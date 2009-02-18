@@ -10,7 +10,7 @@ namespace FeaEntidades
 		long idTransaccion;
 		bool presta_serv;
 		DateTime fecha_cbte = System.DateTime.Now;
-        DateTime probandoMerge = System.DateTime.Now;
+        DateTime prodoMerge = System.DateTime.Now;
 		DateTime fecha_serv_desde = System.DateTime.Now;
 		DateTime fecha_serv_hasta = System.DateTime.Now;
 		DateTime fecha_venc_pago = System.DateTime.Now;
