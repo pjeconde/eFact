@@ -6,7 +6,7 @@ namespace FeaEntidades.TiposDeComprobantes
 {
 	public class TipoComprobante
 	{
-		private long idComprobante;
+		private long idComprobante;sdadsa
 		protected short codigo;
 		protected string descr;
 
