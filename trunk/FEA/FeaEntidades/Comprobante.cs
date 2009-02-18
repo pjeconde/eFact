@@ -14,8 +14,6 @@ namespace FeaEntidades
         DateTime prodoMer = System.DateTime.Now;
 =======
         DateTime proadoMerge = System.DateTime.Now;
->>>>>>> .r13
-		DateTime fecha_serv_desde = System.DateTime.Now;
 		DateTime fecha_serv_hasta = System.DateTime.Now;
 		DateTime fecha_venc_pago = System.DateTime.Now;
 		short puntoVenta;
