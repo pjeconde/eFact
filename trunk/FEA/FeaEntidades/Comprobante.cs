@@ -6,7 +6,7 @@ namespace FeaEntidades
 {
 	public class Comprobante
 	{
-		DateTime fhaImpao;
+		DateTime fhadsdImpao;
 		long idTransaccion;
 		bool presta_serv;
 		DateTime fecha_cbte = System.DateTime.Now;
