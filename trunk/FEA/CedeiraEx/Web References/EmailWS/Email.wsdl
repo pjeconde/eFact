@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.cedeira.com.ar/webservices/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.cedeira.com.ar/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.cedeira.com.ar/webservices/">
+      <s:element name="EnviarEmailSinAdjunto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="De" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Para" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CCO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Asunto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Body" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SmtpServer" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnviarEmailSinAdjuntoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EnviarEmailConAdjunto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="De" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Para" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CC" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CCO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Asunto" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Body" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SmtpServer" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="f" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="fileName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnviarEmailConAdjuntoResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="EnviarEmailSinAdjuntoSoapIn">
+    <wsdl:part name="parameters" element="tns:EnviarEmailSinAdjunto" />
+  </wsdl:message>
+  <wsdl:message name="EnviarEmailSinAdjuntoSoapOut">
+    <wsdl:part name="parameters" element="tns:EnviarEmailSinAdjuntoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EnviarEmailConAdjuntoSoapIn">
+    <wsdl:part name="parameters" element="tns:EnviarEmailConAdjunto" />
+  </wsdl:message>
+  <wsdl:message name="EnviarEmailConAdjuntoSoapOut">
+    <wsdl:part name="parameters" element="tns:EnviarEmailConAdjuntoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="EmailSoap">
+    <wsdl:operation name="EnviarEmailSinAdjunto">
+      <wsdl:input message="tns:EnviarEmailSinAdjuntoSoapIn" />
+      <wsdl:output message="tns:EnviarEmailSinAdjuntoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviarEmailConAdjunto">
+      <wsdl:input message="tns:EnviarEmailConAdjuntoSoapIn" />
+      <wsdl:output message="tns:EnviarEmailConAdjuntoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EmailSoap" type="tns:EmailSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EnviarEmailSinAdjunto">
+      <soap:operation soapAction="http://www.cedeira.com.ar/webservices/EnviarEmailSinAdjunto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarEmailConAdjunto">
+      <soap:operation soapAction="http://www.cedeira.com.ar/webservices/EnviarEmailConAdjunto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="EmailSoap12" type="tns:EmailSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EnviarEmailSinAdjunto">
+      <soap12:operation soapAction="http://www.cedeira.com.ar/webservices/EnviarEmailSinAdjunto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarEmailConAdjunto">
+      <soap12:operation soapAction="http://www.cedeira.com.ar/webservices/EnviarEmailConAdjunto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Email">
+    <wsdl:port name="EmailSoap" binding="tns:EmailSoap">
+      <soap:address location="http://dpuntonet:9053/WS/Email.asmx" />
+    </wsdl:port>
+    <wsdl:port name="EmailSoap12" binding="tns:EmailSoap12">
+      <soap12:address location="http://dpuntonet:9053/WS/Email.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
