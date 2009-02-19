@@ -444,6 +444,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
 			//smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
+			smtpClient.Credentials = new System.Net.NetworkCredential("facturaelectronica@cedeira.com.ar", "cedeira123");
 			smtpClient.Host = "smtp.cedeira.com.ar";
 
 			smtpClient.Send(mail);
@@ -466,7 +467,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			smtpClient = new System.Net.Mail.SmtpClient();
 			//smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
 			smtpClient.Host = "smtp.cedeira.com.ar";
-
+			smtpClient.Credentials = new System.Net.NetworkCredential("facturaelectronica@cedeira.com.ar", "cedeira123");
 			smtpClient.Send(mailCedeira);
 
 			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Archivo enviado satisfactoriamente');</script>");
