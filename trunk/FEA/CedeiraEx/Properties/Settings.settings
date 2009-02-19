@@ -1,9 +1,0 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Cedeira.Ex.Properties" GeneratedClassName="Settings">
-  <Profiles />
-  <Settings>
-    <Setting Name="CedeiraEx_EmailWS_Email" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://dpuntonet:9053/WS/Email.asmx</Value>
-    </Setting>
-  </Settings>
-</SettingsFile>
