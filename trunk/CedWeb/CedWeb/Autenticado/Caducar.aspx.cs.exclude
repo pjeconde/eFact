@@ -1,0 +1,53 @@
+﻿using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+namespace CedWeb.Autenticado
+{
+	public partial class Caducar : System.Web.UI.Page
+	{
+		protected void Page_Load(object sender, EventArgs e)
+		{
+
+		}
+		protected void AceptarButton_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				CedWebEntidades.Aplicacion aplic = CedWebrn.Aplicacion.Crear();
+				CedEntidades.Sesion sesion = new CedEntidades.Sesion();
+				Cedeira.SV.Sesion.Crear("Caduc", String.Empty, "CICS", ((CedEntidades.Sesion)Session["sesion"]).CnnStr, "Caduc", aplic.Version, aplic.VersionParaControl, sesion);
+				int CantPFs;
+				CedWebrn.Caduc.Ejecutar(out CantPFs, false, sesion);
+				switch (CantPFs)
+				{
+					case 0:
+						MensajeLabel.Text = "Proceso concluído satisfactoriamente, no había ninguna novedad";
+						break;
+					case 1:
+						MensajeLabel.Text = "Proceso concluído satisfactoriamente, se actualizó una operacion";
+						break;
+					default:
+						MensajeLabel.Text = "Proceso concluído satisfactoriamente, se actualizaron " + CantPFs + " operaciones";
+						break;
+				}
+				AceptarButton.Visible = false;
+			}
+			catch (System.Threading.ThreadAbortException)
+			{
+				Trace.Warn("Thread abortado");
+			}
+			catch (Exception ex)
+			{
+				CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Autenticado/Excepcion.aspx");
+			}
+		}
+	}
+}

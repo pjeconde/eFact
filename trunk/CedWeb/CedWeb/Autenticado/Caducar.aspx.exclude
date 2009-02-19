@@ -1,0 +1,65 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/Autenticado/CedWebautenticado.master" AutoEventWireup="true" CodeFile="~/Autenticado/Caducar.aspx.cs" Inherits="CedWeb.Autenticado.Caducar" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolderAutenticado" Runat="Server">
+    <asp:UpdatePanel ID="ContingenciaSincroPasivasUpdatePanel" runat="server">
+        <ContentTemplate>
+            <table style="height: 500px; width: 850px">
+                <tr>
+                    <td valign="top">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="text-align: center">
+                                    <asp:Label ID="Label1" runat="server" Text="Hacer caducar las operaciones no concluídas" SkinID="TituloPagina"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr><td style="height: 10px"></td></tr>
+                            <tr>
+                                <td style="text-align: justify">
+                                    <asp:Label ID="Label2" runat="server" Text="Existe un PROCESO AUTOMÁTICO que hace caducar todas las operaciones que no han sido concluidas (PFs y pagos de PFs)."
+                                        Width="100%"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: justify">
+                                    <asp:Label ID="Label5" runat="server" Text="Si, por alguna razón, el proceso automático dejara de funcionar, es posible iniciarlo manualmente."
+                                        Width="100%"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr><td style="height: 10px"></td></tr>
+                            <tr>
+                                <td style="text-align: justify">
+                                    <asp:Label ID="Label3" runat="server" Text="¿ Desea iniciar el proceso en este momento ? (quedan excluídas las operaciones del día)"
+                                        Width="100%"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr><td style="height: 10px"></td></tr>
+                            <tr>
+                                <td>
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="text-align: center">
+                                                <asp:Button ID="AceptarButton" runat="server" Text="Aceptar" OnClick="AceptarButton_Click" />
+                                                <asp:Button ID="CancelarButton" runat="server" Text="Salir" PostBackUrl="~/Autenticado/Bienvenida.aspx" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr><td style="height: 10px"></td></tr>
+                            <tr>
+                                <td style="text-align: center">
+                                    <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina"></asp:Label>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    <asp:UpdateProgress ID="ContingenciaSincroPasivasUpdateProgress" runat="server" AssociatedUpdatePanelID="ContingenciaSincroPasivasUpdatePanel">
+        <ProgressTemplate>
+&nbsp;<img src="../Imagenes/GaliciaAnimado.gif" alt="LogoGaliciaAnimado"/>
+</ProgressTemplate>
+    </asp:UpdateProgress>
+</asp:Content>
+
