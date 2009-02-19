@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FEArn
+namespace Hola MundoFEArn
 {
 	public class Comprobante
 	{
