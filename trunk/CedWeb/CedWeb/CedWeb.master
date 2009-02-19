@@ -1,0 +1,95 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="~/CedWeb.master.cs" Inherits="CedWeb.CedWeb" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="CedWebHead" runat="server">
+    <title>Cedeira Software Factory</title>
+    <link rel="shortcut icon" href="Imagenes/Cedeira.ico" />
+</head>
+<body>
+    <form id="MasterNoAutenticadoForm" runat="server">
+        <table style="" width="100%" border="0" cellpadding="0px" cellspacing="0px">
+            <tr>
+                <td rowspan="5" style="width: 50%; background-image: url('Imagenes/BgL.jpg'); background-repeat: repeat-y;
+                    background-position: right">
+                    <table border="0" cellpadding="0" cellspacing="0" width="20px">
+                        <tr>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td colspan="3" style="height: 4px; background-color: #c8d2dc">
+                </td>
+                <td rowspan="5" style="width: 50%; background-image: url('Imagenes/BgR.jpg'); background-repeat: repeat-y;
+                    background-position: left;">
+                    <table cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td style="background-color: #c8d2dc">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 200px">
+                    <table border="0" cellpadding="0" cellspacing="0" width="200px">
+                        <tr>
+                            <td style="width: 10px">
+                                <asp:Label ID="LabelEncaL" runat="server" Text="" SkinID="LabelGral"></asp:Label>
+                            </td>
+                            <td style="width: 180px; padding-top: 5px; text-align: left">
+                                <asp:Image ID="CedeiraSFimage" runat="server" ImageUrl="~/Imagenes/CedeiraSF_v1.jpg"
+                                    Height="66px" Width="180px" Visible="true" />
+                            </td>
+                            <td style="width: 10px">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="height: 80px; width: 600px; background-image: url('Imagenes/LogoBienvenidos_v1.jpg')">
+                    <table id="Table1" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="width: 200px">
+                            </td>
+                            <td style="width: 400px">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="background-image: url('Imagenes/MenuTopL.gif'); background-repeat: repeat-x;
+                    height: 50px;">
+                    <table id="Table3" border="0" cellpadding="0" cellspacing="0" style="text-align: center;">
+                        <tr>
+                            <td style="width: 50%">
+                            </td>
+                            <td align="center" style="height: 14px; width: 256px;">
+                                <asp:Menu ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1" SkinID="MenuInicio"
+                                    Height="14px" MaximumDynamicDisplayLevels="5" Orientation="Horizontal" StaticSelectedStyle-Font-Size="16px"
+                                    StaticDisplayLevels="2" Width="157px" BorderStyle="None" StaticSubMenuIndent="10px">
+                                    <StaticSelectedStyle Font-Size="16px" />
+                                </asp:Menu>
+                                <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+                            </td>
+                            <td style="width: 50%">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr style="vertical-align: top;">
+                <td style="vertical-align: top;" colspan="3">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolderNoAutenticado" runat="server">
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="TextoComun" align="center" style="height: 19px; background-color: #c8d2dc">
+                    © 2009 Cedeira Sofware Factory S.R.L. Todos los derechos reservados.
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
