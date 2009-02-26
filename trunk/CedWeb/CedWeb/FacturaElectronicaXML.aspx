@@ -60,7 +60,7 @@
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
                                     </td>
                                     <td style="height: 20px;">
-                                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Factura Electrónica"
+                                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Factura Electrónica (Versión de prueba)"
                                             SkinID="TituloPagina"></asp:Label>
                                     </td>
                                 </tr>
@@ -1353,7 +1353,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center; height: 10px;">
+                                    <td style="text-align: center; height: 10px;">Agradeceríamos a los usuarios del sitio que nos informen sobre dudas, posibles omisiones y errores y que nos envíen las correcciones o sugerencias por correo electrónico a
+                                        <asp:HyperLink ID="contactoHyperLink"  NavigateUrl="~/Contacto.aspx" runat="server">facturaelectronica@cedeira.com.ar</asp:HyperLink>. Es de suma importancia conocer su opinión. Muchas gracias.
                                     </td>
                                 </tr>
                                 <tr>
