@@ -16,6 +16,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 	int gvNewPageIndex = 0;
 	int gvEditIndex = -1;
 	System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas;
+	System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> impuestos;
 	#endregion
 	protected void Page_Load(object sender, EventArgs e)
 	{
@@ -26,6 +27,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			lineas.Add(linea);
 			detalleGridView.DataSource = lineas;
 			ViewState["lineas"] = lineas;
+
+			impuestos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>();
+			FeaEntidades.InterFacturas.resumenImpuestos impuesto = new FeaEntidades.InterFacturas.resumenImpuestos();
+			impuestos.Add(impuesto);
+			impuestosGridView.DataSource = impuestos;
+			ViewState["impuestos"] = impuestos;
 
 			Condicion_IVA_VendedorDropDownList.DataValueField = "Codigo";
 			Condicion_IVA_VendedorDropDownList.DataTextField = "Descr";
@@ -65,18 +72,25 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			DataBind();
 
+			BindearDropDownLists();
+			
 			//System.Collections.Generic.List<FeaEntidades.InterFacturas.lineaDescuentos> lineasDescuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.lineaDescuentos>();
 			//FeaEntidades.InterFacturas.lineaDescuentos lineaDescuentos = new FeaEntidades.InterFacturas.lineaDescuentos();
 			//lineaDescuentos.descripcion_descuento = "Cualquier cosa";
 			//lineasDescuentos.Add(lineaDescuentos);
 			//descuentosGridEX.DataSource = lineasDescuentos;
 
-			//System.Collections.Generic.List<FeaEntidades.InterFacturas.lineaImpuestos> lineasImpuestos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.lineaImpuestos>();
-			//FeaEntidades.InterFacturas.lineaImpuestos lineaImpuestos = new FeaEntidades.InterFacturas.lineaImpuestos();
-			//lineaImpuestos.descripcion_impuesto = "Cualquier cosa";
-			//lineasImpuestos.Add(lineaImpuestos);
-			//impuestosGridEX.DataSource = lineasImpuestos;
 		}
+	}
+
+	private void BindearDropDownLists()
+	{
+		((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataValueField = "Codigo";
+		((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataTextField = "Descr";
+		((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataSource = FeaEntidades.CodigosImpuesto.CodigoImpuesto.Lista();
+		((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataBind();
+
+
 	}
 
 	protected void detalleGridView_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -125,7 +139,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 	protected void detalleGridView_RowCommand(object sender, GridViewCommandEventArgs e)
 	{
-		//Check if Add button clicked
 		if (e.CommandName.Equals("AddDetalle"))
 		{
 			try
@@ -165,7 +178,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				detalleGridView.DataSource = ViewState["lineas"];
 				detalleGridView.DataBind();
 
-				//ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Detalle agregado satisfactoriamente');</script>");
 			}
 			catch (Exception ex)
 			{
@@ -254,7 +266,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			detalleGridView.DataSource = ViewState["lineas"];
 			detalleGridView.DataBind();
 
-			//ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Detalle eliminado correctamente');</script>");
 		}
 		catch { }
 
@@ -410,6 +421,24 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			comp.resumen = r;
 
+			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos = (System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"];
+			comp.resumen.impuestos = new FeaEntidades.InterFacturas.resumenImpuestos[listadeimpuestos.Count];
+
+			for (int i = 0; i < listadeimpuestos.Count; i++)
+			{
+				if (!listadeimpuestos[i].codigo_impuesto.Equals(0))
+				{
+					comp.resumen.impuestos[i] = new FeaEntidades.InterFacturas.resumenImpuestos();
+					comp.resumen.impuestos[i].codigo_impuesto = listadeimpuestos[i].codigo_impuesto;
+					comp.resumen.impuestos[i].codigo_jurisdiccion = listadeimpuestos[i].codigo_jurisdiccion;
+					comp.resumen.impuestos[i].codigo_jurisdiccionSpecified = listadeimpuestos[i].codigo_jurisdiccionSpecified;
+					comp.resumen.impuestos[i].descripcion = listadeimpuestos[i].descripcion;
+					comp.resumen.impuestos[i].importe_impuesto = listadeimpuestos[i].importe_impuesto;
+					comp.resumen.impuestos[i].porcentaje_impuesto = listadeimpuestos[i].porcentaje_impuesto;
+					comp.resumen.impuestos[i].porcentaje_impuestoSpecified = listadeimpuestos[i].porcentaje_impuestoSpecified;
+				}
+			}
+
 			lote.comprobante[0] = comp;
 
 			System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
@@ -447,17 +476,21 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			mail.Body = AgregarBody();
 
 			System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
-			//smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
-			smtpClient.Credentials = new System.Net.NetworkCredential("facturaelectronica@cedeira.com.ar", "cedeira123");
-			smtpClient.Host = "smtp.cedeira.com.ar";
+
+			smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
+
+			//smtpClient.Credentials = new System.Net.NetworkCredential("facturaelectronica@cedeira.com.ar", "cedeira123");
+			//smtpClient.Host = "smtp.cedeira.com.ar";
+
+			//smtpClient.Host = "localhost";
 
 			smtpClient.Send(mail);
 			m.Close();
 
 			//Envío de mail a nosotros
 
-			System.Net.Mail.MailMessage mailCedeira = new System.Net.Mail.MailMessage("facturaelectronica@cedeira.com.ar",
-				"facturaelectronica@cedeira.com.ar", "XML_" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + "_" + System.DateTime.Now.ToLocalTime(), string.Empty);
+			System.Net.Mail.MailMessage mailCedeira = new System.Net.Mail.MailMessage("facturaelectronicaxml@cedeira.com.ar",
+				"facturaelectronicaxml@cedeira.com.ar", "XML_" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + "_" + System.DateTime.Now.ToLocalTime(), string.Empty);
 			sb = new System.Text.StringBuilder();
 			sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.email);
 			sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.razon_social);
@@ -469,9 +502,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			mailCedeira.Body = sb.ToString();
 
 			smtpClient = new System.Net.Mail.SmtpClient();
-			//smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
-			smtpClient.Host = "smtp.cedeira.com.ar";
-			smtpClient.Credentials = new System.Net.NetworkCredential("facturaelectronica@cedeira.com.ar", "cedeira123");
+
+			smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
+			//smtpClient.Credentials = new System.Net.NetworkCredential("facturaelectronicaxml@cedeira.com.ar", "cedeira123");
+			//smtpClient.Host = "smtp.cedeira.com.ar";
+			//smtpClient.Host = "localhost";
+
 			smtpClient.Send(mailCedeira);
 
 			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Archivo enviado satisfactoriamente');</script>");
@@ -536,5 +572,150 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		sb.AppendLine("© 2009 Cedeira Sofware Factory S.R.L. Todos los derechos reservados.");
 		sb.AppendLine("Buenos Aires, Argentina");
 		return sb.ToString();
+	}
+	protected void impuestosGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+	{
+		impuestosGridView.EditIndex = -1;
+		impuestosGridView.DataSource = ViewState["impuestos"];
+		impuestosGridView.DataBind();
+	}
+	protected void impuestosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+	{
+		if (e.CommandName.Equals("AddImpuestoGlobal"))
+		{
+			try
+			{
+				FeaEntidades.InterFacturas.resumenImpuestos r = new FeaEntidades.InterFacturas.resumenImpuestos();
+
+				int auxcodigo_impuesto = Convert.ToInt32(((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).SelectedValue);
+				r.codigo_impuesto = auxcodigo_impuesto;
+				r.descripcion = ((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).SelectedItem.Text;
+
+				string auxTotal = ((TextBox)impuestosGridView.FooterRow.FindControl("txtimporte_impuesto")).Text;
+				if (!auxTotal.Contains(","))
+				{
+					r.importe_impuesto = Convert.ToDouble(auxTotal);
+				}
+				else
+				{
+					throw new Exception("Impuesto global no agregado porque el separador de decimales debe ser el punto");
+				}
+
+				((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]).Add(r);
+
+
+				//Me fijo si elimino la fila automática
+				System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> impuestos = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]);
+				FeaEntidades.InterFacturas.resumenImpuestos impuestoInicial = impuestos[0];
+				if (impuestoInicial.codigo_impuesto == 0)
+				{
+					((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]).Remove(impuestoInicial);
+				}
+
+				impuestosGridView.DataSource = ViewState["impuestos"];
+				impuestosGridView.DataBind();
+				BindearDropDownLists();
+
+			}
+			catch (Exception ex)
+			{
+				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</script>");
+			}
+		}
+	}
+	protected void impuestosGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
+	{
+		if (e.Exception != null)
+		{
+			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</script>");
+			e.ExceptionHandled = true;
+		}
+	}
+	protected void impuestosGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+	{
+		try
+		{
+			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> impuestos = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]);
+			FeaEntidades.InterFacturas.resumenImpuestos r = impuestos[e.RowIndex];
+			impuestos.Remove(r);
+
+			if (impuestos.Count.Equals(0))
+			{
+				FeaEntidades.InterFacturas.resumenImpuestos nueva = new FeaEntidades.InterFacturas.resumenImpuestos();
+				impuestos.Add(nueva);
+			}
+
+			impuestosGridView.EditIndex = -1;
+
+			impuestosGridView.DataSource = ViewState["impuestos"];
+			impuestosGridView.DataBind();
+			BindearDropDownLists();
+		}
+		catch { }
+	}
+	protected void impuestosGridView_RowEditing(object sender, GridViewEditEventArgs e)
+	{
+		impuestosGridView.EditIndex = e.NewEditIndex;
+
+		impuestosGridView.DataSource = ViewState["impuestos"];
+		impuestosGridView.DataBind();
+		BindearDropDownLists();
+
+		((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_impuestoEdit")).DataValueField = "Codigo";
+		((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_impuestoEdit")).DataTextField = "Descr";
+		((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_impuestoEdit")).DataSource = FeaEntidades.CodigosImpuesto.CodigoImpuesto.Lista();
+		((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_impuestoEdit")).DataBind();
+		try
+		{
+			ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_impuestoEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"])[e.NewEditIndex].codigo_impuesto.ToString());
+			li.Selected = true;
+		}
+		catch
+		{
+		}
+	}
+	protected void impuestosGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
+	{
+		if (e.Exception != null)
+		{
+			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</script>");
+			e.ExceptionHandled = true;
+		}
+	}
+	protected void impuestosGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
+	{
+
+		try
+		{
+			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> impuestos = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]);
+
+			FeaEntidades.InterFacturas.resumenImpuestos r = impuestos[e.RowIndex];
+			int auxcodigo_impuesto = Convert.ToInt32(((DropDownList)impuestosGridView.Rows[e.RowIndex].FindControl("ddlcodigo_impuestoEdit")).SelectedValue);
+			r.codigo_impuesto = auxcodigo_impuesto;
+
+			string auxdescr_impuesto = ((DropDownList)impuestosGridView.Rows[e.RowIndex].FindControl("ddlcodigo_impuestoEdit")).SelectedItem.Text;
+			r.descripcion = auxdescr_impuesto;
+
+
+			string auxTotal = ((TextBox)impuestosGridView.Rows[e.RowIndex].FindControl("txtimporte_impuesto")).Text;
+			if (!auxTotal.Contains(","))
+			{
+				r.importe_impuesto = Convert.ToDouble(auxTotal);
+			}
+			else
+			{
+				throw new Exception("Impuesto global no actualizado porque el separador de decimales debe ser el punto");
+			}
+
+			impuestosGridView.EditIndex = -1;
+			impuestosGridView.DataSource = ViewState["impuestos"];
+			impuestosGridView.DataBind();
+			BindearDropDownLists();
+
+		}
+		catch (Exception ex)
+		{
+			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</script>");
+		}
 	}
 }
