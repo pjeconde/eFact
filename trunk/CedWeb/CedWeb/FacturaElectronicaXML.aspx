@@ -1,5 +1,5 @@
 <%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="FacturaElectronicaXML.aspx.cs"
-    Inherits="FacturaElectronicaXML" MaintainScrollPositionOnPostback="true" Buffer="true" %>
+    Inherits="FacturaElectronicaXML" MaintainScrollPositionOnPostback="true" Buffer="true" UICulture="es" %>
 
 <%@ Register Src="DatePickerWebUserControl.ascx" TagName="DatePickerWebUserControl"
     TagPrefix="uc1" %>
