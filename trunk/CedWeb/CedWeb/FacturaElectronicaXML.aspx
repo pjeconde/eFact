@@ -1056,18 +1056,19 @@
                                                         <Columns>
                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Código del impuesto">
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lblcodigo_impuesto" Text='<%# Eval("descripcion") %>' runat="server"></asp:Label>
+                                                                    <asp:Label ID="lblcodigo_impuesto" Text='<%# Eval("descripcion") %>' 
+                                                                    Width="360px" runat="server"></asp:Label>
                                                                 </ItemTemplate>
                                                                 <EditItemTemplate>
                                                                     <asp:DropDownList ID="ddlcodigo_impuestoEdit"
-                                                                    runat="server" Width="100%"></asp:DropDownList>
+                                                                    runat="server" Width="360px"></asp:DropDownList>
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
                                                                     <asp:DropDownList ID="ddlcodigo_impuesto"  
-                                                                    runat="server" Width="100%"></asp:DropDownList>
+                                                                    runat="server" Width="360px"></asp:DropDownList>
                                                                 </FooterTemplate>
-                                                                <ItemStyle HorizontalAlign="Right" />
-                                                                <FooterStyle HorizontalAlign="Right" />
+                                                                <ItemStyle HorizontalAlign="Left" Width="360px"/>
+                                                                <FooterStyle HorizontalAlign="Left" Width="360px"/>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe total impuesto">
                                                                 <ItemTemplate>
