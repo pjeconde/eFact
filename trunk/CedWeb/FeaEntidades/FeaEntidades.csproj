@@ -33,6 +33,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodigosImpuesto\CodigoImpuesto.cs" />
+    <Compile Include="CodigosImpuesto\IB.cs" />
+    <Compile Include="CodigosImpuesto\Internos.cs" />
+    <Compile Include="CodigosImpuesto\IVA.cs" />
+    <Compile Include="CodigosImpuesto\Municipales.cs" />
+    <Compile Include="CodigosImpuesto\Nacionales.cs" />
+    <Compile Include="CodigosImpuesto\Otros.cs" />
     <Compile Include="CodigosOperacion\CodigoOperacion.cs" />
     <Compile Include="CodigosOperacion\ExportacionesALaZonaFranca.cs" />
     <Compile Include="CodigosOperacion\ExportacionesAlExterior.cs" />
