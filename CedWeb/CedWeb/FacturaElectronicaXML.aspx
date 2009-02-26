@@ -1,6 +1,5 @@
-Ôªø<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" 
-CodeFile="FacturaElectronicaXML.aspx.cs" Inherits="FacturaElectronicaXML" MaintainScrollPositionOnPostback="true"
-Buffer="true"%>
+<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="FacturaElectronicaXML.aspx.cs"
+    Inherits="FacturaElectronicaXML" MaintainScrollPositionOnPostback="true" Buffer="true" %>
 
 <%@ Register Src="DatePickerWebUserControl.ascx" TagName="DatePickerWebUserControl"
     TagPrefix="uc1" %>
@@ -23,7 +22,7 @@ Buffer="true"%>
             {
                 img.src = "minus.gif";
             }
-            img.alt = "Cierre para ver otros art√≠culos";
+            img.alt = "Cierre para ver otros artÌculos";
         }
         else
         {
@@ -41,597 +40,1333 @@ Buffer="true"%>
     } 
     </script>
 
-
     <table style="width: 800px; text-align: left;" cellpadding="0" cellspacing="0" border="0"
         class="TextComunSinPosicion">
         <tr>
-            <td valign="top" style="height: 10px; width: 556px;">
+            <td valign="top" style="height: 10px;">
             </td>
         </tr>
         <tr>
-            <td valign="top" style="padding-left: 10px;">
-                <table style="width: 100%;" cellpadding="0" cellspacing="0" border="0">
+            <td valign="top" style="">
+                <table style="width: 800px;" cellpadding="0" cellspacing="0" border="0">
                     <tr>
-                        <td valign="top" style="">
+                        <td colspan="3" valign="top" style="">
                             <!-- @@@ TITULO DE LA PAGINA @@@-->
                             <table cellpadding="0" cellspacing="0" border="0">
                                 <tr>
+                                    <td style="width: 10px;">
+                                    </td>
                                     <td style="width: 21px; height: 20px;">
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
                                     </td>
                                     <td style="height: 20px;">
-                                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Factura Electr√≥nica"
+                                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Factura ElectrÛnica"
                                             SkinID="TituloPagina"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height: 10px;">
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
                     <tr>
-                        <td valign="top" align="left">
-                            <table border="0" style="width: 100%; height: 100%;">
-                                <tr>
-                                    <td colspan="2" style="height: 47px">
-                                        <h2 style="text-align: center">
-                                            Lote</h2>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 30%; text-align: right">
-                                        <asp:RegularExpressionValidator ID="NroLoteRegularExpressionValidator" runat="server"
-                                            ControlToValidate="Id_LoteTextbox" ErrorMessage="error de formateo en n√∫mero de lote"
-                                            ValidationExpression="[0-9]+" SetFocusOnError="True">* </asp:RegularExpressionValidator>
-                                        <asp:RequiredFieldValidator ID="loteRequiredFieldValidator" runat="server" ErrorMessage="n√∫mero de lote"
-                                            ControlToValidate="Id_LoteTextbox" Display="Static" SetFocusOnError="True">* </asp:RequiredFieldValidator>N√∫mero
-                                        de lote
-                                    </td>
-                                    <td style="text-align: left;">
-                                        <asp:TextBox ID="Id_LoteTextbox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right">
-                                        Cuit canal</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <asp:TextBox ID="Cuit_CanalTextBox" runat="server" Width="100%" ReadOnly="True">30690783521</asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right">
-                                        Presta servicios</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <asp:CheckBox ID="Presta_ServCheckBox" runat="server" Width="100%"></asp:CheckBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right; height: 11px;">
-                                        <asp:RegularExpressionValidator ID="PtoVentaRegularExpressionValidator" runat="server"
-                                            ControlToValidate="Punto_VentaTextBox" ErrorMessage="error de formateo en punto de venta"
-                                            ValidationExpression="[0-9]+" SetFocusOnError="True">* </asp:RegularExpressionValidator>
-                                        <asp:RequiredFieldValidator ID="puntoVentaRequiredFieldValidator" runat="server"
-                                            ErrorMessage="punto de venta" ControlToValidate="Punto_VentaTextBox" SetFocusOnError="True">* </asp:RequiredFieldValidator>Punto
-                                        de venta</td>
-                                    <td style="text-align: left; height: 11px; width: 739px;">
-                                        <asp:TextBox ID="Punto_VentaTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <h2 style="text-align: center">
-                                            Informaci√≥n vendedor</h2>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        GLN</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="GLN_VendedorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        C√≥digo interno</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <asp:TextBox ID="Codigo_Interno_VendedorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        <asp:RequiredFieldValidator ID="Razon_Social_VendedorRequiredFieldValidator" runat="server"
-                                            ControlToValidate="Razon_Social_VendedorTextBox" ErrorMessage="raz√≥n social" SetFocusOnError="True">* </asp:RequiredFieldValidator>Raz√≥n
-                                        social
-                                    </td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <asp:TextBox ID="Razon_Social_VendedorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        <asp:RequiredFieldValidator ID="CUITVendedorRequiredFieldValidator" runat="server"
-                                            ControlToValidate="Cuit_VendedorTextBox" ErrorMessage="CUIT del vendedor" SetFocusOnError="True">* </asp:RequiredFieldValidator>CUIT</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Cuit_VendedorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        IVA</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <asp:DropDownList ID="Condicion_IVA_VendedorDropDownList" runat="server" Width="100%">
-                                        </asp:DropDownList></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Inicio de actividades</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <uc1:DatePickerWebUserControl ID="InicioDeActividadesVendedorDatePickerWebUserControl"
-                                            runat="server" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="height: 21px; text-align: right; width: 610px;">
-                                        Nombre del contacto</td>
-                                    <td style="height: 21px; width: 739px;">
-                                        <asp:TextBox ID="Contacto_VendedorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; height: 26px; width: 610px;">
-                                        Calle</td>
-                                    <td style="height: 26px; width: 739px;">
-                                        <asp:TextBox ID="Domicilio_Calle_VendedorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        N√∫mero</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Domicilio_Numero_VendedorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Piso</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Domicilio_Piso_VendedorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Depto</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Domicilio_Depto_VendedorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Sector</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Domicilio_Sector_VendedorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Torre</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Domicilio_Torre_VendedorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Manzana</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Domicilio_Manzana_VendedorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        <asp:RequiredFieldValidator ID="Localidad_VendedorRequiredFieldValidator" runat="server"
-                                            ControlToValidate="Localidad_VendedorTextBox" ErrorMessage="localidad" SetFocusOnError="True">* </asp:RequiredFieldValidator>Localidad</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Localidad_VendedorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; height: 13px; width: 610px;">
-                                        Provincia</td>
-                                    <td style="height: 13px; width: 739px;">
-                                        <asp:DropDownList ID="Provincia_VendedorDropDownList" runat="server" Width="100%">
-                                        </asp:DropDownList></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        C√≥digo Postal</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Cp_VendedorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="Email_VendedorTextBox"
-                                            ErrorMessage="error de formateo en mail contacto vendedor" SetFocusOnError="True"
-                                            ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$">* </asp:RegularExpressionValidator>
-                                        <asp:RequiredFieldValidator ID="Email_VendedorRequiredFieldValidator" runat="server"
-                                            ControlToValidate="Email_VendedorTextBox" ErrorMessage="mail contacto del vendedor" SetFocusOnError="True">* </asp:RequiredFieldValidator>Mail
-                                        Contacto</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Email_VendedorTextBox" runat="server" Width="100%" AutoCompleteType="Email"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Tel√©fono contacto</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Telefono_VendedorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <h2 style="text-align: center">
-                                            Informaci√≥n comprador</h2>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        GLN</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="GLN_CompradorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        C√≥digo interno</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <asp:TextBox ID="Codigo_Interno_CompradorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Tipo de documento</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <asp:DropDownList ID="Codigo_Doc_Identificatorio_CompradorDropDownList" runat="server"
-                                            Width="100%">
-                                        </asp:DropDownList></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        <asp:RequiredFieldValidator ID="docCompradorRequiredFieldValidator" runat="server"
-                                            ControlToValidate="Nro_Doc_Identificatorio_CompradorTextBox" ErrorMessage="documento del comprador" SetFocusOnError="True">* </asp:RequiredFieldValidator>Nro.
-                                        de documento</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <asp:TextBox ID="Nro_Doc_Identificatorio_CompradorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Denominaci√≥n
-                                    </td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <asp:TextBox ID="Denominacion_CompradorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        IVA</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <asp:DropDownList ID="Condicion_IVA_CompradorDropDownList" runat="server" Width="100%">
-                                        </asp:DropDownList></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Inicio de actividades</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <uc1:DatePickerWebUserControl ID="InicioDeActividadesCompradorDatePickerWebUserControl"
-                                            runat="server" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="height: 21px; text-align: right; width: 610px;">
-                                        Contacto</td>
-                                    <td style="height: 21px; width: 739px;">
-                                        <asp:TextBox ID="Contacto_CompradorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Calle</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Domicilio_Calle_CompradorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        N√∫mero</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Domicilio_Numero_CompradorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Piso</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Domicilio_Piso_CompradorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Depto</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Domicilio_Depto_CompradorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Sector</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Domicilio_Sector_CompradorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Torre</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Domicilio_Torre_CompradorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Manzana</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Domicilio_Manzana_CompradorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Localidad</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Localidad_CompradorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; height: 13px; width: 610px;">
-                                        Provincia</td>
-                                    <td style="height: 13px; width: 739px;">
-                                        <asp:DropDownList ID="Provincia_CompradorDropDownList" runat="server" Width="100%">
-                                        </asp:DropDownList></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        C√≥digo Postal</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Cp_CompradorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="Email_CompradorTextBox"
-                                            ErrorMessage="error de formateo en mail contacto comprador" SetFocusOnError="True"
-                                            ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$">* </asp:RegularExpressionValidator>Mail Contacto</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Email_CompradorTextBox" runat="server" Width="100%" AutoCompleteType="Email"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right; width: 610px;">
-                                        Tel√©fono contacto</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Telefono_CompradorTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center; height: 21px;" colspan="2">
-                                        <h2>
-                                            Informaci√≥n comprobante</h2>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right">
-                                        Tipo de comprobante</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <asp:DropDownList ID="Tipo_De_ComprobanteDropDownList" runat="server" Width="100%">
-                                        </asp:DropDownList></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right">
-                                        <asp:RegularExpressionValidator ID="Numero_comprobanteRegularExpressionValidator"
-                                            runat="server" ControlToValidate="Numero_ComprobanteTextBox" ErrorMessage="error de formateo en n√∫mero de comprobante"
-                                            ValidationExpression="[0-9]+" SetFocusOnError="True">* </asp:RegularExpressionValidator>
-                                        <asp:RequiredFieldValidator ID="Numero_ComprobanteRequiredFieldValidator" runat="server"
-                                            ControlToValidate="Numero_ComprobanteTextBox" ErrorMessage="n√∫mero de comprobante" SetFocusOnError="True">* </asp:RequiredFieldValidator>N√∫mero
-                                        de comprobante</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right">
-                                        <asp:RequiredFieldValidator ID="FechaEmisionDatePickerRequiredFieldValidator" runat="server"
-                                            ControlToValidate="FechaEmisionDatePickerWebUserControl:txt_Date"
-                                            ErrorMessage="fecha de emisi√≥n" SetFocusOnError="True">* </asp:RequiredFieldValidator>Fecha de emisi√≥n</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <uc1:DatePickerWebUserControl ID="FechaEmisionDatePickerWebUserControl" runat="server" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right">
-                                        <asp:RequiredFieldValidator ID="FechaVencimientoRequiredFieldValidator" runat="server"
-                                            ControlToValidate="FechaVencimientoDatePickerWebUserControl:txt_Date"
-                                            ErrorMessage="fecha de vencimiento" SetFocusOnError="True">* </asp:RequiredFieldValidator>Fecha de vencimiento</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <uc1:DatePickerWebUserControl ID="FechaVencimientoDatePickerWebUserControl" runat="server" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right; height: 24px;">
-                                        Fecha inicio servicio</td>
-                                    <td style="text-align: left; height: 24px; width: 739px;">
-                                        <uc1:DatePickerWebUserControl ID="FechaServDesdeDatePickerWebUserControl" runat="server" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right">
-                                        Fecha finalizaci√≥n servicio</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <uc1:DatePickerWebUserControl ID="FechaServHastaDatePickerWebUserControl" runat="server" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right">
-                                        CAE</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <asp:TextBox ID="CAETextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right">
-                                        Fecha de vencimiento del CAE</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        &nbsp;<uc1:DatePickerWebUserControl ID="FechaCAEVencimientoDatePickerWebUserControl"
-                                            runat="server" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right">
-                                        Fecha de obtenci√≥n del CAE</td>
-                                    <td style="text-align: left; width: 739px;">
-                                        <uc1:DatePickerWebUserControl ID="FechaCAEObtencionDatePickerWebUserControl" runat="server" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center" colspan="2">
-                                        <h2>
-                                            Detalle</h2>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right">
-                                        Comentarios</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="ComentariosTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" style="text-align: center; height: 100%; width: 100%">
-                                        <asp:GridView ID="detalleGridView" runat="server" AutoGenerateColumns="False" ShowFooter="true"
-                                            GridLines="Both" BorderStyle="Ridge" OnRowCommand="detalleGridView_RowCommand"
-                                            EnableViewState="true" OnRowEditing="detalleGridView_RowEditing" OnRowUpdated="detalleGridView_RowUpdated"
-                                            OnRowUpdating="detalleGridView_RowUpdating" OnRowCancelingEdit="detalleGridView_RowCancelingEdit"
-                                            OnRowDeleted="detalleGridView_RowDeleted" OnRowDeleting="detalleGridView_RowDeleting"
-                                            Width="100%" BorderWidth="5px" ToolTip="El separador de decimales a utilizar es el punto">
-                                            <Columns>
-                                                <asp:TemplateField HeaderText="Descripci√≥n del producto o servicio" ItemStyle-HorizontalAlign="Right"
-                                                    FooterStyle-HorizontalAlign="Right">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="lbldescripcion" Text='<%# Eval("descripcion") %>' runat="server"></asp:Label>
-                                                    </ItemTemplate>
-                                                    <EditItemTemplate>
-                                                        <asp:TextBox ID="txtdescripcion" Text='<%# Eval("descripcion") %>' runat="server" Width="100%"></asp:TextBox>
-                                                    </EditItemTemplate>
-                                                    <FooterTemplate>
-                                                        <asp:TextBox ID="txtdescripcion" Text='' runat="server" Width="100%"></asp:TextBox>
-                                                    </FooterTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField HeaderText="Importe total art√≠culo" ItemStyle-HorizontalAlign="Right">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="lblimporte_total_articulo" Text='<%# Eval("importe_total_articulo") %>'
-                                                            runat="server"></asp:Label>
-                                                    </ItemTemplate>
-                                                    <EditItemTemplate>
-                                                        <asp:TextBox ID="txtimporte_total_articulo" Text='<%# Eval("importe_total_articulo") %>'
-                                                            runat="server" Width="100%"></asp:TextBox>
-                                                    </EditItemTemplate>
-                                                    <FooterTemplate>
-                                                        <asp:TextBox ID="txtimporte_total_articulo" Text='' runat="server" Width="100%"></asp:TextBox>
-                                                    </FooterTemplate>
-                                                </asp:TemplateField>
-                                                <asp:CommandField HeaderText="Edici√≥n" ShowEditButton="True" ItemStyle-HorizontalAlign="Center"
-                                                    CancelText="Cancelar" UpdateText="Actualizar" EditText="Editar" />
-                                                <asp:TemplateField HeaderText="Eliminaci√≥n / Incorporaci√≥n" ItemStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton ID="linkDeleteDetalle" CommandName="Delete" runat="server">Borrar</asp:LinkButton>
-                                                    </ItemTemplate>
-                                                    <FooterTemplate>
-                                                        <asp:LinkButton ID="linkAddDetalle" CommandName="AddDetalle" runat="server" OnClientClick="GetScollerPosition();">Agregar</asp:LinkButton>
-                                                    </FooterTemplate>
-                                                </asp:TemplateField>
-                                            </Columns>
-                                        </asp:GridView>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center" colspan="2">
-                                        <h2>
-                                            Descuentos Globales</h2>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center" colspan="2">
-                                        En preparaci√≥n</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center" colspan="2">
-                                        <h2>
-                                            Impuestos Globales</h2>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center" colspan="2">
-                                        En preparaci√≥n</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center" colspan="2">
-                                        <h2>
-                                            Resumen Final</h2>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right">
-                                        <asp:RegularExpressionValidator ID="ImporteTotalNetoGravadoRegularExpressionValidator"
-                                            runat="server" ControlToValidate="Importe_Total_Neto_Gravado_ResumenTextBox" ErrorMessage="error de formateo en importe total neto gravado"
-                                            ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator>
-                                        <asp:RequiredFieldValidator ID="Importe_Total_Neto_Gravado_ResumenRequiredFieldValidator"
-                                            runat="server" ControlToValidate="Importe_Total_Neto_Gravado_ResumenTextBox" ErrorMessage="importe total neto gravado" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
-                                        total neto gravado</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Importe_Total_Neto_Gravado_ResumenTextBox" runat="server" Width="100%"
-                                            ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right">
-                                        <asp:RegularExpressionValidator ID="Importe_Total_Concepto_No_gravadoRegularExpressionValidator"
-                                            runat="server" ControlToValidate="Importe_Total_Concepto_No_Gravado_ResumenTextBox" ErrorMessage="error de formateo en importe total de conceptos que no integren el precio neto gravado"
-                                            ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator>
-                                        <asp:RequiredFieldValidator ID="Importe_Total_Concepto_No_Gravado_ResumenRequiredFieldValidator"
-                                            runat="server" ControlToValidate="Importe_Total_Concepto_No_Gravado_ResumenTextBox" ErrorMessage="importe total de conceptos que no integren el precio neto gravado" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
-                                        total de conceptos que no integren el precio neto gravado</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Importe_Total_Concepto_No_Gravado_ResumenTextBox" runat="server"
-                                            ToolTip="El separador de decimales a utilizar es el punto" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right">
-                                        <asp:RegularExpressionValidator ID="Importe_Operaciones_ExentasRegularExpressionValidator"
-                                            runat="server" ControlToValidate="Importe_Operaciones_Exentas_ResumenTextBox" ErrorMessage="error de formateo en importe de operaciones exentas"
-                                            ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator>
-                                        <asp:RequiredFieldValidator ID="Importe_Operaciones_Exentas_ResumenRequiredFieldValidator"
-                                            runat="server" ControlToValidate="Importe_Operaciones_Exentas_ResumenTextBox" ErrorMessage="importe de operaciones exentas" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
-                                        de operaciones exentas</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Importe_Operaciones_Exentas_ResumenTextBox" runat="server" Width="100%"
-                                            ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right">
-                                        <asp:RegularExpressionValidator ID="Impuesto_LiqRegularExpressionValidator" runat="server"
-                                            ControlToValidate="Impuesto_Liq_ResumenTextBox" ErrorMessage="error de formateo en impuesto liquidado"
-                                            ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator>
-                                        <asp:RequiredFieldValidator ID="Impuesto_Liq_ResumenRequiredFieldValidator" runat="server"
-                                            ControlToValidate="Impuesto_Liq_ResumenTextBox" ErrorMessage="impuesto liquidado" SetFocusOnError="True">* </asp:RequiredFieldValidator>Impuesto
-                                        liquidado&nbsp;</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Impuesto_Liq_ResumenTextBox" runat="server" Width="100%" ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; text-align: right">
-                                        <asp:RegularExpressionValidator ID="Impuesto_Liq_RniRegularExpressionValidator" runat="server"
-                                            ControlToValidate="Impuesto_Liq_Rni_ResumenTextBox" ErrorMessage="error de formateo en impuesto liquidado a RNI o percepci√≥n a no categorizados"
-                                            ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator>
-                                        <asp:RequiredFieldValidator ID="Impuesto_Liq_Rni_ResumenRequiredFieldValidator" runat="server"
-                                            ControlToValidate="Impuesto_Liq_Rni_ResumenTextBox" ErrorMessage="impuesto liquidado a RNI o percepci√≥n a no categorizados" SetFocusOnError="True">* </asp:RequiredFieldValidator>Impuesto
-                                        liquidado a RNI o percepci√≥n a no categorizados</td>
-                                    <td style="width: 739px">
-                                        <asp:TextBox ID="Impuesto_Liq_Rni_ResumenTextBox" runat="server" Width="100%" ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; height: 21px; text-align: right">
-                                        <asp:RegularExpressionValidator ID="Importe_Total_FacturaRegularExpressionValidator"
-                                            runat="server" ControlToValidate="Importe_Total_Factura_ResumenTextBox"
-                                            ErrorMessage="error de formateo en importe total" ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator><asp:RequiredFieldValidator
-                                                ID="Importe_Total_Factura_ResumenRequiredFieldValidator" runat="server" ControlToValidate="Importe_Total_Factura_ResumenTextBox" ErrorMessage="importe total" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
-                                        total
-                                    </td>
-                                    <td style="height: 21px; width: 739px;">
-                                        <asp:TextBox ID="Importe_Total_Factura_ResumenTextBox" runat="server" Width="100%"
-                                            ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 610px; height: 21px; text-align: right">
-                                        Observaciones</td>
-                                    <td style="height: 21px; width: 739px;">
-                                        <asp:TextBox ID="Observaciones_ResumenTextBox" runat="server" Width="100%"></asp:TextBox></td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right">
-                                        <asp:ValidationSummary ID="RequeridosValidationSummary" runat="server" HeaderText="Hay que ingresar o corregir los siguientes campos:"
-                                            ShowMessageBox="True" />
-                                    </td>
-                                    <td style="height: 100%; width: 100%; text-align: center">
-                                        <asp:Button ID="GenerarButton" runat="server" OnClick="GenerarButton_Click" Height="100px"
-                                            Width="400px" Text="Enviar archivo XML al e-mail del vendedor" />
+                        <td style="width: 9px;">
+                        </td>
+                        <td valign="top" align="center" style="width: 782px;">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td style="">
+                                        <table style="width: 782px" border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td rowspan="3" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="1" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="3" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top" align="left">
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                        <tr>
+                                                            <td style="width: 370px">
+                                                            </td>
+                                                            <td style="width: 40px; height: 10px; background-image: url('Imagenes/bgFEA-C.jpg')">
+                                                            </td>
+                                                            <td style="width: 370px">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <!-- TIPO DE COMPROBANTE -->
+                                                    <table style="width: 780px" border="0" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td style="width: 240px" align="center" class="TextoResaltado">
+                                                                INFORMACI”N VENDEDOR</td>
+                                                            <td style="width: 300px">
+                                                                <table style="width: 300px" border="0" cellpadding="0" cellspacing="0">
+                                                                    <tr>
+                                                                        <td rowspan="2" style="width: 1px; background-color: Gray;">
+                                                                        </td>
+                                                                        <td colspan="3" style="height: 1px; background-color: Gray;">
+                                                                        </td>
+                                                                        <td rowspan="2" style="width: 1px; background-color: Gray;">
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 9px;">
+                                                                        </td>
+                                                                        <td style="width: 280px">
+                                                                            <table border="0" cellpadding="0" cellspacing="0" style="background-color: White;">
+                                                                                <tr>
+                                                                                    <td style="text-align: center; width: 280px" class="TextoLabelFEAVendedor">
+                                                                                        Tipo de comprobante
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="width: 280px">
+                                                                                        <asp:DropDownList ID="Tipo_De_ComprobanteDropDownList" runat="server" SkinID="DropDownListCompradorGr">
+                                                                                        </asp:DropDownList>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="height: 5px">
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                        <td style="width: 9px;">
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="5" style="height: 1px; background-color: Gray;">
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td style="width: 240px" valign="middle" align="center">
+                                                                COMPROBANTE ELECTR”NICO
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <!-- DATOS DEL VENDEDOR -->
+                                                    <table style="width: 780px" border="0" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td style="width: 370px;">
+                                                            </td>
+                                                            <td rowspan="15" style="width: 40px; background-image: url('Imagenes/bgFEA-C.jpg');
+                                                                background-repeat: repeat-y;">
+                                                            </td>
+                                                            <td style="width: 370px;">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="3" style="height: 10px;">
+                                                            </td>
+                                                            <td colspan="3">
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Datos del Vendedor: Razon Social / Comprobante -->
+                                                        <tr>
+                                                            <td>
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td style="" class="TextoLabelFEAVendedor">
+                                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Razon_Social_VendedorTextBox"
+                                                                                ErrorMessage="razÛn social" SetFocusOnError="True">* </asp:RequiredFieldValidator>RazÛn
+                                                                            social: &nbsp;
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorDet" style="">
+                                                                            <asp:TextBox ID="Razon_Social_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td style="">
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td class="TextoLabelFEAVendedor" style="">
+                                                                            <asp:RegularExpressionValidator ID="PtoVentaRegularExpressionValidator" runat="server"
+                                                                                ControlToValidate="Punto_VentaTextBox" ErrorMessage="error de formateo en punto de venta"
+                                                                                ValidationExpression="[0-9]+" SetFocusOnError="True">* </asp:RegularExpressionValidator>
+                                                                            <asp:RequiredFieldValidator ID="puntoVentaRequiredFieldValidator" runat="server"
+                                                                                ErrorMessage="punto de venta" ControlToValidate="Punto_VentaTextBox" SetFocusOnError="True">* </asp:RequiredFieldValidator>Punto
+                                                                            de venta: &nbsp;
+                                                                        </td>
+                                                                        <td style="" class="TextoLabelFEAVendedorDet">
+                                                                            <asp:TextBox ID="Punto_VentaTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Datos del Vendedor: Calle -->
+                                                        <tr>
+                                                            <td style="">
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td style="" class="TextoLabelFEAVendedor">
+                                                                            Calle: &nbsp;</td>
+                                                                        <td style="" class="TextoLabelFEAVendedorDet">
+                                                                            <asp:TextBox ID="Domicilio_Calle_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td style="">
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td class="TextoLabelFEAVendedor">
+                                                                            <asp:RegularExpressionValidator ID="Numero_comprobanteRegularExpressionValidator"
+                                                                                runat="server" ControlToValidate="Numero_ComprobanteTextBox" ErrorMessage="error de formateo en n˙mero de comprobante"
+                                                                                ValidationExpression="[0-9]+" SetFocusOnError="True">* </asp:RegularExpressionValidator>
+                                                                            <asp:RequiredFieldValidator ID="Numero_ComprobanteRequiredFieldValidator" runat="server"
+                                                                                ControlToValidate="Numero_ComprobanteTextBox" ErrorMessage="n˙mero de comprobante"
+                                                                                SetFocusOnError="True">* </asp:RequiredFieldValidator>N˙mero de comprobante:
+                                                                            &nbsp;
+                                                                        </td>
+                                                                        <td style="" class="TextoLabelFEAVendedorDet">
+                                                                            <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Datos del Vendedor: Nro.Calle, Piso y Dpto  / Fecha Emision -->
+                                                        <tr>
+                                                            <td>
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <!-- 25 + 80 + 40 + 60 + 40 + 80 + 40 + 5 padding = 370px -->
+                                                                        <td style="width: 25px;">
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorCh">
+                                                                            Nro.: &nbsp;
+                                                                        </td>
+                                                                        <td style="" class="TextoLabelFEAVendedorDetChCh">
+                                                                            <asp:TextBox ID="Domicilio_Numero_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorChCh">
+                                                                            Piso: &nbsp;
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorDetChCh">
+                                                                            <asp:TextBox ID="Domicilio_Piso_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorCh">
+                                                                            Depto: &nbsp;
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorDetChCh" style="padding-right: 5px">
+                                                                            <asp:TextBox ID="Domicilio_Depto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td>
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td class="TextoLabelFEAVendedor">
+                                                                            <asp:RequiredFieldValidator ID="FechaEmisionDatePickerRequiredFieldValidator" runat="server"
+                                                                                ControlToValidate="FechaEmisionDatePickerWebUserControl:txt_Date" ErrorMessage="fecha de emisiÛn"
+                                                                                SetFocusOnError="True">* </asp:RequiredFieldValidator>Fecha de emisiÛn: &nbsp;
+                                                                        </td>
+                                                                        <td style="padding-top: 3px;">
+                                                                            <uc1:DatePickerWebUserControl ID="FechaEmisionDatePickerWebUserControl" runat="server"
+                                                                                TextCssClass="DatePickerFecha" />
+                                                                        </td>
+                                                                        <td align="left" style="width: 95px">
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Datos del Vendedor: Sector, Torre y Manzana -->
+                                                        <tr>
+                                                            <td>
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <!-- 25 + 80 + 40 + 60 + 40 + 80 + 40 + 5 padding = 370px -->
+                                                                        <td style="width: 25px;">
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorCh">
+                                                                            Sector: &nbsp;
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorDetChCh">
+                                                                            <asp:TextBox ID="Domicilio_Sector_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorChCh">
+                                                                            Torre: &nbsp;
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorDetChCh">
+                                                                            <asp:TextBox ID="Domicilio_Torre_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorCh">
+                                                                            Manzana: &nbsp;
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorDetChCh" style="padding-right: 5px">
+                                                                            <asp:TextBox ID="Domicilio_Manzana_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td style="">
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Datos del Vendedor: Localidad -->
+                                                        <tr>
+                                                            <td>
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td style="" class="TextoLabelFEAVendedor">
+                                                                            <asp:RequiredFieldValidator ID="Localidad_VendedorRequiredFieldValidator" runat="server"
+                                                                                ControlToValidate="Localidad_VendedorTextBox" ErrorMessage="localidad" SetFocusOnError="True">* </asp:RequiredFieldValidator>Localidad:
+                                                                            &nbsp;
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorDet">
+                                                                            <asp:TextBox ID="Localidad_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td style="">
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Datos del Vendedor: Provincia -->
+                                                        <tr>
+                                                            <td>
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td class="TextoLabelFEAVendedor">
+                                                                            Provincia: &nbsp;
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorDet">
+                                                                            <asp:DropDownList ID="Provincia_VendedorDropDownList" runat="server" SkinID="DropDownListVendedor">
+                                                                            </asp:DropDownList>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td style="">
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Datos del Vendedor: CÛdigo Postal -->
+                                                        <tr>
+                                                            <td>
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td style="" class="TextoLabelFEAVendedor">
+                                                                            CÛdigo Postal: &nbsp;
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorDet">
+                                                                            <asp:TextBox ID="Cp_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Datos del Vendedor: GLN -->
+                                                        <tr>
+                                                            <td style="">
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td style="" class="TextoLabelFEAVendedor">
+                                                                            GLN: &nbsp;</td>
+                                                                        <td style="" class="TextoLabelFEAVendedorDet">
+                                                                            <asp:TextBox ID="GLN_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td style="">
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Datos del Vendedor: Nombre contacto -->
+                                                        <tr>
+                                                            <td style="">
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td style="" class="TextoLabelFEAVendedor">
+                                                                            Nombre contacto: &nbsp;
+                                                                        </td>
+                                                                        <td style="" class="TextoLabelFEAVendedorDet">
+                                                                            <asp:TextBox ID="Contacto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td style="">
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Datos del Vendedor: Mail Contacto / CUIT -->
+                                                        <tr>
+                                                            <td style="">
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td style="" class="TextoLabelFEAVendedor">
+                                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="Email_VendedorTextBox"
+                                                                                ErrorMessage="error de formateo en mail contacto vendedor" SetFocusOnError="True"
+                                                                                ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$">* </asp:RegularExpressionValidator>
+                                                                            <asp:RequiredFieldValidator ID="Email_VendedorRequiredFieldValidator" runat="server"
+                                                                                ControlToValidate="Email_VendedorTextBox" ErrorMessage="mail contacto del vendedor"
+                                                                                SetFocusOnError="True">* </asp:RequiredFieldValidator>Mail Contacto: &nbsp;
+                                                                        </td>
+                                                                        <td style="" class="TextoLabelFEAVendedorDet">
+                                                                            <asp:TextBox ID="Email_VendedorTextBox" runat="server" AutoCompleteType="Email" SkinID="TextoBoxFEAVendedorDet">
+                                                                            </asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td style="">
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td style="" class="TextoLabelFEAVendedor">
+                                                                            <asp:RequiredFieldValidator ID="CUITVendedorRequiredFieldValidator" runat="server"
+                                                                                ControlToValidate="Cuit_VendedorTextBox" ErrorMessage="CUIT del vendedor" SetFocusOnError="True">* </asp:RequiredFieldValidator>
+                                                                            CUIT: &nbsp;
+                                                                        </td>
+                                                                        <td style="" class="TextoLabelFEAVendedorDet">
+                                                                            <asp:TextBox ID="Cuit_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Datos del Vendedor: TelÈfono contacto -->
+                                                        <tr>
+                                                            <td style="">
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td style="" class="TextoLabelFEAVendedor">
+                                                                            TelÈfono contacto: &nbsp;
+                                                                        </td>
+                                                                        <td style="" class="TextoLabelFEAVendedorDet">
+                                                                            <asp:TextBox ID="Telefono_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td style="">
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Datos del Vendedor: IVA / Inicio de actividades -->
+                                                        <tr>
+                                                            <td style="">
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td style="" class="TextoLabelFEAVendedor">
+                                                                            IVA: &nbsp;
+                                                                        </td>
+                                                                        <td style="" class="TextoLabelFEAVendedorDet">
+                                                                            <asp:DropDownList ID="Condicion_IVA_VendedorDropDownList" runat="server" SkinID="DropDownListVendedor">
+                                                                            </asp:DropDownList>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td valign="top" align="left">
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td class="TextoLabelFEAVendedor">
+                                                                            Inicio de actividades: &nbsp;
+                                                                        </td>
+                                                                        <td valign="top" align="left" style="padding-top: 3px;">
+                                                                            <uc1:DatePickerWebUserControl ID="InicioDeActividadesVendedorDatePickerWebUserControl"
+                                                                                TextCssClass="DatePickerFecha" runat="server" />
+                                                                        </td>
+                                                                        <td align="left" style="width: 95px">
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="height: 10px;">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
                             </table>
+                            <br />
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <!-- DATOS DEL LOTE -->
+                                <tr>
+                                    <td>
+                                        <table style="width: 782px" border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="1" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center;" class="TextoResaltado">
+                                                    LOTE
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                <asp:RegularExpressionValidator ID="NroLoteRegularExpressionValidator" runat="server"
+                                                                    ControlToValidate="Id_LoteTextbox" ErrorMessage="error de formateo en n˙mero de lote"
+                                                                    ValidationExpression="[0-9]+" SetFocusOnError="True">* </asp:RegularExpressionValidator>
+                                                                <asp:RequiredFieldValidator ID="loteRequiredFieldValidator" runat="server" ErrorMessage="n˙mero de lote"
+                                                                    ControlToValidate="Id_LoteTextbox" Display="Static" SetFocusOnError="True">* </asp:RequiredFieldValidator>Nro.
+                                                                de lote: &nbsp;
+                                                            </td>
+                                                            <td style="" class="TextoLabelFEAVendedorCh">
+                                                                <asp:TextBox ID="Id_LoteTextbox" runat="server" SkinID="TextoBoxFEAVendedorDetCh"></asp:TextBox>
+                                                            </td>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                Cuit canal: &nbsp;</td>
+                                                            <td class="TextoLabelFEAVendedorCh">
+                                                                <asp:TextBox ID="Cuit_CanalTextBox" runat="server" ReadOnly="True" SkinID="TextoBoxFEAVendedorDetCh">30690783521</asp:TextBox>
+                                                            </td>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                Presta servicios: &nbsp;</td>
+                                                            <td class="TextoLabelFEAVendedorChCh" style="text-align: left;">
+                                                                <asp:CheckBox ID="Presta_ServCheckBox" runat="server"></asp:CheckBox>
+                                                            </td>
+                                                            <td style="width: 80px; padding-right: 5px;">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="1" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br />
+                                    </td>
+                                </tr>
+                                <!-- DATOS DEL COMPRADOR -->
+                                <tr>
+                                    <td>
+                                        <table style="width: 782px" border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="3" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: center" class="TextoResaltado">
+                                                    INFORMACI”N COMPRADOR
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top" align="right">
+                                                    <table style="width: 370px" border="0" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                GLN: &nbsp;</td>
+                                                            <td style="" class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="GLN_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                CÛdigo interno: &nbsp;</td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Codigo_Interno_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                Tipo de documento: &nbsp;</td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:DropDownList ID="Codigo_Doc_Identificatorio_CompradorDropDownList" runat="server"
+                                                                    SkinID="DropDownListComprador">
+                                                                </asp:DropDownList></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                <asp:RequiredFieldValidator ID="docCompradorRequiredFieldValidator" runat="server"
+                                                                    ControlToValidate="Nro_Doc_Identificatorio_CompradorTextBox" ErrorMessage="documento del comprador"
+                                                                    SetFocusOnError="True">* </asp:RequiredFieldValidator>Nro. de documento: &nbsp;</td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Nro_Doc_Identificatorio_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                DenominaciÛn: &nbsp;
+                                                            </td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Denominacion_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="" class="TextoLabelFEAVendedor">
+                                                                Calle: &nbsp;
+                                                            </td>
+                                                            <td style="" class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Domicilio_Calle_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2" style="padding-top: 5px; text-align: right;">
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="text-align: right;">
+                                                                    <tr>
+                                                                        <td style="" class="TextoLabelFEAVendedorCh">
+                                                                            Nro.: &nbsp;
+                                                                        </td>
+                                                                        <td style="" class="TextoBoxFEAVendedorDetChCh">
+                                                                            <asp:TextBox ID="Domicilio_Numero_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
+                                                                        </td>
+                                                                        <td style="" class="TextoLabelFEAVendedorChCh">
+                                                                            Piso: &nbsp;
+                                                                        </td>
+                                                                        <td style="" class="TextoLabelFEADetVendedorChCh">
+                                                                            <asp:TextBox ID="Domicilio_Piso_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
+                                                                        </td>
+                                                                        <td style="" class="TextoLabelFEAVendedorCh">
+                                                                            Depto: &nbsp;
+                                                                        </td>
+                                                                        <td style="padding-right: 5px" class="TextoBoxFEAVendedorDetChCh">
+                                                                            <asp:TextBox ID="Domicilio_Depto_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2" style="padding-top: 5px; text-align: right;">
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="text-align: right;">
+                                                                    <tr>
+                                                                        <td style="" class="TextoLabelFEAVendedorCh">
+                                                                            Sector: &nbsp;
+                                                                        </td>
+                                                                        <td style="" class="TextoLabelFEAVendedorDetChCh">
+                                                                            <asp:TextBox ID="Domicilio_Sector_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
+                                                                        </td>
+                                                                        <td style="" class="TextoLabelFEAVendedorChCh">
+                                                                            Torre: &nbsp;
+                                                                        </td>
+                                                                        <td style="" class="TextoLabelFEAVendedorDetChCh">
+                                                                            <asp:TextBox ID="Domicilio_Torre_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox></td>
+                                                                        <td style="" class="TextoLabelFEAVendedorCh">
+                                                                            &nbsp;Manzana: &nbsp;
+                                                                        </td>
+                                                                        <td style="padding-right: 5px" class="TextoLabelFEAVendedorDetChCh">
+                                                                            <asp:TextBox ID="Domicilio_Manzana_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: center; height: 10px;">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td rowspan="20" style="width: 40px; background-image: url('Imagenes/bgFEA-C.jpg');
+                                                    background-repeat: repeat-y;">
+                                                </td>
+                                                <td valign="top" align="left">
+                                                    <table style="width: 370px" border="0" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td style="" class="TextoLabelFEAVendedor">
+                                                                Localidad: &nbsp;</td>
+                                                            <td style="" class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Localidad_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                Provincia: &nbsp;</td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:DropDownList ID="Provincia_CompradorDropDownList" runat="server" SkinID="DropDownListComprador">
+                                                                </asp:DropDownList></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="" class="TextoLabelFEAVendedor">
+                                                                CÛdigo Postal: &nbsp;</td>
+                                                            <td style="" class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Cp_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                Contacto: &nbsp;</td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Contacto_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="" class="TextoLabelFEAVendedor">
+                                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="Email_CompradorTextBox"
+                                                                    ErrorMessage="error de formateo en mail contacto comprador" SetFocusOnError="True"
+                                                                    ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$">* </asp:RegularExpressionValidator>Mail
+                                                                Contacto: &nbsp;</td>
+                                                            <td style="" class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Email_CompradorTextBox" runat="server" AutoCompleteType="Email"
+                                                                    SkinID="TextoBoxFEAVendedorDet"></asp:TextBox></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="" class="TextoLabelFEAVendedor">
+                                                                TelÈfono contacto: &nbsp;</td>
+                                                            <td style="" class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Telefono_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="" class="TextoLabelFEAVendedor">
+                                                                Inicio de actividades: &nbsp;</td>
+                                                            <td style="padding-top: 3px;" class="">
+                                                                <uc1:DatePickerWebUserControl ID="InicioDeActividadesCompradorDatePickerWebUserControl"
+                                                                    TextCssClass="DatePickerFecha" runat="server" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                IVA: &nbsp;</td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:DropDownList ID="Condicion_IVA_CompradorDropDownList" runat="server" SkinID="DropDownListComprador">
+                                                                </asp:DropDownList></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="height: 10px;">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br />
+                                    </td>
+                                </tr>
+                                <!-- DATOS DEL COMPROBANTE -->
+                                <tr>
+                                    <td>
+                                        <table style="width: 782px" border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="3" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: center;" class="TextoResaltado">
+                                                    INFORMACI”N COMPROBANTE
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: center; height: 10px;" class="TextoResaltado">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top" align="left">
+                                                    <table style="width: 370px" border="0" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td style="" class="TextoLabelFEAVendedor">
+                                                                CÛdigo interno: &nbsp;
+                                                            </td>
+                                                            <td style="">
+                                                                <asp:TextBox ID="Codigo_Interno_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                <asp:RequiredFieldValidator ID="FechaVencimientoRequiredFieldValidator" runat="server"
+                                                                    ControlToValidate="FechaVencimientoDatePickerWebUserControl:txt_Date" ErrorMessage="fecha de vencimiento"
+                                                                    SetFocusOnError="True">* </asp:RequiredFieldValidator>Fecha de vencimiento:
+                                                                &nbsp;</td>
+                                                            <td style="padding-top: 3px;">
+                                                                <uc1:DatePickerWebUserControl ID="FechaVencimientoDatePickerWebUserControl" runat="server"
+                                                                    TextCssClass="DatePickerFecha" />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td rowspan="5" style="width: 40px; background-image: url('Imagenes/bgFEA-C.jpg');
+                                                    background-repeat: repeat-y;">
+                                                </td>
+                                                <td valign="top" align="left">
+                                                    <table style="width: 370px" border="0" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor" style="">
+                                                                Fecha inicio servicio: &nbsp;</td>
+                                                            <td style="">
+                                                                <uc1:DatePickerWebUserControl ID="FechaServDesdeDatePickerWebUserControl" runat="server"
+                                                                    TextCssClass="DatePickerFecha" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor" style="">
+                                                                Fecha finalizaciÛn servicio: &nbsp;</td>
+                                                            <td style="padding-top: 3px;">
+                                                                <uc1:DatePickerWebUserControl ID="FechaServHastaDatePickerWebUserControl" runat="server"
+                                                                    TextCssClass="DatePickerFecha" />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: center; height: 10px;" class="TextoResaltado">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br />
+                                    </td>
+                                </tr>
+                                <!-- DATOS DEL DETALLE -->
+                                <tr>
+                                    <td style="text-align: center" class="TextoResaltado">
+                                        <table style="width: 782px" border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="1" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center;" class="TextoResaltado">
+                                                    DETALLE
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                Comentarios: &nbsp;
+                                                            </td>
+                                                            <td class="TextoLabelFEADescrLarga" style="padding: 5px;">
+                                                                <asp:TextBox ID="ComentariosTextBox" runat="server" SkinID="TextoBoxFEADescrGr"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: center; height: 10px;" colspan="2">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
+                                                                <asp:GridView ID="detalleGridView" runat="server" AutoGenerateColumns="False" GridLines="Both"
+                                                                    EnableViewState="true" Font-Bold="false" Width="100%" BorderStyle="Solid" BorderWidth="1px"
+                                                                    BorderColor="gray" HeaderStyle-ForeColor="#A52A2A" ShowHeader="True" ShowFooter="true"
+                                                                    ForeColor="#071F70" EditRowStyle-ForeColor="#071F70" EmptyDataRowStyle-ForeColor="#071F70"
+                                                                    PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70"
+                                                                    ToolTip="El separador de decimales a utilizar es el punto" OnRowCommand="detalleGridView_RowCommand"
+                                                                    OnRowEditing="detalleGridView_RowEditing" OnRowUpdated="detalleGridView_RowUpdated"
+                                                                    OnRowUpdating="detalleGridView_RowUpdating" OnRowCancelingEdit="detalleGridView_RowCancelingEdit"
+                                                                    OnRowDeleted="detalleGridView_RowDeleted" OnRowDeleting="detalleGridView_RowDeleting">
+                                                                    <Columns>
+                                                                        <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Descripci&#243;n del producto o servicio">
+                                                                            <ItemTemplate>
+                                                                                <asp:Label ID="lbldescripcion" Text='<%# Eval("descripcion") %>' runat="server"></asp:Label>
+                                                                            </ItemTemplate>
+                                                                            <EditItemTemplate>
+                                                                                <asp:TextBox ID="txtdescripcion" Text='<%# Eval("descripcion") %>' runat="server"
+                                                                                    Width="100%"></asp:TextBox>
+                                                                            </EditItemTemplate>
+                                                                            <FooterTemplate>
+                                                                                <asp:TextBox ID="txtdescripcion" Text='' runat="server" Width="100%"></asp:TextBox>
+                                                                            </FooterTemplate>
+                                                                            <ItemStyle HorizontalAlign="Right" />
+                                                                            <FooterStyle HorizontalAlign="Right" />
+                                                                        </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe total art&#237;culo">
+                                                                            <ItemTemplate>
+                                                                                <asp:Label ID="lblimporte_total_articulo" Text='<%# Eval("importe_total_articulo") %>'
+                                                                                    runat="server"></asp:Label>
+                                                                            </ItemTemplate>
+                                                                            <EditItemTemplate>
+                                                                                <asp:TextBox ID="txtimporte_total_articulo" Text='<%# Eval("importe_total_articulo") %>'
+                                                                                    runat="server" Width="100%"></asp:TextBox>
+                                                                            </EditItemTemplate>
+                                                                            <FooterTemplate>
+                                                                                <asp:TextBox ID="txtimporte_total_articulo" Text='' runat="server" Width="100%"></asp:TextBox>
+                                                                            </FooterTemplate>
+                                                                            <ItemStyle HorizontalAlign="Right" />
+                                                                        </asp:TemplateField>
+                                                                        <asp:CommandField HeaderStyle-Font-Bold="false" HeaderText="Edici&#243;n" ShowEditButton="True"
+                                                                            CancelText="Cancelar" UpdateText="Actualizar" EditText="Editar" CausesValidation="false">
+                                                                            <ItemStyle HorizontalAlign="Center" />
+                                                                        </asp:CommandField>
+                                                                        <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Eliminaci&#243;n / Incorporaci&#243;n">
+                                                                            <ItemTemplate>
+                                                                                <asp:LinkButton ID="linkDeleteDetalle" CommandName="Delete" runat="server" CausesValidation="false">Borrar</asp:LinkButton>
+                                                                            </ItemTemplate>
+                                                                            <FooterTemplate>
+                                                                                <asp:LinkButton ID="linkAddDetalle" CommandName="AddDetalle" runat="server"  CausesValidation="false">Agregar</asp:LinkButton>
+                                                                            </FooterTemplate>
+                                                                            <ItemStyle HorizontalAlign="Center" />
+                                                                        </asp:TemplateField>
+                                                                    </Columns>
+                                                                </asp:GridView>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="8" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br />
+                                    </td>
+                                </tr>
+                                <!-- DATOS DE DESCUENTOS GLOBALES -->
+                                <tr>
+                                    <td style="text-align: center">
+                                        <table style="width: 782px" border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="1" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center;" class="TextoResaltado">
+                                                    DESCUENTOS GLOBALES
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">
+                                                    En preparaciÛn
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="1" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br />
+                                    </td>
+                                </tr>
+                                <!-- DATOS DE IMPUESTOS GLOBALES -->
+                                <tr>
+                                    <td style="text-align: center">
+                                        <table style="width: 782px" border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="1" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center;" class="TextoResaltado">
+                                                    IMPUESTOS GLOBALES
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">
+                                                    <asp:GridView ID="impuestosGridView" runat="server" AutoGenerateColumns="False" GridLines="Both"
+                                                        EnableViewState="true" Font-Bold="false" Width="100%" BorderStyle="Solid" BorderWidth="1px"
+                                                        BorderColor="gray" HeaderStyle-ForeColor="#A52A2A" ShowHeader="True" ShowFooter="true"
+                                                        ForeColor="#071F70" EditRowStyle-ForeColor="#071F70" EmptyDataRowStyle-ForeColor="#071F70"
+                                                        PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70"
+                                                        ToolTip="El separador de decimales a utilizar es el punto" OnRowCommand="impuestosGridView_RowCommand"
+                                                        OnRowEditing="impuestosGridView_RowEditing" OnRowUpdated="impuestosGridView_RowUpdated"
+                                                        OnRowUpdating="impuestosGridView_RowUpdating" OnRowCancelingEdit="impuestosGridView_RowCancelingEdit"
+                                                        OnRowDeleted="impuestosGridView_RowDeleted" OnRowDeleting="impuestosGridView_RowDeleting" >
+                                                        <Columns>
+                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="CÛdigo del impuesto">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblcodigo_impuesto" Text='<%# Eval("descripcion") %>' runat="server"></asp:Label>
+                                                                </ItemTemplate>
+                                                                <EditItemTemplate>
+                                                                    <asp:DropDownList ID="ddlcodigo_impuestoEdit"
+                                                                    runat="server" Width="100%"></asp:DropDownList>
+                                                                </EditItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <asp:DropDownList ID="ddlcodigo_impuesto"  
+                                                                    runat="server" Width="100%"></asp:DropDownList>
+                                                                </FooterTemplate>
+                                                                <ItemStyle HorizontalAlign="Right" />
+                                                                <FooterStyle HorizontalAlign="Right" />
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe total impuesto">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblimporte_impuesto" Text='<%# Eval("importe_impuesto") %>'
+                                                                        runat="server"></asp:Label>
+                                                                </ItemTemplate>
+                                                                <EditItemTemplate>
+                                                                    <asp:TextBox ID="txtimporte_impuesto" Text='<%# Eval("importe_impuesto") %>'
+                                                                        runat="server" Width="100%"></asp:TextBox>
+                                                                </EditItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <asp:TextBox ID="txtimporte_impuesto" Text='' runat="server" Width="100%"></asp:TextBox>
+                                                                </FooterTemplate>
+                                                                <ItemStyle HorizontalAlign="Right" />
+                                                            </asp:TemplateField>
+                                                            <asp:CommandField HeaderStyle-Font-Bold="false" HeaderText="Edici&#243;n" ShowEditButton="True"
+                                                                CancelText="Cancelar" UpdateText="Actualizar" EditText="Editar" CausesValidation="false">
+                                                                <ItemStyle HorizontalAlign="Center" />
+                                                            </asp:CommandField>
+                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Eliminaci&#243;n / Incorporaci&#243;n">
+                                                                <ItemTemplate>
+                                                                    <asp:LinkButton ID="linkDeleteImpuesto" CommandName="Delete" runat="server" CausesValidation="false">Borrar</asp:LinkButton>
+                                                                </ItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <asp:LinkButton ID="linkAddImpuesto" CommandName="AddImpuestoGlobal" runat="server" CausesValidation="false">Agregar</asp:LinkButton>
+                                                                </FooterTemplate>
+                                                                <ItemStyle HorizontalAlign="Center" />
+                                                            </asp:TemplateField>
+                                                        </Columns>
+                                                    </asp:GridView>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="1" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br />
+                                    </td>
+                                </tr>
+                                <!-- DATOS DE RESUMEN FINAL -->
+                                <tr>
+                                    <td style="text-align: center">
+                                        <table style="width: 782px" border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="3" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: center;" class="TextoResaltado">
+                                                    RESUMEN FINAL
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center">
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
+                                                        <tr>
+                                                            <td style="width: 370px" align="center">
+                                                                <table style="width: 335px" border="0" cellpadding="0" cellspacing="0">
+                                                                    <tr>
+                                                                        <td rowspan="2" style="width: 1px; background-color: Gray;">
+                                                                        </td>
+                                                                        <td colspan="3" style="height: 1px; background-color: Gray;">
+                                                                        </td>
+                                                                        <td rowspan="2" style="width: 1px; background-color: Gray;">
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 9px;">
+                                                                        </td>
+                                                                        <td style="width: 315px">
+                                                                            <table border="0" cellpadding="0" cellspacing="0" style="background-color: White;">
+                                                                                <tr>
+                                                                                    <td style="width: 120px;" class="TextoLabelFEAVendedorCh">
+                                                                                        CAE:
+                                                                                    </td>
+                                                                                    <td style="width: 10px;">
+                                                                                    </td>
+                                                                                    <td class="TextoLabelFEAVendedorDet">
+                                                                                        <asp:TextBox ID="CAETextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="width: 120px;" class="TextoLabelFEAVendedorCh">
+                                                                                        Fecha de vencimiento CAE:
+                                                                                    </td>
+                                                                                    <td style="width: 10px;">
+                                                                                    </td>
+                                                                                    <td style="padding-top: 3px; text-align: left;">
+                                                                                        <uc1:DatePickerWebUserControl ID="FechaCAEVencimientoDatePickerWebUserControl" runat="server"
+                                                                                            TextCssClass="DatePickerFecha" />
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="width: 120px;" class="TextoLabelFEAVendedorCh">
+                                                                                        Fecha de obtenciÛn CAE:
+                                                                                    </td>
+                                                                                    <td style="width: 10px;">
+                                                                                    </td>
+                                                                                    <td style="padding-top: 3px; text-align: left;">
+                                                                                        <uc1:DatePickerWebUserControl ID="FechaCAEObtencionDatePickerWebUserControl" runat="server"
+                                                                                            TextCssClass="DatePickerFecha" />
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="height: 5px">
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                        <td style="width: 9px;">
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="5" style="height: 1px; background-color: Gray;">
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td rowspan="2" style="width: 40px; background-image: url('Imagenes/bgFEA-C.jpg');
+                                                    background-repeat: repeat-y;">
+                                                </td>
+                                                <td valign="top" align="left">
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                <asp:RegularExpressionValidator ID="ImporteTotalNetoGravadoRegularExpressionValidator"
+                                                                    runat="server" ControlToValidate="Importe_Total_Neto_Gravado_ResumenTextBox"
+                                                                    ErrorMessage="error de formateo en importe total neto gravado" ValidationExpression="[0-9]+(\.[0-9]+)?"
+                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator>
+                                                                <asp:RequiredFieldValidator ID="Importe_Total_Neto_Gravado_ResumenRequiredFieldValidator"
+                                                                    runat="server" ControlToValidate="Importe_Total_Neto_Gravado_ResumenTextBox"
+                                                                    ErrorMessage="importe total neto gravado" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
+                                                                total neto gravado: &nbsp;
+                                                            </td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Importe_Total_Neto_Gravado_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                    ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                <asp:RegularExpressionValidator ID="Importe_Total_Concepto_No_gravadoRegularExpressionValidator"
+                                                                    runat="server" ControlToValidate="Importe_Total_Concepto_No_Gravado_ResumenTextBox"
+                                                                    ErrorMessage="error de formateo en importe total de conceptos que no integren el precio neto gravado"
+                                                                    ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator>
+                                                                <asp:RequiredFieldValidator ID="Importe_Total_Concepto_No_Gravado_ResumenRequiredFieldValidator"
+                                                                    runat="server" ControlToValidate="Importe_Total_Concepto_No_Gravado_ResumenTextBox"
+                                                                    ErrorMessage="importe total de conceptos que no integren el precio neto gravado"
+                                                                    SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe total de conceptos
+                                                                que no integren el precio neto gravado: &nbsp;
+                                                            </td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Importe_Total_Concepto_No_Gravado_ResumenTextBox" runat="server"
+                                                                    SkinID="TextoBoxFEAVendedorDet" ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                <asp:RegularExpressionValidator ID="Importe_Operaciones_ExentasRegularExpressionValidator"
+                                                                    runat="server" ControlToValidate="Importe_Operaciones_Exentas_ResumenTextBox"
+                                                                    ErrorMessage="error de formateo en importe de operaciones exentas" ValidationExpression="[0-9]+(\.[0-9]+)?"
+                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator>
+                                                                <asp:RequiredFieldValidator ID="Importe_Operaciones_Exentas_ResumenRequiredFieldValidator"
+                                                                    runat="server" ControlToValidate="Importe_Operaciones_Exentas_ResumenTextBox"
+                                                                    ErrorMessage="importe de operaciones exentas" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
+                                                                de operaciones exentas: &nbsp;
+                                                            </td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Importe_Operaciones_Exentas_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                    ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                <asp:RegularExpressionValidator ID="Impuesto_LiqRegularExpressionValidator" runat="server"
+                                                                    ControlToValidate="Impuesto_Liq_ResumenTextBox" ErrorMessage="error de formateo en impuesto liquidado"
+                                                                    ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator>
+                                                                <asp:RequiredFieldValidator ID="Impuesto_Liq_ResumenRequiredFieldValidator" runat="server"
+                                                                    ControlToValidate="Impuesto_Liq_ResumenTextBox" ErrorMessage="impuesto liquidado"
+                                                                    SetFocusOnError="True">* </asp:RequiredFieldValidator>Impuesto liquidado: &nbsp;</td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Impuesto_Liq_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                    ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                <asp:RegularExpressionValidator ID="Impuesto_Liq_RniRegularExpressionValidator" runat="server"
+                                                                    ControlToValidate="Impuesto_Liq_Rni_ResumenTextBox" ErrorMessage="error de formateo en impuesto liquidado a RNI o percepciÛn a no categorizados"
+                                                                    ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator>
+                                                                <asp:RequiredFieldValidator ID="Impuesto_Liq_Rni_ResumenRequiredFieldValidator" runat="server"
+                                                                    ControlToValidate="Impuesto_Liq_Rni_ResumenTextBox" ErrorMessage="impuesto liquidado a RNI o percepciÛn a no categorizados"
+                                                                    SetFocusOnError="True">* </asp:RequiredFieldValidator>Impuesto liquidado a RNI
+                                                                o percepciÛn a no categorizados: &nbsp;</td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Impuesto_Liq_Rni_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                    ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                <asp:RegularExpressionValidator ID="Importe_Total_FacturaRegularExpressionValidator"
+                                                                    runat="server" ControlToValidate="Importe_Total_Factura_ResumenTextBox" ErrorMessage="error de formateo en importe total"
+                                                                    ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator><asp:RequiredFieldValidator
+                                                                        ID="Importe_Total_Factura_ResumenRequiredFieldValidator" runat="server" ControlToValidate="Importe_Total_Factura_ResumenTextBox"
+                                                                        ErrorMessage="importe total" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
+                                                                total: &nbsp;
+                                                            </td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Importe_Total_Factura_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                    ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: center; height: 10px;" class="TextoResaltado">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="3" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="3" style="height: 1px;">
+                                                </td>
+                                                <td rowspan="3" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 780px; padding: 5px;">
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                Observaciones: &nbsp;
+                                                            </td>
+                                                            <td class="TextoLabelFEADescrLarga">
+                                                                <asp:TextBox ID="Observaciones_ResumenTextBox" runat="server" SkinID="TextoBoxFEADescrGr">
+                                                                </asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center">
+                                        <asp:Button ID="GenerarButton" runat="server" OnClick="GenerarButton_Click" Height="60px"
+                                            Width="780px" Text="Enviar archivo XML al e-mail del vendedor" BorderColor="Gray"
+                                            BorderWidth="1px" BorderStyle="NotSet" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; height: 10px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; width: 780px;" align="left">
+                                        <asp:ValidationSummary ID="RequeridosValidationSummary" BorderColor="Gray" BorderWidth="1px"
+                                            runat="server" HeaderText="Hay que ingresar o corregir los siguientes campos:"
+                                            ShowMessageBox="True" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                        </td>
+                        <td style="width: 9px;">
                         </td>
                     </tr>
                 </table>
