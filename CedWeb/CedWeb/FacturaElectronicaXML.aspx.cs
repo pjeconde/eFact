@@ -477,12 +477,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
 
-			smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
+			//smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
 
 			//smtpClient.Credentials = new System.Net.NetworkCredential("facturaelectronica@cedeira.com.ar", "cedeira123");
 			//smtpClient.Host = "smtp.cedeira.com.ar";
 
-			//smtpClient.Host = "localhost";
+			smtpClient.Host = "localhost";
 
 			smtpClient.Send(mail);
 			m.Close();
@@ -503,10 +503,11 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			smtpClient = new System.Net.Mail.SmtpClient();
 
-			smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
+			//smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
 			//smtpClient.Credentials = new System.Net.NetworkCredential("facturaelectronicaxml@cedeira.com.ar", "cedeira123");
 			//smtpClient.Host = "smtp.cedeira.com.ar";
-			//smtpClient.Host = "localhost";
+
+			smtpClient.Host = "localhost";
 
 			smtpClient.Send(mailCedeira);
 
