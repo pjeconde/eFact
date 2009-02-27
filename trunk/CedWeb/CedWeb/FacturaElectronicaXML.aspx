@@ -244,7 +244,7 @@
                                                                         <td class="TextoLabelFEAVendedorCh">
                                                                             Nro.: 
                                                                         </td>
-                                                                        <td style="" class="TextoLabelFEAVendedorDetChCh">
+                                                                        <td class="TextoLabelFEAVendedorDetChCh">
                                                                             <asp:TextBox ID="Domicilio_Numero_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
                                                                         </td>
                                                                         <td class="TextoLabelFEAVendedorChCh">
@@ -1292,20 +1292,28 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="TextoLabelFEAVendedor">
+                                                                <asp:RegularExpressionValidator ID="Importe_Total_Impuestos_MunicipalesResumenRegularExpressionValidator"
+                                                                    runat="server" ControlToValidate="Importe_Total_Impuestos_Municipales_ResumenTextBox" ErrorMessage="error de formateo en impuestos municipales"
+                                                                    ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator><asp:RequiredFieldValidator
+                                                                        ID="Impuestos_municipalesResumenRequiredFieldValidator" runat="server" ControlToValidate="Importe_Total_Impuestos_Municipales_ResumenTextBox"
+                                                                        ErrorMessage="Impuestos municipales" SetFocusOnError="True">* </asp:RequiredFieldValidator>Impuestos municipales:
+                                                            </td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Importe_Total_Impuestos_Municipales_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                    ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox>                                                            
+                                                            </td>
+                                                        </tr>                                                        
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
                                                                 <asp:RegularExpressionValidator ID="Importe_Total_FacturaRegularExpressionValidator"
                                                                     runat="server" ControlToValidate="Importe_Total_Factura_ResumenTextBox" ErrorMessage="error de formateo en importe total"
                                                                     ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator><asp:RequiredFieldValidator
                                                                         ID="Importe_Total_Factura_ResumenRequiredFieldValidator" runat="server" ControlToValidate="Importe_Total_Factura_ResumenTextBox"
-                                                                        ErrorMessage="importe total" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
-                                                                total: 
+                                                                        ErrorMessage="importe total" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe total:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Importe_Total_Factura_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
                                                                     ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="text-align: center; height: 10px;" class="TextoResaltado">
                                                             </td>
                                                         </tr>
                                                     </table>
