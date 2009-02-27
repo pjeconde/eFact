@@ -411,9 +411,25 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			r.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
 
 			r.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+			if (r.importe_total_impuestos_nacionales!=0)
+			{
+				r.importe_total_impuestos_nacionalesSpecified = true;
+			}
 			r.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+			if (r.importe_total_ingresos_brutos!=0)
+			{
+				r.importe_total_ingresos_brutosSpecified = true;
+			}
 			r.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+			if (r.importe_total_impuestos_municipales!=0)
+			{
+				r.importe_total_impuestos_municipalesSpecified = true;
+			}
 			r.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+			if (r.importe_total_impuestos_internos!=0)
+			{
+				r.importe_total_impuestos_internosSpecified = true;
+			}
 
 			r.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
 
@@ -477,12 +493,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
 
-			//smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
+			smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
 
 			//smtpClient.Credentials = new System.Net.NetworkCredential("facturaelectronica@cedeira.com.ar", "cedeira123");
 			//smtpClient.Host = "smtp.cedeira.com.ar";
 
-			smtpClient.Host = "localhost";
+			//smtpClient.Host = "localhost";
 
 			smtpClient.Send(mail);
 			m.Close();
@@ -503,11 +519,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			smtpClient = new System.Net.Mail.SmtpClient();
 
-			//smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
+			smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
+			
 			//smtpClient.Credentials = new System.Net.NetworkCredential("facturaelectronicaxml@cedeira.com.ar", "cedeira123");
 			//smtpClient.Host = "smtp.cedeira.com.ar";
 
-			smtpClient.Host = "localhost";
+			//smtpClient.Host = "localhost";
 
 			smtpClient.Send(mailCedeira);
 

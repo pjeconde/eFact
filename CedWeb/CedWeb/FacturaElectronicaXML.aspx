@@ -1288,7 +1288,7 @@
                                                                 <asp:RequiredFieldValidator ID="Impuesto_Liq_Rni_ResumenRequiredFieldValidator" runat="server"
                                                                     ControlToValidate="Impuesto_Liq_Rni_ResumenTextBox" ErrorMessage="impuesto liquidado a RNI o percepción a no categorizados"
                                                                     SetFocusOnError="True">* </asp:RequiredFieldValidator>Impuesto liquidado a RNI
-                                                                o percepción a no categorizados: </td>
+                                                                o percepción a no categorizados(IVA R.G. 2126): </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Impuesto_Liq_Rni_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
                                                                     ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox></td>
