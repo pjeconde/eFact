@@ -1,8 +1,10 @@
 <%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="FacturaElectronicaXML.aspx.cs"
-    Inherits="FacturaElectronicaXML" MaintainScrollPositionOnPostback="true" Buffer="true" UICulture="es" %>
+    Inherits="FacturaElectronicaXML" MaintainScrollPositionOnPostback="true" Buffer="true" UICulture="es" 
+    Title="Factura Electrónica Gratis(XML para Interfacturas)" %>
 
 <%@ Register Src="DatePickerWebUserControl.ascx" TagName="DatePickerWebUserControl"
     TagPrefix="uc1" %>
+
 <asp:Content ID="XMLContent" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado"
     runat="Server">
 
@@ -1272,7 +1274,8 @@
                                                                     ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator>
                                                                 <asp:RequiredFieldValidator ID="Impuesto_Liq_ResumenRequiredFieldValidator" runat="server"
                                                                     ControlToValidate="Impuesto_Liq_ResumenTextBox" ErrorMessage="impuesto liquidado"
-                                                                    SetFocusOnError="True">* </asp:RequiredFieldValidator>IVA Resp. Inscrip: </td>
+                                                                    SetFocusOnError="True">* </asp:RequiredFieldValidator>IVA Responsable inscripto:
+                                                            </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Impuesto_Liq_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
                                                                     ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox></td>
@@ -1296,11 +1299,56 @@
                                                                     runat="server" ControlToValidate="Importe_Total_Impuestos_Municipales_ResumenTextBox" ErrorMessage="error de formateo en impuestos municipales"
                                                                     ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator><asp:RequiredFieldValidator
                                                                         ID="Impuestos_municipalesResumenRequiredFieldValidator" runat="server" ControlToValidate="Importe_Total_Impuestos_Municipales_ResumenTextBox"
-                                                                        ErrorMessage="Impuestos municipales" SetFocusOnError="True">* </asp:RequiredFieldValidator>Impuestos municipales:
+                                                                        ErrorMessage="Impuestos municipales" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
+                                                                total impuestos municipales:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Importe_Total_Impuestos_Municipales_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
                                                                     ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox>                                                            
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                <asp:RegularExpressionValidator ID="Importe_Total_Impuestos_Nacionales_ResumenTextBoxResumenRegularExpressionValidator"
+                                                                    runat="server" ControlToValidate="Importe_Total_Impuestos_Nacionales_ResumenTextBox" ErrorMessage="error de formateo en importe total impuestos nacionales"
+                                                                    ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator><asp:RequiredFieldValidator
+                                                                        ID="Importe_Total_Impuestos_Nacionales_ResumenTextBoxRequiredFieldValidator" runat="server" ControlToValidate="Importe_Total_Impuestos_Nacionales_ResumenTextBox"
+                                                                        ErrorMessage="importe total impuestos nacionales" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
+                                                                total impuestos nacionales:
+                                                            </td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Importe_Total_Impuestos_Nacionales_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                    ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+														
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                <asp:RegularExpressionValidator ID="Importe_Total_Ingresos_Brutos_ResumenTextBoxResumenRegularExpressionValidator"
+                                                                    runat="server" ControlToValidate="Importe_Total_Ingresos_Brutos_ResumenTextBox" ErrorMessage="error de formateo en importe total ingresos brutos"
+                                                                    ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator><asp:RequiredFieldValidator
+                                                                        ID="Importe_Total_Ingresos_Brutos_ResumenTextBoxRequiredFieldValidator" runat="server" ControlToValidate="Importe_Total_Ingresos_Brutos_ResumenTextBox"
+                                                                        ErrorMessage="importe total ingresos brutos" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
+                                                                total ingresos brutos:
+                                                            </td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Importe_Total_Ingresos_Brutos_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                    ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+														
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                <asp:RegularExpressionValidator ID="Importe_Total_Impuestos_Internos_ResumenTextBoxResumenRegularExpressionValidator"
+                                                                    runat="server" ControlToValidate="Importe_Total_Impuestos_Internos_ResumenTextBox" ErrorMessage="error de formateo en importe total impuestos internos"
+                                                                    ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator><asp:RequiredFieldValidator
+                                                                        ID="Importe_Total_Impuestos_Internos_ResumenTextBoxRequiredFieldValidator" runat="server" ControlToValidate="Importe_Total_Impuestos_Internos_ResumenTextBox"
+                                                                        ErrorMessage="importe total impuestos internos" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
+                                                                total impuestos internos:
+                                                            </td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Importe_Total_Impuestos_Internos_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                    ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox>
                                                             </td>
                                                         </tr>                                                        
                                                         <tr>
