@@ -17,6 +17,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 	int gvEditIndex = -1;
 	System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas;
 	System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> impuestos;
+	System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> descuentos;
 	#endregion
 	protected void Page_Load(object sender, EventArgs e)
 	{
@@ -33,6 +34,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			impuestos.Add(impuesto);
 			impuestosGridView.DataSource = impuestos;
 			ViewState["impuestos"] = impuestos;
+
+			descuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>();
+			FeaEntidades.InterFacturas.resumenDescuentos descuento = new FeaEntidades.InterFacturas.resumenDescuentos();
+			descuentos.Add(descuento);
+			descuentosGridView.DataSource = descuentos;
+			ViewState["descuentos"] = descuentos;
 
 			Condicion_IVA_VendedorDropDownList.DataValueField = "Codigo";
 			Condicion_IVA_VendedorDropDownList.DataTextField = "Descr";
@@ -73,13 +80,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			DataBind();
 
 			BindearDropDownLists();
-			
-			//System.Collections.Generic.List<FeaEntidades.InterFacturas.lineaDescuentos> lineasDescuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.lineaDescuentos>();
-			//FeaEntidades.InterFacturas.lineaDescuentos lineaDescuentos = new FeaEntidades.InterFacturas.lineaDescuentos();
-			//lineaDescuentos.descripcion_descuento = "Cualquier cosa";
-			//lineasDescuentos.Add(lineaDescuentos);
-			//descuentosGridEX.DataSource = lineasDescuentos;
-
 		}
 	}
 
@@ -89,8 +89,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataTextField = "Descr";
 		((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataSource = FeaEntidades.CodigosImpuesto.CodigoImpuesto.Lista();
 		((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataBind();
-
-
 	}
 
 	protected void detalleGridView_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -215,8 +213,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			detalleGridView.EditIndex = -1;
 			detalleGridView.DataSource = ViewState["lineas"];
 			detalleGridView.DataBind();
-
-			//ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Detalle actualizado correctamente');</script>");
 		}
 		catch (Exception ex)
 		{
@@ -455,6 +451,31 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				}
 			}
 
+
+			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> listadedescuentos = (System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"];
+			comp.resumen.descuentos = new FeaEntidades.InterFacturas.resumenDescuentos[listadedescuentos.Count];
+
+			for (int i = 0; i < listadedescuentos.Count; i++)
+			{
+				if (!listadedescuentos[i].descripcion_descuento.Equals(string.Empty))
+				{
+					comp.resumen.descuentos[i] = new FeaEntidades.InterFacturas.resumenDescuentos();
+					comp.resumen.descuentos[i].alicuota_iva_descuento = listadedescuentos[i].alicuota_iva_descuento;
+					comp.resumen.descuentos[i].alicuota_iva_descuentoSpecified = listadedescuentos[i].alicuota_iva_descuentoSpecified;
+					comp.resumen.descuentos[i].descripcion_descuento = listadedescuentos[i].descripcion_descuento;
+					comp.resumen.descuentos[i].importe_descuento = listadedescuentos[i].importe_descuento;
+					comp.resumen.descuentos[i].importe_descuento_moneda_origen = listadedescuentos[i].importe_descuento_moneda_origen;
+					comp.resumen.descuentos[i].importe_descuento_moneda_origenSpecified = listadedescuentos[i].importe_descuento_moneda_origenSpecified;
+					comp.resumen.descuentos[i].importe_iva_descuento = listadedescuentos[i].importe_iva_descuento;
+					comp.resumen.descuentos[i].importe_iva_descuento_moneda_origen = listadedescuentos[i].importe_iva_descuento_moneda_origen;
+					comp.resumen.descuentos[i].importe_iva_descuento_moneda_origenSpecified = listadedescuentos[i].importe_iva_descuento_moneda_origenSpecified;
+					comp.resumen.descuentos[i].importe_iva_descuentoSpecified = listadedescuentos[i].importe_iva_descuentoSpecified;
+					comp.resumen.descuentos[i].porcentaje_descuento = listadedescuentos[i].porcentaje_descuento;
+					comp.resumen.descuentos[i].porcentaje_descuentoSpecified = listadedescuentos[i].porcentaje_descuentoSpecified;
+				}
+			}
+
+
 			lote.comprobante[0] = comp;
 
 			System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
@@ -493,12 +514,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
 
-			smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
+			//smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
 
 			//smtpClient.Credentials = new System.Net.NetworkCredential("facturaelectronica@cedeira.com.ar", "cedeira123");
 			//smtpClient.Host = "smtp.cedeira.com.ar";
 
-			//smtpClient.Host = "localhost";
+			smtpClient.Host = "localhost";
 
 			smtpClient.Send(mail);
 			m.Close();
@@ -519,12 +540,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			smtpClient = new System.Net.Mail.SmtpClient();
 
-			smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
+			//smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
 			
 			//smtpClient.Credentials = new System.Net.NetworkCredential("facturaelectronicaxml@cedeira.com.ar", "cedeira123");
 			//smtpClient.Host = "smtp.cedeira.com.ar";
 
-			//smtpClient.Host = "localhost";
+			smtpClient.Host = "localhost";
 
 			smtpClient.Send(mailCedeira);
 
@@ -730,6 +751,139 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			impuestosGridView.DataBind();
 			BindearDropDownLists();
 
+		}
+		catch (Exception ex)
+		{
+			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</script>");
+		}
+	}
+	protected void descuentosGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+	{
+		descuentosGridView.EditIndex = -1;
+		descuentosGridView.DataSource = ViewState["descuentos"];
+		descuentosGridView.DataBind();
+	}
+	protected void descuentosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+	{
+		if (e.CommandName.Equals("Adddescuentos"))
+		{
+			try
+			{
+				FeaEntidades.InterFacturas.resumenDescuentos rd = new FeaEntidades.InterFacturas.resumenDescuentos();
+
+				string auxDescr = ((TextBox)descuentosGridView.FooterRow.FindControl("txtdescripcion")).Text;
+				if (!auxDescr.Equals(string.Empty))
+				{
+					rd.descripcion_descuento = auxDescr;
+				}
+				else
+				{
+					throw new Exception("Descuento no agregado porque la descripción no puede estar vacía");
+				}
+				string auxTotal = ((TextBox)descuentosGridView.FooterRow.FindControl("txtimporte_descuento")).Text;
+				if (!auxTotal.Contains(","))
+				{
+					rd.importe_descuento = Convert.ToDouble(auxTotal);
+				}
+				else
+				{
+					throw new Exception("Descuento no agregado porque el separador de decimales debe ser el punto");
+				}
+
+				((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"]).Add(rd);
+
+
+				//Me fijo si elimino la fila automática
+				System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> rds = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"]);
+				if (rds[0].descripcion_descuento == null)
+				{
+					((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"]).Remove(rds[0]);
+				}
+
+				descuentosGridView.DataSource = ViewState["descuentos"];
+				descuentosGridView.DataBind();
+
+			}
+			catch (Exception ex)
+			{
+				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</script>");
+			}
+		}
+	}
+	protected void descuentosGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
+	{
+		if (e.Exception != null)
+		{
+			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</script>");
+			e.ExceptionHandled = true;
+		}
+	}
+	protected void descuentosGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+	{
+		try
+		{
+			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> rds = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"]);
+			FeaEntidades.InterFacturas.resumenDescuentos rd = rds[e.RowIndex];
+			rds.Remove(rd);
+
+			if (rds.Count.Equals(0))
+			{
+				FeaEntidades.InterFacturas.resumenDescuentos nuevo = new FeaEntidades.InterFacturas.resumenDescuentos();
+				rds.Add(nuevo);
+			}
+
+			descuentosGridView.EditIndex = -1;
+
+			descuentosGridView.DataSource = ViewState["descuentos"];
+			descuentosGridView.DataBind();
+		}
+		catch
+		{
+		}
+	}
+	protected void descuentosGridView_RowEditing(object sender, GridViewEditEventArgs e)
+	{
+		descuentosGridView.EditIndex = e.NewEditIndex;
+		descuentosGridView.DataSource = ViewState["descuentos"];
+		descuentosGridView.DataBind();
+	}
+	protected void descuentosGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
+	{
+		if (e.Exception != null)
+		{
+			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</script>");
+			e.ExceptionHandled = true;
+		}
+	}
+	protected void descuentosGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
+	{
+		try
+		{
+			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> rds = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"]);
+
+			FeaEntidades.InterFacturas.resumenDescuentos rd = rds[e.RowIndex];
+			string auxDescr = ((TextBox)descuentosGridView.Rows[e.RowIndex].FindControl("txtdescripcion")).Text;
+			if (!auxDescr.Equals(string.Empty))
+			{
+				rd.descripcion_descuento = auxDescr;
+			}
+			else
+			{
+				throw new Exception("Descuento no actualizado porque la descripción no puede estar vacía");
+			}
+			string auxTotal = ((TextBox)descuentosGridView.Rows[e.RowIndex].FindControl("txtimporte_descuento")).Text;
+			if (!auxTotal.Contains(","))
+			{
+				rd.importe_descuento = Convert.ToDouble(auxTotal);
+			}
+			else
+			{
+				throw new Exception("Descuento no actualizado porque el separador de decimales debe ser el punto");
+			}
+
+			descuentosGridView.EditIndex = -1;
+			descuentosGridView.DataSource = ViewState["descuentos"];
+			descuentosGridView.DataBind();
 		}
 		catch (Exception ex)
 		{
