@@ -17,18 +17,28 @@ namespace CedWeb
         }
 		protected void LoginButton_Click(object sender, EventArgs e)
 		{
-			if (UsuarioTextBox.Text == String.Empty)
-			{
-				MsgErrorLabel.Text = "Usuario no informado";
-			}
-			else if (PasswordTextBox.Text == String.Empty)
-			{
-				MsgErrorLabel.Text = "Contraseña no informada";
-			}
-			else
-			{
-				MsgErrorLabel.Text = "Usuario inexistente";
-			}
+            try
+            {
+                MsgErrorLabel.Text = String.Empty;
+                CedWebEntidades.Sesion sesion = (CedWebEntidades.Sesion)Session["Sesion"];
+                sesion.Cuenta.Id = UsuarioTextBox.Text;
+                sesion.Cuenta.Password = PasswordTextBox.Text;
+                CedWebRN.Cuenta.Login(sesion.Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
+                Response.Redirect("~/FacturaElectronica.aspx", true);
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+                Trace.Warn("Thread abortado");
+            }
+            catch (Exception ex)
+            {
+                CedWebEntidades.Sesion sesion = (CedWebEntidades.Sesion)Session["Sesion"];
+                CedWebRN.Cuenta.Limpiar(sesion.Cuenta);
+                ((Label)Master.FindControl("NombreCuentaLabel")).Text = String.Empty;
+                ((Label)Master.FindControl("SeparadorLabel")).Visible = false;
+                ((LinkButton)Master.FindControl("SalirLinkButton")).Visible = false;
+                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
+            }
 		}
 		protected void UsuarioTextBox_TextChanged(object sender, EventArgs e)
 		{

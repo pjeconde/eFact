@@ -186,7 +186,7 @@
                                     <td style="width: 15px; height: 20px">
                                     </td>
                                     <td style="">
-                                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="http://www.afip.gov.ar/efactura"
+                                        <asp:HyperLink ID="HyperLink1" runat="server" Target="_blank" NavigateUrl="http://www.afip.gov.ar/efactura"
                                             SkinID="LinkMedianoClaro">http://www.afip.gov.ar/efactura</asp:HyperLink>
                                     </td>
                                 </tr>
@@ -194,7 +194,7 @@
                                     <td style="width: 15px; height: 20px">
                                     </td>
                                     <td style="">
-                                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="http://www.interfacturas.com.ar/PF.html#nov"
+                                        <asp:HyperLink ID="HyperLink2" runat="server" Target="_blank" NavigateUrl="http://www.interfacturas.com.ar/PF.html#nov"
                                             SkinID="LinkMedianoClaro">http://www.interfacturas.com.ar</asp:HyperLink></td>
                                 </tr>
                             </table>

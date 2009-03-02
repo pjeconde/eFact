@@ -8,13 +8,7 @@
         border="0" class="TextoComun">
         <tr>
             <td valign="top">
-                <table style="width: 100%" cellpadding="0" cellspacing="0" border="0">
-                    <tr>
-                        <td style="height: 10px;">
-                        </td>
-                    </tr>
-                </table>
-                <table style="width: 100%" cellpadding="0" cellspacing="0" border="0">
+                <table style="width:100%; padding-top:10px" cellpadding="0" cellspacing="0" border="0">
                     <tr>
                         <td valign="top" style="padding-left: 10px">
                             <!-- @@@ TITULO DE LA PAGINA @@@-->
@@ -29,6 +23,7 @@
                                     </td>
                                 </tr>
                             </table>
+                        <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@-->
                         </td>
                     </tr>
                     <tr>
@@ -39,7 +34,7 @@
                         <td>
                             <table style="padding-left: 10px" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                    <td>
+                                    <td style="padding-left:22px">
                                         <!-- @@@ OBJETOS ESPECIFICOS DE LA PAGINA @@@-->
                                         <asp:Label ID="Label1" runat="server" Text="Nuestra empresa fue fundada en el año 1980 por un grupo de profesionales 
                                             con el objetivo de cubrir las necesidades informáticas que el mercado requería en ese momento. 
@@ -49,11 +44,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="height: 20px;">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
+                                    <td style="padding-left:22px; padding-top:10px">
                                         <asp:Label ID="Label3" runat="server" Text="Contamos no solo con personal altamente capacitado, 
                                         sino con el know how necesario adquirido a través de cientos de 
                                         implantaciones en las diversas áreas empresariales. 
@@ -63,11 +54,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="height: 20px;">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
+                                    <td style="padding-left:22px; padding-top:10px">
                                         <table style="" cellpadding="0" cellspacing="0" border="0">
                                             <tr>
                                                 <td style="width: 10px;">
@@ -93,12 +80,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="height: 10px;">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <table style="" cellpadding="0" cellspacing="0" border="0">
+                                    <td style="padding-left:22px; padding-top:10px">
+                                        <table cellpadding="0" cellspacing="0" border="0">
                                             <tr>
                                                 <td style="width: 10px;">
                                                     <asp:Label ID="LabelBulletServiciosSF" runat="server" CssClass="TextoResaltadoSuave"
@@ -123,11 +106,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="height: 10px;">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
+                                    <td style="padding-left:22px; padding-top:10px">
                                         <table style="" cellpadding="0" cellspacing="0" border="0">
                                             <tr>
                                                 <td style="width: 10px;">

@@ -3,22 +3,17 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado"
     runat="Server">
-    <table style="height: 500px; width: 800px" cellpadding="0" cellspacing="0" border="0"
-        class="TextoComun">
+    <table style="height: 500px; width: 800px" cellpadding="0" cellspacing="0" border="0" class="TextoComun">
         <tr>
-            <td style="width: 780px;" valign="top">
+            <td style="width: 780px; padding-left:10px; padding-top:10px" valign="top">
                 <table style="width: 100%;" cellpadding="0" cellspacing="0" border="0">
                     <tr>
-                        <td style="height: 10px;">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="left" valign="top" style="padding-left: 10px">
+                        <td align="left" valign="top">
                             <contenttemplate>
                                     <!-- @@@ OBJETOS ESPECIFICOS DE LA PAGINA @@@-->
                                     <table border="0" cellpadding="0" cellspacing="0" style="">
                                         <tr>
-                                             <td colspan="2" align="left" style="height: 33px;">
+                                             <td colspan="2" align="left">
                                                  <table cellpadding="0" cellspacing="0" border="0">
                                                      <tr>
                                                         <td style="width: 22px">
@@ -32,10 +27,10 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td align="left" valign="top" style="padding-right:20px;">
+                                            <td align="left" valign="top" style="padding-right:20px; padding-left:22px; padding-top:10px">
                                                 <asp:Label ID="CedFCIDescrLabel" runat="server" Text="El sistema de Administración de FCIs es una herramienta de administración de las carteras de inversión de los fondos y de cálculo de los valores de cuotaparte.  Lleva la contabilidad y facilita el cumplimiento de las normas establecidas por el organismo de fiscalización y de los reglamentos de gestión." SkinID="TextoMediano"></asp:Label>
                                             </td>
-                                            <td rowspan="3" style="height: 100%">
+                                            <td rowspan="2" style="height:100%; padding-top:10px">
                                                 <table cellpadding="0" cellspacing="0" border="0">
                                                     <tr>
                                                         <td style="">
@@ -50,32 +45,13 @@
                                                     </tr>
                                                 </table>
                                             </td>
-
                                         </tr>
                                         <tr>
-                                            <td align="left" valign="top" style="padding-right:10px; height: 20px; vertical-align: top;">
+                                            <td align="right" style="padding-right:10px; vertical-align:bottom">
                                                 <asp:Label ID="Label2" runat="server" Font-Bold="true" ForeColor="red" Text="»" ></asp:Label>
                                                 <asp:HyperLink ID="CedFCIpresentacionHyperLink" runat="server" NavigateUrl="~/Descarga.aspx?archivo=CedFCI.pdf" SkinID="LinkMedianoClaro">Descargar presentación</asp:HyperLink>
                                                 <asp:Label ID="CedFCIbarraLabel" runat="server" Text=" / "></asp:Label>
                                                 <asp:HyperLink ID="CedFCImasInfoHyperLink" runat="server" NavigateUrl="~/CedFCI.aspx" SkinID="LinkMedianoClaro">Ver más información</asp:HyperLink>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="left" valign="top" style=" height: 45px;">
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                        <tr>
-                                            <td style="height: 10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="background-color: #c8d2dc;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="height: 10px;">
                                             </td>
                                         </tr>
                                     </table>
@@ -95,17 +71,17 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td align="left" style="padding-right:10px">
+                                            <td align="left" valign="top" style="padding-right:20px; padding-left:22px; padding-top:10px">
                                                 <asp:Label ID="CedSTDescrLabel" runat="server" SkinID="TextoMediano" Text="Es un sistema diseñado para centralizar la administración de transferencias.  En línea con el BCRA, concentra el 100% de las operaciones, tanto enviadas como recibidas, en un único repositorio, para realizar un control eficiente y una óptima gestión operativa.  Facilita las tareas a través de la automatización de los procesos de: ingreso, envío, recepción, distribución y conciliación, entre otros. Contempla todas las operatorias, acorde a las normativas, y se encuentra integrado al Sistema de Medios de Pagos (Mep) del BCRA."></asp:Label>
                                             </td>
-                                            <td rowspan="2">
+                                            <td rowspan="2" style="padding-top:10px">
                                                 <asp:HyperLink ID="HyperLinkCedSTimagen" runat="server" NavigateUrl="~/VerImagen.aspx?Imagen='Imagenes/CedFCI-Tablero_ch.jpg'" EnableTheming="True">
                                                       <asp:Image ID="ImageCedSTTablero" runat="server"  ImageUrl="~/Imagenes/CedST-Tablero_ch.jpg" Width="200px" Height="135px"/>
                                                 </asp:HyperLink>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td align="left" valign="top" style="padding-right:10px">
+                                            <td align="right" valign="top" style="padding-right:10px; vertical-align:bottom">
                                                 <asp:Label ID="Label3" runat="server" Font-Bold="true" ForeColor="red" Text="»" ></asp:Label>
                                                 <asp:HyperLink ID="CedSTpresentacionHyperLink" runat="server" NavigateUrl="~/Descarga.aspx?archivo=CedST.pdf" SkinID="LinkMedianoClaro">Descargar presentación</asp:HyperLink>
                                                 <asp:Label ID="CedSTbarraLabel" runat="server" Text=" / "></asp:Label>
@@ -113,33 +89,12 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                        <tr>
-                                            <td style="height: 10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="height: 1px; background-color: #c8d2dc;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="height: 10px;">
-                                            </td>
-                                        </tr>
-                                        
-                                    </table>
                                     <table border="0" cellpadding="0" cellspacing="0" style="padding-top:10px">
                                         <tr>
                                             <td align="left">
                                                 <asp:TreeView ID="Arbol" runat="server" SkinID="TextoMediano" RootNodeStyle-Font-Bold="true">
                                                     <RootNodeStyle Font-Bold="True" />
                                                 </asp:TreeView>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                        <tr>
-                                            <td style="height: 10px;">
                                             </td>
                                         </tr>
                                     </table>
