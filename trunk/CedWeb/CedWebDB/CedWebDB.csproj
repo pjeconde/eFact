@@ -7,8 +7,8 @@
     <ProjectGuid>{C6F923E8-4A61-4708-A234-A98A20D92657}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CedeiraLogin</RootNamespace>
-    <AssemblyName>CedeiraLogin</AssemblyName>
+    <RootNamespace>CedWebDB</RootNamespace>
+    <AssemblyName>CedWebDB</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,8 +34,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contacto.cs" />
+    <Compile Include="Cuenta.cs" />
     <Compile Include="db.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Texto.cs" />
+    <Compile Include="Vendedor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CedeiraAP\CedeiraAP.csproj">
@@ -49,6 +52,10 @@
     <ProjectReference Include="..\CedEx\CedeiraEx.csproj">
       <Project>{883AB19F-36F5-42A4-A1A7-4206F84E7757}</Project>
       <Name>CedeiraEx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CedWebEntidades\CedWebEntidades.csproj">
+      <Project>{E4986760-165B-4079-9A4F-3026D498BD11}</Project>
+      <Name>CedWebEntidades</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
