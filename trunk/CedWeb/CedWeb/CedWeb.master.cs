@@ -17,6 +17,7 @@ namespace CedWeb
 		{
             if (!IsPostBack)
             {
+                MensajeGeneralLabel.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).MensajeGeneral;
                 if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Nombre != null)
                 {
                     NombreCuentaLabel.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Nombre;

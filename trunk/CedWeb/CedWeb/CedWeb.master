@@ -49,8 +49,10 @@
                 <td style="height:80px; width:570px; background-image:url('Imagenes/LogoBienvenidos_v1.jpg')">
                     <table border="0" cellpadding="0" cellspacing="0">
                         <tr>
-                            <td style="height:50px; width:570px; padding-right:70px" align="right">
-                                <asp:Label ID="Label1" runat="server" Font-Bold="true" ForeColor="white" Text="SITIO EN CONSTRUCCIÓN"></asp:Label>
+                            <td style="height:50px; width:335px">
+                            </td>
+                            <td style="height:50px; width:210px" align="center">
+                                <asp:Label ID="MensajeGeneralLabel" runat="server" Font-Bold="true" ForeColor="white" Width="210px"></asp:Label>
                             </td>
                         </tr>
                         <tr>

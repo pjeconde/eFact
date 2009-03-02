@@ -22,6 +22,7 @@
         // Código que se ejecuta cuando se inicia una nueva sesión
         CedWebEntidades.Sesion s = new CedWebEntidades.Sesion();
         s.CnnStr = System.Configuration.ConfigurationManager.AppSettings["CnnStr"];
+        s.MensajeGeneral = System.Configuration.ConfigurationManager.AppSettings["MensajeGeneral"];
         Session["Sesion"] = s;
     }
 

@@ -9,6 +9,7 @@ namespace CedWebEntidades
     {
         #region Atributos
         private CedWebEntidades.Cuenta cuenta;
+        private string mensajeGeneral;
         #endregion
 
         #region Constructor
@@ -28,6 +29,17 @@ namespace CedWebEntidades
             set
             {
                 cuenta = value;
+            }
+        }
+        public string MensajeGeneral
+        {
+            get
+            {
+                return mensajeGeneral;
+            }
+            set
+            {
+                mensajeGeneral = value;
             }
         }
         #endregion
