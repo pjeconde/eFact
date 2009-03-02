@@ -1,9 +1,13 @@
-﻿<%@ Register Assembly="CedeiraUIWebForms" Namespace="CedeiraUIWebForms" TagPrefix="cc1" %>
+<%@ Register Assembly="CedeiraUIWebForms" Namespace="CedeiraUIWebForms" TagPrefix="cc1" %>
 <%@ Register Assembly="CrystalDecisions.Web, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304"
     Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
+<%@ Register Assembly="Janus.Web.GridEX.v3" Namespace="Janus.Web.GridEX" TagPrefix="jwg" %>
+<%@ Register Assembly="Janus.Web.GridEX.v3" Namespace="Janus.Web.GridEX.EditControls.CalendarCombo" TagPrefix="jwgecc" %>
+<%@ Register Assembly="Janus.Web.UI.v3" Namespace="Janus.Web.UI.Dock" TagPrefix="jwu" %>
 
 <asp:Label runat="server" Font-Size="14px" ForeColor="#202020" Font-Bold="True" Width="100%" SkinID="TituloPagina"></asp:Label>
 <asp:Label runat="server" Font-Size="14px" ForeColor="white" Font-Bold="True" Width="100%" SkinID="TituloPaginaClaro"></asp:Label>
+<asp:Label runat="server" Font-Size="20px" ForeColor="white" Font-Bold="True" Width="100%" SkinID="TituloPaginaClaroGr"></asp:Label>
 
 <asp:Label runat="server" Font-Size="12px" ForeColor="#404040" Font-Bold="True" Width="100%" SkinID="TituloMediano"></asp:Label>
 <asp:Label runat="server" Font-Size="10px" ForeColor="#404040" Font-Bold="True" Width="100%" SkinID="TituloChico"></asp:Label>
@@ -14,12 +18,13 @@
 <asp:Label runat="server" Font-Size="10px" ForeColor="#404040" Font-Bold="False" Width="100%" SkinID="TextoChico"></asp:Label>
 
 <asp:Label runat="server" Font-Size="10px" ForeColor="white" Font-Bold="False" Width="100%" SkinID="BulletTituloMediano"></asp:Label>
-<asp:Label runat="server" Font-Size="10px" ForeColor="#A52A2A" Font-Bold="False" Width="100%" SkinID="BulletLinkChico"></asp:Label>
+<asp:Label runat="server" Font-Size="10px" ForeColor="red" Font-Bold="False" Width="100%" SkinID="BulletLinkChico"></asp:Label>
 
-<asp:TextBox runat="server" Style="width: 50px" ForeColor=DarkBlue SkinID="TextoBoxChico" BorderStyle="Solid" BorderWidth="1px" BorderColor=DarkBlue></asp:TextBox>
-<asp:TextBox runat="server" Style="width: 100px" ForeColor=DarkBlue SkinID="TextoBoxMediano" BorderStyle="Solid" BorderWidth="1px" BorderColor=DarkBlue></asp:TextBox>
+<asp:TextBox runat="server" Style="width: 50px" ForeColor="#071F70" SkinID="TextoBoxChico" BorderStyle="Solid" BorderWidth="1px" BorderColor=#071F70></asp:TextBox>
+<asp:TextBox runat="server" Style="width: 100px" ForeColor="#071F70" SkinID="TextoBoxMediano" BorderStyle="Solid" BorderWidth="1px" BorderColor=#071F70></asp:TextBox>
 
-<asp:Label runat="server" Font-Size="10px" ForeColor="#FF6600" Font-Bold="True" Width="100%" SkinID="MensajePagina"></asp:Label>
+<asp:Label runat="server" Font-Size="12px" ForeColor="#FF6600" Font-Bold="True" Width="100%" SkinID="MensajePagina"></asp:Label>
+<asp:Label runat="server" Font-Size="12px" ForeColor="#FF6600" Font-Bold="True" SkinID="MensajePaginaSinWidth"></asp:Label>
 
 <asp:Label runat="server" Font-Size="14px" ForeColor="#A52A2A" Font-Bold="True" Width="100%" SkinID="TituloColor1Grande"></asp:Label>
 <asp:Label runat="server" Font-Size="12px" ForeColor="#A52A2A" Font-Bold="True" Width="100%" SkinID="TituloColor1Mediano"></asp:Label>
@@ -27,10 +32,22 @@
 
 <asp:Label runat="server" Font-Size="12px" ForeColor="red" Font-Bold="True" Width="100%" SkinID="TituloColor2Mediano"></asp:Label>
 
-<asp:HyperLink runat="server" Font-Size="10px" ForeColor=DarkBlue SkinID="LinkChico"></asp:HyperLink>
-<asp:HyperLink runat="server" Font-Size="12px" ForeColor=DarkBlue SkinID="LinkMediano"></asp:HyperLink>
+<asp:HyperLink runat="server" Font-Size="10px" ForeColor="#071F70" SkinID="LinkChico"></asp:HyperLink>
+<asp:HyperLink runat="server" Font-Size="12px" ForeColor="#071F70" SkinID="LinkMediano"></asp:HyperLink>
 <asp:HyperLink runat="server" Font-Size="10px" ForeColor=Blue SkinID="LinkChicoClaro"></asp:HyperLink>
 <asp:HyperLink runat="server" Font-Size="12px" ForeColor=Blue SkinID="LinkMedianoClaro"></asp:HyperLink>
+
+<asp:TextBox runat="server" Style="width: 180px" ForeColor="#071F70" SkinID="TextoBoxFEAVendedorDet" BorderStyle="NotSet"></asp:TextBox>
+<asp:TextBox runat="server" Style="width: 80px" ForeColor="#071F70" SkinID="TextoBoxFEAVendedorDetCh" BorderStyle="NotSet"></asp:TextBox>
+<asp:TextBox runat="server" Style="width: 40px" ForeColor="#071F70" SkinID="TextoBoxFEAVendedorDetChCh" BorderStyle="NotSet"></asp:TextBox>
+<asp:DropDownList runat="server" Style="width: 186px" ForeColor="#071F70" SkinID="DropDownListVendedor" BorderStyle="NotSet"></asp:DropDownList>
+
+<asp:CheckBox runat="server" Width="40px" ForeColor="#071F70" SkinID="CheckBoxFEALoteDetChCh"></asp:CheckBox>
+
+<asp:DropDownList runat="server" Style="width: 186px" ForeColor="#071F70" SkinID="DropDownListComprador" BorderStyle="NotSet"></asp:DropDownList>
+<asp:DropDownList runat="server" Style="width: 280px" ForeColor="#071F70" SkinID="DropDownListCompradorGr" BorderStyle="NotSet"></asp:DropDownList>
+
+<asp:TextBox runat="server" Style="width: 590px" ForeColor="#071F70" SkinID="TextoBoxFEADescrGr" BorderStyle="NotSet"></asp:TextBox>
 
 <asp:Menu runat="server"
     Width="100%"
@@ -87,7 +104,6 @@
 <asp:TreeView runat="server" 
     Font-Size="12px" 
     ForeColor="#404040"
-    RootNodeStyle-ForeColor="black"
     RootNodeStyle-Font-Bold="true" 
     RootNodeStyle-Font-Size="14px"
     ShowLines="true"
@@ -101,5 +117,13 @@
     SeparatePages="True" HasSearchButton="False" PrintMode="Pdf" ShowAllPageIds="True"
     BestFitPage="False" HasPrintButton="False" Height="500px" Width="1070px"/>
                                                 
+<jwg:GridEX runat="server" AllowPaging="Never" VisualStyle="Office2003Silver"
+    TableHeaders="True" SelectionMode="NoSelection" GroupByBoxVisible="False" AutomaticSort="False"
+    AllowColumnDrag="False" GridLineColor="ScrollBar">
+</jwg:GridEX>
+
+<jwgecc:CalendarCombo runat="server" Width="80px"
+    TodayButtonText="Hoy" DateFormat="Custom" CustomFormat="dd/MM/yyyy">
+</jwgecc:CalendarCombo>
 
 
