@@ -5,25 +5,24 @@
     void Application_Start(object sender, EventArgs e) 
     {
         // Código que se ejecuta al iniciarse la aplicación
-
     }
     
     void Application_End(object sender, EventArgs e) 
     {
         //  Código que se ejecuta cuando se cierra la aplicación
-
     }
         
     void Application_Error(object sender, EventArgs e) 
     { 
         // Código que se ejecuta al producirse un error no controlado
-
     }
 
     void Session_Start(object sender, EventArgs e) 
     {
         // Código que se ejecuta cuando se inicia una nueva sesión
-
+        CedWebEntidades.Sesion s = new CedWebEntidades.Sesion();
+        s.CnnStr = System.Configuration.ConfigurationManager.AppSettings["CnnStr"];
+        Session["Sesion"] = s;
     }
 
     void Session_End(object sender, EventArgs e) 

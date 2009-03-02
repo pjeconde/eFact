@@ -22,13 +22,13 @@ namespace CedWeb
 				string exString = urlWrapper["ex"];
 				Exception ex = new Exception(exString);
 				Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
-				((Label)ExceptionUiPanelManager.RootPanel.PanelManager.FindControl("ExLabel")).Text = ex.Message;
+				ExLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
 			}
 			catch
 			{
 				string auxEx = "Excepción tratando de mostrar o publicar la excepción original";
 				Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(new Exception(auxEx));
-				((Label)ExceptionUiPanelManager.RootPanel.PanelManager.FindControl("ExLabel")).Text = auxEx;
+                ExLabel.Text = auxEx;
 			}
 		}
 	}

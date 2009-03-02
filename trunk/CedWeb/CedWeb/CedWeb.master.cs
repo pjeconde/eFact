@@ -9,19 +9,30 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
-
 namespace CedWeb
 {
 	public partial class CedWeb : System.Web.UI.MasterPage
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-            HtmlGenericControl myJs = new HtmlGenericControl();
-            myJs.TagName = "script";
-            myJs.Attributes.Add("type", "text/javascript");
-            myJs.Attributes.Add("language", "javascript"); //don't need it usually but for cross browser.
-            myJs.Attributes.Add("src", ResolveUrl("/Autenticado/stmenu.js"));
-            this.Page.Header.Controls.Add(myJs);
+            if (!IsPostBack)
+            {
+                if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Nombre != null)
+                {
+                    NombreCuentaLabel.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Nombre;
+                    SeparadorLabel.Visible = true;
+                    SalirLinkButton.Visible = true;
+                }
+            }
 		}
-	}
+        public void SalirLinkButton_Click(object sender, EventArgs e)
+        {
+            CedWebEntidades.Sesion sesion = (CedWebEntidades.Sesion)Session["Sesion"];
+            CedWebRN.Cuenta.Limpiar(sesion.Cuenta); 
+            NombreCuentaLabel.Text = String.Empty;
+            SeparadorLabel.Visible = false;
+            SalirLinkButton.Visible = false;
+            Response.Redirect("~/Inicio.aspx", true);
+        }
+    }
 }	

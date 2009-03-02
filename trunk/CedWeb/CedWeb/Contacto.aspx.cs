@@ -66,7 +66,7 @@ namespace CedWeb
             }
             catch (Exception ex)
             {
-                MsgErrorLabel.Text = ex.Message.ToString();
+                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
             }
         }
         protected void NuevaClaveCaptchaButton_Click(object sender, EventArgs e)
