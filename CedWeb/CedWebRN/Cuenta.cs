@@ -129,6 +129,16 @@ namespace CedWebRN
         {
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             cuenta.Leer(Cuenta);
+            Cuenta.Vendedor.IdCuenta = Cuenta.Id;
+            Cuenta.Vendedor.NombreCuenta = Cuenta.Nombre;
+            try
+            {
+                CedWebRN.Vendedor.Leer(Cuenta.Vendedor, Sesion);
+            }
+            catch (Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente)
+            {
+                CedWebRN.Vendedor.Limpiar(Cuenta.Vendedor);
+            }
         }
         public static void Limpiar(CedWebEntidades.Cuenta Cuenta)
         {
@@ -144,6 +154,7 @@ namespace CedWebRN
             Cuenta.TipoCuenta.Descr = null;
             Cuenta.EstadoCuenta.Id = null;
             Cuenta.EstadoCuenta.Descr = null;
+            CedWebRN.Vendedor.Limpiar(Cuenta.Vendedor);
         }
         public static void Login(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
@@ -160,8 +171,7 @@ namespace CedWebRN
                 else
                 {
                     string passwordIngresada = Cuenta.Password;
-                    CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
-                    cuenta.Leer(Cuenta);
+                    Leer(Cuenta, Sesion);
                     if (passwordIngresada != Cuenta.Password)
                     {
                         throw new Microsoft.ApplicationBlocks.ExceptionManagement.Cuenta.LoginRechazadoXPasswordInvalida();

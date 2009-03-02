@@ -16,11 +16,13 @@ namespace CedWebEntidades
         private string respuesta;
         private TipoCuenta tipoCuenta;
         private EstadoCuenta estadoCuenta;
+        private Vendedor vendedor;
 
         public Cuenta()
         {
             tipoCuenta = new TipoCuenta();
             estadoCuenta = new EstadoCuenta();
+            vendedor = new Vendedor();
         }
         public string Id
         {
@@ -131,6 +133,17 @@ namespace CedWebEntidades
             get
             {
                 return estadoCuenta;
+            }
+        }
+        public Vendedor Vendedor
+        {
+            set
+            {
+                vendedor = value;
+            }
+            get
+            {
+                return vendedor;
             }
         }
     }
