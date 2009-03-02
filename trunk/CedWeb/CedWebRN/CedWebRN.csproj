@@ -36,10 +36,17 @@
   <ItemGroup>
     <Compile Include="Aplicacion.cs" />
     <Compile Include="Contacto.cs" />
+    <Compile Include="Cuenta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sesion.cs" />
+    <Compile Include="Texto.cs" />
+    <Compile Include="Vendedor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CaptchaDotNet2\CaptchaDotNet2.csproj">
+      <Project>{B76ED545-1CF6-40BC-A3E1-52C34B0A0EFF}</Project>
+      <Name>CaptchaDotNet2</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CedeiraAP\CedeiraAP.csproj">
       <Project>{DB0A7D76-F68E-43A7-ADBD-08DDF2AFAD36}</Project>
       <Name>CedeiraAP</Name>
