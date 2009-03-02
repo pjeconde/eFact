@@ -417,6 +417,11 @@
                                             </tr>
                                         </table>
                                     </td>
+                                    <td valign="top" style="width:10px;" align="left">
+                                    </td>
+                                    <td align="center" valign="middle" style="width: 300px;" style="font-size:smaller">
+                                        <a href="javascript:window.external.AddFavorite('http://www.cedeira.com.ar/Inicio.aspx','Cedeira');">Agregar a favoritos</a>
+                                    </td>                                       
                                 </tr>
                                 <tr>
                                     <td style="height: 10px;">
