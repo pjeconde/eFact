@@ -108,6 +108,7 @@ namespace CedWeb
                 vendedor.FechaInicioActividades = FechaInicioActividadesDatePickerWebUserControl.CalendarDate;
                 CedWebRN.Vendedor.Validar(vendedor, (CedEntidades.Sesion)Session["Sesion"]);
                 CedWebRN.Vendedor.Guardar(vendedor, (CedEntidades.Sesion)Session["Sesion"]);
+                CedWebRN.Vendedor.Copiar(vendedor, ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor);
                 Response.Redirect("~/FacturaElectronica.aspx", true);
             }
             catch (Exception ex)

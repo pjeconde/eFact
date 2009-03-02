@@ -80,6 +80,32 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			DataBind();
 
 			BindearDropDownLists();
+
+            if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.CUIT != 0)
+            {
+                CedWebEntidades.Vendedor v = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor;
+                Razon_Social_VendedorTextBox.Text = v.RazonSocial;
+                Domicilio_Calle_VendedorTextBox.Text = v.Calle;
+                Domicilio_Numero_VendedorTextBox.Text = v.Nro;
+                Domicilio_Piso_VendedorTextBox.Text = v.Piso;
+                Domicilio_Depto_VendedorTextBox.Text = v.Depto;
+                Domicilio_Sector_VendedorTextBox.Text = v.Sector;
+                Domicilio_Torre_VendedorTextBox.Text = v.Torre;
+                Domicilio_Manzana_VendedorTextBox.Text = v.Manzana;
+                Localidad_VendedorTextBox.Text = v.Localidad;
+                Provincia_VendedorDropDownList.SelectedValue = v.IdProvincia;
+                Cp_VendedorTextBox.Text = v.CodPost;
+                Contacto_VendedorTextBox.Text = v.NombreContacto;
+                Email_VendedorTextBox.Text = v.EmailContacto;
+                Telefono_VendedorTextBox.Text = v.TelefonoContacto.ToString();
+                Cuit_VendedorTextBox.Text = v.CUIT.ToString();
+                Condicion_IVA_VendedorDropDownList.SelectedValue = v.IdCondIVA.ToString();
+                //Nro_Ingresos_Brutos_VendedorTextBox.Text = v.NroIngBrutos.ToString();
+                //Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue = v.IdCondIngBrutos.ToString();
+                GLN_VendedorTextBox.Text = v.GLN.ToString();
+                Codigo_Interno_VendedorTextBox.Text = v.CodigoInterno;
+                InicioDeActividadesVendedorDatePickerWebUserControl.CalendarDate = v.FechaInicioActividades;
+            }
 		}
 	}
 

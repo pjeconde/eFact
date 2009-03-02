@@ -33,5 +33,63 @@ namespace CedWebRN
             CedWebDB.Vendedor vendedor = new CedWebDB.Vendedor(Sesion);
             vendedor.Leer(Vendedor);
         }
+        public static void Limpiar(CedWebEntidades.Vendedor Vendedor)
+        {
+            Vendedor.IdCuenta = null;
+            Vendedor.NombreCuenta = null;
+            Vendedor.RazonSocial = null;
+            Vendedor.Calle = null;
+            Vendedor.Nro = null;
+            Vendedor.Piso = null;
+            Vendedor.Depto = null;
+            Vendedor.Sector = null;
+            Vendedor.Torre = null;
+            Vendedor.Manzana = null;
+            Vendedor.Localidad = null;
+            Vendedor.IdProvincia = null;
+            Vendedor.DescrProvincia = null;
+            Vendedor.CodPost = null;
+            Vendedor.NombreContacto = null;
+            Vendedor.EmailContacto = null;
+            Vendedor.TelefonoContacto = 0;
+            Vendedor.CUIT = 0;
+            Vendedor.IdCondIVA = 0;
+            Vendedor.DescrCondIVA = null;
+            Vendedor.NroIngBrutos = null;
+            Vendedor.IdCondIngBrutos = 0;
+            Vendedor.DescrCondIngBrutos = null;
+            Vendedor.GLN = 0;
+            Vendedor.CodigoInterno = null;
+            Vendedor.FechaInicioActividades = DateTime.MinValue;
+        }
+        public static void Copiar(CedWebEntidades.Vendedor VendedorDsd, CedWebEntidades.Vendedor VendedorHst)
+        {
+            VendedorHst.IdCuenta = VendedorDsd.IdCuenta;
+            VendedorHst.NombreCuenta = VendedorDsd.NombreCuenta;
+            VendedorHst.RazonSocial = VendedorDsd.RazonSocial;
+            VendedorHst.Calle = VendedorDsd.Calle;
+            VendedorHst.Nro = VendedorDsd.Nro;
+            VendedorHst.Piso = VendedorDsd.Piso;
+            VendedorHst.Depto = VendedorDsd.Depto;
+            VendedorHst.Sector = VendedorDsd.Sector;
+            VendedorHst.Torre = VendedorDsd.Torre;
+            VendedorHst.Manzana = VendedorDsd.Manzana;
+            VendedorHst.Localidad = VendedorDsd.Localidad;
+            VendedorHst.IdProvincia = VendedorDsd.IdProvincia;
+            VendedorHst.DescrProvincia = VendedorDsd.DescrProvincia;
+            VendedorHst.CodPost = VendedorDsd.CodPost;
+            VendedorHst.NombreContacto = VendedorDsd.NombreContacto;
+            VendedorHst.EmailContacto = VendedorDsd.EmailContacto;
+            VendedorHst.TelefonoContacto = VendedorDsd.TelefonoContacto;
+            VendedorHst.CUIT = VendedorDsd.CUIT;
+            VendedorHst.IdCondIVA = VendedorDsd.IdCondIVA;
+            VendedorHst.DescrCondIVA = VendedorDsd.DescrCondIVA;
+            VendedorHst.NroIngBrutos = VendedorDsd.NroIngBrutos;
+            VendedorHst.IdCondIngBrutos = VendedorDsd.IdCondIngBrutos;
+            VendedorHst.DescrCondIngBrutos = VendedorDsd.DescrCondIngBrutos;
+            VendedorHst.GLN = VendedorDsd.GLN;
+            VendedorHst.CodigoInterno = VendedorDsd.CodigoInterno;
+            VendedorHst.FechaInicioActividades = VendedorDsd.FechaInicioActividades;
+        }
     }
 }
