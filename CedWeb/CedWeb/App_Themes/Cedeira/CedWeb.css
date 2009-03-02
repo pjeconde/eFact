@@ -5,7 +5,6 @@
 	font-family:Arial;
 	font-size:small;
 	margin: 0px;
-	position: relative;
 	border: none;
 	text-align: center;
 }
@@ -36,7 +35,6 @@
     background-color: #FF6600;
     color: White;
 }
-
 .AlternatingRowStyle
 {
     background-color:#FFF8DC;  
@@ -106,44 +104,107 @@ A:active {text-decoration: none; color: navy;}
 A:hover {text-decoration: none; color: red;}
 .TextoResaltado
 {
-	font-weight: bold;
 	color: black;
-	font-size: 12px;
-	font-family: Arial;
-	font-style: normal;
+	font-weight: bold; font-size: 12px; font-family: Arial; font-style: normal;
 }
 .TextoComun
 {
-	position: relative;
-	border: 0px;
-	padding-top: 0px; 
-	font-weight: normal;
-	color: black;
-	font-size: 12px;
-	font-family: Arial;
-	font-style: normal;
+	position: relative; border: 0px; color: black;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
+}
+.TextoLabelFEAVendedor
+{
+	position: relative; border: 0px; text-align: right; color: #A52A2A;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
+	width: 180px; padding-top:5px; padding-right: 5px; 
+}
+.TextoLabelFEAVendedorCh
+{
+	position: relative; border: 0px; text-align: right; color: #A52A2A;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
+	width: 80px; padding-top:5px;
+}
+.TextoLabelFEAVendedorChCh
+{
+	position: relative; border: 0px; text-align: right; color: #A52A2A;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
+	width: 60px; padding-top:5px;
+}
+.TextoLabelFEAVendedorDet
+{
+	position: relative; border: 0px; text-align: right; color: #071F70;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
+	width: 180px; padding-top:5px; padding-right: 5px;
+}
+.TextoLabelFEAVendedorDetCh
+{
+	position: relative; border: 0px; text-align: right; color: #071F70;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
+	width: 80px; padding-top:5px;
+}
+.TextoLabelFEAVendedorDetChCh
+{
+	position: relative; border: 0px; text-align: right; color: #071F70;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
+	width: 40px; padding-top:5px;
+}
+.TextoLabelFEADescrLarga
+{
+	position: relative; border: 0px; color: #A52A2A; text-align: right;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
+	width: 590px;	
 }
 .TextComunSinPosicion
 {
-	font-weight: normal;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
 	color: black;
-	font-size: 12px;
-	font-family: Arial;
-	font-style: normal;
 }
 .linkMenu
 {
-	font-weight: bold;
+	font-weight: bold; font-size: 22px; font-family: Comic Sans MS; font-style: normal;
 	color: #696969;
-	font-size: 22px;
-	font-family: Comic Sans MS;
-	font-style: normal;
 }
 .linkMenuSeparador
 {
-	font-weight: bold;
+	font-weight: bold; font-size: medium; font-family: Arial; font-style: normal;
 	color: gray;
-	font-size: medium;
-	font-family: Arial;
-	font-style: normal;
+}
+.DatePickerFecha
+{
+	color: #071F70;
+	text-align: left;
+}
+.Ajuste1
+{
+	width: 10px;
+}
+.TextoFEASYP_EncaRow1
+{
+	text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
+	font-size: 12px; font-weight: bold; font-style: normal; font-family: Arial; text-align: center; padding: 5px; 
+}
+.TextoFEASYP_EncaRow2
+{
+	text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
+	font-size: 11px; font-weight: bold; font-style: normal; font-family: Arial; text-align: center; padding: 5px; 
+}
+.TextoFEASYP_EncaRow3
+{
+	text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
+	font-size: 11px; font-weight: 400; font-style: normal; font-family: Arial; text-align: center; padding: 5px; 
+}
+.TextoFEASYP_DetCol1
+{
+	width:300px; text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
+	font-size: 10px; font-weight: 400; font-style: normal; font-family: Arial; text-align: Left; padding: 5px; 
+}
+.TextoFEASYP_DeteFactweb
+{
+	text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
+	font-size: 10px; font-weight: 400; font-style: normal; font-family: Arial; text-align: center; padding: 5px; 
+}
+.TextoFEASYP_DeteFactcp
+{
+	text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
+	font-size: 10px; font-weight: 400; font-style: normal; font-family: Arial; text-align: center; padding: 5px; 
 }
