@@ -58,41 +58,64 @@ namespace CedWebRN
         }
         public static void Registrar(CedWebEntidades.Contacto Contacto)
         {
-            MailMessage mail2InfoCedeira = new MailMessage();
-            mail2InfoCedeira.From = new MailAddress("info@cedeira.com.ar");
+            StringBuilder a;
+            string cuentaMailCedeira;
             if (Contacto.Motivo == "FactElectronica")
             {
-                mail2InfoCedeira.To.Add(new MailAddress("facturaelectronica@cedeira.com.ar"));
+                cuentaMailCedeira = "facturaelectronica@cedeira.com.ar";
             }
             else
             {
-                mail2InfoCedeira.To.Add(new MailAddress("info@cedeira.com.ar"));
+                cuentaMailCedeira = "info@cedeira.com.ar";
             }
-            mail2InfoCedeira.Subject = "Formulario electrónico (Contacto de cedeira.com.ar)";
 
-            StringBuilder a = new StringBuilder();
-            a.Append("Motivo: " + Contacto.Motivo); a.AppendLine();
+            //Mail para Cedeira
+            SmtpClient smtpClient2Cedeira = new SmtpClient("localhost");
+            MailMessage mail2Cedeira = new MailMessage();
+            mail2Cedeira.From = new MailAddress("contacto@cedeira.com.ar");
+            mail2Cedeira.To.Add(new MailAddress(cuentaMailCedeira));
+            mail2Cedeira.Subject = "Formulario electrónico (Contacto de cedeira.com.ar)";
+            a = new StringBuilder();
+            a.Append("Los siguientes son, los datos del nuevo contacto");
+            if (Contacto.Motivo == "FactElectronica") a.Append(" (por el tema de FACTURA ELECTRONICA)");
+            a.Append(":"); a.AppendLine();
+            a.AppendLine();
             a.Append("Nombre: " + Contacto.Nombre); a.AppendLine();
             a.Append("Telefono: " + Contacto.Telefono); a.AppendLine();
             a.Append("Email: " + Contacto.Email); a.AppendLine();
-            a.Append("Mensaje: " + Contacto.Mensaje); a.AppendLine();
-            mail2InfoCedeira.Body = a.ToString();
+            a.Append("Mensaje: "); a.AppendLine();
+            a.Append("------------------------------------------------"); a.AppendLine();
+            a.Append(Contacto.Mensaje); a.AppendLine();
+            a.Append("------------------------------------------------"); a.AppendLine();
+            mail2Cedeira.Body = a.ToString();
+            smtpClient2Cedeira.Send(mail2Cedeira);
 
-            MailMessage mail2Remitente = new MailMessage();
-            mail2Remitente.From = new MailAddress("info@cedeira.com.ar");
-            mail2Remitente.To.Add(new MailAddress(Contacto.Email));
-            mail2Remitente.Subject = "Acuse de recibo de Formulario electrónico";
+            //Mail para el Contacto
+            SmtpClient smtpClient2Contacto = new SmtpClient("localhost");
+            MailMessage mail2Contacto = new MailMessage();
+            mail2Contacto.From = new MailAddress(cuentaMailCedeira);
+            mail2Contacto.To.Add(new MailAddress(Contacto.Email));
+            mail2Contacto.Subject = "Acuse de recibo de Formulario electrónico";
             a = new StringBuilder();
-            a.Append("Gracias por comunicarse con Cedeira Software Factory."); a.AppendLine();
-            a.Append("Su consulta será respondida a la brevedad."); a.AppendLine();
+            a.Append("Estimado/a " + Contacto.Nombre.Trim() + ":"); a.AppendLine();
+            a.AppendLine();
+            a.Append("Gracias por comunicarse con nosotros."); a.AppendLine();
+            if (Contacto.Motivo == "FactElectronica")
+            {
+                a.Append("Su consulta, sobre el tema de Factura Electrónica, será respondida a la brevedad."); a.AppendLine();
+            }
+            else
+            {
+                a.Append("Su consulta será respondida a la brevedad."); a.AppendLine();
+            }
             a.Append("Saludos."); a.AppendLine();
-            mail2Remitente.Body = a.ToString();
-
-            SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
-			smtpClient.Credentials = new NetworkCredential("info@cedeira.com.ar", "cedeira123");
-			smtpClient.UseDefaultCredentials = false;
-			smtpClient.Send(mail2InfoCedeira);
-			smtpClient.Send(mail2Remitente);
+            a.AppendLine();
+            a.Append("Cedeira Software Factory");
+            a.AppendLine();
+            a.AppendLine();
+            a.AppendLine("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden."); a.AppendLine();
+            mail2Contacto.Body = a.ToString();
+            smtpClient2Contacto.Send(mail2Contacto);
         }
     }
 }
