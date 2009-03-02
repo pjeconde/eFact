@@ -457,7 +457,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			for (int i = 0; i < listadedescuentos.Count; i++)
 			{
-				if (!listadedescuentos[i].descripcion_descuento.Equals(string.Empty))
+				if (listadedescuentos[i].descripcion_descuento!=null && !listadedescuentos[i].descripcion_descuento.Equals(string.Empty))
 				{
 					comp.resumen.descuentos[i] = new FeaEntidades.InterFacturas.resumenDescuentos();
 					comp.resumen.descuentos[i].alicuota_iva_descuento = listadedescuentos[i].alicuota_iva_descuento;
