@@ -35,22 +35,14 @@
                         <td align="center">
                             <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; width: 750px; border-color: Gray; padding: 3px;">
                                 <tr>
-                                    <td class="TextoFEASYP_EncaRow1">
-                                        Producto</td>
-                                    <td class="TextoFEASYP_EncaRow1" colspan="2" style="color: maroon;">
-                                        eFactweb</td>
-                                    <td class="TextoFEASYP_EncaRow1" style="color: maroon;">
-                                        eFactcp</td>
-                                </tr>
-                                <tr>
                                     <td class="TextoFEASYP_EncaRow2">
-                                        Versión</td>
+                                        Producto / Servicio <img src="Imagenes/eFact.jpg" alt="Logo de los productos / servicio de factura electrónica" /></td>
                                     <td class="TextoFEASYP_EncaRow2" style="color: maroon;">
-                                        Free</td>
+                                        Libre</td>
                                     <td class="TextoFEASYP_EncaRow2" style="color: maroon;">
                                         Premium</td>
                                     <td class="TextoFEASYP_EncaRow2" style="color: maroon;">
-                                        Standard</td>
+                                        Profesional</td>
                                 </tr>
                                 <tr>
                                     <td class="TextoFEASYP_DetCol1">
