@@ -4,12 +4,12 @@ using System.Text;
 
 namespace FeaEntidades.CodigosProvincia
 {
-	public class TierraDelFuego : CodigoProvincia
+	public class SinInformar : CodigoProvincia
 	{
-		public TierraDelFuego()
+		public SinInformar()
 		{
-			Codigo = 23;
-			Descr = "Tierra del Fuego";
+			Codigo = 0;
+			Descr = String.Empty;
 		}
 	}
 }

@@ -24,6 +24,7 @@ namespace FeaEntidades.CodigosProvincia
 		public static List<CodigoProvincia> Lista()
 		{
 			List<CodigoProvincia> lista = new List<CodigoProvincia>();
+			lista.Add(new SinInformar());
 			lista.Add(new CapitalFederal());
 			lista.Add(new BuenosAires());
 			lista.Add(new Catamarca());
