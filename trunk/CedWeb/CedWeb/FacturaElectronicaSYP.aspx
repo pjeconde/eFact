@@ -36,7 +36,7 @@
                             <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; width: 750px; border-color: Gray; padding: 3px;">
                                 <tr>
                                     <td class="TextoFEASYP_EncaRow1" style="color: maroon;">
-                                        Producto / Servicio <img src="Imagenes/eFact.jpg" alt="Logo de los productos / servicio de factura electrónica" /></td>
+                                        Producto / Servicio <img style="vertical-align:middle" src="Imagenes/eFact.jpg" alt="Logo de los productos / servicio de factura electrónica" /></td>
                                     <td class="TextoFEASYP_EncaRow1" style="color: maroon;">
                                         Libre</td>
                                     <td class="TextoFEASYP_EncaRow1" style="color: maroon;">
@@ -49,20 +49,20 @@
                                         Objetivo</td>
                                     <td colspan="2" class="TextoFEASYP_DeteFactweb">
                                         Facilitar el ingreso de facturas electrónicas poniendo a su disposición un archivo
-                                        XML para el procesamiento en la red de Interfacturas(*)</td>
+                                        XML para el procesamiento en la red de Interfacturas.</td>
                                     <td class="TextoFEASYP_DeteFactcp">
-                                        Realizar la emisión de Facturas Electrónicas a través de la red Interfacturas.</td>
+                                        Realizar la emisión de Facturas Electrónicas a través de la red Interfacturas y/o AFIP.</td>
                                 </tr>
                                 <tr>
                                     <td class="TextoFEASYP_DetCol1">
                                         Canal
                                     </td>
-                                    <td colspan="2" class="TextoFEASYP_DeteFactweb">
+                                    <td colspan="2" class="TextoFEASYP_DeteFactweb" style="vertical-align: top">
                                         <img src="Imagenes/FEA/FEA-SYP-Interfacturas.jpg" alt="Interfacturas" />
                                     </td>
                                     <td class="TextoFEASYP_DeteFactcp">
-                                        <img src="Imagenes/FEA/FEA-SYP-AFIP.jpg" alt="AFIP" />
                                         <img src="Imagenes/FEA/FEA-SYP-Interfacturas.jpg" alt="Interfacturas" />
+                                        <img src="Imagenes/FEA/FEA-SYP-AFIP.jpg" alt="AFIP" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -72,9 +72,9 @@
                                         Archivo XML Recomendado por la Camara Argentina de Comercio Electrónico
                                     </td>
                                     <td class="TextoFEASYP_DeteFactcp">
-                                        * Archivo XML Recomendado por la Camara Argentina de Comercio Electrónico<br>
-                                        * OnLine con la AFIP<br>
-                                        * OnLine con Interfacturas</td>
+                                        • Archivo XML Recomendado por la Camara Argentina de Comercio Electrónico<br/>
+                                        • OnLine con la AFIP<br/>
+                                        •  OnLine con Interfacturas</td>
                                 </tr>
                                 <tr>
                                     <td class="TextoFEASYP_DetCol1">
@@ -96,28 +96,7 @@
                                     <td class="TextoFEASYP_DeteFactcp">
                                         <img src="Imagenes/Ok.gif" alt="Ok" /></td>
                                 </tr>
-                                <tr>
-                                    <td class="TextoFEASYP_DetCol1">
-                                        Recomendado para quienes cuenten con un Sistema de Facturación que NO se comunica
-                                        con la AFIP o Interfacturas</td>
-                                    <td class="TextoFEASYP_DeteFactweb">
-                                        &nbsp;</td>
-                                    <td class="TextoFEASYP_DeteFactweb">
-                                        &nbsp;</td>
-                                    <td class="TextoFEASYP_DeteFactcp">
-                                        <img src="Imagenes/Ok.gif" alt="Ok" /></td>
-                                </tr>
-                                <tr>
-                                    <td class="TextoFEASYP_DetCol1">
-                                        &nbsp;</td>
-                                    <td class="TextoFEASYP_DeteFactweb">
-                                        &nbsp;</td>
-                                    <td class="TextoFEASYP_DeteFactweb">
-                                        &nbsp;</td>
-                                    <td class="TextoFEASYP_DeteFactcp">
-                                        &nbsp;</td>
-                                </tr>
-                                <tr>
+                                 <tr>
                                     <td class="TextoFEASYP_DetCol1">
                                         Genera interfaz XML para Interfacturas ?</td>
                                     <td class="TextoFEASYP_DeteFactweb">
@@ -129,21 +108,11 @@
                                 </tr>
                                 <tr>
                                     <td class="TextoFEASYP_DetCol1">
-                                        Comunicación OnLine con la AFIP ?</td>
+                                        Parametrización de datos del Vendedor?</td>
                                     <td class="TextoFEASYP_DeteFactweb">
                                         <img src="Imagenes/Ok.gif" alt="Ok" /></td>
                                     <td class="TextoFEASYP_DeteFactweb">
                                         <img src="Imagenes/Ok.gif" alt="Ok" /></td>
-                                    <td class="TextoFEASYP_DeteFactcp">
-                                        <img src="Imagenes/Ok.gif" alt="Ok" /></td>
-                                </tr>
-                                <tr>
-                                    <td class="TextoFEASYP_DetCol1">
-                                        Comunicación OnLine con Interfacturas ?</td>
-                                    <td class="TextoFEASYP_DeteFactweb">
-                                        &nbsp;</td>
-                                    <td class="TextoFEASYP_DeteFactweb">
-                                        &nbsp;</td>
                                     <td class="TextoFEASYP_DeteFactcp">
                                         <img src="Imagenes/Ok.gif" alt="Ok" /></td>
                                 </tr>
@@ -159,12 +128,22 @@
                                 </tr>
                                 <tr>
                                     <td class="TextoFEASYP_DetCol1">
-                                        Captura de datos desde otros sistemas ? (Por medio de archivos de
-                                            interfaz o accediendo directamente a la base de datos de su sistema de facturación)</td>
+                                        Soporte via mail sin costo</td>
                                     <td class="TextoFEASYP_DeteFactweb">
-                                        &nbsp;</td>
+                                        <img src="Imagenes/Ok.gif" alt="Ok" /></td>
                                     <td class="TextoFEASYP_DeteFactweb">
-                                        &nbsp;</td>
+                                        <img src="Imagenes/Ok.gif" alt="Ok" /></td>
+                                    <td class="TextoFEASYP_DeteFactcp">
+                                        <img src="Imagenes/Ok.gif" alt="Ok" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="TextoFEASYP_DetCol1">
+                                        Soporte telefónico sin costo
+                                    </td>
+                                    <td class="TextoFEASYP_DeteFactweb">
+                                    </td>
+                                    <td class="TextoFEASYP_DeteFactweb">
+                                        <img src="Imagenes/Ok.gif" alt="Ok" /></td>
                                     <td class="TextoFEASYP_DeteFactcp">
                                         <img src="Imagenes/Ok.gif" alt="Ok" /></td>
                                 </tr>
@@ -203,16 +182,6 @@
                                 </tr>
                                 <tr>
                                     <td class="TextoFEASYP_DetCol1">
-                                        Parametrización de datos del Vendedor?</td>
-                                    <td class="TextoFEASYP_DeteFactweb">
-                                        <img src="Imagenes/Ok.gif" alt="Ok" /></td>
-                                    <td class="TextoFEASYP_DeteFactweb">
-                                        <img src="Imagenes/Ok.gif" alt="Ok" /></td>
-                                    <td class="TextoFEASYP_DeteFactcp">
-                                        <img src="Imagenes/Ok.gif" alt="Ok" /></td>
-                                </tr>
-                                <tr>
-                                    <td class="TextoFEASYP_DetCol1">
                                         Repositorio histórico de Comprobantes ?</td>
                                     <td class="TextoFEASYP_DeteFactweb">
                                         &nbsp;</td>
@@ -223,7 +192,50 @@
                                 </tr>
                                 <tr>
                                     <td class="TextoFEASYP_DetCol1">
+                                        Comunicación OnLine con la AFIP ?</td>
+                                    <td class="TextoFEASYP_DeteFactweb">
+                                    </td>
+                                    <td class="TextoFEASYP_DeteFactweb">
+                                    </td>
+                                    <td class="TextoFEASYP_DeteFactcp">
+                                        <img src="Imagenes/Ok.gif" alt="Ok" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="TextoFEASYP_DetCol1">
+                                        Comunicación OnLine con Interfacturas ?</td>
+                                    <td class="TextoFEASYP_DeteFactweb">
+                                        &nbsp;</td>
+                                    <td class="TextoFEASYP_DeteFactweb">
+                                        &nbsp;</td>
+                                    <td class="TextoFEASYP_DeteFactcp">
+                                        <img src="Imagenes/Ok.gif" alt="Ok" /></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="TextoFEASYP_DetCol1">
                                         Emisión de reporte para IVA Ventas ?</td>
+                                    <td class="TextoFEASYP_DeteFactweb">
+                                        &nbsp;</td>
+                                    <td class="TextoFEASYP_DeteFactweb">
+                                        &nbsp;</td>
+                                    <td class="TextoFEASYP_DeteFactcp">
+                                        <img src="Imagenes/Ok.gif" alt="Ok" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="TextoFEASYP_DetCol1">
+                                        Recomendado para quienes cuenten con un Sistema de Facturación que NO se comunica
+                                        con la AFIP o Interfacturas</td>
+                                    <td class="TextoFEASYP_DeteFactweb">
+                                        &nbsp;</td>
+                                    <td class="TextoFEASYP_DeteFactweb">
+                                        &nbsp;</td>
+                                    <td class="TextoFEASYP_DeteFactcp">
+                                        <img src="Imagenes/Ok.gif" alt="Ok" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="TextoFEASYP_DetCol1">
+                                        Captura de datos desde otros sistemas ? (Por medio de archivos de interfaz o accediendo
+                                        directamente a la base de datos de su sistema de facturación)</td>
                                     <td class="TextoFEASYP_DeteFactweb">
                                         &nbsp;</td>
                                     <td class="TextoFEASYP_DeteFactweb">
