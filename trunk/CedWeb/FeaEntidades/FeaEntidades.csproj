@@ -68,6 +68,7 @@
     <Compile Include="CodigosProvincia\SantaCruz.cs" />
     <Compile Include="CodigosProvincia\SantaFe.cs" />
     <Compile Include="CodigosProvincia\SantiagoDelEstero.cs" />
+    <Compile Include="CodigosProvincia\SinInformar.cs" />
     <Compile Include="CodigosProvincia\TierraDelFuego.cs" />
     <Compile Include="CodigosProvincia\Tucuman.cs" />
     <Compile Include="Comprobante.cs" />
