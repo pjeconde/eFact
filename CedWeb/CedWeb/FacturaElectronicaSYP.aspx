@@ -35,13 +35,13 @@
                         <td align="center">
                             <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; width: 750px; border-color: Gray; padding: 3px;">
                                 <tr>
-                                    <td class="TextoFEASYP_EncaRow2">
+                                    <td class="TextoFEASYP_EncaRow1" style="color: maroon;">
                                         Producto / Servicio <img src="Imagenes/eFact.jpg" alt="Logo de los productos / servicio de factura electrónica" /></td>
-                                    <td class="TextoFEASYP_EncaRow2" style="color: maroon;">
+                                    <td class="TextoFEASYP_EncaRow1" style="color: maroon;">
                                         Libre</td>
-                                    <td class="TextoFEASYP_EncaRow2" style="color: maroon;">
+                                    <td class="TextoFEASYP_EncaRow1" style="color: maroon;">
                                         Premium</td>
-                                    <td class="TextoFEASYP_EncaRow2" style="color: maroon;">
+                                    <td class="TextoFEASYP_EncaRow1" style="color: maroon;">
                                         Profesional</td>
                                 </tr>
                                 <tr>
