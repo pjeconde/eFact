@@ -86,6 +86,7 @@
     <Compile Include="CondicionesIVA\ResponsableInscriptoAgentePercepcion.cs" />
     <Compile Include="CondicionesIVA\ResponsableMonotributo.cs" />
     <Compile Include="CondicionesIVA\ResponsableNoInscripto.cs" />
+    <Compile Include="CondicionesIVA\SinInformar.cs" />
     <Compile Include="CondicionesIVA\SujetoExento.cs" />
     <Compile Include="CondicionesIVA\SujetoNoCategorizado.cs" />
     <Compile Include="Documentos\ActaNacimiento.cs" />

@@ -24,6 +24,7 @@ namespace FeaEntidades.CondicionesIVA
 		public static List<CondicionIVA> Lista()
 		{
 			List<CondicionIVA> lista = new List<CondicionIVA>();
+			lista.Add(new SinInformar());
 			lista.Add(new ResponsableInscripto());
 			lista.Add(new ResponsableNoInscripto());
 			lista.Add(new NoResponsable());
