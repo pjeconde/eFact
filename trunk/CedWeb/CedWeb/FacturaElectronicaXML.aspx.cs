@@ -328,8 +328,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			infcompra.codigo_doc_identificatorio = Convert.ToInt32(Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue);
 			infcompra.nro_doc_identificatorio = Convert.ToInt64(Nro_Doc_Identificatorio_CompradorTextBox.Text);
 			infcompra.denominacion = Denominacion_CompradorTextBox.Text;
-			infcompra.condicion_IVASpecified = true;
-			infcompra.condicion_IVA = Convert.ToInt32(Condicion_IVA_CompradorDropDownList.SelectedValue);
+			int auxCondIVACompra = Convert.ToInt32(Condicion_IVA_CompradorDropDownList.SelectedValue);
+			if (!auxCondIVACompra.Equals(0))
+			{
+				infcompra.condicion_IVASpecified = true;
+				infcompra.condicion_IVA = auxCondIVACompra;
+			}
 			//infcompra.condicion_ingresos_brutosSpecified = true;
 			//infcompra.condicion_ingresos_brutos = Convert.ToInt32(Condicion_Ingresos_Brutos_CompradorDropDownList.SelectedValue);
 			//infcompra.nro_ingresos_brutos
@@ -384,12 +388,16 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			infovend.codigo_interno = Codigo_Interno_VendedorTextBox.Text;
 			infovend.razon_social = Razon_Social_VendedorTextBox.Text;
 			infovend.cuit = Convert.ToInt64(Cuit_VendedorTextBox.Text);
-			infovend.condicion_IVASpecified = true;
-			infovend.condicion_IVA = Convert.ToInt32(Condicion_IVA_VendedorDropDownList.SelectedValue);
+			int auxCondIVAVend = Convert.ToInt32(Condicion_IVA_VendedorDropDownList.SelectedValue);
+			if (!auxCondIVAVend.Equals(0))
+			{
+				infovend.condicion_IVASpecified = true;
+				infovend.condicion_IVA = auxCondIVAVend;
+			}
 			//infovend.condicion_ingresos_brutosSpecified = true;
 			//infovend.condicion_ingresos_brutos = Convert.ToInt32(Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue);
 			//infovend.nro_ingresos_brutos = Nro_Ingresos_Brutos_VendedorTextBox.Text;
-			infovend.inicio_de_actividades = InicioDeActividadesCompradorDatePickerWebUserControl.CalendarDateString;
+			infovend.inicio_de_actividades = InicioDeActividadesVendedorDatePickerWebUserControl.CalendarDateString;
 			infovend.contacto = Contacto_VendedorTextBox.Text;
 			infovend.domicilio_calle = Domicilio_Calle_VendedorTextBox.Text;
 			infovend.domicilio_numero = Domicilio_Numero_VendedorTextBox.Text;
@@ -421,7 +429,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				det.linea[i].numeroLinea = i + 1;
 				if (listadelineas[i].descripcion == null)
 				{
-					throw new Exception("La descripción de ningún artículo puede estar vacía");
+					throw new Exception("Debe informar al menos un artículo");
 				}
 				det.linea[i].descripcion = listadelineas[i].descripcion;
 				det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
@@ -548,12 +556,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
 
-			smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
+			//smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
 
 			//smtpClient.Credentials = new System.Net.NetworkCredential("facturaelectronica@cedeira.com.ar", "cedeira123");
 			//smtpClient.Host = "smtp.cedeira.com.ar";
 
-			//smtpClient.Host = "localhost";
+			smtpClient.Host = "localhost";
 
 			smtpClient.Send(mail);
 			m.Close();
@@ -574,12 +582,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			smtpClient = new System.Net.Mail.SmtpClient();
 
-			smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
+			//smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
 			
 			//smtpClient.Credentials = new System.Net.NetworkCredential("facturaelectronicaxml@cedeira.com.ar", "cedeira123");
 			//smtpClient.Host = "smtp.cedeira.com.ar";
 
-			//smtpClient.Host = "localhost";
+			smtpClient.Host = "localhost";
 
 			smtpClient.Send(mailCedeira);
 
