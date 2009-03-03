@@ -343,7 +343,11 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			infcompra.domicilio_torre = Domicilio_Torre_CompradorTextBox.Text;
 			infcompra.domicilio_manzana = Domicilio_Manzana_CompradorTextBox.Text;
 			infcompra.localidad = Localidad_CompradorTextBox.Text;
-			infcompra.provincia = Convert.ToString(Provincia_CompradorDropDownList.SelectedValue);
+			string auxCodProvCompra = Convert.ToString(Provincia_CompradorDropDownList.SelectedValue);
+			if (!auxCodProvCompra.Equals("0"))
+			{
+				infcompra.provincia = auxCodProvCompra;
+			}
 			infcompra.cp = Cp_CompradorTextBox.Text;
 			infcompra.email = Email_CompradorTextBox.Text;
 			infcompra.telefono = Telefono_CompradorTextBox.Text;
@@ -395,7 +399,11 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			infovend.domicilio_torre = Domicilio_Torre_VendedorTextBox.Text;
 			infovend.domicilio_manzana = Domicilio_Manzana_VendedorTextBox.Text;
 			infovend.localidad = Localidad_VendedorTextBox.Text;
-			infovend.provincia = Convert.ToString(Provincia_VendedorDropDownList.SelectedValue);
+			string auxCodProvVend = Convert.ToString(Provincia_VendedorDropDownList.SelectedValue);
+			if (!auxCodProvVend.Equals("0"))
+			{
+				infovend.provincia = auxCodProvVend;
+			}
 			infovend.cp = Cp_VendedorTextBox.Text;
 			infovend.email = Email_VendedorTextBox.Text;
 			infovend.telefono = Telefono_VendedorTextBox.Text;
@@ -540,12 +548,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
 
-			//smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
+			smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
 
 			//smtpClient.Credentials = new System.Net.NetworkCredential("facturaelectronica@cedeira.com.ar", "cedeira123");
 			//smtpClient.Host = "smtp.cedeira.com.ar";
 
-			smtpClient.Host = "localhost";
+			//smtpClient.Host = "localhost";
 
 			smtpClient.Send(mail);
 			m.Close();
@@ -566,12 +574,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			smtpClient = new System.Net.Mail.SmtpClient();
 
-			//smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
+			smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
 			
 			//smtpClient.Credentials = new System.Net.NetworkCredential("facturaelectronicaxml@cedeira.com.ar", "cedeira123");
 			//smtpClient.Host = "smtp.cedeira.com.ar";
 
-			smtpClient.Host = "localhost";
+			//smtpClient.Host = "localhost";
 
 			smtpClient.Send(mailCedeira);
 
