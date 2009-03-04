@@ -102,6 +102,14 @@ A:link {text-decoration: none; color: navy;}
 A:visited {text-decoration: none; color: navy;}
 A:active {text-decoration: none; color: navy;}
 A:hover {text-decoration: none; color: red;}
+.TextoMensajeTitulo
+{
+	color: black; font-weight: normal; font-size: 20px; font-family: Verdana; font-style: normal;
+}
+.TextoMensajeDetalle
+{
+	color: black; font-weight: normal; font-size: 12px; font-family: Verdana; font-style: normal;
+}
 .TextoResaltado
 {
 	color: black;
