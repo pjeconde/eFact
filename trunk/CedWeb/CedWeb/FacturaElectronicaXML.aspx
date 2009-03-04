@@ -1366,10 +1366,8 @@
                                                             <td class="TextoLabelFEAVendedor">
                                                                 <asp:RegularExpressionValidator ID="Importe_Total_Impuestos_MunicipalesResumenRegularExpressionValidator"
                                                                     runat="server" ControlToValidate="Importe_Total_Impuestos_Municipales_ResumenTextBox"
-                                                                    ErrorMessage="error de formateo en impuestos municipales" ValidationExpression="[0-9]+(\.[0-9]+)?"
-                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator><asp:RequiredFieldValidator
-                                                                        ID="Impuestos_municipalesResumenRequiredFieldValidator" runat="server" ControlToValidate="Importe_Total_Impuestos_Municipales_ResumenTextBox"
-                                                                        ErrorMessage="Impuestos municipales" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
+                                                                    ErrorMessage="error de formateo en importe total impuestos municipales" ValidationExpression="[0-9]+(\.[0-9]+)?"
+                                                                    SetFocusOnError="True">*</asp:RegularExpressionValidator>Importe
                                                                 total impuestos municipales:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
@@ -1382,10 +1380,7 @@
                                                                 <asp:RegularExpressionValidator ID="Importe_Total_Impuestos_Nacionales_ResumenTextBoxResumenRegularExpressionValidator"
                                                                     runat="server" ControlToValidate="Importe_Total_Impuestos_Nacionales_ResumenTextBox"
                                                                     ErrorMessage="error de formateo en importe total impuestos nacionales" ValidationExpression="[0-9]+(\.[0-9]+)?"
-                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator><asp:RequiredFieldValidator
-                                                                        ID="Importe_Total_Impuestos_Nacionales_ResumenTextBoxRequiredFieldValidator"
-                                                                        runat="server" ControlToValidate="Importe_Total_Impuestos_Nacionales_ResumenTextBox"
-                                                                        ErrorMessage="importe total impuestos nacionales" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
+                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator>Importe
                                                                 total impuestos nacionales:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
@@ -1398,10 +1393,7 @@
                                                                 <asp:RegularExpressionValidator ID="Importe_Total_Ingresos_Brutos_ResumenTextBoxResumenRegularExpressionValidator"
                                                                     runat="server" ControlToValidate="Importe_Total_Ingresos_Brutos_ResumenTextBox"
                                                                     ErrorMessage="error de formateo en importe total ingresos brutos" ValidationExpression="[0-9]+(\.[0-9]+)?"
-                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator><asp:RequiredFieldValidator
-                                                                        ID="Importe_Total_Ingresos_Brutos_ResumenTextBoxRequiredFieldValidator" runat="server"
-                                                                        ControlToValidate="Importe_Total_Ingresos_Brutos_ResumenTextBox" ErrorMessage="importe total ingresos brutos"
-                                                                        SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe total ingresos
+                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator>Importe total ingresos
                                                                 brutos:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
@@ -1414,10 +1406,7 @@
                                                                 <asp:RegularExpressionValidator ID="Importe_Total_Impuestos_Internos_ResumenTextBoxResumenRegularExpressionValidator"
                                                                     runat="server" ControlToValidate="Importe_Total_Impuestos_Internos_ResumenTextBox"
                                                                     ErrorMessage="error de formateo en importe total impuestos internos" ValidationExpression="[0-9]+(\.[0-9]+)?"
-                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator><asp:RequiredFieldValidator
-                                                                        ID="Importe_Total_Impuestos_Internos_ResumenTextBoxRequiredFieldValidator" runat="server"
-                                                                        ControlToValidate="Importe_Total_Impuestos_Internos_ResumenTextBox" ErrorMessage="importe total impuestos internos"
-                                                                        SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe total impuestos
+                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator>Importe total impuestos
                                                                 internos:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
