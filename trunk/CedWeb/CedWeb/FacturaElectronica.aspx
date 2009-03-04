@@ -72,7 +72,7 @@
                                 <tr>
                                     <td style="padding-top:10px">
                                         <asp:Label ID="Label7" runat="server" Font-Bold="true" ForeColor="red" Text="»"></asp:Label>
-                                        <asp:HyperLink ID="FEASYPHyperLink" runat="server"  NavigateUrl="~/FacturaElectronicaSYP.aspx" SkinID="LinkMedianoClaro">ver Detalle de servicios y productos eFact ( tabla comparativa )</asp:HyperLink>
+                                        <asp:HyperLink ID="FEASYPHyperLink" runat="server"  NavigateUrl="~/FacturaElectronicaSYP.aspx" SkinID="LinkMedianoClaro">Detalle de servicios y productos eFact ( tabla comparativa )</asp:HyperLink>
                                     </td>
                                 </tr>
                                 <tr>
