@@ -39,6 +39,7 @@ namespace CedWeb
 				Arbol.CollapseImageUrl = "Imagenes/CajaBrownPeruMenos.ico";
 				Arbol.RootNodeStyle.HorizontalPadding = 4;
                 Arbol.NodeIndent = 0;
+                Arbol.Nodes[0].Collapse();
             }
         }
     }
