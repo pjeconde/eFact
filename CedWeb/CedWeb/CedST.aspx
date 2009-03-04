@@ -31,9 +31,7 @@
                                             <asp:Label ID="CedSTDescrLabel" runat="server" SkinID="TextoMediano" Text="Es un sistema diseñado para centralizar la administración de transferencias.  En línea con el BCRA, concentra el 100% de las operaciones, tanto enviadas como recibidas, en un único repositorio, para realizar un control eficiente y una óptima gestión operativa.  Facilita las tareas a través de la automatización de los procesos de: ingreso, envío, recepción, distribución y conciliación, entre otros. Contempla todas las operatorias, acorde a las normativas, y se encuentra integrado al Sistema de Medios de Pagos (Mep) del BCRA."></asp:Label>
                                         </td>
                                         <td rowspan="2" style="padding-top:10px">
-                                            <asp:HyperLink ID="HyperLinkCedSTimagen" runat="server" NavigateUrl="~/VerImagen.aspx?Imagen='Imagenes/CedFCI-Tablero_ch.jpg'" EnableTheming="True">
-                                                  <asp:Image ID="ImageCedSTTablero" runat="server"  ImageUrl="~/Imagenes/CedST-Tablero_ch.jpg" Width="200px" Height="135px"/>
-                                            </asp:HyperLink>
+                                            <asp:Image ID="Image1" runat="server" ImageUrl="Imagenes/CedST-Tablero_ch.jpg" Width="220px" ImageAlign="Right"/>
                                         </td>
                                     </tr>
                                     <tr>
