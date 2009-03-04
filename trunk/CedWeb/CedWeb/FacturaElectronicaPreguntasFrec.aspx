@@ -13,7 +13,7 @@
                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico"/>
                     </td>
                     <td style="height: 20px;">
-                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Factura Electrónica" SkinID="TituloPagina"></asp:Label>
+                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Preguntas frecuentes" SkinID="TituloPagina"></asp:Label>
                     </td>
                 </tr>
                 </table>
@@ -28,15 +28,20 @@
                         <td style="width: 15px; height: 21px">
                         </td>
                         <td style="height: 21px;">
-                            <asp:Label ID="Label2" runat="server" SkinID="TituloColor1Mediano" Text="Preguntas Frecuentes. Normativa Afip">
-                            </asp:Label>
-                            <br/>
+                            <table style="">
+                                <tr>
+                                    <td style="height: 21px">
+                                        <asp:Label ID="Label2" runat="server" SkinID="TituloColor1Mediano" Text="Normativa AFIP">
+                                        </asp:Label>
+                                    </td>
+                                </tr>
+                            </table>
                             <table style="">
                                 <tr>
                                     <td style="width: 15px; height: 21px">
                                     </td>
                                     <td style="">
-                                        <asp:Label ID="Label1" runat="server" SkinID="TituloColor1Mediano" Text="¿Qué es factura electrónica?">
+                                        <asp:Label ID="Label17" runat="server" SkinID="TituloColor1Mediano" Text="¿Qué es factura electrónica?">
                                         </asp:Label>
                                     </td>
                                 </tr>

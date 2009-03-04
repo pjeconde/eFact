@@ -50,19 +50,20 @@
                                                     valign="top">
                                                 </td>
                                                 <td colspan="2" style="background-image: url('Imagenes/Ingreso/Box/Box2DC-Facturas-FEA.gif'); background-repeat: no-repeat;" class="IngresoBoxTexto" valign="top">
-                                                    <table cellpadding="0" cellspacing="0" border="0" style="background-image: url('Imagenes/Logo-Interfacturas_2.gif'); background-repeat: no-repeat;">
+                                                    <table cellpadding="0" cellspacing="0" border="0">
                                                         <tr>
                                                             <td colspan="3;">
                                                                 <table cellpadding="0" cellspacing="0" border="0">
                                                                     <tr>
-                                                                        <td style="width: 220px; vertical-align: top; padding-top:10px;">
+                                                                        <td style="width: 200px; vertical-align: top; padding-top:10px;">
                                                                             <asp:Label ID="LabelFactElectronica" runat="server" SkinID="TextoInicioMediano" Text="<b>Genere GRATIS el archivo XML para Interfacturas.</b><br/>">
                                                                             </asp:Label>
                                                                         </td>
-                                                                        <td style="width: 221px; vertical-align: top; padding-top:15px;">
-                                                                            <asp:Label ID="LabelTitFactElectronica" runat="server" Font-Bold="True" SkinID="TituloColor1MuyGrande" Text=""></asp:Label>
+                                                                        <td style="width: 261px; vertical-align: top; padding-top:15px;">
+                                                                            <asp:Label ID="LabelTitFactElectronica" runat="server" Font-Bold="True" Font-Size="X-Large" ForeColor="brown" Text="Factura Electrónica"></asp:Label>
+                                                                            <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/InterfacturasInterbankingLogo.jpg" ImageAlign="Middle"/>
                                                                         </td>
-                                                                        <td style="width: 220px; padding-top:10px;">
+                                                                        <td style="width: 200px; padding-top:10px;">
                                                                             <asp:Label ID="Label4" runat="server" SkinID="TextoInicioMediano" Text="<b>Integramos su sistema de facturación con el régimen de facturación electrónica.<br/></b>">
                                                                             </asp:Label>
                                                                         </td>
@@ -419,7 +420,7 @@
                                     </td>
                                     <td valign="top" style="width:10px;" align="left">
                                     </td>
-                                    <td align="center" valign="middle" style="width: 300px;" style="font-size:smaller">
+                                    <td align="center" valign="middle" style="width: 300px; font-size:smaller">
                                         <a href="javascript:window.external.AddFavorite('http://www.cedeira.com.ar/Inicio.aspx','Cedeira');">Agregar a favoritos</a>
                                     </td>                                       
                                 </tr>
