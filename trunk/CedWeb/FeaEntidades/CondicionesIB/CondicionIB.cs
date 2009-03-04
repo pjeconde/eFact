@@ -24,6 +24,7 @@ namespace FeaEntidades.CondicionesIB
 		public static List<CondicionIB> Lista()
 		{
 			List<CondicionIB> lista = new List<CondicionIB>();
+			lista.Add(new SinInformar());
 			lista.Add(new ContribuyenteLocal());
 			lista.Add(new ContribuyenteMultilateral());
 			lista.Add(new Exento());

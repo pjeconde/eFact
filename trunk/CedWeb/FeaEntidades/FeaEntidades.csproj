@@ -76,6 +76,7 @@
     <Compile Include="CondicionesIB\ContribuyenteLocal.cs" />
     <Compile Include="CondicionesIB\ContribuyenteMultilateral.cs" />
     <Compile Include="CondicionesIB\Exento.cs" />
+    <Compile Include="CondicionesIB\SinInformar.cs" />
     <Compile Include="CondicionesIVA\ClienteDelExterior.cs" />
     <Compile Include="CondicionesIVA\CondicionIVA.cs" />
     <Compile Include="CondicionesIVA\ConsumidorFinal.cs" />

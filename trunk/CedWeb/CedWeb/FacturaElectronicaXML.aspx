@@ -329,7 +329,18 @@
                                                                 </table>
                                                             </td>
                                                             <td style="">
-                                                            </td>
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+	                                                                <tr>
+		                                                                <td class="TextoLabelFEAVendedor">
+			                                                                Condición IB:
+		                                                                </td>
+		                                                                <td class="TextoLabelFEAVendedorDet">
+			                                                                <asp:DropDownList ID="Condicion_Ingresos_Brutos_VendedorDropDownList" runat="server" SkinID="DropDownListVendedor">
+			                                                                </asp:DropDownList>
+		                                                                </td>
+	                                                                </tr>
+                                                                </table>
+                                                             </td>
                                                         </tr>
                                                         <!-- Datos del Vendedor: Provincia -->
                                                         <tr>
@@ -347,6 +358,18 @@
                                                                 </table>
                                                             </td>
                                                             <td style="">
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td style="" class="TextoLabelFEAVendedor">
+                                                                            <asp:RegularExpressionValidator ID="NumeroIBVendedorRegularExpressionValidator" runat="server"
+                                                                                ControlToValidate="NroIBVendedorTextBox" ErrorMessage="error de formateo en nro IB del vendedor"
+                                                                                SetFocusOnError="True" ValidationExpression="[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}">* </asp:RegularExpressionValidator>Número IB:
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorDet">
+                                                                            <asp:TextBox ID="NroIBVendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
                                                             </td>
                                                         </tr>
                                                         <!-- Datos del Vendedor: Código Postal -->
