@@ -61,7 +61,7 @@
                                                                         </td>
                                                                         <td style="width: 261px; vertical-align: top; padding-top:15px;">
                                                                             <asp:Label ID="LabelTitFactElectronica" runat="server" Font-Bold="True" Font-Size="X-Large" ForeColor="brown" Text="Factura Electrónica"></asp:Label>
-                                                                            <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/InterfacturasInterbankingLogo.jpg" ImageAlign="Middle"/>
+                                                                            <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/InterfacturasInterbankingLogo.gif" ImageAlign="Middle"/>
                                                                         </td>
                                                                         <td style="width: 200px; padding-top:10px;">
                                                                             <asp:Label ID="Label4" runat="server" SkinID="TextoInicioMediano" Text="<b>Integramos su sistema de facturación con el régimen de facturación electrónica.<br/></b>">

@@ -54,7 +54,7 @@
                             <table cellpadding="0" cellspacing="0" border="0">
                                 <tr>
                                     <td style="width: 750px; padding-top:20px" align="center">
-                                        <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/Imagenes/InterfacturasInterbankingLogo.jpg" NavigateUrl="http://www.interfacturas.com.ar/" Target="_blank"></asp:HyperLink>
+                                        <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/Imagenes/InterfacturasInterbankingLogo.gif" NavigateUrl="http://www.interfacturas.com.ar/" Target="_blank"></asp:HyperLink>
                                     </td>
                                 </tr>
                                 <tr>
