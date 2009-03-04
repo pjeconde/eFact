@@ -94,7 +94,7 @@
                                 <tr>
                                     <td>
                                         <asp:Label ID="Label2" runat="server" SkinID="TextoMediano" Text="Interfacturas pone a su disposición el sitio Web para que sus clientes se registren y puedan visualizar sus facturas electrónicas.  Para mayor información consulte "></asp:Label>
-                                        <asp:HyperLink ID="HyperLink2" runat="server" Target="_blank" NavigateUrl="http://www.interfacturas.com.ar/PF.html#nov" SkinID="LinkMedianoClaro">aqui</asp:HyperLink>
+                                        <asp:HyperLink ID="HyperLink2" runat="server" Target="_blank" NavigateUrl="http://www.interfacturas.com.ar" SkinID="LinkMedianoClaro">aqui</asp:HyperLink>
                                     </td>
                                 </tr>
                                 <tr>
