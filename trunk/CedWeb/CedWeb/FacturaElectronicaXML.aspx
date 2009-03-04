@@ -375,7 +375,7 @@
                                                                             GLN:
                                                                         </td>
                                                                         <td style="" class="TextoLabelFEAVendedorDet">
-                                                                            <asp:TextBox ID="GLN_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                            <asp:TextBox ID="GLN_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Código estándar para identificar locaciones o empresas"></asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -607,7 +607,7 @@
                                                                 GLN:
                                                             </td>
                                                             <td style="" class="TextoLabelFEAVendedorDet">
-                                                                <asp:TextBox ID="GLN_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox></td>
+                                                                <asp:TextBox ID="GLN_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Código estándar para identificar locaciones o empresas (Global location number) del comprador"></asp:TextBox></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="TextoLabelFEAVendedor">
