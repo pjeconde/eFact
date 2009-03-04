@@ -3,40 +3,37 @@
     <table style="width: 800px; height: 500px; text-align: left;" cellpadding="0" cellspacing="0"
         border="0" class="TextoComun">
         <tr>
-            <td valign="top" style="height: 20px;">
-            </td>
-        </tr>
-        <tr>
-            <td valign="top" style="padding-left: 10px;">
+            <td valign="top" style="padding-left:10px; padding-top:10px">
                 <table cellpadding="0" cellspacing="0" border="0">
                     <tr>
                         <td colspan="2" valign="top" style="">
                             <!-- @@@ TITULO DE LA PAGINA @@@-->
                             <table cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                    <td style="width: 20px; height: 20px;">
+                                    <td style="width: 21px; height: 20px;">
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
                                     </td>
                                     <td style="height: 20px;">
-                                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Factura Electrónica"
-                                            SkinID="TituloPagina"></asp:Label>
+                                        <asp:Label ID="Label5" runat="server" Text="Detalle de servicios y productos" Font-Size="Medium" ForeColor="Black" Font-Bold="True"></asp:Label>
+                                    </td>
+                                    <td style="height: 20px; padding-left:3px" valign="middle">
+                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/eFact.jpg" />
+                                    </td>
+                                    <td style="height:20px; padding-left:3px">
+                                        <asp:Label ID="Label1" runat="server" Text="( tabla comparativa )" Font-Size="Medium" ForeColor="Black" Font-Bold="True"></asp:Label>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td valign="top" style="height: 10px;">
-                                    </td>
-                                </tr>
-                            </table>
+                            </table>       
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 20px;">
+                        <td style="width: 20px; padding-top:20px">
                         </td>
-                        <td align="center">
+                        <td align="center" style="padding-top:20px">
                             <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse; width: 750px; border-color: Gray; padding: 3px;">
                                 <tr>
                                     <td class="TextoFEASYP_EncaRow1" style="color: maroon;">
-                                        Producto / Servicio <img style="vertical-align:middle" src="Imagenes/eFact.jpg" alt="Logo de los productos / servicio de factura electrónica" /></td>
+                                        Servicio / Producto</td>
                                     <td class="TextoFEASYP_EncaRow1" style="color: maroon;">
                                         Libre</td>
                                     <td class="TextoFEASYP_EncaRow1" style="color: maroon;">

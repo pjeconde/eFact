@@ -53,51 +53,30 @@
                             </table>
                             <table cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                    <td style="width: 20px; height: 10px">
-                                    </td>
-                                    <td style="width: 750px;">
-                                        <img src="Imagenes/Logo-Interfacturas.gif" alt="Interfacturas" style="border: 0px; border-style:none;"/><br />
-                                        <asp:Label ID="Label5" runat="server" Font-Bold="true" ForeColor="red" Text="»"></asp:Label>
-                                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/FacturaElectronicaXML.aspx" SkinID="LinkMedianoClaro">Generación de XML ( Comprobante Electrónico )
-                                        </asp:HyperLink>
-                                        <br />
+                                    <td style="width: 750px; padding-top:20px" align="center">
+                                        <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="~/Imagenes/InterfacturasInterbankingLogo.jpg" NavigateUrl="http://www.interfacturas.com.ar/" Target="_blank"></asp:HyperLink>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="">
+                                    <td style="padding-top:20px">
+                                        <asp:Label ID="Label5" runat="server" Font-Bold="true" ForeColor="red" Text="»"></asp:Label>
+                                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/FacturaElectronicaXML.aspx" SkinID="LinkMedianoClaro">Ingreso de Factura Electrónica y generación de XML ( Comprobante Electrónico )</asp:HyperLink>
                                     </td>
-                                    <td style="padding-bottom: 10px;">
+                                </tr>
+                                <tr>
+                                    <td style="padding-top:10px">
                                         <asp:Label ID="Label6" runat="server" Font-Bold="true" ForeColor="red" Text="»"></asp:Label>
                                         <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Vendedor.aspx" SkinID="LinkMedianoClaro">Configuracion de Información del Vendedor</asp:HyperLink>
-                                        <br />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="">
-                                    </td>
-                                    <td style="height:1px; background-color: Gray;">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="">
-                                    </td>
-                                    <td style="padding-top: 10px; padding-bottom: 10px;">
+                                    <td style="padding-top:10px">
                                         <asp:Label ID="Label7" runat="server" Font-Bold="true" ForeColor="red" Text="»"></asp:Label>
-                                        <asp:HyperLink ID="FEASYPHyperLink" runat="server" NavigateUrl="~/FacturaElectronicaSYP.aspx"
-                                            SkinID="LinkMedianoClaro"><b>Ver los servicios ofrecidos ( tabla comparativa )</b>
-                                        </asp:HyperLink>
+                                        <asp:HyperLink ID="FEASYPHyperLink" runat="server"  NavigateUrl="~/FacturaElectronicaSYP.aspx" SkinID="LinkMedianoClaro">ver Detalle de servicios y productos eFact ( tabla comparativa )</asp:HyperLink>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="">
-                                    </td>
-                                    <td style="height:1px; background-color: Gray;">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="">
-                                    </td>
-                                    <td style="padding-top: 10px; padding-bottom: 10px;">
+                                    <td style="padding-top:10px">
                                         <asp:Label ID="Label3" runat="server" Font-Bold="true" ForeColor="red" Text="»"></asp:Label>
                                         <asp:HyperLink ID="FEAPreguntasFrecHyperLink" runat="server" NavigateUrl="~/FacturaElectronicaPreguntasFrec.aspx"
                                             SkinID="LinkMedianoClaro">Preguntas frecuentes
