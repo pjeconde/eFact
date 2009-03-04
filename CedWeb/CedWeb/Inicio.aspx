@@ -130,18 +130,6 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2" style="text-align: left; padding-top: 5px;">
-                                                                            <table cellpadding="0" cellspacing="0" border="0">
-                                                                                <tr>
-                                                                                    <td style="width: 105px">
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <asp:Label ID="Label9" runat="server" Font-Bold="True" Text="»" SkinID="BulletLinkChico"></asp:Label>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        &nbsp;<asp:HyperLink SkinID="LinkMediano" ID="HyperLink5" NavigateUrl="~/FacturaElectronica.aspx" runat="server"><b>ver Propuestas</b></asp:HyperLink>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
