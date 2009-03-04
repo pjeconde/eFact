@@ -45,9 +45,9 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			Condicion_IVA_VendedorDropDownList.DataTextField = "Descr";
 			Condicion_IVA_VendedorDropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
 
-			//Condicion_Ingresos_Brutos_VendedorDropDownList.DataValueField = "Codigo";
-			//Condicion_Ingresos_Brutos_VendedorDropDownList.DataTextField = "Descr";
-			//Condicion_Ingresos_Brutos_VendedorDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.Lista();
+			Condicion_Ingresos_Brutos_VendedorDropDownList.DataValueField = "Codigo";
+			Condicion_Ingresos_Brutos_VendedorDropDownList.DataTextField = "Descr";
+			Condicion_Ingresos_Brutos_VendedorDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.Lista();
 
 			Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
 			Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
@@ -100,8 +100,8 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 Telefono_VendedorTextBox.Text = v.TelefonoContacto.ToString();
                 Cuit_VendedorTextBox.Text = v.CUIT.ToString();
                 Condicion_IVA_VendedorDropDownList.SelectedValue = v.IdCondIVA.ToString();
-                //Nro_Ingresos_Brutos_VendedorTextBox.Text = v.NroIngBrutos.ToString();
-                //Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue = v.IdCondIngBrutos.ToString();
+                NroIBVendedorTextBox.Text = v.NroIngBrutos.ToString();
+                Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue = v.IdCondIngBrutos.ToString();
                 GLN_VendedorTextBox.Text = v.GLN.ToString();
                 Codigo_Interno_VendedorTextBox.Text = v.CodigoInterno;
                 InicioDeActividadesVendedorDatePickerWebUserControl.CalendarDate = v.FechaInicioActividades;
@@ -394,9 +394,24 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				infovend.condicion_IVASpecified = true;
 				infovend.condicion_IVA = auxCondIVAVend;
 			}
-			//infovend.condicion_ingresos_brutosSpecified = true;
-			//infovend.condicion_ingresos_brutos = Convert.ToInt32(Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue);
-			//infovend.nro_ingresos_brutos = Nro_Ingresos_Brutos_VendedorTextBox.Text;
+
+			try
+			{
+				infovend.condicion_ingresos_brutos = Convert.ToInt32(Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue);
+				infovend.nro_ingresos_brutos = NroIBVendedorTextBox.Text;
+				if (infovend.condicion_ingresos_brutos != 0 && infovend.nro_ingresos_brutos != string.Empty)
+				{
+					infovend.condicion_ingresos_brutosSpecified = true;
+				}
+				else
+				{
+					infovend.nro_ingresos_brutos = null;
+				}
+			}
+			catch
+			{
+
+			}
 			infovend.inicio_de_actividades = InicioDeActividadesVendedorDatePickerWebUserControl.CalendarDateString;
 			infovend.contacto = Contacto_VendedorTextBox.Text;
 			infovend.domicilio_calle = Domicilio_Calle_VendedorTextBox.Text;
