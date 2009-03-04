@@ -1,7 +1,7 @@
 /* Default attributes of table container for entire calendar */
 .table-style {
 	font-family: arial;
-	border-width: 1; 
+	border-width: 1px; 
 	border-style: solid; 
 	border-color: #a0a0a0; 
 	background-color: #ffffff;
@@ -64,9 +64,9 @@
 .dropdown-style {
 	font-family: arial; 
 	font-size: 11px; 
-	border-width: 1; 
+	border-width: 1px; 
 	border-style: solid; 
-	background-color: #b5b5b5;
+	background-color: Background;
 	border-color: #cccccc;
 	color: White;
 	cursor: default;
@@ -74,13 +74,12 @@
 
 /* Default attributes selected (mouse-over) item in drop down lists (month and year). */
 .dropdown-select-style {
-	background-color: #828282;
-	cursor: hand;
+	background-color: Blue;
 }
 
 /* Default attributes unselected (mouse-off) item in drop down lists (month and year). */
 .dropdown-normal-style {
-	background-color: #000000;
+	background-color:Background;
 }
 
 /* Default attributes of calendar body (weekday titles and numbers). */
