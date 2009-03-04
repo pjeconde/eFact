@@ -6,12 +6,12 @@
 <asp:Label runat="server" Font-Size="14px" ForeColor="white" Font-Bold="True" Width="100%" SkinID="TituloPaginaClaro"></asp:Label>
 <asp:Label runat="server" Font-Size="20px" ForeColor="white" Font-Bold="True" Width="100%" SkinID="TituloPaginaClaroGr"></asp:Label>
 
-<asp:Label runat="server" Font-Size="12px" ForeColor="#404040" Font-Bold="True" Width="100%" SkinID="TituloMediano"></asp:Label>
+<asp:Label runat="server" Font-Size="12px" ForeColor="#404040" Font-Bold="True" SkinID="TituloMediano"></asp:Label>
 <asp:Label runat="server" Font-Size="10px" ForeColor="#404040" Font-Bold="True" Width="100%" SkinID="TituloChico"></asp:Label>
 <asp:Label runat="server" Font-Size="12px" ForeColor="#404040" Font-Bold="False" Width="100%" SkinID="TextoInicioMediano"></asp:Label>
 <asp:Label runat="server" Font-Size="10px" ForeColor="#404040" Font-Bold="False" Width="100%" SkinID="TextoInicioChico"></asp:Label>
 
-<asp:Label runat="server" Font-Size="12px" ForeColor="#404040" Font-Bold="False" Width="100%" SkinID="TextoMediano"></asp:Label>
+<asp:Label runat="server" Font-Size="12px" ForeColor="#404040" Font-Bold="False" SkinID="TextoMediano"></asp:Label>
 <asp:Label runat="server" Font-Size="10px" ForeColor="#404040" Font-Bold="False" Width="100%" SkinID="TextoChico"></asp:Label>
 
 <asp:Label runat="server" Font-Size="10px" ForeColor="white" Font-Bold="False" Width="100%" SkinID="BulletTituloMediano"></asp:Label>
@@ -24,7 +24,7 @@
 <asp:Label runat="server" Font-Size="12px" ForeColor="#FF6600" Font-Bold="True" SkinID="MensajePaginaSinWidth"></asp:Label>
 
 <asp:Label runat="server" Font-Size="14px" ForeColor="#A52A2A" Font-Bold="True" Width="100%" SkinID="TituloColor1Grande"></asp:Label>
-<asp:Label runat="server" Font-Size="12px" ForeColor="#A52A2A" Font-Bold="True" Width="100%" SkinID="TituloColor1Mediano"></asp:Label>
+<asp:Label runat="server" Font-Size="12px" ForeColor="#A52A2A" Font-Bold="True" SkinID="TituloColor1Mediano"></asp:Label>
 <asp:Label runat="server" Font-Size="10px" ForeColor="#A52A2A" Font-Bold="True" Width="100%" SkinID="TituloColor1Chico"></asp:Label>
 
 <asp:Label runat="server" Font-Size="12px" ForeColor="red" Font-Bold="True" Width="100%" SkinID="TituloColor2Mediano"></asp:Label>
