@@ -51,7 +51,7 @@ function Homepage(){
             </tr>
             <tr>
                 <td style="width: 400px" colspan="2" class="TextoMensajeDetalle">
-                    Vuelva a intetar mas tarde.
+                    Vuelva a intentar mas tarde.
                     <hr style="color:#C0C0C0;">
                 </td>
             </tr>
