@@ -31,19 +31,7 @@
                                             <asp:Label ID="CedFCIDescrLabel" runat="server" Text="El sistema de Administración de FCIs es una herramienta de administración de las carteras de inversión de los fondos y de cálculo de los valores de cuotaparte.  Lleva la contabilidad y facilita el cumplimiento de las normas establecidas por el organismo de fiscalización y de los reglamentos de gestión." SkinID="TextoMediano"></asp:Label>
                                         </td>
                                         <td rowspan="2" style="height:100%; padding-top:10px">
-                                            <table cellpadding="0" cellspacing="0" border="0">
-                                                <tr>
-                                                    <td style="">
-                                                        <asp:HyperLink ID="HyperLinkCedFCIimagen" runat="server" NavigateUrl="~/VerImagen.aspx?Imagen='Imagenes/CedFCI-Tablero_ch.jpg'" EnableTheming="True">
-                                                            <asp:Image ID="ImageCedFCITablero" runat="server"  ImageUrl="~/Imagenes/CedFCI-Tablero_ch.jpg" Width="200px" Height="135px"/>
-                                                        </asp:HyperLink>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width: 68px;">
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                            <asp:Image ID="CedFCIimage" runat="server" ImageUrl="Imagenes/CedFCI-Tablero_ch.jpg" Width="220px" ImageAlign="Right"/>
                                         </td>
                                     </tr>
                                     <tr>
