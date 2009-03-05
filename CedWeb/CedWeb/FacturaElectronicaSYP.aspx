@@ -55,11 +55,11 @@
                                         Canal
                                     </td>
                                     <td colspan="2" class="TextoFEASYP_DeteFactweb" style="vertical-align: top">
-                                        <img src="Imagenes/FEA/FEA-SYP-Interfacturas.jpg" alt="Interfacturas" />
+                                        <img src="Imagenes/InterfacturasInterbankingLogo_ch.gif" alt="Interfacturas" />
                                     </td>
                                     <td class="TextoFEASYP_DeteFactcp">
-                                        <img src="Imagenes/FEA/FEA-SYP-Interfacturas.jpg" alt="Interfacturas" />
-                                        <img src="Imagenes/FEA/FEA-SYP-AFIP.jpg" alt="AFIP" />
+                                        <img src="Imagenes/InterfacturasInterbankingLogo_ch.gif" alt="Interfacturas" />
+                                        <img src="Imagenes/AFIPLogo.jpg" alt="AFIP" />
                                     </td>
                                 </tr>
                                 <tr>
