@@ -5,10 +5,6 @@
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
 <head runat="server">
-    <style type="text/css">
-        a:link                  {font:8pt/11pt verdana; color:#FF0000}
-        a:visited               {font:8pt/11pt verdana; color:#4e4e4e}
-    </style>
     <meta name="ROBOTS" content="NOINDEX"/>
     <title>Mensaje del Sitio Web</title>
     <meta http-equiv="Content-Type" content="text-html; charset=Windows-1252"/>
@@ -46,7 +42,7 @@ function Homepage(){
         <table style="width:410px" border="0" cellpadding="3" cellspacing="5">
             <tr>
                 <td align="left" valign="middle" style="width:360px" class="TextoMensajeTitulo">
-                     En estos momentos no podemos acceder a la información solicitada.
+                    <img src="Imagenes/CajaBrownPeru.ico" alt="Mensaje" /> En estos momentos no podemos acceder a la información solicitada.
                 </td>
             </tr>
             <tr>
@@ -58,7 +54,7 @@ function Homepage(){
             <tr>
                 <td>
                     <asp:Label ID="Label15" runat="server" Font-Bold="true" ForeColor="red" Text="»"></asp:Label>
-                    <a href="javascript:history.back(1)">Volver a la página anterior</a>
+                    <a href="javascript:history.back(1)"><span class="linkOpcion1">Volver a la página anterior</span></a>
                 </td>
             </tr>
         </table>
