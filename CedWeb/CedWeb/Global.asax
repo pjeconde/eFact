@@ -15,6 +15,23 @@
     void Application_Error(object sender, EventArgs e) 
     { 
         // Código que se ejecuta al producirse un error no controlado
+        try
+        {
+            string strFile = Server.MapPath("Log.txt");
+            System.IO.StreamWriter log = new System.IO.StreamWriter(strFile, true);
+
+            System.Exception exc = Server.GetLastError();
+
+            log.WriteLine(exc.ToString());
+            log.Close();
+        }
+        catch (System.Exception ex)
+        {
+        }
+        finally
+        {
+            //Response.Redirect("Mensaje.aspx");
+        }
     }
 
     void Session_Start(object sender, EventArgs e) 
