@@ -9,7 +9,7 @@ namespace FeaEntidades.CondicionesIVA
 		public ResponsableInscriptoAgentePercepcion()
 		{
 			Codigo = 11;
-			Descr = "IVA Responsable Inscripto - Agente Percepción";
+			Descr = "IVA R.I.-Agente Percepción";
 		}
 	}
 }
