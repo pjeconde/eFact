@@ -167,15 +167,14 @@ A:hover {text-decoration: none; color: red;}
 	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
 	color: black;
 }
-.linkMenu
+.linkBullet
 {
-	font-weight: bold; font-size: 22px; font-family: Comic Sans MS; font-style: normal;
-	color: #696969;
+	color:Red;	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
 }
-.linkMenuSeparador
+.linkOpcion1
 {
-	font-weight: bold; font-size: medium; font-family: Arial; font-style: normal;
-	color: gray;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
+	color: blue; 
 }
 .DatePickerFecha
 {
