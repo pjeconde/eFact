@@ -311,6 +311,16 @@
                                                                 </table>
                                                             </td>
                                                             <td style="">
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td style="" class="TextoLabelFEAVendedor">
+                                                                            Código interno:
+                                                                        </td>
+                                                                        <td style="" class="TextoLabelFEAVendedorDet">
+                                                                            <asp:TextBox ID="Codigo_Interno_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>                                                       
                                                             </td>
                                                         </tr>
                                                         <!-- Datos del Vendedor: Localidad -->
@@ -841,14 +851,6 @@
                                                 <td valign="top" align="left">
                                                     <table style="width: 370px" border="0" cellpadding="0" cellspacing="0">
                                                         <tr>
-                                                            <td style="" class="TextoLabelFEAVendedor">
-                                                                Código interno:
-                                                            </td>
-                                                            <td style="">
-                                                                <asp:TextBox ID="Codigo_Interno_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
                                                             <td class="TextoLabelFEAVendedor">
                                                                 <asp:RequiredFieldValidator ID="FechaVencimientoRequiredFieldValidator" runat="server"
                                                                     ControlToValidate="FechaVencimientoDatePickerWebUserControl:txt_Date" ErrorMessage="fecha de vencimiento"
@@ -859,6 +861,15 @@
                                                                     TextCssClass="DatePickerFecha" />
                                                             </td>
                                                         </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                IVA computable:
+                                                            </td>
+                                                            <td style="padding-top: 3px;">
+                                                                <asp:DropDownList runat="server" ID="IVAcomputableDropDownList">
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                        </tr>                                                        
                                                     </table>
                                                 </td>
                                                 <td rowspan="5" style="width: 40px; background-image: url('Imagenes/bgFEA-C.jpg');
