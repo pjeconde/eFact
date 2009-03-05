@@ -39,5 +39,21 @@ namespace FeaEntidades.CondicionesIVA
 			return lista;
 		}
 
-	}
+        public static List<CondicionIVA> ListaInf()
+        {
+            List<CondicionIVA> lista = new List<CondicionIVA>();
+            lista.Add(new ResponsableInscripto());
+            lista.Add(new ResponsableNoInscripto());
+            lista.Add(new NoResponsable());
+            lista.Add(new SujetoExento());
+            lista.Add(new ConsumidorFinal());
+            lista.Add(new ResponsableMonotributo());
+            lista.Add(new SujetoNoCategorizado());
+            lista.Add(new ImportadorDelExterior());
+            lista.Add(new ClienteDelExterior());
+            lista.Add(new Liberado());
+            lista.Add(new ResponsableInscriptoAgentePercepcion());
+            return lista;
+        }
+    }
 }

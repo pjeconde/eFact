@@ -27,13 +27,13 @@ namespace CedWeb
                     {
                         ProvinciaDropDownList.DataValueField = "Codigo";
                         ProvinciaDropDownList.DataTextField = "Descr";
-                        ProvinciaDropDownList.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+                        ProvinciaDropDownList.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.ListaInf();
                         CondIVADropDownList.DataValueField = "Codigo";
                         CondIVADropDownList.DataTextField = "Descr";
-                        CondIVADropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
+                        CondIVADropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.ListaInf();
                         CondIngBrutosDropDownList.DataValueField = "Codigo";
                         CondIngBrutosDropDownList.DataTextField = "Descr";
-                        CondIngBrutosDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.Lista();
+                        CondIngBrutosDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.ListaInf();
                         DataBind();
                         //Leo datos actuales
                         CedWebEntidades.Vendedor vendedor = new CedWebEntidades.Vendedor();
@@ -103,7 +103,14 @@ namespace CedWeb
                 vendedor.NroIngBrutos = NroIngBrutosTextBox.Text;
                 vendedor.IdCondIngBrutos = Convert.ToInt32(CondIngBrutosDropDownList.SelectedValue);
                 vendedor.DescrCondIngBrutos = CondIngBrutosDropDownList.SelectedItem.Text;
-                vendedor.GLN = Convert.ToInt64(GLNTextBox.Text);
+                if (GLNTextBox.Text == String.Empty)
+                {
+                    vendedor.GLN = 0;
+                }
+                else
+                {
+                    vendedor.GLN = Convert.ToInt64(GLNTextBox.Text);
+                }
                 vendedor.CodigoInterno = CodigoInternoTextBox.Text;
                 vendedor.FechaInicioActividades = FechaInicioActividadesDatePickerWebUserControl.CalendarDate;
                 CedWebRN.Vendedor.Validar(vendedor, (CedEntidades.Sesion)Session["Sesion"]);

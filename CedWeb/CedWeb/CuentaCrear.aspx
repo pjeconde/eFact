@@ -64,7 +64,7 @@ function ContactoTable_onclick() {
                                     <td colspan="2" align="right" style="padding-top:3px; padding-right:5px">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" SetFocusOnError="True"
                                             ControlToValidate="TelefonoTextBox" ErrorMessage="Teléfono"
-                                            ValidationExpression="[A-Za-z\- ,.0-9]*">
+                                            ValidationExpression="[0-9\-]*">
                                             <asp:Label ID="Label9" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                         </asp:RegularExpressionValidator>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"  SetFocusOnError="True"
@@ -110,7 +110,7 @@ function ContactoTable_onclick() {
                                     <td align="left" style="padding-top:3px">
                                         <asp:TextBox ID="IdUsuarioTextBox" runat="server" Width="100px" TabIndex="4"></asp:TextBox>
                                     </td>
-                                    <td colspan="2" align="left" style="padding-left:5px; padding-top:3px" style="width:330px">
+                                    <td colspan="2" align="left" style="padding-left:5px; padding-top:3px; width:330px">
                                         <asp:Button ID="ComprobarDisponibilidadButton" runat="server" Text="Comprobar disp." ToolTip="Comprobar la disponibilidad del Id.Usuario ingresado" OnClick="ComprobarDisponibilidadButton_Click" Width="120px" CausesValidation="false"></asp:Button>
                                         <asp:Label ID="ResultadoComprobarDisponibilidadLabel" runat="server" Font-Size="12px" Font-Bold="True" Text="" Width="200px"></asp:Label>
                                     </td>
