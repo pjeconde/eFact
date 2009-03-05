@@ -18,7 +18,7 @@
                                             Font-Bold="True" SkinID="TituloPagina"></asp:Label>
                                     </td>
                                     <td style="height: 20px; padding-left:3px" valign="middle">
-                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/eFact.jpg" />
+                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/eFact.jpg" AlternateText="Factura Electrónica"/>
                                     </td>
                                 </tr>
                             </table>

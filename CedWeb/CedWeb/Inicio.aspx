@@ -222,7 +222,7 @@
                                                                     Text="Acceda a mejores servicios con su cuenta "></asp:Label>
                                                             </td>
                                                             <td style="padding-left: 3px">
-                                                                <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/eFact.jpg" />
+                                                                <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/eFact.jpg" AlternateText="Factura Electrónica" />
                                                             </td>
                                                         </tr>
                                                     </table>
