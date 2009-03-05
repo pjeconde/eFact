@@ -31,5 +31,13 @@ namespace FeaEntidades.CondicionesIB
 			return lista;
 		}
 
-	}
+        public static List<CondicionIB> ListaInf()
+        {
+            List<CondicionIB> lista = new List<CondicionIB>();
+            lista.Add(new ContribuyenteLocal());
+            lista.Add(new ContribuyenteMultilateral());
+            lista.Add(new Exento());
+            return lista;
+        }
+    }
 }
