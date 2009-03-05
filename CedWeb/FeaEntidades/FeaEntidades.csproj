@@ -90,6 +90,10 @@
     <Compile Include="CondicionesIVA\SinInformar.cs" />
     <Compile Include="CondicionesIVA\SujetoExento.cs" />
     <Compile Include="CondicionesIVA\SujetoNoCategorizado.cs" />
+    <Compile Include="Dicotomicos\Dicotomico.cs" />
+    <Compile Include="Dicotomicos\No.cs" />
+    <Compile Include="Dicotomicos\Si.cs" />
+    <Compile Include="Dicotomicos\SinInformar.cs" />
     <Compile Include="Documentos\ActaNacimiento.cs" />
     <Compile Include="Documentos\CDI.cs" />
     <Compile Include="Documentos\CI\BsAsRNP.cs" />

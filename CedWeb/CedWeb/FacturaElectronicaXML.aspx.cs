@@ -77,6 +77,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			Provincia_VendedorDropDownList.DataTextField = "Descr";
 			Provincia_VendedorDropDownList.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
 
+			IVAcomputableDropDownList.DataValueField = "Codigo";
+			IVAcomputableDropDownList.DataTextField = "Descr";
+			IVAcomputableDropDownList.DataSource = FeaEntidades.Dicotomicos.Dicotomico.Lista();
+
 			DataBind();
 
 			BindearDropDownLists();
@@ -369,8 +373,14 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			}
 			infcomprob.fecha_serv_desde = FechaServDesdeDatePickerWebUserControl.CalendarDateString;
 			infcomprob.fecha_serv_hasta = FechaServHastaDatePickerWebUserControl.CalendarDateString;
+
+			string auxIVAcompu = IVAcomputableDropDownList.SelectedValue;
+			if (!auxIVAcompu.Equals(string.Empty))
+			{
+				infcomprob.iva_computable = IVAcomputableDropDownList.SelectedValue;
+			}
+
 			//infcomprob.condicion_de_pago = Convert.ToInt32(Condicion_De_PagoTextBox.Text);
-			//infcomprob.iva_computable = Iva_ComputableDropDownList.SelectedValue;
 			//infcomprob.codigo_operacion = Codigo_OperacionDropDownList.SelectedValue;
 			if (!CAETextBox.Text.Equals(string.Empty))
 			{
