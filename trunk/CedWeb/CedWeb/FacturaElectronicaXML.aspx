@@ -329,17 +329,6 @@
                                                                 </table>
                                                             </td>
                                                             <td style="">
-                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
-	                                                                <tr>
-		                                                                <td class="TextoLabelFEAVendedor">
-			                                                                Condición IB:
-		                                                                </td>
-		                                                                <td class="TextoLabelFEAVendedorDet">
-			                                                                <asp:DropDownList ID="Condicion_Ingresos_Brutos_VendedorDropDownList" runat="server" SkinID="DropDownListVendedor">
-			                                                                </asp:DropDownList>
-		                                                                </td>
-	                                                                </tr>
-                                                                </table>
                                                              </td>
                                                         </tr>
                                                         <!-- Datos del Vendedor: Provincia -->
@@ -358,18 +347,6 @@
                                                                 </table>
                                                             </td>
                                                             <td style="">
-                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
-                                                                    <tr>
-                                                                        <td style="" class="TextoLabelFEAVendedor">
-                                                                            <asp:RegularExpressionValidator ID="NumeroIBVendedorRegularExpressionValidator" runat="server"
-                                                                                ControlToValidate="NroIBVendedorTextBox" ErrorMessage="error de formateo en nro IB del vendedor"
-                                                                                SetFocusOnError="True" ValidationExpression="[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}">* </asp:RegularExpressionValidator>Número IB:
-                                                                        </td>
-                                                                        <td class="TextoLabelFEAVendedorDet">
-                                                                            <asp:TextBox ID="NroIBVendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
                                                             </td>
                                                         </tr>
                                                         <!-- Datos del Vendedor: Código Postal -->
@@ -421,6 +398,18 @@
                                                                 </table>
                                                             </td>
                                                             <td style="">
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td style="" class="TextoLabelFEAVendedor">
+                                                                            <asp:RequiredFieldValidator ID="CUITVendedorRequiredFieldValidator" runat="server"
+                                                                                ControlToValidate="Cuit_VendedorTextBox" ErrorMessage="CUIT del vendedor" SetFocusOnError="True">* </asp:RequiredFieldValidator>
+                                                                            CUIT:
+                                                                        </td>
+                                                                        <td style="" class="TextoLabelFEAVendedorDet">
+                                                                            <asp:TextBox ID="Cuit_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>                                                            
                                                             </td>
                                                         </tr>
                                                         <!-- Datos del Vendedor: Mail Contacto / CUIT -->
@@ -445,17 +434,16 @@
                                                             </td>
                                                             <td style="">
                                                                 <table border="0" cellpadding="0" cellspacing="0" style="">
-                                                                    <tr>
-                                                                        <td style="" class="TextoLabelFEAVendedor">
-                                                                            <asp:RequiredFieldValidator ID="CUITVendedorRequiredFieldValidator" runat="server"
-                                                                                ControlToValidate="Cuit_VendedorTextBox" ErrorMessage="CUIT del vendedor" SetFocusOnError="True">* </asp:RequiredFieldValidator>
-                                                                            CUIT:
-                                                                        </td>
-                                                                        <td style="" class="TextoLabelFEAVendedorDet">
-                                                                            <asp:TextBox ID="Cuit_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
+	                                                                <tr>
+		                                                                <td class="TextoLabelFEAVendedor">
+			                                                                Condición IB:
+		                                                                </td>
+		                                                                <td class="TextoLabelFEAVendedorDet">
+			                                                                <asp:DropDownList ID="Condicion_Ingresos_Brutos_VendedorDropDownList" runat="server" SkinID="DropDownListVendedor">
+			                                                                </asp:DropDownList>
+		                                                                </td>
+	                                                                </tr>
+                                                                </table>                                                            
                                                             </td>
                                                         </tr>
                                                         <!-- Datos del Vendedor: Teléfono contacto -->
@@ -473,6 +461,18 @@
                                                                 </table>
                                                             </td>
                                                             <td style="">
+                                                                <table border="0" cellpadding="0" cellspacing="0" style="">
+                                                                    <tr>
+                                                                        <td style="" class="TextoLabelFEAVendedor">
+                                                                            <asp:RegularExpressionValidator ID="NumeroIBVendedorRegularExpressionValidator" runat="server"
+                                                                                ControlToValidate="NroIBVendedorTextBox" ErrorMessage="error de formateo en nro IB del vendedor"
+                                                                                SetFocusOnError="True" ValidationExpression="[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}">* </asp:RegularExpressionValidator>Número IB:
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorDet">
+                                                                            <asp:TextBox ID="NroIBVendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>                                                            
                                                             </td>
                                                         </tr>
                                                         <!-- Datos del Vendedor: IVA / Inicio de actividades -->
@@ -845,7 +845,7 @@
                                                                 Código interno:
                                                             </td>
                                                             <td style="">
-                                                                <asp:TextBox ID="Codigo_Interno_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
+                                                                <asp:TextBox ID="Codigo_Interno_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1013,7 +1013,7 @@
                                 </tr>
                                 <!-- DATOS DE DESCUENTOS GLOBALES -->
                                 <tr>
-                                    <td style="text-align: center">
+                                    <td style="text-align: center" class="TextoResaltado">
                                         <table style="width: 782px" border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td rowspan="6" style="width: 1px; background-color: Gray;">
@@ -1037,7 +1037,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: center">
+                                                <td style="text-align: center; padding: 3px; font-weight: normal;">
                                                     <asp:GridView ID="descuentosGridView" runat="server" AutoGenerateColumns="False"
                                                         GridLines="Both" EnableViewState="true" Font-Bold="false" Width="100%" BorderStyle="Solid"
                                                         BorderWidth="1px" BorderColor="gray" HeaderStyle-ForeColor="#A52A2A" ShowHeader="True"
@@ -1112,7 +1112,7 @@
                                 </tr>
                                 <!-- DATOS DE IMPUESTOS GLOBALES -->
                                 <tr>
-                                    <td style="text-align: center">
+                                    <td style="text-align: center" class="TextoResaltado">
                                         <table style="width: 782px" border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td rowspan="6" style="width: 1px; background-color: Gray;">
@@ -1136,7 +1136,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: center">
+                                                <td style="text-align: center; padding: 3px; font-weight: normal;">
                                                     <asp:GridView ID="impuestosGridView" runat="server" AutoGenerateColumns="False" GridLines="Both"
                                                         EnableViewState="true" Font-Bold="false" Width="100%" BorderStyle="Solid" BorderWidth="1px"
                                                         BorderColor="gray" HeaderStyle-ForeColor="#A52A2A" ShowHeader="True" ShowFooter="true"
@@ -1451,6 +1451,11 @@
                                                                     ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox>
                                                             </td>
                                                         </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <br />
+                                                            </td>
+                                                        </tr>
                                                     </table>
                                                 </td>
                                             </tr>
@@ -1499,9 +1504,9 @@
                                 <tr>
                                     <td style="text-align: center; height: 10px;">
                                         Agradeceríamos a los usuarios del sitio que nos informen sobre dudas, posibles omisiones
-                                        y errores y que nos envíen las correcciones o sugerencias por correo electrónico
-                                        a
-                                        <asp:HyperLink ID="contactoHyperLink" NavigateUrl="~/Contacto.aspx" runat="server">facturaelectronica@cedeira.com.ar</asp:HyperLink>.
+                                        y/o errores y que nos envíen las correcciones o sugerencias por correo electrónico
+                                        a través de 
+                                        <asp:HyperLink ID="contactoHyperLink" NavigateUrl="~/Contacto.aspx" runat="server">este formulario</asp:HyperLink>.
                                         Es de suma importancia conocer su opinión. Muchas gracias.
                                     </td>
                                 </tr>
@@ -1515,8 +1520,8 @@
                             </table>
                             <br />
                         </td>
-                        <td style="width: 9px;">
-                        </td>
+                        <!--td style="width: 9px;">Lucas
+                        </td-->
                     </tr>
                 </table>
             </td>
