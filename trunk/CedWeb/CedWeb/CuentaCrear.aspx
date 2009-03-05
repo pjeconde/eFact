@@ -28,7 +28,7 @@ function ContactoTable_onclick() {
                                         <asp:Label ID="Label5" runat="server" Text="Creación de cuenta " Font-Size="Medium" ForeColor="Black" Font-Bold="True"></asp:Label>
                                     </td>
                                     <td style="height: 20px; padding-left:3px" valign="middle">
-                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/eFact.jpg" />
+                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/eFact.jpg" AlternateText="Factura Electrónica"/>
                                     </td>
                                 </tr>
                             </table>                        
@@ -43,6 +43,15 @@ function ContactoTable_onclick() {
                             <table id="ContactoTable" border="0" cellpadding="0" cellspacing="0" width="600" onclick="return ContactoTable_onclick()">
                                 <tr>
                                     <td colspan="2" style="width:300px; padding-right:5px; padding-top:10px" align="right">
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" SetFocusOnError="True"
+                                            ControlToValidate="NombreTextBox" ErrorMessage="Nombre y Apellido"
+                                            ValidationExpression="[A-Za-z\- ,.0-9]*">
+                                            <asp:Label ID="Label7" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RegularExpressionValidator>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"  SetFocusOnError="True"
+                                            ControlToValidate="NombreTextBox" ErrorMessage="Nombre y Apellido">
+                                            <asp:Label ID="Label8" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RequiredFieldValidator>
                                         <asp:Label ID="NombreLabel" runat="server" Text="Nombre y Apellido"></asp:Label>
                                     </td>
                                     <td colspan="2" align="left" style="padding-top:10px">
@@ -53,6 +62,15 @@ function ContactoTable_onclick() {
                                 </tr>
                                 <tr>
                                     <td colspan="2" align="right" style="padding-top:3px; padding-right:5px">
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" SetFocusOnError="True"
+                                            ControlToValidate="TelefonoTextBox" ErrorMessage="Teléfono"
+                                            ValidationExpression="[A-Za-z\- ,.0-9]*">
+                                            <asp:Label ID="Label9" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RegularExpressionValidator>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"  SetFocusOnError="True"
+                                            ControlToValidate="TelefonoTextBox" ErrorMessage="Teléfono">
+                                            <asp:Label ID="Label10" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RequiredFieldValidator>
                                         <asp:Label ID="TelefonoLabel" runat="server" Text="Teléfono"></asp:Label>
                                     </td>
                                     <td colspan="2" align="left" style="padding-top:3px">
@@ -61,6 +79,15 @@ function ContactoTable_onclick() {
                                 </tr>
                                 <tr>
                                     <td colspan="2" align="right" style="padding-top:3px; padding-right:5px">
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" SetFocusOnError="True"
+                                            ControlToValidate="EmailTextBox" ErrorMessage="Email"
+                                            ValidationExpression="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$">
+                                            <asp:Label ID="Label11" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RegularExpressionValidator>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server"  SetFocusOnError="True"
+                                            ControlToValidate="EmailTextBox" ErrorMessage="Email">
+                                            <asp:Label ID="Label12" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RequiredFieldValidator>
                                         <asp:Label ID="EmailLabel" runat="server" Text="Email"></asp:Label>
                                     </td>
                                     <td colspan="2" align="left" style="padding-top:3px">
@@ -69,18 +96,36 @@ function ContactoTable_onclick() {
                                 </tr>
                                 <tr>
                                     <td colspan="2" align="right" style="padding-top:3px; padding-right:5px">
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" SetFocusOnError="True"
+                                            ControlToValidate="IdUsuarioTextBox" ErrorMessage="Id.Usuario"
+                                            ValidationExpression="[A-Za-z\- ,.0-9]*">
+                                            <asp:Label ID="Label13" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RegularExpressionValidator>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"  SetFocusOnError="True"
+                                            ControlToValidate="IdUsuarioTextBox" ErrorMessage="Id.Usuario">
+                                            <asp:Label ID="Label14" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RequiredFieldValidator>
                                         <asp:Label ID="IdUsuarioLabel" runat="server" Text="Id.Usuario"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-top:3px">
                                         <asp:TextBox ID="IdUsuarioTextBox" runat="server" Width="100px" TabIndex="4"></asp:TextBox>
                                     </td>
-                                    <td colspan="2" align="left" style="padding-left:5px; padding-top:3px">
-                                        <asp:Button ID="ComprobarDisponibilidadButton" runat="server" Text="Comprobar disp." ToolTip="Comprobar la disponibilidad del Id.Usuario ingresado" OnClick="ComprobarDisponibilidadButton_Click" Width="120px"></asp:Button>
+                                    <td colspan="2" align="left" style="padding-left:5px; padding-top:3px" style="width:330px">
+                                        <asp:Button ID="ComprobarDisponibilidadButton" runat="server" Text="Comprobar disp." ToolTip="Comprobar la disponibilidad del Id.Usuario ingresado" OnClick="ComprobarDisponibilidadButton_Click" Width="120px" CausesValidation="false"></asp:Button>
                                         <asp:Label ID="ResultadoComprobarDisponibilidadLabel" runat="server" Font-Size="12px" Font-Bold="True" Text="" Width="200px"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" align="right" style="padding-top:3px; padding-right:5px">
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" SetFocusOnError="True"
+                                            ControlToValidate="PasswordTextBox" ErrorMessage="Contraseña"
+                                            ValidationExpression="[A-Za-z\- ,.0-9]*">
+                                            <asp:Label ID="Label15" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RegularExpressionValidator>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"  SetFocusOnError="True"
+                                            ControlToValidate="PasswordTextBox" ErrorMessage="Contraseña">
+                                            <asp:Label ID="Label16" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RequiredFieldValidator>
                                         <asp:Label ID="PasswordLabel" runat="server" Text="Contraseña"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-top:3px">
@@ -92,7 +137,16 @@ function ContactoTable_onclick() {
                                 </tr>
                                 <tr>
                                     <td colspan="2" align="right" style="padding-top:3px; padding-right:5px">
-                                        <asp:Label ID="ConfirmacionPasswordLabel" runat="server" Text="Conirmacion de Contraseña"></asp:Label>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" SetFocusOnError="True"
+                                            ControlToValidate="ConfirmacionPasswordTextBox" ErrorMessage="Confirmacion de Contraseña"
+                                            ValidationExpression="[A-Za-z\- ,.0-9]*">
+                                            <asp:Label ID="Label17" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RegularExpressionValidator>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server"  SetFocusOnError="True"
+                                            ControlToValidate="ConfirmacionPasswordTextBox" ErrorMessage="Confirmacion de Contraseña">
+                                            <asp:Label ID="Label18" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RequiredFieldValidator>
+                                        <asp:Label ID="ConfirmacionPasswordLabel" runat="server" Text="Confirmacion de Contraseña"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-top:3px">
                                         <asp:TextBox ID="ConfirmacionPasswordTextBox" runat="server" Width="100px" TextMode="Password" TabIndex="6"></asp:TextBox>
@@ -100,6 +154,15 @@ function ContactoTable_onclick() {
                                 </tr>
                                 <tr>
                                     <td colspan="2" align="right" style="padding-top:3px; padding-right:5px">
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" SetFocusOnError="True"
+                                            ControlToValidate="PreguntaTextBox" ErrorMessage="Pregunta de seguridad"
+                                            ValidationExpression="[A-Za-z\- ,.0-9]*">
+                                            <asp:Label ID="Label19" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RegularExpressionValidator>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server"  SetFocusOnError="True"
+                                            ControlToValidate="PreguntaTextBox" ErrorMessage="Pregunta de seguridad">
+                                            <asp:Label ID="Label20" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RequiredFieldValidator>
                                         <asp:Label ID="PreguntaLabel" runat="server" Text="Pregunta de seguridad"></asp:Label>
                                     </td>
                                     <td colspan="2" align="left" style="padding-top:3px">
@@ -110,6 +173,15 @@ function ContactoTable_onclick() {
                                 </tr>
                                 <tr>
                                     <td colspan="2" align="right" style="padding-top:3px; padding-right:5px">
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" SetFocusOnError="True"
+                                            ControlToValidate="RespuestaTextBox" ErrorMessage="Respuesta"
+                                            ValidationExpression="[A-Za-z\- ,.0-9]*">
+                                            <asp:Label ID="Label21" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RegularExpressionValidator>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server"  SetFocusOnError="True"
+                                            ControlToValidate="RespuestaTextBox" ErrorMessage="Respuesta">
+                                            <asp:Label ID="Label22" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RequiredFieldValidator>
                                         <asp:Label ID="RespuestaLabel" runat="server" Text="Respuesta"></asp:Label>
                                     </td>
                                     <td colspan="2" align="left" style="padding-top:3px">
@@ -130,10 +202,19 @@ function ContactoTable_onclick() {
                                 </tr>
                                 <tr>
                                     <td valign="top" align="center" style="padding-top:3px">
-                                        <asp:Button ID="NuevaClaveCaptchaButton" runat="server" Text="Nueva Clave" OnClick="NuevaClaveCaptchaButton_Click">
+                                        <asp:Button ID="NuevaClaveCaptchaButton" runat="server" Text="Nueva Clave" OnClick="NuevaClaveCaptchaButton_Click" CausesValidation="false">
                                         </asp:Button>
                                     </td>
                                     <td align="right" style="padding-top:3px; padding-right:5px; width:150px">
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" SetFocusOnError="True"
+                                            ControlToValidate="CaptchaTextBox" ErrorMessage="Clave"
+                                            ValidationExpression="[A-Za-z\- ,.0-9]*">
+                                            <asp:Label ID="Label23" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RegularExpressionValidator>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server"  SetFocusOnError="True"
+                                            ControlToValidate="CaptchaTextBox" ErrorMessage="Clave">
+                                            <asp:Label ID="Label24" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RequiredFieldValidator>
                                         <asp:Label ID="ClaveLabel" runat="server" Text="Clave"></asp:Label>
                                     </td>
                                     <td align="left" style="width:80px; padding-top:3px">
@@ -156,7 +237,7 @@ function ContactoTable_onclick() {
                                         </asp:Button>
                                     </td>
                                     <td align="right" style="padding-top:10px">
-                                        <asp:Button ID="CancelarButton" runat="server" Text="Cancelar" Width="100px" PostBackUrl="~/Inicio.aspx">
+                                        <asp:Button ID="CancelarButton" runat="server" Text="Cancelar" Width="100px" PostBackUrl="~/Inicio.aspx" CausesValidation="false">
                                         </asp:Button>
                                     </td>
                                 </tr>
@@ -169,6 +250,7 @@ function ContactoTable_onclick() {
                                     </td>
                                     <td colspan="2" align="center" style="padding-bottom:30px">
                                         <asp:Label ID="MsgErrorLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
+                                        <asp:ValidationSummary ID="MensajeValidationSummary" runat="server" SkinID="MensajeValidationSummary"/>
                                     </td>
                                 </tr>
                             </table>

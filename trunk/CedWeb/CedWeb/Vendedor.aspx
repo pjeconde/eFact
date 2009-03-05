@@ -262,6 +262,7 @@
                                 <tr>
                                     <td colspan="2" align="center" style="padding-bottom:30px; padding-top:10px">
                                         <asp:Label ID="MsgErrorLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
+                                        <asp:ValidationSummary ID="MensajeValidationSummary" runat="server" SkinID="MensajeValidationSummary"/>
                                     </td>
                                 </tr>
                             </table>

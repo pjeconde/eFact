@@ -17,7 +17,7 @@
                                         <asp:Label ID="Label5" runat="server" Text="Detalle de servicios y productos" Font-Size="Medium" ForeColor="Black" Font-Bold="True"></asp:Label>
                                     </td>
                                     <td style="height: 20px; padding-left:3px" valign="middle">
-                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/eFact.jpg" />
+                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/eFact.jpg" AlternateText="Factura Electrónica"/>
                                     </td>
                                     <td style="height:20px; padding-left:3px">
                                         <asp:Label ID="Label1" runat="server" Text="( tabla comparativa )" Font-Size="Medium" ForeColor="Black" Font-Bold="True"></asp:Label>
