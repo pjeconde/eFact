@@ -58,7 +58,7 @@
                                     <td style="width: 10px;">
                                     </td>
                                     <td style="width: 21px; height: 20px;">
-                                        <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
+                                        <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="+"/>
                                     </td>
                                     <td style="height: 20px;">
                                         <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Factura Electrónica (Versión de prueba)"
@@ -968,7 +968,7 @@
                                                             <td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
                                                                 <asp:GridView ID="detalleGridView" runat="server" AutoGenerateColumns="False" GridLines="Both"
                                                                     EnableViewState="true" Font-Bold="false" Width="100%" BorderStyle="Solid" BorderWidth="1px"
-                                                                    BorderColor="gray" HeaderStyle-ForeColor="#A52A2A" ShowHeader="True" ShowFooter="true"
+                                                                    BorderColor="Gray" HeaderStyle-ForeColor="#A52A2A" ShowHeader="True" ShowFooter="true"
                                                                     ForeColor="#071F70" EditRowStyle-ForeColor="#071F70" EmptyDataRowStyle-ForeColor="#071F70"
                                                                     PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70"
                                                                     ToolTip="El separador de decimales a utilizar es el punto" OnRowCommand="detalleGridView_RowCommand"
