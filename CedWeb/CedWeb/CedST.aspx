@@ -20,7 +20,7 @@
                                                         <asp:Image ID="Image3" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico"/>
                                                     </td>
                                                     <td style="height: 20px">
-                                                        <asp:Label ID="CedSTtituloLabel" runat="server" Text="Sistema de Transferencias ( implementación MEP ) V2.4" Font-Bold="True" SkinID="TituloPagina" Width="415px"></asp:Label>
+                                                        <asp:Label ID="CedSTtituloLabel" runat="server" Text="Sistema de Transferencias ( implementación MEP ) V2.4" SkinID="TituloPagina" Width="415px"></asp:Label>
                                                     </td>
                                                 </tr>
                                             </table>

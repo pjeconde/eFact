@@ -61,8 +61,7 @@
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="+"/>
                                     </td>
                                     <td style="height: 20px;">
-                                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Factura Electrónica (Versión de prueba)"
-                                            SkinID="TituloPagina"></asp:Label>
+                                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Factura Electrónica (Versión de prueba)" SkinID="TituloPagina"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>

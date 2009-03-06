@@ -68,8 +68,7 @@
                                                                                         <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
                                                                                     </td>
                                                                                     <td>
-                                                                                        <asp:Label ID="Label10" runat="server" Text="Ingrese GRATIS su Factura Electrónica y genere el archivo XML para Interfacturas (la red de facturas electrónicas de Interbanking)"
-                                                                                            Font-Bold="True" SkinID="TituloPagina"></asp:Label>
+                                                                                        <asp:Label ID="Label10" runat="server" Text="Ingrese su Factura Electrónica y genere el archivo XML para Interfacturas (la red de facturas electrónicas de Interbanking)" SkinID="TituloPagina"></asp:Label>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -77,8 +76,7 @@
                                                                                         <asp:Image ID="Image5" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
                                                                                     </td>
                                                                                     <td style="padding-top: 15px">
-                                                                                        <asp:Label ID="Label13" runat="server" Text="Es rápido, fácil y seguro." Font-Bold="True"
-                                                                                            SkinID="TituloPagina"></asp:Label>
+                                                                                        <asp:Label ID="Label13" runat="server" Text="Es gratuito, rápido, fácil y seguro." SkinID="TituloPagina"></asp:Label>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -86,8 +84,7 @@
                                                                                         <asp:Image ID="Image6" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
                                                                                     </td>
                                                                                     <td style="padding-top: 15px">
-                                                                                        <asp:Label ID="Label11" runat="server" Text="Cargue su factura haciendo clic aqui."
-                                                                                            Font-Bold="True" SkinID="TituloPagina"></asp:Label>
+                                                                                        <asp:Label ID="Label11" runat="server" Text="Cargue su factura haciendo clic aqui." SkinID="TituloPagina"></asp:Label>
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>
@@ -113,7 +110,7 @@
                                                                                         <asp:Image ID="Image9" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
                                                                                     </td>
                                                                                     <td valign="top">
-                                                                                        <asp:Label ID="Label12" runat="server" Font-Bold="True" SkinID="TituloPagina" Text="Facilitamos el cumplimiento del régimen normativo de la AFIP"> </asp:Label>
+                                                                                        <asp:Label ID="Label12" runat="server" SkinID="TituloPagina" Text="Facilitamos el cumplimiento del régimen normativo de la AFIP"> </asp:Label>
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>
@@ -125,7 +122,7 @@
                                                                                         <asp:Image ID="Image7" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
                                                                                     </td>
                                                                                     <td valign="top">
-                                                                                        <asp:Label ID="Label4" runat="server" Font-Bold="True" SkinID="TituloPagina" Text="Integramos la Factura Electrónica a su sistema facturación, o contable, a través de un formato estándar."> </asp:Label>
+                                                                                        <asp:Label ID="Label4" runat="server" SkinID="TituloPagina" Text="Integramos la Factura Electrónica a su sistema facturación, o contable, a través de un formato estándar."> </asp:Label>
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>

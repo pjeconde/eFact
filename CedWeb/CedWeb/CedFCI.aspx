@@ -20,7 +20,7 @@
                                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico"/>
                                                     </td>
                                                     <td>
-                                                        <asp:Label ID="CedFCItituloLabel" runat="server" Text="Sistema de Administración de Fondos Comunes de Inversión V3.0" Font-Bold="True" SkinID="TituloPagina"></asp:Label>
+                                                        <asp:Label ID="CedFCItituloLabel" runat="server" Text="Sistema de Administración de Fondos Comunes de Inversión V3.0" SkinID="TituloPagina"></asp:Label>
                                                     </td>
                                                  </tr>
                                              </table>
