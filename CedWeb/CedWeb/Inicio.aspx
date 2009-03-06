@@ -32,7 +32,7 @@
                                                 <td style="background-image: url('Imagenes/Ingreso/Box/BoxT.gif'); width: 568px;">
                                                     <table cellpadding="0" cellspacing="0" border="0">
                                                         <tr>
-                                                            <td style="width: 15px" align="Left" valign="middle">
+                                                            <td style="width: 15px" align="left" valign="middle">
                                                                 <img src="Imagenes/Ingreso/Bullet/markerWhite.gif" width="5px" height="10" alt="" />
                                                             </td>
                                                             <td valign="middle">
@@ -159,7 +159,7 @@
                                                 <td style="background-image: url('Imagenes/Ingreso/Box/BoxT.gif'); width: 258px;">
                                                     <table cellpadding="0" cellspacing="0" border="0">
                                                         <tr>
-                                                            <td style="width: 15px" align="Left" valign="middle">
+                                                            <td style="width: 15px" align="left" valign="middle">
                                                                 <img src="Imagenes/Ingreso/Bullet/markerWhite.gif" width="5px" height="10" alt="" />
                                                             </td>
                                                             <td valign="middle">
@@ -283,7 +283,7 @@
                                                 <td style="background-image: url('Imagenes/Ingreso/Box/BoxT.gif'); width: 258px;">
                                                     <table cellpadding="0" cellspacing="0" border="0">
                                                         <tr>
-                                                            <td style="width: 15px" align="Left" valign="middle">
+                                                            <td style="width: 15px" align="left" valign="middle">
                                                                 <img src="Imagenes/Ingreso/Bullet/markerWhite.gif" width="5px" height="10" alt="" />
                                                             </td>
                                                             <td valign="middle">
@@ -332,7 +332,7 @@
                                                 <td align="left" valign="middle" style="width: 150px; background-image: url('Imagenes/Ingreso/Box/Box2T.gif');">
                                                     <table cellpadding="0" cellspacing="0" border="0">
                                                         <tr>
-                                                            <td style="width: 15px" align="Left" valign="middle">
+                                                            <td style="width: 15px" align="left" valign="middle">
                                                                 <img src="Imagenes/Ingreso/Bullet/markerWhite.gif" width="5px" height="10" alt="" />
                                                             </td>
                                                             <td valign="middle">
