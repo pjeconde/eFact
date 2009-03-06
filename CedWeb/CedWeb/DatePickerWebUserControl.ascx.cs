@@ -20,7 +20,6 @@ namespace CedWeb
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			// links to CSS and JS files in "cal" subdirectory
-			litCSS.Text = "<link href='" + ResolveUrl("cal/popcalendar.css") + "' type=\"text/css\" rel=\"stylesheet\" />";
 			litJS.Text = "<script language=\"javascript\" src='" + ResolveUrl("cal/popcalendar.js") + "' type=\"text/javascript\"></script>";
 
 			string scriptStr = "javascript:return popUpCalendar(this, '" + ResolveUrl("cal") + "/', document.getElementById('" + getClientID() + @"'), '" + DateFormat + "')";
