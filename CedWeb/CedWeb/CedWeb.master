@@ -41,7 +41,7 @@
                             </td>
                             <td style="width: 180px; padding-top: 5px; text-align: left">
                                 <asp:Image ID="CedeiraSFimage" runat="server" ImageUrl="~/Imagenes/CedeiraSF_v1.jpg"
-                                    Height="66px" Width="180px" Visible="true" />
+                                    Height="66px" Width="180px" Visible="true"  AlternateText="Cedeira Logo"/>
                             </td>
                             <td style="width: 10px">
                             </td>
