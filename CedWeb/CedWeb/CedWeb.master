@@ -1,10 +1,10 @@
-<%@ Master Language="C#" AutoEventWireup="true" CodeFile="~/CedWeb.master.cs" Inherits="CedWeb.CedWeb" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="~/CedWeb.master.cs" Inherits="CedWeb.CedWeb" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="CedWebHead" runat="server">
     <title>Cedeira Software Factory</title>
     <link rel="shortcut icon" href="Imagenes/Cedeira.ico" />
-    <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 </head>
 <body>
     <form id="MasterNoAutenticadoForm" runat="server">
@@ -97,7 +97,7 @@
             </tr>
             <tr>
                 <td colspan="3" class="TextoComun" align="center" style="height: 19px; background-color: #c8d2dc">
-                    � 2009 Cedeira Sofware Factory S.R.L. Todos los derechos reservados.
+                    © 2009 Cedeira Sofware Factory S.R.L. Todos los derechos reservados.
                 </td>
             </tr>
         </table>
