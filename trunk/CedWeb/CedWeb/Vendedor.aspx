@@ -68,7 +68,7 @@
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td align="left">
-                                                    <asp:TextBox ID="CalleTextBox" runat="server" Width="150px" TabIndex="1"></asp:TextBox>
+                                                    <asp:TextBox ID="CalleTextBox" runat="server" Width="150px" TabIndex="2"></asp:TextBox>
                                                 </td>                                            
                                                 <td style="padding-left:5px;" align="right">
                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" SetFocusOnError="True"
@@ -83,7 +83,7 @@
                                                     <asp:Label ID="Label12" runat="server" Text="Nro"></asp:Label>
                                                 </td>                                            
                                                 <td style="padding-left:5px;" align="left">
-                                                    <asp:TextBox ID="NroTextBox" runat="server" Width="40px" TabIndex="1"></asp:TextBox>
+                                                    <asp:TextBox ID="NroTextBox" runat="server" Width="40px" TabIndex="3"></asp:TextBox>
                                                 </td>
                                                 <td style="padding-left:5px" align="right">
                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" SetFocusOnError="True"
@@ -91,14 +91,10 @@
                                                         ValidationExpression="[A-Za-z\- ,.0-9]*">
                                                         <asp:Label ID="Label29" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                                     </asp:RegularExpressionValidator>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"  SetFocusOnError="True"
-                                                        ControlToValidate="PisoTextBox" ErrorMessage="Piso">
-                                                        <asp:Label ID="Label30" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                                                    </asp:RequiredFieldValidator>
                                                     <asp:Label ID="Label13" runat="server" Text="Piso"></asp:Label>
                                                 </td>
                                                 <td style="padding-left:5px" align="left">
-                                                    <asp:TextBox ID="PisoTextBox" runat="server" Width="25px" TabIndex="1"></asp:TextBox>
+                                                    <asp:TextBox ID="PisoTextBox" runat="server" Width="25px" TabIndex="4"></asp:TextBox>
                                                 </td>
                                                 <td style="padding-left:5px" align="right">
                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" SetFocusOnError="True"
@@ -109,7 +105,7 @@
                                                     <asp:Label ID="Label14" runat="server" Text="Depto"></asp:Label>
                                                 </td>
                                                 <td style="padding-left:5px" align="left">
-                                                    <asp:TextBox ID="DeptoTextBox" runat="server" Width="25px" TabIndex="1"></asp:TextBox>
+                                                    <asp:TextBox ID="DeptoTextBox" runat="server" Width="25px" TabIndex="5"></asp:TextBox>
                                                 </td>
                                             </tr>
                                         </table>
@@ -129,7 +125,7 @@
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td>
-                                                    <asp:TextBox ID="SectorTextBox" runat="server" Width="120px" TabIndex="1"></asp:TextBox>
+                                                    <asp:TextBox ID="SectorTextBox" runat="server" Width="120px" TabIndex="6"></asp:TextBox>
                                                 </td>
                                                 <td style="width:40px" align="right">
                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" SetFocusOnError="True"
@@ -140,7 +136,7 @@
                                                     <asp:Label ID="Label16" runat="server" Text="Torre"></asp:Label>
                                                 </td>
                                                 <td style="padding-left:5px">
-                                                    <asp:TextBox ID="TorreTextBox" runat="server" Width="55px" TabIndex="1"></asp:TextBox>
+                                                    <asp:TextBox ID="TorreTextBox" runat="server" Width="55px" TabIndex="7"></asp:TextBox>
                                                 </td>
                                                 <td style="width:60px" align="right">
                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" SetFocusOnError="True"
@@ -151,7 +147,7 @@
                                                     <asp:Label ID="Label17" runat="server" Text="Manzana"></asp:Label>
                                                 </td>
                                                 <td style="padding-left:5px">
-                                                    <asp:TextBox ID="ManzanaTextBox" runat="server" Width="67px" TabIndex="1"></asp:TextBox>
+                                                    <asp:TextBox ID="ManzanaTextBox" runat="server" Width="67px" TabIndex="8"></asp:TextBox>
                                                 </td>
                                             </tr>
                                         </table>
@@ -172,7 +168,7 @@
                                         <asp:Label ID="Label4" runat="server" Text="Localidad"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-top:3px">
-                                        <asp:TextBox ID="LocalidadTextBox" runat="server" Width="400px" TabIndex="1"></asp:TextBox>
+                                        <asp:TextBox ID="LocalidadTextBox" runat="server" Width="400px" TabIndex="9"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <!-- Datos del Vendedor: Provincia y Código postal -->
@@ -184,7 +180,7 @@
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td style="padding-top:3px">
-                                                    <asp:DropDownList ID="ProvinciaDropDownList" Width="183px" runat="server"></asp:DropDownList>
+                                                    <asp:DropDownList ID="ProvinciaDropDownList" Width="183px" runat="server" TabIndex="10"></asp:DropDownList>
                                                 </td>
                                                 <td style="padding-left:14px; padding-right:5px; padding-top:3px" align="right">
                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator10" runat="server" SetFocusOnError="True"
@@ -199,7 +195,7 @@
                                                     <asp:Label ID="Label6" runat="server" Text="Codigo Postal"></asp:Label>
                                                 </td>
                                                 <td align="left" style="padding-top:3px">
-                                                    <asp:TextBox ID="CodPostTextBox" runat="server" Width="80px" TabIndex="1"></asp:TextBox>
+                                                    <asp:TextBox ID="CodPostTextBox" runat="server" Width="80px" TabIndex="11"></asp:TextBox>
                                                 </td>
                                             </tr>
                                         </table>
@@ -220,7 +216,7 @@
                                         <asp:Label ID="Label8" runat="server" Text="Nombre Contacto"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-top:3px">
-                                        <asp:TextBox ID="NombreContactoTextBox" runat="server" Width="400px" TabIndex="1"></asp:TextBox>
+                                        <asp:TextBox ID="NombreContactoTextBox" runat="server" Width="400px" TabIndex="12"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <!-- Datos del Vendedor: Mail Contacto -->
@@ -238,7 +234,7 @@
                                         <asp:Label ID="Label9" runat="server" Text="Email Contacto"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-top:3px">
-                                        <asp:TextBox ID="EmailContactoTextBox" runat="server" Width="400px" TabIndex="1"></asp:TextBox>
+                                        <asp:TextBox ID="EmailContactoTextBox" runat="server" Width="400px" TabIndex="13" ToolTip="Muy importante! Todos los archivos XML serán enviados a esta casilla de correo. Verifique su correcto ingreso."></asp:TextBox>
                                     </td>
                                 </tr>
                                 <!-- Datos del Vendedor: Teléfono contacto -->
@@ -256,7 +252,7 @@
                                         <asp:Label ID="Label10" runat="server" Text="Teléfono Contacto"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-top:3px">
-                                        <asp:TextBox ID="TelefonoContactoTextBox" runat="server" Width="400px" TabIndex="1"></asp:TextBox>
+                                        <asp:TextBox ID="TelefonoContactoTextBox" runat="server" Width="400px" TabIndex="14" ToolTip="Debe ingresar sólo números."></asp:TextBox>
                                     </td>
                                 </tr>
                                 <!-- Datos del Vendedor: CUIT y CondIVA -->
@@ -264,7 +260,7 @@
                                     <td style="padding-right:5px; padding-top:3px" align="right">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator14" runat="server" SetFocusOnError="True"
                                             ControlToValidate="CUITTextBox" ErrorMessage="CUIT"
-                                            ValidationExpression="[0-9]*">
+                                            ValidationExpression="[0-9]{11}">
                                             <asp:Label ID="Label45" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                         </asp:RegularExpressionValidator>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server"  SetFocusOnError="True"
@@ -277,13 +273,13 @@
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td style="padding-top:3px">
-                                                    <asp:TextBox ID="CUITTextBox" runat="server" Width="80px" TabIndex="1"></asp:TextBox>
+                                                    <asp:TextBox ID="CUITTextBox" runat="server" Width="80px" TabIndex="15"></asp:TextBox>
                                                 </td>
                                                 <td style="padding-left:10px; padding-right:5px; padding-top:3px" align="right">
                                                     <asp:Label ID="Label11" runat="server" Text="Cond.IVA"></asp:Label>
                                                 </td>
                                                 <td align="left" style="padding-top:3px">
-                                                    <asp:DropDownList ID="CondIVADropDownList" runat="server" Width="255px"></asp:DropDownList>
+                                                    <asp:DropDownList ID="CondIVADropDownList" runat="server" Width="255px" TabIndex="16"></asp:DropDownList>
                                                 </td>
                                             </tr>
                                         </table>
@@ -294,7 +290,7 @@
                                     <td style="padding-right:5px; padding-top:3px" align="right">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator15" runat="server" SetFocusOnError="True"
                                             ControlToValidate="NroIngBrutosTextBox" ErrorMessage="Nro.Ing.Brutos"
-                                            ValidationExpression="[A-Za-z\- ,.0-9]*">
+                                            ValidationExpression="[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}">
                                             <asp:Label ID="Label47" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                         </asp:RegularExpressionValidator>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server"  SetFocusOnError="True"
@@ -307,13 +303,13 @@
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td style="padding-top:3px">                                    
-                                                    <asp:TextBox ID="NroIngBrutosTextBox" runat="server" Width="80px" TabIndex="1"></asp:TextBox>
+                                                    <asp:TextBox ID="NroIngBrutosTextBox" runat="server" Width="80px" TabIndex="17"></asp:TextBox>
                                                 </td>
                                                 <td style="padding-left:10px; padding-right:5px; padding-top:3px" align="right">
                                                     <asp:Label ID="Label18" runat="server" Text="Cond.Ing.Brutos"></asp:Label>
                                                 </td>
                                                 <td align="left" style="padding-top:3px">
-                                                    <asp:DropDownList ID="CondIngBrutosDropDownList" runat="server" Width="216px"></asp:DropDownList>
+                                                    <asp:DropDownList ID="CondIngBrutosDropDownList" runat="server" Width="216px" TabIndex="18"></asp:DropDownList>
                                                 </td>
                                             </tr>
                                         </table>
@@ -324,7 +320,7 @@
                                     <td style="padding-right:5px; padding-top:3px" align="right">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator16" runat="server" SetFocusOnError="True"
                                             ControlToValidate="GLNTextBox" ErrorMessage="GLN"
-                                            ValidationExpression="[0-9]*">
+                                            ValidationExpression="[0-9]{13}">
                                             <asp:Label ID="Label49" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                         </asp:RegularExpressionValidator>
                                         <asp:Label ID="Label7" runat="server" Text="GLN"></asp:Label>
@@ -333,7 +329,7 @@
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td style="padding-top:3px">    
-                                                    <asp:TextBox ID="GLNTextBox" runat="server" Width="100px" TabIndex="1"></asp:TextBox>
+                                                    <asp:TextBox ID="GLNTextBox" runat="server" Width="100px" TabIndex="19" ToolTip="(opcional) Código estándar para identificar locaciones o empresas (Global Location Number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres."></asp:TextBox>
                                                 </td>
                                                 <td style="padding-left:70px; padding-right:5px; padding-top:3px" align="right">
                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator17" runat="server" SetFocusOnError="True"
@@ -344,7 +340,7 @@
                                                     <asp:Label ID="Label21" runat="server" Text="Codigo interno"></asp:Label>
                                                 </td>
                                                 <td align="left" style="padding-top:3px">
-                                                    <asp:TextBox ID="CodigoInternoTextBox" runat="server" Width="100px" TabIndex="1"></asp:TextBox>
+                                                    <asp:TextBox ID="CodigoInternoTextBox" runat="server" Width="100px" TabIndex="20" ToolTip="(opcional) Código utilizado para identificar al vendedor dentro de la empresa / organización. (ej.: código de Cliente, Proveedor, etc.)"></asp:TextBox>
                                                 </td>
                                             </tr>
                                         </table>
@@ -362,10 +358,10 @@
                                                         ControlToValidate="FechaInicioActividadesDatePickerWebUserControl:txt_Date" ErrorMessage="Fecha de inicio de actividades">
                                                         <asp:Label ID="Label51" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                                     </asp:RequiredFieldValidator>
-                                                    <asp:Label ID="Label22" runat="server" Text="Fecha de inicio de actividades"></asp:Label>
+                                                    <asp:Label ID="Label22" runat="server" Text="Fecha de inicio de actividades (AAAAMMDD)"></asp:Label>
                                                 </td>
                                                 <td align="right" style="padding-left:5px; padding-top:3px">
-                                                    <uc1:DatePickerWebUserControl ID="FechaInicioActividadesDatePickerWebUserControl" runat="server" TextCssClass="DatePickerFecha" />
+                                                    <uc1:DatePickerWebUserControl ID="FechaInicioActividadesDatePickerWebUserControl" runat="server" TextCssClass="DatePickerFecha" TabIndex="21" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -379,11 +375,11 @@
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td align="left">
-                                                    <asp:Button ID="GuardarButton" runat="server" Text="Guardar" Width="100px" OnClick="GuardarButton_Click" TabIndex="10">
+                                                    <asp:Button ID="GuardarButton" runat="server" Text="Guardar" Width="100px" OnClick="GuardarButton_Click" TabIndex="22">
                                                     </asp:Button>
                                                 </td>
                                                 <td align="right" style="width:100%">
-                                                    <asp:Button ID="CancelarButton" runat="server" Text="Cancelar" Width="100px" PostBackUrl="~/FacturaElectronica.aspx" CausesValidation="false">
+                                                    <asp:Button ID="CancelarButton" runat="server" Text="Cancelar" Width="100px" PostBackUrl="~/FacturaElectronica.aspx" CausesValidation="false" TabIndex="23">
                                                     </asp:Button>
                                                 </td>
                                             </tr>
