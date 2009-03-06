@@ -66,7 +66,7 @@
                                 <tr>
                                     <td style="padding-top:10px">
                                         <asp:Label ID="Label6" runat="server" Font-Bold="true" ForeColor="red" Text="»"></asp:Label>
-                                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Vendedor.aspx" SkinID="LinkMedianoClaro">Configuracion de Información del Vendedor</asp:HyperLink>
+                                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Vendedor.aspx" SkinID="LinkMedianoClaro">Configuración de Información del Vendedor</asp:HyperLink>
                                     </td>
                                 </tr>
                                 <tr>
