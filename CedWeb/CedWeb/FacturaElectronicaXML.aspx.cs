@@ -106,7 +106,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 Condicion_IVA_VendedorDropDownList.SelectedValue = v.IdCondIVA.ToString();
                 NroIBVendedorTextBox.Text = v.NroIngBrutos.ToString();
                 Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue = v.IdCondIngBrutos.ToString();
-                GLN_VendedorTextBox.Text = v.GLN.ToString();
+                if(!v.GLN.ToString().Equals("0"))
+				{
+					GLN_VendedorTextBox.Text = v.GLN.ToString();
+				}
                 Codigo_Interno_VendedorTextBox.Text = v.CodigoInterno;
                 InicioDeActividadesVendedorDatePickerWebUserControl.CalendarDate = v.FechaInicioActividades;
             }

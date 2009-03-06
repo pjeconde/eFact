@@ -104,7 +104,8 @@
                                                     <table style="width: 780px" border="0" cellpadding="0" cellspacing="0">
                                                         <tr>
                                                             <td style="width: 240px" align="center" class="TextoResaltado">
-                                                                INFORMACIÓN VENDEDOR</td>
+                                                                INFORMACIÓN VENDEDOR<br />
+                                                                <asp:HyperLink ID="ConfigurarVendedorHyperLink" runat="server" NavigateUrl="~/Vendedor.aspx">Configurar</asp:HyperLink></td>
                                                             <td style="width: 300px">
                                                                 <table style="width: 300px" border="0" cellpadding="0" cellspacing="0">
                                                                     <tr>
@@ -228,7 +229,8 @@
                                                                                 SetFocusOnError="True">* </asp:RequiredFieldValidator>Número de comprobante:
                                                                         </td>
                                                                         <td style="" class="TextoLabelFEAVendedorDet">
-                                                                            <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                            <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                                ToolTip="Debe ser correlativo al último ingresado por Punto de Venta y Tipo de Comprobante. No es necesario ingresar ceros a la izquierda. Si su factura es p.ej.0002-00000005, puede ingresar 5."></asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -317,10 +319,12 @@
                                                                             Código interno:
                                                                         </td>
                                                                         <td style="" class="TextoLabelFEAVendedorDet">
-                                                                            <asp:TextBox ID="Codigo_Interno_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                            <asp:TextBox ID="Codigo_Interno_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                                ToolTip="<Opcional> Código utilizado para identificar al vendedor dentro de una empresa/organización. (Ej. Cod. de cliente, Proveedor, etc.)">
+                                                                            </asp:TextBox>
                                                                         </td>
                                                                     </tr>
-                                                                </table>                                                       
+                                                                </table>
                                                             </td>
                                                         </tr>
                                                         <!-- Datos del Vendedor: Localidad -->
@@ -339,7 +343,7 @@
                                                                 </table>
                                                             </td>
                                                             <td style="">
-                                                             </td>
+                                                            </td>
                                                         </tr>
                                                         <!-- Datos del Vendedor: Provincia -->
                                                         <tr>
@@ -385,7 +389,8 @@
                                                                             GLN:
                                                                         </td>
                                                                         <td style="" class="TextoLabelFEAVendedorDet">
-                                                                            <asp:TextBox ID="GLN_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Código estándar para identificar locaciones o empresas"></asp:TextBox>
+                                                                            <asp:TextBox ID="GLN_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                                ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres."></asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -419,7 +424,7 @@
                                                                             <asp:TextBox ID="Cuit_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
                                                                         </td>
                                                                     </tr>
-                                                                </table>                                                            
+                                                                </table>
                                                             </td>
                                                         </tr>
                                                         <!-- Datos del Vendedor: Mail Contacto / CUIT -->
@@ -444,16 +449,17 @@
                                                             </td>
                                                             <td style="">
                                                                 <table border="0" cellpadding="0" cellspacing="0" style="">
-	                                                                <tr>
-		                                                                <td class="TextoLabelFEAVendedor">
-			                                                                Condición IB:
-		                                                                </td>
-		                                                                <td class="TextoLabelFEAVendedorDet">
-			                                                                <asp:DropDownList ID="Condicion_Ingresos_Brutos_VendedorDropDownList" runat="server" SkinID="DropDownListVendedor">
-			                                                                </asp:DropDownList>
-		                                                                </td>
-	                                                                </tr>
-                                                                </table>                                                            
+                                                                    <tr>
+                                                                        <td class="TextoLabelFEAVendedor">
+                                                                            Condición IB:
+                                                                        </td>
+                                                                        <td class="TextoLabelFEAVendedorDet">
+                                                                            <asp:DropDownList ID="Condicion_Ingresos_Brutos_VendedorDropDownList" runat="server"
+                                                                                SkinID="DropDownListVendedor">
+                                                                            </asp:DropDownList>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
                                                             </td>
                                                         </tr>
                                                         <!-- Datos del Vendedor: Teléfono contacto -->
@@ -476,13 +482,14 @@
                                                                         <td style="" class="TextoLabelFEAVendedor">
                                                                             <asp:RegularExpressionValidator ID="NumeroIBVendedorRegularExpressionValidator" runat="server"
                                                                                 ControlToValidate="NroIBVendedorTextBox" ErrorMessage="error de formateo en nro IB del vendedor"
-                                                                                SetFocusOnError="True" ValidationExpression="[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}">* </asp:RegularExpressionValidator>Número IB:
+                                                                                SetFocusOnError="True" ValidationExpression="[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}">* </asp:RegularExpressionValidator>Número
+                                                                            IB:
                                                                         </td>
                                                                         <td class="TextoLabelFEAVendedorDet">
                                                                             <asp:TextBox ID="NroIBVendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
                                                                         </td>
                                                                     </tr>
-                                                                </table>                                                            
+                                                                </table>
                                                             </td>
                                                         </tr>
                                                         <!-- Datos del Vendedor: IVA / Inicio de actividades -->
@@ -571,7 +578,9 @@
                                                                 de lote:
                                                             </td>
                                                             <td style="" class="TextoLabelFEAVendedorCh">
-                                                                <asp:TextBox ID="Id_LoteTextbox" runat="server" SkinID="TextoBoxFEAVendedorDetCh"></asp:TextBox>
+                                                                <asp:TextBox ID="Id_LoteTextbox" runat="server" SkinID="TextoBoxFEAVendedorDetCh"
+                                                                    ToolTip="Es un número correlativo y consecutivo que debe llevarse manualmente e identifica el número de envío del archivo xml que envía a Interfacturas (Upload). Este número NO SE PUEDE REPETIR.">
+                                                                </asp:TextBox>
                                                             </td>
                                                             <td class="TextoLabelFEAVendedor">
                                                                 Cuit canal:
@@ -640,14 +649,18 @@
                                                                 GLN:
                                                             </td>
                                                             <td style="" class="TextoLabelFEAVendedorDet">
-                                                                <asp:TextBox ID="GLN_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Código estándar para identificar locaciones o empresas (Global location number) del comprador"></asp:TextBox></td>
+                                                                <asp:TextBox ID="GLN_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                    ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres.">
+                                                                </asp:TextBox>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="TextoLabelFEAVendedor">
                                                                 Código interno:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
-                                                                <asp:TextBox ID="Codigo_Interno_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox></td>
+                                                                <asp:TextBox ID="Codigo_Interno_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                    ToolTip="<Opcional> Código utilizado para identificar al comprador dentro de una empresa/organización. (Ej. Cod. de cliente, Proveedor, etc.)"></asp:TextBox></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="TextoLabelFEAVendedor">
@@ -672,7 +685,8 @@
                                                                 Denominación:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
-                                                                <asp:TextBox ID="Denominacion_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox></td>
+                                                                <asp:TextBox ID="Denominacion_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                    ToolTip="Razón Social y Nombre del comprador"></asp:TextBox></td>
                                                         </tr>
                                                         <tr>
                                                             <td style="" class="TextoLabelFEAVendedor">
@@ -869,7 +883,7 @@
                                                                 <asp:DropDownList runat="server" ID="IVAcomputableDropDownList">
                                                                 </asp:DropDownList>
                                                             </td>
-                                                        </tr>                                                        
+                                                        </tr>
                                                     </table>
                                                 </td>
                                                 <td rowspan="5" style="width: 40px; background-image: url('Imagenes/bgFEA-C.jpg');
@@ -1075,12 +1089,11 @@
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe total descuento">
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lblimporte_descuento" Text='<%# Eval("importe_descuento") %>'
-                                                                        runat="server"></asp:Label>
+                                                                    <asp:Label ID="lblimporte_descuento" Text='<%# Eval("importe_descuento") %>' runat="server"></asp:Label>
                                                                 </ItemTemplate>
                                                                 <EditItemTemplate>
-                                                                    <asp:TextBox ID="txtimporte_descuento" Text='<%# Eval("importe_descuento") %>'
-                                                                        runat="server" Width="100%"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtimporte_descuento" Text='<%# Eval("importe_descuento") %>' runat="server"
+                                                                        Width="100%"></asp:TextBox>
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
                                                                     <asp:TextBox ID="txtimporte_descuento" Text='' runat="server" Width="100%"></asp:TextBox>
@@ -1272,7 +1285,7 @@
                                                                                     <td style="width: 10px;">
                                                                                     </td>
                                                                                     <td class="TextoLabelFEAVendedorDet">
-                                                                                        <asp:TextBox ID="CAETextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                                        <asp:TextBox ID="CAETextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Opcional> MUY IMPORTANTE! Solo si YA TIENE GENERADO EL CAE, debe ingresar este dato. Si omite esta información, se generará una nueva factura ante la AFIP o bien se retornará un error por comprobante ya ingresado."></asp:TextBox>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -1333,7 +1346,7 @@
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Importe_Total_Neto_Gravado_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                    ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox>
+                                                                    ToolTip="<Obligatorio> En el caso que no informe este campo, debe ingresar 0 (cero).El separador de decimales a utilizar es el punto"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1350,7 +1363,7 @@
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Importe_Total_Concepto_No_Gravado_ResumenTextBox" runat="server"
-                                                                    SkinID="TextoBoxFEAVendedorDet" ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox>
+                                                                    SkinID="TextoBoxFEAVendedorDet" ToolTip="<Obligatorio> En el caso que no informe este campo, debe ingresar 0 (cero).El separador de decimales a utilizar es el punto"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1366,43 +1379,43 @@
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Importe_Operaciones_Exentas_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                    ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox>
+                                                                    ToolTip="<Obligatorio> En el caso que no informe este campo, debe ingresar 0 (cero).El separador de decimales a utilizar es el punto"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="TextoLabelFEAVendedor">
                                                                 <asp:RegularExpressionValidator ID="Impuesto_LiqRegularExpressionValidator" runat="server"
-                                                                    ControlToValidate="Impuesto_Liq_ResumenTextBox" ErrorMessage="error de formateo en impuesto liquidado"
-                                                                    ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator>
+                                                                    ControlToValidate="Impuesto_Liq_ResumenTextBox" ErrorMessage="error de formateo en importe IVA Responsable inscripto"
+                                                                    SetFocusOnError="True" ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator>
                                                                 <asp:RequiredFieldValidator ID="Impuesto_Liq_ResumenRequiredFieldValidator" runat="server"
-                                                                    ControlToValidate="Impuesto_Liq_ResumenTextBox" ErrorMessage="impuesto liquidado"
+                                                                    ControlToValidate="Impuesto_Liq_ResumenTextBox" ErrorMessage="importe de IVA Responsable inscripto"
                                                                     SetFocusOnError="True">* </asp:RequiredFieldValidator>IVA Responsable inscripto:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Impuesto_Liq_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                    ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox></td>
+                                                                    ToolTip="<Obligatorio> En el caso que no informe este campo, debe ingresar 0 (cero).El separador de decimales a utilizar es el punto"></asp:TextBox></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="TextoLabelFEAVendedor">
                                                                 <asp:RegularExpressionValidator ID="Impuesto_Liq_RniRegularExpressionValidator" runat="server"
-                                                                    ControlToValidate="Impuesto_Liq_Rni_ResumenTextBox" ErrorMessage="error de formateo en impuesto liquidado a RNI o percepción a no categorizados"
-                                                                    ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator>
+                                                                    ControlToValidate="Impuesto_Liq_Rni_ResumenTextBox" ErrorMessage="error de formateo en impuesto liquidado a RNI o percepción a no categorizados(IVA R.G. 2126)"
+                                                                    SetFocusOnError="True" ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator>
                                                                 <asp:RequiredFieldValidator ID="Impuesto_Liq_Rni_ResumenRequiredFieldValidator" runat="server"
-                                                                    ControlToValidate="Impuesto_Liq_Rni_ResumenTextBox" ErrorMessage="impuesto liquidado a RNI o percepción a no categorizados"
+                                                                    ControlToValidate="Impuesto_Liq_Rni_ResumenTextBox" ErrorMessage="impuesto liquidado a RNI o percepción a no categorizados(IVA R.G. 2126)"
                                                                     SetFocusOnError="True">* </asp:RequiredFieldValidator>Impuesto liquidado a RNI
                                                                 o percepción a no categorizados(IVA R.G. 2126):
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Impuesto_Liq_Rni_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                    ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox></td>
+                                                                    ToolTip="<Obligatorio> En el caso que no informe este campo, debe ingresar 0 (cero).El separador de decimales a utilizar es el punto"></asp:TextBox></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="TextoLabelFEAVendedor">
                                                                 <asp:RegularExpressionValidator ID="Importe_Total_Impuestos_MunicipalesResumenRegularExpressionValidator"
                                                                     runat="server" ControlToValidate="Importe_Total_Impuestos_Municipales_ResumenTextBox"
                                                                     ErrorMessage="error de formateo en importe total impuestos municipales" ValidationExpression="[0-9]+(\.[0-9]+)?"
-                                                                    SetFocusOnError="True">*</asp:RegularExpressionValidator>Importe
-                                                                total impuestos municipales:
+                                                                    SetFocusOnError="True">*</asp:RegularExpressionValidator>Importe total impuestos
+                                                                municipales:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Importe_Total_Impuestos_Municipales_ResumenTextBox" runat="server"
@@ -1414,8 +1427,8 @@
                                                                 <asp:RegularExpressionValidator ID="Importe_Total_Impuestos_Nacionales_ResumenTextBoxResumenRegularExpressionValidator"
                                                                     runat="server" ControlToValidate="Importe_Total_Impuestos_Nacionales_ResumenTextBox"
                                                                     ErrorMessage="error de formateo en importe total impuestos nacionales" ValidationExpression="[0-9]+(\.[0-9]+)?"
-                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator>Importe
-                                                                total impuestos nacionales:
+                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator>Importe total impuestos
+                                                                nacionales:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Importe_Total_Impuestos_Nacionales_ResumenTextBox" runat="server"
@@ -1459,7 +1472,7 @@
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Importe_Total_Factura_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                    ToolTip="El separador de decimales a utilizar es el punto"></asp:TextBox>
+                                                                    ToolTip="<Obligatorio> En el caso que no informe este campo, debe ingresar 0 (cero).El separador de decimales a utilizar es el punto"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1516,7 +1529,7 @@
                                     <td style="text-align: center; height: 10px;">
                                         Agradeceríamos a los usuarios del sitio que nos informen sobre dudas, posibles omisiones
                                         y/o errores y que nos envíen las correcciones o sugerencias por correo electrónico
-                                        a través de 
+                                        a través de
                                         <asp:HyperLink ID="contactoHyperLink" NavigateUrl="~/Contacto.aspx" runat="server">este formulario</asp:HyperLink>.
                                         Es de suma importancia conocer su opinión. Muchas gracias.
                                     </td>
@@ -1531,8 +1544,6 @@
                             </table>
                             <br />
                         </td>
-                        <!--td style="width: 9px;">Lucas
-                        </td-->
                     </tr>
                 </table>
             </td>
