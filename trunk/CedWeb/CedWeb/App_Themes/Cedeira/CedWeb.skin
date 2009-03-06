@@ -26,6 +26,7 @@
 <asp:ValidationSummary runat="server" Font-Size="12px" ForeColor="#FF6600" Font-Bold="True" SkinID="MensajeValidationSummary" HeaderText="Por favor, ingrese (o corrija) los siguientes campos: " ShowMessageBox="true" ShowSummary="true" DisplayMode="SingleParagraph"/>
 <asp:Label runat="server" SkinID="IndicadorValidacion" Font-Size="14px" ForeColor="#FF6600" Font-Bold="True" Text="*"></asp:Label>
 
+<asp:Label runat="server" Font-Size="14px" ForeColor="#202020" SkinID="TituloGrande"></asp:Label>
 <asp:Label runat="server" Font-Size="14px" ForeColor="#A52A2A" Font-Bold="True" Width="100%" SkinID="TituloColor1Grande"></asp:Label>
 <asp:Label runat="server" Font-Size="12px" ForeColor="#A52A2A" Font-Bold="True" SkinID="TituloColor1Mediano"></asp:Label>
 <asp:Label runat="server" Font-Size="10px" ForeColor="#A52A2A" Font-Bold="True" Width="100%" SkinID="TituloColor1Chico"></asp:Label>
@@ -36,6 +37,7 @@
 <asp:HyperLink runat="server" Font-Size="12px" ForeColor="#071F70" SkinID="LinkMediano"></asp:HyperLink>
 <asp:HyperLink runat="server" Font-Size="10px" ForeColor=Blue SkinID="LinkChicoClaro"></asp:HyperLink>
 <asp:HyperLink runat="server" Font-Size="12px" ForeColor=Blue SkinID="LinkMedianoClaro"></asp:HyperLink>
+<asp:HyperLink runat="server" Font-Size="14px" ForeColor=Blue SkinID="LinkGrandeClaro"></asp:HyperLink>
 
 <asp:TextBox runat="server" Style="width: 180px" ForeColor="#071F70" SkinID="TextoBoxFEAVendedorDet" BorderStyle="NotSet"></asp:TextBox>
 <asp:TextBox runat="server" Style="width: 80px" ForeColor="#071F70" SkinID="TextoBoxFEAVendedorDetCh" BorderStyle="NotSet"></asp:TextBox>
