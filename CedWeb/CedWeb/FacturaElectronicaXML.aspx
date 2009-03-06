@@ -987,8 +987,8 @@
                                                                             <FooterTemplate>
                                                                                 <asp:TextBox ID="txtdescripcion" Text='' runat="server" Width="100%"></asp:TextBox>
                                                                             </FooterTemplate>
-                                                                            <ItemStyle HorizontalAlign="Left" />
-                                                                            <FooterStyle HorizontalAlign="Left" />
+                                                                            <ItemStyle HorizontalAlign="left" />
+                                                                            <FooterStyle HorizontalAlign="left" />
                                                                         </asp:TemplateField>
                                                                         <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe total art&#237;culo">
                                                                             <ItemTemplate>
@@ -1084,8 +1084,8 @@
                                                                 <FooterTemplate>
                                                                     <asp:TextBox ID="txtdescripcion" Text='' runat="server" Width="100%"></asp:TextBox>
                                                                 </FooterTemplate>
-                                                                <ItemStyle HorizontalAlign="Left" />
-                                                                <FooterStyle HorizontalAlign="Left" />
+                                                                <ItemStyle HorizontalAlign="left" />
+                                                                <FooterStyle HorizontalAlign="left" />
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe total descuento">
                                                                 <ItemTemplate>
@@ -1184,8 +1184,8 @@
                                                                     <asp:DropDownList ID="ddlcodigo_impuesto" runat="server" Width="360px">
                                                                     </asp:DropDownList>
                                                                 </FooterTemplate>
-                                                                <ItemStyle HorizontalAlign="Left" Width="360px" />
-                                                                <FooterStyle HorizontalAlign="Left" Width="360px" />
+                                                                <ItemStyle HorizontalAlign="left" Width="360px" />
+                                                                <FooterStyle HorizontalAlign="left" Width="360px" />
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe total impuesto">
                                                                 <ItemTemplate>
