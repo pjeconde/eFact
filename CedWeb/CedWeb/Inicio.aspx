@@ -189,8 +189,8 @@
                                                                             <asp:Label ID="Label8" runat="server" Font-Bold="True" Text="»" SkinID="BulletLinkChico"></asp:Label>
                                                                         </td>
                                                                         <td>
-                                                                            &nbsp;<asp:HyperLink SkinID="LinkMediano" ID="HyperLink2" NavigateUrl="~/Soluciones.aspx"
-                                                                                runat="server"><b>ver Soluciones</b></asp:HyperLink>
+                                                                            &nbsp;<asp:HyperLink SkinID="LinkMedianoClaro" ID="HyperLink2" NavigateUrl="~/Soluciones.aspx"
+                                                                                runat="server">ver Soluciones</asp:HyperLink>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -256,7 +256,7 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="4" align="center" style="height: 20px;">
-                                                    <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/CuentaCrear.aspx" SkinID="LinkMediano">Crear una nueva cuenta</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/CuentaCrear.aspx" SkinID="LinkMedianoClaro">Crear una nueva cuenta</asp:HyperLink>
                                                 </td>
                                             </tr>
                                         </table>
@@ -305,14 +305,14 @@
                                                     <table cellpadding="0" cellspacing="0" border="0" style="background-image: url('Imagenes/Ingreso/Box/DisWeb.gif');
                                                         background-repeat: no-repeat; width: 361px;">
                                                         <tr>
-                                                            <td style="width: 160px; padding-top: 5px;" valign="top">
+                                                            <td style="width: 160px; padding-top: 5px; height: 119px;" valign="top">
                                                                 <asp:Label ID="LabelDesarrolloWeb" runat="server" SkinID="TextoInicioMediano" Text="Diseñamos, desarrollamos y mantenemos sitios web, dinámicos e inteligentes, con capacidades de Comercio electrónico."
                                                                     Width="160px"></asp:Label>
                                                                 <asp:Label ID="Label2" runat="server" Font-Bold="True" Text="»" ForeColor="red"></asp:Label>
-                                                                <asp:HyperLink SkinID="LinkMediano" ID="HyperLinkFactElectronica3" NavigateUrl="~/DesarrolloWeb.aspx"
-                                                                    runat="server"><b>ver Diseño Web</b></asp:HyperLink>
+                                                                <asp:HyperLink SkinID="LinkMedianoClaro" ID="HyperLinkFactElectronica3" NavigateUrl="~/DesarrolloWeb.aspx"
+                                                                    runat="server">ver Diseño Web</asp:HyperLink>
                                                             </td>
-                                                            <td style="width: 201px" valign="top">
+                                                            <td style="width: 201px; height: 119px;" valign="top">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -370,8 +370,7 @@
                                                                         </td>
                                                                         <td style="width: 200px; text-align: left;">
                                                                             &nbsp;<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Clientes.aspx"
-                                                                                SkinID="LinkMediano"><b>ver Clientes</b>
-                                                                            </asp:HyperLink>
+                                                                                SkinID="LinkMedianoClaro">ver Clientes                                                                    </asp:HyperLink>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -406,9 +405,8 @@
                                     </td>
                                     <td valign="top" style="width: 10px;" align="left">
                                     </td>
-                                    <td align="center" valign="middle" style="width: 300px; font-size: smaller">
-                                        <a href="javascript:window.external.AddFavorite('http://www.cedeira.com.ar/Inicio.aspx','Cedeira');">
-                                            Agregar a favoritos</a>
+                                    <td align="center" valign="middle" style="width:300px; font-size:smaller">
+                                        <a href="javascript:window.external.AddFavorite('http://www.cedeira.com.ar/Inicio.aspx','Cedeira');" style="color:Blue">Agregar a favoritos</a>
                                     </td>
                                 </tr>
                                 <tr>

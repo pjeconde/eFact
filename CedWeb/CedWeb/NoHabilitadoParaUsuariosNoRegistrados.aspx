@@ -27,16 +27,16 @@
                         </td>
                     </tr>
                     <tr>
-                        <td align="left" style="padding-left:32px; padding-right:32px">
+                        <td align="left" style="padding-top:10px; padding-left:32px; padding-right:32px">
                             <asp:Label ID="Label6" runat="server" SkinID="MensajePaginaSinWidth" Text="Si ya ha creado su cuenta eFact, identifiquese en la página de "></asp:Label>
-                            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Inicio.aspx" SkinID="LinkMediano">Inicio</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Inicio.aspx" SkinID="LinkMedianoClaro">Inicio</asp:HyperLink>
                             <asp:Label ID="Label8" runat="server" SkinID="MensajePaginaSinWidth" Text="."></asp:Label>
                         </td>
                     </tr>
                     <tr>
-                        <td align="left" style="padding-left:32px; padding-right:32px">
+                        <td align="left" style="padding-top:10px; padding-left:32px; padding-right:32px;">
                             <asp:Label ID="Label14" runat="server" SkinID="MensajePaginaSinWidth" Text="Si no ha creado su cuenta eFact, y desea hacerlo, haga clic "></asp:Label>
-                            <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/CuentaCrear.aspx" SkinID="LinkMediano">aqui</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/CuentaCrear.aspx" SkinID="LinkMedianoClaro">aqui</asp:HyperLink>
                             <asp:Label ID="Label15" runat="server" SkinID="MensajePaginaSinWidth" Text="."></asp:Label>
                         </td>
                     </tr>
