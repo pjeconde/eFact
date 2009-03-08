@@ -122,7 +122,7 @@
                                                                                     <asp:Image ID="Image7" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
                                                                                 </td>
                                                                                 <td valign="top">
-                                                                                    <asp:Label ID="Label4" runat="server" SkinID="TituloPagina" Text="Integramos la Factura Electrónica a su sistema facturación, o contable, a través de un formato estándar."> </asp:Label>
+                                                                                    <asp:Label ID="Label4" runat="server" SkinID="TituloPagina" Text="Integramos la Factura Electrónica a su sistema de facturación, o contable, a través de un formato estándar."></asp:Label>
                                                                                 </td>
                                                                             </tr>
                                                                         </table>
