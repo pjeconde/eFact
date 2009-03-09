@@ -84,7 +84,7 @@
                                                                                 </td>
                                                                                 <td style="padding-top: 15px">
                                                                                     <asp:Label ID="Label11" runat="server" Text="Cargue su factura haciendo clic " Font-Bold="true" SkinID="TituloGrande"></asp:Label>
-                                                                                    <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/FacturaElectronica.aspx" Font-Bold="true" SkinID="LinkGrandeClaro">aqui</asp:HyperLink>
+                                                                                    <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/FacturaElectronica.aspx" Font-Bold="true" SkinID="LinkGrandeClaro">aquí</asp:HyperLink>
                                                                                 </td>
                                                                             </tr>
                                                                         </table>
