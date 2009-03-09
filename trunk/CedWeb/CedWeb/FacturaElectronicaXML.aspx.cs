@@ -576,11 +576,11 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			System.Text.StringBuilder sb = new System.Text.StringBuilder();
 			sb.Append(lote.cabecera_lote.cuit_vendedor);
 			sb.Append("-");
-			sb.Append(lote.cabecera_lote.punto_de_venta);
+			sb.Append(lote.cabecera_lote.punto_de_venta.ToString("0000"));
 			sb.Append("-");
-			sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante);
+			sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00"));
 			sb.Append("-");
-			sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
+			sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000"));
 			sb.Append(".xml");
 
 			System.IO.MemoryStream m = new System.IO.MemoryStream();
