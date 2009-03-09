@@ -88,7 +88,7 @@
                                 </tr>
                                 <tr>
                                     <td style="padding-top:10px">
-                                        <asp:Label ID="Label1" runat="server" SkinID="TituloColor1Mediano" Text="¿Cómo pongo, la factura electrónica, a dispocición de mis clientes?"></asp:Label>
+                                        <asp:Label ID="Label1" runat="server" SkinID="TituloColor1Mediano" Text="¿Cómo pongo, la factura electrónica, a disposición de mis clientes?"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
