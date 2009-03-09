@@ -24,6 +24,7 @@ namespace FeaEntidades.CodigosOperacion
 		public static List<CodigoOperacion> Lista()
 		{
 			List<CodigoOperacion> lista = new List<CodigoOperacion>();
+			lista.Add(new SinInformar());
 			lista.Add(new ExportacionesALaZonaFranca());
 			lista.Add(new ExportacionesAlExterior());
 			lista.Add(new NoGravado());
