@@ -57,7 +57,11 @@ namespace CedWeb
                         CondIVADropDownList.SelectedValue = Convert.ToString(vendedor.IdCondIVA);
                         NroIngBrutosTextBox.Text = vendedor.NroIngBrutos;
                         CondIngBrutosDropDownList.SelectedValue = Convert.ToString(vendedor.IdCondIngBrutos);
-                        GLNTextBox.Text = Convert.ToString(vendedor.GLN);
+						string auxGLN = Convert.ToString(vendedor.GLN);
+						if (!auxGLN.Equals(string.Empty))
+						{
+							GLNTextBox.Text = auxGLN;
+						}
                         CodigoInternoTextBox.Text = vendedor.CodigoInterno;
                         FechaInicioActividadesDatePickerWebUserControl.CalendarDate = vendedor.FechaInicioActividades;
                     }
