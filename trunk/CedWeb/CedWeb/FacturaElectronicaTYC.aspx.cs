@@ -37,10 +37,15 @@ namespace CedWeb
         }
         protected void ButtonAceptar_Click(object sender, EventArgs e)
         {
-            if (CheckBoxAceptarTYC.Checked)
-            {
-                Response.Redirect("FacturaElectronicaXML.aspx");
-            }
+			if (CheckBoxAceptarTYC.Checked)
+			{
+				Session["AceptarTYC"] = true;
+				Response.Redirect("FacturaElectronicaXML.aspx");
+			}
+			else
+			{
+				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Debe marcar que acepta los términos y condiciones');</script>");				
+			}
         }
     }
 }
