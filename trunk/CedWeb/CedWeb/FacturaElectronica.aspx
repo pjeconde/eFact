@@ -93,7 +93,7 @@
                                         <asp:Label ID="Label1" runat="server" Text="-" SkinID="TituloGrande"></asp:Label>
                                         <asp:HyperLink ID="FEAPreguntasFrecHyperLink" runat="server" NavigateUrl="~/FacturaElectronicaPreguntasFrec.aspx" SkinID="LinkMedianoClaro">Preguntas frecuentes</asp:HyperLink>
                                     </td>
-                                <tr>
+                                </tr>
                                 <tr>
                                     <td style="width: 750px; padding-top:10px; padding-bottom:30px" align="center">
                                         <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/Imagenes/InterfacturasInterbankingLogo.gif" NavigateUrl="http://www.interfacturas.com.ar/" Target="_blank"></asp:HyperLink>
