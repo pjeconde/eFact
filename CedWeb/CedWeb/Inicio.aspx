@@ -306,11 +306,7 @@
                                                         background-repeat: no-repeat; width: 361px;">
                                                         <tr>
                                                             <td style="width: 160px; padding-top: 5px; height: 119px;" valign="top">
-                                                                <asp:Label ID="LabelDesarrolloWeb" runat="server" SkinID="TextoInicioMediano" Text="Diseñamos, desarrollamos y mantenemos sitios web, dinámicos e inteligentes, con capacidades de Comercio electrónico."
-                                                                    Width="160px"></asp:Label>
-                                                                <asp:Label ID="Label2" runat="server" Font-Bold="True" Text="»" ForeColor="red"></asp:Label>
-                                                                <asp:HyperLink SkinID="LinkMedianoClaro" ID="HyperLinkFactElectronica3" NavigateUrl="~/DesarrolloWeb.aspx"
-                                                                    runat="server">ver Diseño Web</asp:HyperLink>
+                                                                <asp:Label ID="LabelDesarrolloWeb" runat="server" SkinID="TextoInicioMediano" Text="Diseñamos, desarrollamos y mantenemos sitios web, dinámicos e inteligentes, con capacidades de Comercio electrónico." Width="160px"></asp:Label>
                                                             </td>
                                                             <td style="width: 201px; height: 119px;" valign="top">
                                                             </td>
