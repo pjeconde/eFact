@@ -80,7 +80,7 @@
                             </td>
                             <td style="padding-left:10px; padding-right:10px">
                                 <asp:LinkButton ID="ClientesLinkButton" runat="server" CausesValidation="false" PostBackUrl="~/Clientes.aspx" ForeColor="white" Font-Bold="true">Clientes</asp:LinkButton>
-                            </td">
+                            </td>
                             <td style="padding-left:10px; padding-right:10px">
                                 <asp:LinkButton ID="ContactoLinkButton" runat="server" CausesValidation="false" PostBackUrl="~/Contacto.aspx" ForeColor="white" Font-Bold="true">Contacto</asp:LinkButton>
                             </td>

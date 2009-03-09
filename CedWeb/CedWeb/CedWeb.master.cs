@@ -33,6 +33,7 @@ namespace CedWeb
             NombreCuentaLabel.Text = String.Empty;
             SeparadorLabel.Visible = false;
             SalirLinkButton.Visible = false;
+			Session["AceptarTYC"] = null;
             Response.Redirect("~/Inicio.aspx", true);
         }
     }
