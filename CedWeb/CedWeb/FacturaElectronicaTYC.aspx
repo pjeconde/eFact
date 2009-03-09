@@ -1,4 +1,5 @@
-<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/FacturaElectronicaTYC.aspx.cs" Inherits="CedWeb.FacturaElectronicaPreguntasFrec"%>
+<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/FacturaElectronicaTYC.aspx.cs" Inherits="CedWeb.FacturaElectronicaPreguntasFrec"
+ MaintainScrollPositionOnPostback="true"%>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado" Runat="Server">
     <table style="height:500px; width:800px; text-align: left;" cellpadding="0" cellspacing="0" border="0" class="TextoComun">
         <tr>
@@ -239,7 +240,7 @@
                                                         <table cellpadding="0" cellspacing="0" border="0" style="">
                                                             <tr>
                                                                 <td style="width:80px; height: 24px;">
-                                                                    <asp:Button ID="ButtonAceptar" runat="server" Text="Aceptar" OnClick="ButtonAceptar_Click" />
+                                                                    <asp:Button ID="ButtonAceptar" runat="server" Text="Confirmar" OnClick="ButtonAceptar_Click" />
                                                                 </td>
                                                                 <td style="HEIGHT: 24px">
                                                                     <asp:Button ID="ButtonRechazar" runat="server" Text="Rechazar" PostBackUrl="~/FacturaElectronica.aspx" />
