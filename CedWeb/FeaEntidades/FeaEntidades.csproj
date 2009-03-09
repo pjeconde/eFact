@@ -45,6 +45,7 @@
     <Compile Include="CodigosOperacion\ExportacionesAlExterior.cs" />
     <Compile Include="CodigosOperacion\NoGravado.cs" />
     <Compile Include="CodigosOperacion\OperacionesExentas.cs" />
+    <Compile Include="CodigosOperacion\SinInformar.cs" />
     <Compile Include="CodigosProvincia\BuenosAires.cs" />
     <Compile Include="CodigosProvincia\CapitalFederal.cs" />
     <Compile Include="CodigosProvincia\Catamarca.cs" />

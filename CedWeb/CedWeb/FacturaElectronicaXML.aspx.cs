@@ -65,9 +65,9 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
 			Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
 
-			//Codigo_OperacionDropDownList.DataValueField = "Codigo";
-			//Codigo_OperacionDropDownList.DataTextField = "Descr";
-			//Codigo_OperacionDropDownList.DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.Lista();
+			CodigoOperacionDropDownList.DataValueField = "Codigo";
+			CodigoOperacionDropDownList.DataTextField = "Descr";
+			CodigoOperacionDropDownList.DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.Lista();
 
 			Provincia_CompradorDropDownList.DataValueField = "Codigo";
 			Provincia_CompradorDropDownList.DataTextField = "Descr";
@@ -391,7 +391,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			}
 
 			//infcomprob.condicion_de_pago = Convert.ToInt32(Condicion_De_PagoTextBox.Text);
-			//infcomprob.codigo_operacion = Codigo_OperacionDropDownList.SelectedValue;
+			infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
 			if (!CAETextBox.Text.Equals(string.Empty))
 			{
 				infcomprob.cae = CAETextBox.Text;

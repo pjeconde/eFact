@@ -883,6 +883,15 @@
                                                                 </asp:DropDownList>
                                                             </td>
                                                         </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                Código de operación:
+                                                            </td>
+                                                            <td style="padding-top: 8px;">
+                                                                <asp:DropDownList runat="server" ID="CodigoOperacionDropDownList">
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                        </tr>
                                                     </table>
                                                 </td>
                                                 <td rowspan="5" style="width: 40px; background-image: url('Imagenes/bgFEA-C.jpg');
