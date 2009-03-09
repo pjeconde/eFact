@@ -37,7 +37,7 @@
                                         <tr>
                                             <td align="right" style="padding-right:10px; vertical-align:bottom">
                                                 <asp:Label ID="Label2" runat="server" Font-Bold="true" ForeColor="red" Text="»" ></asp:Label>
-                                                <asp:HyperLink ID="CedFCIpresentacionHyperLink" runat="server" NavigateUrl="~/Descarga.aspx?archivo=CedFCI.pdf" SkinID="LinkMedianoClaro">Descargar presentación</asp:HyperLink>
+                                                <asp:HyperLink ID="CedFCIpresentacionHyperLink" runat="server" NavigateUrl="~/Descarga.aspx?archivo=Cedeira-SistAdminFCIs.pdf" SkinID="LinkMedianoClaro">Descargar presentación</asp:HyperLink>
                                                 <asp:Label ID="CedFCIbarraLabel" runat="server" Text=" / "></asp:Label>
                                                 <asp:HyperLink ID="CedFCImasInfoHyperLink" runat="server" NavigateUrl="~/CedFCI.aspx" SkinID="LinkMedianoClaro">Ver más información</asp:HyperLink>
                                             </td>
@@ -69,7 +69,7 @@
                                         <tr>
                                             <td align="right" valign="top" style="padding-right:10px; vertical-align:bottom">
                                                 <asp:Label ID="Label3" runat="server" Font-Bold="true" ForeColor="red" Text="»" ></asp:Label>
-                                                <asp:HyperLink ID="CedSTpresentacionHyperLink" runat="server" NavigateUrl="~/Descarga.aspx?archivo=CedST.pdf" SkinID="LinkMedianoClaro">Descargar presentación</asp:HyperLink>
+                                                <asp:HyperLink ID="CedSTpresentacionHyperLink" runat="server" NavigateUrl="~/Descarga.aspx?archivo=Cedeira-SistTransfMEP.pdf" SkinID="LinkMedianoClaro">Descargar presentación</asp:HyperLink>
                                                 <asp:Label ID="CedSTbarraLabel" runat="server" Text=" / "></asp:Label>
                                                 <asp:HyperLink ID="CedSTmasInfoHyperLink" runat="server" NavigateUrl="~/CedST.aspx" SkinID="LinkMedianoClaro">Ver más información</asp:HyperLink>
                                             </td>

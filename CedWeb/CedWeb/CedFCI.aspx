@@ -37,7 +37,7 @@
                                     <tr>
                                         <td align="right" style="padding-right:10px; vertical-align:bottom">
                                             <asp:Label ID="Label2" runat="server" Font-Bold="true" ForeColor="red" Text="»" ></asp:Label>
-                                            <asp:HyperLink ID="CedFCIpresentacionHyperLink" runat="server" NavigateUrl="~/Descarga.aspx?archivo=CedFCI.pdf" SkinID="LinkMedianoClaro">Descargar presentación</asp:HyperLink>
+                                            <asp:HyperLink ID="CedFCIpresentacionHyperLink" runat="server" NavigateUrl="~/Descarga.aspx?archivo=Cedeira-SistAdminFCIs.pdf" SkinID="LinkMedianoClaro">Descargar presentación</asp:HyperLink>
                                             <asp:Label ID="CedFCIbarraLabel" runat="server" Text=" / "></asp:Label>
                                             <asp:HyperLink ID="CedFCImasInfoHyperLink" runat="server" NavigateUrl="~/Soluciones.aspx" SkinID="LinkMedianoClaro">Volver a Soluciones</asp:HyperLink>
                                         </td>
