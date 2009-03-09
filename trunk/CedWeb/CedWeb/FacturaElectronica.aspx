@@ -41,7 +41,7 @@
                                                     <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/Bola1.png"/>
                                                 </td>
                                                 <td style="padding-top:20px; padding-left:5px; width:626px" valign="middle" align="left">
-                                                    <asp:Label ID="Label8" runat="server" Text="Si ya dispone de una cuenta eFact, y ha configurado los datos del Vendedor, continue por el punto" SkinID="TituloGrande"></asp:Label>
+                                                    <asp:Label ID="Label8" runat="server" Text="Si ya dispone de una cuenta eFact, y ha configurado los datos del Vendedor, continúe por el punto" SkinID="TituloGrande"></asp:Label>
                                                 </td>
                                                 <td style="padding-top:20px; padding-left:5px">
                                                     <asp:Image ID="Image7" runat="server" ImageUrl="~/Imagenes/Bola4.png"/>
@@ -53,7 +53,7 @@
                                                 </td>
                                                 <td style="padding-top:10px; padding-left:5px" align="left">
                                                     <asp:Label ID="Label9" runat="server" Text="Obtenga su <b>cuenta eFact</b>, haciendo clic" SkinID="TituloGrande"></asp:Label>
-                                                    <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/CuentaCrear.aspx" SkinID="LinkGrandeClaro">aqui</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/CuentaCrear.aspx" SkinID="LinkGrandeClaro">aquí</asp:HyperLink>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -62,7 +62,7 @@
                                                 </td>
                                                 <td style="padding-top:10px; padding-left:5px" align="left"">
                                                     <asp:Label ID="Label10" runat="server" Text="Configure los <b>datos del Vendedor</b>, haciendo clic" SkinID="TituloGrande"></asp:Label>
-                                                    <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Vendedor.aspx" SkinID="LinkGrandeClaro">aqui</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Vendedor.aspx" SkinID="LinkGrandeClaro">aquí</asp:HyperLink>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -71,7 +71,7 @@
                                                 </td>
                                                 <td colspan="2" style="padding-top:10px; padding-left:5px" align="left">
                                                     <asp:Label ID="Label11" runat="server" Text="<b>Genere una Factura Electrónica</b> y reciba su archivo XML (comprobante electrónico), haciendo clic" SkinID="TituloGrande"></asp:Label>
-                                                    <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/FacturaElectronicaXML.aspx" SkinID="LinkGrandeClaro">aqui</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/FacturaElectronicaXML.aspx" SkinID="LinkGrandeClaro">aquí</asp:HyperLink>
                                                 </td>
                                             </tr>
                                             <tr>
