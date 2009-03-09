@@ -58,7 +58,7 @@ namespace CedWeb
                         NroIngBrutosTextBox.Text = vendedor.NroIngBrutos;
                         CondIngBrutosDropDownList.SelectedValue = Convert.ToString(vendedor.IdCondIngBrutos);
 						string auxGLN = Convert.ToString(vendedor.GLN);
-						if (!auxGLN.Equals(string.Empty))
+						if (!auxGLN.Equals("0"))
 						{
 							GLNTextBox.Text = auxGLN;
 						}
