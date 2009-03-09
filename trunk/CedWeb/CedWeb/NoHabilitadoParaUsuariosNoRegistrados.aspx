@@ -36,7 +36,7 @@
                     <tr>
                         <td align="left" style="padding-top:10px; padding-left:32px; padding-right:32px;">
                             <asp:Label ID="Label14" runat="server" SkinID="MensajePaginaSinWidth" Text="Si no ha creado su cuenta eFact, y desea hacerlo, haga clic "></asp:Label>
-                            <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/CuentaCrear.aspx" SkinID="LinkMedianoClaro">aqui</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/CuentaCrear.aspx" SkinID="LinkMedianoClaro">aquí</asp:HyperLink>
                             <asp:Label ID="Label15" runat="server" SkinID="MensajePaginaSinWidth" Text="."></asp:Label>
                         </td>
                     </tr>
