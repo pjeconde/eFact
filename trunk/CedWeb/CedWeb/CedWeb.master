@@ -13,12 +13,6 @@
             <tr>
                 <td rowspan="5" style="width: 50%; background-image: url('Imagenes/BgL.jpg'); background-repeat: repeat-y;
                     background-position: right">
-                    <table border="0" cellpadding="0" cellspacing="0" width="20px">
-                        <tr>
-                            <td>
-                            </td>
-                        </tr>
-                    </table>
                 </td>
                 <td colspan="3" style="height: 4px; background-color: #c8d2dc">
                 </td>
@@ -70,21 +64,27 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3" style="background-image: url('Imagenes/MenuTopL.gif'); background-repeat: repeat-x;
-                    height: 50px;">
-                    <table id="Table3" border="0" cellpadding="0" cellspacing="0" style="text-align: center;">
+                <td colspan="3" style="background-image: url('Imagenes/eFact-Fondo.jpg'); background-repeat: repeat-x; height:18px">
+                    <table id="Table3" border="0" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
-                            <td style="width: 50%">
+                            <td style="width:50%">
                             </td>
-                            <td align="center" style="height: 14px; width: 256px;">
-                                <asp:Menu ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1" SkinID="MenuInicio"
-                                    Height="14px" MaximumDynamicDisplayLevels="5" Orientation="Horizontal" StaticSelectedStyle-Font-Size="16px"
-                                    StaticDisplayLevels="2" Width="157px" BorderStyle="None" StaticSubMenuIndent="10px">
-                                    <StaticSelectedStyle Font-Size="16px" />
-                                </asp:Menu>
-                                <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+                            <td style="padding-left:10px; padding-right:10px">
+                                <asp:LinkButton ID="InicioLinkButton" runat="server" CausesValidation="false" PostBackUrl="~/Inicio.aspx" ForeColor="white" Font-Bold="true">Inicio</asp:LinkButton>
                             </td>
-                            <td style="width: 50%">
+                            <td style="padding-left:10px; padding-right:10px">
+                                <asp:LinkButton ID="SolucionesLinkButton" runat="server" CausesValidation="false" PostBackUrl="~/soluciones.aspx" ForeColor="white" Font-Bold="true">Soluciones</asp:LinkButton>
+                            </td>
+                            <td style="padding-left:10px; padding-right:10px">
+                                <asp:LinkButton ID="EmpresaLinkButton" runat="server" CausesValidation="false" PostBackUrl="~/empresa.aspx" ForeColor="white" Font-Bold="true">Empresa</asp:LinkButton>
+                            </td>
+                            <td style="padding-left:10px; padding-right:10px">
+                                <asp:LinkButton ID="ClientesLinkButton" runat="server" CausesValidation="false" PostBackUrl="~/Clientes.aspx" ForeColor="white" Font-Bold="true">Clientes</asp:LinkButton>
+                            </td">
+                            <td style="padding-left:10px; padding-right:10px">
+                                <asp:LinkButton ID="ContactoLinkButton" runat="server" CausesValidation="false" PostBackUrl="~/Contacto.aspx" ForeColor="white" Font-Bold="true">Contacto</asp:LinkButton>
+                            </td>
+                            <td style="width:50%">
                             </td>
                         </tr>
                     </table>

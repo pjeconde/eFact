@@ -79,6 +79,7 @@ namespace CedWeb
                 Arbol.NodeIndent = 0;
                 Arbol.LeafNodeStyle.Font.Italic = true;
                 Arbol.RootNodeStyle.VerticalPadding = 2;
+                ((LinkButton)Master.FindControl("ClientesLinkButton")).ForeColor = System.Drawing.Color.Gold;
             }
         }
 	}
