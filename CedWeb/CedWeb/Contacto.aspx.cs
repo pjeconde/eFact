@@ -18,6 +18,7 @@ namespace CedWeb
             if (!IsPostBack)
             {
                 GenerarImagenCaptcha();
+                ((LinkButton)Master.FindControl("ContactoLinkButton")).ForeColor = System.Drawing.Color.Gold;
             }
         }
         protected void BorrarDatosButton_Click(object sender, EventArgs e)

@@ -15,13 +15,7 @@ namespace CedWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            PaginaActual();
-        }
-        private static void PaginaActual()
-        {
-            //HttpRequest Request = HttpContext.Current.Request;
-            //HttpResponse Response = HttpContext.Current.Response;
-            //Response.Write("Hola");
+            ((LinkButton)Master.FindControl("EmpresaLinkButton")).ForeColor = System.Drawing.Color.Gold;
         }
     }
 }

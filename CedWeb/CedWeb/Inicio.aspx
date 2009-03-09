@@ -384,16 +384,12 @@
                                     <td valign="top" style="width: 9px;" align="left">
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td style="height: 10px;">
-                                    </td>
-                                </tr>
                                 <!--4to reglon de cajas-->
                                 <tr>
-                                    <td colspan="2" align="right" style="">
-                                        <table cellpadding="0" cellspacing="0" border="0" style="">
+                                    <td colspan="2" align="right">
+                                        <table cellpadding="0" cellspacing="0" border="0">
                                             <tr>
-                                                <td valign="middle" align="right" style="">
+                                                <td valign="middle" align="right">
                                                     <asp:Label ID="Label1" runat="server" Text="Navegador<br/>recomendado" Font-Size="Smaller"
                                                         ForeColor="Navy" SkinID="TituloColor1Chico"></asp:Label>
                                                 </td>
