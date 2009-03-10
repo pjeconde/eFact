@@ -17,6 +17,7 @@ namespace CedWeb
         {
             if (!IsPostBack)
             {
+                RazonSocialTextBox.Focus();
                 try
                 {
                     if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id == null)

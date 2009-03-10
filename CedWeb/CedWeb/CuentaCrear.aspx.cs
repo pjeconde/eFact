@@ -19,6 +19,7 @@ namespace CedWeb
             ConfirmacionPasswordTextBox.Attributes.Add("value", ConfirmacionPasswordTextBox.Text);
             if (!IsPostBack)
             {
+                NombreTextBox.Focus();
                 try
                 {
                     GenerarImagenCaptcha();

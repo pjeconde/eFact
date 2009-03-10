@@ -21,6 +21,7 @@ namespace CedWeb
                 {
                     LoginPanel.Enabled = false;
                 }
+                UsuarioTextBox.Focus();
             }
         }
 		protected void LoginButton_Click(object sender, EventArgs e)
