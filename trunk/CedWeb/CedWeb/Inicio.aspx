@@ -64,7 +64,7 @@
                                                                         <table cellpadding="0" cellspacing="0" border="0">
                                                                             <tr>
                                                                                 <td style="width: 22px" valign="top">
-                                                                                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
+                                                                                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                                                 </td>
                                                                                 <td>
                                                                                     <asp:Label ID="Label10" runat="server" Text="Ingrese su Factura Electrónica y genere el archivo XML para Interfacturas (la red de facturas electrónicas de Interbanking)" SkinID="TituloPagina"></asp:Label>
@@ -72,7 +72,7 @@
                                                                             </tr>
                                                                             <tr>
                                                                                 <td style="width: 22px; padding-top: 15px">
-                                                                                    <asp:Image ID="Image5" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
+                                                                                    <asp:Image ID="Image5" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                                                 </td>
                                                                                 <td style="padding-top: 15px">
                                                                                     <asp:Label ID="Label13" runat="server" Text="Es gratuito, rápido, fácil y seguro." SkinID="TituloPagina"></asp:Label>
@@ -80,7 +80,7 @@
                                                                             </tr>
                                                                             <tr>
                                                                                 <td style="width: 22px; padding-top: 15px">
-                                                                                    <asp:Image ID="Image6" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
+                                                                                    <asp:Image ID="Image6" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                                                 </td>
                                                                                 <td style="padding-top: 15px">
                                                                                     <asp:Label ID="Label11" runat="server" Text="Cargue su factura haciendo clic " Font-Bold="true" SkinID="TituloGrande"></asp:Label>
@@ -98,16 +98,15 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="padding-top: 5px" align="left">
-                                                                        <asp:Image ID="Image8" runat="server" ImageUrl="~/Imagenes/InterfacturasInterbankingLogo.gif"
-                                                                            ImageAlign="Middle" />
-                                                                    </td>
+                                                                        &nbsp;<asp:HyperLink ID="InterfacturasHyperLink" runat="server" ImageUrl="~/Imagenes/InterfacturasInterbankingLogo.gif"
+                                                                            NavigateUrl="http://www.interfacturas.com.ar/" Target="_blank"></asp:HyperLink></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td valign="bottom">
                                                                         <table cellpadding="0" cellspacing="0" border="0">
                                                                             <tr>
                                                                                 <td style="width: 22px" valign="top">
-                                                                                    <asp:Image ID="Image9" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
+                                                                                    <asp:Image ID="Image9" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                                                 </td>
                                                                                 <td valign="top" style="width:250px">
                                                                                     <asp:Label ID="Label12" runat="server" SkinID="TituloPagina" Text="Facilitamos el cumplimiento del régimen normativo de la AFIP"> </asp:Label>
@@ -119,7 +118,7 @@
                                                                         <table cellpadding="0" cellspacing="0" border="0">
                                                                             <tr>
                                                                                 <td style="width: 22px" valign="top">
-                                                                                    <asp:Image ID="Image7" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
+                                                                                    <asp:Image ID="Image7" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                                                 </td>
                                                                                 <td valign="top">
                                                                                     <asp:Label ID="Label4" runat="server" SkinID="TituloPagina" Text="Integramos la Factura Electrónica a su sistema de facturación, o contable, a través de un formato estándar."></asp:Label>
