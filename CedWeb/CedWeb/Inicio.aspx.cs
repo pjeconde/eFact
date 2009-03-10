@@ -41,11 +41,7 @@ namespace CedWeb
 			}
 			catch (Exception ex)
 			{
-				CedWebEntidades.Sesion sesion = (CedWebEntidades.Sesion)Session["Sesion"];
-				CedWebRN.Cuenta.Limpiar(sesion.Cuenta);
-				((Label)Master.FindControl("NombreCuentaLabel")).Text = String.Empty;
-				((Label)Master.FindControl("SeparadorLabel")).Visible = false;
-				((LinkButton)Master.FindControl("SalirLinkButton")).Visible = false;
+                ((CedWeb)this.Master).CaducarIdentificacion();
 				MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
 			}
 		}
