@@ -209,7 +209,6 @@
       <DependentUpon>frmMensaje.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="licenses.licx" />
     <EmbeddedResource Include="PureComponents_NicePanel.license" />
     <Content Include="Imagenes\Cedeira.gif" />
   </ItemGroup>
