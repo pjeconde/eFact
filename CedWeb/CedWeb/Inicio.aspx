@@ -99,7 +99,7 @@
                                                                 <tr>
                                                                     <td style="padding-top: 5px" align="left">
                                                                         &nbsp;<asp:HyperLink ID="InterfacturasHyperLink" runat="server" ImageUrl="~/Imagenes/InterfacturasInterbankingLogo.gif"
-                                                                            NavigateUrl="http://www.interfacturas.com.ar/" Target="_blank"></asp:HyperLink></td>
+                                                                            NavigateUrl="http://www.interfacturas.com.ar/" Target="_blank" Text="Logo de interfacturas"></asp:HyperLink></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td valign="bottom">
@@ -391,7 +391,7 @@
                                                         ForeColor="Navy" SkinID="TituloColor1Chico"></asp:Label>
                                                 </td>
                                                 <td valign="middle" align="right">
-                                                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="Imagenes/NavegadorRecomendado.jpg" NavigateUrl="http://www.mozilla-europe.org/es/firefox/" Target="_blank"></asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="Imagenes/NavegadorRecomendado.jpg" NavigateUrl="http://www.mozilla-europe.org/es/firefox/" Target="_blank" Text="Logo de Firefox"></asp:HyperLink>
                                                 </td>
                                             </tr>
                                         </table>
