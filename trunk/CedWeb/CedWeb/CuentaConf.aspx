@@ -11,7 +11,7 @@
                             <table cellpadding="0" cellspacing="0" border="0">
                                 <tr>
                                     <td style="width: 21px; height: 20px;">
-                                        <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
+                                        <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                     </td>
                                     <td style="height: 20px;">
                                         <asp:Label ID="Label5" runat="server" Text="Confirmación de creación de cuenta" SkinID="TituloPagina"></asp:Label>
