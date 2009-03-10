@@ -127,10 +127,18 @@
                             </table>
                             <table cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                    <td style="padding-top:20px; width:50%" align="center">
-                                        <asp:HyperLink ID="FEASYPHyperLink" runat="server"  NavigateUrl="~/FacturaElectronicaSYP.aspx" SkinID="LinkMedianoClaro">Detalle de servicios y productos eFact ( tabla comparativa )</asp:HyperLink>
-                                        <asp:Label ID="Label1" runat="server" Text="-" SkinID="TituloGrande"></asp:Label>
-                                        <asp:HyperLink ID="FEAPreguntasFrecHyperLink" runat="server" NavigateUrl="~/FacturaElectronicaPreguntasFrec.aspx" SkinID="LinkMedianoClaro">Preguntas frecuentes</asp:HyperLink>
+                                    <td style="padding-top:20px" align="center">
+                                        <asp:HyperLink ID="FEASYPHyperLink" runat="server"  NavigateUrl="~/FacturaElectronicaSYP.aspx" SkinID="LinkMedianoClaro">Guía de servicios y productos eFact ( tabla comparativa )</asp:HyperLink>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <asp:HyperLink ID="CambioPasswordHyperLink" runat="server" NavigateUrl="~/FacturaElectronicaPreguntasFrec.aspx" SkinID="LinkMedianoClaro">Cambiar la Contraseña</asp:HyperLink>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/FacturaElectronicaPreguntasFrec.aspx" SkinID="LinkMedianoClaro">Preguntas frecuentes</asp:HyperLink>
                                     </td>
                                 </tr>
                                 <tr>

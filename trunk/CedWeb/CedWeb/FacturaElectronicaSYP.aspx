@@ -14,7 +14,7 @@
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
                                     </td>
                                     <td style="height: 20px;">
-                                        <asp:Label ID="Label5" runat="server" Text="Detalle de servicios y productos" Font-Size="Medium" ForeColor="Black" Font-Bold="True"></asp:Label>
+                                        <asp:Label ID="Label5" runat="server" Text="Guía de servicios y productos" Font-Size="Medium" ForeColor="Black" Font-Bold="True"></asp:Label>
                                     </td>
                                     <td style="height: 20px; padding-left:3px" valign="middle">
                                         <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/eFact.jpg" AlternateText="Factura Electrónica"/>

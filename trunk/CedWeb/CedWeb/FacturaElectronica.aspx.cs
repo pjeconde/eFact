@@ -19,6 +19,7 @@ namespace CedWeb
                 if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id == null)
                 {
                     UsuarioLogueadoPanel.Visible = false;
+                    CambioPasswordHyperLink.Visible = false;
                 }
                 else
                 {
