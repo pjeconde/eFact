@@ -113,7 +113,7 @@ namespace CedWeb
                     ResultadoComprobarDisponibilidadLabel.Text = "No disponible";
                 }
             }
-            catch (Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorNoInfo ex)
+            catch (Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorNoInfo)
             {
                 ResultadoComprobarDisponibilidadLabel.ForeColor = MsgErrorLabel.ForeColor;
                 ResultadoComprobarDisponibilidadLabel.Text = "IdUsuario no informado";

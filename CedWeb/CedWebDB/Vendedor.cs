@@ -36,7 +36,7 @@ namespace CedWebDB
                 Vendedor.CodPost = Convert.ToString(dt.Rows[0]["CodPost"]);
                 Vendedor.NombreContacto = Convert.ToString(dt.Rows[0]["NombreContacto"]);
                 Vendedor.EmailContacto = Convert.ToString(dt.Rows[0]["EmailContacto"]);
-                Vendedor.TelefonoContacto = Convert.ToInt64(dt.Rows[0]["TelefonoContacto"]);
+                Vendedor.TelefonoContacto = Convert.ToString(dt.Rows[0]["TelefonoContacto"]);
                 Vendedor.CUIT = Convert.ToInt64(dt.Rows[0]["CUIT"]);
                 Vendedor.IdCondIVA = Convert.ToInt32(dt.Rows[0]["IdCondIVA"]);
                 Vendedor.DescrCondIVA = Convert.ToString(dt.Rows[0]["DescrCondIVA"]);
@@ -68,7 +68,7 @@ namespace CedWebDB
             a.Append("CodPost='" + Vendedor.CodPost + "', ");
             a.Append("NombreContacto='" + Vendedor.NombreContacto + "', ");
             a.Append("EmailContacto='" + Vendedor.EmailContacto + "', ");
-            a.Append("TelefonoContacto=" + Vendedor.TelefonoContacto + ", ");
+            a.Append("TelefonoContacto='" + Vendedor.TelefonoContacto + "', ");
             a.Append("CUIT=" + Vendedor.CUIT + ", ");
             a.Append("IdCondIVA=" + Vendedor.IdCondIVA + ", ");
             a.Append("DescrCondIVA='" + Vendedor.DescrCondIVA + "', ");
@@ -98,7 +98,7 @@ namespace CedWebDB
             a.Append("'" + Vendedor.CodPost + "', ");
             a.Append("'" + Vendedor.NombreContacto + "', ");
             a.Append("'" + Vendedor.EmailContacto + "', ");
-            a.Append(Vendedor.TelefonoContacto + ", ");
+            a.Append("'" + Vendedor.TelefonoContacto + "', ");
             a.Append(Vendedor.CUIT + ", ");
             a.Append(Vendedor.IdCondIVA + ", ");
             a.Append("'" + Vendedor.DescrCondIVA + "', ");

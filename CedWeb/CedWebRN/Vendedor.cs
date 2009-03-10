@@ -51,7 +51,7 @@ namespace CedWebRN
             Vendedor.CodPost = null;
             Vendedor.NombreContacto = null;
             Vendedor.EmailContacto = null;
-            Vendedor.TelefonoContacto = 0;
+            Vendedor.TelefonoContacto = null;
             Vendedor.CUIT = 0;
             Vendedor.IdCondIVA = 0;
             Vendedor.DescrCondIVA = null;
