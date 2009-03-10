@@ -6,8 +6,8 @@ GO
 SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[TipoCuenta](
-	[IdTipoCuenta] [varchar](15) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[DescrTipoCuenta] [varchar](50) COLLATE Modern_Spanish_CI_AS NOT NULL,
+	[IdTipoCuenta] [varchar](15) NOT NULL,
+	[DescrTipoCuenta] [varchar](50) NOT NULL,
  CONSTRAINT [PK_TipoCuenta] PRIMARY KEY CLUSTERED 
 (
 	[IdTipoCuenta] ASC
@@ -25,8 +25,8 @@ GO
 SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[EstadoCuenta](
-	[IdEstadoCuenta] [varchar](15) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[DescrEstadoCuenta] [varchar](50) COLLATE Modern_Spanish_CI_AS NOT NULL,
+	[IdEstadoCuenta] [varchar](15) NOT NULL,
+	[DescrEstadoCuenta] [varchar](50) NOT NULL,
  CONSTRAINT [PK_EstadoCuenta] PRIMARY KEY CLUSTERED 
 (
 	[IdEstadoCuenta] ASC
@@ -44,15 +44,15 @@ GO
 SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[Cuenta](
-	[IdCuenta] [varchar](50) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[Nombre] [varchar](50) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[Telefono] [varchar](50) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[Email] [varchar](128) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[Password] [varchar](50) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[Pregunta] [varchar](256) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[Respuesta] [varchar](256) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[IdTipoCuenta] [varchar](15) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[IdEstadoCuenta] [varchar](15) COLLATE Modern_Spanish_CI_AS NOT NULL,
+	[IdCuenta] [varchar](50) NOT NULL,
+	[Nombre] [varchar](50) NOT NULL,
+	[Telefono] [varchar](50) NOT NULL,
+	[Email] [varchar](128) NOT NULL,
+	[Password] [varchar](50) NOT NULL,
+	[Pregunta] [varchar](256) NOT NULL,
+	[Respuesta] [varchar](256) NOT NULL,
+	[IdTipoCuenta] [varchar](15) NOT NULL,
+	[IdEstadoCuenta] [varchar](15) NOT NULL,
  CONSTRAINT [PK_Table_Cuenta] PRIMARY KEY CLUSTERED 
 (
 	[IdCuenta] ASC
@@ -80,8 +80,8 @@ GO
 SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[Texto](
-	[IdTexto] [varchar](50) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[DescrTexto] [text] COLLATE Modern_Spanish_CI_AS NOT NULL,
+	[IdTexto] [varchar](50) NOT NULL,
+	[DescrTexto] [text] NOT NULL,
  CONSTRAINT [PK_Texto] PRIMARY KEY CLUSTERED 
 (
 	[IdTexto] ASC
@@ -98,30 +98,30 @@ GO
 SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[Vendedor](
-	[IdCuenta] [varchar](50) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[RazonSocial] [varchar](50) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[Calle] [varchar](30) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[Nro] [varchar](6) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[Piso] [varchar](5) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[Depto] [varchar](5) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[Sector] [varchar](5) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[Torre] [varchar](5) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[Manzana] [varchar](5) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[Localidad] [varchar](25) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[IdProvincia] [varchar](2) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[DescrProvincia] [varchar](50) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[CodPost] [varchar](8) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[NombreContacto] [varchar](25) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[EmailContacto] [varchar](60) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[TelefonoContacto] [numeric](15, 0) NOT NULL,
+	[IdCuenta] [varchar](50) NOT NULL,
+	[RazonSocial] [varchar](50) NOT NULL,
+	[Calle] [varchar](30) NOT NULL,
+	[Nro] [varchar](6) NOT NULL,
+	[Piso] [varchar](5) NOT NULL,
+	[Depto] [varchar](5) NOT NULL,
+	[Sector] [varchar](5) NOT NULL,
+	[Torre] [varchar](5) NOT NULL,
+	[Manzana] [varchar](5) NOT NULL,
+	[Localidad] [varchar](25) NOT NULL,
+	[IdProvincia] [varchar](2) NOT NULL,
+	[DescrProvincia] [varchar](50) NOT NULL,
+	[CodPost] [varchar](8) NOT NULL,
+	[NombreContacto] [varchar](25) NOT NULL,
+	[EmailContacto] [varchar](60) NOT NULL,
+	[TelefonoContacto] [varchar](50) NOT NULL,
 	[CUIT] [numeric](11, 0) NOT NULL,
 	[IdCondIVA] [numeric](2, 0) NOT NULL,
-	[DescrCondIVA] [varchar](50) COLLATE Modern_Spanish_CI_AS NOT NULL,
-	[NroIngBrutos] [varchar](13) COLLATE Modern_Spanish_CI_AS NOT NULL,
+	[DescrCondIVA] [varchar](50) NOT NULL,
+	[NroIngBrutos] [varchar](13) NOT NULL,
 	[IdCondIngBrutos] [numeric](2, 0) NOT NULL,
-	[DescrCondIngBrutos] [varchar](50) COLLATE Modern_Spanish_CI_AS NOT NULL,
+	[DescrCondIngBrutos] [varchar](50) NOT NULL,
 	[GLN] [numeric](13, 0) NOT NULL,
-	[CodigoInterno] [varchar](20) COLLATE Modern_Spanish_CI_AS NOT NULL,
+	[CodigoInterno] [varchar](20) NOT NULL,
 	[FechaInicioActividades] [datetime] NOT NULL,
  CONSTRAINT [PK_Table_Vendedor] PRIMARY KEY CLUSTERED 
 (
