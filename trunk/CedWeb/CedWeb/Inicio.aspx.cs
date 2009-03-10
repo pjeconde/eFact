@@ -10,7 +10,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 namespace CedWeb
 {
-	public partial class Iniciar : System.Web.UI.Page
+	public partial class Inicio : System.Web.UI.Page
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
