@@ -100,7 +100,7 @@ namespace CedWeb
                 vendedor.CodPost = CodPostTextBox.Text;
                 vendedor.NombreContacto = NombreContactoTextBox.Text;
                 vendedor.EmailContacto = EmailContactoTextBox.Text;
-                vendedor.TelefonoContacto = Convert.ToInt64(TelefonoContactoTextBox.Text);
+                vendedor.TelefonoContacto = TelefonoContactoTextBox.Text;
                 vendedor.CUIT = Convert.ToInt64(CUITTextBox.Text);
                 vendedor.IdCondIVA = Convert.ToInt32(CondIVADropDownList.SelectedValue);
                 vendedor.DescrCondIVA = CondIVADropDownList.SelectedItem.Text;

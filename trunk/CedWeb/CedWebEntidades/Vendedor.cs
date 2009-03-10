@@ -22,7 +22,7 @@ namespace CedWebEntidades
         private string codPost;
         private string nombreContacto;
         private string emailContacto;
-        private long telefonoContacto;
+        private string telefonoContacto;
         private long cUIT;
         private int idCondIVA;
         private string descrCondIVA;
@@ -213,7 +213,7 @@ namespace CedWebEntidades
                 return emailContacto;
             }
         }
-        public long TelefonoContacto
+        public string TelefonoContacto
         {
             set
             {
