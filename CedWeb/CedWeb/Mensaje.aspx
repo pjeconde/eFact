@@ -31,7 +31,7 @@ function Homepage(){
 		
 	//for display, we need to skip after http://, and go to the next slash
 	displayresult=DocURL.substring(protocolIndex + 3 ,serverIndex);
-	document.write( '<A HREF="' + escape(urlresult) + '">' + displayresult + "</a>");
+	document.write( '<a href="' + escape(urlresult) + '">' + displayresult + "</a>");
 }
     </script>
 
