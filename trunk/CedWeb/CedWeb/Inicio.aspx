@@ -208,7 +208,8 @@
                                     </td>
                                     <!--Caja de Login-->
                                     <td align="left" valign="top" style="width: 300px; height: 142px;">
-                                        <table cellpadding="0" cellspacing="0" border="0" style="height: 142px; width: 300px;">
+                                        <asp:Panel ID="LoginPanel" runat="server">
+                                            <table cellpadding="0" cellspacing="0" border="0" style="height: 142px; width: 300px;">
                                             <tr>
                                                 <td colspan="3" align="center" style="height: 30px;" valign="middle">
                                                     <table cellpadding="0" cellspacing="0" border="0">
@@ -260,6 +261,7 @@
                                                 </td>
                                             </tr>
                                         </table>
+                                        </asp:Panel>
                                     </td>
                                     <td valign="top" style="width: 9px;" align="left">
                                     </td>

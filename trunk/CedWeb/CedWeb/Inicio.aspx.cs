@@ -15,6 +15,13 @@ namespace CedWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             ((LinkButton)Master.FindControl("InicioLinkButton")).ForeColor = System.Drawing.Color.Gold;
+            if (!IsPostBack)
+            {
+                if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id != null)
+                {
+                    LoginPanel.Enabled = false;
+                }
+            }
         }
 		protected void LoginButton_Click(object sender, EventArgs e)
 		{
