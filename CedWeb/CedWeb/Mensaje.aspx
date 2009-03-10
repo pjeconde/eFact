@@ -9,32 +9,6 @@
 </head>
 <body style="background-color: #FFFFFF; text-align: left;">
 
-    <script type="text/javascript"> 
-function Homepage(){
-// in real bits, urls get returned to our script like this:
-// res://shdocvw.dll/http_404.htm#http://www.DocURL.com/bar.htm 
-
-	//For testing use DocURL = "res://shdocvw.dll/http_404.htm#https://www.microsoft.com/bar.htm"
-	DocURL=document.URL;
-	
-	//this is where the http or https will be, as found by searching for :// but skipping the res://
-	protocolIndex=DocURL.indexOf("://",4);
-	
-	//this finds the ending slash for the domain server 
-	serverIndex=DocURL.indexOf("/",protocolIndex + 3);
-
-	//for the href, we need a valid URL to the domain. We search for the # symbol to find the begining 
-	//of the true URL, and add 1 to skip it - this is the BeginURL value. We use serverIndex as the end marker.
-	//urlresult=DocURL.substring(protocolIndex - 4,serverIndex);
-	BeginURL=DocURL.indexOf("#",1) + 1;
-	urlresult=DocURL.substring(BeginURL,serverIndex);
-		
-	//for display, we need to skip after http://, and go to the next slash
-	displayresult=DocURL.substring(protocolIndex + 3 ,serverIndex);
-	document.write( '<a href="' + escape(urlresult) + '">' + displayresult + "</a>");
-}
-    </script>
-
     <form id="form1" runat="server">
         <div>
             <table style="width: 410px" border="0" cellpadding="3" cellspacing="5">
