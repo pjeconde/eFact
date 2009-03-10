@@ -56,7 +56,9 @@
                         <tr>
                             <td colspan="3" style="height:30px; padding-top:10px; padding-right:12px" align="right">
                                 <asp:Label ID="NombreCuentaLabel" runat="server" Font-Bold="true" ForeColor="brown"></asp:Label>
-                                <asp:Label ID="SeparadorLabel" runat="server" Text="|" Visible="false"></asp:Label>
+                                <asp:Label ID="Separador1Label" runat="server" Text="|" Visible="false"></asp:Label>
+                                <asp:LinkButton ID="CambiarPasswordLinkButton" runat="server" CausesValidation="false" ForeColor=Blue PostBackUrl="~/CuentaCambiarPassword.aspx" Visible="false">Cambiar contraseña</asp:LinkButton>
+                                <asp:Label ID="Separador2Label" runat="server" Text="|" Visible="false"></asp:Label>
                                 <asp:LinkButton ID="SalirLinkButton" runat="server" CausesValidation="false" ForeColor=Blue OnClick="SalirLinkButton_Click" Visible="false">Salir</asp:LinkButton>
                             </td>
                         </tr>
