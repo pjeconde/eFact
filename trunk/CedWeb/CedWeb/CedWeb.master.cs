@@ -21,20 +21,28 @@ namespace CedWeb
                 if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Nombre != null)
                 {
                     NombreCuentaLabel.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Nombre;
-                    SeparadorLabel.Visible = true;
+                    Separador1Label.Visible = true;
+                    CambiarPasswordLinkButton.Visible = true;
+                    Separador2Label.Visible = true;
                     SalirLinkButton.Visible = true;
                 }
             }
 		}
         public void SalirLinkButton_Click(object sender, EventArgs e)
         {
-            CedWebEntidades.Sesion sesion = (CedWebEntidades.Sesion)Session["Sesion"];
-            CedWebRN.Cuenta.Limpiar(sesion.Cuenta); 
-            NombreCuentaLabel.Text = String.Empty;
-            SeparadorLabel.Visible = false;
-            SalirLinkButton.Visible = false;
-			Session["AceptarTYC"] = null;
+            CaducarIdentificacion();
             Response.Redirect("~/Inicio.aspx", true);
+        }
+        public void CaducarIdentificacion()
+        {
+            CedWebEntidades.Sesion sesion = (CedWebEntidades.Sesion)Session["Sesion"];
+            CedWebRN.Cuenta.Limpiar(sesion.Cuenta);
+            NombreCuentaLabel.Text = String.Empty;
+            Separador1Label.Visible = false;
+            CambiarPasswordLinkButton.Visible = false;
+            Separador2Label.Visible = false; 
+            SalirLinkButton.Visible = false;
+            Session["AceptarTYC"] = null;
         }
     }
 }	
