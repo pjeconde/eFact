@@ -917,6 +917,15 @@
                                                                     TextCssClass="DatePickerFecha" />
                                                             </td>
                                                         </tr>
+                                                        <tr>
+                                                            <td class="TextoLabelFEAVendedor" style="">
+                                                                <asp:RegularExpressionValidator ID="CondicionDePAgoRegularExpressionValidator" runat="server"
+                                                                    ControlToValidate="Condicion_De_PagoTextBox" ErrorMessage="error de formateo en condición de pago"
+                                                                    SetFocusOnError="True" ValidationExpression="[0-9]?[0-9]?[0-9]?">* </asp:RegularExpressionValidator>Condición
+                                                                de pago(en días):</td>
+                                                            <td style="padding-top: 3px;">
+                                                                <asp:TextBox ID="Condicion_De_PagoTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox></td>
+                                                        </tr>
                                                     </table>
                                                 </td>
                                             </tr>
