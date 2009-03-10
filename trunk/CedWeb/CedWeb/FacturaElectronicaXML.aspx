@@ -485,7 +485,8 @@
                                                                             IB:
                                                                         </td>
                                                                         <td class="TextoLabelFEAVendedorDet">
-                                                                            <asp:TextBox ID="NroIBVendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                            <asp:TextBox ID="NroIBVendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                                ToolTip="Formatos válidos: XXXXXXX-XX o XX-XXXXXXXX-X o XXX-XXXXXX-X"></asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
