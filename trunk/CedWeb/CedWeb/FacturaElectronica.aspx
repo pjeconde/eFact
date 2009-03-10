@@ -133,11 +133,6 @@
                                 </tr>
                                 <tr>
                                     <td align="center">
-                                        <asp:HyperLink ID="CambioPasswordHyperLink" runat="server" NavigateUrl="~/FacturaElectronicaPreguntasFrec.aspx" SkinID="LinkMedianoClaro">Cambiar la Contraseña</asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="center">
                                         <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/FacturaElectronicaPreguntasFrec.aspx" SkinID="LinkMedianoClaro">Preguntas frecuentes</asp:HyperLink>
                                     </td>
                                 </tr>
