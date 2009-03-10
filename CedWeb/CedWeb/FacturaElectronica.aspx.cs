@@ -14,7 +14,17 @@ namespace CedWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id == null)
+                {
+                    UsuarioLogueadoPanel.Visible = false;
+                }
+                else
+                {
+                    UsuarioNoLogueadoPanel.Visible = false;
+                }
+            }
         }
     }
 }
