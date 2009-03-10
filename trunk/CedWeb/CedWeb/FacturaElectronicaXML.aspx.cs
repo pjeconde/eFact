@@ -390,7 +390,11 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				infcomprob.iva_computable = IVAcomputableDropDownList.SelectedValue;
 			}
 
-			//infcomprob.condicion_de_pago = Convert.ToInt32(Condicion_De_PagoTextBox.Text);
+			if (!Condicion_De_PagoTextBox.Text.Equals(string.Empty))
+			{
+				infcomprob.condicion_de_pago = Convert.ToInt32(Condicion_De_PagoTextBox.Text);
+				infcomprob.condicion_de_pagoSpecified = true;
+			}
 			infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
 			if (!CAETextBox.Text.Equals(string.Empty))
 			{
