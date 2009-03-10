@@ -386,6 +386,21 @@
                                     <td colspan="2" align="right">
                                         <table cellpadding="0" cellspacing="0" border="0">
                                             <tr>
+                                                <td>
+                                                    <p>
+                                                        <a href="http://validator.w3.org/check?uri=referer">
+                                                            <img alt="Valid XHTML 1.0 Transitional" height="31" src="http://www.w3.org/Icons/valid-xhtml10-blue"
+                                                                width="88" /></a>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                                                            <img alt="¡CSS Válido!" src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+                                                                style="border: 0; width: 88px; height: 31px" />
+                                                        </a>
+                                                    </p>
+                                                </td>
                                                 <td valign="middle" align="right">
                                                     <asp:Label ID="Label1" runat="server" Text="Navegador<br/>recomendado" Font-Size="Smaller"
                                                         ForeColor="Navy" SkinID="TituloColor1Chico"></asp:Label>
