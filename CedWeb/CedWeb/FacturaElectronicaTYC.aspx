@@ -29,14 +29,14 @@
                         <td style="width: 15px; height: 21px">
                         </td>
                         <td>
-                            <asp:Label ID="Label2" runat="server" SkinID="TituloColor1Mediano" Text="Terminos y Condiciones"></asp:Label>
+                            <asp:Label ID="Label2" runat="server" SkinID="TituloColor1Mediano" Text="Términos y Condiciones"></asp:Label>
                             <br/>
                             <table style="">
                                 <tr>
                                     <td style="width: 15px; height: 21px">
                                     </td>
                                     <td style="">
-                                        <asp:Label ID="Label1" runat="server" SkinID="TextoMediano" Text='Los siguientes términos y condiciones generales regularán expresamente las relaciones surgidas entre este Portal www.cedeira.com.ar de Cedeira Software Factory S.R.L ( en adelante "NUESTRA EMPRESA" ) y Usted (en adelante el "USUARIO o USUARIOS") en virtud de las cuales NUESTRA EMPRESA le brinda servicios de gratuito de generación de comprobantes electrónicos en un archivo de formato XML, ya sea que se trate de nuevos USUARIOS o aquellos vinculados a través de cualquier acuerdo previo que pudiera existir entre las partes. Este acuerdo sustituye cualquier otra comunicación previa oral o de otro tipo, que haya habido entre las partes. '></asp:Label>
+                                        <asp:Label ID="Label1" runat="server" SkinID="TextoMediano" Text='Los siguientes términos y condiciones generales regularán expresamente las relaciones surgidas entre este Portal www.cedeira.com.ar de Cedeira Software Factory S.R.L ( en adelante "NUESTRA EMPRESA" ) y Usted (en adelante el "USUARIO o USUARIOS") en virtud de las cuales NUESTRA EMPRESA le brinda servicios de generación de comprobantes electrónicos en un archivo de formato XML, ya sea que se trate de nuevos USUARIOS o aquellos vinculados a través de cualquier acuerdo previo que pudiera existir entre las partes. Este acuerdo sustituye cualquier otra comunicación previa oral o de otro tipo, que haya habido entre las partes. '></asp:Label>
                                     </td>
                                 </tr>
                             </table>
@@ -51,7 +51,7 @@
                                     <td style="width: 15px; height: 21px">
                                     </td>
                                     <td style="">
-                                        <asp:Label ID="Label4" runat="server" SkinID="TextoMediano" Text="La utilización del Portal www.cedeira.com.ar atribuye la condición de USUARIO del Portal, sea persona física o jurídica, e implica la aceptación plena y sin reservas de todas y cada una de las disposiciones incluidas en estos terminos y condiciones que se detallan a contituación."></asp:Label>
+                                        <asp:Label ID="Label4" runat="server" SkinID="TextoMediano" Text="La utilización del Portal www.cedeira.com.ar atribuye la condición de USUARIO del Portal, sea persona física o jurídica, e implica la aceptación plena y sin reservas de todas y cada una de las disposiciones incluídas en estos términos y condiciones que se detallan a continuación."></asp:Label>
                                     </td>
                                 </tr>
                             </table>
@@ -88,7 +88,7 @@
                                                 <td style="width: 15px; height: 21px" valign="top">
                                                     <asp:Label ID="Label3" runat="server" SkinID="TituloColor1Mediano" Text="1."></asp:Label></td>
                                                 <td style="">
-                                                    <asp:Label ID="Label9" runat="server" SkinID="TextoMediano" Text="No asume ninguna responsabilidad por la utilización de los presentes modelos de carga de comprobantes, ya que sólo los ofrece en forma gratuita a modo de simplificar las tareas en la carga de la información del comprobante electrónico que solicita InterFacturas. "></asp:Label>
+                                                    <asp:Label ID="Label9" runat="server" SkinID="TextoMediano" Text="No asume ninguna responsabilidad por la utilización de los presentes modelos de carga de comprobantes, ya que sólo los ofrece en forma gratuita a modo de simplificar las tareas en la carga de la información del comprobante electrónico que solicita Interfacturas. "></asp:Label>
                                                 </td>
                                             </tr>
                                         </table>
@@ -118,7 +118,7 @@
                                                 <td style="width: 15px; height: 21px" valign="top">
                                                     <asp:Label ID="Label7" runat="server" SkinID="TituloColor1Mediano" Text="3."></asp:Label></td>
                                                 <td>
-                                                    <asp:Label ID="Label13" runat="server" SkinID="TextoMediano" Text="Se reserva el derecho unilateral de suspender temporalmente o de terminar definitivamente la prestación del servicios a través del Portal. "></asp:Label>
+                                                    <asp:Label ID="Label13" runat="server" SkinID="TextoMediano" Text="Se reserva el derecho unilateral de suspender temporalmente o de terminar definitivamente la prestación del servicio a través del Portal. "></asp:Label>
                                                 </td>
                                             </tr>
                                         </table>
@@ -205,7 +205,7 @@
                                     <td style="width: 15px; height: 21px">
                                         </td>
                                     <td style="">
-                                        <asp:Label ID="Label22" runat="server" SkinID="TextoMediano" Text="El USUARIO acepta que la legislación aplicable al funcionamiento de este servicio es la Argentina y se somete a la jurisdicción de los juzgados y tribunales de la Ciudad Autónoma de Buenos Aires para la resolución de las devergencias que se deriven de la interpretación o aplicación de este clausulado."></asp:Label>
+                                        <asp:Label ID="Label22" runat="server" SkinID="TextoMediano" Text="El USUARIO acepta que la legislación aplicable al funcionamiento de este servicio es la argentina y se somete a la jurisdicción de los juzgados y tribunales de la Ciudad Autónoma de Buenos Aires para la resolución de las divergencias que se deriven de la interpretación o aplicación de este clausulado."></asp:Label>
                                     </td>
                                 </tr>
                             </table><table style="">
