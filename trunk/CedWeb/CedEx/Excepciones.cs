@@ -93,6 +93,23 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
             }
         }
         [Serializable]
+        public class PasswordNuevaIgualAActual : Microsoft.ApplicationBlocks.ExceptionManagement.Usuario.BaseApplicationException
+        {
+            static string TextoError = "La Contraseña nueva no debe ser igual a la actual";
+            public PasswordNuevaIgualAActual()
+                : base(TextoError)
+            {
+            }
+            public PasswordNuevaIgualAActual(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public PasswordNuevaIgualAActual(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
         public class IdUsuarioNoDisponible : Microsoft.ApplicationBlocks.ExceptionManagement.Usuario.BaseApplicationException
         {
             static string TextoError = "El IdUsuario, que ingresó, ya ha sido usado por otra persona.  Modifiquelo hasta encontrar un valor único.";

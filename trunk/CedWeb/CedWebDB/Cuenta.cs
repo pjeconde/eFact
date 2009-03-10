@@ -53,11 +53,17 @@ namespace CedWebDB
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("update Cuenta set IdEstadoCuenta='Vigente' where IdCuenta='" + Cuenta.Id + "' and IdEstadoCuenta='PteConf' ");
-            int cantReg = (int) Ejecutar(a.ToString(), TipoRetorno.CantReg, Transaccion.NoAcepta, sesion.CnnStr);
+            int cantReg = (int)Ejecutar(a.ToString(), TipoRetorno.CantReg, Transaccion.NoAcepta, sesion.CnnStr);
             if (cantReg != 1)
             {
                 throw new Microsoft.ApplicationBlocks.ExceptionManagement.Cuenta.CuentaConfUpdateErroneo();
             }
+        }
+        public void CambiarPassword(CedWebEntidades.Cuenta Cuenta, string PasswordNueva)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update Cuenta set Password='" + PasswordNueva + "' where IdCuenta='" + Cuenta.Id + "' ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
     }
 }

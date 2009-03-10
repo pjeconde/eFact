@@ -215,5 +215,52 @@ namespace CedWebRN
                 }
             }
         }
+        public static void CambioPassword(CedWebEntidades.Cuenta Cuenta, string PasswordActual, string PasswordNueva, string ConfirmacionPasswordNueva, CedEntidades.Sesion Sesion)
+        {
+            if (PasswordActual == String.Empty)
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorNoInfo("Contraseña actual");
+            }
+            else
+            {
+                if (PasswordNueva == String.Empty)
+                {
+                    throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorNoInfo("Contraseña nueva");
+                }
+                else
+                {
+                    if (ConfirmacionPasswordNueva == String.Empty)
+                    {
+                        throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorNoInfo("Confirmación de Contraseña nueva");
+                    }
+                    else
+                    {
+                        if (Cuenta.Password != PasswordActual)
+                        {
+                            throw new Microsoft.ApplicationBlocks.ExceptionManagement.Login.PasswordNoMatch();
+                        }
+                        else
+                        {
+                            if (PasswordNueva != ConfirmacionPasswordNueva)
+                            {
+                                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Cuenta.PasswordYConfirmacionNoCoincidente();
+                            }
+                            else
+                            {
+                                if (Cuenta.Password == PasswordNueva)
+                                {
+                                    throw new Microsoft.ApplicationBlocks.ExceptionManagement.Cuenta.PasswordNuevaIgualAActual();
+                                }
+                                else
+                                {
+                                    CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+                                    cuenta.CambiarPassword(Cuenta, PasswordNueva);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
