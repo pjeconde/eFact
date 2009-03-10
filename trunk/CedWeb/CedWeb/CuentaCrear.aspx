@@ -52,10 +52,10 @@ function ContactoTable_onclick() {
                                             ControlToValidate="NombreTextBox" ErrorMessage="Nombre y Apellido">
                                             <asp:Label ID="Label8" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                         </asp:RequiredFieldValidator>
-                                        <asp:Label ID="NombreLabel" runat="server" Text="Nombre y Apellido"></asp:Label>
+                                        <asp:Label ID="NombreLabel" runat="server" Text="Nombre y Apellido" ></asp:Label>
                                     </td>
                                     <td colspan="2" align="left" style="padding-top:10px">
-                                        <asp:TextBox ID="NombreTextBox" runat="server" Width="360px" TabIndex="1"></asp:TextBox>
+                                        <asp:TextBox ID="NombreTextBox" runat="server" Width="360px" TabIndex="1" MaxLength="50"></asp:TextBox>
                                     </td>
                                     <td style="width:200px">
                                     </td>
@@ -74,7 +74,7 @@ function ContactoTable_onclick() {
                                         <asp:Label ID="TelefonoLabel" runat="server" Text="Teléfono"></asp:Label>
                                     </td>
                                     <td colspan="2" align="left" style="padding-top:3px">
-                                        <asp:TextBox ID="TelefonoTextBox" runat="server" Width="360px" TabIndex="2"></asp:TextBox>
+                                        <asp:TextBox ID="TelefonoTextBox" runat="server" Width="360px" TabIndex="2" MaxLength="50"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -91,7 +91,7 @@ function ContactoTable_onclick() {
                                         <asp:Label ID="EmailLabel" runat="server" Text="Email"></asp:Label>
                                     </td>
                                     <td colspan="2" align="left" style="padding-top:3px">
-                                        <asp:TextBox ID="EmailTextBox" runat="server" Width="360px" TabIndex="3"></asp:TextBox>
+                                        <asp:TextBox ID="EmailTextBox" runat="server" Width="360px" TabIndex="3" MaxLength="128"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -108,7 +108,7 @@ function ContactoTable_onclick() {
                                         <asp:Label ID="IdUsuarioLabel" runat="server" Text="Id.Usuario"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-top:3px">
-                                        <asp:TextBox ID="IdUsuarioTextBox" runat="server" Width="100px" TabIndex="4"></asp:TextBox>
+                                        <asp:TextBox ID="IdUsuarioTextBox" runat="server" Width="100px" TabIndex="4" MaxLength="50"></asp:TextBox>
                                     </td>
                                     <td colspan="2" align="left" style="padding-left:5px; padding-top:3px; width:330px">
                                         <asp:Button ID="ComprobarDisponibilidadButton" runat="server" Text="Comprobar disp." ToolTip="Comprobar la disponibilidad del Id.Usuario ingresado" OnClick="ComprobarDisponibilidadButton_Click" Width="120px" CausesValidation="false"></asp:Button>
@@ -129,7 +129,7 @@ function ContactoTable_onclick() {
                                         <asp:Label ID="PasswordLabel" runat="server" Text="Contraseña"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-top:3px">
-                                        <asp:TextBox ID="PasswordTextBox" runat="server" Width="100px" TextMode="Password" TabIndex="5"></asp:TextBox>
+                                        <asp:TextBox ID="PasswordTextBox" runat="server" Width="100px" TextMode="Password" TabIndex="5" MaxLength="50"></asp:TextBox>
                                     </td>
                                     <td rowspan="2" style="padding-top:3px" align="center" valign="middle">
                                         <asp:Label ID="Label4" runat="server" Text="(si olvida su Contraseña, le preguntaremos la Respuesta a su Pregunta de seguridad)" ForeColor="gray"></asp:Label>
@@ -149,7 +149,7 @@ function ContactoTable_onclick() {
                                         <asp:Label ID="ConfirmacionPasswordLabel" runat="server" Text="Confirmacion de Contraseña"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-top:3px">
-                                        <asp:TextBox ID="ConfirmacionPasswordTextBox" runat="server" Width="100px" TextMode="Password" TabIndex="6"></asp:TextBox>
+                                        <asp:TextBox ID="ConfirmacionPasswordTextBox" runat="server" Width="100px" TextMode="Password" TabIndex="6" MaxLength="50"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -167,7 +167,7 @@ function ContactoTable_onclick() {
                                     </td>
                                     <td colspan="2" align="left" style="padding-top:3px">
                                         <asp:Label ID="Label1" runat="server" Text="¿" Font-Bold="true"></asp:Label>
-                                        <asp:TextBox ID="PreguntaTextBox" runat="server" Width="340px" TabIndex="7"></asp:TextBox>
+                                        <asp:TextBox ID="PreguntaTextBox" runat="server" Width="340px" TabIndex="7" MaxLength="256"></asp:TextBox>
                                         <asp:Label ID="Label6" runat="server" Text="?" Font-Bold="true"></asp:Label>
                                     </td>
                                 </tr>
@@ -185,7 +185,7 @@ function ContactoTable_onclick() {
                                         <asp:Label ID="RespuestaLabel" runat="server" Text="Respuesta"></asp:Label>
                                     </td>
                                     <td colspan="2" align="left" style="padding-top:3px">
-                                        <asp:TextBox ID="RespuestaTextBox" runat="server" Width="360px" TabIndex="8"></asp:TextBox>
+                                        <asp:TextBox ID="RespuestaTextBox" runat="server" Width="360px" TabIndex="8" MaxLength="256"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -218,7 +218,7 @@ function ContactoTable_onclick() {
                                         <asp:Label ID="ClaveLabel" runat="server" Text="Clave"></asp:Label>
                                     </td>
                                     <td align="left" style="width:80px; padding-top:3px">
-                                        <asp:TextBox ID="CaptchaTextBox" runat="server" Width="100px" TabIndex="9"></asp:TextBox>
+                                        <asp:TextBox ID="CaptchaTextBox" runat="server" Width="100px" TabIndex="9" MaxLength="20"></asp:TextBox>
                                     </td>
                                     <td align="left" style="padding-top:3px; padding-left:5px">
                                         <asp:Label ID="CaseSensitiveLabel" runat="server" Text="(no se distinguen mayúsculas de minúsculas)" ForeColor="gray"></asp:Label>
