@@ -17,7 +17,7 @@
                                         <table cellpadding="0" cellspacing="0" border="0">
                                             <tr>
                                                 <td style="width: 22px">
-                                                    <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
+                                                    <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                 </td>
                                                 <td>
                                                     <asp:Label ID="CedFCItituloLabel" runat="server" Text="Sistema de Administración de Fondos Comunes de Inversión V3.0"
@@ -54,7 +54,7 @@
                                         <table cellpadding="0" cellspacing="0" border="0">
                                             <tr>
                                                 <td style="width: 22px; height: 20px;">
-                                                    <asp:Image ID="Image3" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
+                                                    <asp:Image ID="Image3" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                 </td>
                                                 <td style="height: 20px">
                                                     <asp:Label ID="CedSTtituloLabel" runat="server" Text="Sistema de Transferencias ( implementación MEP ) V2.4"
