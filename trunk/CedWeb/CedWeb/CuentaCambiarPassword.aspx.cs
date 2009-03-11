@@ -47,7 +47,7 @@ namespace CedWeb
             {
                 MsgErrorLabel.Text = String.Empty;
                 CedWebEntidades.Sesion sesion = (CedWebEntidades.Sesion)Session["Sesion"];
-                CedWebRN.Cuenta.CambioPassword(sesion.Cuenta, PasswordTextBox.Text, PasswordNuevaTextBox.Text, ConfirmacionPasswordNuevaTextBox.Text, (CedEntidades.Sesion)Session["Sesion"]);
+                CedWebRN.Cuenta.CambiarPassword(sesion.Cuenta, PasswordTextBox.Text, PasswordNuevaTextBox.Text, ConfirmacionPasswordNuevaTextBox.Text, (CedEntidades.Sesion)Session["Sesion"]);
                 ((CedWeb)this.Master).CaducarIdentificacion();
                 PasswordTextBox.Enabled = false;
                 PasswordNuevaTextBox.Enabled = false;

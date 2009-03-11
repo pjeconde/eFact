@@ -215,7 +215,7 @@ namespace CedWebRN
                 }
             }
         }
-        public static void CambioPassword(CedWebEntidades.Cuenta Cuenta, string PasswordActual, string PasswordNueva, string ConfirmacionPasswordNueva, CedEntidades.Sesion Sesion)
+        public static void CambiarPassword(CedWebEntidades.Cuenta Cuenta, string PasswordActual, string PasswordNueva, string ConfirmacionPasswordNueva, CedEntidades.Sesion Sesion)
         {
             if (PasswordActual == String.Empty)
             {
@@ -261,6 +261,37 @@ namespace CedWebRN
                     }
                 }
             }
+        }
+        public static void ReportarIdCuentas(string Email, CedEntidades.Sesion Sesion)
+        {
+            //Alta en la base de datos
+            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+            List<CedWebEntidades.Cuenta> cuentas = cuenta.Lista(Email);
+            //Mail para confirmación
+            SmtpClient smtpClient = new SmtpClient("localhost");
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
+            mail.To.Add(new MailAddress(Email));
+            mail.Subject = "Información de cuenta(s) eFact";
+            StringBuilder a = new StringBuilder();
+            a.Append("Estimado/a " + cuentas[0].Nombre.Trim() + ":"); a.AppendLine();
+            a.AppendLine();
+            a.Append("Cumplimos en informarle cuáles son las cuentas eFact vinculadas a esta cuenta de correo electrónico:"); a.AppendLine();
+            a.AppendLine();
+            for (int i = 0; i < cuentas.Count; i++)
+            {
+                a.Append("Cuenta '"+cuentas[i].Nombre + "' (Id.Usuario='" + cuentas[i].Id + "')"); a.AppendLine();
+            }
+            a.AppendLine();
+            a.Append("Si ha recibido este correo electrónico y no ha solicitado información sobre su(s) cuenta(s) eFact, es probable que otro usuario haya introducido su dirección por error. Si no ha solicitado esta información, no es necesario que realice ninguna acción, y puede ignorar este mensaje con total seguridad."); a.AppendLine();
+            a.Append("Saludos."); a.AppendLine();
+            a.AppendLine();
+            a.Append("Cedeira Software Factory"); a.AppendLine();
+            a.AppendLine();
+            a.AppendLine();
+            a.AppendLine("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden."); a.AppendLine();
+            mail.Body = a.ToString();
+            smtpClient.Send(mail);
         }
     }
 }

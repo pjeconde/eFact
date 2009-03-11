@@ -24,12 +24,12 @@ namespace CedWeb
             try
             {
                 MsgErrorLabel.Text = String.Empty;
-                //CedWebEntidades.Sesion sesion = (CedWebEntidades.Sesion)Session["Sesion"];
-                //CedWebRN.Cuenta.CambioPassword(sesion.Cuenta, PasswordTextBox.Text, PasswordNuevaTextBox.Text, ConfirmacionPasswordNuevaTextBox.Text, (CedEntidades.Sesion)Session["Sesion"]);
+                CedWebEntidades.Sesion sesion = (CedWebEntidades.Sesion)Session["Sesion"];
+                CedWebRN.Cuenta.ReportarIdCuentas(EmailTextBox.Text, (CedEntidades.Sesion)Session["Sesion"]);
                 EmailTextBox.Enabled = false;
                 AceptarButton.Visible = false;
                 CancelarButton.Visible = false;
-                MsgErrorLabel.Text = "Se ha enviado, por correo electrónico, el Id.Usuario de su cuenta eFact.  La recepción del email puede demorar unos minutos.";
+                MsgErrorLabel.Text = "Se ha enviado, por correo electrónico, el Id.Usuario de su(s) cuenta(s) eFact.  La recepción del email puede demorar unos minutos.";
             }
             catch (System.Threading.ThreadAbortException)
             {

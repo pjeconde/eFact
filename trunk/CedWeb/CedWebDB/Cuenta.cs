@@ -21,17 +21,22 @@ namespace CedWebDB
             }
             else
             {
-                Cuenta.Nombre = Convert.ToString(dt.Rows[0]["Nombre"]);
-                Cuenta.Telefono = Convert.ToString(dt.Rows[0]["Telefono"]);
-                Cuenta.Email = Convert.ToString(dt.Rows[0]["Email"]);
-                Cuenta.Password = Convert.ToString(dt.Rows[0]["Password"]);
-                Cuenta.Pregunta = Convert.ToString(dt.Rows[0]["Pregunta"]);
-                Cuenta.Respuesta = Convert.ToString(dt.Rows[0]["Respuesta"]);
-                Cuenta.TipoCuenta.Id = Convert.ToString(dt.Rows[0]["IdTipoCuenta"]);
-                Cuenta.TipoCuenta.Descr = Convert.ToString(dt.Rows[0]["DescrTipoCuenta"]);
-                Cuenta.EstadoCuenta.Id = Convert.ToString(dt.Rows[0]["IdEstadoCuenta"]);
-                Cuenta.EstadoCuenta.Descr = Convert.ToString(dt.Rows[0]["DescrEstadoCuenta"]);
+                Copiar(dt.Rows[0], Cuenta);
             }
+        }
+        private void Copiar(DataRow Desde, CedWebEntidades.Cuenta Hasta)
+        {
+            Hasta.Id = Convert.ToString(Desde["IdCuenta"]);
+            Hasta.Nombre = Convert.ToString(Desde["Nombre"]);
+            Hasta.Telefono = Convert.ToString(Desde["Telefono"]);
+            Hasta.Email = Convert.ToString(Desde["Email"]);
+            Hasta.Password = Convert.ToString(Desde["Password"]);
+            Hasta.Pregunta = Convert.ToString(Desde["Pregunta"]);
+            Hasta.Respuesta = Convert.ToString(Desde["Respuesta"]);
+            Hasta.TipoCuenta.Id = Convert.ToString(Desde["IdTipoCuenta"]);
+            Hasta.TipoCuenta.Descr = Convert.ToString(Desde["DescrTipoCuenta"]);
+            Hasta.EstadoCuenta.Id = Convert.ToString(Desde["IdEstadoCuenta"]);
+            Hasta.EstadoCuenta.Descr = Convert.ToString(Desde["DescrEstadoCuenta"]);
         }
         public void Crear(CedWebEntidades.Cuenta Cuenta)
         {
@@ -64,6 +69,28 @@ namespace CedWebDB
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("update Cuenta set Password='" + PasswordNueva + "' where IdCuenta='" + Cuenta.Id + "' ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
+        }
+        public List<CedWebEntidades.Cuenta> Lista(string Email)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("select Cuenta.IdCuenta, Cuenta.Nombre, Cuenta.Telefono, Cuenta.Email, Cuenta.Password, Cuenta.Pregunta, Cuenta.Respuesta, Cuenta.IdTipoCuenta, TipoCuenta.DescrTipoCuenta, Cuenta.IdEstadoCuenta, EstadoCuenta.DescrEstadoCuenta from Cuenta, TipoCuenta, EstadoCuenta ");
+            a.Append("where Cuenta.Email='" + Email + "' and Cuenta.IdTipoCuenta=TipoCuenta.IdTipoCuenta and Cuenta.IdEstadoCuenta=EstadoCuenta.IdEstadoCuenta ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            if (dt.Rows.Count == 0)
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Cuenta.NoHayCuentasAsociadasAEmail();
+            }
+            else
+            {
+                List<CedWebEntidades.Cuenta> lista = new List<CedWebEntidades.Cuenta>();
+                for (int i=0; i<dt.Rows.Count; i++)
+                {
+                    CedWebEntidades.Cuenta cuenta = new CedWebEntidades.Cuenta();
+                    Copiar(dt.Rows[i], cuenta);
+                    lista.Add(cuenta);
+                }
+                return lista;
+            }
         }
     }
 }
