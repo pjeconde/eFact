@@ -74,7 +74,7 @@
                     <tr>
                         <td style="width: 9px;">
                         </td>
-                        <td valign="top" align="center" style="width: 782px;">
+                        <td valign="top" align="center" style="width: 782px; vertical-align: middle; text-align: center;">
                             <table cellpadding="0" cellspacing="0" border="0">
                                 <tr>
                                     <td style="">
@@ -1560,6 +1560,8 @@
                                     </td>
                                 </tr>
                             </table>
+                            <asp:FileUpload ID="XMLFileUpload" runat="server"></asp:FileUpload>
+                            <asp:Button  ID="FileUploadButton" runat="server" OnClick="FileUploadButton_Click" Text="Subir XML" CausesValidation="false"/> 
                             <br />
                         </td>
                     </tr>
