@@ -99,8 +99,8 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3" class="TextoComun" align="center" style="height: 19px; background-color: #c8d2dc">
-                    © 2009 Cedeira Sofware Factory S.R.L. Todos los derechos reservados.
+                <td colspan="3" class="TextoComun" align="center" style="background-image: url('Imagenes/eFact-Fondo.jpg'); background-repeat: repeat-x; height:18px; color:White">
+                    <b>© 2009 Cedeira Sofware Factory S.R.L. Todos los derechos reservados.</b>
                 </td>
             </tr>
         </table>

@@ -280,7 +280,7 @@
                                     </td>
                                     <!--Caja de Diseño Web-->
                                     <td valign="top" style="" align="left">
-                                        <table cellpadding="0" cellspacing="0" border="0" style="height: 142px;">
+                                        <table cellpadding="0" cellspacing="0" border="0" style="height:142px;">
                                             <tr>
                                                 <td style="height: 38px; background-image: url('Imagenes/Ingreso/Box/BoxTL.gif');
                                                     background-repeat: no-repeat; width: 110px;">
@@ -311,10 +311,10 @@
                                                     <table cellpadding="0" cellspacing="0" border="0" style="background-image: url('Imagenes/Ingreso/Box/DisWeb.gif');
                                                         background-repeat: no-repeat; width: 361px;">
                                                         <tr>
-                                                            <td style="width: 160px; padding-top: 5px; height: 119px;" valign="top">
+                                                            <td style="width: 160px; padding-top: 5px; height: 100px;" valign="top">
                                                                 <asp:Label ID="LabelDesarrolloWeb" runat="server" SkinID="TextoInicioMediano" Text="Diseñamos, desarrollamos y mantenemos sitios web, dinámicos e inteligentes, con capacidades de Comercio electrónico." Width="160px"></asp:Label>
                                                             </td>
-                                                            <td style="width: 201px; height: 119px;" valign="top">
+                                                            <td style="width: 201px; height: 100px;" valign="top">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -388,24 +388,24 @@
                                 </tr>
                                 <!--4to reglon de cajas-->
                                 <tr>
-                                    <td colspan="2" align="right">
+                                    <td colspan="2">
                                         <table cellpadding="0" cellspacing="0" border="0">
                                             <tr>
-                                                <td>
+                                                <td valign="middle" align="left" style="padding-left:10px">
                                                     <p>
                                                         <a href="http://validator.w3.org/check?uri=referer">
-                                                            <img alt="Valid XHTML 1.0 Transitional" height="31" src="http://www.w3.org/Icons/valid-xhtml10-blue"
-                                                                width="88" /></a>
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p>
-                                                        <a href="http://jigsaw.w3.org/css-validator/check/referer">
-                                                            <img alt="¡CSS Válido!" src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
-                                                                style="border: 0; width: 88px; height: 31px" />
+                                                            <img alt="Valid XHTML 1.0 Transitional" src="http://www.w3.org/Icons/valid-xhtml10-blue" style="border: 0; width: 88px; height: 31px" />
                                                         </a>
                                                     </p>
                                                 </td>
+                                                <td valign="middle" align="left" style="padding-left:5px">
+                                                    <p>
+                                                        <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                                                            <img alt="¡CSS Válido!" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" style="border: 0; width: 88px; height: 31px" />
+                                                        </a>
+                                                    </p>
+                                                </td>
+                                                <td style="width:100%"></td>
                                                 <td valign="middle" align="right">
                                                     <asp:Label ID="Label1" runat="server" Text="Navegador<br/>recomendado" Font-Size="Smaller"
                                                         ForeColor="Navy" SkinID="TituloColor1Chico"></asp:Label>
