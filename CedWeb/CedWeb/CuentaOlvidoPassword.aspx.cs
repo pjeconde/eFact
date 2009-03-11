@@ -10,46 +10,29 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 namespace CedWeb
 {
-    public partial class CuentaCambiarPassword : System.Web.UI.Page
+    public partial class CuentaOlvidoPassword : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            PasswordTextBox.Attributes.Add("value", PasswordTextBox.Text);
             PasswordNuevaTextBox.Attributes.Add("value", PasswordNuevaTextBox.Text);
-            ConfirmacionPasswordNuevaTextBox.Attributes.Add("value", ConfirmacionPasswordNuevaTextBox.Text); 
+            ConfirmacionPasswordNuevaTextBox.Attributes.Add("value", ConfirmacionPasswordNuevaTextBox.Text);
             if (!IsPostBack)
             {
-                PasswordTextBox.Focus();
-                try
-                {
-                    if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id == null)
-                    {
-                        CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloLabel.Text, "~/NoHabilitadoParaUsuariosNoRegistrados.aspx");
-                    }
-                }
-                catch (System.Threading.ThreadAbortException)
-                {
-                    Trace.Warn("Thread abortado");
-                }
-                catch (Exception ex)
-                {
-                    CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepcion.aspx");
-                }
+                IdUsuarioTextBox.Focus();
             }
         }
-		protected void TextBox_TextChanged(object sender, EventArgs e)
-		{
-			MsgErrorLabel.Text = String.Empty;
-		}
+        protected void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            MsgErrorLabel.Text = String.Empty;
+        }
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
             try
             {
                 MsgErrorLabel.Text = String.Empty;
                 CedWebEntidades.Sesion sesion = (CedWebEntidades.Sesion)Session["Sesion"];
-                CedWebRN.Cuenta.CambioPassword(sesion.Cuenta, PasswordTextBox.Text, PasswordNuevaTextBox.Text, ConfirmacionPasswordNuevaTextBox.Text, (CedEntidades.Sesion)Session["Sesion"]);
+                //CedWebRN.Cuenta.CambioPassword(sesion.Cuenta, PasswordTextBox.Text, PasswordNuevaTextBox.Text, ConfirmacionPasswordNuevaTextBox.Text, (CedEntidades.Sesion)Session["Sesion"]);
                 ((CedWeb)this.Master).CaducarIdentificacion();
-                PasswordTextBox.Enabled = false;
                 PasswordNuevaTextBox.Enabled = false;
                 ConfirmacionPasswordNuevaTextBox.Enabled = false;
                 AceptarButton.Visible = false;

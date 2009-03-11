@@ -24,7 +24,16 @@
                                         <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/eFact.jpg" AlternateText="Factura Electrónica"/>
                                     </td>
                                 </tr>
+                            </table>
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td style="width:21px"></td>
+                                    <td style="padding-top:10px;" align="left">
+                                        <asp:Label ID="Label8" runat="server" Text="Para realizar el cambio de la Contraseña de su cuenta eFact, ingrese los datos que se solicitan a continuación:" SkinID="TextoMediano"></asp:Label>
+                                    </td>
+                                </tr>
                             </table>  
+
                         </td>
                     </tr>
                     <!-- @@@ OBJETOS ESPECIFICOS DE LA PAGINA @@@-->
