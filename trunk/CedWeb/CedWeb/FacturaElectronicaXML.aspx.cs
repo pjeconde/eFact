@@ -1000,4 +1000,34 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</script>");
 		}
 	}
+	protected void FileUploadButton_Click(object sender, EventArgs e)
+	{
+		if (XMLFileUpload.HasFile)
+		{
+			try
+			{
+				System.IO.MemoryStream ms = new System.IO.MemoryStream(XMLFileUpload.FileBytes);
+				ms.Seek(0, System.IO.SeekOrigin.Begin);
+				FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+				System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lc.GetType());
+				lc = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+
+				Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
+				Presta_ServCheckBox.Checked = Convert.ToBoolean(lc.cabecera_lote.presta_serv);
+				Punto_VentaTextBox.Text = Convert.ToString(lc.cabecera_lote.punto_de_venta);
+				Numero_ComprobanteTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
+				FechaEmisionDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
+				FechaVencimientoDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento);
+				FechaServDesdeDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde);
+				FechaServHastaDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta);
+				Condicion_De_PagoTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago);
+				Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio);
+				Razon_Social_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.razon_social);
+			}
+			catch
+			{
+				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>");
+			}
+		}
+	}
 }
