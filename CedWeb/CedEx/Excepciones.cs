@@ -194,6 +194,23 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
             {
             }
         }
+        [Serializable]
+        public class NoHayCuentasAsociadasAEmail : Microsoft.ApplicationBlocks.ExceptionManagement.Usuario.BaseApplicationException
+        {
+            static string TextoError = "No hay cuentas eFact asociadas a la dirección de correo electrónico especificada";
+            public NoHayCuentasAsociadasAEmail()
+                : base(TextoError)
+            {
+            }
+            public NoHayCuentasAsociadasAEmail(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public NoHayCuentasAsociadasAEmail(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
     }
     namespace WF
 	{
