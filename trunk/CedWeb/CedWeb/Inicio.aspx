@@ -227,7 +227,7 @@
                                             <tr>
                                                 <td class="TextoInicioMediano" align="right" style="height: 20px; padding-left: 10px;
                                                     padding-right: 10px;">
-                                                    Usuario
+                                                    Id.Usuario
                                                 </td>
                                                 <td align="left" style="width: 100px;">
                                                     <asp:TextBox ID="UsuarioTextBox" runat="server" Width="120px" OnTextChanged="UsuarioTextBox_TextChanged"
@@ -255,8 +255,13 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="4" align="center" style="height: 20px;">
+                                                <td colspan="4" align="center" style="height: 20px; color:Blue">
                                                     <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/CuentaCrear.aspx" SkinID="LinkMedianoClaro">Crear una nueva cuenta</asp:HyperLink>
+                                                    <br />¿ Olvidó su 
+                                                    <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/CuentaOlvidoId.aspx" SkinID="LinkMedianoClaro">Id.Usuario</asp:HyperLink>
+                                                    o su 
+                                                    <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/CuentaOlvidoPassword.aspx" SkinID="LinkMedianoClaro">Contraseña</asp:HyperLink>
+                                                    ?
                                                 </td>
                                             </tr>
                                         </table>
