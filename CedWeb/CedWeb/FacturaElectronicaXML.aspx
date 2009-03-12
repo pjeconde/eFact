@@ -61,7 +61,7 @@
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="+"/>
                                     </td>
                                     <td style="height: 20px;">
-                                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Factura Electrónica (Versión de prueba)" SkinID="TituloPagina"></asp:Label>
+                                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Factura Electrónica" SkinID="TituloPagina"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -1561,7 +1561,7 @@
                                 </tr>
                             </table>
                             <asp:FileUpload ID="XMLFileUpload" runat="server"></asp:FileUpload>
-                            <asp:Button  ID="FileUploadButton" runat="server" OnClick="FileUploadButton_Click" Text="Subir XML" CausesValidation="false"/> 
+                            <asp:Button  ID="FileUploadButton" runat="server" OnClick="FileUploadButton_Click" Text="Completar datos desde comprobante previo" CausesValidation="false"/> 
                             <br />
                         </td>
                     </tr>
