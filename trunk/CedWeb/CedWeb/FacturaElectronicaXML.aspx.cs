@@ -1008,55 +1008,92 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
             {
                 System.IO.MemoryStream ms = new System.IO.MemoryStream(XMLFileUpload.FileBytes);
                 ms.Seek(0, System.IO.SeekOrigin.Begin);
-                FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
-                System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lc.GetType());
-                lc = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
 
-                //Cabecera
-                Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
-                Presta_ServCheckBox.Checked = Convert.ToBoolean(lc.cabecera_lote.presta_serv);
-                Punto_VentaTextBox.Text = Convert.ToString(lc.cabecera_lote.punto_de_venta);
-                //Comprobante
-                Numero_ComprobanteTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
-                FechaEmisionDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
-                FechaVencimientoDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento);
-                FechaServDesdeDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde);
-                FechaServHastaDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta);
-                Condicion_De_PagoTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago);
-                //Comprador
-                Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio);
-                //Vendedor
-                Razon_Social_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.razon_social);
-                Localidad_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.localidad);
-                Email_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.email);
-                Cuit_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.cuit);
-                //Resumen
-                Importe_Total_Neto_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_neto_gravado);
-                Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_concepto_no_gravado);
-                Importe_Operaciones_Exentas_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_operaciones_exentas);
-                Impuesto_Liq_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.impuesto_liq);
-                Impuesto_Liq_Rni_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.impuesto_liq_rni);
-                Importe_Total_Factura_ResumenTextBox.Text=Convert.ToString(lc.comprobante[0].resumen.importe_total_factura);
-                //Detalle
-
-                detalleGridView.DataSource = lc.comprobante[0].detalle.linea;
-                detalleGridView.DataBind();
-                ViewState["lineas"] = detalleGridView.DataSource;
-
-                lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
-
-                foreach (FeaEntidades.InterFacturas.linea l in lc.comprobante[0].detalle.linea)
+                try
                 {
-                    FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
-                    linea.descripcion = l.descripcion;
-                    linea.importe_total_articulo = l.importe_total_articulo;
-                    lineas.Add(linea);
+                    FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+                    System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lc.GetType());
+                    lc = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+                    //Cabecera
+                    Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
+                    Presta_ServCheckBox.Checked = Convert.ToBoolean(lc.cabecera_lote.presta_serv);
+                    Punto_VentaTextBox.Text = Convert.ToString(lc.cabecera_lote.punto_de_venta);
+                    //Comprobante
+                    Numero_ComprobanteTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
+                    FechaEmisionDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
+                    FechaVencimientoDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento);
+                    FechaServDesdeDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde);
+                    FechaServHastaDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta);
+                    Condicion_De_PagoTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago);
+                    //Comprador
+                    Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio);
+                    //Vendedor
+                    Razon_Social_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.razon_social);
+                    Localidad_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.localidad);
+                    Email_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.email);
+                    Cuit_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.cuit);
+                    //Resumen
+                    Importe_Total_Neto_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_neto_gravado);
+                    Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_concepto_no_gravado);
+                    Importe_Operaciones_Exentas_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_operaciones_exentas);
+                    Impuesto_Liq_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.impuesto_liq);
+                    Impuesto_Liq_Rni_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.impuesto_liq_rni);
+                    Importe_Total_Factura_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_factura);
+                    //Detalle
+                    lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
+                    foreach (FeaEntidades.InterFacturas.linea l in lc.comprobante[0].detalle.linea)
+                    {
+                        FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
+                        linea.descripcion = l.descripcion;
+                        linea.importe_total_articulo = l.importe_total_articulo;
+                        lineas.Add(linea);
+                    }
+                    detalleGridView.DataSource = lineas;
+                    detalleGridView.DataBind();
+                    ViewState["lineas"] = lineas;
+                    //Descuentos globales
+                    descuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>();
+                    foreach (FeaEntidades.InterFacturas.resumenDescuentos r in lc.comprobante[0].resumen.descuentos)
+                    {
+                        descuentos.Add(r);
+                    }
+                    descuentosGridView.DataSource = descuentos;
+                    descuentosGridView.DataBind();
+                    ViewState["descuentos"] = descuentos;
+                    //impuestos globales
+                    impuestos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>();
+                    foreach (FeaEntidades.InterFacturas.resumenImpuestos imp in lc.comprobante[0].resumen.impuestos)
+                    {
+                        impuestos.Add(imp);
+                    }
+                    impuestosGridView.DataSource = impuestos;
+                    impuestosGridView.DataBind();
+                    ViewState["impuestos"] = impuestos;
+
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo');</script>");            
+
                 }
+                catch(Exception ex)
+                {
+                    if (ex.Source.Equals("System.Xml"))
+                    {
+                        try
+                        {
+                            ms.Seek(0, System.IO.SeekOrigin.Begin);
+                            FeaEntidades.InterFacturas.comprobante c = new FeaEntidades.InterFacturas.comprobante();
+                            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(c.GetType());
+                            c = (FeaEntidades.InterFacturas.comprobante)x.Deserialize(ms);
 
-                detalleGridView.DataSource = lineas;
-                ViewState["lineas"] = lineas;
+                            //TODO serializar un comprobante
 
-                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo');</script>");            
+                            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Esquema de un solo comprobante no implementado');</script>");
+                        }
+                        catch
+                        {
+                            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>");
+                        }
+                    }
+                }
             }
             catch
             {
