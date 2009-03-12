@@ -83,7 +83,7 @@
                                                                                     <asp:Image ID="Image6" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                                                 </td>
                                                                                 <td style="padding-top: 15px">
-                                                                                    &nbsp;<asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/FacturaElectronica.aspx" SkinID="LinkGrandeClaro"><b>Cargue gratis su factura</b></asp:HyperLink>
+                                                                                    &nbsp;<asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/FacturaElectronica.aspx" SkinID="LinkGrandeClaro"><b>Cargue gratis su Factura Electrónica</b></asp:HyperLink>
                                                                                 </td>
                                                                             </tr>
                                                                         </table>
