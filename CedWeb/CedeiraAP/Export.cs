@@ -13,45 +13,6 @@ namespace Cedeira.SV
 	{		
 		public enum ExportFormat : int {CSV = 1, Excel = 2}; 
 			
-		public void ExportDetails(Janus.Windows.GridEX.GridEX Grilla, ExportFormat FormatType, string FileName)
-		{
-			try
-			{				
-				DataSet dsExport = Cedeira.SV.Fun.GetDataSetFromJanusGridEx(Grilla,FileName);
-				dsExport.DataSetName="Export";
-				dsExport.Tables[0].TableName = "Values";
-				string[] sHeaders = new string[dsExport.Tables[0].Columns.Count];
-				string[] sFileds = new string[dsExport.Tables[0].Columns.Count];
-				for (int i=0; i < dsExport.Tables[0].Columns.Count; i++)
-				{
-					sHeaders[i] = ReemplazarEspaciosyAcentos(dsExport.Tables[0].Columns[i].ColumnName);
-					dsExport.Tables[0].Columns[i].ColumnName=sHeaders[i];
-					sFileds[i] = sHeaders[i];					
-				}
-				for(int l=0; l < dsExport.Tables[0].Rows.Count; l++)
-				{
-					for (int i=0; i < dsExport.Tables[0].Columns.Count; i++)
-					{
-						string aux=ReemplazarXPath(Convert.ToString(dsExport.Tables[0].Rows[l].ItemArray[i]));
-						dsExport.Tables[0].Rows[l][i] = aux;
-						dsExport.Tables[0].Rows[l].AcceptChanges();
-					}
-				}
-				string dir=System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal)+"\\CedFCI\\";
-				if (!System.IO.Directory.Exists(dir)) 
-				{
-					System.IO.Directory.CreateDirectory(dir);
-				}
-				FileName=dir+ReemplazarEspaciosyAcentos(FileName);
-				Export_with_XSLT_Windows(dsExport, sHeaders, sFileds, FormatType, FileName);
-				System.Diagnostics.Process.Start(FileName);
-			}			
-			catch(Exception Ex)
-			{
-				throw Ex;
-			}			
-		}
-		
 		private string ReemplazarAcentos(string aux)
 		{
 			aux=aux.Replace("á","a");

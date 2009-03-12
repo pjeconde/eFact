@@ -105,16 +105,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Janus.Windows.Common.v2">
-      <Name>Janus.Windows.Common.v2</Name>
-      <HintPath>C:\Archivos de programa\Janus Systems\Controls for Microsoft .NET\Windows Forms Controls v2\Bin\Janus.Windows.Common.v2.dll</HintPath>
-      <AssemblyFolderKey>hklm\janus.windows.schedule.v2</AssemblyFolderKey>
-    </Reference>
-    <Reference Include="Janus.Windows.GridEX.v2">
-      <Name>Janus.Windows.GridEX.v2</Name>
-      <HintPath>C:\Archivos de programa\Janus Systems\Controls for Microsoft .NET\Windows Forms Controls v2\Bin\Janus.Windows.GridEX.v2.dll</HintPath>
-      <AssemblyFolderKey>hklm\janus.windows.schedule.v2</AssemblyFolderKey>
-    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
