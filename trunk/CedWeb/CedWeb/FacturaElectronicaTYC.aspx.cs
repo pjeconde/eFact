@@ -16,7 +16,10 @@ namespace CedWeb
         {
             if (!IsPostBack)
             {
-                HyperLinkVolverPagAnt.NavigateUrl = Page.Request.UrlReferrer.ToString();
+                if (Page.Request.UrlReferrer != null)
+                {
+                    HyperLinkVolverPagAnt.NavigateUrl = Page.Request.UrlReferrer.ToString();
+                }
                 if (CheckBoxAceptarTYC.Checked)
                 {
                     if (Page.Request.QueryString.ToString() == "Link=VerTYC")
