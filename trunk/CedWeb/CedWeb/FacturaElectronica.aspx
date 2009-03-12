@@ -97,8 +97,8 @@
                                                         <asp:Image ID="Image9" runat="server" ImageUrl="~/Imagenes/Bola2.png"/>
                                                     </td>
                                                     <td style="padding-top:10px; padding-left:5px" align="left">
-                                                        <asp:Label ID="Label6" runat="server" Text="Configure los <b>datos del Vendedor</b>, haciendo clic" SkinID="TituloGrande"></asp:Label>
-                                                        <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Vendedor.aspx" SkinID="LinkGrandeClaro">aquí</asp:HyperLink>
+                                                        &nbsp;<asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Vendedor.aspx"
+                                                            SkinID="LinkGrandeClaro">Configure los <b>datos del Vendedor</b></asp:HyperLink>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -106,8 +106,8 @@
                                                         <asp:Image ID="Image10" runat="server" ImageUrl="~/Imagenes/Bola3.png"/>
                                                     </td>
                                                     <td style="padding-top:10px; padding-left:5px" align="left">
-                                                        <asp:Label ID="Label7" runat="server" Text="<b>Genere una Factura Electrónica</b> y reciba su archivo XML (comprobante electrónico), haciendo clic" SkinID="TituloGrande"></asp:Label>
-                                                        <asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/FacturaElectronicaXML.aspx" SkinID="LinkGrandeClaro">aquí</asp:HyperLink>
+                                                        &nbsp;<asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/FacturaElectronicaXML.aspx"
+                                                            SkinID="LinkGrandeClaro"><b>Genere una Factura Electrónica</b> y reciba su archivo XML (comprobante electrónico)</asp:HyperLink>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -115,8 +115,8 @@
                                                         <asp:Image ID="Image11" runat="server" ImageUrl="~/Imagenes/Bola4.png"/>
                                                     </td>
                                                     <td style="padding-top:10px; padding-left:5px" align="left">
-                                                        <asp:Label ID="Label14" runat="server" Text="Suba el comprobante electrónico a Interfacturas (la red de facturas electrónicas de Interbanking)" SkinID="TituloGrande"></asp:Label>
-                                                    </td>
+                                                        &nbsp;<asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="http://www.interfacturas.com.ar/"
+                                                            SkinID="LinkGrandeClaro" Target="_blank"><b>Suba el comprobante</b> electrónico a Interfacturas (la red de facturas electrónicas de Interbanking)</asp:HyperLink></td>
                                                 </tr>
                                             </table>
                                         </asp:Panel>
