@@ -1032,6 +1032,29 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 Cuit_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.cuit);
                 //Resumen
                 Importe_Total_Neto_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_neto_gravado);
+                Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_concepto_no_gravado);
+                Importe_Operaciones_Exentas_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_operaciones_exentas);
+                Impuesto_Liq_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.impuesto_liq);
+                Impuesto_Liq_Rni_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.impuesto_liq_rni);
+                Importe_Total_Factura_ResumenTextBox.Text=Convert.ToString(lc.comprobante[0].resumen.importe_total_factura);
+                //Detalle
+
+                detalleGridView.DataSource = lc.comprobante[0].detalle.linea;
+                detalleGridView.DataBind();
+                ViewState["lineas"] = detalleGridView.DataSource;
+
+                lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
+
+                foreach (FeaEntidades.InterFacturas.linea l in lc.comprobante[0].detalle.linea)
+                {
+                    FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
+                    linea.descripcion = l.descripcion;
+                    linea.importe_total_articulo = l.importe_total_articulo;
+                    lineas.Add(linea);
+                }
+
+                detalleGridView.DataSource = lineas;
+                ViewState["lineas"] = lineas;
 
                 ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo');</script>");            
             }

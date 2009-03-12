@@ -53,19 +53,40 @@
                     <tr>
                         <td colspan="3" valign="top" style="">
                             <!-- @@@ TITULO DE LA PAGINA @@@-->
-                            <table cellpadding="0" cellspacing="0" border="0">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
                                 <tr>
                                     <td style="width: 10px;">
                                     </td>
                                     <td style="width: 21px; height: 20px;">
-                                        <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="+"/>
+                                        <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="+" />
                                     </td>
                                     <td style="height: 20px;">
-                                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Factura Electrónica" SkinID="TituloPagina"></asp:Label>
+                                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Factura Electrónica"
+                                            SkinID="TituloPagina"></asp:Label>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="height: 10px;">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="height: 10px;">
+                                    <td></td>
+                                    <td></td>
+                                    <td> 
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0"> 
+                                            <tr></tr>
+                                            <tr>   
+                                                <td>
+                                                    <asp:FileUpload Width="100%" ID="XMLFileUpload" runat="server" ></asp:FileUpload>
+                                                </td>
+                                                <td>
+                                                    <asp:Button ID="FileUploadButton" runat="server" OnClick="FileUploadButton_Click"
+                                                    Text="Completar datos desde comprobante previo" CausesValidation="false" Width="100%" />
+                                                </td>
+                                            </tr>
+                                            <tr></tr>
+                                        </table>
                                     </td>
                                 </tr>
                             </table>
@@ -104,7 +125,8 @@
                                                         <tr>
                                                             <td style="width: 240px" align="center" class="TextoResaltado">
                                                                 INFORMACIÓN VENDEDOR<br />
-                                                                <asp:HyperLink ID="ConfigurarVendedorHyperLink" runat="server" NavigateUrl="~/Vendedor.aspx" SkinID="LinkMedianoClaro" Font-Bold="false">Configurar</asp:HyperLink></td>
+                                                                <asp:HyperLink ID="ConfigurarVendedorHyperLink" runat="server" NavigateUrl="~/Vendedor.aspx"
+                                                                    SkinID="LinkMedianoClaro" Font-Bold="false">Configurar</asp:HyperLink></td>
                                                             <td style="width: 300px">
                                                                 <table style="width: 300px" border="0" cellpadding="0" cellspacing="0">
                                                                     <tr>
@@ -1560,8 +1582,7 @@
                                     </td>
                                 </tr>
                             </table>
-                            <asp:FileUpload ID="XMLFileUpload" runat="server"></asp:FileUpload>
-                            <asp:Button  ID="FileUploadButton" runat="server" OnClick="FileUploadButton_Click" Text="Completar datos desde comprobante previo" CausesValidation="false"/> 
+                            &nbsp;
                             <br />
                         </td>
                     </tr>
