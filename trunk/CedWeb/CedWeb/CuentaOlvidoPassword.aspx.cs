@@ -25,19 +25,111 @@ namespace CedWeb
         {
             MsgErrorLabel.Text = String.Empty;
         }
+        protected void SolicitarPreguntaButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (IdUsuarioTextBox.Text == String.Empty)
+                {
+                    MsgErrorLabel.Text = "Id.Usuario no informado.";
+                }
+                else
+                {
+                    if (EmailTextBox.Text == String.Empty)
+                    {
+                        MsgErrorLabel.Text = "Email no informado.";
+                    }
+                    else
+                    {
+                        CedWebEntidades.Cuenta cuenta = new CedWebEntidades.Cuenta();
+                        cuenta.Id = IdUsuarioTextBox.Text;
+                        CedWebRN.Cuenta.Leer(cuenta, (CedEntidades.Sesion)Session["Sesion"]);
+                        if (cuenta.Email.ToLower() != EmailTextBox.Text.ToLower())
+                        {
+                            MsgErrorLabel.Text = "No hay ninguna cuenta en la que el Id.Usuario y el Email ingresados estén relacionados.";
+                        }
+                        else
+                        {
+                            MsgErrorLabel.Text = "";
+                            IdUsuarioTextBox.Enabled = false;
+                            EmailTextBox.Enabled = false;
+                            SolicitarPreguntaButton.Enabled = false;
+                            PreguntaLabel.Text = "¿" + cuenta.Pregunta + "?";
+                            ViewState["respuesta"] = cuenta.Respuesta;
+                            RespuestaTextBox.Enabled = true;
+                            SolicitarNuevaPasswordButton.Enabled = true;
+                            RespuestaTextBox.Focus();
+                        }
+                    }
+                }
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+                Trace.Warn("Thread abortado");
+            }
+            catch (Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente)
+            {
+                MsgErrorLabel.Text = "No hay ninguna cuenta con el Id.Usuario solicitado.";
+            }
+            catch (Exception ex)
+            {
+                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
+            }
+        }
+        protected void SolicitarNuevaPasswordButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (RespuestaTextBox.Text == String.Empty)
+                {
+                    MsgErrorLabel.Text = "Respuesta no informada.";
+                }
+                else
+                {
+                    if (RespuestaTextBox.Text.ToLower() != ViewState["respuesta"].ToString().ToLower())
+                    {
+                        MsgErrorLabel.Text = "Respuesta incorrecta.";
+                    }
+                    else
+                    {
+                        MsgErrorLabel.Text = "";
+                        RespuestaTextBox.Enabled = false;
+                        SolicitarNuevaPasswordButton.Enabled = false;
+                        PasswordNuevaTextBox.Enabled = true;
+                        ConfirmacionPasswordNuevaTextBox.Enabled = true;
+                        AceptarButton.Enabled = true;
+                        PasswordNuevaTextBox.Focus();
+                    }
+                }
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+                Trace.Warn("Thread abortado");
+            }
+            catch (Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente)
+            {
+                MsgErrorLabel.Text = "No hay ninguna cuenta con el Id.Usuario solicitado.";
+            }
+            catch (Exception ex)
+            {
+                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
+            }
+        }
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
             try
             {
                 MsgErrorLabel.Text = String.Empty;
-                CedWebEntidades.Sesion sesion = (CedWebEntidades.Sesion)Session["Sesion"];
-                //CedWebRN.Cuenta.CambioPassword(sesion.Cuenta, PasswordTextBox.Text, PasswordNuevaTextBox.Text, ConfirmacionPasswordNuevaTextBox.Text, (CedEntidades.Sesion)Session["Sesion"]);
-                ((CedWeb)this.Master).CaducarIdentificacion();
+                CedWebEntidades.Cuenta cuenta = new CedWebEntidades.Cuenta();
+                cuenta.Id = IdUsuarioTextBox.Text;
+                CedWebRN.Cuenta.Leer(cuenta, (CedEntidades.Sesion)Session["Sesion"]);
+                cuenta.Password = PasswordNuevaTextBox.Text+"X";
+                CedWebRN.Cuenta.CambiarPassword(cuenta, cuenta.Password, PasswordNuevaTextBox.Text, ConfirmacionPasswordNuevaTextBox.Text, (CedEntidades.Sesion)Session["Sesion"]);
                 PasswordNuevaTextBox.Enabled = false;
                 ConfirmacionPasswordNuevaTextBox.Enabled = false;
                 AceptarButton.Visible = false;
                 CancelarButton.Visible = false;
-                MsgErrorLabel.Text = "La Contraseña fue modificada satisfactoriamente.  Si desea seguir trabajando, deberá volver a identificarse en la página de inicio.";
+                MsgErrorLabel.Text = "La Contraseña fue registrada satisfactoriamente.  Para iniciar una sesion de trabajo, deberá identificarse en la página de inicio.";
             }
             catch (System.Threading.ThreadAbortException)
             {
