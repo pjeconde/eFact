@@ -1015,6 +1015,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                     System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lc.GetType());
                     lc = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
                     //Cabecera
+                    Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
                     Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
                     Presta_ServCheckBox.Checked = Convert.ToBoolean(lc.cabecera_lote.presta_serv);
                     Punto_VentaTextBox.Text = Convert.ToString(lc.cabecera_lote.punto_de_venta);
