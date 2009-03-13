@@ -407,7 +407,9 @@
                                                                 <table border="0" cellpadding="0" cellspacing="0" style="">
                                                                     <tr>
                                                                         <td style="" class="TextoLabelFEAVendedor">
-                                                                            GLN:
+                                                                            <asp:RegularExpressionValidator ID="GLN_VendedorRegularExpressionValidator" runat="server"
+                                                                                ControlToValidate="GLN_VendedorTextBox" ErrorMessage="error de formateo en GLN del vendedor"
+                                                                                SetFocusOnError="True" ValidationExpression="[0-9]{13}">* </asp:RegularExpressionValidator>GLN:
                                                                         </td>
                                                                         <td style="" class="TextoLabelFEAVendedorDet">
                                                                             <asp:TextBox ID="GLN_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
@@ -668,7 +670,9 @@
                                                     <table style="width: 370px" border="0" cellpadding="0" cellspacing="0">
                                                         <tr>
                                                             <td class="TextoLabelFEAVendedor">
-                                                                GLN:
+                                                                <asp:RegularExpressionValidator ID="GLN_CompradorRegularExpressionValidator" runat="server" ControlToValidate="GLN_VendedorTextBox"
+                                                                    ErrorMessage="error de formateo en GLN del comprador" SetFocusOnError="True"
+                                                                    ValidationExpression="[0-9]{13}">* </asp:RegularExpressionValidator>GLN:
                                                             </td>
                                                             <td style="" class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="GLN_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
