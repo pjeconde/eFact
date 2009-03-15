@@ -86,6 +86,9 @@
                             <td style="padding-left:10px; padding-right:10px">
                                 <asp:LinkButton ID="ContactoLinkButton" runat="server" CausesValidation="false" PostBackUrl="~/Contacto.aspx" ForeColor="white" Font-Bold="true">Contacto</asp:LinkButton>
                             </td>
+                            <td style="padding-left:10px; padding-right:10px">
+                                <asp:LinkButton ID="CuentasLinkButton" runat="server" CausesValidation="false" PostBackUrl="~/CuentaExplorador.aspx" ForeColor="white" Font-Bold="true" Visible="false">Cuentas</asp:LinkButton>
+                            </td>
                             <td style="width:50%">
                             </td>
                         </tr>

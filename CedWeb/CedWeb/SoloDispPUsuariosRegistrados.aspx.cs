@@ -12,7 +12,7 @@ using CedeiraUIWebForms;
 
 namespace CedWeb
 {
-    public partial class NoHabilitadoParaUsuariosNoRegistrados : System.Web.UI.Page
+    public partial class SoloDispPUsuariosRegistrados : System.Web.UI.Page
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{

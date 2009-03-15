@@ -146,5 +146,19 @@ namespace CedWebEntidades
                 return vendedor;
             }
         }
+        public string DescrTipoCuenta
+        {
+            get
+            {
+                return tipoCuenta.Descr;
+            }
+        }
+        public string DescrEstadoCuenta
+        {
+            get
+            {
+                return EstadoCuenta.Descr;
+            }
+        }
     }
 }

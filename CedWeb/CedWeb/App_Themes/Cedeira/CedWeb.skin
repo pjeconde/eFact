@@ -73,16 +73,22 @@
     <StaticMenuItemStyle HorizontalPadding="8px" VerticalPadding="3px" />
 </asp:Menu>
       
-<cc1:paginggridview runat="server" GridLines="Vertical" CssClass="DataWebControlStyleGrid"
-    AllowPaging="True" AllowSorting="True" CellPadding="1" VirtualItemCount="-1"
-    AutoGenerateColumns="False" >
-    <PagerSettings Mode="NumericFirstLast" />
-    <PagerStyle CssClass="PagerStyleGrid" />
-    <RowStyle CssClass="RowStyleGrid"/>
-    <AlternatingRowStyle CssClass="AlternatingRowStyleGrid" />
-    <HeaderStyle CssClass="HeaderStyleGrid"/>
-    <FooterStyle CssClass="FooterStyleGrid" />
-    <SelectedRowStyle CssClass="SelectedRowStyleGrid" />
+<cc1:paginggridview 
+    runat="server" 
+    CssClass="DataWebControlStylePagingGridView"
+    GridLines="None" 
+    AllowPaging="True" 
+    AllowSorting="True" 
+    CellPadding="1" 
+    VirtualItemCount="-1" 
+    AutoGenerateColumns="False">
+    <PagerSettings Mode="NumericFirstLast"/>
+    <PagerStyle CssClass="PagerStylePagingGridView"/>
+    <RowStyle CssClass="RowStylePagingGridView"/>
+    <AlternatingRowStyle CssClass="AlternatingRowStylePagingGridView"/>
+    <HeaderStyle CssClass="HeaderStylePagingGridView"/>
+    <FooterStyle CssClass="FooterStylePagingGridView"/>
+    <SelectedRowStyle CssClass="SelectedRowStylePagingGridView"/>
 </cc1:paginggridview>  
 
 <asp:GridView 
@@ -92,7 +98,7 @@
     ShowHeader="false" ShowFooter="false"
     BorderStyle="None"
     GridLines="None"
-    Font-Size="Small" ForeColor="#AAAA99" 
+    Font-Size="Small" ForeColor="#AAAA99"
     >
 </asp:GridView>
 

@@ -256,10 +256,9 @@
                                             <tr>
                                                 <td colspan="4" align="center" style="height: 20px; color:Blue">
                                                     <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/CuentaCrear.aspx" SkinID="LinkMedianoClaro">Crear una nueva cuenta</asp:HyperLink>
-                                                    <br />¿ Olvidó su 
-                                                    <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/CuentaOlvidoId.aspx" SkinID="LinkMedianoClaro">Id.Usuario</asp:HyperLink>
-                                                    o su 
-                                                    <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/CuentaOlvidoPassword.aspx" SkinID="LinkMedianoClaro">Contraseña</asp:HyperLink>
+                                                    <br />
+                                                    <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/CuentaOlvidoId.aspx" SkinID="LinkMedianoClaro">¿Olvidó su Id.Usuario?</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/CuentaOlvidoPassword.aspx" SkinID="LinkMedianoClaro">¿Olvidó su Contraseña?</asp:HyperLink>
                                                     ?
                                                 </td>
                                             </tr>

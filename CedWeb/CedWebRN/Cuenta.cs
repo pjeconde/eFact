@@ -280,7 +280,7 @@ namespace CedWebRN
             a.AppendLine();
             for (int i = 0; i < cuentas.Count; i++)
             {
-                a.Append("Cuenta '"+cuentas[i].Nombre + "' (Id.Usuario='" + cuentas[i].Id + "')"); a.AppendLine();
+                a.Append("Cuenta '" + cuentas[i].Nombre + "' (Id.Usuario='" + cuentas[i].Id + "')"); a.AppendLine();
             }
             a.AppendLine();
             a.Append("Si ha recibido este correo electrónico y no ha solicitado información sobre su(s) cuenta(s) eFact, es probable que otro usuario haya introducido su dirección por error. Si no ha solicitado esta información, no es necesario que realice ninguna acción, y puede ignorar este mensaje con total seguridad."); a.AppendLine();
@@ -292,6 +292,20 @@ namespace CedWebRN
             a.AppendLine("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden."); a.AppendLine();
             mail.Body = a.ToString();
             smtpClient.Send(mail);
+        }
+        public static List<CedWebEntidades.Cuenta> Lista(int IndicePagina, int TamañoPagina, string OrderBy, CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+            if (OrderBy.Equals(String.Empty))
+            {
+                OrderBy = "IdCuenta";
+            }
+            return cuenta.Lista(IndicePagina, TamañoPagina, OrderBy);
+        }
+        public static int CantidadDeFilas(CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+            return cuenta.CantidadDeFilas();
         }
     }
 }

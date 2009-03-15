@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/NoHabilitadoParaUsuariosNoRegistrados.aspx.cs" Inherits="CedWeb.NoHabilitadoParaUsuariosNoRegistrados" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/SoloDispPUsuariosPremium.aspx.cs" Inherits="CedWeb.SoloDispPUsuariosPremium" %>
 <asp:Content ID="ExContent" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado" runat="Server">
     <table style="height: 500px; width: 800px; text-align: left;" cellpadding="0" cellspacing="0"
         border="0" class="TextoComun">
