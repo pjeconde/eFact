@@ -259,7 +259,6 @@
                                                     <br />
                                                     <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/CuentaOlvidoId.aspx" SkinID="LinkMedianoClaro">¿Olvidó su Id.Usuario?</asp:HyperLink>
                                                     <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/CuentaOlvidoPassword.aspx" SkinID="LinkMedianoClaro">¿Olvidó su Contraseña?</asp:HyperLink>
-                                                    ?
                                                 </td>
                                             </tr>
                                         </table>
