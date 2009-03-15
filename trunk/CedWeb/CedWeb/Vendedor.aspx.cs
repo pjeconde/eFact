@@ -22,7 +22,7 @@ namespace CedWeb
                 {
                     if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id == null)
                     {
-                        CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloLabel.Text, "~/NoHabilitadoParaUsuariosNoRegistrados.aspx");
+                        CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloLabel.Text, "~/SoloDispPUsuariosRegistrados.aspx");
                     }
                     else
                     {

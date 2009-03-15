@@ -73,7 +73,6 @@
 {
     background-color:#E1DED7;  
 }
-
 .RowStyleGrid
 {
 	width:200px;
@@ -81,7 +80,6 @@
 	max-width:200px;
 	color: Black;
 }
-
 .SelectedRowStyleGrid
 {
     background-color: #A52A2A;
@@ -98,10 +96,10 @@
     font-size: 80%;
     text-align: right;
 }
-A:link {text-decoration: none; color: navy;}
-A:visited {text-decoration: none; color: navy;}
-A:active {text-decoration: none; color: navy;}
-A:hover {text-decoration: none; color: red;}
+A:link {text-decoration: none; font-weight:normal; color: Blue;}
+A:visited {text-decoration: none; font-weight:normal; color: Blue;}
+A:active {text-decoration: none; font-weight:normal; color: Blue;}
+A:hover {text-decoration: none; font-weight:normal; color: Blue;}
 .TextoMensajeTitulo
 {
 	color: black; font-weight: normal; font-size: 20px; font-family: Verdana; font-style: normal;
@@ -214,4 +212,45 @@ A:hover {text-decoration: none; color: red;}
 {
 	text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
 	font-size: 10px; font-weight: 400; font-style: normal; font-family: Arial; text-align: center; padding: 5px; 
+}
+.DataWebControlStylePagingGridView
+{
+    font-size: 100%;
+    text-align: right;
+}
+.PagerStylePagingGridView
+{
+	background-color:#FFDAB9;
+	text-align:left;
+	height:10px;
+}
+.PagerStylePagingGridView span
+{
+    background-color:#A52A2A;
+    font-weight: bold;
+    color:White;
+} 
+.PagerStylePagingGridView a
+{
+	color:Blue;
+}
+.AlternatingRowStylePagingGridView
+{
+    background-color:#FFF8DC;  
+}
+.HeaderStylePagingGridView
+{
+    background-color:#FFDAB9;
+    font-weight:normal;
+    text-align:center;
+    color:Black;
+}
+.FooterStylePagingGridView
+{
+    background-color: White;
+}
+.SelectedRowStylePagingGridView
+{
+    background-color:#A52A2A;
+    color:White;
 }

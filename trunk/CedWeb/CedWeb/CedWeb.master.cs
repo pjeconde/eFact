@@ -25,6 +25,10 @@ namespace CedWeb
                     CambiarPasswordLinkButton.Visible = true;
                     Separador2Label.Visible = true;
                     SalirLinkButton.Visible = true;
+                    if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.TipoCuenta.Id == "Admin")
+                    {
+                        CuentasLinkButton.Visible = true;
+                    }
                 }
             }
 		}
@@ -42,6 +46,7 @@ namespace CedWeb
             CambiarPasswordLinkButton.Visible = false;
             Separador2Label.Visible = false; 
             SalirLinkButton.Visible = false;
+            CuentasLinkButton.Visible = false;
             Session["AceptarTYC"] = null;
         }
     }
