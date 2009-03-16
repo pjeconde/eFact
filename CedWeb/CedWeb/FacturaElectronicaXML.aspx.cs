@@ -113,12 +113,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				Codigo_Interno_VendedorTextBox.Text = v.CodigoInterno;
 				InicioDeActividadesVendedorDatePickerWebUserControl.CalendarDate = v.FechaInicioActividades;
 			}
-			else
+
+			if (Session["AceptarTYC"]==null || Session["AceptarTYC"].Equals(false))
 			{
-				if (Session["AceptarTYC"]==null || Session["AceptarTYC"].Equals(false))
-				{
-					Response.Redirect("FacturaElectronicaTYC.aspx");
-				}
+				Response.Redirect("FacturaElectronicaTYC.aspx");
 			}
 		}
 	}
