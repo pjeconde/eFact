@@ -192,7 +192,7 @@
                                                         ControlToValidate="CodPostTextBox" ErrorMessage="Codigo Postal">
                                                         <asp:Label ID="Label38" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                                     </asp:RequiredFieldValidator>
-                                                    <asp:Label ID="Label6" runat="server" Text="Codigo Postal"></asp:Label>
+                                                    <asp:Label ID="Label6" runat="server" Text="Código Postal"></asp:Label>
                                                 </td>
                                                 <td align="left" style="padding-top:3px">
                                                     <asp:TextBox ID="CodPostTextBox" runat="server" Width="80px" TabIndex="11" MaxLength="8"></asp:TextBox>
@@ -337,7 +337,7 @@
                                                         ValidationExpression="[A-Za-z\- ,.0-9]*">
                                                         <asp:Label ID="Label52" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                                     </asp:RegularExpressionValidator>
-                                                    <asp:Label ID="Label21" runat="server" Text="Codigo interno"></asp:Label>
+                                                    <asp:Label ID="Label21" runat="server" Text="Código interno"></asp:Label>
                                                 </td>
                                                 <td align="left" style="padding-top:3px">
                                                     <asp:TextBox ID="CodigoInternoTextBox" runat="server" Width="100px" TabIndex="20" MaxLength="20" ToolTip="(opcional) Código utilizado para identificar al vendedor dentro de la empresa / organización. (ej.: código de Cliente, Proveedor, etc.)"></asp:TextBox>
