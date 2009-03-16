@@ -58,7 +58,7 @@
     Font-Size="12px"
     Font-Bold="True"
     ForeColor="White"
-    BackColor=Transparent
+    BackColor="Transparent"
     ItemWrap="true"
     StaticMenuStyle-BackColor=Transparent
     DynamicMenuStyle-BackColor=Transparent
@@ -81,6 +81,7 @@
     AllowSorting="True" 
     CellPadding="1" 
     VirtualItemCount="-1" 
+    BackColor="white"
     AutoGenerateColumns="False">
     <PagerSettings Mode="NumericFirstLast"/>
     <PagerStyle CssClass="PagerStylePagingGridView"/>
