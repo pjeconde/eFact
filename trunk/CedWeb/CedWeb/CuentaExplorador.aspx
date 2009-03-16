@@ -29,37 +29,38 @@
                     <!-- @@@ OBJETOS ESPECIFICOS DE LA PAGINA @@@-->
                     <tr>
                         <td valign="top" style="padding-left:10px; padding-top:10px">
-                            <cc1:PagingGridView ID="CuentaPagingGridView" Width="100%" runat="server"
-                                                BorderColor="brown" BorderStyle="Solid" BorderWidth="1px"
-                                                OnSorting="CuentaPagingGridView_Sorting" OnSelectedIndexChanged="CuentaPagingGridView_SelectedIndexChanged" OnPageIndexChanging="CuentaPagingGridView_PageIndexChanging"
-                                                OnRowDataBound="CuentaPagingGridView_RowDataBound">
-                                <Columns>
-                                    <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id">
-                                        <headerstyle horizontalalign="left"/>
-                                        <itemstyle wrap="False" horizontalalign="left" Width="100%"/>
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre">
-                                        <headerstyle horizontalalign="left"/>
-                                        <itemstyle  wrap="False" horizontalalign="left"/>
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="Telefono" HeaderText="Telefono" SortExpression="Telefono">
-                                        <headerstyle horizontalalign="left"/>
-                                        <itemstyle  wrap="False" horizontalalign="left"/>
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email">
-                                        <headerstyle horizontalalign="left"/>
-                                        <itemstyle  wrap="False" horizontalalign="left"/>
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="DescrTipoCuenta" HeaderText="Tipo" SortExpression="DescrTipoCuenta">
-                                        <headerstyle horizontalalign="left"/>
-                                        <itemstyle  wrap="False" horizontalalign="left"/>
-                                    </asp:BoundField>
-                                    <asp:BoundField DataField="DescrEstadoCuenta" HeaderText="Estado" SortExpression="DescrEstadoCuenta">
-                                        <headerstyle horizontalalign="left"/>
-                                        <itemstyle  wrap="False" horizontalalign="left"/>
-                                    </asp:BoundField>
-                                </Columns>
-                            </cc1:PagingGridView>
+                            <asp:Panel ID="Panel1" runat="server" Height="400px" Width="650px" ScrollBars="Auto" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" BackColor="peachpuff">
+                                <cc1:PagingGridView ID="CuentaPagingGridView" runat="server"
+                                                    OnSorting="CuentaPagingGridView_Sorting" OnSelectedIndexChanged="CuentaPagingGridView_SelectedIndexChanged" OnPageIndexChanging="CuentaPagingGridView_PageIndexChanging"
+                                                    OnRowDataBound="CuentaPagingGridView_RowDataBound">
+                                    <Columns>
+                                        <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id">
+                                            <headerstyle horizontalalign="left"/>
+                                            <itemstyle wrap="False" horizontalalign="left" Width="300px"/>
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre">
+                                            <headerstyle horizontalalign="left"/>
+                                            <itemstyle  wrap="False" horizontalalign="left"/>
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Telefono" HeaderText="Telefono" SortExpression="Telefono">
+                                            <headerstyle horizontalalign="left"/>
+                                            <itemstyle  wrap="False" horizontalalign="left"/>
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email">
+                                            <headerstyle horizontalalign="left"/>
+                                            <itemstyle  wrap="False" horizontalalign="left"/>
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="DescrTipoCuenta" HeaderText="Tipo" SortExpression="DescrTipoCuenta">
+                                            <headerstyle horizontalalign="left"/>
+                                            <itemstyle  wrap="False" horizontalalign="left"/>
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="DescrEstadoCuenta" HeaderText="Estado" SortExpression="DescrEstadoCuenta">
+                                            <headerstyle horizontalalign="left"/>
+                                            <itemstyle  wrap="False" horizontalalign="left"/>
+                                        </asp:BoundField>
+                                    </Columns>
+                                </cc1:PagingGridView>
+                            </asp:Panel>
                         </td>
                         <td valign="top" align="left" style="padding-left:10px; padding-top:6px">
                             <table cellpadding="0" cellspacing="0" border="0">
