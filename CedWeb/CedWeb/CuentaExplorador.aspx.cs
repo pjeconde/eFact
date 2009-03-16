@@ -60,6 +60,7 @@ namespace CedWeb
         {
             try
             {
+                DesSeleccionarFilas();
                 CuentaPagingGridView.PageIndex = e.NewPageIndex;
                 System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
                 lista = CedWebRN.Cuenta.Lista(CuentaPagingGridView.PageIndex, CuentaPagingGridView.PageSize, CuentaPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
@@ -81,6 +82,7 @@ namespace CedWeb
         {
             try
             {
+                DesSeleccionarFilas();
                 System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
                 lista = CedWebRN.Cuenta.Lista(CuentaPagingGridView.PageIndex, CuentaPagingGridView.PageSize, CuentaPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
                 ViewState["lista"] = lista;
@@ -155,6 +157,10 @@ namespace CedWeb
 
                 e.Row.Attributes["onclick"] = ClientScript.GetPostBackClientHyperlink(this.CuentaPagingGridView, "Select$" + e.Row.RowIndex);
             }
+        }
+        private void DesSeleccionarFilas()
+        {
+            CuentaPagingGridView.SelectedIndex = -1;
         }
         protected void BajaButton_Click(object sender, EventArgs e)
         {
