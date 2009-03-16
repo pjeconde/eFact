@@ -44,7 +44,7 @@
                                             ControlToValidate="RazonSocialTextBox" ErrorMessage="Razon Social">
                                             <asp:Label ID="Label24" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                         </asp:RequiredFieldValidator>
-                                        <asp:Label ID="Label1" runat="server" Text="Razon Social"></asp:Label>
+                                        <asp:Label ID="Label1" runat="server" Text="Razón Social"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-top:10px">
                                         <asp:TextBox ID="RazonSocialTextBox" runat="server" Width="400px" TabIndex="1" MaxLength="50"></asp:TextBox>
