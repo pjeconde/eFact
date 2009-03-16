@@ -102,11 +102,7 @@ namespace CedWeb
         {
             try
             {
-                BajaButton.Enabled = false;
-                AnularBajaButton.Enabled = false;
-                SuspenderPremiumButton.Enabled = false;
-                RestablecerPremiumButton.Enabled = false;
-
+                DeshabilitarAcciones();
                 System.Collections.Generic.List<CedWebEntidades.Cuenta> lista = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
                 CedWebEntidades.Cuenta cuenta = new CedWebEntidades.Cuenta();
                 cuenta = (CedWebEntidades.Cuenta)lista[((CedeiraUIWebForms.PagingGridView)sender).SelectedIndex];
@@ -160,7 +156,15 @@ namespace CedWeb
         }
         private void DesSeleccionarFilas()
         {
+            DeshabilitarAcciones();
             CuentaPagingGridView.SelectedIndex = -1;
+        }
+        private void DeshabilitarAcciones()
+        {
+            BajaButton.Enabled = false;
+            AnularBajaButton.Enabled = false;
+            SuspenderPremiumButton.Enabled = false;
+            RestablecerPremiumButton.Enabled = false;
         }
         protected void BajaButton_Click(object sender, EventArgs e)
         {
