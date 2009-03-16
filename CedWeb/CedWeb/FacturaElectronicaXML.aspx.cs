@@ -1089,23 +1089,29 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                     detalleGridView.DataBind();
                     ViewState["lineas"] = lineas;
                     //Descuentos globales
-                    descuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>();
-                    foreach (FeaEntidades.InterFacturas.resumenDescuentos r in lc.comprobante[0].resumen.descuentos)
-                    {
-                        descuentos.Add(r);
-                    }
-                    descuentosGridView.DataSource = descuentos;
-                    descuentosGridView.DataBind();
-                    ViewState["descuentos"] = descuentos;
+					if (lc.comprobante[0].resumen.descuentos!=null)
+					{
+						descuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>();
+						foreach (FeaEntidades.InterFacturas.resumenDescuentos r in lc.comprobante[0].resumen.descuentos)
+						{
+							descuentos.Add(r);
+						}
+						descuentosGridView.DataSource = descuentos;
+						descuentosGridView.DataBind();
+						ViewState["descuentos"] = descuentos;
+					}
                     //impuestos globales
-                    impuestos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>();
-                    foreach (FeaEntidades.InterFacturas.resumenImpuestos imp in lc.comprobante[0].resumen.impuestos)
-                    {
-                        impuestos.Add(imp);
-                    }
-                    impuestosGridView.DataSource = impuestos;
-                    impuestosGridView.DataBind();
-                    ViewState["impuestos"] = impuestos;
+					if (lc.comprobante[0].resumen.impuestos!=null)
+					{
+						impuestos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>();
+						foreach (FeaEntidades.InterFacturas.resumenImpuestos imp in lc.comprobante[0].resumen.impuestos)
+						{
+							impuestos.Add(imp);
+						}
+						impuestosGridView.DataSource = impuestos;
+						impuestosGridView.DataBind();
+						ViewState["impuestos"] = impuestos;
+					}
                     ComentariosTextBox.Text = lc.comprobante[0].detalle.comentarios;
                     //Resumen
                     Importe_Total_Neto_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_neto_gravado);
@@ -1126,24 +1132,28 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 }
                 catch(Exception ex)
                 {
-                    if (ex.Source.Equals("System.Xml"))
-                    {
-                        try
-                        {
-                            ms.Seek(0, System.IO.SeekOrigin.Begin);
-                            FeaEntidades.InterFacturas.comprobante c = new FeaEntidades.InterFacturas.comprobante();
-                            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(c.GetType());
-                            c = (FeaEntidades.InterFacturas.comprobante)x.Deserialize(ms);
+					if (ex.Source.Equals("System.Xml"))
+					{
+						try
+						{
+							ms.Seek(0, System.IO.SeekOrigin.Begin);
+							FeaEntidades.InterFacturas.comprobante c = new FeaEntidades.InterFacturas.comprobante();
+							System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(c.GetType());
+							c = (FeaEntidades.InterFacturas.comprobante)x.Deserialize(ms);
 
-                            //TODO serializar un comprobante
+							//TODO serializar un comprobante
 
-                            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Esquema de un solo comprobante no implementado');</script>");
-                        }
-                        catch
-                        {
-                            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>");
-                        }
-                    }
+							ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Esquema de un solo comprobante no implementado');</script>");
+						}
+						catch
+						{
+							ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>");
+						}
+					}
+					else
+					{
+						throw ex;
+					}
                 }
             }
             catch
