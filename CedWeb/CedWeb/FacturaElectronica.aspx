@@ -126,7 +126,12 @@
                             <table cellpadding="0" cellspacing="0" border="0">
                                 <tr>
                                     <td style="padding-top:20px" align="center">
-                                        <asp:HyperLink ID="FEASYPHyperLink" runat="server"  NavigateUrl="~/FacturaElectronicaSYP.aspx" SkinID="LinkMedianoClaro">Guía de servicios y productos eFact ( tabla comparativa )</asp:HyperLink>
+                                        <asp:HyperLink ID="FEASYPHyperLink" runat="server"  NavigateUrl="~/EsquemaSolucioneseFact.aspx" SkinID="LinkMedianoClaro">Esquema de soluciones eFact ( gráfico )</asp:HyperLink>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <asp:HyperLink ID="HyperLink11" runat="server"  NavigateUrl="~/FacturaElectronicaSYP.aspx" SkinID="LinkMedianoClaro">Guía de servicios y productos eFact ( tabla comparativa )</asp:HyperLink>
                                     </td>
                                 </tr>
                                 <tr>
