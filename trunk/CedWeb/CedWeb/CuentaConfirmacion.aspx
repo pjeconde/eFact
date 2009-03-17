@@ -1,4 +1,4 @@
-ï»¿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/CuentaConf.aspx.cs" Inherits="CedWeb.CuentaConf" %>
+<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/CuentaConfirmacion.aspx.cs" Inherits="CedWeb.CuentaConfirmacion" %>
 <asp:Content ID="Content" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado" runat="Server">
     <table style="height: 500px; width: 800px; text-align: left;" cellpadding="0" cellspacing="0"
         border="0" class="TextoComun">
@@ -14,10 +14,10 @@
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                     </td>
                                     <td style="height: 20px;">
-                                        <asp:Label ID="Label5" runat="server" Text="ConfirmaciÃ³n de creaciÃ³n de cuenta" SkinID="TituloPagina"></asp:Label>
+                                        <asp:Label ID="Label5" runat="server" Text="Confirmación de creación de cuenta" SkinID="TituloPagina"></asp:Label>
                                     </td>
                                     <td style="height: 20px; padding-left:3px" valign="middle">
-                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/eFact.jpg" AlternateText="Factura ElectrÃ³nica"/>
+                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/eFact.jpg" AlternateText="Factura Electrónica"/>
                                     </td>
                                 </tr>
                             </table>
@@ -31,7 +31,7 @@
                     </tr>
                     <tr>
                         <td style="padding-top:10px; padding-left:32px">
-                            <asp:Label ID="Label2" runat="server" Font-Bold="true" ForeColor="red" Text="Â»" ></asp:Label>
+                            <asp:Label ID="Label2" runat="server" Font-Bold="true" ForeColor="red" Text="»" ></asp:Label>
                             <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Inicio.aspx" SkinID="LinkMedianoClaro">Ir a Inicio</asp:HyperLink>
                         </td>
                     </tr>

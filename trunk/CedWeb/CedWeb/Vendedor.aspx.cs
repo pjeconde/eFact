@@ -20,7 +20,7 @@ namespace CedWeb
                 RazonSocialTextBox.Focus();
                 try
                 {
-                    if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id == null)
+                    if (CedWebRN.Fun.NoHayNadieLogueado((CedWebEntidades.Sesion)Session["Sesion"]))
                     {
                         CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloLabel.Text, "~/SoloDispPUsuariosRegistrados.aspx");
                     }

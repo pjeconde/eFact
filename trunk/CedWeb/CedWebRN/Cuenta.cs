@@ -112,7 +112,7 @@ namespace CedWebRN
             a.Append("Gracias por crear su cuenta eFact."); a.AppendLine();
             a.Append("Para confirmar el alta, haga clic en el enlace que aparece a continuación:"); a.AppendLine();
             a.AppendLine();
-            a.Append("http://www.cedeira.com.ar/CuentaConf.aspx?Id=" + Encryptor.Encrypt(Cuenta.Id, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp"))); a.AppendLine();
+            a.Append("http://www.cedeira.com.ar/CuentaConfirmacion.aspx?Id=" + Encryptor.Encrypt(Cuenta.Id, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp"))); a.AppendLine();
             a.AppendLine();
             a.Append("Si no puede acceder a la página, copie la URL y péguela en una ventana nueva del navegador."); a.AppendLine();
             a.Append("Si ha recibido este correo electrónico y no ha solicitado la creación de una cuenta eFact, es probable que otro usuario haya introducido su dirección por error al intentar llevar a cabo este proceso. Si no ha solicitado la creación de una cuenta eFact, no es necesario que realice ninguna acción, y puede ignorar este mensaje con total seguridad."); a.AppendLine();
@@ -308,6 +308,11 @@ namespace CedWebRN
         {
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             return cuenta.CantidadDeFilas();
+        }
+        public static void ReservarNroLote(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+            cuenta.ReservarNroLote(Cuenta);
         }
     }
 }

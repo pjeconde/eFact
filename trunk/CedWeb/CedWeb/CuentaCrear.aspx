@@ -2,16 +2,6 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado"
     runat="Server">
-<script language="javascript" type="text/javascript">
-// <!CDATA[
-
-function ContactoTable_onclick() {
-
-}
-
-// ]]>
-</script>
-
     <table style="height: 500px; width: 800px" cellpadding="0" cellspacing="0" border="0">
         <tr>
             <td valign="top">
@@ -25,7 +15,7 @@ function ContactoTable_onclick() {
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                     </td>
                                     <td style="height: 20px;">
-                                        <asp:Label ID="Label5" runat="server" Text="Creación de cuenta " Font-Size="Medium" ForeColor="Black" Font-Bold="True"></asp:Label>
+                                        <asp:Label ID="Label5" runat="server" Text="Creación de cuenta " SkinID="TituloPagina"></asp:Label>
                                     </td>
                                     <td style="height: 20px; padding-left:3px" valign="middle">
                                         <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/eFact.jpg" AlternateText="Factura Electrónica"/>
@@ -40,7 +30,7 @@ function ContactoTable_onclick() {
                         <td align="left" style="padding-left:32px" colspan="2">
                             <!-- @@@ OBJETOS ESPECIFICOS DE LA PAGINA @@@-->
                             <asp:Label ID="Label2" runat="server" Text="Disponer de una cuenta eFact, le permitirá personalizar su perfil de usuario.   Esto le ahorrará trabajo, en el ingreso de facturas electrónicas, y disminuirá el riesgo de equivocarse en la carga de datos repetitivos."></asp:Label>
-                            <table id="ContactoTable" border="0" cellpadding="0" cellspacing="0" width="600" onclick="return ContactoTable_onclick()">
+                            <table id="Table1" border="0" cellpadding="0" cellspacing="0" width="600">
                                 <tr>
                                     <td colspan="2" style="width:300px; padding-right:5px; padding-top:10px" align="right">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" SetFocusOnError="True"

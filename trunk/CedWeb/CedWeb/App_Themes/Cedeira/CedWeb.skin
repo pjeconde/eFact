@@ -2,7 +2,7 @@
 <%@ Register Assembly="CrystalDecisions.Web, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304"
     Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
 
-<asp:Label runat="server" Font-Size="14px" ForeColor="#202020" Font-Bold="True" Width="100%" SkinID="TituloPagina"></asp:Label>
+<asp:Label runat="server" Font-Size="14px" ForeColor="black" Font-Bold="True" SkinID="TituloPagina"></asp:Label>
 <asp:Label runat="server" Font-Size="14px" ForeColor="white" Font-Bold="True" Width="100%" SkinID="TituloPaginaClaro"></asp:Label>
 <asp:Label runat="server" Font-Size="20px" ForeColor="white" Font-Bold="True" Width="100%" SkinID="TituloPaginaClaroGr"></asp:Label>
 

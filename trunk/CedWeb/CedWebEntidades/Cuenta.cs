@@ -17,6 +17,7 @@ namespace CedWebEntidades
         private TipoCuenta tipoCuenta;
         private EstadoCuenta estadoCuenta;
         private Vendedor vendedor;
+        private long ultimoNroLote;
 
         public Cuenta()
         {
@@ -24,6 +25,7 @@ namespace CedWebEntidades
             estadoCuenta = new EstadoCuenta();
             vendedor = new Vendedor();
         }
+
         public string Id
         {
             set
@@ -68,7 +70,6 @@ namespace CedWebEntidades
                 return email;
             }
         }
-
         public string Password
         {
             set
@@ -158,6 +159,17 @@ namespace CedWebEntidades
             get
             {
                 return EstadoCuenta.Descr;
+            }
+        }
+        public long UltimoNroLote
+        {
+            set
+            {
+                ultimoNroLote = value;
+            }
+            get
+            {
+                return ultimoNroLote;
             }
         }
     }

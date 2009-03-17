@@ -22,7 +22,7 @@ namespace CedWeb
                 {
                     NombreCuentaLabel.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Nombre;
                     Separador1Label.Visible = true;
-                    CambiarPasswordLinkButton.Visible = true;
+                    ConfiguracionLinkButton.Visible = true;
                     Separador2Label.Visible = true;
                     SalirLinkButton.Visible = true;
                     if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.TipoCuenta.Id == "Admin")
@@ -43,7 +43,7 @@ namespace CedWeb
             CedWebRN.Cuenta.Limpiar(sesion.Cuenta);
             NombreCuentaLabel.Text = String.Empty;
             Separador1Label.Visible = false;
-            CambiarPasswordLinkButton.Visible = false;
+            ConfiguracionLinkButton.Visible = false;
             Separador2Label.Visible = false; 
             SalirLinkButton.Visible = false;
             CuentasLinkButton.Visible = false;

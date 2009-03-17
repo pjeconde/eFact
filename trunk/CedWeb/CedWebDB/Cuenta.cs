@@ -12,7 +12,7 @@ namespace CedWebDB
         public void Leer(CedWebEntidades.Cuenta Cuenta)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("select Cuenta.IdCuenta, Cuenta.Nombre, Cuenta.Telefono, Cuenta.Email, Cuenta.Password, Cuenta.Pregunta, Cuenta.Respuesta, Cuenta.IdTipoCuenta, TipoCuenta.DescrTipoCuenta, Cuenta.IdEstadoCuenta, EstadoCuenta.DescrEstadoCuenta from Cuenta, TipoCuenta, EstadoCuenta ");
+            a.Append("select Cuenta.IdCuenta, Cuenta.Nombre, Cuenta.Telefono, Cuenta.Email, Cuenta.Password, Cuenta.Pregunta, Cuenta.Respuesta, Cuenta.IdTipoCuenta, TipoCuenta.DescrTipoCuenta, Cuenta.IdEstadoCuenta, EstadoCuenta.DescrEstadoCuenta, Cuenta.UltimoNroLote from Cuenta, TipoCuenta, EstadoCuenta ");
             a.Append("where Cuenta.IdCuenta='" + Cuenta.Id.ToString() + "' and Cuenta.IdTipoCuenta=TipoCuenta.IdTipoCuenta and Cuenta.IdEstadoCuenta=EstadoCuenta.IdEstadoCuenta ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             if (dt.Rows.Count == 0)
@@ -37,6 +37,7 @@ namespace CedWebDB
             Hasta.TipoCuenta.Descr = Convert.ToString(Desde["DescrTipoCuenta"]);
             Hasta.EstadoCuenta.Id = Convert.ToString(Desde["IdEstadoCuenta"]);
             Hasta.EstadoCuenta.Descr = Convert.ToString(Desde["DescrEstadoCuenta"]);
+            Hasta.UltimoNroLote = Convert.ToInt64(Desde["UltimoNroLote"]);
         }
         public void Crear(CedWebEntidades.Cuenta Cuenta)
         {
@@ -50,8 +51,8 @@ namespace CedWebDB
             a.Append("'"+Cuenta.Pregunta+"', ");
             a.Append("'"+Cuenta.Respuesta+"', ");
             a.Append("'"+Cuenta.TipoCuenta.Id+"', ");
-            a.Append("'"+Cuenta.EstadoCuenta.Id+"'");
-            a.Append(")");
+            a.Append("'"+Cuenta.EstadoCuenta.Id+"', ");
+            a.Append("" + Cuenta.UltimoNroLote + ")");
             Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
         }
         public void Confirmar(CedWebEntidades.Cuenta Cuenta)
@@ -140,6 +141,22 @@ namespace CedWebDB
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             return Convert.ToInt32(dt.Rows[0][0]);
+        }
+        public void ReservarNroLote(CedWebEntidades.Cuenta Cuenta)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("declare @UltimoNroLote numeric(14) ");
+            a.Append("update Cuenta set @UltimoNroLote=Cuenta.UltimoNroLote=Cuenta.UltimoNroLote+1 from Cuenta where Cuenta.IdCuenta='" + Cuenta.Id.ToString() + "' ");
+            a.Append("select @UltimoNroLote as UltimoNroLote ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            if (dt.Rows.Count == 0)
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente("Cuenta " + Cuenta.Id.ToString());
+            }
+            else
+            {
+                Cuenta.UltimoNroLote=Convert.ToInt64(dt.Rows[0]["UltimoNroLote"]);
+            }
         }
     }
 }
