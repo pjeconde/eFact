@@ -27,45 +27,28 @@ namespace CedWeb
         }
         protected void GuardarButton_Click(object sender, EventArgs e)
         {
-            //MsgErrorLabel.Text = String.Empty;
-            //ResultadoComprobarDisponibilidadLabel.Text = String.Empty;
-            //CedWebEntidades.Cuenta cuenta = new CedWebEntidades.Cuenta();
-            //cuenta.Nombre = NombreTextBox.Text;
-            //cuenta.Telefono = TelefonoTextBox.Text;
-            //cuenta.Email = EmailTextBox.Text;
-            //cuenta.Id = IdUsuarioTextBox.Text;
-            //cuenta.Password = PasswordTextBox.Text;
-            //cuenta.ConfirmacionPassword = ConfirmacionPasswordTextBox.Text;
-            //cuenta.Pregunta = PreguntaTextBox.Text;
-            //cuenta.Respuesta = RespuestaTextBox.Text;
-            //try
-            //{
-            //    CedWebRN.Cuenta.Validar(cuenta, Session["captcha"].ToString(), CaptchaTextBox.Text, (CedEntidades.Sesion)Session["Sesion"]);
-            //    CedWebRN.Cuenta.Registrar(cuenta, (CedEntidades.Sesion)Session["Sesion"]);
-            //    ComprobarDisponibilidadButton.Visible = false;
-            //    NuevaClaveCaptchaButton.Visible = false;
-            //    CrearCuentaButton.Visible = false;
-            //    CancelarButton.Visible = false;
-            //    CrearCuentaLabel.Visible = false;
-            //    CaptchaImage.Visible = false;
-            //    ClaveLabel.Visible = false;
-            //    CaptchaTextBox.Visible = false;
-            //    CaseSensitiveLabel.Visible = false;
-            //    NombreTextBox.Enabled = false;
-            //    TelefonoTextBox.Enabled = false;
-            //    EmailTextBox.Enabled = false;
-            //    IdUsuarioTextBox.Enabled = false;
-            //    PasswordTextBox.Enabled = false;
-            //    ConfirmacionPasswordTextBox.Enabled = false;
-            //    PreguntaTextBox.Enabled = false;
-            //    RespuestaTextBox.Enabled = false;
-            //    MsgErrorLabel.Text = "Gracias por crear su cuenta eFact.  Siga las instrucciones, que se enviaron por email, para confirmar la creación de su cuenta.  La recepción del email puede demorar unos minutos.";
-            //}
-            //catch (Exception ex)
-            //{
-            //    string a = CedeiraUIWebForms.Excepciones.Detalle(ex);
-            //    MsgErrorLabel.Text = a;
-            //}
+            MsgErrorLabel.Text = String.Empty;
+            CedWebEntidades.Cuenta cuenta = new CedWebEntidades.Cuenta();
+            cuenta.Id = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id;
+            cuenta.Nombre = NombreTextBox.Text;
+            cuenta.Telefono = TelefonoTextBox.Text;
+            cuenta.UltimoNroLote = Convert.ToInt64(UltimoNroLoteTextBox.Text);
+            try
+            {
+                CedWebRN.Cuenta.Configurar(cuenta, (CedEntidades.Sesion)Session["Sesion"]);
+                GuardarButton.Visible = false;
+                CancelarButton.Visible = false;
+                NombreTextBox.Enabled = false;
+                TelefonoTextBox.Enabled = false;
+                EmailTextBox.Enabled = false;
+                UltimoNroLoteTextBox.Enabled = false;
+                MsgErrorLabel.Text = "Se ha registrado la nueva configuración satisfactoriamente.";
+            }
+            catch (Exception ex)
+            {
+                string a = CedeiraUIWebForms.Excepciones.Detalle(ex);
+                MsgErrorLabel.Text = a;
+            }
         }
    }
 }

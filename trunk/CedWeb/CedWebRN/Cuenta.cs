@@ -314,5 +314,10 @@ namespace CedWebRN
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             cuenta.ReservarNroLote(Cuenta);
         }
+        public static void Configurar(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+            cuenta.Configurar(Cuenta);
+        }
     }
 }
