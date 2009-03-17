@@ -39,7 +39,7 @@ function ContactoTable_onclick() {
                     <tr>
                         <td align="left" style="padding-left:32px" colspan="2">
                             <!-- @@@ OBJETOS ESPECIFICOS DE LA PAGINA @@@-->
-                            <asp:Label ID="Label2" runat="server" Text="Disponer de una cuenta eFact, le permiirá personalizar su perfil de usuario.   Esto le ahorrará trabajo, en el ingreso de facturas electrónicas, y disminuirá el riesgo de equivocarse en la carga de datos repetitivos."></asp:Label>
+                            <asp:Label ID="Label2" runat="server" Text="Disponer de una cuenta eFact, le permitirá personalizar su perfil de usuario.   Esto le ahorrará trabajo, en el ingreso de facturas electrónicas, y disminuirá el riesgo de equivocarse en la carga de datos repetitivos."></asp:Label>
                             <table id="ContactoTable" border="0" cellpadding="0" cellspacing="0" width="600" onclick="return ContactoTable_onclick()">
                                 <tr>
                                     <td colspan="2" style="width:300px; padding-right:5px; padding-top:10px" align="right">
