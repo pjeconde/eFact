@@ -95,7 +95,8 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 {
                     CedWebRN.Cuenta.ReservarNroLote(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
                     Id_LoteTextbox.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.UltimoNroLote.ToString();
-                    Id_LoteTextbox.ReadOnly = true;
+					Email_VendedorRequiredFieldValidator.Enabled = false;
+					GenerarButton.Text = "Enviar archivo XML al e-mail de la cuenta eFact ("+((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Email+")";
                 }
                 if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.CUIT != 0)
                 {
@@ -606,11 +607,21 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			System.Xml.XmlWriter writerdememoria = new System.Xml.XmlTextWriter(m, System.Text.Encoding.GetEncoding("ISO-8859-1"));
 			x.Serialize(writerdememoria, lote);
 
-			System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage("facturaelectronica@cedeira.com.ar",
-				Email_VendedorTextBox.Text,
-				"Ced-eFact-Envío automático archivo XML:" + sb.ToString()
-				, string.Empty);
-
+			System.Net.Mail.MailMessage mail;
+			if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id != null)
+			{
+				mail = new System.Net.Mail.MailMessage("facturaelectronica@cedeira.com.ar",
+					((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Email,
+					"Ced-eFact-Envío automático archivo XML:" + sb.ToString()
+					, string.Empty);
+			}
+			else
+			{
+				mail = new System.Net.Mail.MailMessage("facturaelectronica@cedeira.com.ar",
+					Email_VendedorTextBox.Text,
+					"Ced-eFact-Envío automático archivo XML:" + sb.ToString()
+					, string.Empty);
+			}
 			m.Seek(0, System.IO.SeekOrigin.Begin);
 
 			System.Net.Mime.ContentType contentType = new System.Net.Mime.ContentType();
@@ -669,7 +680,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		}
 		catch (Exception ex)
 		{
-			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al generar el archivo." + ex.Message + "');</script>");
+			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al generar el archivo. " + ex.Message + ". Ir a DETALLE.');</script>");
 		}
 	}
 

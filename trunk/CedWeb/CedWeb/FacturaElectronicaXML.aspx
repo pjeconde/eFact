@@ -170,7 +170,8 @@
                                                             </td>
                                                             <td style="width: 240px" valign="middle" align="center">
                                                                 COMPROBANTE ELECTRÓNICO
-                                                            </td>
+                                                                <br />
+                                                                EN PESOS</td>
                                                         </tr>
                                                     </table>
                                                     <!-- DATOS DEL VENDEDOR -->
@@ -456,9 +457,9 @@
                                                                 <table border="0" cellpadding="0" cellspacing="0" style="">
                                                                     <tr>
                                                                         <td style="" class="TextoLabelFEAVendedor">
-                                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="Email_VendedorTextBox"
+                                                                            <asp:RegularExpressionValidator ID="Email_VendedorRegularExpressionValidator" runat="server" ControlToValidate="Email_VendedorTextBox"
                                                                                 ErrorMessage="error de formateo en mail contacto vendedor" SetFocusOnError="True"
-                                                                                ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$">* </asp:RegularExpressionValidator>
+                                                                                ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$" Width="11px">* </asp:RegularExpressionValidator>
                                                                             <asp:RequiredFieldValidator ID="Email_VendedorRequiredFieldValidator" runat="server"
                                                                                 ControlToValidate="Email_VendedorTextBox" ErrorMessage="mail contacto del vendedor"
                                                                                 SetFocusOnError="True">* </asp:RequiredFieldValidator>Mail Contacto:
