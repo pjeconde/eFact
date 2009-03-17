@@ -53,7 +53,7 @@ namespace CedWebDB
             a.Append("'"+Cuenta.TipoCuenta.Id+"', ");
             a.Append("'"+Cuenta.EstadoCuenta.Id+"', ");
             a.Append("" + Cuenta.UltimoNroLote + ")");
-            Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
         public void Confirmar(CedWebEntidades.Cuenta Cuenta)
         {
@@ -155,8 +155,18 @@ namespace CedWebDB
             }
             else
             {
-                Cuenta.UltimoNroLote=Convert.ToInt64(dt.Rows[0]["UltimoNroLote"]);
+                Cuenta.UltimoNroLote = Convert.ToInt64(dt.Rows[0]["UltimoNroLote"]);
             }
+        }
+        public void Configurar(CedWebEntidades.Cuenta Cuenta)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update Cuenta set ");
+            a.Append("Nombre='" + Cuenta.Nombre + "', ");
+            a.Append("Telefono='" + Cuenta.Telefono + "', ");
+            a.Append("UltimoNroLote=" + Cuenta.UltimoNroLote.ToString() + " ");
+            a.Append("where Cuenta.IdCuenta='" + Cuenta.Id.ToString() + "' ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
     }
 }

@@ -85,12 +85,12 @@
                                 <tr>
                                     <td align="right" style="padding-top:3px; padding-right:5px">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator16" runat="server" SetFocusOnError="True"
-                                            ControlToValidate="UltimoNroLoteTextBox" ErrorMessage="Último n° de Lote emitido"
-                                            ValidationExpression="[0-9]">
+                                            ControlToValidate="UltimoNroLoteTextBox" ErrorMessage="Último n° de Lote reservado"
+                                            ValidationExpression="[0-9]{1,14}">
                                             <asp:Label ID="Label49" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                         </asp:RegularExpressionValidator>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"  SetFocusOnError="True"
-                                            ControlToValidate="UltimoNroLoteTextBox" ErrorMessage="Último n° de Lote emitido">
+                                            ControlToValidate="UltimoNroLoteTextBox" ErrorMessage="Último n° de Lote reservado">
                                             <asp:Label ID="Label3" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                         </asp:RequiredFieldValidator>
                                         <asp:Label ID="Label4" runat="server" Text="Último n° de Lote reservado"></asp:Label>
@@ -122,7 +122,7 @@
                                 <tr>
                                     <td></td>
                                     <td align="left" style="padding-top:10px">
-                                        <asp:Button ID="GuardarButton" runat="server" Text="Guardar" Width="100px" Enabled="false" OnClick="GuardarButton_Click" TabIndex="4">
+                                        <asp:Button ID="GuardarButton" runat="server" Text="Guardar" Width="100px" OnClick="GuardarButton_Click" TabIndex="4">
                                         </asp:Button>
                                     </td>
                                     <td align="right" style="padding-top:10px">
