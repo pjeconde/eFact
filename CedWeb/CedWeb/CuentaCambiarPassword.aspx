@@ -18,7 +18,7 @@
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
                                     </td>
                                     <td style="height: 20px;">
-                                        <asp:Label ID="TituloLabel" runat="server" Text="Cambio de Contraseña de la cuenta " Font-Size="Medium" ForeColor="Black" Font-Bold="True"></asp:Label>
+                                        <asp:Label ID="TituloLabel" runat="server" Text="Cambio de Contraseña de la cuenta " SkinID="TituloPagina"></asp:Label>
                                     </td>
                                     <td style="height: 20px; padding-left:3px" valign="middle">
                                         <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/eFact.jpg" AlternateText="Factura Electrónica"/>
@@ -97,7 +97,7 @@
                                         <asp:Button ID="AceptarButton" runat="server" Text="Aceptar" OnClick="AceptarButton_Click" TabIndex="4" />
                                     </td>
                                     <td align="left" style="padding-top:5px; padding-left:5px">
-                                        <asp:Button ID="CancelarButton" runat="server" Text="Cancelar" PostBackUrl="~/Inicio.aspx" CausesValidation="false" TabIndex="5"> </asp:Button>
+                                        <asp:Button ID="CancelarButton" runat="server" Text="Cancelar" PostBackUrl="~/Configuracion.aspx" CausesValidation="false" TabIndex="5"> </asp:Button>
                                     </td>
                                 </tr>
                             </table>

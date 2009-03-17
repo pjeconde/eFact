@@ -12,7 +12,7 @@ using CedeiraUIWebForms;
 
 namespace CedWeb
 {
-    public partial class CuentaConf : System.Web.UI.Page
+    public partial class CuentaConfirmacion : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

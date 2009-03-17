@@ -14,7 +14,7 @@
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
                                     </td>
                                     <td style="height:20px;">
-                                        <asp:Label ID="TituloLabel" runat="server" Text="Cuentas" Font-Size="Medium" ForeColor="Black" Font-Bold="True"></asp:Label>
+                                        <asp:Label ID="TituloLabel" runat="server" Text="Cuentas" SkinID="TituloPagina"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>

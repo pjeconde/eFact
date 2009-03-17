@@ -19,11 +19,11 @@ namespace CedWeb
                 ((LinkButton)Master.FindControl("CuentasLinkButton")).ForeColor = System.Drawing.Color.Gold;
                 if (!this.IsPostBack)
                 {
-                    if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id == null)
+                    if (CedWebRN.Fun.NoHayNadieLogueado((CedWebEntidades.Sesion)Session["Sesion"]))
                     {
                         CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloLabel.Text, "~/SoloDispPUsuariosAdministradores.aspx");
                     }
-                    if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.TipoCuenta.Id != "Admin" || ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.EstadoCuenta.Id!="Vigente")
+                    if (CedWebRN.Fun.NoEstaLogueadoUnAdministrador((CedWebEntidades.Sesion)Session["Sesion"]))
                     {
                         CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloLabel.Text, "~/SoloDispPUsuariosAdministradores.aspx");
                     }

@@ -16,7 +16,7 @@ namespace CedWeb
         {
             if (!IsPostBack)
             {
-                if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id == null)
+                if (CedWebRN.Fun.NoHayNadieLogueado((CedWebEntidades.Sesion)Session["Sesion"]))
                 {
                     UsuarioLogueadoPanel.Visible = false;
                 }

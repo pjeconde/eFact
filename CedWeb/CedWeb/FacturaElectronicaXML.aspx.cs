@@ -23,102 +23,110 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 	{
 		if (!this.IsPostBack)
 		{
-			lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
-			FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
-			lineas.Add(linea);
-			detalleGridView.DataSource = lineas;
-			ViewState["lineas"] = lineas;
+            if (Session["AceptarTYC"] == null || Session["AceptarTYC"].Equals(false))
+            {
+                Response.Redirect("FacturaElectronicaTYC.aspx");
+            }
+            else
+            {
+                lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
+                FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
+                lineas.Add(linea);
+                detalleGridView.DataSource = lineas;
+                ViewState["lineas"] = lineas;
 
-			impuestos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>();
-			FeaEntidades.InterFacturas.resumenImpuestos impuesto = new FeaEntidades.InterFacturas.resumenImpuestos();
-			impuestos.Add(impuesto);
-			impuestosGridView.DataSource = impuestos;
-			ViewState["impuestos"] = impuestos;
+                impuestos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>();
+                FeaEntidades.InterFacturas.resumenImpuestos impuesto = new FeaEntidades.InterFacturas.resumenImpuestos();
+                impuestos.Add(impuesto);
+                impuestosGridView.DataSource = impuestos;
+                ViewState["impuestos"] = impuestos;
 
-			descuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>();
-			FeaEntidades.InterFacturas.resumenDescuentos descuento = new FeaEntidades.InterFacturas.resumenDescuentos();
-			descuentos.Add(descuento);
-			descuentosGridView.DataSource = descuentos;
-			ViewState["descuentos"] = descuentos;
+                descuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>();
+                FeaEntidades.InterFacturas.resumenDescuentos descuento = new FeaEntidades.InterFacturas.resumenDescuentos();
+                descuentos.Add(descuento);
+                descuentosGridView.DataSource = descuentos;
+                ViewState["descuentos"] = descuentos;
 
-			Condicion_IVA_VendedorDropDownList.DataValueField = "Codigo";
-			Condicion_IVA_VendedorDropDownList.DataTextField = "Descr";
-			Condicion_IVA_VendedorDropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
+                Condicion_IVA_VendedorDropDownList.DataValueField = "Codigo";
+                Condicion_IVA_VendedorDropDownList.DataTextField = "Descr";
+                Condicion_IVA_VendedorDropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
 
-			Condicion_Ingresos_Brutos_VendedorDropDownList.DataValueField = "Codigo";
-			Condicion_Ingresos_Brutos_VendedorDropDownList.DataTextField = "Descr";
-			Condicion_Ingresos_Brutos_VendedorDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.Lista();
+                Condicion_Ingresos_Brutos_VendedorDropDownList.DataValueField = "Codigo";
+                Condicion_Ingresos_Brutos_VendedorDropDownList.DataTextField = "Descr";
+                Condicion_Ingresos_Brutos_VendedorDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.Lista();
 
-			Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
-			Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
-			Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
+                Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+                Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
+                Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
 
-			Condicion_IVA_CompradorDropDownList.DataValueField = "Codigo";
-			Condicion_IVA_CompradorDropDownList.DataTextField = "Descr";
-			Condicion_IVA_CompradorDropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
+                Condicion_IVA_CompradorDropDownList.DataValueField = "Codigo";
+                Condicion_IVA_CompradorDropDownList.DataTextField = "Descr";
+                Condicion_IVA_CompradorDropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
 
-			//Condicion_Ingresos_Brutos_CompradorDropDownList.DataValueField = "Codigo";
-			//Condicion_Ingresos_Brutos_CompradorDropDownList.DataTextField = "Descr";
-			//Condicion_Ingresos_Brutos_CompradorDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.Lista();
+                //Condicion_Ingresos_Brutos_CompradorDropDownList.DataValueField = "Codigo";
+                //Condicion_Ingresos_Brutos_CompradorDropDownList.DataTextField = "Descr";
+                //Condicion_Ingresos_Brutos_CompradorDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.Lista();
 
-			Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-			Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-			Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
+                Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
 
-			CodigoOperacionDropDownList.DataValueField = "Codigo";
-			CodigoOperacionDropDownList.DataTextField = "Descr";
-			CodigoOperacionDropDownList.DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.Lista();
+                CodigoOperacionDropDownList.DataValueField = "Codigo";
+                CodigoOperacionDropDownList.DataTextField = "Descr";
+                CodigoOperacionDropDownList.DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.Lista();
 
-			Provincia_CompradorDropDownList.DataValueField = "Codigo";
-			Provincia_CompradorDropDownList.DataTextField = "Descr";
-			Provincia_CompradorDropDownList.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+                Provincia_CompradorDropDownList.DataValueField = "Codigo";
+                Provincia_CompradorDropDownList.DataTextField = "Descr";
+                Provincia_CompradorDropDownList.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
 
-			Provincia_VendedorDropDownList.DataValueField = "Codigo";
-			Provincia_VendedorDropDownList.DataTextField = "Descr";
-			Provincia_VendedorDropDownList.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+                Provincia_VendedorDropDownList.DataValueField = "Codigo";
+                Provincia_VendedorDropDownList.DataTextField = "Descr";
+                Provincia_VendedorDropDownList.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
 
-			IVAcomputableDropDownList.DataValueField = "Codigo";
-			IVAcomputableDropDownList.DataTextField = "Descr";
-			IVAcomputableDropDownList.DataSource = FeaEntidades.Dicotomicos.Dicotomico.Lista();
+                IVAcomputableDropDownList.DataValueField = "Codigo";
+                IVAcomputableDropDownList.DataTextField = "Descr";
+                IVAcomputableDropDownList.DataSource = FeaEntidades.Dicotomicos.Dicotomico.Lista();
 
-			DataBind();
+                DataBind();
 
-			BindearDropDownLists();
+                BindearDropDownLists();
 
-			if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.CUIT != 0)
-			{
-				CedWebEntidades.Vendedor v = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor;
-				Razon_Social_VendedorTextBox.Text = v.RazonSocial;
-				Domicilio_Calle_VendedorTextBox.Text = v.Calle;
-				Domicilio_Numero_VendedorTextBox.Text = v.Nro;
-				Domicilio_Piso_VendedorTextBox.Text = v.Piso;
-				Domicilio_Depto_VendedorTextBox.Text = v.Depto;
-				Domicilio_Sector_VendedorTextBox.Text = v.Sector;
-				Domicilio_Torre_VendedorTextBox.Text = v.Torre;
-				Domicilio_Manzana_VendedorTextBox.Text = v.Manzana;
-				Localidad_VendedorTextBox.Text = v.Localidad;
-				Provincia_VendedorDropDownList.SelectedValue = v.IdProvincia;
-				Cp_VendedorTextBox.Text = v.CodPost;
-				Contacto_VendedorTextBox.Text = v.NombreContacto;
-				Email_VendedorTextBox.Text = v.EmailContacto;
-				Telefono_VendedorTextBox.Text = v.TelefonoContacto.ToString();
-				Cuit_VendedorTextBox.Text = v.CUIT.ToString();
-				Condicion_IVA_VendedorDropDownList.SelectedValue = v.IdCondIVA.ToString();
-				NroIBVendedorTextBox.Text = v.NroIngBrutos.ToString();
-				Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue = v.IdCondIngBrutos.ToString();
-				if (!v.GLN.ToString().Equals("0"))
-				{
-					GLN_VendedorTextBox.Text = v.GLN.ToString();
-				}
-				Codigo_Interno_VendedorTextBox.Text = v.CodigoInterno;
-				InicioDeActividadesVendedorDatePickerWebUserControl.CalendarDate = v.FechaInicioActividades;
-			}
-
-			if (Session["AceptarTYC"]==null || Session["AceptarTYC"].Equals(false))
-			{
-				Response.Redirect("FacturaElectronicaTYC.aspx");
-			}
-		}
+                if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id != null)
+                {
+                    CedWebRN.Cuenta.ReservarNroLote(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
+                    Id_LoteTextbox.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.UltimoNroLote.ToString();
+                    Id_LoteTextbox.ReadOnly = true;
+                }
+                if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.CUIT != 0)
+                {
+                    CedWebEntidades.Vendedor v = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor;
+                    Razon_Social_VendedorTextBox.Text = v.RazonSocial;
+                    Domicilio_Calle_VendedorTextBox.Text = v.Calle;
+                    Domicilio_Numero_VendedorTextBox.Text = v.Nro;
+                    Domicilio_Piso_VendedorTextBox.Text = v.Piso;
+                    Domicilio_Depto_VendedorTextBox.Text = v.Depto;
+                    Domicilio_Sector_VendedorTextBox.Text = v.Sector;
+                    Domicilio_Torre_VendedorTextBox.Text = v.Torre;
+                    Domicilio_Manzana_VendedorTextBox.Text = v.Manzana;
+                    Localidad_VendedorTextBox.Text = v.Localidad;
+                    Provincia_VendedorDropDownList.SelectedValue = v.IdProvincia;
+                    Cp_VendedorTextBox.Text = v.CodPost;
+                    Contacto_VendedorTextBox.Text = v.NombreContacto;
+                    Email_VendedorTextBox.Text = v.EmailContacto;
+                    Telefono_VendedorTextBox.Text = v.TelefonoContacto.ToString();
+                    Cuit_VendedorTextBox.Text = v.CUIT.ToString();
+                    Condicion_IVA_VendedorDropDownList.SelectedValue = v.IdCondIVA.ToString();
+                    NroIBVendedorTextBox.Text = v.NroIngBrutos.ToString();
+                    Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue = v.IdCondIngBrutos.ToString();
+                    if (!v.GLN.ToString().Equals("0"))
+                    {
+                        GLN_VendedorTextBox.Text = v.GLN.ToString();
+                    }
+                    Codigo_Interno_VendedorTextBox.Text = v.CodigoInterno;
+                    InicioDeActividadesVendedorDatePickerWebUserControl.CalendarDate = v.FechaInicioActividades;
+                }
+            }
+        }
 	}
 
 	private void BindearDropDownLists()
