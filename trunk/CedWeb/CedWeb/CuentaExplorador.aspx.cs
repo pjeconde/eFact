@@ -16,19 +16,22 @@ namespace CedWeb
         {
             try
             {
-                ((LinkButton)Master.FindControl("CuentasLinkButton")).ForeColor = System.Drawing.Color.Gold;
-                if (!this.IsPostBack)
+                if (!IsPostBack)
                 {
-                    if (CedWebRN.Fun.NoHayNadieLogueado((CedWebEntidades.Sesion)Session["Sesion"]))
+                    ((LinkButton)Master.FindControl("CuentasLinkButton")).ForeColor = System.Drawing.Color.Gold;
+                    if (!this.IsPostBack)
                     {
-                        CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloLabel.Text, "~/SoloDispPUsuariosAdministradores.aspx");
+                        if (CedWebRN.Fun.NoHayNadieLogueado((CedWebEntidades.Sesion)Session["Sesion"]))
+                        {
+                            CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloLabel.Text, "~/SoloDispPUsuariosAdministradores.aspx");
+                        }
+                        if (CedWebRN.Fun.NoEstaLogueadoUnAdministrador((CedWebEntidades.Sesion)Session["Sesion"]))
+                        {
+                            CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloLabel.Text, "~/SoloDispPUsuariosAdministradores.aspx");
+                        }
+                        CuentaPagingGridView.PageSize = 20;
+                        BindPagingGrid();
                     }
-                    if (CedWebRN.Fun.NoEstaLogueadoUnAdministrador((CedWebEntidades.Sesion)Session["Sesion"]))
-                    {
-                        CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloLabel.Text, "~/SoloDispPUsuariosAdministradores.aspx");
-                    }
-                    CuentaPagingGridView.PageSize = 20;
-                    BindPagingGrid();
                 }
             }
             catch (System.Threading.ThreadAbortException)
