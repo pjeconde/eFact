@@ -11,6 +11,6 @@ country: Argentina
 postal_code: 
 phone_number: 
 display_email: contacto@cedeira.com.ar
-site_name: 
+site_name: Cedeira Software Factory
 site_description: Factura electrónica gratis Genera XML para Interfacturas
 
