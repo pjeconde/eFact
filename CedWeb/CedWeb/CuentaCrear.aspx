@@ -100,9 +100,9 @@
                                     <td align="left" style="padding-top:3px">
                                         <asp:TextBox ID="IdUsuarioTextBox" runat="server" Width="100px" TabIndex="4" MaxLength="50"></asp:TextBox>
                                     </td>
-                                    <td colspan="2" align="left" style="padding-left:5px; padding-top:3px; width:330px">
-                                        <asp:Button ID="ComprobarDisponibilidadButton" runat="server" Text="Comprobar disp." ToolTip="Comprobar la disponibilidad" OnClick="ComprobarDisponibilidadButton_Click" Width="103px" CausesValidation="false"></asp:Button>
-                                        <asp:Label ID="ResultadoComprobarDisponibilidadLabel" runat="server" Font-Size="12px" Font-Bold="True" Text="" Width="200px"></asp:Label>
+                                    <td colspan="2" align="center" style="padding-left:5px; padding-top:3px; width:330px">
+                                        <asp:Button ID="ComprobarDisponibilidadButton" runat="server" Text="Comprobar disponibilidad" ToolTip="Comprobar la disponibilidad" OnClick="ComprobarDisponibilidadButton_Click" Width="100%" CausesValidation="false"></asp:Button>
+                                        <asp:Label ID="ResultadoComprobarDisponibilidadLabel" runat="server" Font-Size="12px" Font-Bold="True" Text="" Width="100%"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -157,7 +157,7 @@
                                     </td>
                                     <td colspan="2" align="left" style="padding-top:3px">
                                         <asp:Label ID="Label1" runat="server" Text="¿" Font-Bold="true"></asp:Label>
-                                        <asp:TextBox ID="PreguntaTextBox" runat="server" Width="340px" TabIndex="7" MaxLength="256"></asp:TextBox>
+                                        <asp:TextBox ID="PreguntaTextBox" runat="server" Width="334px" TabIndex="7" MaxLength="256"></asp:TextBox>
                                         <asp:Label ID="Label6" runat="server" Text="?" Font-Bold="true"></asp:Label>
                                     </td>
                                 </tr>
