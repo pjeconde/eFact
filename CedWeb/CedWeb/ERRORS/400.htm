@@ -3,8 +3,12 @@
 
 <head>
     <style type="text/css">
-        a:link			{font:8pt/11pt verdana; color:FF0000}
-        a:visited		{font:8pt/11pt verdana; color:#4e4e4e}
+        a:link			    {color:#CC0000; text-decoration:none;}
+        a:visited		    {color:#CC0000; text-decoration:none;}
+        .texto1             {font-size:12px; font-family: arial; color:#333333; text-decoration:none; vertical-align:top;}
+        .texto1b             {font-size:12px; font-family: arial;  font-weight:bold; color:#333333; text-decoration:none; vertical-align:top;}
+        .texto2             {font-size:16px; font-family: arial;  font-weight:bold; color:#333333; text-decoration:none; vertical-align:top;}
+        
     </style>
     <link rel="stylesheet" type="text/css" href="~/App_Themes/Cedeira/CedWeb.css"/>
     <meta name="ROBOTS" content="NOINDEX"/>
@@ -44,26 +48,23 @@ function Homepage(){
 
 <table width="410" cellpadding="3" cellspacing="5">
     <tr>
-        <td align="left" valign="middle" width="360px">
-            <h1 style="color: #000000; font: 13pt/15pt verdana">
-                <img src="../Imagenes/CajaBrownPeru.ico" alt="Mensaje" /> La página no fuciona
-            </h1>
+        <td style="width:360px; text-align:left; vertical-align:middle;"  class="texto2">
+            <img src="../Imagenes/CajaBrownPeru.ico" alt="Mensaje" /> La página no fuciona
         </td>
     </tr>
     <tr>
-        <td style="width:400px" colspan="2">
-            <font style="color: #000000; font: 8pt/11pt verdana">La página que usted busca podría
-                haber sido quitada, su nombre ha cambiado, o está no disponible temporalmente.</font></td>
+        <td style="width:400px" colspan="2" class="texto1">
+            La página que usted busca podría haber sido quitada, su nombre ha cambiado, o no está disponible temporalmente.
+        </td>
     </tr>
     <tr>
-        <td style="width:400px" colspan="2">
-            <span style="color: #000000; font: 8pt/11pt verdana">
-                <hr color="#C0C0C0" noshade>
-                <p>
-                    Por favor intente el siguiente:</p>
+        <td style="width:400px;" colspan="2" class="texto1">
+                <hr style="color:#C0C0C0"/>
+                    Por favor intente lo siguiente:
+                    <br />
                 <ul>
                     <li>Si usted escribiera la dirección de la página en la barra de dirección, asegúrese
-                        que es deletreado correctamente.
+                        que pueda deletrearla correctamente.
                     </li>
                     <li>Abra la
                         <script language="JavaScript" type="text/javascript"> 
@@ -78,16 +79,15 @@ function Homepage(){
                         página de inicio, y luego busque los vínculos a la información que usted quiere.
                     </li>
                     <li>Intente con otro vínculo.<br /><br />
-                        <span style="color:red; font-weight:bold; font-family:Verdana; font-size:12px;">» </span><a href="javascript:history.back(1)"><span style="color:blue; font: 8pt/11pt verdana; text-decoration: none;">
+                        <span style="color:red; font-weight:bold;">» </span><a href="javascript:history.back(1)"><span style="color:blue;">
                             Volver a la página anterior</span></a>
                     </li>
                 </ul>
-                <h2 style="color: #000000; font: 8pt/11pt verdana">
-                        HTTP 400 - Petición mala<br />
+                    <span class="texto1b">
+                        HTTP 400 - Petición mala</span><br />
                         Servicios de información de internet<br/>
                     <br />
-                <hr color="#C0C0C0" noshade>
-                </h2>
+                <hr style="color:#C0C0C0"/>
                 <p>
                     Información técnica (para personal de soporte)&nbsp;</p>
                 <ul>
