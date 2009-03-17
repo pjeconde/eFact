@@ -37,6 +37,7 @@ namespace CedWeb
         protected void CrearCuentaButton_Click(object sender, EventArgs e)
         {
             MsgErrorLabel.Text = String.Empty;
+            ResultadoComprobarDisponibilidadLabel.Text = String.Empty;
             CedWebEntidades.Cuenta cuenta = new CedWebEntidades.Cuenta();
             cuenta.Nombre = NombreTextBox.Text;
             cuenta.Telefono = TelefonoTextBox.Text;
@@ -72,14 +73,7 @@ namespace CedWeb
             catch (Exception ex)
             {
                 string a = CedeiraUIWebForms.Excepciones.Detalle(ex);
-                if (a.IndexOf("PK_Table_Cuenta")!=0)
-                {
-                    MsgErrorLabel.Text = new Microsoft.ApplicationBlocks.ExceptionManagement.Cuenta.IdUsuarioNoDisponible().Message.ToString();
-                }
-                else
-                {
-                    MsgErrorLabel.Text = a;
-                }
+                MsgErrorLabel.Text = a;
             }
         }
         protected void NuevaClaveCaptchaButton_Click(object sender, EventArgs e)

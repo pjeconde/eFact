@@ -202,7 +202,9 @@ namespace CedWebRN
             {
                 try
                 {
-                    Leer(Cuenta, Sesion);
+                    CedWebEntidades.Cuenta cuentaExistente = new CedWebEntidades.Cuenta();
+                    cuentaExistente.Id = Cuenta.Id;
+                    Leer(cuentaExistente, Sesion);
                     return false;
                 }
                 catch (Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente)
