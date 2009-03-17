@@ -101,7 +101,7 @@
                                         <asp:TextBox ID="IdUsuarioTextBox" runat="server" Width="100px" TabIndex="4" MaxLength="50"></asp:TextBox>
                                     </td>
                                     <td colspan="2" align="left" style="padding-left:5px; padding-top:3px; width:330px">
-                                        <asp:Button ID="ComprobarDisponibilidadButton" runat="server" Text="Comprobar disp." ToolTip="Comprobar la disponibilidad del Id.Usuario ingresado" OnClick="ComprobarDisponibilidadButton_Click" Width="120px" CausesValidation="false"></asp:Button>
+                                        <asp:Button ID="ComprobarDisponibilidadButton" runat="server" Text="Comprobar disp." ToolTip="Comprobar la disponibilidad" OnClick="ComprobarDisponibilidadButton_Click" Width="103px" CausesValidation="false"></asp:Button>
                                         <asp:Label ID="ResultadoComprobarDisponibilidadLabel" runat="server" Font-Size="12px" Font-Bold="True" Text="" Width="200px"></asp:Label>
                                     </td>
                                 </tr>
@@ -122,7 +122,7 @@
                                         <asp:TextBox ID="PasswordTextBox" runat="server" Width="100px" TextMode="Password" TabIndex="5" MaxLength="50"></asp:TextBox>
                                     </td>
                                     <td rowspan="2" style="padding-top:3px" align="center" valign="middle">
-                                        <asp:Label ID="Label4" runat="server" Text="(si olvida su Contraseña, le preguntaremos la Respuesta a su Pregunta de seguridad)" ForeColor="gray"></asp:Label>
+                                        <asp:Label ID="Label4" runat="server" Text="(si olvida su Contraseña, utilizaremos la pregunta de seguridad)" ForeColor="Gray"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -136,7 +136,7 @@
                                             ControlToValidate="ConfirmacionPasswordTextBox" ErrorMessage="Confirmacion de Contraseña">
                                             <asp:Label ID="Label18" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                         </asp:RequiredFieldValidator>
-                                        <asp:Label ID="ConfirmacionPasswordLabel" runat="server" Text="Confirmacion de Contraseña"></asp:Label>
+                                        <asp:Label ID="ConfirmacionPasswordLabel" runat="server" Text="Confirmación de Contraseña"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-top:3px">
                                         <asp:TextBox ID="ConfirmacionPasswordTextBox" runat="server" Width="100px" TextMode="Password" TabIndex="6" MaxLength="50"></asp:TextBox>
