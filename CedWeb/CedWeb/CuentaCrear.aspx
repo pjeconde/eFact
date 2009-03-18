@@ -85,6 +85,13 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td colspan="2">
+                                    </td>
+                                    <td colspan="2" style="color:Gray">
+                                    (muy importante: las facturas electrónicas -archivos xml- se enviarán, vía email, a esta dirección)
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td colspan="2" align="right" style="padding-top:3px; padding-right:5px">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" SetFocusOnError="True"
                                             ControlToValidate="IdUsuarioTextBox" ErrorMessage="Id.Usuario"
