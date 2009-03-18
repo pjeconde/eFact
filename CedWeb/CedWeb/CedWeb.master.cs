@@ -30,6 +30,10 @@ namespace CedWeb
                         CuentasLinkButton.Visible = true;
                     }
                 }
+				if (Request.UrlReferrer!=null)
+				{
+					Session["ref"] = Request.UrlReferrer.AbsoluteUri;
+				}
             }
 		}
         public void SalirLinkButton_Click(object sender, EventArgs e)
