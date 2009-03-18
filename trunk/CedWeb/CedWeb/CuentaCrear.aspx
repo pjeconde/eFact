@@ -128,8 +128,8 @@
                                     <td align="left" style="padding-top:3px">
                                         <asp:TextBox ID="PasswordTextBox" runat="server" Width="100px" TextMode="Password" TabIndex="5" MaxLength="50"></asp:TextBox>
                                     </td>
-                                    <td rowspan="2" style="padding-top:3px" align="center" valign="middle">
-                                        <asp:Label ID="Label4" runat="server" Text="(si olvida su Contraseña, utilizaremos la pregunta de seguridad)" ForeColor="Gray"></asp:Label>
+                                    <td rowspan="2" style="padding-left:5px; padding-top:3px" align="left" valign="middle">
+                                        <asp:Label ID="Label4" runat="server" Text="(si olvida su Contraseña, utilizaremos la Pregunta de seguridad)" ForeColor="Gray"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
