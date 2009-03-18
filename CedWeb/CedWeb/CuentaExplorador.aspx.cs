@@ -18,7 +18,7 @@ namespace CedWeb
             {
                 if (!IsPostBack)
                 {
-                    ((LinkButton)Master.FindControl("CuentasLinkButton")).ForeColor = System.Drawing.Color.Gold;
+                    ((LinkButton)Master.FindControl("AdministracionLinkButton")).ForeColor = System.Drawing.Color.Gold;
                     if (!this.IsPostBack)
                     {
                         if (CedWebRN.Fun.NoHayNadieLogueado((CedWebEntidades.Sesion)Session["Sesion"]))
