@@ -27,7 +27,7 @@ namespace CedWeb
                     SalirLinkButton.Visible = true;
                     if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.TipoCuenta.Id == "Admin")
                     {
-                        CuentasLinkButton.Visible = true;
+                        AdministracionLinkButton.Visible = true;
                     }
                 }
 				if (Request.UrlReferrer!=null)
@@ -50,7 +50,7 @@ namespace CedWeb
             ConfiguracionLinkButton.Visible = false;
             Separador2Label.Visible = false; 
             SalirLinkButton.Visible = false;
-            CuentasLinkButton.Visible = false;
+            AdministracionLinkButton.Visible = false;
             Session["AceptarTYC"] = null;
         }
     }
