@@ -15,18 +15,18 @@
         // Código que se ejecuta al producirse un error no controlado
         try
         {
-            string strFile = Server.MapPath("Log.txt");
+            string strFile = Server.MapPath("log.txt");
             System.IO.StreamWriter log = new System.IO.StreamWriter(strFile, true);
             System.Exception exc = Server.GetLastError();
-            Exception oErr;
-            oErr = Server.GetLastError().InnerException;
-            if (Request.Url.ToString().Contains("localhost")) {
+            //Exception oErr;
+            //oErr = Server.GetLastError().InnerException;
+            //if (Request.Url.ToString().Contains("localhost")) {
                 //return;
-            }
-            string urlPathAbsoluto = Request.Url.AbsolutePath.ToString();
-            string explorador = Request.UserAgent.ToString();
-            string fecha = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss ");
-            log.WriteLine("Fecha:" + fecha + "\nUrlPathAbsoluto:" + urlPathAbsoluto + "\nExplorador:" + explorador + "\nDescripcion:" + exc.ToString() + "\n" + oErr.ToString() + "\n");
+            //}
+            string urlPathAbsoluto = ""; //Request.Url.AbsolutePath.ToString();
+            string explorador = ""; //Request.UserAgent.ToString();
+            string fecha = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+            log.WriteLine("Fecha:" + fecha + "\nUrlPathAbsoluto:" + urlPathAbsoluto + "\nExplorador:" + explorador + "\nDescripcion:" + exc.ToString() + "\n");
             log.Close();
         }
         catch (System.Exception ex)
