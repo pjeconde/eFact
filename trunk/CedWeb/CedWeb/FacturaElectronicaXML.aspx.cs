@@ -1176,7 +1176,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		}
 		else
 		{
-			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Debe elegir un archivo para subir');</script>");
+			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Debe seleccionar un archivo');</script>");
 		}
 	}
 }
