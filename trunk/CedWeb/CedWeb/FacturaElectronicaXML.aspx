@@ -48,45 +48,77 @@
             </td>
         </tr>
         <tr>
-            <td valign="top" style="">
+            <td valign="top">
                 <table style="width: 800px;" cellpadding="0" cellspacing="0" border="0">
                     <tr>
+                        <td style="width: 9px;">
+                        </td>
                         <td colspan="3" valign="top" style="">
                             <!-- @@@ TITULO DE LA PAGINA @@@-->
                             <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
                                 <tr>
-                                    <td style="width: 10px;">
-                                    </td>
-                                    <td style="width: 21px; height: 20px;">
+                                    <td>
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="+" />
-                                    </td>
-                                    <td style="height: 20px;">
-                                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Factura Electrónica"
-                                            SkinID="TituloPagina"></asp:Label>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" style="height: 10px;">
+                                        <asp:Label ID="Label1" runat="server" SkinID="TituloPagina" Text="Factura Electrónica"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td> 
-                                        <table width="100%" cellpadding="0" cellspacing="0" border="0"> 
-                                            <tr></tr>
-                                            <tr>   
-                                                <td>
-                                                    <asp:FileUpload Width="100%" ID="XMLFileUpload" runat="server" ></asp:FileUpload>
+                                    <td align="center" style="width: 782px; vertical-align: middle; text-align: center;"
+                                        valign="top">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+                                            <tr>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
                                                 </td>
-                                                <td>
-                                                    <asp:Button ID="FileUploadButton" runat="server" OnClick="FileUploadButton_Click"
-                                                    Text="Completar datos desde comprobante previo" CausesValidation="false" Width="100%" />
+                                                <td colspan="1" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
                                                 </td>
                                             </tr>
-                                            <tr></tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="TextoResaltado" style="text-align: center;">
+                                                    COMPROBANTE PREEXISTENTE
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
+                                                        <tr>
+                                                            <td>
+                                                                <asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px" ></asp:FileUpload>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:Button ID="FileUploadButton" runat="server" CausesValidation="false" Height="25px"
+                                                                    OnClick="FileUploadButton_Click" Text="Completar datos desde archivo xml seleccionado"
+                                                                    />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="1" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
                                         </table>
+                                        <br />
                                     </td>
                                 </tr>
                             </table>
@@ -457,9 +489,10 @@
                                                                 <table border="0" cellpadding="0" cellspacing="0" style="">
                                                                     <tr>
                                                                         <td style="" class="TextoLabelFEAVendedor">
-                                                                            <asp:RegularExpressionValidator ID="Email_VendedorRegularExpressionValidator" runat="server" ControlToValidate="Email_VendedorTextBox"
-                                                                                ErrorMessage="error de formateo en mail contacto vendedor" SetFocusOnError="True"
-                                                                                ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$" Width="11px">* </asp:RegularExpressionValidator>
+                                                                            <asp:RegularExpressionValidator ID="Email_VendedorRegularExpressionValidator" runat="server"
+                                                                                ControlToValidate="Email_VendedorTextBox" ErrorMessage="error de formateo en mail contacto vendedor"
+                                                                                SetFocusOnError="True" ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$"
+                                                                                Width="11px">* </asp:RegularExpressionValidator>
                                                                             <asp:RequiredFieldValidator ID="Email_VendedorRequiredFieldValidator" runat="server"
                                                                                 ControlToValidate="Email_VendedorTextBox" ErrorMessage="mail contacto del vendedor"
                                                                                 SetFocusOnError="True">* </asp:RequiredFieldValidator>Mail Contacto:
@@ -671,9 +704,9 @@
                                                     <table style="width: 370px" border="0" cellpadding="0" cellspacing="0">
                                                         <tr>
                                                             <td class="TextoLabelFEAVendedor">
-                                                                <asp:RegularExpressionValidator ID="GLN_CompradorRegularExpressionValidator" runat="server" ControlToValidate="GLN_VendedorTextBox"
-                                                                    ErrorMessage="error de formateo en GLN del comprador" SetFocusOnError="True"
-                                                                    ValidationExpression="[0-9]{13}">* </asp:RegularExpressionValidator>GLN:
+                                                                <asp:RegularExpressionValidator ID="GLN_CompradorRegularExpressionValidator" runat="server"
+                                                                    ControlToValidate="GLN_VendedorTextBox" ErrorMessage="error de formateo en GLN del comprador"
+                                                                    SetFocusOnError="True" ValidationExpression="[0-9]{13}">* </asp:RegularExpressionValidator>GLN:
                                                             </td>
                                                             <td style="" class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="GLN_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
@@ -1587,7 +1620,6 @@
                                     </td>
                                 </tr>
                             </table>
-                            &nbsp;
                             <br />
                         </td>
                     </tr>
