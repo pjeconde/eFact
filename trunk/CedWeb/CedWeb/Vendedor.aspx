@@ -374,12 +374,12 @@
                                     <td align="right" style="padding-top:10px">
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
-                                                <td align="left">
+                                                <td align="left" style="height: 24px">
                                                     <asp:Button ID="GuardarButton" runat="server" Text="Guardar" Width="100px" OnClick="GuardarButton_Click" TabIndex="22">
                                                     </asp:Button>
                                                 </td>
-                                                <td align="right" style="width:100%">
-                                                    <asp:Button ID="CancelarButton" runat="server" Text="Cancelar" Width="100px" PostBackUrl="~/FacturaElectronica.aspx" CausesValidation="false" TabIndex="23">
+                                                <td align="right" style="width:100%; height: 24px;">
+                                                    <asp:Button ID="CancelarButton" runat="server" Text="Cancelar" Width="100px" CausesValidation="false" TabIndex="23" OnClick="CancelarButton_Click">
                                                     </asp:Button>
                                                 </td>
                                             </tr>

@@ -128,5 +128,9 @@ namespace CedWeb
                 MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
             }
         }
-    }
+		protected void CancelarButton_Click(object sender, EventArgs e)
+		{
+			Response.Redirect((string)Session["ref"]);
+		}
+}
 }
