@@ -100,9 +100,9 @@
                                     <td align="left" style="padding-top:3px">
                                         <asp:TextBox ID="IdUsuarioTextBox" runat="server" Width="100px" TabIndex="4" MaxLength="50"></asp:TextBox>
                                     </td>
-                                    <td colspan="2" align="center" style="padding-left:5px; padding-top:3px; width:330px">
-                                        <asp:Button ID="ComprobarDisponibilidadButton" runat="server" Text="Comprobar disponibilidad" ToolTip="Comprobar la disponibilidad" OnClick="ComprobarDisponibilidadButton_Click" Width="100%" CausesValidation="false"></asp:Button>
-                                        <asp:Label ID="ResultadoComprobarDisponibilidadLabel" runat="server" Font-Size="12px" Font-Bold="True" Text="" Width="100%"></asp:Label>
+                                    <td colspan="2" align="left" style="padding-left:5px; padding-top:3px; width:330px">
+                                        <asp:Button ID="ComprobarDisponibilidadButton" runat="server" Text="¿Esta disponible?" ToolTip="Comprobar la disponibilidad del Id.Usuario ingresado" OnClick="ComprobarDisponibilidadButton_Click" Width="120px" CausesValidation="false"></asp:Button>
+                                        <asp:Label ID="ResultadoComprobarDisponibilidadLabel" runat="server" Font-Size="12px" Font-Bold="True" Text="" Width="200px"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
