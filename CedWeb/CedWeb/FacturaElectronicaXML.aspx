@@ -58,8 +58,17 @@
                             <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
                                 <tr>
                                     <td>
-                                        <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="+" />
-                                        <asp:Label ID="Label1" runat="server" SkinID="TituloPagina" Text="Factura Electrónica"></asp:Label>
+                                        <table>
+                                            <tr>
+                                                <td valign="middle">
+                                                    <asp:Image ID="Image1" runat="server" AlternateText="+" ImageUrl="~/Imagenes/CajaBrownPeru.ico">
+                                                    </asp:Image>
+                                                </td>
+                                                <td valign="middle">
+                                                    <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" Text="Factura Electrónica"></asp:Label>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
                                 <tr>
@@ -80,7 +89,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="TextoResaltado" style="text-align: center;">
-                                                    COMPROBANTE PREEXISTENTE
+                                                    UTILIZAR COMPROBANTE PREEXISTENTE
                                                 </td>
                                             </tr>
                                             <tr>
@@ -98,7 +107,7 @@
                                                         <tr>
                                                             <td>
                                                                 <asp:Button ID="FileUploadButton" runat="server" CausesValidation="false" Height="25px"
-                                                                    OnClick="FileUploadButton_Click" Text="Completar datos desde archivo xml seleccionado"
+                                                                    OnClick="FileUploadButton_Click" Text="Completar datos automáticamente desde archivo xml seleccionado"
                                                                     />
                                                             </td>
                                                         </tr>
