@@ -105,6 +105,11 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td style="padding-top:20px">
+                                        <asp:Button ID="SalirButton" runat="server" Text="Salir" Width="100%" OnClick="SalirButton_Click"> </asp:Button>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td align="center" style="padding-top:10px">
                                         <asp:Label ID="MsgErrorLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
                                         <asp:ValidationSummary ID="MensajeValidationSummary" runat="server" SkinID="MensajeValidationSummary"/>

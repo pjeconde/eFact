@@ -201,5 +201,9 @@ namespace CedWeb
             BindPagingGrid();
             DesSeleccionarFilas();
         }
+        protected void SalirButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect((string)Session["ref"]);
+        }
     }
 }
