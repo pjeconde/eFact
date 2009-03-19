@@ -1221,7 +1221,14 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					{
 						FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
 						linea.descripcion = l.descripcion;
-						linea.importe_total_articulo = l.importe_total_articulo;
+						if (l.importes_moneda_origen==null)
+						{
+							linea.importe_total_articulo = l.importe_total_articulo;
+						}
+						else
+						{
+							linea.importe_total_articulo = l.importes_moneda_origen.importe_total_articulo;
+						}
 						lineas.Add(linea);
 					}
 					detalleGridView.DataSource = lineas;
@@ -1233,6 +1240,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 						descuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>();
 						foreach (FeaEntidades.InterFacturas.resumenDescuentos r in lc.comprobante[0].resumen.descuentos)
 						{
+							if (r.importe_descuento_moneda_origenSpecified)
+							{
+								r.importe_descuento = r.importe_descuento_moneda_origen;
+							}
 							descuentos.Add(r);
 						}
 						descuentosGridView.DataSource = descuentos;
@@ -1245,6 +1256,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 						impuestos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>();
 						foreach (FeaEntidades.InterFacturas.resumenImpuestos imp in lc.comprobante[0].resumen.impuestos)
 						{
+							if (imp.importe_impuesto_moneda_origenSpecified)
+							{
+								imp.importe_impuesto = imp.importe_impuesto_moneda_origen;
+							}
 							impuestos.Add(imp);
 						}
 						impuestosGridView.DataSource = impuestos;
@@ -1255,18 +1270,47 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					//Resumen
 					MonedaComprobanteDropDownList.SelectedIndex = MonedaComprobanteDropDownList.Items.IndexOf(MonedaComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].resumen.codigo_moneda)));
 					Tipo_de_cambioTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.tipo_de_cambio);
-					Importe_Total_Neto_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_neto_gravado);
-					Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_concepto_no_gravado);
-					Importe_Operaciones_Exentas_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_operaciones_exentas);
-					Impuesto_Liq_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.impuesto_liq);
-					Impuesto_Liq_Rni_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.impuesto_liq_rni);
-					Importe_Total_Factura_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_factura);
+					if (lc.comprobante[0].resumen.codigo_moneda.Equals("PES"))
+					{
+						Importe_Total_Neto_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_neto_gravado);
+						Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_concepto_no_gravado);
+						Importe_Operaciones_Exentas_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_operaciones_exentas);
+						Impuesto_Liq_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.impuesto_liq);
+						Impuesto_Liq_Rni_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.impuesto_liq_rni);
+						Importe_Total_Factura_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_factura);
+						Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_impuestos_nacionales);
+						Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_impuestos_municipales);
+						Importe_Total_Impuestos_Internos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_impuestos_internos);
+						Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_ingresos_brutos);
+					}
+					else
+					{
+						Importe_Total_Neto_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_neto_gravado);
+						Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_concepto_no_gravado);
+						Importe_Operaciones_Exentas_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_operaciones_exentas);
+						Impuesto_Liq_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.impuesto_liq);
+						Impuesto_Liq_Rni_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.impuesto_liq_rni);
+						Importe_Total_Factura_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_factura);
+						Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_nacionales);
+						Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_municipales);
+						Importe_Total_Impuestos_Internos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_internos);
+						Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_ingresos_brutos);
+					}
 					Observaciones_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.observaciones);
 
-					Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_impuestos_nacionales);
-					Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_impuestos_municipales);
-					Importe_Total_Impuestos_Internos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_impuestos_internos);
-					Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_ingresos_brutos);
+					if (!lc.comprobante[0].resumen.codigo_moneda.Equals("PES"))
+					{
+						Tipo_de_cambioLabel.Visible = true;
+						Tipo_de_cambioTextBox.Visible = true;
+						Tipo_de_cambioRequiredFieldValidator.Enabled = true;
+					}
+					else
+					{
+						Tipo_de_cambioLabel.Visible = false;
+						Tipo_de_cambioTextBox.Visible = false;
+						Tipo_de_cambioTextBox.Text = null;
+						Tipo_de_cambioRequiredFieldValidator.Enabled = false;
+					}
 
 					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo');</script>");
 
@@ -1313,12 +1357,14 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		{
 			Tipo_de_cambioLabel.Visible = true;
 			Tipo_de_cambioTextBox.Visible = true;
+			Tipo_de_cambioRequiredFieldValidator.Enabled = true;
 		}
 		else
 		{
 			Tipo_de_cambioLabel.Visible = false;
 			Tipo_de_cambioTextBox.Visible = false;
 			Tipo_de_cambioTextBox.Text = null;
+			Tipo_de_cambioRequiredFieldValidator.Enabled = false;
 		}
 	}
 }
