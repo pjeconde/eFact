@@ -1,5 +1,5 @@
 <%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/Inicio.aspx.cs"
-    Inherits="CedWeb.Inicio"  MaintainScrollPositionOnPostback="true"%>
+    Inherits="CedWeb.Inicio" MaintainScrollPositionOnPostback="true"%>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado"
     runat="Server">

@@ -325,5 +325,39 @@ namespace CedWebRN
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             cuenta.Configurar(Cuenta);
         }
+        private static void CambiarEstado(CedWebEntidades.Cuenta Cuenta, CedWebEntidades.EstadoCuenta NuevoEstadoCuenta, CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+            cuenta.CambiarEstado(Cuenta, NuevoEstadoCuenta);
+        }
+        public static void DarDeBaja(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        {
+            CedWebEntidades.EstadoCuenta nuevoEstado=new CedWebEntidades.EstadoCuenta();
+            nuevoEstado.Id = "Baja";
+            CambiarEstado(Cuenta, nuevoEstado, Sesion);
+        }        
+        public static void AnularBaja(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        {
+            CedWebEntidades.EstadoCuenta nuevoEstado=new CedWebEntidades.EstadoCuenta();
+            nuevoEstado.Id = "Vigente";
+            CambiarEstado(Cuenta, nuevoEstado, Sesion);
+        }        
+        public static void SuspenderPremium(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        {
+            CedWebEntidades.EstadoCuenta nuevoEstado=new CedWebEntidades.EstadoCuenta();
+            nuevoEstado.Id = "Suspend";
+            CambiarEstado(Cuenta, nuevoEstado, Sesion);
+        }        
+        public static void RestablecerPremium(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        {
+            CedWebEntidades.EstadoCuenta nuevoEstado=new CedWebEntidades.EstadoCuenta();
+            nuevoEstado.Id = "Vigente";
+            CambiarEstado(Cuenta, nuevoEstado, Sesion);
+        }
+        public static void DepurarBajas(CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+            cuenta.DepurarBajas();
+        }
     }
 }

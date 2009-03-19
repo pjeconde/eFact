@@ -16,6 +16,7 @@ namespace CedWeb
         {
             try
             {
+                ((LinkButton)Master.FindControl("AdministracionLinkButton")).ForeColor = System.Drawing.Color.Gold;
                 if (!IsPostBack)
                 {
                     if (CedWebRN.Fun.NoHayNadieLogueado((CedWebEntidades.Sesion)Session["Sesion"]))
@@ -167,19 +168,38 @@ namespace CedWeb
         }
         protected void BajaButton_Click(object sender, EventArgs e)
         {
-
+            CedWebRN.Cuenta.DarDeBaja(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
+            BindPagingGrid();
+            DesSeleccionarFilas();
         }
         protected void AnularBajaButton_Click(object sender, EventArgs e)
         {
-
+            CedWebRN.Cuenta.AnularBaja(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
+            BindPagingGrid();
+            DesSeleccionarFilas();
         }
         protected void SuspenderPremiumButton_Click(object sender, EventArgs e)
         {
-
+            CedWebRN.Cuenta.SuspenderPremium(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
+            BindPagingGrid();
+            DesSeleccionarFilas();
         }
         protected void RestablecerPremiumButton_Click(object sender, EventArgs e)
         {
-
+            CedWebRN.Cuenta.RestablecerPremium(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
+            BindPagingGrid();
+            DesSeleccionarFilas();
+        }
+        protected CedWebEntidades.Cuenta CuentaSeleccionada()
+        {
+            System.Collections.Generic.List<CedWebEntidades.Cuenta> lista = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
+            return (CedWebEntidades.Cuenta)lista[CuentaPagingGridView.SelectedIndex];
+        }
+        protected void DepurarButton_Click(object sender, EventArgs e)
+        {
+            CedWebRN.Cuenta.DepurarBajas((CedEntidades.Sesion)Session["Sesion"]);
+            BindPagingGrid();
+            DesSeleccionarFilas();
         }
     }
 }
