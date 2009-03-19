@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/CuentaExplorador.aspx.cs" Inherits="CedWeb.CuentaExplorador" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/CuentaExplorador.aspx.cs" Inherits="CedWeb.CuentaExplorador" MaintainScrollPositionOnPostback="true"%>
 <%@ Register Assembly="CedeiraUIWebForms" Namespace="CedeiraUIWebForms" TagPrefix="cc1" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado" runat="Server">
     <table style="height: 500px; width: 800px; text-align: left;" cellpadding="0" cellspacing="0" border="0" class="TextoComun">
@@ -92,6 +92,16 @@
                                 <tr>
                                     <td style="padding-top:5px">
                                         <asp:Button ID="RestablecerPremiumButton" runat="server" Text="Restablecer" Width="100%" OnClick="RestablecerPremiumButton_Click" Enabled="false"> </asp:Button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top:10px" class="TextoResaltado" align="center">
+                                        Procesos
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top:5px">
+                                        <asp:Button ID="DepurarButton" runat="server" Text="Depurar bajas" Width="100%" OnClick="DepurarButton_Click"> </asp:Button>
                                     </td>
                                 </tr>
                                 <tr>
