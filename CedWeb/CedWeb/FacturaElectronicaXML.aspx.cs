@@ -782,8 +782,14 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				smtpClient.Host = "localhost";
 				smtpClient.Send(mailCedeira);
 			}
-
-			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Archivo enviado satisfactoriamente');window.open('https://srv1.interfacturas.com.ar/cfeWeb/faces/login/identificacion.jsp/', '_blank');</script>");
+			if (!smtpXAmb.Equals("DESA"))
+			{
+				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Archivo enviado satisfactoriamente');window.open('https://srv1.interfacturas.com.ar/cfeWeb/faces/login/identificacion.jsp/', '_blank');</script>");
+			}
+			else
+			{
+				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Archivo enviado satisfactoriamente');</script>");
+			}
 		}
 		catch (Exception ex)
 		{
