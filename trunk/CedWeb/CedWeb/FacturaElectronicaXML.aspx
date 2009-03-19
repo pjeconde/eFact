@@ -106,9 +106,9 @@
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <asp:Button ID="FileUploadButton" runat="server" CausesValidation="false" Height="25px"
-                                                                    OnClick="FileUploadButton_Click" Text="Completar datos automáticamente desde archivo xml seleccionado"
-                                                                    />
+                                                                <asp:Button ID="FileUploadButton" runat="server" BorderColor="Gray" BorderStyle="NotSet"
+                                                                    BorderWidth="1px" CausesValidation="false" Height="25px" OnClick="FileUploadButton_Click"
+                                                                    Text="Completar datos automáticamente desde archivo xml seleccionado" />
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -212,7 +212,8 @@
                                                             <td style="width: 240px" valign="middle" align="center">
                                                                 COMPROBANTE ELECTRÓNICO
                                                                 <br />
-                                                                EN PESOS</td>
+                                                                EN <asp:DropDownList ID="MonedaComprobanteDropDownList" runat="server" SkinID="DropDownListVendedor" AutoPostBack="True" OnSelectedIndexChanged="MonedaComprobanteDropDownList_SelectedIndexChanged">
+                                                                </asp:DropDownList></td>
                                                         </tr>
                                                     </table>
                                                     <!-- DATOS DEL VENDEDOR -->
@@ -1563,9 +1564,22 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
+                                                            <td class="TextoLabelFEAVendedor">
+                                                                <asp:RegularExpressionValidator ID="Tipo_de_cambioRegularExpressionValidator" runat="server"
+                                                                    ControlToValidate="Tipo_de_cambioTextBox" ErrorMessage="error de formateo en tipo de cambio"
+                                                                    SetFocusOnError="True" ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator>
+                                                                <asp:RequiredFieldValidator ID="Tipo_de_cambioRequiredFieldValidator" runat="server"
+                                                                    ControlToValidate="Tipo_de_cambioTextBox" ErrorMessage="tipo de cambio" SetFocusOnError="True">* </asp:RequiredFieldValidator>
+                                                                <asp:Label ID="Tipo_de_cambioLabel" runat="server" Text="Tipo de cambio:" Visible="false"></asp:Label></td>
+                                                            <td class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="Tipo_de_cambioTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" Visible="false"
+                                                                    ToolTip="<Obligatorio para moneda extranjera> El separador de decimales a utilizar es el punto"></asp:TextBox></td>
+                                                        </tr>
+                                                        <tr>
                                                             <td>
                                                                 <br />
                                                             </td>
+                                                            <td></td>
                                                         </tr>
                                                     </table>
                                                 </td>
