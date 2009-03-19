@@ -110,7 +110,7 @@
                                         &nbsp &nbsp 3) registra el resultado de ese impacto, incluyendo la confirmación del CAE (código de<br />
                                         &nbsp &nbsp &nbsp &nbsp autorización electrónico).<br />
                                         La forma en la que nuestro sistema capturará sus comprobantes, será personalizada, por nosotros, en función de las posibilidades que nos de su sistema de facturación.<br />
-                                        También estableceremos las equivalencias entre los códigos propios, de su sistema de facturación, y los códigos estandar de la operatoria de Factura Electrónica.<br />
+                                        También estableceremos las equivalencias entre los códigos propios, de su sistema de facturación, y los códigos estándar de la operatoria de Factura Electrónica.<br />
                                         Por último, configuraremos, a su medida, la forma en la que nuestro sistema registrará la respuesta del impacto. 
                                     </td>
                                     <td style="padding-top: 10px; border-style:solid; border-width:1px; border-color:#A52A2A">

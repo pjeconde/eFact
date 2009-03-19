@@ -10,11 +10,11 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 namespace CedWeb
 {
-    public partial class Administracion : System.Web.UI.Page
+    public partial class FacturaElectronicaSolucionDeConectividad : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ((LinkButton)Master.FindControl("AdministracionLinkButton")).ForeColor = System.Drawing.Color.Gold;
+
         }
     }
 }
