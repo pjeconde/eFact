@@ -87,6 +87,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				IVAcomputableDropDownList.DataTextField = "Descr";
 				IVAcomputableDropDownList.DataSource = FeaEntidades.Dicotomicos.Dicotomico.Lista();
 
+				MonedaComprobanteDropDownList.DataValueField = "Codigo";
+				MonedaComprobanteDropDownList.DataTextField = "Descr";
+				MonedaComprobanteDropDownList.DataSource = FeaEntidades.CodigosMoneda.CodigoMoneda.Lista();
+
 				DataBind();
 
 				BindearDropDownLists();
@@ -478,7 +482,18 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					throw new Exception("Debe informar al menos un artículo");
 				}
 				det.linea[i].descripcion = listadelineas[i].descripcion;
-				det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
+				if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
+				{
+					det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
+				}
+				else
+				{
+					det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo*Convert.ToDouble(Tipo_de_cambioTextBox.Text);
+					FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
+					limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
+					limo.importe_total_articuloSpecified = true;
+					det.linea[i].importes_moneda_origen = limo;
+				}
 			}
 
 			det.comentarios = ComentariosTextBox.Text;
@@ -486,59 +501,140 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			comp.detalle = det;
 
 			FeaEntidades.InterFacturas.resumen r = new FeaEntidades.InterFacturas.resumen();
-			r.tipo_de_cambio = 1;
-			r.codigo_moneda = "PES";
-			r.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
-			r.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
-			r.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
-			r.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
-			r.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
+			r.tipo_de_cambio = Convert.ToDouble(Tipo_de_cambioTextBox.Text);
+			r.codigo_moneda = MonedaComprobanteDropDownList.SelectedValue;
 
-			try
+			if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
+			//Moneda local
 			{
-				r.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
-				if (r.importe_total_impuestos_nacionales != 0)
+				r.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
+				r.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
+				r.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
+				r.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
+				r.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
+
+				try
 				{
-					r.importe_total_impuestos_nacionalesSpecified = true;
+					r.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+					if (r.importe_total_impuestos_nacionales != 0)
+					{
+						r.importe_total_impuestos_nacionalesSpecified = true;
+					}
 				}
-			}
-			catch
-			{
-			}
-			try
-			{
-				r.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
-				if (r.importe_total_ingresos_brutos != 0)
+				catch
 				{
-					r.importe_total_ingresos_brutosSpecified = true;
 				}
-			}
-			catch
-			{
-			}
-			try
-			{
-				r.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
-				if (r.importe_total_impuestos_municipales != 0)
+				try
 				{
-					r.importe_total_impuestos_municipalesSpecified = true;
+					r.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+					if (r.importe_total_ingresos_brutos != 0)
+					{
+						r.importe_total_ingresos_brutosSpecified = true;
+					}
 				}
-			}
-			catch
-			{
-			}
-			try
-			{
-				r.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
-				if (r.importe_total_impuestos_internos != 0)
+				catch
 				{
-					r.importe_total_impuestos_internosSpecified = true;
 				}
+				try
+				{
+					r.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+					if (r.importe_total_impuestos_municipales != 0)
+					{
+						r.importe_total_impuestos_municipalesSpecified = true;
+					}
+				}
+				catch
+				{
+				}
+				try
+				{
+					r.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+					if (r.importe_total_impuestos_internos != 0)
+					{
+						r.importe_total_impuestos_internosSpecified = true;
+					}
+				}
+				catch
+				{
+				}
+				r.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
 			}
-			catch
+			else
+			//Moneda extranjera
 			{
+				double tipodecambio = Convert.ToDouble(Tipo_de_cambioTextBox.Text);
+
+				FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo = new FeaEntidades.InterFacturas.resumenImportes_moneda_origen();
+
+				r.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text)*tipodecambio;
+				rimo.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
+				r.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text) * tipodecambio;
+				rimo.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
+				r.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text) * tipodecambio;
+				rimo.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
+				r.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text) * tipodecambio;
+				rimo.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
+				r.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text) * tipodecambio;
+				rimo.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
+
+				try
+				{
+					r.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text) * tipodecambio;
+					rimo.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+					if (r.importe_total_impuestos_nacionales != 0)
+					{
+						r.importe_total_impuestos_nacionalesSpecified = true;
+						rimo.importe_total_impuestos_nacionalesSpecified = true;
+					}
+				}
+				catch
+				{
+				}
+				try
+				{
+					r.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text) * tipodecambio;
+					rimo.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+					if (r.importe_total_ingresos_brutos != 0)
+					{
+						r.importe_total_ingresos_brutosSpecified = true;
+						rimo.importe_total_ingresos_brutosSpecified = true;
+					}
+				}
+				catch
+				{
+				}
+				try
+				{
+					r.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text) * tipodecambio;
+					rimo.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+					if (r.importe_total_impuestos_municipales != 0)
+					{
+						r.importe_total_impuestos_municipalesSpecified = true;
+						rimo.importe_total_impuestos_municipalesSpecified = true;
+					}
+				}
+				catch
+				{
+				}
+				try
+				{
+					r.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text) * tipodecambio;
+					rimo.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+					if (r.importe_total_impuestos_internos != 0)
+					{
+						r.importe_total_impuestos_internosSpecified = true;
+						rimo.importe_total_impuestos_internosSpecified = true;
+					}
+				}
+				catch
+				{
+				}
+				r.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text) * tipodecambio;
+				rimo.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
+
+				r.importes_moneda_origen = rimo;
 			}
-			r.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
+			
 
 			r.observaciones = Observaciones_ResumenTextBox.Text;
 
@@ -556,9 +652,18 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					comp.resumen.impuestos[i].codigo_jurisdiccion = listadeimpuestos[i].codigo_jurisdiccion;
 					comp.resumen.impuestos[i].codigo_jurisdiccionSpecified = listadeimpuestos[i].codigo_jurisdiccionSpecified;
 					comp.resumen.impuestos[i].descripcion = listadeimpuestos[i].descripcion;
-					comp.resumen.impuestos[i].importe_impuesto = listadeimpuestos[i].importe_impuesto;
 					comp.resumen.impuestos[i].porcentaje_impuesto = listadeimpuestos[i].porcentaje_impuesto;
 					comp.resumen.impuestos[i].porcentaje_impuestoSpecified = listadeimpuestos[i].porcentaje_impuestoSpecified;
+					if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
+					{
+						comp.resumen.impuestos[i].importe_impuesto = listadeimpuestos[i].importe_impuesto;
+					}
+					else
+					{
+						comp.resumen.impuestos[i].importe_impuesto = listadeimpuestos[i].importe_impuesto * Convert.ToDouble(Tipo_de_cambioTextBox.Text);
+						comp.resumen.impuestos[i].importe_impuesto_moneda_origen = listadeimpuestos[i].importe_impuesto;
+						comp.resumen.impuestos[i].importe_impuesto_moneda_origenSpecified = true;
+					}
 				}
 			}
 
@@ -574,15 +679,23 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					comp.resumen.descuentos[i].alicuota_iva_descuento = listadedescuentos[i].alicuota_iva_descuento;
 					comp.resumen.descuentos[i].alicuota_iva_descuentoSpecified = listadedescuentos[i].alicuota_iva_descuentoSpecified;
 					comp.resumen.descuentos[i].descripcion_descuento = listadedescuentos[i].descripcion_descuento;
-					comp.resumen.descuentos[i].importe_descuento = listadedescuentos[i].importe_descuento;
-					comp.resumen.descuentos[i].importe_descuento_moneda_origen = listadedescuentos[i].importe_descuento_moneda_origen;
-					comp.resumen.descuentos[i].importe_descuento_moneda_origenSpecified = listadedescuentos[i].importe_descuento_moneda_origenSpecified;
 					comp.resumen.descuentos[i].importe_iva_descuento = listadedescuentos[i].importe_iva_descuento;
 					comp.resumen.descuentos[i].importe_iva_descuento_moneda_origen = listadedescuentos[i].importe_iva_descuento_moneda_origen;
 					comp.resumen.descuentos[i].importe_iva_descuento_moneda_origenSpecified = listadedescuentos[i].importe_iva_descuento_moneda_origenSpecified;
 					comp.resumen.descuentos[i].importe_iva_descuentoSpecified = listadedescuentos[i].importe_iva_descuentoSpecified;
 					comp.resumen.descuentos[i].porcentaje_descuento = listadedescuentos[i].porcentaje_descuento;
 					comp.resumen.descuentos[i].porcentaje_descuentoSpecified = listadedescuentos[i].porcentaje_descuentoSpecified;
+
+					if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
+					{
+						comp.resumen.descuentos[i].importe_descuento = listadedescuentos[i].importe_descuento;
+					}
+					else
+					{
+						comp.resumen.descuentos[i].importe_descuento = listadedescuentos[i].importe_descuento * Convert.ToDouble(Tipo_de_cambioTextBox.Text); 
+						comp.resumen.descuentos[i].importe_descuento_moneda_origen = listadedescuentos[i].importe_descuento;
+						comp.resumen.descuentos[i].importe_descuento_moneda_origenSpecified = true;
+					}
 				}
 			}
 
@@ -1127,6 +1240,8 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					}
 					ComentariosTextBox.Text = lc.comprobante[0].detalle.comentarios;
 					//Resumen
+					MonedaComprobanteDropDownList.SelectedIndex = MonedaComprobanteDropDownList.Items.IndexOf(MonedaComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].resumen.codigo_moneda)));
+					Tipo_de_cambioTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.tipo_de_cambio);
 					Importe_Total_Neto_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_neto_gravado);
 					Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_concepto_no_gravado);
 					Importe_Operaciones_Exentas_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_operaciones_exentas);
@@ -1177,6 +1292,20 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		else
 		{
 			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Debe seleccionar un archivo');</script>");
+		}
+	}
+	protected void MonedaComprobanteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+	{
+		if (!MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
+		{
+			Tipo_de_cambioLabel.Visible = true;
+			Tipo_de_cambioTextBox.Visible = true;
+		}
+		else
+		{
+			Tipo_de_cambioLabel.Visible = false;
+			Tipo_de_cambioTextBox.Visible = false;
+			Tipo_de_cambioTextBox.Text = null;
 		}
 	}
 }
