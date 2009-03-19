@@ -488,7 +488,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				}
 				else
 				{
-					det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo*Convert.ToDouble(Tipo_de_cambioTextBox.Text);
+					det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo*Convert.ToDouble(Tipo_de_cambioTextBox.Text),2);
 					FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
 					limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
 					limo.importe_total_articuloSpecified = true;
@@ -501,7 +501,14 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			comp.detalle = det;
 
 			FeaEntidades.InterFacturas.resumen r = new FeaEntidades.InterFacturas.resumen();
-			r.tipo_de_cambio = Convert.ToDouble(Tipo_de_cambioTextBox.Text);
+			if (Tipo_de_cambioTextBox.Text != string.Empty)
+			{
+				r.tipo_de_cambio = Convert.ToDouble(Tipo_de_cambioTextBox.Text);
+			}
+			else
+			{
+				r.tipo_de_cambio = 1;
+			}
 			r.codigo_moneda = MonedaComprobanteDropDownList.SelectedValue;
 
 			if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
@@ -566,20 +573,20 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 				FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo = new FeaEntidades.InterFacturas.resumenImportes_moneda_origen();
 
-				r.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text)*tipodecambio;
+				r.importe_total_neto_gravado = Math.Round(Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text)*tipodecambio,2);
 				rimo.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
-				r.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text) * tipodecambio;
+				r.importe_total_concepto_no_gravado = Math.Round(Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text) * tipodecambio,2);
 				rimo.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
-				r.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text) * tipodecambio;
+				r.importe_operaciones_exentas = Math.Round(Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text) * tipodecambio,2);
 				rimo.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
-				r.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text) * tipodecambio;
+				r.impuesto_liq = Math.Round(Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text) * tipodecambio,2);
 				rimo.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
-				r.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text) * tipodecambio;
+				r.impuesto_liq_rni = Math.Round(Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text) * tipodecambio,2);
 				rimo.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
 
 				try
 				{
-					r.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text) * tipodecambio;
+					r.importe_total_impuestos_nacionales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text) * tipodecambio,2);
 					rimo.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
 					if (r.importe_total_impuestos_nacionales != 0)
 					{
@@ -592,7 +599,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				}
 				try
 				{
-					r.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text) * tipodecambio;
+					r.importe_total_ingresos_brutos = Math.Round(Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text) * tipodecambio,2);
 					rimo.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
 					if (r.importe_total_ingresos_brutos != 0)
 					{
@@ -605,7 +612,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				}
 				try
 				{
-					r.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text) * tipodecambio;
+					r.importe_total_impuestos_municipales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text) * tipodecambio,2);
 					rimo.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
 					if (r.importe_total_impuestos_municipales != 0)
 					{
@@ -618,7 +625,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				}
 				try
 				{
-					r.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text) * tipodecambio;
+					r.importe_total_impuestos_internos = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text) * tipodecambio,2);
 					rimo.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
 					if (r.importe_total_impuestos_internos != 0)
 					{
@@ -629,7 +636,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				catch
 				{
 				}
-				r.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text) * tipodecambio;
+				r.importe_total_factura = Math.Round(Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text) * tipodecambio, 2);
 				rimo.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
 
 				r.importes_moneda_origen = rimo;
@@ -660,7 +667,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					}
 					else
 					{
-						comp.resumen.impuestos[i].importe_impuesto = listadeimpuestos[i].importe_impuesto * Convert.ToDouble(Tipo_de_cambioTextBox.Text);
+						comp.resumen.impuestos[i].importe_impuesto = Math.Round(listadeimpuestos[i].importe_impuesto * Convert.ToDouble(Tipo_de_cambioTextBox.Text),2);
 						comp.resumen.impuestos[i].importe_impuesto_moneda_origen = listadeimpuestos[i].importe_impuesto;
 						comp.resumen.impuestos[i].importe_impuesto_moneda_origenSpecified = true;
 					}
@@ -692,7 +699,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					}
 					else
 					{
-						comp.resumen.descuentos[i].importe_descuento = listadedescuentos[i].importe_descuento * Convert.ToDouble(Tipo_de_cambioTextBox.Text); 
+						comp.resumen.descuentos[i].importe_descuento = Math.Round(listadedescuentos[i].importe_descuento * Convert.ToDouble(Tipo_de_cambioTextBox.Text),2); 
 						comp.resumen.descuentos[i].importe_descuento_moneda_origen = listadedescuentos[i].importe_descuento;
 						comp.resumen.descuentos[i].importe_descuento_moneda_origenSpecified = true;
 					}
