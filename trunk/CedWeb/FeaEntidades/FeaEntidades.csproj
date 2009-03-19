@@ -40,6 +40,9 @@
     <Compile Include="CodigosImpuesto\Municipales.cs" />
     <Compile Include="CodigosImpuesto\Nacionales.cs" />
     <Compile Include="CodigosImpuesto\Otros.cs" />
+    <Compile Include="CodigosMoneda\CodigoMoneda.cs" />
+    <Compile Include="CodigosMoneda\DolarUSA.cs" />
+    <Compile Include="CodigosMoneda\Pesos.cs" />
     <Compile Include="CodigosOperacion\CodigoOperacion.cs" />
     <Compile Include="CodigosOperacion\ExportacionesALaZonaFranca.cs" />
     <Compile Include="CodigosOperacion\ExportacionesAlExterior.cs" />
