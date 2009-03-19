@@ -86,7 +86,41 @@
                             </table>
                             <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 10px">
                                 <tr>
-                                    <td align="left">
+                                    <td colspan="2" align="left" style="height: 10px">
+                                        <table cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td style="width: 22px; height: 20px;">
+                                                    <asp:Image ID="Image4" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
+                                                </td>
+                                                <td style="height: 20px">
+                                                    <asp:Label ID="Label1" runat="server" Text="Factura Electrónica (solución de conectividad)"
+                                                        SkinID="TituloPagina" Width="415px"></asp:Label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top" style="padding-right: 20px; padding-left: 22px; padding-top: 10px">
+                                        Es un producto que permite "subir", a la red Interfacturas, los comprobantes generados por su sistema de facturación.<br />
+                                        Se trata de una herramienta que:<br />
+                                        &nbsp &nbsp 1) "captura" sus comprobantes,<br /> 
+                                        &nbsp &nbsp 2) los impacta en Interfacturas (generando así la factura electrónica) y<br /> 
+                                        &nbsp &nbsp 3) registra el resultado de ese impacto, incluyendo el CAE (código de autoriz.electrónico).<br />
+                                        La forma en la que nuestro sistema capturará sus comprobantes, será customizada, por nosotros, en función de las posibilidades que nos de su sistema de facturación.<br />
+                                        También parametrizaremos las equivalencias entre los códigos propios, de su sistema de facturación, y los códigos estandar de la operatoria de Factura Electrónica.<br />
+                                        Por último parametrizaremos, a su medida, la forma en la que nuestro sistema registrará la respuesta del impacto. 
+                                    </td>
+                                    <td style="padding-top: 10px; border-style:solid; border-width:1px; border-color:#A52A2A">
+                                        <asp:Image ID="Image5" runat="server" ImageUrl="Imagenes/EsquemaSolucioneseFact.jpg" Width="220px"
+                                            ImageAlign="Right" />
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 10px">
+                                <tr>
+                                    <td align="left" style="padding-bottom:20px">
                                         <asp:TreeView ID="Arbol" runat="server" SkinID="TextoMediano" RootNodeStyle-Font-Bold="true">
                                             <RootNodeStyle Font-Bold="True" />
                                         </asp:TreeView>
