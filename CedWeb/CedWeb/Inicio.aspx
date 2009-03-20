@@ -13,7 +13,8 @@
                             <table border="0" cellspacing="0" cellpadding="0" width="800px" style="">
                                 <!-- Novedades -->
                                 <tr>
-                                    <td valign="top" style="height: 142px; padding-left:10px">
+                                    <td style="height: 142px; padding-left: 10px; padding-right: 10px; padding-bottom: 10px; text-align: left"
+                                        valign="top">
                                         <table cellpadding="0" cellspacing="0" border="0" style="height: 142px;">
                                             <tr>
                                                 <td style="height: 38px; background-image: url('Imagenes/Ingreso/Box/BoxTL.gif');
@@ -120,7 +121,7 @@
                                 </tr>
                                 <!-- Gráfico y Login -->
                                 <tr>
-                                    <td valign="top" style=" padding-left:10px; padding-right:10px; padding-bottom:10px">
+                                    <td valign="top" style="padding-left:10px; padding-right:10px; padding-bottom:10px">
                                         <table cellpadding="0" cellspacing="0" border="0" style="background-image: url('Imagenes/EsquemaSolucioneseFact3.jpg'); background-repeat:no-repeat; height:322px">
                                             <tr>
                                                 <td colspan="4" style="height:125px; width:100%">
