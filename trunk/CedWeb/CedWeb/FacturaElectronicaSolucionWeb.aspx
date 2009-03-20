@@ -2,11 +2,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado" Runat="Server">
     <table style="width:800px; height:500px; text-align: left;" cellpadding="0" cellspacing="0" border="0" class="TextoComun">
         <tr>
-           <td valign="top" style="height: 10px;">
-           </td>
-        </tr>
-        <tr>
-            <td valign="top" style="padding-left: 10px;">
+            <td valign="top" style="padding-left:10px; padding-top:10px">
                 <table cellpadding="0" cellspacing="0" border="0">
                     <tr>
                         <td valign="top" style="">
@@ -21,7 +17,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td></td>
+                                    <td>
+                                    </td>
                                     <td align="center">
                                         <table id="Table1" runat="server" cellpadding="0" cellspacing="0" border="0">
                                             <tr>
@@ -77,10 +74,9 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-top:20px">
-                                                    <asp:HyperLink ID="HyperLinkVolverPagAnt" runat="server" NavigateUrl="~/EsquemaSolucioneseFact.aspx" SkinID="LinkMedianoClaro">Volver a la pagina anterior</asp:HyperLink>
+                                                    <asp:LinkButton ID="VolverLinkButton" runat="server" CausesValidation="false" ForeColor="Blue" OnClick="VolverLinkButton_Click">Volver a la pagina anterior</asp:LinkButton>
                                                 </td>
                                             </tr>
-                                        </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-top:20px" align="left">
                                                     Advertencia: algunas de las funcionalidades mencionadas serán de uso libre y gratuito.  Otras, estarán reservadas al servicio Premium, de costo muy accesible.  No todas las funcionalidades están implementadas en la actualidad, algunas serán liberadas en las próximas semanas.                                                   
