@@ -101,8 +101,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="padding-top: 5px" align="left">
-                                                                        &nbsp;<asp:HyperLink ID="InterfacturasHyperLink" runat="server" ImageUrl="~/Imagenes/InterfacturasInterbankingLogo.gif"
-                                                                            NavigateUrl="http://www.interfacturas.com.ar/" Target="_blank" Text="Logo de interfacturas"></asp:HyperLink>
+                                                                        <asp:Image ID="Image3" runat="server" ImageUrl="~/Imagenes/InterfacturasInterbankingLogo.gif" AlternateText="Logo de interfacturas" /><br />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -122,7 +121,7 @@
                                 <!-- Gráfico y Login -->
                                 <tr>
                                     <td valign="top" style=" padding-left:10px; padding-right:10px; padding-bottom:10px">
-                                        <table cellpadding="0" cellspacing="0" border="0" style="background-image: url('Imagenes/EsquemaSolucioneseFact.jpg'); background-repeat:no-repeat; height:322px">
+                                        <table cellpadding="0" cellspacing="0" border="0" style="background-image: url('Imagenes/EsquemaSolucioneseFact3.jpg'); background-repeat:no-repeat; height:322px">
                                             <tr>
                                                 <td colspan="4" style="height:125px; width:100%">
                                                 </td>
