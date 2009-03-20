@@ -775,7 +775,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			{
 
 				System.Net.Mail.MailMessage mailCedeira = new System.Net.Mail.MailMessage("facturaelectronicaxml@cedeira.com.ar",
-					"facturaelectronicaxml@cedeira.com.ar", "XML_" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + "_" + System.DateTime.Now.ToLocalTime(), string.Empty);
+					"facturaelectronicaxml@cedeira.com.ar", "XML_" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + "_" + System.DateTime.Now.ToLocalTime().ToString("yyyyMMdd hh:mm:ss"), string.Empty);
 				sb = new System.Text.StringBuilder();
 				sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.email);
 				sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.razon_social);
@@ -800,7 +800,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		}
 		catch (Exception ex)
 		{
-			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al generar el archivo. " + ex.Message + ". Ir a DETALLE.');</script>");
+			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al generar el archivo.\\n " + ex.Message + "');</script>");
 		}
 	}
 
