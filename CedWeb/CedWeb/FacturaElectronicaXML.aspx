@@ -1071,13 +1071,13 @@
                                                                             <EditItemTemplate>
                                                                                 <asp:TextBox ID="txtdescripcion" runat="server" Text='<%# Eval("descripcion") %>'
                                                                                     TextMode="MultiLine" Width="90%"></asp:TextBox>
-                                                                                <asp:RequiredFieldValidator ID="txtdescripcionRegularExpressionValidator" runat="server"
+                                                                                <asp:RequiredFieldValidator ID="txtdescripcionEditRequiredFieldValidator" runat="server"
                                                                                     ControlToValidate="txtdescripcion" ErrorMessage="Descripción del producto o servicio en edición no informada"
                                                                                     SetFocusOnError="True" ValidationGroup="Grillas">*</asp:RequiredFieldValidator>
                                                                             </EditItemTemplate>
                                                                             <FooterTemplate>
                                                                                 <asp:TextBox ID="txtdescripcion" runat="server" Text='' TextMode="MultiLine" Width="90%"></asp:TextBox>
-                                                                                <asp:RequiredFieldValidator ID="txtdescripcionFooterRegularExpressionValidator" runat="server"
+                                                                                <asp:RequiredFieldValidator ID="txtdescripcionFooterRequiredFieldValidator" runat="server"
                                                                                     ControlToValidate="txtdescripcion" ErrorMessage="Descripción del producto o servicio a agregar no informada"
                                                                                     SetFocusOnError="True" ValidationGroup="DetalleFooter">*</asp:RequiredFieldValidator>
                                                                             </FooterTemplate>
@@ -1091,16 +1091,22 @@
                                                                             </ItemTemplate>
                                                                             <EditItemTemplate>
                                                                                 <asp:TextBox ID="txtimporte_total_articulo" Text='<%# Eval("importe_total_articulo") %>'
-                                                                                    runat="server" Width="90%"></asp:TextBox>
-                                                                                <asp:RegularExpressionValidator ID="txtimporte_total_articuloRegularExpressionValidator"
+                                                                                    runat="server" Width="80%"></asp:TextBox>
+                                                                                <asp:RegularExpressionValidator ID="txtimporte_total_articuloEditRegularExpressionValidator"
                                                                                     runat="server" ControlToValidate="txtimporte_total_articulo" ErrorMessage="Importe total artículo en edición mal formateado"
-                                                                                    SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="Grillas">*</asp:RegularExpressionValidator>                                                                                    
+                                                                                    SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="Grillas">*</asp:RegularExpressionValidator>
+                                                                                <asp:RequiredFieldValidator ID="txtimporte_total_articuloEditRequiredFieldValidator"
+                                                                                    runat="server" ControlToValidate="txtimporte_total_articulo" ErrorMessage="Importe total artículo en edición no informado"
+                                                                                    SetFocusOnError="True" ValidationGroup="Grillas">*</asp:RequiredFieldValidator>
                                                                             </EditItemTemplate>
                                                                             <FooterTemplate>
-                                                                                <asp:TextBox ID="txtimporte_total_articulo" Text='' runat="server" Width="90%"></asp:TextBox>
+                                                                                <asp:TextBox ID="txtimporte_total_articulo" Text='' runat="server" Width="80%"></asp:TextBox>
                                                                                 <asp:RegularExpressionValidator ID="txtimporte_total_articuloFooterRegularExpressionValidator"
                                                                                     runat="server" ControlToValidate="txtimporte_total_articulo" ErrorMessage="Importe total artículo a agregar mal formateado"
                                                                                     SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DetalleFooter">*</asp:RegularExpressionValidator>
+                                                                                <asp:RequiredFieldValidator ID="txtimporte_total_articuloFooterRequiredFieldValidator"
+                                                                                    runat="server" ControlToValidate="txtimporte_total_articulo" ErrorMessage="Importe total artículo a agregar no informado"
+                                                                                    SetFocusOnError="True" ValidationGroup="DetalleFooter">*</asp:RequiredFieldValidator>
                                                                             </FooterTemplate>
                                                                             <ItemStyle HorizontalAlign="Right" />
                                                                         </asp:TemplateField>
