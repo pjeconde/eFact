@@ -223,7 +223,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="5" valign="bottom" align="right" style="height:100%; width:100%">
+                                                <td valign="bottom" align="right" colspan="5">
                                                     <table cellpadding="0" cellspacing="0" border="0">
                                                         <tr>
                                                             <td style="height:100%">
@@ -253,8 +253,6 @@
                         </td>
                     </tr>
                 </table>
-            </td>
-            <td valign="top" style="width: 30px">
             </td>
         </tr>
     </table>
