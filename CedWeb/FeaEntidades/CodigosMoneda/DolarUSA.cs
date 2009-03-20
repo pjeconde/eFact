@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosMoneda
 		public DolarUSA()
 		{
 			Codigo = "DOL";
-			Descr = "Dólar ESTADOUNIDENSE";
+			Descr = "DÓLAR ESTADOUNIDENSE";
 		}
 	}
 }
