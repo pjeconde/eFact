@@ -75,7 +75,7 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-top:20px">
-                                                    <asp:HyperLink ID="HyperLinkVolverPagAnt" runat="server" NavigateUrl="~/EsquemaSolucioneseFact.aspx" SkinID="LinkMedianoClaro">Volver a la pagina anterior</asp:HyperLink>
+                                                    <asp:LinkButton ID="VolverLinkButton" runat="server" CausesValidation="false" ForeColor="Blue" OnClick="VolverLinkButton_Click">Volver a la pagina anterior</asp:LinkButton>
                                                 </td>
                                             </tr>
                                         </tr>
