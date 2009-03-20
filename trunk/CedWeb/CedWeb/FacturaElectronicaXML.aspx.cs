@@ -434,7 +434,14 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			{
 				infovend.condicion_ingresos_brutos = Convert.ToInt32(Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue);
 				infovend.nro_ingresos_brutos = NroIBVendedorTextBox.Text;
-				if (infovend.condicion_ingresos_brutos != 0 && infovend.nro_ingresos_brutos != string.Empty)
+			}
+			catch
+			{
+
+			}
+			finally
+			{
+				if (infovend.condicion_ingresos_brutos != 0)
 				{
 					infovend.condicion_ingresos_brutosSpecified = true;
 				}
@@ -442,10 +449,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				{
 					infovend.nro_ingresos_brutos = null;
 				}
-			}
-			catch
-			{
-
 			}
 			infovend.inicio_de_actividades = InicioDeActividadesVendedorDatePickerWebUserControl.CalendarDateString;
 			infovend.contacto = Contacto_VendedorTextBox.Text;
