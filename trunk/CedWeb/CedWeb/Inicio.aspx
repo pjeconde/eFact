@@ -250,6 +250,191 @@
                                     </td>
                                 </tr>                                
                             </table>
+<%--
+                                <!--2do reglon de cajas-->
+                                <tr>
+                                    <td valign="top" style="width: 10px;" align="left">
+                                    </td>
+                                    <!--Caja de Soluciones de negocio-->
+                                    <td valign="top" style="height: 142px;" align="left">
+                                        <table cellpadding="0" cellspacing="0" border="0" style="width: 471px; height: 142px;">
+                                            <tr>
+                                                <td style="height: 38px; background-image: url('Imagenes/Ingreso/Box/BoxTL.gif');
+                                                    width: 110px;">
+                                                </td>
+                                                <td style="background-image: url('Imagenes/Ingreso/Box/BoxT.gif'); width: 258px;">
+                                                    <table cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td style="width: 15px" align="left" valign="middle">
+                                                                <img src="Imagenes/Ingreso/Bullet/markerWhite.gif" width="5px" height="10" alt="" />
+                                                            </td>
+                                                            <td valign="middle">
+                                                                <asp:Label ID="Label7" runat="server" Font-Bold="True" SkinID="TituloPaginaClaro"
+                                                                    Text="Soluciones de Negocio"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td style="width: 103px; background-image: url('Imagenes/Ingreso/Box/BoxTR.gif');">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="height: 104px; width: 110px; background-image: url('Imagenes/Ingreso/Box/Box2DL.gif')"
+                                                    valign="top">
+                                                </td>
+                                                <td colspan="1" style="width: 258px; background-image: url('Imagenes/Ingreso/Box/Box2DC.gif');"
+                                                    class="IngresoBoxTexto" valign="top">
+                                                    <table cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td style="padding-top: 5px;">
+                                                                <asp:Label ID="Label5" runat="server" SkinID="TextoInicioMediano" Text="<b>Le garantizamos las soluciones que usted y su negocio necesitan</b>, a través nuestro excelente equipo de profesionales y la amplia experincia en el mercado informático."
+                                                                    Width="241px"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="text-align: left;">
+                                                                <table cellpadding="0" cellspacing="0" border="0">
+                                                                    <tr>
+                                                                        <td>
+                                                                            <asp:Label ID="Label8" runat="server" Font-Bold="True" Text="»" SkinID="BulletLinkChico"></asp:Label>
+                                                                        </td>
+                                                                        <td>
+                                                                            &nbsp;<asp:HyperLink SkinID="LinkMedianoClaro" ID="HyperLink2" NavigateUrl="~/Soluciones.aspx"
+                                                                                runat="server">ver Soluciones</asp:HyperLink>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td style="height: 104px; width: 103px; background-image: url('Imagenes/Ingreso/Box/Box2DR.gif')"
+                                                    valign="top">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td valign="top" style="width: 10px;" align="left">
+                                    </td>
+                                    <!--Caja de Login-->
+                                    <td align="left" valign="top" style="width: 300px; height: 142px;">
+                                    </td>
+                                    <td valign="top" style="width: 9px;" align="left">
+                                    </td>
+                                </tr>
+                                <!--3er reglon de cajas-->
+                                <tr>
+                                    <td valign="top" style="width: 10px;" align="left">
+                                    </td>
+                                    <!--Caja de Diseño Web-->
+                                    <td valign="top" style="" align="left">
+                                        <table cellpadding="0" cellspacing="0" border="0" style="height:142px;">
+                                            <tr>
+                                                <td style="height: 38px; background-image: url('Imagenes/Ingreso/Box/BoxTL.gif');
+                                                    background-repeat: no-repeat; width: 110px;">
+                                                </td>
+                                                <td style="background-image: url('Imagenes/Ingreso/Box/BoxT.gif'); width: 258px;">
+                                                    <table cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td style="width: 15px" align="left" valign="middle">
+                                                                <img src="Imagenes/Ingreso/Bullet/markerWhite.gif" width="5px" height="10" alt="" />
+                                                            </td>
+                                                            <td valign="middle">
+                                                                <asp:Label ID="LabelTitDesarrolloWeb" runat="server" Font-Bold="True" SkinID="TituloPaginaClaro"
+                                                                    Text="Diseño Web"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td style="width: 103px; background-image: url('Imagenes/Ingreso/Box/BoxTR.gif');
+                                                    background-repeat: no-repeat;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="height: 104px; width: 110px; background-image: url('Imagenes/Ingreso/Box/Box2DL.gif');
+                                                    background-repeat: no-repeat;" valign="top">
+                                                </td>
+                                                <td colspan="2" style="width: 361px; background-image: url('Imagenes/Ingreso/Box/Box2DC-Clientes.gif');
+                                                    background-repeat: no-repeat;" class="IngresoBoxTexto" valign="top">
+                                                    <table cellpadding="0" cellspacing="0" border="0" style="background-image: url('Imagenes/Ingreso/Box/DisWeb.gif');
+                                                        background-repeat: no-repeat; width: 361px;">
+                                                        <tr>
+                                                            <td style="width: 160px; padding-top: 5px; height: 100px;" valign="top">
+                                                                <asp:Label ID="LabelDesarrolloWeb" runat="server" SkinID="TextoInicioMediano" Text="Diseñamos, desarrollamos y mantenemos sitios web, dinámicos e inteligentes, con capacidades de Comercio electrónico." Width="160px"></asp:Label>
+                                                            </td>
+                                                            <td style="width: 201px; height: 100px;" valign="top">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td valign="top" style="width: 10px;" align="left">
+                                    </td>
+                                    <!--Caja de Clientes-->
+                                    <td align="left" valign="top" style="width: 300px; height: 142px">
+                                        <table cellpadding="0" cellspacing="0" border="0" style="height: 142px; width: 300px">
+                                            <tr>
+                                                <td style="height: 38px; width: 47px; background-image: url('Imagenes/Ingreso/Box/Box2TL.gif');">
+                                                </td>
+                                                <td align="left" valign="middle" style="width: 150px; background-image: url('Imagenes/Ingreso/Box/Box2T.gif');">
+                                                    <table cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td style="width: 15px" align="left" valign="middle">
+                                                                <img src="Imagenes/Ingreso/Bullet/markerWhite.gif" width="5px" height="10" alt="" />
+                                                            </td>
+                                                            <td valign="middle">
+                                                                <asp:Label ID="LabelTitClientes" runat="server" Font-Bold="True" SkinID="TituloPaginaClaro"
+                                                                    Text="Clientes"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td style="height: 38px; width: 103px; background-image: url(Imagenes/Ingreso/Box/Box2TR.gif);">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" align="left" valign="top" style="background-image: url('Imagenes/Ingreso/Box/BoxD-LCR.gif');
+                                                    height: 104px;">
+                                                    <table cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td style="width: 47px">
+                                                            </td>
+                                                            <td style="width: 200px; text-align: left; padding-top: 5px;">
+                                                                <asp:Label ID="LabelClientes" runat="server" SkinID="TextoInicioMediano" Text="<b>Clientes conformes</b> con los productos adquiridos y los servicios prestados por nuestra empresa."></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2" style="height: 10px;">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="width: 47px;">
+                                                            </td>
+                                                            <td style="text-align: left;">
+                                                                <table cellpadding="0" cellspacing="0" border="0">
+                                                                    <tr>
+                                                                        <td>
+                                                                            <asp:Label ID="Label3" runat="server" Font-Bold="True" Text="»" SkinID="BulletLinkChico"></asp:Label>
+                                                                        </td>
+                                                                        <td style="width: 200px; text-align: left;">
+                                                                            &nbsp;<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Clientes.aspx"
+                                                                                SkinID="LinkMedianoClaro">ver Clientes                                                                    </asp:HyperLink>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td valign="top" style="width: 9px;" align="left">
+                                    </td>
+                                </tr>
+--%>
                             <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
                         </td>
                     </tr>
