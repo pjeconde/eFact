@@ -144,6 +144,23 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
             }
         }
         [Serializable]
+        public class ParametrosAccionCompradorErroneo : Microsoft.ApplicationBlocks.ExceptionManagement.Usuario.BaseApplicationException
+        {
+            static string TextoError = "Acción inválida sobre Comprador.  Por favor, póngase en contacto con Cedeira Software Factory, para solucionar el inconveniente.  Muchas gracias.";
+            public ParametrosAccionCompradorErroneo()
+                : base(TextoError)
+            {
+            }
+            public ParametrosAccionCompradorErroneo(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public ParametrosAccionCompradorErroneo(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
         public class CuentaConfUpdateErroneo : Microsoft.ApplicationBlocks.ExceptionManagement.Usuario.BaseApplicationException
         {
             static string TextoError = "El evento de confirmación (de creación de la cuenta eFact) no puede ejecutarse.  Es probable que la confirmación ya haya sido registrada.  Verifique si puede identificarse.  En paso contrario, póngase en contacto con Cedeira Software Factory, para solucionar el inconveniente.  Muchas gracias.";
