@@ -65,7 +65,15 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="padding-top:10px">
-                                                        <asp:Image ID="Image5" runat="server" ImageUrl="~/Imagenes/Bola4.png"/>
+                                                        <asp:Image ID="Image8" runat="server" ImageUrl="~/Imagenes/Bola4.png"/>
+                                                    </td>
+                                                    <td style="padding-top:10px; padding-left:5px" align="left">
+                                                        &nbsp;<asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="~/CompradorExplorador.aspx" SkinID="LinkGrandeClaro">Configure los <b>datos de Compradores (clientes)</b></asp:HyperLink>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-top:10px">
+                                                        <asp:Image ID="Image5" runat="server" ImageUrl="~/Imagenes/Bola5.png"/>
                                                     </td>
                                                     <td style="padding-top:10px; padding-left:5px" align="left">
                                                         &nbsp;<asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/FacturaElectronicaXML.aspx" SkinID="LinkGrandeClaro"><b>Genere una Factura Electrónica</b> y reciba su archivo XML (comprobante electrónico)</asp:HyperLink>
@@ -73,7 +81,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="padding-top:10px">
-                                                        <asp:Image ID="Image6" runat="server" ImageUrl="~/Imagenes/Bola5.png"/>
+                                                        <asp:Image ID="Image6" runat="server" ImageUrl="~/Imagenes/Bola6.png"/>
                                                     </td>
                                                     <td style="padding-top:10px; padding-left:5px" align="left">
                                                         <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="http://www.interfacturas.com.ar/"
@@ -89,7 +97,7 @@
                                                         <asp:Image ID="Image7" runat="server" ImageUrl="~/Imagenes/Bola1.png"/>
                                                     </td>
                                                     <td style="padding-top:20px; padding-left:5px; width:680px" valign="middle" align="left">
-                                                        <asp:Label ID="Label3" runat="server" Text="Si ya ha configurado los datos del Vendedor, continúe por el punto 3." SkinID="TituloGrande"></asp:Label>
+                                                        <asp:Label ID="Label3" runat="server" Text="Si no necesita configurar los datos (Vendedor y Compradores), continúe por el punto 4." SkinID="TituloGrande"></asp:Label>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -103,7 +111,15 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="padding-top:10px">
-                                                        <asp:Image ID="Image10" runat="server" ImageUrl="~/Imagenes/Bola3.png"/>
+                                                        <asp:Image ID="Image12" runat="server" ImageUrl="~/Imagenes/Bola3.png"/>
+                                                    </td>
+                                                    <td style="padding-top:10px; padding-left:5px" align="left">
+                                                        &nbsp;<asp:HyperLink ID="HyperLink13" runat="server" NavigateUrl="~/CompradorExplorador.aspx" SkinID="LinkGrandeClaro">Configure los <b>datos de Compradores (clientes)</b></asp:HyperLink>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-top:10px">
+                                                        <asp:Image ID="Image10" runat="server" ImageUrl="~/Imagenes/Bola4.png"/>
                                                     </td>
                                                     <td style="padding-top:10px; padding-left:5px" align="left">
                                                         &nbsp;<asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/FacturaElectronicaXML.aspx"
@@ -112,7 +128,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="padding-top:10px">
-                                                        <asp:Image ID="Image11" runat="server" ImageUrl="~/Imagenes/Bola4.png"/>
+                                                        <asp:Image ID="Image11" runat="server" ImageUrl="~/Imagenes/Bola5.png"/>
                                                     </td>
                                                     <td style="padding-top:10px; padding-left:5px" align="left">
                                                         &nbsp;<asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="http://www.interfacturas.com.ar/"

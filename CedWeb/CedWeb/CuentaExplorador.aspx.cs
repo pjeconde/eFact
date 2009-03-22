@@ -23,12 +23,18 @@ namespace CedWeb
                     {
                         CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloLabel.Text, "~/SoloDispPUsuariosAdministradores.aspx");
                     }
-                    if (CedWebRN.Fun.NoEstaLogueadoUnAdministrador((CedWebEntidades.Sesion)Session["Sesion"]))
+                    else
                     {
-                        CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloLabel.Text, "~/SoloDispPUsuariosAdministradores.aspx");
+                        if (CedWebRN.Fun.NoEstaLogueadoUnAdministrador((CedWebEntidades.Sesion)Session["Sesion"]))
+                        {
+                            CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloLabel.Text, "~/SoloDispPUsuariosAdministradores.aspx");
+                        }
+                        else
+                        {
+                            CuentaPagingGridView.PageSize = 20;
+                            BindPagingGrid();
+                        }
                     }
-                    CuentaPagingGridView.PageSize = 20;
-                    BindPagingGrid();
                 }
             }
             catch (System.Threading.ThreadAbortException)
@@ -109,31 +115,7 @@ namespace CedWeb
                 string auxCache = "Cuenta" + Session.SessionID;
                 Cache.Remove(auxCache);
                 Cache.Add(auxCache, cuenta, null, DateTime.UtcNow.AddSeconds(300), TimeSpan.Zero, System.Web.Caching.CacheItemPriority.NotRemovable, null);
-
-                if (cuenta.EstadoCuenta.Id == "Vigente")
-                {
-                    BajaButton.Enabled = true;
-                }
-                else
-                {
-                    if (cuenta.EstadoCuenta.Id == "Baja")
-                    {
-                        AnularBajaButton.Enabled = true;
-                    }
-                }
-
-                if (cuenta.TipoCuenta.Id == "Prem")
-                {
-                    switch (cuenta.EstadoCuenta.Id)
-                    {
-                        case "Vigente":
-                            SuspenderPremiumButton.Enabled = true;
-                            break;
-                        case "Suspend":
-                            RestablecerPremiumButton.Enabled = true;
-                            break;
-                    }
-                }
+                HabilitarAcciones(cuenta);
             }
             catch (System.Threading.ThreadAbortException)
             {
@@ -158,6 +140,33 @@ namespace CedWeb
         {
             DeshabilitarAcciones();
             CuentaPagingGridView.SelectedIndex = -1;
+        }
+        private void HabilitarAcciones(CedWebEntidades.Cuenta Cuenta)
+        {
+            if (Cuenta.EstadoCuenta.Id == "Vigente")
+            {
+                BajaButton.Enabled = true;
+            }
+            else
+            {
+                if (Cuenta.EstadoCuenta.Id == "Baja")
+                {
+                    AnularBajaButton.Enabled = true;
+                }
+            }
+
+            if (Cuenta.TipoCuenta.Id == "Prem")
+            {
+                switch (Cuenta.EstadoCuenta.Id)
+                {
+                    case "Vigente":
+                        SuspenderPremiumButton.Enabled = true;
+                        break;
+                    case "Suspend":
+                        RestablecerPremiumButton.Enabled = true;
+                        break;
+                }
+            }
         }
         private void DeshabilitarAcciones()
         {
