@@ -130,24 +130,30 @@ namespace CedWebDB
         }
         public List<CedWebEntidades.Comprador> Lista(CedWebEntidades.Cuenta Cuenta)
         {
-            System.Text.StringBuilder a = new StringBuilder();
-            a.Append("select ");
-            a.Append("Comprador.IdCuenta, Cuenta.Nombre as NombreCuenta, Comprador.RazonSocial, Comprador.Calle, Comprador.Nro, Comprador.Piso, Comprador.Depto, Comprador.Sector, Comprador.Torre, Comprador.Manzana, Comprador.Localidad, Comprador.IdProvincia, Comprador.DescrProvincia, Comprador.CodPost, Comprador.NombreContacto, Comprador.EmailContacto, Comprador.TelefonoContacto, Comprador.IdTipoDoc, Comprador.DescrTipoDoc, Comprador.NroDoc, Comprador.IdCondIVA, Comprador.DescrCondIVA, Comprador.NroIngBrutos, Comprador.IdCondIngBrutos, Comprador.DescrCondIngBrutos, Comprador.GLN, Comprador.CodigoInterno, Comprador.FechaInicioActividades ");
-            a.Append("from Comprador, Cuenta ");
-            a.Append("where Comprador.IdCuenta='" + Cuenta.Id + "' and Comprador.IdCuenta=Cuenta.IdCuenta ");
-            a.Append("order by Comprador.RazonSocial ");
-            DataTable dt = new DataTable();
-            dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
-            List<CedWebEntidades.Comprador> lista = new List<CedWebEntidades.Comprador>();
-            if (dt.Rows.Count != 0)
-            {
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    CedWebEntidades.Comprador comprador = new CedWebEntidades.Comprador();
-                    Copiar(dt.Rows[i], comprador);
-                    lista.Add(comprador);
-                }
-            }
+			List<CedWebEntidades.Comprador> lista = new List<CedWebEntidades.Comprador>();
+			if (Cuenta.Id != null)
+			{
+				CedWebEntidades.Comprador seleccionar = new CedWebEntidades.Comprador();
+				seleccionar.RazonSocial = "Seleccionar comprador";
+				lista.Add(seleccionar);
+				System.Text.StringBuilder a = new StringBuilder();
+				a.Append("select ");
+				a.Append("Comprador.IdCuenta, Cuenta.Nombre as NombreCuenta, Comprador.RazonSocial, Comprador.Calle, Comprador.Nro, Comprador.Piso, Comprador.Depto, Comprador.Sector, Comprador.Torre, Comprador.Manzana, Comprador.Localidad, Comprador.IdProvincia, Comprador.DescrProvincia, Comprador.CodPost, Comprador.NombreContacto, Comprador.EmailContacto, Comprador.TelefonoContacto, Comprador.IdTipoDoc, Comprador.DescrTipoDoc, Comprador.NroDoc, Comprador.IdCondIVA, Comprador.DescrCondIVA, Comprador.NroIngBrutos, Comprador.IdCondIngBrutos, Comprador.DescrCondIngBrutos, Comprador.GLN, Comprador.CodigoInterno, Comprador.FechaInicioActividades ");
+				a.Append("from Comprador, Cuenta ");
+				a.Append("where Comprador.IdCuenta='" + Cuenta.Id + "' and Comprador.IdCuenta=Cuenta.IdCuenta ");
+				a.Append("order by Comprador.RazonSocial ");
+				DataTable dt = new DataTable();
+				dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+				if (dt.Rows.Count != 0)
+				{
+					for (int i = 0; i < dt.Rows.Count; i++)
+					{
+						CedWebEntidades.Comprador comprador = new CedWebEntidades.Comprador();
+						Copiar(dt.Rows[i], comprador);
+						lista.Add(comprador);
+					}
+				}
+			}
             return lista;
         }
         public List<CedWebEntidades.Comprador> Lista(CedWebEntidades.Cuenta Cuenta, int IndicePagina, int TamañoPagina, string OrderBy)
