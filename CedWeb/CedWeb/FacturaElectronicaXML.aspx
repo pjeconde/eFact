@@ -1064,27 +1064,27 @@
                                                                     OnRowUpdating="detalleGridView_RowUpdating" OnRowCancelingEdit="detalleGridView_RowCancelingEdit"
                                                                     OnRowDeleted="detalleGridView_RowDeleted" OnRowDeleting="detalleGridView_RowDeleting">
                                                                     <Columns>
-                                                                        <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Descripci&#243;n del producto o servicio">
+                                                                        <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Descripci&#243;n del artículo">
                                                                             <ItemTemplate>
                                                                                 <asp:Label ID="lbldescripcion" Text='<%# Eval("descripcion") %>' runat="server"></asp:Label>
                                                                             </ItemTemplate>
                                                                             <EditItemTemplate>
                                                                                 <asp:TextBox ID="txtdescripcion" runat="server" Text='<%# Eval("descripcion") %>'
-                                                                                    TextMode="MultiLine" Width="90%"></asp:TextBox>
+                                                                                    Width="90%"></asp:TextBox>
                                                                                 <asp:RequiredFieldValidator ID="txtdescripcionEditRequiredFieldValidator" runat="server"
-                                                                                    ControlToValidate="txtdescripcion" ErrorMessage="Descripción del producto o servicio en edición no informada"
-                                                                                    SetFocusOnError="True" ValidationGroup="Grillas">*</asp:RequiredFieldValidator>
+                                                                                    ControlToValidate="txtdescripcion" ErrorMessage="Descripción del artículo en edición no informada"
+                                                                                    SetFocusOnError="True" ValidationGroup="DetalleEditItem">*</asp:RequiredFieldValidator>
                                                                             </EditItemTemplate>
                                                                             <FooterTemplate>
-                                                                                <asp:TextBox ID="txtdescripcion" runat="server" Text='' TextMode="MultiLine" Width="90%"></asp:TextBox>
+                                                                                <asp:TextBox ID="txtdescripcion" runat="server" Text='' Width="90%"></asp:TextBox>
                                                                                 <asp:RequiredFieldValidator ID="txtdescripcionFooterRequiredFieldValidator" runat="server"
-                                                                                    ControlToValidate="txtdescripcion" ErrorMessage="Descripción del producto o servicio a agregar no informada"
+                                                                                    ControlToValidate="txtdescripcion" ErrorMessage="Descripción del artículo a agregar no informada"
                                                                                     SetFocusOnError="True" ValidationGroup="DetalleFooter">*</asp:RequiredFieldValidator>
                                                                             </FooterTemplate>
                                                                             <ItemStyle HorizontalAlign="left" />
                                                                             <FooterStyle HorizontalAlign="left" />
                                                                         </asp:TemplateField>
-                                                                        <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe total art&#237;culo">
+                                                                        <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe total">
                                                                             <ItemTemplate>
                                                                                 <asp:Label ID="lblimporte_total_articulo" Text='<%# Eval("importe_total_articulo") %>'
                                                                                     runat="server"></asp:Label>
@@ -1094,7 +1094,7 @@
                                                                                     runat="server" Width="80%"></asp:TextBox>
                                                                                 <asp:RegularExpressionValidator ID="txtimporte_total_articuloEditRegularExpressionValidator"
                                                                                     runat="server" ControlToValidate="txtimporte_total_articulo" ErrorMessage="Importe total artículo en edición mal formateado"
-                                                                                    SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="Grillas">*</asp:RegularExpressionValidator>
+                                                                                    SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DetalleEditItem">*</asp:RegularExpressionValidator>
                                                                                 <asp:RequiredFieldValidator ID="txtimporte_total_articuloEditRequiredFieldValidator"
                                                                                     runat="server" ControlToValidate="txtimporte_total_articulo" ErrorMessage="Importe total artículo en edición no informado"
                                                                                     SetFocusOnError="True" ValidationGroup="Grillas">*</asp:RequiredFieldValidator>
@@ -1111,7 +1111,7 @@
                                                                             <ItemStyle HorizontalAlign="Right" />
                                                                         </asp:TemplateField>
                                                                         <asp:CommandField HeaderStyle-Font-Bold="false" HeaderText="Edici&#243;n" ShowEditButton="True"
-                                                                            CancelText="Cancelar" UpdateText="Actualizar" EditText="Editar" CausesValidation="true" ValidationGroup="Grillas">
+                                                                            CancelText="Cancelar" UpdateText="Actualizar" EditText="Editar" CausesValidation="true" ValidationGroup="DetalleEditItem">
                                                                             <ItemStyle HorizontalAlign="Center" />
                                                                         </asp:CommandField>
                                                                         <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Eliminaci&#243;n / Incorporaci&#243;n">
@@ -1132,7 +1132,7 @@
                                                             <td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
                                                                 <asp:ValidationSummary ID="GrillasValidationSummary" runat="server" BorderColor="Gray"
                                                                     BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:"
-                                                                    ShowMessageBox="True" ValidationGroup="Grillas"></asp:ValidationSummary>
+                                                                    ShowMessageBox="True" ValidationGroup="DetalleEditItem"></asp:ValidationSummary>
                                                             </td>
                                                         </tr>
                                                         <tr>
