@@ -151,7 +151,8 @@ namespace CedWeb
         }
         protected void EliminarButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/CompradorEliminar.aspx?Id=" + CompradorSeleccionado().RazonSocial, true);
+			Session["CompradorSeleccionado"] = CompradorSeleccionado().RazonSocial;
+			Response.Redirect("~/CompradorEliminar.aspx", true);
         }
         protected void ModificarButton_Click(object sender, EventArgs e)
         {
