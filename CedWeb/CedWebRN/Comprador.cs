@@ -125,5 +125,10 @@ namespace CedWebRN
             CedWebDB.Comprador comprador = new CedWebDB.Comprador(Sesion);
             return comprador.CantidadDeFilas(Cuenta);
         }
+		public static List<CedWebEntidades.Comprador> Lista(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+		{
+			CedWebDB.Comprador comprador = new CedWebDB.Comprador(Sesion);
+			return comprador.Lista(Cuenta);
+		}
     }
 }
