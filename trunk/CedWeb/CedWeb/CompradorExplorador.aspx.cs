@@ -159,7 +159,8 @@ namespace CedWeb
         }
         protected void ConsultarButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/CompradorConsultar.aspx?Id=" + CompradorSeleccionado().RazonSocial, true);
+			Session["CompradorSeleccionado"] = CompradorSeleccionado().RazonSocial;
+			Response.Redirect("~/CompradorConsultar.aspx", true);
         }
         protected CedWebEntidades.Comprador CompradorSeleccionado()
         {
