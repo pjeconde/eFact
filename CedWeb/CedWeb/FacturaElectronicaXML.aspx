@@ -706,7 +706,15 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3" style="text-align: center; height: 10px;">
+                                                <td align="center" class="TextoLabelFEAVendedorDet" colspan="3" style="text-align: center; height: 10px; width: 740px">
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 740px">
+                                                        <tr>
+                                                            <td style="width:100%">
+                                                                <asp:DropDownList ID="CompradorDropDownList" runat="server" SkinID="DropDownListComprador" Visible="false" AutoPostBack="True" OnSelectedIndexChanged="CompradorDropDownList_SelectedIndexChanged">
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -899,7 +907,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="5" style="height: 1px; background-color: Gray;">
+                                                <td colspan="3" style="height: 1px; background-color: Gray;">
                                                 </td>
                                             </tr>
                                         </table>
