@@ -40,11 +40,11 @@
         </tr>
         <tr>
             <td align="left" style="padding-left:31px; padding-top:20px">
-                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/FacturaElectronica.aspx" SkinID="LinkMedianoClaro">Volver a la pagina anterior</asp:HyperLink>
+                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/FacturaElectronica.aspx" SkinID="LinkMedianoClaro">Volver a la página anterior</asp:HyperLink>
             </td>
         </tr>
         <tr>
-            <td height="100%">
+            <td style="height:100%">
             </td>
         </tr>
         <!-- @@@ @@@-->
