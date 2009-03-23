@@ -95,14 +95,15 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 				BindearDropDownLists();
 
-				if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id != null)
+				CedWebEntidades.Sesion sesion=(CedWebEntidades.Sesion)Session["Sesion"];
+				if (sesion.Cuenta.Id != null)
 				{
 					CedWebRN.Cuenta.ReservarNroLote(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
 					Id_LoteTextbox.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.UltimoNroLote.ToString();
 					Email_VendedorRequiredFieldValidator.Enabled = false;
 					GenerarButton.Text = "Enviar archivo XML al e-mail de la cuenta eFact (" + ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Email + ")";
 				}
-				if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.CUIT != 0)
+				if (sesion.Cuenta.Vendedor.CUIT != 0)
 				{
 					CedWebEntidades.Vendedor v = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor;
 					Razon_Social_VendedorTextBox.Text = v.RazonSocial;
@@ -129,6 +130,20 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					}
 					Codigo_Interno_VendedorTextBox.Text = v.CodigoInterno;
 					InicioDeActividadesVendedorDatePickerWebUserControl.CalendarDate = v.FechaInicioActividades;
+				}
+				System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores=CedWebRN.Comprador.Lista(sesion.Cuenta, sesion);
+				if (listacompradores.Count > 0)
+				{
+					CompradorDropDownList.Visible = true;
+					CompradorDropDownList.DataValueField = "RazonSocial";
+					CompradorDropDownList.DataTextField = "RazonSocial";
+					CompradorDropDownList.DataSource = listacompradores;
+					CompradorDropDownList.DataBind();
+				}
+				else
+				{
+					CompradorDropDownList.Visible = false;
+					CompradorDropDownList.DataSource = null;
 				}
 			}
 		}
@@ -1368,6 +1383,67 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			Tipo_de_cambioTextBox.Visible = false;
 			Tipo_de_cambioTextBox.Text = null;
 			Tipo_de_cambioRequiredFieldValidator.Enabled = false;
+		}
+	}
+	protected void CompradorDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+	{
+		CedWebEntidades.Comprador comprador = new CedWebEntidades.Comprador();
+		comprador.IdCuenta = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id;
+		comprador.RazonSocial = Convert.ToString(CompradorDropDownList.SelectedValue);
+		try
+		{
+			CedWebRN.Comprador.Leer(comprador, (CedWebEntidades.Sesion)Session["Sesion"]);
+			Denominacion_CompradorTextBox.Text = comprador.RazonSocial;
+			Domicilio_Calle_CompradorTextBox.Text = comprador.Calle;
+			Domicilio_Numero_CompradorTextBox.Text = comprador.Nro;
+			Domicilio_Piso_CompradorTextBox.Text = comprador.Piso;
+			Domicilio_Depto_CompradorTextBox.Text = comprador.Depto;
+			Domicilio_Sector_CompradorTextBox.Text = comprador.Sector;
+			Domicilio_Torre_CompradorTextBox.Text = comprador.Torre;
+			Domicilio_Manzana_CompradorTextBox.Text = comprador.Manzana;
+			Localidad_CompradorTextBox.Text = comprador.Localidad;
+			Provincia_CompradorDropDownList.SelectedValue = comprador.IdProvincia;
+			Cp_CompradorTextBox.Text = comprador.CodPost;
+			Contacto_CompradorTextBox.Text = comprador.NombreContacto;
+			Email_CompradorTextBox.Text = comprador.EmailContacto;
+			Telefono_CompradorTextBox.Text = Convert.ToString(comprador.TelefonoContacto);
+			Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = Convert.ToString(comprador.IdTipoDoc);
+			Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(comprador.NroDoc);
+			Condicion_IVA_CompradorDropDownList.SelectedValue = Convert.ToString(comprador.IdCondIVA);
+			//NroIngBrutosTextBox.Text = comprador.NroIngBrutos;
+			//CondIngBrutosDropDownList.SelectedValue = Convert.ToString(comprador.IdCondIngBrutos);
+			string auxGLN = Convert.ToString(comprador.GLN);
+			if (!auxGLN.Equals("0"))
+			{
+				GLN_CompradorTextBox.Text = auxGLN;
+			}
+			Codigo_Interno_CompradorTextBox.Text = comprador.CodigoInterno;
+			InicioDeActividadesCompradorDatePickerWebUserControl.CalendarDate = comprador.FechaInicioActividades;
+		}
+		catch(Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente ex)
+		{
+			Denominacion_CompradorTextBox.Text = string.Empty;
+			Domicilio_Calle_CompradorTextBox.Text = string.Empty;
+			Domicilio_Numero_CompradorTextBox.Text = string.Empty;
+			Domicilio_Piso_CompradorTextBox.Text = string.Empty;
+			Domicilio_Depto_CompradorTextBox.Text = string.Empty;
+			Domicilio_Sector_CompradorTextBox.Text = string.Empty;
+			Domicilio_Torre_CompradorTextBox.Text = string.Empty;
+			Domicilio_Manzana_CompradorTextBox.Text = string.Empty;
+			Localidad_CompradorTextBox.Text = string.Empty;
+			Provincia_CompradorDropDownList.SelectedValue = Convert.ToString(0);
+			Cp_CompradorTextBox.Text = string.Empty;
+			Contacto_CompradorTextBox.Text = string.Empty;
+			Email_CompradorTextBox.Text = string.Empty;
+			Telefono_CompradorTextBox.Text = string.Empty;
+			Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = Convert.ToString(80);
+			Nro_Doc_Identificatorio_CompradorTextBox.Text = string.Empty;
+			Condicion_IVA_CompradorDropDownList.SelectedValue = Convert.ToString(0);
+			//NroIngBrutosTextBox.Text = comprador.NroIngBrutos;
+			//CondIngBrutosDropDownList.SelectedValue = Convert.ToString(comprador.IdCondIngBrutos);
+			GLN_CompradorTextBox.Text = string.Empty;
+			Codigo_Interno_CompradorTextBox.Text = string.Empty;
+			((TextBox)InicioDeActividadesCompradorDatePickerWebUserControl.FindControl("txt_Date")).Text=string.Empty;
 		}
 	}
 }
