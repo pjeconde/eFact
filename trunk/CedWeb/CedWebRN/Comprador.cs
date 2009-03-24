@@ -111,6 +111,11 @@ namespace CedWebRN
             CompradorHst.CodigoInterno = CompradorDsd.CodigoInterno;
             CompradorHst.FechaInicioActividades = CompradorDsd.FechaInicioActividades;
         }
+        public static List<CedWebEntidades.Comprador> Lista(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Comprador comprador = new CedWebDB.Comprador(Sesion);
+            return comprador.Lista(Cuenta);
+        }
         public static List<CedWebEntidades.Comprador> Lista(CedWebEntidades.Cuenta Cuenta, int IndicePagina, int TamañoPagina, string OrderBy, CedEntidades.Sesion Sesion)
         {
             CedWebDB.Comprador comprador = new CedWebDB.Comprador(Sesion);
@@ -125,10 +130,19 @@ namespace CedWebRN
             CedWebDB.Comprador comprador = new CedWebDB.Comprador(Sesion);
             return comprador.CantidadDeFilas(Cuenta);
         }
-		public static List<CedWebEntidades.Comprador> Lista(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
-		{
-			CedWebDB.Comprador comprador = new CedWebDB.Comprador(Sesion);
-			return comprador.Lista(Cuenta);
-		}
+        public static List<CedWebEntidades.Comprador> ListaAdministracion(int IndicePagina, int TamañoPagina, string OrderBy, CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Comprador comprador = new CedWebDB.Comprador(Sesion);
+            if (OrderBy.Equals(String.Empty))
+            {
+                OrderBy = "RazonSocial";
+            }
+            return comprador.ListaAdministracion(IndicePagina, TamañoPagina, OrderBy);
+        }
+        public static int CantidadDeFilasAdministracion(CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Comprador comprador = new CedWebDB.Comprador(Sesion);
+            return comprador.CantidadDeFilasAdministracion();
+        }
     }
 }

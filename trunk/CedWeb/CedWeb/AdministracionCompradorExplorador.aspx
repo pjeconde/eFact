@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/CompradorExplorador.aspx.cs" Inherits="CedWeb.CompradorExplorador" MaintainScrollPositionOnPostback="true"%>
+﻿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/AdministracionCompradorExplorador.aspx.cs" Inherits="CedWeb.AdministracionCompradorExplorador" MaintainScrollPositionOnPostback="true"%>
 <%@ Register Assembly="CedeiraUIWebForms" Namespace="CedeiraUIWebForms" TagPrefix="cc1" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado" runat="Server">
     <table style="height: 500px; width: 800px; text-align: left;" cellpadding="0" cellspacing="0" border="0" class="TextoComun">
@@ -14,19 +14,7 @@
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
                                     </td>
                                     <td style="height:20px;">
-                                        <asp:Label ID="TituloLabel" runat="server" Text="Confirguración de datos de Compradores" SkinID="TituloPagina"></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td style="padding-top:10px" align="left">
-                                        <asp:Label ID="Label2" runat="server" Text="Configure los datos de Compradores para ahorrar tiempo al momento de ingresar las facturas."></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td style="padding-top:5px;" align="left">
-                                        <asp:Label ID="Label8" runat="server" Text="Haga clic en el comprador que desee seleccionar." SkinID="TextoMediano"></asp:Label>
+                                        <asp:Label ID="TituloLabel" runat="server" Text="Compradores" SkinID="TituloPagina"></asp:Label>
                                     </td>
                                 </tr>
                             </table>  
@@ -36,10 +24,17 @@
                     <tr>
                         <td valign="top" style="padding-left:10px; padding-top:10px">
                             <asp:Panel ID="Panel1" runat="server" Height="400px" Width="650px" ScrollBars="Auto" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" BackColor="peachpuff">
-                                <cc1:PagingGridView ID="CompradorPagingGridView" runat="server"
-                                                    OnSorting="CompradorPagingGridView_Sorting" OnSelectedIndexChanged="CompradorPagingGridView_SelectedIndexChanged" OnPageIndexChanging="CompradorPagingGridView_PageIndexChanging"
-                                                    OnRowDataBound="CompradorPagingGridView_RowDataBound">
+                                <cc1:PagingGridView ID="GrillaPagingGridView" runat="server"
+                                                    OnSorting="GrillaPagingGridView_Sorting" OnPageIndexChanging="GrillaPagingGridView_PageIndexChanging">
                                     <Columns>
+                                        <asp:BoundField DataField="IdCuenta" HeaderText="Id.Cuenta" SortExpression="IdCuenta">
+                                            <headerstyle horizontalalign="left" wrap="False"/>
+                                            <itemstyle wrap="False" horizontalalign="left"/>
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="NombreCuenta" HeaderText="Nombre Cuenta" SortExpression="NombreCuenta">
+                                            <headerstyle horizontalalign="left" wrap="False"/>
+                                            <itemstyle  wrap="False" horizontalalign="left"/>
+                                        </asp:BoundField>
                                         <asp:BoundField DataField="RazonSocial" HeaderText="Razon Social" SortExpression="RazonSocial">
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left"/>
@@ -139,32 +134,7 @@
                         <td valign="top" align="left" style="padding-left:10px; padding-top:6px">
                             <table cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                    <td style="padding-top:5px" class="TextoResaltado" align="center">
-                                        Acciones
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td style="padding-top:5px">
-                                        <asp:Button ID="CrearButton" runat="server" Text="Nuevo" Width="100px" OnClick="CrearButton_Click"> </asp:Button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-top:5px">
-                                        <asp:Button ID="EliminarButton" runat="server" Text="Eliminar" Width="100px" OnClick="EliminarButton_Click" Enabled="false"> </asp:Button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-top:5px">
-                                        <asp:Button ID="ModificarButton" runat="server" Text="Modificar" Width="100px" OnClick="ModificarButton_Click" Enabled="false"> </asp:Button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-top:5px">
-                                        <asp:Button ID="ConsultarButton" runat="server" Text="Consultar" Width="100px" OnClick="ConsultarButton_Click" Enabled="false"> </asp:Button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-top:20px">
                                         <asp:Button ID="SalirButton" runat="server" Text="Salir" Width="100px" OnClick="SalirButton_Click"> </asp:Button>
                                     </td>
                                 </tr>
