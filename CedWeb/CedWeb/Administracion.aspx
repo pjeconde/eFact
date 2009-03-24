@@ -35,15 +35,15 @@
                                                     <asp:Image ID="Image4" runat="server" ImageUrl="~/Imagenes/Bola1.png"/>
                                                 </td>
                                                 <td style="padding-top:20px; padding-left:5px; width:680px" valign="middle" align="left">
-                                                    &nbsp;<asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/CuentaExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Cuentas</asp:HyperLink>
+                                                    &nbsp;<asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/AdministracionCuentaExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Cuentas</asp:HyperLink>
                                                 </td>
                                             </tr>
-<%--                                            <tr>
+                                            <tr>
                                                 <td style="padding-top:10px">
                                                     <asp:Image ID="Image3" runat="server" ImageUrl="~/Imagenes/Bola2.png"/>
                                                 </td>
                                                 <td style="padding-top:10px; padding-left:5px" align="left">
-                                                    &nbsp;<asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Vendedor.aspx" SkinID="LinkGrandeClaro">Configure los datos del Vendedor</asp:HyperLink>
+                                                    &nbsp;<asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/AdministracionVendedorExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Vendedores</asp:HyperLink>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -51,9 +51,9 @@
                                                     <asp:Image ID="Image5" runat="server" ImageUrl="~/Imagenes/Bola3.png"/>
                                                 </td>
                                                 <td style="padding-top:10px; padding-left:5px" align="left">
-                                                    &nbsp;<asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/CuentaCambiarPassword.aspx" SkinID="LinkGrandeClaro">Cambie su Contraseña</asp:HyperLink>
+                                                    &nbsp;<asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/AdministracionCompradorExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Compradores</asp:HyperLink>
                                                 </td>
-                                            </tr>--%>
+                                            </tr>
                                         </table>
                                     </td>
                                 </tr>                            

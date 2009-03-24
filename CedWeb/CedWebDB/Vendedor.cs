@@ -21,32 +21,37 @@ namespace CedWebDB
             }
             else
             {
-                Vendedor.NombreCuenta = Convert.ToString(dt.Rows[0]["NombreCuenta"]);
-                Vendedor.RazonSocial = Convert.ToString(dt.Rows[0]["RazonSocial"]);
-                Vendedor.Calle = Convert.ToString(dt.Rows[0]["Calle"]);
-                Vendedor.Nro = Convert.ToString(dt.Rows[0]["Nro"]);
-                Vendedor.Piso = Convert.ToString(dt.Rows[0]["Piso"]);
-                Vendedor.Depto = Convert.ToString(dt.Rows[0]["Depto"]);
-                Vendedor.Sector = Convert.ToString(dt.Rows[0]["Sector"]);
-                Vendedor.Torre = Convert.ToString(dt.Rows[0]["Torre"]);
-                Vendedor.Manzana = Convert.ToString(dt.Rows[0]["Manzana"]);
-                Vendedor.Localidad = Convert.ToString(dt.Rows[0]["Localidad"]);
-                Vendedor.IdProvincia = Convert.ToString(dt.Rows[0]["IdProvincia"]);
-                Vendedor.DescrProvincia = Convert.ToString(dt.Rows[0]["DescrProvincia"]);
-                Vendedor.CodPost = Convert.ToString(dt.Rows[0]["CodPost"]);
-                Vendedor.NombreContacto = Convert.ToString(dt.Rows[0]["NombreContacto"]);
-                Vendedor.EmailContacto = Convert.ToString(dt.Rows[0]["EmailContacto"]);
-                Vendedor.TelefonoContacto = Convert.ToString(dt.Rows[0]["TelefonoContacto"]);
-                Vendedor.CUIT = Convert.ToInt64(dt.Rows[0]["CUIT"]);
-                Vendedor.IdCondIVA = Convert.ToInt32(dt.Rows[0]["IdCondIVA"]);
-                Vendedor.DescrCondIVA = Convert.ToString(dt.Rows[0]["DescrCondIVA"]);
-                Vendedor.NroIngBrutos = Convert.ToString(dt.Rows[0]["NroIngBrutos"]);
-                Vendedor.IdCondIngBrutos = Convert.ToInt32(dt.Rows[0]["IdCondIngBrutos"]);
-                Vendedor.DescrCondIngBrutos = Convert.ToString(dt.Rows[0]["DescrCondIngBrutos"]);
-                Vendedor.GLN = Convert.ToInt64(dt.Rows[0]["GLN"]);
-                Vendedor.CodigoInterno = Convert.ToString(dt.Rows[0]["CodigoInterno"]);
-                Vendedor.FechaInicioActividades = Convert.ToDateTime(dt.Rows[0]["FechaInicioActividades"]);
+                Copiar(dt.Rows[0], Vendedor);
             }
+        }
+        private void Copiar(DataRow Desde, CedWebEntidades.Vendedor Hasta)
+        {
+            Hasta.IdCuenta = Convert.ToString(Desde["IdCuenta"]);
+            Hasta.NombreCuenta = Convert.ToString(Desde["NombreCuenta"]);
+            Hasta.RazonSocial = Convert.ToString(Desde["RazonSocial"]);
+            Hasta.Calle = Convert.ToString(Desde["Calle"]);
+            Hasta.Nro = Convert.ToString(Desde["Nro"]);
+            Hasta.Piso = Convert.ToString(Desde["Piso"]);
+            Hasta.Depto = Convert.ToString(Desde["Depto"]);
+            Hasta.Sector = Convert.ToString(Desde["Sector"]);
+            Hasta.Torre = Convert.ToString(Desde["Torre"]);
+            Hasta.Manzana = Convert.ToString(Desde["Manzana"]);
+            Hasta.Localidad = Convert.ToString(Desde["Localidad"]);
+            Hasta.IdProvincia = Convert.ToString(Desde["IdProvincia"]);
+            Hasta.DescrProvincia = Convert.ToString(Desde["DescrProvincia"]);
+            Hasta.CodPost = Convert.ToString(Desde["CodPost"]);
+            Hasta.NombreContacto = Convert.ToString(Desde["NombreContacto"]);
+            Hasta.EmailContacto = Convert.ToString(Desde["EmailContacto"]);
+            Hasta.TelefonoContacto = Convert.ToString(Desde["TelefonoContacto"]);
+            Hasta.CUIT = Convert.ToInt64(Desde["CUIT"]);
+            Hasta.IdCondIVA = Convert.ToInt32(Desde["IdCondIVA"]);
+            Hasta.DescrCondIVA = Convert.ToString(Desde["DescrCondIVA"]);
+            Hasta.NroIngBrutos = Convert.ToString(Desde["NroIngBrutos"]);
+            Hasta.IdCondIngBrutos = Convert.ToInt32(Desde["IdCondIngBrutos"]);
+            Hasta.DescrCondIngBrutos = Convert.ToString(Desde["DescrCondIngBrutos"]);
+            Hasta.GLN = Convert.ToInt64(Desde["GLN"]);
+            Hasta.CodigoInterno = Convert.ToString(Desde["CodigoInterno"]);
+            Hasta.FechaInicioActividades = Convert.ToDateTime(Desde["FechaInicioActividades"]);
         }
         public void Guardar(CedWebEntidades.Vendedor Vendedor)
         {
@@ -110,6 +115,50 @@ namespace CedWebDB
             a.Append("'" + Vendedor.FechaInicioActividades.ToString("yyyyMMdd") + "' ");
             a.Append(") ");
             Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+        }
+        public List<CedWebEntidades.Vendedor> ListaAdministracion(int IndicePagina, int TamañoPagina, string OrderBy)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            a.Append("select * ");
+            a.Append("from (select top {0} ROW_NUMBER() OVER (ORDER BY {1}) as ROW_NUM, ");
+            a.Append("Vendedor.IdCuenta, Cuenta.Nombre as NombreCuenta, Vendedor.RazonSocial, Vendedor.Calle, Vendedor.Nro, Vendedor.Piso, Vendedor.Depto, Vendedor.Sector, Vendedor.Torre, Vendedor.Manzana, Vendedor.Localidad, Vendedor.IdProvincia, Vendedor.DescrProvincia, Vendedor.CodPost, Vendedor.NombreContacto, Vendedor.EmailContacto, Vendedor.TelefonoContacto, Vendedor.CUIT, Vendedor.IdCondIVA, Vendedor.DescrCondIVA, Vendedor.NroIngBrutos, Vendedor.IdCondIngBrutos, Vendedor.DescrCondIngBrutos, Vendedor.GLN, Vendedor.CodigoInterno, Vendedor.FechaInicioActividades ");
+            a.Append("from Vendedor, Cuenta ");
+            a.Append("where Vendedor.IdCuenta=Cuenta.IdCuenta ");
+            a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), ModificarOrderBy(OrderBy), (IndicePagina * TamañoPagina));
+            DataTable dt = new DataTable();
+            dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<CedWebEntidades.Vendedor> lista = new List<CedWebEntidades.Vendedor>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    CedWebEntidades.Vendedor Vendedor = new CedWebEntidades.Vendedor();
+                    Copiar(dt.Rows[i], Vendedor);
+                    lista.Add(Vendedor);
+                }
+            }
+            return lista;
+        }
+        public int CantidadDeFilasAdministracion()
+        {
+            string commandText = "select count(*) from Vendedor ";
+            DataTable dt = new DataTable();
+            dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            return Convert.ToInt32(dt.Rows[0][0]);
+        }
+        private string ModificarOrderBy(string OrderBy)
+        {
+            switch (OrderBy.Trim())
+            {
+                case "NombreCuenta":
+                    OrderBy = "Cuenta." + OrderBy;
+                    break;
+                default:
+                    OrderBy = "Vendedor." + OrderBy;
+                    break;
+            }
+            return OrderBy;
         }
     }
 }

@@ -91,5 +91,19 @@ namespace CedWebRN
             VendedorHst.CodigoInterno = VendedorDsd.CodigoInterno;
             VendedorHst.FechaInicioActividades = VendedorDsd.FechaInicioActividades;
         }
+        public static List<CedWebEntidades.Vendedor> ListaAdministracion(int IndicePagina, int TamañoPagina, string OrderBy, CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Vendedor vendedor = new CedWebDB.Vendedor(Sesion);
+            if (OrderBy.Equals(String.Empty))
+            {
+                OrderBy = "RazonSocial";
+            }
+            return vendedor.ListaAdministracion(IndicePagina, TamañoPagina, OrderBy);
+        }
+        public static int CantidadDeFilasAdministracion(CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Vendedor vendedor = new CedWebDB.Vendedor(Sesion);
+            return vendedor.CantidadDeFilasAdministracion();
+        }
     }
 }

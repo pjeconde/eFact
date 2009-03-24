@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/CuentaExplorador.aspx.cs" Inherits="CedWeb.CuentaExplorador" MaintainScrollPositionOnPostback="true"%>
+<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/AdministracionCuentaExplorador.aspx.cs" Inherits="CedWeb.AdministracionCuentaExplorador" MaintainScrollPositionOnPostback="true"%>
 <%@ Register Assembly="CedeiraUIWebForms" Namespace="CedeiraUIWebForms" TagPrefix="cc1" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado" runat="Server">
     <table style="height: 500px; width: 800px; text-align: left;" cellpadding="0" cellspacing="0" border="0" class="TextoComun">
@@ -35,27 +35,27 @@
                                                     OnRowDataBound="CuentaPagingGridView_RowDataBound">
                                     <Columns>
                                         <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id">
-                                            <headerstyle horizontalalign="left"/>
+                                            <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left" Width="300px"/>
                                         </asp:BoundField>
                                         <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre">
-                                            <headerstyle horizontalalign="left"/>
+                                            <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle  wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
                                         <asp:BoundField DataField="Telefono" HeaderText="Telefono" SortExpression="Telefono">
-                                            <headerstyle horizontalalign="left"/>
+                                            <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle  wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
                                         <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email">
-                                            <headerstyle horizontalalign="left"/>
+                                            <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle  wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
                                         <asp:BoundField DataField="DescrTipoCuenta" HeaderText="Tipo" SortExpression="DescrTipoCuenta">
-                                            <headerstyle horizontalalign="left"/>
+                                            <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle  wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
                                         <asp:BoundField DataField="DescrEstadoCuenta" HeaderText="Estado" SortExpression="DescrEstadoCuenta">
-                                            <headerstyle horizontalalign="left"/>
+                                            <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle  wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
                                     </Columns>
@@ -71,12 +71,12 @@
                                 </tr>
                                 <tr>
                                     <td style="padding-top:5px">
-                                        <asp:Button ID="BajaButton" runat="server" Text="Dar de baja" Width="100%" OnClick="BajaButton_Click" Enabled="false"> </asp:Button>
+                                        <asp:Button ID="BajaButton" runat="server" Text="Dar de baja" Width="100px" OnClick="BajaButton_Click" Enabled="false"> </asp:Button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="padding-top:5px">
-                                        <asp:Button ID="AnularBajaButton" runat="server" Text="Anular la baja" Width="100%" OnClick="AnularBajaButton_Click" Enabled="false"> </asp:Button>
+                                        <asp:Button ID="AnularBajaButton" runat="server" Text="Anular la baja" Width="100px" OnClick="AnularBajaButton_Click" Enabled="false"> </asp:Button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -86,12 +86,12 @@
                                 </tr>
                                 <tr>
                                     <td style="padding-top:5px">
-                                        <asp:Button ID="SuspenderPremiumButton" runat="server" Text="Suspender" Width="100%" OnClick="SuspenderPremiumButton_Click" Enabled="false"> </asp:Button>
+                                        <asp:Button ID="SuspenderPremiumButton" runat="server" Text="Suspender" Width="100px" OnClick="SuspenderPremiumButton_Click" Enabled="false"> </asp:Button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="padding-top:5px">
-                                        <asp:Button ID="RestablecerPremiumButton" runat="server" Text="Restablecer" Width="100%" OnClick="RestablecerPremiumButton_Click" Enabled="false"> </asp:Button>
+                                        <asp:Button ID="RestablecerPremiumButton" runat="server" Text="Restablecer" Width="100px" OnClick="RestablecerPremiumButton_Click" Enabled="false"> </asp:Button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -101,12 +101,12 @@
                                 </tr>
                                 <tr>
                                     <td style="padding-top:5px">
-                                        <asp:Button ID="DepurarButton" runat="server" Text="Depurar bajas" Width="100%" OnClick="DepurarButton_Click"> </asp:Button>
+                                        <asp:Button ID="DepurarButton" runat="server" Text="Depurar bajas" Width="100px" OnClick="DepurarButton_Click"> </asp:Button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="padding-top:20px">
-                                        <asp:Button ID="SalirButton" runat="server" Text="Salir" Width="100%" OnClick="SalirButton_Click"> </asp:Button>
+                                        <asp:Button ID="SalirButton" runat="server" Text="Salir" Width="100px" OnClick="SalirButton_Click"> </asp:Button>
                                     </td>
                                 </tr>
                                 <tr>

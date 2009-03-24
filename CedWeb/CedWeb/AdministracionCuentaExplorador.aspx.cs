@@ -10,7 +10,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 namespace CedWeb
 {
-    public partial class CuentaExplorador : System.Web.UI.Page
+    public partial class AdministracionCuentaExplorador : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

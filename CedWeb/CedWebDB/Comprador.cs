@@ -26,6 +26,7 @@ namespace CedWebDB
         }
         private void Copiar(DataRow Desde, CedWebEntidades.Comprador Hasta)
         {
+            Hasta.IdCuenta = Convert.ToString(Desde["IdCuenta"]);
             Hasta.NombreCuenta = Convert.ToString(Desde["NombreCuenta"]);
             Hasta.RazonSocial = Convert.ToString(Desde["RazonSocial"]);
             Hasta.Calle = Convert.ToString(Desde["Calle"]);
@@ -180,6 +181,44 @@ namespace CedWebDB
             }
             return lista;
         }
+        public int CantidadDeFilas(CedWebEntidades.Cuenta Cuenta)
+        {
+            string commandText = "select count(*) from Comprador where IdCuenta='" + Cuenta.Id + "' ";
+            DataTable dt = new DataTable();
+            dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            return Convert.ToInt32(dt.Rows[0][0]);
+        }
+        public List<CedWebEntidades.Comprador> ListaAdministracion(int IndicePagina, int TamañoPagina, string OrderBy)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            a.Append("select * ");
+            a.Append("from (select top {0} ROW_NUMBER() OVER (ORDER BY {1}) as ROW_NUM, ");
+            a.Append("Comprador.IdCuenta, Cuenta.Nombre as NombreCuenta, Comprador.RazonSocial, Comprador.Calle, Comprador.Nro, Comprador.Piso, Comprador.Depto, Comprador.Sector, Comprador.Torre, Comprador.Manzana, Comprador.Localidad, Comprador.IdProvincia, Comprador.DescrProvincia, Comprador.CodPost, Comprador.NombreContacto, Comprador.EmailContacto, Comprador.TelefonoContacto, Comprador.IdTipoDoc, Comprador.DescrTipoDoc, Comprador.NroDoc, Comprador.IdCondIVA, Comprador.DescrCondIVA, Comprador.NroIngBrutos, Comprador.IdCondIngBrutos, Comprador.DescrCondIngBrutos, Comprador.GLN, Comprador.CodigoInterno, Comprador.FechaInicioActividades ");
+            a.Append("from Comprador, Cuenta ");
+            a.Append("where Comprador.IdCuenta=Cuenta.IdCuenta ");
+            a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), ModificarOrderBy(OrderBy), (IndicePagina * TamañoPagina));
+            DataTable dt = new DataTable();
+            dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<CedWebEntidades.Comprador> lista = new List<CedWebEntidades.Comprador>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    CedWebEntidades.Comprador comprador = new CedWebEntidades.Comprador();
+                    Copiar(dt.Rows[i], comprador);
+                    lista.Add(comprador);
+                }
+            }
+            return lista;
+        }
+        public int CantidadDeFilasAdministracion()
+        {
+            string commandText = "select count(*) from Comprador ";
+            DataTable dt = new DataTable();
+            dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            return Convert.ToInt32(dt.Rows[0][0]);
+        }
         private string ModificarOrderBy(string OrderBy)
         {
             switch (OrderBy.Trim())
@@ -192,13 +231,6 @@ namespace CedWebDB
                     break;
             }
             return OrderBy;
-        }
-        public int CantidadDeFilas(CedWebEntidades.Cuenta Cuenta)
-        {
-            string commandText = "select count(*) from Comprador where IdCuenta='" + Cuenta.Id + "' ";
-            DataTable dt = new DataTable();
-            dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
-            return Convert.ToInt32(dt.Rows[0][0]);
         }
     }
 }
