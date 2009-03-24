@@ -33,7 +33,14 @@ namespace CedWeb
 				sesion.Cuenta.Id = UsuarioTextBox.Text;
 				sesion.Cuenta.Password = PasswordTextBox.Text;
 				CedWebRN.Cuenta.Login(sesion.Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
-				Response.Redirect("~/FacturaElectronica.aspx", true);
+                if (sesion.Cuenta.TipoCuenta.Id != "Admin")
+                {
+                    Response.Redirect("~/FacturaElectronica.aspx", true);
+                }
+                else
+                {
+                    Response.Redirect("~/Administracion.aspx", true);
+                }
 			}
 			catch (System.Threading.ThreadAbortException)
 			{
