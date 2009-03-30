@@ -1213,7 +1213,10 @@
                                                                 </ItemTemplate>
                                                                 <EditItemTemplate>
                                                                     <asp:TextBox ID="txtdescripcion" Text='<%# Eval("descripcion_descuento") %>' runat="server"
-                                                                        Width="100%"></asp:TextBox>
+                                                                        Width="90%"></asp:TextBox>
+                                                                    <asp:RequiredFieldValidator ID="txtdescripcionEditItemRequiredFieldValidator" runat="server"
+                                                                        ControlToValidate="txtdescripcion" ErrorMessage="Descripción del descuento global en edición no informada"
+                                                                        SetFocusOnError="True" ValidationGroup="DescuentosGlobalesEditItem">*</asp:RequiredFieldValidator>
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
                                                                     <asp:TextBox ID="txtdescripcion" Text='' runat="server" Width="90%"></asp:TextBox>
@@ -1230,7 +1233,13 @@
                                                                 </ItemTemplate>
                                                                 <EditItemTemplate>
                                                                     <asp:TextBox ID="txtimporte_descuento" Text='<%# Eval("importe_descuento") %>' runat="server"
-                                                                        Width="100%"></asp:TextBox>
+                                                                        Width="80%"></asp:TextBox>
+                                                                    <asp:RequiredFieldValidator ID="txtimporte_descuentoEditItemRequiredFieldValidator"
+                                                                        runat="server" ControlToValidate="txtimporte_descuento" ErrorMessage="Importe del descuento global en edición no informado"
+                                                                        SetFocusOnError="True" ValidationGroup="DescuentosGlobalesEditItem">*</asp:RequiredFieldValidator>
+                                                                    <asp:RegularExpressionValidator ID="txtimporte_descuentoEditItemRegularExpressionValidator"
+                                                                        runat="server" ControlToValidate="txtimporte_descuento" ErrorMessage="Importe total descuento global en edición mal formateado"
+                                                                        SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DescuentosGlobalesEditItem">*</asp:RegularExpressionValidator>
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
                                                                     <asp:TextBox ID="txtimporte_descuento" Text='' runat="server" Width="80%"></asp:TextBox>
@@ -1243,8 +1252,9 @@
                                                                 </FooterTemplate>
                                                                 <ItemStyle HorizontalAlign="Right" />
                                                             </asp:TemplateField>
-                                                            <asp:CommandField HeaderStyle-Font-Bold="false" HeaderText="Edici&#243;n" ShowEditButton="True"
-                                                                CancelText="Cancelar" UpdateText="Actualizar" EditText="Editar" CausesValidation="false">
+                                                            <asp:CommandField CancelText="Cancelar" CausesValidation="true" EditText="Editar"
+                                                                HeaderStyle-Font-Bold="false" HeaderText="Edici&#243;n" ShowEditButton="True"
+                                                                UpdateText="Actualizar" ValidationGroup="DescuentosGlobalesEditItem">
                                                                 <ItemStyle HorizontalAlign="Center" />
                                                             </asp:CommandField>
                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Eliminaci&#243;n / Incorporaci&#243;n">
