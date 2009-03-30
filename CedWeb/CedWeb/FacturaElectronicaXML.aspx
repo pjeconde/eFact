@@ -1306,11 +1306,11 @@
                                     <td style="text-align: center" class="TextoResaltado">
                                         <table style="width: 782px" border="0" cellpadding="0" cellspacing="0">
                                             <tr>
-                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                <td rowspan="8" style="width: 1px; background-color: Gray;">
                                                 </td>
                                                 <td colspan="1" style="height: 1px; background-color: Gray;">
                                                 </td>
-                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                <td rowspan="8" style="width: 1px; background-color: Gray;">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1354,21 +1354,34 @@
                                                                 <ItemStyle HorizontalAlign="left" Width="360px" />
                                                                 <FooterStyle HorizontalAlign="left" Width="360px" />
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe total impuesto">
+                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe total">
                                                                 <ItemTemplate>
                                                                     <asp:Label ID="lblimporte_impuesto" Text='<%# Eval("importe_impuesto") %>' runat="server"></asp:Label>
                                                                 </ItemTemplate>
                                                                 <EditItemTemplate>
                                                                     <asp:TextBox ID="txtimporte_impuesto" Text='<%# Eval("importe_impuesto") %>' runat="server"
-                                                                        Width="100%"></asp:TextBox>
+                                                                        Width="75%"></asp:TextBox>
+                                                                    <asp:RegularExpressionValidator ID="txtimporte_impuestoEditItemRegularExpressionValidator"
+                                                                        runat="server" ControlToValidate="txtimporte_impuesto" ErrorMessage="Importe total impuesto global en edición mal formateado"
+                                                                        SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="ImpuestosGlobalesEditItem">*</asp:RegularExpressionValidator>
+                                                                    <asp:RequiredFieldValidator ID="txtimporte_impuestoEditItemRequiredFieldValidator"
+                                                                        runat="server" ControlToValidate="txtimporte_impuesto" ErrorMessage="Importe total impuesto global en edición no informado"
+                                                                        SetFocusOnError="True" ValidationGroup="ImpuestosGlobalesEditItem">*</asp:RequiredFieldValidator>
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
-                                                                    <asp:TextBox ID="txtimporte_impuesto" Text='' runat="server" Width="100%"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtimporte_impuesto" Text='' runat="server" Width="75%"></asp:TextBox>
+                                                                    <asp:RegularExpressionValidator ID="txtimporte_impuestoFooterRegularExpressionValidator"
+                                                                        runat="server" ControlToValidate="txtimporte_impuesto" ErrorMessage="Importe total impuesto global a agregar mal formateado"
+                                                                        SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="ImpuestosGlobalesFooter">*</asp:RegularExpressionValidator>
+                                                                    <asp:RequiredFieldValidator ID="txtimporte_impuestoFooterRequiredFieldValidator"
+                                                                        runat="server" ControlToValidate="txtimporte_impuesto" ErrorMessage="Importe total impuesto global a agregar no informado"
+                                                                        SetFocusOnError="True" ValidationGroup="ImpuestosGlobalesFooter">*</asp:RequiredFieldValidator>
                                                                 </FooterTemplate>
                                                                 <ItemStyle HorizontalAlign="Right" />
                                                             </asp:TemplateField>
-                                                            <asp:CommandField HeaderStyle-Font-Bold="false" HeaderText="Edici&#243;n" ShowEditButton="True"
-                                                                CancelText="Cancelar" UpdateText="Actualizar" EditText="Editar" CausesValidation="false">
+                                                            <asp:CommandField CancelText="Cancelar" CausesValidation="true" EditText="Editar"
+                                                                HeaderStyle-Font-Bold="false" HeaderText="Edici&#243;n" ShowEditButton="True"
+                                                                UpdateText="Actualizar" ValidationGroup="ImpuestosGlobalesEditItem">
                                                                 <ItemStyle HorizontalAlign="Center" />
                                                             </asp:CommandField>
                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Eliminaci&#243;n / Incorporaci&#243;n">
@@ -1376,8 +1389,8 @@
                                                                     <asp:LinkButton ID="linkDeleteImpuesto" CommandName="Delete" runat="server" CausesValidation="false">Borrar</asp:LinkButton>
                                                                 </ItemTemplate>
                                                                 <FooterTemplate>
-                                                                    <asp:LinkButton ID="linkAddImpuesto" CommandName="AddImpuestoGlobal" runat="server"
-                                                                        CausesValidation="false">Agregar</asp:LinkButton>
+                                                                    <asp:LinkButton ID="linkAddImpuesto" runat="server" CausesValidation="true" CommandName="AddImpuestoGlobal"
+                                                                        ValidationGroup="ImpuestosGlobalesFooter">Agregar</asp:LinkButton>
                                                                 </FooterTemplate>
                                                                 <ItemStyle HorizontalAlign="Center" />
                                                             </asp:TemplateField>
@@ -1390,11 +1403,25 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                <td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
+                                                    <asp:ValidationSummary ID="ImpuestoEditItemValidationSummary" runat="server" BorderColor="Gray"
+                                                        BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:"
+                                                        ShowMessageBox="True" ValidationGroup="ImpuestosGlobalesEditItem"></asp:ValidationSummary>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
+                                                    <asp:ValidationSummary ID="ImpuestoFooterValidationSummary" runat="server" BorderColor="Gray"
+                                                        BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:"
+                                                        ShowMessageBox="True" ValidationGroup="ImpuestosGlobalesFooter"></asp:ValidationSummary>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="8" style="width: 1px; background-color: Gray;">
                                                 </td>
                                                 <td colspan="1" style="height: 1px; background-color: Gray;">
                                                 </td>
-                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                <td rowspan="8" style="width: 1px; background-color: Gray;">
                                                 </td>
                                             </tr>
                                         </table>
