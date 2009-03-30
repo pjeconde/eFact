@@ -101,7 +101,7 @@
                                                     <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
                                                         <tr>
                                                             <td>
-                                                                <asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px" ></asp:FileUpload>
+                                                                <asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px"></asp:FileUpload>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -212,7 +212,9 @@
                                                             <td style="width: 240px" valign="middle" align="center">
                                                                 COMPROBANTE ELECTRÓNICO
                                                                 <br />
-                                                                EN <asp:DropDownList ID="MonedaComprobanteDropDownList" runat="server" SkinID="DropDownListVendedor" AutoPostBack="True" OnSelectedIndexChanged="MonedaComprobanteDropDownList_SelectedIndexChanged">
+                                                                EN
+                                                                <asp:DropDownList ID="MonedaComprobanteDropDownList" runat="server" SkinID="DropDownListVendedor"
+                                                                    AutoPostBack="True" OnSelectedIndexChanged="MonedaComprobanteDropDownList_SelectedIndexChanged">
                                                                 </asp:DropDownList></td>
                                                         </tr>
                                                     </table>
@@ -706,11 +708,13 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td align="center" class="TextoLabelFEAVendedorDet" colspan="3" style="text-align: center; height: 10px; width: 740px">
+                                                <td align="center" class="TextoLabelFEAVendedorDet" colspan="3" style="text-align: center;
+                                                    height: 10px; width: 740px">
                                                     <table border="0" cellpadding="0" cellspacing="0" style="width: 740px">
                                                         <tr>
-                                                            <td style="width:100%">
-                                                                <asp:DropDownList ID="CompradorDropDownList" runat="server" SkinID="DropDownListComprador" Visible="false" AutoPostBack="True" OnSelectedIndexChanged="CompradorDropDownList_SelectedIndexChanged">
+                                                            <td style="width: 100%">
+                                                                <asp:DropDownList ID="CompradorDropDownList" runat="server" SkinID="DropDownListComprador"
+                                                                    Visible="false" AutoPostBack="True" OnSelectedIndexChanged="CompradorDropDownList_SelectedIndexChanged">
                                                                 </asp:DropDownList>
                                                             </td>
                                                         </tr>
@@ -1119,7 +1123,8 @@
                                                                             <ItemStyle HorizontalAlign="Right" />
                                                                         </asp:TemplateField>
                                                                         <asp:CommandField HeaderStyle-Font-Bold="false" HeaderText="Edici&#243;n" ShowEditButton="True"
-                                                                            CancelText="Cancelar" UpdateText="Actualizar" EditText="Editar" CausesValidation="true" ValidationGroup="DetalleEditItem">
+                                                                            CancelText="Cancelar" UpdateText="Actualizar" EditText="Editar" CausesValidation="true"
+                                                                            ValidationGroup="DetalleEditItem">
                                                                             <ItemStyle HorizontalAlign="Center" />
                                                                         </asp:CommandField>
                                                                         <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Eliminaci&#243;n / Incorporaci&#243;n">
@@ -1170,11 +1175,11 @@
                                     <td style="text-align: center" class="TextoResaltado">
                                         <table style="width: 782px" border="0" cellpadding="0" cellspacing="0">
                                             <tr>
-                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                <td rowspan="8" style="width: 1px; background-color: Gray;">
                                                 </td>
                                                 <td colspan="1" style="height: 1px; background-color: Gray;">
                                                 </td>
-                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                <td rowspan="8" style="width: 1px; background-color: Gray;">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1211,12 +1216,15 @@
                                                                         Width="100%"></asp:TextBox>
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
-                                                                    <asp:TextBox ID="txtdescripcion" Text='' runat="server" Width="100%"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtdescripcion" Text='' runat="server" Width="90%"></asp:TextBox>
+                                                                    <asp:RequiredFieldValidator ID="txtdescripcionFooterRequiredFieldValidator" runat="server"
+                                                                        ControlToValidate="txtdescripcion" ErrorMessage="Descripción del descuento global a agregar no informada"
+                                                                        SetFocusOnError="True" ValidationGroup="DescuentosGlobalesFooter">*</asp:RequiredFieldValidator>
                                                                 </FooterTemplate>
                                                                 <ItemStyle HorizontalAlign="left" />
                                                                 <FooterStyle HorizontalAlign="left" />
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe total descuento">
+                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe total">
                                                                 <ItemTemplate>
                                                                     <asp:Label ID="lblimporte_descuento" Text='<%# Eval("importe_descuento") %>' runat="server"></asp:Label>
                                                                 </ItemTemplate>
@@ -1225,7 +1233,13 @@
                                                                         Width="100%"></asp:TextBox>
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
-                                                                    <asp:TextBox ID="txtimporte_descuento" Text='' runat="server" Width="100%"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtimporte_descuento" Text='' runat="server" Width="80%"></asp:TextBox>
+                                                                    <asp:RegularExpressionValidator ID="txtimporte_descuentoFooterRegularExpressionValidator"
+                                                                        runat="server" ControlToValidate="txtimporte_descuento" ErrorMessage="Importe total descuento global a agregar mal formateado"
+                                                                        SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DescuentosGlobalesFooter">*</asp:RegularExpressionValidator>
+                                                                    <asp:RequiredFieldValidator ID="txtimporte_descuentoFooterRequiredFieldValidator"
+                                                                        runat="server" ControlToValidate="txtimporte_descuento" ErrorMessage="Importe total descuento global a agregar no informado"
+                                                                        SetFocusOnError="True" ValidationGroup="DescuentosGlobalesFooter">*</asp:RequiredFieldValidator>
                                                                 </FooterTemplate>
                                                                 <ItemStyle HorizontalAlign="Right" />
                                                             </asp:TemplateField>
@@ -1238,8 +1252,8 @@
                                                                     <asp:LinkButton ID="linkDeletedescuentos" CommandName="Delete" runat="server" CausesValidation="false">Borrar</asp:LinkButton>
                                                                 </ItemTemplate>
                                                                 <FooterTemplate>
-                                                                    <asp:LinkButton ID="linkAdddescuentos" CommandName="Adddescuentos" runat="server"
-                                                                        CausesValidation="false">Agregar</asp:LinkButton>
+                                                                    <asp:LinkButton ID="linkAdddescuentos" runat="server" CausesValidation="true" CommandName="Adddescuentos"
+                                                                        ValidationGroup="DescuentosGlobalesFooter">Agregar</asp:LinkButton>
                                                                 </FooterTemplate>
                                                                 <ItemStyle HorizontalAlign="Center" />
                                                             </asp:TemplateField>
@@ -1252,11 +1266,25 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                <td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
+                                                    <asp:ValidationSummary ID="DescuentosGlobalesEditValidationSummary" runat="server"
+                                                        BorderColor="Gray" BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:"
+                                                        ShowMessageBox="True" ValidationGroup="DescuentosGlobalesEditItem"></asp:ValidationSummary>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
+                                                    <asp:ValidationSummary ID="DescuentosGlobalesFooterValidationSummary" runat="server"
+                                                        BorderColor="Gray" BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:"
+                                                        ShowMessageBox="True" ValidationGroup="DescuentosGlobalesFooter"></asp:ValidationSummary>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="8" style="width: 1px; background-color: Gray;">
                                                 </td>
                                                 <td colspan="1" style="height: 1px; background-color: Gray;">
                                                 </td>
-                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                <td rowspan="8" style="width: 1px; background-color: Gray;">
                                                 </td>
                                             </tr>
                                         </table>
@@ -1613,14 +1641,15 @@
                                                                     ControlToValidate="Tipo_de_cambioTextBox" ErrorMessage="tipo de cambio" SetFocusOnError="True">* </asp:RequiredFieldValidator>
                                                                 <asp:Label ID="Tipo_de_cambioLabel" runat="server" Text="Tipo de cambio:" Visible="false"></asp:Label></td>
                                                             <td class="TextoLabelFEAVendedorDet">
-                                                                <asp:TextBox ID="Tipo_de_cambioTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" Visible="false"
-                                                                    ToolTip="<Obligatorio para moneda extranjera> El separador de decimales a utilizar es el punto"></asp:TextBox></td>
+                                                                <asp:TextBox ID="Tipo_de_cambioTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                    Visible="false" ToolTip="<Obligatorio para moneda extranjera> El separador de decimales a utilizar es el punto"></asp:TextBox></td>
                                                         </tr>
                                                         <tr>
                                                             <td>
                                                                 <br />
                                                             </td>
-                                                            <td></td>
+                                                            <td>
+                                                            </td>
                                                         </tr>
                                                     </table>
                                                 </td>
