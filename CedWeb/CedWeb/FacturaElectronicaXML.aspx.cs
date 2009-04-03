@@ -91,6 +91,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				MonedaComprobanteDropDownList.DataTextField = "Descr";
 				MonedaComprobanteDropDownList.DataSource = FeaEntidades.CodigosMoneda.CodigoMoneda.Lista();
 
+
 				DataBind();
 
 				BindearDropDownLists();
@@ -155,6 +156,11 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataTextField = "Descr";
 		((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataSource = FeaEntidades.CodigosImpuesto.CodigoImpuesto.Lista();
 		((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataBind();
+
+		((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataValueField = "Codigo";
+		((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataTextField = "Descr";
+		((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.Lista();
+		((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataBind();
 	}
 
 	protected void detalleGridView_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -228,6 +234,21 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					throw new Exception("Detalle no agregado porque el separador de decimales debe ser el punto");
 				}
 
+				double auxAliIVA = Convert.ToDouble(((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).SelectedValue);
+				string auxDescAliIVA = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).SelectedItem.Text;
+				string auxNull = ((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo")).Text;
+				if (!auxNull.Equals(string.Empty))
+				{
+					double auxImporteIVA = Convert.ToDouble(((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo")).Text);
+					if (!auxDescAliIVA.Equals(string.Empty) || auxImporteIVA != 0)
+					{
+						l.alicuota_ivaSpecified = true;
+						l.alicuota_iva = auxAliIVA;
+						l.importe_ivaSpecified = true;
+						l.importe_iva = auxImporteIVA;
+					}
+				}
+				
 				((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]).Add(l);
 
 
@@ -241,7 +262,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 				detalleGridView.DataSource = ViewState["lineas"];
 				detalleGridView.DataBind();
-
+				BindearDropDownLists();
 			}
 			catch (Exception ex)
 			{
@@ -276,9 +297,26 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				throw new Exception("Detalle no actualizado porque el separador de decimales debe ser el punto");
 			}
 
+			double auxAliIVA = Convert.ToDouble(((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlalicuota_articuloEdit")).SelectedValue);
+			string auxDescAliIVA = ((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlalicuota_articuloEdit")).SelectedItem.Text;
+			string auxNull = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_alicuota_articulo")).Text;
+			if (!auxNull.Equals(string.Empty))
+			{
+				double auxImporteIVA = Convert.ToDouble(auxNull);
+				if (!auxDescAliIVA.Equals(string.Empty) || auxImporteIVA != 0)
+				{
+					l.alicuota_ivaSpecified = true;
+					l.alicuota_iva = auxAliIVA;
+					l.importe_ivaSpecified = true;
+					l.importe_iva = auxImporteIVA;
+				}
+			}
+
 			detalleGridView.EditIndex = -1;
 			detalleGridView.DataSource = ViewState["lineas"];
 			detalleGridView.DataBind();
+			BindearDropDownLists();
+
 		}
 		catch (Exception ex)
 		{
@@ -300,6 +338,21 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		detalleGridView.EditIndex = e.NewEditIndex;
 		detalleGridView.DataSource = ViewState["lineas"];
 		detalleGridView.DataBind();
+		BindearDropDownLists();
+
+		((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articuloEdit")).DataValueField = "Codigo";
+		((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articuloEdit")).DataTextField = "Descr";
+		((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articuloEdit")).DataSource = FeaEntidades.IVA.IVA.Lista();
+		((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articuloEdit")).DataBind();
+		try
+		{
+			ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articuloEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"])[e.NewEditIndex].alicuota_iva.ToString());
+			li.Selected = true;
+		}
+		catch
+		{
+		}
+
 	}
 
 	protected void detalleGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -327,7 +380,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			detalleGridView.DataSource = ViewState["lineas"];
 			detalleGridView.DataBind();
-
+			BindearDropDownLists();
 		}
 		catch { }
 
