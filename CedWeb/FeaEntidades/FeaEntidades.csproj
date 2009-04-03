@@ -147,6 +147,12 @@
     <Compile Include="InterFacturas\resumenDescuentos.cs" />
     <Compile Include="InterFacturas\resumenImportes_moneda_origen.cs" />
     <Compile Include="InterFacturas\resumenImpuestos.cs" />
+    <Compile Include="IVA\Cero.cs" />
+    <Compile Include="IVA\DiezYMedio.cs" />
+    <Compile Include="IVA\IVA.cs" />
+    <Compile Include="IVA\SinInformar.cs" />
+    <Compile Include="IVA\Veintisiete.cs" />
+    <Compile Include="IVA\Veintiuno.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TiposDeComprobantes\CuentaDeVentaYLiquido\A.cs" />
     <Compile Include="TiposDeComprobantes\CuentaDeVentaYLiquido\B.cs" />
