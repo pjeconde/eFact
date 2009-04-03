@@ -8,7 +8,7 @@ namespace FeaEntidades.IVA
 	{
 		public SinInformar()
 		{
-			Codigo = 0;
+			Codigo = 999;
 			Descr = string.Empty;
 		}
 	}
