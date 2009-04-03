@@ -221,7 +221,7 @@
                                     <td style="width: 15px; height: 15px">
                                     </td>
                                     <td style="WIDTH: 700px">
-                                        <asp:Panel ID="PanelAceptaTYC" runat="server" Height="50px" Width="700px">
+                                        <asp:Panel ID="PanelAceptaTYC" runat="server" Height="69px" Width="700px">
                                             <table style="">
                                                 <tr>
                                                     <td style="height: 21px; width: 15px;">
@@ -231,12 +231,11 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <br />
-                                            <table style="">    
+                                            <table style="">
                                                 <tr>
-                                                    <td style="width: 15px; height: 20px">
+                                                    <td style="width: 15px;">
                                                     </td>
-                                                    <td style="">
+                                                    <td style="height: 48px">
                                                         <table cellpadding="0" cellspacing="0" border="0" style="">
                                                             <tr>
                                                                 <td style="width:80px; height: 24px;">
@@ -277,7 +276,8 @@
                                         </table>
                                     </td>
                                 </tr>
-                            </table><table style="">
+                            </table>
+                            <table style="">
                                 <tr>
                                     <td style="width: 15px; height: 15px">
                                     </td>
