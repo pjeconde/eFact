@@ -19,8 +19,10 @@ namespace CedWeb
                 int ultimoNodoPpal;
                 Arbol.Nodes.Add(new TreeNode("Otras soluciones relacionadas al área financiera"));
                 ultimoNodoPpal = Arbol.Nodes.Count - 1;
-                Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("Administración y Presentación de Contenidos (implementación Capitales Mínimos) • Asambleas y Accionistas"));
-                Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("Libranzas y Pagos Judiciales • Autorización de Tasas de Sucursales • Administración de Carteras"));
+                Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("Administración y Presentación de Contenidos (implementación Capitales Mínimos)"));
+                Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("Asambleas y Accionistas"));
+                Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("Autorización de Tasas de Sucursales"));
+                Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("Administración de Carteras"));
                 Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("Plataforma Mesa de Dinero"));
 				for (int i = 0; i < Arbol.Nodes.Count; i++)
 				{

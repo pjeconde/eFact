@@ -90,6 +90,30 @@
                                         <table cellpadding="0" cellspacing="0" border="0">
                                             <tr>
                                                 <td style="width: 22px; height: 20px;">
+                                                    <asp:Image ID="Image6" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
+                                                </td>
+                                                <td style="height: 20px">
+                                                    <asp:Label ID="Label4" runat="server" Text="Sistema de Inversiones y Pagos Judiciales"
+                                                        SkinID="TituloPagina" Width="415px"></asp:Label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top" style="padding-right:20px; padding-left:22px; padding-top:10px">
+                                        Es una aplicación que contribuye a la automatización del servicio que los bancos prestan a los Juzgados Comerciales en los que se tramitan quiebras.  El sistema permite, por un lado, registrar las colocaciones temporarias, de los fondos surgidos de la liquidación de bienes, en <b>INVERSIONES</b> a plazo fijo o en cajas de ahorro.  Cada inversión se mantendrá siempre relacionada al Juzgado-Secretaría-Causa-Incidente en los que se originó.<br />Por otro lado, la aplicación permite, a partir de esas inversiones, realizar <B>PAGOS</B> a beneficiarios (acreedores) de acuerdo a las instrucciones emanadas de los Juzgados.  Existen dos instrumentos mediantes los cuáles los juzgados ordenan los pagos:<br />&nbsp &nbsp 1) Oficios judiciales y<br />&nbsp &nbsp 2) Libranzas judiciales.<br />En ambos casos, los pagos se liquidan en las sucursales del banco (esta aplicación le brinda, a la plataforma de sucursales del banco, un servicio para validar y registrar pagos judiciales).<br />También ofrece una amplia gama de reportes, tanto para los Juzgados (y la Corte Suprema) como para los sectores que administran las inversiones y los pagos.
+                                    </td>
+                                    <td style="padding-top:10px; border-style:solid; border-width:1px; border-color:#A52A2A; width:220px">
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 10px">
+                                <tr>
+                                    <td colspan="2" align="left" style="height: 10px">
+                                        <table cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td style="width: 22px; height: 20px;">
                                                     <asp:Image ID="Image4" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                 </td>
                                                 <td style="height: 20px">
@@ -118,7 +142,6 @@
                                             ImageAlign="Right" />
                                     </td>
                                 </tr>
-
                             </table>
                             <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 10px">
                                 <tr>
