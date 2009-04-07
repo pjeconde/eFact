@@ -20,8 +20,7 @@
                                                     <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                 </td>
                                                 <td>
-                                                    <asp:Label ID="CedFCItituloLabel" runat="server" Text="Sistema de Administración de Fondos Comunes de Inversión V3.0"
-                                                        SkinID="TituloPagina"></asp:Label>
+                                                    <asp:Label ID="CedFCItituloLabel" runat="server" Text="Sistema de Administración de Fondos Comunes de Inversión" SkinID="TituloPagina"></asp:Label>
                                                 </td>
                                             </tr>
                                         </table>
@@ -57,8 +56,7 @@
                                                     <asp:Image ID="Image3" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                 </td>
                                                 <td style="height: 20px">
-                                                    <asp:Label ID="CedSTtituloLabel" runat="server" Text="Sistema de Transferencias ( implementación MEP ) V2.4"
-                                                        SkinID="TituloPagina" Width="415px"></asp:Label>
+                                                    <asp:Label ID="CedSTtituloLabel" runat="server" Text="Sistema de Transferencias ( implementación MEP )" SkinID="TituloPagina" Width="415px"></asp:Label>
                                                 </td>
                                             </tr>
                                         </table>
@@ -104,8 +102,39 @@
                                     <td align="left" valign="top" style="padding-right:20px; padding-left:22px; padding-top:10px">
                                         Es una aplicación que contribuye a la automatización del servicio que los bancos prestan a los Juzgados Comerciales en los que se tramitan quiebras.  El sistema permite, por un lado, registrar las colocaciones temporarias, de los fondos surgidos de la liquidación de bienes, en <b>INVERSIONES</b> a plazo fijo o en cajas de ahorro.  Cada inversión se mantendrá siempre relacionada al Juzgado-Secretaría-Causa-Incidente en los que se originó.<br />Por otro lado, la aplicación permite, a partir de esas inversiones, realizar <B>PAGOS</B> a beneficiarios (acreedores) de acuerdo a las instrucciones emanadas de los Juzgados.  Existen dos instrumentos mediantes los cuáles los juzgados ordenan los pagos:<br />&nbsp &nbsp 1) Oficios judiciales y<br />&nbsp &nbsp 2) Libranzas judiciales.<br />En ambos casos, los pagos se liquidan en las sucursales del banco (esta aplicación le brinda, a la plataforma de sucursales del banco, un servicio para validar y registrar pagos judiciales).<br />También ofrece una amplia gama de reportes, tanto para los Juzgados (y la Corte Suprema) como para los sectores que administran las inversiones y los pagos.
                                     </td>
-                                    <td style="padding-top:10px; border-style:solid; border-width:1px; border-color:#A52A2A">
+                                    <td style="padding-top:10px">
                                         <asp:Image ID="Image7" runat="server" ImageUrl="Imagenes/CedJU.jpg" Width="220px" ImageAlign="Right" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 10px">
+                                <tr>
+                                    <td colspan="2" align="left" style="height: 10px">
+                                        <table cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td style="width: 22px; height: 20px;">
+                                                    <asp:Image ID="Image8" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
+                                                </td>
+                                                <td style="height: 20px">
+                                                    <asp:Label ID="Label5" runat="server" Text="Sistema de Administración y Presentación de Contenidos"
+                                                        SkinID="TituloPagina" Width="415px"></asp:Label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top" style="padding-right:20px; padding-left:22px; padding-top:10px">
+                                        Es una herramienta, de propósitos generales, que permite automatizar procesos informáticos en los que:<br />
+                                        &nbsp &nbsp 1) se recolecten de datos,<br />
+                                        &nbsp &nbsp 2) se calculen resultados, a partir de esos datos, y<br />
+                                        &nbsp &nbsp 3) se presenten esos resultados (contenidos)<br />
+                                        Ofrece, a los administradores, un entorno amigable e intuitivo para la definición de datos básicos, fórmulas y templates de presentación (que serán usados para la generación de reportes o de interfaces de salida).<br />
+                                        Luego, asiste a los usuarios en el proceso de captura de datos (manual, desde el front-end propio, o automática, desde interfaces con otras aplicaciones) y en el proceso de cálculo y de presentación de resultados.  Sólo exige una capacitación mínima.<br />
+                                        El sistema contempla, y controla, el aporte de datos desde distintos sectores.  Implementa un repositorio histórico (de datos, de resultados y registra un log con la actividad de los usuarios).
+                                    </td>
+                                    <td style="padding-top:10px">
+                                        <asp:Image ID="Image9" runat="server" ImageUrl="Imagenes/CedAPC.jpg" Width="220px" ImageAlign="Right" />
                                     </td>
                                 </tr>
                             </table>
@@ -138,7 +167,7 @@
                                         También estableceremos las equivalencias entre los códigos propios, de su sistema de facturación, y los códigos estándar de la operatoria de Factura Electrónica.<br />
                                         Por último, configuraremos, a su medida, la forma en la que nuestro sistema registrará la respuesta del impacto. 
                                     </td>
-                                    <td style="padding-top: 10px; border-style:solid; border-width:1px; border-color:#A52A2A">
+                                    <td style="padding-top:10px">
                                         <asp:Image ID="Image5" runat="server" ImageUrl="Imagenes/EsquemaSolucioneseFact2.jpg" Width="220px"
                                             ImageAlign="Right" />
                                     </td>
