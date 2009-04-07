@@ -17,12 +17,11 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                    </td>
-                                    <td align="center">
+                                    <td style="width:20px"></td>
+                                    <td align="left">
                                         <table id="Table1" runat="server" cellpadding="0" cellspacing="0" border="0">
                                             <tr>
-                                                <td colspan="2" style="padding-top:15px">
+                                                <td colspan="2" style="width:750px; padding-top:15px">
                                                     En nuestro site podrá cargar una factura y obtener un comprobante electrónico (archivo xml) para subirlo a la red de Interfacturas.  Trabajará en un entorno asistido y amigable.
                                                 </td>
                                             </tr>
@@ -32,10 +31,10 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-top:10px" valign="top">
+                                                <td style="width:23px; padding-top:10px;" valign="top">
                                                     <asp:Image ID="Image4" runat="server" ImageUrl="~/Imagenes/Bola1.png"/>
                                                 </td>
-                                                <td style="padding-top:10px" valign="middle" align="left">
+                                                <td style="width:727px; padding-top:10px;" valign="middle" align="left">
                                                     Configurar sus datos de<br />
                                                     &nbsp &nbsp - Vendedor (emisor del comprobante)<br />
                                                     &nbsp &nbsp - Clientes<br />
@@ -47,7 +46,7 @@
                                                 <td style="padding-top:5px" valign="top">
                                                     <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/Bola2.png"/>
                                                 </td>
-                                                <td style="padding-top:5px" valign="middle" align="left">
+                                                <td style="padding-top:5px" valign="middle">
                                                     Tomar como modelo cualquier factura que ya haya ingresado.
                                                 </td>
                                             </tr>
