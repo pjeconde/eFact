@@ -22,7 +22,7 @@
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td align="center">
+                                    <td align="left">
                                         <table id="Table1" runat="server" cellpadding="0" cellspacing="0" border="0">
                                             <tr>
                                                 <td colspan="2" style="padding-top:15px">
@@ -35,7 +35,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-top:10px" valign="top">
+                                                <td style="padding-top:10px;" valign="top">
                                                     <asp:Image ID="Image4" runat="server" ImageUrl="~/Imagenes/Bola1.png"/>
                                                 </td>
                                                 <td style="padding-top:10px" valign="middle">
@@ -78,7 +78,6 @@
                                                     <asp:LinkButton ID="VolverLinkButton" runat="server" CausesValidation="false" ForeColor="Blue" OnClick="VolverLinkButton_Click">Volver a la página anterior</asp:LinkButton>
                                                 </td>
                                             </tr>
-                                        </tr>
                                         </table>
                                     </td>
                                 </tr>                            
