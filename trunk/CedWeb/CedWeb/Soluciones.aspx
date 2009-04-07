@@ -88,6 +88,35 @@
                                         <table cellpadding="0" cellspacing="0" border="0">
                                             <tr>
                                                 <td style="width: 22px; height: 20px;">
+                                                    <asp:Image ID="Image10" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
+                                                </td>
+                                                <td style="height: 20px">
+                                                    <asp:Label ID="Label6" runat="server" Text="Sistema de Carga Centralizada de Tasas"
+                                                        SkinID="TituloPagina" Width="415px"></asp:Label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top" style="padding-right:20px; padding-left:22px; padding-top:10px">
+                                        Esta aplicación permite la consulta y modificación, en línea, de todo tipo de Tasas Pasivas.<br />
+                                        Presenta un Tablero de Control donde se pueden visualizar todas la tasas en una estructura jerárquica y sobre el que se pueden realizar cambios puntuales o masivos (actualizando las tasas en cadena, acordes a un índice o porcentaje definido, en más o en menos ).  Todos los cambios se impactan en los sistemas corporativos del banco.<br />
+                                        Permite un control preciso de la autorización de las operaciones y registra un log detallado para documentar los cambios realizados.<br />
+                                        Genera Reportes Operativos y Actas para el Directorio.<br />
+                                        También permite exportar la información a planillas de cálculo.
+                                    </td>
+                                    <td valign="top">
+                                        <asp:Image ID="Image11" runat="server" ImageUrl="Imagenes/CedCCT.jpg" Width="220px" ImageAlign="right" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 10px">
+                                <tr>
+                                    <td colspan="2" align="left" style="height: 10px">
+                                        <table cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td style="width: 22px; height: 20px;">
                                                     <asp:Image ID="Image6" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                 </td>
                                                 <td style="height: 20px">
