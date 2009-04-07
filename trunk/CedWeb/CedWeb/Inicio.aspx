@@ -57,7 +57,7 @@
                                                                                     <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                                                 </td>
                                                                                 <td style="padding-top:5px">
-                                                                                    <asp:Label ID="Label10" runat="server" Text="Ingrese su Factura Electrónica y genere el archivo XML para Interfacturas (la red de facturas electrónicas de Interbanking)" SkinID="TituloPagina"></asp:Label>
+                                                                                    <asp:Label ID="Label10" runat="server" Text="Ingrese su Factura Electrónica y genere el archivo XML para Interfacturas (la red de facturas electrónicas de Interbanking)" SkinID="TextoGrande"></asp:Label>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -65,7 +65,7 @@
                                                                                     <asp:Image ID="Image5" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                                                 </td>
                                                                                 <td style="padding-top:5px">
-                                                                                    <asp:Label ID="Label13" runat="server" Text="Es gratuito, rápido, fácil y seguro." SkinID="TituloPagina"></asp:Label>
+                                                                                    <asp:Label ID="Label13" runat="server" Text="Es gratuito, rápido, fácil y seguro." SkinID="TextoGrande"></asp:Label>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -73,7 +73,7 @@
                                                                                     <asp:Image ID="Image6" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                                                 </td>
                                                                                 <td style="padding-top:5px">
-                                                                                    <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/FacturaElectronica.aspx" SkinID="LinkGrandeClaro"><b>Cargue gratis su Factura Electrónica</b></asp:HyperLink>
+                                                                                    <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/FacturaElectronica.aspx" SkinID="LinkGrandeClaro">Cargue gratis su Factura Electrónica</asp:HyperLink>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -81,7 +81,7 @@
                                                                                     <asp:Image ID="Image9" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                                                 </td>
                                                                                 <td style="padding-top:5px">
-                                                                                    <asp:Label ID="Label12" runat="server" SkinID="TituloPagina" Text="Facilitamos el cumplimiento del régimen normativo de la AFIP"> </asp:Label>
+                                                                                    <asp:Label ID="Label12" runat="server" SkinID="TextoGrande" Text="Facilitamos el cumplimiento del régimen normativo de la AFIP"> </asp:Label>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -89,7 +89,7 @@
                                                                                     <asp:Image ID="Image7" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                                                 </td>
                                                                                 <td style="padding-top:5px">
-                                                                                    <asp:Label ID="Label4" runat="server" SkinID="TituloPagina" Text="Integramos la Factura Electrónica a su sistema de facturación, o contable, a través de un formato estándar."></asp:Label>
+                                                                                    <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/FacturaElectronicaSolucionDeConectividad.aspx" SkinID="LinkGrandeClaro">Integramos la Factura Electrónica a su sistema de facturación, o contable, a través de un formato estándar.</asp:HyperLink>
                                                                                 </td>
                                                                             </tr>
                                                                         </table>
@@ -187,22 +187,6 @@
                                                             </tr>
                                                         </table>
                                                     </asp:Panel>
-                                                    <asp:Panel ID="NevegadorRecomendadoPanel" runat="server" Height="100%" Width="100%" HorizontalAlign="Right" >
-                                                        <table cellpadding="0" cellspacing="0" border="0">
-                                                            <tr>
-                                                                <td colspan="2" style="height:100%">
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="width:100%">
-                                                                    <asp:Label ID="Label2" runat="server" Text="Navegador<br/>recomendado" Font-Size="Smaller" ForeColor="Navy" SkinID="TituloColor1Chico"></asp:Label>
-                                                                </td>
-                                                                <td style="width:31px">
-                                                                    <asp:HyperLink ID="HyperLink3" runat="server" ImageUrl="Imagenes/NavegadorRecomendado.jpg" NavigateUrl="http://www.mozilla-europe.org/es/firefox/" Target="_blank" Text="Logo de Firefox"></asp:HyperLink>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </asp:Panel>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -227,18 +211,26 @@
                                                 <td valign="bottom" align="right" colspan="5">
                                                     <table cellpadding="0" cellspacing="0" border="0">
                                                         <tr>
-                                                            <td style="height:100%">
+                                                            <td align="right">
+                                                                <asp:Label ID="Label3" runat="server" Text="Navegador<br/>recomendado" Font-Size="Smaller" ForeColor="Navy" SkinID="TituloColor1Chico"></asp:Label>
+                                                            </td>
+                                                            <td style="width:31px">
+                                                                <asp:HyperLink ID="HyperLink1" runat="server" ImageUrl="Imagenes/NavegadorRecomendado.jpg" NavigateUrl="http://www.mozilla-europe.org/es/firefox/" Target="_blank" Text="Logo de Firefox"></asp:HyperLink>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td align="right" style="height:31px">
+                                                            <td colspan="2" style="height:100%">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2" align="right" style="height:31px">
                                                                 <a href="http://validator.w3.org/check?uri=referer">
                                                                     <img alt="Valid XHTML 1.0 Transitional" src="http://www.w3.org/Icons/valid-xhtml10-blue" style="border: 0; width: 88px" />
                                                                 </a>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td align="right" style="height:31px">
+                                                            <td colspan="2" align="right" style="height:31px">
                                                                 <a href="http://jigsaw.w3.org/css-validator/check/referer">
                                                                     <img alt="¡CSS Válido!" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" style="border: 0; width: 88px" />
                                                                 </a>
