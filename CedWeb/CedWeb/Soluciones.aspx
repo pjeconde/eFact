@@ -160,7 +160,8 @@
                                         &nbsp &nbsp 3) se presenten esos resultados (contenidos)<br />
                                         Ofrece, a los administradores, un entorno amigable e intuitivo para la definición de datos básicos, fórmulas y templates de presentación (que serán usados para la generación de reportes o de interfaces de salida).<br />
                                         Luego, asiste a los usuarios en el proceso de captura de datos (manual, desde el front-end propio, o automática, desde interfaces con otras aplicaciones) y en el proceso de cálculo y de presentación de resultados.  Sólo exige una capacitación mínima.<br />
-                                        El sistema contempla, y controla, el aporte de datos desde distintos sectores.  Implementa un repositorio histórico (de datos, de resultados y registra un log con la actividad de los usuarios).
+                                        El sistema contempla, y controla, el aporte de datos desde distintos sectores.  Implementa un repositorio histórico (de datos, de resultados y registra un log con la actividad de los usuarios).<br />
+                                        Una experiencia exitosa, de implementación, lo constituye el cálculo de las exigencias de <b>Capitales Mínimos</b>, que tienen las entidades financieras, y su consiguiente presentación de reportes y generación de interfaces.
                                     </td>
                                     <td style="padding-top:10px">
                                         <asp:Image ID="Image9" runat="server" ImageUrl="Imagenes/CedAPC.jpg" Width="220px" ImageAlign="Right" />
