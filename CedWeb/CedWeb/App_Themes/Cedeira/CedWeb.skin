@@ -6,6 +6,7 @@
 <asp:Label runat="server" Font-Size="14px" ForeColor="white" Font-Bold="True" Width="100%" SkinID="TituloPaginaClaro"></asp:Label>
 <asp:Label runat="server" Font-Size="20px" ForeColor="white" Font-Bold="True" Width="100%" SkinID="TituloPaginaClaroGr"></asp:Label>
 
+<asp:Label runat="server" Font-Size="14px" ForeColor="black" SkinID="TextoGrande"></asp:Label>
 <asp:Label runat="server" Font-Size="12px" ForeColor="#404040" Font-Bold="True" SkinID="TituloMediano"></asp:Label>
 <asp:Label runat="server" Font-Size="10px" ForeColor="#404040" Font-Bold="True" Width="100%" SkinID="TituloChico"></asp:Label>
 <asp:Label runat="server" Font-Size="12px" ForeColor="#404040" Font-Bold="False" Width="100%" SkinID="TextoInicioMediano"></asp:Label>
@@ -91,6 +92,25 @@
     <FooterStyle CssClass="FooterStylePagingGridView"/>
     <SelectedRowStyle CssClass="SelectedRowStylePagingGridView"/>
 </cc1:paginggridview>  
+
+<asp:GridView 
+    runat="server" 
+    SkinID="GrillaComun"
+    CssClass="DataWebControlStylePagingGridView"
+    GridLines="None" 
+    AllowPaging="False" 
+    AllowSorting="False" 
+    CellPadding="1" 
+    VirtualItemCount="-1" 
+    BackColor="white"
+    ShowFooter="true"
+    AutoGenerateColumns="False">
+    <RowStyle CssClass="RowStylePagingGridView"/>
+    <AlternatingRowStyle CssClass="AlternatingRowStylePagingGridView"/>
+    <HeaderStyle CssClass="HeaderStylePagingGridView"/>
+    <FooterStyle CssClass="FooterStylePagingGridView"/>
+    <SelectedRowStyle CssClass="SelectedRowStylePagingGridView"/>
+</asp:GridView>  
 
 <asp:GridView 
     runat="server" 
