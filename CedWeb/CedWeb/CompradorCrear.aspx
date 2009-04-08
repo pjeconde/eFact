@@ -183,10 +183,6 @@
                                                         ValidationExpression="[A-Za-z\- ,.0-9]*">
                                                         <asp:Label ID="Label37" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                                     </asp:RegularExpressionValidator>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server"  SetFocusOnError="True"
-                                                        ControlToValidate="CodPostTextBox" ErrorMessage="Codigo Postal">
-                                                        <asp:Label ID="Label38" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                                                    </asp:RequiredFieldValidator>
                                                     <asp:Label ID="Label6" runat="server" Text="Código Postal"></asp:Label>
                                                 </td>
                                                 <td align="left" style="padding-top:3px">
@@ -204,10 +200,6 @@
                                             ValidationExpression="[A-Za-z\- ,.0-9]*">
                                             <asp:Label ID="Label39" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                         </asp:RegularExpressionValidator>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server"  SetFocusOnError="True"
-                                            ControlToValidate="NombreContactoTextBox" ErrorMessage="Nombre Contacto">
-                                            <asp:Label ID="Label40" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                                        </asp:RequiredFieldValidator>
                                         <asp:Label ID="Label8" runat="server" Text="Nombre Contacto"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-top:3px">
@@ -222,10 +214,6 @@
                                             ValidationExpression="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$">
                                             <asp:Label ID="Label41" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                         </asp:RegularExpressionValidator>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server"  SetFocusOnError="True"
-                                            ControlToValidate="EmailContactoTextBox" ErrorMessage="Email Contacto">
-                                            <asp:Label ID="Label42" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                                        </asp:RequiredFieldValidator>
                                         <asp:Label ID="Label9" runat="server" Text="Email Contacto"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-top:3px">
@@ -235,15 +223,11 @@
                                 <!-- Teléfono contacto -->
                                 <tr>
                                     <td style="padding-right:5px; padding-top:3px" align="right">
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator13" runat="server" SetFocusOnError="True"
-                                        ControlToValidate="TelefonoContactoTextBox" ErrorMessage="Teléfono Contacto"
-                                        ValidationExpression="[A-Za-z\- ,.0-9]*">
-                                        <asp:Label ID="Label43" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                                    </asp:RegularExpressionValidator>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server"  SetFocusOnError="True"
-                                        ControlToValidate="TelefonoContactoTextBox" ErrorMessage="Teléfono Contacto">
-                                        <asp:Label ID="Label44" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                                    </asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator13" runat="server" SetFocusOnError="True"
+                                            ControlToValidate="TelefonoContactoTextBox" ErrorMessage="Teléfono Contacto"
+                                            ValidationExpression="[A-Za-z\- ,.0-9]*">
+                                            <asp:Label ID="Label43" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RegularExpressionValidator>
                                         <asp:Label ID="Label10" runat="server" Text="Teléfono Contacto"></asp:Label>
                                     </td>
                                     <td align="left" style="padding-top:3px">
@@ -305,10 +289,6 @@
                                             ValidationExpression="[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}">
                                             <asp:Label ID="Label47" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                         </asp:RegularExpressionValidator>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server"  SetFocusOnError="True"
-                                            ControlToValidate="NroIngBrutosTextBox" ErrorMessage="Nro.Ing.Brutos">
-                                            <asp:Label ID="Label48" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                                        </asp:RequiredFieldValidator>
                                         <asp:Label ID="Label20" runat="server" Text="Nro.Ing.Brutos"></asp:Label>
                                     </td>
                                     <td align="left">
@@ -366,10 +346,6 @@
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td align="right" style="padding-top:3px; width:259px">
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server"  SetFocusOnError="True"
-                                                        ControlToValidate="FechaInicioActividadesDatePickerWebUserControl:txt_Date" ErrorMessage="Fecha de inicio de actividades">
-                                                        <asp:Label ID="Label51" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                                                    </asp:RequiredFieldValidator>
                                                     <asp:Label ID="Label22" runat="server" Text="Fecha de inicio de actividades (AAAAMMDD)"></asp:Label>
                                                 </td>
                                                 <td align="right" style="padding-left:5px; padding-top:3px">

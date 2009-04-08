@@ -36,7 +36,7 @@ namespace CedWeb
 						TipoDocDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
 						CondIngBrutosDropDownList.DataValueField = "Codigo";
 						CondIngBrutosDropDownList.DataTextField = "Descr";
-						CondIngBrutosDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.ListaInf();
+						CondIngBrutosDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.Lista();
 						DataBind();
 						CedWebEntidades.Comprador Comprador = new CedWebEntidades.Comprador();
 						Comprador.IdCuenta = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id;
