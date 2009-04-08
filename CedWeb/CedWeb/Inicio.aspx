@@ -97,7 +97,7 @@
                                                                                     <asp:Image ID="Image8" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                                                 </td>
                                                                                 <td style="padding-top:5px">
-                                                                                    <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/FacturaElectronicaActividadesAlcanzadas.aspx" SkinID="LinkMedianoClaro">¿ Qué actividades están alcanzadas por el Régimen de Factura Electrónica ?</asp:HyperLink>
+                                                                                    <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/FacturaElectronicaActividadesAlcanzadas.aspx" SkinID="LinkMedianoClaro">¿Qué actividades están alcanzadas por el Régimen de Factura Electrónica?</asp:HyperLink>
                                                                                 </td>
                                                                             </tr>
                                                                         </table>

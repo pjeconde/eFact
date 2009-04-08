@@ -7,13 +7,13 @@
 <asp:Label runat="server" Font-Size="20px" ForeColor="white" Font-Bold="True" Width="100%" SkinID="TituloPaginaClaroGr"></asp:Label>
 
 <asp:Label runat="server" Font-Size="14px" ForeColor="black" SkinID="TextoGrande"></asp:Label>
-<asp:Label runat="server" Font-Size="12px" ForeColor="#404040" Font-Bold="True" SkinID="TituloMediano"></asp:Label>
-<asp:Label runat="server" Font-Size="10px" ForeColor="#404040" Font-Bold="True" Width="100%" SkinID="TituloChico"></asp:Label>
-<asp:Label runat="server" Font-Size="12px" ForeColor="#404040" Font-Bold="False" Width="100%" SkinID="TextoInicioMediano"></asp:Label>
-<asp:Label runat="server" Font-Size="10px" ForeColor="#404040" Font-Bold="False" Width="100%" SkinID="TextoInicioChico"></asp:Label>
+<asp:Label runat="server" Font-Size="12px" ForeColor="black" Font-Bold="True" SkinID="TituloMediano"></asp:Label>
+<asp:Label runat="server" Font-Size="10px" ForeColor="black" Font-Bold="True" Width="100%" SkinID="TituloChico"></asp:Label>
+<asp:Label runat="server" Font-Size="12px" ForeColor="black" Font-Bold="False" Width="100%" SkinID="TextoInicioMediano"></asp:Label>
+<asp:Label runat="server" Font-Size="10px" ForeColor="black" Font-Bold="False" Width="100%" SkinID="TextoInicioChico"></asp:Label>
 
-<asp:Label runat="server" Font-Size="12px" ForeColor="#404040" Font-Bold="False" SkinID="TextoMediano"></asp:Label>
-<asp:Label runat="server" Font-Size="10px" ForeColor="#404040" Font-Bold="False" Width="100%" SkinID="TextoChico"></asp:Label>
+<asp:Label runat="server" Font-Size="12px" ForeColor="black" Font-Bold="False" SkinID="TextoMediano"></asp:Label>
+<asp:Label runat="server" Font-Size="10px" ForeColor="black" Font-Bold="False" Width="100%" SkinID="TextoChico"></asp:Label>
 
 <asp:Label runat="server" Font-Size="10px" ForeColor="white" Font-Bold="False" Width="100%" SkinID="BulletTituloMediano"></asp:Label>
 <asp:Label runat="server" Font-Size="10px" ForeColor="red" Font-Bold="False" Width="100%" SkinID="BulletLinkChico"></asp:Label>
