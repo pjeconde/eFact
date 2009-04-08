@@ -20,7 +20,7 @@
                                                     <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                 </td>
                                                 <td>
-                                                    <asp:Label ID="CedFCItituloLabel" runat="server" Text="Sistema de Administración de Fondos Comunes de Inversión V3.0"
+                                                    <asp:Label ID="CedFCItituloLabel" runat="server" Text="Sistema de Administración de Fondos Comunes de Inversión"
                                                         SkinID="TituloPagina"></asp:Label>
                                                 </td>
                                             </tr>
@@ -59,23 +59,6 @@
                                     <td align="left" style="padding-right: 10px; padding-top: 10px" valign="top">
                                         <asp:Label ID="Label3" runat="server" Text="• Cliente/Servidor en tres capas<br>• Workflow basado en datos<br>• Desarrollado en c# (WinForms) para el .Net Framework 2.0<br>• Instalador MSI con control de versión<br>• Motor de base de datos relacional"
                                             SkinID="TextoMediano"></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 200px; padding-top: 10px" align="left">
-                                        <asp:Label ID="Label4" runat="server" Text="Precio de la Licencia" Font-Size="Medium"
-                                            ForeColor="Black" Font-Bold="True" SkinID="TituloColor1Grande"></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="left" style="padding-right: 10px; padding-top: 10px">
-                                        <asp:Label ID="Label5" runat="server" Text="El precio de la licencia, durante el primer semestre del año 2009, se encuentra "></asp:Label>
-                                        <asp:Label ID="Label6" runat="server" Text="bonificado " Font-Bold="true" Font-Size="Large"
-                                            ForeColor="brown"></asp:Label>
-                                        <asp:Label ID="Label7" runat="server" Text="en un "></asp:Label>
-                                        <asp:Label ID="Label8" runat="server" Text="100%" Font-Bold="true" Font-Size="Large"
-                                            ForeColor="brown"></asp:Label>
-                                        <asp:Label ID="Label9" runat="server" Text="."></asp:Label>
                                     </td>
                                 </tr>
                             </table>
