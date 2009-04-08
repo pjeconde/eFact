@@ -36,7 +36,7 @@ namespace CedWeb
                         TipoDocDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
                         CondIngBrutosDropDownList.DataValueField = "Codigo";
                         CondIngBrutosDropDownList.DataTextField = "Descr";
-                        CondIngBrutosDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.ListaInf();
+                        CondIngBrutosDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.Lista();
                         DataBind();
                         RazonSocialTextBox.Focus();
                     }
