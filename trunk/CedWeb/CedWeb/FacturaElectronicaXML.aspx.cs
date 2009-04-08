@@ -380,6 +380,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		detalleGridView.EditIndex = -1;
 		detalleGridView.DataSource = ViewState["lineas"];
 		detalleGridView.DataBind();
+		BindearDropDownLists();
 	}
 
 	protected void detalleGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -1333,6 +1334,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					}
 					detalleGridView.DataSource = lineas;
 					detalleGridView.DataBind();
+					BindearDropDownLists();
 					ViewState["lineas"] = lineas;
 					//Descuentos globales
 					if (lc.comprobante[0].resumen.descuentos != null)
