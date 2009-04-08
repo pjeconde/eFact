@@ -34,10 +34,10 @@
                                                 <td style="width:23px; padding-top:10px;" valign="top">
                                                     <asp:Image ID="Image4" runat="server" ImageUrl="~/Imagenes/Bola1.png"/>
                                                 </td>
-                                                <td style="width:727px; padding-top:10px;" valign="middle" align="left">
-                                                    Configurar sus datos de<br />
+                                                <td style="padding-top:10px; padding-left:5px" valign="middle" align="left">
+                                                    Configurar sus datos de<br /><br />
                                                     &nbsp &nbsp - Vendedor (emisor del comprobante)<br />
-                                                    &nbsp &nbsp - Clientes<br />
+                                                    &nbsp &nbsp - Compradores (clientes)<br />
                                                     &nbsp &nbsp - Artículos<br />
                                                     &nbsp &nbsp - Contratos (para la emisión automática de la facturas electrónicas)
                                                 </td>
@@ -46,7 +46,7 @@
                                                 <td style="padding-top:5px" valign="top">
                                                     <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/Bola2.png"/>
                                                 </td>
-                                                <td style="padding-top:5px" valign="middle">
+                                                <td style="padding-top:5px; padding-left:5px" valign="middle" align="left">
                                                     Tomar como modelo cualquier factura que ya haya ingresado.
                                                 </td>
                                             </tr>
@@ -54,7 +54,7 @@
                                                 <td style="padding-top:5px" valign="top">
                                                     <asp:Image ID="Image3" runat="server" ImageUrl="~/Imagenes/Bola3.png"/>
                                                 </td>
-                                                <td style="padding-top:5px" valign="middle" align="left">
+                                                <td style="padding-top:5px; padding-left:5px" valign="middle" align="left">
                                                     Emitir facturas en moneda extranjera (la conversión a moneda local se realiza en forma automática)
                                                 </td>
                                             </tr>
@@ -62,8 +62,8 @@
                                                 <td style="padding-top:5px" valign="top" align="left">
                                                     <asp:Image ID="Image5" runat="server" ImageUrl="~/Imagenes/Bola4.png"/>
                                                 </td>
-                                                <td style="padding-top:5px" valign="middle">
-                                                    Podrá desentenderse del "número de lote" (la aplicación lo puede generar automáticamente).
+                                                <td style="padding-top:5px; padding-left:5px" valign="middle">
+                                                    Desentenderse del "número de lote" (la aplicación lo puede generar automáticamente).
                                                 </td>
                                             </tr>
                                             <tr>
