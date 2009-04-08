@@ -37,6 +37,7 @@
     <Compile Include="Comprador.cs" />
     <Compile Include="Contacto.cs" />
     <Compile Include="Cuenta.cs" />
+    <Compile Include="Estadistica.cs" />
     <Compile Include="EstadoCuenta.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
