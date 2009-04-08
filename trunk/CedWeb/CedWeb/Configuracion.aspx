@@ -51,7 +51,15 @@
                                                     <asp:Image ID="Image5" runat="server" ImageUrl="~/Imagenes/Bola3.png"/>
                                                 </td>
                                                 <td style="padding-top:10px; padding-left:5px" align="left">
-                                                    &nbsp;<asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/CuentaCambiarPassword.aspx" SkinID="LinkGrandeClaro">Cambie su Contraseña</asp:HyperLink>
+                                                    &nbsp;<asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/CompradorExplorador.aspx" SkinID="LinkGrandeClaro">Configure los datos de los Compradores</asp:HyperLink>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-top:10px">
+                                                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/Bola4.png"/>
+                                                </td>
+                                                <td style="padding-top:10px; padding-left:5px" align="left">
+                                                    &nbsp;<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/CuentaCambiarPassword.aspx" SkinID="LinkGrandeClaro">Cambie su Contraseña</asp:HyperLink>
                                                 </td>
                                             </tr>
                                         </table>

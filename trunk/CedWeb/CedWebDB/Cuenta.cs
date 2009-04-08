@@ -137,7 +137,19 @@ namespace CedWebDB
         }
         public int CantidadDeFilas()
         {
-            string commandText = "select count(*) from Cuenta ";
+            return CantidadDeFilas(true);
+        }
+        public int CantidadDeFilas(bool IncluirAdministradores)
+        {
+            string commandText;
+            if (IncluirAdministradores)
+            {
+                commandText = "select count(*) from Cuenta ";
+            }
+            else
+            {
+                commandText = "select count(*) from Cuenta where IdTipoCuenta<>'Admin' ";
+            }
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             return Convert.ToInt32(dt.Rows[0][0]);

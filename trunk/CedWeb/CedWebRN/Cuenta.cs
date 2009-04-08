@@ -315,6 +315,11 @@ namespace CedWebRN
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             return cuenta.CantidadDeFilas();
         }
+        public static int CantidadDeFilas(bool IncluirAdministradores, CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+            return cuenta.CantidadDeFilas(IncluirAdministradores);
+        }
         public static void ReservarNroLote(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);

@@ -35,7 +35,8 @@
                                                     <asp:Image ID="Image4" runat="server" ImageUrl="~/Imagenes/Bola1.png"/>
                                                 </td>
                                                 <td style="padding-top:20px; padding-left:5px; width:680px" valign="middle" align="left">
-                                                    &nbsp;<asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/AdministracionCuentaExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Cuentas</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/AdministracionCuentaExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Cuentas</asp:HyperLink>
+                                                    <asp:Label ID="CuentasLabel" runat="server" Text="" SkinID="TextoGrande"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -43,7 +44,8 @@
                                                     <asp:Image ID="Image3" runat="server" ImageUrl="~/Imagenes/Bola2.png"/>
                                                 </td>
                                                 <td style="padding-top:10px; padding-left:5px" align="left">
-                                                    &nbsp;<asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/AdministracionVendedorExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Vendedores</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/AdministracionVendedorExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Vendedores</asp:HyperLink>
+                                                    <asp:Label ID="VendedoresLabel" runat="server" Text="" SkinID="TextoGrande"></asp:Label>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -51,7 +53,8 @@
                                                     <asp:Image ID="Image5" runat="server" ImageUrl="~/Imagenes/Bola3.png"/>
                                                 </td>
                                                 <td style="padding-top:10px; padding-left:5px" align="left">
-                                                    &nbsp;<asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/AdministracionCompradorExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Compradores</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/AdministracionCompradorExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Compradores</asp:HyperLink>
+                                                    <asp:Label ID="CompradoresLabel" runat="server" Text="" SkinID="TextoGrande"></asp:Label>
                                                 </td>
                                             </tr>
                                         </table>
