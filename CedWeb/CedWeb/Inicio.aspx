@@ -225,14 +225,14 @@
                                                         <tr>
                                                             <td colspan="2" align="right" style="height:31px">
                                                                 <a href="http://validator.w3.org/check?uri=referer">
-                                                                    <img alt="Valid XHTML 1.0 Transitional" src="http://www.w3.org/Icons/valid-xhtml10-blue" style="border: 0; width: 88px" />
+                                                                    <img alt="Valid XHTML 1.0 Transitional" src="http://www.w3.org/Icons/valid-xhtml10" style="border: 0; width: 88px" />
                                                                 </a>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td colspan="2" align="right" style="height:31px">
                                                                 <a href="http://jigsaw.w3.org/css-validator/check/referer">
-                                                                    <img alt="¡CSS Válido!" src="http://jigsaw.w3.org/css-validator/images/vcss-blue" style="border: 0; width: 88px" />
+                                                                    <img alt="¡CSS Válido!" src="http://jigsaw.w3.org/css-validator/images/vcss" style="border: 0; width: 88px" />
                                                                 </a>
                                                             </td>
                                                         </tr>
