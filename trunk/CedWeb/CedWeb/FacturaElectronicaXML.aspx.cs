@@ -237,16 +237,26 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				double auxAliIVA = Convert.ToDouble(((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).SelectedValue);
 				string auxDescAliIVA = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).SelectedItem.Text;
 				string auxNull = ((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo")).Text;
-				if (!auxNull.Equals(string.Empty))
+				if (!auxNull.Equals(string.Empty) && !auxNull.Equals("0"))
 				{
-					double auxImporteIVA = Convert.ToDouble(((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo")).Text);
-					if (!auxDescAliIVA.Equals(string.Empty) || auxImporteIVA != 0)
-					{
-						l.alicuota_ivaSpecified = true;
-						l.alicuota_iva = auxAliIVA;
-						l.importe_ivaSpecified = true;
-						l.importe_iva = auxImporteIVA;
-					}
+					double auxImporteIVA = Convert.ToDouble(auxNull);
+					l.importe_ivaSpecified = true;
+					l.importe_iva = auxImporteIVA;
+				}
+				else
+				{
+					l.importe_ivaSpecified = false;
+					l.importe_iva = 0;
+				}
+				if (!auxDescAliIVA.Equals(string.Empty))
+				{
+					l.alicuota_ivaSpecified = true;
+					l.alicuota_iva = auxAliIVA;
+				}
+				else
+				{
+					l.alicuota_ivaSpecified = false;
+					l.alicuota_iva = 0;
 				}
 				
 				((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]).Add(l);
@@ -300,16 +310,26 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			double auxAliIVA = Convert.ToDouble(((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlalicuota_articuloEdit")).SelectedValue);
 			string auxDescAliIVA = ((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlalicuota_articuloEdit")).SelectedItem.Text;
 			string auxNull = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_alicuota_articulo")).Text;
-			if (!auxNull.Equals(string.Empty))
+			if (!auxNull.Equals(string.Empty) && !auxNull.Equals("0"))
 			{
 				double auxImporteIVA = Convert.ToDouble(auxNull);
-				if (!auxDescAliIVA.Equals(string.Empty) || auxImporteIVA != 0)
-				{
-					l.alicuota_ivaSpecified = true;
-					l.alicuota_iva = auxAliIVA;
-					l.importe_ivaSpecified = true;
-					l.importe_iva = auxImporteIVA;
-				}
+				l.importe_ivaSpecified = true;
+				l.importe_iva = auxImporteIVA;
+			}
+			else
+			{
+				l.importe_ivaSpecified = false;
+				l.importe_iva = 0;
+			}
+			if (!auxDescAliIVA.Equals(string.Empty))
+			{
+				l.alicuota_ivaSpecified = true;
+				l.alicuota_iva = auxAliIVA;
+			}
+			else
+			{
+				l.alicuota_ivaSpecified = false;
+				l.alicuota_iva = 0;
 			}
 
 			detalleGridView.EditIndex = -1;
@@ -553,16 +573,22 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					throw new Exception("Debe informar al menos un artículo");
 				}
 				det.linea[i].descripcion = listadelineas[i].descripcion;
+				det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
+				det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
 				if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
 				{
 					det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
+					det.linea[i].importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
+					det.linea[i].importe_iva = listadelineas[i].importe_iva;
 				}
 				else
 				{
 					det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo*Convert.ToDouble(Tipo_de_cambioTextBox.Text),2);
 					FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
-					limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
 					limo.importe_total_articuloSpecified = true;
+					limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
+					limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
+					limo.importe_iva = listadelineas[i].importe_iva;
 					det.linea[i].importes_moneda_origen = limo;
 				}
 			}
@@ -1292,13 +1318,16 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					{
 						FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
 						linea.descripcion = l.descripcion;
+						linea.alicuota_iva = l.alicuota_iva;
 						if (l.importes_moneda_origen==null)
 						{
 							linea.importe_total_articulo = l.importe_total_articulo;
+							linea.importe_iva = l.importe_iva;
 						}
 						else
 						{
 							linea.importe_total_articulo = l.importes_moneda_origen.importe_total_articulo;
+							linea.importe_iva = l.importes_moneda_origen.importe_iva;
 						}
 						lineas.Add(linea);
 					}
@@ -1424,11 +1453,22 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 	}
 	protected void MonedaComprobanteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
 	{
+		System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
 		if (!MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
 		{
 			Tipo_de_cambioLabel.Visible = true;
 			Tipo_de_cambioTextBox.Visible = true;
 			Tipo_de_cambioRequiredFieldValidator.Enabled = true;
+
+			for (int i = 0; i < listadelineas.Count; i++)
+			{
+				FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
+				limo.importe_total_articuloSpecified = true;
+				limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
+				limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
+				limo.importe_iva = listadelineas[i].importe_iva;
+				listadelineas[i].importes_moneda_origen = limo;
+			}
 		}
 		else
 		{
@@ -1436,6 +1476,13 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			Tipo_de_cambioTextBox.Visible = false;
 			Tipo_de_cambioTextBox.Text = null;
 			Tipo_de_cambioRequiredFieldValidator.Enabled = false;
+
+			for (int i = 0; i < listadelineas.Count; i++)
+			{
+				listadelineas[i].importe_total_articulo = listadelineas[i].importes_moneda_origen.importe_total_articulo;
+				listadelineas[i].importe_ivaSpecified = listadelineas[i].importes_moneda_origen.importe_ivaSpecified;
+				listadelineas[i].importe_iva = listadelineas[i].importes_moneda_origen.importe_iva;
+			}
 		}
 	}
 	protected void CompradorDropDownList_SelectedIndexChanged(object sender, EventArgs e)
