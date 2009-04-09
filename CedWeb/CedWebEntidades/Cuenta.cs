@@ -18,6 +18,9 @@ namespace CedWebEntidades
         private EstadoCuenta estadoCuenta;
         private Vendedor vendedor;
         private long ultimoNroLote;
+        private DateTime fechaAlta;
+        private int cantidadEnviosMail;
+        private DateTime fechaUltimoReenvioMail;
 
         public Cuenta()
         {
@@ -147,11 +150,25 @@ namespace CedWebEntidades
                 return vendedor;
             }
         }
+        public string IdTipoCuenta
+        {
+            get
+            {
+                return tipoCuenta.Id;
+            }
+        }
         public string DescrTipoCuenta
         {
             get
             {
                 return tipoCuenta.Descr;
+            }
+        }
+        public string IdEstadoCuenta
+        {
+            get
+            {
+                return EstadoCuenta.Id;
             }
         }
         public string DescrEstadoCuenta
@@ -170,6 +187,39 @@ namespace CedWebEntidades
             get
             {
                 return ultimoNroLote;
+            }
+        }
+        public DateTime FechaAlta
+        {
+            set
+            {
+                fechaAlta = value;
+            }
+            get
+            {
+                return fechaAlta;
+            }
+        }
+        public int CantidadEnviosMail
+        {
+            set
+            {
+                cantidadEnviosMail = value;
+            }
+            get
+            {
+                return cantidadEnviosMail;
+            }
+        }
+        public DateTime FechaUltimoReenvioMail
+        {
+            set
+            {
+                fechaUltimoReenvioMail = value;
+            }
+            get
+            {
+                return fechaUltimoReenvioMail;
             }
         }
     }

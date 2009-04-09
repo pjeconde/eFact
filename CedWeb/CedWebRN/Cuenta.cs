@@ -94,17 +94,16 @@ namespace CedWebRN
         }
         public static void Registrar(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
-            //Alta en la base de datos
             Cuenta.TipoCuenta.Id = "Free";
             Cuenta.EstadoCuenta.Id = "PteConf";
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             cuenta.Crear(Cuenta);
-
-            //Mail para confirmación
             EnviarMail("Ahora dispone de una nueva cuenta eFact", Cuenta, Sesion);
         }
         public static void ReenviarMail(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
+            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+            cuenta.RegistrarReenvioMail(Cuenta);
             EnviarMail("Ahora dispone de una nueva cuenta eFact (reenvio)", Cuenta, Sesion);
         }
         private static void EnviarMail(string Asunto, CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
@@ -137,7 +136,7 @@ namespace CedWebRN
             a.Append("<br />");
             a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
             mail.Body = a.ToString();
-            smtpClient.Send(mail);
+            //smtpClient.Send(mail);
         }
         public static void Leer(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
