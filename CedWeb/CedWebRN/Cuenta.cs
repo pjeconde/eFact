@@ -136,7 +136,7 @@ namespace CedWebRN
             a.Append("<br />");
             a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
             mail.Body = a.ToString();
-            //smtpClient.Send(mail);
+            smtpClient.Send(mail);
         }
         public static void Leer(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
