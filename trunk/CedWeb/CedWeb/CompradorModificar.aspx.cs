@@ -67,7 +67,10 @@ namespace CedWeb
 							GLNTextBox.Text = auxGLN;
 						}
 						CodigoInternoTextBox.Text = Comprador.CodigoInterno;
-						FechaInicioActividadesDatePickerWebUserControl.CalendarDate = Comprador.FechaInicioActividades;
+                        if (!Comprador.FechaInicioActividades.Equals(new DateTime(9999, 12, 31)))
+                        {
+                            FechaInicioActividadesDatePickerWebUserControl.CalendarDate = Comprador.FechaInicioActividades;
+                        }
 						RazonSocialTextBox.Focus();
 					}
 				}
