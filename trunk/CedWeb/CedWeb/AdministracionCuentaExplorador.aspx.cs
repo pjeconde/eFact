@@ -143,18 +143,19 @@ namespace CedWeb
         }
         private void HabilitarAcciones(CedWebEntidades.Cuenta Cuenta)
         {
-            if (Cuenta.EstadoCuenta.Id == "Vigente")
+            switch (Cuenta.EstadoCuenta.Id)
             {
-                BajaButton.Enabled = true;
-            }
-            else
-            {
-                if (Cuenta.EstadoCuenta.Id == "Baja")
-                {
+                case "Vigente":
+                    BajaButton.Enabled = true;
+                    break;
+                case "Baja":
                     AnularBajaButton.Enabled = true;
-                }
+                    break;
+                case "PteConf":
+                    BajaButton.Enabled = true;
+                    ReenviarMailButton.Enabled = true;
+                    break;
             }
-
             if (Cuenta.TipoCuenta.Id == "Prem")
             {
                 switch (Cuenta.EstadoCuenta.Id)
@@ -172,6 +173,7 @@ namespace CedWeb
         {
             BajaButton.Enabled = false;
             AnularBajaButton.Enabled = false;
+            ReenviarMailButton.Enabled = false;
             SuspenderPremiumButton.Enabled = false;
             RestablecerPremiumButton.Enabled = false;
         }
@@ -184,6 +186,12 @@ namespace CedWeb
         protected void AnularBajaButton_Click(object sender, EventArgs e)
         {
             CedWebRN.Cuenta.AnularBaja(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
+            BindPagingGrid();
+            DesSeleccionarFilas();
+        }
+        protected void ReenviarMailButton_Click(object sender, EventArgs e)
+        {
+            CedWebRN.Cuenta.ReenviarMail(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
             BindPagingGrid();
             DesSeleccionarFilas();
         }

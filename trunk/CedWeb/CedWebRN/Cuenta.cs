@@ -101,11 +101,19 @@ namespace CedWebRN
             cuenta.Crear(Cuenta);
 
             //Mail para confirmación
+            EnviarMail("Ahora dispone de una nueva cuenta eFact", Cuenta, Sesion);
+        }
+        public static void ReenviarMail(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        {
+            EnviarMail("Ahora dispone de una nueva cuenta eFact (reenvio)", Cuenta, Sesion);
+        }
+        private static void EnviarMail(string Asunto, CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        {
             SmtpClient smtpClient = new SmtpClient("localhost");
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
             mail.To.Add(new MailAddress(Cuenta.Email));
-            mail.Subject = "Ahora dispone de una nueva cuenta eFact";
+            mail.Subject = Asunto;
             mail.IsBodyHtml = true;
             StringBuilder a = new StringBuilder();
             a.Append("Estimado/a " + Cuenta.Nombre.Trim() + ":<br />");

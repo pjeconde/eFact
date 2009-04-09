@@ -80,6 +80,11 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td style="padding-top:5px">
+                                        <asp:Button ID="ReenviarMailButton" runat="server" Text="Reenviar mail" Width="100px" OnClick="ReenviarMailButton_Click" Enabled="false"> </asp:Button>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td style="padding-top:10px" class="TextoResaltado" align="center">
                                         Servicio Premium
                                     </td>
