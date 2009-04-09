@@ -1520,8 +1520,11 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				GLN_CompradorTextBox.Text = auxGLN;
 			}
 			Codigo_Interno_CompradorTextBox.Text = comprador.CodigoInterno;
-			InicioDeActividadesCompradorDatePickerWebUserControl.CalendarDate = comprador.FechaInicioActividades;
-		}
+            if (!comprador.FechaInicioActividades.Equals(new DateTime(9999, 12, 31)))
+            {
+                InicioDeActividadesCompradorDatePickerWebUserControl.CalendarDate = comprador.FechaInicioActividades;
+            }
+        }
 		catch(Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente ex)
 		{
 			Denominacion_CompradorTextBox.Text = string.Empty;
