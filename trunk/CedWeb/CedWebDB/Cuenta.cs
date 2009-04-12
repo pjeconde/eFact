@@ -219,5 +219,11 @@ namespace CedWebDB
             a.Append("update Cuenta set Cuenta.ActivCP=1-Cuenta.ActivCP where Cuenta.IdCuenta='" + Cuenta.Id.ToString() + "' ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
+        public void ApagarActivCP(CedWebEntidades.Cuenta Cuenta)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update Cuenta set Cuenta.ActivCP=0 where Cuenta.IdCuenta='" + Cuenta.Id.ToString() + "' ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
+        }
     }
 }

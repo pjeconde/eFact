@@ -35,7 +35,14 @@ namespace CedWeb
 				CedWebRN.Cuenta.Login(sesion.Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
                 if (sesion.Cuenta.TipoCuenta.Id != "Admin")
                 {
-                    Response.Redirect("~/FacturaElectronica.aspx", true);
+                    if (sesion.Cuenta.ActivCP)
+                    {
+                        Response.Redirect("~/ActivacionClientePesado.aspx", true);
+                    }
+                    else
+                    {
+                        Response.Redirect("~/FacturaElectronica.aspx", true);
+                    }
                 }
                 else
                 {

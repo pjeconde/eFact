@@ -17,7 +17,7 @@
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o"/>
                                     </td>
                                     <td style="width:750px;">
-                                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Administración" SkinID="TituloPagina"></asp:Label>
+                                        <asp:Label ID="TituloLabel" runat="server" Text="Administración" SkinID="TituloPagina"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>

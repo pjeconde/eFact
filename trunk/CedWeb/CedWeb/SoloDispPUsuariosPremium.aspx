@@ -23,7 +23,7 @@
                     </tr>
                     <tr>
                         <td align="left" style="padding-top:10px; padding-left:32px; padding-right:32px">
-                            <asp:Label ID="Label1" runat="server" SkinID="MensajePaginaSinWidth" Text="Esta opción esta disponible sólo para USUARIOS REGISTRADOS."></asp:Label>
+                            <asp:Label ID="Label1" runat="server" SkinID="MensajePaginaSinWidth" Text="Esta opción esta disponible sólo para USUARIOS PREMIUM."></asp:Label>
                         </td>
                     </tr>
                     <tr>

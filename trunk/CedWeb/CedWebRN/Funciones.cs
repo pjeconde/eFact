@@ -21,5 +21,10 @@ namespace CedWebRN
             bool b = (Sesion.Cuenta.TipoCuenta.Id != "Prem" || Sesion.Cuenta.EstadoCuenta.Id != "Vigente");
             return b;
         }
+        public static bool NoActivCP(CedWebEntidades.Sesion Sesion)
+        {
+            bool b = !Sesion.Cuenta.ActivCP;
+            return b;
+        }
     }
 }
