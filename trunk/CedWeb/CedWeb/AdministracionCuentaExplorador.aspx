@@ -29,7 +29,7 @@
                     <!-- @@@ OBJETOS ESPECIFICOS DE LA PAGINA @@@-->
                     <tr>
                         <td valign="top" style="padding-left:10px; padding-top:10px">
-                            <asp:Panel ID="Panel1" runat="server" Height="400px" Width="650px" ScrollBars="Auto" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" BackColor="peachpuff">
+                            <asp:Panel ID="Panel1" runat="server" Height="373px" Width="650px" ScrollBars="Auto" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" BackColor="peachpuff">
                                 <cc1:PagingGridView ID="CuentaPagingGridView" runat="server"
                                                     OnSorting="CuentaPagingGridView_Sorting" OnSelectedIndexChanged="CuentaPagingGridView_SelectedIndexChanged" OnPageIndexChanging="CuentaPagingGridView_PageIndexChanging"
                                                     OnRowDataBound="CuentaPagingGridView_RowDataBound">
@@ -54,10 +54,10 @@
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="ActivCP" HeaderText="ActivCP" SortExpression="ActivCP">
+                                        <asp:CheckBoxField DataField="ActivCP" HeaderText="ActivCP" SortExpression="ActivCP">
                                             <headerstyle horizontalalign="left" wrap="False"/>
-                                            <itemstyle wrap="False" horizontalalign="left"/>
-                                        </asp:BoundField>
+                                            <itemstyle wrap="False" horizontalalign="center"/>
+                                        </asp:CheckBoxField>
                                         <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email">
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left"/>
