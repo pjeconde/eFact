@@ -31,7 +31,7 @@ namespace CedWeb
                         }
                         else
                         {
-                            CuentaPagingGridView.PageSize = 20;
+                            CuentaPagingGridView.PageSize = 15;
                             BindPagingGrid();
                         }
                     }
