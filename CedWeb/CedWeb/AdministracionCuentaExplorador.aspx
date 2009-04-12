@@ -62,7 +62,7 @@
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="FechaAlta" HeaderText="Fecha alta" SortExpression="FechaAlta">
+                                        <asp:BoundField DataField="FechaAlta" DataFormatString="{0:dd/MM/yyyy H:mm}" HtmlEncode="false" HeaderText="Fecha alta" SortExpression="FechaAlta">
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
@@ -70,7 +70,7 @@
                                             <headerstyle horizontalalign="center" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="center"/>
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="FechaUltimoReenvioMail" HeaderText="Fecha ult.env.mail" SortExpression="FechaUltimoReenvioMail">
+                                        <asp:BoundField DataField="FechaUltimoReenvioMail" DataFormatString="{0:dd/MM/yyyy H:mm}" HtmlEncode="false" HeaderText="Fecha ult.env.mail" SortExpression="FechaUltimoReenvioMail">
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
