@@ -168,55 +168,116 @@ namespace CedWeb
                         break;
                 }
             }
+            if ((Cuenta.TipoCuenta.Id == "Prem" || Cuenta.TipoCuenta.Id == "Free") && 
+                (Cuenta.EstadoCuenta.Id == "Vigente" || Cuenta.EstadoCuenta.Id == "Suspend"))
+            {
+                ActivCPButton.Enabled = true;
+            }
         }
         private void DeshabilitarAcciones()
         {
             BajaButton.Enabled = false;
             AnularBajaButton.Enabled = false;
             ReenviarMailButton.Enabled = false;
+            ActivCPButton.Enabled = false;
             SuspenderPremiumButton.Enabled = false;
             RestablecerPremiumButton.Enabled = false;
-        }
-        protected void BajaButton_Click(object sender, EventArgs e)
-        {
-            CedWebRN.Cuenta.DarDeBaja(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
-            BindPagingGrid();
-            DesSeleccionarFilas();
-        }
-        protected void AnularBajaButton_Click(object sender, EventArgs e)
-        {
-            CedWebRN.Cuenta.AnularBaja(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
-            BindPagingGrid();
-            DesSeleccionarFilas();
-        }
-        protected void ReenviarMailButton_Click(object sender, EventArgs e)
-        {
-            CedWebRN.Cuenta.ReenviarMail(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
-            BindPagingGrid();
-            DesSeleccionarFilas();
-        }
-        protected void SuspenderPremiumButton_Click(object sender, EventArgs e)
-        {
-            CedWebRN.Cuenta.SuspenderPremium(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
-            BindPagingGrid();
-            DesSeleccionarFilas();
-        }
-        protected void RestablecerPremiumButton_Click(object sender, EventArgs e)
-        {
-            CedWebRN.Cuenta.RestablecerPremium(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
-            BindPagingGrid();
-            DesSeleccionarFilas();
         }
         protected CedWebEntidades.Cuenta CuentaSeleccionada()
         {
             System.Collections.Generic.List<CedWebEntidades.Cuenta> lista = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
             return (CedWebEntidades.Cuenta)lista[CuentaPagingGridView.SelectedIndex];
         }
+        protected void BajaButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CedWebRN.Cuenta.DarDeBaja(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
+                BindPagingGrid();
+                DesSeleccionarFilas();
+            }
+            catch (Exception ex)
+            {
+                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
+            }
+        }
+        protected void AnularBajaButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CedWebRN.Cuenta.AnularBaja(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
+                BindPagingGrid();
+                DesSeleccionarFilas();
+            }
+            catch (Exception ex)
+            {
+                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
+            }
+        }
+        protected void ReenviarMailButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CedWebRN.Cuenta.ReenviarMail(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
+                BindPagingGrid();
+                DesSeleccionarFilas();
+            }
+            catch (Exception ex)
+            {
+                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
+            }
+        }
+        protected void ActivCPButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CedWebRN.Cuenta.CambiarActivCP(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
+                BindPagingGrid();
+                DesSeleccionarFilas();
+            }
+            catch (Exception ex)
+            {
+                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
+            }
+        }
+        protected void SuspenderPremiumButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CedWebRN.Cuenta.SuspenderPremium(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
+                BindPagingGrid();
+                DesSeleccionarFilas();
+            }
+            catch (Exception ex)
+            {
+                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
+            }
+        }
+        protected void RestablecerPremiumButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CedWebRN.Cuenta.RestablecerPremium(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
+                BindPagingGrid();
+                DesSeleccionarFilas();
+            }
+            catch (Exception ex)
+            {
+                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
+            }
+        }
         protected void DepurarButton_Click(object sender, EventArgs e)
         {
-            CedWebRN.Cuenta.DepurarBajas((CedEntidades.Sesion)Session["Sesion"]);
-            BindPagingGrid();
-            DesSeleccionarFilas();
+            try
+            {
+                CedWebRN.Cuenta.DepurarBajas((CedEntidades.Sesion)Session["Sesion"]);
+                BindPagingGrid();
+                DesSeleccionarFilas();
+            }
+            catch (Exception ex)
+            {
+                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
+            }
         }
         protected void SalirButton_Click(object sender, EventArgs e)
         {

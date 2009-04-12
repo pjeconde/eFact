@@ -21,6 +21,7 @@ namespace CedWebEntidades
         private DateTime fechaAlta;
         private int cantidadEnviosMail;
         private DateTime fechaUltimoReenvioMail;
+        private bool activCP;
 
         public Cuenta()
         {
@@ -220,6 +221,17 @@ namespace CedWebEntidades
             get
             {
                 return fechaUltimoReenvioMail;
+            }
+        }
+        public bool ActivCP
+        {
+            set
+            {
+                activCP = value;
+            }
+            get
+            {
+                return activCP;
             }
         }
     }

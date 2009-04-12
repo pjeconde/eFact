@@ -40,39 +40,43 @@
                                         </asp:BoundField>
                                         <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre">
                                             <headerstyle horizontalalign="left" wrap="False"/>
-                                            <itemstyle  wrap="False" horizontalalign="left"/>
+                                            <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
                                         <asp:BoundField DataField="UltimoNroLote" HeaderText="Ult.N°Lote" SortExpression="UltimoNroLote">
                                             <headerstyle horizontalalign="center" wrap="False"/>
-                                            <itemstyle  wrap="False" horizontalalign="center"/>
+                                            <itemstyle wrap="False" horizontalalign="center"/>
                                         </asp:BoundField>
                                         <asp:BoundField DataField="IdTipoCuenta" HeaderText="Tipo" SortExpression="IdTipoCuenta">
                                             <headerstyle horizontalalign="left" wrap="False"/>
-                                            <itemstyle  wrap="False" horizontalalign="left"/>
+                                            <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
                                         <asp:BoundField DataField="IdEstadoCuenta" HeaderText="Estado" SortExpression="IdEstadoCuenta">
                                             <headerstyle horizontalalign="left" wrap="False"/>
-                                            <itemstyle  wrap="False" horizontalalign="left"/>
+                                            <itemstyle wrap="False" horizontalalign="left"/>
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="ActivCP" HeaderText="ActivCP" SortExpression="ActivCP">
+                                            <headerstyle horizontalalign="left" wrap="False"/>
+                                            <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
                                         <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email">
                                             <headerstyle horizontalalign="left" wrap="False"/>
-                                            <itemstyle  wrap="False" horizontalalign="left"/>
+                                            <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
                                         <asp:BoundField DataField="FechaAlta" HeaderText="Fecha alta" SortExpression="FechaAlta">
                                             <headerstyle horizontalalign="left" wrap="False"/>
-                                            <itemstyle  wrap="False" horizontalalign="left"/>
+                                            <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
                                         <asp:BoundField DataField="CantidadEnviosMail" HeaderText="Cant.env.mail" SortExpression="CantidadEnviosMail">
                                             <headerstyle horizontalalign="center" wrap="False"/>
-                                            <itemstyle  wrap="False" horizontalalign="center"/>
+                                            <itemstyle wrap="False" horizontalalign="center"/>
                                         </asp:BoundField>
                                         <asp:BoundField DataField="FechaUltimoReenvioMail" HeaderText="Fecha ult.env.mail" SortExpression="FechaUltimoReenvioMail">
                                             <headerstyle horizontalalign="left" wrap="False"/>
-                                            <itemstyle  wrap="False" horizontalalign="left"/>
+                                            <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
                                         <asp:BoundField DataField="Telefono" HeaderText="Telefono" SortExpression="Telefono">
                                             <headerstyle horizontalalign="left" wrap="False"/>
-                                            <itemstyle  wrap="False" horizontalalign="left"/>
+                                            <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
                                     </Columns>
                                 </cc1:PagingGridView>
@@ -98,6 +102,11 @@
                                 <tr>
                                     <td style="padding-top:5px">
                                         <asp:Button ID="ReenviarMailButton" runat="server" Text="Reenviar mail" Width="100px" OnClick="ReenviarMailButton_Click" Enabled="false"> </asp:Button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top:5px">
+                                        <asp:Button ID="ActivCPButton" runat="server" Text="± Activ.CP" Width="100px" OnClick="ActivCPButton_Click" Enabled="false"> </asp:Button>
                                     </td>
                                 </tr>
                                 <tr>
