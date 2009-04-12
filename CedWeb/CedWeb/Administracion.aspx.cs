@@ -18,20 +18,34 @@ namespace CedWeb
             ((LinkButton)Master.FindControl("AdministracionLinkButton")).ForeColor = System.Drawing.Color.Gold;
             if (!IsPostBack)
             {
-                List<CedWebEntidades.Estadistica> registros = CedWebRN.Estadistica.DeterminarCantidadRegistros((CedEntidades.Sesion)Session["Sesion"]);
-                for (int i = 0; i < registros.Count; i++)
+                if (CedWebRN.Fun.NoHayNadieLogueado((CedWebEntidades.Sesion)Session["Sesion"]))
                 {
-                    switch (registros[i].Concepto)
+                    CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloLabel.Text, "~/SoloDispPUsuariosAdministradores.aspx");
+                }
+                else
+                {
+                    if (CedWebRN.Fun.NoEstaLogueadoUnAdministrador((CedWebEntidades.Sesion)Session["Sesion"]))
                     {
-                        case "Vendedores":
-                            VendedoresLabel.Text="("+registros[i].Cantidad.ToString()+")";
-                            break;
-                        case "Compradores":
-                            CompradoresLabel.Text="("+registros[i].Cantidad.ToString()+")";
-                            break;
-                        default:
-                            CuentasLabel.Text = "(" + registros[i].Cantidad.ToString() + ")";
-                            break;
+                        CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloLabel.Text, "~/SoloDispPUsuariosAdministradores.aspx");
+                    }
+                    else
+                    {
+                        List<CedWebEntidades.Estadistica> registros = CedWebRN.Estadistica.DeterminarCantidadRegistros((CedEntidades.Sesion)Session["Sesion"]);
+                        for (int i = 0; i < registros.Count; i++)
+                        {
+                            switch (registros[i].Concepto)
+                            {
+                                case "Vendedores":
+                                    VendedoresLabel.Text = "(" + registros[i].Cantidad.ToString() + ")";
+                                    break;
+                                case "Compradores":
+                                    CompradoresLabel.Text = "(" + registros[i].Cantidad.ToString() + ")";
+                                    break;
+                                default:
+                                    CuentasLabel.Text = "(" + registros[i].Cantidad.ToString() + ")";
+                                    break;
+                            }
+                        }
                     }
                 }
             }
