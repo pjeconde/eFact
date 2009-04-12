@@ -106,6 +106,11 @@ namespace CedWebRN
             cuenta.RegistrarReenvioMail(Cuenta);
             EnviarMail("Ahora dispone de una nueva cuenta eFact (reenvio)", Cuenta, Sesion);
         }
+        public static void CambiarActivCP(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+            cuenta.CambiarActivCP(Cuenta);
+        }
         private static void EnviarMail(string Asunto, CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
             SmtpClient smtpClient = new SmtpClient("localhost");
