@@ -78,7 +78,7 @@
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="NroSerieDisco" HeaderText="Clave Solic.ActivCP" SortExpression="NroSerieDisco">
+                                        <asp:BoundField DataField="NroSerieDisco" HeaderText="Clave solic.ActivCP" SortExpression="NroSerieDisco">
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
