@@ -22,6 +22,7 @@ namespace CedWebEntidades
         private int cantidadEnviosMail;
         private DateTime fechaUltimoReenvioMail;
         private bool activCP;
+        private string nroSerieDisco;
 
         public Cuenta()
         {
@@ -232,6 +233,17 @@ namespace CedWebEntidades
             get
             {
                 return activCP;
+            }
+        }
+        public string NroSerieDisco
+        {
+            set
+            {
+                nroSerieDisco = value;
+            }
+            get
+            {
+                return nroSerieDisco;
             }
         }
     }

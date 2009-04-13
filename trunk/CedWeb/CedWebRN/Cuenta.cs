@@ -379,7 +379,7 @@ namespace CedWebRN
         public static string ObtenerClaveActivCP(CedWebEntidades.Cuenta Cuenta, string ClaveSolicitud, CedEntidades.Sesion Sesion)
         {
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
-            cuenta.ApagarActivCP(Cuenta);
+            cuenta.ApagarActivCP(Cuenta, ClaveSolicitud);
             Cuenta.ActivCP = false;
             return Encryptor.Encrypt(ClaveSolicitud, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
         }
