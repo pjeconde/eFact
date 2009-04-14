@@ -14,5 +14,10 @@ namespace eFact_R_XL
         {
             InitializeComponent();
         }
+
+        private void SalirButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

@@ -28,13 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.SalirButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // SalirButton
+            // 
+            this.SalirButton.Location = new System.Drawing.Point(387, 231);
+            this.SalirButton.Name = "SalirButton";
+            this.SalirButton.Size = new System.Drawing.Size(75, 23);
+            this.SalirButton.TabIndex = 0;
+            this.SalirButton.Text = "Salir";
+            this.SalirButton.UseVisualStyleBackColor = true;
+            this.SalirButton.Click += new System.EventHandler(this.SalirButton_Click);
             // 
             // Tablero
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(472, 266);
+            this.Controls.Add(this.SalirButton);
             this.Name = "Tablero";
             this.Text = "eFact-Residente-XL (versión 0.1)";
             this.ResumeLayout(false);
@@ -42,6 +54,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Button SalirButton;
     }
 }
 
