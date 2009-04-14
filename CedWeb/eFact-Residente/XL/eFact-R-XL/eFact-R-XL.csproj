@@ -36,12 +36,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activación.cs">
+    <Compile Include="Activacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Activación.Designer.cs">
-      <DependentUpon>Activación.cs</DependentUpon>
+    <Compile Include="Activacion.Designer.cs">
+      <DependentUpon>Activacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entidades\Disco.cs" />
+    <Compile Include="Entidades\Registro.cs" />
+    <Compile Include="RN\Disco.cs" />
+    <Compile Include="RN\Registro.cs" />
     <Compile Include="Tablero.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -50,9 +54,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Activación.resx">
+    <EmbeddedResource Include="Activacion.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>Activación.cs</DependentUpon>
+      <DependentUpon>Activacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
