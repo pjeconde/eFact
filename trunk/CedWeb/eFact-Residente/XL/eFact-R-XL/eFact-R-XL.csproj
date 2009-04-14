@@ -53,7 +53,7 @@
     <Compile Include="Tablero.Designer.cs">
       <DependentUpon>Tablero.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Aplicacion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Activacion.resx">
       <SubType>Designer</SubType>
