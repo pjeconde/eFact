@@ -10,10 +10,10 @@ namespace eFact_R_XL
 {
     public partial class Activacion : Form
     {
-        public Activacion(string NroSerieDisco)
+        public Activacion()
         {
             InitializeComponent();
-            ClaveSolicitudTextBox.Text = NroSerieDisco;
+            DiscosDataGridView.DataSource = Aplicacion.Discos;
         }
     }
 }

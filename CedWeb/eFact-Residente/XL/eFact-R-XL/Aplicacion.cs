@@ -5,8 +5,9 @@ using eFact_R_XL;
 
 namespace eFact_R_XL
 {
-    static class Program
+    static class Aplicacion
     {
+        public static List<Entidades.Disco> Discos;
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
@@ -15,17 +16,16 @@ namespace eFact_R_XL
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Entidades.Disco disco = new eFact_R_XL.Entidades.Disco();
-            RN.Disco.Leer(disco);
+            Discos = RN.Disco.Lista();
             Entidades.Registro registro = new eFact_R_XL.Entidades.Registro();
             RN.Registro.Leer(registro);
-            if (disco.ClaveActivacion == registro.ClaveActivacion)
+            if (Discos[0].ClaveActivacion == registro.ClaveActivacion)
             {
                 Application.Run(new Tablero());
             }
             else
             {
-                Application.Run(new Activacion(disco.NroSerie));
+                Application.Run(new Activacion());
             }
         }
     }

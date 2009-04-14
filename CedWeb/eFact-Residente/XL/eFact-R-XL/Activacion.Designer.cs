@@ -33,6 +33,8 @@
             this.ClaveSolicitudTextBox = new System.Windows.Forms.TextBox();
             this.ClaveActivacionTextBox = new System.Windows.Forms.TextBox();
             this.RegistrarButton = new System.Windows.Forms.Button();
+            this.DiscosDataGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.DiscosDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -76,11 +78,20 @@
             this.RegistrarButton.Text = "Registrar activación";
             this.RegistrarButton.UseVisualStyleBackColor = true;
             // 
+            // DiscosDataGridView
+            // 
+            this.DiscosDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DiscosDataGridView.Location = new System.Drawing.Point(15, 121);
+            this.DiscosDataGridView.Name = "DiscosDataGridView";
+            this.DiscosDataGridView.Size = new System.Drawing.Size(447, 198);
+            this.DiscosDataGridView.TabIndex = 5;
+            // 
             // Activacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 136);
+            this.ClientSize = new System.Drawing.Size(474, 331);
+            this.Controls.Add(this.DiscosDataGridView);
             this.Controls.Add(this.RegistrarButton);
             this.Controls.Add(this.ClaveActivacionTextBox);
             this.Controls.Add(this.ClaveSolicitudTextBox);
@@ -88,6 +99,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Activacion";
             this.Text = "Activación";
+            ((System.ComponentModel.ISupportInitialize)(this.DiscosDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -100,5 +112,6 @@
         private System.Windows.Forms.TextBox ClaveSolicitudTextBox;
         private System.Windows.Forms.TextBox ClaveActivacionTextBox;
         private System.Windows.Forms.Button RegistrarButton;
+        private System.Windows.Forms.DataGridView DiscosDataGridView;
     }
 }
