@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Management;
 
 namespace eFact_R_XL.RN
 {
@@ -8,6 +9,7 @@ namespace eFact_R_XL.RN
     {
         public static void Leer(eFact_R_XL.Entidades.Disco Disco)
         {
+
         }
     }
 }
