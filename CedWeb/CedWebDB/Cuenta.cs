@@ -231,5 +231,29 @@ namespace CedWebDB
             a.Append("update Cuenta set Cuenta.ActivCP=0, Cuenta.NroSerieDisco='" + NroSerieDisco + "' where Cuenta.IdCuenta='" + Cuenta.Id.ToString() + "' ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
+        public List<CedWebEntidades.Estadistica> EstadisticaMedio()
+        {
+            List<CedWebEntidades.Estadistica> lista = new List<CedWebEntidades.Estadistica>();
+            int cantidadCuentas = CantidadDeFilas();
+            if (cantidadCuentas > 0)
+            {
+                StringBuilder a = new StringBuilder(string.Empty);
+                a.Append("select Medio.IdMedio, count(*) as Cantidad ");
+                a.Append("from Cuenta, Medio ");
+                a.Append("where Cuenta.IdMedio=Medio.IdMedio ");
+                a.Append("group by Medio.IdMedio ");
+                a.Append("order by count(*) desc ");
+                DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    CedWebEntidades.Estadistica elemento = new CedWebEntidades.Estadistica();
+                    elemento.Concepto = Convert.ToString(dt.Rows[i]["IdMedio"]);
+                    elemento.Cantidad = Convert.ToInt32(dt.Rows[i]["Cantidad"]);
+                    elemento.Porcentaje = elemento.Cantidad * 100 / cantidadCuentas;
+                    lista.Add(elemento);
+                }
+            }
+            return lista;
+        }
     }
 }

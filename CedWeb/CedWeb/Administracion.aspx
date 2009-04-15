@@ -59,7 +59,13 @@
                                             </tr>
                                         </table>
                                     </td>
-                                </tr>                            
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td rowspan="3" align="left" valign="middle" style="padding-top:20px">
+                                        <asp:ImageMap ID="MedioImageMap" runat="server" BorderStyle="Solid" BorderColor="brown" BorderWidth="1px"></asp:ImageMap>
+                                    </td>
+                                </tr>
                             </table>
                         </td>
                     </tr>

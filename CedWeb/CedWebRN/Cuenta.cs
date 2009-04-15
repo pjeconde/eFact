@@ -383,5 +383,11 @@ namespace CedWebRN
             Cuenta.ActivCP = false;
             return Encryptor.Encrypt(ClaveSolicitud, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
         }
+        public static List<CedWebEntidades.Estadistica> EstadisticaMedio(CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+            return cuenta.EstadisticaMedio();
+        }
+
     }
 }
