@@ -38,7 +38,7 @@ namespace CedBPrn
             GraficoDeTorta.SliceRelativeDisplacements = desplazamiento;
             GraficoDeTorta.Colors = colores;
             // Inicializo grafico
-            AnguloGiro = -47;
+            AnguloGiro = 30;
             GraficoDeTorta.InitialAngle = AnguloGiro;
             GraficoDeTorta.EdgeColorType = System.Drawing.PieChart.EdgeColorType.SurfaceColor;
             GraficoDeTorta.ShadowStyle = System.Drawing.PieChart.ShadowStyle.GradualShadow;
