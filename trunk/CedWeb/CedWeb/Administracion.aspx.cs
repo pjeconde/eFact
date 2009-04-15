@@ -46,9 +46,25 @@ namespace CedWeb
                                     break;
                             }
                         }
+                        GenerarGrafico();
+                        MedioImageMap.ImageUrl = "~/Imagenes/temp.bmp";
+                        MedioImageMap.DataBind();
+
                     }
                 }
             }
+        }
+        private void GenerarGrafico()
+        {
+            List<CedWebEntidades.Estadistica> lista = CedWebRN.Cuenta.EstadisticaMedio((CedEntidades.Sesion)Session["Sesion"]);
+            decimal[] valores = new decimal[lista.Count];
+            string[] textos = new string[lista.Count];
+            for (int i = 0; i < lista.Count; i++)
+            {
+                textos[i] = lista[i].Concepto;
+                valores[i] = lista[i].Cantidad;
+            }
+            CedBPrn.Grafico.Generar(140, 315, valores, textos);
         }
     }
 }

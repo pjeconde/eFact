@@ -8,6 +8,7 @@ namespace CedWebEntidades
     {
         private string concepto;
         private int cantidad;
+        private double porcentaje;
         private string uRL;
 
         public Estadistica()
@@ -33,6 +34,17 @@ namespace CedWebEntidades
             set
             {
                 cantidad = value;
+            }
+        }
+        public double Porcentaje
+        {
+            get
+            {
+                return porcentaje;
+            }
+            set
+            {
+                porcentaje = value;
             }
         }
         public string URL
