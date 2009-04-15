@@ -82,6 +82,10 @@
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
+                                        <asp:BoundField DataField="IdMedio" HeaderText="Medio" SortExpression="IdMedio">
+                                            <headerstyle horizontalalign="left" wrap="False"/>
+                                            <itemstyle wrap="False" horizontalalign="left"/>
+                                        </asp:BoundField>
                                     </Columns>
                                 </cc1:PagingGridView>
                             </asp:Panel>

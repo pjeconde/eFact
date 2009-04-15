@@ -186,6 +186,18 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td colspan="2" align="right" style="padding-top:3px; padding-right:5px">
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server"  SetFocusOnError="True"
+                                            ControlToValidate="MedioDropDownList" ErrorMessage="Cómo nos conoció">
+                                            <asp:Label ID="Label26" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RequiredFieldValidator>
+                                        <asp:Label ID="Label25" runat="server" Text="¿Cómo nos conoció?"></asp:Label>
+                                    </td>
+                                    <td colspan="2" align="left" style="padding-top:3px">
+                                        <asp:DropDownList ID="MedioDropDownList" Width="183px" runat="server" TabIndex="9"></asp:DropDownList>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td align="center" valign="bottom" style="padding-top:3px; width:150px">
                                         <asp:Label ID="Label3" runat="server" Text="" Width="150px"></asp:Label>
                                         <asp:Image ID="CaptchaImage" runat="server" Height="60px" Width="150px" AlternateText="" />
@@ -215,7 +227,7 @@
                                         <asp:Label ID="ClaveLabel" runat="server" Text="Clave"></asp:Label>
                                     </td>
                                     <td align="left" style="width:80px; padding-top:3px">
-                                        <asp:TextBox ID="CaptchaTextBox" runat="server" Width="100px" TabIndex="9" MaxLength="20"></asp:TextBox>
+                                        <asp:TextBox ID="CaptchaTextBox" runat="server" Width="100px" TabIndex="10" MaxLength="20"></asp:TextBox>
                                     </td>
                                     <td align="left" style="padding-top:3px; padding-left:5px">
                                         <asp:Label ID="CaseSensitiveLabel" runat="server" Text="(no se distinguen mayúsculas de minúsculas)" ForeColor="gray"></asp:Label>

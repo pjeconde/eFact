@@ -27,6 +27,10 @@ namespace CedWeb
                     texto.Id = "eFact-TerminosyCondiciones";
                     CedWebRN.Texto.Leer(texto, (CedEntidades.Sesion)Session["Sesion"]);
                     CondicionesTextBox.Text = texto.Descr;
+                    MedioDropDownList.DataValueField = "Id";
+                    MedioDropDownList.DataTextField = "Descr";
+                    MedioDropDownList.DataSource = CedWebRN.Medio.Lista((CedEntidades.Sesion)Session["Sesion"]);
+                    DataBind();
                 }
                 catch (Exception ex)
                 {
@@ -47,6 +51,8 @@ namespace CedWeb
             cuenta.ConfirmacionPassword = ConfirmacionPasswordTextBox.Text;
             cuenta.Pregunta = PreguntaTextBox.Text;
             cuenta.Respuesta = RespuestaTextBox.Text;
+            cuenta.Medio.Id = MedioDropDownList.SelectedValue;
+            cuenta.Medio.Descr = MedioDropDownList.SelectedItem.Text;
             try
             {
                 CedWebRN.Cuenta.Validar(cuenta, Session["captcha"].ToString(), CaptchaTextBox.Text, (CedEntidades.Sesion)Session["Sesion"]);
@@ -68,6 +74,7 @@ namespace CedWeb
                 ConfirmacionPasswordTextBox.Enabled = false;
                 PreguntaTextBox.Enabled = false;
                 RespuestaTextBox.Enabled = false;
+                MedioDropDownList.Enabled = false;
                 MsgErrorLabel.Text = "Gracias por crear su cuenta eFact.  Siga las instrucciones, que se enviaron por email, para confirmar la creación de su cuenta.  La recepción del email puede demorar unos minutos.";
             }
             catch (Exception ex)
