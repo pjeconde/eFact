@@ -23,12 +23,14 @@ namespace CedWebEntidades
         private DateTime fechaUltimoReenvioMail;
         private bool activCP;
         private string nroSerieDisco;
+        private Medio medio;
 
         public Cuenta()
         {
             tipoCuenta = new TipoCuenta();
             estadoCuenta = new EstadoCuenta();
             vendedor = new Vendedor();
+            medio = new Medio();
         }
 
         public string Id
@@ -244,6 +246,31 @@ namespace CedWebEntidades
             get
             {
                 return nroSerieDisco;
+            }
+        }
+        public Medio Medio
+        {
+            set
+            {
+                medio = value;
+            }
+            get
+            {
+                return medio;
+            }
+        }
+        public string IdMedio
+        {
+            get
+            {
+                return medio.Id;
+            }
+        }
+        public string DescrMedio
+        {
+            get
+            {
+                return medio.Descr;
             }
         }
     }
