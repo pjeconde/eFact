@@ -62,7 +62,13 @@
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td rowspan="3" align="left" valign="middle" style="padding-top:20px">
+                                    <td align="left" valign="middle" style="padding-top:20px">
+                                        <asp:Label ID="Label1" runat="server" Text="Medio" SkinID="TituloColor1Grande"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td align="left" valign="middle">
                                         <asp:ImageMap ID="MedioImageMap" runat="server" BorderStyle="Solid" BorderColor="brown" BorderWidth="1px"></asp:ImageMap>
                                     </td>
                                 </tr>
