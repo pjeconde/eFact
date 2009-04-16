@@ -47,6 +47,7 @@
     </Compile>
     <Compile Include="Entidades\Disco.cs" />
     <Compile Include="RN\Disco.cs" />
+    <Compile Include="RN\Encryptor.cs" />
     <Compile Include="RN\Registro.cs" />
     <Compile Include="Tablero.cs">
       <SubType>Form</SubType>
