@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // conjunto de atributos. Cambie estos atributos para modificar la información
 // asociada con un ensamblado.
 [assembly: AssemblyTitle("eFact-R-XL")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("eFact Residente version Excel")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Cedeira Software Factory S.R.L.")]
 [assembly: AssemblyProduct("eFact-R-XL")]
 [assembly: AssemblyCopyright("©  2009")]
 [assembly: AssemblyTrademark("")]

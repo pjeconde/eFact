@@ -38,5 +38,25 @@ namespace eFact_R_XL.RN
             }
             return discos;
         }
+        public static string ClaveSolicitud()
+        {
+            StringBuilder clave = new StringBuilder(String.Empty);
+            List<eFact_R_XL.Entidades.Disco> discos = Lista();
+            for (int i = 0; i < discos.Count; i++)
+            {
+                if (discos[i].Tipo != "USB")
+                {
+                    if (discos[i].NroSerie != "None")
+                    {
+                        clave.Append(discos[i].NroSerie);
+                    }
+                    else
+                    {
+                        clave.Append(discos[i].Modelo);
+                    }
+                }
+            }
+            return clave.ToString().Replace(" ", String.Empty).Replace("-", String.Empty);
+        }
     }
 }
