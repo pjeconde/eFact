@@ -33,20 +33,20 @@ namespace CedWeb
 				sesion.Cuenta.Id = UsuarioTextBox.Text;
 				sesion.Cuenta.Password = PasswordTextBox.Text;
 				CedWebRN.Cuenta.Login(sesion.Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
-                if (sesion.Cuenta.TipoCuenta.Id != "Admin")
+                if (sesion.Cuenta.ActivCP)
                 {
-                    if (sesion.Cuenta.ActivCP)
+                    Response.Redirect("~/ActivacionClientePesado.aspx", true);
+                }
+                else
+                {
+                    if (sesion.Cuenta.TipoCuenta.Id != "Admin")
                     {
-                        Response.Redirect("~/ActivacionClientePesado.aspx", true);
+                        Response.Redirect("~/Administracion.aspx", true);
                     }
                     else
                     {
                         Response.Redirect("~/FacturaElectronica.aspx", true);
                     }
-                }
-                else
-                {
-                    Response.Redirect("~/Administracion.aspx", true);
                 }
 			}
 			catch (System.Threading.ThreadAbortException)
