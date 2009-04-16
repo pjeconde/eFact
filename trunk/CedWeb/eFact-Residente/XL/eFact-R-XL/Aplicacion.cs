@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using eFact_R_XL;
 using Microsoft.Win32;
+using CaptchaDotNet2.Security.Cryptography;
 
 namespace eFact_R_XL
 {
@@ -26,9 +27,10 @@ namespace eFact_R_XL
             }
             //Verificar activacion
             ClaveSolicitud = RN.Disco.ClaveSolicitud();
+            string claveSolicitud = Encryptor.Encrypt(ClaveSolicitud, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
             object claveActivacion;
             RN.Registro.Leer(Registry.LocalMachine, RegistroNombreClave, "k", out claveActivacion);
-            if (ClaveSolicitud == claveActivacion.ToString())
+            if (claveSolicitud == claveActivacion.ToString())
             {
                 Application.Run(new Tablero());
             }
