@@ -17,26 +17,41 @@ namespace eFact_R_XL
         [STAThread]
         static void Main()
         {
+            object changüí;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             if (!RN.Registro.Existe(Registry.LocalMachine, RegistroNombreClave))
             {
                 //Registracion
-                RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "q", "10");
+                changüí = Encryptor.Encrypt("5", "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "q", changüí);
                 RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "k", "");
             }
-            //Verificar activacion
-            ClaveSolicitud = RN.Disco.ClaveSolicitud();
-            string claveSolicitud = Encryptor.Encrypt(ClaveSolicitud, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-            object claveActivacion;
-            RN.Registro.Leer(Registry.LocalMachine, RegistroNombreClave, "k", out claveActivacion);
-            if (claveSolicitud == claveActivacion.ToString())
+            //Verificar changüí
+            RN.Registro.Leer(Registry.LocalMachine, RegistroNombreClave, "q", out changüí);
+            int i = Convert.ToInt32(Encryptor.Decrypt(changüí.ToString(), "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")));
+            if (i>0)
             {
+                i--;
+                changüí = Encryptor.Encrypt(i.ToString(), "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "q", changüí);
                 Application.Run(new Tablero());
             }
             else
             {
-                Application.Run(new Activacion());
+                //Verificar activacion
+                ClaveSolicitud = RN.Disco.ClaveSolicitud();
+                string claveSolicitud = Encryptor.Encrypt(ClaveSolicitud, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                object claveActivacion;
+                RN.Registro.Leer(Registry.LocalMachine, RegistroNombreClave, "k", out claveActivacion);
+                if (claveSolicitud == claveActivacion.ToString())
+                {
+                    Application.Run(new Tablero());
+                }
+                else
+                {
+                    Application.Run(new Activacion());
+                }
             }
         }
     }
