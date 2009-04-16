@@ -197,9 +197,16 @@
                                         También estableceremos las equivalencias entre los códigos propios, de su sistema de facturación, y los códigos estándar de la operatoria de Factura Electrónica.<br />
                                         Por último, configuraremos, a su medida, la forma en la que nuestro sistema registrará la respuesta del impacto. 
                                     </td>
-                                    <td style="padding-top:10px">
+                                    <td rowspan="2" style="padding-top:10px">
                                         <asp:Image ID="Image5" runat="server" ImageUrl="Imagenes/EsquemaSolucioneseFact2.jpg" Width="220px"
                                             ImageAlign="Right" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="padding-right: 10px; vertical-align: bottom">
+                                        <asp:Label ID="Label7" runat="server" Font-Bold="true" ForeColor="red" Text="»"></asp:Label>
+                                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Descarga.aspx?archivo=eFact-R-XL.exe"
+                                            SkinID="LinkMedianoClaro">Descargar eFact-Residente versión Excel (eFact-R-XL.exe)</asp:HyperLink>
                                     </td>
                                 </tr>
                             </table>
