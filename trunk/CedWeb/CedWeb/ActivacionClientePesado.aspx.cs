@@ -37,5 +37,9 @@ namespace CedWeb
         {
             ClaveActivCPTextBox.Text = CedWebRN.Cuenta.ObtenerClaveActivCP(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ClaveSolicitudTextBox.Text, (CedEntidades.Sesion)Session["Sesion"]);
         }
+        protected void SalirButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Inicio.aspx", true);
+        }
     }
 }

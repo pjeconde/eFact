@@ -75,6 +75,14 @@
                                                     para que quede completamente operativo.
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td align="center" style="padding-top:10px">
+                                                    <asp:Button ID="SalirButton" runat="server" Text="Salir" Width="200px" TabIndex="10" OnClick="SalirButton_Click" CausesValidation="false">
+                                                    </asp:Button>
+                                                </td>
+                                                <td></td>
+                                            </tr>
                                         </table>
                                     </td>
                                 </tr>                            
