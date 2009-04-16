@@ -44,7 +44,6 @@
       <DependentUpon>Activacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Entidades\Disco.cs" />
-    <Compile Include="Entidades\Registro.cs" />
     <Compile Include="RN\Disco.cs" />
     <Compile Include="RN\Registro.cs" />
     <Compile Include="Tablero.cs">

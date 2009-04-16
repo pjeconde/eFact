@@ -25,9 +25,5 @@ namespace eFact_R_XL.Entidades
             get { return nroSerie; }
             set { nroSerie = value; }
         }
-        public string ClaveActivacion
-        {
-            get { return nroSerie; }    //encriptar
-        }
     }
 }
