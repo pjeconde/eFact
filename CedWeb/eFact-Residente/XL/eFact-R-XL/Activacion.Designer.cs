@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Activacion));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.ClaveSolicitudTextBox = new System.Windows.Forms.TextBox();
@@ -112,6 +113,7 @@
             this.Controls.Add(this.ClaveSolicitudTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Activacion";
             this.Text = "Activación";
             ((System.ComponentModel.ISupportInitialize)(this.discoBindingSource1)).EndInit();
@@ -130,7 +132,6 @@
         private System.Windows.Forms.Button RegistrarButton;
         private System.Windows.Forms.BindingSource discoBindingSource;
         private System.Windows.Forms.BindingSource discoBindingSource1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn claveActivacionDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button SalirButton;
     }
 }
