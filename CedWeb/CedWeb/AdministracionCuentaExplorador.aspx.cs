@@ -147,6 +147,7 @@ namespace CedWeb
             {
                 case "Vigente":
                     BajaButton.Enabled = true;
+                    ActivCPButton.Enabled = true;
                     break;
                 case "Baja":
                     AnularBajaButton.Enabled = true;
@@ -154,6 +155,9 @@ namespace CedWeb
                 case "PteConf":
                     BajaButton.Enabled = true;
                     ReenviarMailButton.Enabled = true;
+                    break;
+                case "Suspend":
+                    ActivCPButton.Enabled = true;
                     break;
             }
             if (Cuenta.TipoCuenta.Id == "Prem")
@@ -167,11 +171,6 @@ namespace CedWeb
                         RestablecerPremiumButton.Enabled = true;
                         break;
                 }
-            }
-            if ((Cuenta.TipoCuenta.Id == "Prem" || Cuenta.TipoCuenta.Id == "Free") && 
-                (Cuenta.EstadoCuenta.Id == "Vigente" || Cuenta.EstadoCuenta.Id == "Suspend"))
-            {
-                ActivCPButton.Enabled = true;
             }
         }
         private void DeshabilitarAcciones()
