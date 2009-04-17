@@ -39,7 +39,7 @@
                                                     <asp:Label ID="ClaveSolicitudLabel" runat="server" Text="Clave de solicitud"></asp:Label>
                                                 </td>
                                                 <td align="left" style="padding-top:10px">
-                                                    <asp:TextBox ID="ClaveSolicitudTextBox" runat="server" Width="200px" TabIndex="9" MaxLength="20"></asp:TextBox>
+                                                    <asp:TextBox ID="ClaveSolicitudTextBox" runat="server" Width="600px" TabIndex="9" MaxLength="20"></asp:TextBox>
                                                 </td>                                                    
                                                 <td style="width:50%; padding-top:10px"> 
                                                 </td>                                                    
@@ -51,7 +51,7 @@
                                             </tr>
                                             <tr>
                                                 <td></td>
-                                                <td align="center" style="padding-top:10px">
+                                                <td align="left" style="padding-top:10px">
                                                     <asp:Button ID="SolicitarActivCPButton" runat="server" Text="Obtener Clave de activación" Width="200px" TabIndex="10" OnClick="SolicitarActivCPButton_Click">
                                                     </asp:Button>
                                                 </td>
@@ -62,22 +62,22 @@
                                                     <asp:Label ID="ClaveActivCPLabel" runat="server" Text="Clave de activación"></asp:Label>
                                                 </td>
                                                 <td colspan="2" align="left" style="padding-top:10px">
-                                                    <asp:TextBox ID="ClaveActivCPTextBox" runat="server" Width="100%" TabIndex="9" MaxLength="20"></asp:TextBox>
+                                                    <asp:TextBox ID="ClaveActivCPTextBox" runat="server" Width="600px" TabIndex="9" MaxLength="20"></asp:TextBox>
                                                 </td>                                                    
                                             </tr>                                            
                                             <tr>
                                                 <td colspan="3" style="padding-top:10px; padding-left:5px" valign="middle">
-                                                    Copie la <b>Clave de activación</b> obtenida en la ventana de activación del programa eFact-Residente
+                                                    Copie la <b>Clave de activación</b> obtenida en la ventana de activación del programa eFact-Residente para que quede
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="3" style="padding-top:5px; padding-left:5px" valign="middle">
-                                                    para que quede completamente operativo.
+                                                    completamente operativo.
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td></td>
-                                                <td align="center" style="padding-top:10px">
+                                                <td align="left" style="padding-top:10px">
                                                     <asp:Button ID="SalirButton" runat="server" Text="Salir" Width="200px" TabIndex="10" OnClick="SalirButton_Click" CausesValidation="false">
                                                     </asp:Button>
                                                 </td>
