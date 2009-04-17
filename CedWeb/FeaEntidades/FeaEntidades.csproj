@@ -126,6 +126,7 @@
     <Compile Include="Documentos\LC.cs" />
     <Compile Include="Documentos\LE.cs" />
     <Compile Include="Documentos\Pasaporte.cs" />
+    <Compile Include="Excel\Ubicador.cs" />
     <Compile Include="InterFacturas\cabecera.cs" />
     <Compile Include="InterFacturas\cabecera_lote.cs" />
     <Compile Include="InterFacturas\comprobante.cs" />
@@ -179,6 +180,15 @@
     <Compile Include="TiposDeComprobantes\Recibos\B.cs" />
     <Compile Include="TiposDeComprobantes\Recibos\Recibo.cs" />
     <Compile Include="TiposDeComprobantes\TipoComprobante.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileHelpers\FileHelpers.2005.csproj">
+      <Project>{EB8633FF-CEED-40EE-8D1A-CA1BF5678C42}</Project>
+      <Name>FileHelpers.2005</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converters\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
