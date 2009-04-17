@@ -3,6 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-R-XL", "eFact-R-XL\eFact-R-XL.csproj", "{2A145857-3B75-4308-A56E-40F971142FE4}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Instalador", "Instalador\Instalador\Instalador.vdproj", "{EC88A860-D897-463B-853B-2463B106B4B5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2A145857-3B75-4308-A56E-40F971142FE4} = {2A145857-3B75-4308-A56E-40F971142FE4}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +18,10 @@ Global
 		{2A145857-3B75-4308-A56E-40F971142FE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A145857-3B75-4308-A56E-40F971142FE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A145857-3B75-4308-A56E-40F971142FE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC88A860-D897-463B-853B-2463B106B4B5}.Debug|Any CPU.ActiveCfg = Debug
+		{EC88A860-D897-463B-853B-2463B106B4B5}.Debug|Any CPU.Build.0 = Debug
+		{EC88A860-D897-463B-853B-2463B106B4B5}.Release|Any CPU.ActiveCfg = Release
+		{EC88A860-D897-463B-853B-2463B106B4B5}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
