@@ -88,6 +88,10 @@
     <Content Include="Cedeira.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\CedEx\CedeiraEx.csproj">
+      <Project>{883AB19F-36F5-42A4-A1A7-4206F84E7757}</Project>
+      <Name>CedeiraEx</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\FeaEntidades\FeaEntidades.csproj">
       <Project>{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}</Project>
       <Name>FeaEntidades</Name>
