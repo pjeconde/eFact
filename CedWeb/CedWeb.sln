@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "C:\...\CedWeb\", "CedWeb\", "{77BD76BF-75B7-468A-8DBD-E2381B43EE2E}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "C:\CedWeb\CedWeb\", "CedWeb\", "{77BD76BF-75B7-468A-8DBD-E2381B43EE2E}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = "Svn"
 		SccAuxPath = "Svn"
@@ -86,6 +86,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeaEntidades", "FeaEntidade
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PieChart", "PieChart\PieChart.csproj", "{FFD70223-E4B1-4CA3-9655-D5107D1C920B}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-R-XL", "eFact-Residente\XL\eFact-R-XL\eFact-R-XL.csproj", "{2A145857-3B75-4308-A56E-40F971142FE4}"
 	ProjectSection(WebsiteProperties) = preProject
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.Debug = "False"
@@ -288,6 +294,21 @@ Global
 		{FFD70223-E4B1-4CA3-9655-D5107D1C920B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FFD70223-E4B1-4CA3-9655-D5107D1C920B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{FFD70223-E4B1-4CA3-9655-D5107D1C920B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Cedeira|.NET.ActiveCfg = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Cedeira|Any CPU.ActiveCfg = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Cedeira|Any CPU.Build.0 = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Cedeira|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Cedeira|Mixed Platforms.Build.0 = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Release|.NET.ActiveCfg = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
