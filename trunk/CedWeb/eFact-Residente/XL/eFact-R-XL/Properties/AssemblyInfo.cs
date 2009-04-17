@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("Cedeira Software Factory S.R.L.")]
 [assembly: AssemblyProduct("eFact-R-XL")]
 [assembly: AssemblyCopyright("©  2009")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("eFact Residente versión Excel")]
 [assembly: AssemblyCulture("")]
 
 // Si establece ComVisible como false hace que los tipos de este ensamblado no sean visibles 
