@@ -88,6 +88,10 @@
     <Content Include="Cedeira.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\FeaEntidades\FeaEntidades.csproj">
+      <Project>{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}</Project>
+      <Name>FeaEntidades</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\FileHelpers.ExcelStorage\FileHelpers.ExcelStorage.2005.csproj">
       <Project>{B3F2B976-73D5-49C7-BEAA-BF62E233132A}</Project>
       <Name>FileHelpers.ExcelStorage.2005</Name>
