@@ -36,7 +36,8 @@ namespace eFact_R_XL
 					FileHelpers.DataLink.ExcelStorage provider = new FileHelpers.DataLink.ExcelStorage(u.GetType());
 					provider.StartRow = u.X;
 					provider.StartColumn = u.Y;
-					provider.FileName = "..\\..\\Comprobantes.xls";
+					//provider.FileName = "..\\..\\Comprobantes.xls";
+					provider.FileName = @"C:\Documents and Settings\l0737860\Mis documentos\Factura A Modelo-v1.8.xls";
 					Object[] oArray = (Object[])System.Array.CreateInstance(u.GetType(), 10);
 					oArray = (Object[])provider.ExtractRecords();
 
@@ -114,7 +115,7 @@ namespace eFact_R_XL
 			}
 			catch (Exception ex)
 			{
-				Cedeira.Ex.ExceptionManager.Publish(ex);
+				Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
 			}
 		}
     }
