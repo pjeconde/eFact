@@ -23,7 +23,7 @@ namespace eFact_R_XL
             if (!RN.Registro.Existe(Registry.LocalMachine, RegistroNombreClave))
             {
                 //Registracion
-                changüí = Encryptor.Encrypt("5", "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                changüí = Encryptor.Encrypt("0", "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
                 RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "q", changüí);
                 RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "k", "");
             }
