@@ -11,12 +11,15 @@ namespace FeaEntidades.InterFacturas
 	[System.ComponentModel.DesignerCategoryAttribute("code")]
 	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://lote.schemas.cfe.ib.com.ar/")]
 	[System.Xml.Serialization.XmlRootAttribute(Namespace = "http://lote.schemas.cfe.ib.com.ar/", IsNullable = false)]
+	[FileHelpers.DelimitedRecord("|")]
 	public partial class detalle
 	{
 
-		private linea[] lineaField=new linea[1000];
-
 		private string comentariosField;
+
+		//[FileHelpers.FieldConverter(typeof(FeaEntidades.Converters.lineaConverter))]
+		[FileHelpers.FieldIgnored()]
+		private linea[] lineaField = new linea[1000];
 
 		/// <comentarios/>
 		[System.Xml.Serialization.XmlElementAttribute("linea")]

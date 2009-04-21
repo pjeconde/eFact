@@ -38,7 +38,7 @@
 			this.SalirButton.Location = new System.Drawing.Point(12, 45);
 			this.SalirButton.Name = "SalirButton";
 			this.SalirButton.Size = new System.Drawing.Size(250, 23);
-			this.SalirButton.TabIndex = 0;
+			this.SalirButton.TabIndex = 1;
 			this.SalirButton.Text = "Salir";
 			this.SalirButton.UseVisualStyleBackColor = true;
 			this.SalirButton.Click += new System.EventHandler(this.SalirButton_Click);
@@ -48,7 +48,7 @@
 			this.ExcelButton.Location = new System.Drawing.Point(12, 12);
 			this.ExcelButton.Name = "ExcelButton";
 			this.ExcelButton.Size = new System.Drawing.Size(250, 23);
-			this.ExcelButton.TabIndex = 1;
+			this.ExcelButton.TabIndex = 0;
 			this.ExcelButton.Text = "Seleccionar archivo y generar XML";
 			this.ExcelButton.UseVisualStyleBackColor = true;
 			this.ExcelButton.Click += new System.EventHandler(this.ExcelButton_Click);

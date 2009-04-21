@@ -10,6 +10,7 @@ namespace FeaEntidades.InterFacturas
 	[System.Diagnostics.DebuggerStepThroughAttribute()]
 	[System.ComponentModel.DesignerCategoryAttribute("code")]
 	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://lote.schemas.cfe.ib.com.ar/")]
+	[FileHelpers.DelimitedRecord("|")]
 	public partial class informacion_comprobanteReferencias
 	{
 

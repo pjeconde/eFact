@@ -11,6 +11,7 @@ namespace FeaEntidades.InterFacturas
 	[System.ComponentModel.DesignerCategoryAttribute("code")]
 	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://lote.schemas.cfe.ib.com.ar/")]
 	[System.Xml.Serialization.XmlRootAttribute(Namespace = "http://lote.schemas.cfe.ib.com.ar/", IsNullable = false)]
+	[FileHelpers.DelimitedRecord("|")]
 	public partial class linea
 	{
 
@@ -46,21 +47,30 @@ namespace FeaEntidades.InterFacturas
 
 		private string indicacion_exento_gravadoField;
 
-		private lineaDescuentos[] descuentosField;
-
 		private double importe_total_descuentosField;
 
 		private bool importe_total_descuentosFieldSpecified;
-
-		private lineaImpuestos[] impuestosField;
 
 		private double importe_total_impuestosField;
 
 		private bool importe_total_impuestosFieldSpecified;
 
+		private int numeroLineaField;
+
+		//[FileHelpers.FieldConverter(typeof(FeaEntidades.Converters.lineaImportes_moneda_origenConverter))]
+		[FileHelpers.FieldIgnored()]
 		private lineaImportes_moneda_origen importes_moneda_origenField;
 
-		private int numeroLineaField;
+		//[FileHelpers.FieldArrayLength(1,1)]
+		//[FileHelpers.FieldConverter(typeof(FeaEntidades.Converters.lineaDescuentosConverter))]
+		[FileHelpers.FieldIgnored()]
+		private lineaDescuentos[] descuentosField;
+
+		//[FileHelpers.FieldArrayLength(1,1)]
+		//[FileHelpers.FieldConverter(typeof(FeaEntidades.Converters.lineaImpuestosConverter))]
+		[FileHelpers.FieldIgnored()]
+		private lineaImpuestos[] impuestosField;
+
 
 		/// <comentarios/>
 		public long GTIN

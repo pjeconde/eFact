@@ -11,11 +11,9 @@ namespace FeaEntidades.InterFacturas
 	[System.ComponentModel.DesignerCategoryAttribute("code")]
 	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://lote.schemas.cfe.ib.com.ar/")]
 	[System.Xml.Serialization.XmlRootAttribute(Namespace = "http://lote.schemas.cfe.ib.com.ar/", IsNullable = false)]
+	[FileHelpers.DelimitedRecord("|")]
 	public partial class resumen
 	{
-
-		private resumenDescuentos[] descuentosField;
-
 		private double importe_total_neto_gravadoField;
 
 		private double importe_total_concepto_no_gravadoField;
@@ -25,8 +23,6 @@ namespace FeaEntidades.InterFacturas
 		private double impuesto_liqField;
 
 		private double impuesto_liq_rniField;
-
-		private resumenImpuestos[] impuestosField;
 
 		private double importe_total_impuestos_nacionalesField;
 
@@ -56,7 +52,19 @@ namespace FeaEntidades.InterFacturas
 
 		private bool cant_alicuotas_ivaFieldSpecified;
 
+		//[FileHelpers.FieldConverter(typeof(FeaEntidades.Converters.resumenImportes_moneda_origenConverter))]
+		[FileHelpers.FieldIgnored()]
 		private resumenImportes_moneda_origen importes_moneda_origenField;
+
+		//[FileHelpers.FieldArrayLength(1, 1)]
+		//[FileHelpers.FieldConverter(typeof(FeaEntidades.Converters.resumenDescuentosConverter))]
+		[FileHelpers.FieldIgnored()]
+		private resumenDescuentos[] descuentosField;
+
+		//[FileHelpers.FieldArrayLength(1, 1)]
+		//[FileHelpers.FieldConverter(typeof(FeaEntidades.Converters.resumenImpuestosConverter))]
+		[FileHelpers.FieldIgnored()]
+		private resumenImpuestos[] impuestosField;
 
 		/// <comentarios/>
 		[System.Xml.Serialization.XmlElementAttribute("descuentos")]
