@@ -137,6 +137,17 @@ namespace eFact_R_XL
 					fs.Close();
 					System.Diagnostics.Process.Start(sb.ToString());
 				}
+				catch(NullReferenceException ex)
+				{
+					try
+					{
+						throw new Exception("El archivo no está generado desde el template");
+					}
+					catch (Exception exc)
+					{
+						Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(exc);
+					}
+				}
 				catch (Exception ex)
 				{
 					Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
