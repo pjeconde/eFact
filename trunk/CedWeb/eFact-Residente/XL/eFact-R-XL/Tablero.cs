@@ -114,8 +114,15 @@ namespace eFact_R_XL
 
 					System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
 					System.Text.StringBuilder sb = new System.Text.StringBuilder();
-					sb.Append(@d);
-					sb.Append(System.IO.Path.DirectorySeparatorChar);
+					if (d != null)
+					{
+						sb.Append(@d);
+						sb.Append(System.IO.Path.DirectorySeparatorChar);
+					}
+					else
+					{
+						throw new Exception("Debe elegir un directorio primero");
+					}
 					sb.Append(lote.cabecera_lote.cuit_vendedor);
 					sb.Append("-");
 					sb.Append(lote.cabecera_lote.punto_de_venta.ToString("0000"));
