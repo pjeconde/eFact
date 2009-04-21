@@ -540,7 +540,7 @@
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
+            "ReadOnly" = "11:TRUE"
             "Hidden" = "11:FALSE"
             "System" = "11:FALSE"
             "Permanent" = "11:FALSE"
@@ -782,7 +782,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Instalador"
         "ProductCode" = "8:{4E9169D9-AF74-409E-A427-216AE131182B}"
-        "PackageCode" = "8:{AC6828A7-D8B4-4800-A893-AAE4B33EBC1F}"
+        "PackageCode" = "8:{02B4DE40-2EA1-4F72-8547-65A3CCE2F172}"
         "UpgradeCode" = "8:{08658639-C455-43CC-B63B-986C948F6570}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
@@ -1302,7 +1302,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FF8073D15E3F4F6E9DA1B7B2268A1072"
             {
-            "SourcePath" = "8:..\\..\\eFact-R-XL\\obj\\Release\\eFact-R-XL.exe"
+            "SourcePath" = "8:..\\..\\eFact-R-XL\\obj\\Debug\\eFact-R-XL.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_993702E00BF049C1B8AF7E958213CAAD"
