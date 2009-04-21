@@ -35,7 +35,7 @@
 			// 
 			// DirectorioButton
 			// 
-			this.DirectorioButton.Location = new System.Drawing.Point(12, 45);
+			this.DirectorioButton.Location = new System.Drawing.Point(12, 12);
 			this.DirectorioButton.Name = "DirectorioButton";
 			this.DirectorioButton.Size = new System.Drawing.Size(250, 23);
 			this.DirectorioButton.TabIndex = 1;
@@ -45,7 +45,7 @@
 			// 
 			// ExcelButton
 			// 
-			this.ExcelButton.Location = new System.Drawing.Point(12, 12);
+			this.ExcelButton.Location = new System.Drawing.Point(12, 43);
 			this.ExcelButton.Name = "ExcelButton";
 			this.ExcelButton.Size = new System.Drawing.Size(250, 23);
 			this.ExcelButton.TabIndex = 0;
@@ -57,7 +57,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(274, 72);
+			this.ClientSize = new System.Drawing.Size(274, 78);
 			this.Controls.Add(this.ExcelButton);
 			this.Controls.Add(this.DirectorioButton);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
