@@ -11,6 +11,7 @@ namespace FeaEntidades.InterFacturas
 	[System.ComponentModel.DesignerCategoryAttribute("code")]
 	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://lote.schemas.cfe.ib.com.ar/")]
 	[System.Xml.Serialization.XmlRootAttribute(Namespace = "http://lote.schemas.cfe.ib.com.ar/", IsNullable = false)]
+	[FileHelpers.DelimitedRecord("|")]
 	public partial class informacion_comprobante
 	{
 
@@ -48,6 +49,9 @@ namespace FeaEntidades.InterFacturas
 
 		private string es_detalle_encriptadoField;
 
+		//[FileHelpers.FieldConverter(typeof(FeaEntidades.Converters.informacion_comprobanteReferenciasConverter))]
+		//[FileHelpers.FieldNullValue(new informacion_comprobanteReferencias[0])]
+		[FileHelpers.FieldIgnored()]
 		private informacion_comprobanteReferencias[] referenciasField;
 
 		/// <comentarios/>

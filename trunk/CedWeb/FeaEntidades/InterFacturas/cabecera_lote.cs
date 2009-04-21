@@ -11,6 +11,7 @@ namespace FeaEntidades.InterFacturas
 	[System.ComponentModel.DesignerCategoryAttribute("code")]
 	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://lote.schemas.cfe.ib.com.ar/")]
 	[System.Xml.Serialization.XmlRootAttribute(Namespace = "http://lote.schemas.cfe.ib.com.ar/", IsNullable = false)]
+	[FileHelpers.DelimitedRecord("|")]
 	public partial class cabecera_lote
 	{
 
