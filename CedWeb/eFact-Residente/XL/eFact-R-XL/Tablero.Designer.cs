@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Tablero));
-			this.SalirButton = new System.Windows.Forms.Button();
+			this.DirectorioButton = new System.Windows.Forms.Button();
 			this.ExcelButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
-			// SalirButton
+			// DirectorioButton
 			// 
-			this.SalirButton.Location = new System.Drawing.Point(12, 45);
-			this.SalirButton.Name = "SalirButton";
-			this.SalirButton.Size = new System.Drawing.Size(250, 23);
-			this.SalirButton.TabIndex = 1;
-			this.SalirButton.Text = "Salir";
-			this.SalirButton.UseVisualStyleBackColor = true;
-			this.SalirButton.Click += new System.EventHandler(this.SalirButton_Click);
+			this.DirectorioButton.Location = new System.Drawing.Point(12, 45);
+			this.DirectorioButton.Name = "DirectorioButton";
+			this.DirectorioButton.Size = new System.Drawing.Size(250, 23);
+			this.DirectorioButton.TabIndex = 1;
+			this.DirectorioButton.Text = "Seleccionar directorio para XML";
+			this.DirectorioButton.UseVisualStyleBackColor = true;
+			this.DirectorioButton.Click += new System.EventHandler(this.SalirButton_Click);
 			// 
 			// ExcelButton
 			// 
@@ -58,10 +58,12 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(274, 72);
-			this.ControlBox = false;
 			this.Controls.Add(this.ExcelButton);
-			this.Controls.Add(this.SalirButton);
+			this.Controls.Add(this.DirectorioButton);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.Name = "Tablero";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "eFact-Residente-XL";
@@ -71,7 +73,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button SalirButton;
+        private System.Windows.Forms.Button DirectorioButton;
 		private System.Windows.Forms.Button ExcelButton;
     }
 }

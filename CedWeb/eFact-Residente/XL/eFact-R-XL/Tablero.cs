@@ -11,14 +11,19 @@ namespace eFact_R_XL
 {
     public partial class Tablero : Form
     {
-        public Tablero()
+		string d;
+		public Tablero()
         {
-            InitializeComponent();
+			InitializeComponent();
         }
 
         private void SalirButton_Click(object sender, EventArgs e)
         {
-            Close();
+			FolderBrowserDialog directorio = new FolderBrowserDialog();
+			if (directorio.ShowDialog() == DialogResult.OK)
+			{
+				d = directorio.SelectedPath;
+			}
         }
 
 		private void ExcelButton_Click(object sender, EventArgs e)
@@ -109,6 +114,8 @@ namespace eFact_R_XL
 
 					System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
 					System.Text.StringBuilder sb = new System.Text.StringBuilder();
+					sb.Append(@d);
+					sb.Append(System.IO.Path.DirectorySeparatorChar);
 					sb.Append(lote.cabecera_lote.cuit_vendedor);
 					sb.Append("-");
 					sb.Append(lote.cabecera_lote.punto_de_venta.ToString("0000"));
