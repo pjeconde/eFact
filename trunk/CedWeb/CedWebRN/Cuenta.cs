@@ -147,16 +147,13 @@ namespace CedWebRN
         {
             if (Destinatarios.Count > 0)
             {
-                string destinatarios=String.Empty;
-                for (int i = 0; i < Destinatarios.Count; i++)
-                {
-                    destinatarios += Destinatarios[i].EmailSMS;
-                    if (i != Destinatarios.Count-1) destinatarios += "; ";
-                }
                 SmtpClient smtpClient = new SmtpClient("localhost");
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
-                mail.To.Add(new MailAddress(destinatarios));
+                for (int i = 0; i < Destinatarios.Count; i++)
+                {
+                    mail.To.Add(new MailAddress(Destinatarios[i].EmailSMS));
+                }
                 mail.Subject = Asunto;
                 mail.Body = Mensaje;
                 smtpClient.Send(mail);
