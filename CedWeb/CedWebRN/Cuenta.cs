@@ -143,7 +143,7 @@ namespace CedWebRN
             mail.Body = a.ToString();
             smtpClient.Send(mail);
         }
-        private static void EnviarSMS(string Mensaje, List<CedWebEntidades.Cuenta> Destinatarios)
+        private static void EnviarSMS(string Asunto, string Mensaje, List<CedWebEntidades.Cuenta> Destinatarios)
         {
             if (Destinatarios.Count > 0)
             {
@@ -155,10 +155,10 @@ namespace CedWebRN
                 }
                 SmtpClient smtpClient = new SmtpClient("localhost");
                 MailMessage mail = new MailMessage();
-                mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
+                mail.From = new MailAddress("CedWeb");
                 mail.To.Add(new MailAddress(destinatarios));
-                mail.Subject = Mensaje;
-                mail.Body = String.Empty;
+                mail.Subject = Asunto;
+                mail.Body = Mensaje;
                 smtpClient.Send(mail);
             }
         }
@@ -228,7 +228,7 @@ namespace CedWebRN
             Leer(Cuenta, Sesion);
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             cuenta.Confirmar(Cuenta);
-            EnviarSMS("Alta cuenta " + Cuenta.Nombre, cuenta.DestinatariosAvisoAltaCuenta());  
+            EnviarSMS("Alta cuenta", Cuenta.Nombre, cuenta.DestinatariosAvisoAltaCuenta());  
         }
         public static bool IdCuentaDisponible(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
