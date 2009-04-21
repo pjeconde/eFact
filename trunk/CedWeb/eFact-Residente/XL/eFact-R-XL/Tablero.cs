@@ -14,7 +14,6 @@ namespace eFact_R_XL
 		string d;
 		public Tablero()
         {
-			System.Diagnostics.Process.Start("Templates\\Comprobante.xlt");
 			InitializeComponent();
         }
 
@@ -136,13 +135,18 @@ namespace eFact_R_XL
 					System.Xml.XmlWriter writer = new System.Xml.XmlTextWriter(fs, System.Text.Encoding.GetEncoding("ISO-8859-1"));
 					x.Serialize(writer, lote);
 					fs.Close();
+					System.Diagnostics.Process.Start(sb.ToString());
 				}
 				catch (Exception ex)
 				{
 					Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
 				}
 			}
+		}
 
+		private void XLTbutton_Click(object sender, EventArgs e)
+		{
+			System.Diagnostics.Process.Start("Templates\\eFact-Serv-Pesos-SP-xls10-v1.0.xlt");
 		}
     }
 }
