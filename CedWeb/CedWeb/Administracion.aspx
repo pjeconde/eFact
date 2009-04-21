@@ -72,6 +72,12 @@
                                         <asp:ImageMap ID="MedioImageMap" runat="server" BorderStyle="Solid" BorderColor="brown" BorderWidth="1px"></asp:ImageMap>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td></td>
+                                    <td style="padding-top:10px; padding-left:5px" align="left">
+                                        <asp:CheckBox ID="RecibeAvisoAltaCuentaCheckBox" runat="server" Text="Recibe aviso de alta de cuenta (SMS)" OnCheckedChanged="RecibeAvisoAltaCuentaCheckBox_CheckedChanged" AutoPostBack="true" />
+                                    </td>
+                                </tr>
                             </table>
                         </td>
                     </tr>

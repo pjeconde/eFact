@@ -84,6 +84,19 @@
                                 </tr>
                                 <tr>
                                     <td align="right" style="padding-top:3px; padding-right:5px">
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" SetFocusOnError="True"
+                                            ControlToValidate="EmailTextBox" ErrorMessage="Email para SMSs"
+                                            ValidationExpression="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$">
+                                            <asp:Label ID="Label1" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RegularExpressionValidator>
+                                        <asp:Label ID="Label13" runat="server" Text="Email para SMSs"></asp:Label>
+                                    </td>
+                                    <td colspan="2" align="left" style="padding-top:3px">
+                                        <asp:TextBox ID="EmailSMSTextBox" runat="server" Width="360px" MaxLength="128"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" style="padding-top:3px; padding-right:5px">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator16" runat="server" SetFocusOnError="True"
                                             ControlToValidate="UltimoNroLoteTextBox" ErrorMessage="Último n° de Lote reservado"
                                             ValidationExpression="[0-9]{1,14}">

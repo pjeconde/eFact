@@ -21,6 +21,7 @@ namespace CedWeb
                 NombreTextBox.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Nombre;
                 TelefonoTextBox.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Telefono;
                 EmailTextBox.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Email;
+                EmailSMSTextBox.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.EmailSMS;
                 UltimoNroLoteTextBox.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.UltimoNroLote.ToString();
                 CancelarButton.Focus();
             }
@@ -32,6 +33,7 @@ namespace CedWeb
             cuenta.Id = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id;
             cuenta.Nombre = NombreTextBox.Text;
             cuenta.Telefono = TelefonoTextBox.Text;
+            cuenta.EmailSMS = EmailSMSTextBox.Text;
             cuenta.UltimoNroLote = Convert.ToInt64(UltimoNroLoteTextBox.Text);
             try
             {
@@ -41,6 +43,7 @@ namespace CedWeb
                 NombreTextBox.Enabled = false;
                 TelefonoTextBox.Enabled = false;
                 EmailTextBox.Enabled = false;
+                EmailSMSTextBox.Enabled = false;
                 UltimoNroLoteTextBox.Enabled = false;
                 MsgErrorLabel.Text = "Se ha registrado la nueva configuración satisfactoriamente.";
             }

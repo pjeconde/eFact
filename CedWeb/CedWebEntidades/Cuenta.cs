@@ -24,6 +24,8 @@ namespace CedWebEntidades
         private bool activCP;
         private string nroSerieDisco;
         private Medio medio;
+        private string emailSMS;
+        private bool recibeAvisoAltaCuenta;
 
         public Cuenta()
         {
@@ -271,6 +273,28 @@ namespace CedWebEntidades
             get
             {
                 return medio.Descr;
+            }
+        }
+        public string EmailSMS
+        {
+            set
+            {
+                emailSMS = value;
+            }
+            get
+            {
+                return emailSMS;
+            }
+        }
+        public bool RecibeAvisoAltaCuenta
+        {
+            set
+            {
+                recibeAvisoAltaCuenta = value;
+            }
+            get
+            {
+                return recibeAvisoAltaCuenta;
             }
         }
     }

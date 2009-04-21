@@ -98,20 +98,20 @@ namespace CedWebRN
             Cuenta.EstadoCuenta.Id = "PteConf";
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             cuenta.Crear(Cuenta);
-            EnviarMail("Ahora dispone de una nueva cuenta eFact", Cuenta, Sesion);
+            EnviarMail("Ahora dispone de una nueva cuenta eFact", Cuenta);
         }
         public static void ReenviarMail(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             cuenta.RegistrarReenvioMail(Cuenta);
-            EnviarMail("Ahora dispone de una nueva cuenta eFact (reenvio)", Cuenta, Sesion);
+            EnviarMail("Ahora dispone de una nueva cuenta eFact (reenvio)", Cuenta);
         }
         public static void CambiarActivCP(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             cuenta.CambiarActivCP(Cuenta);
         }
-        private static void EnviarMail(string Asunto, CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        private static void EnviarMail(string Asunto, CedWebEntidades.Cuenta Cuenta)
         {
             SmtpClient smtpClient = new SmtpClient("localhost");
             MailMessage mail = new MailMessage();
@@ -142,6 +142,25 @@ namespace CedWebRN
             a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
             mail.Body = a.ToString();
             smtpClient.Send(mail);
+        }
+        private static void EnviarSMS(string Mensaje, List<CedWebEntidades.Cuenta> Destinatarios)
+        {
+            if (Destinatarios.Count > 0)
+            {
+                string destinatarios=String.Empty;
+                for (int i = 0; i < Destinatarios.Count; i++)
+                {
+                    destinatarios += Destinatarios[i].EmailSMS;
+                    if (i != Destinatarios.Count-1) destinatarios += "; ";
+                }
+                SmtpClient smtpClient = new SmtpClient("localhost");
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
+                mail.To.Add(new MailAddress(destinatarios));
+                mail.Subject = Mensaje;
+                mail.Body = String.Empty;
+                smtpClient.Send(mail);
+            }
         }
         public static void Leer(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
@@ -209,6 +228,7 @@ namespace CedWebRN
             Leer(Cuenta, Sesion);
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             cuenta.Confirmar(Cuenta);
+            EnviarSMS("Alta cuenta " + Cuenta.Nombre, cuenta.DestinatariosAvisoAltaCuenta());  
         }
         public static bool IdCuentaDisponible(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
@@ -388,6 +408,10 @@ namespace CedWebRN
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             return cuenta.EstadisticaMedio();
         }
-
+        public static void SetearRecibeAvisoAltaCuenta(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+            cuenta.SetearRecibeAvisoAltaCuenta(Cuenta);
+        }
     }
 }
