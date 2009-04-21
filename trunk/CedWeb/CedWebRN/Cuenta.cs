@@ -155,7 +155,7 @@ namespace CedWebRN
                 }
                 SmtpClient smtpClient = new SmtpClient("localhost");
                 MailMessage mail = new MailMessage();
-                mail.From = new MailAddress("CedWeb");
+                mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
                 mail.To.Add(new MailAddress(destinatarios));
                 mail.Subject = Asunto;
                 mail.Body = Mensaje;
