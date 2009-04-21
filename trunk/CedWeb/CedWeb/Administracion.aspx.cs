@@ -49,7 +49,7 @@ namespace CedWeb
                         GenerarGrafico();
                         MedioImageMap.ImageUrl = "~/Imagenes/temp.bmp";
                         MedioImageMap.DataBind();
-
+                        RecibeAvisoAltaCuentaCheckBox.Checked = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.RecibeAvisoAltaCuenta;
                     }
                 }
             }
@@ -65,6 +65,11 @@ namespace CedWeb
                 valores[i] = lista[i].Cantidad;
             }
             CedBPrn.Grafico.Generar(140, 315, valores, textos);
+        }
+        protected void RecibeAvisoAltaCuentaCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.RecibeAvisoAltaCuenta = RecibeAvisoAltaCuentaCheckBox.Checked;
+            CedWebRN.Cuenta.SetearRecibeAvisoAltaCuenta((CedWebEntidades.Cuenta)((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
         }
     }
 }
