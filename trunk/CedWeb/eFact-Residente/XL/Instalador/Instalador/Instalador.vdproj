@@ -15,6 +15,18 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_0AF069069E86997D018838F0E5A667C5"
+        "OwnerKey" = "8:_3AE8200DD79A7CC5401C736AC9895A7E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_0AF069069E86997D018838F0E5A667C5"
+        "OwnerKey" = "8:_FF8073D15E3F4F6E9DA1B7B2268A1072"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_17146718648C0536B325C4C92541A855"
         "OwnerKey" = "8:_D2545898930A25928F29B692888F79F4"
         "MsmSig" = "8:_UNDEFINED"
@@ -27,8 +39,14 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_211AC0DED664D4BDE80495478A27DE2D"
+        "OwnerKey" = "8:_FF8073D15E3F4F6E9DA1B7B2268A1072"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_21AFC173111480BF94E4065A3598164D"
-        "OwnerKey" = "8:_C2292CBC8B2FE5369753117BAE84E75B"
+        "OwnerKey" = "8:_0AF069069E86997D018838F0E5A667C5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -40,7 +58,7 @@
         "Entry"
         {
         "MsmKey" = "8:_2C94F30112368D95AE97575D2BDF642B"
-        "OwnerKey" = "8:_C2292CBC8B2FE5369753117BAE84E75B"
+        "OwnerKey" = "8:_0AF069069E86997D018838F0E5A667C5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -57,14 +75,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_40F8CF21D8C75B7F65E4849811F4F414"
+        "MsmKey" = "8:_3AE8200DD79A7CC5401C736AC9895A7E"
         "OwnerKey" = "8:_FF8073D15E3F4F6E9DA1B7B2268A1072"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_5956B93B4C8A6152CE89764C3B154AEE"
-        "OwnerKey" = "8:_FCAFF42838FE839140CA5BE4CFF1E551"
+        "OwnerKey" = "8:_211AC0DED664D4BDE80495478A27DE2D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -106,7 +124,7 @@
         "Entry"
         {
         "MsmKey" = "8:_AF2D3401F81CDA95C02D7F7464152377"
-        "OwnerKey" = "8:_C2292CBC8B2FE5369753117BAE84E75B"
+        "OwnerKey" = "8:_0AF069069E86997D018838F0E5A667C5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -135,25 +153,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C2292CBC8B2FE5369753117BAE84E75B"
-        "OwnerKey" = "8:_40F8CF21D8C75B7F65E4849811F4F414"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C2292CBC8B2FE5369753117BAE84E75B"
-        "OwnerKey" = "8:_FF8073D15E3F4F6E9DA1B7B2268A1072"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_D2545898930A25928F29B692888F79F4"
-        "OwnerKey" = "8:_FF8073D15E3F4F6E9DA1B7B2268A1072"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FCAFF42838FE839140CA5BE4CFF1E551"
         "OwnerKey" = "8:_FF8073D15E3F4F6E9DA1B7B2268A1072"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -167,6 +167,24 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_FF8073D15E3F4F6E9DA1B7B2268A1072"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_211AC0DED664D4BDE80495478A27DE2D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3AE8200DD79A7CC5401C736AC9895A7E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0AF069069E86997D018838F0E5A667C5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -190,25 +208,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FCAFF42838FE839140CA5BE4CFF1E551"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_5956B93B4C8A6152CE89764C3B154AEE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_40F8CF21D8C75B7F65E4849811F4F414"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C2292CBC8B2FE5369753117BAE84E75B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -335,6 +335,37 @@
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0AF069069E86997D018838F0E5A667C5"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:CedeiraUIforms, Version=1.0.35.1, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_0AF069069E86997D018838F0E5A667C5"
+                    {
+                    "Name" = "8:CedeiraUIforms.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:CedeiraUIforms.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_993702E00BF049C1B8AF7E958213CAAD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_17146718648C0536B325C4C92541A855"
             {
             "AssemblyRegister" = "3:1"
@@ -349,6 +380,37 @@
                     }
                 }
             "SourcePath" = "8:Interop.Excel.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_993702E00BF049C1B8AF7E958213CAAD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_211AC0DED664D4BDE80495478A27DE2D"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:FeaEntidades, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_211AC0DED664D4BDE80495478A27DE2D"
+                    {
+                    "Name" = "8:FeaEntidades.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:FeaEntidades.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_993702E00BF049C1B8AF7E958213CAAD"
@@ -448,14 +510,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_40F8CF21D8C75B7F65E4849811F4F414"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3AE8200DD79A7CC5401C736AC9895A7E"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:CedeiraEx, Version=1.0.35.1, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_40F8CF21D8C75B7F65E4849811F4F414"
+                    "_3AE8200DD79A7CC5401C736AC9895A7E"
                     {
                     "Name" = "8:CedeiraEx.dll"
                     "Attributes" = "3:512"
@@ -515,7 +577,7 @@
             "SourcePath" = "8:..\\..\\eFact-R-XL\\Templates\\Comprobante.XLT"
             "TargetName" = "8:Comprobante.XLT"
             "Tag" = "8:"
-            "Folder" = "8:_993702E00BF049C1B8AF7E958213CAAD"
+            "Folder" = "8:_2ED32600480841B0B0DEF0F168364758"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -643,37 +705,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C2292CBC8B2FE5369753117BAE84E75B"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CedeiraUIforms, Version=1.0.35.1, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_C2292CBC8B2FE5369753117BAE84E75B"
-                    {
-                    "Name" = "8:CedeiraUIforms.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:CedeiraUIforms.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_993702E00BF049C1B8AF7E958213CAAD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D2545898930A25928F29B692888F79F4"
             {
             "AssemblyRegister" = "3:1"
@@ -688,37 +719,6 @@
                     }
                 }
             "SourcePath" = "8:FileHelpers.ExcelStorage.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_993702E00BF049C1B8AF7E958213CAAD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FCAFF42838FE839140CA5BE4CFF1E551"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FeaEntidades, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_FCAFF42838FE839140CA5BE4CFF1E551"
-                    {
-                    "Name" = "8:FeaEntidades.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:FeaEntidades.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_993702E00BF049C1B8AF7E958213CAAD"
@@ -774,6 +774,17 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_2ED32600480841B0B0DEF0F168364758"
+                    {
+                    "Name" = "8:Templates"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_6335AF50B2CB4B739EC6B43050303496"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
         }
@@ -792,7 +803,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:eFact-R-XL"
         "ProductCode" = "8:{4E9169D9-AF74-409E-A427-216AE131182B}"
-        "PackageCode" = "8:{A05B5665-FF89-490F-92B7-27BA1CB38239}"
+        "PackageCode" = "8:{F12015CB-A9AE-411A-9448-7CFDD101714E}"
         "UpgradeCode" = "8:{08658639-C455-43CC-B63B-986C948F6570}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
@@ -1340,7 +1351,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_FF8073D15E3F4F6E9DA1B7B2268A1072"
             {
-            "SourcePath" = "8:..\\..\\eFact-R-XL\\obj\\Release\\eFact-R-XL.exe"
+            "SourcePath" = "8:..\\..\\eFact-R-XL\\obj\\Debug\\eFact-R-XL.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_993702E00BF049C1B8AF7E958213CAAD"

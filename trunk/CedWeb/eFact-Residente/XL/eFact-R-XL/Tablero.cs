@@ -14,6 +14,7 @@ namespace eFact_R_XL
 		string d;
 		public Tablero()
         {
+			System.Diagnostics.Process.Start("Templates\\Comprobante.xlt");
 			InitializeComponent();
         }
 

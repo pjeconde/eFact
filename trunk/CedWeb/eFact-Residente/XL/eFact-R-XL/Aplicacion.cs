@@ -44,14 +44,15 @@ namespace eFact_R_XL
                 string claveSolicitud = Encryptor.Encrypt(ClaveSolicitud, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
                 object claveActivacion;
                 RN.Registro.Leer(Registry.LocalMachine, RegistroNombreClave, "k", out claveActivacion);
-                if (claveSolicitud == claveActivacion.ToString())
-                {
-                    Application.Run(new Tablero());
-                }
-                else
-                {
-                    Application.Run(new Activacion());
-                }
+				Application.Run(new Tablero());
+				//if (claveSolicitud == claveActivacion.ToString())
+				//{
+				//    Application.Run(new Tablero());
+				//}
+				//else
+				//{
+				//    Application.Run(new Activacion());
+				//}
             }
         }
     }
