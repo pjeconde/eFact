@@ -76,6 +76,7 @@
                                     <td></td>
                                     <td style="padding-top:10px; padding-left:5px" align="left">
                                         <asp:CheckBox ID="RecibeAvisoAltaCuentaCheckBox" runat="server" Text="Recibe aviso de alta de cuenta (SMS)" OnCheckedChanged="RecibeAvisoAltaCuentaCheckBox_CheckedChanged" AutoPostBack="true" />
+                                        (en la Configuración de su Cuenta eFact podrá ingresar el "Email para SMSs")
                                     </td>
                                 </tr>
                             </table>
