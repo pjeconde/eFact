@@ -78,7 +78,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Comprobante.XLT">
+    <None Include="Templates\eFact-Serv-Pesos-SP-xls10-v1.0.xlt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Compile Include="Properties\Settings.Designer.cs">
