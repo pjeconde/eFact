@@ -20,103 +20,114 @@ namespace eFact_R_XL
         {
             Close();
         }
+
 		private void ExcelButton_Click(object sender, EventArgs e)
 		{
-			try
+			OpenFileDialog xlsOpenFileDialog = new OpenFileDialog();
+
+			xlsOpenFileDialog.Filter = "Archivos Excel (*.xls)|*.xls|Todos los archivos (*.*)|*.*";
+			xlsOpenFileDialog.Multiselect = false;
+			xlsOpenFileDialog.FilterIndex = 1;
+			xlsOpenFileDialog.RestoreDirectory = true;
+
+			if (xlsOpenFileDialog.ShowDialog() == DialogResult.OK)
 			{
-				FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
-				FeaEntidades.InterFacturas.cabecera compcab = new FeaEntidades.InterFacturas.cabecera();
-				FeaEntidades.InterFacturas.comprobante comp = new FeaEntidades.InterFacturas.comprobante();
-				comp.cabecera = compcab;
-				lote.comprobante[0] = comp;
-
-				List<FeaEntidades.Excel.Ubicador> lista = FeaEntidades.Excel.Ubicador.Lista();
-				foreach (FeaEntidades.Excel.Ubicador u in lista)
+				try
 				{
-					FileHelpers.DataLink.ExcelStorage provider = new FileHelpers.DataLink.ExcelStorage(u.GetType());
-					provider.StartRow = u.X;
-					provider.StartColumn = u.Y;
-					//provider.FileName = "..\\..\\Comprobantes.xls";
-					provider.FileName = @"C:\Documents and Settings\l0737860\Mis documentos\Factura A Modelo-v1.8.xls";
-					Object[] oArray = (Object[])System.Array.CreateInstance(u.GetType(), 10);
-					oArray = (Object[])provider.ExtractRecords();
+					string archivo = xlsOpenFileDialog.FileName;
+					FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
+					FeaEntidades.InterFacturas.cabecera compcab = new FeaEntidades.InterFacturas.cabecera();
+					FeaEntidades.InterFacturas.comprobante comp = new FeaEntidades.InterFacturas.comprobante();
+					comp.cabecera = compcab;
+					lote.comprobante[0] = comp;
 
-					foreach (Object o in oArray)
+					List<FeaEntidades.Excel.Ubicador> lista = FeaEntidades.Excel.Ubicador.Lista();
+					foreach (FeaEntidades.Excel.Ubicador u in lista)
 					{
-						FileHelpers.DataLink.ExcelStorage providerInterno = new FileHelpers.DataLink.ExcelStorage(System.Type.GetType("FeaEntidades.InterFacturas." + ((FeaEntidades.Excel.Ubicador)o).Tipo + ", FeaEntidades"));
-						providerInterno.StartRow = ((FeaEntidades.Excel.Ubicador)o).Y;
-						providerInterno.StartColumn = ((FeaEntidades.Excel.Ubicador)o).X + 1;
-						providerInterno.FileName = "..\\..\\Comprobantes.xls";
-						Object[] oArrayInterno = (Object[])System.Array.CreateInstance(System.Type.GetType("FeaEntidades.InterFacturas." + ((FeaEntidades.Excel.Ubicador)o).Tipo + ", FeaEntidades"), 10);
-						oArrayInterno = (Object[])providerInterno.ExtractRecords();
+						FileHelpers.DataLink.ExcelStorage provider = new FileHelpers.DataLink.ExcelStorage(u.GetType());
+						provider.StartRow = u.X;
+						provider.StartColumn = u.Y;
+						provider.FileName = @archivo;
+						Object[] oArray = (Object[])System.Array.CreateInstance(u.GetType(), 10);
+						oArray = (Object[])provider.ExtractRecords();
 
-						if (oArrayInterno.Length > 0)
+						foreach (Object o in oArray)
 						{
-							switch (oArrayInterno.GetType().ToString())
+							FileHelpers.DataLink.ExcelStorage providerInterno = new FileHelpers.DataLink.ExcelStorage(System.Type.GetType("FeaEntidades.InterFacturas." + ((FeaEntidades.Excel.Ubicador)o).Tipo + ", FeaEntidades"));
+							providerInterno.StartRow = ((FeaEntidades.Excel.Ubicador)o).Y;
+							providerInterno.StartColumn = ((FeaEntidades.Excel.Ubicador)o).X + 1;
+							providerInterno.FileName = @archivo;
+							Object[] oArrayInterno = (Object[])System.Array.CreateInstance(System.Type.GetType("FeaEntidades.InterFacturas." + ((FeaEntidades.Excel.Ubicador)o).Tipo + ", FeaEntidades"), 10);
+							oArrayInterno = (Object[])providerInterno.ExtractRecords();
+
+							if (oArrayInterno.Length > 0)
 							{
-								case "FeaEntidades.InterFacturas.cabecera_lote[]":
-									lote.cabecera_lote = (FeaEntidades.InterFacturas.cabecera_lote)oArrayInterno[0];
-									break;
-								case "FeaEntidades.InterFacturas.informacion_comprador[]":
-									compcab.informacion_comprador = (FeaEntidades.InterFacturas.informacion_comprador)oArrayInterno[0];
-									break;
-								case "FeaEntidades.InterFacturas.informacion_comprobante[]":
-									compcab.informacion_comprobante = (FeaEntidades.InterFacturas.informacion_comprobante)oArrayInterno[0];
-									break;
-								case "FeaEntidades.InterFacturas.informacion_comprobanteReferencias[]":
-									compcab.informacion_comprobante.referencias = (FeaEntidades.InterFacturas.informacion_comprobanteReferencias[])oArrayInterno;
-									break;
-								case "FeaEntidades.InterFacturas.informacion_vendedor[]":
-									compcab.informacion_vendedor = (FeaEntidades.InterFacturas.informacion_vendedor)oArrayInterno[0];
-									break;
-								case "FeaEntidades.InterFacturas.detalle[]":
-									comp.detalle = (FeaEntidades.InterFacturas.detalle)oArrayInterno[0];
-									break;
-								case "FeaEntidades.InterFacturas.linea[]":
-									comp.detalle.linea = (FeaEntidades.InterFacturas.linea[])oArrayInterno;
-									break;
-								case "FeaEntidades.InterFacturas.lineaImportes_moneda_origen[]":
-									break;
-								case "FeaEntidades.InterFacturas.lineaImpuestos[]":
-									break;
-								case "FeaEntidades.InterFacturas.lineaDescuentos[]":
-									break;
-								case "FeaEntidades.InterFacturas.resumen[]":
-									comp.resumen = (FeaEntidades.InterFacturas.resumen)oArrayInterno[0];
-									break;
-								case "FeaEntidades.InterFacturas.resumenDescuentos[]":
-									comp.resumen.descuentos = (FeaEntidades.InterFacturas.resumenDescuentos[])oArrayInterno;
-									break;
-								case "FeaEntidades.InterFacturas.resumenImportes_moneda_origen[]":
-									break;
-								case "FeaEntidades.InterFacturas.resumenImpuestos[]":
-									comp.resumen.impuestos = (FeaEntidades.InterFacturas.resumenImpuestos[])oArrayInterno;
-									break;
+								switch (oArrayInterno.GetType().ToString())
+								{
+									case "FeaEntidades.InterFacturas.cabecera_lote[]":
+										lote.cabecera_lote = (FeaEntidades.InterFacturas.cabecera_lote)oArrayInterno[0];
+										break;
+									case "FeaEntidades.InterFacturas.informacion_comprador[]":
+										compcab.informacion_comprador = (FeaEntidades.InterFacturas.informacion_comprador)oArrayInterno[0];
+										break;
+									case "FeaEntidades.InterFacturas.informacion_comprobante[]":
+										compcab.informacion_comprobante = (FeaEntidades.InterFacturas.informacion_comprobante)oArrayInterno[0];
+										break;
+									case "FeaEntidades.InterFacturas.informacion_comprobanteReferencias[]":
+										compcab.informacion_comprobante.referencias = (FeaEntidades.InterFacturas.informacion_comprobanteReferencias[])oArrayInterno;
+										break;
+									case "FeaEntidades.InterFacturas.informacion_vendedor[]":
+										compcab.informacion_vendedor = (FeaEntidades.InterFacturas.informacion_vendedor)oArrayInterno[0];
+										break;
+									case "FeaEntidades.InterFacturas.detalle[]":
+										comp.detalle = (FeaEntidades.InterFacturas.detalle)oArrayInterno[0];
+										break;
+									case "FeaEntidades.InterFacturas.linea[]":
+										comp.detalle.linea = (FeaEntidades.InterFacturas.linea[])oArrayInterno;
+										break;
+									case "FeaEntidades.InterFacturas.lineaImportes_moneda_origen[]":
+										break;
+									case "FeaEntidades.InterFacturas.lineaImpuestos[]":
+										break;
+									case "FeaEntidades.InterFacturas.lineaDescuentos[]":
+										break;
+									case "FeaEntidades.InterFacturas.resumen[]":
+										comp.resumen = (FeaEntidades.InterFacturas.resumen)oArrayInterno[0];
+										break;
+									case "FeaEntidades.InterFacturas.resumenDescuentos[]":
+										comp.resumen.descuentos = (FeaEntidades.InterFacturas.resumenDescuentos[])oArrayInterno;
+										break;
+									case "FeaEntidades.InterFacturas.resumenImportes_moneda_origen[]":
+										break;
+									case "FeaEntidades.InterFacturas.resumenImpuestos[]":
+										comp.resumen.impuestos = (FeaEntidades.InterFacturas.resumenImpuestos[])oArrayInterno;
+										break;
+								}
 							}
 						}
 					}
+
+					System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
+					System.Text.StringBuilder sb = new System.Text.StringBuilder();
+					sb.Append(lote.cabecera_lote.cuit_vendedor);
+					sb.Append("-");
+					sb.Append(lote.cabecera_lote.punto_de_venta.ToString("0000"));
+					sb.Append("-");
+					sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00"));
+					sb.Append("-");
+					sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000"));
+					sb.Append(".xml");
+					System.IO.Stream fs = new System.IO.FileStream(sb.ToString(), System.IO.FileMode.Create);
+					System.Xml.XmlWriter writer = new System.Xml.XmlTextWriter(fs, System.Text.Encoding.GetEncoding("ISO-8859-1"));
+					x.Serialize(writer, lote);
+					fs.Close();
 				}
-
-				System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
-				System.Text.StringBuilder sb = new System.Text.StringBuilder();
-				sb.Append(lote.cabecera_lote.cuit_vendedor);
-				sb.Append("-");
-				sb.Append(lote.cabecera_lote.punto_de_venta.ToString("0000"));
-				sb.Append("-");
-				sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00"));
-				sb.Append("-");
-				sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000"));
-				sb.Append(".xml");
-				System.IO.Stream fs = new System.IO.FileStream(sb.ToString(), System.IO.FileMode.Create);
-				System.Xml.XmlWriter writer = new System.Xml.XmlTextWriter(fs, System.Text.Encoding.GetEncoding("ISO-8859-1"));
-				x.Serialize(writer, lote);
-				fs.Close();
-
+				catch (Exception ex)
+				{
+					Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
+				}
 			}
-			catch (Exception ex)
-			{
-				Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
-			}
+
 		}
     }
 }
