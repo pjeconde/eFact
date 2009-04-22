@@ -30,7 +30,7 @@
                                                                         <td rowspan="4" style="width:400px" align="left">
                                                                             <table cellpadding="0" cellspacing="0" border="0">
                                                                                 <tr>
-                                                                                    <td style="width:22px" valign="top">
+                                                                                    <td style="width:22px" valign="middle">
                                                                                         <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                                                     </td>
                                                                                     <td>
