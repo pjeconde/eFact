@@ -3,125 +3,106 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado"
     runat="Server">
-    <table style="height: 500px; width: 800px" cellpadding="0px" cellspacing="0" border="0">
+    <table style="height:500px; width:800px" cellpadding="0" cellspacing="0" border="0">
         <tr>
             <td valign="top" style="width: 800px; padding-top:10px">
-                <table style="width: 100%" cellpadding="0px" cellspacing="0" border="0">
+                <table style="width: 100%" cellpadding="0" cellspacing="0" border="0">
                     <tr>
                         <td align="center">
                             <!-- @@@ OBJETOS ESPECIFICOS DE LA PAGINA @@@-->
-                            <table border="0" cellspacing="0" cellpadding="0" width="800px" style="">
+                            <table border="0" cellspacing="0" cellpadding="0" width="800px">
                                 <!-- Novedades -->
                                 <tr>
-                                    <td style="height: 142px; padding-left: 10px; padding-right: 10px; padding-bottom: 10px; text-align: left"
-                                        valign="top">
-                                        <table cellpadding="0" cellspacing="0" border="0" style="height: 142px;">
+                                    <td style="padding-left:10px; padding-right:10px; padding-bottom:10px; text-align:left" valign="top">
+                                        <table cellpadding="0" cellspacing="0" border="0">
                                             <tr>
-                                                <td style="height: 38px; background-image: url('Imagenes/Ingreso/Box/BoxTL.gif');
-                                                    background-repeat: no-repeat; width: 110px;">
+                                                <td style="width:110px" valign="top">
                                                 </td>
-                                                <td style="background-image: url('Imagenes/Ingreso/Box/BoxT.gif'); width: 568px;">
+                                                <td colspan="2" class="IngresoBoxTexto" valign="top">
                                                     <table cellpadding="0" cellspacing="0" border="0">
                                                         <tr>
-                                                            <td style="width: 15px" align="left" valign="middle">
-                                                                <img src="Imagenes/Ingreso/Bullet/markerWhite.gif" width="5px" height="10" alt="" />
-                                                            </td>
-                                                            <td valign="middle">
-                                                                <asp:Label ID="LabelNovedades" runat="server" Font-Bold="True" SkinID="TituloPaginaClaro"
-                                                                    Text="Novedades"></asp:Label>
+                                                            <td colspan="3">
+                                                                <table cellpadding="0" cellspacing="0" border="0">
+                                                                    <tr>
+                                                                        <td style="width:300px" align="left">
+                                                                            <asp:Label ID="Label14" runat="server" Font-Bold="True" Font-Size="X-Large" ForeColor="brown" Text="Factura Electrónica"></asp:Label>
+                                                                        </td>
+                                                                        <td rowspan="4" style="width:400px" align="left">
+                                                                            <table cellpadding="0" cellspacing="0" border="0">
+                                                                                <tr>
+                                                                                    <td style="width:22px" valign="top">
+                                                                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <asp:Label ID="Label10" runat="server" Text="Ingrese su Factura Electrónica y genere el archivo XML para Interfacturas (la red de facturas electrónicas de Interbanking)" SkinID="TextoMediano"></asp:Label>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="width: 22px; padding-top:3px" valign="top">
+                                                                                        <asp:Image ID="Image5" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
+                                                                                    </td>
+                                                                                    <td style="padding-top:3px">
+                                                                                        <asp:Label ID="Label13" runat="server" Text="Es gratuito, rápido, fácil y seguro."
+                                                                                            SkinID="TextoMediano"></asp:Label>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="width: 22px; padding-top:3px" valign="top">
+                                                                                        <asp:Image ID="Image6" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
+                                                                                    </td>
+                                                                                    <td style="padding-top:3px">
+                                                                                        <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/FacturaElectronica.aspx"
+                                                                                            SkinID="LinkMedianoClaro">Cargue gratis su Factura Electrónica</asp:HyperLink>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="width: 22px; padding-top:3px" valign="top">
+                                                                                        <asp:Image ID="Image9" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
+                                                                                    </td>
+                                                                                    <td style="padding-top:3px">
+                                                                                        <asp:Label ID="Label12" runat="server" SkinID="TextoMediano" Text="Facilitamos el cumplimiento del régimen normativo de la AFIP"> </asp:Label>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="width: 22px; padding-top:3px" valign="top">
+                                                                                        <asp:Image ID="Image7" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
+                                                                                    </td>
+                                                                                    <td style="padding-top:3px">
+                                                                                        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/FacturaElectronicaSolucionDeConectividad.aspx"
+                                                                                            SkinID="LinkMedianoClaro">Integramos la Factura Electrónica a su sistema de facturación, o contable, a través de un formato estándar.</asp:HyperLink>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="width: 22px; padding-top:3px" valign="top">
+                                                                                        <asp:Image ID="Image8" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
+                                                                                    </td>
+                                                                                    <td style="padding-top:3px">
+                                                                                        <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/FacturaElectronicaActividadesAlcanzadas.aspx"
+                                                                                            SkinID="LinkMedianoClaro">¿Qué actividades están alcanzadas por el Régimen de Factura Electrónica?</asp:HyperLink>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="padding-left:90px; padding-top:3px" align="left">
+                                                                            <asp:Image ID="Image4" runat="server" ImageUrl="~/Imagenes/eFact.jpg" AlternateText="Factura Electrónica" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="padding-top:3px" align="left">
+                                                                            <asp:Image ID="Image3" runat="server" ImageUrl="~/Imagenes/InterfacturasInterbankingLogo.gif" AlternateText="Logo de interfacturas" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td valign="middle" align="left" style="padding-left:20px; padding-top:5px">
+                                                                            <asp:Label ID="Label1" runat="server" Font-Size="18px" ForeColor="#A52A2A" Font-Bold="True" Text="Nuestras Soluciones"></asp:Label>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                </td>
-                                                <td style="width: 103px; background-image: url('Imagenes/Ingreso/Box/BoxTR.gif');">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="height: 208px; width: 110px; background-image: url('Imagenes/Ingreso/Box/Box2DL-FEA.gif');
-                                                    background-repeat: no-repeat;" valign="top">
-                                                </td>
-                                                <td colspan="2" style="background-image: url('Imagenes/Ingreso/Box/Box2DC-Facturas-FEA.gif');
-                                                    background-repeat: no-repeat;" class="IngresoBoxTexto" valign="top">
-                                                    <table cellpadding="0" cellspacing="0" border="0">
-                                                    <tr>
-                                                        <td colspan="3">
-                                                            <table cellpadding="0" cellspacing="0" border="0">
-                                                                <tr>
-                                                                    <td style="width:190px; padding-top:20px; padding-left:90px" align="left">
-                                                                        <asp:Image ID="Image4" runat="server" ImageUrl="~/Imagenes/eFact.jpg" AlternateText="Factura Electrónica" /><br />
-                                                                    </td>
-                                                                    <td rowspan="4" style="width:400px" align="left">
-                                                                        <table cellpadding="0" cellspacing="0" border="0">
-                                                                            <tr>
-                                                                                <td style="width:22px; padding-top:5px" valign="top">
-                                                                                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
-                                                                                </td>
-                                                                                <td style="padding-top:5px">
-                                                                                    <asp:Label ID="Label10" runat="server" Text="Ingrese su Factura Electrónica y genere el archivo XML para Interfacturas (la red de facturas electrónicas de Interbanking)" SkinID="TextoMediano"></asp:Label>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="width:22px; padding-top:5px" valign="top">
-                                                                                    <asp:Image ID="Image5" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
-                                                                                </td>
-                                                                                <td style="padding-top:5px">
-                                                                                    <asp:Label ID="Label13" runat="server" Text="Es gratuito, rápido, fácil y seguro." SkinID="TextoMediano"></asp:Label>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="width:22px; padding-top:5px" valign="top">
-                                                                                    <asp:Image ID="Image6" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
-                                                                                </td>
-                                                                                <td style="padding-top:5px">
-                                                                                    <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/FacturaElectronica.aspx" SkinID="LinkMedianoClaro">Cargue gratis su Factura Electrónica</asp:HyperLink>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="width:22px; padding-top:5px" valign="top">
-                                                                                    <asp:Image ID="Image9" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
-                                                                                </td>
-                                                                                <td style="padding-top:5px">
-                                                                                    <asp:Label ID="Label12" runat="server" SkinID="TextoMediano" Text="Facilitamos el cumplimiento del régimen normativo de la AFIP"> </asp:Label>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="width:22px; padding-top:5px" valign="top">
-                                                                                    <asp:Image ID="Image7" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
-                                                                                </td>
-                                                                                <td style="padding-top:5px">
-                                                                                    <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/FacturaElectronicaSolucionDeConectividad.aspx" SkinID="LinkMedianoClaro">Integramos la Factura Electrónica a su sistema de facturación, o contable, a través de un formato estándar.</asp:HyperLink>
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td style="width:22px; padding-top:5px" valign="top">
-                                                                                    <asp:Image ID="Image8" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
-                                                                                </td>
-                                                                                <td style="padding-top:5px">
-                                                                                    <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/FacturaElectronicaActividadesAlcanzadas.aspx" SkinID="LinkMedianoClaro">¿Qué actividades están alcanzadas por el Régimen de Factura Electrónica?</asp:HyperLink>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="padding-top: 5px" align="left">
-                                                                        <asp:Label ID="Label14" runat="server" Font-Bold="True" Font-Size="X-Large" ForeColor="brown" Text="Factura Electrónica"></asp:Label>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="padding-top: 5px" align="left">
-                                                                        <asp:Image ID="Image3" runat="server" ImageUrl="~/Imagenes/InterfacturasInterbankingLogo.gif" AlternateText="Logo de interfacturas" /><br />
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td valign="bottom" align="left" style="padding-left:20px; padding-top:20px">
-                                                                        <asp:Label ID="Label1" runat="server" Font-Size="18px" ForeColor="#A52A2A" Font-Bold="True" Text="Nuestras Soluciones"></asp:Label>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </table>
                                                 </td>
                                             </tr>
                                         </table>
@@ -134,11 +115,11 @@
                                             <tr>
                                                 <td colspan="4" style="height:125px; width:100%">
                                                 </td>
-                                                <td rowspan="2" valign="top" style="padding-right:10px">
-                                                    <asp:Panel ID="LoginPanel" runat="server">
-                                                        <table cellpadding="0" cellspacing="0" border="0" style="height: 142px;">
+                                                <td rowspan="2" valign="top" style="padding-right:35px; padding-top:20px">
+                                                    <asp:Panel ID="LoginPanel" runat="server" BackColor="cornsilk" BorderColor="peachpuff" BorderStyle="Double" BorderWidth="3px">
+                                                        <table cellpadding="0" cellspacing="0" border="0" style="height:142px">
                                                             <tr>
-                                                                <td colspan="3" align="center" style="height: 30px;" valign="middle">
+                                                                <td colspan="3" align="center" style="height:30px" valign="middle">
                                                                     <table cellpadding="0" cellspacing="0" border="0">
                                                                         <tr>
                                                                             <td>
@@ -155,10 +136,10 @@
                                                                 <td class="TextoInicioMediano" align="right" style="height:20px; padding-left:10px; padding-right:10px;">
                                                                     Id.Usuario
                                                                 </td>
-                                                                <td align="left" style="width: 100px;">
-                                                                    <asp:TextBox ID="UsuarioTextBox" runat="server" Width="120px" OnTextChanged="UsuarioTextBox_TextChanged" TabIndex="1"></asp:TextBox>
+                                                                <td align="left" style="width:100px;">
+                                                                    <asp:TextBox ID="UsuarioTextBox" runat="server" Width="114px" OnTextChanged="UsuarioTextBox_TextChanged" TabIndex="1"></asp:TextBox>
                                                                 </td>
-                                                                <td rowspan="2" align="left" style="width:31px;">
+                                                                <td rowspan="2" align="left" style="padding-right:10px">
                                                                     <asp:Button ID="LoginButton" runat="server" Text="Acceder" OnClick="LoginButton_Click" TabIndex="3" />
                                                                 </td>
                                                             </tr>
@@ -167,7 +148,7 @@
                                                                     Contraseña
                                                                 </td>
                                                                 <td align="left" style="width:100px; padding-right:10px; padding-top:5px">
-                                                                    <asp:TextBox ID="PasswordTextBox" runat="server" Width="120px" OnTextChanged="PasswordTextBox_TextChanged" TextMode="Password" TabIndex="2"></asp:TextBox>
+                                                                    <asp:TextBox ID="PasswordTextBox" runat="server" Width="114px" OnTextChanged="PasswordTextBox_TextChanged" TextMode="Password" TabIndex="2"></asp:TextBox>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -181,15 +162,13 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td colspan="3" align="center" style="color: Blue">
-                                                                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/CuentaOlvidoId.aspx"
-                                                                        SkinID="LinkMedianoClaro">¿Olvidó su Id.Usuario?</asp:HyperLink>
-                                                                    <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/CuentaOlvidoPassword.aspx"
-                                                                        SkinID="LinkMedianoClaro">¿Olvidó su Contraseña?</asp:HyperLink>
+                                                                <td colspan="3" align="center" style="color:Blue">
+                                                                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/CuentaOlvidoId.aspx" SkinID="LinkMedianoClaro">¿Olvidó su Id.Usuario?</asp:HyperLink>
+                                                                    <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/CuentaOlvidoPassword.aspx" SkinID="LinkMedianoClaro">¿Olvidó su Contraseña?</asp:HyperLink>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td colspan="3" align="center">
+                                                                <td colspan="3" align="center" style="padding-bottom:8px">
                                                                     <a href="javascript:window.external.AddFavorite('http://www.cedeira.com.ar/Inicio.aspx','Cedeira');" style="color:Blue">Agregar a favoritos</a>
                                                                 </td>
                                                             </tr>
