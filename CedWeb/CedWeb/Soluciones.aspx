@@ -233,8 +233,8 @@
                                 <tr>
                                     <td align="right" style="padding-right: 10px; vertical-align: bottom">
                                         <asp:Label ID="Label9" runat="server" Font-Bold="true" ForeColor="red" Text="»"></asp:Label>
-                                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Descarga.aspx?archivo=eFact-R-XL.msi"
-                                            SkinID="LinkMedianoClaro">Descargar eFact residente versión Excel (MSI)</asp:HyperLink>
+                                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Descarga.aspx?archivo=eFact-R-XL.zip"
+                                            SkinID="LinkMedianoClaro">Descargar eFact residente versión Excel 2000 o posterior</asp:HyperLink>
                                     </td>
                                 </tr>
                             </table>
