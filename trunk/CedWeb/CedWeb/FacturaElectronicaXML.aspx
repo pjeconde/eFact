@@ -1758,10 +1758,21 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center">
-                                        <asp:Button ID="GenerarButton" runat="server" OnClick="GenerarButton_Click" Height="60px"
-                                            Width="780px" Text="Enviar archivo XML al e-mail del vendedor" BorderColor="Gray"
-                                            BorderWidth="1px" BorderStyle="NotSet" />
+                                    <td style="text-align:center; width:100%">
+                                        <table border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td style="width:160px; padding-right:3px">
+                                                    <asp:Button ID="DescargarButton" runat="server" OnClick="GenerarButton_Click" Height="60px"
+                                                        Width="100%" Text="Descargar archivo XML" BorderColor="Gray"
+                                                        BorderWidth="1px" BorderStyle="NotSet" Enabled="false" />
+                                                </td>
+                                                <td style="width:620px">
+                                                    <asp:Button ID="GenerarButton" runat="server" OnClick="GenerarButton_Click" Height="60px"
+                                                        Width="100%" Text="Enviar archivo XML al e-mail del vendedor" BorderColor="Gray"
+                                                        BorderWidth="1px" BorderStyle="NotSet" />
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
                                 <tr>
