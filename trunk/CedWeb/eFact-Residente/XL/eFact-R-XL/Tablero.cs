@@ -53,6 +53,7 @@ namespace eFact_R_XL
 						provider.StartRow = u.X;
 						provider.StartColumn = u.Y;
 						provider.FileName = @archivo;
+						provider.SheetName = "XML";
 						Object[] oArray = (Object[])System.Array.CreateInstance(u.GetType(), 10);
 						oArray = (Object[])provider.ExtractRecords();
 
@@ -62,6 +63,7 @@ namespace eFact_R_XL
 							providerInterno.StartRow = ((FeaEntidades.Excel.Ubicador)o).Y;
 							providerInterno.StartColumn = ((FeaEntidades.Excel.Ubicador)o).X + 1;
 							providerInterno.FileName = @archivo;
+							providerInterno.SheetName = "XML";
 							Object[] oArrayInterno = (Object[])System.Array.CreateInstance(System.Type.GetType("FeaEntidades.InterFacturas." + ((FeaEntidades.Excel.Ubicador)o).Tipo + ", FeaEntidades"), 10);
 							oArrayInterno = (Object[])providerInterno.ExtractRecords();
 
@@ -137,7 +139,7 @@ namespace eFact_R_XL
 					fs.Close();
 					System.Diagnostics.Process.Start(sb.ToString());
 				}
-				catch(NullReferenceException ex)
+				catch(NullReferenceException)
 				{
 					try
 					{
