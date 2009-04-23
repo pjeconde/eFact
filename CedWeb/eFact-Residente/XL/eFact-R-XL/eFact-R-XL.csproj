@@ -79,7 +79,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Templates\eFact-Serv-Pesos-SP-xls10-v1.0.xlt" />
+    <None Include="Templates\eFact-Serv-Pesos-SP-xls10-v1.0.xlt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
