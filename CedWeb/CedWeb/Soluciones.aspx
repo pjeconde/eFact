@@ -197,16 +197,44 @@
                                         También estableceremos las equivalencias entre los códigos propios, de su sistema de facturación, y los códigos estándar de la operatoria de Factura Electrónica.<br />
                                         Por último, configuraremos, a su medida, la forma en la que nuestro sistema registrará la respuesta del impacto. 
                                     </td>
+                                    <td style="padding-top:10px">
+                                        <asp:Image ID="Image5" runat="server" ImageUrl="Imagenes/eFact-R.jpg" Width="220px"
+                                            ImageAlign="Right" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 10px">
+                                <tr>
+                                    <td colspan="2" align="left" style="height: 10px">
+                                        <table cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td style="width: 22px; height: 20px;">
+                                                    <asp:Image ID="Image12" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
+                                                </td>
+                                                <td style="height: 20px">
+                                                    <asp:Label ID="Label8" runat="server" Text="Factura Electrónica (eFact residente versión Excel)"
+                                                        SkinID="TituloPagina" Width="415px"></asp:Label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top" style="padding-right: 20px; padding-left: 22px; padding-top: 10px">
+                                        Es un producto que permite "subir", a la red Interfacturas, los comprobantes ingresados a través de una planilla Excel.<br />
+                                        Con él se provee una planilla modelo (template).<br />
+                                        Un programa genera, a partir de los datos ingresados en la planilla, el archivo XML que dará origen al comprobante electrónico <br /> 
+                                    </td>
                                     <td rowspan="2" style="padding-top:10px">
-                                        <asp:Image ID="Image5" runat="server" ImageUrl="Imagenes/EsquemaSolucioneseFact2.jpg" Width="220px"
+                                        <asp:Image ID="Image13" runat="server" ImageUrl="Imagenes/eFact-R-XL.jpg" Width="220px"
                                             ImageAlign="Right" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td align="right" style="padding-right: 10px; vertical-align: bottom">
-                                        <asp:Label ID="Label7" runat="server" Font-Bold="true" ForeColor="red" Text="»"></asp:Label>
-                                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Descarga.aspx?archivo=eFact-R-XL.exe"
-                                            SkinID="LinkMedianoClaro">Descargar eFact-Residente versión Excel (eFact-R-XL.exe)</asp:HyperLink>
+                                        <asp:Label ID="Label9" runat="server" Font-Bold="true" ForeColor="red" Text="»"></asp:Label>
+                                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Descarga.aspx?archivo=eFact-R-XL.msi"
+                                            SkinID="LinkMedianoClaro">Descargar eFact-Residente versión Excel (MSI)</asp:HyperLink>
                                     </td>
                                 </tr>
                             </table>

@@ -29,6 +29,10 @@ namespace CedWeb
                     Response.WriteFile(dlDir + filename);
                     Response.End();
                 }
+                else
+                {
+                    CedeiraUIWebForms.Excepciones.Redireccionar(new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ArchivoInexistente(filename), "~/Excepcion.aspx");
+                }
             }
         }
     }
