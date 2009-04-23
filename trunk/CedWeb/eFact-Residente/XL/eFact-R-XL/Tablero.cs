@@ -141,7 +141,7 @@ namespace eFact_R_XL
 				{
 					try
 					{
-						throw new Exception("El archivo no está generado desde el template");
+						throw new Exception("El archivo seleccionado no está generado desde el template excel");
 					}
 					catch (Exception exc)
 					{
