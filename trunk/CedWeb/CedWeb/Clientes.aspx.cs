@@ -48,7 +48,6 @@ namespace CedWeb
                 ultimoNodoPpal = Arbol.Nodes.Count - 1;
                 Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("Delfino Magnus S.A. • Ing. Augusto Spinazzola S.C.A • Julius Vía Pública S.A. • Meca Media Group • Caled Vía Pública"));
                 Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("y División Aeropuertos • Vía Pública Clan S.A. • Verdad Publicidad S.A. • Publipal S.R.L. • Ital-Art S.A. • Poster S.A.(ROU)"));
-                Arbol.Nodes[ultimoNodoPpal].CollapseAll();
                 Arbol.Nodes.Add(new TreeNode("Transporte"));
                 ultimoNodoPpal = Arbol.Nodes.Count - 1;
                 Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("José Fiorentino y Cía. S.R.L"));
