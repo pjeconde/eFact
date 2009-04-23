@@ -64,6 +64,7 @@
 			// 
 			this.ClaveSolicitudTextBox.Location = new System.Drawing.Point(119, 16);
 			this.ClaveSolicitudTextBox.Name = "ClaveSolicitudTextBox";
+			this.ClaveSolicitudTextBox.ReadOnly = true;
 			this.ClaveSolicitudTextBox.Size = new System.Drawing.Size(580, 20);
 			this.ClaveSolicitudTextBox.TabIndex = 2;
 			// 
