@@ -14,20 +14,23 @@ namespace CedWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (CedWebRN.Fun.NoHayNadieLogueado((CedWebEntidades.Sesion)Session["Sesion"]))
-            {
-                CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloParte1Label.Text + TituloParte2Label.Text, "~/SoloDispPUsuariosActivCP.aspx");
-            }
-            else
-            {
-                if (CedWebRN.Fun.NoActivCP((CedWebEntidades.Sesion)Session["Sesion"]))
-                {
-                    CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloParte1Label.Text + TituloParte2Label.Text, "~/SoloDispPUsuariosActivCP.aspx");
-                }
-                else
-                {
-                }
-            }
+			if (!this.IsPostBack)
+			{
+				if (CedWebRN.Fun.NoHayNadieLogueado((CedWebEntidades.Sesion)Session["Sesion"]))
+				{
+					CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloParte1Label.Text + TituloParte2Label.Text, "~/SoloDispPUsuariosActivCP.aspx");
+				}
+				else
+				{
+					if (CedWebRN.Fun.NoActivCP((CedWebEntidades.Sesion)Session["Sesion"]))
+					{
+						CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloParte1Label.Text + TituloParte2Label.Text, "~/SoloDispPUsuariosActivCP.aspx");
+					}
+					else
+					{
+					}
+				}
+			}
         }
         protected void VolverLinkButton_Click(object sender, EventArgs e)
         {
@@ -39,7 +42,7 @@ namespace CedWeb
         }
         protected void SalirButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Inicio.aspx", true);
+            Response.Redirect("~/Inicio.aspx");
         }
     }
 }
