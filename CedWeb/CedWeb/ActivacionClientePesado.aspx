@@ -39,7 +39,7 @@
                                                     <asp:Label ID="ClaveSolicitudLabel" runat="server" Text="Clave de solicitud"></asp:Label>
                                                 </td>
                                                 <td align="left" style="padding-top:10px">
-                                                    <asp:TextBox ID="ClaveSolicitudTextBox" runat="server" Width="600px" TabIndex="9"></asp:TextBox>
+                                                    <asp:TextBox ID="ClaveSolicitudTextBox" runat="server" Width="600px" TabIndex="1" TextMode="MultiLine" Height="80px"></asp:TextBox>
                                                 </td>                                                    
                                                 <td style="width:50%; padding-top:10px"> 
                                                 </td>                                                    
@@ -52,7 +52,7 @@
                                             <tr>
                                                 <td></td>
                                                 <td align="left" style="padding-top:10px">
-                                                    <asp:Button ID="SolicitarActivCPButton" runat="server" Text="Obtener Clave de activación" Width="200px" TabIndex="10" OnClick="SolicitarActivCPButton_Click">
+                                                    <asp:Button ID="SolicitarActivCPButton" runat="server" Text="Obtener Clave de activación" Width="200px" TabIndex="2" OnClick="SolicitarActivCPButton_Click">
                                                     </asp:Button>
                                                 </td>
                                                 <td></td>
@@ -62,7 +62,7 @@
                                                     <asp:Label ID="ClaveActivCPLabel" runat="server" Text="Clave de activación"></asp:Label>
                                                 </td>
                                                 <td colspan="2" align="left" style="padding-top:10px">
-                                                    <asp:TextBox ID="ClaveActivCPTextBox" runat="server" Width="600px" TabIndex="9" MaxLength="20"></asp:TextBox>
+                                                    <asp:TextBox ID="ClaveActivCPTextBox" runat="server" Width="600px" TabIndex="3" TextMode="MultiLine" Height="80px" ReadOnly="true"></asp:TextBox>
                                                 </td>                                                    
                                             </tr>                                            
                                             <tr>
