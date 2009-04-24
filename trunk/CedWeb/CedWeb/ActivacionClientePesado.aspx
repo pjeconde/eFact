@@ -39,7 +39,7 @@
                                                     <asp:Label ID="ClaveSolicitudLabel" runat="server" Text="Clave de solicitud"></asp:Label>
                                                 </td>
                                                 <td align="left" style="padding-top:10px">
-                                                    <asp:TextBox ID="ClaveSolicitudTextBox" runat="server" Width="600px" TabIndex="9" MaxLength="20"></asp:TextBox>
+                                                    <asp:TextBox ID="ClaveSolicitudTextBox" runat="server" Width="600px" TabIndex="9"></asp:TextBox>
                                                 </td>                                                    
                                                 <td style="width:50%; padding-top:10px"> 
                                                 </td>                                                    
