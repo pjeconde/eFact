@@ -22,28 +22,28 @@
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td style="padding-top:20px; padding-left:5px; width:680px" valign="middle" align="left">
+                                    <td style="padding-top:20px; width:680px" valign="middle" align="left">
                                         <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/AdministracionCuentaExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Cuentas</asp:HyperLink>
                                         <asp:Label ID="CuentasLabel" runat="server" Text="" SkinID="TextoGrande"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td style="padding-top:10px; padding-left:5px" align="left">
+                                    <td style="padding-top:10px" align="left">
                                         <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/AdministracionVendedorExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Vendedores</asp:HyperLink>
                                         <asp:Label ID="VendedoresLabel" runat="server" Text="" SkinID="TextoGrande"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td style="padding-top:10px; padding-left:5px" align="left">
+                                    <td style="padding-top:10px" align="left">
                                         <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/AdministracionCompradorExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Compradores</asp:HyperLink>
                                         <asp:Label ID="CompradoresLabel" runat="server" Text="" SkinID="TextoGrande"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td style="padding-top:10px; padding-left:5px" align="left">
+                                    <td style="padding-top:10px" align="left">
                                         <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="http://ar62.toservers.com/awstats/awstats.pl?&inst=482&output=main&config=cedeira" SkinID="LinkGrandeClaro" Target="_blank">Estadísticas del sitio</asp:HyperLink>
                                         <asp:Label ID="Label2" runat="server" Text="" SkinID="TextoGrande"></asp:Label>
                                     </td>
@@ -62,7 +62,7 @@
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td style="padding-top:10px; padding-left:5px" align="left">
+                                    <td style="padding-top:10px" align="left">
                                         <asp:CheckBox ID="RecibeAvisoAltaCuentaCheckBox" runat="server" Text="Recibe aviso de alta de cuenta (SMS)" OnCheckedChanged="RecibeAvisoAltaCuentaCheckBox_CheckedChanged" AutoPostBack="true" />
                                         (en la Configuración de su Cuenta eFact podrá ingresar el "Email para SMSs")
                                     </td>
