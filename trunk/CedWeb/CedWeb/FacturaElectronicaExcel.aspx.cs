@@ -14,11 +14,17 @@ namespace CedWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-        }
-        protected void VolverLinkButton_Click(object sender, EventArgs e)
-        {
-            Response.Redirect((string)Session["ref"]);
+            if (!IsPostBack)
+            {
+                if (CedWebRN.Fun.NoHayNadieLogueado((CedWebEntidades.Sesion)Session["Sesion"]))
+                {
+                    UsuarioLogueadoPanel.Visible = false;
+                }
+                else
+                {
+                    UsuarioNoLogueadoPanel.Visible = false;
+                }
+            }
         }
     }
 }
