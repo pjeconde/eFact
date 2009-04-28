@@ -1,7 +1,7 @@
 brown	 	#A52A2A
 peru	 	#CD853F
-peachpuff 	#FFDAB9
-cornsilk 	#FFF8DC
+peachpuff 	#FFDAB9	255 218 185
+cornsilk 	#FFF8DC 255 248 208
 black	 	#000000
 white	 	#FFFFFF
 "naranja"	#FF6600 (mensajes)
