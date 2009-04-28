@@ -327,9 +327,7 @@
                         <td style="width: 20px;">
                         </td>
                         <td style="height: 10px;">
-                            &nbsp;<asp:Label ID="Label15" runat="server" Font-Bold="true" ForeColor="red" Text="»"></asp:Label>
-                            <asp:HyperLink ID="VolverAFEAHyperLink" runat="server" NavigateUrl="~/FacturaElectronica.aspx"
-                                SkinID="LinkMedianoClaro">volver a Factura Electrónica (guia rápida)</asp:HyperLink>
+                            <asp:LinkButton ID="VolverLinkButton" runat="server" CausesValidation="false" ForeColor="Blue" OnClick="VolverLinkButton_Click">Volver a la página anterior</asp:LinkButton>
                         </td>
                     </tr>
                     <tr>

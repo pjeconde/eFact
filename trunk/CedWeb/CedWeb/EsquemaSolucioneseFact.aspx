@@ -1,7 +1,5 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/EsquemaSolucioneseFact.aspx.cs" Inherits="CedWeb.EsquemaSolucioneseFact" %>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado"
-    runat="Server">
-
+﻿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/EsquemaSolucioneseFact.aspx.cs" Inherits="CedWeb.EsquemaSolucioneseFact"%>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado" runat="Server">
     <table style="height:500px; width:800px; text-align:left" cellpadding="0" cellspacing="0" border="0" class="TextoComun">
         <tr>
             <td valign="top">
@@ -40,7 +38,7 @@
         </tr>
         <tr>
             <td align="left" style="padding-left:31px; padding-top:20px">
-                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/FacturaElectronica.aspx" SkinID="LinkMedianoClaro">Volver a la página anterior</asp:HyperLink>
+                <asp:LinkButton ID="VolverLinkButton" runat="server" CausesValidation="false" ForeColor="Blue" OnClick="VolverLinkButton_Click">Volver a la página anterior</asp:LinkButton>
             </td>
         </tr>
         <tr>

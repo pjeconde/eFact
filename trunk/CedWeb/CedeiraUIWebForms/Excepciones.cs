@@ -15,7 +15,7 @@ namespace CedeiraUIWebForms
         public static void Redireccionar(string idParm, string valor, string url)
         {
             UrlParameterPasser urlWrapper = new UrlParameterPasser(url);
-            urlWrapper[idParm] = valor;
+            urlWrapper[idParm] = valor.Replace("<b>", String.Empty).Replace("<b/>", String.Empty);
             urlWrapper.PassParameters();
         }
         public static string Detalle(Exception ex)
