@@ -52,7 +52,7 @@
                                                                                     </td>
                                                                                     <td style="padding-top:3px">
                                                                                         <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/FacturaElectronica.aspx"
-                                                                                            SkinID="LinkMedianoClaro">Cargue gratis su Factura Electrónica</asp:HyperLink>
+                                                                                            SkinID="LinkMedianoClaro">Cargue gratis su Factura Electrónica con nuestro Servicio Web</asp:HyperLink>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -69,7 +69,7 @@
                                                                                     </td>
                                                                                     <td style="padding-top:3px">
                                                                                         <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/FacturaElectronicaSolucionDeConectividad.aspx"
-                                                                                            SkinID="LinkMedianoClaro">Integramos la Factura Electrónica a su sistema de facturación, o contable, a través de un formato estándar.</asp:HyperLink>
+                                                                                            SkinID="LinkMedianoClaro">Podemos integrar su sistema de facturación a la red de Interfacturas.</asp:HyperLink>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -77,8 +77,8 @@
                                                                                         <asp:Image ID="Image8" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o" />
                                                                                     </td>
                                                                                     <td style="padding-top:3px">
-                                                                                        <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/FacturaElectronicaActividadesAlcanzadas.aspx"
-                                                                                            SkinID="LinkMedianoClaro">¿Qué actividades están alcanzadas por el Régimen de Factura Electrónica?</asp:HyperLink>
+                                                                                        <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/FacturaElectronicaExcel.aspx"
+                                                                                            SkinID="LinkMedianoClaro">Usa una planilla Excel como herramienta de facturación.<br />La podemos integrar a la red de Interfacturas</asp:HyperLink>
                                                                                     </td>
                                                                                 </tr>
                                                                             </table>

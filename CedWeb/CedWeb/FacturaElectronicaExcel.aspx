@@ -101,7 +101,13 @@
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td style="padding-top:30px" align="center">
+                                    <td style="padding-top:20px">
+                                        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Inicio.aspx" SkinID="LinkMedianoClaro">Volver a Inicio</asp:HyperLink>
+                                    </td>
+                                </tr>                                                
+                                <tr>
+                                    <td></td>
+                                    <td style="padding-top:20px" align="center">
                                         <asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="~/FacturaElectronicaActividadesAlcanzadas.aspx" SkinID="LinkMedianoClaro">Actividades alcanzadas por el Régimen de Factura Electrónica</asp:HyperLink>
                                         <br />
                                         <asp:HyperLink ID="HyperLink11" runat="server"  NavigateUrl="~/FacturaElectronicaSYP.aspx" SkinID="LinkMedianoClaro">Guía de servicios y productos eFact ( tabla comparativa )</asp:HyperLink>
@@ -115,12 +121,6 @@
                                     <td></td>
                                     <td style="padding-top:10px" align="center">
                                         <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/Imagenes/InterfacturasInterbankingLogo.gif" NavigateUrl="http://www.interfacturas.com.ar/" Target="_blank"></asp:HyperLink>
-                                    </td>
-                                </tr>
-                                <tr style="height:100%">
-                                    <td></td>
-                                    <td style="height:100%" align="center">
-                                        &nbsp;
                                     </td>
                                 </tr>
                             </table>

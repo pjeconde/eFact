@@ -1,10 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/FacturaElectronicaSolucionDeConectividad.aspx.cs" Inherits="CedWeb.FacturaElectronicaSolucionDeConectividad"%>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado" Runat="Server">
-    <table style="width:800px; height:500px; text-align: left;" cellpadding="0" cellspacing="0" border="0" class="TextoComun">
-        <tr>
-           <td valign="top" style="height: 10px;">
-           </td>
-        </tr>
+    <table style="width:800px; text-align:left;" cellpadding="0" cellspacing="0" border="0" class="TextoComun">
         <tr>
             <td valign="top" style="padding-left: 10px;">
                 <table cellpadding="0" cellspacing="0" border="0">
@@ -13,11 +9,14 @@
                             <!-- @@@ TITULO DE LA PAGINA @@@-->
                             <table cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                    <td style="width: 20px; height: 20px;">
+                                    <td style="width:20px; height:20px; padding-top:10px">
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o"/>
                                     </td>
-                                    <td style="width:750px;">
-                                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Solución de conectividad - Factura Electrónica" SkinID="TituloPagina"></asp:Label>
+                                    <td style="width:750px; padding-top:10px">
+                                        <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Factura Electrónica (solución de conectividad)" SkinID="TituloPagina"></asp:Label>
+                                    </td>
+                                    <td rowspan="4" valign="top">
+                                        <asp:Image ID="Image13" runat="server" ImageUrl="~/Imagenes/eFact-R-vertical.jpg"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -75,12 +74,24 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-top:20px">
-                                                    <asp:LinkButton ID="VolverLinkButton" runat="server" CausesValidation="false" ForeColor="Blue" OnClick="VolverLinkButton_Click">Volver a la página anterior</asp:LinkButton>
+                                                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Inicio.aspx" SkinID="LinkMedianoClaro">Volver a Inicio</asp:HyperLink>
                                                 </td>
                                             </tr>
                                         </table>
                                     </td>
-                                </tr>                            
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td style="padding-bottom:20px; padding-top:30px" align="center">
+                                        <asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="~/FacturaElectronicaActividadesAlcanzadas.aspx" SkinID="LinkMedianoClaro">Actividades alcanzadas por el Régimen de Factura Electrónica</asp:HyperLink>
+                                        <br />
+                                        <asp:HyperLink ID="HyperLink11" runat="server"  NavigateUrl="~/FacturaElectronicaSYP.aspx" SkinID="LinkMedianoClaro">Guía de servicios y productos eFact ( tabla comparativa )</asp:HyperLink>
+                                        <br />
+                                        <asp:HyperLink ID="FEASYPHyperLink" runat="server"  NavigateUrl="~/EsquemaSolucioneseFact.aspx" SkinID="LinkMedianoClaro">Esquema de soluciones eFact ( gráfico )</asp:HyperLink>
+                                        <br />
+                                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/FacturaElectronicaPreguntasFrec.aspx" SkinID="LinkMedianoClaro">Preguntas frecuentes</asp:HyperLink>
+                                    </td>
+                                </tr>
                             </table>
                         </td>
                     </tr>

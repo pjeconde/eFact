@@ -15,4 +15,8 @@ public partial class FacturaElectronicaSYP : System.Web.UI.Page
     {
 
     }
+    protected void VolverLinkButton_Click(object sender, EventArgs e)
+    {
+        Response.Redirect((string)Session["ref"]);
+    }
 }

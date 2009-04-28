@@ -16,9 +16,5 @@ namespace CedWeb
         {
 
         }
-        protected void VolverLinkButton_Click(object sender, EventArgs e)
-        {
-            Response.Redirect((string)Session["ref"]);
-        }
     }
 }
