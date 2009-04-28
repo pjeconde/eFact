@@ -24,11 +24,11 @@ namespace CedWeb
 				{
                     if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.NroSerieDisco==String.Empty)
                     {
-                        ClaveActivCPTextBox.Text = CedWebRN.Cuenta.ObtenerClaveActivCP(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.NroSerieDisco, (CedEntidades.Sesion)Session["Sesion"]);
+                        MsgErrorLabel.Text = "No se registra que se haya generado la clave de activación";
                     }
                     else
                     {
-                        MsgErrorLabel.Text = "No se registra que se haya generado la clave de activación";
+                        ClaveActivCPTextBox.Text = CedWebRN.Cuenta.ObtenerClaveActivCP(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.NroSerieDisco, (CedEntidades.Sesion)Session["Sesion"]);
                     }
                 }
 			}
