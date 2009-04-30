@@ -29,7 +29,7 @@
                                                     -
                                                 </td>
                                                 <td style="padding-top:10px; padding-left:5px" valign="middle">
-                                                    Servicios profesionales (montos de operaciones iguales o mayores a $ 600.000 anuales).
+                                                    Servicios profesionales (abogados, contadores, escribanos, arquitectos, licenciados en sistemas, en administración, entre otros) con montos anuales de operaciones iguales o mayores a 600.000,- $).
                                                 </td>
                                             </tr>
                                             <tr>
