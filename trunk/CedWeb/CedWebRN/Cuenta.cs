@@ -216,6 +216,12 @@ namespace CedWebRN
                     {
                         throw new Microsoft.ApplicationBlocks.ExceptionManagement.Cuenta.LoginRechazadoXEstadoCuenta();
                     }
+                    //Suspendo cuentas premium por vencimiento
+                    if (Cuenta.TipoCuenta.Id == "Prem" && Cuenta.EstadoCuenta.Id == "Vigente" && DateTime.Today > Cuenta.FechaVtoPremium)
+                    {
+                        SuspenderPremium(Cuenta, Sesion);
+                        Leer(Cuenta, Sesion);
+                    }
                 }
             }
         }
@@ -382,18 +388,22 @@ namespace CedWebRN
             nuevoEstado.Id = "Suspend";
             CambiarEstado(Cuenta, nuevoEstado, Sesion);
         }        
-        public static void RestablecerPremium(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
-        {
-            CedWebEntidades.EstadoCuenta nuevoEstado=new CedWebEntidades.EstadoCuenta();
-            nuevoEstado.Id = "Vigente";
-            CambiarEstado(Cuenta, nuevoEstado, Sesion);
-        }
         public static void ActivarPremium(CedWebEntidades.Cuenta Cuenta, DateTime FechaVtoPremium, CedEntidades.Sesion Sesion)
         {
-            CedWebEntidades.TipoCuenta nuevoTipo = new CedWebEntidades.TipoCuenta();
-            nuevoTipo.Id = "Prem";
-            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
-            cuenta.CambiarTipo(Cuenta, nuevoTipo, FechaVtoPremium);
+            if (Convert.ToInt64(FechaVtoPremium.ToString("yyyyMMdd")) < Convert.ToInt64(DateTime.Today.ToString("yyyyMMdd")))
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorInvalido("Fecha de vto. del servicio Premium");
+            }
+            else
+            {
+                CedWebEntidades.TipoCuenta nuevoTipo = new CedWebEntidades.TipoCuenta();
+                nuevoTipo.Id = "Prem";
+                CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+                cuenta.CambiarTipo(Cuenta, nuevoTipo, FechaVtoPremium);
+                CedWebEntidades.EstadoCuenta nuevoEstado = new CedWebEntidades.EstadoCuenta();
+                nuevoEstado.Id = "Vigente";
+                CambiarEstado(Cuenta, nuevoEstado, Sesion);
+            }
         }
         public static void DesactivarPremium(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {

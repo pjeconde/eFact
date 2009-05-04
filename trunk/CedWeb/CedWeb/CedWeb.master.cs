@@ -25,9 +25,44 @@ namespace CedWeb
                     ConfiguracionLinkButton.Visible = true;
                     Separador2Label.Visible = true;
                     SalirLinkButton.Visible = true;
-                    if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.TipoCuenta.Id == "Admin")
+                    switch (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.TipoCuenta.Id)
                     {
-                        AdministracionLinkButton.Visible = true;
+                        case "Admin":
+                            AdministracionLinkButton.Visible = true;
+                            break;
+                        case "Prem":
+                            switch (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.EstadoCuenta.Id)
+                            {
+                                case "Vigente":
+                                    ServicioPremiumEstadoLabel.Text = "Servicio Premium vigente";
+                                    TimeSpan n = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.FechaVtoPremium.Subtract(DateTime.Today);
+                                    if (n.Days == 0)
+                                    {
+                                        ServicioPremiumVtoLabel.Text = "(caduca hoy)";
+                                    }
+                                    else
+                                    {
+                                        if (n.Days == 1)
+                                        {
+                                            ServicioPremiumVtoLabel.Text = "(caduca mañana)";
+                                        }
+                                        else
+                                        {
+                                            if (n.Days > 1 && n.Days < 10)
+                                            {
+                                                ServicioPremiumVtoLabel.Text = "(caduca en " + n.Days.ToString() + " días)";
+                                            }
+                                        }
+                                    }
+                                    break;
+                                case "Suspend":
+                                    ServicioPremiumEstadoLabel.Text = "Servicio Premium suspendido";
+                                    break;
+                            }
+                            break;
+                        case "Free":
+                            ServicioPremiumEstadoLabel.Text = "Servicio Premium no activado";
+                            break;
                     }
                 }
 				if (Request.UrlReferrer!=null)

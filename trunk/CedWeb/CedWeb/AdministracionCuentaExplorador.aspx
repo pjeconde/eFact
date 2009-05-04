@@ -141,17 +141,12 @@
                                 </tr>
                                 <tr>
                                     <td style="padding-top:5px">
-                                        <asp:Button ID="DesactivarPremiumButton" runat="server" Text="Desactivar" Width="100px" OnClick="DesactivarPremiumButton_Click" Enabled="false"> </asp:Button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-top:5px">
                                         <asp:Button ID="SuspenderPremiumButton" runat="server" Text="Suspender" Width="100px" OnClick="SuspenderPremiumButton_Click" Enabled="false"> </asp:Button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="padding-top:5px">
-                                        <asp:Button ID="RestablecerPremiumButton" runat="server" Text="Restablecer" Width="100px" OnClick="RestablecerPremiumButton_Click" Enabled="false"> </asp:Button>
+                                        <asp:Button ID="DesactivarPremiumButton" runat="server" Text="Desactivar" Width="100px" OnClick="DesactivarPremiumButton_Click" Enabled="false"> </asp:Button>
                                     </td>
                                 </tr>
                                 <tr>
