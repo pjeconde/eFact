@@ -388,6 +388,23 @@ namespace CedWebRN
             nuevoEstado.Id = "Vigente";
             CambiarEstado(Cuenta, nuevoEstado, Sesion);
         }
+        public static void ActivarPremium(CedWebEntidades.Cuenta Cuenta, DateTime FechaVtoPremium, CedEntidades.Sesion Sesion)
+        {
+            CedWebEntidades.TipoCuenta nuevoTipo = new CedWebEntidades.TipoCuenta();
+            nuevoTipo.Id = "Prem";
+            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+            cuenta.CambiarTipo(Cuenta, nuevoTipo, FechaVtoPremium);
+        }
+        public static void DesactivarPremium(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        {
+            CedWebEntidades.EstadoCuenta nuevoEstado = new CedWebEntidades.EstadoCuenta();
+            nuevoEstado.Id = "Vigente";
+            CambiarEstado(Cuenta, nuevoEstado, Sesion);
+            CedWebEntidades.TipoCuenta nuevoTipo = new CedWebEntidades.TipoCuenta();
+            nuevoTipo.Id = "Free";
+            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+            cuenta.CambiarTipo(Cuenta, nuevoTipo);
+        }
         public static void DepurarBajas(CedEntidades.Sesion Sesion)
         {
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
@@ -409,6 +426,11 @@ namespace CedWebRN
         {
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             cuenta.SetearRecibeAvisoAltaCuenta(Cuenta);
+        }
+        public static void RegistrarComprobante(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+            cuenta.RegistrarComprobante(Cuenta);
         }
     }
 }

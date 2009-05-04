@@ -42,7 +42,7 @@
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="UltimoNroLote" HeaderText="Ult.N°Lote" SortExpression="UltimoNroLote">
+                                        <asp:BoundField DataField="CantidadComprobantes" HeaderText="qComprob." SortExpression="CantidadComprobantes">
                                             <headerstyle horizontalalign="center" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="center"/>
                                         </asp:BoundField>
@@ -66,7 +66,15 @@
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="CantidadEnviosMail" HeaderText="Cant.env.mail" SortExpression="CantidadEnviosMail">
+                                        <asp:BoundField DataField="FechaUltimoComprobante" DataFormatString="{0:dd/MM/yyyy H:mm}" HtmlEncode="false" HeaderText="Fecha ult.comprob." SortExpression="FechaUltimoComprobante">
+                                            <headerstyle horizontalalign="left" wrap="False"/>
+                                            <itemstyle wrap="False" horizontalalign="left"/>
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="FechaVtoPremium" DataFormatString="{0:dd/MM/yyyy H:mm}" HtmlEncode="false" HeaderText="Fecha vto.Prem." SortExpression="FechaVtoPremium">
+                                            <headerstyle horizontalalign="left" wrap="False"/>
+                                            <itemstyle wrap="False" horizontalalign="left"/>
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="CantidadEnviosMail" HeaderText="qEnv.mail" SortExpression="CantidadEnviosMail">
                                             <headerstyle horizontalalign="center" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="center"/>
                                         </asp:BoundField>
@@ -85,6 +93,10 @@
                                         <asp:BoundField DataField="IdMedio" HeaderText="Medio" SortExpression="IdMedio">
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left"/>
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="UltimoNroLote" HeaderText="Ult.N°Lote" SortExpression="UltimoNroLote">
+                                            <headerstyle horizontalalign="center" wrap="False"/>
+                                            <itemstyle wrap="False" horizontalalign="center"/>
                                         </asp:BoundField>
                                     </Columns>
                                 </cc1:PagingGridView>
@@ -124,6 +136,16 @@
                                 </tr>
                                 <tr>
                                     <td style="padding-top:5px">
+                                        <asp:Button ID="ActivarPremiumButton" runat="server" Text="Activar" Width="100px" OnClick="ActivarPremiumButton_Click" Enabled="false"> </asp:Button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top:5px">
+                                        <asp:Button ID="DesactivarPremiumButton" runat="server" Text="Desactivar" Width="100px" OnClick="DesactivarPremiumButton_Click" Enabled="false"> </asp:Button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top:5px">
                                         <asp:Button ID="SuspenderPremiumButton" runat="server" Text="Suspender" Width="100px" OnClick="SuspenderPremiumButton_Click" Enabled="false"> </asp:Button>
                                     </td>
                                 </tr>
@@ -134,7 +156,7 @@
                                 </tr>
                                 <tr>
                                     <td style="padding-top:10px" class="TextoResaltado" align="center">
-                                        Procesos
+                                        Proceso
                                     </td>
                                 </tr>
                                 <tr>
@@ -143,7 +165,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding-top:20px">
+                                    <td style="padding-top:10px">
                                         <asp:Button ID="SalirButton" runat="server" Text="Salir" Width="100px" OnClick="SalirButton_Click"> </asp:Button>
                                     </td>
                                 </tr>

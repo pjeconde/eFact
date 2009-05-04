@@ -26,6 +26,9 @@ namespace CedWebEntidades
         private Medio medio;
         private string emailSMS;
         private bool recibeAvisoAltaCuenta;
+        private int cantidadComprobantes;
+        private DateTime fechaUltimoComprobante;
+        private DateTime fechaVtoPremium;
 
         public Cuenta()
         {
@@ -295,6 +298,39 @@ namespace CedWebEntidades
             get
             {
                 return recibeAvisoAltaCuenta;
+            }
+        }
+        public int CantidadComprobantes
+        {
+            set
+            {
+                cantidadComprobantes = value;
+            }
+            get
+            {
+                return cantidadComprobantes;
+            }
+        }
+        public DateTime FechaUltimoComprobante
+        {
+            set
+            {
+                fechaUltimoComprobante = value;
+            }
+            get
+            {
+                return fechaUltimoComprobante;
+            }
+        }
+        public DateTime FechaVtoPremium
+        {
+            set
+            {
+                fechaVtoPremium = value;
+            }
+            get
+            {
+                return fechaVtoPremium;
             }
         }
     }

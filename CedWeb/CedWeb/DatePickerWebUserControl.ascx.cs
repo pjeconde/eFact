@@ -38,7 +38,15 @@ namespace CedWeb
 			get { return txt_Date.CssClass; }
 			set { txt_Date.CssClass = value; }
 		}
-
+        public bool ReadOnly
+        {
+            get { return txt_Date.ReadOnly; }
+            set { txt_Date.ReadOnly = value; }
+        }
+        public void Focus()
+        {
+            txt_Date.Focus();
+        }
 		/// <summary>
 		/// Gets or sets the content of the textbox which represents a date.
 		/// </summary>
