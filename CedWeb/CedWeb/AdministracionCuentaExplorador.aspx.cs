@@ -170,7 +170,7 @@ namespace CedWeb
                             DesactivarPremiumButton.Enabled = true;
                             break;
                         case "Suspend":
-                            RestablecerPremiumButton.Enabled = true;
+                            ActivarPremiumButton.Enabled = true;
                             DesactivarPremiumButton.Enabled = true;
                             break;
                     }
@@ -192,7 +192,6 @@ namespace CedWeb
             ReenviarMailButton.Enabled = false;
             ActivCPButton.Enabled = false;
             SuspenderPremiumButton.Enabled = false;
-            RestablecerPremiumButton.Enabled = false;
             ActivarPremiumButton.Enabled = false;
             DesactivarPremiumButton.Enabled = false;
         }
@@ -258,19 +257,6 @@ namespace CedWeb
             try
             {
                 CedWebRN.Cuenta.SuspenderPremium(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
-                BindPagingGrid();
-                DesSeleccionarFilas();
-            }
-            catch (Exception ex)
-            {
-                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
-            }
-        }
-        protected void RestablecerPremiumButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                CedWebRN.Cuenta.RestablecerPremium(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
                 BindPagingGrid();
                 DesSeleccionarFilas();
             }
