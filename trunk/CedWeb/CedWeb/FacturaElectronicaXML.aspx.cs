@@ -866,12 +866,14 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			smtpClient.Send(mail);
 			m.Close();
-
+            //Registro cantidad de comprobantes
+            if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id != null)
+            {
+                CedWebRN.Cuenta.RegistrarComprobante(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
+            }
 			//Envío de mail a nosotros
-
 			if (!smtpXAmb.Equals("DESA"))
 			{
-
 				System.Net.Mail.MailMessage mailCedeira = new System.Net.Mail.MailMessage("facturaelectronicaxml@cedeira.com.ar",
 					"facturaelectronicaxml@cedeira.com.ar", "XML_" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + "_" + System.DateTime.Now.ToLocalTime().ToString("yyyyMMdd hh:mm:ss"), string.Empty);
 				sb = new System.Text.StringBuilder();

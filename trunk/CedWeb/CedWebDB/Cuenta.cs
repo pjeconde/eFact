@@ -13,7 +13,7 @@ namespace CedWebDB
         {
 
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("select Cuenta.IdCuenta, Cuenta.Nombre, Cuenta.Telefono, Cuenta.Email, Cuenta.Password, Cuenta.Pregunta, Cuenta.Respuesta, Cuenta.IdTipoCuenta, TipoCuenta.DescrTipoCuenta, Cuenta.IdEstadoCuenta, EstadoCuenta.DescrEstadoCuenta, Cuenta.UltimoNroLote, Cuenta.FechaAlta, Cuenta.CantidadEnviosMail, Cuenta.FechaUltimoReenvioMail, Cuenta.ActivCP, Cuenta.NroSerieDisco, Cuenta.IdMedio, Medio.DescrMedio, Cuenta.EmailSMS, Cuenta.RecibeAvisoAltaCuenta ");
+            a.Append("select Cuenta.IdCuenta, Cuenta.Nombre, Cuenta.Telefono, Cuenta.Email, Cuenta.Password, Cuenta.Pregunta, Cuenta.Respuesta, Cuenta.IdTipoCuenta, TipoCuenta.DescrTipoCuenta, Cuenta.IdEstadoCuenta, EstadoCuenta.DescrEstadoCuenta, Cuenta.UltimoNroLote, Cuenta.FechaAlta, Cuenta.CantidadEnviosMail, Cuenta.FechaUltimoReenvioMail, Cuenta.ActivCP, Cuenta.NroSerieDisco, Cuenta.IdMedio, Medio.DescrMedio, Cuenta.EmailSMS, Cuenta.RecibeAvisoAltaCuenta, Cuenta.CantidadComprobantes, Cuenta.FechaUltimoComprobante, Cuenta.FechaVtoPremium ");
             a.Append("from Cuenta, TipoCuenta, EstadoCuenta, Medio ");
             a.Append("where Cuenta.IdCuenta='" + Cuenta.Id.ToString() + "' and Cuenta.IdTipoCuenta=TipoCuenta.IdTipoCuenta and Cuenta.IdEstadoCuenta=EstadoCuenta.IdEstadoCuenta and Cuenta.IdMedio=Medio.IdMedio ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
@@ -48,6 +48,9 @@ namespace CedWebDB
             Hasta.Medio.Id = Convert.ToString(Desde["IdMedio"]);
             Hasta.Medio.Descr = Convert.ToString(Desde["DescrMedio"]);
             Hasta.EmailSMS = Convert.ToString(Desde["EmailSMS"]);
+            Hasta.CantidadComprobantes = Convert.ToInt32(Desde["CantidadComprobantes"]);
+            Hasta.FechaUltimoComprobante = Convert.ToDateTime(Desde["FechaUltimoComprobante"]);
+            Hasta.FechaVtoPremium = Convert.ToDateTime(Desde["FechaVtoPremium"]);
             Hasta.RecibeAvisoAltaCuenta = Convert.ToBoolean(Desde["RecibeAvisoAltaCuenta"]);
         }
         public void Crear(CedWebEntidades.Cuenta Cuenta)
@@ -71,7 +74,10 @@ namespace CedWebDB
             a.Append("'', ");           //NroSerieDisco
             a.Append("'" + Cuenta.Medio.Id + "', ");
             a.Append("'', ");           //EmailSMS
-            a.Append("0 ");             //RecibeAvisoAltaCuenta
+            a.Append("0, ");            //RecibeAvisoAltaCuenta
+            a.Append("0, ");            //CantidadComprobantes
+            a.Append("'20000101', ");   //FechaUltimoComprobante
+            a.Append("'20000101', ");   //Cuenta.FechaVtoPremium
             a.Append(")");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
@@ -94,7 +100,7 @@ namespace CedWebDB
         public List<CedWebEntidades.Cuenta> Lista(string Email)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("select Cuenta.IdCuenta, Cuenta.Nombre, Cuenta.Telefono, Cuenta.Email, Cuenta.Password, Cuenta.Pregunta, Cuenta.Respuesta, Cuenta.IdTipoCuenta, TipoCuenta.DescrTipoCuenta, Cuenta.IdEstadoCuenta, EstadoCuenta.DescrEstadoCuenta, Cuenta.UltimoNroLote, Cuenta.FechaAlta, Cuenta.CantidadEnviosMail, Cuenta.FechaUltimoReenvioMail, Cuenta.ActivCP, Cuenta.NroSerieDisco, Cuenta.IdMedio, Medio.DescrMedio, Cuenta.EmailSMS, Cuenta.RecibeAvisoAltaCuenta ");
+            a.Append("select Cuenta.IdCuenta, Cuenta.Nombre, Cuenta.Telefono, Cuenta.Email, Cuenta.Password, Cuenta.Pregunta, Cuenta.Respuesta, Cuenta.IdTipoCuenta, TipoCuenta.DescrTipoCuenta, Cuenta.IdEstadoCuenta, EstadoCuenta.DescrEstadoCuenta, Cuenta.UltimoNroLote, Cuenta.FechaAlta, Cuenta.CantidadEnviosMail, Cuenta.FechaUltimoReenvioMail, Cuenta.ActivCP, Cuenta.NroSerieDisco, Cuenta.IdMedio, Medio.DescrMedio, Cuenta.EmailSMS, Cuenta.RecibeAvisoAltaCuenta, Cuenta.CantidadComprobantes, Cuenta.FechaUltimoComprobante, Cuenta.FechaVtoPremium ");
             a.Append("from Cuenta, TipoCuenta, EstadoCuenta, Medio ");
             a.Append("where Cuenta.Email='" + Email + "' and Cuenta.IdTipoCuenta=TipoCuenta.IdTipoCuenta and Cuenta.IdEstadoCuenta=EstadoCuenta.IdEstadoCuenta and Cuenta.IdMedio=Medio.IdMedio ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
@@ -119,7 +125,7 @@ namespace CedWebDB
             System.Text.StringBuilder a = new StringBuilder();
             a.Append("select * ");
             a.Append("from (select top {0} ROW_NUMBER() OVER (ORDER BY {1}) as ROW_NUM, ");
-            a.Append("Cuenta.IdCuenta, Cuenta.Nombre, Cuenta.Telefono, Cuenta.Email, Cuenta.Password, Cuenta.Pregunta, Cuenta.Respuesta, Cuenta.IdTipoCuenta, TipoCuenta.DescrTipoCuenta, Cuenta.IdEstadoCuenta, EstadoCuenta.DescrEstadoCuenta, Cuenta.UltimoNroLote, Cuenta.FechaAlta, Cuenta.CantidadEnviosMail, Cuenta.FechaUltimoReenvioMail, Cuenta.ActivCP, Cuenta.NroSerieDisco, Cuenta.IdMedio, Medio.DescrMedio, Cuenta.EmailSMS, Cuenta.RecibeAvisoAltaCuenta ");
+            a.Append("Cuenta.IdCuenta, Cuenta.Nombre, Cuenta.Telefono, Cuenta.Email, Cuenta.Password, Cuenta.Pregunta, Cuenta.Respuesta, Cuenta.IdTipoCuenta, TipoCuenta.DescrTipoCuenta, Cuenta.IdEstadoCuenta, EstadoCuenta.DescrEstadoCuenta, Cuenta.UltimoNroLote, Cuenta.FechaAlta, Cuenta.CantidadEnviosMail, Cuenta.FechaUltimoReenvioMail, Cuenta.ActivCP, Cuenta.NroSerieDisco, Cuenta.IdMedio, Medio.DescrMedio, Cuenta.EmailSMS, Cuenta.RecibeAvisoAltaCuenta, Cuenta.CantidadComprobantes, Cuenta.FechaUltimoComprobante, Cuenta.FechaVtoPremium ");
             a.Append("from Cuenta, TipoCuenta, EstadoCuenta, Medio ");
             a.Append("where Cuenta.IdTipoCuenta=TipoCuenta.IdTipoCuenta and Cuenta.IdEstadoCuenta=EstadoCuenta.IdEstadoCuenta and Cuenta.IdMedio=Medio.IdMedio ");
             a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
@@ -211,6 +217,24 @@ namespace CedWebDB
             a.Append("where Cuenta.IdCuenta='" + Cuenta.Id.ToString() + "' ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
+        public void CambiarTipo(CedWebEntidades.Cuenta Cuenta, CedWebEntidades.TipoCuenta NuevoTipoCuenta, DateTime FechaVtoPremium)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update Cuenta set ");
+            a.Append("IdTipoCuenta='" + NuevoTipoCuenta.Id + "', ");
+            a.Append("FechaVtoPremium='" + FechaVtoPremium.ToString("yyyyMMdd HH:mm:ss") + "' ");
+            a.Append("where Cuenta.IdCuenta='" + Cuenta.Id.ToString() + "' ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
+        }
+        public void CambiarTipo(CedWebEntidades.Cuenta Cuenta, CedWebEntidades.TipoCuenta NuevoTipoCuenta)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update Cuenta set ");
+            a.Append("IdTipoCuenta='" + NuevoTipoCuenta.Id + "', ");
+            a.Append("FechaVtoPremium='99991231' ");
+            a.Append("where Cuenta.IdCuenta='" + Cuenta.Id.ToString() + "' ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
+        }
         public void DepurarBajas()
         {
             StringBuilder a = new StringBuilder(string.Empty);
@@ -270,7 +294,7 @@ namespace CedWebDB
         public List<CedWebEntidades.Cuenta> DestinatariosAvisoAltaCuenta()
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("select Cuenta.IdCuenta, Cuenta.Nombre, Cuenta.Telefono, Cuenta.Email, Cuenta.Password, Cuenta.Pregunta, Cuenta.Respuesta, Cuenta.IdTipoCuenta, TipoCuenta.DescrTipoCuenta, Cuenta.IdEstadoCuenta, EstadoCuenta.DescrEstadoCuenta, Cuenta.UltimoNroLote, Cuenta.FechaAlta, Cuenta.CantidadEnviosMail, Cuenta.FechaUltimoReenvioMail, Cuenta.ActivCP, Cuenta.NroSerieDisco, Cuenta.IdMedio, Medio.DescrMedio, Cuenta.EmailSMS, Cuenta.RecibeAvisoAltaCuenta ");
+            a.Append("select Cuenta.IdCuenta, Cuenta.Nombre, Cuenta.Telefono, Cuenta.Email, Cuenta.Password, Cuenta.Pregunta, Cuenta.Respuesta, Cuenta.IdTipoCuenta, TipoCuenta.DescrTipoCuenta, Cuenta.IdEstadoCuenta, EstadoCuenta.DescrEstadoCuenta, Cuenta.UltimoNroLote, Cuenta.FechaAlta, Cuenta.CantidadEnviosMail, Cuenta.FechaUltimoReenvioMail, Cuenta.ActivCP, Cuenta.NroSerieDisco, Cuenta.IdMedio, Medio.DescrMedio, Cuenta.EmailSMS, Cuenta.RecibeAvisoAltaCuenta, Cuenta.CantidadComprobantes, Cuenta.FechaUltimoComprobante, Cuenta.FechaVtoPremium ");
             a.Append("from Cuenta, TipoCuenta, EstadoCuenta, Medio ");
             a.Append("where RecibeAvisoAltaCuenta=1 and EmailSMS<>'' ");
             a.Append("and Cuenta.IdTipoCuenta=TipoCuenta.IdTipoCuenta and Cuenta.IdEstadoCuenta=EstadoCuenta.IdEstadoCuenta and Cuenta.IdMedio=Medio.IdMedio ");
@@ -283,6 +307,12 @@ namespace CedWebDB
                 lista.Add(cuenta);
             }
             return lista;
+        }
+        public void RegistrarComprobante(CedWebEntidades.Cuenta Cuenta)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update Cuenta set Cuenta.CantidadComprobantes=Cuenta.CantidadComprobantes+1, FechaUltimoComprobante=getdate() from Cuenta where Cuenta.IdCuenta='" + Cuenta.Id.ToString() + "' ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
     }
 }

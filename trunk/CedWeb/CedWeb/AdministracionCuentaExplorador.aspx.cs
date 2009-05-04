@@ -160,17 +160,29 @@ namespace CedWeb
                     ActivCPButton.Enabled = true;
                     break;
             }
-            if (Cuenta.TipoCuenta.Id == "Prem")
+            switch (Cuenta.TipoCuenta.Id)
             {
-                switch (Cuenta.EstadoCuenta.Id)
-                {
-                    case "Vigente":
-                        SuspenderPremiumButton.Enabled = true;
-                        break;
-                    case "Suspend":
-                        RestablecerPremiumButton.Enabled = true;
-                        break;
-                }
+                case "Prem":
+                    switch (Cuenta.EstadoCuenta.Id)
+                    {
+                        case "Vigente":
+                            SuspenderPremiumButton.Enabled = true;
+                            DesactivarPremiumButton.Enabled = true;
+                            break;
+                        case "Suspend":
+                            RestablecerPremiumButton.Enabled = true;
+                            DesactivarPremiumButton.Enabled = true;
+                            break;
+                    }
+                    break;
+                case "Free":
+                    switch (Cuenta.EstadoCuenta.Id)
+                    {
+                        case "Vigente":
+                            ActivarPremiumButton.Enabled = true;
+                            break;
+                    }
+                    break;
             }
         }
         private void DeshabilitarAcciones()
@@ -181,6 +193,8 @@ namespace CedWeb
             ActivCPButton.Enabled = false;
             SuspenderPremiumButton.Enabled = false;
             RestablecerPremiumButton.Enabled = false;
+            ActivarPremiumButton.Enabled = false;
+            DesactivarPremiumButton.Enabled = false;
         }
         protected CedWebEntidades.Cuenta CuentaSeleccionada()
         {
@@ -265,6 +279,24 @@ namespace CedWeb
                 MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
             }
         }
+        protected void ActivarPremiumButton_Click(object sender, EventArgs e)
+        {
+            Session["CuentaPremiumActivar-Id"] = CuentaSeleccionada().Id;
+            Response.Redirect("~/CuentaPremiumActivar.aspx", true);
+        }
+        protected void DesactivarPremiumButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CedWebRN.Cuenta.DesactivarPremium(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
+                BindPagingGrid();
+                DesSeleccionarFilas();
+            }
+            catch (Exception ex)
+            {
+                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
+            }
+        }
         protected void DepurarButton_Click(object sender, EventArgs e)
         {
             try
@@ -280,7 +312,7 @@ namespace CedWeb
         }
         protected void SalirButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect((string)Session["ref"]);
+            Response.Redirect("~/Administracion.aspx", true);
         }
     }
 }
