@@ -1350,6 +1350,8 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 						FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
 						linea.descripcion = l.descripcion;
 						linea.alicuota_iva = l.alicuota_iva;
+						linea.alicuota_ivaSpecified = l.alicuota_ivaSpecified;
+						linea.importe_ivaSpecified = l.importe_ivaSpecified;
 						if (l.importes_moneda_origen==null)
 						{
 							linea.importe_total_articulo = l.importe_total_articulo;
