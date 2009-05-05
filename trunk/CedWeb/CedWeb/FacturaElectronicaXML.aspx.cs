@@ -438,6 +438,24 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			FeaEntidades.InterFacturas.cabecera compcab = new FeaEntidades.InterFacturas.cabecera();
 
 			FeaEntidades.InterFacturas.informacion_comprador infcompra = new FeaEntidades.InterFacturas.informacion_comprador();
+
+			if (!MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
+			{
+				Tipo_de_cambioLabel.Visible = true;
+				Tipo_de_cambioTextBox.Visible = true;
+				Tipo_de_cambioRequiredFieldValidator.Enabled = true;
+				Tipo_de_cambioRegularExpressionValidator.Enabled = true;
+			}
+			else
+			{
+				Tipo_de_cambioLabel.Visible = false;
+				Tipo_de_cambioTextBox.Visible = false;
+				Tipo_de_cambioTextBox.Text = null;
+				Tipo_de_cambioRequiredFieldValidator.Enabled = false;
+				Tipo_de_cambioRegularExpressionValidator.Enabled = false;
+			}
+
+			
 			if (!GLN_CompradorTextBox.Text.Equals(string.Empty))
 			{
 				infcompra.GLN = Convert.ToInt64(GLN_CompradorTextBox.Text);
@@ -1417,6 +1435,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 						Tipo_de_cambioLabel.Visible = true;
 						Tipo_de_cambioTextBox.Visible = true;
 						Tipo_de_cambioRequiredFieldValidator.Enabled = true;
+						Tipo_de_cambioRegularExpressionValidator.Enabled = true;
 					}
 					else
 					{
@@ -1424,6 +1443,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 						Tipo_de_cambioTextBox.Visible = false;
 						Tipo_de_cambioTextBox.Text = null;
 						Tipo_de_cambioRequiredFieldValidator.Enabled = false;
+						Tipo_de_cambioRegularExpressionValidator.Enabled = false;
 					}
 
 					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo');</script>");
@@ -1473,6 +1493,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			Tipo_de_cambioLabel.Visible = true;
 			Tipo_de_cambioTextBox.Visible = true;
 			Tipo_de_cambioRequiredFieldValidator.Enabled = true;
+			Tipo_de_cambioRegularExpressionValidator.Enabled = true;
 
 			for (int i = 0; i < listadelineas.Count; i++)
 			{
@@ -1490,6 +1511,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			Tipo_de_cambioTextBox.Visible = false;
 			Tipo_de_cambioTextBox.Text = null;
 			Tipo_de_cambioRequiredFieldValidator.Enabled = false;
+			Tipo_de_cambioRegularExpressionValidator.Enabled = false;
 
 			for (int i = 0; i < listadelineas.Count; i++)
 			{
