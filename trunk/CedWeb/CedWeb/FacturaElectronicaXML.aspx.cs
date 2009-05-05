@@ -103,7 +103,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					Id_LoteTextbox.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.UltimoNroLote.ToString();
 					Email_VendedorRequiredFieldValidator.Enabled = false;
 					GenerarButton.Text = "Enviar archivo XML al e-mail de la cuenta eFact (" + ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Email + ")";
-                    if (sesion.Cuenta.Id.ToLower()=="prueba")
+                    if (sesion.Cuenta.Id.ToLower() == "prueba" || sesion.Cuenta.Id.ToLower() == "pjeconde")
                     {
                         DescargarButton.Enabled = true;
                     }
