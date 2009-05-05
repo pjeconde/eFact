@@ -143,7 +143,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				{
 					CompradorDropDownList.Visible = true;
                     if (!CompradorDropDownList.Enabled) CompradorExclusivoPremiumLabel.Visible = true;
-                    CompradorExclusivoPremiumLabel.Visible = true;
 					CompradorDropDownList.DataValueField = "RazonSocial";
 					CompradorDropDownList.DataTextField = "RazonSocial";
 					CompradorDropDownList.DataSource = listacompradores;
