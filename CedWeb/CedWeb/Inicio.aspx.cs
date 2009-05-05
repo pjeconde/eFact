@@ -39,7 +39,7 @@ namespace CedWeb
                 }
                 else
                 {
-                    if (sesion.Cuenta.TipoCuenta.Id == "Admin")
+                    if (sesion.Cuenta.Id.ToLower() == "claudio.cedeira")
                     {
                         Response.Redirect("~/Administracion.aspx", true);
                     }
