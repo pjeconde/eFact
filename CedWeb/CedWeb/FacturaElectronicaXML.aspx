@@ -93,22 +93,18 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: center; height: 10px;">
-                                                </td>
-                                            </tr>
-                                            <tr>
                                                 <td>
                                                     <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
                                                         <tr>
-                                                            <td>
-                                                                <asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px"></asp:FileUpload>
+                                                            <td style="padding-top:5px">
+                                                                <asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px" ToolTip="Exclusivo SERVICIO PREMIUM"></asp:FileUpload>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>
-                                                                <asp:Button ID="FileUploadButton" runat="server" BorderColor="Gray" BorderStyle="NotSet"
-                                                                    BorderWidth="1px" CausesValidation="false" Height="25px" OnClick="FileUploadButton_Click"
-                                                                    Text="Completar datos automáticamente desde archivo xml seleccionado" />
+                                                            <td style="padding-top:5px">
+                                                                <asp:Button ID="FileUploadButton" runat="server" BackColor="peachpuff" BorderStyle="Solid" 
+                                                                    BorderWidth="1px" BorderColor="brown" ForeColor="brown" Font-Bold="true" CausesValidation="false" Height="25px" OnClick="FileUploadButton_Click"
+                                                                    Text="Completar datos automáticamente desde archivo xml seleccionado" ToolTip="Exclusivo SERVICIO PREMIUM"/>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -209,13 +205,13 @@
                                                                     </tr>
                                                                 </table>
                                                             </td>
-                                                            <td style="width: 240px" valign="middle" align="center">
-                                                                COMPROBANTE ELECTRÓNICO
-                                                                <br />
-                                                                EN
-                                                                <asp:DropDownList ID="MonedaComprobanteDropDownList" runat="server" SkinID="DropDownListVendedor"
-                                                                    AutoPostBack="True" OnSelectedIndexChanged="MonedaComprobanteDropDownList_SelectedIndexChanged">
-                                                                </asp:DropDownList></td>
+                                                            <td style="width: 240px; color:#A52A2A" valign="middle" align="center" style="">
+                                                                Comprobante electrónico en
+                                                                <asp:DropDownList ID="MonedaComprobanteDropDownList" runat="server" SkinID="DropDownListPremium" 
+                                                                    AutoPostBack="True" OnSelectedIndexChanged="MonedaComprobanteDropDownList_SelectedIndexChanged" Enabled="false">
+                                                                </asp:DropDownList>
+                                                                <asp:Label ID="MonedaComprobanteExclusivoPremiumLabel" runat="server" Font-Size="X-Small" Text="(exclusivo SERVICIO PREMIUM)" ForeColor="brown"></asp:Label>
+                                                            </td>
                                                         </tr>
                                                     </table>
                                                     <!-- DATOS DEL VENDEDOR -->
@@ -712,10 +708,12 @@
                                                     height: 10px; width: 740px">
                                                     <table border="0" cellpadding="0" cellspacing="0" style="width: 740px">
                                                         <tr>
-                                                            <td style="width: 100%">
-                                                                <asp:DropDownList ID="CompradorDropDownList" runat="server" SkinID="DropDownListComprador"
-                                                                    Visible="false" AutoPostBack="True" OnSelectedIndexChanged="CompradorDropDownList_SelectedIndexChanged">
+                                                            <td style="width: 100%" align="center">
+                                                                <asp:DropDownList ID="CompradorDropDownList" runat="server" SkinID="DropDownListPremium"
+                                                                    Visible="false" Enabled="false" AutoPostBack="True" OnSelectedIndexChanged="CompradorDropDownList_SelectedIndexChanged">
                                                                 </asp:DropDownList>
+                                                                <br />
+                                                                <asp:Label ID="CompradorExclusivoPremiumLabel" runat="server" Font-Size="X-Small" Text="(exclusivo SERVICIO PREMIUM)" ForeColor="brown" Visible="false"></asp:Label>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -1761,12 +1759,11 @@
                                     <td style="text-align:center; width:100%">
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
-                                                <td style="width:160px; padding-right:3px">
+                                                <td style="width:170px; padding-right:3px">
                                                     <asp:Button ID="DescargarButton" runat="server" OnClick="GenerarButton_Click" Height="60px"
-                                                        Width="100%" Text="Descargar archivo XML" BorderColor="Gray"
-                                                        BorderWidth="1px" BorderStyle="NotSet" Enabled="false" />
+                                                        Width="100%" Text="Descargar archivo XML" BackColor="peachpuff" BorderStyle="Solid" BorderWidth="1px" BorderColor="brown" ForeColor="brown" Font-Bold="true" ToolTip="Exclusivo SERVICIO PREMIUM"/>
                                                 </td>
-                                                <td style="width:620px">
+                                                <td style="width:610px">
                                                     <asp:Button ID="GenerarButton" runat="server" OnClick="GenerarButton_Click" Height="60px"
                                                         Width="100%" Text="Enviar archivo XML al e-mail del vendedor" BorderColor="Gray"
                                                         BorderWidth="1px" BorderStyle="NotSet" />

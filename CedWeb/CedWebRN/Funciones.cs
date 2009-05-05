@@ -16,10 +16,15 @@ namespace CedWebRN
             bool b = (Sesion.Cuenta.TipoCuenta.Id != "Admin" || Sesion.Cuenta.EstadoCuenta.Id != "Vigente");
             return b;
         }
+        public static bool EstaLogueadoUnUsuarioPremium(CedWebEntidades.Sesion Sesion)
+        {
+            bool b = (Sesion.Cuenta.TipoCuenta.Id == "Prem" && Sesion.Cuenta.EstadoCuenta.Id == "Vigente") ||
+                     (Sesion.Cuenta.TipoCuenta.Id == "Admin" && Sesion.Cuenta.EstadoCuenta.Id == "Vigente");
+            return b;
+        }
         public static bool NoEstaLogueadoUnUsuarioPremium(CedWebEntidades.Sesion Sesion)
         {
-            bool b = (Sesion.Cuenta.TipoCuenta.Id != "Prem" || Sesion.Cuenta.EstadoCuenta.Id != "Vigente");
-            return b;
+            return !EstaLogueadoUnUsuarioPremium(Sesion);
         }
         public static bool NoActivCP(CedWebEntidades.Sesion Sesion)
         {
