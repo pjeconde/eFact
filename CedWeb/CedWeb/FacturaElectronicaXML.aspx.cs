@@ -103,6 +103,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					Id_LoteTextbox.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.UltimoNroLote.ToString();
 					Email_VendedorRequiredFieldValidator.Enabled = false;
 					GenerarButton.Text = "Enviar archivo XML al e-mail de la cuenta eFact (" + ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Email + ")";
+                    if (sesion.Cuenta.Id.ToLower()=="prueba")
+                    {
+                        DescargarButton.Enabled = true;
+                    }
 				}
 				if (sesion.Cuenta.Vendedor.CUIT != 0)
 				{
@@ -824,47 +828,53 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			sw.Flush();
 			System.Xml.XmlWriter writerdememoria = new System.Xml.XmlTextWriter(m, System.Text.Encoding.GetEncoding("ISO-8859-1"));
 			x.Serialize(writerdememoria, lote);
+            m.Seek(0, System.IO.SeekOrigin.Begin);
 
-			System.Net.Mail.MailMessage mail;
-			if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id != null)
-			{
-				mail = new System.Net.Mail.MailMessage("facturaelectronica@cedeira.com.ar",
-					((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Email,
-					"Ced-eFact-Envío automático archivo XML:" + sb.ToString()
-					, string.Empty);
-			}
-			else
-			{
-				mail = new System.Net.Mail.MailMessage("facturaelectronica@cedeira.com.ar",
-					Email_VendedorTextBox.Text,
-					"Ced-eFact-Envío automático archivo XML:" + sb.ToString()
-					, string.Empty);
-			}
-			m.Seek(0, System.IO.SeekOrigin.Begin);
-
-			System.Net.Mime.ContentType contentType = new System.Net.Mime.ContentType();
-			contentType.MediaType = System.Net.Mime.MediaTypeNames.Application.Octet;
-			contentType.Name = sb.ToString();
-			System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment(m, contentType);
-
-			mail.Attachments.Add(attachment);
-			mail.BodyEncoding = System.Text.Encoding.UTF8;
-			mail.Body = AgregarBody();
-
-			string smtpXAmb = System.Configuration.ConfigurationManager.AppSettings["Ambiente"].ToString();
-
-			System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
-
-			if (smtpXAmb.Equals("DESA"))
-			{
-				smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
-			}
-			else
-			{
-				smtpClient.Host = "localhost";
-			}
-
-			smtpClient.Send(mail);
+            string smtpXAmb = System.Configuration.ConfigurationManager.AppSettings["Ambiente"].ToString();
+            System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
+            if (((Button)sender).ID == "DescargarButton")
+            {
+                //Descarga directa del XML
+                System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"Temp/" + sb.ToString()), System.IO.FileMode.Create);
+                m.WriteTo(fs);
+                fs.Close();
+                Response.Redirect("~/DescargaTemporarios.aspx?archivo=" + sb.ToString(), false);
+            }
+            else
+            {
+                //Envio por mail del XML
+                System.Net.Mail.MailMessage mail;
+                if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id != null)
+                {
+                    mail = new System.Net.Mail.MailMessage("facturaelectronica@cedeira.com.ar",
+                        ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Email,
+                        "Ced-eFact-Envío automático archivo XML:" + sb.ToString()
+                        , string.Empty);
+                }
+                else
+                {
+                    mail = new System.Net.Mail.MailMessage("facturaelectronica@cedeira.com.ar",
+                        Email_VendedorTextBox.Text,
+                        "Ced-eFact-Envío automático archivo XML:" + sb.ToString()
+                        , string.Empty);
+                }
+                System.Net.Mime.ContentType contentType = new System.Net.Mime.ContentType();
+                contentType.MediaType = System.Net.Mime.MediaTypeNames.Application.Octet;
+                contentType.Name = sb.ToString();
+                System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment(m, contentType);
+                mail.Attachments.Add(attachment);
+                mail.BodyEncoding = System.Text.Encoding.UTF8;
+                mail.Body = AgregarBody();
+                if (smtpXAmb.Equals("DESA"))
+                {
+                    smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
+                }
+                else
+                {
+                    smtpClient.Host = "localhost";
+                }
+                smtpClient.Send(mail);
+            }
 			m.Close();
             //Registro cantidad de comprobantes
             if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id != null)
