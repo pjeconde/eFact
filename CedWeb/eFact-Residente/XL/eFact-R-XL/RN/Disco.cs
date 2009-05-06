@@ -23,9 +23,11 @@ namespace eFact_R_XL.RN
             int i = 0;
             foreach (ManagementObject wmi_HD in searcher.Get())
             {
+                if (i >= discos.Count) { break; }
                 // get the hard drive from collection using index
                 eFact_R_XL.Entidades.Disco disco = (eFact_R_XL.Entidades.Disco)discos[i];
-                // get the hardware serial no.
+                // get the hardware serial no.    //wmi_HD["Name"]
+
                 if (wmi_HD["SerialNumber"] == null)
                 {
                     disco.NroSerie = "None";
