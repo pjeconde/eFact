@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/FacturaElectronicaExcel.aspx.cs" Inherits="CedWeb.FacturaElectronicaExcel"%>
+﻿<%@ Page AutoEventWireup="true" CodeFile="~/FacturaElectronicaExcel.aspx.cs" Inherits="CedWeb.FacturaElectronicaExcel"
+    Language="C#" MasterPageFile="~/CedWeb.master" Title="Factura Electrónica (versión Excel)" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado" Runat="Server">
     <table style="width:800px; text-align: left;" cellpadding="0" cellspacing="0" border="0" class="TextoComun">
         <tr>
