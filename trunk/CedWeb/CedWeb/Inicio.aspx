@@ -1,5 +1,6 @@
-<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/Inicio.aspx.cs"
-    Inherits="CedWeb.Inicio" MaintainScrollPositionOnPostback="true"%>
+<%@ Page AutoEventWireup="true" CodeFile="~/Inicio.aspx.cs" Inherits="CedWeb.Inicio"
+    Language="C#" MaintainScrollPositionOnPostback="true" MasterPageFile="~/CedWeb.master"
+    Title="Factura electrónica en Argentina (Interfacturas)" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado"
     runat="Server">

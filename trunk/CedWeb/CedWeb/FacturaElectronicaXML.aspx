@@ -205,7 +205,7 @@
                                                                     </tr>
                                                                 </table>
                                                             </td>
-                                                            <td style="width: 240px; color:#A52A2A" valign="middle" align="center" style="">
+                                                            <td style="width: 240px; color:#A52A2A" valign="middle" align="center">
                                                                 Comprobante electrónico en
                                                                 <asp:DropDownList ID="MonedaComprobanteDropDownList" runat="server" SkinID="DropDownListPremium" 
                                                                     AutoPostBack="True" OnSelectedIndexChanged="MonedaComprobanteDropDownList_SelectedIndexChanged" Enabled="false">
@@ -1094,7 +1094,7 @@
                                                                             <ItemStyle HorizontalAlign="left" />
                                                                             <FooterStyle HorizontalAlign="left" />
                                                                         </asp:TemplateField>
-                                                                        <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe total" HeaderStyle-Width="15%">
+                                                                        <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="15%" HeaderText="Importe">
                                                                             <ItemTemplate>
                                                                                 <asp:Label ID="lblimporte_total_articulo" Text='<%# Eval("importe_total_articulo") %>'
                                                                                     runat="server"></asp:Label>
@@ -1120,7 +1120,7 @@
                                                                             </FooterTemplate>
                                                                             <ItemStyle HorizontalAlign="Right" />
                                                                         </asp:TemplateField>
-                                                                        <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Alícuota" HeaderStyle-Width="8%">
+                                                                        <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="8%" HeaderText="Alic.IVA">
                                                                             <ItemTemplate>
                                                                                 <asp:Label ID="lbl_alicuota_articulo" runat="server" Text='<%# Eval("alicuota_iva") %>'></asp:Label>
                                                                             </ItemTemplate>
@@ -1132,7 +1132,7 @@
                                                                             </FooterTemplate>
                                                                             <ItemStyle HorizontalAlign="Right" />
                                                                         </asp:TemplateField>
-                                                                        <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe alícuota" HeaderStyle-Width="15%">
+                                                                        <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="15%" HeaderText="Importe IVA">
                                                                             <ItemTemplate>
                                                                                 <asp:Label ID="lbl_importe_alicuota_articulo" runat="server" Text='<%# Eval("importe_iva") %>'></asp:Label>
                                                                             </ItemTemplate>
