@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/Administracion.aspx.cs" Inherits="CedWeb.Administracion"%>
+<%@ Register Assembly="CedeiraUIWebForms" Namespace="CedeiraUIWebForms" TagPrefix="cc1" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado" Runat="Server">
     <table style="width:800px; height:500px; text-align: left;" cellpadding="0" cellspacing="0" border="0" class="TextoComun">
         <tr>
@@ -67,6 +68,85 @@
                                         (en la Configuración de su Cuenta eFact podrá ingresar
                                         <br />
                                          el 'Email para SMSs')
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td style="color:#A52A2A; font-weight:bold; padding-top:10px">
+                                        Ultimas altas de cuentas eFact
+                                        <br />
+                                        <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto" Width="315px" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" BackColor="peachpuff" Font-Bold="false" ForeColor="black">
+                                            <cc1:PagingGridView ID="UltimasAltasPagingGridView" runat="server"
+                                                                OnSorting="UltimasAltasPagingGridView_Sorting"
+                                                                OnPageIndexChanging="UltimasAltasPagingGridView_PageIndexChanging">
+                                                <Columns>
+                                                    <asp:BoundField DataField="FechaAlta" DataFormatString="{0:dd/MM/yyyy HH:mm}" HtmlEncode="false" HeaderText="Fecha y hora" SortExpression="FechaAlta">
+                                                        <headerstyle horizontalalign="left" wrap="False"/>
+                                                        <itemstyle wrap="False" horizontalalign="left"/>
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre">
+                                                        <headerstyle horizontalalign="left" wrap="False"/>
+                                                        <itemstyle wrap="False" horizontalalign="left"/>
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="IdTipoCuenta" HeaderText="Tipo" SortExpression="IdTipoCuenta">
+                                                        <headerstyle horizontalalign="left" wrap="False"/>
+                                                        <itemstyle wrap="False" horizontalalign="left"/>
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="IdEstadoCuenta" HeaderText="Estado" SortExpression="IdEstadoCuenta">
+                                                        <headerstyle horizontalalign="left" wrap="False"/>
+                                                        <itemstyle wrap="False" horizontalalign="left"/>
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email">
+                                                        <headerstyle horizontalalign="left" wrap="False"/>
+                                                        <itemstyle wrap="False" horizontalalign="left"/>
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id">
+                                                        <headerstyle horizontalalign="left" wrap="False"/>
+                                                        <itemstyle wrap="False" horizontalalign="left" Width="300px"/>
+                                                    </asp:BoundField>
+                                                </Columns>
+                                            </cc1:PagingGridView>
+                                        </asp:Panel>
+                                    </td>
+                                    <td style="color:#A52A2A; font-weight:bold; padding-top:10px; padding-left:20px">
+                                        Ultimos comprobantes generados
+                                        <br />
+                                        <asp:Panel ID="Panel" runat="server" ScrollBars="Auto" Width="315px" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" BackColor="peachpuff" Font-Bold="false" ForeColor="black">
+                                            <cc1:PagingGridView ID="UltimosComprobantesPagingGridView" runat="server"
+                                                                OnSorting="UltimasAltasPagingGridView_Sorting"
+                                                                OnPageIndexChanging="UltimasAltasPagingGridView_PageIndexChanging">
+                                                <Columns>
+                                                    <asp:BoundField DataField="FechaUltimoComprobante" DataFormatString="{0:dd/MM/yyyy HH:mm}" HtmlEncode="false" HeaderText="Fecha y hora" SortExpression="FechaUltimoComprobante">
+                                                        <headerstyle horizontalalign="left" wrap="False"/>
+                                                        <itemstyle wrap="False" horizontalalign="left"/>
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre">
+                                                        <headerstyle horizontalalign="left" wrap="False"/>
+                                                        <itemstyle wrap="False" horizontalalign="left"/>
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="CantidadComprobantes" HeaderText="qComprob." SortExpression="CantidadComprobantes">
+                                                        <headerstyle horizontalalign="center" wrap="False"/>
+                                                        <itemstyle wrap="False" horizontalalign="center"/>
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="IdTipoCuenta" HeaderText="Tipo" SortExpression="IdTipoCuenta">
+                                                        <headerstyle horizontalalign="left" wrap="False"/>
+                                                        <itemstyle wrap="False" horizontalalign="left"/>
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="IdEstadoCuenta" HeaderText="Estado" SortExpression="IdEstadoCuenta">
+                                                        <headerstyle horizontalalign="left" wrap="False"/>
+                                                        <itemstyle wrap="False" horizontalalign="left"/>
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email">
+                                                        <headerstyle horizontalalign="left" wrap="False"/>
+                                                        <itemstyle wrap="False" horizontalalign="left"/>
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id">
+                                                        <headerstyle horizontalalign="left" wrap="False"/>
+                                                        <itemstyle wrap="False" horizontalalign="left" Width="300px"/>
+                                                    </asp:BoundField>
+                                                </Columns>
+                                            </cc1:PagingGridView>
+                                        </asp:Panel>
                                     </td>
                                 </tr>
                             </table>

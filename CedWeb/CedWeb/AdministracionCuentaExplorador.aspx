@@ -160,7 +160,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding-top:10px">
+                                    <td style="padding-top:20px">
                                         <asp:Button ID="SalirButton" runat="server" Text="Salir" Width="100px" OnClick="SalirButton_Click"> </asp:Button>
                                     </td>
                                 </tr>
