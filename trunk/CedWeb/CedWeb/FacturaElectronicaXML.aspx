@@ -1490,6 +1490,11 @@
                                                     <table border="0" cellpadding="0" cellspacing="0" style="border-color:Gray; border-width:1px; border-style:solid">
                                                         <tr>
                                                             <td style="padding-left:5px; text-align:left; width:180px" class="TextoLabelFEAVendedorCh">
+                                                                Si ya solicitó la CAE, a la A.F.I.P., ingrésela aqui:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding-left:5px; padding-top:10px; text-align:left; width:180px" class="TextoLabelFEAVendedorCh">
                                                                 CAE
                                                             </td>
                                                         </tr>
