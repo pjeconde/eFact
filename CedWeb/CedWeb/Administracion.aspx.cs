@@ -93,7 +93,6 @@ namespace CedWeb
                 System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
                 lista = CedWebRN.Cuenta.Lista(UltimasAltasPagingGridView.PageIndex, UltimasAltasPagingGridView.PageSize, UltimasAltasPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
                 UltimasAltasPagingGridView.VirtualItemCount = CedWebRN.Cuenta.CantidadDeFilas((CedEntidades.Sesion)Session["Sesion"]);
-                ViewState["lista"] = lista;
                 UltimasAltasPagingGridView.DataSource = lista;
                 UltimasAltasPagingGridView.DataBind();
             }
@@ -112,8 +111,7 @@ namespace CedWeb
             {
                 System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
                 lista = CedWebRN.Cuenta.Lista(UltimasAltasPagingGridView.PageIndex, UltimasAltasPagingGridView.PageSize, UltimasAltasPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
-                ViewState["lista"] = lista;
-                UltimasAltasPagingGridView.DataSource = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
+                UltimasAltasPagingGridView.DataSource = lista;
                 UltimasAltasPagingGridView.DataBind();
             }
             catch (System.Threading.ThreadAbortException)
@@ -133,7 +131,6 @@ namespace CedWeb
                 System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
                 lista = CedWebRN.Cuenta.Lista(UltimosComprobantesPagingGridView.PageIndex, UltimosComprobantesPagingGridView.PageSize, UltimosComprobantesPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
                 UltimosComprobantesPagingGridView.VirtualItemCount = CedWebRN.Cuenta.CantidadDeFilas((CedEntidades.Sesion)Session["Sesion"]);
-                ViewState["lista"] = lista;
                 UltimosComprobantesPagingGridView.DataSource = lista;
                 UltimosComprobantesPagingGridView.DataBind();
             }
@@ -152,8 +149,7 @@ namespace CedWeb
             {
                 System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
                 lista = CedWebRN.Cuenta.Lista(UltimosComprobantesPagingGridView.PageIndex, UltimosComprobantesPagingGridView.PageSize, UltimosComprobantesPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
-                ViewState["lista"] = lista;
-                UltimosComprobantesPagingGridView.DataSource = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
+                UltimosComprobantesPagingGridView.DataSource = lista;
                 UltimosComprobantesPagingGridView.DataBind();
             }
             catch (System.Threading.ThreadAbortException)
