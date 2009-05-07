@@ -13,16 +13,21 @@
                             <!-- @@@ TITULO DE LA PAGINA @@@-->
                             <table cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                    <td style="width: 20px; height: 20px;">
+                                    <td style="width:20px; height:20px;">
                                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/CajaBrownPeru.ico" AlternateText="o"/>
                                     </td>
-                                    <td style="width:750px;">
+                                    <td>
                                         <asp:Label ID="TituloLabel" runat="server" Text="Administración" SkinID="TituloPagina"></asp:Label>
+                                    </td>
+                                    <td rowspan="7" style="color:#A52A2A; font-weight:bold; padding-left:20px" align="left" valign="bottom">
+                                        Medio
+                                        <br />
+                                        <asp:ImageMap ID="MedioImageMap" runat="server" BorderStyle="Solid" BorderColor="brown" BorderWidth="1px"></asp:ImageMap>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td style="padding-top:20px; width:680px" valign="middle" align="left">
+                                    <td style="padding-top:20px" valign="middle" align="left">
                                         <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/AdministracionCuentaExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Cuentas</asp:HyperLink>
                                         <asp:Label ID="CuentasLabel" runat="server" Text="" SkinID="TextoGrande"></asp:Label>
                                     </td>
@@ -49,22 +54,19 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td align="left" valign="middle" style="padding-top:20px">
-                                        <asp:Label ID="Label1" runat="server" Text="Medio" SkinID="TituloColor1Grande"></asp:Label>
+                                    <td style="padding-top:10px; padding-right:3px" align="right" valign="top">
+                                        <asp:CheckBox ID="RecibeAvisoAltaCuentaCheckBox" runat="server" OnCheckedChanged="RecibeAvisoAltaCuentaCheckBox_CheckedChanged" AutoPostBack="true" />
+                                    </td>
+                                    <td style="padding-top:10px" align="left" valign="middle">
+                                        Recibe aviso de alta de cuenta (SMS)
                                     </td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td align="left" valign="middle">
-                                        <asp:ImageMap ID="MedioImageMap" runat="server" BorderStyle="Solid" BorderColor="brown" BorderWidth="1px"></asp:ImageMap>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td style="padding-top:10px" align="left">
-                                        <asp:CheckBox ID="RecibeAvisoAltaCuentaCheckBox" runat="server" Text="Recibe aviso de alta de cuenta (SMS)" OnCheckedChanged="RecibeAvisoAltaCuentaCheckBox_CheckedChanged" AutoPostBack="true" />
-                                        (en la Configuración de su Cuenta eFact podrá ingresar el "Email para SMSs")
+                                    <td align="left">
+                                        (en la Configuración de su Cuenta eFact podrá ingresar
+                                        <br />
+                                         el 'Email para SMSs')
                                     </td>
                                 </tr>
                             </table>
