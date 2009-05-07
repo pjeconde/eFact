@@ -1490,22 +1490,22 @@
                                                     <table border="0" cellpadding="0" cellspacing="0" style="border-color:Gray; border-width:1px; border-style:solid">
                                                         <tr>
                                                             <td style="padding-left:5px; text-align:left; width:180px" class="TextoLabelFEAVendedorCh">
-                                                                Si ya solicitó la CAE a la A.F.I.P., ingrésela aqui:
+                                                                Si ya solicitó el C.A.E. a la A.F.I.P., ingrésela aqui:
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="padding-left:5px; padding-top:10px; text-align:left; width:180px" class="TextoLabelFEAVendedorCh">
-                                                                CAE
+                                                                C.A.E.
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="padding-left:5px; padding-top:3px" class="TextoLabelFEAVendedorDet">
-                                                                <asp:TextBox ID="CAETextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Opcional> MUY IMPORTANTE! Solo si YA TIENE GENERADO EL CAE, debe ingresar este dato. Si omite esta información, se generará una nueva factura ante la AFIP o bien se retornará un error por comprobante ya ingresado."></asp:TextBox>
+                                                                <asp:TextBox ID="CAETextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Opcional> MUY IMPORTANTE! Solo si YA TIENE GENERADO EL C.A.E., debe ingresar este dato. Si omite esta información, se generará una nueva factura ante la AFIP o bien se retornará un error por comprobante ya ingresado."></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="padding-left:5px; text-align:left; width:180px" class="TextoLabelFEAVendedorCh">
-                                                                Fecha de vencimiento CAE:
+                                                                Fecha de vencimiento C.A.E.:
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1516,7 +1516,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td style="padding-left:5px; text-align:left; width:180px" class="TextoLabelFEAVendedorCh">
-                                                                Fecha de obtención CAE:
+                                                                Fecha de obtención C.A.E.:
                                                             </td>
                                                         </tr>
                                                         <tr>
