@@ -88,6 +88,10 @@
                                                         <headerstyle horizontalalign="left" wrap="False"/>
                                                         <itemstyle wrap="False" horizontalalign="left"/>
                                                     </asp:BoundField>
+                                                    <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id">
+                                                        <headerstyle horizontalalign="left" wrap="False"/>
+                                                        <itemstyle wrap="False" horizontalalign="left" Width="300px"/>
+                                                    </asp:BoundField>
                                                     <asp:BoundField DataField="IdTipoCuenta" HeaderText="Tipo" SortExpression="IdTipoCuenta">
                                                         <headerstyle horizontalalign="left" wrap="False"/>
                                                         <itemstyle wrap="False" horizontalalign="left"/>
@@ -99,10 +103,6 @@
                                                     <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email">
                                                         <headerstyle horizontalalign="left" wrap="False"/>
                                                         <itemstyle wrap="False" horizontalalign="left"/>
-                                                    </asp:BoundField>
-                                                    <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id">
-                                                        <headerstyle horizontalalign="left" wrap="False"/>
-                                                        <itemstyle wrap="False" horizontalalign="left" Width="300px"/>
                                                     </asp:BoundField>
                                                 </Columns>
                                             </cc1:PagingGridView>
