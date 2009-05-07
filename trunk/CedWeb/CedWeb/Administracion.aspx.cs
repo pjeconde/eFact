@@ -50,6 +50,20 @@ namespace CedWeb
                         MedioImageMap.ImageUrl = "~/Imagenes/temp.bmp";
                         MedioImageMap.DataBind();
                         RecibeAvisoAltaCuentaCheckBox.Checked = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.RecibeAvisoAltaCuenta;
+
+                        UltimasAltasPagingGridView.PageSize = 6;
+                        System.Collections.Generic.List<CedWebEntidades.Cuenta> listaUltimasAltas;
+                        listaUltimasAltas = CedWebRN.Cuenta.Lista(UltimasAltasPagingGridView.PageIndex, UltimasAltasPagingGridView.PageSize, "FechaAlta DESC", (CedEntidades.Sesion)Session["Sesion"]);
+                        UltimasAltasPagingGridView.VirtualItemCount = CedWebRN.Cuenta.CantidadDeFilas((CedEntidades.Sesion)Session["Sesion"]);
+                        UltimasAltasPagingGridView.DataSource = listaUltimasAltas;
+                        UltimasAltasPagingGridView.DataBind();
+
+                        UltimosComprobantesPagingGridView.PageSize = 6;
+                        System.Collections.Generic.List<CedWebEntidades.Cuenta> listaUltimosComprobantes;
+                        listaUltimosComprobantes = CedWebRN.Cuenta.Lista(UltimosComprobantesPagingGridView.PageIndex, UltimosComprobantesPagingGridView.PageSize, "FechaUltimoComprobante DESC", (CedEntidades.Sesion)Session["Sesion"]);
+                        UltimosComprobantesPagingGridView.VirtualItemCount = CedWebRN.Cuenta.CantidadDeFilas((CedEntidades.Sesion)Session["Sesion"]);
+                        UltimosComprobantesPagingGridView.DataSource = listaUltimosComprobantes;
+                        UltimosComprobantesPagingGridView.DataBind();
                     }
                 }
             }
@@ -70,6 +84,86 @@ namespace CedWeb
         {
             ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.RecibeAvisoAltaCuenta = RecibeAvisoAltaCuentaCheckBox.Checked;
             CedWebRN.Cuenta.SetearRecibeAvisoAltaCuenta((CedWebEntidades.Cuenta)((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
+        }
+        protected void UltimasAltasPagingGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                UltimasAltasPagingGridView.PageIndex = e.NewPageIndex;
+                System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
+                lista = CedWebRN.Cuenta.Lista(UltimasAltasPagingGridView.PageIndex, UltimasAltasPagingGridView.PageSize, UltimasAltasPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
+                UltimasAltasPagingGridView.VirtualItemCount = CedWebRN.Cuenta.CantidadDeFilas((CedEntidades.Sesion)Session["Sesion"]);
+                ViewState["lista"] = lista;
+                UltimasAltasPagingGridView.DataSource = lista;
+                UltimasAltasPagingGridView.DataBind();
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+                Trace.Warn("Thread abortado");
+            }
+            catch (Exception ex)
+            {
+                CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepcion.aspx");
+            }
+        }
+        protected void UltimasAltasPagingGridView_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            try
+            {
+                System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
+                lista = CedWebRN.Cuenta.Lista(UltimasAltasPagingGridView.PageIndex, UltimasAltasPagingGridView.PageSize, UltimasAltasPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
+                ViewState["lista"] = lista;
+                UltimasAltasPagingGridView.DataSource = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
+                UltimasAltasPagingGridView.DataBind();
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+                Trace.Warn("Thread abortado");
+            }
+            catch (Exception ex)
+            {
+                CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepcion.aspx");
+            }
+        }
+        protected void UltimosComprobantesPagingGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                UltimosComprobantesPagingGridView.PageIndex = e.NewPageIndex;
+                System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
+                lista = CedWebRN.Cuenta.Lista(UltimosComprobantesPagingGridView.PageIndex, UltimosComprobantesPagingGridView.PageSize, UltimosComprobantesPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
+                UltimosComprobantesPagingGridView.VirtualItemCount = CedWebRN.Cuenta.CantidadDeFilas((CedEntidades.Sesion)Session["Sesion"]);
+                ViewState["lista"] = lista;
+                UltimosComprobantesPagingGridView.DataSource = lista;
+                UltimosComprobantesPagingGridView.DataBind();
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+                Trace.Warn("Thread abortado");
+            }
+            catch (Exception ex)
+            {
+                CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepcion.aspx");
+            }
+        }
+        protected void UltimosComprobantesPagingGridView_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            try
+            {
+                System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
+                lista = CedWebRN.Cuenta.Lista(UltimosComprobantesPagingGridView.PageIndex, UltimosComprobantesPagingGridView.PageSize, UltimosComprobantesPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
+                ViewState["lista"] = lista;
+                UltimosComprobantesPagingGridView.DataSource = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
+                UltimosComprobantesPagingGridView.DataBind();
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+                Trace.Warn("Thread abortado");
+            }
+            catch (Exception ex)
+            {
+                CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepcion.aspx");
+            }
         }
     }
 }
