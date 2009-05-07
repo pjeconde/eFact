@@ -111,10 +111,6 @@
                                     <td style="padding-top:20px" align="center">
                                         <asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="~/FacturaElectronicaActividadesAlcanzadas.aspx" SkinID="LinkMedianoClaro">Actividades alcanzadas por el Régimen de Factura Electrónica</asp:HyperLink>
                                         <br />
-                                        <asp:HyperLink ID="HyperLink11" runat="server"  NavigateUrl="~/FacturaElectronicaSYP.aspx" SkinID="LinkMedianoClaro">Guía de servicios y productos eFact ( tabla comparativa )</asp:HyperLink>
-                                        <br />
-                                        <asp:HyperLink ID="FEASYPHyperLink" runat="server"  NavigateUrl="~/EsquemaSolucioneseFact.aspx" SkinID="LinkMedianoClaro">Esquema de soluciones eFact ( gráfico )</asp:HyperLink>
-                                        <br />
                                         <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/FacturaElectronicaPreguntasFrec.aspx" SkinID="LinkMedianoClaro">Preguntas frecuentes</asp:HyperLink>
                                     </td>
                                 </tr>

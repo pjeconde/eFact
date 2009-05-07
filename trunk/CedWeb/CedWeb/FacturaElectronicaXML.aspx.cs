@@ -1605,4 +1605,15 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			((TextBox)InicioDeActividadesCompradorDatePickerWebUserControl.FindControl("txt_Date")).Text=string.Empty;
 		}
 	}
+    protected void CalcularTotalesButton_Click(object sender, EventArgs e)
+    {
+        if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+        {
+            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Esta funcionalidad es exclusiva del SERVICIO PREMIUM.  Contáctese con Cedeira Software Factory para acceder al servicio.');</script>");
+        }
+        else
+        {
+            //Calculo y asigno totales
+        }
+    }
 }
