@@ -72,10 +72,10 @@
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td style="color:#A52A2A; font-weight:bold; padding-top:10px">
-                                        Ultimas altas de cuentas eFact
+                                    <td style="color:#A52A2A; font-weight:bold; padding-top:10px" valign="top">
+                                        Ultimas altas de Cuentas
                                         <br />
-                                        <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto" Width="315px" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" BackColor="peachpuff" Font-Bold="false" ForeColor="black">
+                                        <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto" Width="315px" Height="159px" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" BackColor="peachpuff" Font-Bold="false" ForeColor="black">
                                             <cc1:PagingGridView ID="UltimasAltasPagingGridView" runat="server"
                                                                 OnSorting="UltimasAltasPagingGridView_Sorting"
                                                                 OnPageIndexChanging="UltimasAltasPagingGridView_PageIndexChanging">
@@ -108,13 +108,13 @@
                                             </cc1:PagingGridView>
                                         </asp:Panel>
                                     </td>
-                                    <td style="color:#A52A2A; font-weight:bold; padding-top:10px; padding-left:20px">
-                                        Ultimos comprobantes generados
+                                    <td style="color:#A52A2A; font-weight:bold; padding-top:10px; padding-left:20px" valign="top">
+                                        Ultimos Comprobantes generados
                                         <br />
-                                        <asp:Panel ID="Panel" runat="server" ScrollBars="Auto" Width="315px" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" BackColor="peachpuff" Font-Bold="false" ForeColor="black">
+                                        <asp:Panel ID="Panel" runat="server" ScrollBars="Auto" Width="315px" Height="159px" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" BackColor="peachpuff" Font-Bold="false" ForeColor="black">
                                             <cc1:PagingGridView ID="UltimosComprobantesPagingGridView" runat="server"
-                                                                OnSorting="UltimasAltasPagingGridView_Sorting"
-                                                                OnPageIndexChanging="UltimasAltasPagingGridView_PageIndexChanging">
+                                                                OnSorting="UltimosComprobantesPagingGridView_Sorting"
+                                                                OnPageIndexChanging="UltimosComprobantesPagingGridView_PageIndexChanging">
                                                 <Columns>
                                                     <asp:BoundField DataField="FechaUltimoComprobante" DataFormatString="{0:dd/MM/yyyy HH:mm}" HtmlEncode="false" HeaderText="Fecha y hora" SortExpression="FechaUltimoComprobante">
                                                         <headerstyle horizontalalign="left" wrap="False"/>
