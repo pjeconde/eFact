@@ -1462,11 +1462,11 @@
                                     <td style="text-align: center">
                                         <table style="width: 782px" border="0" cellpadding="0" cellspacing="0">
                                             <tr>
-                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                <td rowspan="5" style="width: 1px; background-color: Gray;">
                                                 </td>
                                                 <td colspan="3" style="height: 1px; background-color: Gray;">
                                                 </td>
-                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                <td rowspan="5" style="width: 1px; background-color: Gray;">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1474,98 +1474,70 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3" style="text-align: center;" class="TextoResaltado">
+                                                <td colspan="3" style="text-align:center" class="TextoResaltado">
                                                     RESUMEN FINAL
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3" style="text-align: center; height: 10px;">
+                                                <td colspan="2" style="text-align:right;" class="TextoResaltado">
+                                                </td>
+                                                <td align="right" style="padding-right:5px" class="TextoResaltado">
+                                                    <asp:Button ID="CalcularTotalesButton" runat="server" BackColor="peachpuff" BorderStyle="Solid" BorderWidth="1px" BorderColor="brown" ForeColor="brown" Font-Bold="true" CausesValidation="false" Height="25px" Width="184" Text="Calcular totales" ToolTip="Exclusivo SERVICIO PREMIUM" OnClick="CalcularTotalesButton_Click"/>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: center">
-                                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
+                                                <td align="center" valign="bottom" style="padding-bottom:35px; padding-left:5px">
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="border-color:Gray; border-width:1px; border-style:solid">
                                                         <tr>
-                                                            <td style="width: 370px" align="center">
-                                                                <table style="width: 335px" border="0" cellpadding="0" cellspacing="0">
-                                                                    <tr>
-                                                                        <td rowspan="2" style="width: 1px; background-color: Gray;">
-                                                                        </td>
-                                                                        <td colspan="3" style="height: 1px; background-color: Gray;">
-                                                                        </td>
-                                                                        <td rowspan="2" style="width: 1px; background-color: Gray;">
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td style="width: 9px;">
-                                                                        </td>
-                                                                        <td style="width: 315px">
-                                                                            <table border="0" cellpadding="0" cellspacing="0" style="background-color: White;">
-                                                                                <tr>
-                                                                                    <td style="width: 120px;" class="TextoLabelFEAVendedorCh">
-                                                                                        CAE:
-                                                                                    </td>
-                                                                                    <td style="width: 10px;">
-                                                                                    </td>
-                                                                                    <td class="TextoLabelFEAVendedorDet">
-                                                                                        <asp:TextBox ID="CAETextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Opcional> MUY IMPORTANTE! Solo si YA TIENE GENERADO EL CAE, debe ingresar este dato. Si omite esta información, se generará una nueva factura ante la AFIP o bien se retornará un error por comprobante ya ingresado."></asp:TextBox>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td style="width: 120px;" class="TextoLabelFEAVendedorCh">
-                                                                                        Fecha de vencimiento CAE:
-                                                                                    </td>
-                                                                                    <td style="width: 10px;">
-                                                                                    </td>
-                                                                                    <td style="padding-top: 3px; text-align: left;">
-                                                                                        <uc1:DatePickerWebUserControl ID="FechaCAEVencimientoDatePickerWebUserControl" runat="server"
-                                                                                            TextCssClass="DatePickerFecha" />
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td style="width: 120px;" class="TextoLabelFEAVendedorCh">
-                                                                                        Fecha de obtención CAE:
-                                                                                    </td>
-                                                                                    <td style="width: 10px;">
-                                                                                    </td>
-                                                                                    <td style="padding-top: 3px; text-align: left;">
-                                                                                        <uc1:DatePickerWebUserControl ID="FechaCAEObtencionDatePickerWebUserControl" runat="server"
-                                                                                            TextCssClass="DatePickerFecha" />
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td style="height: 5px">
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
-                                                                        </td>
-                                                                        <td style="width: 9px;">
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="5" style="height: 1px; background-color: Gray;">
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
+                                                            <td style="padding-left:5px; text-align:left; width:180px" class="TextoLabelFEAVendedorCh">
+                                                                CAE
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding-left:5px; padding-top:3px" class="TextoLabelFEAVendedorDet">
+                                                                <asp:TextBox ID="CAETextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Opcional> MUY IMPORTANTE! Solo si YA TIENE GENERADO EL CAE, debe ingresar este dato. Si omite esta información, se generará una nueva factura ante la AFIP o bien se retornará un error por comprobante ya ingresado."></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding-left:5px; text-align:left; width:180px" class="TextoLabelFEAVendedorCh">
+                                                                Fecha de vencimiento CAE:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding-left:5px; padding-top:3px">
+                                                                <uc1:DatePickerWebUserControl ID="FechaCAEVencimientoDatePickerWebUserControl" runat="server"
+                                                                    TextCssClass="DatePickerFecha" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding-left:5px; text-align:left; width:180px" class="TextoLabelFEAVendedorCh">
+                                                                Fecha de obtención CAE:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding-left:5px; padding-top:3px">
+                                                                <uc1:DatePickerWebUserControl ID="FechaCAEObtencionDatePickerWebUserControl" runat="server" TextCssClass="DatePickerFecha" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="height: 5px">
                                                             </td>
                                                         </tr>
                                                     </table>
                                                 </td>
-                                                <td rowspan="2" style="width: 40px; background-image: url('Imagenes/bgFEA-C.jpg');
-                                                    background-repeat: repeat-y;">
-                                                </td>
+                                                <td></td>
                                                 <td valign="top" align="left">
-                                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
+                                                    <table border="0" cellpadding="0" cellspacing="0">
                                                         <tr>
-                                                            <td class="TextoLabelFEAVendedor">
+                                                            <td style="width:390px" class="TextoLabelFEAVendedor">
                                                                 <asp:RegularExpressionValidator ID="ImporteTotalNetoGravadoRegularExpressionValidator"
                                                                     runat="server" ControlToValidate="Importe_Total_Neto_Gravado_ResumenTextBox"
                                                                     ErrorMessage="error de formateo en importe total neto gravado" ValidationExpression="[0-9]+(\.[0-9]+)?"
                                                                     SetFocusOnError="True">* </asp:RegularExpressionValidator>
                                                                 <asp:RequiredFieldValidator ID="Importe_Total_Neto_Gravado_ResumenRequiredFieldValidator"
                                                                     runat="server" ControlToValidate="Importe_Total_Neto_Gravado_ResumenTextBox"
-                                                                    ErrorMessage="importe total neto gravado" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
-                                                                total neto gravado:
+                                                                    ErrorMessage="importe total neto gravado" SetFocusOnError="True">* </asp:RequiredFieldValidator>
+                                                                    Importe total neto gravado:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Importe_Total_Neto_Gravado_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
@@ -1573,7 +1545,7 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="TextoLabelFEAVendedor">
+                                                            <td style="width:390px" class="TextoLabelFEAVendedor">
                                                                 <asp:RegularExpressionValidator ID="Importe_Total_Concepto_No_gravadoRegularExpressionValidator"
                                                                     runat="server" ControlToValidate="Importe_Total_Concepto_No_Gravado_ResumenTextBox"
                                                                     ErrorMessage="error de formateo en importe total de conceptos que no integren el precio neto gravado"
@@ -1581,8 +1553,8 @@
                                                                 <asp:RequiredFieldValidator ID="Importe_Total_Concepto_No_Gravado_ResumenRequiredFieldValidator"
                                                                     runat="server" ControlToValidate="Importe_Total_Concepto_No_Gravado_ResumenTextBox"
                                                                     ErrorMessage="importe total de conceptos que no integren el precio neto gravado"
-                                                                    SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe total de conceptos
-                                                                que no integren el precio neto gravado:
+                                                                    SetFocusOnError="True">* </asp:RequiredFieldValidator>
+                                                                Importe total de conceptos que no integren el precio neto gravado:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Importe_Total_Concepto_No_Gravado_ResumenTextBox" runat="server"
@@ -1590,15 +1562,15 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="TextoLabelFEAVendedor">
+                                                            <td style="width:390px" class="TextoLabelFEAVendedor">
                                                                 <asp:RegularExpressionValidator ID="Importe_Operaciones_ExentasRegularExpressionValidator"
                                                                     runat="server" ControlToValidate="Importe_Operaciones_Exentas_ResumenTextBox"
                                                                     ErrorMessage="error de formateo en importe de operaciones exentas" ValidationExpression="[0-9]+(\.[0-9]+)?"
                                                                     SetFocusOnError="True">* </asp:RegularExpressionValidator>
                                                                 <asp:RequiredFieldValidator ID="Importe_Operaciones_Exentas_ResumenRequiredFieldValidator"
                                                                     runat="server" ControlToValidate="Importe_Operaciones_Exentas_ResumenTextBox"
-                                                                    ErrorMessage="importe de operaciones exentas" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
-                                                                de operaciones exentas:
+                                                                    ErrorMessage="importe de operaciones exentas" SetFocusOnError="True">* </asp:RequiredFieldValidator>
+                                                                Importe de operaciones exentas:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Importe_Operaciones_Exentas_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
@@ -1606,39 +1578,40 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="TextoLabelFEAVendedor">
+                                                            <td style="width:390px" class="TextoLabelFEAVendedor">
                                                                 <asp:RegularExpressionValidator ID="Impuesto_LiqRegularExpressionValidator" runat="server"
                                                                     ControlToValidate="Impuesto_Liq_ResumenTextBox" ErrorMessage="error de formateo en importe IVA Responsable inscripto"
                                                                     SetFocusOnError="True" ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator>
                                                                 <asp:RequiredFieldValidator ID="Impuesto_Liq_ResumenRequiredFieldValidator" runat="server"
                                                                     ControlToValidate="Impuesto_Liq_ResumenTextBox" ErrorMessage="importe de IVA Responsable inscripto"
-                                                                    SetFocusOnError="True">* </asp:RequiredFieldValidator>IVA Responsable inscripto:
+                                                                    SetFocusOnError="True">* </asp:RequiredFieldValidator>
+                                                                IVA Responsable inscripto:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Impuesto_Liq_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
                                                                     ToolTip="<Obligatorio> En el caso que no informe este campo, debe ingresar 0 (cero).El separador de decimales a utilizar es el punto"></asp:TextBox></td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="TextoLabelFEAVendedor">
+                                                            <td style="width:390px" class="TextoLabelFEAVendedor">
                                                                 <asp:RegularExpressionValidator ID="Impuesto_Liq_RniRegularExpressionValidator" runat="server"
                                                                     ControlToValidate="Impuesto_Liq_Rni_ResumenTextBox" ErrorMessage="error de formateo en impuesto liquidado a RNI o percepción a no categorizados(IVA R.G. 2126)"
                                                                     SetFocusOnError="True" ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator>
                                                                 <asp:RequiredFieldValidator ID="Impuesto_Liq_Rni_ResumenRequiredFieldValidator" runat="server"
                                                                     ControlToValidate="Impuesto_Liq_Rni_ResumenTextBox" ErrorMessage="impuesto liquidado a RNI o percepción a no categorizados(IVA R.G. 2126)"
-                                                                    SetFocusOnError="True">* </asp:RequiredFieldValidator>Impuesto liquidado a RNI
-                                                                o percepción a no categorizados(IVA R.G. 2126):
+                                                                    SetFocusOnError="True">* </asp:RequiredFieldValidator>
+                                                                Impuesto liquidado a RNI o percepción a no categorizados<br />(IVA R.G. 2126):
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Impuesto_Liq_Rni_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
                                                                     ToolTip="<Obligatorio> En el caso que no informe este campo, debe ingresar 0 (cero).El separador de decimales a utilizar es el punto"></asp:TextBox></td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="TextoLabelFEAVendedor">
+                                                            <td style="width:390px" class="TextoLabelFEAVendedor">
                                                                 <asp:RegularExpressionValidator ID="Importe_Total_Impuestos_MunicipalesResumenRegularExpressionValidator"
                                                                     runat="server" ControlToValidate="Importe_Total_Impuestos_Municipales_ResumenTextBox"
                                                                     ErrorMessage="error de formateo en importe total impuestos municipales" ValidationExpression="[0-9]+(\.[0-9]+)?"
-                                                                    SetFocusOnError="True">*</asp:RegularExpressionValidator>Importe total impuestos
-                                                                municipales:
+                                                                    SetFocusOnError="True">*</asp:RegularExpressionValidator>
+                                                                Importe total impuestos municipales:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Importe_Total_Impuestos_Municipales_ResumenTextBox" runat="server"
@@ -1646,12 +1619,12 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="TextoLabelFEAVendedor">
+                                                            <td style="width:390px" class="TextoLabelFEAVendedor">
                                                                 <asp:RegularExpressionValidator ID="Importe_Total_Impuestos_Nacionales_ResumenTextBoxResumenRegularExpressionValidator"
                                                                     runat="server" ControlToValidate="Importe_Total_Impuestos_Nacionales_ResumenTextBox"
                                                                     ErrorMessage="error de formateo en importe total impuestos nacionales" ValidationExpression="[0-9]+(\.[0-9]+)?"
-                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator>Importe total impuestos
-                                                                nacionales:
+                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator>
+                                                                Importe total impuestos nacionales:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Importe_Total_Impuestos_Nacionales_ResumenTextBox" runat="server"
@@ -1659,12 +1632,12 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="TextoLabelFEAVendedor">
+                                                            <td style="width:390px" class="TextoLabelFEAVendedor">
                                                                 <asp:RegularExpressionValidator ID="Importe_Total_Ingresos_Brutos_ResumenTextBoxResumenRegularExpressionValidator"
                                                                     runat="server" ControlToValidate="Importe_Total_Ingresos_Brutos_ResumenTextBox"
                                                                     ErrorMessage="error de formateo en importe total ingresos brutos" ValidationExpression="[0-9]+(\.[0-9]+)?"
-                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator>Importe total ingresos
-                                                                brutos:
+                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator>
+                                                                Importe total ingresos brutos:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Importe_Total_Ingresos_Brutos_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
@@ -1672,12 +1645,12 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="TextoLabelFEAVendedor">
+                                                            <td style="width:390px" class="TextoLabelFEAVendedor">
                                                                 <asp:RegularExpressionValidator ID="Importe_Total_Impuestos_Internos_ResumenTextBoxResumenRegularExpressionValidator"
                                                                     runat="server" ControlToValidate="Importe_Total_Impuestos_Internos_ResumenTextBox"
                                                                     ErrorMessage="error de formateo en importe total impuestos internos" ValidationExpression="[0-9]+(\.[0-9]+)?"
-                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator>Importe total impuestos
-                                                                internos:
+                                                                    SetFocusOnError="True">* </asp:RegularExpressionValidator>
+                                                                Importe total impuestos internos:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Importe_Total_Impuestos_Internos_ResumenTextBox" runat="server"
@@ -1685,13 +1658,13 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="TextoLabelFEAVendedor">
+                                                            <td style="width:390px" class="TextoLabelFEAVendedor">
                                                                 <asp:RegularExpressionValidator ID="Importe_Total_FacturaRegularExpressionValidator"
                                                                     runat="server" ControlToValidate="Importe_Total_Factura_ResumenTextBox" ErrorMessage="error de formateo en importe total"
                                                                     ValidationExpression="[0-9]+(\.[0-9]+)?" SetFocusOnError="True">* </asp:RegularExpressionValidator><asp:RequiredFieldValidator
                                                                         ID="Importe_Total_Factura_ResumenRequiredFieldValidator" runat="server" ControlToValidate="Importe_Total_Factura_ResumenTextBox"
-                                                                        ErrorMessage="importe total" SetFocusOnError="True">* </asp:RequiredFieldValidator>Importe
-                                                                total:
+                                                                        ErrorMessage="importe total" SetFocusOnError="True">* </asp:RequiredFieldValidator>
+                                                                Importe total:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorDet">
                                                                 <asp:TextBox ID="Importe_Total_Factura_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
@@ -1699,7 +1672,7 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="TextoLabelFEAVendedor">
+                                                            <td style="width:390px" class="TextoLabelFEAVendedor">
                                                                 <asp:RegularExpressionValidator ID="Tipo_de_cambioRegularExpressionValidator" runat="server"
                                                                     ControlToValidate="Tipo_de_cambioTextBox" ErrorMessage="error de formateo en tipo de cambio"
                                                                     SetFocusOnError="True" ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator>
