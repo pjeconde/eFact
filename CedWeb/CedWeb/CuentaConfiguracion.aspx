@@ -133,6 +133,18 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td align="right" style="padding-top:3px; padding-right:5px">
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server"  SetFocusOnError="True"
+                                            ControlToValidate="PaginaDefaultDropDownList" ErrorMessage="Página de inicio">
+                                            <asp:Label ID="Label26" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RequiredFieldValidator>
+                                        <asp:Label ID="Label25" runat="server" Text="Página de inicio"></asp:Label>
+                                    </td>
+                                    <td colspan="2" align="left" style="padding-top:3px">
+                                        <asp:DropDownList ID="PaginaDefaultDropDownList" Width="360px" runat="server" TabIndex="4"></asp:DropDownList>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td></td>
                                     <td align="left" style="padding-top:10px">
                                         <asp:Button ID="GuardarButton" runat="server" Text="Guardar" Width="100px" OnClick="GuardarButton_Click" TabIndex="4">

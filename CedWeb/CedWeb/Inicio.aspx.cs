@@ -39,14 +39,7 @@ namespace CedWeb
                 }
                 else
                 {
-                    if (sesion.Cuenta.Id.ToLower() == "claudio.cedeira")
-                    {
-                        Response.Redirect("~/Administracion.aspx", true);
-                    }
-                    else
-                    {
-                        Response.Redirect("~/FacturaElectronica.aspx", true);
-                    }
+                    Response.Redirect("~/" + sesion.Cuenta.PaginaDefault.URL + ".aspx", true);
                 }
 			}
 			catch (System.Threading.ThreadAbortException)
