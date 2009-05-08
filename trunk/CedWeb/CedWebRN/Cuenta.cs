@@ -96,6 +96,7 @@ namespace CedWebRN
         {
             Cuenta.TipoCuenta.Id = "Free";
             Cuenta.EstadoCuenta.Id = "PteConf";
+            Cuenta.PaginaDefault.Id = CedWebRN.PaginaDefault.Predeterminada(Cuenta.TipoCuenta, Sesion).Id;
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             cuenta.Crear(Cuenta);
             EnviarMail("Ahora dispone de una nueva cuenta eFact", Cuenta);

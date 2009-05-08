@@ -23,6 +23,11 @@ namespace CedWeb
                 EmailTextBox.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Email;
                 EmailSMSTextBox.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.EmailSMS;
                 UltimoNroLoteTextBox.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.UltimoNroLote.ToString();
+                PaginaDefaultDropDownList.DataValueField = "Id";
+                PaginaDefaultDropDownList.DataTextField = "Descr";
+                PaginaDefaultDropDownList.DataSource = CedWebRN.PaginaDefault.Lista(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
+                PaginaDefaultDropDownList.SelectedValue = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.PaginaDefault.Id; ;
+                DataBind();
                 CancelarButton.Focus();
             }
         }
@@ -35,6 +40,7 @@ namespace CedWeb
             cuenta.Telefono = TelefonoTextBox.Text;
             cuenta.EmailSMS = EmailSMSTextBox.Text;
             cuenta.UltimoNroLote = Convert.ToInt64(UltimoNroLoteTextBox.Text);
+            cuenta.PaginaDefault.Id = Convert.ToString(PaginaDefaultDropDownList.SelectedValue);
             try
             {
                 CedWebRN.Cuenta.Configurar(cuenta, (CedEntidades.Sesion)Session["Sesion"]);
@@ -45,6 +51,7 @@ namespace CedWeb
                 EmailTextBox.Enabled = false;
                 EmailSMSTextBox.Enabled = false;
                 UltimoNroLoteTextBox.Enabled = false;
+                PaginaDefaultDropDownList.Enabled = false;
                 MsgErrorLabel.Text = "Se ha registrado la nueva configuración satisfactoriamente.";
             }
             catch (Exception ex)

@@ -29,6 +29,7 @@ namespace CedWebEntidades
         private int cantidadComprobantes;
         private DateTime fechaUltimoComprobante;
         private DateTime fechaVtoPremium;
+        private PaginaDefault paginaDefault;
 
         public Cuenta()
         {
@@ -36,6 +37,7 @@ namespace CedWebEntidades
             estadoCuenta = new EstadoCuenta();
             vendedor = new Vendedor();
             medio = new Medio();
+            paginaDefault = new PaginaDefault();
         }
 
         public string Id
@@ -331,6 +333,17 @@ namespace CedWebEntidades
             get
             {
                 return fechaVtoPremium;
+            }
+        }
+        public PaginaDefault PaginaDefault
+        {
+            set
+            {
+                paginaDefault = value;
+            }
+            get
+            {
+                return paginaDefault;
             }
         }
     }
