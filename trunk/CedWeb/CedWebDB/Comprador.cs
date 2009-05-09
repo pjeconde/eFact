@@ -129,14 +129,17 @@ namespace CedWebDB
             a.Append("and Comprador.RazonSocial='" + Comprador.RazonSocial + "' ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
-        public List<CedWebEntidades.Comprador> Lista(CedWebEntidades.Cuenta Cuenta)
+        public List<CedWebEntidades.Comprador> Lista(CedWebEntidades.Cuenta Cuenta, bool ConSeleccionarComprador)
         {
 			List<CedWebEntidades.Comprador> lista = new List<CedWebEntidades.Comprador>();
 			if (Cuenta.Id != null)
 			{
-				CedWebEntidades.Comprador seleccionar = new CedWebEntidades.Comprador();
-				seleccionar.RazonSocial = "Seleccionar comprador";
-				lista.Add(seleccionar);
+                if (ConSeleccionarComprador)
+                {
+                    CedWebEntidades.Comprador seleccionar = new CedWebEntidades.Comprador();
+                    seleccionar.RazonSocial = "Seleccionar comprador";
+                    lista.Add(seleccionar);
+                }
 				System.Text.StringBuilder a = new StringBuilder();
 				a.Append("select ");
 				a.Append("Comprador.IdCuenta, Cuenta.Nombre as NombreCuenta, Comprador.RazonSocial, Comprador.Calle, Comprador.Nro, Comprador.Piso, Comprador.Depto, Comprador.Sector, Comprador.Torre, Comprador.Manzana, Comprador.Localidad, Comprador.IdProvincia, Comprador.DescrProvincia, Comprador.CodPost, Comprador.NombreContacto, Comprador.EmailContacto, Comprador.TelefonoContacto, Comprador.IdTipoDoc, Comprador.DescrTipoDoc, Comprador.NroDoc, Comprador.IdCondIVA, Comprador.DescrCondIVA, Comprador.NroIngBrutos, Comprador.IdCondIngBrutos, Comprador.DescrCondIngBrutos, Comprador.GLN, Comprador.CodigoInterno, Comprador.FechaInicioActividades ");

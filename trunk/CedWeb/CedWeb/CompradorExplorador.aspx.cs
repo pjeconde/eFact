@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Configuration;
+using System.Collections.Generic;
 using System.Collections;
 using System.Web;
 using System.Web.Security;
@@ -169,9 +170,38 @@ namespace CedWeb
             System.Collections.Generic.List<CedWebEntidades.Comprador> lista = (System.Collections.Generic.List<CedWebEntidades.Comprador>)ViewState["lista"];
             return (CedWebEntidades.Comprador)lista[CompradorPagingGridView.SelectedIndex];
         }
+        protected void BackupButton_Click(object sender, EventArgs e)
+        {
+            if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+            {
+                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Esta funcionalidad es exclusiva del SERVICIO PREMIUM.  Contáctese con Cedeira Software Factory para acceder al servicio.');</script>");
+            }
+            else
+            {
+                //Download de XML de Compradores
+                List<CedWebEntidades.Comprador> compradores = CedWebRN.Comprador.Lista(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedEntidades.Sesion)Session["Sesion"], false);
+                if (compradores.Count == 0)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('No hay compradores para descargar.');</script>");
+                }
+                else
+                {
+                    System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(compradores.GetType());
+                    System.IO.MemoryStream m = new System.IO.MemoryStream();
+                    System.Xml.XmlWriter writerdememoria = new System.Xml.XmlTextWriter(m, System.Text.Encoding.GetEncoding("ISO-8859-1"));
+                    x.Serialize(writerdememoria, compradores);
+                    m.Seek(0, System.IO.SeekOrigin.Begin);
+                    string nombreArchivo = "eFact-Compradores-" + ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id.Replace(".",String.Empty).ToUpper() + ".xml";
+                    System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"Temp/" + nombreArchivo), System.IO.FileMode.Create);
+                    m.WriteTo(fs);
+                    fs.Close();
+                    Response.Redirect("~/DescargaTemporarios.aspx?archivo=" + nombreArchivo, false);
+                }
+
+            }
+        }
         protected void SalirButton_Click(object sender, EventArgs e)
         {
-            //Response.Redirect((string)Session["ref"]);
             Response.Redirect("~/FacturaElectronica.aspx", true);
         }
     }

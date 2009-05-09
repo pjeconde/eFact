@@ -169,6 +169,13 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td style="padding-top:20px" align="center">
+                                        <asp:Button ID="BackupButton" runat="server" Text="Descargar" Height="50px" Width="100px" OnClick="BackupButton_Click" BackColor="peachpuff" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" ForeColor="brown" Font-Bold="true" ToolTip="Exclusivo SERVICIO PREMIUM"> </asp:Button>
+                                        <br />
+                                        <asp:Label ID="BackupLabel" runat="server" Font-Size="X-Small" Text="(copia de seguridad)" ForeColor="brown" ToolTip="Exclusivo SERVICIO PREMIUM"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td align="center" style="padding-top:10px">
                                         <asp:Label ID="MsgErrorLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
                                         <asp:ValidationSummary ID="MensajeValidationSummary" runat="server" SkinID="MensajeValidationSummary"/>
