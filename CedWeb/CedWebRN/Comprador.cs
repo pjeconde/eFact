@@ -113,8 +113,12 @@ namespace CedWebRN
         }
         public static List<CedWebEntidades.Comprador> Lista(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
+            return Lista(Cuenta, Sesion, true);
+        }
+        public static List<CedWebEntidades.Comprador> Lista(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion, bool ConSeleccionarComprador)
+        {
             CedWebDB.Comprador comprador = new CedWebDB.Comprador(Sesion);
-            return comprador.Lista(Cuenta);
+            return comprador.Lista(Cuenta, ConSeleccionarComprador);
         }
         public static List<CedWebEntidades.Comprador> Lista(CedWebEntidades.Cuenta Cuenta, int IndicePagina, int TamañoPagina, string OrderBy, CedEntidades.Sesion Sesion)
         {
