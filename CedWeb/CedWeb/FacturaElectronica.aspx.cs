@@ -14,6 +14,7 @@ namespace CedWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            ((LinkButton)Master.FindControl("FacturaElectronicaLinkButton")).ForeColor = System.Drawing.Color.Gold;
             if (!IsPostBack)
             {
                 if (CedWebRN.Fun.NoHayNadieLogueado((CedWebEntidades.Sesion)Session["Sesion"]))
