@@ -94,6 +94,9 @@
                                 <asp:LinkButton ID="InicioLinkButton" runat="server" CausesValidation="false" PostBackUrl="~/Inicio.aspx" ForeColor="white" Font-Bold="true">Inicio</asp:LinkButton>
                             </td>
                             <td style="padding-left:10px; padding-right:10px">
+                                <asp:LinkButton ID="FacturaElectronicaLinkButton" runat="server" CausesValidation="false" PostBackUrl="~/FacturaElectronica.aspx" ForeColor="white" Font-Bold="true" Width="123px">Factura Electrónica</asp:LinkButton>
+                            </td>
+                            <td style="padding-left:10px; padding-right:10px">
                                 <asp:LinkButton ID="SolucionesLinkButton" runat="server" CausesValidation="false" PostBackUrl="~/soluciones.aspx" ForeColor="white" Font-Bold="true">Soluciones</asp:LinkButton>
                             </td>
                             <td style="padding-left:10px; padding-right:10px">
