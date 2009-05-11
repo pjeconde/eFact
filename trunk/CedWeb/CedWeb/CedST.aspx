@@ -46,16 +46,21 @@
                                             SkinID="LinkMedianoClaro">Volver a Soluciones</asp:HyperLink>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td colspan="2" align="center" style="padding-top:10px">
+                                        <asp:Image ID="Image2" runat="server" ImageUrl="Imagenes/CedST-EsquemaMEP.jpg"/>
+                                    </td>
+                                </tr>
                             </table>
                             <table border="0" cellpadding="0" cellspacing="0" style="padding-left: 23px">
                                 <tr>
-                                    <td style="width: 700px" align="left">
+                                    <td style="width: 700px; padding-top:10px" align="left">
                                         <asp:Label ID="Label1" runat="server" Text="Tecnología" Font-Size="Medium" ForeColor="Black"
                                             Font-Bold="True" SkinID="TituloColor1Grande"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td align="left" style="padding-right: 10px; padding-top: 10px" valign="top">
+                                    <td align="left" style="padding-right:10px; padding-top:10px; padding-bottom:20px" valign="top">
                                         <asp:Label ID="Label3" runat="server" Text="• Cliente/Servidor en tres capas<br>• Workflow basado en datos<br>• Desarrollado en c# (WinForms) para el .Net Framework 2.0<br>• Instalador MSI con control de versión<br>• Motor de base de datos relacional"
                                             SkinID="TextoMediano"></asp:Label>
                                     </td>
