@@ -149,6 +149,18 @@
                                         </asp:Panel>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td></td>
+                                    <td colspan="2" style="padding-top:10px" align="left">
+                                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="http://www.cualesmiip.com/" SkinID="LinkGrandeClaro" Target="_blank">¿ Cuál es mi IP ?</asp:HyperLink>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td colspan="2" align="left">
+                                        (para acceder, en forma remota, al servidor de base de datos de Towebs se debe ingresar su IP en el Firewall del Haiti Control Module)
+                                    </td>
+                                </tr>
                             </table>
                         </td>
                     </tr>
