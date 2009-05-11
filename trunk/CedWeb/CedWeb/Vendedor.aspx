@@ -49,6 +49,11 @@
                                     <td align="left" style="padding-top:10px">
                                         <asp:TextBox ID="RazonSocialTextBox" runat="server" Width="400px" TabIndex="1" MaxLength="50"></asp:TextBox>
                                     </td>
+                                    <td rowspan="13" style="padding-left:10px; padding-top:10px" align="center" valign="top">
+                                        <asp:Button ID="BackupButton" runat="server" Text="Descargar" Height="50px" Width="100px" OnClick="BackupButton_Click" BackColor="peachpuff" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" ForeColor="brown" Font-Bold="true" ToolTip="Exclusivo SERVICIO PREMIUM"> </asp:Button>
+                                        <br />
+                                        <asp:Label ID="BackupLabel" runat="server" Font-Size="X-Small" Text="(copia de seguridad)" ForeColor="brown" ToolTip="Exclusivo SERVICIO PREMIUM"></asp:Label>
+                                    </td>
                                 </tr>
                                 <!-- Calle, Nro, Piso y Depto -->
                                 <tr>
