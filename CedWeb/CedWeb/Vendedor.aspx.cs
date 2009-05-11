@@ -84,40 +84,7 @@ namespace CedWeb
         {
             try
             {
-                CedWebEntidades.Vendedor vendedor = new CedWebEntidades.Vendedor();
-                vendedor.IdCuenta = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id;
-                vendedor.NombreCuenta = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Nombre;
-                vendedor.RazonSocial = RazonSocialTextBox.Text;
-                vendedor.Calle = CalleTextBox.Text;
-                vendedor.Nro = NroTextBox.Text;
-                vendedor.Piso = PisoTextBox.Text;
-                vendedor.Depto = DeptoTextBox.Text;
-                vendedor.Sector = SectorTextBox.Text;
-                vendedor.Torre = TorreTextBox.Text;
-                vendedor.Manzana = ManzanaTextBox.Text;
-                vendedor.Localidad = LocalidadTextBox.Text;
-                vendedor.IdProvincia = ProvinciaDropDownList.SelectedValue;
-                vendedor.DescrProvincia = ProvinciaDropDownList.SelectedItem.Text;
-                vendedor.CodPost = CodPostTextBox.Text;
-                vendedor.NombreContacto = NombreContactoTextBox.Text;
-                vendedor.EmailContacto = EmailContactoTextBox.Text;
-                vendedor.TelefonoContacto = TelefonoContactoTextBox.Text;
-                vendedor.CUIT = Convert.ToInt64(CUITTextBox.Text);
-                vendedor.IdCondIVA = Convert.ToInt32(CondIVADropDownList.SelectedValue);
-                vendedor.DescrCondIVA = CondIVADropDownList.SelectedItem.Text;
-                vendedor.NroIngBrutos = NroIngBrutosTextBox.Text;
-                vendedor.IdCondIngBrutos = Convert.ToInt32(CondIngBrutosDropDownList.SelectedValue);
-                vendedor.DescrCondIngBrutos = CondIngBrutosDropDownList.SelectedItem.Text;
-                if (GLNTextBox.Text == String.Empty)
-                {
-                    vendedor.GLN = 0;
-                }
-                else
-                {
-                    vendedor.GLN = Convert.ToInt64(GLNTextBox.Text);
-                }
-                vendedor.CodigoInterno = CodigoInternoTextBox.Text;
-                vendedor.FechaInicioActividades = FechaInicioActividadesDatePickerWebUserControl.CalendarDate;
+                CedWebEntidades.Vendedor vendedor = DatosVendedor();
                 CedWebRN.Vendedor.Validar(vendedor, (CedEntidades.Sesion)Session["Sesion"]);
                 CedWebRN.Vendedor.Guardar(vendedor, (CedEntidades.Sesion)Session["Sesion"]);
                 CedWebRN.Vendedor.Copiar(vendedor, ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor);
@@ -128,9 +95,69 @@ namespace CedWeb
                 MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
             }
         }
-		protected void CancelarButton_Click(object sender, EventArgs e)
+        protected CedWebEntidades.Vendedor DatosVendedor()
+        {
+            CedWebEntidades.Vendedor vendedor = new CedWebEntidades.Vendedor();
+            vendedor.IdCuenta = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id;
+            vendedor.NombreCuenta = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Nombre;
+            vendedor.RazonSocial = RazonSocialTextBox.Text;
+            vendedor.Calle = CalleTextBox.Text;
+            vendedor.Nro = NroTextBox.Text;
+            vendedor.Piso = PisoTextBox.Text;
+            vendedor.Depto = DeptoTextBox.Text;
+            vendedor.Sector = SectorTextBox.Text;
+            vendedor.Torre = TorreTextBox.Text;
+            vendedor.Manzana = ManzanaTextBox.Text;
+            vendedor.Localidad = LocalidadTextBox.Text;
+            vendedor.IdProvincia = ProvinciaDropDownList.SelectedValue;
+            vendedor.DescrProvincia = ProvinciaDropDownList.SelectedItem.Text;
+            vendedor.CodPost = CodPostTextBox.Text;
+            vendedor.NombreContacto = NombreContactoTextBox.Text;
+            vendedor.EmailContacto = EmailContactoTextBox.Text;
+            vendedor.TelefonoContacto = TelefonoContactoTextBox.Text;
+            vendedor.CUIT = Convert.ToInt64(CUITTextBox.Text);
+            vendedor.IdCondIVA = Convert.ToInt32(CondIVADropDownList.SelectedValue);
+            vendedor.DescrCondIVA = CondIVADropDownList.SelectedItem.Text;
+            vendedor.NroIngBrutos = NroIngBrutosTextBox.Text;
+            vendedor.IdCondIngBrutos = Convert.ToInt32(CondIngBrutosDropDownList.SelectedValue);
+            vendedor.DescrCondIngBrutos = CondIngBrutosDropDownList.SelectedItem.Text;
+            if (GLNTextBox.Text == String.Empty)
+            {
+                vendedor.GLN = 0;
+            }
+            else
+            {
+                vendedor.GLN = Convert.ToInt64(GLNTextBox.Text);
+            }
+            vendedor.CodigoInterno = CodigoInternoTextBox.Text;
+            vendedor.FechaInicioActividades = FechaInicioActividadesDatePickerWebUserControl.CalendarDate;
+            return vendedor;
+        }
+        protected void BackupButton_Click(object sender, EventArgs e)
+        {
+            if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+            {
+                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Esta funcionalidad es exclusiva del SERVICIO PREMIUM.  Contáctese con Cedeira Software Factory para acceder al servicio.');</script>");
+            }
+            else
+            {
+                //Download de XML de Compradores
+                CedWebEntidades.Vendedor vendedor = DatosVendedor();
+                System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(vendedor.GetType());
+                System.IO.MemoryStream m = new System.IO.MemoryStream();
+                System.Xml.XmlWriter writerdememoria = new System.Xml.XmlTextWriter(m, System.Text.Encoding.GetEncoding("ISO-8859-1"));
+                x.Serialize(writerdememoria, vendedor);
+                m.Seek(0, System.IO.SeekOrigin.Begin);
+                string nombreArchivo = "eFact-Vendedor-" + ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id.Replace(".", String.Empty).ToUpper() + ".xml";
+                System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"Temp/" + nombreArchivo), System.IO.FileMode.Create);
+                m.WriteTo(fs);
+                fs.Close();
+                Response.Redirect("~/DescargaTemporarios.aspx?archivo=" + nombreArchivo, false);
+            }
+        }
+        protected void CancelarButton_Click(object sender, EventArgs e)
 		{
 			Response.Redirect((string)Session["ref"]);
 		}
-}
+    }
 }
