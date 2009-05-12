@@ -141,7 +141,6 @@ namespace CedWeb
             }
             else
             {
-                //Download de XML de Compradores
                 CedWebEntidades.Vendedor vendedor = DatosVendedor();
                 System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(vendedor.GetType());
                 System.IO.MemoryStream m = new System.IO.MemoryStream();

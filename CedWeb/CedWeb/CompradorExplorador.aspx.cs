@@ -178,11 +178,10 @@ namespace CedWeb
             }
             else
             {
-                //Download de XML de Compradores
                 List<CedWebEntidades.Comprador> compradores = CedWebRN.Comprador.Lista(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedEntidades.Sesion)Session["Sesion"], false);
                 if (compradores.Count == 0)
                 {
-                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('No hay compradores para descargar.');</script>");
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('No hay datos de Compradores para descargar.');</script>");
                 }
                 else
                 {
