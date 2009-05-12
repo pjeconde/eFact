@@ -36,9 +36,9 @@
 
 <asp:HyperLink runat="server" Font-Size="10px" ForeColor="#071F70" SkinID="LinkChico"></asp:HyperLink>
 <asp:HyperLink runat="server" Font-Size="12px" ForeColor="#071F70" SkinID="LinkMediano"></asp:HyperLink>
-<asp:HyperLink runat="server" Font-Size="10px" ForeColor=Blue SkinID="LinkChicoClaro"></asp:HyperLink>
-<asp:HyperLink runat="server" Font-Size="12px" ForeColor=Blue SkinID="LinkMedianoClaro"></asp:HyperLink>
-<asp:HyperLink runat="server" Font-Size="14px" ForeColor=Blue SkinID="LinkGrandeClaro"></asp:HyperLink>
+<asp:HyperLink runat="server" Font-Size="10px" ForeColor="blue" SkinID="LinkChicoClaro"></asp:HyperLink>
+<asp:HyperLink runat="server" Font-Size="12px" ForeColor="blue" SkinID="LinkMedianoClaro"></asp:HyperLink>
+<asp:HyperLink runat="server" Font-Size="14px" ForeColor="blue" SkinID="LinkGrandeClaro"></asp:HyperLink>
 
 <asp:TextBox runat="server" Style="width: 180px" ForeColor="#071F70" SkinID="TextoBoxFEAVendedorDet" BorderStyle="NotSet"></asp:TextBox>
 <asp:TextBox runat="server" Style="width: 80px" ForeColor="#071F70" SkinID="TextoBoxFEAVendedorDetCh" BorderStyle="NotSet"></asp:TextBox>

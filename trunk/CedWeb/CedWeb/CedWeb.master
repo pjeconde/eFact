@@ -78,6 +78,8 @@
                                 <asp:Label ID="Separador1Label" runat="server" Text="|" Visible="false"></asp:Label>
                                 <asp:LinkButton ID="ConfiguracionLinkButton" runat="server" CausesValidation="false" ForeColor=Blue PostBackUrl="~/Configuracion.aspx" Visible="false">Configuración</asp:LinkButton>
                                 <asp:Label ID="Separador2Label" runat="server" Text="|" Visible="false"></asp:Label>
+                                <asp:LinkButton ID="BackupLinkButton" runat="server" CausesValidation="false" ForeColor=Blue PostBackUrl="~/Backup.aspx" Visible="false">Descargas</asp:LinkButton>
+                                <asp:Label ID="Separador3Label" runat="server" Text="|" Visible="false"></asp:Label>
                                 <asp:LinkButton ID="SalirLinkButton" runat="server" CausesValidation="false" ForeColor=Blue OnClick="SalirLinkButton_Click" Visible="false">Salir</asp:LinkButton>
                             </td>
                         </tr>

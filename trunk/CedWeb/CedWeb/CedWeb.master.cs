@@ -24,6 +24,8 @@ namespace CedWeb
                     Separador1Label.Visible = true;
                     ConfiguracionLinkButton.Visible = true;
                     Separador2Label.Visible = true;
+                    BackupLinkButton.Visible = true;
+                    Separador3Label.Visible = true;
                     SalirLinkButton.Visible = true;
                     switch (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.TipoCuenta.Id)
                     {
@@ -83,7 +85,9 @@ namespace CedWeb
             NombreCuentaLabel.Text = String.Empty;
             Separador1Label.Visible = false;
             ConfiguracionLinkButton.Visible = false;
-            Separador2Label.Visible = false; 
+            Separador2Label.Visible = false;
+            BackupLinkButton.Visible = false;
+            Separador3Label.Visible = false;
             SalirLinkButton.Visible = false;
             AdministracionLinkButton.Visible = false;
             Session["AceptarTYC"] = null;
