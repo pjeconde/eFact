@@ -75,7 +75,7 @@
                                     <td style="color:#A52A2A; font-weight:bold; padding-top:10px" valign="top">
                                         Ultimas altas de Cuentas
                                         <br />
-                                        <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto" Width="315px" Height="159px" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" BackColor="peachpuff" Font-Bold="false" ForeColor="black">
+                                        <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto" Width="380px" Height="159px" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" BackColor="peachpuff" Font-Bold="false" ForeColor="black">
                                             <cc1:PagingGridView ID="UltimasAltasPagingGridView" runat="server"
                                                                 OnSorting="UltimasAltasPagingGridView_Sorting"
                                                                 OnPageIndexChanging="UltimasAltasPagingGridView_PageIndexChanging">
@@ -97,6 +97,10 @@
                                                         <itemstyle wrap="False" horizontalalign="left"/>
                                                     </asp:BoundField>
                                                     <asp:BoundField DataField="IdEstadoCuenta" HeaderText="Estado" SortExpression="IdEstadoCuenta">
+                                                        <headerstyle horizontalalign="left" wrap="False"/>
+                                                        <itemstyle wrap="False" horizontalalign="left"/>
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="IdMedio" HeaderText="Medio" SortExpression="IdMedio">
                                                         <headerstyle horizontalalign="left" wrap="False"/>
                                                         <itemstyle wrap="False" horizontalalign="left"/>
                                                     </asp:BoundField>
