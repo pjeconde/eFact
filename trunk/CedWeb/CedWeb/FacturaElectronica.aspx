@@ -144,7 +144,7 @@
                                 <tr>
                                     <td></td>
                                     <td style="padding-top:10px" align="center">
-                                        <asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="~/FacturaElectronicaActividadesAlcanzadas.aspx" SkinID="LinkMedianoClaro">Actividades alcanzadas por el Régimen de Factura Electrónica</asp:HyperLink>
+                                        <asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="~/FacturaElectronicaActividadesAlcanzadas.aspx" SkinID="LinkMedianoClaro">Actividades alcanzadas por el<br />Régimen de Factura Electrónica</asp:HyperLink>
                                     </td>
                                 </tr>
                                 <tr>
