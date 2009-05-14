@@ -46,9 +46,16 @@ namespace CedWeb
                                     break;
                             }
                         }
-                        GenerarGrafico("Temp\\AdministracionGraficoMedio-" + Session.SessionID + ".bmp");
+                        List<CedWebEntidades.Estadistica> lista = CedWebRN.Cuenta.EstadisticaMedio((CedEntidades.Sesion)Session["Sesion"]);
+                        GenerarGrafico(lista, "Temp\\AdministracionGraficoMedio-" + Session.SessionID + ".bmp");
                         MedioImageMap.ImageUrl = "~/Temp/AdministracionGraficoMedio-" + Session.SessionID + ".bmp";
                         MedioImageMap.DataBind();
+
+                        lista = CedWebRN.Cuenta.EstadisticaProvincia((CedEntidades.Sesion)Session["Sesion"]);
+                        GenerarGrafico(lista, "Temp\\AdministracionGraficoProvincia-" + Session.SessionID + ".bmp");
+                        ProvinciaImageMap.ImageUrl = "~/Temp/AdministracionGraficoProvincia-" + Session.SessionID + ".bmp";
+                        ProvinciaImageMap.DataBind();
+
                         RecibeAvisoAltaCuentaCheckBox.Checked = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.RecibeAvisoAltaCuenta;
 
                         UltimasAltasPagingGridView.PageSize = 6;
@@ -68,28 +75,29 @@ namespace CedWeb
                 }
             }
         }
-        //protected void Page_Unload(object sender, EventArgs e)
-        //{
-        //    if (!IsPostBack)
-        //    {
-        //        string archivoTemporario = Server.MapPath(MedioImageMap.ImageUrl.Replace("~/", String.Empty).Replace("/", "\\"));
-        //        if (System.IO.File.Exists(archivoTemporario))
-        //        {
-        //            System.IO.File.Delete(archivoTemporario);
-        //        }
-        //    }
-        //}
-        private void GenerarGrafico(string Path)
+        protected void Page_Disposed(object sender, EventArgs e)
         {
-            List<CedWebEntidades.Estadistica> lista = CedWebRN.Cuenta.EstadisticaMedio((CedEntidades.Sesion)Session["Sesion"]);
-            decimal[] valores = new decimal[lista.Count];
-            string[] textos = new string[lista.Count];
-            for (int i = 0; i < lista.Count; i++)
+            string archivoTemporario = Server.MapPath(MedioImageMap.ImageUrl.Replace("~/", String.Empty).Replace("/", "\\"));
+            if (System.IO.File.Exists(archivoTemporario))
             {
-                textos[i] = lista[i].Concepto;
-                valores[i] = lista[i].Cantidad;
+                System.IO.File.Delete(archivoTemporario);
             }
-            CedBPrn.Grafico.Generar(140, 315, valores, textos, Path);
+            archivoTemporario = Server.MapPath(ProvinciaImageMap.ImageUrl.Replace("~/", String.Empty).Replace("/", "\\"));
+            if (System.IO.File.Exists(archivoTemporario))
+            {
+                System.IO.File.Delete(archivoTemporario);
+            }
+        }
+        private void GenerarGrafico(List<CedWebEntidades.Estadistica> Lista, string Path)
+        {
+            decimal[] valores = new decimal[Lista.Count];
+            string[] textos = new string[Lista.Count];
+            for (int i = 0; i < Lista.Count; i++)
+            {
+                textos[i] = Lista[i].Concepto;
+                valores[i] = Lista[i].Cantidad;
+            }
+            CedBPrn.Grafico.Generar(155, 155, 0, valores, textos, Path, System.Drawing.Color.Navy);
         }
         protected void RecibeAvisoAltaCuentaCheckBox_CheckedChanged(object sender, EventArgs e)
         {

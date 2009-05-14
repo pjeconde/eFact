@@ -433,6 +433,11 @@ namespace CedWebRN
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             return cuenta.EstadisticaMedio();
         }
+        public static List<CedWebEntidades.Estadistica> EstadisticaProvincia(CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+            return cuenta.EstadisticaProvincia();
+        }
         public static void SetearRecibeAvisoAltaCuenta(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
