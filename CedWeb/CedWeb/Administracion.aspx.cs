@@ -46,8 +46,8 @@ namespace CedWeb
                                     break;
                             }
                         }
-                        GenerarGrafico();
-                        MedioImageMap.ImageUrl = "~/Imagenes/temp.bmp";
+                        GenerarGrafico("Temp\\AdministracionGraficoMedio-" + Session.SessionID + ".bmp");
+                        MedioImageMap.ImageUrl = "~/Temp/AdministracionGraficoMedio-" + Session.SessionID + ".bmp";
                         MedioImageMap.DataBind();
                         RecibeAvisoAltaCuentaCheckBox.Checked = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.RecibeAvisoAltaCuenta;
 
@@ -68,7 +68,18 @@ namespace CedWeb
                 }
             }
         }
-        private void GenerarGrafico()
+        //protected void Page_Unload(object sender, EventArgs e)
+        //{
+        //    if (!IsPostBack)
+        //    {
+        //        string archivoTemporario = Server.MapPath(MedioImageMap.ImageUrl.Replace("~/", String.Empty).Replace("/", "\\"));
+        //        if (System.IO.File.Exists(archivoTemporario))
+        //        {
+        //            System.IO.File.Delete(archivoTemporario);
+        //        }
+        //    }
+        //}
+        private void GenerarGrafico(string Path)
         {
             List<CedWebEntidades.Estadistica> lista = CedWebRN.Cuenta.EstadisticaMedio((CedEntidades.Sesion)Session["Sesion"]);
             decimal[] valores = new decimal[lista.Count];
@@ -78,7 +89,7 @@ namespace CedWeb
                 textos[i] = lista[i].Concepto;
                 valores[i] = lista[i].Cantidad;
             }
-            CedBPrn.Grafico.Generar(140, 315, valores, textos);
+            CedBPrn.Grafico.Generar(140, 315, valores, textos, Path);
         }
         protected void RecibeAvisoAltaCuentaCheckBox_CheckedChanged(object sender, EventArgs e)
         {

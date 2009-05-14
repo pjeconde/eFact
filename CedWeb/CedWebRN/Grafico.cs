@@ -8,7 +8,7 @@ namespace CedBPrn
     public static class Grafico
     {
 
-        public static void Generar(int Alto, int Ancho, decimal[] Valores, string[] Textos)
+        public static void Generar(int Alto, int Ancho, decimal[] Valores, string[] Textos, string Path)
         {
             System.Drawing.PieChart.PieChartControl GraficoDeTorta;
             float AnguloGiro;
@@ -53,7 +53,7 @@ namespace CedBPrn
             Rectangle j = new Rectangle(0, 0, Ancho, Alto);
             GraficoDeTorta.DrawToBitmap(memoryImage, j);
             string ruta = string.Empty;
-            ruta = System.Web.HttpContext.Current.Server.MapPath("Imagenes\\temp.bmp");
+            ruta = System.Web.HttpContext.Current.Server.MapPath(Path);
             memoryImage.Save(ruta);
         }
     }
