@@ -26,13 +26,13 @@ namespace CedWeb
 		}
 		protected void LoginButton_Click(object sender, EventArgs e)
 		{
-			try
-			{
-				MsgErrorLabel.Text = String.Empty;
-				CedWebEntidades.Sesion sesion = (CedWebEntidades.Sesion)Session["Sesion"];
-				sesion.Cuenta.Id = UsuarioTextBox.Text;
-				sesion.Cuenta.Password = PasswordTextBox.Text;
-				CedWebRN.Cuenta.Login(sesion.Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
+            try
+            {
+                MsgErrorLabel.Text = String.Empty;
+                CedWebEntidades.Sesion sesion = (CedWebEntidades.Sesion)Session["Sesion"];
+                sesion.Cuenta.Id = UsuarioTextBox.Text;
+                sesion.Cuenta.Password = PasswordTextBox.Text;
+                CedWebRN.Cuenta.Login(sesion.Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
                 if (sesion.Cuenta.ActivCP)
                 {
                     Response.Redirect("~/ActivacionClientePesado.aspx", true);
@@ -41,16 +41,28 @@ namespace CedWeb
                 {
                     Response.Redirect("~/" + sesion.Cuenta.PaginaDefault.URL + ".aspx", true);
                 }
-			}
-			catch (System.Threading.ThreadAbortException)
-			{
-				Trace.Warn("Thread abortado");
-			}
-			catch (Exception ex)
-			{
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+                Trace.Warn("Thread abortado");
+            }
+            catch (Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente ex)
+            {
                 ((CedWeb)this.Master).CaducarIdentificacion();
-				MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
-			}
+                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
+                UsuarioTextBox.Focus();
+            }
+            catch (Microsoft.ApplicationBlocks.ExceptionManagement.Cuenta.LoginRechazadoXPasswordInvalida ex)
+            {
+                ((CedWeb)this.Master).CaducarIdentificacion();
+                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
+                PasswordTextBox.Focus();
+            }
+            catch (Exception ex)
+            {
+                ((CedWeb)this.Master).CaducarIdentificacion();
+                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
+            }
 		}
 		protected void UsuarioTextBox_TextChanged(object sender, EventArgs e)
 		{

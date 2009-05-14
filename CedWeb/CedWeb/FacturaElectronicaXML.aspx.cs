@@ -1579,7 +1579,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 InicioDeActividadesCompradorDatePickerWebUserControl.CalendarDate = comprador.FechaInicioActividades;
             }
         }
-		catch(Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente ex)
+		catch(Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente)
 		{
 			Denominacion_CompradorTextBox.Text = string.Empty;
 			Domicilio_Calle_CompradorTextBox.Text = string.Empty;

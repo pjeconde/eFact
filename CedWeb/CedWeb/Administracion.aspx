@@ -25,6 +25,11 @@
                                         <br />
                                         <asp:ImageMap ID="MedioImageMap" runat="server" BorderStyle="Solid" BorderColor="brown" BorderWidth="1px"></asp:ImageMap>
                                     </td>
+                                    <td rowspan="7" style="color:#A52A2A; font-weight:bold; padding-left:20px" align="left" valign="bottom">
+                                        Provincia
+                                        <br />
+                                        <asp:ImageMap ID="ProvinciaImageMap" runat="server" BorderStyle="Solid" BorderColor="brown" BorderWidth="1px"></asp:ImageMap>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -112,10 +117,10 @@
                                             </cc1:PagingGridView>
                                         </asp:Panel>
                                     </td>
-                                    <td style="color:#A52A2A; font-weight:bold; padding-top:10px; padding-left:20px" valign="top">
+                                    <td colspan="2" style="color:#A52A2A; font-weight:bold; padding-top:10px; padding-left:20px" valign="top">
                                         Ultimos Comprobantes generados
                                         <br />
-                                        <asp:Panel ID="Panel" runat="server" ScrollBars="Auto" Width="315px" Height="159px" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" BackColor="peachpuff" Font-Bold="false" ForeColor="black">
+                                        <asp:Panel ID="Panel" runat="server" ScrollBars="Auto" Width="334px" Height="159px" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" BackColor="peachpuff" Font-Bold="false" ForeColor="black">
                                             <cc1:PagingGridView ID="UltimosComprobantesPagingGridView" runat="server"
                                                                 OnSorting="UltimosComprobantesPagingGridView_Sorting"
                                                                 OnPageIndexChanging="UltimosComprobantesPagingGridView_PageIndexChanging">
@@ -161,7 +166,7 @@
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td colspan="2" align="left">
+                                    <td colspan="3" align="left">
                                         (para acceder, en forma remota, al servidor de base de datos de Towebs se debe ingresar su IP en el Firewall del Haiti Control Module)
                                     </td>
                                 </tr>

@@ -290,6 +290,30 @@ namespace CedWebDB
             }
             return lista;
         }
+        public List<CedWebEntidades.Estadistica> EstadisticaProvincia()
+        {
+            List<CedWebEntidades.Estadistica> lista = new List<CedWebEntidades.Estadistica>();
+            int cantidadCuentas = CantidadDeFilas();
+            if (cantidadCuentas > 0)
+            {
+                StringBuilder a = new StringBuilder(string.Empty);
+                a.Append("select Vendedor.DescrProvincia, count(*) as Cantidad ");
+                a.Append("from Cuenta, Vendedor ");
+                a.Append("where Cuenta.IdCuenta=Vendedor.IdCuenta ");
+                a.Append("group by Vendedor.DescrProvincia ");
+                a.Append("order by count(*) ");
+                DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    CedWebEntidades.Estadistica elemento = new CedWebEntidades.Estadistica();
+                    elemento.Concepto = Convert.ToString(dt.Rows[i]["DescrProvincia"]);
+                    elemento.Cantidad = Convert.ToInt32(dt.Rows[i]["Cantidad"]);
+                    elemento.Porcentaje = elemento.Cantidad * 100 / cantidadCuentas;
+                    lista.Add(elemento);
+                }
+            }
+            return lista;
+        }
         public void SetearRecibeAvisoAltaCuenta(CedWebEntidades.Cuenta Cuenta)
         {
             StringBuilder a = new StringBuilder(string.Empty);
