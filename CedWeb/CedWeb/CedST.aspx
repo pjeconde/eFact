@@ -23,11 +23,19 @@
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td align="left" valign="top" style="padding-top:10px">
+                                    <td align="left" style="padding-top:10px">
                                         Es un sistema diseñado para <b>centralizar la administración</b> de transferencias.
-                                        <br />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td align="left">
                                         En línea con el BCRA, concentra el 100% de las operaciones, tanto enviadas como recibidas, en un único repositorio, para realizar un <b>control eficiente</b> y una <b>óptima gestión operativa</b>.
-                                        <br />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td align="left">
                                         Facilita las tareas a través de la <b>automatización de los procesos</b> de: ingreso, envío, recepción, distribución y conciliación, entre otros. Contempla todas las operatorias, acorde a las normativas, y se encuentra <b>integrado al Sistema de Medios de Pagos (Mep)</b> del BCRA.
                                     </td>
                                 </tr>
@@ -214,7 +222,7 @@
                                                             <td valign="middle" align="center" style="border-style:solid; border-width:1px; border-color:#CD853F">
                                                                 Manual
                                                             </td>
-                                                            <td style="border-style:solid; border-width:1px; border-color:#CD853F">
+                                                            <td style="border-style:solid; border-width:1px; border-color:#CD853F; width:100%">
                                                                 Se realiza en forma intuitiva. En una sola pantalla encontramos toda la información relacionada a la operación.
                                                             </td>
                                                         </tr>
@@ -222,7 +230,7 @@
                                                             <td style="border-style:solid; border-width:1px; border-color:#CD853F">
                                                                 Automático
                                                             </td>
-                                                            <td style="border-style:solid; border-width:1px; border-color:#CD853F">
+                                                            <td style="border-style:solid; border-width:1px; border-color:#CD853F; width:100%">
                                                                 Generado desde otra aplicación.
                                                             </td>
                                                         </tr>
