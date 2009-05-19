@@ -1,4 +1,4 @@
-brown	 	#A52A2A
+brown	 	#A52A2A 165 42 42
 peru	 	#CD853F
 peachpuff 	#FFDAB9	255 218 185
 cornsilk 	#FFF8DC 255 248 208
