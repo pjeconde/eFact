@@ -131,6 +131,12 @@
                                                     <b>Seguimiento de transferencias</b>: cada sector puede realizar el seguimiento permanente de una transferencia en particular o tener una visión global a través de indicadores generales del estado de las operaciones. 
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td valign="top">•</td>
+                                                <td style="padding-left:5px">
+                                                    <b>Actualización automática de Operatorias</b>: el sistema actualiza, en forma automática, la estructura de datos de cada operatoria, sincronizando las novedades que se incorporen a MepTransaccional. De esta manera se evita la modificación del sistema ante los cambios que incorpore el BCRA. 
+                                                </td>
+                                            </tr>
                                         </table>
                                     </td>
                                 </tr>
@@ -209,7 +215,7 @@
                                                                 Manual
                                                             </td>
                                                             <td style="border-style:solid; border-width:1px; border-color:#CD853F">
-                                                                Se realiza en forma intuitiva. En una sola pantalla encontramos toda la información relacionada a la operación. Contempla la posibilidad de pre-definir operaciones frecuentes.
+                                                                Se realiza en forma intuitiva. En una sola pantalla encontramos toda la información relacionada a la operación.
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -246,7 +252,7 @@
                                                     Buscador de Transferencias
                                                 </td>
                                                 <td colspan="2" style="border-style:solid; border-width:1px; border-color:#CD853F">
-                                                    Se dispone de un ágil buscador de operaciones que permite, a través de diversos filtros de selección,  consultarlas, listarlas o exportarlas.
+                                                    Un ágil buscador de operaciones permite consultar, listar o exportar transferencias, a través de diversos filtros de selección (rango de fechas, tipos de operatoria, Entidad, Sector Destino, Moneda, Importe, texto dentro de la instrucción, etc).
                                                 </td>
                                             </tr>
                                             <tr>
@@ -268,20 +274,12 @@
                                             </tr>
                                             <tr>
                                                 <td valign="middle" align="center" style="border-style:solid; border-width:1px; border-color:#CD853F">
-                                                    Contingencia
-                                                </td>
-                                                <td colspan="2" style="border-style:solid; border-width:1px; border-color:#CD853F">
-                                                    Se dispone de una interfaz automática con el Sistema Mep Contingencia, que evita la transcripción manual de todas las operaciones pendientes de envío.
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td valign="middle" align="center" style="border-style:solid; border-width:1px; border-color:#CD853F">
                                                     Tecnología
                                                 </td>
                                                 <td colspan="2" style="border-style:solid; border-width:1px; border-color:#CD853F">
                                                     • Cliente/Servidor en tres capas<br />
                                                     • Workflow basado en datos<br />
-                                                    • Desarrollado en c# (WinForms) para el .Net Framework 2.0<br />
+                                                    • Desarrollado en c# (WinForms)<br />
                                                     • Instalador MSI con control de versión<br />
                                                     • Motor de base de datos relacional
                                                 </td>
