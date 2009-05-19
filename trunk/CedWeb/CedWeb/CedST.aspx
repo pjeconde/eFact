@@ -252,7 +252,7 @@
                                                     Buscador de Transferencias
                                                 </td>
                                                 <td colspan="2" style="border-style:solid; border-width:1px; border-color:#CD853F">
-                                                    Un ágil buscador de operaciones permite consultar, listar o exportar transferencias, a través de diversos filtros de selección (rango de fechas, tipos de operatoria, Entidad, Sector Destino, Moneda, Importe, texto dentro de la instrucción, etc).
+                                                    Un ágil buscador de operaciones permite consultar, listar o exportar transferencias, a través de diversos filtros de selección (rango de fechas, tipos de operatoria, entidad, sector destino, moneda, importe, texto dentro de la instrucción, etc).
                                                 </td>
                                             </tr>
                                             <tr>
