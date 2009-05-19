@@ -180,7 +180,7 @@
                                                 <td colspan="2" style="border-style:solid; border-width:1px; border-color:#CD853F">
                                                     Captura y Conciliación:<br />
                                                     Se realiza la captura mediante el procesamiento del archivo de interfaz, solicitado al BCRA vía X400.<br />
-                                                    Considerando que la desencripción, por motivos técnicos, es manual, el sistema ofrece un procedimiento de conciliación para identificar posibles adulteraciones.<br />
+                                                    Considerando que el descifrado, por motivos técnicos, es manual, el sistema ofrece un procedimiento de conciliación para identificar posibles adulteraciones.<br />
                                                     Se dispone de un Visor de Captura para monitorear la correcta incorporación de las transferencias.<br />
                                                 </td>
                                             </tr>
