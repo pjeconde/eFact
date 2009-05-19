@@ -52,45 +52,86 @@
                                 <tr>
                                     <td></td>
                                     <td style="padding-top:5px">
-                                        Se dispone de toda la <b>información histórica</b> (Mep elimina las operaciones durante el proceso de cierre diario).
-                                        <br />
-                                        <b>Se incorporan las Transferencias Recibidas</b> (Mep no procesa transferencias recibidas).
-                                        <br />
-                                        Incluye un <b>esquema de autorización de operaciones flexible</b>, en el que se puede personalizar: cantidad y jerarquía de funcionarios intervinientes por sector, autorización por escala de montos y control por oposición (Mep no contempla un tercer nivel de supervisión para las operaciones de riesgo y no controla montos).
-                                        <br />
-                                        <b>Conectividad con otras aplicaciones</b>: se incluyen servicios y componentes para interactuar, en línea, con otros sistemas (Mep carece de estas prestaciones).
-                                        <br />
-                                        <b>Reducción de la carga operativa</b> del sector que administra las transferencias:
-                                        <br />
-                                        <table>
+                                        <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
-                                                <td style="width:20px"></td>
-                                                <td style="width:90px" valign="top">
-                                                    Mep enviadas
-                                                </td>
-                                                <td>
-                                                    Las operaciones se ingresan y autorizan, en los sectores de origen.  Acotando la intervención del sector administrador, a aspectos de tesorería; se eliminan los controles manuales (de firmas, del origen e integridad de la información en faxes, mails, cartas, entre otros).
+                                                <td valign="top">•</td>
+                                                <td style="padding-left:5px">
+                                                    Se dispone de toda la <b>información histórica</b> (Mep elimina las operaciones durante el proceso de cierre diario).
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td></td>
-                                                <td>
-                                                    Mep recibidas
+                                                <td valign="top">•</td>
+                                                <td style="padding-left:5px">
+                                                    <b>Se incorporan las Transferencias Recibidas</b> (Mep no procesa transferencias recibidas).
                                                 </td>
-                                                <td>
-                                                    Mediante la automatización del proceso de distribución a los sectores de destino.
+                                            </tr>
+                                            <tr>
+                                                <td valign="top">•</td>
+                                                <td style="padding-left:5px">
+                                                    Incluye un <b>esquema de autorización de operaciones flexible</b>, en el que se puede personalizar: cantidad y jerarquía de funcionarios intervinientes por sector, autorización por escala de montos y control por oposición (Mep no contempla un tercer nivel de supervisión para las operaciones de riesgo y no controla montos).
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top">•</td>
+                                                <td style="padding-left:5px">
+                                                    <b>Conectividad con otras aplicaciones</b>: se incluyen servicios y componentes para interactuar, en línea, con otros sistemas (Mep carece de estas prestaciones).
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top">•</td>
+                                                <td style="padding-left:5px">
+                                                    <b>Reducción de la carga operativa</b> del sector que administra las transferencias:
+                                                    <table>
+                                                        <tr>
+                                                            <td style="width:90px; padding-left:10px" valign="top">
+                                                                Mep enviadas
+                                                            </td>
+                                                            <td>
+                                                                Las operaciones se ingresan y autorizan, en los sectores de origen.  Acotando la intervención del sector administrador, a aspectos de tesorería; se eliminan los controles manuales (de firmas, del origen e integridad de la información en faxes, mails, cartas, entre otros).
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding-left:10px">
+                                                                Mep recibidas
+                                                            </td>
+                                                            <td>
+                                                                Mediante la automatización del proceso de distribución a los sectores de destino.
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top">•</td>
+                                                <td style="padding-left:5px">
+                                                    Sistematización de la <b>notificación de recepción o envío de transferencias</b>.  Los sectores perciben estas novedades en tiempo real a través de la aplicación.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top">•</td>
+                                                <td style="padding-left:5px">
+                                                    <b>Uniformidad en el tratamiento de la información</b>: todos los sectores hablan el mismo idioma.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top">•</td>
+                                                <td style="padding-left:5px">
+                                                    <b>Logs de auditoría</b>: se registra toda la actividad de los usuarios y de los administradores de seguridad.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top">•</td>
+                                                <td style="padding-left:5px">
+                                                    Se preserva la <b>seguridad, integridad y confidencialidad</b> de todas las transferencias.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td valign="top">•</td>
+                                                <td style="padding-left:5px">
+                                                    <b>Seguimiento de transferencias</b>: cada sector puede realizar el seguimiento permanente de una transferencia en particular o tener una visión global a través de indicadores generales del estado de las operaciones. 
                                                 </td>
                                             </tr>
                                         </table>
-                                        Sistematización de la <b>notificación de recepción o envío de transferencias</b>.  Los sectores perciben estas novedades en tiempo real a través de la aplicación.
-                                        <br />
-                                        <b>Uniformidad en el tratamiento de la información</b>: todos los sectores hablan el mismo idioma.
-                                        <br />
-                                        <b>Logs de auditoría</b>: se registra toda la actividad de los usuarios y de los administradores de seguridad.
-                                        <br />
-                                        Se preserva la <b>seguridad, integridad y confidencialidad</b> de todas las transferencias.
-                                        <br />
-                                        <b>Seguimiento de transferencias</b>: cada sector puede realizar el seguimiento permanente de una transferencia en particular o tener una visión global a través de indicadores generales del estado de las operaciones. 
                                     </td>
                                 </tr>
                                 <tr>
