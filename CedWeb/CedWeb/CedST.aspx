@@ -18,7 +18,7 @@
                                     </td>
                                     <td style="height: 20px">
                                         <asp:Label ID="CedSTtituloLabel" runat="server" Text="Sistema de Transferencias ( implementación MEP )"
-                                            SkinID="TituloPagina" Width="415px"></asp:Label>
+                                            SkinID="TituloPagina"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -142,7 +142,7 @@
                                             <tr>
                                                 <td valign="top">•</td>
                                                 <td style="padding-left:5px">
-                                                    <b>Actualización automática de operatorias</b>: el sistema actualiza, en forma automática, la estructura de datos de cada operatoria, sincronizando las novedades que se incorporen a MepTransaccional. De esta manera se evita la modificación del sistema ante los cambios que incorpore el BCRA. 
+                                                    <b>Actualización automática de operatorias</b>: el sistema actualiza, en forma automática, la estructura de datos de cada operatoria, sincronizando las novedades que se incorporen a MepTransaccional. De esta manera, se evita la modificación del sistema ante los cambios que incorpore el BCRA. 
                                                 </td>
                                             </tr>
                                         </table>
@@ -277,7 +277,7 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="border-style:solid; border-width:1px; border-color:#CD853F">
-                                                    Los usuarios solo podran visualizar las operaciones de los sectores a los que pertenezcan.
+                                                    Los usuarios sólo podrán visualizar las operaciones de los sectores a los que pertenezcan.
                                                 </td>
                                             </tr>
                                             <tr>
@@ -285,11 +285,11 @@
                                                     Tecnología
                                                 </td>
                                                 <td colspan="2" style="border-style:solid; border-width:1px; border-color:#CD853F">
-                                                    • Cliente/Servidor en tres capas<br />
-                                                    • Workflow basado en datos<br />
-                                                    • Desarrollado en c# (WinForms)<br />
-                                                    • Instalador MSI con control de versión<br />
-                                                    • Motor de base de datos relacional
+                                                    • Cliente/Servidor en tres capas.<br />
+                                                    • Workflow basado en datos.<br />
+                                                    • Desarrollado en c# (WinForms).<br />
+                                                    • Instalador MSI con control de versión.<br />
+                                                    • Motor de base de datos relacional.
                                                 </td>
                                             </tr>
                                         </table>
