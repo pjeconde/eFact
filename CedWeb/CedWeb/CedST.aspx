@@ -134,7 +134,7 @@
                                             <tr>
                                                 <td valign="top">•</td>
                                                 <td style="padding-left:5px">
-                                                    <b>Actualización automática de Operatorias</b>: el sistema actualiza, en forma automática, la estructura de datos de cada operatoria, sincronizando las novedades que se incorporen a MepTransaccional. De esta manera se evita la modificación del sistema ante los cambios que incorpore el BCRA. 
+                                                    <b>Actualización automática de operatorias</b>: el sistema actualiza, en forma automática, la estructura de datos de cada operatoria, sincronizando las novedades que se incorporen a MepTransaccional. De esta manera se evita la modificación del sistema ante los cambios que incorpore el BCRA. 
                                                 </td>
                                             </tr>
                                         </table>
