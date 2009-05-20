@@ -182,76 +182,38 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td rowspan="3" valign="middle" align="center" style="border-style:solid; border-width:1px; border-color:#CD853F">
+                                                <td valign="middle" align="center" style="border-style:solid; border-width:1px; border-color:#CD853F">
                                                     Circuito de<br />Transferencias<br /><b>Recibidas</b>
                                                 </td>
                                                 <td colspan="2" style="border-style:solid; border-width:1px; border-color:#CD853F">
-                                                    Captura y Conciliación:<br />
+                                                    <b>Captura y Conciliación</b><br />
                                                     Se realiza la captura mediante el procesamiento del archivo de interfaz, solicitado al BCRA vía X400.<br />
                                                     Considerando que el descifrado, por motivos técnicos, es manual, el sistema ofrece un procedimiento de conciliación para identificar posibles adulteraciones.<br />
                                                     Se dispone de un Visor de Captura para monitorear la correcta incorporación de las transferencias.<br />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="border-style:solid; border-width:1px; border-color:#CD853F">
-                                                    Distribución:<br />
-                                                    La asignación de las transferencias, a los sectores, se puede realizar en forma manual. También se puede automatizar aplicando criterios como los detallados a continuación:
-                                                    Operatorias exclusivas:  aplicadas a tipos de operatorias utilizadas únicamente por un sector.
-                                                    Transferencias esperadas: declaradas previamente. 
-                                                    Aplicando reglas específicas: por ejemplo: asignar a un sector las transferencias referidas a CBUs de determinadas sucursales.
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="border-style:solid; border-width:1px; border-color:#CD853F">
-                                                    Gestión:<br /> 
-                                                    Liquidación:  el sistema permite registrar el detalle de la liquidación de una transferencia.
-                                                    Rechazo al BCRA: genera automáticamente una Mep Enviada, evitando la transcripción.
+                                                    <b>Distribución</b><br />
+                                                    La asignación de las transferencias, a los sectores, se puede realizar en forma manual. También se puede automatizar aplicando criterios como los detallados a continuación:<br />
+                                                    1) Operatorias exclusivas:  aplicadas a tipos de operatorias utilizadas únicamente por un sector.<br />
+                                                    2) Transferencias esperadas: declaradas previamente. <br />
+                                                    3) Aplicando reglas específicas: por ejemplo: asignar a un sector las transferencias referidas a CBUs de determinadas sucursales.<br />
+                                                    <b>Gestión</b><br /> 
+                                                    Liquidación:  el sistema permite registrar el detalle de la liquidación de una transferencia.<br />
+                                                    Rechazo al BCRA: genera automáticamente una Mep Enviada, evitando la transcripción.<br />
                                                     Devolución al administrador de Meps Recibidas: para su reasignación a otro sector.
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td rowspan="4" valign="middle" align="center" style="border-style:solid; border-width:1px; border-color:#CD853F">
+                                                <td valign="middle" align="center" style="border-style:solid; border-width:1px; border-color:#CD853F">
                                                     Circuito de<br />Transferencias<br /><b>Enviadas</b>
                                                 </td>
-                                                <td colspan="2" style="padding:0px">
-                                                    <table border="0" cellpadding="5px" cellspacing="0">
-                                                        <tr>
-                                                            <td rowspan="2" valign="middle" align="center" style="border-style:solid; border-width:1px; border-color:#CD853F">
-                                                                Ingreso:
-                                                            </td>
-                                                            <td valign="middle" align="center" style="border-style:solid; border-width:1px; border-color:#CD853F">
-                                                                Manual
-                                                            </td>
-                                                            <td style="border-style:solid; border-width:1px; border-color:#CD853F; width:100%">
-                                                                Se realiza en forma intuitiva. En una sola pantalla encontramos toda la información relacionada a la operación.
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="border-style:solid; border-width:1px; border-color:#CD853F">
-                                                                Automático
-                                                            </td>
-                                                            <td style="border-style:solid; border-width:1px; border-color:#CD853F; width:100%">
-                                                                Generado desde otra aplicación.
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="border-style:solid; border-width:1px; border-color:#CD853F">
-                                                    Autorización del sector:<br />
-                                                    Cada sector, deberá autorizar las operaciones, cumpliendo los controles definidos en  el worflow.
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="border-style:solid; border-width:1px; border-color:#CD853F">
-                                                    Verificación de fondos:<br />
-                                                    Es la intervención de Tesorería.
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="border-style:solid; border-width:1px; border-color:#CD853F">
-                                                    Envío al BCRA:<br />
+                                                <td colspan="2">
+                                                    <b>Ingreso</b><br />
+                                                    Manual: se realiza en forma intuitiva. En una sola pantalla encontramos toda la información relacionada a la operación.<br />
+                                                    Automático: generado desde otra aplicación.<br />
+                                                    <b>Autorización del sector</b><br />
+                                                    Cada sector, deberá autorizar las operaciones, cumpliendo los controles definidos en  el worflow.<br />
+                                                    <b>Verificación de fondos</b><br />
+                                                    Es la intervención de Tesorería.<br />
+                                                    <b>Envío al BCRA</b><br />
                                                     Para todas las operaciones enviadas al BCRA, la aplicación registra la respuesta del mismo y concilia los datos enviados contra la consulta de extracto del BCRA, para asegurarse que los datos de cada transferencia enviada sean idénticos en ambos lados.
                                                 </td>
                                             </tr>
@@ -264,7 +226,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td rowspan="2" valign="middle" align="center" style="border-style:solid; border-width:1px; border-color:#CD853F">
+                                                <td valign="middle" align="center" style="border-style:solid; border-width:1px; border-color:#CD853F">
                                                     Seguridad<br />y<br />confidencialidad
                                                 </td>
                                                 <td colspan="2" style="border-style:solid; border-width:1px; border-color:#CD853F">
@@ -272,11 +234,7 @@
                                                     • el esquema de autorización por montos,<br />
                                                     • el control por oposición de usuarios,<br />
                                                     • la captura y distribución automáticas de operaciones,<br />
-                                                    • la verificación en línea con el extracto del BCRA.
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" style="border-style:solid; border-width:1px; border-color:#CD853F">
+                                                    • la verificación en línea con el extracto del BCRA.<br />
                                                     Los usuarios sólo podrán visualizar las operaciones de los sectores a los que pertenezcan.
                                                 </td>
                                             </tr>
