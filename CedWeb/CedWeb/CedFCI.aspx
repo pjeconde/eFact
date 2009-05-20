@@ -36,7 +36,7 @@
                                 <tr>
                                     <td></td>
                                     <td align="center" style="padding-top:20px">
-                                        <asp:Image ID="Image2" runat="server" ImageUrl="Imagenes/CedFCI-Tablero.jpg" Width="692px"/>
+                                        <asp:Image ID="Image2" runat="server" ImageUrl="Imagenes/CedFCI-EsquemaProceso.jpg"/>
                                     </td>
                                 </tr>
                                 <tr>
