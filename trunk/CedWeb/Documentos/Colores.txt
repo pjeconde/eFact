@@ -1,5 +1,5 @@
 brown	 	#A52A2A 165 42 42
-peru	 	#CD853F
+peru	 	#CD853F 205 133 63
 peachpuff 	#FFDAB9	255 218 185
 cornsilk 	#FFF8DC 255 248 208
 black	 	#000000
