@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/CedFCI.aspx.cs"
-    Inherits="CedWeb.CedFCI" %>
+    Inherits="CedWeb.CedFCI" Title="Fondos Comunes de Inversión" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado"
     runat="Server">

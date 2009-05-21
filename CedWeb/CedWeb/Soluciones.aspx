@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/Soluciones.aspx.cs"
-    Inherits="CedWeb.Soluciones" %>
+    Inherits="CedWeb.Soluciones" Title="Soluciones Cedeira" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado"
     runat="Server">
