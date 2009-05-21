@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="~/CedST.aspx.cs"
-    Inherits="CedWeb.CedST" %>
+    Inherits="CedWeb.CedST" Title="Transferencias MEP" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado"
     runat="Server">
