@@ -1486,7 +1486,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td align="center" valign="bottom" style="padding-bottom:35px; padding-left:5px">
+                                                <td align="center" valign="middle" style="padding-bottom:35px; padding-left:5px">
                                                     <table border="0" cellpadding="0" cellspacing="0" style="border-color:Gray; border-width:1px; border-style:solid">
                                                         <tr>
                                                             <td style="padding-left:5px; text-align:left; width:180px" class="TextoLabelFEAVendedorCh">
@@ -1522,10 +1522,6 @@
                                                         <tr>
                                                             <td style="padding-left:5px; padding-top:3px">
                                                                 <uc1:DatePickerWebUserControl ID="FechaCAEObtencionDatePickerWebUserControl" runat="server" TextCssClass="DatePickerFecha" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="height: 5px">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -1689,10 +1685,10 @@
                                                                     Visible="false" ToolTip="<Obligatorio para moneda extranjera> El separador de decimales a utilizar es el punto"></asp:TextBox></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>
+                                                            <td style="height: 46px">
                                                                 <br />
                                                             </td>
-                                                            <td>
+                                                            <td style="height: 46px">
                                                             </td>
                                                         </tr>
                                                     </table>
