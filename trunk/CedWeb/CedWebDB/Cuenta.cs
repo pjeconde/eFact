@@ -133,7 +133,7 @@ namespace CedWebDB
             a.Append("from Cuenta, TipoCuenta, EstadoCuenta, Medio, PaginaDefault ");
             a.Append("where Cuenta.IdTipoCuenta=TipoCuenta.IdTipoCuenta and Cuenta.IdEstadoCuenta=EstadoCuenta.IdEstadoCuenta and Cuenta.IdMedio=Medio.IdMedio and Cuenta.IdPaginaDefault=PaginaDefault.IdPaginaDefault ");
             a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
-            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), ModificarOrderBy(OrderBy), (IndicePagina * TamañoPagina));
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), OrderBy, (IndicePagina * TamañoPagina));
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<CedWebEntidades.Cuenta> lista = new List<CedWebEntidades.Cuenta>();
@@ -147,25 +147,6 @@ namespace CedWebDB
                 }
             }
             return lista;
-        }
-        private string ModificarOrderBy(string OrderBy)
-        {
-            switch (OrderBy.Trim())
-            {
-                case "DescrEstadoCuenta":
-                    OrderBy = "EstadoCuenta." + OrderBy;
-                    break;
-                case "DescrTipoCuenta":
-                    OrderBy = "TipoCuenta." + OrderBy;
-                    break;
-                case "Id":
-                    OrderBy = "Cuenta.IdCuenta";
-                    break;
-                default:
-                    OrderBy = "Cuenta." + OrderBy;
-                    break;
-            }
-            return OrderBy;
         }
         public int CantidadDeFilas()
         {

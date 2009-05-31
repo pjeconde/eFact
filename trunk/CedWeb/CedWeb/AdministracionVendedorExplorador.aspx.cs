@@ -91,7 +91,7 @@ namespace CedWeb
                 System.Collections.Generic.List<CedWebEntidades.Vendedor> lista;
                 lista = CedWebRN.Vendedor.ListaAdministracion(GrillaPagingGridView.PageIndex, GrillaPagingGridView.PageSize, GrillaPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
                 ViewState["lista"] = lista;
-                GrillaPagingGridView.DataSource = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
+                GrillaPagingGridView.DataSource = (System.Collections.Generic.List<CedWebEntidades.Vendedor>)ViewState["lista"];
                 GrillaPagingGridView.DataBind();
             }
             catch (System.Threading.ThreadAbortException)

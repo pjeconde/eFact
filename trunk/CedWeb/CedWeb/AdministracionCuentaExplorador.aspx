@@ -34,7 +34,7 @@
                                                     OnSorting="CuentaPagingGridView_Sorting" OnSelectedIndexChanged="CuentaPagingGridView_SelectedIndexChanged" OnPageIndexChanging="CuentaPagingGridView_PageIndexChanging"
                                                     OnRowDataBound="CuentaPagingGridView_RowDataBound">
                                     <Columns>
-                                        <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id">
+                                        <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="IdCuenta">
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left" Width="300px"/>
                                         </asp:BoundField>
@@ -46,11 +46,11 @@
                                             <headerstyle horizontalalign="center" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="center"/>
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="IdTipoCuenta" HeaderText="Tipo" SortExpression="IdTipoCuenta">
+                                        <asp:BoundField DataField="IdTipoCuenta" HeaderText="Tipo" SortExpression="Cuenta.IdTipoCuenta">
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="IdEstadoCuenta" HeaderText="Estado" SortExpression="IdEstadoCuenta">
+                                        <asp:BoundField DataField="IdEstadoCuenta" HeaderText="Estado" SortExpression="Cuenta.IdEstadoCuenta">
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>

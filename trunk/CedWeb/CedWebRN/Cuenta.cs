@@ -342,7 +342,7 @@ namespace CedWebRN
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             if (OrderBy.Equals(String.Empty))
             {
-                OrderBy = "FechaAlta DESC";
+                OrderBy = "Nombre";
             }
             return cuenta.Lista(IndicePagina, TamañoPagina, OrderBy);
         }

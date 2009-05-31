@@ -169,7 +169,7 @@ namespace CedWebDB
             a.Append("from Comprador, Cuenta ");
             a.Append("where Comprador.IdCuenta='" + Cuenta.Id + "' and Comprador.IdCuenta=Cuenta.IdCuenta ");
             a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
-            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), ModificarOrderBy(OrderBy), (IndicePagina * TamañoPagina));
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), OrderBy, (IndicePagina * TamañoPagina));
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<CedWebEntidades.Comprador> lista = new List<CedWebEntidades.Comprador>();
@@ -200,7 +200,7 @@ namespace CedWebDB
             a.Append("from Comprador, Cuenta ");
             a.Append("where Comprador.IdCuenta=Cuenta.IdCuenta ");
             a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
-            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), ModificarOrderBy(OrderBy), (IndicePagina * TamañoPagina));
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), OrderBy, (IndicePagina * TamañoPagina));
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<CedWebEntidades.Comprador> lista = new List<CedWebEntidades.Comprador>();
@@ -221,19 +221,6 @@ namespace CedWebDB
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             return Convert.ToInt32(dt.Rows[0][0]);
-        }
-        private string ModificarOrderBy(string OrderBy)
-        {
-            switch (OrderBy.Trim())
-            {
-                case "NombreCuenta":
-                    OrderBy = "Cuenta." + OrderBy;
-                    break;
-                default:
-                    OrderBy = "Comprador." + OrderBy;
-                    break;
-            }
-            return OrderBy;
         }
     }
 }

@@ -27,11 +27,11 @@
                                 <cc1:PagingGridView ID="GrillaPagingGridView" runat="server"
                                                     OnSorting="GrillaPagingGridView_Sorting" OnPageIndexChanging="GrillaPagingGridView_PageIndexChanging">
                                     <Columns>
-                                        <asp:BoundField DataField="IdCuenta" HeaderText="Id.Cuenta" SortExpression="IdCuenta">
+                                        <asp:BoundField DataField="IdCuenta" HeaderText="Id.Cuenta" SortExpression="Vendedor.IdCuenta">
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="NombreCuenta" HeaderText="Nombre Cuenta" SortExpression="NombreCuenta">
+                                        <asp:BoundField DataField="NombreCuenta" HeaderText="Nombre Cuenta" SortExpression="Nombre">
                                             <headerstyle horizontalalign="left" wrap="False"/>
                                             <itemstyle  wrap="False" horizontalalign="left"/>
                                         </asp:BoundField>
