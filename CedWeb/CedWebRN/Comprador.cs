@@ -139,7 +139,7 @@ namespace CedWebRN
             CedWebDB.Comprador comprador = new CedWebDB.Comprador(Sesion);
             if (OrderBy.Equals(String.Empty))
             {
-                OrderBy = "RazonSocial";
+                OrderBy = "Nombre, RazonSocial";
             }
             return comprador.ListaAdministracion(IndicePagina, TamañoPagina, OrderBy);
         }

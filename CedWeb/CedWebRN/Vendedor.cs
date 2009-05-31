@@ -96,7 +96,7 @@ namespace CedWebRN
             CedWebDB.Vendedor vendedor = new CedWebDB.Vendedor(Sesion);
             if (OrderBy.Equals(String.Empty))
             {
-                OrderBy = "RazonSocial";
+                OrderBy = "Nombre";
             }
             return vendedor.ListaAdministracion(IndicePagina, TamañoPagina, OrderBy);
         }

@@ -93,19 +93,19 @@
                                                         <headerstyle horizontalalign="left" wrap="False"/>
                                                         <itemstyle wrap="False" horizontalalign="left"/>
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id">
+                                                    <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="IdCuenta">
                                                         <headerstyle horizontalalign="left" wrap="False"/>
-                                                        <itemstyle wrap="False" horizontalalign="left" Width="300px"/>
+                                                        <itemstyle wrap="False" horizontalalign="left" width="300px"/>
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="IdTipoCuenta" HeaderText="Tipo" SortExpression="IdTipoCuenta">
-                                                        <headerstyle horizontalalign="left" wrap="False"/>
-                                                        <itemstyle wrap="False" horizontalalign="left"/>
-                                                    </asp:BoundField>
-                                                    <asp:BoundField DataField="IdEstadoCuenta" HeaderText="Estado" SortExpression="IdEstadoCuenta">
+                                                    <asp:BoundField DataField="IdTipoCuenta" HeaderText="Tipo" SortExpression="Cuenta.IdTipoCuenta">
                                                         <headerstyle horizontalalign="left" wrap="False"/>
                                                         <itemstyle wrap="False" horizontalalign="left"/>
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="IdMedio" HeaderText="Medio" SortExpression="IdMedio">
+                                                    <asp:BoundField DataField="IdEstadoCuenta" HeaderText="Estado" SortExpression="Cuenta.IdEstadoCuenta">
+                                                        <headerstyle horizontalalign="left" wrap="False"/>
+                                                        <itemstyle wrap="False" horizontalalign="left"/>
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="IdMedio" HeaderText="Medio" SortExpression="Cuenta.IdMedio">
                                                         <headerstyle horizontalalign="left" wrap="False"/>
                                                         <itemstyle wrap="False" horizontalalign="left"/>
                                                     </asp:BoundField>
@@ -137,11 +137,11 @@
                                                         <headerstyle horizontalalign="center" wrap="False"/>
                                                         <itemstyle wrap="False" horizontalalign="center"/>
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="IdTipoCuenta" HeaderText="Tipo" SortExpression="IdTipoCuenta">
+                                                    <asp:BoundField DataField="IdTipoCuenta" HeaderText="Tipo" SortExpression="Cuenta.IdTipoCuenta">
                                                         <headerstyle horizontalalign="left" wrap="False"/>
                                                         <itemstyle wrap="False" horizontalalign="left"/>
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="IdEstadoCuenta" HeaderText="Estado" SortExpression="IdEstadoCuenta">
+                                                    <asp:BoundField DataField="IdEstadoCuenta" HeaderText="Estado" SortExpression="Cuenta.IdEstadoCuenta">
                                                         <headerstyle horizontalalign="left" wrap="False"/>
                                                         <itemstyle wrap="False" horizontalalign="left"/>
                                                     </asp:BoundField>
@@ -149,7 +149,7 @@
                                                         <headerstyle horizontalalign="left" wrap="False"/>
                                                         <itemstyle wrap="False" horizontalalign="left"/>
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id">
+                                                    <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="IdCuenta">
                                                         <headerstyle horizontalalign="left" wrap="False"/>
                                                         <itemstyle wrap="False" horizontalalign="left" Width="300px"/>
                                                     </asp:BoundField>

@@ -125,7 +125,7 @@ namespace CedWebDB
             a.Append("from Vendedor, Cuenta ");
             a.Append("where Vendedor.IdCuenta=Cuenta.IdCuenta ");
             a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
-            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), ModificarOrderBy(OrderBy), (IndicePagina * TamañoPagina));
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), OrderBy, (IndicePagina * TamañoPagina));
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<CedWebEntidades.Vendedor> lista = new List<CedWebEntidades.Vendedor>();
@@ -146,19 +146,6 @@ namespace CedWebDB
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             return Convert.ToInt32(dt.Rows[0][0]);
-        }
-        private string ModificarOrderBy(string OrderBy)
-        {
-            switch (OrderBy.Trim())
-            {
-                case "NombreCuenta":
-                    OrderBy = "Cuenta." + OrderBy;
-                    break;
-                default:
-                    OrderBy = "Vendedor." + OrderBy;
-                    break;
-            }
-            return OrderBy;
         }
     }
 }
