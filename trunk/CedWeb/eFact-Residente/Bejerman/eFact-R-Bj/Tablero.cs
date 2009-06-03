@@ -14,5 +14,10 @@ namespace eFact_R_Bj
         {
             InitializeComponent();
         }
+
+        private void SalirButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(this.Width.ToString());
+        }
     }
 }
