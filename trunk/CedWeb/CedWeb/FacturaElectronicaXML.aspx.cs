@@ -1614,6 +1614,51 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
         else
         {
             //Calculo y asigno totales
+            try
+            {
+                Importe_Total_Neto_Gravado_ResumenTextBox.Text = "0";
+                Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = "0";
+                Importe_Operaciones_Exentas_ResumenTextBox.Text = "0";
+                Impuesto_Liq_ResumenTextBox.Text = "0";
+                Impuesto_Liq_Rni_ResumenTextBox.Text = "0";
+                //Importe_Total_Impuestos_Municipales_ResumenTextBox
+                //Importe_Total_Impuestos_Nacionales_ResumenTextBox
+                //Importe_Total_Ingresos_Brutos_ResumenTextBox
+                //Importe_Total_Impuestos_Internos_ResumenTextBox
+                Importe_Total_Factura_ResumenTextBox.Text = "0";
+                //Tipo_de_cambioTextBox
+                System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
+                for (int i = 0; i < listadelineas.Count; i++)
+                {
+                    if (listadelineas[i].descripcion == null)
+                    {
+                        throw new Exception("Debe informar al menos un artículo");
+                    }
+                    //det.linea[i].descripcion = listadelineas[i].descripcion;
+                    //det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
+                    //det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
+                    //if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
+                    //{
+                    //    det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
+                    //    det.linea[i].importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
+                    //    det.linea[i].importe_iva = listadelineas[i].importe_iva;
+                    //}
+                    //else
+                    //{
+                    //    det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
+                    //    FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
+                    //    limo.importe_total_articuloSpecified = true;
+                    //    limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
+                    //    limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
+                    //    limo.importe_iva = listadelineas[i].importe_iva;
+                    //    det.linea[i].importes_moneda_origen = limo;
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al generar el archivo.\\n " + ex.Message + "');</script>");
+            }
         }
     }
 }
