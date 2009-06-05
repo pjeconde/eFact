@@ -74,7 +74,7 @@
                                 <tr>
                                     <td align="center" style="width: 782px; vertical-align: middle; text-align: center;"
                                         valign="top">
-                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 784px">
                                             <tr>
                                                 <td rowspan="6" style="width: 1px; background-color: Gray;">
                                                 </td>

@@ -617,7 +617,9 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                     else
                     {
                         det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
-                        FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
+						det.linea[i].importe_iva = Math.Round(listadelineas[i].importe_iva * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
+						det.linea[i].importe_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
+						FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
                         limo.importe_total_articuloSpecified = true;
                         limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
                         limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
@@ -1535,9 +1537,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
 			for (int i = 0; i < listadelineas.Count; i++)
 			{
-				listadelineas[i].importe_total_articulo = listadelineas[i].importes_moneda_origen.importe_total_articulo;
-				listadelineas[i].importe_ivaSpecified = listadelineas[i].importes_moneda_origen.importe_ivaSpecified;
-				listadelineas[i].importe_iva = listadelineas[i].importes_moneda_origen.importe_iva;
+				if (listadelineas[i].importes_moneda_origen != null)
+				{
+					listadelineas[i].importe_total_articulo = listadelineas[i].importes_moneda_origen.importe_total_articulo;
+					listadelineas[i].importe_ivaSpecified = listadelineas[i].importes_moneda_origen.importe_ivaSpecified;
+					listadelineas[i].importe_iva = listadelineas[i].importes_moneda_origen.importe_iva;
+				}
 			}
 		}
 	}
