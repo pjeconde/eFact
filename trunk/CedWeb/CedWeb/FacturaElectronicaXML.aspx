@@ -480,6 +480,9 @@
                                                                 <table border="0" cellpadding="0" cellspacing="0" style="">
                                                                     <tr>
                                                                         <td style="" class="TextoLabelFEAVendedor">
+                                                                            <asp:RegularExpressionValidator ID="CUITVendedorRegularExpressionValidator" runat="server"
+                                                                                ControlToValidate="Cuit_VendedorTextBox" ErrorMessage="error de formateo en CUIT del vendedor"
+                                                                                SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
                                                                             <asp:RequiredFieldValidator ID="CUITVendedorRequiredFieldValidator" runat="server"
                                                                                 ControlToValidate="Cuit_VendedorTextBox" ErrorMessage="CUIT del vendedor" SetFocusOnError="True">* </asp:RequiredFieldValidator>
                                                                             CUIT:
@@ -753,6 +756,9 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="TextoLabelFEAVendedor">
+                                                                <asp:RegularExpressionValidator ID="docCompradorRegularExpressionValidator" runat="server"
+                                                                    ControlToValidate="Nro_Doc_Identificatorio_CompradorTextBox" ErrorMessage="error de formateo en documento del comprador"
+                                                                    SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
                                                                 <asp:RequiredFieldValidator ID="docCompradorRequiredFieldValidator" runat="server"
                                                                     ControlToValidate="Nro_Doc_Identificatorio_CompradorTextBox" ErrorMessage="documento del comprador"
                                                                     SetFocusOnError="True">* </asp:RequiredFieldValidator>Nro. de documento:
