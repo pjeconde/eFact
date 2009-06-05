@@ -226,6 +226,7 @@ namespace CedWebDB
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("delete Comprador where IdCuenta in (select IdCuenta from Cuenta where IdEstadoCuenta='Baja') ");
             a.Append("delete Vendedor where IdCuenta in (select IdCuenta from Cuenta where IdEstadoCuenta='Baja') ");
+            a.Append("insert CuentaDepurada select * from Cuenta where IdEstadoCuenta='Baja' ");
             a.Append("delete Cuenta where IdEstadoCuenta='Baja' ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
