@@ -221,13 +221,20 @@ namespace CedWebDB
             a.Append("where Cuenta.IdCuenta='" + Cuenta.Id.ToString() + "' ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
-        public void DepurarBajas()
+        public void Depurar()
         {
             StringBuilder a = new StringBuilder(string.Empty);
+            //Depuracion bajas
+            a.Append("insert CompradorDepurado select * from Comprador where IdCuenta in (select IdCuenta from Cuenta where IdEstadoCuenta='Baja') ");
             a.Append("delete Comprador where IdCuenta in (select IdCuenta from Cuenta where IdEstadoCuenta='Baja') ");
+            a.Append("insert VendedorDepurado select * from Vendedor where IdCuenta in (select IdCuenta from Cuenta where IdEstadoCuenta='Baja') ");
             a.Append("delete Vendedor where IdCuenta in (select IdCuenta from Cuenta where IdEstadoCuenta='Baja') ");
             a.Append("insert CuentaDepurada select * from Cuenta where IdEstadoCuenta='Baja' ");
             a.Append("delete Cuenta where IdEstadoCuenta='Baja' ");
+            //Suspension de cuentas Premium
+            a.Append("update Cuenta set ");
+            a.Append("IdEstadoCuenta='Suspend' ");
+            a.Append("where FechaVtoPremium<getdate() and IdEstadoCuenta<>'Suspend' and IdTipoCuenta='Prem' ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
         public void RegistrarReenvioMail(CedWebEntidades.Cuenta Cuenta)
