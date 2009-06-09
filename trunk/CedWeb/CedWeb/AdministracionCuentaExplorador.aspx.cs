@@ -202,6 +202,7 @@ namespace CedWeb
         }
         protected void BajaButton_Click(object sender, EventArgs e)
         {
+            MsgErrorLabel.Text = String.Empty;
             try
             {
                 CedWebRN.Cuenta.DarDeBaja(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
@@ -215,6 +216,7 @@ namespace CedWeb
         }
         protected void AnularBajaButton_Click(object sender, EventArgs e)
         {
+            MsgErrorLabel.Text = String.Empty;
             try
             {
                 CedWebRN.Cuenta.AnularBaja(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
@@ -228,6 +230,7 @@ namespace CedWeb
         }
         protected void ReenviarMailButton_Click(object sender, EventArgs e)
         {
+            MsgErrorLabel.Text = String.Empty;
             try
             {
                 CedWebRN.Cuenta.ReenviarMail(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
@@ -241,6 +244,7 @@ namespace CedWeb
         }
         protected void ActivCPButton_Click(object sender, EventArgs e)
         {
+            MsgErrorLabel.Text = String.Empty;
             try
             {
                 CedWebRN.Cuenta.CambiarActivCP(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
@@ -254,6 +258,7 @@ namespace CedWeb
         }
         protected void SuspenderPremiumButton_Click(object sender, EventArgs e)
         {
+            MsgErrorLabel.Text = String.Empty;
             try
             {
                 CedWebRN.Cuenta.SuspenderPremium(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
@@ -272,6 +277,7 @@ namespace CedWeb
         }
         protected void DesactivarPremiumButton_Click(object sender, EventArgs e)
         {
+            MsgErrorLabel.Text = String.Empty;
             try
             {
                 CedWebRN.Cuenta.DesactivarPremium(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
@@ -285,9 +291,10 @@ namespace CedWeb
         }
         protected void DepurarButton_Click(object sender, EventArgs e)
         {
+            MsgErrorLabel.Text = String.Empty;
             try
             {
-                CedWebRN.Cuenta.DepurarBajas((CedEntidades.Sesion)Session["Sesion"]);
+                CedWebRN.Cuenta.Depurar((CedEntidades.Sesion)Session["Sesion"]);
                 BindPagingGrid();
                 DesSeleccionarFilas();
             }

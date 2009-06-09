@@ -416,10 +416,10 @@ namespace CedWebRN
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             cuenta.CambiarTipo(Cuenta, nuevoTipo);
         }
-        public static void DepurarBajas(CedEntidades.Sesion Sesion)
+        public static void Depurar(CedEntidades.Sesion Sesion)
         {
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
-            cuenta.DepurarBajas();
+            cuenta.Depurar();
         }
         public static string ObtenerClaveActivCP(CedWebEntidades.Cuenta Cuenta, string ClaveSolicitud, CedEntidades.Sesion Sesion)
         {

@@ -33,6 +33,10 @@ namespace CedWeb
                 sesion.Cuenta.Id = UsuarioTextBox.Text;
                 sesion.Cuenta.Password = PasswordTextBox.Text;
                 CedWebRN.Cuenta.Login(sesion.Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
+                if (sesion.Cuenta.TipoCuenta.Id == "Admin")
+                {
+                    CedWebRN.Cuenta.Depurar(sesion);
+                }
                 if (sesion.Cuenta.ActivCP)
                 {
                     Response.Redirect("~/ActivacionClientePesado.aspx", true);
