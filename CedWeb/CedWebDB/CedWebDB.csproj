@@ -37,6 +37,7 @@
     <Compile Include="Contacto.cs" />
     <Compile Include="Cuenta.cs" />
     <Compile Include="db.cs" />
+    <Compile Include="Flag.cs" />
     <Compile Include="Medio.cs" />
     <Compile Include="PaginaDefault.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -20,12 +20,12 @@
                                     <td>
                                         <asp:Label ID="TituloLabel" runat="server" Text="Administración" SkinID="TituloPagina"></asp:Label>
                                     </td>
-                                    <td rowspan="7" style="color:#A52A2A; font-weight:bold; padding-left:20px" align="left" valign="bottom">
+                                    <td rowspan="9" style="color:#A52A2A; font-weight:bold; padding-left:20px" align="left" valign="bottom">
                                         Medio
                                         <br />
                                         <asp:ImageMap ID="MedioImageMap" runat="server" BorderStyle="Solid" BorderColor="brown" BorderWidth="1px"></asp:ImageMap>
                                     </td>
-                                    <td rowspan="7" style="color:#A52A2A; font-weight:bold; padding-left:20px" align="left" valign="bottom">
+                                    <td rowspan="9" style="color:#A52A2A; font-weight:bold; padding-left:20px" align="left" valign="bottom">
                                         Provincia
                                         <br />
                                         <asp:ImageMap ID="ProvinciaImageMap" runat="server" BorderStyle="Solid" BorderColor="brown" BorderWidth="1px"></asp:ImageMap>
@@ -33,37 +33,51 @@
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td style="padding-top:20px" valign="middle" align="left">
-                                        <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/AdministracionCuentaExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Cuentas</asp:HyperLink>
-                                        <asp:Label ID="CuentasLabel" runat="server" Text="" SkinID="TextoGrande"></asp:Label>
+                                    <td style="padding-top:10px" valign="middle" align="left">
+                                        <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/AdministracionCuentaExplorador.aspx" SkinID="LinkMedianoClaro">Explorador de Cuentas</asp:HyperLink>
+                                        <asp:Label ID="CuentasLabel" runat="server" Text="" SkinID="TextoMediano"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td style="padding-top:10px" align="left">
-                                        <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/AdministracionVendedorExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Vendedores</asp:HyperLink>
-                                        <asp:Label ID="VendedoresLabel" runat="server" Text="" SkinID="TextoGrande"></asp:Label>
+                                    <td style="padding-top:5px" align="left">
+                                        <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/AdministracionVendedorExplorador.aspx" SkinID="LinkMedianoClaro">Explorador de Vendedores</asp:HyperLink>
+                                        <asp:Label ID="VendedoresLabel" runat="server" Text="" SkinID="TextoMediano"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td style="padding-top:10px" align="left">
-                                        <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/AdministracionCompradorExplorador.aspx" SkinID="LinkGrandeClaro">Explorador de Compradores</asp:HyperLink>
-                                        <asp:Label ID="CompradoresLabel" runat="server" Text="" SkinID="TextoGrande"></asp:Label>
+                                    <td style="padding-top:5px" align="left">
+                                        <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/AdministracionCompradorExplorador.aspx" SkinID="LinkMedianoClaro">Explorador de Compradores</asp:HyperLink>
+                                        <asp:Label ID="CompradoresLabel" runat="server" Text="" SkinID="TextoMediano"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td style="padding-top:10px" align="left">
+                                    <td style="padding-top:5px" align="left">
                                         <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="http://ar62.toservers.com/awstats/awstats.pl?&inst=482&output=main&config=cedeira" SkinID="LinkGrandeClaro" Target="_blank">Estadísticas del sitio</asp:HyperLink>
                                         <asp:Label ID="Label2" runat="server" Text="" SkinID="TextoGrande"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding-top:10px; padding-right:3px" align="right" valign="top">
+                                    <td style="padding-top:5px; padding-right:3px" align="right" valign="top">
+                                        <asp:CheckBox ID="ModoDepuracionCheckBox" runat="server" OnCheckedChanged="ModoDepuracionCheckBox_CheckedChanged" AutoPostBack="true" />
+                                    </td>
+                                    <td style="padding-top:5px" align="left" valign="middle">
+                                        Modo depuración
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td align="left">
+                                        (guarda los archivos xml enviados por mail)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top:5px; padding-right:3px" align="right" valign="top">
                                         <asp:CheckBox ID="RecibeAvisoAltaCuentaCheckBox" runat="server" OnCheckedChanged="RecibeAvisoAltaCuentaCheckBox_CheckedChanged" AutoPostBack="true" />
                                     </td>
-                                    <td style="padding-top:10px" align="left" valign="middle">
+                                    <td style="padding-top:5px" align="left" valign="middle">
                                         Recibe aviso de alta de cuenta (SMS)
                                     </td>
                                 </tr>
@@ -151,7 +165,7 @@
                                                     </asp:BoundField>
                                                     <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="IdCuenta">
                                                         <headerstyle horizontalalign="left" wrap="False"/>
-                                                        <itemstyle wrap="False" horizontalalign="left" Width="300px"/>
+                                                        <itemstyle wrap="False" horizontalalign="left"/>
                                                     </asp:BoundField>
                                                 </Columns>
                                             </cc1:PagingGridView>
@@ -161,7 +175,7 @@
                                 <tr>
                                     <td></td>
                                     <td colspan="2" style="padding-top:10px" align="left">
-                                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="http://www.cualesmiip.com/" SkinID="LinkGrandeClaro" Target="_blank">¿ Cuál es mi IP ?</asp:HyperLink>
+                                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="http://www.cualesmiip.com/" SkinID="LinkMedianoClaro" Target="_blank">¿ Cuál es mi IP ?</asp:HyperLink>
                                     </td>
                                 </tr>
                                 <tr>
