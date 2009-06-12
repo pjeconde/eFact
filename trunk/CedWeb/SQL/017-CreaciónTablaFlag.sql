@@ -1,0 +1,20 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Flag](
+	[IdFlag] [varchar](30) NOT NULL,
+	[Valor] [bit] NOT NULL,
+ CONSTRAINT [PK_Flag] PRIMARY KEY CLUSTERED 
+(
+	[IdFlag] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+go
+insert Flag values ('ModoDepuracion', 0)
+go
