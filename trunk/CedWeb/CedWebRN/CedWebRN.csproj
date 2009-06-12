@@ -42,6 +42,7 @@
     <Compile Include="Contacto.cs" />
     <Compile Include="Cuenta.cs" />
     <Compile Include="Estadistica.cs" />
+    <Compile Include="Flag.cs" />
     <Compile Include="Funciones.cs" />
     <Compile Include="Grafico.cs" />
     <Compile Include="Medio.cs" />

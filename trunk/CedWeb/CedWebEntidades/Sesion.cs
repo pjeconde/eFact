@@ -10,12 +10,14 @@ namespace CedWebEntidades
         #region Atributos
         private CedWebEntidades.Cuenta cuenta;
         private string mensajeGeneral;
+        private CedWebEntidades.Flag flag;
         #endregion
 
         #region Constructor
         public Sesion()
         {
             cuenta = new CedWebEntidades.Cuenta();
+            flag = new CedWebEntidades.Flag();
         }
         #endregion
 
@@ -29,6 +31,17 @@ namespace CedWebEntidades
             set
             {
                 cuenta = value;
+            }
+        }
+        public CedWebEntidades.Flag Flag
+        {
+            get
+            {
+                return flag;
+            }
+            set
+            {
+                flag = value;
             }
         }
         public string MensajeGeneral

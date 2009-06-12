@@ -46,6 +46,7 @@
         CedWebEntidades.Sesion s = new CedWebEntidades.Sesion();
         s.CnnStr = System.Configuration.ConfigurationManager.AppSettings["CnnStr"];
         s.MensajeGeneral = System.Configuration.ConfigurationManager.AppSettings["MensajeGeneral"];
+        CedWebRN.Flag.Leer(s.Flag, s);
         Session["Sesion"] = s;
     }
     void Session_End(object sender, EventArgs e) 

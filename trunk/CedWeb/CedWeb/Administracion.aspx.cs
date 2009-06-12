@@ -56,6 +56,7 @@ namespace CedWeb
                         ProvinciaImageMap.ImageUrl = "~/Temp/AdministracionGraficoProvincia-" + Session.SessionID + ".bmp";
                         ProvinciaImageMap.DataBind();
 
+                        ModoDepuracionCheckBox.Checked = ((CedWebEntidades.Sesion)Session["Sesion"]).Flag.ModoDepuracion;
                         RecibeAvisoAltaCuentaCheckBox.Checked = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.RecibeAvisoAltaCuenta;
 
                         UltimasAltasPagingGridView.PageSize = 6;
@@ -102,7 +103,12 @@ namespace CedWeb
         protected void RecibeAvisoAltaCuentaCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.RecibeAvisoAltaCuenta = RecibeAvisoAltaCuentaCheckBox.Checked;
-            CedWebRN.Cuenta.SetearRecibeAvisoAltaCuenta((CedWebEntidades.Cuenta)((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
+            CedWebRN.Flag.SetearModoDepuracion((CedWebEntidades.Flag)((CedWebEntidades.Sesion)Session["Sesion"]).Flag, (CedEntidades.Sesion)Session["Sesion"]);
+        }
+        protected void ModoDepuracionCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            ((CedWebEntidades.Sesion)Session["Sesion"]).Flag.ModoDepuracion = ModoDepuracionCheckBox.Checked;
+            CedWebRN.Flag.SetearModoDepuracion((CedWebEntidades.Flag)((CedWebEntidades.Sesion)Session["Sesion"]).Flag, (CedEntidades.Sesion)Session["Sesion"]);
         }
         protected void UltimasAltasPagingGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
