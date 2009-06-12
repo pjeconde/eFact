@@ -244,14 +244,8 @@ namespace CedWebRN
             {
                 try
                 {
-                    CedWebEntidades.Cuenta cuentaExistente = new CedWebEntidades.Cuenta();
-                    cuentaExistente.Id = Cuenta.Id;
-                    Leer(cuentaExistente, Sesion);
-                    return false;
-                }
-                catch (Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente)
-                {
-                    return true;
+                    CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+                    return cuenta.IdCuentaDisponible(Cuenta);
                 }
                 catch (Exception ex)
                 {
