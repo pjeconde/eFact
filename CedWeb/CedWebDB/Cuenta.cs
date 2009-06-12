@@ -95,6 +95,24 @@ namespace CedWebDB
                 throw new Microsoft.ApplicationBlocks.ExceptionManagement.Cuenta.CuentaConfUpdateErroneo();
             }
         }
+        public bool IdCuentaDisponible(CedWebEntidades.Cuenta Cuenta)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("IF EXISTS(select * from Cuenta where IdCuenta='" + Cuenta.Id + "') ");
+            a.Append("  BEGIN ");
+            a.Append("	select convert(bit, 0) as Disponible ");
+            a.Append("  END ");
+            a.Append("ELSE IF EXISTS(select * from CuentaDepurada where IdCuenta='" + Cuenta.Id + "') ");
+            a.Append("  BEGIN ");
+            a.Append("	select convert(bit, 0) as Disponible ");
+            a.Append("  END ");
+            a.Append("ELSE ");
+            a.Append("  BEGIN ");
+            a.Append("	select convert(bit, 1) as Disponible ");
+            a.Append("  END ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            return Convert.ToBoolean(dt.Rows[0]["Disponible"]);
+        }
         public void CambiarPassword(CedWebEntidades.Cuenta Cuenta, string PasswordNueva)
         {
             StringBuilder a = new StringBuilder(string.Empty);
