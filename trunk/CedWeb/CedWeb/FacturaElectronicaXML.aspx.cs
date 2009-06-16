@@ -157,7 +157,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			}
 		}
 	}
-
 	private void BindearDropDownLists()
 	{
 		((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataValueField = "Codigo";
@@ -170,7 +169,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.Lista();
 		((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataBind();
 	}
-
 	protected void detalleGridView_RowDataBound(object sender, GridViewRowEventArgs e)
 	{
 		GridViewRow row = e.Row;
@@ -205,7 +203,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		"confirm('Está seguro que quiere borrar " +
 		DataBinder.Eval(e.Row.DataItem, "descripcion") + "')");
 	}
-
 	//private ObjectDataSource ChildDataSourceImpuesto(FeaEntidades.InterFacturas.linea l)
 	//{
 	//    ObjectDataSource impuestoODS = new ObjectDataSource();
@@ -214,7 +211,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 	//    impuestoODS.SelectMethod = "Listar";
 	//    return impuestoODS;
 	//}
-
 	protected void detalleGridView_RowCommand(object sender, GridViewCommandEventArgs e)
 	{
 		if (e.CommandName.Equals("AddDetalle"))
@@ -288,7 +284,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			}
 		}
 	}
-
 	protected void detalleGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
 	{
 		try
@@ -351,7 +346,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</script>");
 		}
 	}
-
 	protected void detalleGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
 	{
 		if (e.Exception != null)
@@ -360,7 +354,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			e.ExceptionHandled = true;
 		}
 	}
-
 	protected void detalleGridView_RowEditing(object sender, GridViewEditEventArgs e)
 	{
 		detalleGridView.EditIndex = e.NewEditIndex;
@@ -382,7 +375,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		}
 
 	}
-
 	protected void detalleGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
 	{
 		detalleGridView.EditIndex = -1;
@@ -390,7 +382,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		detalleGridView.DataBind();
 		BindearDropDownLists();
 	}
-
 	protected void detalleGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
 	{
 		try
@@ -414,7 +405,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		catch { }
 
 	}
-
 	protected void detalleGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
 	{
 		if (e.Exception != null)
@@ -423,7 +413,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			e.ExceptionHandled = true;
 		}
 	}
-
 	protected void GenerarButton_Click(object sender, EventArgs e)
 	{
         if (((Button)sender).ID == "DescargarButton" && CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
@@ -805,11 +794,8 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                         }
                     }
                 }
-
-
                 System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> listadedescuentos = (System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"];
                 comp.resumen.descuentos = new FeaEntidades.InterFacturas.resumenDescuentos[listadedescuentos.Count];
-
                 for (int i = 0; i < listadedescuentos.Count; i++)
                 {
                     if (listadedescuentos[i].descripcion_descuento != null && !listadedescuentos[i].descripcion_descuento.Equals(string.Empty))
@@ -837,8 +823,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                         }
                     }
                 }
-
-
                 lote.comprobante[0] = comp;
 
                 System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
@@ -872,6 +856,13 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 }
                 else
                 {
+                    if (((CedWebEntidades.Sesion)Session["Sesion"]).Flag.ModoDepuracion)
+                    {
+                        //ModoDepuracion encendido
+                        System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"Temp/" + sb.ToString()), System.IO.FileMode.Create);
+                        m.WriteTo(fs);
+                        fs.Close();
+                    }
                     //Envio por mail del XML
                     System.Net.Mail.MailMessage mail;
                     if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id != null)
@@ -944,7 +935,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
             }
         }
 	}
-
 	private string AgregarBody()
 	{
 		System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -1618,51 +1608,111 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
         }
         else
         {
-            //Calculo y asigno totales
             try
             {
+                //Proceso DETALLE
                 Importe_Total_Neto_Gravado_ResumenTextBox.Text = "0";
                 Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = "0";
                 Importe_Operaciones_Exentas_ResumenTextBox.Text = "0";
                 Impuesto_Liq_ResumenTextBox.Text = "0";
                 Impuesto_Liq_Rni_ResumenTextBox.Text = "0";
-                //Importe_Total_Impuestos_Municipales_ResumenTextBox
-                //Importe_Total_Impuestos_Nacionales_ResumenTextBox
-                //Importe_Total_Ingresos_Brutos_ResumenTextBox
-                //Importe_Total_Impuestos_Internos_ResumenTextBox
+                Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = "0";
+                Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = "0";
+                Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = "0";
+                Importe_Total_Impuestos_Internos_ResumenTextBox.Text = "0";
                 Importe_Total_Factura_ResumenTextBox.Text = "0";
-                //Tipo_de_cambioTextBox
                 System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
+                double totalGravado = 0;
+                double totalNoGravado = 0;
+                double totalIVA = 0;
                 for (int i = 0; i < listadelineas.Count; i++)
                 {
                     if (listadelineas[i].descripcion == null)
                     {
                         throw new Exception("Debe informar al menos un artículo");
                     }
-                    //det.linea[i].descripcion = listadelineas[i].descripcion;
-                    //det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
-                    //det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
-                    //if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
-                    //{
-                    //    det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
-                    //    det.linea[i].importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
-                    //    det.linea[i].importe_iva = listadelineas[i].importe_iva;
-                    //}
-                    //else
-                    //{
-                    //    det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
-                    //    FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
-                    //    limo.importe_total_articuloSpecified = true;
-                    //    limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
-                    //    limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
-                    //    limo.importe_iva = listadelineas[i].importe_iva;
-                    //    det.linea[i].importes_moneda_origen = limo;
-                    //}
+                    if (listadelineas[i].importe_iva != 0)
+                    {
+                        totalGravado += listadelineas[i].importe_total_articulo;
+                    }
+                    else
+                    {
+                        totalNoGravado += listadelineas[i].importe_total_articulo;
+                    }
+                    totalIVA += listadelineas[i].importe_iva;
                 }
+                //Proceso DESCUENTOS GLOBALES
+                System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> listadedescuentos = (System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"];
+                for (int i = 0; i < listadedescuentos.Count; i++)
+                {
+                    if (listadedescuentos[i].descripcion_descuento != null && !listadedescuentos[i].descripcion_descuento.Equals(string.Empty))
+                    {
+                        totalNoGravado -= listadedescuentos[i].importe_descuento;
+                    }
+                }
+                //Proceso IMPUESTOS GLOBALES
+                double total_Impuestos_Nacionales = 0;
+                double total_Impuestos_Internos = 0;
+                double total_Ingresos_Brutos = 0;
+                double total_Impuestos_Municipales = 0;
+                System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos = (System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"];
+                for (int i = 0; i < listadeimpuestos.Count; i++)
+                {
+                    if (!listadeimpuestos[i].codigo_impuesto.Equals(0))
+                    {
+                        if (listadeimpuestos[i].codigo_impuesto == new FeaEntidades.CodigosImpuesto.IVA().Codigo ||
+                            listadeimpuestos[i].codigo_impuesto == new FeaEntidades.CodigosImpuesto.Otros().Codigo ||
+                            listadeimpuestos[i].codigo_impuesto == new FeaEntidades.CodigosImpuesto.Nacionales().Codigo)
+                        {
+                            total_Impuestos_Nacionales += listadeimpuestos[i].importe_impuesto;
+                        }
+                        else if (listadeimpuestos[i].codigo_impuesto == new FeaEntidades.CodigosImpuesto.Internos().Codigo)
+                        {
+                            total_Impuestos_Internos += listadeimpuestos[i].importe_impuesto;
+                        }
+                        else if (listadeimpuestos[i].codigo_impuesto == new FeaEntidades.CodigosImpuesto.IB().Codigo)
+                        {
+                            total_Ingresos_Brutos += listadeimpuestos[i].importe_impuesto;
+                        }
+                        else if (listadeimpuestos[i].codigo_impuesto == new FeaEntidades.CodigosImpuesto.Municipales().Codigo)
+                        {
+                            total_Impuestos_Municipales += listadeimpuestos[i].importe_impuesto;
+                        }
+                        else
+                        {
+                            throw new Exception("Código del impuesto inválido");
+                        }
+                    }
+                }
+                //Asigno totales
+                Importe_Total_Neto_Gravado_ResumenTextBox.Text = totalGravado.ToString();
+                Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = totalNoGravado.ToString();
+                if (Condicion_IVA_CompradorDropDownList.SelectedValue == (new FeaEntidades.CondicionesIVA.ResponsableNoInscripto()).Codigo.ToString() || Condicion_IVA_CompradorDropDownList.SelectedValue == (new FeaEntidades.CondicionesIVA.SujetoNoCategorizado()).Codigo.ToString())
+                {
+                    Impuesto_Liq_Rni_ResumenTextBox.Text = totalIVA.ToString();
+                }
+                else
+                {
+                    Impuesto_Liq_ResumenTextBox.Text = totalIVA.ToString();
+                }
+                Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = total_Impuestos_Municipales.ToString();
+                Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = total_Impuestos_Nacionales.ToString();
+                Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = total_Ingresos_Brutos.ToString();
+                Importe_Total_Impuestos_Internos_ResumenTextBox.Text = total_Impuestos_Internos.ToString();
+                double total = totalGravado + totalNoGravado + totalIVA + total_Impuestos_Nacionales + total_Impuestos_Internos + total_Ingresos_Brutos + total_Impuestos_Municipales;
+                Importe_Total_Factura_ResumenTextBox.Text = total.ToString();
             }
             catch (Exception ex)
             {
-                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al generar el archivo.\\n " + ex.Message + "');</script>");
+                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al calcular los totales.\\n " + ex.Message + "');</script>");
+            }
+            finally
+            {
+                //Restauro totales no informados
+                if (Importe_Total_Impuestos_Municipales_ResumenTextBox.Text == "0") Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = String.Empty;
+                if (Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text == "0") Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = String.Empty;
+                if (Importe_Total_Ingresos_Brutos_ResumenTextBox.Text == "0") Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = String.Empty;
+                if (Importe_Total_Impuestos_Internos_ResumenTextBox.Text == "0") Importe_Total_Impuestos_Internos_ResumenTextBox.Text = String.Empty;
             }
         }
     }

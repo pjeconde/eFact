@@ -1488,7 +1488,7 @@
                                                 <td colspan="2" style="text-align:right;" class="TextoResaltado">
                                                 </td>
                                                 <td align="right" style="padding-right:5px" class="TextoResaltado">
-                                                    <asp:Button ID="CalcularTotalesButton" runat="server" BackColor="peachpuff" BorderStyle="Solid" BorderWidth="1px" BorderColor="brown" ForeColor="brown" Font-Bold="true" CausesValidation="false" Height="25px" Width="184" Text="Calcular totales" ToolTip="Exclusivo SERVICIO PREMIUM" OnClick="CalcularTotalesButton_Click"/>
+                                                    <asp:Button ID="CalcularTotalesButton" runat="server" BackColor="peachpuff" BorderStyle="Solid" BorderWidth="1px" BorderColor="brown" ForeColor="brown" Font-Bold="true" CausesValidation="false" Height="25px" Width="184" Text="Sugerir totales" ToolTip="Exclusivo SERVICIO PREMIUM" OnClick="CalcularTotalesButton_Click"/>
                                                 </td>
                                             </tr>
                                             <tr>
