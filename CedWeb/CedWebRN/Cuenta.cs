@@ -99,20 +99,20 @@ namespace CedWebRN
             Cuenta.PaginaDefault.Id = CedWebRN.PaginaDefault.Predeterminada(Cuenta.TipoCuenta, Sesion).Id;
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             cuenta.Crear(Cuenta);
-            EnviarMail("Ahora dispone de una nueva cuenta eFact", Cuenta);
+            EnviarMailBienvenidaeFact("Ahora dispone de una nueva cuenta eFact", Cuenta);
         }
         public static void ReenviarMail(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             cuenta.RegistrarReenvioMail(Cuenta);
-            EnviarMail("Ahora dispone de una nueva cuenta eFact (reenvio)", Cuenta);
+            EnviarMailBienvenidaeFact("Ahora dispone de una nueva cuenta eFact (reenvio)", Cuenta);
         }
         public static void CambiarActivCP(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             cuenta.CambiarActivCP(Cuenta);
         }
-        private static void EnviarMail(string Asunto, CedWebEntidades.Cuenta Cuenta)
+        private static void EnviarMailBienvenidaeFact(string Asunto, CedWebEntidades.Cuenta Cuenta)
         {
             SmtpClient smtpClient = new SmtpClient("localhost");
             MailMessage mail = new MailMessage();
@@ -399,6 +399,19 @@ namespace CedWebRN
                 nuevoEstado.Id = "Vigente";
                 CambiarEstado(Cuenta, nuevoEstado, Sesion);
             }
+        }
+        public static void EnviarMailBienvenidaPremium(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        {
+            SmtpClient smtpClient = new SmtpClient("localhost");
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
+            mail.To.Add(new MailAddress(Cuenta.Email));
+            mail.Subject = "Prueba Bienvenida Premium";
+            mail.IsBodyHtml = true;
+            StringBuilder a = new StringBuilder();
+            a.Append("Prueba Bienvenida Premium");
+            mail.Body = a.ToString();
+            smtpClient.Send(mail);
         }
         public static void DesactivarPremium(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
