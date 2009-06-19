@@ -186,5 +186,12 @@ namespace CedWeb
                 CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepcion.aspx");
             }
         }
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            CedWebEntidades.Cuenta cuenta=new CedWebEntidades.Cuenta();
+            cuenta.Id="claudio.cedeira";
+            CedWebRN.Cuenta.Leer(cuenta, (CedWebEntidades.Sesion)Session["Sesion"]);
+            CedWebRN.Cuenta.EnviarMailBienvenidaPremium(cuenta, (CedWebEntidades.Sesion)Session["Sesion"]);
+        }
     }
 }

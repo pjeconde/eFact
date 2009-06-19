@@ -32,7 +32,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td></td>
+                                    <td style="padding-top:10px" valign="middle"><asp:Button ID="Button1" runat="server" Text="" Width="16px" Height="16px" OnClick="Button1_Click" /></td>
                                     <td style="padding-top:10px" valign="middle" align="left">
                                         <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/AdministracionCuentaExplorador.aspx" SkinID="LinkMedianoClaro">Explorador de Cuentas</asp:HyperLink>
                                         <asp:Label ID="CuentasLabel" runat="server" Text="" SkinID="TextoMediano"></asp:Label>
