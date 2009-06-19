@@ -408,9 +408,8 @@ namespace CedWebRN
             mail.To.Add(new MailAddress(Cuenta.Email));
             mail.Subject = "Prueba Bienvenida Premium";
             mail.IsBodyHtml = true;
-            StringBuilder a = new StringBuilder();
-            a.Append("Prueba Bienvenida Premium");
-            mail.Body = a.ToString();
+            WebClient carta = new WebClient();
+            mail.Body = carta.DownloadString("CedWeb/Cartas/FacturaElectronicaMail.htm");
             smtpClient.Send(mail);
         }
         public static void DesactivarPremium(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
