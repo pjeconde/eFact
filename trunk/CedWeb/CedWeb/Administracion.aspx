@@ -184,6 +184,12 @@
                                         (para acceder, en forma remota, al servidor de base de datos de Towebs se debe ingresar su IP en el Firewall del Haiti Control Module)
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td></td>
+                                    <td colspan="3" align="center" style="padding-top:10px">
+                                        <asp:Label ID="MsgErrorLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
+                                    </td>
+                                </tr>
                             </table>
                         </td>
                     </tr>
