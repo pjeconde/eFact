@@ -16,7 +16,9 @@
                                         <asp:Label ID="LabelTitFacturaElectronica" runat="server" Text="Factura Electrónica (servicio web)" SkinID="TituloPagina"></asp:Label>
                                     </td>
                                     <td rowspan="10" valign="top">
-                                        <asp:Image ID="Image13" runat="server" ImageUrl="~/Imagenes/eFact-W-vertical.jpg"/>
+                                        <asp:ImageMap ID="eFactWverticalImageMap" runat="server" ImageUrl="~/Imagenes/eFact-W-vertical.jpg" HotSpotMode="Navigate">
+                                            <asp:RectangleHotSpot Top="185" Left="81" Bottom="220" Right="219" NavigateUrl="http://www.interfacturas.com.ar/" Target="_blank" />
+                                        </asp:ImageMap>
                                     </td>
                                 </tr>
                                 <tr>
@@ -144,9 +146,10 @@
                                 <tr>
                                     <td></td>
                                     <td style="width:750px; padding-top:20px; padding-bottom:10px; padding-left:7px" align="left">
-                                        <asp:Image ID="Image14" runat="server" ImageUrl="~/Imagenes/TarifasServicioPremium.jpg"/>
-<%--                                        <asp:HyperLink ID="HyperLink4" runat="server" ImageUrl="~/Imagenes/InterfacturasInterbankingLogo.gif" NavigateUrl="http://www.interfacturas.com.ar/" Target="_blank"></asp:HyperLink>
---%>                                    </td>
+                                        <asp:ImageMap ID="TarifasServicioPremiumImageMap" runat="server" ImageUrl="~/Imagenes/TarifasServicioPremium.jpg" HotSpotMode="Navigate">
+                                            <asp:RectangleHotSpot Top="37" Left="0" Bottom="78" Right="95" NavigateUrl="~/FacturaElectronicaServicioPremium.aspx" />
+                                        </asp:ImageMap>
+                                    </td>
                                 </tr>
                             </table>
                         </td>
