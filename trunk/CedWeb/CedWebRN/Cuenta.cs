@@ -410,7 +410,7 @@ namespace CedWebRN
             mail.IsBodyHtml = true;
             WebClient carta = new WebClient();
             mail.BodyEncoding = System.Text.Encoding.UTF8;
-            string a = carta.DownloadString(System.Web.HttpContext.Current.Server.MapPath("FacturaElectronicaServicioPremiumBienvenida.htm"));
+            string a = carta.DownloadString(System.Web.HttpContext.Current.Server.MapPath("EmailTemplates/FacturaElectronicaServicioPremiumBienvenida.htm"));
             mail.Body = a.Substring(a.IndexOf("<"));
             smtpClient.Send(mail);
         }
