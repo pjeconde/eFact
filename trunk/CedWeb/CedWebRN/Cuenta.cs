@@ -410,7 +410,8 @@ namespace CedWebRN
             mail.IsBodyHtml = true;
             WebClient carta = new WebClient();
             mail.BodyEncoding = System.Text.Encoding.UTF8;
-            mail.Body = carta.DownloadString(System.Web.HttpContext.Current.Server.MapPath("Cartas\\FacturaElectronicaServicioPremiumBienvenida.htm"));
+            string a = carta.DownloadString(System.Web.HttpContext.Current.Server.MapPath("FacturaElectronicaServicioPremiumBienvenida.htm"));
+            mail.Body = a.Substring(a.IndexOf("<"));
             smtpClient.Send(mail);
         }
         public static void DesactivarPremium(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
