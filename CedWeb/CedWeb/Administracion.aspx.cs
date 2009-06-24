@@ -196,10 +196,10 @@ namespace CedWeb
         {
             try
             {
-                CedWebEntidades.Cuenta cuenta = new CedWebEntidades.Cuenta();
-                cuenta.Id = "claudio.cedeira";
-                CedWebRN.Cuenta.Leer(cuenta, (CedWebEntidades.Sesion)Session["Sesion"]);
-                CedWebRN.Cuenta.EnviarMailBienvenidaPremium(cuenta, (CedWebEntidades.Sesion)Session["Sesion"]);
+                DateTime fechaVto = DateTime.Today.AddDays(Convert.ToDouble(((CedWebEntidades.Sesion)Session["Sesion"]).CantidadDiasPremiumSinCostoEnAltaCuenta));
+                ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.FechaVtoPremium = new DateTime(fechaVto.Year, fechaVto.Month, fechaVto.Day, 23, 59, 59);
+                CedWebRN.Cuenta.EnviarMailBienvenidaPremium(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedWebEntidades.Sesion)Session["Sesion"]);
+                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El mail fué enviado satisfactoriamente a " + ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Email + "');</script>");
             }
             catch (Exception ex)
             {

@@ -232,12 +232,13 @@ namespace CedWebRN
             Leer(Cuenta, (CedEntidades.Sesion)Sesion);
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta((CedEntidades.Sesion)Sesion);
             cuenta.Confirmar(Cuenta);
-            //if (Sesion.Flag.PremiumSinCostoEnAltaCuenta)
-            //{
-            //    DateTime fechaVto = DateTime.Today.AddDays(Convert.ToDouble(Sesion.CantidadDiasPremiumSinCostoEnAltaCuenta));
-            //    ActivarPremium(Cuenta, new DateTime(fechaVto.Year, fechaVto.Month, fechaVto.Day, 23, 59, 59), (CedEntidades.Sesion)Sesion);
-            //    CedWebRN.Cuenta.EnviarMailBienvenidaPremium(Cuenta, Sesion);
-            //}
+            if (Sesion.Flag.PremiumSinCostoEnAltaCuenta)
+            {
+                DateTime fechaVto = DateTime.Today.AddDays(Convert.ToDouble(Sesion.CantidadDiasPremiumSinCostoEnAltaCuenta));
+                ActivarPremium(Cuenta, new DateTime(fechaVto.Year, fechaVto.Month, fechaVto.Day, 23, 59, 59), (CedEntidades.Sesion)Sesion);
+                Leer(Cuenta, (CedEntidades.Sesion)Sesion);
+                CedWebRN.Cuenta.EnviarMailBienvenidaPremium(Cuenta, Sesion);
+            }
             EnviarSMS("Alta cuenta", Cuenta.Nombre, cuenta.DestinatariosAvisoAltaCuenta());  
         }
         public static bool IdCuentaDisponible(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
@@ -412,13 +413,14 @@ namespace CedWebRN
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
             mail.To.Add(new MailAddress(Cuenta.Email));
-            mail.Subject = "Prueba Bienvenida Premium";
+            mail.Subject = "Facturación Electrónica - Bienvenida a productos eFact (Ref. " + Cuenta.Id + ")";
             mail.IsBodyHtml = true;
             WebClient carta = new WebClient();
             mail.BodyEncoding = System.Text.Encoding.UTF8;
             string a = carta.DownloadString(System.Web.HttpContext.Current.Server.MapPath("EmailTemplates/FacturaElectronicaServicioPremiumBienvenida.htm"));
             mail.Body = a.Substring(a.IndexOf("<"));
             mail.Body = mail.Body.Replace("%usuario%", Cuenta.Nombre);
+            mail.Body = mail.Body.Replace("%fechaVencimiento%", Cuenta.FechaVtoPremium.ToString("dd/MM/yyyy"));
             smtpClient.Send(mail);
         }
         public static void DesactivarPremium(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
