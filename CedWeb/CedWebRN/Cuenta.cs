@@ -412,6 +412,7 @@ namespace CedWebRN
             SmtpClient smtpClient = new SmtpClient("localhost");
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
+            mail.CC = new MailAddress("facturaelectronica@cedeira.com.ar");
             mail.To.Add(new MailAddress(Cuenta.Email));
             mail.Subject = "Facturación Electrónica - Bienvenida a productos eFact (Ref. " + Cuenta.Id + ")";
             mail.IsBodyHtml = true;
