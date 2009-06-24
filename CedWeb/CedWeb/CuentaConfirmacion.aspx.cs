@@ -32,7 +32,7 @@ namespace CedWeb
                     string idUsuario = a;
                     CedWebEntidades.Cuenta cuenta = new CedWebEntidades.Cuenta();
                     cuenta.Id = idUsuario;
-                    CedWebRN.Cuenta.Confirmar(cuenta, (CedEntidades.Sesion)Session["Sesion"]);
+                    CedWebRN.Cuenta.Confirmar(cuenta, (CedWebEntidades.Sesion)Session["Sesion"]);
                     MensajeLabel.Text = "Felicitaciones !!!.  Su nueva cuenta '" + cuenta.Id + "' ya está disponible.";
                 }
             }

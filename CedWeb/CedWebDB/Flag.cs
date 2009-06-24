@@ -21,6 +21,9 @@ namespace CedWebDB
                     case "ModoDepuracion":
                         Flag.ModoDepuracion=Convert.ToBoolean(dt.Rows[i]["Valor"]);
                         break;
+                    case "PremiumSinCostoEnAltaCuenta":
+                        Flag.PremiumSinCostoEnAltaCuenta = Convert.ToBoolean(dt.Rows[i]["Valor"]);
+                        break;
                 }
             }
         }
@@ -28,6 +31,12 @@ namespace CedWebDB
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("update Flag set Flag.Valor=" + Convert.ToInt32(Flag.ModoDepuracion) + " where Flag.IdFlag='ModoDepuracion' ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
+        }
+        public void SetearPremiumSinCostoEnAltaCuenta(CedWebEntidades.Flag Flag)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update Flag set Flag.Valor=" + Convert.ToInt32(Flag.PremiumSinCostoEnAltaCuenta) + " where Flag.IdFlag='PremiumSinCostoEnAltaCuenta' ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
     }

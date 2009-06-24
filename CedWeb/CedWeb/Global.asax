@@ -46,6 +46,7 @@
         CedWebEntidades.Sesion s = new CedWebEntidades.Sesion();
         s.CnnStr = System.Configuration.ConfigurationManager.AppSettings["CnnStr"];
         s.MensajeGeneral = System.Configuration.ConfigurationManager.AppSettings["MensajeGeneral"];
+        s.CantidadDiasPremiumSinCostoEnAltaCuenta = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["CantidadDiasPremiumSinCostoEnAltaCuenta"]);
         CedWebRN.Flag.Leer(s.Flag, s);
         Session["Sesion"] = s;
     }

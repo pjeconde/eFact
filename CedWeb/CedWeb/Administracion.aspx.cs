@@ -56,6 +56,7 @@ namespace CedWeb
                         ProvinciaImageMap.ImageUrl = "~/Temp/AdministracionGraficoProvincia-" + Session.SessionID + ".bmp";
                         ProvinciaImageMap.DataBind();
 
+                        PremiumSinCostoEnAltaCuentaCheckBox.Checked = ((CedWebEntidades.Sesion)Session["Sesion"]).Flag.PremiumSinCostoEnAltaCuenta;
                         ModoDepuracionCheckBox.Checked = ((CedWebEntidades.Sesion)Session["Sesion"]).Flag.ModoDepuracion;
                         RecibeAvisoAltaCuentaCheckBox.Checked = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.RecibeAvisoAltaCuenta;
 
@@ -103,12 +104,17 @@ namespace CedWeb
         protected void RecibeAvisoAltaCuentaCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.RecibeAvisoAltaCuenta = RecibeAvisoAltaCuentaCheckBox.Checked;
-            CedWebRN.Flag.SetearModoDepuracion((CedWebEntidades.Flag)((CedWebEntidades.Sesion)Session["Sesion"]).Flag, (CedEntidades.Sesion)Session["Sesion"]);
+            CedWebRN.Cuenta.SetearRecibeAvisoAltaCuenta(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedWebEntidades.Sesion)Session["Sesion"]);
         }
         protected void ModoDepuracionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             ((CedWebEntidades.Sesion)Session["Sesion"]).Flag.ModoDepuracion = ModoDepuracionCheckBox.Checked;
             CedWebRN.Flag.SetearModoDepuracion((CedWebEntidades.Flag)((CedWebEntidades.Sesion)Session["Sesion"]).Flag, (CedEntidades.Sesion)Session["Sesion"]);
+        }
+        protected void PremiumSinCostoEnAltaCuentaCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            ((CedWebEntidades.Sesion)Session["Sesion"]).Flag.PremiumSinCostoEnAltaCuenta = PremiumSinCostoEnAltaCuentaCheckBox.Checked;
+            CedWebRN.Flag.SetearPremiumSinCostoEnAltaCuenta((CedWebEntidades.Flag)((CedWebEntidades.Sesion)Session["Sesion"]).Flag, (CedEntidades.Sesion)Session["Sesion"]);
         }
         protected void UltimasAltasPagingGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -186,7 +192,7 @@ namespace CedWeb
                 CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepcion.aspx");
             }
         }
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void PruebaEmailBienvenidaPremiumLinkButton_Click(object sender, EventArgs e)
         {
             try
             {
