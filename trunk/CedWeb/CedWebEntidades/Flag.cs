@@ -7,6 +7,7 @@ namespace CedWebEntidades
     public class Flag
     {
         private bool modoDepuracion;
+        private bool premiumSinCostoEnAltaCuenta;
 
         public Flag()
         {
@@ -20,6 +21,17 @@ namespace CedWebEntidades
             get
             {
                 return modoDepuracion;
+            }
+        }
+        public bool PremiumSinCostoEnAltaCuenta
+        {
+            set
+            {
+                premiumSinCostoEnAltaCuenta = value;
+            }
+            get
+            {
+                return premiumSinCostoEnAltaCuenta;
             }
         }
     }

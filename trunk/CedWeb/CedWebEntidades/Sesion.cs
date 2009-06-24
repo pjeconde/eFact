@@ -11,6 +11,7 @@ namespace CedWebEntidades
         private CedWebEntidades.Cuenta cuenta;
         private string mensajeGeneral;
         private CedWebEntidades.Flag flag;
+        private Int32 cantidadDiasPremiumSinCostoEnAltaCuenta;
         #endregion
 
         #region Constructor
@@ -53,6 +54,17 @@ namespace CedWebEntidades
             set
             {
                 mensajeGeneral = value;
+            }
+        }
+        public Int32 CantidadDiasPremiumSinCostoEnAltaCuenta
+        {
+            get
+            {
+                return cantidadDiasPremiumSinCostoEnAltaCuenta;
+            }
+            set
+            {
+                cantidadDiasPremiumSinCostoEnAltaCuenta = value;
             }
         }
         #endregion

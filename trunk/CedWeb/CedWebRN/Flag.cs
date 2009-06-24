@@ -15,5 +15,10 @@ namespace CedWebRN
             CedWebDB.Flag flag = new CedWebDB.Flag(Sesion);
             flag.SetearModoDepuracion(Flag);
         }
+        public static void SetearPremiumSinCostoEnAltaCuenta(CedWebEntidades.Flag Flag, CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Flag flag = new CedWebDB.Flag(Sesion);
+            flag.SetearPremiumSinCostoEnAltaCuenta(Flag);
+        }
     }
 }
