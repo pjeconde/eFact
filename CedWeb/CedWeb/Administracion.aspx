@@ -83,7 +83,7 @@
                                         Probar envío mail de 
                                         <asp:LinkButton ID="PruebaEmailBienvenidaPremiumLinkButton" runat="server" OnClick="PruebaEmailBienvenidaPremiumLinkButton_Click">bienvenida</asp:LinkButton>
                                         , o
-                                        <asp:LinkButton ID="LinkButton1" runat="server" OnClick="PruebaEmailSuspensionPremiumLinkButton_Click">suspensión</asp:LinkButton>
+                                        <asp:LinkButton ID="PruebaEmailSuspensionPremiumLinkButton" runat="server" OnClick="PruebaEmailSuspensionPremiumLinkButton_Click">suspensión</asp:LinkButton>
                                         , al Servicio Premium
                                     </td>
                                 </tr>
