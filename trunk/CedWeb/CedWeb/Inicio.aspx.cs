@@ -19,6 +19,7 @@ namespace CedWeb
             if (!CuentaCrearHyperLink.Enabled)
             {
                 CuentaCrearHyperLink.ForeColor=System.Drawing.Color.Red;
+                CuentaCrearHyperLink.Text = "Crear una nueva cuenta<br />(momentáneamente inhabilitado)";
             }
 			if (!IsPostBack)
 			{
