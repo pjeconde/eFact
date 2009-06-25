@@ -114,7 +114,7 @@
                         </tr>
                         <tr>
                             <td colspan="3" align="center" style="padding-top:5px; color: Blue">
-                                <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/CuentaCrear.aspx" SkinID="LinkMedianoClaro">Crear una nueva cuenta</asp:HyperLink>
+                                <asp:HyperLink ID="CuentaCrearHyperLink" runat="server" NavigateUrl="~/CuentaCrear.aspx" SkinID="LinkMedianoClaro">Crear una nueva cuenta</asp:HyperLink>
                             </td>
                         </tr>
                         <tr>

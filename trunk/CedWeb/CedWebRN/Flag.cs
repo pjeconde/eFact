@@ -20,5 +20,10 @@ namespace CedWebRN
             CedWebDB.Flag flag = new CedWebDB.Flag(Sesion);
             flag.SetearPremiumSinCostoEnAltaCuenta(Flag);
         }
+        public static void SetearCreacionCuentaHabilitada(CedWebEntidades.Flag Flag, CedEntidades.Sesion Sesion)
+        {
+            CedWebDB.Flag flag = new CedWebDB.Flag(Sesion);
+            flag.SetearCreacionCuentaHabilitada(Flag);
+        }
     }
 }

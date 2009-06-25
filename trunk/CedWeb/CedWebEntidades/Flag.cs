@@ -8,6 +8,7 @@ namespace CedWebEntidades
     {
         private bool modoDepuracion;
         private bool premiumSinCostoEnAltaCuenta;
+        private bool creacionCuentaHabilitada;
 
         public Flag()
         {
@@ -32,6 +33,17 @@ namespace CedWebEntidades
             get
             {
                 return premiumSinCostoEnAltaCuenta;
+            }
+        }
+        public bool CreacionCuentaHabilitada
+        {
+            set
+            {
+                creacionCuentaHabilitada = value;
+            }
+            get
+            {
+                return creacionCuentaHabilitada;
             }
         }
     }

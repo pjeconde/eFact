@@ -56,6 +56,7 @@ namespace CedWeb
                         ProvinciaImageMap.ImageUrl = "~/Temp/AdministracionGraficoProvincia-" + Session.SessionID + ".bmp";
                         ProvinciaImageMap.DataBind();
 
+                        CreacionCuentaHabilitadaCheckBox.Checked = ((CedWebEntidades.Sesion)Session["Sesion"]).Flag.CreacionCuentaHabilitada;
                         PremiumSinCostoEnAltaCuentaCheckBox.Checked = ((CedWebEntidades.Sesion)Session["Sesion"]).Flag.PremiumSinCostoEnAltaCuenta;
                         ModoDepuracionCheckBox.Checked = ((CedWebEntidades.Sesion)Session["Sesion"]).Flag.ModoDepuracion;
                         RecibeAvisoAltaCuentaCheckBox.Checked = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.RecibeAvisoAltaCuenta;
@@ -115,6 +116,11 @@ namespace CedWeb
         {
             ((CedWebEntidades.Sesion)Session["Sesion"]).Flag.PremiumSinCostoEnAltaCuenta = PremiumSinCostoEnAltaCuentaCheckBox.Checked;
             CedWebRN.Flag.SetearPremiumSinCostoEnAltaCuenta((CedWebEntidades.Flag)((CedWebEntidades.Sesion)Session["Sesion"]).Flag, (CedEntidades.Sesion)Session["Sesion"]);
+        }
+        protected void CreacionCuentaHabilitadaCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            ((CedWebEntidades.Sesion)Session["Sesion"]).Flag.CreacionCuentaHabilitada = CreacionCuentaHabilitadaCheckBox.Checked;
+            CedWebRN.Flag.SetearCreacionCuentaHabilitada((CedWebEntidades.Flag)((CedWebEntidades.Sesion)Session["Sesion"]).Flag, (CedEntidades.Sesion)Session["Sesion"]);
         }
         protected void UltimasAltasPagingGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
