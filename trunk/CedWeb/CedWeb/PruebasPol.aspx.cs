@@ -23,7 +23,7 @@ public partial class PruebasPol : System.Web.UI.Page
         MailMessage mail = new MailMessage();
         mail.From = new MailAddress("facturaelectronica@cedeira.com.ar");
         mail.CC.Add(new MailAddress("facturaelectronica@cedeira.com.ar"));
-        mail.To.Add(new MailAddress("pjeconde@yahoo.com.ar")); //Cuenta.Email));
+        mail.To.Add(new MailAddress("pjeconde@gmail.com")); //Cuenta.Email));
         mail.Subject = "Facturación Electrónica - Bienvenida a productos eFact (Ref. 1)"; //Cuenta.Id + ")";
         mail.IsBodyHtml = true;
         WebClient carta = new WebClient();
