@@ -80,7 +80,11 @@
                                 <tr>
                                     <td></td>
                                     <td style="padding-top:5px" align="left">
-                                        <asp:LinkButton ID="PruebaEmailBienvenidaPremiumLinkButton" runat="server" OnClick="PruebaEmailBienvenidaPremiumLinkButton_Click">Probar envío de mail de bienvenida al Servicio Premium</asp:LinkButton>
+                                        Probar envío mail de 
+                                        <asp:LinkButton ID="PruebaEmailBienvenidaPremiumLinkButton" runat="server" OnClick="PruebaEmailBienvenidaPremiumLinkButton_Click">bienvenida</asp:LinkButton>
+                                        , o
+                                        <asp:LinkButton ID="LinkButton1" runat="server" OnClick="PruebaEmailSuspensionPremiumLinkButton_Click">suspensión</asp:LinkButton>
+                                        , al Servicio Premium
                                     </td>
                                 </tr>
                                 <tr>

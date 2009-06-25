@@ -206,5 +206,17 @@ namespace CedWeb
                 MsgErrorLabel.Text = ex.Message;
             }
         }
+        protected void PruebaEmailSuspensionPremiumLinkButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CedWebRN.Cuenta.EnviarMailSuspensionPremium(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedWebEntidades.Sesion)Session["Sesion"]);
+                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El mail fué enviado satisfactoriamente a " + ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Email + "');</script>");
+            }
+            catch (Exception ex)
+            {
+                MsgErrorLabel.Text = ex.Message;
+            }
+        }
     }
 }

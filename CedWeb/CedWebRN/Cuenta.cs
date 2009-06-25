@@ -424,6 +424,22 @@ namespace CedWebRN
             mail.Body = mail.Body.Replace("%fechaVencimiento%", Cuenta.FechaVtoPremium.ToString("dd/MM/yyyy"));
             smtpClient.Send(mail);
         }
+        public static void EnviarMailSuspensionPremium(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        {
+            SmtpClient smtpClient = new SmtpClient("localhost");
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
+            mail.CC.Add(new MailAddress("facturaelectronica@cedeira.com.ar"));
+            mail.To.Add(new MailAddress(Cuenta.Email));
+            mail.Subject = "Facturación Electrónica - Aviso de suspensión del Servicio Premium (Ref. " + Cuenta.Id + ")";
+            mail.IsBodyHtml = true;
+            WebClient carta = new WebClient();
+            mail.BodyEncoding = System.Text.Encoding.UTF8;
+            string a = carta.DownloadString(System.Web.HttpContext.Current.Server.MapPath("EmailTemplates/FacturaElectronicaServicioPremiumBienvenida.htm"));
+            mail.Body = a.Substring(a.IndexOf("<"));
+            mail.Body = mail.Body.Replace("%usuario%", Cuenta.Nombre);
+            smtpClient.Send(mail);
+        }
         public static void DesactivarPremium(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
             CedWebEntidades.EstadoCuenta nuevoEstado = new CedWebEntidades.EstadoCuenta();
