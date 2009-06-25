@@ -435,7 +435,7 @@ namespace CedWebRN
             mail.IsBodyHtml = true;
             WebClient carta = new WebClient();
             mail.BodyEncoding = System.Text.Encoding.UTF8;
-            string a = carta.DownloadString(System.Web.HttpContext.Current.Server.MapPath("EmailTemplates/FacturaElectronicaServicioPremiumBienvenida.htm"));
+            string a = carta.DownloadString(System.Web.HttpContext.Current.Server.MapPath("EmailTemplates/FacturaElectronicaServicioPremiumSuspension.htm"));
             mail.Body = a.Substring(a.IndexOf("<"));
             mail.Body = mail.Body.Replace("%usuario%", Cuenta.Nombre);
             smtpClient.Send(mail);
