@@ -20,12 +20,12 @@
                                     <td>
                                         <asp:Label ID="TituloLabel" runat="server" Text="Administración" SkinID="TituloPagina"></asp:Label>
                                     </td>
-                                    <td rowspan="8" style="color:#A52A2A; font-weight:bold; padding-left:20px" align="left" valign="bottom">
+                                    <td rowspan="9" style="color:#A52A2A; font-weight:bold; padding-left:20px" align="left" valign="bottom">
                                         Medio
                                         <br />
                                         <asp:ImageMap ID="MedioImageMap" runat="server" BorderStyle="Solid" BorderColor="brown" BorderWidth="1px"></asp:ImageMap>
                                     </td>
-                                    <td rowspan="8" style="color:#A52A2A; font-weight:bold; padding-left:20px" align="left" valign="bottom">
+                                    <td rowspan="9" style="color:#A52A2A; font-weight:bold; padding-left:20px" align="left" valign="bottom">
                                         Provincia
                                         <br />
                                         <asp:ImageMap ID="ProvinciaImageMap" runat="server" BorderStyle="Solid" BorderColor="brown" BorderWidth="1px"></asp:ImageMap>
@@ -47,9 +47,17 @@
                                 </tr>
                                 <tr>
                                     <td style="padding-top:5px; padding-right:3px" align="right" valign="top">
-                                        <asp:CheckBox ID="PremiumSinCostoEnAltaCuentaCheckBox" runat="server" OnCheckedChanged="PremiumSinCostoEnAltaCuentaCheckBox_CheckedChanged" AutoPostBack="true" />
+                                        <asp:CheckBox ID="CreacionCuentaHabilitadaCheckBox" runat="server" OnCheckedChanged="CreacionCuentaHabilitadaCheckBox_CheckedChanged" AutoPostBack="true" />
                                     </td>
                                     <td style="padding-top:5px" align="left" valign="middle">
+                                        Creacion de Cuentas habilitada
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right:3px" align="right" valign="top">
+                                        <asp:CheckBox ID="PremiumSinCostoEnAltaCuentaCheckBox" runat="server" OnCheckedChanged="PremiumSinCostoEnAltaCuentaCheckBox_CheckedChanged" AutoPostBack="true" />
+                                    </td>
+                                    <td align="left" valign="middle">
                                         Servicio Premium sin costo en alta de Cuenta
                                     </td>
                                 </tr>

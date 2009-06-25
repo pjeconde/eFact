@@ -15,6 +15,11 @@ namespace CedWeb
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			((LinkButton)Master.FindControl("InicioLinkButton")).ForeColor = System.Drawing.Color.Gold;
+            CuentaCrearHyperLink.Enabled = ((CedWebEntidades.Sesion)Session["Sesion"]).Flag.CreacionCuentaHabilitada;
+            if (!CuentaCrearHyperLink.Enabled)
+            {
+                CuentaCrearHyperLink.ForeColor=System.Drawing.Color.Red;
+            }
 			if (!IsPostBack)
 			{
 				if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id != null)
