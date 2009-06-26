@@ -239,21 +239,34 @@ namespace CedWebDB
             a.Append("where Cuenta.IdCuenta='" + Cuenta.Id.ToString() + "' ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
-        public void Depurar()
+        public List<CedWebEntidades.Cuenta> DepurarYObtenerListaDePremiumSuspendidas()
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            //Depuracion bajas
+            //Depurar bajas
             a.Append("insert CompradorDepurado select * from Comprador where IdCuenta in (select IdCuenta from Cuenta where IdEstadoCuenta='Baja') ");
             a.Append("delete Comprador where IdCuenta in (select IdCuenta from Cuenta where IdEstadoCuenta='Baja') ");
             a.Append("insert VendedorDepurado select * from Vendedor where IdCuenta in (select IdCuenta from Cuenta where IdEstadoCuenta='Baja') ");
             a.Append("delete Vendedor where IdCuenta in (select IdCuenta from Cuenta where IdEstadoCuenta='Baja') ");
             a.Append("insert CuentaDepurada select * from Cuenta where IdEstadoCuenta='Baja' ");
             a.Append("delete Cuenta where IdEstadoCuenta='Baja' ");
-            //Suspension de cuentas Premium
+            //Obtener lista de cuentas Premium suspendidas
+            a.Append("select Cuenta.IdCuenta, Cuenta.Nombre, Cuenta.Telefono, Cuenta.Email, Cuenta.Password, Cuenta.Pregunta, Cuenta.Respuesta, Cuenta.IdTipoCuenta, TipoCuenta.DescrTipoCuenta, Cuenta.IdEstadoCuenta, EstadoCuenta.DescrEstadoCuenta, Cuenta.UltimoNroLote, Cuenta.FechaAlta, Cuenta.CantidadEnviosMail, Cuenta.FechaUltimoReenvioMail, Cuenta.ActivCP, Cuenta.NroSerieDisco, Cuenta.IdMedio, Medio.DescrMedio, Cuenta.EmailSMS, Cuenta.RecibeAvisoAltaCuenta, Cuenta.CantidadComprobantes, Cuenta.FechaUltimoComprobante, Cuenta.FechaVtoPremium, Cuenta.IdPaginaDefault, PaginaDefault.DescrPaginaDefault, PaginaDefault.URL ");
+            a.Append("from Cuenta, TipoCuenta, EstadoCuenta, Medio, PaginaDefault ");
+            a.Append("where Cuenta.FechaVtoPremium<getdate() and Cuenta.IdEstadoCuenta<>'Suspend' and Cuenta.IdTipoCuenta='Prem' ");
+            a.Append("and Cuenta.IdTipoCuenta=TipoCuenta.IdTipoCuenta and Cuenta.IdEstadoCuenta=EstadoCuenta.IdEstadoCuenta and Cuenta.IdMedio=Medio.IdMedio and Cuenta.IdPaginaDefault=PaginaDefault.IdPaginaDefault ");
+            //Suspender cuentas Premium
             a.Append("update Cuenta set ");
             a.Append("IdEstadoCuenta='Suspend' ");
             a.Append("where FechaVtoPremium<getdate() and IdEstadoCuenta<>'Suspend' and IdTipoCuenta='Prem' ");
-            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<CedWebEntidades.Cuenta> lista = new List<CedWebEntidades.Cuenta>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                CedWebEntidades.Cuenta cuenta = new CedWebEntidades.Cuenta();
+                Copiar(dt.Rows[i], cuenta);
+                lista.Add(cuenta);
+            }
+            return lista;
         }
         public void RegistrarReenvioMail(CedWebEntidades.Cuenta Cuenta)
         {
