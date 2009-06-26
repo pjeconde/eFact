@@ -74,6 +74,8 @@ namespace CedWeb
                         UltimosComprobantesPagingGridView.VirtualItemCount = CedWebRN.Cuenta.CantidadDeFilas((CedEntidades.Sesion)Session["Sesion"]);
                         UltimosComprobantesPagingGridView.DataSource = listaUltimosComprobantes;
                         UltimosComprobantesPagingGridView.DataBind();
+
+                        CantidadDiasPremiumSinCostoEnAltaCuenta.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).CantidadDiasPremiumSinCostoEnAltaCuenta.ToString();
                     }
                 }
             }
@@ -100,7 +102,7 @@ namespace CedWeb
                 textos[i] = Lista[i].Concepto;
                 valores[i] = Lista[i].Cantidad;
             }
-            CedBPrn.Grafico.Generar(155, 155, 0, valores, textos, Path, System.Drawing.Color.Navy);
+            CedBPrn.Grafico.Generar(155, 155, 0, -90, valores, textos, Path, System.Drawing.Color.Navy);
         }
         protected void RecibeAvisoAltaCuentaCheckBox_CheckedChanged(object sender, EventArgs e)
         {

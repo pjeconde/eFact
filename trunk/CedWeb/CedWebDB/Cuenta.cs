@@ -297,7 +297,7 @@ namespace CedWebDB
                 a.Append("from Cuenta, Medio ");
                 a.Append("where Cuenta.IdMedio=Medio.IdMedio ");
                 a.Append("group by Medio.IdMedio ");
-                a.Append("order by count(*) desc ");
+                a.Append("order by count(*) ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {

@@ -8,10 +8,9 @@ namespace CedBPrn
     public static class Grafico
     {
 
-        public static void Generar(int Alto, int Ancho, float Grosor, decimal[] Valores, string[] Textos, string Path, System.Drawing.Color ForeColor)
+        public static void Generar(int Alto, int Ancho, float Grosor, float AnguloGiro, decimal[] Valores, string[] Textos, string Path, System.Drawing.Color ForeColor)
         {
             System.Drawing.PieChart.PieChartControl GraficoDeTorta;
-            float AnguloGiro;
             GraficoDeTorta = new System.Drawing.PieChart.PieChartControl();
             GraficoDeTorta.BackColor = System.Drawing.Color.Cornsilk;
             GraficoDeTorta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
@@ -46,7 +45,6 @@ namespace CedBPrn
             GraficoDeTorta.SliceRelativeDisplacements = desplazamiento;
             GraficoDeTorta.Colors = colores;
             // Inicializo grafico
-            AnguloGiro = 0;
             GraficoDeTorta.InitialAngle = AnguloGiro;
             GraficoDeTorta.EdgeColorType = System.Drawing.PieChart.EdgeColorType.SurfaceColor;
             GraficoDeTorta.ShadowStyle = System.Drawing.PieChart.ShadowStyle.GradualShadow;

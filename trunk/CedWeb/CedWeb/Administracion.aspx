@@ -50,7 +50,7 @@
                                         <asp:CheckBox ID="CreacionCuentaHabilitadaCheckBox" runat="server" OnCheckedChanged="CreacionCuentaHabilitadaCheckBox_CheckedChanged" AutoPostBack="true" />
                                     </td>
                                     <td style="padding-top:5px" align="left" valign="middle">
-                                        Creacion de Cuentas habilitada
+                                        Creación de Cuentas disponible
                                     </td>
                                 </tr>
                                 <tr>
@@ -58,7 +58,9 @@
                                         <asp:CheckBox ID="PremiumSinCostoEnAltaCuentaCheckBox" runat="server" OnCheckedChanged="PremiumSinCostoEnAltaCuentaCheckBox_CheckedChanged" AutoPostBack="true" />
                                     </td>
                                     <td align="left" valign="middle">
-                                        Servicio Premium sin costo en alta de Cuenta
+                                        Servicio Premium sin costo en alta de Cuenta ( por 
+                                        <asp:Label ID="CantidadDiasPremiumSinCostoEnAltaCuenta" runat="server" SkinID="TextoMediano"></asp:Label>
+                                        días )
                                     </td>
                                 </tr>
                                 <tr>
@@ -80,9 +82,9 @@
                                 <tr>
                                     <td></td>
                                     <td align="left">
-                                        (en la Configuración de su Cuenta eFact podrá ingresar
+                                        (en la Configuración de su Cuenta eFact podrá ingresar el 'Email
                                         <br />
-                                         el 'Email para SMSs')
+                                         para SMSs')
                                     </td>
                                 </tr>
                                 <tr>
