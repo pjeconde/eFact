@@ -294,7 +294,7 @@ namespace CedWeb
             MsgErrorLabel.Text = String.Empty;
             try
             {
-                CedWebRN.Cuenta.Depurar((CedEntidades.Sesion)Session["Sesion"]);
+                CedWebRN.Cuenta.Depurar((CedWebEntidades.Sesion)Session["Sesion"]);
                 BindPagingGrid();
                 DesSeleccionarFilas();
             }

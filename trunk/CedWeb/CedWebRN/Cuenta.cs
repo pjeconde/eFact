@@ -450,10 +450,14 @@ namespace CedWebRN
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             cuenta.CambiarTipo(Cuenta, nuevoTipo);
         }
-        public static void Depurar(CedEntidades.Sesion Sesion)
+        public static void Depurar(CedWebEntidades.Sesion Sesion)
         {
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
-            cuenta.Depurar();
+            List<CedWebEntidades.Cuenta> cuentaSuspendida = cuenta.DepurarYObtenerListaDePremiumSuspendidas();
+            for (int i = 0; i < cuentaSuspendida.Count; i++)
+            {
+                CedWebRN.Cuenta.EnviarMailSuspensionPremium(cuentaSuspendida[i], Sesion);
+            }
         }
         public static string ObtenerClaveActivCP(CedWebEntidades.Cuenta Cuenta, string ClaveSolicitud, CedEntidades.Sesion Sesion)
         {
