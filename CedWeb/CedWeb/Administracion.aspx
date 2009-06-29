@@ -65,7 +65,7 @@
                                 </tr>
                                 <tr>
                                     <td style="padding-right:3px" align="right" valign="top">
-                                        <asp:CheckBox ID="ModoDepuracionCheckBox" runat="server" OnCheckedChanged="ModoDepuracionCheckBox_CheckedChanged" AutoPostBack="true" />
+                                        <asp:CheckBox ID="ModoDepuracionCheckBox" runat="server" OnCheckedChanged="ModoDepuracionCheckBox_CheckedChanged" AutoPostBack="true" Enabled="false" />
                                     </td>
                                     <td align="left" valign="middle">
                                         Modo depuración (guarda los archivos xml enviados por mail)

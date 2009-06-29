@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aplicacion.cs" />
+    <Compile Include="ArchivoXML.cs" />
     <Compile Include="Comprador.cs" />
     <Compile Include="Contacto.cs" />
     <Compile Include="Cuenta.cs" />
