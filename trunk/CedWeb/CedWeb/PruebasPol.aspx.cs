@@ -19,19 +19,21 @@ public partial class PruebasPol : System.Web.UI.Page
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        SmtpClient smtpClient = new SmtpClient("localhost");
+        SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
         MailMessage mail = new MailMessage();
         mail.From = new MailAddress("facturaelectronica@cedeira.com.ar");
         mail.CC.Add(new MailAddress("facturaelectronica@cedeira.com.ar"));
-        mail.To.Add(new MailAddress("pjeconde@gmail.com")); //Cuenta.Email));
-        mail.Subject = "Facturación Electrónica - Bienvenida a productos eFact (Ref. 1)"; //Cuenta.Id + ")";
+        mail.To.Add(new MailAddress(EMailTextBox.Text)); //Contacto.Email
+        mail.Subject = AsuntoTextBox.Text + " (Facturación Electrónica - Bienvenida a productos)"; //Contacto.Referencia
         mail.IsBodyHtml = true;
+        mail.Priority = MailPriority.High;
         WebClient carta = new WebClient();
         mail.BodyEncoding = System.Text.Encoding.UTF8;
         string a = carta.DownloadString(System.Web.HttpContext.Current.Server.MapPath("EmailTemplates/FacturaElectronicaMailEstudiosContables.htm"));
         mail.Body = a.Substring(a.IndexOf("<"));
-        mail.Body = mail.Body.Replace("%usuario%", "PEPE");
-        mail.Body = mail.Body.Replace("%fechaVencimiento%", "30/11/2009");
+        mail.Body = mail.Body.Replace("%usuario%", "Sr.Contador"); //Contacto.Empresa + Contacto.Nombre
+        smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
         smtpClient.Send(mail);
+        
     }
 }
