@@ -9,7 +9,16 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Enviar mail" /></div>
+        <br />
+        <asp:Label ID="Label1" runat="server" Font-Names="Arial" Font-Size="12px" Text="EMail Destinatario: "
+            Width="128px"></asp:Label>
+        <asp:TextBox ID="EMailTextBox" runat="server" Width="400px"></asp:TextBox><br />
+        <asp:Label ID="Label2" runat="server" Font-Names="Arial" Font-Size="12px" Text="Asunto:"
+            Width="128px"></asp:Label>
+        <asp:TextBox ID="AsuntoTextBox" runat="server" Width="400px"></asp:TextBox><br />
+        <br />
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Enviar mail ( contadores )"
+            Width="536px" />&nbsp;</div>
     </form>
 </body>
 </html>
