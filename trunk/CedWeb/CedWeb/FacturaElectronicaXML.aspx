@@ -1080,19 +1080,33 @@
                                                                     OnRowUpdating="detalleGridView_RowUpdating" OnRowCancelingEdit="detalleGridView_RowCancelingEdit"
                                                                     OnRowDeleted="detalleGridView_RowDeleted" OnRowDeleting="detalleGridView_RowDeleting">
                                                                     <Columns>
-                                                                        <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Descripción del artículo">
+                                                                        <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="100px" HeaderText="Unidad">
+                                                                            <ItemTemplate>
+                                                                                <asp:Label ID="lbl_unidad" runat="server" Text='<%# Eval("unidad") %>'></asp:Label>
+                                                                            </ItemTemplate>
+                                                                            <EditItemTemplate>
+                                                                                <asp:DropDownList ID="ddlunidadEdit" runat="server" Width="100px">
+                                                                                </asp:DropDownList>
+                                                                            </EditItemTemplate>
+                                                                            <FooterTemplate>
+                                                                                <asp:DropDownList ID="ddlunidad" runat="server" Width="100px">
+                                                                                </asp:DropDownList>
+                                                                            </FooterTemplate>
+                                                                            <ItemStyle HorizontalAlign="Right" />
+                                                                        </asp:TemplateField>
+                                                                        <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="200px" HeaderText="Descripción del artículo">
                                                                             <ItemTemplate>
                                                                                 <asp:Label ID="lbldescripcion" Text='<%# Eval("descripcion") %>' runat="server"></asp:Label>
                                                                             </ItemTemplate>
                                                                             <EditItemTemplate>
                                                                                 <asp:TextBox ID="txtdescripcion" runat="server" Text='<%# Eval("descripcion") %>'
-                                                                                    Width="95%"></asp:TextBox>
+                                                                                    Width="200px"></asp:TextBox>
                                                                                 <asp:RequiredFieldValidator ID="txtdescripcionEditRequiredFieldValidator" runat="server"
                                                                                     ControlToValidate="txtdescripcion" ErrorMessage="Descripción del artículo en edición no informada"
                                                                                     SetFocusOnError="True" ValidationGroup="DetalleEditItem">*</asp:RequiredFieldValidator>
                                                                             </EditItemTemplate>
                                                                             <FooterTemplate>
-                                                                                <asp:TextBox ID="txtdescripcion" runat="server" Text='' Width="95%"></asp:TextBox>
+                                                                                <asp:TextBox ID="txtdescripcion" runat="server" Text='' Width="200px"></asp:TextBox>
                                                                                 <asp:RequiredFieldValidator ID="txtdescripcionFooterRequiredFieldValidator" runat="server"
                                                                                     ControlToValidate="txtdescripcion" ErrorMessage="Descripción del artículo a agregar no informada"
                                                                                     SetFocusOnError="True" ValidationGroup="DetalleFooter">*</asp:RequiredFieldValidator>

@@ -168,6 +168,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataTextField = "Descr";
 		((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.Lista();
 		((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataBind();
+
+        ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataValueField = "Codigo";
+        ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataTextField = "Descr";
+        ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.Lista();
+        ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataBind();
+
 	}
 	protected void detalleGridView_RowDataBound(object sender, GridViewRowEventArgs e)
 	{
@@ -260,8 +266,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				else
 				{
 					l.alicuota_ivaSpecified = false;
-					l.alicuota_iva = 0;
+					l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
 				}
+
+                l.unidad = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).SelectedItem.Value;
 				
 				((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]).Add(l);
 
@@ -332,8 +340,11 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			else
 			{
 				l.alicuota_ivaSpecified = false;
-				l.alicuota_iva = 0;
+                l.alicuota_iva = auxAliIVA;
 			}
+            string auxUnidad=((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlunidadEdit")).SelectedItem.Value;
+            l.unidad = auxUnidad;
+
 
 			detalleGridView.EditIndex = -1;
 			detalleGridView.DataSource = ViewState["lineas"];
@@ -373,6 +384,20 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		catch
 		{
 		}
+
+        ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidadEdit")).DataValueField = "Codigo";
+        ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidadEdit")).DataTextField = "Descr";
+        ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidadEdit")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.Lista();
+        ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidadEdit")).DataBind();
+        try
+        {
+            ListItem liUnidad = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidadEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"])[e.NewEditIndex].unidad.ToString());
+            liUnidad.Selected = true;
+        }
+        catch
+        {
+        }
+
 
 	}
 	protected void detalleGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -596,7 +621,14 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                     }
                     det.linea[i].descripcion = listadelineas[i].descripcion;
                     det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
-                    det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
+                    if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+                    {
+                        det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
+                    }
+                    if (!listadelineas[i].unidad.Equals(Convert.ToString(new FeaEntidades.CodigosUnidad.SinInformar().Codigo)))
+                    {
+                        det.linea[i].unidad = listadelineas[i].unidad;
+                    }
                     if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
                     {
                         det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
@@ -1358,9 +1390,24 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                         {
                             FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
                             linea.descripcion = l.descripcion;
-                            linea.alicuota_iva = l.alicuota_iva;
+                            if (l.alicuota_ivaSpecified)
+                            {
+                                linea.alicuota_iva = l.alicuota_iva;
+                            }
+                            else
+                            {
+                                linea.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
+                            }
                             linea.alicuota_ivaSpecified = l.alicuota_ivaSpecified;
                             linea.importe_ivaSpecified = l.importe_ivaSpecified;
+                            if (l.unidad != null)
+                            {
+                                linea.unidad = l.unidad;
+                            }
+                            else
+                            {
+                                linea.unidad = Convert.ToString(new FeaEntidades.CodigosUnidad.SinInformar().Codigo);
+                            }
                             if (l.importes_moneda_origen == null)
                             {
                                 linea.importe_total_articulo = l.importe_total_articulo;
