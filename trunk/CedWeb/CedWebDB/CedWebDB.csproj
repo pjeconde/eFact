@@ -33,6 +33,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BonoFiscal.cs" />
     <Compile Include="Comprador.cs" />
     <Compile Include="Contacto.cs" />
     <Compile Include="Cuenta.cs" />

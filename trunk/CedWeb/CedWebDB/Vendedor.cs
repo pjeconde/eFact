@@ -22,6 +22,8 @@ namespace CedWebDB
             else
             {
                 Copiar(dt.Rows[0], Vendedor);
+                CedWebDB.BonoFiscal bonoFiscal = new BonoFiscal(sesion);
+                bonoFiscal.Leer(Vendedor);
             }
         }
         private void Copiar(DataRow Desde, CedWebEntidades.Vendedor Hasta)
