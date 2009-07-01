@@ -35,6 +35,16 @@ namespace FeaEntidades.CodigosUnidad
             lista.Add(new Par());
             lista.Add(new Docena());
             lista.Add(new Quilate());
+            lista.Add(new Millar());
+            lista.Add(new MegaU());
+            lista.Add(new UnidadIntActInmung());
+            lista.Add(new Gramo());
+            lista.Add(new Milimetro());
+            lista.Add(new MilimetroCubico());
+            lista.Add(new Kilometro());
+            lista.Add(new Hectolitro());
+            lista.Add(new MegaUnidadIntActInmung());
+            lista.Add(new Centimetro());
             return lista;
         }
 
