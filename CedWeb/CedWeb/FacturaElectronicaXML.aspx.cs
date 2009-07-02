@@ -18,6 +18,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 	System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas;
 	System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> impuestos;
 	System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> descuentos;
+    private System.Globalization.CultureInfo cedeiraCultura;
 	#endregion
 	protected void Page_Load(object sender, EventArgs e)
 	{
@@ -29,7 +30,8 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			}
 			else
 			{
-				lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
+                
+                lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
 				FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
 				lineas.Add(linea);
 				detalleGridView.DataSource = lineas;
@@ -90,7 +92,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				MonedaComprobanteDropDownList.DataValueField = "Codigo";
 				MonedaComprobanteDropDownList.DataTextField = "Descr";
 				MonedaComprobanteDropDownList.DataSource = FeaEntidades.CodigosMoneda.CodigoMoneda.Lista();
-
 
 				DataBind();
 
@@ -223,7 +224,9 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		{
 			try
 			{
-				FeaEntidades.InterFacturas.linea l = new FeaEntidades.InterFacturas.linea();
+                cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationSettings.AppSettings["Cultura"]);				
+                
+                FeaEntidades.InterFacturas.linea l = new FeaEntidades.InterFacturas.linea();
 
 				string auxDescr = ((TextBox)detalleGridView.FooterRow.FindControl("txtdescripcion")).Text;
 				if (!auxDescr.Equals(string.Empty))
@@ -237,7 +240,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				string auxTotal = ((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_total_articulo")).Text;
 				if (!auxTotal.Contains(","))
 				{
-					l.importe_total_articulo = Convert.ToDouble(auxTotal);
+					l.importe_total_articulo = Convert.ToDouble(auxTotal, cedeiraCultura);
 				}
 				else
 				{
@@ -249,7 +252,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				string auxNull = ((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo")).Text;
 				if (!auxNull.Equals(string.Empty) && !auxNull.Equals("0"))
 				{
-					double auxImporteIVA = Convert.ToDouble(auxNull);
+					double auxImporteIVA = Convert.ToDouble(auxNull, cedeiraCultura);
 					l.importe_ivaSpecified = true;
 					l.importe_iva = auxImporteIVA;
 				}
@@ -270,7 +273,17 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				}
 
                 l.unidad = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).SelectedItem.Value;
-				
+                string auxCantidad = ((TextBox)detalleGridView.FooterRow.FindControl("txtcantidad")).Text;
+                if (!auxCantidad.Equals(string.Empty) && !auxCantidad.Equals("0"))
+                {
+                    l.cantidad = Convert.ToDouble(auxCantidad, cedeiraCultura);
+                    l.cantidadSpecified = true;
+                }
+                else
+                {
+                    l.cantidadSpecified = false;
+                }
+
 				((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]).Add(l);
 
 
@@ -296,7 +309,9 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 	{
 		try
 		{
-			System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]);
+            cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationSettings.AppSettings["Cultura"]);
+
+            System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]);
 
 			FeaEntidades.InterFacturas.linea l = lineas[e.RowIndex];
 			string auxDescr = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtdescripcion")).Text;
@@ -311,7 +326,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			string auxTotal = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_total_articulo")).Text;
 			if (!auxTotal.Contains(","))
 			{
-				l.importe_total_articulo = Convert.ToDouble(auxTotal);
+				l.importe_total_articulo = Convert.ToDouble(auxTotal, cedeiraCultura);
 			}
 			else
 			{
@@ -344,6 +359,25 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			}
             string auxUnidad=((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlunidadEdit")).SelectedItem.Value;
             l.unidad = auxUnidad;
+            string auxCantidad = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcantidad")).Text;
+
+            if (!auxCantidad.Contains(","))
+            {
+                if (!auxCantidad.Equals(string.Empty) && !auxCantidad.Equals("0"))
+                {
+                    l.cantidad = Convert.ToDouble(auxCantidad, cedeiraCultura);
+                    l.cantidadSpecified = true;
+                }
+                else
+                {
+                    l.cantidadSpecified = false;
+                }
+            }
+            else
+            {
+                throw new Exception("Detalle no actualizado porque el separador de decimales debe ser el punto");
+            }
+
 
 
 			detalleGridView.EditIndex = -1;
@@ -629,6 +663,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                     {
                         det.linea[i].unidad = listadelineas[i].unidad;
                     }
+                    det.linea[i].cantidad = listadelineas[i].cantidad;
+                    det.linea[i].cantidadSpecified = listadelineas[i].cantidadSpecified;
+
+
                     if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
                     {
                         det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
@@ -1408,6 +1446,11 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                             {
                                 linea.unidad = Convert.ToString(new FeaEntidades.CodigosUnidad.SinInformar().Codigo);
                             }
+                            linea.cantidad = l.cantidad;
+                            linea.cantidadSpecified = l.cantidadSpecified;
+
+
+
                             if (l.importes_moneda_origen == null)
                             {
                                 linea.importe_total_articulo = l.importe_total_articulo;
