@@ -283,6 +283,8 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 {
                     l.cantidadSpecified = false;
                 }
+                string auxcpvendedor = ((TextBox)detalleGridView.FooterRow.FindControl("txtcpvendedor")).Text;
+                l.codigo_producto_comprador = auxcpvendedor;
 
 				((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]).Add(l);
 
@@ -360,7 +362,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
             string auxUnidad=((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlunidadEdit")).SelectedItem.Value;
             l.unidad = auxUnidad;
             string auxCantidad = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcantidad")).Text;
-
             if (!auxCantidad.Contains(","))
             {
                 if (!auxCantidad.Equals(string.Empty) && !auxCantidad.Equals("0"))
@@ -377,7 +378,8 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
             {
                 throw new Exception("Detalle no actualizado porque el separador de decimales debe ser el punto");
             }
-
+            string auxcodigo_producto_comprador = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpvendedor")).Text;
+            l.codigo_producto_comprador = auxcodigo_producto_comprador;
 
 
 			detalleGridView.EditIndex = -1;
@@ -665,7 +667,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                     }
                     det.linea[i].cantidad = listadelineas[i].cantidad;
                     det.linea[i].cantidadSpecified = listadelineas[i].cantidadSpecified;
-
+                    det.linea[i].codigo_producto_comprador = listadelineas[i].codigo_producto_comprador;
 
                     if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
                     {
@@ -1448,7 +1450,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                             }
                             linea.cantidad = l.cantidad;
                             linea.cantidadSpecified = l.cantidadSpecified;
-
+                            linea.codigo_producto_comprador = l.codigo_producto_comprador;
 
 
                             if (l.importes_moneda_origen == null)
