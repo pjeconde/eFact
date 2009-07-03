@@ -32,5 +32,14 @@ namespace FeaEntidades.CodigosOperacion
 			return lista;
 		}
 
+        public static List<CodigoOperacion> ListaDetalle()
+        {
+            List<CodigoOperacion> lista = new List<CodigoOperacion>();
+            lista.Add(new SinInformar());
+            lista.Add(new Gravado());
+            lista.Add(new NoGravado());
+            lista.Add(new OperacionesExentas());
+            return lista;
+        }
 	}
 }

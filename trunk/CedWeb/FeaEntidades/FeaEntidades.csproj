@@ -46,6 +46,7 @@
     <Compile Include="CodigosOperacion\CodigoOperacion.cs" />
     <Compile Include="CodigosOperacion\ExportacionesALaZonaFranca.cs" />
     <Compile Include="CodigosOperacion\ExportacionesAlExterior.cs" />
+    <Compile Include="CodigosOperacion\Gravado.cs" />
     <Compile Include="CodigosOperacion\NoGravado.cs" />
     <Compile Include="CodigosOperacion\OperacionesExentas.cs" />
     <Compile Include="CodigosOperacion\SinInformar.cs" />
