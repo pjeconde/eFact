@@ -2,6 +2,7 @@
 using System.Data;
 using System.Configuration;
 using System.Collections;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -65,6 +66,14 @@ namespace CedWeb
 						}
                         CodigoInternoTextBox.Text = vendedor.CodigoInterno;
                         FechaInicioActividadesDatePickerWebUserControl.CalendarDate = vendedor.FechaInicioActividades;
+                        for (int i = 0; i < vendedor.BonoFiscal.PuntoDeVentaHabilitado.Count; i++)
+                        {
+                            PuntoDeVentaListBox.Items.Add(vendedor.BonoFiscal.PuntoDeVentaHabilitado[i].ToString());
+                        }
+                        if (vendedor.BonoFiscal.PuntoDeVentaHabilitado.Count>0)
+                        {
+                            QuitarPuntoDeVentaButton.Enabled = true;
+                        }
                     }
                 }
                 catch (Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente)
@@ -131,6 +140,11 @@ namespace CedWeb
             }
             vendedor.CodigoInterno = CodigoInternoTextBox.Text;
             vendedor.FechaInicioActividades = FechaInicioActividadesDatePickerWebUserControl.CalendarDate;
+            vendedor.BonoFiscal.PuntoDeVentaHabilitado.Clear();
+            for (int i = 0; i < PuntoDeVentaListBox.Items.Count; i++)
+            {
+                vendedor.BonoFiscal.PuntoDeVentaHabilitado.Add(Convert.ToInt32(PuntoDeVentaListBox.Items[i].Value));
+            }
             return vendedor;
         }
         protected void BackupButton_Click(object sender, EventArgs e)
@@ -158,5 +172,32 @@ namespace CedWeb
 		{
 			Response.Redirect((string)Session["ref"]);
 		}
+        protected void AgregarPuntoDeVentaButton_Click(object sender, EventArgs e)
+        {
+            int nuevoPuntoDeVenta = 0;
+            if (Int32.TryParse(NuevoPuntoDeVentaTextBox.Text, out nuevoPuntoDeVenta))
+            {
+                if (nuevoPuntoDeVenta > 0)
+                {
+                    if (!PuntoDeVentaListBox.Items.Contains(new ListItem(nuevoPuntoDeVenta.ToString())))
+                    {
+                        PuntoDeVentaListBox.Items.Add(nuevoPuntoDeVenta.ToString());
+                        QuitarPuntoDeVentaButton.Enabled = true;
+                    }
+                }
+            }
+            NuevoPuntoDeVentaTextBox.Text = String.Empty;
+        }
+        protected void QuitarPuntoDeVentaButton_Click(object sender, EventArgs e)
+        {
+            if (PuntoDeVentaListBox.SelectedIndex >= 0)
+            {
+                PuntoDeVentaListBox.Items.Remove(PuntoDeVentaListBox.Items[PuntoDeVentaListBox.SelectedIndex]);
+                if (PuntoDeVentaListBox.Items.Count == 0)
+                {
+                    QuitarPuntoDeVentaButton.Enabled = false;
+                }
+            }
+        }
     }
 }

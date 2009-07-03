@@ -245,6 +245,8 @@ namespace CedWebDB
             //Depurar bajas
             a.Append("insert CompradorDepurado select * from Comprador where IdCuenta in (select IdCuenta from Cuenta where IdEstadoCuenta='Baja') ");
             a.Append("delete Comprador where IdCuenta in (select IdCuenta from Cuenta where IdEstadoCuenta='Baja') ");
+            a.Append("insert BonoFiscalDepurado select * from BonoFiscal where CUIT in (select CUIT from Vendedor where IdCuenta in (select IdCuenta from Cuenta where IdEstadoCuenta='Baja')) ");
+            a.Append("delete BonoFiscal where CUIT in (select CUIT from Vendedor where IdCuenta in (select IdCuenta from Cuenta where IdEstadoCuenta='Baja')) ");
             a.Append("insert VendedorDepurado select * from Vendedor where IdCuenta in (select IdCuenta from Cuenta where IdEstadoCuenta='Baja') ");
             a.Append("delete Vendedor where IdCuenta in (select IdCuenta from Cuenta where IdEstadoCuenta='Baja') ");
             a.Append("insert CuentaDepurada select * from Cuenta where IdEstadoCuenta='Baja' ");

@@ -58,8 +58,10 @@ namespace CedWebDB
         public void Guardar(CedWebEntidades.Vendedor Vendedor)
         {
             StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("delete BonoFiscal where CUIT=" + Vendedor.CUIT.ToString() + " ");
             a.Append("if exists (select RazonSocial from Vendedor where IdCuenta='" + Vendedor.IdCuenta + "') ");
-
+            a.Append("begin ");
+            a.Append("delete BonoFiscal from Vendedor, BonoFiscal where Vendedor.CUIT=BonoFiscal.CUIT and Vendedor.IdCuenta='" + Vendedor.IdCuenta + "' ");
             a.Append("update Vendedor set ");
             a.Append("RazonSocial='" + Vendedor.RazonSocial + "', ");
             a.Append("Calle='" + Vendedor.Calle + "', ");
@@ -86,6 +88,7 @@ namespace CedWebDB
             a.Append("CodigoInterno='" + Vendedor.CodigoInterno + "', ");
             a.Append("FechaInicioActividades='" + Vendedor.FechaInicioActividades.ToString("yyyyMMdd") + "' ");
             a.Append("where IdCuenta='" + Vendedor.IdCuenta + "' ");
+            a.Append("end ");
 
             a.Append("else ");
 
@@ -116,6 +119,11 @@ namespace CedWebDB
             a.Append("'" + Vendedor.CodigoInterno + "', ");
             a.Append("'" + Vendedor.FechaInicioActividades.ToString("yyyyMMdd") + "' ");
             a.Append(") ");
+
+            for (int i = 0; i < Vendedor.BonoFiscal.PuntoDeVentaHabilitado.Count; i++)
+            {
+                a.Append("insert BonoFiscal values (" + Vendedor.CUIT.ToString() + ", " + Convert.ToString(Vendedor.BonoFiscal.PuntoDeVentaHabilitado[i]) + ") ");
+            }
             Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
         }
         public List<CedWebEntidades.Vendedor> ListaAdministracion(int IndicePagina, int TamañoPagina, string OrderBy)

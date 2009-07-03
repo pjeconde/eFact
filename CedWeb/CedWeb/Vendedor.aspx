@@ -27,7 +27,6 @@
                             <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@-->
                         </td>
                     </tr>
-                    <tr><td style="height:10px"></td></tr>
                     <tr>
                         <td align="center" colspan="2">
                             <!-- @@@ OBJETOS ESPECIFICOS DE LA PAGINA @@@-->
@@ -49,7 +48,7 @@
                                     <td align="left" style="padding-top:10px">
                                         <asp:TextBox ID="RazonSocialTextBox" runat="server" Width="400px" TabIndex="1" MaxLength="50"></asp:TextBox>
                                     </td>
-                                    <td rowspan="13" style="padding-left:10px; padding-top:10px" align="center" valign="top">
+                                    <td rowspan="3" style="padding-left:10px; padding-top:10px" align="center" valign="top">
                                         <asp:Button ID="BackupButton" runat="server" Text="Descargar" Height="50px" Width="100px" OnClick="BackupButton_Click" BackColor="peachpuff" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" ForeColor="brown" Font-Bold="true" ToolTip="Exclusivo SERVICIO PREMIUM"> </asp:Button>
                                         <br />
                                         <asp:Label ID="BackupLabel" runat="server" Font-Size="X-Small" Text="(copia de seguridad)" ForeColor="brown" ToolTip="Exclusivo SERVICIO PREMIUM"></asp:Label>
@@ -320,7 +319,7 @@
                                         </table>
                                     </td>
                                 </tr>
-                                <!-- GLN y CodigoInterno-->
+                                <!-- GLN -->
                                 <tr>
                                     <td style="padding-right:5px; padding-top:3px" align="right">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator16" runat="server" SetFocusOnError="True"
@@ -330,46 +329,87 @@
                                         </asp:RegularExpressionValidator>
                                         <asp:Label ID="Label7" runat="server" Text="GLN"></asp:Label>
                                     </td>
-                                    <td align="left">
+                                    <td rowspan="4">
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
-                                                <td style="padding-top:3px">    
+                                                <td align="left" style="padding-top:3px">
                                                     <asp:TextBox ID="GLNTextBox" runat="server" Width="100px" TabIndex="19" MaxLength="13" ToolTip="(opcional) Código estándar para identificar locaciones o empresas (Global Location Number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres."></asp:TextBox>
                                                 </td>
-                                                <td style="padding-left:70px; padding-right:5px; padding-top:3px" align="right">
-                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator17" runat="server" SetFocusOnError="True"
-                                                        ControlToValidate="CodigoInternoTextBox" ErrorMessage="Codigo interno"
-                                                        ValidationExpression="[A-Za-z\- ,.0-9]*">
-                                                        <asp:Label ID="Label52" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                                                    </asp:RegularExpressionValidator>
-                                                    <asp:Label ID="Label21" runat="server" Text="Código interno"></asp:Label>
+                                                <td rowspan="4" style="padding-left:84px">
+                                                    <asp:Panel ID="Panel1" runat="server" BackColor="cornsilk" BorderStyle="Solid" BorderWidth="1" BorderColor="peachpuff">
+                                                        <table border="0" cellpadding="0" cellspacing="0" style="padding-top:3px; padding-bottom:3px; padding-left:5px; padding-right:5px">
+                                                            <tr>
+                                                                <td align="center" style="padding-right:5px">
+                                                                    BONO FISCAL
+                                                                </td>
+                                                                <td rowspan="3" align="right">
+                                                                    <asp:ListBox ID="PuntoDeVentaListBox" SelectionMode="Single" Width="56px" Height="75px" runat="server"></asp:ListBox>
+                                                                </td>
+                                                                <td align="center" style="padding-left:5px">
+                                                                    <asp:TextBox ID="NuevoPuntoDeVentaTextBox" runat="server" Width="32px"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td rowspan="2" align="center" valign="middle" style="padding-right:5px">
+                                                                    puntos<br />
+                                                                    de venta<br />
+                                                                    habilitados
+                                                                </td>
+                                                                <td align="left" style="padding-top:3px; padding-left:5px">
+                                                                    <asp:Button ID="AgregarPuntoDeVentaButtonButton" runat="server" Text="Agregar" Width="60px" OnClick="AgregarPuntoDeVentaButton_Click" CausesValidation="false" ToolTip="Ingrese arriba el número de punto de venta que desea agregar"/>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="left" style="padding-top:3px; padding-left:5px">
+                                                                    <asp:Button ID="QuitarPuntoDeVentaButton" runat="server" Text="Quitar" Width="60px" Enabled="false" OnClick="QuitarPuntoDeVentaButton_Click" CausesValidation="false" ToolTip="Seleccione el punto de venta que desea quitar"/>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </asp:Panel>
                                                 </td>
+                                            </tr>
+                                            <tr>
                                                 <td align="left" style="padding-top:3px">
                                                     <asp:TextBox ID="CodigoInternoTextBox" runat="server" Width="100px" TabIndex="20" MaxLength="20" ToolTip="(opcional) Código utilizado para identificar al vendedor dentro de la empresa / organización. (ej.: código de Cliente, Proveedor, etc.)"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left">
+                                                    <uc1:DatePickerWebUserControl ID="FechaInicioActividadesDatePickerWebUserControl" runat="server" TextCssClass="DatePickerFecha" TabIndex="21" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left" style="padding-left:6px">
+                                                    <asp:Label ID="Label53" runat="server" Text="AAAAMMDD"></asp:Label>
                                                 </td>
                                             </tr>
                                         </table>
                                     </td>
                                 </tr>
+                                <!-- CodigoInterno -->
+                                <tr>
+                                    <td style="padding-right:5px; padding-top:3px" align="right">
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator17" runat="server" SetFocusOnError="True"
+                                            ControlToValidate="CodigoInternoTextBox" ErrorMessage="Codigo interno"
+                                            ValidationExpression="[A-Za-z\- ,.0-9]*">
+                                            <asp:Label ID="Label52" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RegularExpressionValidator>
+                                        <asp:Label ID="Label21" runat="server" Text="Código interno"></asp:Label>
+                                    </td>
+                                </tr>
                                 <!-- FechaInicioActividades -->
                                 <tr>
-                                    <td>
+                                    <td style="padding-right:5px; padding-top:9px" align="right">
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server"  SetFocusOnError="True"
+                                            ControlToValidate="FechaInicioActividadesDatePickerWebUserControl:txt_Date" ErrorMessage="Fecha de inicio de actividades">
+                                            <asp:Label ID="Label51" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                                        </asp:RequiredFieldValidator>
+                                        <asp:Label ID="Label22" runat="server" Text="Fecha de inicio de actividades"></asp:Label>
                                     </td>
-                                    <td>
-                                        <table border="0" cellpadding="0" cellspacing="0">
-                                            <tr>
-                                                <td align="right" style="padding-top:3px; width:259px">
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server"  SetFocusOnError="True"
-                                                        ControlToValidate="FechaInicioActividadesDatePickerWebUserControl:txt_Date" ErrorMessage="Fecha de inicio de actividades">
-                                                        <asp:Label ID="Label51" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                                                    </asp:RequiredFieldValidator>
-                                                    <asp:Label ID="Label22" runat="server" Text="Fecha de inicio de actividades (AAAAMMDD)"></asp:Label>
-                                                </td>
-                                                <td align="right" style="padding-left:5px; padding-top:3px">
-                                                    <uc1:DatePickerWebUserControl ID="FechaInicioActividadesDatePickerWebUserControl" runat="server" TextCssClass="DatePickerFecha" TabIndex="21" />
-                                                </td>
-                                            </tr>
-                                        </table>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right:5px; padding-top:5px" align="right">
+                                        ingresar año, mes, día:
                                     </td>
                                 </tr>
                                 <!-- Botones -->
