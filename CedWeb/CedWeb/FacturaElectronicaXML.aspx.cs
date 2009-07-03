@@ -175,7 +175,11 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
         ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.Lista();
         ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataBind();
 
-	}
+        ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataValueField = "Codigo";
+        ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataTextField = "Descr";
+        ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.ListaDetalle();
+        ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataBind();
+    }
 	protected void detalleGridView_RowDataBound(object sender, GridViewRowEventArgs e)
 	{
 		GridViewRow row = e.Row;
@@ -287,6 +291,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 l.codigo_producto_comprador = auxcpcomprador;
                 string auxcpvendedor = ((TextBox)detalleGridView.FooterRow.FindControl("txtcpvendedor")).Text;
                 l.codigo_producto_vendedor = auxcpvendedor;
+                l.indicacion_exento_gravado = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).SelectedItem.Value;
 
 				((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]).Add(l);
 
@@ -384,7 +389,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
             l.codigo_producto_comprador = auxcodigo_producto_comprador;
             string auxcodigo_producto_vendedor = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpvendedor")).Text;
             l.codigo_producto_vendedor = auxcodigo_producto_vendedor;
-
+            l.indicacion_exento_gravado = ((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlindicacion_exento_gravadoEdit")).SelectedItem.Value;
 
 			detalleGridView.EditIndex = -1;
 			detalleGridView.DataSource = ViewState["lineas"];
@@ -438,6 +443,18 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
         {
         }
 
+        ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).DataValueField = "Codigo";
+        ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).DataTextField = "Descr";
+        ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.ListaDetalle();
+        ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).DataBind();
+        try
+        {
+            ListItem liIndExento = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"])[e.NewEditIndex].indicacion_exento_gravado.ToString());
+            liIndExento.Selected = true;
+        }
+        catch
+        {
+        }
 
 	}
 	protected void detalleGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -673,6 +690,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                     det.linea[i].cantidadSpecified = listadelineas[i].cantidadSpecified;
                     det.linea[i].codigo_producto_comprador = listadelineas[i].codigo_producto_comprador;
                     det.linea[i].codigo_producto_vendedor = listadelineas[i].codigo_producto_vendedor;
+                    det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
 
                     if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
                     {
@@ -1457,7 +1475,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                             linea.cantidadSpecified = l.cantidadSpecified;
                             linea.codigo_producto_comprador = l.codigo_producto_comprador;
                             linea.codigo_producto_vendedor = l.codigo_producto_vendedor;
-
+                            linea.indicacion_exento_gravado = l.indicacion_exento_gravado;
 
                             if (l.importes_moneda_origen == null)
                             {
