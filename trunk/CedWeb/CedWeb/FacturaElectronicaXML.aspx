@@ -1076,14 +1076,14 @@
                                                         </tr>
                                                         <tr>
                                                             <td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
-                                                                <asp:Panel runat="server" ID="detallePanel" ScrollBars="Horizontal" Width="770px">
+                                                                <asp:Panel runat="server" ID="detallePanel" ScrollBars="Auto" Width="760px" Wrap="false" BorderStyle="Ridge">
                                                                     <asp:GridView ID="detalleGridView" runat="server" AutoGenerateColumns="False" GridLines="Both"
                                                                         EnableViewState="true" Font-Bold="false" Width="100%" BorderStyle="Solid" BorderWidth="1px"
                                                                         BorderColor="Gray" HeaderStyle-ForeColor="#A52A2A" ShowHeader="True" ShowFooter="true"
                                                                         ForeColor="#071F70" EditRowStyle-ForeColor="#071F70" EmptyDataRowStyle-ForeColor="#071F70"
                                                                         PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70"
-                                                                        ToolTip="El separador de decimales a utilizar es el punto" OnRowCommand="detalleGridView_RowCommand"
-                                                                        OnRowEditing="detalleGridView_RowEditing" OnRowUpdated="detalleGridView_RowUpdated"
+                                                                        ToolTip="Recuerde que al ingresar importes con decimales el separador a utilizar es el punto" 
+                                                                        OnRowCommand="detalleGridView_RowCommand" OnRowEditing="detalleGridView_RowEditing" OnRowUpdated="detalleGridView_RowUpdated"
                                                                         OnRowUpdating="detalleGridView_RowUpdating" OnRowCancelingEdit="detalleGridView_RowCancelingEdit"
                                                                         OnRowDeleted="detalleGridView_RowDeleted" OnRowDeleting="detalleGridView_RowDeleting">
                                                                         <Columns>
@@ -1093,13 +1093,13 @@
                                                                                 </ItemTemplate>
                                                                                 <EditItemTemplate>
                                                                                     <asp:TextBox ID="txtdescripcion" runat="server" Text='<%# Eval("descripcion") %>'
-                                                                                        Width="180px"></asp:TextBox>
+                                                                                        Width="170px"></asp:TextBox>
                                                                                     <asp:RequiredFieldValidator ID="txtdescripcionEditRequiredFieldValidator" runat="server"
                                                                                         ControlToValidate="txtdescripcion" ErrorMessage="Descripción del artículo en edición no informada"
                                                                                         SetFocusOnError="True" ValidationGroup="DetalleEditItem" Width="20px">*</asp:RequiredFieldValidator>
                                                                                 </EditItemTemplate>
                                                                                 <FooterTemplate>
-                                                                                    <asp:TextBox ID="txtdescripcion" runat="server" Text='' Width="180px"></asp:TextBox>
+                                                                                    <asp:TextBox ID="txtdescripcion" runat="server" Text='' Width="170px"></asp:TextBox>
                                                                                     <asp:RequiredFieldValidator ID="txtdescripcionFooterRequiredFieldValidator" runat="server"
                                                                                         ControlToValidate="txtdescripcion" ErrorMessage="Descripción del artículo a agregar no informada"
                                                                                         SetFocusOnError="True" ValidationGroup="DetalleFooter" Width="20px">*</asp:RequiredFieldValidator>
@@ -1107,7 +1107,7 @@
                                                                                 <ItemStyle HorizontalAlign="left" />
                                                                                 <FooterStyle HorizontalAlign="left" />
                                                                             </asp:TemplateField>
-                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="Código Producto Comprador">
+                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="Código Producto Comprador (Nomenclador)">
                                                                                 <ItemTemplate>
                                                                                     <asp:Label ID="lblcpvendedor" runat="server" Text='<%# Eval("codigo_producto_comprador") %>'
                                                                                         Width="150px"></asp:Label>
@@ -1132,7 +1132,7 @@
                                                                                     <asp:Label ID="lblcantidad" runat="server" Text='<%# Eval("cantidad") %>' Width="100px"></asp:Label>
                                                                                 </ItemTemplate>
                                                                                 <EditItemTemplate>
-                                                                                    <asp:TextBox ID="txtcantidad" runat="server" Text='<%# Eval("cantidad") %>' Width="80px"></asp:TextBox>
+                                                                                    <asp:TextBox ID="txtcantidad" runat="server" Text='<%# Eval("cantidad") %>' Width="70px"></asp:TextBox>
                                                                                     <asp:RegularExpressionValidator ID="txtcantidadEditRegularExpressionValidator" runat="server"
                                                                                         ControlToValidate="txtcantidad" ErrorMessage="Cantidad del artículo en edición mal formateado"
                                                                                         SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DetalleEditItem"
@@ -1142,7 +1142,7 @@
                                                                                     SetFocusOnError="True" ValidationGroup="Grillas">*</asp:RequiredFieldValidator>--%>
                                                                                 </EditItemTemplate>
                                                                                 <FooterTemplate>
-                                                                                    <asp:TextBox ID="txtcantidad" runat="server" Text='' Width="80px"></asp:TextBox>
+                                                                                    <asp:TextBox ID="txtcantidad" runat="server" Text='' Width="70px"></asp:TextBox>
                                                                                     <asp:RegularExpressionValidator ID="txtcantidadFooterRegularExpressionValidator"
                                                                                         runat="server" ControlToValidate="txtcantidad" ErrorMessage="Cantidad del artículo a agregar mal formateado"
                                                                                         SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DetalleFooter" Width="20px">*</asp:RegularExpressionValidator>
@@ -1152,82 +1152,82 @@
                                                                                 </FooterTemplate>
                                                                                 <ItemStyle HorizontalAlign="Right" />
                                                                             </asp:TemplateField>
-                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="Unidad">
+                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Unidad">
                                                                                 <ItemTemplate>
-                                                                                    <asp:Label ID="lbl_unidad" runat="server" Text='<%# Eval("unidad") %>'></asp:Label>
+                                                                                    <asp:Label ID="lbl_unidad" runat="server" Text='<%# Eval("unidad") %>' Width="200px"></asp:Label>
                                                                                 </ItemTemplate>
                                                                                 <EditItemTemplate>
-                                                                                    <asp:DropDownList ID="ddlunidadEdit" runat="server" Width="150px">
+                                                                                    <asp:DropDownList ID="ddlunidadEdit" runat="server" Width="200px">
                                                                                     </asp:DropDownList>
                                                                                 </EditItemTemplate>
                                                                                 <FooterTemplate>
-                                                                                    <asp:DropDownList ID="ddlunidad" runat="server" Width="150px">
+                                                                                    <asp:DropDownList ID="ddlunidad" runat="server" Width="200px">
                                                                                     </asp:DropDownList>
                                                                                 </FooterTemplate>
                                                                                 <ItemStyle HorizontalAlign="Right" />
                                                                             </asp:TemplateField>
-                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="Importe">
+                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe">
                                                                                 <ItemTemplate>
                                                                                     <asp:Label ID="lblimporte_total_articulo" runat="server" Text='<%# Eval("importe_total_articulo") %>'
-                                                                                        Width="150px"></asp:Label>
+                                                                                        Width="100px"></asp:Label>
                                                                                 </ItemTemplate>
                                                                                 <EditItemTemplate>
                                                                                     <asp:TextBox ID="txtimporte_total_articulo" runat="server" Text='<%# Eval("importe_total_articulo") %>'
-                                                                                        Width="130px"></asp:TextBox>
+                                                                                        Width="70px"></asp:TextBox>
                                                                                     <asp:RegularExpressionValidator ID="txtimporte_total_articuloEditRegularExpressionValidator"
                                                                                         runat="server" ControlToValidate="txtimporte_total_articulo" ErrorMessage="Importe total artículo en edición mal formateado"
                                                                                         SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DetalleEditItem"
-                                                                                        Width="10px">*</asp:RegularExpressionValidator>
+                                                                                        >*</asp:RegularExpressionValidator>
                                                                                     <asp:RequiredFieldValidator ID="txtimporte_total_articuloEditRequiredFieldValidator"
                                                                                         runat="server" ControlToValidate="txtimporte_total_articulo" ErrorMessage="Importe total artículo en edición no informado"
-                                                                                        SetFocusOnError="True" ValidationGroup="Grillas" Width="10px">*</asp:RequiredFieldValidator>
+                                                                                        SetFocusOnError="True" ValidationGroup="Grillas" >*</asp:RequiredFieldValidator>
                                                                                 </EditItemTemplate>
                                                                                 <FooterTemplate>
-                                                                                    <asp:TextBox ID="txtimporte_total_articulo" runat="server" Text='' Width="130px"></asp:TextBox>
+                                                                                    <asp:TextBox ID="txtimporte_total_articulo" runat="server" Text='' Width="70px"></asp:TextBox>
                                                                                     <asp:RegularExpressionValidator ID="txtimporte_total_articuloFooterRegularExpressionValidator"
                                                                                         runat="server" ControlToValidate="txtimporte_total_articulo" ErrorMessage="Importe total artículo a agregar mal formateado"
                                                                                         SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DetalleFooter"
-                                                                                        Width="10px">*</asp:RegularExpressionValidator>
+                                                                                        >*</asp:RegularExpressionValidator>
                                                                                     <asp:RequiredFieldValidator ID="txtimporte_total_articuloFooterRequiredFieldValidator"
                                                                                         runat="server" ControlToValidate="txtimporte_total_articulo" ErrorMessage="Importe total artículo a agregar no informado"
-                                                                                        SetFocusOnError="True" ValidationGroup="DetalleFooter" Width="10px">*</asp:RequiredFieldValidator>
+                                                                                        SetFocusOnError="True" ValidationGroup="DetalleFooter">*</asp:RequiredFieldValidator>
                                                                                 </FooterTemplate>
                                                                                 <ItemStyle HorizontalAlign="Right" />
                                                                             </asp:TemplateField>
-                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="Alic.IVA">
+                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="50px" HeaderText="Alic.IVA">
                                                                                 <ItemTemplate>
                                                                                     <asp:Label ID="lbl_alicuota_articulo" runat="server" Text='<%# Eval("alicuota_iva") %>'
-                                                                                        Width="150px"></asp:Label>
+                                                                                        Width="50px"></asp:Label>
                                                                                 </ItemTemplate>
                                                                                 <EditItemTemplate>
-                                                                                    <asp:DropDownList ID="ddlalicuota_articuloEdit" runat="server" Width="150px">
+                                                                                    <asp:DropDownList ID="ddlalicuota_articuloEdit" runat="server" Width="50px">
                                                                                     </asp:DropDownList>
                                                                                 </EditItemTemplate>
                                                                                 <FooterTemplate>
-                                                                                    <asp:DropDownList ID="ddlalicuota_articulo" runat="server" Width="150px">
+                                                                                    <asp:DropDownList ID="ddlalicuota_articulo" runat="server" Width="50px">
                                                                                     </asp:DropDownList>
                                                                                 </FooterTemplate>
                                                                                 <ItemStyle HorizontalAlign="Right" />
                                                                             </asp:TemplateField>
-                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="Importe IVA">
+                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe IVA">
                                                                                 <ItemTemplate>
                                                                                     <asp:Label ID="lbl_importe_alicuota_articulo" runat="server" Text='<%# Eval("importe_iva") %>'
-                                                                                        Width="150px"></asp:Label>
+                                                                                        Width="100px"></asp:Label>
                                                                                 </ItemTemplate>
                                                                                 <EditItemTemplate>
                                                                                     <asp:TextBox ID="txtimporte_alicuota_articulo" runat="server" Text='<%# Eval("importe_iva") %>'
-                                                                                        Width="130px"></asp:TextBox>
+                                                                                        Width="70px"></asp:TextBox>
                                                                                     <asp:RegularExpressionValidator ID="txtimporte_alicuota_articuloEditRegularExpressionValidator"
                                                                                         runat="server" ControlToValidate="txtimporte_alicuota_articulo" ErrorMessage="Importe alícuota en edición mal formateado"
                                                                                         SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DetalleEditItem"
-                                                                                        Width="20px">*</asp:RegularExpressionValidator>
+                                                                                        Width="10px">*</asp:RegularExpressionValidator>
                                                                                 </EditItemTemplate>
                                                                                 <FooterTemplate>
-                                                                                    <asp:TextBox ID="txtimporte_alicuota_articulo" runat="server" Text='' Width="130px"></asp:TextBox>
+                                                                                    <asp:TextBox ID="txtimporte_alicuota_articulo" runat="server" Text='' Width="70px"></asp:TextBox>
                                                                                     <asp:RegularExpressionValidator ID="txtimporte_alicuota_articuloFooterRegularExpressionValidator"
                                                                                         runat="server" ControlToValidate="txtimporte_alicuota_articulo" ErrorMessage="Importe alícuota a agregar mal formateado"
                                                                                         SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DetalleFooter"
-                                                                                        Width="120px">*</asp:RegularExpressionValidator>
+                                                                                        Width="10px">*</asp:RegularExpressionValidator>
                                                                                 </FooterTemplate>
                                                                                 <ItemStyle HorizontalAlign="Right" />
                                                                             </asp:TemplateField>
