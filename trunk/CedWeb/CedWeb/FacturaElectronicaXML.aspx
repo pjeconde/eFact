@@ -1150,14 +1150,14 @@
                                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Indicación exento gravado">
                                                                                 <ItemTemplate>
                                                                                     <asp:Label ID="lbl_indicacion_exento_gravado" runat="server" Text='<%# Eval("indicacion_exento_gravado") %>'
-                                                                                        Width="200px"></asp:Label>
+                                                                                        Width="130px"></asp:Label>
                                                                                 </ItemTemplate>
                                                                                 <EditItemTemplate>
-                                                                                    <asp:DropDownList ID="ddlindicacion_exento_gravadoEdit" runat="server" Width="200px">
+                                                                                    <asp:DropDownList ID="ddlindicacion_exento_gravadoEdit" runat="server" Width="130px">
                                                                                     </asp:DropDownList>
                                                                                 </EditItemTemplate>
                                                                                 <FooterTemplate>
-                                                                                    <asp:DropDownList ID="ddlindicacion_exento_gravado" runat="server" Width="200px">
+                                                                                    <asp:DropDownList ID="ddlindicacion_exento_gravado" runat="server" Width="130px">
                                                                                     </asp:DropDownList>
                                                                                 </FooterTemplate>
                                                                                 <ItemStyle HorizontalAlign="Right" />
