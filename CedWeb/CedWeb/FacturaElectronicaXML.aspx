@@ -1076,7 +1076,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
-                                                                <asp:Panel runat="server" ID="detallePanel" ScrollBars="Auto" Width="760px" Wrap="false" BorderStyle="Ridge">
+                                                                <asp:Panel runat="server" ID="detallePanel" ScrollBars="Auto" Width="760px" Height="200px" Wrap="true" BorderStyle="Ridge">
                                                                     <asp:GridView ID="detalleGridView" runat="server" AutoGenerateColumns="False" GridLines="Both"
                                                                         EnableViewState="true" Font-Bold="false" Width="100%" BorderStyle="Solid" BorderWidth="1px"
                                                                         BorderColor="Gray" HeaderStyle-ForeColor="#A52A2A" ShowHeader="True" ShowFooter="true"
@@ -1087,6 +1087,46 @@
                                                                         OnRowUpdating="detalleGridView_RowUpdating" OnRowCancelingEdit="detalleGridView_RowCancelingEdit"
                                                                         OnRowDeleted="detalleGridView_RowDeleted" OnRowDeleting="detalleGridView_RowDeleting">
                                                                         <Columns>
+                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="Código Producto Vendedor">
+                                                                                <ItemTemplate>
+                                                                                    <asp:Label ID="lblcpvendedor" runat="server" Text='<%# Eval("codigo_producto_vendedor") %>'
+                                                                                        Width="150px"></asp:Label>
+                                                                                </ItemTemplate>
+                                                                                <EditItemTemplate>
+                                                                                    <asp:TextBox ID="txtcpvendedor" runat="server" Text='<%# Eval("codigo_producto_vendedor") %>'
+                                                                                        Width="150px"></asp:TextBox>
+                                                                                    <%--<asp:RequiredFieldValidator ID="txtcantidadEditRequiredFieldValidator" runat="server"
+                                                                                    ControlToValidate="txtcantidad" ErrorMessage="Código producto vendedor del artículo en edición no informado"
+                                                                                    SetFocusOnError="True" ValidationGroup="Grillas">*</asp:RequiredFieldValidator>--%>
+                                                                                </EditItemTemplate>
+                                                                                <FooterTemplate>
+                                                                                    <asp:TextBox ID="txtcpvendedor" runat="server" Text='' Width="150px"></asp:TextBox>
+                                                                                    <%--<asp:RequiredFieldValidator ID="txtcantidadFooterRequiredFieldValidator" runat="server"
+                                                                                    ControlToValidate="txtcantidad" ErrorMessage="Código producto vendedor del artículo a agregar no informado"
+                                                                                    SetFocusOnError="True" ValidationGroup="DetalleFooter">*</asp:RequiredFieldValidator>--%>
+                                                                                </FooterTemplate>
+                                                                                <ItemStyle HorizontalAlign="Right" />
+                                                                            </asp:TemplateField>                                                                            
+                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="Código Producto Comprador (Nomenclador)">
+                                                                                <ItemTemplate>
+                                                                                    <asp:Label ID="lblcpcomprador" runat="server" Text='<%# Eval("codigo_producto_comprador") %>'
+                                                                                        Width="150px"></asp:Label>
+                                                                                </ItemTemplate>
+                                                                                <EditItemTemplate>
+                                                                                    <asp:TextBox ID="txtcpcomprador" runat="server" Text='<%# Eval("codigo_producto_comprador") %>'
+                                                                                        Width="150px"></asp:TextBox>
+                                                                                    <%--<asp:RequiredFieldValidator ID="txtcantidadEditRequiredFieldValidator" runat="server"
+                                                                                    ControlToValidate="txtcantidad" ErrorMessage="Código producto comprador del artículo en edición no informado"
+                                                                                    SetFocusOnError="True" ValidationGroup="Grillas">*</asp:RequiredFieldValidator>--%>
+                                                                                </EditItemTemplate>
+                                                                                <FooterTemplate>
+                                                                                    <asp:TextBox ID="txtcpcomprador" runat="server" Text='' Width="150px"></asp:TextBox>
+                                                                                    <%--<asp:RequiredFieldValidator ID="txtcantidadFooterRequiredFieldValidator" runat="server"
+                                                                                    ControlToValidate="txtcantidad" ErrorMessage="Código producto comprador del artículo a agregar no informado"
+                                                                                    SetFocusOnError="True" ValidationGroup="DetalleFooter">*</asp:RequiredFieldValidator>--%>
+                                                                                </FooterTemplate>
+                                                                                <ItemStyle HorizontalAlign="Right" />
+                                                                            </asp:TemplateField>
                                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="200px" HeaderText="Descripción del artículo">
                                                                                 <ItemTemplate>
                                                                                     <asp:Label ID="lbldescripcion" runat="server" Text='<%# Eval("descripcion") %>' Width="200px"></asp:Label>
@@ -1106,26 +1146,6 @@
                                                                                 </FooterTemplate>
                                                                                 <ItemStyle HorizontalAlign="left" />
                                                                                 <FooterStyle HorizontalAlign="left" />
-                                                                            </asp:TemplateField>
-                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="Código Producto Comprador (Nomenclador)">
-                                                                                <ItemTemplate>
-                                                                                    <asp:Label ID="lblcpvendedor" runat="server" Text='<%# Eval("codigo_producto_comprador") %>'
-                                                                                        Width="150px"></asp:Label>
-                                                                                </ItemTemplate>
-                                                                                <EditItemTemplate>
-                                                                                    <asp:TextBox ID="txtcpvendedor" runat="server" Text='<%# Eval("codigo_producto_comprador") %>'
-                                                                                        Width="150px"></asp:TextBox>
-                                                                                    <%--<asp:RequiredFieldValidator ID="txtcantidadEditRequiredFieldValidator" runat="server"
-                                                                                    ControlToValidate="txtcantidad" ErrorMessage="Código producto comprador del artículo en edición no informado"
-                                                                                    SetFocusOnError="True" ValidationGroup="Grillas">*</asp:RequiredFieldValidator>--%>
-                                                                                </EditItemTemplate>
-                                                                                <FooterTemplate>
-                                                                                    <asp:TextBox ID="txtcpvendedor" runat="server" Text='' Width="150px"></asp:TextBox>
-                                                                                    <%--<asp:RequiredFieldValidator ID="txtcantidadFooterRequiredFieldValidator" runat="server"
-                                                                                    ControlToValidate="txtcantidad" ErrorMessage="Código producto comprador del artículo a agregar no informado"
-                                                                                    SetFocusOnError="True" ValidationGroup="DetalleFooter">*</asp:RequiredFieldValidator>--%>
-                                                                                </FooterTemplate>
-                                                                                <ItemStyle HorizontalAlign="Right" />
                                                                             </asp:TemplateField>
                                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="100px" HeaderText="Cantidad">
                                                                                 <ItemTemplate>

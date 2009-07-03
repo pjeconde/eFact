@@ -283,8 +283,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 {
                     l.cantidadSpecified = false;
                 }
+                string auxcpcomprador = ((TextBox)detalleGridView.FooterRow.FindControl("txtcpcomprador")).Text;
+                l.codigo_producto_comprador = auxcpcomprador;
                 string auxcpvendedor = ((TextBox)detalleGridView.FooterRow.FindControl("txtcpvendedor")).Text;
-                l.codigo_producto_comprador = auxcpvendedor;
+                l.codigo_producto_vendedor = auxcpvendedor;
 
 				((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]).Add(l);
 
@@ -378,8 +380,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
             {
                 throw new Exception("Detalle no actualizado porque el separador de decimales debe ser el punto");
             }
-            string auxcodigo_producto_comprador = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpvendedor")).Text;
+            string auxcodigo_producto_comprador = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpcomprador")).Text;
             l.codigo_producto_comprador = auxcodigo_producto_comprador;
+            string auxcodigo_producto_vendedor = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpvendedor")).Text;
+            l.codigo_producto_vendedor = auxcodigo_producto_vendedor;
 
 
 			detalleGridView.EditIndex = -1;
@@ -668,6 +672,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                     det.linea[i].cantidad = listadelineas[i].cantidad;
                     det.linea[i].cantidadSpecified = listadelineas[i].cantidadSpecified;
                     det.linea[i].codigo_producto_comprador = listadelineas[i].codigo_producto_comprador;
+                    det.linea[i].codigo_producto_vendedor = listadelineas[i].codigo_producto_vendedor;
 
                     if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
                     {
@@ -1451,6 +1456,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                             linea.cantidad = l.cantidad;
                             linea.cantidadSpecified = l.cantidadSpecified;
                             linea.codigo_producto_comprador = l.codigo_producto_comprador;
+                            linea.codigo_producto_vendedor = l.codigo_producto_vendedor;
 
 
                             if (l.importes_moneda_origen == null)
