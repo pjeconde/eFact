@@ -690,8 +690,13 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                     det.linea[i].cantidadSpecified = listadelineas[i].cantidadSpecified;
                     det.linea[i].codigo_producto_comprador = listadelineas[i].codigo_producto_comprador;
                     det.linea[i].codigo_producto_vendedor = listadelineas[i].codigo_producto_vendedor;
-                    det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
-
+                    if (listadelineas[i].indicacion_exento_gravado != null)
+                    {
+                        if (!listadelineas[i].indicacion_exento_gravado.Equals(string.Empty))
+                        {
+                            det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
+                        }
+                    }
                     if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
                     {
                         det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
