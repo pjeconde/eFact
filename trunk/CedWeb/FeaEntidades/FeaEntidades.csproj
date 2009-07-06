@@ -76,6 +76,12 @@
     <Compile Include="CodigosProvincia\SinInformar.cs" />
     <Compile Include="CodigosProvincia\TierraDelFuego.cs" />
     <Compile Include="CodigosProvincia\Tucuman.cs" />
+    <Compile Include="CodigosReferencia\CodigoReferencia.cs" />
+    <Compile Include="CodigosReferencia\FacturaDeReferencia.cs" />
+    <Compile Include="CodigosReferencia\NotaDeCredito.cs" />
+    <Compile Include="CodigosReferencia\OrdenDeCompra.cs" />
+    <Compile Include="CodigosReferencia\Remito.cs" />
+    <Compile Include="CodigosReferencia\SinInformar.cs" />
     <Compile Include="CodigosUnidad\Centimetro.cs" />
     <Compile Include="CodigosUnidad\Docena.cs" />
     <Compile Include="CodigosUnidad\Gramo.cs" />
