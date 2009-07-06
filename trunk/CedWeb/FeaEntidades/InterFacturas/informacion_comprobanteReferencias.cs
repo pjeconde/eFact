@@ -16,9 +16,11 @@ namespace FeaEntidades.InterFacturas
 
 		private int codigo_de_referenciaField;
 
-		private long dato_de_referenciaField;
+        private string descripcioncodigo_de_referenciaField;
 
-		/// <comentarios/>
+		private long dato_de_referenciaField;
+        
+        /// <comentarios/>
 		public int codigo_de_referencia
 		{
 			get
@@ -30,6 +32,20 @@ namespace FeaEntidades.InterFacturas
 				this.codigo_de_referenciaField = value;
 			}
 		}
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string descripcioncodigo_de_referencia
+        {
+            get
+            {
+                return this.descripcioncodigo_de_referenciaField;
+            }
+            set
+            {
+                this.descripcioncodigo_de_referenciaField = value;
+            }
+        }
 
 		/// <comentarios/>
 		public long dato_de_referencia
