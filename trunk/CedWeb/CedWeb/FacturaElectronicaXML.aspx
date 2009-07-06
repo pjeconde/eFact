@@ -1340,6 +1340,32 @@
                                                                                 </FooterTemplate>
                                                                                 <ItemStyle HorizontalAlign="Right" />
                                                                             </asp:TemplateField>
+                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Precio unitario">
+                                                                                <ItemTemplate>
+                                                                                    <asp:Label ID="lblprecio_unitario" runat="server" Text='<%# Eval("precio_unitario") %>'
+                                                                                        Width="100px"></asp:Label>
+                                                                                </ItemTemplate>
+                                                                                <EditItemTemplate>
+                                                                                    <asp:TextBox ID="txtprecio_unitario" runat="server" Text='<%# Eval("precio_unitario") %>'
+                                                                                        Width="70px"></asp:TextBox>
+                                                                                    <asp:RegularExpressionValidator ID="txtprecio_unitarioEditRegularExpressionValidator"
+                                                                                        runat="server" ControlToValidate="txtprecio_unitario" ErrorMessage="Precio unitario artículo en edición mal formateado"
+                                                                                        SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DetalleEditItem">*</asp:RegularExpressionValidator>
+                                                                                   <%-- <asp:RequiredFieldValidator ID="txtprecio_unitarioEditRequiredFieldValidator" runat="server"
+                                                                                        ControlToValidate="txtprecio_unitario" ErrorMessage="Precio unitario artículo en edición no informado"
+                                                                                        SetFocusOnError="True" ValidationGroup="Grillas">*</asp:RequiredFieldValidator>--%>
+                                                                                </EditItemTemplate>
+                                                                                <FooterTemplate>
+                                                                                    <asp:TextBox ID="txtprecio_unitario" runat="server" Text='' Width="70px"></asp:TextBox>
+                                                                                    <asp:RegularExpressionValidator ID="txtprecio_unitarioFooterRegularExpressionValidator"
+                                                                                        runat="server" ControlToValidate="txtprecio_unitario" ErrorMessage="Precio unitario artículo a agregar mal formateado"
+                                                                                        SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DetalleFooter">*</asp:RegularExpressionValidator>
+                                                                                    <%--<asp:RequiredFieldValidator ID="txtprecio_unitarioFooterRequiredFieldValidator" runat="server"
+                                                                                        ControlToValidate="txtprecio_unitario" ErrorMessage="Precio unitario artículo a agregar no informado"
+                                                                                        SetFocusOnError="True" ValidationGroup="DetalleFooter">*</asp:RequiredFieldValidator>--%>
+                                                                                </FooterTemplate>
+                                                                                <ItemStyle HorizontalAlign="Right" />
+                                                                            </asp:TemplateField>
                                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe">
                                                                                 <ItemTemplate>
                                                                                     <asp:Label ID="lblimporte_total_articulo" runat="server" Text='<%# Eval("importe_total_articulo") %>'
