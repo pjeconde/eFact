@@ -18,6 +18,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 	System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas;
 	System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> impuestos;
 	System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> descuentos;
+    System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> referencias;
     private System.Globalization.CultureInfo cedeiraCultura;
 	#endregion
 	protected void Page_Load(object sender, EventArgs e)
@@ -48,6 +49,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				descuentos.Add(descuento);
 				descuentosGridView.DataSource = descuentos;
 				ViewState["descuentos"] = descuentos;
+
+                referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
+                FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
+                referencias.Add(referencia);
+                referenciasGridView.DataSource = referencias;
+                ViewState["referencias"] = referencias;
 
 				Condicion_IVA_VendedorDropDownList.DataValueField = "Codigo";
 				Condicion_IVA_VendedorDropDownList.DataTextField = "Descr";
@@ -180,6 +187,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
         ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.ListaDetalle();
         ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataBind();
     }
+
+        ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataValueField = "Codigo";
+        ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataTextField = "Descr";
+        ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+        ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
+	}
 	protected void detalleGridView_RowDataBound(object sender, GridViewRowEventArgs e)
 	{
 		GridViewRow row = e.Row;
@@ -605,6 +618,15 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                     infcomprob.fecha_obtencion_cae = FechaCAEObtencionDatePickerWebUserControl.CalendarDateString;
                     infcomprob.fecha_vencimiento_cae = FechaCAEVencimientoDatePickerWebUserControl.CalendarDateString;
                 }
+                
+                System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> listareferencias = (System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"];
+                for (int i = 0; i < listareferencias.Count; i++)
+                {
+                    infcomprob.referencias[i] = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
+                    infcomprob.referencias[i].codigo_de_referencia = Convert.ToInt32(listareferencias[i].codigo_de_referencia);
+                    infcomprob.referencias[i].descripcioncodigo_de_referencia = listareferencias[i].descripcioncodigo_de_referencia;
+                    infcomprob.referencias[i].dato_de_referencia = listareferencias[i].dato_de_referencia;
+                }
                 compcab.informacion_comprobante = infcomprob;
 
                 FeaEntidades.InterFacturas.informacion_vendedor infovend = new FeaEntidades.InterFacturas.informacion_vendedor();
@@ -666,7 +688,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 comp.cabecera = compcab;
 
                 FeaEntidades.InterFacturas.detalle det = new FeaEntidades.InterFacturas.detalle();
-
                 System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
                 for (int i = 0; i < listadelineas.Count; i++)
                 {
@@ -1103,7 +1124,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			try
 			{
 				FeaEntidades.InterFacturas.resumenImpuestos r = new FeaEntidades.InterFacturas.resumenImpuestos();
-
 				int auxcodigo_impuesto = Convert.ToInt32(((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).SelectedValue);
 				r.codigo_impuesto = auxcodigo_impuesto;
 				r.descripcion = ((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).SelectedItem.Text;
@@ -1161,9 +1181,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				FeaEntidades.InterFacturas.resumenImpuestos nueva = new FeaEntidades.InterFacturas.resumenImpuestos();
 				impuestos.Add(nueva);
 			}
-
 			impuestosGridView.EditIndex = -1;
-
 			impuestosGridView.DataSource = ViewState["impuestos"];
 			impuestosGridView.DataBind();
 			BindearDropDownLists();
@@ -1213,7 +1231,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			string auxdescr_impuesto = ((DropDownList)impuestosGridView.Rows[e.RowIndex].FindControl("ddlcodigo_impuestoEdit")).SelectedItem.Text;
 			r.descripcion = auxdescr_impuesto;
 
-
 			string auxTotal = ((TextBox)impuestosGridView.Rows[e.RowIndex].FindControl("txtimporte_impuesto")).Text;
 			if (!auxTotal.Contains(","))
 			{
@@ -1235,6 +1252,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</script>");
 		}
 	}
+
 	protected void descuentosGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
 	{
 		descuentosGridView.EditIndex = -1;
@@ -1368,6 +1386,152 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</script>");
 		}
 	}
+
+    protected void referenciasGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+    {
+        referenciasGridView.EditIndex = -1;
+        referenciasGridView.DataSource = ViewState["referencias"];
+        referenciasGridView.DataBind();
+    }
+    protected void referenciasGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName.Equals("Addreferencias"))
+        {
+            try
+            {
+                FeaEntidades.InterFacturas.informacion_comprobanteReferencias r = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
+                string auxCodRef = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue.ToString();
+                string auxDescrCodRef = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
+                if (!auxCodRef.Equals(string.Empty))
+                {
+                    r.codigo_de_referencia = Convert.ToInt32(auxCodRef);
+                    r.descripcioncodigo_de_referencia = auxDescrCodRef;
+                }
+                else
+                {
+                    throw new Exception("Referencia no agregada porque el codigo de referencia no puede estar vacío");
+                }
+                string auxDatoRef = ((TextBox)referenciasGridView.FooterRow.FindControl("txtdato_de_referencia")).Text;
+                if (System.Text.RegularExpressions.Regex.IsMatch(auxDatoRef, "^[0-9]+$"))
+                {
+                    r.dato_de_referencia = Convert.ToInt64(auxDatoRef);
+                }
+                else
+                {
+                    throw new Exception("Referencia no agregada porque el dato de referencia debe ser numérico y entero");
+                }
+                ((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"]).Add(r);
+                //Me fijo si elimino la fila automática
+                System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> refs = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"]);
+                if (refs[0].codigo_de_referencia == 0)
+                {
+                    ((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"]).Remove(refs[0]);
+                }
+                referenciasGridView.DataSource = ViewState["referencias"];
+                referenciasGridView.DataBind();
+                BindearDropDownLists();
+            }
+            catch (Exception ex)
+            {
+                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</script>");
+            }
+        }
+    }
+    protected void referenciasGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
+    {
+        if (e.Exception != null)
+        {
+            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</script>");
+            e.ExceptionHandled = true;
+        }
+    }
+    protected void referenciasGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        try
+        {
+            System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> refs = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"]);
+            FeaEntidades.InterFacturas.informacion_comprobanteReferencias r = refs[e.RowIndex];
+            refs.Remove(r);
+            if (refs.Count.Equals(0))
+            {
+                FeaEntidades.InterFacturas.informacion_comprobanteReferencias nuevo = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
+                refs.Add(nuevo);
+            }
+            referenciasGridView.EditIndex = -1;
+            referenciasGridView.DataSource = ViewState["referencias"];
+            referenciasGridView.DataBind();
+            BindearDropDownLists();
+        }
+        catch
+        {
+        }
+    }
+    protected void referenciasGridView_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        referenciasGridView.EditIndex = e.NewEditIndex;
+
+        referenciasGridView.DataSource = ViewState["referencias"];
+        referenciasGridView.DataBind();
+        BindearDropDownLists();
+
+        ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataValueField = "Codigo";
+        ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataTextField = "Descr";
+        ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+        ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataBind();
+        try
+        {
+            ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"])[e.NewEditIndex].codigo_de_referencia.ToString());
+            li.Selected = true;
+        }
+        catch
+        {
+        }
+    }
+    protected void referenciasGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
+    {
+        if (e.Exception != null)
+        {
+            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</script>");
+            e.ExceptionHandled = true;
+        }
+    }
+    protected void referenciasGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        try
+        {
+            System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> refs = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"]);
+            FeaEntidades.InterFacturas.informacion_comprobanteReferencias r = refs[e.RowIndex];
+            string auxCodRef = ((DropDownList)referenciasGridView.Rows[e.RowIndex].FindControl("ddlcodigo_de_referenciaEdit")).SelectedValue.ToString();
+            string auxDescrCodRef = ((DropDownList)referenciasGridView.Rows[e.RowIndex].FindControl("ddlcodigo_de_referenciaEdit")).SelectedItem.Text;
+            if (!auxCodRef.Equals(string.Empty))
+            {
+                r.codigo_de_referencia = Convert.ToInt32(auxCodRef);
+                r.descripcioncodigo_de_referencia = auxDescrCodRef;
+            }
+            else
+            {
+                throw new Exception("Referencia no actualizada porque el codigo de referencia no puede estar vacío");
+            }
+            string auxDatoRef = ((TextBox)referenciasGridView.Rows[e.RowIndex].FindControl("txtdato_de_referencia")).Text;
+            if (System.Text.RegularExpressions.Regex.IsMatch(auxDatoRef, "^[0-9]+$"))
+            {
+                r.dato_de_referencia = Convert.ToInt64(auxDatoRef);
+            }
+            else
+            {
+                throw new Exception("Referencia no agregada porque el dato de referencia debe ser numérico y entero");
+            }
+            referenciasGridView.EditIndex = -1;
+            referenciasGridView.DataSource = ViewState["referencias"];
+            referenciasGridView.DataBind();
+            BindearDropDownLists();
+        }
+        catch (Exception ex)
+        {
+            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</script>");
+        }
+    }
+
 	protected void FileUploadButton_Click(object sender, EventArgs e)
 	{
         if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
@@ -1402,6 +1566,24 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                         Condicion_De_PagoTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago);
                         IVAcomputableDropDownList.SelectedIndex = IVAcomputableDropDownList.Items.IndexOf(IVAcomputableDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.iva_computable)));
                         CodigoOperacionDropDownList.SelectedIndex = CodigoOperacionDropDownList.Items.IndexOf(CodigoOperacionDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.codigo_operacion)));
+                        //Referencias
+                        if (lc.comprobante[0].cabecera.informacion_comprobante.referencias != null)
+                        {
+                            referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
+                            foreach (FeaEntidades.InterFacturas.informacion_comprobanteReferencias r in lc.comprobante[0].cabecera.informacion_comprobante.referencias)
+                            {
+                                //descripcioncodigo_de_referencia ( XmlIgnoreAttribute )
+                                //Se busca la descripción a través del código.
+                                string descrcodigo =((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
+                                ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue = r.codigo_de_referencia.ToString();
+                                descrcodigo = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
+                                r.descripcioncodigo_de_referencia = descrcodigo;
+                                referencias.Add(r);
+                            }
+                            referenciasGridView.DataSource = referencias;
+                            referenciasGridView.DataBind();
+                            ViewState["referencias"] = referencias;
+                        }
                         //Comprador
                         if (lc.comprobante[0].cabecera.informacion_comprador.GLN != 0)
                         {
@@ -1450,8 +1632,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                         Domicilio_Sector_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_sector);
                         Domicilio_Torre_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_torre);
                         Domicilio_Manzana_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_manzana);
-
-
                         //Detalle
                         lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
                         foreach (FeaEntidades.InterFacturas.linea l in lc.comprobante[0].detalle.linea)
@@ -1561,7 +1741,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                             Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_ingresos_brutos);
                         }
                         Observaciones_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.observaciones);
-
                         if (!lc.comprobante[0].resumen.codigo_moneda.Equals("PES"))
                         {
                             Tipo_de_cambioLabel.Visible = true;
@@ -1577,9 +1756,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                             Tipo_de_cambioRequiredFieldValidator.Enabled = false;
                             Tipo_de_cambioRegularExpressionValidator.Enabled = false;
                         }
-
                         ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo');</script>");
-
                     }
                     catch (Exception ex)
                     {
