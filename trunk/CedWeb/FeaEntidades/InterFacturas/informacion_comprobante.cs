@@ -52,7 +52,7 @@ namespace FeaEntidades.InterFacturas
 		//[FileHelpers.FieldConverter(typeof(FeaEntidades.Converters.informacion_comprobanteReferenciasConverter))]
 		//[FileHelpers.FieldNullValue(new informacion_comprobanteReferencias[0])]
 		[FileHelpers.FieldIgnored()]
-		private informacion_comprobanteReferencias[] referenciasField;
+		private informacion_comprobanteReferencias[] referenciasField = new informacion_comprobanteReferencias[10];
 
 		/// <comentarios/>
 		public int tipo_de_comprobante
