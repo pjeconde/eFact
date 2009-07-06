@@ -1034,6 +1034,145 @@
                                         <br />
                                     </td>
                                 </tr>
+                                <!-- CODIGOS DE REFERENCIAS -->
+                                <tr>
+                                    <td style="text-align: center" class="TextoResaltado">
+                                        <table style="width: 782px" border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td rowspan="8" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="1" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="8" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center;" class="TextoResaltado">
+                                                    REFERENCIAS
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; padding: 3px; font-weight: normal;">
+                                                    <asp:GridView ID="referenciasGridView" runat="server" AutoGenerateColumns="False"
+                                                        GridLines="Both" EnableViewState="true" Font-Bold="false" Width="100%" BorderStyle="Solid"
+                                                        BorderWidth="1px" BorderColor="gray" HeaderStyle-ForeColor="#A52A2A" ShowHeader="True"
+                                                        ShowFooter="true" ForeColor="#071F70" EditRowStyle-ForeColor="#071F70" EmptyDataRowStyle-ForeColor="#071F70"
+                                                        PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70"
+                                                        ToolTip="El dato de referencia debe ser un número entero" OnRowCommand="referenciasGridView_RowCommand"
+                                                        OnRowEditing="referenciasGridView_RowEditing" OnRowUpdated="referenciasGridView_RowUpdated"
+                                                        OnRowUpdating="referenciasGridView_RowUpdating" OnRowCancelingEdit="referenciasGridView_RowCancelingEdit"
+                                                        OnRowDeleted="referenciasGridView_RowDeleted" OnRowDeleting="referenciasGridView_RowDeleting">
+                                                        <Columns>
+                                                            <asp:TemplateField HeaderText="C&#243;digo de referencia">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblcodigo_de_referencia" Text='<%# Eval("descripcioncodigo_de_referencia") %>' runat="server" Width="360px"></asp:Label>
+                                                                </ItemTemplate>
+                                                                <EditItemTemplate>
+                                                                    <asp:DropDownList ID="ddlcodigo_de_referenciaEdit" runat="server" Width="360px">
+                                                                    </asp:DropDownList>
+                                                                    <asp:RequiredFieldValidator ID="ddlcodigo_de_referenciaEditItemRequiredFieldValidator" runat="server"
+                                                                        ControlToValidate="ddlcodigo_de_referenciaEdit" ErrorMessage="Codigo de referencia en edición no informado"
+                                                                        SetFocusOnError="True" ValidationGroup="ReferenciasEditItem">*</asp:RequiredFieldValidator>
+                                                                </EditItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <asp:DropDownList ID="ddlcodigo_de_referencia" runat="server" Width="360px">
+                                                                    </asp:DropDownList>
+                                                                    <asp:RequiredFieldValidator ID="ddldescripcionFooterRequiredFieldValidator" runat="server"
+                                                                        ControlToValidate="ddlcodigo_de_referencia" ErrorMessage="Codigo de referencia a agregar no informado"
+                                                                        SetFocusOnError="True" ValidationGroup="ReferenciasFooter">*</asp:RequiredFieldValidator>
+                                                                </FooterTemplate>
+                                                                <ItemStyle HorizontalAlign="Left" Width="360px"/>
+                                                                <FooterStyle HorizontalAlign="Left" Width="360px"/>
+                                                                <HeaderStyle Font-Bold="False" />
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Dato de referencia">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lbldato_de_referencia" Text='<%# Eval("dato_de_referencia") %>' runat="server"></asp:Label>
+                                                                </ItemTemplate>
+                                                                <EditItemTemplate>
+                                                                    <asp:TextBox ID="txtdato_de_referencia" Text='<%# Eval("dato_de_referencia") %>' runat="server" Width="75%"></asp:TextBox>
+                                                                    <asp:RequiredFieldValidator ID="txtdato_de_referenciaEditItemRequiredFieldValidator"
+                                                                        runat="server" ControlToValidate="txtdato_de_referencia" ErrorMessage="dato de referencia en edición no informado"
+                                                                        SetFocusOnError="True" ValidationGroup="ReferenciasEditItem">*</asp:RequiredFieldValidator>
+                                                                    <asp:RegularExpressionValidator ID="txtdato_de_referenciaEditItemRegularExpressionValidator"
+                                                                        runat="server" ControlToValidate="txtdato_de_referencia" ErrorMessage="dato de referencia en edición mal formateado"
+                                                                        SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="ReferenciasEditItem">*</asp:RegularExpressionValidator>
+                                                                </EditItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <asp:TextBox ID="txtdato_de_referencia" Text='' runat="server" Width="75%"></asp:TextBox>
+                                                                    <asp:RegularExpressionValidator ID="txtdato_de_referenciaFooterRegularExpressionValidator"
+                                                                        runat="server" ControlToValidate="txtdato_de_referencia" ErrorMessage="Dato de referencia a agregar mal formateado"
+                                                                        SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="ReferenciasFooter">*</asp:RegularExpressionValidator>
+                                                                    <asp:RequiredFieldValidator ID="txtdato_de_referenciaFooterRequiredFieldValidator"
+                                                                        runat="server" ControlToValidate="txtdato_de_referencia" ErrorMessage="Dato de referencia a agregar no informado"
+                                                                        SetFocusOnError="True" ValidationGroup="ReferenciasFooter">*</asp:RequiredFieldValidator>
+                                                                </FooterTemplate>
+                                                                <ItemStyle HorizontalAlign="Right"/>
+                                                                <HeaderStyle Font-Bold="False"/>
+                                                            </asp:TemplateField>
+                                                            <asp:CommandField HeaderText="Edici&#243;n" ShowEditButton="True" ValidationGroup="ReferenciasEditItem">
+                                                                <ItemStyle HorizontalAlign="Center" />
+                                                                <HeaderStyle Font-Bold="False" />
+                                                            </asp:CommandField>
+                                                            <asp:TemplateField HeaderText="Eliminaci&#243;n / Incorporaci&#243;n">
+                                                                <ItemTemplate>
+                                                                    <asp:LinkButton ID="linkDeletereferencias" CommandName="Delete" runat="server" CausesValidation="false">Borrar</asp:LinkButton>
+                                                                </ItemTemplate>
+                                                                <FooterTemplate>
+                                                                    <asp:LinkButton ID="linkAddreferencias" runat="server" CausesValidation="true" CommandName="Addreferencias"
+                                                                        ValidationGroup="ReferenciasFooter">Agregar</asp:LinkButton>
+                                                                </FooterTemplate>
+                                                                <ItemStyle HorizontalAlign="Center" />
+                                                                <HeaderStyle Font-Bold="False" />
+                                                            </asp:TemplateField>
+                                                        </Columns>
+                                                        <EmptyDataRowStyle ForeColor="#071F70" />
+                                                        <RowStyle ForeColor="#071F70" />
+                                                        <EditRowStyle ForeColor="#071F70" />
+                                                        <SelectedRowStyle ForeColor="#071F70" />
+                                                        <PagerStyle ForeColor="#071F70" />
+                                                        <HeaderStyle ForeColor="Brown" />
+                                                    </asp:GridView>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
+                                                    <asp:ValidationSummary ID="ReferenciasEditValidationSummary" runat="server"
+                                                        BorderColor="Gray" BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:"
+                                                        ShowMessageBox="True" ValidationGroup="ReferenciasEditItem"></asp:ValidationSummary>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
+                                                    <asp:ValidationSummary ID="ReferenciasFooterValidationSummary" runat="server"
+                                                        BorderColor="Gray" BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:"
+                                                        ShowMessageBox="True" ValidationGroup="ReferenciasFooter"></asp:ValidationSummary>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="8" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="1" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="8" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br />
+                                    </td>
+                                </tr>
                                 <!-- DATOS DEL DETALLE -->
                                 <tr>
                                     <td style="text-align: center" class="TextoResaltado">
@@ -1483,7 +1622,7 @@
                                                         OnRowUpdating="impuestosGridView_RowUpdating" OnRowCancelingEdit="impuestosGridView_RowCancelingEdit"
                                                         OnRowDeleted="impuestosGridView_RowDeleted" OnRowDeleting="impuestosGridView_RowDeleting">
                                                         <Columns>
-                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Código del impuesto">
+                                                            <asp:TemplateField HeaderText="C&#243;digo del impuesto">
                                                                 <ItemTemplate>
                                                                     <asp:Label ID="lblcodigo_impuesto" Text='<%# Eval("descripcion") %>' Width="360px"
                                                                         runat="server"></asp:Label>
@@ -1496,10 +1635,11 @@
                                                                     <asp:DropDownList ID="ddlcodigo_impuesto" runat="server" Width="360px">
                                                                     </asp:DropDownList>
                                                                 </FooterTemplate>
-                                                                <ItemStyle HorizontalAlign="left" Width="360px" />
-                                                                <FooterStyle HorizontalAlign="left" Width="360px" />
+                                                                <ItemStyle HorizontalAlign="Left" Width="360px" />
+                                                                <FooterStyle HorizontalAlign="Left" Width="360px" />
+                                                                <HeaderStyle Font-Bold="False" />
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe total">
+                                                            <asp:TemplateField HeaderText="Importe total">
                                                                 <ItemTemplate>
                                                                     <asp:Label ID="lblimporte_impuesto" Text='<%# Eval("importe_impuesto") %>' runat="server"></asp:Label>
                                                                 </ItemTemplate>
@@ -1523,13 +1663,13 @@
                                                                         SetFocusOnError="True" ValidationGroup="ImpuestosGlobalesFooter">*</asp:RequiredFieldValidator>
                                                                 </FooterTemplate>
                                                                 <ItemStyle HorizontalAlign="Right" />
+                                                                <HeaderStyle Font-Bold="False" />
                                                             </asp:TemplateField>
-                                                            <asp:CommandField CancelText="Cancelar" CausesValidation="true" EditText="Editar"
-                                                                HeaderStyle-Font-Bold="false" HeaderText="Edici&#243;n" ShowEditButton="True"
-                                                                UpdateText="Actualizar" ValidationGroup="ImpuestosGlobalesEditItem">
+                                                            <asp:CommandField HeaderText="Edici&#243;n" ShowEditButton="True" ValidationGroup="ImpuestosGlobalesEditItem">
                                                                 <ItemStyle HorizontalAlign="Center" />
+                                                                <HeaderStyle Font-Bold="False" />
                                                             </asp:CommandField>
-                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Eliminaci&#243;n / Incorporaci&#243;n">
+                                                            <asp:TemplateField HeaderText="Eliminaci&#243;n / Incorporaci&#243;n">
                                                                 <ItemTemplate>
                                                                     <asp:LinkButton ID="linkDeleteImpuesto" CommandName="Delete" runat="server" CausesValidation="false">Borrar</asp:LinkButton>
                                                                 </ItemTemplate>
@@ -1538,8 +1678,15 @@
                                                                         ValidationGroup="ImpuestosGlobalesFooter">Agregar</asp:LinkButton>
                                                                 </FooterTemplate>
                                                                 <ItemStyle HorizontalAlign="Center" />
+                                                                <HeaderStyle Font-Bold="False" />
                                                             </asp:TemplateField>
                                                         </Columns>
+                                                        <EmptyDataRowStyle ForeColor="#071F70" />
+                                                        <RowStyle ForeColor="#071F70" />
+                                                        <EditRowStyle ForeColor="#071F70" />
+                                                        <SelectedRowStyle ForeColor="#071F70" />
+                                                        <PagerStyle ForeColor="#071F70" />
+                                                        <HeaderStyle ForeColor="Brown" />
                                                     </asp:GridView>
                                                 </td>
                                             </tr>
