@@ -304,6 +304,18 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 string auxcpvendedor = ((TextBox)detalleGridView.FooterRow.FindControl("txtcpvendedor")).Text;
                 l.codigo_producto_vendedor = auxcpvendedor;
                 l.indicacion_exento_gravado = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).SelectedItem.Value;
+                string auxprecio_unitario = ((TextBox)detalleGridView.FooterRow.FindControl("txtprecio_unitario")).Text;
+                if (!auxprecio_unitario.Equals(string.Empty) && !auxprecio_unitario.Equals("0"))
+                {
+                    double auxPU = Convert.ToDouble(auxprecio_unitario, cedeiraCultura);
+                    l.precio_unitario = auxPU;
+                    l.precio_unitarioSpecified = true;
+                }
+                else
+                {
+                    l.precio_unitario = 0;
+                    l.precio_unitarioSpecified = false;
+                }
 
 				((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]).Add(l);
 
@@ -402,7 +414,17 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
             string auxcodigo_producto_vendedor = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpvendedor")).Text;
             l.codigo_producto_vendedor = auxcodigo_producto_vendedor;
             l.indicacion_exento_gravado = ((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlindicacion_exento_gravadoEdit")).SelectedItem.Value;
-
+            string auxprecio_unitario = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtprecio_unitario")).Text;
+            if (!auxprecio_unitario.Equals(string.Empty) && !auxNull.Equals("0"))
+            {
+                l.precio_unitario = Convert.ToDouble(auxprecio_unitario);
+                l.precio_unitarioSpecified = true;
+            }
+            else 
+            {
+                l.precio_unitario = 0;
+                l.precio_unitarioSpecified = false;
+            }
 			detalleGridView.EditIndex = -1;
 			detalleGridView.DataSource = ViewState["lineas"];
 			detalleGridView.DataBind();
@@ -722,17 +744,24 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                         det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
                         det.linea[i].importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
                         det.linea[i].importe_iva = listadelineas[i].importe_iva;
+                        det.linea[i].precio_unitario = listadelineas[i].precio_unitario;
+                        det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
                     }
                     else
                     {
                         det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
 						det.linea[i].importe_iva = Math.Round(listadelineas[i].importe_iva * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
 						det.linea[i].importe_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
+                        det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
+                        det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+
 						FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
                         limo.importe_total_articuloSpecified = true;
                         limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
                         limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
                         limo.importe_iva = listadelineas[i].importe_iva;
+                        limo.precio_unitario = listadelineas[i].precio_unitario;
+                        limo.precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
                         det.linea[i].importes_moneda_origen = limo;
                     }
                 }
@@ -1665,11 +1694,15 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                             {
                                 linea.importe_total_articulo = l.importe_total_articulo;
                                 linea.importe_iva = l.importe_iva;
+                                linea.precio_unitario = l.precio_unitario;
+                                linea.precio_unitarioSpecified = l.precio_unitarioSpecified;
                             }
                             else
                             {
                                 linea.importe_total_articulo = l.importes_moneda_origen.importe_total_articulo;
                                 linea.importe_iva = l.importes_moneda_origen.importe_iva;
+                                linea.precio_unitario = l.importes_moneda_origen.precio_unitario;
+                                linea.precio_unitarioSpecified = l.importes_moneda_origen.precio_unitarioSpecified;
                             }
                             lineas.Add(linea);
                         }
@@ -1811,7 +1844,9 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 				limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
 				limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
 				limo.importe_iva = listadelineas[i].importe_iva;
-				listadelineas[i].importes_moneda_origen = limo;
+                limo.precio_unitario = listadelineas[i].precio_unitario;
+                limo.precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+                listadelineas[i].importes_moneda_origen = limo;
 			}
 		}
 		else
@@ -1829,7 +1864,9 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					listadelineas[i].importe_total_articulo = listadelineas[i].importes_moneda_origen.importe_total_articulo;
 					listadelineas[i].importe_ivaSpecified = listadelineas[i].importes_moneda_origen.importe_ivaSpecified;
 					listadelineas[i].importe_iva = listadelineas[i].importes_moneda_origen.importe_iva;
-				}
+                    listadelineas[i].precio_unitario = listadelineas[i].importes_moneda_origen.precio_unitario;
+                    listadelineas[i].precio_unitarioSpecified = listadelineas[i].importes_moneda_origen.precio_unitarioSpecified;
+                }
 			}
 		}
 	}
