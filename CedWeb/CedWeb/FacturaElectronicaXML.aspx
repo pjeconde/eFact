@@ -651,24 +651,24 @@
                                                                     ControlToValidate="Id_LoteTextbox" Display="Static" SetFocusOnError="True">* </asp:RequiredFieldValidator>Nro.
                                                                 de lote:
                                                             </td>
-                                                            <td style="" class="TextoLabelFEAVendedorCh">
-                                                                <asp:TextBox ID="Id_LoteTextbox" runat="server" SkinID="TextoBoxFEAVendedorDetCh"
+                                                            <td style="" class="TextoLabelFEAVendedor">
+                                                                <asp:TextBox ID="Id_LoteTextbox" runat="server" SkinID="TextoBoxFEAVendedorDet"
                                                                     ToolTip="Es un número correlativo y consecutivo que debe llevarse manualmente e identifica el número de envío del archivo xml que envía a Interfacturas (Upload). Este número NO SE PUEDE REPETIR.">
                                                                 </asp:TextBox>
                                                             </td>
-                                                            <td class="TextoLabelFEAVendedor">
+                                                            <td class="TextoLabelFEAVendedorMed">
                                                                 Cuit canal:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorCh">
                                                                 <asp:TextBox ID="Cuit_CanalTextBox" runat="server" ReadOnly="True" SkinID="TextoBoxFEAVendedorDetCh">30690783521</asp:TextBox>
                                                             </td>
-                                                            <td class="TextoLabelFEAVendedor">
+                                                            <td class="TextoLabelFEAVendedorMed">
                                                                 Presta servicios:
                                                             </td>
                                                             <td class="TextoLabelFEAVendedorChCh" style="text-align: left;">
                                                                 <asp:CheckBox ID="Presta_ServCheckBox" runat="server"></asp:CheckBox>
                                                             </td>
-                                                            <td style="width: 80px; padding-right: 5px;">
+                                                            <td style="width: 5px;">
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -1073,25 +1073,25 @@
                                                         <Columns>
                                                             <asp:TemplateField HeaderText="C&#243;digo de referencia">
                                                                 <ItemTemplate>
-                                                                    <asp:Label ID="lblcodigo_de_referencia" Text='<%# Eval("descripcioncodigo_de_referencia") %>' runat="server" Width="360px"></asp:Label>
+                                                                    <asp:Label ID="lblcodigo_de_referencia" Text='<%# Eval("descripcioncodigo_de_referencia") %>' runat="server" Width="320px"></asp:Label>
                                                                 </ItemTemplate>
                                                                 <EditItemTemplate>
-                                                                    <asp:DropDownList ID="ddlcodigo_de_referenciaEdit" runat="server" Width="360px">
+                                                                    <asp:DropDownList ID="ddlcodigo_de_referenciaEdit" runat="server" Width="300px">
                                                                     </asp:DropDownList><asp:RequiredFieldValidator ID="ddlcodigo_de_referenciaEditItemRequiredFieldValidator" runat="server"
                                                                         ControlToValidate="ddlcodigo_de_referenciaEdit" ErrorMessage="Codigo de referencia en edición no informado"
                                                                         SetFocusOnError="True" ValidationGroup="ReferenciasEditItem">*</asp:RequiredFieldValidator>
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
-                                                                    <asp:DropDownList ID="ddlcodigo_de_referencia" runat="server" Width="360px">
+                                                                    <asp:DropDownList ID="ddlcodigo_de_referencia" runat="server" Width="300px">
                                                                     </asp:DropDownList><asp:RequiredFieldValidator ID="ddldescripcionFooterRequiredFieldValidator" runat="server"
                                                                         ControlToValidate="ddlcodigo_de_referencia" ErrorMessage="Codigo de referencia a agregar no informado"
                                                                         SetFocusOnError="True" ValidationGroup="ReferenciasFooter">*</asp:RequiredFieldValidator>
                                                                 </FooterTemplate>
-                                                                <ItemStyle HorizontalAlign="Left" Width="360px"/>
-                                                                <FooterStyle HorizontalAlign="Left" Width="360px"/>
+                                                                <ItemStyle HorizontalAlign="Left" Width="320px"/>
+                                                                <FooterStyle HorizontalAlign="Left" Width="320px"/>
                                                                 <HeaderStyle Font-Bold="False" />
                                                             </asp:TemplateField>
-                                                            <asp:TemplateField HeaderText="Dato de referencia">
+                                                            <asp:TemplateField HeaderText="Número de referencia">
                                                                 <ItemTemplate>
                                                                     <asp:Label ID="lbldato_de_referencia" Text='<%# Eval("dato_de_referencia") %>' runat="server"></asp:Label>
                                                                 </ItemTemplate>
@@ -1216,7 +1216,7 @@
                                                                 <asp:Panel runat="server" ID="detallePanel" ScrollBars="Auto" Width="760px" Height="200px" Wrap="true" BorderStyle="Ridge">
                                                                     <asp:GridView ID="detalleGridView" runat="server" AutoGenerateColumns="False" GridLines="Both"
                                                                         EnableViewState="true" Font-Bold="false" Width="100%" BorderStyle="Solid" BorderWidth="1px"
-                                                                        BorderColor="Gray" HeaderStyle-ForeColor="#A52A2A" ShowHeader="True" ShowFooter="true"
+                                                                        BorderColor="Gray" HeaderStyle-ForeColor="#A52A2A" ShowHeader="True" UseAccessibleHeader="true" ShowFooter="true"
                                                                         ForeColor="#071F70" EditRowStyle-ForeColor="#071F70" EmptyDataRowStyle-ForeColor="#071F70"
                                                                         PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70"
                                                                         ToolTip="Recuerde que al ingresar importes con decimales el separador a utilizar es el punto" 
