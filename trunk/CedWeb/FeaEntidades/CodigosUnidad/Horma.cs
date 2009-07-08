@@ -8,7 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public Horma()
         {
-
+            Codigo = 0;
+            Descr = "";
         }
     }
 }

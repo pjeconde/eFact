@@ -8,7 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public Muiactig()
         {
-
+            Codigo = 0;
+            Descr = "";
         }
     }
 }

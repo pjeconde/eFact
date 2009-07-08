@@ -8,7 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public KgBruto()
         {
-
+            Codigo = 0;
+            Descr = "";
         }
     }
 }

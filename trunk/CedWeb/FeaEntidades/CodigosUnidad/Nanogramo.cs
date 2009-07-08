@@ -8,7 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public Nanogramo()
         {
-
+            Codigo = 0;
+            Descr = "";
         }
     }
 }

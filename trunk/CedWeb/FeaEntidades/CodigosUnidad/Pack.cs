@@ -8,7 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public Pack()
         {
-
+            Codigo = 0;
+            Descr = "";
         }
     }
 }

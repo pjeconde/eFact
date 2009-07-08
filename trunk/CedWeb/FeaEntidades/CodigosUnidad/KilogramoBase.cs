@@ -8,7 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public KilogramoBase()
         {
-
+            Codigo = 0;
+            Descr = "";
         }
     }
 }

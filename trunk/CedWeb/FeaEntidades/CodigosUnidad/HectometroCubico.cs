@@ -8,7 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public HectometroCubico()
         {
-
+            Codigo = 0;
+            Descr = "";
         }
     }
 }

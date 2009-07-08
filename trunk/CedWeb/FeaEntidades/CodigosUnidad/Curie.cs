@@ -8,7 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public Curie()
         {
-
+            Codigo = 0;
+            Descr = "";
         }
     }
 }
