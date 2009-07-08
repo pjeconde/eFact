@@ -61,6 +61,7 @@ namespace CedWebRN
             Vendedor.GLN = 0;
             Vendedor.CodigoInterno = null;
             Vendedor.FechaInicioActividades = DateTime.MinValue;
+            Vendedor.BonoFiscal = null;
         }
         public static void Copiar(CedWebEntidades.Vendedor VendedorDsd, CedWebEntidades.Vendedor VendedorHst)
         {
@@ -90,6 +91,7 @@ namespace CedWebRN
             VendedorHst.GLN = VendedorDsd.GLN;
             VendedorHst.CodigoInterno = VendedorDsd.CodigoInterno;
             VendedorHst.FechaInicioActividades = VendedorDsd.FechaInicioActividades;
+            VendedorHst.BonoFiscal = VendedorDsd.BonoFiscal;
         }
         public static List<CedWebEntidades.Vendedor> ListaAdministracion(int IndicePagina, int TamañoPagina, string OrderBy, CedEntidades.Sesion Sesion)
         {
