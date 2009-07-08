@@ -8,8 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public Gruesa()
         {
-            Codigo = 0;
-            Descr = "";
+            Codigo = 54;
+            Descr = "Gruesa";
         }
     }
 }

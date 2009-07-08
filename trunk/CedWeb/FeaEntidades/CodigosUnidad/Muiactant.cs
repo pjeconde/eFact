@@ -8,8 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public Muiactant()
         {
-            Codigo = 0;
-            Descr = "";
+            Codigo = 36;
+            Descr = "Muiactant";
         }
     }
 }

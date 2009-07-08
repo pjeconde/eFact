@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public Metros()
         {
             Codigo = 2;
-            Descr = "METROS";
+            Descr = "Metros";
         }
     }
 }

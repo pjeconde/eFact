@@ -8,8 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public Picogramo()
         {
-            Codigo = 0;
-            Descr = "";
+            Codigo = 35;
+            Descr = "Picogramo";
         }
     }
 }

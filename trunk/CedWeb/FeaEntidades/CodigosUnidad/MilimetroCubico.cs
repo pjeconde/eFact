@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public MilimetroCubico()
         {
             Codigo = 16;
-            Descr = "MILIMETRO CUBICO";
+            Descr = "Milimetro Cubico";
         }
     }
 }

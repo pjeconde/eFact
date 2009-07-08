@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public MetroCuadrado()
         {
             Codigo = 3;
-            Descr = "METRO CUADRADO";
+            Descr = "Metro Cuadrado";
         }
     }
 }

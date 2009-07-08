@@ -8,8 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public MegaUInterActHor()
         {
-            Codigo = 0;
-            Descr = "";
+            Codigo = 52;
+            Descr = "Mega U. Inter. Act. Hor.";
         }
     }
 }

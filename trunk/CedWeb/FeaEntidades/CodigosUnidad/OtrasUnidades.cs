@@ -8,8 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public OtrasUnidades()
         {
-            Codigo = 0;
-            Descr = "";
+            Codigo = 98;
+            Descr = "Otras Unidades";
         }
     }
 }

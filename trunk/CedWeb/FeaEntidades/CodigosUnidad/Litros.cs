@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public Litros()
         {
             Codigo = 5;
-            Descr = "LITROS";
+            Descr = "Litros";
         }
     }
 }

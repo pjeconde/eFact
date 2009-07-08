@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public MegaU()
         {
             Codigo = 12;
-            Descr = "MEGA-U. INT. ACT. ANTIB";
+            Descr = "Mega-U. Int. Act. Antib";
         }
     }
 }

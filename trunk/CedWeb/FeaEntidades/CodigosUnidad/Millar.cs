@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public Millar()
         {
             Codigo = 11;
-            Descr = "MILLAR";
+            Descr = "Millar";
         }
     }
 }

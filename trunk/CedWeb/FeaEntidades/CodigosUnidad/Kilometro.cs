@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public Kilometro()
         {
             Codigo = 17;
-            Descr = "KILOMETRO";
+            Descr = "Kilometro";
         }
     }
 }

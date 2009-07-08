@@ -8,8 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public Muiacthor()
         {
-            Codigo = 0;
-            Descr = "";
+            Codigo = 26;
+            Descr = "Muiacthor";
         }
     }
 }

@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public Par()
         {
             Codigo = 8;
-            Descr = "PAR";
+            Descr = "Par";
         }
     }
 }

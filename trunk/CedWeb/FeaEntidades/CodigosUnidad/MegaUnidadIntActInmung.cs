@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public MegaUnidadIntActInmung()
         {
             Codigo = 19;
-            Descr = "MEGA U. INT. ACT. INMUNG.";
+            Descr = "Mega U. Int. Act. Inmung.";
         }
     }
 }

@@ -8,8 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public Tonelada()
         {
-            Codigo = 0;
-            Descr = "";
+            Codigo = 29;
+            Descr = "Tonelada";
         }
     }
 }

@@ -8,8 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public DecametroCubico()
         {
-            Codigo = 0;
-            Descr = "";
+            Codigo = 30;
+            Descr = "Decametro Cubico";
         }
     }
 }

@@ -8,8 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public Miligramo()
         {
-            Codigo = 0;
-            Descr = "";
+            Codigo = 41;
+            Descr = "Miligramo";
         }
     }
 }

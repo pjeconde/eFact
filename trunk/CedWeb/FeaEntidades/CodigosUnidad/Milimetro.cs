@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public Milimetro()
         {
             Codigo = 15;
-            Descr = "MILIMETRO";
+            Descr = "Milimetro";
         }
     }
 }

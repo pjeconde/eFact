@@ -8,8 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public GramoBase()
         {
-            Codigo = 0;
-            Descr = "";
+            Codigo = 23;
+            Descr = "Gramo Base";
         }
     }
 }
