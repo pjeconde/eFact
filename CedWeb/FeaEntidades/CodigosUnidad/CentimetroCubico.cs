@@ -8,8 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public CentimetroCubico()
         {
-            Codigo = 0;
-            Descr = "";
+            Codigo = 27;
+            Descr = "Centimetro Cubico";
         }
     }
 }
