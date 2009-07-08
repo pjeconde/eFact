@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public Gramo()
         {
             Codigo = 14;
-            Descr = "GRAMO";
+            Descr = "Gramo";
         }
     }
 }

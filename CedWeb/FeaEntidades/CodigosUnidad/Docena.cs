@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public Docena()
         {
             Codigo = 9;
-            Descr = "DOCENA";
+            Descr = "Docena";
         }
     }
 }

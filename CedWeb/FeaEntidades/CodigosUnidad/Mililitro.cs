@@ -8,8 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public Mililitro()
         {
-            Codigo = 0;
-            Descr = "";
+            Codigo = 47;
+            Descr = "Mililitro";
         }
     }
 }

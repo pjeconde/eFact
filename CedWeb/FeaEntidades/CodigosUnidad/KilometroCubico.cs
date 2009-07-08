@@ -8,8 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public KilometroCubico()
         {
-            Codigo = 0;
-            Descr = "";
+            Codigo = 32;
+            Descr = "Kilometro Cubico";
         }
     }
 }

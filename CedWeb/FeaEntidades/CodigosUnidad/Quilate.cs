@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public Quilate()
         {
             Codigo = 10;
-            Descr = "QUILATE";
+            Descr = "Quilate";
         }
     }
 }

@@ -8,8 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public JuegoOPaqueteMazoDeNaipes()
         {
-            Codigo = 0;
-            Descr = "";
+            Codigo = 25;
+            Descr = "Juego O Paquete Mazo De Naipes";
         }
     }
 }

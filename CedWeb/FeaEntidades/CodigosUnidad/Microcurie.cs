@@ -8,8 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public Microcurie()
         {
-            Codigo = 0;
-            Descr = "";
+            Codigo = 50;
+            Descr = "Microcurie";
         }
     }
 }

@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public KilowattHora()
         {
             Codigo = 6;
-            Descr = "1000 KILOWATT HORA";
+            Descr = "1000 Kilowatt Hora";
         }
     }
 }

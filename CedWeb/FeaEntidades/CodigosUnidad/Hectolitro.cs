@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public Hectolitro()
         {
             Codigo = 18;
-            Descr = "HECTOLITRO";
+            Descr = "Hectolitro";
         }
     }
 }

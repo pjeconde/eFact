@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public Kilogramo()
 		{
 			Codigo = 1;
-            Descr = "KILOGRAMO";
+            Descr = "Kilogramo";
 		}
     }
 }
