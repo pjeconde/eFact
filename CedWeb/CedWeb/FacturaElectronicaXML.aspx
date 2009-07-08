@@ -264,7 +264,7 @@
                                                                             de venta:
                                                                         </td>
                                                                         <td style="" class="TextoLabelFEAVendedorDet">
-                                                                            <asp:TextBox ID="Punto_VentaTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"></asp:TextBox>
+                                                                            <asp:TextBox ID="Punto_VentaTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" AutoPostBack="True" OnTextChanged="Punto_VentaTextBox_TextChanged"></asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -1321,14 +1321,14 @@
                                                                             </asp:TemplateField>
                                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Unidad">
                                                                                 <ItemTemplate>
-                                                                                    <asp:Label ID="lbl_unidad" runat="server" Text='<%# Eval("unidad") %>' Width="200px"></asp:Label>
+                                                                                    <asp:Label ID="lbl_unidad" runat="server" Text='<%# Eval("unidad") %>' Width="220px"></asp:Label>
                                                                                 </ItemTemplate>
                                                                                 <EditItemTemplate>
-                                                                                    <asp:DropDownList ID="ddlunidadEdit" runat="server" Width="200px">
+                                                                                    <asp:DropDownList ID="ddlunidadEdit" runat="server" Width="220px">
                                                                                     </asp:DropDownList>
                                                                                 </EditItemTemplate>
                                                                                 <FooterTemplate>
-                                                                                    <asp:DropDownList ID="ddlunidad" runat="server" Width="200px">
+                                                                                    <asp:DropDownList ID="ddlunidad" runat="server" Width="220px">
                                                                                     </asp:DropDownList>
                                                                                 </FooterTemplate>
                                                                                 <ItemStyle HorizontalAlign="Right" />
