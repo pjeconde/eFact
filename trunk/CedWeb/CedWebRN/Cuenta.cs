@@ -114,7 +114,7 @@ namespace CedWebRN
         }
         private static void EnviarMailBienvenidaeFact(string Asunto, CedWebEntidades.Cuenta Cuenta)
         {
-            SmtpClient smtpClient = new SmtpClient("localhost");
+            SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
             mail.To.Add(new MailAddress(Cuenta.Email));
@@ -142,6 +142,7 @@ namespace CedWebRN
             a.Append("<br />");
             a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
             mail.Body = a.ToString();
+            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
             smtpClient.Send(mail);
         }
         private static void EnviarSMS(string Asunto, string Mensaje, List<CedWebEntidades.Cuenta> Destinatarios)
