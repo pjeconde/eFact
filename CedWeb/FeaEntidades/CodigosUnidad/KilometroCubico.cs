@@ -6,5 +6,9 @@ namespace FeaEntidades.CodigosUnidad
 {
     public class KilometroCubico : CodigoUnidad
     {
+        public KilometroCubico()
+        {
+
+        }
     }
 }

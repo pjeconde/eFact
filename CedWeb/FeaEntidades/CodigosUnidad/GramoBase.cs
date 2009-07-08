@@ -6,5 +6,9 @@ namespace FeaEntidades.CodigosUnidad
 {
     public class GramoBase : CodigoUnidad
     {
+        public GramoBase()
+        {
+
+        }
     }
 }

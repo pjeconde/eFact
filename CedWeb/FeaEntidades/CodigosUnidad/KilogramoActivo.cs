@@ -6,5 +6,9 @@ namespace FeaEntidades.CodigosUnidad
 {
     public class KilogramoActivo : CodigoUnidad
     {
+        public KilogramoActivo()
+        {
+
+        }
     }
 }
