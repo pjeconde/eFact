@@ -2077,7 +2077,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
                 Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
             }
-            DataBind();
+            Tipo_De_ComprobanteDropDownList.DataBind();
         }
     }
 }
