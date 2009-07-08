@@ -8,7 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public Microgramo()
         {
-
+            Codigo = 0;
+            Descr = "";
         }
     }
 }

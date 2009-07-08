@@ -8,7 +8,8 @@ namespace FeaEntidades.CodigosUnidad
     {
         public UInterActHor()
         {
-
+            Codigo = 0;
+            Descr = "";
         }
     }
 }
