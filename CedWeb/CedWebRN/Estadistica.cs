@@ -28,6 +28,11 @@ namespace CedWebRN
             elemento.Concepto = "Compradores";
             elemento.Cantidad = CedWebRN.Comprador.CantidadDeFilasAdministracion(Sesion);
             lista.Add(elemento);
+            //Publicaciones
+            elemento = new CedWebEntidades.Estadistica();
+            elemento.Concepto = "Publicaciones";
+            elemento.Cantidad = CedWebRN.Publicacion.CantidadDeFilas(Sesion);
+            lista.Add(elemento);
             return lista;
         }
     }

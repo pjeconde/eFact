@@ -35,6 +35,9 @@ namespace CedWeb
                         {
                             switch (registros[i].Concepto)
                             {
+                                case "Publicaciones":
+                                    PublicacionesLabel.Text = "(" + registros[i].Cantidad.ToString() + ")";
+                                    break;
                                 case "Vendedores":
                                     VendedoresLabel.Text = "(" + registros[i].Cantidad.ToString() + ")";
                                     break;
