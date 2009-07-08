@@ -351,9 +351,9 @@
                                                             </tr>
                                                             <tr>
                                                                 <td rowspan="2" align="center" valign="middle" style="padding-right:5px">
-                                                                    puntos<br />
+                                                                    punto(s)<br />
                                                                     de venta<br />
-                                                                    habilitados
+                                                                    habilitado(s)
                                                                 </td>
                                                                 <td align="left" style="padding-top:3px; padding-left:5px">
                                                                     <asp:Button ID="AgregarPuntoDeVentaButtonButton" runat="server" Text="Agregar" Width="60px" OnClick="AgregarPuntoDeVentaButton_Click" CausesValidation="false" ToolTip="Ingrese arriba el número de punto de venta que desea agregar"/>

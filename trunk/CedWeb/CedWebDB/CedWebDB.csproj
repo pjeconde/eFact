@@ -42,6 +42,7 @@
     <Compile Include="Medio.cs" />
     <Compile Include="PaginaDefault.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Publicacion.cs" />
     <Compile Include="Texto.cs" />
     <Compile Include="Vendedor.cs" />
   </ItemGroup>
