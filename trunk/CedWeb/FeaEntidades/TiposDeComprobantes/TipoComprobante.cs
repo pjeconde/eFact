@@ -49,5 +49,16 @@ namespace FeaEntidades.TiposDeComprobantes
 			lista.Add(new Liquidacion.B());
 			return lista;
 		}
+        public static List<TipoComprobante> ListaParaBienesDeCapital()
+        {
+            List<TipoComprobante> lista = new List<TipoComprobante>();
+            lista.Add(new Facturas.A());
+            lista.Add(new NotasDebito.A());
+            lista.Add(new NotasCredito.A());
+            lista.Add(new Facturas.B());
+            lista.Add(new NotasDebito.B());
+            lista.Add(new NotasCredito.B());
+            return lista;
+        }
 	}
 }

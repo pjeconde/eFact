@@ -2054,4 +2054,30 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
             }
         }
     }
+    protected void Punto_VentaTextBox_TextChanged(object sender, EventArgs e)
+    {
+        if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+        {
+            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+            int auxPV = Convert.ToInt32(((TextBox)sender).Text);
+            if (listaPV.Contains(auxPV))
+            {
+                Presta_ServCheckBox.Checked = false;
+                Presta_ServCheckBox.Enabled = false;
+                Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
+
+            }
+            else
+            {
+                Presta_ServCheckBox.Checked = true;
+                Presta_ServCheckBox.Enabled = true;
+                Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
+            }
+            DataBind();
+        }
+    }
 }
