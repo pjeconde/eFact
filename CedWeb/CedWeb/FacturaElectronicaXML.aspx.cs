@@ -643,10 +643,13 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> listareferencias = (System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"];
                 for (int i = 0; i < listareferencias.Count; i++)
                 {
-                    infcomprob.referencias[i] = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
-                    infcomprob.referencias[i].codigo_de_referencia = Convert.ToInt32(listareferencias[i].codigo_de_referencia);
-                    infcomprob.referencias[i].descripcioncodigo_de_referencia = listareferencias[i].descripcioncodigo_de_referencia;
-                    infcomprob.referencias[i].dato_de_referencia = listareferencias[i].dato_de_referencia;
+                    if (listareferencias[i].descripcioncodigo_de_referencia != null)
+                    {
+                        infcomprob.referencias[i] = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
+                        infcomprob.referencias[i].codigo_de_referencia = Convert.ToInt32(listareferencias[i].codigo_de_referencia);
+                        infcomprob.referencias[i].descripcioncodigo_de_referencia = listareferencias[i].descripcioncodigo_de_referencia;
+                        infcomprob.referencias[i].dato_de_referencia = listareferencias[i].dato_de_referencia;
+                    }
                 }
                 compcab.informacion_comprobante = infcomprob;
 
@@ -1788,6 +1791,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                             Tipo_de_cambioRequiredFieldValidator.Enabled = false;
                             Tipo_de_cambioRegularExpressionValidator.Enabled = false;
                         }
+                        BindearDropDownLists();
                         ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo');</script>");
                     }
                     catch (Exception ex)
