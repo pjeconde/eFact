@@ -1588,6 +1588,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                         Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
                         Presta_ServCheckBox.Checked = Convert.ToBoolean(lc.cabecera_lote.presta_serv);
                         Punto_VentaTextBox.Text = Convert.ToString(lc.cabecera_lote.punto_de_venta);
+                        Punto_VentaTextBox_TextChanged(Punto_VentaTextBox, e);
                         //Comprobante
                         Numero_ComprobanteTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
                         FechaEmisionDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
