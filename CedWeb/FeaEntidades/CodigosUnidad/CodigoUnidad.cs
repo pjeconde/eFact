@@ -45,6 +45,38 @@ namespace FeaEntidades.CodigosUnidad
             lista.Add(new Hectolitro());
             lista.Add(new MegaUnidadIntActInmung());
             lista.Add(new Centimetro());
+            lista.Add(new KilogramoActivo());
+            lista.Add(new GramoActivo());
+            lista.Add(new GramoBase());
+            lista.Add(new Uiacthor());
+            lista.Add(new JuegoOPaqueteMazoDeNaipes());
+            lista.Add(new Muiacthor());
+            lista.Add(new CentimetroCubico());
+            lista.Add(new Uiactant());
+            lista.Add(new Tonelada());
+            lista.Add(new DecametroCubico());
+            lista.Add(new HectometroCubico());
+            lista.Add(new KilometroCubico());
+            lista.Add(new Microgramo());
+            lista.Add(new Nanogramo());
+            lista.Add(new Picogramo());
+            lista.Add(new Muiactant());
+            lista.Add(new Uiactig());
+            lista.Add(new Miligramo());
+            lista.Add(new Mililitro());
+            lista.Add(new Curie());
+            lista.Add(new Milicurie());
+            lista.Add(new Microcurie());
+            lista.Add(new UInterActHor());
+            lista.Add(new MegaUInterActHor());
+            lista.Add(new KilogramoBase());
+            lista.Add(new Gruesa());
+            lista.Add(new Muiactig());
+            lista.Add(new KgBruto());
+            lista.Add(new Pack());
+            lista.Add(new Horma());
+            lista.Add(new OtrasUnidades());
+
             return lista;
         }
 
