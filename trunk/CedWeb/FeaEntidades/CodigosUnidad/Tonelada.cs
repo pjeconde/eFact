@@ -6,5 +6,9 @@ namespace FeaEntidades.CodigosUnidad
 {
     public class Tonelada : CodigoUnidad
     {
+        public Tonelada()
+        {
+
+        }
     }
 }

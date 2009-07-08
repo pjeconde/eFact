@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosUnidad
         public Centimetro()
         {
             Codigo = 20;
-            Descr = "CENTÍMETRO";
+            Descr = "Centímetro";
         }
     }
 }

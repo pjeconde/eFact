@@ -6,5 +6,10 @@ namespace FeaEntidades.CodigosUnidad
 {
     public class CentimetroCubico : CodigoUnidad
     {
+        public CentimetroCubico()
+        {
+            Codigo = 0;
+            Descr = "";
+        }
     }
 }

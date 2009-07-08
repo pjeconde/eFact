@@ -6,5 +6,9 @@ namespace FeaEntidades.CodigosUnidad
 {
     public class Muiacthor : CodigoUnidad
     {
+        public Muiacthor()
+        {
+
+        }
     }
 }
