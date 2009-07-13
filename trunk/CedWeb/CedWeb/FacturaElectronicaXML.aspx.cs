@@ -240,6 +240,11 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		{
 			try
 			{
+                if (Punto_VentaTextBox.Text.Equals(string.Empty))
+                {
+                    throw new Exception("Debe definir el punto de venta antes de ingresar un detalle");
+                }
+
                 cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationSettings.AppSettings["Cultura"]);				
                 
                 FeaEntidades.InterFacturas.linea l = new FeaEntidades.InterFacturas.linea();
@@ -290,14 +295,47 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
                 l.unidad = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).SelectedItem.Value;
                 string auxCantidad = ((TextBox)detalleGridView.FooterRow.FindControl("txtcantidad")).Text;
-                if (!auxCantidad.Equals(string.Empty) && !auxCantidad.Equals("0"))
+                if (!auxCantidad.Contains(","))
                 {
-                    l.cantidad = Convert.ToDouble(auxCantidad, cedeiraCultura);
-                    l.cantidadSpecified = true;
+                    if (!auxCantidad.Equals(string.Empty) && !auxCantidad.Equals("0"))
+                    {
+                        l.cantidad = Convert.ToDouble(auxCantidad, cedeiraCultura);
+                        l.cantidadSpecified = true;
+                    }
+                    else
+                    {
+                        if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                        {
+                            if (!Punto_VentaTextBox.Text.Equals(string.Empty))
+                            {
+                                System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                                int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+                                if (listaPV.Contains(auxPV))
+                                {
+                                    throw new Exception("Detalle no agregado porque la cantidad es obligatoria para bono fiscal");
+                                }
+                                else
+                                {
+                                    l.cantidadSpecified = false;
+                                    l.cantidad = 0;
+                                }
+                            }
+                            else
+                            {
+                                l.cantidadSpecified = false;
+                                l.cantidad = 0;
+                            }
+                        }
+                        else
+                        {
+                            l.cantidadSpecified = false;
+                            l.cantidad = 0;
+                        }
+                    }
                 }
                 else
                 {
-                    l.cantidadSpecified = false;
+                    throw new Exception("Detalle no agregado porque el separador de decimales debe ser el punto");
                 }
                 
                 string auxcpcomprador = ((TextBox)detalleGridView.FooterRow.FindControl("txtcpcomprador")).Text;
@@ -374,6 +412,11 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 	{
 		try
 		{
+            if (Punto_VentaTextBox.Text.Equals(string.Empty))
+            {
+                throw new Exception("Debe definir el punto de venta antes de editar un detalle");
+            }
+            
             cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationSettings.AppSettings["Cultura"]);
 
             System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]);
@@ -434,7 +477,33 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 }
                 else
                 {
-                    l.cantidadSpecified = false;
+                    if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                    {
+                        if (!Punto_VentaTextBox.Text.Equals(string.Empty))
+                        {
+                            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                            int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+                            if (listaPV.Contains(auxPV))
+                            {
+                                throw new Exception("Detalle no actualizado porque la cantidad es obligatoria para bono fiscal");
+                            }
+                            else
+                            {
+                                l.cantidadSpecified = false;
+                                l.cantidad = 0;
+                            }
+                        }
+                        else
+                        {
+                            l.cantidadSpecified = false;
+                            l.cantidad = 0;
+                        }
+                    }
+                    else
+                    {
+                        l.cantidadSpecified = false;
+                        l.cantidad = 0;
+                    }
                 }
             }
             else
@@ -2122,25 +2191,28 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
     {
         if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
         {
-            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
-            int auxPV = Convert.ToInt32(((TextBox)sender).Text);
-            if (listaPV.Contains(auxPV))
+            if (!((TextBox)sender).Text.Equals(string.Empty))
             {
-                Presta_ServCheckBox.Checked = false;
-                Presta_ServCheckBox.Enabled = false;
-                Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-                Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-                Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
+                System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                int auxPV = Convert.ToInt32(((TextBox)sender).Text);
+                if (listaPV.Contains(auxPV))
+                {
+                    Presta_ServCheckBox.Checked = false;
+                    Presta_ServCheckBox.Enabled = false;
+                    Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                    Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                    Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
+                }
+                else
+                {
+                    Presta_ServCheckBox.Checked = true;
+                    Presta_ServCheckBox.Enabled = true;
+                    Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                    Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                    Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
+                }
+                Tipo_De_ComprobanteDropDownList.DataBind();
             }
-            else
-            {
-                Presta_ServCheckBox.Checked = true;
-                Presta_ServCheckBox.Enabled = true;
-                Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-                Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-                Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
-            }
-            Tipo_De_ComprobanteDropDownList.DataBind();
-        } 
+        }
     }
 }
