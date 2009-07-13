@@ -1232,15 +1232,9 @@
                                                                                 <EditItemTemplate>
                                                                                     <asp:TextBox ID="txtcpvendedor" runat="server" Text='<%# Eval("codigo_producto_vendedor") %>'
                                                                                         Width="150px"></asp:TextBox>
-                                                                                    <%--<asp:RequiredFieldValidator ID="txtcantidadEditRequiredFieldValidator" runat="server"
-                                                                                    ControlToValidate="txtcantidad" ErrorMessage="Código producto vendedor del artículo en edición no informado"
-                                                                                    SetFocusOnError="True" ValidationGroup="Grillas">*</asp:RequiredFieldValidator>--%>
                                                                                 </EditItemTemplate>
                                                                                 <FooterTemplate>
                                                                                     <asp:TextBox ID="txtcpvendedor" runat="server" Text='' Width="150px"></asp:TextBox>
-                                                                                    <%--<asp:RequiredFieldValidator ID="txtcantidadFooterRequiredFieldValidator" runat="server"
-                                                                                    ControlToValidate="txtcantidad" ErrorMessage="Código producto vendedor del artículo a agregar no informado"
-                                                                                    SetFocusOnError="True" ValidationGroup="DetalleFooter">*</asp:RequiredFieldValidator>--%>
                                                                                 </FooterTemplate>
                                                                                 <ItemStyle HorizontalAlign="Right" />
                                                                             </asp:TemplateField>                                                                            
@@ -1251,16 +1245,10 @@
                                                                                 </ItemTemplate>
                                                                                 <EditItemTemplate>
                                                                                     <asp:TextBox ID="txtcpcomprador" runat="server" Text='<%# Eval("codigo_producto_comprador") %>'
-                                                                                        Width="150px"></asp:TextBox>
-                                                                                    <%--<asp:RequiredFieldValidator ID="txtcantidadEditRequiredFieldValidator" runat="server"
-                                                                                    ControlToValidate="txtcantidad" ErrorMessage="Código producto comprador del artículo en edición no informado"
-                                                                                    SetFocusOnError="True" ValidationGroup="Grillas">*</asp:RequiredFieldValidator>--%>
+                                                                                        Width="130px"></asp:TextBox>
                                                                                 </EditItemTemplate>
                                                                                 <FooterTemplate>
-                                                                                    <asp:TextBox ID="txtcpcomprador" runat="server" Text='' Width="150px"></asp:TextBox>
-                                                                                    <%--<asp:RequiredFieldValidator ID="txtcantidadFooterRequiredFieldValidator" runat="server"
-                                                                                    ControlToValidate="txtcantidad" ErrorMessage="Código producto comprador del artículo a agregar no informado"
-                                                                                    SetFocusOnError="True" ValidationGroup="DetalleFooter">*</asp:RequiredFieldValidator>--%>
+                                                                                    <asp:TextBox ID="txtcpcomprador" runat="server" Text='' Width="130px"></asp:TextBox>
                                                                                 </FooterTemplate>
                                                                                 <ItemStyle HorizontalAlign="Right" />
                                                                             </asp:TemplateField>
@@ -1305,17 +1293,11 @@
                                                                                         ControlToValidate="txtcantidad" ErrorMessage="Cantidad del artículo en edición mal formateado"
                                                                                         SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DetalleEditItem"
                                                                                         >*</asp:RegularExpressionValidator>
-                                                                                    <%--<asp:RequiredFieldValidator ID="txtcantidadEditRequiredFieldValidator" runat="server"
-                                                                                    ControlToValidate="txtcantidad" ErrorMessage="Cantidad artículo en edición no informado"
-                                                                                    SetFocusOnError="True" ValidationGroup="Grillas">*</asp:RequiredFieldValidator>--%>
                                                                                 </EditItemTemplate>
                                                                                 <FooterTemplate>
                                                                                     <asp:TextBox ID="txtcantidad" runat="server" Text='' Width="70px"></asp:TextBox><asp:RegularExpressionValidator ID="txtcantidadFooterRegularExpressionValidator"
                                                                                         runat="server" ControlToValidate="txtcantidad" ErrorMessage="Cantidad del artículo a agregar mal formateado"
                                                                                         SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DetalleFooter">*</asp:RegularExpressionValidator>
-                                                                                    <%--<asp:RequiredFieldValidator ID="txtcantidadFooterRequiredFieldValidator" runat="server"
-                                                                                    ControlToValidate="txtcantidad" ErrorMessage="Cantidad del artículo a agregar no informado"
-                                                                                    SetFocusOnError="True" ValidationGroup="DetalleFooter">*</asp:RequiredFieldValidator>--%>
                                                                                 </FooterTemplate>
                                                                                 <ItemStyle HorizontalAlign="Right" />
                                                                             </asp:TemplateField>
@@ -1343,17 +1325,11 @@
                                                                                         Width="70px"></asp:TextBox><asp:RegularExpressionValidator ID="txtprecio_unitarioEditRegularExpressionValidator"
                                                                                         runat="server" ControlToValidate="txtprecio_unitario" ErrorMessage="Precio unitario artículo en edición mal formateado"
                                                                                         SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DetalleEditItem">*</asp:RegularExpressionValidator>
-                                                                                   <%-- <asp:RequiredFieldValidator ID="txtprecio_unitarioEditRequiredFieldValidator" runat="server"
-                                                                                        ControlToValidate="txtprecio_unitario" ErrorMessage="Precio unitario artículo en edición no informado"
-                                                                                        SetFocusOnError="True" ValidationGroup="Grillas">*</asp:RequiredFieldValidator>--%>
                                                                                 </EditItemTemplate>
                                                                                 <FooterTemplate>
                                                                                     <asp:TextBox ID="txtprecio_unitario" runat="server" Text='' Width="70px"></asp:TextBox><asp:RegularExpressionValidator ID="txtprecio_unitarioFooterRegularExpressionValidator"
                                                                                         runat="server" ControlToValidate="txtprecio_unitario" ErrorMessage="Precio unitario artículo a agregar mal formateado"
                                                                                         SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DetalleFooter">*</asp:RegularExpressionValidator>
-                                                                                    <%--<asp:RequiredFieldValidator ID="txtprecio_unitarioFooterRequiredFieldValidator" runat="server"
-                                                                                        ControlToValidate="txtprecio_unitario" ErrorMessage="Precio unitario artículo a agregar no informado"
-                                                                                        SetFocusOnError="True" ValidationGroup="DetalleFooter">*</asp:RequiredFieldValidator>--%>
                                                                                 </FooterTemplate>
                                                                                 <ItemStyle HorizontalAlign="Right" />
                                                                             </asp:TemplateField>
