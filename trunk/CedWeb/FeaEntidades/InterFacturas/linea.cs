@@ -7,7 +7,6 @@ namespace FeaEntidades.InterFacturas
 	/// <comentarios/>
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
 	[System.SerializableAttribute()]
-	[System.Diagnostics.DebuggerStepThroughAttribute()]
 	[System.ComponentModel.DesignerCategoryAttribute("code")]
 	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://lote.schemas.cfe.ib.com.ar/")]
 	[System.Xml.Serialization.XmlRootAttribute(Namespace = "http://lote.schemas.cfe.ib.com.ar/", IsNullable = false)]
@@ -177,6 +176,32 @@ namespace FeaEntidades.InterFacturas
 				this.unidadField = value;
 			}
 		}
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string unidadDescripcion
+        {
+            get
+            {
+                if (unidad!=null && !unidad.Equals(string.Empty))
+                {
+                    List<CodigosUnidad.CodigoUnidad> lcu = CodigosUnidad.CodigoUnidad.Lista();
+                    foreach (CodigosUnidad.CodigoUnidad cu in lcu)
+                    {
+                        short auxUnidad = Convert.ToInt16(unidad);
+                        if (cu.Codigo.Equals(auxUnidad))
+                        {
+                            return cu.Descr;
+                        }
+                    }
+                    return string.Empty;
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
 
 		/// <comentarios/>
 		public double precio_unitario

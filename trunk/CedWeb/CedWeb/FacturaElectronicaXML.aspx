@@ -1236,7 +1236,7 @@
                                                                                 <FooterTemplate>
                                                                                     <asp:TextBox ID="txtcpvendedor" runat="server" Text='' Width="150px"></asp:TextBox>
                                                                                 </FooterTemplate>
-                                                                                <ItemStyle HorizontalAlign="Right" />
+                                                                                <ItemStyle HorizontalAlign="Left" />
                                                                             </asp:TemplateField>                                                                            
                                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="Código Producto Comprador (Nomenclador)">
                                                                                 <ItemTemplate>
@@ -1250,7 +1250,7 @@
                                                                                 <FooterTemplate>
                                                                                     <asp:TextBox ID="txtcpcomprador" runat="server" Text='' Width="130px"></asp:TextBox>
                                                                                 </FooterTemplate>
-                                                                                <ItemStyle HorizontalAlign="Right" />
+                                                                                <ItemStyle HorizontalAlign="Left" />
                                                                             </asp:TemplateField>
                                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="200px" HeaderText="Descripción del artículo">
                                                                                 <ItemTemplate>
@@ -1269,7 +1269,7 @@
                                                                                 <ItemStyle HorizontalAlign="left" />
                                                                                 <FooterStyle HorizontalAlign="left" />
                                                                             </asp:TemplateField>
-                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Indicación exento gravado">
+                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Gravado / Exento / No gravado">
                                                                                 <ItemTemplate>
                                                                                     <asp:Label ID="lbl_indicacion_exento_gravado" runat="server" Text='<%# Eval("indicacion_exento_gravado") %>'
                                                                                         Width="130px"></asp:Label>
@@ -1282,7 +1282,7 @@
                                                                                     <asp:DropDownList ID="ddlindicacion_exento_gravado" runat="server" Width="130px">
                                                                                     </asp:DropDownList>
                                                                                 </FooterTemplate>
-                                                                                <ItemStyle HorizontalAlign="Right" />
+                                                                                <ItemStyle HorizontalAlign="Center" />
                                                                             </asp:TemplateField>                                                                            
                                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="100px" HeaderText="Cantidad">
                                                                                 <ItemTemplate>
@@ -1303,7 +1303,8 @@
                                                                             </asp:TemplateField>
                                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Unidad">
                                                                                 <ItemTemplate>
-                                                                                    <asp:Label ID="lbl_unidad" runat="server" Text='<%# Eval("unidad") %>' Width="220px"></asp:Label>
+                                                                                    <asp:Label ID="lbl_unidad" runat="server" Text='<%# Eval("unidadDescripcion") %>'
+                                                                                        Width="220px"></asp:Label>
                                                                                 </ItemTemplate>
                                                                                 <EditItemTemplate>
                                                                                     <asp:DropDownList ID="ddlunidadEdit" runat="server" Width="220px">
@@ -1313,7 +1314,7 @@
                                                                                     <asp:DropDownList ID="ddlunidad" runat="server" Width="220px">
                                                                                     </asp:DropDownList>
                                                                                 </FooterTemplate>
-                                                                                <ItemStyle HorizontalAlign="Right" />
+                                                                                <ItemStyle HorizontalAlign="Left" />
                                                                             </asp:TemplateField>
                                                                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Precio unitario">
                                                                                 <ItemTemplate>
@@ -1357,7 +1358,7 @@
                                                                                 </FooterTemplate>
                                                                                 <ItemStyle HorizontalAlign="Right" />
                                                                             </asp:TemplateField>
-                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="50px" HeaderText="Alic.IVA">
+                                                                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="50px" HeaderText="Alic.IVA %">
                                                                                 <ItemTemplate>
                                                                                     <asp:Label ID="lbl_alicuota_articulo" runat="server" Text='<%# Eval("alicuota_iva") %>'
                                                                                         Width="50px"></asp:Label>

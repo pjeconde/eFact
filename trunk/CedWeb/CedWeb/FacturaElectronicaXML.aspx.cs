@@ -479,7 +479,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
             l.codigo_producto_vendedor = auxcodigo_producto_vendedor;
             l.indicacion_exento_gravado = ((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlindicacion_exento_gravadoEdit")).SelectedItem.Value;
             string auxprecio_unitario = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtprecio_unitario")).Text;
-            if (!auxprecio_unitario.Equals(string.Empty) && !auxNull.Equals("0"))
+            if (!auxprecio_unitario.Equals(string.Empty) && !auxprecio_unitario.Equals("0"))
             {
                 l.precio_unitario = Convert.ToDouble(auxprecio_unitario);
                 l.precio_unitarioSpecified = true;
