@@ -17,7 +17,10 @@ namespace CedWebDB
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             if (dt.Rows.Count > 0)
             {
-                Vendedor.BonoFiscal.PuntoDeVentaHabilitado.Clear();
+                if (Vendedor.BonoFiscal != null)
+                {
+                    Vendedor.BonoFiscal.PuntoDeVentaHabilitado.Clear();
+                }
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Vendedor.BonoFiscal.PuntoDeVentaHabilitado.Add(Convert.ToInt32(dt.Rows[i]["PuntoDeVentaHabilitado"]));
