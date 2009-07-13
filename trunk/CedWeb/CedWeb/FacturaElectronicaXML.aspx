@@ -1116,7 +1116,7 @@
                                                                 <ItemStyle HorizontalAlign="Right"/>
                                                                 <HeaderStyle Font-Bold="False"/>
                                                             </asp:TemplateField>
-                                                            <asp:CommandField HeaderText="Edici&#243;n" ShowEditButton="True" ValidationGroup="ReferenciasEditItem">
+                                                            <asp:CommandField HeaderText="Edici&#243;n" ShowEditButton="True" ValidationGroup="ReferenciasEditItem" EditText="Editar" CancelText="Cancelar" UpdateText="Actualizar">
                                                                 <ItemStyle HorizontalAlign="Center" />
                                                                 <HeaderStyle Font-Bold="False" />
                                                             </asp:CommandField>
@@ -1653,7 +1653,7 @@
                                                                 <ItemStyle HorizontalAlign="Right" />
                                                                 <HeaderStyle Font-Bold="False" />
                                                             </asp:TemplateField>
-                                                            <asp:CommandField HeaderText="Edici&#243;n" ShowEditButton="True" ValidationGroup="ImpuestosGlobalesEditItem">
+                                                            <asp:CommandField HeaderText="Edici&#243;n" ShowEditButton="True" ValidationGroup="ImpuestosGlobalesEditItem" CancelText="Cancelar" EditText="Editar" UpdateText="Actualizar">
                                                                 <ItemStyle HorizontalAlign="Center" />
                                                                 <HeaderStyle Font-Bold="False" />
                                                             </asp:CommandField>
