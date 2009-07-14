@@ -994,7 +994,7 @@
                                                     <table style="width: 370px" border="0" cellpadding="0" cellspacing="0">
                                                         <tr>
                                                             <td class="TextoLabelFEAVendedor" style="">
-                                                                Fecha inicio servicio:
+                                                                <asp:Label runat="server" ID="FechaInicioServLabel" Text="Fecha inicio servicio:"></asp:Label>
                                                             </td>
                                                             <td style="">
                                                                 <uc1:DatePickerWebUserControl ID="FechaServDesdeDatePickerWebUserControl" runat="server"
@@ -1003,7 +1003,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="TextoLabelFEAVendedor" style="">
-                                                                Fecha finalización servicio:
+                                                                <asp:Label ID="FechaHstServLabel" runat="server" Text="Fecha finalización servicio:"></asp:Label>
                                                             </td>
                                                             <td style="padding-top: 3px;">
                                                                 <uc1:DatePickerWebUserControl ID="FechaServHastaDatePickerWebUserControl" runat="server"

@@ -2199,6 +2199,12 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 {
                     Presta_ServCheckBox.Checked = false;
                     Presta_ServCheckBox.Enabled = false;
+                    FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
+                    FechaServDesdeDatePickerWebUserControl.Visible = false;
+                    FechaInicioServLabel.Visible = false;
+                    FechaHstServLabel.Visible = false;
+                    FechaServHastaDatePickerWebUserControl.CalendarDateString = string.Empty;
+                    FechaServHastaDatePickerWebUserControl.Visible = false;
                     Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
                     Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
                     Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
@@ -2207,6 +2213,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 {
                     Presta_ServCheckBox.Checked = true;
                     Presta_ServCheckBox.Enabled = true;
+                    FechaServDesdeDatePickerWebUserControl.Visible = true;
+                    FechaInicioServLabel.Visible = true;
+                    FechaHstServLabel.Visible = true;
+                    FechaServHastaDatePickerWebUserControl.Visible = true;
                     Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
                     Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
                     Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
