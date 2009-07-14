@@ -21,6 +21,10 @@ namespace CedWebDB
                 {
                     Vendedor.BonoFiscal.PuntoDeVentaHabilitado.Clear();
                 }
+                else
+                {
+                    Vendedor.BonoFiscal = new CedWebEntidades.BonoFiscal();
+                }
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Vendedor.BonoFiscal.PuntoDeVentaHabilitado.Add(Convert.ToInt32(dt.Rows[i]["PuntoDeVentaHabilitado"]));
