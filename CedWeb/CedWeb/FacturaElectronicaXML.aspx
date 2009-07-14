@@ -1345,8 +1345,8 @@
                                                                                         runat="server" ControlToValidate="txtimporte_total_articulo" ErrorMessage="Importe total artículo en edición mal formateado"
                                                                                         SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DetalleEditItem"
                                                                                         >*</asp:RegularExpressionValidator><asp:RequiredFieldValidator ID="txtimporte_total_articuloEditRequiredFieldValidator"
-                                                                                        runat="server" ControlToValidate="txtimporte_total_articulo" ErrorMessage="Importe total artículo en edición no informado"
-                                                                                        SetFocusOnError="True" ValidationGroup="Grillas" >*</asp:RequiredFieldValidator>
+                                                                                            runat="server" ControlToValidate="txtimporte_total_articulo" ErrorMessage="Importe total artículo en edición no informado"
+                                                                                            SetFocusOnError="True" ValidationGroup="DetalleEditItem">*</asp:RequiredFieldValidator>
                                                                                 </EditItemTemplate>
                                                                                 <FooterTemplate>
                                                                                     <asp:TextBox ID="txtimporte_total_articulo" runat="server" Text='' Width="70px"></asp:TextBox><asp:RegularExpressionValidator ID="txtimporte_total_articuloFooterRegularExpressionValidator"
