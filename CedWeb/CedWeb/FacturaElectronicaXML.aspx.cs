@@ -268,8 +268,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					throw new Exception("Detalle no agregado porque el separador de decimales debe ser el punto");
 				}
 
-				double auxAliIVA = Convert.ToDouble(((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).SelectedValue);
-				string auxDescAliIVA = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).SelectedItem.Text;
 				string auxNull = ((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo")).Text;
 				if (!auxNull.Equals(string.Empty) && !auxNull.Equals("0"))
 				{
@@ -282,15 +280,50 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					l.importe_ivaSpecified = false;
 					l.importe_iva = 0;
 				}
-				if (!auxDescAliIVA.Equals(string.Empty))
+                double auxAliIVA = Convert.ToDouble(((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).SelectedValue);
+                string auxDescAliIVA = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).SelectedItem.Text;
+                if (!auxDescAliIVA.Equals(string.Empty))
 				{
 					l.alicuota_ivaSpecified = true;
 					l.alicuota_iva = auxAliIVA;
 				}
 				else
 				{
-					l.alicuota_ivaSpecified = false;
-					l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
+                    if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                    {
+                        if (!Punto_VentaTextBox.Text.Equals(string.Empty))
+                        {
+                            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                            int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+                            if (listaPV.Contains(auxPV))
+                            {
+                                if (auxDescAliIVA.Equals(string.Empty))
+                                {
+                                    throw new Exception("Detalle no agregado porque la alicuota iva es obligatoria para bono fiscal");
+                                }
+                                else
+                                {
+                                    l.alicuota_ivaSpecified = false;
+                                    l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
+                                }
+                            }
+                            else
+                            {
+                                l.alicuota_ivaSpecified = false;
+                                l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
+                            }
+                        }
+                        else
+                        {
+                            l.alicuota_ivaSpecified = false;
+                            l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
+                        }
+                    }
+                    else
+                    {
+                        l.alicuota_ivaSpecified = false;
+                        l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
+                    }					
 				}
 
                 string auxUnidad = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).SelectedItem.Value;
@@ -448,8 +481,33 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 }
                 else
                 {
-                    l.precio_unitario = 0;
-                    l.precio_unitarioSpecified = false;
+                    if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                    {
+                        if (!Punto_VentaTextBox.Text.Equals(string.Empty))
+                        {
+                            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                            int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+                            if (listaPV.Contains(auxPV))
+                            {
+                                throw new Exception("Detalle no agregado porque el precio unitario es obligatorio para bono fiscal");
+                            }
+                            else
+                            {
+                                l.precio_unitario = 0;
+                                l.precio_unitarioSpecified = false;
+                            }
+                        }
+                        else
+                        {
+                            l.precio_unitario = 0;
+                            l.precio_unitarioSpecified = false;
+                        }
+                    }
+                    else
+                    {
+                        l.precio_unitario = 0;
+                        l.precio_unitarioSpecified = false;
+                    }
                 }
 
 				((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]).Add(l);
