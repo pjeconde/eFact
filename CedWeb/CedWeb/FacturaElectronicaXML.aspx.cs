@@ -293,7 +293,39 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 					l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
 				}
 
-                l.unidad = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).SelectedItem.Value;
+                string auxUnidad = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).SelectedItem.Value;
+                if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                {
+                    if (!Punto_VentaTextBox.Text.Equals(string.Empty))
+                    {
+                        System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                        int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+                        if (listaPV.Contains(auxPV))
+                        {
+                            if (auxUnidad.Equals(string.Empty) || auxUnidad.Equals("0"))
+                            {
+                                throw new Exception("Detalle no agregado porque la unidad es obligatoria para bono fiscal");
+                            }
+                            else
+                            {
+                                l.unidad = auxUnidad;
+                            }
+                        }
+                        else
+                        {
+                            l.unidad = auxUnidad;
+                        }
+                    }
+                    else
+                    {
+                        l.unidad = auxUnidad;
+                    }
+                }
+                else
+                {
+                    l.unidad = auxUnidad;
+                }
+                
                 string auxCantidad = ((TextBox)detalleGridView.FooterRow.FindControl("txtcantidad")).Text;
                 if (!auxCantidad.Contains(","))
                 {
@@ -373,7 +405,40 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 
                 string auxcpvendedor = ((TextBox)detalleGridView.FooterRow.FindControl("txtcpvendedor")).Text;
                 l.codigo_producto_vendedor = auxcpvendedor;
-                l.indicacion_exento_gravado = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).SelectedItem.Value;
+
+                string auxindicacion_exento_gravado = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).SelectedItem.Value;
+                if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                {
+                    if (!Punto_VentaTextBox.Text.Equals(string.Empty))
+                    {
+                        System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                        int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+                        if (listaPV.Contains(auxPV))
+                        {
+                            if (auxindicacion_exento_gravado.Equals(string.Empty))
+                            {
+                                throw new Exception("Detalle no agregado porque la indicacion exento gravado es obligatoria para bono fiscal");
+                            }
+                            else
+                            {
+                                l.indicacion_exento_gravado = auxindicacion_exento_gravado;
+                            }
+                        }
+                        else
+                        {
+                            l.indicacion_exento_gravado = auxindicacion_exento_gravado;
+                        }
+                    }
+                    else
+                    {
+                        l.indicacion_exento_gravado = auxindicacion_exento_gravado;
+                    }
+                }
+                else
+                {
+                    l.indicacion_exento_gravado = auxindicacion_exento_gravado;
+                }
+
                 string auxprecio_unitario = ((TextBox)detalleGridView.FooterRow.FindControl("txtprecio_unitario")).Text;
                 if (!auxprecio_unitario.Equals(string.Empty) && !auxprecio_unitario.Equals("0"))
                 {
