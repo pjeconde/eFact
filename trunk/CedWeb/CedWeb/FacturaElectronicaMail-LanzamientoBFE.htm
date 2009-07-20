@@ -22,7 +22,7 @@
         .textoresaltado31   {font-size:14px; font-family: arial; color:#333333; font-weight:bold; text-decoration:none; vertical-align:top;}
         .textoresaltado4    {font-size:18px; font-family: arial; color:#993300; font-weight:bold; text-decoration:none; vertical-align:top;}
         .textoresaltado41   {font-size:14px; font-family: arial; color:#993300; font-weight:bold; text-decoration:none; vertical-align:top;}
-        .texto1             {font-size:14px; font-family: arial; color:#333333; text-decoration:none; vertical-align:top;}
+        .texto1             {font-size:14px; font-family: arial; color:#333333; text-decoration:none; vertical-align:top; font-weight:normal;}
         .texto1j            {font-size:14px; font-family: arial; color:#333333; text-decoration:none; vertical-align:top; text-align:justify;}
         .texto1jc           {font-size:12px; font-family: arial; color: rgb(153,51,0); font-weight:bold; text-decoration:none; vertical-align:center; text-align:center;}
         .texto2             {font-size:14px; font-family: arial; color:#000000; text-decoration:none; vertical-align:top;}
@@ -117,7 +117,7 @@
                             <br />
                         </span><span class="texto1">
                                 <span class="812163823-15072009"><font face="Arial" size="2">En nuestra página de Factura
-                                    Electrónica, seleccionar la <strong>opción 2</strong><span style="color:#0000cc">(Configure
+                                    Electrónica, seleccionar la <strong>opción 2</strong><span style="color:#0000cc"> (Configure
                                         los <strong>datos del Vendedor</strong>)</span><br /><br />
                                 </font>
                                 </span>
@@ -441,7 +441,7 @@
             </td>
         </tr>
         <tr>
-            <td valign="top" class="">
+            <td valign="top" align="left" >
                 <span class="textoresaltado21">&gt;&gt; Otros cambios incorporados: Comprobantes de Referencia.</span> 
                 <br />
                 <br />
@@ -512,86 +512,117 @@
                         <td class="texto2jc">
                             <a href="javascript:__doPostBack('ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView$ctl02$linkDeletereferencias','')">
                             <span style="color: #0000ff">Borrar</span></a>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="texto2jc">
-                                Remito
-                            </td>
-                            <td class="texto2jc">
-                                4654542
-                            </td>
-                            <td class="texto2jc">
-                                <a href="javascript:__doPostBack('ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView','Edit$1')">
-                                <span style="color: #0000ff; text-decoration: underline">Edit</span></a>
-                            </td>
-                            <td class="texto2jc">
-                                <a href="javascript:__doPostBack('ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView$ctl03$linkDeletereferencias','')">
-                                <span style="color: #0000ff">Borrar</span></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="texto2jc">
-                                Factura de referencia
-                            </td>
-                            <td class="texto2jc">
-                                1005001114
-                            </td>
-                            <td class="texto2jc">
-                                <a href="javascript:__doPostBack('ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView','Edit$2')">
-                                <span style="color: #0000ff; text-decoration: underline">Edit</span></a>
-                            </td>
-                            <td class="texto2jc">
-                                <a href="javascript:__doPostBack('ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView$ctl04$linkDeletereferencias','')">
-                                <span style="color: #0000ff">Borrar</span></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="texto2jc">
-                                Nota de crédito
-                            </td>
-                            <td class="texto2jc">
-                                999165412365
-                            </td>
-                            <td class="texto2jc">
-                                <a href="javascript:__doPostBack('ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView','Edit$3')">
-                                <span style="color: #0000ff; text-decoration: underline">Edit</span></a>
-                            </td>
-                            <td class="texto2jc">
-                                <a href="javascript:__doPostBack('ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView$ctl05$linkDeletereferencias','')">
-                                <span style="color: #0000ff">Borrar</span></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="texto2jc">
-                                <select name="ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView$ctl06$ddlcodigo_de_referencia">
-                                    <option selected="selected" value=""></option>
-                                    <option value="1">Orden de compra</option>
-                                    <option value="2">Remito</option>
-                                    <option value="3">Factura de referencia</option>
-                                    <option value="4">Nota de crédito</option>
-                                </select>
-                            </td>
-                            <td class="texto2jc">
-                                <input name="ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView$ctl06$txtdato_de_referencia"
-                                    size="25" type="text" />
-                            </td>
-                            <td class="texto2jc">
-                               &nbsp; 
-                            </td>
-                            <td class="texto2jc">
-                                <a href="javascript:WebForm_DoPostBackWithOptions(new%20WebForm_PostBackOptions(%22ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView$ctl06$linkAddreferencias%22,%20%22%22,%20true,%20%22ReferenciasFooter%22,%20%22%22,%20false,%20true))">
-                                <span style="color: #0000ff; text-decoration: underline">Agregar</span></a>
-                            </td>
-                        </tr>
-                    </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="texto2jc">
+                            Remito
+                        </td>
+                        <td class="texto2jc">
+                            4654542
+                        </td>
+                        <td class="texto2jc">
+                            <a href="javascript:__doPostBack('ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView','Edit$1')">
+                            <span style="color: #0000ff; text-decoration: underline">Edit</span></a>
+                        </td>
+                        <td class="texto2jc">
+                            <a href="javascript:__doPostBack('ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView$ctl03$linkDeletereferencias','')">
+                            <span style="color: #0000ff">Borrar</span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="texto2jc">
+                            Factura de referencia
+                        </td>
+                        <td class="texto2jc">
+                            1005001114
+                        </td>
+                        <td class="texto2jc">
+                            <a href="javascript:__doPostBack('ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView','Edit$2')">
+                            <span style="color: #0000ff; text-decoration: underline">Edit</span></a>
+                        </td>
+                        <td class="texto2jc">
+                            <a href="javascript:__doPostBack('ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView$ctl04$linkDeletereferencias','')">
+                            <span style="color: #0000ff">Borrar</span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="texto2jc">
+                            Nota de crédito
+                        </td>
+                        <td class="texto2jc">
+                            999165412365
+                        </td>
+                        <td class="texto2jc">
+                            <a href="javascript:__doPostBack('ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView','Edit$3')">
+                            <span style="color: #0000ff; text-decoration: underline">Edit</span></a>
+                        </td>
+                        <td class="texto2jc">
+                            <a href="javascript:__doPostBack('ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView$ctl05$linkDeletereferencias','')">
+                            <span style="color: #0000ff">Borrar</span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="texto2jc">
+                            <select name="ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView$ctl06$ddlcodigo_de_referencia">
+                                <option selected="selected" value=""></option>
+                                <option value="1">Orden de compra</option>
+                                <option value="2">Remito</option>
+                                <option value="3">Factura de referencia</option>
+                                <option value="4">Nota de crédito</option>
+                            </select>
+                        </td>
+                        <td class="texto2jc">
+                            <input name="ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView$ctl06$txtdato_de_referencia"
+                                size="25" type="text" />
+                        </td>
+                        <td class="texto2jc">
+                           &nbsp; 
+                        </td>
+                        <td class="texto2jc">
+                            <a href="javascript:WebForm_DoPostBackWithOptions(new%20WebForm_PostBackOptions(%22ctl00$ContentPlaceHolderNoAutenticado$referenciasGridView$ctl06$linkAddreferencias%22,%20%22%22,%20true,%20%22ReferenciasFooter%22,%20%22%22,%20false,%20true))">
+                            <span style="color: #0000ff; text-decoration: underline">Agregar</span></a>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <span class="textoresaltado21">
+                Ver más información ingresando
+                <a href="http://www.cedeira.com.ar">
+                <b><span style="font-size: 14px; color: #0000ff; text-decoration: underline">aquí.</span></b></a>
+                <br />
+                <br />
+                <br />
+                </span>
+                <span class="textoresaltado21">&gt;&gt; Costo de nuestra solución web.</span>
+                <br />
+                <br />
+                <span class="texto1">
+                Con el objetivo de brindar un mejor servicio, estamos presentando nuestro <span style="color:#800000; font-family:Arial; font-size:14px; font-weight:bold">Servicio Premium</span>.
+                <br />
+                Estas son algunas de sus características principales que se agregan a la versión gratuita.
                     <br />
-                    <span class="textoresaltado21">
-                    Ver más información ingresando
-                    <a href="http://www.cedeira.com.ar">
-                    <b><span style="font-size: 14px; color: #0000ff; text-decoration: underline">aquí.</span></b></a>
-                    </span>
+                    <br />
+                
+                1) Podrá tomar como <span style="color:#800000; font-family:Arial; font-size:14px; font-weight:bold">FACTURA MODELO</span>cualquier comprobante ingresado con anterioridad.<br />
+                2) Dispondrá de una opción para la <span style="color:#800000; font-family:Arial; font-size:14px; font-weight:bold">DESCARGA DIRECTA</span> del archivo XML (comprobante electrónico), además del
+                    envio por Email.<br />
+                3) <span style="color:#800000; font-family:Arial; font-size:14px; font-weight:bold">SIN LÍMITE</span> de comprobantes.<br />
+                4) Podrá generar facturas en <span style="color:#800000; font-family:Arial; font-size:14px; font-weight:bold">MONEDA EXTRANJERA</span>.<br />
+                5) Podrá administrar su propio <font color="#800000"><strong>MAESTRO DE CLIENTES</strong></font> (Compradores).<br />
+                6) Podrá hacer <span style="color:#800000; font-family:Arial; font-size:14px; font-weight:bold">COPIAS DE SEGURIDAD</span> (tanto de datos del Vendedor como de Compradores).<br />
+                7) Tendrá <span style="color:#800000; font-family:Arial; font-size:14px; font-weight:bold">SOPORTE TELEFÓNICO</span> exclusivo.<br />
+                <br />
+                Estos son los abonos disponibles:&nbsp;<br />
+                <img src="Imagenes/TarifasServicioPremium.jpg" alt="Tarifas del servicio Premium" />
+                <br />
+                <br />
+                Los importes mencionados no incluyen el IVA. 
+                <br />
+                <span style="color:#800000; font-family:Arial; font-size:14px; font-weight:bold; font-style:italic;">
+                A partir de hoy Ud. dispondrá de una cuenta Premium bonificada por 15 días!
+                </span>
+                <br />
             </td>
         </tr>
     </table>
