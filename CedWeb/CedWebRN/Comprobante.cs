@@ -17,16 +17,6 @@ namespace CedWebRN
         }
         public IBK.lote_comprobantes_response EnviarIBK(FeaEntidades.InterFacturas.lote_comprobantes lc, string pathCertificado)
         {
-            //IBK.consulta_timestamp_comprobante ctc = new IBK.consulta_timestamp_comprobante();
-            //ctc.cuit_vendedor = 30710015062;
-            //ctc.cuit_canal = 30690783521;
-            //ctc.fecha_emision_desde = "20090101";
-            //ctc.fecha_emision_hasta = "20090228";
-            //ctc.limite = IBK.consulta_timestamp_comprobanteLimite.WEB;
-            //IBK.consulta_timestamp_response ctr = objIBK.consultaTimeStampConSchema(ctc);
-
-            
-
             IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
 
             lcIBK.cabecera_lote = new IBK.cabecera_lote();
@@ -154,8 +144,6 @@ namespace CedWebRN
                         d.linea[j].importe_total_impuestos = lc.comprobante[i].detalle.linea[j].importe_total_impuestos;
                         d.linea[j].importe_total_impuestosSpecified = lc.comprobante[i].detalle.linea[j].importe_total_impuestosSpecified;
 
-                        //TODO VER MONEDA ORIGEN
-
                         if (lc.comprobante[i].detalle.linea[j].importes_moneda_origen != null)
                         {
                             d.linea[j].importes_moneda_origen = new IBK.lineaImportes_moneda_origen();
@@ -186,7 +174,6 @@ namespace CedWebRN
                                 d.linea[j].impuestos[k].porcentaje_impuestoSpecified = lc.comprobante[i].detalle.linea[j].impuestos[k].porcentaje_impuestoSpecified;
                             }
                         }
-                        //TODO VER DESCUENTOS
                         if (lc.comprobante[i].detalle.linea[j].descuentos != null)
                         {
                             d.linea[j].descuentos = new IBK.lineaDescuentos[lc.comprobante[i].detalle.linea[j].descuentos.Length];
