@@ -1740,46 +1740,45 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td align="center" valign="middle" style="padding-bottom: 35px; padding-left: 5px">
+                                                <td align="center" style="padding-bottom: 35px; padding-left: 5px; width: 180px"
+                                                    valign="middle">
                                                     <table border="0" cellpadding="0" cellspacing="0" style="border-color: Gray; border-width: 1px;
-                                                        border-style: solid">
+                                                        border-style: solid" width="180px">
                                                         <tr>
-                                                            <td style="padding-left: 5px; text-align: left; width: 180px" class="TextoLabelFEAVendedorCh">
-                                                                Si ya solicitó el C.A.E. a la A.F.I.P., ingrésela aqui:
+                                                            <td class="TextoLabelFEAVendedorCh" style="padding: 5px; text-align: left; width: 180px">
+                                                                Si ya solicitó la CAE a la AFIP, ingrésela aqui:
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="padding-left: 5px; padding-top: 10px; text-align: left; width: 180px"
+                                                            <td style="padding-left: 5px; padding: 5px; text-align: left; width: 180px"
                                                                 class="TextoLabelFEAVendedorCh">
-                                                                C.A.E.
+                                                                CAE:<asp:TextBox ID="CAETextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" width="100px"
+                                                                ToolTip="<Opcional> MUY IMPORTANTE! Solo si YA TIENE GENERADO EL C.A.E., debe ingresar este dato. Si omite esta información, se generará una nueva factura ante la AFIP o bien se retornará un error por comprobante ya ingresado."></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="padding-left: 5px; padding-top: 3px" class="TextoLabelFEAVendedorDet">
-                                                                <asp:TextBox ID="CAETextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Opcional> MUY IMPORTANTE! Solo si YA TIENE GENERADO EL C.A.E., debe ingresar este dato. Si omite esta información, se generará una nueva factura ante la AFIP o bien se retornará un error por comprobante ya ingresado."></asp:TextBox>
+                                                            <td style="padding: 5px; text-align: left; width: 180px" class="TextoLabelFEAVendedorCh">
+                                                                Fecha de vencimiento CAE:<uc1:DatePickerWebUserControl ID="FechaCAEVencimientoDatePickerWebUserControl"
+                                                                    runat="server" TextCssClass="DatePickerFecha" />
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="padding-left: 5px; text-align: left; width: 180px" class="TextoLabelFEAVendedorCh">
-                                                                Fecha de vencimiento C.A.E.:
+                                                            <td style="padding: 5px; text-align: left; width: 180px" class="TextoLabelFEAVendedorCh">
+                                                                Fecha de obtención CAE:<uc1:DatePickerWebUserControl ID="FechaCAEObtencionDatePickerWebUserControl" runat="server"
+                                                                    TextCssClass="DatePickerFecha"  />
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="padding-left: 5px; padding-top: 3px">
-                                                                <uc1:DatePickerWebUserControl ID="FechaCAEVencimientoDatePickerWebUserControl" runat="server"
-                                                                    TextCssClass="DatePickerFecha" />
-                                                            </td>
+                                                            <td class="TextoLabelFEAVendedorCh" style="padding: 5px; text-align: left; width: 180px">
+                                                                Resultado:<asp:TextBox ID="ResultadoTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                    Width="100px">
+                                                                </asp:TextBox></td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="padding-left: 5px; text-align: left; width: 180px" class="TextoLabelFEAVendedorCh">
-                                                                Fecha de obtención C.A.E.:
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="padding-left: 5px; padding-top: 3px">
-                                                                <uc1:DatePickerWebUserControl ID="FechaCAEObtencionDatePickerWebUserControl" runat="server"
-                                                                    TextCssClass="DatePickerFecha" />
-                                                            </td>
+                                                            <td class="TextoLabelFEAVendedorCh" style="padding: 5px; text-align: left; width: 180px">
+                                                                Motivo:<asp:TextBox ID="MotivoTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                    Width="100px">
+                                                                </asp:TextBox></td>
                                                         </tr>
                                                     </table>
                                                 </td>
@@ -1990,17 +1989,32 @@
                                 </tr>
                                 <tr>
                                     <td style="text-align: center; width: 100%">
-                                        <table border="0" cellpadding="0" cellspacing="0">
+                                        <table border="0" cellpadding="2" cellspacing="2">
                                             <tr>
-                                                <td style="width: 170px; padding-right: 3px">
-                                                    <asp:Button ID="DescargarButton" runat="server" OnClick="GenerarButton_Click" Height="60px"
-                                                        Width="100%" Text="Descargar archivo XML" BackColor="peachpuff" BorderStyle="Solid"
-                                                        BorderWidth="1px" BorderColor="brown" ForeColor="brown" Font-Bold="true" ToolTip="Exclusivo SERVICIO PREMIUM" />
-                                                </td>
-                                                <td style="width: 610px">
+                                                <td style="width: 100%" colspan="3">
                                                     <asp:Button ID="GenerarButton" runat="server" OnClick="GenerarButton_Click" Height="60px"
                                                         Width="100%" Text="Enviar archivo XML al e-mail del vendedor" BorderColor="Gray"
                                                         BorderWidth="1px" BorderStyle="NotSet" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 34%; padding-right: 3px">
+                                                    <asp:Button ID="DescargarButton" runat="server" BackColor="peachpuff" BorderColor="brown"
+                                                        BorderStyle="Solid" BorderWidth="1px" Font-Bold="true" ForeColor="brown" Height="60px"
+                                                        OnClick="GenerarButton_Click" Text="Descargar archivo XML" ToolTip="Exclusivo SERVICIO PREMIUM"
+                                                        Width="100%" />
+                                                </td>
+                                                <td style="width: 33%; padding-right: 3px">
+                                                    <asp:Button ID="EnviarIBKButton" runat="server" BackColor="peachpuff" BorderColor="brown"
+                                                        BorderStyle="Solid" BorderWidth="1px" Font-Bold="true" ForeColor="brown" Height="60px"
+                                                        Text="Enviar Interfacturas" ToolTip="Impactar comprobante en Interfacturas - Exclusivo SERVICIO PREMIUM" Width="100%" OnClick="EnviarIBKButton_Click" />
+                                                </td>
+                                                <td style="width: 33%">
+                                                    <asp:Button ID="ConsultarLoteIBKButton" runat="server" BackColor="peachpuff" BorderColor="brown"
+                                                        BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true"
+                                                        ForeColor="brown" Height="60px" OnClick="ConsultarLoteIBKButton_Click" Text="Consultar resultado envío de lote a Interfacturas"
+                                                        ToolTip="Ingrese previamente el numero de lote a consultar- Exclusivo SERVICIO PREMIUM"
+                                                        Width="100%" />
                                                 </td>
                                             </tr>
                                         </table>
