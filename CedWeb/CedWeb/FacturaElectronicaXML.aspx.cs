@@ -2058,35 +2058,38 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
         {
             if (!((TextBox)sender).Text.Equals(string.Empty))
             {
-                System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
-                int auxPV = Convert.ToInt32(((TextBox)sender).Text);
-                if (listaPV.Contains(auxPV))
+                if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal != null)
                 {
-                    Presta_ServCheckBox.Checked = false;
-                    Presta_ServCheckBox.Enabled = false;
-                    FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
-                    FechaServDesdeDatePickerWebUserControl.Visible = false;
-                    FechaInicioServLabel.Visible = false;
-                    FechaHstServLabel.Visible = false;
-                    FechaServHastaDatePickerWebUserControl.CalendarDateString = string.Empty;
-                    FechaServHastaDatePickerWebUserControl.Visible = false;
-                    Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-                    Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-                    Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
+                    System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                    int auxPV = Convert.ToInt32(((TextBox)sender).Text);
+                    if (listaPV.Contains(auxPV))
+                    {
+                        Presta_ServCheckBox.Checked = false;
+                        Presta_ServCheckBox.Enabled = false;
+                        FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
+                        FechaServDesdeDatePickerWebUserControl.Visible = false;
+                        FechaInicioServLabel.Visible = false;
+                        FechaHstServLabel.Visible = false;
+                        FechaServHastaDatePickerWebUserControl.CalendarDateString = string.Empty;
+                        FechaServHastaDatePickerWebUserControl.Visible = false;
+                        Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                        Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                        Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
+                    }
+                    else
+                    {
+                        Presta_ServCheckBox.Checked = true;
+                        Presta_ServCheckBox.Enabled = true;
+                        FechaServDesdeDatePickerWebUserControl.Visible = true;
+                        FechaInicioServLabel.Visible = true;
+                        FechaHstServLabel.Visible = true;
+                        FechaServHastaDatePickerWebUserControl.Visible = true;
+                        Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                        Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                        Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
+                    }
+                    Tipo_De_ComprobanteDropDownList.DataBind();
                 }
-                else
-                {
-                    Presta_ServCheckBox.Checked = true;
-                    Presta_ServCheckBox.Enabled = true;
-                    FechaServDesdeDatePickerWebUserControl.Visible = true;
-                    FechaInicioServLabel.Visible = true;
-                    FechaHstServLabel.Visible = true;
-                    FechaServHastaDatePickerWebUserControl.Visible = true;
-                    Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-                    Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-                    Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
-                }
-                Tipo_De_ComprobanteDropDownList.DataBind();
             }
         }
     }
