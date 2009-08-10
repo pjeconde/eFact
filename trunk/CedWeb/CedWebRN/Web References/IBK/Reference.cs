@@ -24,6 +24,7 @@ namespace CedWebRN.IBK {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="FacturaWebServiceConSchemaSoapBinding", Namespace="http://ar/com/ib/cfe/ejb/services")]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(error[]))]
@@ -44,6 +45,7 @@ namespace CedWebRN.IBK {
             wr.ServicePoint.MaxIdleTime = 1000;
             return wr;
         }
+        
 
         /// <remarks/>
         public FacturaWebServiceConSchemaSoapBindingQSService() {
