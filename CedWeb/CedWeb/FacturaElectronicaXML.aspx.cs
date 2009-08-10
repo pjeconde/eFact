@@ -1604,6 +1604,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 r.descripcioncodigo_de_referencia = descrcodigo;
                 referencias.Add(r);
             }
+            if(referencias.Count.Equals(0))
+            {
+                referencias.Add(new FeaEntidades.InterFacturas.informacion_comprobanteReferencias());
+            }
             referenciasGridView.DataSource = referencias;
             referenciasGridView.DataBind();
             ViewState["referencias"] = referencias;
@@ -1632,7 +1636,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
         Provincia_CompradorDropDownList.SelectedIndex = Provincia_CompradorDropDownList.Items.IndexOf(Provincia_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.provincia)));
         Condicion_IVA_CompradorDropDownList.SelectedIndex = Condicion_IVA_CompradorDropDownList.Items.IndexOf(Condicion_IVA_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.condicion_IVA)));
         //Vendedor
-        Razon_Social_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.razon_social);
+        if (lc.comprobante[0].cabecera.informacion_vendedor.razon_social != null)
+        {
+            Razon_Social_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.razon_social);
+        }
         Localidad_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.localidad);
         if (lc.comprobante[0].cabecera.informacion_vendedor.GLN != 0)
         {
@@ -1718,6 +1725,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 }
                 descuentos.Add(r);
             }
+            if (descuentos.Count.Equals(0))
+            {
+                descuentos.Add(new FeaEntidades.InterFacturas.resumenDescuentos());
+            }
             descuentosGridView.DataSource = descuentos;
             descuentosGridView.DataBind();
             ViewState["descuentos"] = descuentos;
@@ -1733,6 +1744,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                     imp.importe_impuesto = imp.importe_impuesto_moneda_origen;
                 }
                 impuestos.Add(imp);
+            }
+            if (impuestos.Count.Equals(0))
+            {
+                impuestos.Add(new FeaEntidades.InterFacturas.resumenImpuestos());
             }
             impuestosGridView.DataSource = impuestos;
             impuestosGridView.DataBind();
@@ -1784,6 +1799,13 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
             Tipo_de_cambioRequiredFieldValidator.Enabled = false;
             Tipo_de_cambioRegularExpressionValidator.Enabled = false;
         }
+        //CAE
+        CAETextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.cae;
+        FechaCAEObtencionDatePickerWebUserControl.CalendarDateString = lc.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae;
+        FechaCAEVencimientoDatePickerWebUserControl.CalendarDateString = lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae;
+        ResultadoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.resultado;
+        MotivoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.motivo;
+
         BindearDropDownLists();
     }
 	protected void MonedaComprobanteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
@@ -2087,12 +2109,6 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
             {
                 try
                 {
-                    CAETextBox.Text = string.Empty;
-                    FechaCAEObtencionDatePickerWebUserControl.CalendarDateString = string.Empty;
-                    FechaCAEVencimientoDatePickerWebUserControl.CalendarDateString = string.Empty;
-                    ResultadoTextBox.Text = string.Empty;
-                    MotivoTextBox.Text = string.Empty;
-
                     CedWebRN.Comprobante cRN = new CedWebRN.Comprobante();
                     FeaEntidades.InterFacturas.lote_comprobantes lc = GenerarLote();
                     CedWebRN.IBK.lote_comprobantes_response lcr = cRN.EnviarIBK(lc, Server.MapPath("~/Autenticado/Certificados/interfacturas-" + lc.cabecera_lote.cuit_vendedor + ".cer"));
@@ -2562,6 +2578,14 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                 }
             }
         }
+        if (!CAETextBox.Text.Equals(string.Empty))
+        {
+            comp.cabecera.informacion_comprobante.cae = CAETextBox.Text;
+            comp.cabecera.informacion_comprobante.fecha_obtencion_cae = FechaCAEObtencionDatePickerWebUserControl.CalendarDateString;
+            comp.cabecera.informacion_comprobante.fecha_vencimiento_cae = FechaCAEVencimientoDatePickerWebUserControl.CalendarDateString;
+            comp.cabecera.informacion_comprobante.resultado = ResultadoTextBox.Text;
+            comp.cabecera.informacion_comprobante.motivo = MotivoTextBox.Text;
+        }
         lote.comprobante[0] = comp;
         return lote;
     }
@@ -2608,20 +2632,16 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                     CedWebRN.IBK.consulta_lote_comprobantes_response clcr = cRN.ConsultarIBK(clc, Server.MapPath("~/Autenticado/Certificados/interfacturas-" + clc.cuit_vendedor + ".cer"));
                     try
                     {
-                        if (((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).cabecera_lote.resultado.Equals("A"))
+                        CedWebRN.IBK.lote_comprobantes lcIBK = ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item));
+                        if (lcIBK.cabecera_lote.resultado.Equals("A"))
                         {
-                            CAETextBox.Text = ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).comprobante[0].cabecera.informacion_comprobante.cae;
-                            FechaCAEObtencionDatePickerWebUserControl.CalendarDateString = ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae;
-                            FechaCAEVencimientoDatePickerWebUserControl.CalendarDateString = ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae;
-                            ResultadoTextBox.Text = ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).comprobante[0].cabecera.informacion_comprobante.resultado;
-                            MotivoTextBox.Text = ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).comprobante[0].cabecera.informacion_comprobante.motivo;
+                            CompletarUI(cRN.Ibk2FEA(lcIBK), e);
+
                         }
                         else
                         {
                             ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).cabecera_lote.resultado + ":" + ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).cabecera_lote.motivo + "');</script>");
                         }
-                        //TODO CompletarUI
-                        //CompletarUI(new FeaEntidades.InterFacturas.lote_comprobantes(), e);
                     }
                     catch (InvalidCastException ex)
                     {

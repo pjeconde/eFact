@@ -7,12 +7,6 @@ namespace Cedeira.SV
 	/// </summary>
 	public class Autenticacion
 	{
-		public Autenticacion()
-		{
-			//
-			// TODO: agregar aquí la lógica del constructor
-			//
-		}
         public void Login(string Usuario, string Password, string Dominio, string CnnStr, string IdAcceso, string Version, string VersionParaControl, CedEntidades.Sesion sesion)
 		{
 			//System.Configuration.ConfigurationManager.AppSettings["Servidor"];
