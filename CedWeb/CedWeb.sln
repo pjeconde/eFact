@@ -97,6 +97,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileHelpers.2005", "FileHel
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CedWebService", "CedWebService\CedWebService.csproj", "{D6941CA1-BDDD-408E-9DE9-36E5870254CF}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -241,6 +247,16 @@ Global
 		{EB8633FF-CEED-40EE-8D1A-CA1BF5678C42}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB8633FF-CEED-40EE-8D1A-CA1BF5678C42}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EB8633FF-CEED-40EE-8D1A-CA1BF5678C42}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D6941CA1-BDDD-408E-9DE9-36E5870254CF}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{D6941CA1-BDDD-408E-9DE9-36E5870254CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6941CA1-BDDD-408E-9DE9-36E5870254CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6941CA1-BDDD-408E-9DE9-36E5870254CF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D6941CA1-BDDD-408E-9DE9-36E5870254CF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D6941CA1-BDDD-408E-9DE9-36E5870254CF}.Release|.NET.ActiveCfg = Release|Any CPU
+		{D6941CA1-BDDD-408E-9DE9-36E5870254CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6941CA1-BDDD-408E-9DE9-36E5870254CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6941CA1-BDDD-408E-9DE9-36E5870254CF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D6941CA1-BDDD-408E-9DE9-36E5870254CF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
