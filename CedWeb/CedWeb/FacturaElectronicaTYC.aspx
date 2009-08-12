@@ -88,7 +88,7 @@
                                                 <td style="width: 15px; height: 21px" valign="top">
                                                     <asp:Label ID="Label3" runat="server" SkinID="TituloColor1Mediano" Text="1."></asp:Label></td>
                                                 <td style="">
-                                                    <asp:Label ID="Label9" runat="server" SkinID="TextoMediano" Text="No asume ninguna responsabilidad por la utilización de los presentes modelos de carga de comprobantes, ya que sólo los ofrece en forma gratuita a modo de simplificar las tareas en la carga de la información del comprobante electrónico que solicita Interfacturas. "></asp:Label>
+                                                    <asp:Label ID="Label9" runat="server" SkinID="TextoMediano" Text="No asume ninguna responsabilidad por la utilización de los presentes modelos de carga de comprobantes, ya que sólo los ofrece a modo de simplificar las tareas en la carga de la información del comprobante electrónico que solicita Interfacturas. "></asp:Label>
                                                 </td>
                                             </tr>
                                         </table>
@@ -157,7 +157,7 @@
                                                 <td style="width: 15px; height: 21px" valign="top">
                                                     <asp:Label ID="Label14" runat="server" SkinID="TituloColor1Mediano" Text="6."></asp:Label></td>
                                                 <td style="">
-                                                    <asp:Label ID="Label15" runat="server" SkinID="TextoMediano" Text="No presenta ninguna garantía, explicita o implícitamente, acerca de la utilización de este servicio gratuito."></asp:Label>
+                                                    <asp:Label ID="Label15" runat="server" SkinID="TextoMediano" Text="No presenta ninguna garantía, explicita o implícitamente, acerca de la utilización de este servicio."></asp:Label>
                                                 </td>
                                             </tr>
                                         </table>
