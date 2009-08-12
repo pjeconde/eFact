@@ -1598,11 +1598,14 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
             {
                 //descripcioncodigo_de_referencia ( XmlIgnoreAttribute )
                 //Se busca la descripción a través del código.
-                string descrcodigo = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
-                ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue = r.codigo_de_referencia.ToString();
-                descrcodigo = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
-                r.descripcioncodigo_de_referencia = descrcodigo;
-                referencias.Add(r);
+                if (r != null)
+                {
+                    string descrcodigo = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
+                    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue = r.codigo_de_referencia.ToString();
+                    descrcodigo = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
+                    r.descripcioncodigo_de_referencia = descrcodigo;
+                    referencias.Add(r);
+                }
             }
             if(referencias.Count.Equals(0))
             {
@@ -2637,51 +2640,51 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                         return;
                     }
                     //Ir por RN
-                    //CedWebRN.IBK.consulta_lote_comprobantes_response clcr = cRN.ConsultarIBK(clc, Server.MapPath("~/Autenticado/Certificados/interfacturas-" + clc.cuit_vendedor + ".cer"));
-                    //try
-                    //{
-                    //    CedWebRN.IBK.lote_comprobantes lcIBK = ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item));
-                    //    if (lcIBK.cabecera_lote.resultado.Equals("A"))
-                    //    {
-                    //        CompletarUI(cRN.Ibk2FEA(lcIBK), e);
-
-                    //    }
-                    //    else
-                    //    {
-                    //        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).cabecera_lote.resultado + ":" + ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).cabecera_lote.motivo + "');</script>");
-                    //    }
-                    //}
-                    //catch (InvalidCastException ex)
-                    //{
-                    //    string errorConsultaLote = ((CedWebRN.IBK.consulta_lote_responseErrores_consulta)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).error[0].descripcion_error;
-                    //    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + errorConsultaLote + "');</script>");
-                    //}
-                    
-                    //Ir por WS
-                    Cedeira2IBKWS.ConsultaIBK cIBKWS = new Cedeira2IBKWS.ConsultaIBK();
-                    Cedeira2IBKWS.consulta_lote_comprobantes_response clcr = cIBKWS.Consultar(clcIBK, Server.MapPath("~/Autenticado/Certificados/interfacturas-" + clc.cuit_vendedor + ".cer"));
+                    CedWebRN.IBK.consulta_lote_comprobantes_response clcr = cRN.ConsultarIBK(clc, Server.MapPath("~/Autenticado/Certificados/interfacturas-" + clc.cuit_vendedor + ".cer"));
                     try
                     {
-                        Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_responseLote_comprobantes lcIBK = ((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_responseLote_comprobantes)(((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_response)(clcr.Item)).Item));
-                        if (lcIBK.cabecera_lote.resultado==null || lcIBK.cabecera_lote.resultado.Equals("A"))
+                        CedWebRN.IBK.lote_comprobantes lcIBK = ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item));
+                        if (lcIBK.cabecera_lote.resultado.Equals("A"))
                         {
-                            Conversor conv = new Conversor();
-                            FeaEntidades.InterFacturas.lote_comprobantes lcFEA = conv.WSCedeira2Entidad(lcIBK);
-                            CompletarUI(lcFEA, e);
+                            CompletarUI(cRN.Ibk2FEA(lcIBK), e);
 
                         }
                         else
                         {
-                            string resultado = ((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_responseLote_comprobantes)(((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_response)(clcr.Item)).Item)).cabecera_lote.resultado;
-                            string motivo = ((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_responseLote_comprobantes)(((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_response)(clcr.Item)).Item)).cabecera_lote.motivo;
-                            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Resultado:" + resultado + ":" + motivo.Replace("\"", "").Replace("\n", "") + "');</script>");
+                            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).cabecera_lote.resultado + ":" + ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).cabecera_lote.motivo + "');</script>");
                         }
                     }
                     catch (InvalidCastException ex)
                     {
-                        string errorConsultaLote = ((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_responseErrores_consulta)(((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_response)(clcr.Item)).Item)).error[0].descripcion_error;
+                        string errorConsultaLote = ((CedWebRN.IBK.consulta_lote_responseErrores_consulta)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).error[0].descripcion_error;
                         ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + errorConsultaLote + "');</script>");
                     }
+                    
+                    //Ir por WS
+                    //Cedeira2IBKWS.ConsultaIBK cIBKWS = new Cedeira2IBKWS.ConsultaIBK();
+                    //Cedeira2IBKWS.consulta_lote_comprobantes_response clcr = cIBKWS.Consultar(clcIBK, Server.MapPath("~/Autenticado/Certificados/interfacturas-" + clc.cuit_vendedor + ".cer"));
+                    //try
+                    //{
+                    //    Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_responseLote_comprobantes lcIBK = ((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_responseLote_comprobantes)(((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_response)(clcr.Item)).Item));
+                    //    if (lcIBK.cabecera_lote.resultado==null || lcIBK.cabecera_lote.resultado.Equals("A"))
+                    //    {
+                    //        Conversor conv = new Conversor();
+                    //        FeaEntidades.InterFacturas.lote_comprobantes lcFEA = conv.WSCedeira2Entidad(lcIBK);
+                    //        CompletarUI(lcFEA, e);
+
+                    //    }
+                    //    else
+                    //    {
+                    //        string resultado = ((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_responseLote_comprobantes)(((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_response)(clcr.Item)).Item)).cabecera_lote.resultado;
+                    //        string motivo = ((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_responseLote_comprobantes)(((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_response)(clcr.Item)).Item)).cabecera_lote.motivo;
+                    //        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Resultado:" + resultado + ":" + motivo.Replace("\"", "").Replace("\n", "") + "');</script>");
+                    //    }
+                    //}
+                    //catch (InvalidCastException ex)
+                    //{
+                    //    string errorConsultaLote = ((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_responseErrores_consulta)(((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_response)(clcr.Item)).Item)).error[0].descripcion_error;
+                    //    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + errorConsultaLote + "');</script>");
+                    //}
                 }
                 catch (System.Security.Cryptography.CryptographicException ex)
                 {
