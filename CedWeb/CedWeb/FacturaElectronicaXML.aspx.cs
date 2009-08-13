@@ -2662,7 +2662,11 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                     
                     //Ir por WS
                     Cedeira2IBKWS.ConsultaIBK cIBKWS = new Cedeira2IBKWS.ConsultaIBK();
-                    Cedeira2IBKWS.consulta_lote_comprobantes_response clcr = cIBKWS.Consultar(clcIBK, Server.MapPath("~/Autenticado/Certificados/interfacturas-" + clc.cuit_vendedor + ".cer"));
+                    //Ir por WS local
+                    //Cedeira2IBKWS.consulta_lote_comprobantes_response clcr = cIBKWS.Consultar(clcIBK, Server.MapPath("~/Autenticado/Certificados/interfacturas-" + clc.cuit_vendedor + ".cer"));
+                    Cedeira2IBKWS.consulta_lote_comprobantes_response clcr = cIBKWS.Consultar(clcIBK, @"C:/Certificados/interfacturas-" + clc.cuit_vendedor + ".cer");
+                    //Ir por WS no local
+                    //Cedeira2IBKWS.consulta_lote_comprobantes_response clcr = cIBKWS.Consultar(clcIBK, @"C:/Certificados/interfacturas-" + clc.cuit_vendedor + ".cer");
                     try
                     {
                         Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_responseLote_comprobantes lcIBK = ((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_responseLote_comprobantes)(((Cedeira2IBKWS.consulta_lote_comprobantes_responseConsulta_lote_response)(clcr.Item)).Item));
@@ -2686,13 +2690,13 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                         ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + errorConsultaLote + "');</script>");
                     }
                 }
-                catch (System.Security.Cryptography.CryptographicException ex)
+                catch (System.Security.Cryptography.CryptographicException)
                 {
                     ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su certificado no se encuentra en nuestro repositorio');</script>");
                 }
                 catch (Exception ex)
                 {
-                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al consultar a Interfacturas.\\n " + ex.Message + "');</script>");
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al consultar a Interfacturas.\\n " + ex.Message.Replace("\n","") + "');</script>");
                 }
 
             }
