@@ -20,11 +20,18 @@ namespace CedWebService
         [WebMethod]
         public CedWebRN.IBK.consulta_lote_comprobantes_response Consultar(CedWebRN.IBK.consulta_lote_comprobantes clc, string pathCertificado)
         {
-            CedWebRN.IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
-            objIBK = new CedWebRN.IBK.FacturaWebServiceConSchemaSoapBindingQSService();
-            System.Security.Cryptography.X509Certificates.X509Certificate cert = System.Security.Cryptography.X509Certificates.X509Certificate.CreateFromCertFile(pathCertificado);
-            objIBK.ClientCertificates.Add(cert);
-            CedWebRN.IBK.consulta_lote_comprobantes_response clcr = objIBK.getLoteFacturasConSchema(clc);
+            CedWebRN.IBK.consulta_lote_comprobantes_response clcr = new CedWebRN.IBK.consulta_lote_comprobantes_response();
+            try
+            {
+                CedWebRN.Comprobante c = new CedWebRN.Comprobante();
+                clcr = c.ConsultarIBK(clc, pathCertificado);
+            }
+            catch (Exception ex)
+            {
+                throw ExcepcionesSOAP.RaiseException("Consultar", "http://www.cedeira.com.ar/webservices", ex.Message,
+                    "0", ex.Source, FaultCode.Server);
+
+            }
             return clcr;
         }
     }

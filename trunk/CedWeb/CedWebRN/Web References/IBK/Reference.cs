@@ -24,7 +24,6 @@ namespace CedWebRN.IBK {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="FacturaWebServiceConSchemaSoapBinding", Namespace="http://ar/com/ib/cfe/ejb/services")]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(error[]))]
@@ -37,7 +36,7 @@ namespace CedWebRN.IBK {
         private System.Threading.SendOrPostCallback consultaTimeStampConSchemaOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
-
+        
         protected override System.Net.WebRequest GetWebRequest(Uri uri)
         {
             System.Net.HttpWebRequest wr = (System.Net.HttpWebRequest)base.GetWebRequest(uri);
@@ -45,8 +44,6 @@ namespace CedWebRN.IBK {
             wr.ServicePoint.MaxIdleTime = 1000;
             return wr;
         }
-        
-
         /// <remarks/>
         public FacturaWebServiceConSchemaSoapBindingQSService() {
             this.Url = global::CedWebRN.Properties.Settings.Default.CedWebRN_IBK_FacturaWebServiceConSchemaSoapBindingQSService;

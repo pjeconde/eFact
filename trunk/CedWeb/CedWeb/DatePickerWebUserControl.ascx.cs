@@ -43,7 +43,7 @@ namespace CedWeb
             get { return txt_Date.ReadOnly; }
             set { txt_Date.ReadOnly = value; }
         }
-        public void Focus()
+        public override void Focus()
         {
             txt_Date.Focus();
         }

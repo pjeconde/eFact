@@ -29,7 +29,7 @@
             log.WriteLine("Fecha:" + fecha + "\nUrlPathAbsoluto:" + urlPathAbsoluto + "\nExplorador:" + explorador + "\nDescripcion:" + exc.ToString() + "\n");
             log.Close();
         }
-        catch (System.Exception ex)
+        catch (System.Exception)
         {
             //string strFile2 = Server.MapPath("Log.txt");
             //System.IO.StreamWriter log2 = new System.IO.StreamWriter(strFile2, true);

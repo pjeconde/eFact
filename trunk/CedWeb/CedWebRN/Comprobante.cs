@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Security.Cryptography.X509Certificates;
 
 namespace CedWebRN
 {
@@ -10,8 +11,18 @@ namespace CedWebRN
         {
             IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
             objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
-            System.Security.Cryptography.X509Certificates.X509Certificate cert = System.Security.Cryptography.X509Certificates.X509Certificate.CreateFromCertFile(pathCertificado);
-            objIBK.ClientCertificates.Add(cert);
+            
+            //System.Security.Cryptography.X509Certificates.X509Certificate cert = System.Security.Cryptography.X509Certificates.X509Certificate.CreateFromCertFile(pathCertificado);
+            //objIBK.ClientCertificates.Add(cert);
+
+            //System.Security.Cryptography.X509Certificates.X509Certificate c = new System.Security.Cryptography.X509Certificates.X509Certificate(pathCertificado, string.Empty, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags.MachineKeySet);
+            //objIBK.ClientCertificates.Add(c);
+
+            X509Store store = new X509Store(StoreLocation.LocalMachine);
+            store.Open(OpenFlags.ReadOnly);
+            X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, "011f66c68d70", true);
+            objIBK.ClientCertificates.Add(col[0]);
+
             IBK.consulta_lote_comprobantes_response clcr = objIBK.getLoteFacturasConSchema(clc);
             return clcr;
         }
