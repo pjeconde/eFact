@@ -2725,7 +2725,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                     }
 
                 }
-                catch (System.Security.Cryptography.CryptographicException cex)
+                catch (System.Security.Cryptography.CryptographicException)
                 {
                     ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su certificado no se encuentra en nuestro repositorio');</script>");
                 }

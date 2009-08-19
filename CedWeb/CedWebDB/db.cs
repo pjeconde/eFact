@@ -14,7 +14,7 @@ namespace CedWebDB
         public db(CedEntidades.Sesion Sesion)
             : base(Sesion)
         {
-            cedeiraCultura = new CultureInfo(System.Configuration.ConfigurationSettings.AppSettings["Cultura"]);
+            cedeiraCultura = new CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"]);
         }
         #endregion
     }
