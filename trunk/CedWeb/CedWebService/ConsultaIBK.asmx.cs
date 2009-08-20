@@ -8,23 +8,21 @@ using System.ComponentModel;
 
 namespace CedWebService
 {
-    /// <summary>
-    /// Descripción breve de Service1
-    /// </summary>
     [WebService(Namespace = "http://www.cedeira.com.ar/webservices")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [ToolboxItem(false)]
     public class ConsultaIBK : System.Web.Services.WebService
     {
-
         [WebMethod]
         public CedWebRN.IBK.consulta_lote_comprobantes_response Consultar(CedWebRN.IBK.consulta_lote_comprobantes clc, string pathCertificado)
         {
             CedWebRN.IBK.consulta_lote_comprobantes_response clcr = new CedWebRN.IBK.consulta_lote_comprobantes_response();
             try
             {
-                CedWebRN.Comprobante c = new CedWebRN.Comprobante();
-                clcr = c.ConsultarIBK(clc, pathCertificado);
+				Cripto cripto = new Cripto();
+				string nroSerie = cripto.DecryptData(pathCertificado, Server.MapPath("~/CedWebWS.pubpriv.rsa"));
+				CedWebRN.Comprobante c = new CedWebRN.Comprobante();
+				clcr = c.ConsultarIBK(clc, nroSerie);
             }
             catch (Exception ex)
             {

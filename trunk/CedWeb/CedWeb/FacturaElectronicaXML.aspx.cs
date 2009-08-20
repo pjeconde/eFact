@@ -2640,6 +2640,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                         ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el nro de lote');</script>");
                         return;
                     }
+
                     //Ir por RN
                     //CedWebRN.IBK.consulta_lote_comprobantes_response clcr = cRN.ConsultarIBK(clc, Server.MapPath("~/Autenticado/Certificados/interfacturas-" + clc.cuit_vendedor + ".cer"));
                     //try
@@ -2665,11 +2666,10 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                     Cedeira2IBKWS.ConsultaIBK cIBKWS = new Cedeira2IBKWS.ConsultaIBK();
                     try
                     {
-                        //Ir por WS local
-                        //Cedeira2IBKWS.consulta_lote_comprobantes_response clcr = cIBKWS.Consultar(clcIBK, Server.MapPath("~/Autenticado/Certificados/interfacturas-" + clc.cuit_vendedor + ".cer"));
+						Cripto cripto = new Cripto();
+						string certificado = cripto.EncryptData("011f66c68d70", Server.MapPath("~/CedWeb.pubpriv.rsa"), Server.MapPath("~/CedWebWS.pub.rsa"));
 
-                        //Ir por WS no local
-                        Cedeira2IBKWS.consulta_lote_comprobantes_response clcr = cIBKWS.Consultar(clcIBK, @"c:\Inetpub\wwwroot\CedWebWS\interfacturas-" + clc.cuit_vendedor + ".cer");
+						Cedeira2IBKWS.consulta_lote_comprobantes_response clcr = cIBKWS.Consultar(clcIBK, certificado);
 
                         try
                         {

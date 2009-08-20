@@ -15,6 +15,7 @@ namespace FeaEntidades.InterFacturas
 	public partial class informacion_vendedor
 	{
 
+		[FileHelpers.FieldNullValue(typeof(System.Int64), "0")]
 		private long gLNField;
 
 		private bool gLNFieldSpecified;
@@ -23,12 +24,15 @@ namespace FeaEntidades.InterFacturas
 
 		private string razon_socialField;
 
+		[FileHelpers.FieldNullValue(typeof(System.Int64), "0")]
 		private long cuitField;
 
+		[FileHelpers.FieldNullValue(typeof(System.Int32), "0")]
 		private int condicion_IVAField;
 
 		private bool condicion_IVAFieldSpecified;
 
+		[FileHelpers.FieldNullValue(typeof(System.Int32), "0")]
 		private int condicion_ingresos_brutosField;
 
 		private bool condicion_ingresos_brutosFieldSpecified;

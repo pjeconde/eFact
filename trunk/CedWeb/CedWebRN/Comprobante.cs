@@ -7,24 +7,25 @@ namespace CedWebRN
 {
     public class Comprobante
     {
-        public IBK.consulta_lote_comprobantes_response ConsultarIBK(IBK.consulta_lote_comprobantes clc, string pathCertificado)
+        public IBK.consulta_lote_comprobantes_response ConsultarIBK(IBK.consulta_lote_comprobantes clc, string certificado)
         {
             IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
             objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
             
-            //System.Security.Cryptography.X509Certificates.X509Certificate cert = System.Security.Cryptography.X509Certificates.X509Certificate.CreateFromCertFile(pathCertificado);
-            //objIBK.ClientCertificates.Add(cert);
-
-            //System.Security.Cryptography.X509Certificates.X509Certificate c = new System.Security.Cryptography.X509Certificates.X509Certificate(pathCertificado, string.Empty, System.Security.Cryptography.X509Certificates.X509KeyStorageFlags.MachineKeySet);
-            //objIBK.ClientCertificates.Add(c);
-
             X509Store store = new X509Store(StoreLocation.LocalMachine);
             store.Open(OpenFlags.ReadOnly);
-            X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, "011f66c68d70", true);
-            objIBK.ClientCertificates.Add(col[0]);
+			X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
+			if (col.Count.Equals(1))
+			{
+				objIBK.ClientCertificates.Add(col[0]);
+				IBK.consulta_lote_comprobantes_response clcr = objIBK.getLoteFacturasConSchema(clc);
+				return clcr;
+			}
+			else
+			{
+				throw new Exception("Su certificado no está disponible en nuestro repositorio");
+			}
 
-            IBK.consulta_lote_comprobantes_response clcr = objIBK.getLoteFacturasConSchema(clc);
-            return clcr;
         }
         
         public IBK.lote_comprobantes_response EnviarIBK(FeaEntidades.InterFacturas.lote_comprobantes lc, string pathCertificado)

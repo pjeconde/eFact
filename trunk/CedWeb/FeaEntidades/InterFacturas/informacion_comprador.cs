@@ -15,22 +15,27 @@ namespace FeaEntidades.InterFacturas
 	public partial class informacion_comprador
 	{
 
+		[FileHelpers.FieldNullValue(typeof(System.Int64), "0")]
 		private long gLNField;
 
 		private bool gLNFieldSpecified;
 
 		private string codigo_internoField;
 
+		[FileHelpers.FieldNullValue(typeof(System.Int32), "0")]
 		private int codigo_doc_identificatorioField;
 
+		[FileHelpers.FieldNullValue(typeof(System.Int64), "0")]
 		private long nro_doc_identificatorioField;
 
 		private string denominacionField;
 
+		[FileHelpers.FieldNullValue(typeof(System.Int32), "0")]
 		private int condicion_IVAField;
 
 		private bool condicion_IVAFieldSpecified;
 
+		[FileHelpers.FieldNullValue(typeof(System.Int32), "0")]
 		private int condicion_ingresos_brutosField;
 
 		private bool condicion_ingresos_brutosFieldSpecified;
