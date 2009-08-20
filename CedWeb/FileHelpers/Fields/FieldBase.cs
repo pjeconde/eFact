@@ -74,7 +74,7 @@ namespace FileHelpers
 				if (mNullValue != null)
 				{
 					if (! mFieldType.IsAssignableFrom(mNullValue.GetType()))
-						throw new BadUsageException("The NullValue is of type: " + mNullValue.GetType().Name +
+						throw new BadUsageException("The NullValue(" + mNullValue + ") is of type: " + mNullValue.GetType().Name +
 						                            " that is not asignable to the field " + mFieldInfo.Name + " of type: " +
 						                            mFieldType.Name);
 				}
