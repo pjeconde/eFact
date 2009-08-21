@@ -10,10 +10,7 @@ namespace CedWebEntidades
         private int cantidad;
         private double porcentaje;
         private string uRL;
-
-        public Estadistica()
-        {
-        }
+		private int certificado;
         public string Concepto
         {
             get
@@ -58,5 +55,16 @@ namespace CedWebEntidades
                 uRL = value;
             }
         }
-    }
+		public int Certificado
+		{
+			get
+			{
+				return certificado;
+			}
+			set
+			{
+				certificado = value;
+			}
+		}
+	}
 }

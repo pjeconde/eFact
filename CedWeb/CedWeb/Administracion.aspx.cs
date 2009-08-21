@@ -44,6 +44,9 @@ namespace CedWeb
                                 case "Compradores":
                                     CompradoresLabel.Text = "(" + registros[i].Cantidad.ToString() + ")";
                                     break;
+								case "Certificados":
+									CertificadosLabel.Text = "(" + registros[i].Cantidad.ToString() + ")";
+									break;
                                 default:
                                     CuentasLabel.Text = "(" + registros[i].Cantidad.ToString() + ")";
                                     break;

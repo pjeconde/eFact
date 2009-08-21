@@ -35,6 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BonoFiscal.cs" />
+    <Compile Include="Certificado.cs" />
     <Compile Include="Comprador.cs" />
     <Compile Include="Contacto.cs" />
     <Compile Include="Cuenta.cs" />

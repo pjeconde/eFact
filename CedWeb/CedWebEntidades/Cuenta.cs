@@ -30,6 +30,7 @@ namespace CedWebEntidades
         private DateTime fechaUltimoComprobante;
         private DateTime fechaVtoPremium;
         private PaginaDefault paginaDefault;
+		private string nroSerieCertificado;
 
         public Cuenta()
         {
@@ -346,5 +347,16 @@ namespace CedWebEntidades
                 return paginaDefault;
             }
         }
-    }
+		public string NroSerieCertificado
+		{
+			set
+			{
+				nroSerieCertificado = value;
+			}
+			get
+			{
+				return nroSerieCertificado;
+			}
+		}
+	}
 }
