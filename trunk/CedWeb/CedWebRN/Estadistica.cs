@@ -33,7 +33,12 @@ namespace CedWebRN
             elemento.Concepto = "Publicaciones";
             elemento.Cantidad = CedWebRN.Publicacion.CantidadDeFilas(Sesion);
             lista.Add(elemento);
-            return lista;
+			//Certificados
+			elemento = new CedWebEntidades.Estadistica();
+			elemento.Concepto = "Certificados";
+			elemento.Cantidad = CedWebRN.Certificado.CantidadDeFilas(Sesion);
+			lista.Add(elemento);
+			return lista;
         }
     }
 }

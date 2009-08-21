@@ -81,7 +81,8 @@ namespace CedWebDB
             a.Append("0, ");            //CantidadComprobantes
             a.Append("'20000101', ");   //FechaUltimoComprobante
             a.Append("'20000101', ");   //Cuenta.FechaVtoPremium
-            a.Append("'" + Cuenta.PaginaDefault.Id + "' ");
+            a.Append("'" + Cuenta.PaginaDefault.Id + "', ");
+			a.Append("'" + Cuenta.NroSerieCertificado + "' ");
             a.Append(")");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }

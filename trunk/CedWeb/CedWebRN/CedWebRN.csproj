@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Aplicacion.cs" />
     <Compile Include="ArchivoXML.cs" />
+    <Compile Include="Certificado.cs" />
     <Compile Include="Comprador.cs" />
     <Compile Include="Comprobante.cs" />
     <Compile Include="Contacto.cs" />

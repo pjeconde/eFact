@@ -46,7 +46,10 @@
                                         ,&nbsp;
                                         <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/PublicacionExplorador.aspx" SkinID="LinkMedianoClaro">Publicaciones</asp:HyperLink>
                                         <asp:Label ID="PublicacionesLabel" runat="server" Text="" SkinID="TextoMediano"></asp:Label>
-                                    </td>
+                                        ,
+                                        <asp:HyperLink ID="CertificadosHyperLink" runat="server" NavigateUrl="~/AdministracionCertificadosExplorador.aspx"
+                                            SkinID="LinkMedianoClaro">Certificados</asp:HyperLink>
+                                        <asp:Label ID="CertificadosLabel" runat="server" SkinID="TextoMediano" Text=""></asp:Label></td>
                                 </tr>
                                 <tr>
                                     <td style="padding-top:5px; padding-right:3px" align="right" valign="top">
