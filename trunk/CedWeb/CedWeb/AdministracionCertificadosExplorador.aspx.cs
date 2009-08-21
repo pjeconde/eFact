@@ -61,5 +61,23 @@ public partial class AdministracionCertificadosExplorador : System.Web.UI.Page
 			Trace.Warn("Thread abortado");
 		}
 	}
-
+	protected void CertPagingGridView_Sorting(object sender, GridViewSortEventArgs e)
+	{
+		try
+		{
+			System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
+			lista = CedWebRN.Certificado.Lista(CertPagingGridView.PageIndex, CertPagingGridView.PageSize, CertPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
+			ViewState["lista"] = lista;
+			CertPagingGridView.DataSource = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
+			CertPagingGridView.DataBind();
+		}
+		catch (System.Threading.ThreadAbortException)
+		{
+			Trace.Warn("Thread abortado");
+		}
+		catch (Exception ex)
+		{
+			CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepcion.aspx");
+		}
+	}
 }

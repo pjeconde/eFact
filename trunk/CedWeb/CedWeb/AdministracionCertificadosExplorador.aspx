@@ -26,7 +26,7 @@
                         <td style="padding-left: 10px; padding-top: 10px" valign="top">
                             <asp:Panel ID="CertificadosPanel" runat="server" BackColor="peachpuff" BorderColor="brown" BorderStyle="Solid"
                                 BorderWidth="1px" Height="400px" ScrollBars="Auto" Width="650px">
-                                <cc1:paginggridview id="CertPagingGridView" runat="server">
+                                <cc1:PagingGridView ID="CertPagingGridView" runat="server" OnSorting="CertPagingGridView_Sorting">
                                     <Columns>
                                         <asp:BoundField DataField="Id" HeaderText="Id Cuenta"  SortExpression="IdCuenta">
                                             <headerstyle horizontalalign="left" wrap="False"/>
