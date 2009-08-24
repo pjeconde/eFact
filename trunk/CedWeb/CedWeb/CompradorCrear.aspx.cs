@@ -93,7 +93,7 @@ namespace CedWeb
                 comprador.FechaInicioActividades = FechaInicioActividadesDatePickerWebUserControl.CalendarDate;
                 CedWebRN.Comprador.Validar(comprador, (CedEntidades.Sesion)Session["Sesion"]);
                 CedWebRN.Comprador.Crear(comprador, (CedEntidades.Sesion)Session["Sesion"]);
-                Response.Redirect("~/CompradorExplorador.aspx", true);
+                Server.Transfer("~/CompradorExplorador.aspx", true);
             }
             catch (Exception ex)
             {

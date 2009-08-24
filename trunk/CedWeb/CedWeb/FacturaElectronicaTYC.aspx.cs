@@ -30,7 +30,7 @@ namespace CedWeb
                     {
                         if (Page.Request.UrlReferrer.LocalPath.ToString() == "/CedWeb/FacturaElectronica.aspx" || Page.Request.UrlReferrer.LocalPath.ToString() == "/Cedeira/FacturaElectronica.aspx")
                         {
-                            Response.Redirect("FacturaElectronicaXML.aspx");
+                            Server.Transfer("FacturaElectronicaXML.aspx");
                         }
                     }
                 }
@@ -41,7 +41,7 @@ namespace CedWeb
 			if (CheckBoxAceptarTYC.Checked)
 			{
 				Session["AceptarTYC"] = true;
-				Response.Redirect("FacturaElectronicaXML.aspx");
+				Server.Transfer("FacturaElectronicaXML.aspx");
 			}
 			else
 			{

@@ -97,7 +97,7 @@ namespace CedWeb
                 CedWebRN.Vendedor.Validar(vendedor, (CedEntidades.Sesion)Session["Sesion"]);
                 CedWebRN.Vendedor.Guardar(vendedor, (CedEntidades.Sesion)Session["Sesion"]);
                 CedWebRN.Vendedor.Copiar(vendedor, ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor);
-                Response.Redirect("~/FacturaElectronica.aspx", true);
+                Server.Transfer("~/FacturaElectronica.aspx", true);
             }
             catch (Exception ex)
             {
@@ -165,12 +165,12 @@ namespace CedWeb
                 System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"Temp/" + nombreArchivo), System.IO.FileMode.Create);
                 m.WriteTo(fs);
                 fs.Close();
-                Response.Redirect("~/DescargaTemporarios.aspx?archivo=" + nombreArchivo, false);
+                Server.Transfer("~/DescargaTemporarios.aspx?archivo=" + nombreArchivo, false);
             }
         }
         protected void CancelarButton_Click(object sender, EventArgs e)
 		{
-			Response.Redirect((string)Session["ref"]);
+			Server.Transfer("~/FacturaElectronica.aspx");
 		}
         protected void AgregarPuntoDeVentaButton_Click(object sender, EventArgs e)
         {

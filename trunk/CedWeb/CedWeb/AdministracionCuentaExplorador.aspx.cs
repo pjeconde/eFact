@@ -273,7 +273,7 @@ namespace CedWeb
         protected void ActivarPremiumButton_Click(object sender, EventArgs e)
         {
             Session["CuentaPremiumActivar-Id"] = CuentaSeleccionada().Id;
-            Response.Redirect("~/CuentaPremiumActivar.aspx", true);
+            Server.Transfer("~/CuentaPremiumActivar.aspx", true);
         }
         protected void DesactivarPremiumButton_Click(object sender, EventArgs e)
         {
@@ -305,7 +305,7 @@ namespace CedWeb
         }
         protected void SalirButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Administracion.aspx", true);
+			Server.Transfer("~/Administracion.aspx");
         }
     }
 }

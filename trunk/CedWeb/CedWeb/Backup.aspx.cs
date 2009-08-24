@@ -40,7 +40,7 @@ namespace CedWeb
                     System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"Temp/" + nombreArchivo), System.IO.FileMode.Create);
                     m.WriteTo(fs);
                     fs.Close();
-                    Response.Redirect("~/DescargaTemporarios.aspx?archivo=" + nombreArchivo, false);
+                    Server.Transfer("~/DescargaTemporarios.aspx?archivo=" + nombreArchivo, false);
                 }
             }
             catch (Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente)
@@ -76,7 +76,7 @@ namespace CedWeb
                     System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"Temp/" + nombreArchivo), System.IO.FileMode.Create);
                     m.WriteTo(fs);
                     fs.Close();
-                    Response.Redirect("~/DescargaTemporarios.aspx?archivo=" + nombreArchivo, false);
+                    Server.Transfer("~/DescargaTemporarios.aspx?archivo=" + nombreArchivo, false);
                 }
 
             }

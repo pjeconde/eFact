@@ -105,7 +105,7 @@ namespace CedWeb
         }
         protected void SalirButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect((string)Session["ref"]);
-        }
+			Server.Transfer("~/Administracion.aspx");
+		}
     }
 }

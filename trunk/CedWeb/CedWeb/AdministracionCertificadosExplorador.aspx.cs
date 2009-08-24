@@ -80,4 +80,48 @@ public partial class AdministracionCertificadosExplorador : System.Web.UI.Page
 			CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepcion.aspx");
 		}
 	}
+	protected void CertPagingGridView_RowEditing(object sender, GridViewEditEventArgs e)
+	{
+		CertPagingGridView.EditIndex = e.NewEditIndex;
+		CertPagingGridView.DataSource = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
+		CertPagingGridView.DataBind();
+
+	}
+	protected void CertPagingGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+	{
+
+	}
+	protected void CertPagingGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+	{
+		CertPagingGridView.EditIndex = -1;
+		CertPagingGridView.DataSource = ViewState["lista"];
+		CertPagingGridView.DataBind();
+
+	}
+	protected void CertPagingGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
+	{
+		System.Collections.Generic.List<CedWebEntidades.Cuenta> lista = ((System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"]);
+		CedWebEntidades.Cuenta c = lista[e.RowIndex];
+		string nroCert = ((TextBox)CertPagingGridView.Rows[e.RowIndex].FindControl("txtNroSerieCertificado")).Text;
+		c.NroSerieCertificado = nroCert;
+
+		try
+		{
+			CedWebRN.Certificado.Confirmar(c, (CedWebEntidades.Sesion)Session["Sesion"]);
+		}
+		catch (Exception ex)
+		{
+			BindPagingGrid();
+			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.Replace("\r", "").Replace("\n", "") + "');</script>");
+		}
+
+		CertPagingGridView.EditIndex = -1;
+		CertPagingGridView.DataSource = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
+		CertPagingGridView.DataBind();
+
+	}
+	protected void SalirButton_Click(object sender, EventArgs e)
+	{
+		Server.Transfer("~/Administracion.aspx");
+	}
 }

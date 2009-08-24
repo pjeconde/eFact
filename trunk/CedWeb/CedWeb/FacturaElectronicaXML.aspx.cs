@@ -28,7 +28,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
         {
             if (Session["AceptarTYC"] == null || Session["AceptarTYC"].Equals(false))
             {
-                Response.Redirect("FacturaElectronicaTYC.aspx");
+                Server.Transfer("FacturaElectronicaTYC.aspx");
             }
             else
             {
@@ -943,7 +943,7 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
                     System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"Temp/" + sb.ToString()), System.IO.FileMode.Create);
                     m.WriteTo(fs);
                     fs.Close();
-                    Response.Redirect("~/DescargaTemporarios.aspx?archivo=" + sb.ToString(), false);
+                    Server.Transfer("~/DescargaTemporarios.aspx?archivo=" + sb.ToString(), false);
                 }
                 else
                 {

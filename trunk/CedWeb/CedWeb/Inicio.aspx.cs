@@ -45,11 +45,11 @@ namespace CedWeb
                 }
                 if (sesion.Cuenta.ActivCP)
                 {
-                    Response.Redirect("~/ActivacionClientePesado.aspx", true);
+                    Server.Transfer("~/ActivacionClientePesado.aspx", true);
                 }
                 else
                 {
-                    Response.Redirect("~/" + sesion.Cuenta.PaginaDefault.URL + ".aspx", true);
+                    Server.Transfer("~/" + sesion.Cuenta.PaginaDefault.URL + ".aspx", true);
                 }
             }
             catch (System.Threading.ThreadAbortException)

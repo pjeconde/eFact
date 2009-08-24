@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/CedWeb.master" AutoEventWireup="true" CodeFile="AdministracionCertificadosExplorador.aspx.cs" Inherits="AdministracionCertificadosExplorador" %>
 <%@ Register Assembly="CedeiraUIWebForms" Namespace="CedeiraUIWebForms" TagPrefix="cc1" %>
+
 <asp:Content ID="AdministracionCertificadosExploradorContent" runat="Server" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado">
     <table border="0" cellpadding="0" cellspacing="0" class="TextoComun" style="height: 500px;
         width: 800px; text-align: left;">
@@ -26,23 +27,42 @@
                         <td style="padding-left: 10px; padding-top: 10px" valign="top">
                             <asp:Panel ID="CertificadosPanel" runat="server" BackColor="peachpuff" BorderColor="brown" BorderStyle="Solid"
                                 BorderWidth="1px" Height="400px" ScrollBars="Auto" Width="650px">
-                                <cc1:PagingGridView ID="CertPagingGridView" runat="server" OnSorting="CertPagingGridView_Sorting">
+                                <cc1:PagingGridView ID="CertPagingGridView" runat="server" 
+									OnSorting="CertPagingGridView_Sorting" Width="650px" AutoGenerateColumns="False" OnRowCancelingEdit="CertPagingGridView_RowCancelingEdit" OnRowCommand="CertPagingGridView_RowCommand" OnRowEditing="CertPagingGridView_RowEditing" OnRowUpdating="CertPagingGridView_RowUpdating">
                                     <Columns>
-                                        <asp:BoundField DataField="Id" HeaderText="Id Cuenta"  SortExpression="IdCuenta">
-                                            <headerstyle horizontalalign="left" wrap="False"/>
-                                            <itemstyle wrap="False" horizontalalign="left"/>
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="Nombre" HeaderText="Nombre Cuenta" SortExpression="Nombre">
-                                            <headerstyle horizontalalign="left" wrap="False"/>
-                                            <itemstyle  wrap="False" horizontalalign="left"/>
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="NroSerieCertificado" HeaderText="Número de serie del certificado"
-                                            SortExpression="NroSerieCertificado">
-                                            <headerstyle horizontalalign="left" wrap="False"/>
-                                            <itemstyle wrap="False" horizontalalign="left"/>
-                                        </asp:BoundField>
-                                    </Columns>
-                                </cc1:paginggridview>
+										<asp:TemplateField HeaderText="Id Cuenta" SortExpression="IdCuenta">
+											<itemtemplate>
+                                                <asp:Label ID="lblIdCuenta" runat="server" Text='<%# Eval("Id") %>'
+                                                    Width="100%"></asp:Label>
+                                            </itemtemplate>
+											<itemstyle horizontalalign="Center" wrap="false" />
+										</asp:TemplateField>
+										<asp:TemplateField HeaderText="Nombre Cuenta" SortExpression="Nombre">
+											<itemtemplate>
+                                                <asp:Label ID="lblNombre" runat="server" Text='<%# Eval("Nombre") %>'
+                                                    Width="100%"></asp:Label>
+                                            </itemtemplate>
+											<itemstyle horizontalalign="Center" wrap="false"/>
+										</asp:TemplateField>
+										<asp:TemplateField HeaderText="Número de serie del certificado" SortExpression="NroSerieCertificado">
+											<itemtemplate>
+                                                <asp:Label ID="lblNroSerieCertificado" runat="server" Text='<%# Eval("NroSerieCertificado") %>'
+                                                    Width="40%"></asp:Label>
+                                            </itemtemplate>
+											<edititemtemplate>
+                                                <asp:TextBox ID="txtNroSerieCertificado" runat="server" Text='<%# Eval("NroSerieCertificado") %>'
+                                                    Width="100%"></asp:TextBox>
+                                            </edititemtemplate>
+											<itemstyle horizontalalign="Center" wrap="true" />
+										</asp:TemplateField>
+										<asp:CommandField
+											HeaderText="Edición" ShowEditButton="True">
+											<headerstyle font-bold="False" horizontalalign="Center" width="150px" />
+											<itemstyle horizontalalign="Center" width="10%" />
+										</asp:CommandField>
+									</Columns>
+									<PagerSettings Mode="NumericFirstLast"></PagerSettings>
+                                </cc1:PagingGridView>
                             </asp:Panel>
                         </td>
                         <td align="left" style="padding-left: 10px; padding-top: 6px" valign="top">
@@ -50,7 +70,7 @@
                                 <tr>
                                     <td style="padding-top: 5px">
                                         <asp:Button ID="SalirButton" runat="server" Text="Salir"
-                                            Width="100px" />
+                                            Width="100px" OnClick="SalirButton_Click" />
                                     </td>
                                 </tr>
                                 <tr>
