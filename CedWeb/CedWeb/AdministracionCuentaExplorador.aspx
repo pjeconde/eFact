@@ -36,7 +36,7 @@
                                     <Columns>
                                         <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="IdCuenta">
                                             <headerstyle horizontalalign="left" wrap="False"/>
-                                            <itemstyle wrap="False" horizontalalign="left" Width="300px"/>
+                                            <itemstyle wrap="False" horizontalalign="left" width="300px"/>
                                         </asp:BoundField>
                                         <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre">
                                             <headerstyle horizontalalign="left" wrap="False"/>

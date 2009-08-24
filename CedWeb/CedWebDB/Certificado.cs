@@ -47,5 +47,15 @@ namespace CedWebDB
 			Hasta.Nombre = Convert.ToString(Desde["Nombre"]);
 			Hasta.NroSerieCertificado = Convert.ToString(Desde["NroSerieCertificado"]);
 		}
+		public void Confirmar(CedWebEntidades.Cuenta Cuenta)
+		{
+			StringBuilder a = new StringBuilder(string.Empty);
+			a.Append("update Cuenta set NroSerieCertificado='"+Cuenta.NroSerieCertificado+"' where IdCuenta='" + Cuenta.Id + "' ");
+			int cantReg = (int)Ejecutar(a.ToString(), TipoRetorno.CantReg, Transaccion.NoAcepta, sesion.CnnStr);
+			if (cantReg != 1)
+			{
+				throw new Microsoft.ApplicationBlocks.ExceptionManagement.Cuenta.CuentaConfUpdateErroneo();
+			}
+		}
 	}
 }

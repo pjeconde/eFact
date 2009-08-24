@@ -232,7 +232,7 @@ namespace CedWeb
         }
         protected void SalirButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Administracion.aspx", true);
+            Server.Transfer("~/Administracion.aspx", true);
         }
     }
 }

@@ -148,22 +148,22 @@ namespace CedWeb
         }
         protected void CrearButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/CompradorCrear.aspx", true);
+            Server.Transfer("~/CompradorCrear.aspx", true);
         }
         protected void EliminarButton_Click(object sender, EventArgs e)
         {
 			Session["CompradorSeleccionado"] = CompradorSeleccionado().RazonSocial;
-			Response.Redirect("~/CompradorEliminar.aspx", true);
+			Server.Transfer("~/CompradorEliminar.aspx", true);
         }
         protected void ModificarButton_Click(object sender, EventArgs e)
         {
 			Session["CompradorSeleccionado"] = CompradorSeleccionado().RazonSocial;
-			Response.Redirect("~/CompradorModificar.aspx", true);
+			Server.Transfer("~/CompradorModificar.aspx", true);
         }
         protected void ConsultarButton_Click(object sender, EventArgs e)
         {
 			Session["CompradorSeleccionado"] = CompradorSeleccionado().RazonSocial;
-			Response.Redirect("~/CompradorConsultar.aspx", true);
+			Server.Transfer("~/CompradorConsultar.aspx", true);
         }
         protected CedWebEntidades.Comprador CompradorSeleccionado()
         {
@@ -194,14 +194,14 @@ namespace CedWeb
                     System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"Temp/" + nombreArchivo), System.IO.FileMode.Create);
                     m.WriteTo(fs);
                     fs.Close();
-                    Response.Redirect("~/DescargaTemporarios.aspx?archivo=" + nombreArchivo, false);
+                    Server.Transfer("~/DescargaTemporarios.aspx?archivo=" + nombreArchivo, false);
                 }
 
             }
         }
         protected void SalirButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/FacturaElectronica.aspx", true);
+            Server.Transfer("~/FacturaElectronica.aspx", true);
         }
     }
 }

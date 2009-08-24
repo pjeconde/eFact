@@ -42,7 +42,7 @@ namespace CedWeb
         }
         protected void SalirButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Inicio.aspx");
+            Server.Transfer("~/Inicio.aspx");
         }
     }
 }

@@ -20,5 +20,10 @@ namespace CedWebRN
 			}
 			return certificado.Lista(IndicePagina, TamañoPagina, OrderBy);
 		}
+		public static void Confirmar(CedWebEntidades.Cuenta Cuenta, CedWebEntidades.Sesion Sesion)
+		{
+			CedWebDB.Certificado c = new CedWebDB.Certificado((CedEntidades.Sesion)Sesion);
+			c.Confirmar(Cuenta);
+		}
 	}
 }

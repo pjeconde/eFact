@@ -85,7 +85,7 @@ namespace CedWeb
         public void SalirLinkButton_Click(object sender, EventArgs e)
         {
             CaducarIdentificacion();
-            Response.Redirect("~/Inicio.aspx", true);
+            Server.Transfer("~/Inicio.aspx", true);
         }
         public void CaducarIdentificacion()
         {

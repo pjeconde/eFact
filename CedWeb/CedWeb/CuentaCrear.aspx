@@ -246,7 +246,7 @@
                                         </asp:Button>
                                     </td>
                                     <td align="right" style="padding-top:10px">
-                                        <asp:Button ID="CancelarButton" runat="server" Text="Cancelar" Width="100px" PostBackUrl="~/Inicio.aspx" CausesValidation="false">
+                                        <asp:Button ID="CancelarButton" runat="server" Text="Cancelar" Width="100px" PostBackUrl="~/FacturaElectronica.aspx" CausesValidation="false">
                                         </asp:Button>
                                     </td>
                                 </tr>
