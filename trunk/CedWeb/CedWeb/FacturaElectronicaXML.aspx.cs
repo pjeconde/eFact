@@ -10,7 +10,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Xml;
 
-public partial class FacturaElectronicaXML : System.Web.UI.Page
+public partial class FacturaElectronicaXML : Page
 {
 	#region Variables
 	string gvUniqueID = String.Empty;
@@ -2114,26 +2114,96 @@ public partial class FacturaElectronicaXML : System.Web.UI.Page
 		{
 			try
 			{
-				CedWebRN.Comprobante cRN = new CedWebRN.Comprobante();
 				FeaEntidades.InterFacturas.lote_comprobantes lc = GenerarLote();
 
-				CedWebRN.IBK.lote_comprobantes_response lcr = cRN.EnviarIBK(lc, Server.MapPath("~/Autenticado/Certificados/interfacturas-" + lc.cabecera_lote.cuit_vendedor + ".cer"));
+				//Ir por RN
+				//CedWebRN.Comprobante cRN = new CedWebRN.Comprobante();
+				//CedWebRN.IBK.lote_comprobantes_response lcr = cRN.EnviarIBK(lc, Server.MapPath("~/Autenticado/Certificados/interfacturas-" + lc.cabecera_lote.cuit_vendedor + ".cer"));
+				//if (!((CedWebRN.IBK.lote_response)lcr.Item).estado.Equals("OK"))
+				//{
+				//    if (((CedWebRN.IBK.lote_response)lcr.Item).errores_lote != null)
+				//    {
+				//        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Interfacturas dice:" + ((CedWebRN.IBK.lote_response)lcr.Item).errores_lote[0].descripcion_error + "')</script>");
+				//    }
+				//    else
+				//    {
+				//        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Interfacturas dice:" + ((CedWebRN.IBK.lote_response)lcr.Item).comprobante_response[0].errores_comprobante[0].descripcion_error + "')</script>");
+				//    }
+				//}
+				//else
+				//{
+				//    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Comprobante enviado satisfactoriamente a Interfacturas.')</script>");
+				//}
 				
-				if (!((CedWebRN.IBK.lote_response)lcr.Item).estado.Equals("OK"))
+				//Ir por WS
+				CedWebEntidades.Cuenta cta = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta;
+				if (cta.NroSerieCertificado.Equals(string.Empty))
 				{
-					if (((CedWebRN.IBK.lote_response)lcr.Item).errores_lote != null)
+					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>");
+					return;
+				}
+				try
+				{
+					Cripto cripto = new Cripto();
+					string certificado = cripto.EncryptData(cta.NroSerieCertificado, Server.MapPath("~/CedWeb.pubpriv.rsa"), Server.MapPath("~/CedWebWS.pub.rsa"));
+
+					Cedeira2IBKWSEnvio.EnvioIBK eIBKWS = new Cedeira2IBKWSEnvio.EnvioIBK();
+					Cedeira2IBKWSEnvio.lc lcIBK = new Cedeira2IBKWSEnvio.lc();
+
+					Conversor conv = new Conversor();
+					lcIBK = conv.Entidad2WSCedeira(lc);
+
+					Cedeira2IBKWSEnvio.lote_comprobantes_response lcr = eIBKWS.EnviarIBK(lcIBK, certificado);
+
+					if (!((Cedeira2IBKWSEnvio.lote_comprobantes_responseLote_response)lcr.Item).estado.Equals("OK"))
 					{
-						ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Interfacturas dice:" + ((CedWebRN.IBK.lote_response)lcr.Item).errores_lote[0].descripcion_error + "')</script>");
+						if (((Cedeira2IBKWSEnvio.lote_comprobantes_responseLote_response)lcr.Item).errores_lote != null)
+						{
+							ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Interfacturas dice:" + ((Cedeira2IBKWSEnvio.lote_comprobantes_responseLote_response)lcr.Item).errores_lote[0].descripcion_error + "')</script>");
+						}
+						else
+						{
+							ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Interfacturas dice:" + ((Cedeira2IBKWSEnvio.lote_comprobantes_responseLote_response)lcr.Item).comprobante_response[0].errores_comprobante[0].descripcion_error + "')</script>");
+						}
 					}
 					else
 					{
-						ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Interfacturas dice:" + ((CedWebRN.IBK.lote_response)lcr.Item).comprobante_response[0].errores_comprobante[0].descripcion_error + "')</script>");
+						ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Comprobante enviado satisfactoriamente a Interfacturas.')</script>");
 					}
 				}
-				else
+				catch (System.Web.Services.Protocols.SoapException soapEx)
 				{
-					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Comprobante enviado satisfactoriamente a Interfacturas.')</script>");
+					try
+					{
+						XmlDocument doc = new XmlDocument();
+						doc.LoadXml(soapEx.Detail.OuterXml);
+						XmlNamespaceManager nsManager = new
+							XmlNamespaceManager(doc.NameTable);
+						nsManager.AddNamespace("errorNS",
+							"http://www.cedeira.com.ar/webservices");
+						XmlNode Node =
+							doc.DocumentElement.SelectSingleNode("errorNS:Error", nsManager);
+						string errorNumber =
+							Node.SelectSingleNode("errorNS:ErrorNumber",
+							nsManager).InnerText;
+						string errorMessage =
+							Node.SelectSingleNode("errorNS:ErrorMessage",
+							nsManager).InnerText;
+						string errorSource =
+							Node.SelectSingleNode("errorNS:ErrorSource",
+							nsManager).InnerText;
+						ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + " : " + errorMessage.Replace("\r", "").Replace("\n", "") + "');</script>");
+					}
+					catch (Exception)
+					{
+						throw soapEx;
+					}
 				}
+
+
+
+
+
 			}
 			catch (Exception ex)
 			{

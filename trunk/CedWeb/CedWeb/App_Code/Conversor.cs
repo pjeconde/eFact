@@ -318,4 +318,311 @@ public class Conversor
 
         return lcFEA;
     }
+
+	public Cedeira2IBKWSEnvio.lc Entidad2WSCedeira(FeaEntidades.InterFacturas.lote_comprobantes feaLC)
+	{
+		Cedeira2IBKWSEnvio.lc lc = new Cedeira2IBKWSEnvio.lc();
+
+		lc.cabecera_lote = new Cedeira2IBKWSEnvio.lcCabecera_lote();
+		lc.cabecera_lote.cantidad_reg = feaLC.cabecera_lote.cantidad_reg;
+		lc.cabecera_lote.cod_interno_canal = feaLC.cabecera_lote.cod_interno_canal;
+		lc.cabecera_lote.cuit_canal = feaLC.cabecera_lote.cuit_canal;
+		lc.cabecera_lote.cuit_vendedor = feaLC.cabecera_lote.cuit_vendedor;
+		lc.cabecera_lote.fecha_envio_lote = feaLC.cabecera_lote.fecha_envio_lote;
+		lc.cabecera_lote.id_lote = feaLC.cabecera_lote.id_lote;
+		lc.cabecera_lote.motivo = feaLC.cabecera_lote.motivo;
+		lc.cabecera_lote.presta_serv = feaLC.cabecera_lote.presta_serv;
+		lc.cabecera_lote.presta_servSpecified = feaLC.cabecera_lote.presta_servSpecified;
+		lc.cabecera_lote.punto_de_venta = feaLC.cabecera_lote.punto_de_venta;
+		lc.cabecera_lote.resultado = feaLC.cabecera_lote.resultado;
+
+		lc.comprobante = new Cedeira2IBKWSEnvio.lcComprobante[feaLC.comprobante.Length];
+
+		for (int i = 0; i < feaLC.comprobante.Length; i++)
+		{
+			Cedeira2IBKWSEnvio.lcComprobante cIBK = new Cedeira2IBKWSEnvio.lcComprobante();
+
+			cIBK.cabecera = new  Cedeira2IBKWSEnvio.lcComprobanteCabecera();
+
+			cIBK.cabecera.informacion_comprador = new  Cedeira2IBKWSEnvio.lcComprobanteCabeceraInformacion_comprador();
+			cIBK.cabecera.informacion_comprador.codigo_doc_identificatorio = feaLC.comprobante[i].cabecera.informacion_comprador.codigo_doc_identificatorio;
+			cIBK.cabecera.informacion_comprador.codigo_interno = feaLC.comprobante[i].cabecera.informacion_comprador.codigo_interno;
+			cIBK.cabecera.informacion_comprador.condicion_ingresos_brutos = feaLC.comprobante[i].cabecera.informacion_comprador.condicion_ingresos_brutos;
+			cIBK.cabecera.informacion_comprador.condicion_ingresos_brutosSpecified = feaLC.comprobante[i].cabecera.informacion_comprador.condicion_ingresos_brutosSpecified;
+			cIBK.cabecera.informacion_comprador.condicion_IVA = feaLC.comprobante[i].cabecera.informacion_comprador.condicion_IVA;
+			cIBK.cabecera.informacion_comprador.condicion_IVASpecified = feaLC.comprobante[i].cabecera.informacion_comprador.condicion_IVASpecified;
+			cIBK.cabecera.informacion_comprador.contacto = feaLC.comprobante[i].cabecera.informacion_comprador.contacto;
+			cIBK.cabecera.informacion_comprador.cp = feaLC.comprobante[i].cabecera.informacion_comprador.cp;
+			cIBK.cabecera.informacion_comprador.denominacion = feaLC.comprobante[i].cabecera.informacion_comprador.denominacion;
+			cIBK.cabecera.informacion_comprador.domicilio_calle = feaLC.comprobante[i].cabecera.informacion_comprador.domicilio_calle;
+			cIBK.cabecera.informacion_comprador.domicilio_depto = feaLC.comprobante[i].cabecera.informacion_comprador.domicilio_depto;
+			cIBK.cabecera.informacion_comprador.domicilio_manzana = feaLC.comprobante[i].cabecera.informacion_comprador.domicilio_manzana;
+			cIBK.cabecera.informacion_comprador.domicilio_numero = feaLC.comprobante[i].cabecera.informacion_comprador.domicilio_numero;
+			cIBK.cabecera.informacion_comprador.domicilio_piso = feaLC.comprobante[i].cabecera.informacion_comprador.domicilio_piso;
+			cIBK.cabecera.informacion_comprador.domicilio_sector = feaLC.comprobante[i].cabecera.informacion_comprador.domicilio_sector;
+			cIBK.cabecera.informacion_comprador.domicilio_torre = feaLC.comprobante[i].cabecera.informacion_comprador.domicilio_torre;
+			cIBK.cabecera.informacion_comprador.email = feaLC.comprobante[i].cabecera.informacion_comprador.email;
+			cIBK.cabecera.informacion_comprador.GLN = feaLC.comprobante[i].cabecera.informacion_comprador.GLN;
+			cIBK.cabecera.informacion_comprador.GLNSpecified = feaLC.comprobante[i].cabecera.informacion_comprador.GLNSpecified;
+			cIBK.cabecera.informacion_comprador.inicio_de_actividades = feaLC.comprobante[i].cabecera.informacion_comprador.inicio_de_actividades;
+			cIBK.cabecera.informacion_comprador.localidad = feaLC.comprobante[i].cabecera.informacion_comprador.localidad;
+			cIBK.cabecera.informacion_comprador.nro_doc_identificatorio = feaLC.comprobante[i].cabecera.informacion_comprador.nro_doc_identificatorio;
+			cIBK.cabecera.informacion_comprador.nro_ingresos_brutos = feaLC.comprobante[i].cabecera.informacion_comprador.nro_ingresos_brutos;
+			cIBK.cabecera.informacion_comprador.provincia = feaLC.comprobante[i].cabecera.informacion_comprador.provincia;
+			cIBK.cabecera.informacion_comprador.telefono = feaLC.comprobante[i].cabecera.informacion_comprador.telefono;
+
+			cIBK.cabecera.informacion_comprobante = new Cedeira2IBKWSEnvio.lcComprobanteCabeceraInformacion_comprobante();
+			cIBK.cabecera.informacion_comprobante.cae = feaLC.comprobante[i].cabecera.informacion_comprobante.cae;
+			cIBK.cabecera.informacion_comprobante.codigo_operacion = feaLC.comprobante[i].cabecera.informacion_comprobante.codigo_operacion;
+			cIBK.cabecera.informacion_comprobante.condicion_de_pago = feaLC.comprobante[i].cabecera.informacion_comprobante.condicion_de_pago;
+			cIBK.cabecera.informacion_comprobante.condicion_de_pagoSpecified = feaLC.comprobante[i].cabecera.informacion_comprobante.condicion_de_pagoSpecified;
+			cIBK.cabecera.informacion_comprobante.es_detalle_encriptado = feaLC.comprobante[i].cabecera.informacion_comprobante.es_detalle_encriptado;
+			cIBK.cabecera.informacion_comprobante.fecha_emision = feaLC.comprobante[i].cabecera.informacion_comprobante.fecha_emision;
+			cIBK.cabecera.informacion_comprobante.fecha_obtencion_cae = feaLC.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae;
+			cIBK.cabecera.informacion_comprobante.fecha_serv_desde = feaLC.comprobante[i].cabecera.informacion_comprobante.fecha_serv_desde;
+			cIBK.cabecera.informacion_comprobante.fecha_serv_hasta = feaLC.comprobante[i].cabecera.informacion_comprobante.fecha_serv_hasta;
+			cIBK.cabecera.informacion_comprobante.fecha_vencimiento = feaLC.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento;
+			cIBK.cabecera.informacion_comprobante.fecha_vencimiento_cae = feaLC.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento_cae;
+			cIBK.cabecera.informacion_comprobante.iva_computable = feaLC.comprobante[i].cabecera.informacion_comprobante.iva_computable;
+			cIBK.cabecera.informacion_comprobante.motivo = feaLC.comprobante[i].cabecera.informacion_comprobante.motivo;
+			cIBK.cabecera.informacion_comprobante.numero_comprobante = feaLC.comprobante[i].cabecera.informacion_comprobante.numero_comprobante;
+			cIBK.cabecera.informacion_comprobante.punto_de_venta = feaLC.comprobante[i].cabecera.informacion_comprobante.punto_de_venta;
+
+			if (feaLC.comprobante[i].cabecera.informacion_comprobante.referencias != null)
+			{
+				cIBK.cabecera.informacion_comprobante.referencias = new  Cedeira2IBKWSEnvio.lcComprobanteCabeceraInformacion_comprobanteReferencias[feaLC.comprobante[i].cabecera.informacion_comprobante.referencias.Length];
+
+				for (int j = 0; j < feaLC.comprobante[i].cabecera.informacion_comprobante.referencias.Length; j++)
+				{
+					if (feaLC.comprobante[i].cabecera.informacion_comprobante.referencias[j] != null)
+					{
+						cIBK.cabecera.informacion_comprobante.referencias[j] = new Cedeira2IBKWSEnvio.lcComprobanteCabeceraInformacion_comprobanteReferencias();
+						cIBK.cabecera.informacion_comprobante.referencias[j].codigo_de_referencia = feaLC.comprobante[i].cabecera.informacion_comprobante.referencias[j].codigo_de_referencia;
+						cIBK.cabecera.informacion_comprobante.referencias[j].dato_de_referencia = feaLC.comprobante[i].cabecera.informacion_comprobante.referencias[j].dato_de_referencia;
+					}
+				}
+			}
+
+
+			cIBK.cabecera.informacion_comprobante.resultado = feaLC.comprobante[i].cabecera.informacion_comprobante.resultado;
+			cIBK.cabecera.informacion_comprobante.tipo_de_comprobante = feaLC.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante;
+
+			cIBK.cabecera.informacion_vendedor = new  Cedeira2IBKWSEnvio.lcComprobanteCabeceraInformacion_vendedor();
+			cIBK.cabecera.informacion_vendedor.codigo_interno = feaLC.comprobante[i].cabecera.informacion_vendedor.codigo_interno;
+			cIBK.cabecera.informacion_vendedor.condicion_ingresos_brutos = feaLC.comprobante[i].cabecera.informacion_vendedor.condicion_ingresos_brutos;
+			cIBK.cabecera.informacion_vendedor.condicion_ingresos_brutosSpecified = feaLC.comprobante[i].cabecera.informacion_vendedor.condicion_ingresos_brutosSpecified;
+			cIBK.cabecera.informacion_vendedor.condicion_IVA = feaLC.comprobante[i].cabecera.informacion_vendedor.condicion_IVA;
+			cIBK.cabecera.informacion_vendedor.condicion_IVASpecified = feaLC.comprobante[i].cabecera.informacion_vendedor.condicion_IVASpecified;
+			cIBK.cabecera.informacion_vendedor.contacto = feaLC.comprobante[i].cabecera.informacion_vendedor.contacto;
+			cIBK.cabecera.informacion_vendedor.cp = feaLC.comprobante[i].cabecera.informacion_vendedor.cp;
+			cIBK.cabecera.informacion_vendedor.cuit = feaLC.comprobante[i].cabecera.informacion_vendedor.cuit;
+			cIBK.cabecera.informacion_vendedor.domicilio_calle = feaLC.comprobante[i].cabecera.informacion_vendedor.domicilio_calle;
+			cIBK.cabecera.informacion_vendedor.domicilio_depto = feaLC.comprobante[i].cabecera.informacion_vendedor.domicilio_depto;
+			cIBK.cabecera.informacion_vendedor.domicilio_manzana = feaLC.comprobante[i].cabecera.informacion_vendedor.domicilio_manzana;
+			cIBK.cabecera.informacion_vendedor.domicilio_numero = feaLC.comprobante[i].cabecera.informacion_vendedor.domicilio_numero;
+			cIBK.cabecera.informacion_vendedor.domicilio_piso = feaLC.comprobante[i].cabecera.informacion_vendedor.domicilio_piso;
+			cIBK.cabecera.informacion_vendedor.domicilio_sector = feaLC.comprobante[i].cabecera.informacion_vendedor.domicilio_sector;
+			cIBK.cabecera.informacion_vendedor.domicilio_torre = feaLC.comprobante[i].cabecera.informacion_vendedor.domicilio_torre;
+			cIBK.cabecera.informacion_vendedor.email = feaLC.comprobante[i].cabecera.informacion_vendedor.email;
+			cIBK.cabecera.informacion_vendedor.GLN = feaLC.comprobante[i].cabecera.informacion_vendedor.GLN;
+			cIBK.cabecera.informacion_vendedor.GLNSpecified = feaLC.comprobante[i].cabecera.informacion_vendedor.GLNSpecified;
+			cIBK.cabecera.informacion_vendedor.inicio_de_actividades = feaLC.comprobante[i].cabecera.informacion_vendedor.inicio_de_actividades;
+			cIBK.cabecera.informacion_vendedor.localidad = feaLC.comprobante[i].cabecera.informacion_vendedor.localidad;
+			cIBK.cabecera.informacion_vendedor.nro_ingresos_brutos = feaLC.comprobante[i].cabecera.informacion_vendedor.nro_ingresos_brutos;
+			cIBK.cabecera.informacion_vendedor.provincia = feaLC.comprobante[i].cabecera.informacion_vendedor.provincia;
+			cIBK.cabecera.informacion_vendedor.telefono = feaLC.comprobante[i].cabecera.informacion_vendedor.telefono;
+
+
+			cIBK.extensiones = new Cedeira2IBKWSEnvio.lcComprobanteExtensiones();
+
+			Cedeira2IBKWSEnvio.lcComprobanteDetalle d = new Cedeira2IBKWSEnvio.lcComprobanteDetalle();
+
+			FeaEntidades.InterFacturas.detalle detalle = feaLC.comprobante[i].detalle;
+
+			d.linea = new Cedeira2IBKWSEnvio.lcComprobanteDetalleLinea[detalle.linea.Length];
+
+			for (int j = 0; j < detalle.linea.Length; j++)
+			{
+				if (detalle.linea[j] != null)
+				{
+					d.linea[j] = new Cedeira2IBKWSEnvio.lcComprobanteDetalleLinea();
+					d.linea[j].alicuota_iva = detalle.linea[j].alicuota_iva;
+					d.linea[j].alicuota_ivaSpecified = detalle.linea[j].alicuota_ivaSpecified;
+					d.linea[j].cantidad = detalle.linea[j].cantidad;
+					d.linea[j].cantidadSpecified = detalle.linea[j].cantidadSpecified;
+					d.linea[j].codigo_producto_comprador = detalle.linea[j].codigo_producto_comprador;
+					d.linea[j].codigo_producto_vendedor = detalle.linea[j].codigo_producto_vendedor;
+					d.linea[j].descripcion = detalle.linea[j].descripcion;
+
+					d.linea[j].GTIN = detalle.linea[j].GTIN;
+					d.linea[j].GTINSpecified = detalle.linea[j].GTINSpecified;
+					d.linea[j].importe_iva = detalle.linea[j].importe_iva;
+					d.linea[j].importe_ivaSpecified = detalle.linea[j].importe_ivaSpecified;
+					d.linea[j].importe_total_articulo = detalle.linea[j].importe_total_articulo;
+					d.linea[j].importe_total_descuentos = detalle.linea[j].importe_total_descuentos;
+					d.linea[j].importe_total_descuentosSpecified = detalle.linea[j].importe_total_descuentosSpecified;
+					d.linea[j].importe_total_impuestos = detalle.linea[j].importe_total_impuestos;
+					d.linea[j].importe_total_impuestosSpecified = detalle.linea[j].importe_total_impuestosSpecified;
+
+					if (detalle.linea[j].importes_moneda_origen != null)
+					{
+						d.linea[j].importes_moneda_origen = new Cedeira2IBKWSEnvio.lcComprobanteDetalleLineaImportes_moneda_origen();
+						d.linea[j].importes_moneda_origen.importe_iva = detalle.linea[j].importes_moneda_origen.importe_iva;
+						d.linea[j].importes_moneda_origen.importe_ivaSpecified = detalle.linea[j].importes_moneda_origen.importe_ivaSpecified;
+						d.linea[j].importes_moneda_origen.importe_total_articulo = detalle.linea[j].importes_moneda_origen.importe_total_articulo;
+						d.linea[j].importes_moneda_origen.importe_total_articuloSpecified = detalle.linea[j].importes_moneda_origen.importe_total_articuloSpecified;
+						d.linea[j].importes_moneda_origen.importe_total_descuentos = detalle.linea[j].importes_moneda_origen.importe_total_descuentos;
+						d.linea[j].importes_moneda_origen.importe_total_descuentosSpecified = detalle.linea[j].importes_moneda_origen.importe_total_descuentosSpecified;
+						d.linea[j].importes_moneda_origen.importe_total_impuestos = detalle.linea[j].importes_moneda_origen.importe_total_impuestos;
+						d.linea[j].importes_moneda_origen.importe_total_impuestosSpecified = detalle.linea[j].importes_moneda_origen.importe_total_impuestosSpecified;
+						d.linea[j].importes_moneda_origen.precio_unitario = detalle.linea[j].importes_moneda_origen.precio_unitario;
+						d.linea[j].importes_moneda_origen.precio_unitarioSpecified = detalle.linea[j].importes_moneda_origen.precio_unitarioSpecified;
+					}
+
+					if (detalle.linea[j].impuestos != null)
+					{
+						d.linea[j].impuestos = new Cedeira2IBKWSEnvio.lcComprobanteDetalleLineaImpuestos[detalle.linea[j].impuestos.Length];
+						for (int k = 0; k < d.linea[j].impuestos.Length; k++)
+						{
+							d.linea[j].impuestos[k] = new Cedeira2IBKWSEnvio.lcComprobanteDetalleLineaImpuestos();
+							d.linea[j].impuestos[k].codigo_impuesto = detalle.linea[j].impuestos[k].codigo_impuesto;
+							d.linea[j].impuestos[k].descripcion_impuesto = detalle.linea[j].impuestos[k].descripcion_impuesto;
+							d.linea[j].impuestos[k].importe_impuesto = detalle.linea[j].impuestos[k].importe_impuesto;
+							d.linea[j].impuestos[k].importe_impuesto_moneda_origen = detalle.linea[j].impuestos[k].importe_impuesto_moneda_origen;
+							d.linea[j].impuestos[k].importe_impuesto_moneda_origenSpecified = detalle.linea[j].impuestos[k].importe_impuesto_moneda_origenSpecified;
+							d.linea[j].impuestos[k].porcentaje_impuesto = detalle.linea[j].impuestos[k].porcentaje_impuesto;
+							d.linea[j].impuestos[k].porcentaje_impuestoSpecified = detalle.linea[j].impuestos[k].porcentaje_impuestoSpecified;
+						}
+					}
+					if (detalle.linea[j].descuentos != null)
+					{
+						d.linea[j].descuentos = new Cedeira2IBKWSEnvio.lcComprobanteDetalleLineaDescuentos[detalle.linea[j].descuentos.Length];
+						for (int k = 0; k < d.linea[j].descuentos.Length; k++)
+						{
+							d.linea[j].descuentos[k] = new Cedeira2IBKWSEnvio.lcComprobanteDetalleLineaDescuentos();
+							d.linea[j].descuentos[k].descripcion_descuento = detalle.linea[j].descuentos[k].descripcion_descuento;
+							d.linea[j].descuentos[k].importe_descuento = detalle.linea[j].descuentos[k].importe_descuento;
+							d.linea[j].descuentos[k].importe_descuento_moneda_origen = detalle.linea[j].descuentos[k].importe_descuento_moneda_origen;
+							d.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified = detalle.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified;
+							d.linea[j].descuentos[k].porcentaje_descuento = detalle.linea[j].descuentos[k].porcentaje_descuento;
+							d.linea[j].descuentos[k].porcentaje_descuentoSpecified = detalle.linea[j].descuentos[k].porcentaje_descuentoSpecified;
+						}
+					}
+
+					d.linea[j].indicacion_exento_gravado = detalle.linea[j].indicacion_exento_gravado;
+					d.linea[j].numeroLinea = detalle.linea[j].numeroLinea;
+					d.linea[j].precio_unitario = detalle.linea[j].precio_unitario;
+					d.linea[j].precio_unitarioSpecified = detalle.linea[j].precio_unitarioSpecified;
+					d.linea[j].unidad = detalle.linea[j].unidad;
+				}
+				else
+				{
+					break;
+				}
+			}
+
+			cIBK.detalle = d;
+
+
+			cIBK.resumen = new Cedeira2IBKWSEnvio.lcComprobanteResumen();
+			cIBK.resumen.cant_alicuotas_iva = feaLC.comprobante[i].resumen.cant_alicuotas_iva;
+			cIBK.resumen.cant_alicuotas_ivaSpecified = feaLC.comprobante[i].resumen.cant_alicuotas_ivaSpecified;
+			cIBK.resumen.codigo_moneda = feaLC.comprobante[i].resumen.codigo_moneda;
+
+			cIBK.resumen.descuentos = new Cedeira2IBKWSEnvio.lcComprobanteResumenDescuentos[0];
+
+			cIBK.resumen.cant_alicuotas_iva = feaLC.comprobante[i].resumen.cant_alicuotas_iva;
+			cIBK.resumen.cant_alicuotas_ivaSpecified = feaLC.comprobante[i].resumen.cant_alicuotas_ivaSpecified;
+			cIBK.resumen.codigo_moneda = feaLC.comprobante[i].resumen.codigo_moneda;
+
+			cIBK.resumen.importe_operaciones_exentas = feaLC.comprobante[i].resumen.importe_operaciones_exentas;
+			cIBK.resumen.importe_total_concepto_no_gravado = feaLC.comprobante[i].resumen.importe_total_concepto_no_gravado;
+			cIBK.resumen.importe_total_factura = feaLC.comprobante[i].resumen.importe_total_factura;
+			cIBK.resumen.importe_total_impuestos_internos = feaLC.comprobante[i].resumen.importe_total_impuestos_internos;
+			cIBK.resumen.importe_total_impuestos_internosSpecified = feaLC.comprobante[i].resumen.importe_total_impuestos_internosSpecified;
+			cIBK.resumen.importe_total_impuestos_municipales = feaLC.comprobante[i].resumen.importe_total_impuestos_municipales;
+			cIBK.resumen.importe_total_impuestos_municipalesSpecified = feaLC.comprobante[i].resumen.importe_total_impuestos_municipalesSpecified;
+			cIBK.resumen.importe_total_impuestos_nacionales = feaLC.comprobante[i].resumen.importe_total_impuestos_nacionales;
+			cIBK.resumen.importe_total_impuestos_nacionalesSpecified = feaLC.comprobante[i].resumen.importe_total_impuestos_nacionalesSpecified;
+			cIBK.resumen.importe_total_ingresos_brutos = feaLC.comprobante[i].resumen.importe_total_ingresos_brutos;
+			cIBK.resumen.importe_total_ingresos_brutosSpecified = feaLC.comprobante[i].resumen.importe_total_ingresos_brutosSpecified;
+			cIBK.resumen.importe_total_neto_gravado = feaLC.comprobante[i].resumen.importe_total_neto_gravado;
+
+			if (feaLC.comprobante[i].resumen.importes_moneda_origen != null)
+			{
+				cIBK.resumen.importes_moneda_origen = new Cedeira2IBKWSEnvio.lcComprobanteResumenImportes_moneda_origen();
+				cIBK.resumen.importes_moneda_origen.importe_operaciones_exentas = feaLC.comprobante[i].resumen.importes_moneda_origen.importe_operaciones_exentas;
+				cIBK.resumen.importes_moneda_origen.importe_total_concepto_no_gravado = feaLC.comprobante[i].resumen.importes_moneda_origen.importe_total_concepto_no_gravado;
+				cIBK.resumen.importes_moneda_origen.importe_total_factura = feaLC.comprobante[i].resumen.importes_moneda_origen.importe_total_factura;
+				cIBK.resumen.importes_moneda_origen.importe_total_impuestos_internos = feaLC.comprobante[i].resumen.importes_moneda_origen.importe_total_impuestos_internos;
+				cIBK.resumen.importes_moneda_origen.importe_total_impuestos_internosSpecified = feaLC.comprobante[i].resumen.importes_moneda_origen.importe_total_impuestos_internosSpecified;
+				cIBK.resumen.importes_moneda_origen.importe_total_impuestos_municipales = feaLC.comprobante[i].resumen.importes_moneda_origen.importe_total_impuestos_municipales;
+				cIBK.resumen.importes_moneda_origen.importe_total_impuestos_municipalesSpecified = feaLC.comprobante[i].resumen.importes_moneda_origen.importe_total_impuestos_municipalesSpecified;
+				cIBK.resumen.importes_moneda_origen.importe_total_impuestos_nacionales = feaLC.comprobante[i].resumen.importes_moneda_origen.importe_total_impuestos_nacionales;
+				cIBK.resumen.importes_moneda_origen.importe_total_impuestos_nacionalesSpecified = feaLC.comprobante[i].resumen.importes_moneda_origen.importe_total_impuestos_nacionalesSpecified;
+				cIBK.resumen.importes_moneda_origen.importe_total_ingresos_brutos = feaLC.comprobante[i].resumen.importes_moneda_origen.importe_total_ingresos_brutos;
+				cIBK.resumen.importes_moneda_origen.importe_total_ingresos_brutosSpecified = feaLC.comprobante[i].resumen.importes_moneda_origen.importe_total_ingresos_brutosSpecified;
+				cIBK.resumen.importes_moneda_origen.importe_total_neto_gravado = feaLC.comprobante[i].resumen.importes_moneda_origen.importe_total_neto_gravado;
+				cIBK.resumen.importes_moneda_origen.impuesto_liq = feaLC.comprobante[i].resumen.importes_moneda_origen.impuesto_liq;
+				cIBK.resumen.importes_moneda_origen.impuesto_liq_rni = feaLC.comprobante[i].resumen.importes_moneda_origen.impuesto_liq_rni;
+			}
+
+			cIBK.resumen.impuesto_liq = feaLC.comprobante[i].resumen.impuesto_liq;
+			cIBK.resumen.impuesto_liq_rni = feaLC.comprobante[i].resumen.impuesto_liq_rni;
+
+			if (feaLC.comprobante[i].resumen.descuentos != null)
+			{
+				cIBK.resumen.descuentos = new Cedeira2IBKWSEnvio.lcComprobanteResumenDescuentos[feaLC.comprobante[i].resumen.descuentos.Length];
+				for (int l = 0; l < feaLC.comprobante[i].resumen.descuentos.Length; l++)
+				{
+					if (feaLC.comprobante[i].resumen.descuentos[l] != null)
+					{
+						cIBK.resumen.descuentos[l] = new Cedeira2IBKWSEnvio.lcComprobanteResumenDescuentos();
+						cIBK.resumen.descuentos[l].alicuota_iva_descuento = feaLC.comprobante[i].resumen.descuentos[l].alicuota_iva_descuento;
+						cIBK.resumen.descuentos[l].alicuota_iva_descuentoSpecified = feaLC.comprobante[i].resumen.descuentos[l].alicuota_iva_descuentoSpecified;
+						cIBK.resumen.descuentos[l].descripcion_descuento = feaLC.comprobante[i].resumen.descuentos[l].descripcion_descuento;
+						cIBK.resumen.descuentos[l].importe_descuento = feaLC.comprobante[i].resumen.descuentos[l].importe_descuento;
+						cIBK.resumen.descuentos[l].importe_descuento_moneda_origen = feaLC.comprobante[i].resumen.descuentos[l].importe_descuento_moneda_origen;
+						cIBK.resumen.descuentos[l].importe_descuento_moneda_origenSpecified = feaLC.comprobante[i].resumen.descuentos[l].importe_descuento_moneda_origenSpecified;
+						cIBK.resumen.descuentos[l].importe_iva_descuento = feaLC.comprobante[i].resumen.descuentos[l].importe_iva_descuento;
+						cIBK.resumen.descuentos[l].importe_iva_descuento_moneda_origen = feaLC.comprobante[i].resumen.descuentos[l].importe_iva_descuento_moneda_origen;
+						cIBK.resumen.descuentos[l].importe_iva_descuento_moneda_origenSpecified = feaLC.comprobante[i].resumen.descuentos[l].importe_iva_descuento_moneda_origenSpecified;
+						cIBK.resumen.descuentos[l].importe_iva_descuentoSpecified = feaLC.comprobante[i].resumen.descuentos[l].importe_iva_descuentoSpecified;
+						cIBK.resumen.descuentos[l].porcentaje_descuento = feaLC.comprobante[i].resumen.descuentos[l].porcentaje_descuento;
+						cIBK.resumen.descuentos[l].porcentaje_descuentoSpecified = feaLC.comprobante[i].resumen.descuentos[l].porcentaje_descuentoSpecified;
+					}
+				}
+			}
+
+			if (feaLC.comprobante[i].resumen.impuestos != null)
+			{
+				cIBK.resumen.impuestos = new Cedeira2IBKWSEnvio.lcComprobanteResumenImpuestos[feaLC.comprobante[i].resumen.impuestos.Length];
+				for (int l = 0; l < feaLC.comprobante[i].resumen.impuestos.Length; l++)
+				{
+					if (feaLC.comprobante[i].resumen.impuestos[l] != null)
+					{
+						cIBK.resumen.impuestos[l] = new Cedeira2IBKWSEnvio.lcComprobanteResumenImpuestos();
+						cIBK.resumen.impuestos[l].codigo_impuesto = feaLC.comprobante[i].resumen.impuestos[l].codigo_impuesto;
+						cIBK.resumen.impuestos[l].codigo_jurisdiccion = feaLC.comprobante[i].resumen.impuestos[l].codigo_jurisdiccion;
+						cIBK.resumen.impuestos[l].codigo_jurisdiccionSpecified = feaLC.comprobante[i].resumen.impuestos[l].codigo_jurisdiccionSpecified;
+						cIBK.resumen.impuestos[l].descripcion = feaLC.comprobante[i].resumen.impuestos[l].descripcion;
+						cIBK.resumen.impuestos[l].importe_impuesto = feaLC.comprobante[i].resumen.impuestos[l].importe_impuesto;
+						cIBK.resumen.impuestos[l].importe_impuesto_moneda_origen = feaLC.comprobante[i].resumen.impuestos[l].importe_impuesto_moneda_origen;
+						cIBK.resumen.impuestos[l].importe_impuesto_moneda_origenSpecified = feaLC.comprobante[i].resumen.impuestos[l].importe_impuesto_moneda_origenSpecified;
+						cIBK.resumen.impuestos[l].jurisdiccion_municipal = feaLC.comprobante[i].resumen.impuestos[l].jurisdiccion_municipal;
+						cIBK.resumen.impuestos[l].porcentaje_impuesto = feaLC.comprobante[i].resumen.impuestos[l].porcentaje_impuesto;
+						cIBK.resumen.impuestos[l].porcentaje_impuestoSpecified = feaLC.comprobante[i].resumen.impuestos[l].porcentaje_impuestoSpecified;
+					}
+				}
+			}
+
+			cIBK.resumen.observaciones = feaLC.comprobante[i].resumen.observaciones;
+			cIBK.resumen.tipo_de_cambio = feaLC.comprobante[i].resumen.tipo_de_cambio;
+
+			lc.comprobante[i] = cIBK;
+
+		}
+
+		return lc;
+	}
 }
