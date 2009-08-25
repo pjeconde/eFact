@@ -34,7 +34,7 @@ namespace CedWeb
         }
         protected void VolverLinkButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect((string)Session["ref"]);
+			Server.Transfer("~/Inicio.aspx"); ;
         }
         protected void SolicitarActivCPButton_Click(object sender, EventArgs e)
         {

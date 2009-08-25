@@ -270,7 +270,7 @@
                                                 <asp:Label ID="Label19" runat="server" Font-Bold="true" ForeColor="red" Text="»"></asp:Label>
                                             </td>
                                             <td>
-                                                <asp:HyperLink ID="HyperLinkVolverPagAnt" runat="server" NavigateUrl="~/FacturaElectronicaTYC.aspx" SkinID="LinkMedianoClaro">Volver a la página anterior</asp:HyperLink>
+                                                <asp:HyperLink ID="HyperLinkVolverPagAnt" runat="server" NavigateUrl="~/FacturaElectronicaTYC.aspx" SkinID="LinkMedianoClaro">Volver</asp:HyperLink>
                                             </td>
                                         </tr>
                                         </table>

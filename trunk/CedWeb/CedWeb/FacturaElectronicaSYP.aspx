@@ -327,7 +327,7 @@
                         <td style="width: 20px;">
                         </td>
                         <td style="height: 10px;">
-                            <asp:LinkButton ID="VolverLinkButton" runat="server" CausesValidation="false" ForeColor="Blue" OnClick="VolverLinkButton_Click">Volver a la página anterior</asp:LinkButton>
+                            <asp:LinkButton ID="VolverLinkButton" runat="server" CausesValidation="false" ForeColor="Blue" OnClick="VolverLinkButton_Click">Volver</asp:LinkButton>
                         </td>
                     </tr>
                     <tr>
