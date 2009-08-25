@@ -87,10 +87,6 @@ public partial class AdministracionCertificadosExplorador : System.Web.UI.Page
 		CertPagingGridView.DataBind();
 
 	}
-	protected void CertPagingGridView_RowCommand(object sender, GridViewCommandEventArgs e)
-	{
-
-	}
 	protected void CertPagingGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
 	{
 		CertPagingGridView.EditIndex = -1;
