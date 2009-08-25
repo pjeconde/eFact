@@ -135,7 +135,7 @@ namespace CedWeb
 		}
 		protected void CancelarButton_Click(object sender, EventArgs e)
 		{
-			Response.Redirect((string)Session["ref"]);
+			Server.Transfer("~/CompradorExplorador.aspx"); ;
 		}
 	}
 }

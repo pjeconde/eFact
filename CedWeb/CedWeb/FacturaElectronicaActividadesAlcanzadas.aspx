@@ -122,7 +122,7 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="padding-top:20px">
-                                                    <asp:LinkButton ID="VolverLinkButton" runat="server" CausesValidation="false" ForeColor="Blue" OnClick="VolverLinkButton_Click">Volver a la página anterior</asp:LinkButton>
+                                                    <asp:LinkButton ID="VolverLinkButton" runat="server" CausesValidation="false" ForeColor="Blue" OnClick="VolverLinkButton_Click">Volver</asp:LinkButton>
                                                 </td>
                                             </tr>
                                         </table>

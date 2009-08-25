@@ -99,7 +99,7 @@
                                 </tr>
                                 <tr>
                                     <td style="padding-top:10px">
-                                        <asp:LinkButton ID="VolverLinkButton" runat="server" CausesValidation="false" ForeColor="Blue" OnClick="VolverLinkButton_Click">Volver a la página anterior</asp:LinkButton>
+                                        <asp:LinkButton ID="VolverLinkButton" runat="server" CausesValidation="false" ForeColor="Blue" OnClick="VolverLinkButton_Click">Volver</asp:LinkButton>
                                     </td>
                                 </tr>
                                 <tr>
