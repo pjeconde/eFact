@@ -27,20 +27,29 @@ namespace CedWebRN
 			}
 
         }
-        
-        public IBK.lote_comprobantes_response EnviarIBK(FeaEntidades.InterFacturas.lote_comprobantes lc, string pathCertificado)
+
+		public IBK.lote_comprobantes_response EnviarIBK(FeaEntidades.InterFacturas.lote_comprobantes lc, string certificado)
         {
             IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
             lcIBK = Fea2Ibk(lc);
 
             IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
             objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
-            System.Security.Cryptography.X509Certificates.X509Certificate cert = System.Security.Cryptography.X509Certificates.X509Certificate.CreateFromCertFile(pathCertificado);
-            objIBK.ClientCertificates.Add(cert);
 
-            IBK.lote_comprobantes_response lcr = objIBK.receiveFacturasConSchema(lcIBK);
-            return lcr;
-        }
+			X509Store store = new X509Store(StoreLocation.LocalMachine);
+			store.Open(OpenFlags.ReadOnly);
+			X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
+			if (col.Count.Equals(1))
+			{
+				objIBK.ClientCertificates.Add(col[0]);
+				IBK.lote_comprobantes_response lcr = objIBK.receiveFacturasConSchema(lcIBK); 
+				return lcr;
+			}
+			else
+			{
+				throw new Exception("Su certificado no está disponible en nuestro repositorio");
+			}
+		}
 
         public FeaEntidades.InterFacturas.lote_comprobantes Ibk2FEA(CedWebRN.IBK.lote_comprobantes lcIBK)
         {
@@ -416,17 +425,20 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_comprobante.numero_comprobante = lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante;
                 cIBK.cabecera.informacion_comprobante.punto_de_venta = lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta;
 
-                cIBK.cabecera.informacion_comprobante.referencias = new IBK.informacion_comprobanteReferencias[lc.comprobante[i].cabecera.informacion_comprobante.referencias.Length];
+				if (lc.comprobante[i].cabecera.informacion_comprobante.referencias!=null)
+				{
+					cIBK.cabecera.informacion_comprobante.referencias = new IBK.informacion_comprobanteReferencias[lc.comprobante[i].cabecera.informacion_comprobante.referencias.Length];
 
-                for (int j = 0; j < lc.comprobante[i].cabecera.informacion_comprobante.referencias.Length; j++)
-                {
-                    if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j] != null)
-                    {
-                        cIBK.cabecera.informacion_comprobante.referencias[j] = new CedWebRN.IBK.informacion_comprobanteReferencias();
-                        cIBK.cabecera.informacion_comprobante.referencias[j].codigo_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].codigo_de_referencia;
-                        cIBK.cabecera.informacion_comprobante.referencias[j].dato_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].dato_de_referencia;
-                    }
-                }
+					for (int j = 0; j < lc.comprobante[i].cabecera.informacion_comprobante.referencias.Length; j++)
+					{
+						if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j] != null)
+						{
+							cIBK.cabecera.informacion_comprobante.referencias[j] = new CedWebRN.IBK.informacion_comprobanteReferencias();
+							cIBK.cabecera.informacion_comprobante.referencias[j].codigo_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].codigo_de_referencia;
+							cIBK.cabecera.informacion_comprobante.referencias[j].dato_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].dato_de_referencia;
+						}
+					} 
+				}
 
 
                 cIBK.cabecera.informacion_comprobante.resultado = lc.comprobante[i].cabecera.informacion_comprobante.resultado;
