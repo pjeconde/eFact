@@ -2200,10 +2200,6 @@ public partial class FacturaElectronicaXML : Page
 					}
 				}
 
-
-
-
-
 			}
 			catch (Exception ex)
 			{
