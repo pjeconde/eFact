@@ -30,7 +30,7 @@ public partial class AdministracionCertificadosExplorador : System.Web.UI.Page
 					}
 					else
 					{
-						CertPagingGridView.PageSize = 15;
+						CertPagingGridView.PageSize = 20;
 						BindPagingGrid();
 					}
 				}
@@ -120,4 +120,26 @@ public partial class AdministracionCertificadosExplorador : System.Web.UI.Page
 	{
 		Server.Transfer("~/Administracion.aspx");
 	}
+    protected void CertPagingGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        try
+        {
+            CertPagingGridView.PageIndex = e.NewPageIndex;
+            System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
+            lista = CedWebRN.Cuenta.Lista(CertPagingGridView.PageIndex, CertPagingGridView.PageSize, CertPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
+            CertPagingGridView.VirtualItemCount = CedWebRN.Cuenta.CantidadDeFilas((CedEntidades.Sesion)Session["Sesion"]);
+            CertPagingGridView.DataSource = lista;
+            CertPagingGridView.DataBind();
+            ViewState["lista"] = lista;
+        }
+        catch (System.Threading.ThreadAbortException)
+        {
+            Trace.Warn("Thread abortado");
+        }
+        catch (Exception ex)
+        {
+            CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepcion.aspx");
+        }
+
+    }
 }
