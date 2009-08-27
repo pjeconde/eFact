@@ -28,7 +28,7 @@
                             <asp:Panel ID="CertificadosPanel" runat="server" BackColor="peachpuff" BorderColor="brown" BorderStyle="Solid"
                                 BorderWidth="1px" Height="400px" ScrollBars="Auto" Width="650px">
                                 <cc1:PagingGridView ID="CertPagingGridView" runat="server" 
-									OnSorting="CertPagingGridView_Sorting" Width="650px" AutoGenerateColumns="False" OnRowCancelingEdit="CertPagingGridView_RowCancelingEdit" OnRowEditing="CertPagingGridView_RowEditing" OnRowUpdating="CertPagingGridView_RowUpdating">
+									OnSorting="CertPagingGridView_Sorting" Width="650px" AutoGenerateColumns="False" OnRowCancelingEdit="CertPagingGridView_RowCancelingEdit" OnRowEditing="CertPagingGridView_RowEditing" OnRowUpdating="CertPagingGridView_RowUpdating" OnPageIndexChanging="CertPagingGridView_PageIndexChanging">
                                     <Columns>
 										<asp:TemplateField HeaderText="Id Cuenta" SortExpression="IdCuenta">
 											<itemtemplate>

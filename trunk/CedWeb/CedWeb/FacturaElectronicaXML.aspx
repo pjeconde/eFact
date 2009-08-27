@@ -1989,7 +1989,7 @@
                                 </tr>
                                 <tr>
                                     <td style="text-align: center; width: 100%">
-                                        <table border="0" cellpadding="2" cellspacing="2">
+                                        <table border="0" cellpadding="2" cellspacing="2" style="width:780px">
                                             <tr>
                                                 <td style="width: 100%" colspan="3">
                                                     <asp:Button ID="GenerarButton" runat="server" OnClick="GenerarButton_Click" Height="60px"
@@ -2007,12 +2007,12 @@
                                                 <td style="width: 33%; padding-right: 3px">
                                                     <asp:Button ID="EnviarIBKButton" runat="server" BackColor="peachpuff" BorderColor="brown"
                                                         BorderStyle="Solid" BorderWidth="1px" Font-Bold="true" ForeColor="brown" Height="60px"
-                                                        Text="Enviar Interfacturas" ToolTip="Impactar comprobante en Interfacturas - Exclusivo SERVICIO PREMIUM" Width="100%" OnClick="EnviarIBKButton_Click" />
+                                                        Text="Enviar lote a Interfacturas" ToolTip="Impactar comprobante en Interfacturas - Exclusivo SERVICIO PREMIUM" Width="100%" OnClick="EnviarIBKButton_Click" />
                                                 </td>
                                                 <td style="width: 33%">
                                                     <asp:Button ID="ConsultarLoteIBKButton" runat="server" BackColor="peachpuff" BorderColor="brown"
                                                         BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true"
-                                                        ForeColor="brown" Height="60px" OnClick="ConsultarLoteIBKButton_Click" Text="Consultar resultado envío de lote a Interfacturas"
+                                                        ForeColor="brown" Height="60px" OnClick="ConsultarLoteIBKButton_Click" Text="Consultar lote a Interfacturas"
                                                         ToolTip="Ingrese previamente el numero de lote a consultar- Exclusivo SERVICIO PREMIUM"
                                                         Width="100%" />
                                                 </td>
