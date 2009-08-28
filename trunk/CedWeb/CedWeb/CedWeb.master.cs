@@ -85,12 +85,13 @@ namespace CedWeb
         public void SalirLinkButton_Click(object sender, EventArgs e)
         {
             CaducarIdentificacion();
-            Server.Transfer("~/Inicio.aspx", true);
+            //Response.Write("<script>window.opener=null;window. close();</script>");
+            //Response.Write("<script>window.open('close.htm','_self');</script>");
         }
         public void CaducarIdentificacion()
         {
             CedWebEntidades.Sesion sesion = (CedWebEntidades.Sesion)Session["Sesion"];
-            CedWebRN.Cuenta.Limpiar(sesion.Cuenta);
+            sesion.Cuenta=new CedWebEntidades.Cuenta();
             NombreCuentaLabel.Text = String.Empty;
             Separador1Label.Visible = false;
             ConfiguracionLinkButton.Visible = false;
