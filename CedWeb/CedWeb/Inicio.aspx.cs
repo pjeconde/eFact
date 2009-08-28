@@ -23,10 +23,14 @@ namespace CedWeb
             }
 			if (!IsPostBack)
 			{
-				if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id != null)
-				{
-					LoginPanel.Enabled = false;
-				}
+                if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id != null)
+                {
+                    LoginPanel.Enabled = false;
+                }
+                else
+                {
+                    LoginPanel.Enabled = true;
+                }
 				UsuarioTextBox.Focus();
 			}
 		}

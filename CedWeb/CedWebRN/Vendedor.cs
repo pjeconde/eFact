@@ -33,36 +33,6 @@ namespace CedWebRN
             CedWebDB.Vendedor vendedor = new CedWebDB.Vendedor(Sesion);
             vendedor.Leer(Vendedor);
         }
-        public static void Limpiar(CedWebEntidades.Vendedor Vendedor)
-        {
-            Vendedor.IdCuenta = null;
-            Vendedor.NombreCuenta = null;
-            Vendedor.RazonSocial = null;
-            Vendedor.Calle = null;
-            Vendedor.Nro = null;
-            Vendedor.Piso = null;
-            Vendedor.Depto = null;
-            Vendedor.Sector = null;
-            Vendedor.Torre = null;
-            Vendedor.Manzana = null;
-            Vendedor.Localidad = null;
-            Vendedor.IdProvincia = null;
-            Vendedor.DescrProvincia = null;
-            Vendedor.CodPost = null;
-            Vendedor.NombreContacto = null;
-            Vendedor.EmailContacto = null;
-            Vendedor.TelefonoContacto = null;
-            Vendedor.CUIT = 0;
-            Vendedor.IdCondIVA = 0;
-            Vendedor.DescrCondIVA = null;
-            Vendedor.NroIngBrutos = null;
-            Vendedor.IdCondIngBrutos = 0;
-            Vendedor.DescrCondIngBrutos = null;
-            Vendedor.GLN = 0;
-            Vendedor.CodigoInterno = null;
-            Vendedor.FechaInicioActividades = DateTime.MinValue;
-            Vendedor.BonoFiscal = null;
-        }
         public static void Copiar(CedWebEntidades.Vendedor VendedorDsd, CedWebEntidades.Vendedor VendedorHst)
         {
             VendedorHst.IdCuenta = VendedorDsd.IdCuenta;

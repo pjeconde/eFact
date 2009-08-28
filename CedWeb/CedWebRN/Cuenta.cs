@@ -173,25 +173,9 @@ namespace CedWebRN
             }
             catch (Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente)
             {
-                CedWebRN.Vendedor.Limpiar(Cuenta.Vendedor);
             }
         }
-        public static void Limpiar(CedWebEntidades.Cuenta Cuenta)
-        {
-            Cuenta.Id = null;
-            Cuenta.Nombre = null;
-            Cuenta.Telefono = null;
-            Cuenta.Email = null;
-            Cuenta.Password = null;
-            Cuenta.ConfirmacionPassword = null;
-            Cuenta.Pregunta = null;
-            Cuenta.Respuesta = null;
-            Cuenta.TipoCuenta.Id = null;
-            Cuenta.TipoCuenta.Descr = null;
-            Cuenta.EstadoCuenta.Id = null;
-            Cuenta.EstadoCuenta.Descr = null;
-            CedWebRN.Vendedor.Limpiar(Cuenta.Vendedor);
-        }
+       
         public static void Login(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
             if (Cuenta.Id == String.Empty)
