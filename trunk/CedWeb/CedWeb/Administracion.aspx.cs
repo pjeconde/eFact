@@ -82,6 +82,20 @@ namespace CedWeb
                         UltimosComprobantesPagingGridView.DataBind();
 
                         CantidadDiasPremiumSinCostoEnAltaCuenta.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).CantidadDiasPremiumSinCostoEnAltaCuenta.ToString();
+
+                        try
+                        {
+                            //Borro los gráficos anteriores
+                            if (((TimeSpan)DateTime.Now.Subtract(LastOldFileRemoveDate)).Days > 0)
+                            {
+                                DeleteOldTempFiles("~/Temp", 1);
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+
                     }
                 }
             }
@@ -230,6 +244,41 @@ namespace CedWeb
             catch (Exception ex)
             {
                 MsgErrorLabel.Text = ex.Message;
+            }
+        }
+        public static DateTime LastOldFileRemoveDate
+        {
+            get
+            {
+                if (HttpContext.Current.Application["LastOldFileRemoveDate"] == null)
+                {
+                    HttpContext.Current.Application["LastOldFileRemoveDate"] = DateTime.MinValue;
+                }
+                return (DateTime)HttpContext.Current.Application["LastOldFileRemoveDate"];
+            }
+            set
+            {
+                HttpContext.Current.Application["LastOldFileRemoveDate"] = value;
+            }
+        }
+        public static void DeleteOldTempFiles(string TempDirectory, int OlderThanDays)
+        {
+            LastOldFileRemoveDate = DateTime.Now;
+            string[] Files = System.IO.Directory.GetFiles(HttpContext.Current.Server.MapPath(TempDirectory));
+            System.IO.FileInfo fileInfo = null;
+            foreach (string s in Files)
+            {
+                fileInfo = new System.IO.FileInfo(s);
+                if (fileInfo.CreationTime < DateTime.Now.AddDays(-(OlderThanDays)) && fileInfo.Extension.Equals(".bmp"))
+                {
+                    try
+                    {
+                        fileInfo.Delete();
+                    }
+                    catch
+                    {
+                    }
+                }
             }
         }
     }

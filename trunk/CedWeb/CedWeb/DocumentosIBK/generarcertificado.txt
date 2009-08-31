@@ -1,0 +1,13 @@
+CEDEIRA
+30710015062
+keytool -genkey -alias certFactura -sigalg SHA1withRSA -keystore keyStoreFE.ks -keyalg RSA -validity 365 -dname"CN=30710015062,OU=Factura Electronica,O=CEDEIRA SOFTWARE FACTORY SRL,C=AR" 
+ 
+keytool -certreq -alias certFactura -file request.csr -keystore keyStoreFE.ks -dname "CN=30710015062,OU=Factura Electronica,O=CEDEIRA SOFTWARE FACTORY SRL,C=AR" 
+
+FERRE - TOTAL S.A.
+30667671694
+keytool -genkey -alias certFactura30667671694 -sigalg SHA1withRSA -keystore keyStoreFE.ks -keyalg RSA -validity 365 -dname "CN=30667671694,OU=Factura Electronica,O=FERRE - TOTAL S.A.,C=AR" 
+ 
+keytool -certreq -alias certFactura30667671694 -file request30667671694.csr -keystore keyStoreFE.ks -dname "CN=30667671694,OU=Factura Electronica,O=FERRE - TOTAL S.A.,C=AR" 
+
+
