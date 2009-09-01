@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Xml;
+using System.IO;
 
 public partial class FacturaElectronicaXML : Page
 {
@@ -193,48 +194,7 @@ public partial class FacturaElectronicaXML : Page
 		((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
 		((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
 	}
-	protected void detalleGridView_RowDataBound(object sender, GridViewRowEventArgs e)
-	{
-		GridViewRow row = e.Row;
-		string strSort = string.Empty;
 
-		// Make sure we aren't in header/footer rows
-		if (row.DataItem == null)
-		{
-			return;
-		}
-
-		//Find Child GridView control
-		GridView gv = new GridView();
-		gv = (GridView)row.FindControl("impuestoGridView");
-
-		//Check if any additional conditions (Paging, Sorting, Editing, etc) to be applied on child GridView
-		if (gv.UniqueID == gvUniqueID)
-		{
-			gv.PageIndex = gvNewPageIndex;
-			gv.EditIndex = gvEditIndex;
-			//Expand the Child grid
-			ClientScript.RegisterStartupScript(GetType(), "Expand", "<SCRIPT LANGUAGE='javascript'>expandcollapse('div" + ((DataRowView)e.Row.DataItem)["descripcion"].ToString() + "','one');</script>");
-		}
-
-		//Prepare the query for Child GridView by passing the Customer ID of the parent row
-		//gv.DataSource = ChildDataSourceImpuesto((FeaEntidades.InterFacturas.linea)e.Row.DataItem);
-		//gv.DataBind();
-
-		//Add delete confirmation message for Customer
-		LinkButton l = (LinkButton)e.Row.FindControl("linkDeleteDetalle");
-		l.Attributes.Add("onclick", "javascript:return " +
-		"confirm('Está seguro que quiere borrar " +
-		DataBinder.Eval(e.Row.DataItem, "descripcion") + "')");
-	}
-	//private ObjectDataSource ChildDataSourceImpuesto(FeaEntidades.InterFacturas.linea l)
-	//{
-	//    ObjectDataSource impuestoODS = new ObjectDataSource();
-	//    impuestoODS.DataObjectTypeName = "FeaEntidades.InterFacturas.lineaImpuestos";
-	//    impuestoODS.TypeName = "FeaEntidades.InterFacturas.lineasImpuestos";
-	//    impuestoODS.SelectMethod = "Listar";
-	//    return impuestoODS;
-	//}
 	protected void detalleGridView_RowCommand(object sender, GridViewCommandEventArgs e)
 	{
 		if (e.CommandName.Equals("AddDetalle"))
@@ -2115,25 +2075,6 @@ public partial class FacturaElectronicaXML : Page
 			try
 			{
 				FeaEntidades.InterFacturas.lote_comprobantes lc = GenerarLote();
-
-				//Ir por RN
-				//CedWebRN.Comprobante cRN = new CedWebRN.Comprobante();
-				//CedWebRN.IBK.lote_comprobantes_response lcr = cRN.EnviarIBK(lc, Server.MapPath("~/Autenticado/Certificados/interfacturas-" + lc.cabecera_lote.cuit_vendedor + ".cer"));
-				//if (!((CedWebRN.IBK.lote_response)lcr.Item).estado.Equals("OK"))
-				//{
-				//    if (((CedWebRN.IBK.lote_response)lcr.Item).errores_lote != null)
-				//    {
-				//        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Interfacturas dice:" + ((CedWebRN.IBK.lote_response)lcr.Item).errores_lote[0].descripcion_error + "')</script>");
-				//    }
-				//    else
-				//    {
-				//        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Interfacturas dice:" + ((CedWebRN.IBK.lote_response)lcr.Item).comprobante_response[0].errores_comprobante[0].descripcion_error + "')</script>");
-				//    }
-				//}
-				//else
-				//{
-				//    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Comprobante enviado satisfactoriamente a Interfacturas.')</script>");
-				//}
 				
 				//Ir por WS
 				CedWebEntidades.Cuenta cta = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta;
@@ -2659,7 +2600,14 @@ public partial class FacturaElectronicaXML : Page
 	}
 	protected void ConsultarLoteIBKButton_Click(object sender, EventArgs e)
 	{
-		if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+        using (FileStream fs = File.Open(Server.MapPath("~/Consultar.txt"), FileMode.Append, FileAccess.Write))
+        {
+            using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
+            {
+                sw.WriteLine("Consulta de:" + Cuit_VendedorTextBox.Text);
+            }
+        }		
+        if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
 		{
 			if (!MonedaComprobanteDropDownList.Enabled)
 			{
@@ -2674,7 +2622,6 @@ public partial class FacturaElectronicaXML : Page
 		{
 			try
 			{
-				CedWebRN.Comprobante cRN = new CedWebRN.Comprobante();
 				CedWebRN.IBK.consulta_lote_comprobantes clc = new CedWebRN.IBK.consulta_lote_comprobantes();
 				Cedeira2IBKWS.consulta_lote_comprobantes clcIBK = new Cedeira2IBKWS.consulta_lote_comprobantes();
 				clc.cuit_canal = Convert.ToInt64(Cuit_CanalTextBox.Text);
@@ -2707,26 +2654,6 @@ public partial class FacturaElectronicaXML : Page
 					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>");
 					return;
 				}
-				//Ir por RN
-				//CedWebRN.IBK.consulta_lote_comprobantes_response clcr = cRN.ConsultarIBK(clc, Server.MapPath("~/Autenticado/Certificados/interfacturas-" + clc.cuit_vendedor + ".cer"));
-				//try
-				//{
-				//    CedWebRN.IBK.lote_comprobantes lcIBK = ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item));
-				//    if (lcIBK.cabecera_lote.resultado.Equals("A"))
-				//    {
-				//        CompletarUI(cRN.Ibk2FEA(lcIBK), e);
-
-				//    }
-				//    else
-				//    {
-				//        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).cabecera_lote.resultado + ":" + ((CedWebRN.IBK.lote_comprobantes)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).cabecera_lote.motivo + "');</script>");
-				//    }
-				//}
-				//catch (InvalidCastException)
-				//{
-				//    string errorConsultaLote = ((CedWebRN.IBK.consulta_lote_responseErrores_consulta)(((CedWebRN.IBK.consulta_lote_response)(clcr.Item)).Item)).error[0].descripcion_error;
-				//    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + errorConsultaLote + "');</script>");
-				//}
 
 				//Ir por WS
 				Cedeira2IBKWS.ConsultaIBK cIBKWS = new Cedeira2IBKWS.ConsultaIBK();
@@ -2735,6 +2662,7 @@ public partial class FacturaElectronicaXML : Page
 					Cripto cripto = new Cripto();
 					string certificado = cripto.EncryptData(cta.NroSerieCertificado, Server.MapPath("~/CedWeb.pubpriv.rsa"), Server.MapPath("~/CedWebWS.pub.rsa"));
 
+                    cIBKWS.Url = System.Configuration.ConfigurationManager.AppSettings["Cedeira2IBKWS.ConsultaIBK"];
 					Cedeira2IBKWS.consulta_lote_comprobantes_response clcr = cIBKWS.Consultar(clcIBK, certificado);
 
 					try

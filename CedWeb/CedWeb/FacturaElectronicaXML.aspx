@@ -5,42 +5,9 @@
 
 <%@ Register Src="DatePickerWebUserControl.ascx" TagName="DatePickerWebUserControl"
     TagPrefix="uc1" %>
+    
 <asp:Content ID="XMLContent" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado"
     runat="Server">
-
-    <script type="text/javascript">
-    function expandcollapse(obj,row)
-    {
-        var div = document.getElementById(obj);
-        var img = document.getElementById('img' + obj);
-        if (div.style.display == "none")
-        {
-            div.style.display = "block";
-            if (row == 'alt')
-            {
-                img.src = "minus.gif";
-            }
-            else
-            {
-                img.src = "minus.gif";
-            }
-            img.alt = "Cierre para ver otros artículos";
-        }
-        else
-        {
-            div.style.display = "none";
-            if (row == 'alt')
-            {
-                img.src = "plus.gif";
-            }
-            else
-            {
-                img.src = "plus.gif";
-            }
-            img.alt = "Expanda para ver impuestos";
-        }
-    } 
-    </script>
 
     <table style="width: 800px; text-align: left;" cellpadding="0" cellspacing="0" border="0"
         class="TextComunSinPosicion">
