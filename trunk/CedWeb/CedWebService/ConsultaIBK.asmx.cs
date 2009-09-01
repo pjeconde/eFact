@@ -5,6 +5,7 @@ using System.Collections;
 using System.Web.Services;
 using System.Web.Services.Protocols;
 using System.ComponentModel;
+using System.IO;
 
 namespace CedWebService
 {
@@ -20,9 +21,19 @@ namespace CedWebService
             try
             {
 				Cripto cripto = new Cripto();
-				string nroSerie = cripto.DecryptData(pathCertificado, Server.MapPath("~/CedWebWS.pubpriv.rsa"));
-				CedWebRN.Comprobante c = new CedWebRN.Comprobante();
-				clcr = c.ConsultarIBK(clc, nroSerie);
+                string nroSerie = cripto.DecryptData(pathCertificado, Server.MapPath("~/CedWebWS.pubpriv.rsa"));
+                CedWebRN.Comprobante c = new CedWebRN.Comprobante();
+
+                using (FileStream fs = File.Open(Server.MapPath("~/Consultar.txt"), FileMode.Append, FileAccess.Write))
+                {
+                    using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
+                    {
+                        sw.WriteLine("pathCertificado cifrado:" + pathCertificado);
+                        sw.WriteLine("pathCertificado descifrado:" + nroSerie);
+                    }
+                }
+                
+                clcr = c.ConsultarIBK(clc, nroSerie);
             }
             catch (Exception ex)
             {
