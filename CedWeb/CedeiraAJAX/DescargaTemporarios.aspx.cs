@@ -18,7 +18,7 @@ namespace CedeiraAJAX
             string filename = Request.QueryString.Get("archivo");
             if (!String.IsNullOrEmpty(filename))
             {
-                String dlDir = @"Temp/";
+                String dlDir = @"~/Temp/";
                 String path = Server.MapPath(dlDir + filename);
                 System.IO.FileInfo toDownload = new System.IO.FileInfo(path);
                 if (toDownload.Exists)

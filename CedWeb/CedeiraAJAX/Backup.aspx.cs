@@ -38,7 +38,7 @@ namespace CedeiraAJAX
                     x.Serialize(writerdememoria, vendedor);
                     m.Seek(0, System.IO.SeekOrigin.Begin);
                     string nombreArchivo = "eFact-Vendedor-" + ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id.Replace(".", String.Empty).ToUpper() + ".xml";
-                    System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"Temp/" + nombreArchivo), System.IO.FileMode.Create);
+                    System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + nombreArchivo), System.IO.FileMode.Create);
                     m.WriteTo(fs);
                     fs.Close();
                     Server.Transfer("~/DescargaTemporarios.aspx?archivo=" + nombreArchivo, false);
@@ -74,7 +74,7 @@ namespace CedeiraAJAX
                     x.Serialize(writerdememoria, compradores);
                     m.Seek(0, System.IO.SeekOrigin.Begin);
                     string nombreArchivo = "eFact-Compradores-" + ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id.Replace(".", String.Empty).ToUpper() + ".xml";
-                    System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"Temp/" + nombreArchivo), System.IO.FileMode.Create);
+                    System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + nombreArchivo), System.IO.FileMode.Create);
                     m.WriteTo(fs);
                     fs.Close();
                     Server.Transfer("~/DescargaTemporarios.aspx?archivo=" + nombreArchivo, false);
