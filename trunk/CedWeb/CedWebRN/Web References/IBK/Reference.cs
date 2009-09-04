@@ -24,6 +24,7 @@ namespace CedWebRN.IBK {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "2.0.50727.3053")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="FacturaWebServiceConSchemaSoapBinding", Namespace="http://ar/com/ib/cfe/ejb/services")]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(error[]))]
@@ -44,6 +45,7 @@ namespace CedWebRN.IBK {
             wr.ServicePoint.MaxIdleTime = 1000;
             return wr;
         }
+
         /// <remarks/>
         public FacturaWebServiceConSchemaSoapBindingQSService() {
             this.Url = global::CedWebRN.Properties.Settings.Default.CedWebRN_IBK_FacturaWebServiceConSchemaSoapBindingQSService;
@@ -3152,6 +3154,10 @@ namespace CedWebRN.IBK {
         
         private long cuit_vendedorField;
         
+        private int punto_de_ventaField;
+        
+        private bool punto_de_ventaFieldSpecified;
+        
         /// <comentarios/>
         public long id_lote {
             get {
@@ -3189,6 +3195,27 @@ namespace CedWebRN.IBK {
             }
             set {
                 this.cuit_vendedorField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public int punto_de_venta {
+            get {
+                return this.punto_de_ventaField;
+            }
+            set {
+                this.punto_de_ventaField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool punto_de_ventaSpecified {
+            get {
+                return this.punto_de_ventaFieldSpecified;
+            }
+            set {
+                this.punto_de_ventaFieldSpecified = value;
             }
         }
     }

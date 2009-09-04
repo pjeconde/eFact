@@ -118,14 +118,7 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 //				SmtpMail.Send(AdditionalInfo.Get("ExceptionManager.AppDomainName")+"@cedeira.com.ar", m_OpMail, subject, body);
 				SmtpMail.Send(MyMail);
 			}
-			if(exception.InnerException!=null)
-			{
-				Cedeira.UI.Mostrar.Mensaje(exception.Message+"\r\n"+exception.InnerException.Message.ToString(),Microsoft.VisualBasic.MsgBoxStyle.Critical,"NOTIFICACION DE EXCEPCION",exception.StackTrace.ToString()+"\r\n"+exception.InnerException.StackTrace.ToString());
-			}
-			else
-			{
-				Cedeira.UI.Mostrar.Mensaje(exception.Message,Microsoft.VisualBasic.MsgBoxStyle.Critical,"NOTIFICACION DE EXCEPCION",exception.StackTrace.ToString());
-			}
+			
 
 		}
 

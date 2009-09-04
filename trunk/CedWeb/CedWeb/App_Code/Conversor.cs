@@ -625,4 +625,9 @@ public class Conversor
 
 		return lc;
 	}
+
+    public FeaEntidades.InterFacturas.lote_comprobantes dyndns2Entidad(org.dyndns.cedweb.ConsultarResponseConsultarResultConsulta_lote_responseLote_comprobantes lcIBKdyndns)
+    {
+        throw new Exception("The method or operation is not implemented.");
+    }
 }

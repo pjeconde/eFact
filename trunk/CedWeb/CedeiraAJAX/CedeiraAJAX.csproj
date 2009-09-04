@@ -1,0 +1,836 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A572E64D-02D8-4BCC-8BD6-7E28ABA46730}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CedeiraAJAX</RootNamespace>
+    <AssemblyName>CedeiraAJAX</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Web.Extensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Themes\Cedeira\CedWeb.css" />
+    <None Include="Web References\org.dyndns.cedweb.consulta\consultaibk.disco" />
+    <None Include="Web References\org.dyndns.cedweb.envio\envioibk.disco" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivacionClientePesado.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>ActivacionClientePesado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ActivacionClientePesado.aspx.designer.cs">
+      <DependentUpon>ActivacionClientePesado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ActivacionClientePesadoConsulta.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>ActivacionClientePesadoConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ActivacionClientePesadoConsulta.aspx.designer.cs">
+      <DependentUpon>ActivacionClientePesadoConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Administracion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administracion.aspx.designer.cs">
+      <DependentUpon>Administracion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministracionCertificadosExplorador.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>AdministracionCertificadosExplorador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministracionCertificadosExplorador.aspx.designer.cs">
+      <DependentUpon>AdministracionCertificadosExplorador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministracionCompradorExplorador.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>AdministracionCompradorExplorador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministracionCompradorExplorador.aspx.designer.cs">
+      <DependentUpon>AdministracionCompradorExplorador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministracionCuentaExplorador.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>AdministracionCuentaExplorador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministracionCuentaExplorador.aspx.designer.cs">
+      <DependentUpon>AdministracionCuentaExplorador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministracionVendedorExplorador.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>AdministracionVendedorExplorador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdministracionVendedorExplorador.aspx.designer.cs">
+      <DependentUpon>AdministracionVendedorExplorador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backup.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Backup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Backup.aspx.designer.cs">
+      <DependentUpon>Backup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CedeiraAJAX.Master.cs">
+      <DependentUpon>CedeiraAJAX.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CedeiraAJAX.Master.designer.cs">
+      <DependentUpon>CedeiraAJAX.Master</DependentUpon>
+    </Compile>
+    <Compile Include="CedFCI.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>CedFCI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CedFCI.aspx.designer.cs">
+      <DependentUpon>CedFCI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CedST.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>CedST.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CedST.aspx.designer.cs">
+      <DependentUpon>CedST.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clientes.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Clientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clientes.aspx.designer.cs">
+      <DependentUpon>Clientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompradorConsultar.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>CompradorConsultar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompradorConsultar.aspx.designer.cs">
+      <DependentUpon>CompradorConsultar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompradorCrear.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>CompradorCrear.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompradorCrear.aspx.designer.cs">
+      <DependentUpon>CompradorCrear.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompradorEliminar.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>CompradorEliminar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompradorEliminar.aspx.designer.cs">
+      <DependentUpon>CompradorEliminar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompradorExplorador.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>CompradorExplorador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompradorExplorador.aspx.designer.cs">
+      <DependentUpon>CompradorExplorador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompradorModificar.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>CompradorModificar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompradorModificar.aspx.designer.cs">
+      <DependentUpon>CompradorModificar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracion.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Configuracion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracion.aspx.designer.cs">
+      <DependentUpon>Configuracion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contacto.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Contacto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contacto.aspx.designer.cs">
+      <DependentUpon>Contacto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CuentaCambiarPassword.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>CuentaCambiarPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CuentaCambiarPassword.aspx.designer.cs">
+      <DependentUpon>CuentaCambiarPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CuentaConfiguracion.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>CuentaConfiguracion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CuentaConfiguracion.aspx.designer.cs">
+      <DependentUpon>CuentaConfiguracion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CuentaConfirmacion.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>CuentaConfirmacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CuentaConfirmacion.aspx.designer.cs">
+      <DependentUpon>CuentaConfirmacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CuentaCrear.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>CuentaCrear.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CuentaCrear.aspx.designer.cs">
+      <DependentUpon>CuentaCrear.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CuentaOlvidoId.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>CuentaOlvidoId.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CuentaOlvidoId.aspx.designer.cs">
+      <DependentUpon>CuentaOlvidoId.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CuentaOlvidoPassword.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>CuentaOlvidoPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CuentaOlvidoPassword.aspx.designer.cs">
+      <DependentUpon>CuentaOlvidoPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CuentaPremiumActivar.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>CuentaPremiumActivar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CuentaPremiumActivar.aspx.designer.cs">
+      <DependentUpon>CuentaPremiumActivar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DatePickerWebUserControl.ascx.cs">
+      <DependentUpon>DatePickerWebUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DatePickerWebUserControl.ascx.designer.cs">
+      <DependentUpon>DatePickerWebUserControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Descarga.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Descarga.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Descarga.aspx.designer.cs">
+      <DependentUpon>Descarga.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DescargaTemporarios.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>DescargaTemporarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DescargaTemporarios.aspx.designer.cs">
+      <DependentUpon>DescargaTemporarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empresa.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Empresa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Empresa.aspx.designer.cs">
+      <DependentUpon>Empresa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EsquemaSolucioneseFact.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>EsquemaSolucioneseFact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EsquemaSolucioneseFact.aspx.designer.cs">
+      <DependentUpon>EsquemaSolucioneseFact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Excepcion.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Excepcion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Excepcion.aspx.designer.cs">
+      <DependentUpon>Excepcion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\FacturaElectronica.Master.cs">
+      <DependentUpon>FacturaElectronica.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\FacturaElectronica.Master.designer.cs">
+      <DependentUpon>FacturaElectronica.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\FacturaElectronicaTYC.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>FacturaElectronicaTYC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\FacturaElectronicaTYC.aspx.designer.cs">
+      <DependentUpon>FacturaElectronicaTYC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Lote.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Lote.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Lote.aspx.designer.cs">
+      <DependentUpon>Lote.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaElectronica.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>FacturaElectronica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaElectronica.aspx.designer.cs">
+      <DependentUpon>FacturaElectronica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaElectronicaActividadesAlcanzadas.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>FacturaElectronicaActividadesAlcanzadas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaElectronicaActividadesAlcanzadas.aspx.designer.cs">
+      <DependentUpon>FacturaElectronicaActividadesAlcanzadas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaElectronicaExcel.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>FacturaElectronicaExcel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaElectronicaExcel.aspx.designer.cs">
+      <DependentUpon>FacturaElectronicaExcel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaElectronicaPreguntasFrec.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>FacturaElectronicaPreguntasFrec.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaElectronicaPreguntasFrec.aspx.designer.cs">
+      <DependentUpon>FacturaElectronicaPreguntasFrec.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaElectronicaServicioPremium.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>FacturaElectronicaServicioPremium.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaElectronicaServicioPremium.aspx.designer.cs">
+      <DependentUpon>FacturaElectronicaServicioPremium.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaElectronicaSolucionDeConectividad.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>FacturaElectronicaSolucionDeConectividad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaElectronicaSolucionDeConectividad.aspx.designer.cs">
+      <DependentUpon>FacturaElectronicaSolucionDeConectividad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaElectronicaSolucionWeb.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>FacturaElectronicaSolucionWeb.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaElectronicaSolucionWeb.aspx.designer.cs">
+      <DependentUpon>FacturaElectronicaSolucionWeb.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaElectronicaSYP.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>FacturaElectronicaSYP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FacturaElectronicaSYP.aspx.designer.cs">
+      <DependentUpon>FacturaElectronicaSYP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Inicio.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Inicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inicio.aspx.designer.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mensaje.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Mensaje.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mensaje.aspx.designer.cs">
+      <DependentUpon>Mensaje.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="PublicacionExplorador.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>PublicacionExplorador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PublicacionExplorador.aspx.designer.cs">
+      <DependentUpon>PublicacionExplorador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SoloDispPUsuariosActivCP.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>SoloDispPUsuariosActivCP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SoloDispPUsuariosActivCP.aspx.designer.cs">
+      <DependentUpon>SoloDispPUsuariosActivCP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SoloDispPUsuariosAdministradores.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>SoloDispPUsuariosAdministradores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SoloDispPUsuariosAdministradores.aspx.designer.cs">
+      <DependentUpon>SoloDispPUsuariosAdministradores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SoloDispPUsuariosPremium.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>SoloDispPUsuariosPremium.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SoloDispPUsuariosPremium.aspx.designer.cs">
+      <DependentUpon>SoloDispPUsuariosPremium.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SoloDispPUsuariosRegistrados.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>SoloDispPUsuariosRegistrados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SoloDispPUsuariosRegistrados.aspx.designer.cs">
+      <DependentUpon>SoloDispPUsuariosRegistrados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Soluciones.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Soluciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Soluciones.aspx.designer.cs">
+      <DependentUpon>Soluciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TableroPremium.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>TableroPremium.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TableroPremium.aspx.designer.cs">
+      <DependentUpon>TableroPremium.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vendedor.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Vendedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vendedor.aspx.designer.cs">
+      <DependentUpon>Vendedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\org.dyndns.cedweb.consulta\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\org.dyndns.cedweb.envio\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ActivacionClientePesado.aspx" />
+    <Content Include="ActivacionClientePesadoConsulta.aspx" />
+    <Content Include="Administracion.aspx" />
+    <Content Include="AdministracionCertificadosExplorador.aspx" />
+    <Content Include="AdministracionCompradorExplorador.aspx" />
+    <Content Include="AdministracionCuentaExplorador.aspx" />
+    <Content Include="AdministracionVendedorExplorador.aspx" />
+    <Content Include="App_Themes\Cedeira\CedWeb.skin" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\css\default.css" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\html\calendar.html" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\html\calendarbottom.html" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\html\calendartop.html" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\html\crystalexportdialog.htm" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\html\crystalprinthost.html" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\calendar.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\crlogo.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\export.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\exportd.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\export_over.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\First.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\Firstd.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\first_over.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\gotopage.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\gotopaged.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\gotopage_over.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\grouptree.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\grouptreed.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\grouptreepressed.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\grouptree_over.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\Last.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\Lastd.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\last_over.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\Next.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\Nextd.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\next_over.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\Prev.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\Prevd.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\prev_over.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\print.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\printd.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\print_over.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\Refresh.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\refreshd.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\refresh_over.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\Search.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\searchd.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\search_over.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\up.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\upd.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\toolbar\up_over.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\tree\begindots.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\tree\beginminus.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\tree\beginplus.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\tree\blank.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\tree\blankdots.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\tree\dots.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\tree\lastdots.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\tree\lastminus.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\tree\lastplus.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\tree\Magnify.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\tree\minus.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\tree\minusbox.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\tree\plus.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\tree\plusbox.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\tree\singleminus.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\images\tree\singleplus.gif" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\js\calendar_param.js" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\js\dt_param.js" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\js\export.js" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\js\KeyDownEvent.js" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\js\print.js" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\js\prompts_param.js" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\js\strings_chs.js" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\js\strings_cht.js" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\js\strings_de.js" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\js\strings_en.js" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\js\strings_es.js" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\js\strings_fr.js" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\js\strings_it.js" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\js\strings_ja.js" />
+    <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\js\strings_ko.js" />
+    <Content Include="Backup.aspx" />
+    <Content Include="cal\calendar.gif" />
+    <Content Include="cal\close.gif" />
+    <Content Include="cal\divider.gif" />
+    <Content Include="cal\drop1.gif" />
+    <Content Include="cal\drop2.gif" />
+    <Content Include="cal\left1.gif" />
+    <Content Include="cal\left2.gif" />
+    <Content Include="cal\popcalendar.css" />
+    <Content Include="cal\popcalendar.js" />
+    <Content Include="cal\right1.gif" />
+    <Content Include="cal\right2.gif" />
+    <Content Include="cal\up2.gif" />
+    <Content Include="CedFCI.aspx" />
+    <Content Include="CedST.aspx" />
+    <Content Include="Clientes.aspx" />
+    <Content Include="CompradorConsultar.aspx" />
+    <Content Include="CompradorCrear.aspx" />
+    <Content Include="CompradorEliminar.aspx" />
+    <Content Include="CompradorExplorador.aspx" />
+    <Content Include="CompradorModificar.aspx" />
+    <Content Include="Configuracion.aspx" />
+    <Content Include="Contacto.aspx" />
+    <Content Include="CuentaCambiarPassword.aspx" />
+    <Content Include="CuentaConfiguracion.aspx" />
+    <Content Include="CuentaConfirmacion.aspx" />
+    <Content Include="CuentaCrear.aspx" />
+    <Content Include="CuentaOlvidoId.aspx" />
+    <Content Include="CuentaOlvidoPassword.aspx" />
+    <Content Include="CuentaPremiumActivar.aspx" />
+    <Content Include="DatePickerWebUserControl.ascx" />
+    <Content Include="Descarga.aspx" />
+    <Content Include="DescargaTemporarios.aspx" />
+    <Content Include="EmailTemplates\FacturaElectronicaMailEstudiosContables.htm" />
+    <Content Include="EmailTemplates\FacturaElectronicaServicioPremiumBienvenida.htm" />
+    <Content Include="EmailTemplates\FacturaElectronicaServicioPremiumSuspension.htm" />
+    <Content Include="Empresa.aspx" />
+    <Content Include="ERRORS\400.htm" />
+    <Content Include="ERRORS\401-1.htm" />
+    <Content Include="ERRORS\401-2.htm" />
+    <Content Include="ERRORS\401-3.htm" />
+    <Content Include="ERRORS\401-4.htm" />
+    <Content Include="ERRORS\401-5.htm" />
+    <Content Include="ERRORS\403-1.htm" />
+    <Content Include="ERRORS\403-10.htm" />
+    <Content Include="ERRORS\403-11.htm" />
+    <Content Include="ERRORS\403-12.htm" />
+    <Content Include="ERRORS\403-2.htm" />
+    <Content Include="ERRORS\403-3.htm" />
+    <Content Include="ERRORS\403-4.htm" />
+    <Content Include="ERRORS\403-5.htm" />
+    <Content Include="ERRORS\403-6.htm" />
+    <Content Include="ERRORS\403-7.htm" />
+    <Content Include="ERRORS\403-8.htm" />
+    <Content Include="ERRORS\403-9.htm" />
+    <Content Include="ERRORS\403.htm" />
+    <Content Include="ERRORS\404-0.htm" />
+    <Content Include="ERRORS\404-1.htm" />
+    <Content Include="ERRORS\404.htm" />
+    <Content Include="ERRORS\404b.htm" />
+    <Content Include="ERRORS\404b.html" />
+    <Content Include="ERRORS\405.htm" />
+    <Content Include="ERRORS\406.htm" />
+    <Content Include="ERRORS\407.htm" />
+    <Content Include="ERRORS\htmla.htm" />
+    <Content Include="EsquemaSolucioneseFact.aspx" />
+    <Content Include="Excepcion.aspx" />
+    <Content Include="Facturacion\Electronica\FacturaElectronicaTYC.aspx" />
+    <Content Include="Facturacion\Electronica\Lote.aspx" />
+    <Content Include="CedeiraAJAX.Master" />
+    <Content Include="FacturaElectronica.aspx" />
+    <Content Include="FacturaElectronicaActividadesAlcanzadas.aspx" />
+    <Content Include="FacturaElectronicaExcel.aspx" />
+    <Content Include="FacturaElectronicaMail-LanzamientoBFE.htm" />
+    <Content Include="FacturaElectronicaMail.htm" />
+    <Content Include="FacturaElectronicaPreguntasFrec.aspx" />
+    <Content Include="FacturaElectronicaServicioPremium.aspx" />
+    <Content Include="FacturaElectronicaSolucionDeConectividad.aspx" />
+    <Content Include="FacturaElectronicaSolucionWeb.aspx" />
+    <Content Include="FacturaElectronicaSYP.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="google4485466cbce8d17a.html" />
+    <Content Include="Imagenes\Acerca.gif" />
+    <Content Include="Imagenes\AFIPLogo.jpg" />
+    <Content Include="Imagenes\BarraGold.gif" />
+    <Content Include="Imagenes\BarraGrisFrameSuperior.gif" />
+    <Content Include="Imagenes\BarraPeachpuff.gif" />
+    <Content Include="Imagenes\bgFEA-C.jpg" />
+    <Content Include="Imagenes\BgFrameSuperior.gif" />
+    <Content Include="Imagenes\bgL.jpg" />
+    <Content Include="Imagenes\bgR.jpg" />
+    <Content Include="Imagenes\Bola1.png" />
+    <Content Include="Imagenes\Bola2.png" />
+    <Content Include="Imagenes\Bola3.png" />
+    <Content Include="Imagenes\Bola4.png" />
+    <Content Include="Imagenes\Bola5.png" />
+    <Content Include="Imagenes\Bola6.png" />
+    <Content Include="Imagenes\Bola7.png" />
+    <Content Include="Imagenes\Bola8.png" />
+    <Content Include="Imagenes\Bola9.png" />
+    <Content Include="Imagenes\CajaBrownPeru.ico" />
+    <Content Include="Imagenes\CajaBrownPeruMas.ico" />
+    <Content Include="Imagenes\CajaBrownPeruMenos.ico" />
+    <Content Include="Imagenes\CedAPC.jpg" />
+    <Content Include="Imagenes\CedCCT.jpg" />
+    <Content Include="Imagenes\Cedeira.ico" />
+    <Content Include="Imagenes\Cedeira.jpg" />
+    <Content Include="Imagenes\CedeiraSF-icono-animado.gif" />
+    <Content Include="Imagenes\CedeiraSF-Logo.gif" />
+    <Content Include="Imagenes\CedeiraSF-SRL-Logo.gif" />
+    <Content Include="Imagenes\CedeiraSF.jpg" />
+    <Content Include="Imagenes\CedeiraSF_v1.jpg" />
+    <Content Include="Imagenes\CedFCI-EsquemaProceso.jpg" />
+    <Content Include="Imagenes\CedFCI-Tablero.jpg" />
+    <Content Include="Imagenes\CedFCI-Tablero_ch.jpg" />
+    <Content Include="Imagenes\CedJU.jpg" />
+    <Content Include="Imagenes\CedST-EsquemaMEP.jpg" />
+    <Content Include="Imagenes\CedST-Tablero.jpg" />
+    <Content Include="Imagenes\CedST-Tablero_ch.jpg" />
+    <Content Include="Imagenes\Close.gif" />
+    <Content Include="Imagenes\Divisor_MenuBlanco.gif" />
+    <Content Include="Imagenes\Dolar.gif" />
+    <Content Include="Imagenes\dolar.jpg" />
+    <Content Include="Imagenes\Dolar.swf" />
+    <Content Include="Imagenes\dolarb.GIF" />
+    <Content Include="Imagenes\dolarb.jpg" />
+    <Content Include="Imagenes\eFact-Fondo.jpg" />
+    <Content Include="Imagenes\eFact-R-vertical.jpg" />
+    <Content Include="Imagenes\eFact-R-XL-vertical.jpg" />
+    <Content Include="Imagenes\eFact-R-XL.jpg" />
+    <Content Include="Imagenes\eFact-R.jpg" />
+    <Content Include="Imagenes\eFact-vertical.jpg" />
+    <Content Include="Imagenes\eFact-W-vertical.jpg" />
+    <Content Include="Imagenes\eFact.jpg" />
+    <Content Include="Imagenes\Empresa_fdo.gif" />
+    <Content Include="Imagenes\Empresa_fdo2.gif" />
+    <Content Include="Imagenes\EsquemaSolucioneseFact.jpg" />
+    <Content Include="Imagenes\EsquemaSolucioneseFact2.jpg" />
+    <Content Include="Imagenes\EsquemaSolucioneseFact3.jpg" />
+    <Content Include="Imagenes\EsquemaSolucioneseFactMail.jpg" />
+    <Content Include="Imagenes\FEA\FEA-SYP-AFIP.jpg" />
+    <Content Include="Imagenes\FEA\FEA-SYP-Interfacturas.jpg" />
+    <Content Include="Imagenes\FEA\Mail\1-Vendedor.gif" />
+    <Content Include="Imagenes\FEA\Mail\eFact-Mail-w680.gif" />
+    <Content Include="Imagenes\FEA\Mail\eFact-Mail.gif" />
+    <Content Include="Imagenes\FEA\Mail\EsquemaSolucioneseFactMail.jpg" />
+    <Content Include="Imagenes\FEA\Mail\FEA-EncaMail.jpg" />
+    <Content Include="Imagenes\FEA\Mail\header_FEA_w700.gif" />
+    <Content Include="Imagenes\FEA\Mail\SolucionConectividad.gif" />
+    <Content Include="Imagenes\FEA\Mail\SolucionWebPC.gif" />
+    <Content Include="Imagenes\Indicador_SubMenu.gif" />
+    <Content Include="Imagenes\Ingreso\Box\Box2DC-Clientes.gif" />
+    <Content Include="Imagenes\Ingreso\Box\Box2DC-Facturas-FEA.gif" />
+    <Content Include="Imagenes\Ingreso\Box\Box2DC-Facturas.gif" />
+    <Content Include="Imagenes\Ingreso\Box\Box2DC.gif" />
+    <Content Include="Imagenes\Ingreso\Box\Box2DL-FEA.gif" />
+    <Content Include="Imagenes\Ingreso\Box\Box2DL.gif" />
+    <Content Include="Imagenes\Ingreso\Box\Box2DR.gif" />
+    <Content Include="Imagenes\Ingreso\Box\Box2T.gif" />
+    <Content Include="Imagenes\Ingreso\Box\Box2TL.gif" />
+    <Content Include="Imagenes\Ingreso\Box\Box2TR.gif" />
+    <Content Include="Imagenes\Ingreso\Box\Box4D-CR.gif" />
+    <Content Include="Imagenes\Ingreso\Box\BoxD-LCR.gif" />
+    <Content Include="Imagenes\Ingreso\Box\BoxT-FEA.gif" />
+    <Content Include="Imagenes\Ingreso\Box\BoxT.gif" />
+    <Content Include="Imagenes\Ingreso\Box\BoxTL-FEA.gif" />
+    <Content Include="Imagenes\Ingreso\Box\BoxTL.gif" />
+    <Content Include="Imagenes\Ingreso\Box\BoxTR-FEA.gif" />
+    <Content Include="Imagenes\Ingreso\Box\BoxTR.gif" />
+    <Content Include="Imagenes\Ingreso\Box\DisWeb.gif" />
+    <Content Include="Imagenes\Ingreso\Bullet\markerWhite.gif" />
+    <Content Include="Imagenes\InterfacturasInterbankingLogo.gif" />
+    <Content Include="Imagenes\InterfacturasInterbankingLogo_ch.gif" />
+    <Content Include="Imagenes\Logo-Interfacturas.gif" />
+    <Content Include="Imagenes\Logo-Interfacturas_2.gif" />
+    <Content Include="Imagenes\LogoBCBA.gif" />
+    <Content Include="Imagenes\LogoBienvenidos_v1.jpg" />
+    <Content Include="Imagenes\LogoCedeira.swf" />
+    <Content Include="Imagenes\LogoD.gif" />
+    <Content Include="Imagenes\mapa_america_fdo.gif" />
+    <Content Include="Imagenes\MenuTop.gif" />
+    <Content Include="Imagenes\MenuTopL.gif" />
+    <Content Include="Imagenes\NavegadorRecomendado.jpg" />
+    <Content Include="Imagenes\NoHayFoto.gif" />
+    <Content Include="Imagenes\Ok.gif" />
+    <Content Include="Imagenes\Patron-punto.jpg" />
+    <Content Include="Imagenes\reunion.gif" />
+    <Content Include="Imagenes\spinner.gif" />
+    <Content Include="Imagenes\TarifasServicioPremium.jpg" />
+    <Content Include="info.txt" />
+    <Content Include="Inicio.aspx" />
+    <Content Include="Captcha.ashx" />
+    <None Include="CedWeb.pubpriv.rsa" />
+    <None Include="CedWebWS.pub.rsa" />
+    <None Include="Descargas\Cedeira-SistAdminFCIs.pdf" />
+    <None Include="Descargas\Cedeira-SistTransfMEP.pdf" />
+    <None Include="Descargas\eFact-R-XL.zip" />
+    <Content Include="Facturacion\Electronica\FacturaElectronica.Master" />
+    <Content Include="Mensaje.aspx" />
+    <Content Include="PublicacionExplorador.aspx" />
+    <Content Include="SoloDispPUsuariosActivCP.aspx" />
+    <Content Include="SoloDispPUsuariosAdministradores.aspx" />
+    <Content Include="SoloDispPUsuariosPremium.aspx" />
+    <Content Include="SoloDispPUsuariosRegistrados.aspx" />
+    <Content Include="Soluciones.aspx" />
+    <Content Include="TableroPremium.aspx" />
+    <Content Include="Vendedor.aspx" />
+    <None Include="Imagenes\Ingreso\Box\LogoBienvenidos.psd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\org.dyndns.cedweb.consulta\consultaibk.wsdl" />
+    <None Include="Web References\org.dyndns.cedweb.consulta\ConsultarResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\org.dyndns.cedweb.consulta\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\org.dyndns.cedweb.envio\EnviarIBKResponseEnviarIBKResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\org.dyndns.cedweb.envio\envioibk.wsdl" />
+    <None Include="Web References\org.dyndns.cedweb.envio\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://cedweb.dyndns.org/cedweb/ConsultaIBK.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\org.dyndns.cedweb.consulta\</RelPath>
+      <UpdateFromURL>http://cedweb.dyndns.org/cedweb/ConsultaIBK.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedeiraAJAX_org_dyndns_cedweb_consulta_ConsultaIBK</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://cedweb.dyndns.org/CedWeb/envioibk.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\org.dyndns.cedweb.envio\</RelPath>
+      <UpdateFromURL>http://cedweb.dyndns.org/CedWeb/envioibk.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedeiraAJAX_org_dyndns_cedweb_envio_EnvioIBK</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CaptchaDotNet2\CaptchaDotNet2.csproj">
+      <Project>{B76ED545-1CF6-40BC-A3E1-52C34B0A0EFF}</Project>
+      <Name>CaptchaDotNet2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CedeiraUIWebForms\CedeiraUIWebForms.csproj">
+      <Project>{65404969-7DC6-45A2-BD12-40515251A60F}</Project>
+      <Name>CedeiraUIWebForms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CedEntidades\CedEntidades.csproj">
+      <Project>{2D17A63F-789D-4C01-864A-C15411D577A7}</Project>
+      <Name>CedEntidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CedEx\CedeiraEx.csproj">
+      <Project>{883AB19F-36F5-42A4-A1A7-4206F84E7757}</Project>
+      <Name>CedeiraEx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CedWebEntidades\CedWebEntidades.csproj">
+      <Project>{E4986760-165B-4079-9A4F-3026D498BD11}</Project>
+      <Name>CedWebEntidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CedWebRN\CedWebRN.csproj">
+      <Project>{9C229E72-6A86-4209-8730-91F573B4DF19}</Project>
+      <Name>CedWebRN</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FeaEntidades\FeaEntidades.csproj">
+      <Project>{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}</Project>
+      <Name>FeaEntidades</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Temp\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v8.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49573</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
