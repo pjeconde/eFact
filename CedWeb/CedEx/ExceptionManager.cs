@@ -281,7 +281,7 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 		{
 			// Get the Default Publisher
 			// En Cedeira no se escribe al Log
-			IExceptionPublisher Publisher=new MessageExceptionPublisher();
+			IExceptionPublisher Publisher=new ExceptionPublisher();
 				
 			// Publish the exception and any additional information
 			Publisher.Publish(exception, additionalInfo, null);

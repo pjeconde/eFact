@@ -7,8 +7,11 @@ namespace CedWebRN
 {
     public class Comprobante
     {
-        public IBK.consulta_lote_comprobantes_response ConsultarIBK(IBK.consulta_lote_comprobantes clc, string certificado)
+        public FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(IBK.consulta_lote_comprobantes clc, string certificado)
         {
+            FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+            lc.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
+            lc.comprobante = new FeaEntidades.InterFacturas.comprobante[1];
             IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
             objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
             
@@ -19,7 +22,23 @@ namespace CedWebRN
 			{
 				objIBK.ClientCertificates.Add(col[0]);
 				IBK.consulta_lote_comprobantes_response clcr = objIBK.getLoteFacturasConSchema(clc);
-				return clcr;
+
+                try
+                {
+                    IBK.consulta_lote_response clr = (IBK.consulta_lote_response)clcr.Item;
+                    IBK.lote_comprobantes lcIBK=(IBK.lote_comprobantes)clr.Item;
+
+                    lc = Conversor.IBK2Entidad(lcIBK);
+
+                }
+                catch (InvalidCastException)
+                {
+                    string errorConsultaLote = ((IBK.consulta_lote_responseErrores_consulta)(((IBK.consulta_lote_response)(((IBK.consulta_lote_comprobantes_response)clcr).Item)).Item)).error[0].descripcion_error;
+                    throw new Exception(errorConsultaLote);
+                }
+                
+                
+                return lc;
 			}
 			else
 			{

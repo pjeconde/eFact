@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <s0:definitions name="FacturaWebServiceConSchemaDefinitions" targetNamespace="http://ar/com/ib/cfe/ejb/services" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://ar/com/ib/cfe/ejb/services" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/">
   <s0:documentation>Web Service para Emisores de Facturas de la Camara de Factura Electronica de interBANKING</s0:documentation>
   <s0:types>
@@ -782,6 +782,14 @@
             <xs:element name="cuit_canal" type="xs:long"/>
             <xs:element minOccurs="0" name="cod_interno_canal" type="xs:string"/>
             <xs:element name="cuit_vendedor" type="xs:long"/>
+            <xs:element minOccurs="0" name="punto_de_venta">
+              <xs:simpleType>
+                <xs:restriction base="xs:int">
+                  <xs:minInclusive value="1"/>
+                  <xs:maxInclusive value="9998"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -1097,5 +1105,5 @@
       <s2:address location="https://qacfe.interbanking.com.ar/ws/FacturaWebServiceConSchema"/>
     </s0:port>
   </s0:service>
-  
+
 </s0:definitions>

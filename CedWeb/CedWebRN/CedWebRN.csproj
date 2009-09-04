@@ -45,6 +45,8 @@
     <Compile Include="Comprador.cs" />
     <Compile Include="Comprobante.cs" />
     <Compile Include="Contacto.cs" />
+    <Compile Include="Conversor.cs" />
+    <Compile Include="Cripto.cs" />
     <Compile Include="Cuenta.cs" />
     <Compile Include="Estadistica.cs" />
     <Compile Include="Flag.cs" />

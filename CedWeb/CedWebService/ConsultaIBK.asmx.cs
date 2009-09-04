@@ -15,9 +15,9 @@ namespace CedWebService
     public class ConsultaIBK : System.Web.Services.WebService
     {
         [WebMethod]
-        public CedWebRN.IBK.consulta_lote_comprobantes_response Consultar(CedWebRN.IBK.consulta_lote_comprobantes clc, string pathCertificado)
+        public FeaEntidades.InterFacturas.lote_comprobantes Consultar(long cuit_vendedor, long id_lote, int punto_de_venta, string pathCertificado)
         {
-            CedWebRN.IBK.consulta_lote_comprobantes_response clcr = new CedWebRN.IBK.consulta_lote_comprobantes_response();
+            FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
             try
             {
 				Cripto cripto = new Cripto();
@@ -28,12 +28,23 @@ namespace CedWebService
                 {
                     using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
                     {
+                        sw.WriteLine(System.DateTime.Now);
                         sw.WriteLine("pathCertificado cifrado:" + pathCertificado);
                         sw.WriteLine("pathCertificado descifrado:" + nroSerie);
+                        sw.WriteLine("cuit_vendedor:" + cuit_vendedor);
+                        sw.WriteLine("id_lote:" + id_lote);
                     }
                 }
-                
-                clcr = c.ConsultarIBK(clc, nroSerie);
+                CedWebRN.IBK.consulta_lote_comprobantes consulta = new CedWebRN.IBK.consulta_lote_comprobantes();
+                consulta.cuit_canal = 30690783521;
+                consulta.cuit_vendedor = cuit_vendedor;
+                consulta.id_lote = id_lote;
+                consulta.cod_interno_canal = string.Empty;
+                consulta.punto_de_ventaSpecified = true;
+                consulta.punto_de_venta = punto_de_venta;
+
+                lc = c.ConsultarIBK(consulta, nroSerie);
+
             }
             catch (Exception ex)
             {
@@ -41,7 +52,7 @@ namespace CedWebService
                     "0", ex.Source, FaultCode.Server);
 
             }
-            return clcr;
+            return lc;
         }
     }
 }

@@ -41,7 +41,7 @@ namespace CedWeb
 			if (CheckBoxAceptarTYC.Checked)
 			{
 				Session["AceptarTYC"] = true;
-				Server.Transfer("FacturaElectronicaXML.aspx");
+				Server.Transfer("~/FacturaElectronicaXML.aspx");
 			}
 			else
 			{
