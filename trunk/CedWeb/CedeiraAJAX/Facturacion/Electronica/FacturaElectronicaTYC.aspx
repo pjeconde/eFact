@@ -230,7 +230,7 @@
                                                     </td>
                                                     <td>
                                                         <asp:CheckBox ID="CheckBoxAceptarTYC" runat="server" Font-Bold="True" ForeColor="Green"
-                                                            Text="Acepta los terminos y condiciones" />
+                                                            Text="Acepta los términos y condiciones" />
                                                     </td>
                                                 </tr>
                                             </table>

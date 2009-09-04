@@ -29,7 +29,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             {
                 if (Session["AceptarTYC"] == null || Session["AceptarTYC"].Equals(false))
                 {
-                    Server.Transfer("FacturaElectronicaTYC.aspx");
+                    Server.Transfer("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
                 }
                 else
                 {
@@ -900,7 +900,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     if (((Button)sender).ID == "DescargarButton")
                     {
                         //Descarga directa del XML
-                        System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"Temp/" + sb.ToString()), System.IO.FileMode.Create);
+                        System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + sb.ToString()), System.IO.FileMode.Create);
                         m.WriteTo(fs);
                         fs.Close();
                         Server.Transfer("~/DescargaTemporarios.aspx?archivo=" + sb.ToString(), false);
@@ -910,7 +910,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         if (((CedWebEntidades.Sesion)Session["Sesion"]).Flag.ModoDepuracion)
                         {
                             //ModoDepuracion encendido
-                            System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"Temp/" + sb.ToString()), System.IO.FileMode.Create);
+                            System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + sb.ToString()), System.IO.FileMode.Create);
                             m.WriteTo(fs);
                             fs.Close();
                         }
@@ -2927,7 +2927,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
                     CompletarUI(clcrdyndns, e);
 
-                   
                 }
                 catch (System.Web.Services.Protocols.SoapException soapEx)
                 {

@@ -29,7 +29,7 @@ public partial class FacturaElectronicaXML : Page
 		{
 			if (Session["AceptarTYC"] == null || Session["AceptarTYC"].Equals(false))
 			{
-				Server.Transfer("FacturaElectronicaTYC.aspx");
+				Response.Redirect("FacturaElectronicaTYC.aspx");
 			}
 			else
 			{
