@@ -10,6 +10,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Xml;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace CedeiraAJAX.Facturacion.Electronica
 {
@@ -22,6 +23,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
         System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> descuentos;
         System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> referencias;
         private System.Globalization.CultureInfo cedeiraCultura;
+        private RSACryptoServiceProvider rsa;
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -2327,94 +2329,94 @@ namespace CedeiraAJAX.Facturacion.Electronica
         }
         protected void EnviarIBKButton_Click(object sender, EventArgs e)
         {
-            //if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-            //{
-            //    if (!MonedaComprobanteDropDownList.Enabled)
-            //    {
-            //        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Esta funcionalidad es exclusiva del SERVICIO PREMIUM.  Contáctese con Cedeira Software Factory para acceder al servicio.');</script>");
-            //    }
-            //    else
-            //    {
-            //        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesion ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
-            //    }
-            //}
-            //else
-            //{
-            //    try
-            //    {
-            //        FeaEntidades.InterFacturas.lote_comprobantes lc = GenerarLote();
+            if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+            {
+                if (!MonedaComprobanteDropDownList.Enabled)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Esta funcionalidad es exclusiva del SERVICIO PREMIUM.  Contáctese con Cedeira Software Factory para acceder al servicio.');</script>");
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesion ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
+                }
+            }
+            else
+            {
+                try
+                {
+                    FeaEntidades.InterFacturas.lote_comprobantes lc = GenerarLote();
 
-            //        //Ir por WS
-            //        CedWebEntidades.Cuenta cta = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta;
-            //        if (cta.NroSerieCertificado.Equals(string.Empty))
-            //        {
-            //            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>");
-            //            return;
-            //        }
-            //        try
-            //        {
-            //            Cripto cripto = new Cripto();
-            //            string certificado = cripto.EncryptData(cta.NroSerieCertificado, Server.MapPath("~/CedWeb.pubpriv.rsa"), Server.MapPath("~/CedWebWS.pub.rsa"));
+                    //Ir por WS
+                    CedWebEntidades.Cuenta cta = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta;
+                    if (cta.NroSerieCertificado.Equals(string.Empty))
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>");
+                        return;
+                    }
+                    //try
+                    //{
+                    //    Cripto cripto = new Cripto();
+                    //    string certificado = cripto.EncryptData(cta.NroSerieCertificado, Server.MapPath("~/CedWeb.pubpriv.rsa"), Server.MapPath("~/CedWebWS.pub.rsa"));
 
-            //            Cedeira2IBKWSEnvio.EnvioIBK eIBKWS = new Cedeira2IBKWSEnvio.EnvioIBK();
-            //            Cedeira2IBKWSEnvio.lc lcIBK = new Cedeira2IBKWSEnvio.lc();
+                    //    Cedeira2IBKWSEnvio.EnvioIBK eIBKWS = new Cedeira2IBKWSEnvio.EnvioIBK();
+                    //    Cedeira2IBKWSEnvio.lc lcIBK = new Cedeira2IBKWSEnvio.lc();
 
-            //            Conversor conv = new Conversor();
-            //            lcIBK = conv.Entidad2WSCedeira(lc);
+                    //    Conversor conv = new Conversor();
+                    //    lcIBK = conv.Entidad2WSCedeira(lc);
 
-            //            Cedeira2IBKWSEnvio.lote_comprobantes_response lcr = eIBKWS.EnviarIBK(lcIBK, certificado);
+                    //    Cedeira2IBKWSEnvio.lote_comprobantes_response lcr = eIBKWS.EnviarIBK(lcIBK, certificado);
 
-            //            if (!((Cedeira2IBKWSEnvio.lote_comprobantes_responseLote_response)lcr.Item).estado.Equals("OK"))
-            //            {
-            //                if (((Cedeira2IBKWSEnvio.lote_comprobantes_responseLote_response)lcr.Item).errores_lote != null)
-            //                {
-            //                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Interfacturas dice:" + ((Cedeira2IBKWSEnvio.lote_comprobantes_responseLote_response)lcr.Item).errores_lote[0].descripcion_error + "')</script>");
-            //                }
-            //                else
-            //                {
-            //                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Interfacturas dice:" + ((Cedeira2IBKWSEnvio.lote_comprobantes_responseLote_response)lcr.Item).comprobante_response[0].errores_comprobante[0].descripcion_error + "')</script>");
-            //                }
-            //            }
-            //            else
-            //            {
-            //                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Comprobante enviado satisfactoriamente a Interfacturas.')</script>");
-            //            }
-            //        }
-            //        catch (System.Web.Services.Protocols.SoapException soapEx)
-            //        {
-            //            try
-            //            {
-            //                XmlDocument doc = new XmlDocument();
-            //                doc.LoadXml(soapEx.Detail.OuterXml);
-            //                XmlNamespaceManager nsManager = new
-            //                    XmlNamespaceManager(doc.NameTable);
-            //                nsManager.AddNamespace("errorNS",
-            //                    "http://www.cedeira.com.ar/webservices");
-            //                XmlNode Node =
-            //                    doc.DocumentElement.SelectSingleNode("errorNS:Error", nsManager);
-            //                string errorNumber =
-            //                    Node.SelectSingleNode("errorNS:ErrorNumber",
-            //                    nsManager).InnerText;
-            //                string errorMessage =
-            //                    Node.SelectSingleNode("errorNS:ErrorMessage",
-            //                    nsManager).InnerText;
-            //                string errorSource =
-            //                    Node.SelectSingleNode("errorNS:ErrorSource",
-            //                    nsManager).InnerText;
-            //                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + " : " + errorMessage.Replace("\r", "").Replace("\n", "") + "');</script>");
-            //            }
-            //            catch (Exception)
-            //            {
-            //                throw soapEx;
-            //            }
-            //        }
+                    //    if (!((Cedeira2IBKWSEnvio.lote_comprobantes_responseLote_response)lcr.Item).estado.Equals("OK"))
+                    //    {
+                    //        if (((Cedeira2IBKWSEnvio.lote_comprobantes_responseLote_response)lcr.Item).errores_lote != null)
+                    //        {
+                    //            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Interfacturas dice:" + ((Cedeira2IBKWSEnvio.lote_comprobantes_responseLote_response)lcr.Item).errores_lote[0].descripcion_error + "')</script>");
+                    //        }
+                    //        else
+                    //        {
+                    //            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Interfacturas dice:" + ((Cedeira2IBKWSEnvio.lote_comprobantes_responseLote_response)lcr.Item).comprobante_response[0].errores_comprobante[0].descripcion_error + "')</script>");
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Comprobante enviado satisfactoriamente a Interfacturas.')</script>");
+                    //    }
+                    //}
+                    //catch (System.Web.Services.Protocols.SoapException soapEx)
+                    //{
+                    //    try
+                    //    {
+                    //        XmlDocument doc = new XmlDocument();
+                    //        doc.LoadXml(soapEx.Detail.OuterXml);
+                    //        XmlNamespaceManager nsManager = new
+                    //            XmlNamespaceManager(doc.NameTable);
+                    //        nsManager.AddNamespace("errorNS",
+                    //            "http://www.cedeira.com.ar/webservices");
+                    //        XmlNode Node =
+                    //            doc.DocumentElement.SelectSingleNode("errorNS:Error", nsManager);
+                    //        string errorNumber =
+                    //            Node.SelectSingleNode("errorNS:ErrorNumber",
+                    //            nsManager).InnerText;
+                    //        string errorMessage =
+                    //            Node.SelectSingleNode("errorNS:ErrorMessage",
+                    //            nsManager).InnerText;
+                    //        string errorSource =
+                    //            Node.SelectSingleNode("errorNS:ErrorSource",
+                    //            nsManager).InnerText;
+                    //        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + " : " + errorMessage.Replace("\r", "").Replace("\n", "") + "');</script>");
+                    //    }
+                    //    catch (Exception)
+                    //    {
+                    //        throw soapEx;
+                    //    }
+                    //}
 
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a Interfacturas.\\n " + ex.Message + "');</script>");
-            //    }
-            //}
+                }
+                catch (Exception ex)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a Interfacturas.\\n " + ex.Message + "');</script>");
+                }
+            }
         }
 
         private FeaEntidades.InterFacturas.lote_comprobantes GenerarLote()
@@ -2915,9 +2917,11 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         return;
                     }
 
-                    
-                    CedWebRN.Cripto cripto = new CedWebRN.Cripto();
-                    string certificado = cripto.EncryptData(cta.NroSerieCertificado, Server.MapPath("~/CedWeb.pubpriv.rsa"), Server.MapPath("~/CedWebWS.pub.rsa"));
+                    const string pubpriv = "<RSAKeyValue><Modulus>vbCkPIigVG2Nvh+9olTf/0rG3WmnBilf2S4lAJc6YwZ+5nayhYHO1J98x+kaaSCL49AOYC06tq1zxWsLaBALMA2CIlXYpmvmoBZ3VFjDWtxeKB6iJ5d4w9mvNa7GR5LY9MYlYwu0b47dWdLEih1a8LwJLBh3MKxcWw6C6ai50fs=</Modulus><Exponent>AQAB</Exponent><P>+jeiHVg01ZO2nvpnRqgDw8zWwMI1aJz1IOAFu41h2obgnNwvf4Bhep8sJUwpOrkK/5kur1Aid+DWPzs2EewBhQ==</P><Q>whLourJpaGyVtUBbetramWs0aBiyozU/Zd61AiLVvtjN+V1mP7kozV27FQwf8Trrye0c+cJn0ZZXqTusY2Udfw==</Q><DP>HTMg2AvTHpl+Vk8ifjxdNBxTc2s2kF7AvHVoNdrp8HaM/8EySc7RkV3B6RhaN2AgyHM3332aiCLU3cwrIyxHgQ==</DP><DQ>SYFL8FpenhRyZ2HmxBNcNDtsb/jawAIM7xJ40ERNXKlU6hu7/Gquz4mur/wVpRJB+Ar8rIQ7OiCNNyXI1ySXFQ==</DQ><InverseQ>702rhIpGvCYunrchXMtu+Hqn/CVQlkItVXhHGQHLwJV8Q8XGcqLccH4AVaevu4HmWkVOPC3F4j75vQV7sYC97A==</InverseQ><D>P8WwIY3JYTkHq0Cej4G7YOex3eRUO9UTHT/PPtiYz4vyg+ap9AqFD6Si3c63i1pezXM4MgtiruG3h0qKpiympaa2at7nsoZD5irqFARmsLRKivfySaHYmFzI7nw475vusrMPspCgzI48jSpDUr4V4bgvWeb5Tpr282vUJWOaMnk=</D></RSAKeyValue>";
+
+                    const string pub = "<RSAKeyValue><Modulus>xWdYYWOCWmFcOrofFGmii2/JrI0pU249TgNsQKL7k09AsmThPXjcOjCKj377wc6LW497OcLz1GBNinmEBYB2eFaMY4yxfwWXKIM3b63y53nculyvwW8XH0zkPi10x9ShlWjYFQlIkJutppbSJ4jzxvDrCJ/lvIMjzTYBcyMu/lU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
+
+                    string certificado = cta.NroSerieCertificado;
 
                     //Ir por WS
                     org.dyndns.cedweb.consulta.ConsultaIBK clcdyndns = new org.dyndns.cedweb.consulta.ConsultaIBK();
@@ -2956,9 +2960,22 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         throw soapEx;
                     }
                 }
-                catch (System.Security.Cryptography.CryptographicException)
+                catch (System.Security.Cryptography.CryptographicException ex)
                 {
-                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su certificado no se encuentra en nuestro repositorio');</script>");
+                    using (FileStream fs = File.Open(Server.MapPath("~/ConsultarErrores.txt"), FileMode.Append, FileAccess.Write))
+                    {
+                        using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
+                        {
+                            sw.WriteLine("Consulta de:" + Cuit_VendedorTextBox.Text);
+                            sw.WriteLine(ex.Message);
+                            sw.WriteLine(ex.StackTrace);
+                            if (ex.InnerException != null)
+                            {
+                                sw.WriteLine(ex.InnerException.Message);
+                            }
+                        }
+                    } 
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.Replace("\r", "").Replace("\n", "") + "');</script>");
                 }
                 catch (Exception ex)
                 {
@@ -2966,5 +2983,26 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
             }
         }
+        private void AsignarParametros(string ClavePrivada)
+        {
+            const int PROVIDER_RSA_FULL = 1;
+            CspParameters cspParams;
+            cspParams = new CspParameters(PROVIDER_RSA_FULL);
+            cspParams.KeyContainerName = "ClavePrivada";
+            rsa = new RSACryptoServiceProvider(cspParams);
+
+            rsa.FromXmlString(ClavePrivada);
+        }
+        private string EncryptData(string data2Encrypt, string ClavePrivadaPropia, string ClavePublicaAjena)
+        {
+            AsignarParametros(ClavePrivadaPropia);
+
+            rsa.FromXmlString(ClavePublicaAjena);
+
+            byte[] plainbytes = System.Text.Encoding.UTF8.GetBytes(data2Encrypt);
+            byte[] cipherbytes = rsa.Encrypt(plainbytes, false);
+            return Convert.ToBase64String(cipherbytes);
+        }
+
     }
 }

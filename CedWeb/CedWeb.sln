@@ -1,30 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "G:\...\CedWeb\", "CedWeb\", "{77BD76BF-75B7-468A-8DBD-E2381B43EE2E}"
-	ProjectSection(WebsiteProperties) = preProject
-		SccProjectName = "Svn"
-		SccAuxPath = "Svn"
-		SccLocalPath = "Svn"
-		SccProvider = "SubversionScc"
-		ProjectReferences = "{9C229E72-6A86-4209-8730-91F573B4DF19}|CedWebRN.dll;{65404969-7DC6-45A2-BD12-40515251A60F}|CedeiraUIWebForms.dll;{B76ED545-1CF6-40BC-A3E1-52C34B0A0EFF}|CaptchaDotNet2.dll;{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}|FeaEntidades.dll;{DB0A7D76-F68E-43A7-ADBD-08DDF2AFAD36}|CedeiraAP.dll;{2D17A63F-789D-4C01-864A-C15411D577A7}|CedEntidades.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/CedWeb"
-		Debug.AspNetCompiler.PhysicalPath = "CedWeb\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\CedWeb\"
-		Debug.AspNetCompiler.Updateable = "false"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/CedWeb"
-		Release.AspNetCompiler.PhysicalPath = "CedWeb\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\CedWeb\"
-		Release.AspNetCompiler.Updateable = "false"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "1215"
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CedeiraAP", "CedeiraAP\CedeiraAP.csproj", "{DB0A7D76-F68E-43A7-ADBD-08DDF2AFAD36}"
 	ProjectSection(WebsiteProperties) = preProject
 		Debug.AspNetCompiler.Debug = "True"
@@ -123,14 +99,6 @@ Global
 		Release|Mixed Platforms = Release|Mixed Platforms
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{77BD76BF-75B7-468A-8DBD-E2381B43EE2E}.Debug|.NET.ActiveCfg = Debug|.NET
-		{77BD76BF-75B7-468A-8DBD-E2381B43EE2E}.Debug|Any CPU.ActiveCfg = Debug|.NET
-		{77BD76BF-75B7-468A-8DBD-E2381B43EE2E}.Debug|Mixed Platforms.ActiveCfg = Debug|.NET
-		{77BD76BF-75B7-468A-8DBD-E2381B43EE2E}.Release|.NET.ActiveCfg = Debug|.NET
-		{77BD76BF-75B7-468A-8DBD-E2381B43EE2E}.Release|.NET.Build.0 = Debug|.NET
-		{77BD76BF-75B7-468A-8DBD-E2381B43EE2E}.Release|Any CPU.ActiveCfg = Debug|.NET
-		{77BD76BF-75B7-468A-8DBD-E2381B43EE2E}.Release|Mixed Platforms.ActiveCfg = Debug|.NET
-		{77BD76BF-75B7-468A-8DBD-E2381B43EE2E}.Release|Mixed Platforms.Build.0 = Debug|.NET
 		{DB0A7D76-F68E-43A7-ADBD-08DDF2AFAD36}.Debug|.NET.ActiveCfg = Debug|Any CPU
 		{DB0A7D76-F68E-43A7-ADBD-08DDF2AFAD36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DB0A7D76-F68E-43A7-ADBD-08DDF2AFAD36}.Debug|Any CPU.Build.0 = Debug|Any CPU
