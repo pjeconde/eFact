@@ -20,7 +20,7 @@ namespace CedWebService
             FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
             try
             {
-                string nroSerie = pathCertificado;
+                string nroSerie = CaptchaDotNet2.Security.Cryptography.Encryptor.Decrypt(pathCertificado, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
                 CedWebRN.Comprobante c = new CedWebRN.Comprobante();
 
                 using (FileStream fs = File.Open(Server.MapPath("~/Consultar.txt"), FileMode.Append, FileAccess.Write))
