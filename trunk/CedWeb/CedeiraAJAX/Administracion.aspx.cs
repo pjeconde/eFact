@@ -123,7 +123,7 @@ namespace CedeiraAJAX
                 textos[i] = Lista[i].Concepto;
                 valores[i] = Lista[i].Cantidad;
             }
-            CedWebRN.Grafico.Generar(155, 155, 0, -90, valores, textos, Path, System.Drawing.Color.Navy);
+            CedWebRN.Grafico.Generar(155, 155, 0, -30, valores, textos, Path, System.Drawing.Color.Navy);
         }
         protected void RecibeAvisoAltaCuentaCheckBox_CheckedChanged(object sender, EventArgs e)
         {

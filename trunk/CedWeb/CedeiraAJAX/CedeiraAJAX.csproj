@@ -722,8 +722,6 @@
     <Content Include="info.txt" />
     <Content Include="Inicio.aspx" />
     <Content Include="Captcha.ashx" />
-    <None Include="CedWeb.pubpriv.rsa" />
-    <None Include="CedWebWS.pub.rsa" />
     <None Include="Descargas\Cedeira-SistAdminFCIs.pdf" />
     <None Include="Descargas\Cedeira-SistTransfMEP.pdf" />
     <None Include="Descargas\eFact-R-XL.zip" />
