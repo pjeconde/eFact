@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/CedeiraAJAX.Master" AutoEventWireup="true" CodeBehind="AdministracionCertificadosExplorador.aspx.cs" Inherits="CedeiraAJAX.AdministracionCertificadosExplorador"  %>
 
 <%@ Register Assembly="CedeiraUIWebForms" Namespace="CedeiraUIWebForms" TagPrefix="cc1" %>
+
 <asp:Content ID="AdministracionCertificadosExploradorContent" runat="Server" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado">
     <table border="0" cellpadding="0" cellspacing="0" class="TextoComun" style="height: 500px;
         width: 800px; text-align: left;">
@@ -57,7 +58,8 @@
                                             </edititemtemplate>
                                             <itemstyle horizontalalign="Center" wrap="true" />
                                         </asp:TemplateField>
-                                        <asp:CommandField HeaderText="Edición" ShowEditButton="True">
+                                        <asp:CommandField CancelText="Cancelar" EditText="Editar" HeaderText="Edición" ShowEditButton="True"
+											UpdateText="Actualizar">
                                             <headerstyle font-bold="False" horizontalalign="Center" width="150px" />
                                             <itemstyle horizontalalign="Center" width="10%" />
                                         </asp:CommandField>
