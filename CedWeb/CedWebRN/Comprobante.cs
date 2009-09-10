@@ -47,7 +47,7 @@ namespace CedWebRN
 
         }
 
-		public IBK.lote_comprobantes_response EnviarIBK(FeaEntidades.InterFacturas.lote_comprobantes lc, string certificado)
+        public string EnviarIBK(FeaEntidades.InterFacturas.lote_comprobantes lc, string certificado)
         {
             IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
             lcIBK = Fea2Ibk(lc);
@@ -61,8 +61,26 @@ namespace CedWebRN
 			if (col.Count.Equals(1))
 			{
 				objIBK.ClientCertificates.Add(col[0]);
-				IBK.lote_comprobantes_response lcr = objIBK.receiveFacturasConSchema(lcIBK); 
-				return lcr;
+				IBK.lote_comprobantes_response lcr = objIBK.receiveFacturasConSchema(lcIBK);
+                
+                string resultado = string.Empty;
+
+                if (!((IBK.lote_response)(lcr.Item)).estado.Equals("OK"))
+                {
+                    if (((IBK.lote_response)lcr.Item).errores_lote != null)
+                    {
+                        resultado = ((IBK.lote_response)lcr.Item).errores_lote[0].descripcion_error;
+                    }
+                    else
+                    {
+                        resultado = ((IBK.lote_response)lcr.Item).comprobante_response[0].errores_comprobante[0].descripcion_error;
+                    }
+                }
+                else
+                {
+                    resultado="Comprobante enviado satisfactoriamente a Interfacturas";
+                }
+                return resultado;
 			}
 			else
 			{

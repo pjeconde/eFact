@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="CedeiraAJAX_org_dyndns_cedweb_envio_EnvioIBK" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://cedweb.dyndns.org/CedWeb/envioibk.asmx</Value>
+      <Value Profile="(Default)">http://localhost:4167/EnvioIBK.asmx</Value>
     </Setting>
     <Setting Name="CedeiraAJAX_org_dyndns_cedweb_consulta_ConsultaIBK" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://localhost:4167/ConsultaIBK.asmx</Value>

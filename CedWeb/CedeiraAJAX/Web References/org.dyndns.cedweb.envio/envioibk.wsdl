@@ -14,54 +14,7 @@
       <s:element name="EnviarIBKResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="EnviarIBKResult">
-              <s:complexType>
-                <s:sequence>
-                  <s:choice minOccurs="1" maxOccurs="1">
-                    <s:element minOccurs="0" maxOccurs="1" name="lote_response">
-                      <s:complexType>
-                        <s:sequence>
-                          <s:element minOccurs="1" maxOccurs="1" name="id_lote" type="s:long" />
-                          <s:element minOccurs="1" maxOccurs="1" name="cuit_canal" type="s:long" />
-                          <s:element minOccurs="1" maxOccurs="1" name="cuit_vendedor" type="s:long" />
-                          <s:element minOccurs="1" maxOccurs="1" name="cantidad_reg" type="s:int" />
-                          <s:element minOccurs="0" maxOccurs="1" name="presta_serv" type="s:int" />
-                          <s:element minOccurs="0" maxOccurs="1" name="fecha_envio_lote" type="s:string" />
-                          <s:element minOccurs="1" maxOccurs="1" name="punto_de_venta" type="s:int" />
-                          <s:element minOccurs="0" maxOccurs="1" name="estado" type="s:string" />
-                          <s:element minOccurs="0" maxOccurs="1" name="errores_lote" type="s1:ArrayOfError" />
-                          <s:element minOccurs="0" maxOccurs="unbounded" name="comprobante_response">
-                            <s:complexType>
-                              <s:sequence>
-                                <s:element minOccurs="1" maxOccurs="1" name="tipo_de_comprobante" type="s:int" />
-                                <s:element minOccurs="1" maxOccurs="1" name="numero_comprobante" type="s:long" />
-                                <s:element minOccurs="1" maxOccurs="1" name="punto_de_venta" type="s:int" />
-                                <s:element minOccurs="0" maxOccurs="1" name="estado" type="s:string" />
-                                <s:element minOccurs="0" maxOccurs="1" name="errores_comprobante" type="s1:ArrayOfError" />
-                              </s:sequence>
-                            </s:complexType>
-                          </s:element>
-                        </s:sequence>
-                      </s:complexType>
-                    </s:element>
-                    <s:element minOccurs="0" maxOccurs="1" name="errores_response">
-                      <s:complexType>
-                        <s:sequence>
-                          <s:element minOccurs="0" maxOccurs="unbounded" name="error">
-                            <s:complexType>
-                              <s:sequence>
-                                <s:element minOccurs="1" maxOccurs="1" name="codigo_error" type="s:int" />
-                                <s:element minOccurs="0" maxOccurs="1" name="descripcion_error" type="s:string" />
-                              </s:sequence>
-                            </s:complexType>
-                          </s:element>
-                        </s:sequence>
-                      </s:complexType>
-                    </s:element>
-                  </s:choice>
-                </s:sequence>
-              </s:complexType>
-            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="EnviarIBKResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -324,18 +277,6 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="ArrayOfError">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="error">
-            <s:complexType>
-              <s:sequence>
-                <s:element minOccurs="1" maxOccurs="1" name="codigo_error" type="s:int" />
-                <s:element minOccurs="0" maxOccurs="1" name="descripcion_error" type="s:string" />
-              </s:sequence>
-            </s:complexType>
-          </s:element>
-        </s:sequence>
-      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="EnviarIBKSoapIn">
@@ -376,10 +317,10 @@
   </wsdl:binding>
   <wsdl:service name="EnvioIBK">
     <wsdl:port name="EnvioIBKSoap" binding="tns:EnvioIBKSoap">
-      <soap:address location="http://cedweb.dyndns.org/CedWeb/envioibk.asmx" />
+      <soap:address location="http://localhost:4167/EnvioIBK.asmx" />
     </wsdl:port>
     <wsdl:port name="EnvioIBKSoap12" binding="tns:EnvioIBKSoap12">
-      <soap12:address location="http://cedweb.dyndns.org/CedWeb/envioibk.asmx" />
+      <soap12:address location="http://localhost:4167/EnvioIBK.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

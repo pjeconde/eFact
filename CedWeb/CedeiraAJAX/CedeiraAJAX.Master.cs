@@ -85,7 +85,7 @@ namespace CedeiraAJAX
         public void SalirLinkButton_Click(object sender, EventArgs e)
         {
             CaducarIdentificacion();
-            Response.Write("<script>window.opener=null;window. close();</script>");
+            Response.Write(@"<script>if (navigator.appName==""Microsoft Internet Explorer""){window.opener=null;window. close();}</script>");
         }
         public void CaducarIdentificacion()
         {
