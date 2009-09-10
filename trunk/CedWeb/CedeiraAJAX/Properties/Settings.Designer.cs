@@ -26,7 +26,7 @@ namespace CedeiraAJAX.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://cedweb.dyndns.org/CedWeb/envioibk.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:4167/EnvioIBK.asmx")]
         public string CedeiraAJAX_org_dyndns_cedweb_envio_EnvioIBK {
             get {
                 return ((string)(this["CedeiraAJAX_org_dyndns_cedweb_envio_EnvioIBK"]));

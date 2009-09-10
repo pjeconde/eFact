@@ -23,7 +23,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
         System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> descuentos;
         System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> referencias;
         private System.Globalization.CultureInfo cedeiraCultura;
-        private RSACryptoServiceProvider rsa;
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -2353,63 +2352,52 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>");
                         return;
                     }
-                    //try
-                    //{
-                    //    Cripto cripto = new Cripto();
-                    //    string certificado = cripto.EncryptData(cta.NroSerieCertificado, Server.MapPath("~/CedWeb.pubpriv.rsa"), Server.MapPath("~/CedWebWS.pub.rsa"));
+                    try
+                    {
+                        string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(cta.NroSerieCertificado, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
 
-                    //    Cedeira2IBKWSEnvio.EnvioIBK eIBKWS = new Cedeira2IBKWSEnvio.EnvioIBK();
-                    //    Cedeira2IBKWSEnvio.lc lcIBK = new Cedeira2IBKWSEnvio.lc();
+                        //Cedeira2IBKWSEnvio.EnvioIBK eIBKWS = new Cedeira2IBKWSEnvio.EnvioIBK();
+                        org.dyndns.cedweb.envio.EnvioIBK edyndns = new org.dyndns.cedweb.envio.EnvioIBK();
+                        
+                        //Cedeira2IBKWSEnvio.lc lcIBK = new Cedeira2IBKWSEnvio.lc();
+                        org.dyndns.cedweb.envio.lc lcIBK = new org.dyndns.cedweb.envio.lc();
 
-                    //    Conversor conv = new Conversor();
-                    //    lcIBK = conv.Entidad2WSCedeira(lc);
+                        FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
+                        lcIBK = Conversor.Entidad2IBK(lcFea);
 
-                    //    Cedeira2IBKWSEnvio.lote_comprobantes_response lcr = eIBKWS.EnviarIBK(lcIBK, certificado);
+                        //Cedeira2IBKWSEnvio.lote_comprobantes_response lcr = eIBKWS.EnviarIBK(lcIBK, certificado);
+                        string respuesta = edyndns.EnviarIBK(lcIBK, certificado);
 
-                    //    if (!((Cedeira2IBKWSEnvio.lote_comprobantes_responseLote_response)lcr.Item).estado.Equals("OK"))
-                    //    {
-                    //        if (((Cedeira2IBKWSEnvio.lote_comprobantes_responseLote_response)lcr.Item).errores_lote != null)
-                    //        {
-                    //            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Interfacturas dice:" + ((Cedeira2IBKWSEnvio.lote_comprobantes_responseLote_response)lcr.Item).errores_lote[0].descripcion_error + "')</script>");
-                    //        }
-                    //        else
-                    //        {
-                    //            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Interfacturas dice:" + ((Cedeira2IBKWSEnvio.lote_comprobantes_responseLote_response)lcr.Item).comprobante_response[0].errores_comprobante[0].descripcion_error + "')</script>");
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Comprobante enviado satisfactoriamente a Interfacturas.')</script>");
-                    //    }
-                    //}
-                    //catch (System.Web.Services.Protocols.SoapException soapEx)
-                    //{
-                    //    try
-                    //    {
-                    //        XmlDocument doc = new XmlDocument();
-                    //        doc.LoadXml(soapEx.Detail.OuterXml);
-                    //        XmlNamespaceManager nsManager = new
-                    //            XmlNamespaceManager(doc.NameTable);
-                    //        nsManager.AddNamespace("errorNS",
-                    //            "http://www.cedeira.com.ar/webservices");
-                    //        XmlNode Node =
-                    //            doc.DocumentElement.SelectSingleNode("errorNS:Error", nsManager);
-                    //        string errorNumber =
-                    //            Node.SelectSingleNode("errorNS:ErrorNumber",
-                    //            nsManager).InnerText;
-                    //        string errorMessage =
-                    //            Node.SelectSingleNode("errorNS:ErrorMessage",
-                    //            nsManager).InnerText;
-                    //        string errorSource =
-                    //            Node.SelectSingleNode("errorNS:ErrorSource",
-                    //            nsManager).InnerText;
-                    //        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + " : " + errorMessage.Replace("\r", "").Replace("\n", "") + "');</script>");
-                    //    }
-                    //    catch (Exception)
-                    //    {
-                    //        throw soapEx;
-                    //    }
-                    //}
+                        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "')</script>");
+                    }
+                    catch (System.Web.Services.Protocols.SoapException soapEx)
+                    {
+                        try
+                        {
+                            XmlDocument doc = new XmlDocument();
+                            doc.LoadXml(soapEx.Detail.OuterXml);
+                            XmlNamespaceManager nsManager = new
+                                XmlNamespaceManager(doc.NameTable);
+                            nsManager.AddNamespace("errorNS",
+                                "http://www.cedeira.com.ar/webservices");
+                            XmlNode Node =
+                                doc.DocumentElement.SelectSingleNode("errorNS:Error", nsManager);
+                            string errorNumber =
+                                Node.SelectSingleNode("errorNS:ErrorNumber",
+                                nsManager).InnerText;
+                            string errorMessage =
+                                Node.SelectSingleNode("errorNS:ErrorMessage",
+                                nsManager).InnerText;
+                            string errorSource =
+                                Node.SelectSingleNode("errorNS:ErrorSource",
+                                nsManager).InnerText;
+                            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + " : " + errorMessage.Replace("\r", "").Replace("\n", "") + "');</script>");
+                        }
+                        catch (Exception)
+                        {
+                            throw soapEx;
+                        }
+                    }
 
                 }
                 catch (Exception ex)
@@ -2979,26 +2967,5 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
             }
         }
-        private void AsignarParametros(string ClavePrivada)
-        {
-            const int PROVIDER_RSA_FULL = 1;
-            CspParameters cspParams;
-            cspParams = new CspParameters(PROVIDER_RSA_FULL);
-            cspParams.KeyContainerName = "ClavePrivada";
-            rsa = new RSACryptoServiceProvider(cspParams);
-
-            rsa.FromXmlString(ClavePrivada);
-        }
-        private string EncryptData(string data2Encrypt, string ClavePrivadaPropia, string ClavePublicaAjena)
-        {
-            AsignarParametros(ClavePrivadaPropia);
-
-            rsa.FromXmlString(ClavePublicaAjena);
-
-            byte[] plainbytes = System.Text.Encoding.UTF8.GetBytes(data2Encrypt);
-            byte[] cipherbytes = rsa.Encrypt(plainbytes, false);
-            return Convert.ToBase64String(cipherbytes);
-        }
-
     }
 }

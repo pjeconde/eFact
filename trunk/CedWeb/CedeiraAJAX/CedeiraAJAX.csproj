@@ -278,6 +278,7 @@
     <Compile Include="Excepcion.aspx.designer.cs">
       <DependentUpon>Excepcion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Facturacion\Electronica\Conversor.cs" />
     <Compile Include="Facturacion\Electronica\FacturaElectronica.Master.cs">
       <DependentUpon>FacturaElectronica.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -748,9 +749,6 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\org.dyndns.cedweb.envio\EnviarIBKResponseEnviarIBKResult.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
     <None Include="Web References\org.dyndns.cedweb.envio\envioibk.wsdl" />
     <None Include="Web References\org.dyndns.cedweb.envio\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -769,10 +767,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>CedeiraAJAX_org_dyndns_cedweb_consulta_ConsultaIBK</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://cedweb.dyndns.org/CedWeb/envioibk.asmx">
+    <WebReferenceUrl Include="http://localhost:4167/EnvioIBK.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\org.dyndns.cedweb.envio\</RelPath>
-      <UpdateFromURL>http://cedweb.dyndns.org/CedWeb/envioibk.asmx</UpdateFromURL>
+      <UpdateFromURL>http://localhost:4167/EnvioIBK.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

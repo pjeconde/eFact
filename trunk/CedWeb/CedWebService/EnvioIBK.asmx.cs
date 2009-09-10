@@ -5,6 +5,7 @@ using System.Collections;
 using System.Web.Services;
 using System.Web.Services.Protocols;
 using System.ComponentModel;
+using System.IO;
 
 namespace CedWebService
 {
@@ -14,16 +15,25 @@ namespace CedWebService
     public class EnvioIBK : System.Web.Services.WebService
     {
         [WebMethod]
-        public CedWebRN.IBK.lote_comprobantes_response EnviarIBK(FeaEntidades.InterFacturas.lote_comprobantes lc, string pathCertificado)
+        public string EnviarIBK(FeaEntidades.InterFacturas.lote_comprobantes lc, string pathCertificado)
         {
-			CedWebRN.IBK.lote_comprobantes_response lcr = new CedWebRN.IBK.lote_comprobantes_response();
-			try
+            string resultado = string.Empty;
+            try
 			{
-				Cripto cripto = new Cripto();
-				string nroSerie = cripto.DecryptData(pathCertificado, Server.MapPath("~/CedWebWS.pubpriv.rsa"));
-
+                string nroSerie = CaptchaDotNet2.Security.Cryptography.Encryptor.Decrypt(pathCertificado, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
 				CedWebRN.Comprobante c = new CedWebRN.Comprobante();
-				lcr = c.EnviarIBK(lc, nroSerie);
+                using (FileStream fs = File.Open(Server.MapPath("~/Enviar.txt"), FileMode.Append, FileAccess.Write))
+                {
+                    using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
+                    {
+                        sw.WriteLine(System.DateTime.Now);
+                        sw.WriteLine("pathCertificado cifrado:" + pathCertificado);
+                        sw.WriteLine("pathCertificado descifrado:" + nroSerie);
+                        sw.WriteLine("cuit_vendedor:" + lc.cabecera_lote.cuit_vendedor);
+                        sw.WriteLine("id_lote:" + lc.cabecera_lote.id_lote);
+                    }
+                }
+                resultado = c.EnviarIBK(lc, nroSerie);
 			}
 			catch (Exception ex)
 			{
@@ -31,7 +41,7 @@ namespace CedWebService
 					"0", ex.Source, FaultCode.Server);
 
 			}
-            return lcr;
+            return resultado;
         }
     }
 }
