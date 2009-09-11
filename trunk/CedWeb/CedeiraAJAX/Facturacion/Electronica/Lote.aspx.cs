@@ -2345,7 +2345,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 {
                     FeaEntidades.InterFacturas.lote_comprobantes lc = GenerarLote();
 
-                    //Ir por WS
                     CedWebEntidades.Cuenta cta = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta;
                     if (cta.NroSerieCertificado.Equals(string.Empty))
                     {
@@ -2356,16 +2355,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     {
                         string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(cta.NroSerieCertificado, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
 
-                        //Cedeira2IBKWSEnvio.EnvioIBK eIBKWS = new Cedeira2IBKWSEnvio.EnvioIBK();
                         org.dyndns.cedweb.envio.EnvioIBK edyndns = new org.dyndns.cedweb.envio.EnvioIBK();
                         
-                        //Cedeira2IBKWSEnvio.lc lcIBK = new Cedeira2IBKWSEnvio.lc();
                         org.dyndns.cedweb.envio.lc lcIBK = new org.dyndns.cedweb.envio.lc();
 
                         FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
                         lcIBK = Conversor.Entidad2IBK(lcFea);
 
-                        //Cedeira2IBKWSEnvio.lote_comprobantes_response lcr = eIBKWS.EnviarIBK(lcIBK, certificado);
                         string respuesta = edyndns.EnviarIBK(lcIBK, certificado);
 
                         ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "')</script>");
