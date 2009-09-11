@@ -75,6 +75,7 @@ namespace CedWebRN
                     {
                         resultado = ((IBK.lote_response)lcr.Item).comprobante_response[0].errores_comprobante[0].descripcion_error;
                     }
+                    throw new Exception(resultado);
                 }
                 else
                 {
