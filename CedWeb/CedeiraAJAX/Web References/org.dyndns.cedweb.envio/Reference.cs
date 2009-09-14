@@ -32,7 +32,15 @@ namespace CedeiraAJAX.org.dyndns.cedweb.envio {
         private System.Threading.SendOrPostCallback EnviarIBKOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
-        
+
+        protected override System.Net.WebRequest GetWebRequest(Uri uri)
+        {
+            System.Net.HttpWebRequest wr = (System.Net.HttpWebRequest)base.GetWebRequest(uri);
+            wr.KeepAlive = false;
+            wr.ServicePoint.MaxIdleTime = 1000;
+            return wr;
+        }
+
         /// <remarks/>
         public EnvioIBK() {
             this.Url = global::CedeiraAJAX.Properties.Settings.Default.CedeiraAJAX_org_dyndns_cedweb_envio_EnvioIBK;

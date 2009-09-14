@@ -14,7 +14,20 @@ namespace CedWebRN
             lc.comprobante = new FeaEntidades.InterFacturas.comprobante[1];
             IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
             objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
-            
+
+            if (System.Configuration.ConfigurationManager.AppSettings["Proxy"]!=null)
+            {
+                System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], true);
+                string usuarioProxy = System.Configuration.ConfigurationManager.AppSettings["UsuarioProxy"];
+                string claveProxy = System.Configuration.ConfigurationManager.AppSettings["ClaveProxy"];
+                string dominioProxy = System.Configuration.ConfigurationManager.AppSettings["DominioProxy"];
+
+                System.Net.NetworkCredential networkCredential = new System.Net.NetworkCredential(usuarioProxy, claveProxy, dominioProxy);
+                wp.Credentials = networkCredential;
+                objIBK.Proxy = wp;
+            }
+
+
             X509Store store = new X509Store(StoreLocation.LocalMachine);
             store.Open(OpenFlags.ReadOnly);
 			X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
@@ -54,6 +67,18 @@ namespace CedWebRN
 
             IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
             objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
+
+            if (System.Configuration.ConfigurationManager.AppSettings["Proxy"]!=null)
+            {
+                System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], true);
+                string usuarioProxy = System.Configuration.ConfigurationManager.AppSettings["UsuarioProxy"];
+                string claveProxy = System.Configuration.ConfigurationManager.AppSettings["ClaveProxy"];
+                string dominioProxy = System.Configuration.ConfigurationManager.AppSettings["DominioProxy"];
+
+                System.Net.NetworkCredential networkCredential = new System.Net.NetworkCredential(usuarioProxy, claveProxy, dominioProxy);
+                wp.Credentials = networkCredential;
+                objIBK.Proxy = wp;
+            }
 
 			X509Store store = new X509Store(StoreLocation.LocalMachine);
 			store.Open(OpenFlags.ReadOnly);
