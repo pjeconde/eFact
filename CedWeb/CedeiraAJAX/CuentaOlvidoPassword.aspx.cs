@@ -130,7 +130,7 @@ namespace CedeiraAJAX
                 ConfirmacionPasswordNuevaTextBox.Enabled = false;
                 AceptarButton.Visible = false;
                 CancelarButton.Visible = false;
-                MsgErrorLabel.Text = "La Contraseña fue registrada satisfactoriamente.  Para iniciar una sesion de trabajo, deberá identificarse en la página de inicio.";
+                MsgErrorLabel.Text = "La Contraseña fue registrada satisfactoriamente.  Para iniciar una sesión de trabajo, deberá identificarse en la página de inicio.";
             }
             catch (System.Threading.ThreadAbortException)
             {

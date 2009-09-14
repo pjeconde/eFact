@@ -867,7 +867,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesion ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
                 }
             }
             else
@@ -1477,7 +1477,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesion ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
                 }
             }
             else
@@ -2045,7 +2045,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
             {
-                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesion ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
+                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
             }
             else
             {
@@ -2095,7 +2095,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
             {
-                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesion ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
+                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
             }
             else
             {
@@ -2172,7 +2172,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesion ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
                 }
             }
             else
@@ -2216,7 +2216,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     {
                         if (listadedescuentos[i].descripcion_descuento != null && !listadedescuentos[i].descripcion_descuento.Equals(string.Empty))
                         {
-                            totalNoGravado -= listadedescuentos[i].importe_descuento;
+                            totalGravado -= listadedescuentos[i].importe_descuento;
                         }
                     }
                     //Proceso IMPUESTOS GLOBALES
@@ -2336,7 +2336,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesion ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
                 }
             }
             else
@@ -2869,7 +2869,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 else
                 {
-                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesion ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
                 }
             }
             else
