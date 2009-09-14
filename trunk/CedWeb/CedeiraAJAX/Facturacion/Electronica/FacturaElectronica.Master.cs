@@ -85,7 +85,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
         public void SalirLinkButton_Click(object sender, EventArgs e)
         {
             CaducarIdentificacion();
-            Response.Write("<script>window.opener=null;window. close();</script>");
         }
         public void CaducarIdentificacion()
         {

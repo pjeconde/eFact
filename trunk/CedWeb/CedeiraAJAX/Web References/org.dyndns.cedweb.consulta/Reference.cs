@@ -32,7 +32,15 @@ namespace CedeiraAJAX.org.dyndns.cedweb.consulta {
         private System.Threading.SendOrPostCallback ConsultarOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
-        
+
+        protected override System.Net.WebRequest GetWebRequest(Uri uri)
+        {
+            System.Net.HttpWebRequest wr = (System.Net.HttpWebRequest)base.GetWebRequest(uri);
+            wr.KeepAlive = false;
+            wr.ServicePoint.MaxIdleTime = 1000;
+            return wr;
+        }
+
         /// <remarks/>
         public ConsultaIBK() {
             this.Url = global::CedeiraAJAX.Properties.Settings.Default.CedeiraAJAX_org_dyndns_cedweb_consulta_ConsultaIBK;
