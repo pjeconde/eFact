@@ -1914,7 +1914,7 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 		[Serializable]
 		public class Crear : Microsoft.ApplicationBlocks.ExceptionManagement.BaseApplicationException
 		{
-			static string TextoError = "No se puede crear una sesion de trabajo";
+			static string TextoError = "No se puede crear una sesión de trabajo";
 			public Crear() : base(TextoError)
 			{
 			}

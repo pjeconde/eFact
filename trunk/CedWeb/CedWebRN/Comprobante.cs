@@ -17,7 +17,7 @@ namespace CedWebRN
 
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"]!=null)
             {
-                System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], true);
+                System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
                 string usuarioProxy = System.Configuration.ConfigurationManager.AppSettings["UsuarioProxy"];
                 string claveProxy = System.Configuration.ConfigurationManager.AppSettings["ClaveProxy"];
                 string dominioProxy = System.Configuration.ConfigurationManager.AppSettings["DominioProxy"];
@@ -70,7 +70,7 @@ namespace CedWebRN
 
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"]!=null)
             {
-                System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], true);
+                System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
                 string usuarioProxy = System.Configuration.ConfigurationManager.AppSettings["UsuarioProxy"];
                 string claveProxy = System.Configuration.ConfigurationManager.AppSettings["ClaveProxy"];
                 string dominioProxy = System.Configuration.ConfigurationManager.AppSettings["DominioProxy"];
