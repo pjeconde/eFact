@@ -2963,5 +2963,26 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
             }
         }
+
+        protected void PDFButton_Click(object sender, EventArgs e)
+        {
+            if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+            {
+                if (!MonedaComprobanteDropDownList.Enabled)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Esta funcionalidad es exclusiva del SERVICIO PREMIUM.  Contáctese con Cedeira Software Factory para acceder al servicio.');</script>");
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
+                }
+            }
+            else
+            {
+                FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
+                Session["lote"] = lcFea;
+                Response.Redirect("FacturaWebForm.aspx", true);
+            }
+        }
     }
 }

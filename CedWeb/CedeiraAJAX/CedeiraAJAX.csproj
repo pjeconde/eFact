@@ -29,6 +29,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Enterprise.Framework, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Enterprise.InfoStore, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\WINDOWS\assembly\GAC_MSIL\CrystalDecisions.Web\10.2.3600.0__692fbea5521e1304\CrystalDecisions.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -293,12 +302,26 @@
     <Compile Include="Facturacion\Electronica\FacturaElectronicaTYC.aspx.designer.cs">
       <DependentUpon>FacturaElectronicaTYC.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Facturacion\Electronica\FacturaWebForm.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>FacturaWebForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\FacturaWebForm.aspx.designer.cs">
+      <DependentUpon>FacturaWebForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Facturacion\Electronica\Lote.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Lote.aspx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\Lote.aspx.designer.cs">
       <DependentUpon>Lote.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\Factura.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Factura.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="FacturaElectronica.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -599,6 +622,7 @@
     <Content Include="EsquemaSolucioneseFact.aspx" />
     <Content Include="Excepcion.aspx" />
     <Content Include="Facturacion\Electronica\FacturaElectronicaTYC.aspx" />
+    <Content Include="Facturacion\Electronica\FacturaWebForm.aspx" />
     <Content Include="Facturacion\Electronica\Lote.aspx" />
     <Content Include="CedeiraAJAX.Master" />
     <Content Include="FacturaElectronica.aspx" />
@@ -808,6 +832,22 @@
       <Project>{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}</Project>
       <Name>FeaEntidades</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Facturacion\Electronica\Reportes\Factura.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Factura.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsx">
+      <DependentUpon>lote_comprobantes.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Temp\" />

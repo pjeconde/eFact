@@ -2005,6 +2005,15 @@
                                                         Width="100%" />
                                                 </td>
                                             </tr>
+                                            <tr>
+												<td style="width: 100%; padding-right: 3px" colspan="3">
+													<asp:Button ID="PDFButton" runat="server" BackColor="peachpuff" BorderColor="brown"
+														BorderStyle="Solid" BorderWidth="1px" CausesValidation="true" Font-Bold="true"
+														ForeColor="brown" Height="60px" Text="Generar PDF" 
+														ToolTip="Exclusivo SERVICIO PREMIUM"
+														Width="100%" OnClick="PDFButton_Click" />
+												</td>
+                                            </tr>
                                         </table>
                                     </td>
                                 </tr>
