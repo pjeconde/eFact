@@ -3,13 +3,15 @@
 
 <%@ Register Assembly="CrystalDecisions.Web, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304"
 	Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
+	
 <asp:Content ID="FacturaContent" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado"
 	runat="server">
-	<table border="0" cellpadding="0" cellspacing="0" class="TextComunSinPosicion" style="width: 800px;">
+	<table>
 		<tr>
-			<td style="vertical-align: top; height: 500px; max-height: 500px; width: 100%;">
+			<td>
 				<CR:CrystalReportViewer ID="FacturaCrystalReportViewer" runat="server" CssFilename="../../aspnet_client/system_web/2_0_50727/CrystalReportWebFormViewer3/css/default.css"
-				 BestFitPage="True"	ToolbarImagesFolderUrl="../../aspnet_client/system_web/2_0_50727/CrystalReportWebFormViewer3/images/toolbar">
+					HasCrystalLogo="false" HasGotoPageButton="false" HasRefreshButton="false" HasToggleGroupTreeButton="false"
+					ToolbarImagesFolderUrl="../../aspnet_client/system_web/2_0_50727/CrystalReportWebFormViewer3/images/toolbar">
 				</CR:CrystalReportViewer>
 			</td>
 		</tr>

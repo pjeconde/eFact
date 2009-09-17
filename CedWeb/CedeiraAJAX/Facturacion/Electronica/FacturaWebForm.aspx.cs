@@ -11,62 +11,97 @@ using System.Web.UI.HtmlControls;
 using System.Xml.Serialization;
 using System.Text;
 using System.IO;
+using System.Data;
 
 namespace CedeiraAJAX.Facturacion.Electronica
 {
     public partial class FacturaWebForm : System.Web.UI.Page
     {
-        CrystalDecisions.CrystalReports.Engine.ReportDocument oRpt;
+        CrystalDecisions.CrystalReports.Engine.ReportDocument facturaRpt;
+        CrystalDecisions.CrystalReports.Engine.ReportDocument imagenRpt;
+        DataSet dsImages = new DataSet();
         protected void Page_Unload(object sender, EventArgs e)
         {
-            if (oRpt != null)
+            if (facturaRpt != null)
             {
-                oRpt.Dispose();
+                facturaRpt.Dispose();
+            }
+            if (imagenRpt != null)
+            {
+                imagenRpt.Dispose();
             }
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.IsPostBack)
+            if (Session["lote"] == null)
             {
-                if (Session["lote"] == null)
+                Server.Transfer("~/Inicio.aspx");
+            }
+            else
+            {
+                try
                 {
-                    Server.Transfer("~/Inicio.aspx");
+                    facturaRpt = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
+                    string reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/Factura.rpt");
+                    facturaRpt.Load(reportPath);
+
+                    FeaEntidades.InterFacturas.lote_comprobantes lc = (FeaEntidades.InterFacturas.lote_comprobantes)Session["lote"];
+                    DataSet ds = new DataSet();
+
+                    XmlSerializer objXS = new XmlSerializer(lc.GetType());
+                    StringWriter objSW = new StringWriter();
+                    objXS.Serialize(objSW, lc);
+                    StringReader objSR = new StringReader(objSW.ToString());
+                    ds.ReadXml(objSR);
+
+                    facturaRpt.SetDataSource(ds);
+                    facturaRpt.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
+                    facturaRpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
+
+                    //FacturaCrystalReportViewer.ReportSource = facturaRpt;
+                    //FacturaCrystalReportViewer.DataBind();
+                    //FacturaCrystalReportViewer.HasPrintButton = true;
+
+                    CrearTabla();
+                    FileStream FilStr = new FileStream(Server.MapPath("~/Imagenes/Logos.bmp"), FileMode.Open);
+                    BinaryReader BinRed = new BinaryReader(FilStr);
+                    DataRow dr = this.dsImages.Tables["images"].NewRow();
+                    dr["path"] = Server.MapPath("~/Imagenes/Logos.bmp");
+                    dr["image"] = BinRed.ReadBytes((int)BinRed.BaseStream.Length);
+                    this.dsImages.Tables["images"].Rows.Add(dr);
+                    FilStr.Close();
+                    BinRed.Close();
+
+                    //imagenRpt = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
+
+                    imagenRpt = facturaRpt.OpenSubreport("Imagen.rpt");
+                    //reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/Imagen.rpt");
+                    //imagenRpt.Load(reportPath);
+                    imagenRpt.SetDataSource(this.dsImages);
+
+                    FacturaCrystalReportViewer.ReportSource = facturaRpt;
+                    FacturaCrystalReportViewer.DataBind();
+                    FacturaCrystalReportViewer.HasPrintButton = true;
+
                 }
-                else
+                catch (System.Threading.ThreadAbortException)
                 {
-                    try
-                    {
-                        oRpt = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
-                        string reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/Factura.rpt");
-                        oRpt.Load(reportPath);
-
-                        FeaEntidades.InterFacturas.lote_comprobantes lc = (FeaEntidades.InterFacturas.lote_comprobantes)Session["lote"];
-                        DataSet ds = new DataSet();
-
-                        XmlSerializer objXS = new XmlSerializer(lc.GetType());
-                        StringWriter objSW = new StringWriter();
-                        objXS.Serialize(objSW, lc);
-                        StringReader objSR = new StringReader(objSW.ToString());
-                        ds.ReadXml(objSR);
-
-                        oRpt.SetDataSource(ds);
-
-                        oRpt.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
-                        oRpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
-                        FacturaCrystalReportViewer.ReportSource = oRpt;
-                        FacturaCrystalReportViewer.DataBind();
-                        FacturaCrystalReportViewer.HasPrintButton = true;
-                    }
-                    catch (System.Threading.ThreadAbortException)
-                    {
-                        Trace.Warn("Thread abortado");
-                    }
-                    catch (Exception ex)
-                    {
-                        CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepcion.aspx");
-                    }
+                    Trace.Warn("Thread abortado");
+                }
+                catch (Exception ex)
+                {
+                    CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepcion.aspx");
                 }
             }
+        }
+
+        private void CrearTabla()
+        {
+            this.dsImages = new DataSet();
+            DataTable imageTable = new DataTable("Images");
+            imageTable.Columns.Add(new DataColumn("path", typeof(string)));
+            imageTable.Columns.Add(new DataColumn("image", typeof(System.Byte[])));
+            this.dsImages.Tables.Add(imageTable);
         }
     }
 }

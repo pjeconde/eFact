@@ -323,6 +323,12 @@
       <SubType>Component</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\Imagen.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Imagen.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FacturaElectronica.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>FacturaElectronica.aspx</DependentUpon>
@@ -842,12 +848,24 @@
       <LastGenOutput>Factura.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Facturacion\Electronica\Reportes\Imagen.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Facturacion\Electronica\Reportes\Imagen.xsx">
+      <DependentUpon>Imagen.xsd</DependentUpon>
+    </None>
     <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsx">
       <DependentUpon>lote_comprobantes.xsd</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Facturacion\Electronica\Reportes\Imagen.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Imagen.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Temp\" />
