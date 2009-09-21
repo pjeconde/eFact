@@ -19,6 +19,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
     {
         CrystalDecisions.CrystalReports.Engine.ReportDocument facturaRpt;
         CrystalDecisions.CrystalReports.Engine.ReportDocument imagenRpt;
+        CrystalDecisions.CrystalReports.Engine.ReportDocument codigobarrasRpt;
         DataSet dsImages = new DataSet();
         protected void Page_Unload(object sender, EventArgs e)
         {
@@ -29,6 +30,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
             if (imagenRpt != null)
             {
                 imagenRpt.Dispose();
+            }
+            if (codigobarrasRpt != null)
+            {
+                codigobarrasRpt.Dispose();
             }
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -58,26 +63,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     facturaRpt.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
                     facturaRpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
 
-                    //FacturaCrystalReportViewer.ReportSource = facturaRpt;
-                    //FacturaCrystalReportViewer.DataBind();
-                    //FacturaCrystalReportViewer.HasPrintButton = true;
+                    IncrustarLogo();
 
-                    CrearTabla();
-                    FileStream FilStr = new FileStream(Server.MapPath("~/Imagenes/Logos.bmp"), FileMode.Open);
-                    BinaryReader BinRed = new BinaryReader(FilStr);
-                    DataRow dr = this.dsImages.Tables["images"].NewRow();
-                    dr["path"] = Server.MapPath("~/Imagenes/Logos.bmp");
-                    dr["image"] = BinRed.ReadBytes((int)BinRed.BaseStream.Length);
-                    this.dsImages.Tables["images"].Rows.Add(dr);
-                    FilStr.Close();
-                    BinRed.Close();
-
-                    //imagenRpt = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
-
-                    imagenRpt = facturaRpt.OpenSubreport("Imagen.rpt");
-                    //reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/Imagen.rpt");
-                    //imagenRpt.Load(reportPath);
-                    imagenRpt.SetDataSource(this.dsImages);
+                    GenerarCodigoBarras(lc.comprobante[0].cabecera.informacion_comprobante.cae);
 
                     FacturaCrystalReportViewer.ReportSource = facturaRpt;
                     FacturaCrystalReportViewer.DataBind();
@@ -93,6 +81,48 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepcion.aspx");
                 }
             }
+        }
+
+        private void GenerarCodigoBarras(string code)
+        {
+            Reportes.Code39 c39 = new Reportes.Code39();
+            MemoryStream ms = new MemoryStream();
+            c39.FontFamilyName = "Free 3 of 9";
+            c39.FontFileName = Server.MapPath("Reportes/FREE3OF9.TTF");
+            c39.FontSize = 100;
+            c39.ShowCodeString = true;
+            c39.Title = code;
+            System.Drawing.Bitmap objBitmap = c39.GenerateBarcode(code);
+            objBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+            codigobarrasRpt = facturaRpt.OpenSubreport("CodigoBarra.rpt");
+
+            CrearTabla();
+
+            DataRow dr = this.dsImages.Tables["images"].NewRow();
+            dr["path"] = "ninguno";
+            dr["image"] = ms.ToArray();
+            this.dsImages.Tables["images"].Rows.Add(dr);
+            
+            codigobarrasRpt.SetDataSource(this.dsImages);
+
+            
+        }
+
+        private void IncrustarLogo()
+        {
+            CrearTabla();
+            FileStream FilStr = new FileStream(Server.MapPath("~/Imagenes/Logos.bmp"), FileMode.Open);
+            BinaryReader BinRed = new BinaryReader(FilStr);
+            DataRow dr = this.dsImages.Tables["images"].NewRow();
+            dr["path"] = Server.MapPath("~/Imagenes/Logos.bmp");
+            dr["image"] = BinRed.ReadBytes((int)BinRed.BaseStream.Length);
+            this.dsImages.Tables["images"].Rows.Add(dr);
+            FilStr.Close();
+            BinRed.Close();
+
+            imagenRpt = facturaRpt.OpenSubreport("Imagen.rpt");
+            imagenRpt.SetDataSource(this.dsImages);
         }
 
         private void CrearTabla()
