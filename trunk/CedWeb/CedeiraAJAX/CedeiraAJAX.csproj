@@ -750,6 +750,10 @@
     <Content Include="Imagenes\mapa_america_fdo.gif" />
     <Content Include="Imagenes\MenuTop.gif" />
     <Content Include="Imagenes\MenuTopL.gif" />
+    <Content Include="Imagenes\MsgBox\att.png" />
+    <Content Include="Imagenes\MsgBox\err.png" />
+    <Content Include="Imagenes\MsgBox\inf.png" />
+    <Content Include="Imagenes\MsgBox\suc.png" />
     <Content Include="Imagenes\NavegadorRecomendado.jpg" />
     <Content Include="Imagenes\NoHayFoto.gif" />
     <Content Include="Imagenes\Ok.gif" />
@@ -881,6 +885,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Temp\" />
+    <Folder Include="UserControls\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v8.0\WebApplications\Microsoft.WebApplication.targets" />

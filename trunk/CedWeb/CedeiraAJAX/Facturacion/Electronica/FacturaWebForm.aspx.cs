@@ -89,8 +89,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
             MemoryStream ms = new MemoryStream();
             c39.FontFamilyName = "Free 3 of 9";
             c39.FontFileName = Server.MapPath("Reportes/FREE3OF9.TTF");
-            c39.FontSize = 100;
-            c39.ShowCodeString = true;
+            c39.FontSize = 20;
+            c39.ShowCodeString = false;
             c39.Title = code;
             System.Drawing.Bitmap objBitmap = c39.GenerateBarcode(code);
             objBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
