@@ -18,14 +18,5 @@ namespace CedeiraAJAX.Facturacion.Electronica {
     /// Clase generada automáticamente.
     /// </remarks>
     public partial class FacturaWebForm {
-        
-        /// <summary>
-        /// Control FacturaCrystalReportViewer.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::CrystalDecisions.Web.CrystalReportViewer FacturaCrystalReportViewer;
     }
 }

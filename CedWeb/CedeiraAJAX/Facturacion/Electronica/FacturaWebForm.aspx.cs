@@ -67,9 +67,21 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
                     GenerarCodigoBarras(lc.comprobante[0].cabecera.informacion_comprobante.cae);
 
-                    FacturaCrystalReportViewer.ReportSource = facturaRpt;
-                    FacturaCrystalReportViewer.DataBind();
-                    FacturaCrystalReportViewer.HasPrintButton = true;
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.Append(lc.cabecera_lote.cuit_vendedor);
+                    sb.Append("-");
+                    sb.Append(lc.cabecera_lote.punto_de_venta.ToString("0000"));
+                    sb.Append("-");
+                    sb.Append(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00"));
+                    sb.Append("-");
+                    sb.Append(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000"));
+
+                    CrystalDecisions.Shared.ExportOptions exportOpts = new CrystalDecisions.Shared.ExportOptions();
+                    CrystalDecisions.Shared.PdfRtfWordFormatOptions pdfOpts = CrystalDecisions.Shared.ExportOptions.CreatePdfRtfWordFormatOptions();
+                    exportOpts.ExportFormatType = CrystalDecisions.Shared.ExportFormatType.PortableDocFormat;
+                    exportOpts.ExportFormatOptions = pdfOpts;
+                    facturaRpt.ExportToHttpResponse(exportOpts, Response, true, sb.ToString());
+
 
                 }
                 catch (System.Threading.ThreadAbortException)
@@ -85,44 +97,52 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
         private void GenerarCodigoBarras(string code)
         {
-            Reportes.Code39 c39 = new Reportes.Code39();
-            MemoryStream ms = new MemoryStream();
-            c39.FontFamilyName = "Free 3 of 9";
-            c39.FontFileName = Server.MapPath("Reportes/FREE3OF9.TTF");
-            c39.FontSize = 20;
-            c39.ShowCodeString = false;
-            c39.Title = code;
-            System.Drawing.Bitmap objBitmap = c39.GenerateBarcode(code);
-            objBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+            if (code != null)
+            {
+                Reportes.Code39 c39 = new Reportes.Code39();
+                MemoryStream ms = new MemoryStream();
+                c39.FontFamilyName = "Free 3 of 9";
+                c39.FontFileName = Server.MapPath("Reportes/FREE3OF9.TTF");
+                c39.FontSize = 20;
+                c39.ShowCodeString = false;
+                c39.Title = code;
+                System.Drawing.Bitmap objBitmap = c39.GenerateBarcode(code);
+                objBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
 
-            codigobarrasRpt = facturaRpt.OpenSubreport("CodigoBarra.rpt");
+                codigobarrasRpt = facturaRpt.OpenSubreport("CodigoBarra.rpt");
 
-            CrearTabla();
+                CrearTabla();
 
-            DataRow dr = this.dsImages.Tables["images"].NewRow();
-            dr["path"] = "ninguno";
-            dr["image"] = ms.ToArray();
-            this.dsImages.Tables["images"].Rows.Add(dr);
-            
-            codigobarrasRpt.SetDataSource(this.dsImages);
+                DataRow dr = this.dsImages.Tables["images"].NewRow();
+                dr["path"] = "ninguno";
+                dr["image"] = ms.ToArray();
+                this.dsImages.Tables["images"].Rows.Add(dr);
 
-            
+                codigobarrasRpt.SetDataSource(this.dsImages);
+            }
         }
 
         private void IncrustarLogo()
         {
-            CrearTabla();
-            FileStream FilStr = new FileStream(Server.MapPath("~/Imagenes/Logos.bmp"), FileMode.Open);
-            BinaryReader BinRed = new BinaryReader(FilStr);
-            DataRow dr = this.dsImages.Tables["images"].NewRow();
-            dr["path"] = Server.MapPath("~/Imagenes/Logos.bmp");
-            dr["image"] = BinRed.ReadBytes((int)BinRed.BaseStream.Length);
-            this.dsImages.Tables["images"].Rows.Add(dr);
-            FilStr.Close();
-            BinRed.Close();
+            try
+            {
+                FileStream FilStr = new FileStream(Server.MapPath("~/Imagenes/Logos/"+((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.CUIT+".bmp"), FileMode.Open);
+                CrearTabla();
+                BinaryReader BinRed = new BinaryReader(FilStr);
+                DataRow dr = this.dsImages.Tables["images"].NewRow();
+                dr["path"] = Server.MapPath("~/Imagenes/Logos.bmp");
+                dr["image"] = BinRed.ReadBytes((int)BinRed.BaseStream.Length);
+                this.dsImages.Tables["images"].Rows.Add(dr);
+                FilStr.Close();
+                BinRed.Close();
 
-            imagenRpt = facturaRpt.OpenSubreport("Imagen.rpt");
-            imagenRpt.SetDataSource(this.dsImages);
+                imagenRpt = facturaRpt.OpenSubreport("Imagen.rpt");
+                imagenRpt.SetDataSource(this.dsImages);
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private void CrearTabla()

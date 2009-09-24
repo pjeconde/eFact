@@ -884,6 +884,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Imagenes\Logos\" />
     <Folder Include="Temp\" />
     <Folder Include="UserControls\" />
   </ItemGroup>
