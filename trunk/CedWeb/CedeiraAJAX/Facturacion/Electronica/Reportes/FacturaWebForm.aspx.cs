@@ -89,7 +89,7 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
                 }
                 catch (Exception ex)
                 {
-                    CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepcion.aspx");
+                    CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepciones/Excepcion.aspx");
                 }
             }
         }

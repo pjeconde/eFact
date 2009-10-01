@@ -287,6 +287,20 @@
     <Compile Include="Excepcion.aspx.designer.cs">
       <DependentUpon>Excepcion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Excepciones\CedeiraAJAX.Master.cs">
+      <DependentUpon>CedeiraAJAX.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Excepciones\CedeiraAJAX.Master.designer.cs">
+      <DependentUpon>CedeiraAJAX.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Excepciones\Excepcion.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Excepcion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Excepciones\Excepcion.aspx.designer.cs">
+      <DependentUpon>Excepcion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Facturacion\Electronica\Conversor.cs" />
     <Compile Include="Facturacion\Electronica\FacturaElectronica.Master.cs">
       <DependentUpon>FacturaElectronica.Master</DependentUpon>
@@ -854,6 +868,8 @@
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Excepciones\Web.config" />
+    <Content Include="Excepciones\CedeiraAJAX.Master" />
     <None Include="Facturacion\Electronica\Reportes\FREE3OF9.TTF" />
     <None Include="Facturacion\Electronica\Reportes\Factura.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -872,6 +888,7 @@
     <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsx">
       <DependentUpon>lote_comprobantes.xsd</DependentUpon>
     </None>
+    <Content Include="Excepciones\Excepcion.aspx" />
     <Content Include="Facturacion\Electronica\Reportes\Web.config" />
   </ItemGroup>
   <ItemGroup>
