@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CedeiraAJAX.Facturacion.Electronica {
+namespace CedeiraAJAX.Facturacion.Electronica.Reportes {
     
     
     /// <summary>

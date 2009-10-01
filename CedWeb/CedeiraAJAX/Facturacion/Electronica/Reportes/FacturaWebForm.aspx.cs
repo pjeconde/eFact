@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Text;
 using System.IO;
 
-namespace CedeiraAJAX.Facturacion.Electronica
+namespace CedeiraAJAX.Facturacion.Electronica.Reportes
 {
     public partial class FacturaWebForm : System.Web.UI.Page
     {
@@ -101,7 +101,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 Reportes.Code39 c39 = new Reportes.Code39();
                 MemoryStream ms = new MemoryStream();
                 c39.FontFamilyName = "Free 3 of 9";
-                c39.FontFileName = Server.MapPath("Reportes/FREE3OF9.TTF");
+                c39.FontFileName = Server.MapPath("FREE3OF9.TTF");
                 c39.FontSize = 30;
                 c39.ShowCodeString = true;
                 System.Drawing.Bitmap objBitmap = c39.GenerateBarcode(code);
@@ -124,7 +124,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             try
             {
-                FileStream FilStr = new FileStream(Server.MapPath("~/Imagenes/Logos/"+((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.CUIT+".bmp"), FileMode.Open);
+                FileStream FilStr = new FileStream(Server.MapPath("~/Imagenes/Logos/" + ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.CUIT + ".bmp"), FileMode.Open);
                 CrearTabla();
                 BinaryReader BinRed = new BinaryReader(FilStr);
                 DataRow dr = this.dsImages.Tables["images"].NewRow();

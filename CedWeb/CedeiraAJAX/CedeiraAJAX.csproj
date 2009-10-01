@@ -302,13 +302,6 @@
     <Compile Include="Facturacion\Electronica\FacturaElectronicaTYC.aspx.designer.cs">
       <DependentUpon>FacturaElectronicaTYC.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Facturacion\Electronica\FacturaWebForm.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>FacturaWebForm.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Facturacion\Electronica\FacturaWebForm.aspx.designer.cs">
-      <DependentUpon>FacturaWebForm.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Facturacion\Electronica\Lote.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Lote.aspx</DependentUpon>
@@ -329,6 +322,13 @@
       <DependentUpon>Factura.rpt</DependentUpon>
       <SubType>Component</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\FacturaWebForm.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>FacturaWebForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\FacturaWebForm.aspx.designer.cs">
+      <DependentUpon>FacturaWebForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\Reportes\Imagen.cs">
       <AutoGen>True</AutoGen>
@@ -635,9 +635,9 @@
     <Content Include="EsquemaSolucioneseFact.aspx" />
     <Content Include="Excepcion.aspx" />
     <Content Include="Facturacion\Electronica\FacturaElectronicaTYC.aspx" />
-    <Content Include="Facturacion\Electronica\FacturaWebForm.aspx" />
     <Content Include="Facturacion\Electronica\Lote.aspx" />
     <Content Include="CedeiraAJAX.Master" />
+    <Content Include="Facturacion\Electronica\Reportes\FacturaWebForm.aspx" />
     <Content Include="FacturaElectronica.aspx" />
     <Content Include="FacturaElectronicaActividadesAlcanzadas.aspx" />
     <Content Include="FacturaElectronicaExcel.aspx" />
@@ -872,6 +872,7 @@
     <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsx">
       <DependentUpon>lote_comprobantes.xsd</DependentUpon>
     </None>
+    <Content Include="Facturacion\Electronica\Reportes\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Facturacion\Electronica\Reportes\CodigoBarra.rpt">
