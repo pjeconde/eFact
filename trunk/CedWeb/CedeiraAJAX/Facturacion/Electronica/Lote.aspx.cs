@@ -2981,7 +2981,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             {
                 FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
                 Session["lote"] = lcFea;
-                Response.Redirect("FacturaWebForm.aspx", true);
+                Response.Redirect("Reportes\\FacturaWebForm.aspx", true);
             }
         }
     }
