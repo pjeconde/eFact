@@ -8,7 +8,7 @@ namespace FeaEntidades.Documentos.CI
 	{
 		public SanLuis()
 		{
-			Codigo = 11;
+			Codigo = 12;
 			Descr = "CI San Luis";
 		}
 	}
