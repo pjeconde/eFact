@@ -1179,7 +1179,7 @@
                                                                 Comentarios:
                                                             </td>
                                                             <td class="TextoLabelFEADescrLarga" style="padding: 5px;">
-                                                                <asp:TextBox ID="ComentariosTextBox" runat="server" SkinID="TextoBoxFEADescrGr"></asp:TextBox>
+                                                                <asp:TextBox ID="ComentariosTextBox" runat="server" SkinID="TextoBoxFEADescrGr" TextMode="MultiLine"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1959,8 +1959,7 @@
                                                                 Observaciones:
                                                             </td>
                                                             <td class="TextoLabelFEADescrLarga">
-                                                                <asp:TextBox ID="Observaciones_ResumenTextBox" runat="server" SkinID="TextoBoxFEADescrGr">
-                                                                </asp:TextBox>
+                                                                <asp:TextBox ID="Observaciones_ResumenTextBox" runat="server" SkinID="TextoBoxFEADescrGr" TextMode="MultiLine"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                     </table>
