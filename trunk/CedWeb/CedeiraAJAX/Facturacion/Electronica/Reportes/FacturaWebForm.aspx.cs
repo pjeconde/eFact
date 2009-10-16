@@ -50,6 +50,7 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
                     facturaRpt.Load(reportPath);
 
                     FeaEntidades.InterFacturas.lote_comprobantes lc = (FeaEntidades.InterFacturas.lote_comprobantes)Session["lote"];
+                    AsignarCamposOpcionales(lc);
                     DataSet ds = new DataSet();
 
                     XmlSerializer objXS = new XmlSerializer(lc.GetType());
@@ -92,6 +93,15 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
                     CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepciones/Excepcion.aspx");
                 }
             }
+        }
+
+        private void AsignarCamposOpcionales(FeaEntidades.InterFacturas.lote_comprobantes lc)
+        {
+            lc.comprobante[0].resumen.cant_alicuotas_ivaSpecified = true;
+            lc.comprobante[0].resumen.importe_total_impuestos_internosSpecified=true;
+            lc.comprobante[0].resumen.importe_total_impuestos_municipalesSpecified = true;
+            lc.comprobante[0].resumen.importe_total_impuestos_nacionalesSpecified = true;
+            lc.comprobante[0].resumen.importe_total_ingresos_brutosSpecified = true;
         }
 
         private void GenerarCodigoBarras(string code)
