@@ -102,6 +102,18 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
             lc.comprobante[0].resumen.importe_total_impuestos_municipalesSpecified = true;
             lc.comprobante[0].resumen.importe_total_impuestos_nacionalesSpecified = true;
             lc.comprobante[0].resumen.importe_total_ingresos_brutosSpecified = true;
+            for (int i = 0; i < lc.comprobante[0].detalle.linea.Length;i++)
+            {
+                if (lc.comprobante[0].detalle.linea[i]!=null)
+                {
+                    lc.comprobante[0].detalle.linea[i].precio_unitarioSpecified = true;
+                    lc.comprobante[0].detalle.linea[i].importe_ivaSpecified = true;
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
 
         private void GenerarCodigoBarras(string code)
