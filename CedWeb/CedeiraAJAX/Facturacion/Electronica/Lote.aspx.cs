@@ -2950,9 +2950,16 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
             else
             {
-                FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
-                Session["lote"] = lcFea;
-                Response.Redirect("Reportes\\FacturaWebForm.aspx", true);
+                if (!MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no habilitado para comprobantes en moneda extranjera.')</script>");
+                }
+                else
+                {
+                    FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
+                    Session["lote"] = lcFea;
+                    Response.Redirect("Reportes\\FacturaWebForm.aspx", true);
+                }
             }
         }
         private void RegistrarActividad(FeaEntidades.InterFacturas.lote_comprobantes lote, System.Text.StringBuilder sb, System.Net.Mail.SmtpClient smtpClient, string smtpXAmb, System.IO.MemoryStream m)

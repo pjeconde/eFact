@@ -97,6 +97,14 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
 
         private void AsignarCamposOpcionales(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
+            if(lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae==null)
+            {
+                lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae = string.Empty;
+            }
+            lc.comprobante[0].cabecera.informacion_vendedor.condicion_ingresos_brutosSpecified=true;
+            lc.comprobante[0].cabecera.informacion_vendedor.condicion_IVASpecified = true;
+            lc.comprobante[0].cabecera.informacion_comprador.condicion_ingresos_brutosSpecified = true;
+            lc.comprobante[0].cabecera.informacion_comprador.condicion_IVASpecified = true;
             lc.comprobante[0].resumen.cant_alicuotas_ivaSpecified = true;
             lc.comprobante[0].resumen.importe_total_impuestos_internosSpecified=true;
             lc.comprobante[0].resumen.importe_total_impuestos_municipalesSpecified = true;
@@ -108,6 +116,10 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
                 {
                     lc.comprobante[0].detalle.linea[i].precio_unitarioSpecified = true;
                     lc.comprobante[0].detalle.linea[i].importe_ivaSpecified = true;
+                    if (lc.comprobante[0].detalle.linea[i].unidad == null)
+                    {
+                        lc.comprobante[0].detalle.linea[i].unidad = string.Empty;
+                    }
                 }
                 else
                 {
