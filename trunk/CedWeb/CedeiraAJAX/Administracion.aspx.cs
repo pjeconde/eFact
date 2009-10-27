@@ -247,6 +247,23 @@ namespace CedeiraAJAX
                 MsgErrorLabel.Text = ex.Message;
             }
         }
+
+        protected void PruebaSMSLinkButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<CedWebEntidades.Cuenta>lista=new List<CedWebEntidades.Cuenta>();
+                lista.Add(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta);
+                CedWebRN.Cuenta.EnviarSMS("SMS de prueba", "Prueba de envío", lista);
+                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El SMS fué enviado satisfactoriamente a " + ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.EmailSMS + "');</script>");
+            }
+            catch (Exception ex)
+            {
+                MsgErrorLabel.Text = ex.Message;
+            }
+        }
+        
+
         public static DateTime LastOldFileRemoveDate
         {
             get

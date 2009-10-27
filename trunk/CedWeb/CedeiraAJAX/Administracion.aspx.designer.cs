@@ -209,6 +209,15 @@ namespace CedeiraAJAX {
         protected global::System.Web.UI.WebControls.LinkButton PruebaEmailSuspensionPremiumLinkButton;
         
         /// <summary>
+        /// Control PruebaSMSLinkButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton PruebaSMSLinkButton;
+        
+        /// <summary>
         /// Control HyperLink1.
         /// </summary>
         /// <remarks>

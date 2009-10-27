@@ -145,11 +145,11 @@ namespace CedWebRN
             smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
             smtpClient.Send(mail);
         }
-        private static void EnviarSMS(string Asunto, string Mensaje, List<CedWebEntidades.Cuenta> Destinatarios)
+        public static void EnviarSMS(string Asunto, string Mensaje, List<CedWebEntidades.Cuenta> Destinatarios)
         {
             if (Destinatarios.Count > 0)
             {
-                SmtpClient smtpClient = new SmtpClient("localhost");
+                SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
                 for (int i = 0; i < Destinatarios.Count; i++)
@@ -158,6 +158,7 @@ namespace CedWebRN
                 }
                 mail.Subject = Asunto;
                 mail.Body = Mensaje;
+                smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
                 smtpClient.Send(mail);
             }
         }
@@ -298,7 +299,7 @@ namespace CedWebRN
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
             List<CedWebEntidades.Cuenta> cuentas = cuenta.Lista(Email);
             //Mail para confirmación
-            SmtpClient smtpClient = new SmtpClient("localhost");
+            SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
             mail.To.Add(new MailAddress(Email));
@@ -321,6 +322,7 @@ namespace CedWebRN
             a.AppendLine();
             a.AppendLine("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden."); a.AppendLine();
             mail.Body = a.ToString();
+            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
             smtpClient.Send(mail);
         }
         public static List<CedWebEntidades.Cuenta> Lista(int IndicePagina, int TamañoPagina, string OrderBy, CedEntidades.Sesion Sesion)
@@ -394,7 +396,7 @@ namespace CedWebRN
         }
         public static void EnviarMailBienvenidaPremium(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
-            SmtpClient smtpClient = new SmtpClient("localhost");
+            SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
             mail.CC.Add(new MailAddress("facturaelectronica@cedeira.com.ar"));
@@ -407,11 +409,12 @@ namespace CedWebRN
             mail.Body = a.Substring(a.IndexOf("<"));
             mail.Body = mail.Body.Replace("%usuario%", Cuenta.Nombre);
             mail.Body = mail.Body.Replace("%fechaVencimiento%", Cuenta.FechaVtoPremium.ToString("dd/MM/yyyy"));
+            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
             smtpClient.Send(mail);
         }
         public static void EnviarMailSuspensionPremium(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
-            SmtpClient smtpClient = new SmtpClient("localhost");
+            SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
             mail.CC.Add(new MailAddress("facturaelectronica@cedeira.com.ar"));
@@ -423,6 +426,7 @@ namespace CedWebRN
             string a = carta.DownloadString(System.Web.HttpContext.Current.Server.MapPath("EmailTemplates/FacturaElectronicaServicioPremiumSuspension.htm"));
             mail.Body = a.Substring(a.IndexOf("<"));
             mail.Body = mail.Body.Replace("%usuario%", Cuenta.Nombre);
+            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
             smtpClient.Send(mail);
         }
         public static void DesactivarPremium(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
