@@ -898,6 +898,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
                     string smtpXAmb = System.Configuration.ConfigurationManager.AppSettings["Ambiente"].ToString();
                     System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
+
+                    RegistrarActividad(lote, sb, smtpClient, smtpXAmb, m);
+
                     if (((Button)sender).ID == "DescargarButton")
                     {
                         //Descarga directa del XML
@@ -908,13 +911,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     }
                     else
                     {
-                        if (((CedWebEntidades.Sesion)Session["Sesion"]).Flag.ModoDepuracion)
-                        {
-                            //ModoDepuracion encendido
-                            System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + sb.ToString()), System.IO.FileMode.Create);
-                            m.WriteTo(fs);
-                            fs.Close();
-                        }
                         //Envio por mail del XML
                         System.Net.Mail.MailMessage mail;
                         if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id != null)
@@ -951,31 +947,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     m.Close();
 
 
-                    //Registro cantidad de comprobantes
-                    if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id != null)
-                    {
-                        CedWebRN.Cuenta.RegistrarComprobante(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
-                    }
-
-
-                    //Envío de mail a nosotros
-                    if (!smtpXAmb.Equals("DESA"))
-                    {
-                        System.Net.Mail.MailMessage mailCedeira = new System.Net.Mail.MailMessage("facturaelectronicaxml@cedeira.com.ar",
-                            "facturaelectronicaxml@cedeira.com.ar", "XML_" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + "_" + System.DateTime.Now.ToLocalTime().ToString("yyyyMMdd hh:mm:ss"), string.Empty);
-                        sb = new System.Text.StringBuilder();
-                        sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.email);
-                        sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.razon_social);
-                        sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.telefono);
-                        sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.localidad);
-                        sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.contacto);
-                        sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString());
-
-                        mailCedeira.Body = sb.ToString();
-                        smtpClient = new System.Net.Mail.SmtpClient();
-                        smtpClient.Host = "localhost";
-                        smtpClient.Send(mailCedeira);
-                    }
                     if (!smtpXAmb.Equals("DESA"))
                     {
                         ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Archivo enviado satisfactoriamente');window.open('https://srv1.interfacturas.com.ar/cfeWeb/faces/login/identificacion.jsp/', '_blank');</script>");
@@ -2982,6 +2953,42 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
                 Session["lote"] = lcFea;
                 Response.Redirect("Reportes\\FacturaWebForm.aspx", true);
+            }
+        }
+        private void RegistrarActividad(FeaEntidades.InterFacturas.lote_comprobantes lote, System.Text.StringBuilder sb, System.Net.Mail.SmtpClient smtpClient, string smtpXAmb, System.IO.MemoryStream m)
+        {
+            //Registro cantidad de comprobantes
+            if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id != null)
+            {
+                CedWebRN.Cuenta.RegistrarComprobante(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
+            }
+
+
+            //Envío de mail a nosotros
+            if (!smtpXAmb.Equals("DESA"))
+            {
+                System.Net.Mail.MailMessage mailCedeira = new System.Net.Mail.MailMessage("facturaelectronicaxml@cedeira.com.ar",
+                    "facturaelectronicaxml@cedeira.com.ar", "XML_" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + "_" + System.DateTime.Now.ToLocalTime().ToString("yyyyMMdd hh:mm:ss"), string.Empty);
+                sb = new System.Text.StringBuilder();
+                sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.email);
+                sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.razon_social);
+                sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.telefono);
+                sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.localidad);
+                sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.contacto);
+                sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString());
+
+                mailCedeira.Body = sb.ToString();
+                smtpClient = new System.Net.Mail.SmtpClient();
+                smtpClient.Host = "localhost";
+                smtpClient.Send(mailCedeira);
+            }
+
+            if (((CedWebEntidades.Sesion)Session["Sesion"]).Flag.ModoDepuracion)
+            {
+                //ModoDepuracion encendido
+                System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + sb.ToString()), System.IO.FileMode.Create);
+                m.WriteTo(fs);
+                fs.Close();
             }
         }
     }

@@ -119,7 +119,8 @@
                                         <asp:LinkButton ID="PruebaEmailBienvenidaPremiumLinkButton" runat="server" OnClick="PruebaEmailBienvenidaPremiumLinkButton_Click">bienvenida</asp:LinkButton>
                                         , o
                                         <asp:LinkButton ID="PruebaEmailSuspensionPremiumLinkButton" runat="server" OnClick="PruebaEmailSuspensionPremiumLinkButton_Click">suspensión</asp:LinkButton>
-                                        , al Servicio Premium
+										al Servicio Premium, o
+										<asp:LinkButton ID="PruebaSMSLinkButton" runat="server" OnClick="PruebaSMSLinkButton_Click">SMS</asp:LinkButton>
                                     </td>
                                 </tr>
                                 <tr>
