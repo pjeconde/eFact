@@ -116,6 +116,13 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
                 {
                     lc.comprobante[0].detalle.linea[i].precio_unitarioSpecified = true;
                     lc.comprobante[0].detalle.linea[i].importe_ivaSpecified = true;
+                    if (lc.comprobante[0].detalle.linea[i].alicuota_ivaSpecified.Equals(false))
+                    {
+                        lc.comprobante[0].detalle.linea[i].alicuota_ivaSpecified = true;
+                        lc.comprobante[0].detalle.linea[i].alicuota_iva = 99;
+                    }
+                    lc.comprobante[0].detalle.linea[i].cantidadSpecified = true;
+
                     if (lc.comprobante[0].detalle.linea[i].unidad == null)
                     {
                         lc.comprobante[0].detalle.linea[i].unidad = string.Empty;
