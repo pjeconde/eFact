@@ -1524,9 +1524,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
             IVAcomputableDropDownList.SelectedIndex = IVAcomputableDropDownList.Items.IndexOf(IVAcomputableDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.iva_computable)));
             CodigoOperacionDropDownList.SelectedIndex = CodigoOperacionDropDownList.Items.IndexOf(CodigoOperacionDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.codigo_operacion)));
             //Referencias
+            referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
             if (lc.comprobante[0].cabecera.informacion_comprobante.referencias != null)
             {
-                referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
                 foreach (FeaEntidades.InterFacturas.informacion_comprobanteReferencias r in lc.comprobante[0].cabecera.informacion_comprobante.referencias)
                 {
                     //descripcioncodigo_de_referencia ( XmlIgnoreAttribute )
@@ -1540,14 +1540,14 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         referencias.Add(r);
                     }
                 }
-                if (referencias.Count.Equals(0))
-                {
-                    referencias.Add(new FeaEntidades.InterFacturas.informacion_comprobanteReferencias());
-                }
-                referenciasGridView.DataSource = referencias;
-                referenciasGridView.DataBind();
-                ViewState["referencias"] = referencias;
             }
+            if (referencias.Count.Equals(0))
+            {
+                referencias.Add(new FeaEntidades.InterFacturas.informacion_comprobanteReferencias());
+            }
+            referenciasGridView.DataSource = referencias;
+            referenciasGridView.DataBind();
+            ViewState["referencias"] = referencias;
             //Comprador
             if (lc.comprobante[0].cabecera.informacion_comprador.GLN != 0)
             {
@@ -1650,9 +1650,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
             BindearDropDownLists();
             ViewState["lineas"] = lineas;
             //Descuentos globales
+            descuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>();
             if (lc.comprobante[0].resumen.descuentos != null)
             {
-                descuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>();
                 foreach (FeaEntidades.InterFacturas.resumenDescuentos r in lc.comprobante[0].resumen.descuentos)
                 {
                     if (r.importe_descuento_moneda_origenSpecified)
@@ -1661,18 +1661,18 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     }
                     descuentos.Add(r);
                 }
-                if (descuentos.Count.Equals(0))
-                {
-                    descuentos.Add(new FeaEntidades.InterFacturas.resumenDescuentos());
-                }
-                descuentosGridView.DataSource = descuentos;
-                descuentosGridView.DataBind();
-                ViewState["descuentos"] = descuentos;
             }
+            if (descuentos.Count.Equals(0))
+            {
+                descuentos.Add(new FeaEntidades.InterFacturas.resumenDescuentos());
+            }
+            descuentosGridView.DataSource = descuentos;
+            descuentosGridView.DataBind();
+            ViewState["descuentos"] = descuentos;
             //impuestos globales
+            impuestos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>();
             if (lc.comprobante[0].resumen.impuestos != null)
             {
-                impuestos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>();
                 foreach (FeaEntidades.InterFacturas.resumenImpuestos imp in lc.comprobante[0].resumen.impuestos)
                 {
                     if (imp.importe_impuesto_moneda_origenSpecified)
@@ -1681,14 +1681,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     }
                     impuestos.Add(imp);
                 }
-                if (impuestos.Count.Equals(0))
-                {
-                    impuestos.Add(new FeaEntidades.InterFacturas.resumenImpuestos());
-                }
-                impuestosGridView.DataSource = impuestos;
-                impuestosGridView.DataBind();
-                ViewState["impuestos"] = impuestos;
             }
+            if (impuestos.Count.Equals(0))
+            {
+                impuestos.Add(new FeaEntidades.InterFacturas.resumenImpuestos());
+            }
+            impuestosGridView.DataSource = impuestos;
+            impuestosGridView.DataBind();
+            ViewState["impuestos"] = impuestos;
+
             ComentariosTextBox.Text = lc.comprobante[0].detalle.comentarios;
             //Resumen
             MonedaComprobanteDropDownList.SelectedIndex = MonedaComprobanteDropDownList.Items.IndexOf(MonedaComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].resumen.codigo_moneda)));
