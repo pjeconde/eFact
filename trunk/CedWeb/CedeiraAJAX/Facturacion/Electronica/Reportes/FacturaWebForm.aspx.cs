@@ -101,7 +101,12 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
             {
                 lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae = string.Empty;
             }
-            
+            lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pagoSpecified = true;
+            if (lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago == null)
+            {
+                lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago = 0;
+            }
+
             lc.comprobante[0].cabecera.informacion_vendedor.condicion_ingresos_brutosSpecified=true;
             lc.comprobante[0].cabecera.informacion_vendedor.condicion_IVASpecified = true;
             if (lc.comprobante[0].cabecera.informacion_vendedor.provincia == null)
