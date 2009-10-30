@@ -54,7 +54,7 @@ namespace CedeiraAJAX
                 }
                 else
                 {
-                    Server.Transfer("~/" + sesion.Cuenta.PaginaDefault.URL + ".aspx", true);
+                    Response.Redirect("~/" + sesion.Cuenta.PaginaDefault.URL + ".aspx");
                 }
             }
             catch (System.Threading.ThreadAbortException)
