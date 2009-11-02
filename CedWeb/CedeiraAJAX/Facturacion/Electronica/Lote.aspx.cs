@@ -899,7 +899,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     string smtpXAmb = System.Configuration.ConfigurationManager.AppSettings["Ambiente"].ToString();
                     System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
 
-                    RegistrarActividad(lote, sb, smtpClient, smtpXAmb, m);
+                    try
+                    {
+                        RegistrarActividad(lote, sb, smtpClient, smtpXAmb, m);
+                    }
+                    catch
+                    {
+                    }
 
                     if (((Button)sender).ID == "DescargarButton")
                     {
@@ -2970,27 +2976,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             {
                 CedWebRN.Cuenta.RegistrarComprobante(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
             }
-
-
-            //Envío de mail a nosotros
-            if (!smtpXAmb.Equals("DESA"))
-            {
-                System.Net.Mail.MailMessage mailCedeira = new System.Net.Mail.MailMessage("facturaelectronicaxml@cedeira.com.ar",
-                    "facturaelectronicaxml@cedeira.com.ar", "XML_" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + "_" + System.DateTime.Now.ToLocalTime().ToString("yyyyMMdd hh:mm:ss"), string.Empty);
-                sb = new System.Text.StringBuilder();
-                sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.email);
-                sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.razon_social);
-                sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.telefono);
-                sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.localidad);
-                sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.contacto);
-                sb.AppendLine(lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString());
-
-                mailCedeira.Body = sb.ToString();
-                smtpClient = new System.Net.Mail.SmtpClient();
-                smtpClient.Host = "localhost";
-                smtpClient.Send(mailCedeira);
-            }
-
+           
             if (((CedWebEntidades.Sesion)Session["Sesion"]).Flag.ModoDepuracion)
             {
                 //ModoDepuracion encendido
