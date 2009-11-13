@@ -361,6 +361,7 @@
       <DependentUpon>Imagen.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\NumALet.cs" />
     <Compile Include="FacturaElectronica.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>FacturaElectronica.aspx</DependentUpon>
