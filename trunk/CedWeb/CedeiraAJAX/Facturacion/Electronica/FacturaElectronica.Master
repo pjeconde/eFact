@@ -14,12 +14,12 @@
     <form id="MasterNoAutenticadoForm" runat="server">
         <table border="0" cellpadding="0px" cellspacing="0px" style="" width="100%">
             <tr>
-                <td rowspan="5" style="width: 50%; background-image: url('Imagenes/BgL.jpg');
+                <td rowspan="5" style="width: 50%; background-image: url('../../Imagenes/BgL.jpg');
                     background-repeat: repeat-y; background-position: right">
                 </td>
                 <td colspan="3" style="height: 4px; background-color: #c8d2dc">
                 </td>
-                <td rowspan="5" style="width: 50%; background-image: url('Imagenes/BgR.jpg');
+                <td rowspan="5" style="width: 50%; background-image: url('../../Imagenes/BgR.jpg');
                     background-repeat: repeat-y; background-position: left;">
                     <table border="0" cellpadding="0" cellspacing="0">
                         <tr>
@@ -45,7 +45,7 @@
                         </tr>
                     </table>
                 </td>
-                <td style="height: 80px; width: 570px; background-image: url('Imagenes/LogoBienvenidos_v1.jpg')">
+                <td style="height: 80px; width: 570px; background-image: url('../../Imagenes/LogoBienvenidos_v1.jpg')">
                     <table border="0" cellpadding="0" cellspacing="0">
                         <tr>
                             <td style="height: 16px; width: 335px">
@@ -94,7 +94,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3" style="background-image: url('Imagenes/eFact-Fondo.jpg'); background-repeat: repeat-x;
+                <td colspan="3" style="background-image: url('../../Imagenes/eFact-Fondo.jpg'); background-repeat: repeat-x;
                     height: 18px">
                     <table id="Table3" border="0" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
@@ -141,7 +141,7 @@
                 </td>
             </tr>
             <tr>
-                <td align="center" class="TextoComun" colspan="3" style="background-image: url('Imagenes/eFact-Fondo.jpg');
+                <td align="center" class="TextoComun" colspan="3" style="background-image: url('../../Imagenes/eFact-Fondo.jpg');
                     background-repeat: repeat-x; height: 18px; color: White">
                     <b>© 2009 Cedeira Sofware Factory S.R.L. Todos los derechos reservados.</b>
                 </td>
