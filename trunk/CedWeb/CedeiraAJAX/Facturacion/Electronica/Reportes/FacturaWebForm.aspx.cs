@@ -59,13 +59,14 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
                     StringReader objSR = new StringReader(objSW.ToString());
                     ds.ReadXml(objSR);
 
-                    facturaRpt.SetDataSource(ds);
+					
+					facturaRpt.SetDataSource(ds);
                     facturaRpt.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
                     facturaRpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
 
                     IncrustarLogo();
-
                     GenerarCodigoBarras(lc.comprobante[0].cabecera.informacion_comprobante.cae);
+					AsignarParametros(lc.comprobante[0].resumen.importe_total_factura);
 
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
                     sb.Append(lc.cabecera_lote.cuit_vendedor);
@@ -94,6 +95,15 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
                 }
             }
         }
+
+		private void AsignarParametros(double p)
+		{
+			CrystalDecisions.Shared.ParameterValues myVals = new CrystalDecisions.Shared.ParameterValues();
+			CrystalDecisions.Shared.ParameterDiscreteValue myDiscrete = new CrystalDecisions.Shared.ParameterDiscreteValue();
+			myDiscrete.Value = NumALet.ToCardinal(Convert.ToDecimal(p));
+			myVals.Add(myDiscrete);
+			facturaRpt.DataDefinition.ParameterFields[0].ApplyCurrentValues(myVals);
+		}
 
         private void AsignarCamposOpcionales(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
