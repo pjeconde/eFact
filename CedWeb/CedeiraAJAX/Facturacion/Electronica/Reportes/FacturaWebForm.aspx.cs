@@ -208,7 +208,7 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
                 imagenRpt = facturaRpt.OpenSubreport("Imagen.rpt");
                 imagenRpt.SetDataSource(this.dsImages);
             }
-            catch (Exception ex)
+            catch
             {
 
             }

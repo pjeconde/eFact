@@ -254,3 +254,19 @@ A:hover {text-decoration: none; font-weight:normal; color: Blue;}
     background-color:#A52A2A;
     color:White;
 }
+.LogoBienvenidos
+{
+	background-image: url('/Imagenes/LogoBienvenidos_v1.jpg');
+}
+.FondoIzq
+{
+	background-image: url('/Imagenes/BgL.jpg');
+}
+.FondoDer
+{
+	background-image: url('/Imagenes/BgR.jpg');	
+}
+.FondoEFact
+{
+	background-image: url('/Imagenes/eFact-Fondo.jpg');
+}

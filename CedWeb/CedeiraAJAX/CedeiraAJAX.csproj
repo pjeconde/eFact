@@ -88,40 +88,54 @@
     <Compile Include="ActivacionClientePesadoConsulta.aspx.designer.cs">
       <DependentUpon>ActivacionClientePesadoConsulta.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Administracion.aspx.cs">
+    <Compile Include="Admin\Administracion.Master.cs">
+      <DependentUpon>Administracion.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>Administracion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Administracion.aspx.designer.cs">
-      <DependentUpon>Administracion.aspx</DependentUpon>
+    <Compile Include="Admin\Administracion.Master.designer.cs">
+      <DependentUpon>Administracion.Master</DependentUpon>
     </Compile>
-    <Compile Include="AdministracionCertificadosExplorador.aspx.cs">
+    <Compile Include="Admin\Certificados\Explorador.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>AdministracionCertificadosExplorador.aspx</DependentUpon>
+      <DependentUpon>Explorador.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministracionCertificadosExplorador.aspx.designer.cs">
-      <DependentUpon>AdministracionCertificadosExplorador.aspx</DependentUpon>
+    <Compile Include="Admin\Certificados\Explorador.aspx.designer.cs">
+      <DependentUpon>Explorador.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministracionCompradorExplorador.aspx.cs">
+    <Compile Include="Admin\Comprador\Explorador.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>AdministracionCompradorExplorador.aspx</DependentUpon>
+      <DependentUpon>Explorador.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministracionCompradorExplorador.aspx.designer.cs">
-      <DependentUpon>AdministracionCompradorExplorador.aspx</DependentUpon>
+    <Compile Include="Admin\Comprador\Explorador.aspx.designer.cs">
+      <DependentUpon>Explorador.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministracionCuentaExplorador.aspx.cs">
+    <Compile Include="Admin\Cuenta\Explorador.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>AdministracionCuentaExplorador.aspx</DependentUpon>
+      <DependentUpon>Explorador.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministracionCuentaExplorador.aspx.designer.cs">
-      <DependentUpon>AdministracionCuentaExplorador.aspx</DependentUpon>
+    <Compile Include="Admin\Cuenta\Explorador.aspx.designer.cs">
+      <DependentUpon>Explorador.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministracionVendedorExplorador.aspx.cs">
+    <Compile Include="Admin\Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>AdministracionVendedorExplorador.aspx</DependentUpon>
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdministracionVendedorExplorador.aspx.designer.cs">
-      <DependentUpon>AdministracionVendedorExplorador.aspx</DependentUpon>
+    <Compile Include="Admin\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Publicacion\Explorador.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Explorador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Publicacion\Explorador.aspx.designer.cs">
+      <DependentUpon>Explorador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Vendedor\Explorador.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Explorador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Vendedor\Explorador.aspx.designer.cs">
+      <DependentUpon>Explorador.aspx</DependentUpon>
     </Compile>
     <Compile Include="Backup.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -441,13 +455,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="PublicacionExplorador.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>PublicacionExplorador.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PublicacionExplorador.aspx.designer.cs">
-      <DependentUpon>PublicacionExplorador.aspx</DependentUpon>
-    </Compile>
     <Compile Include="SoloDispPUsuariosActivCP.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>SoloDispPUsuariosActivCP.aspx</DependentUpon>
@@ -514,11 +521,6 @@
   <ItemGroup>
     <Content Include="ActivacionClientePesado.aspx" />
     <Content Include="ActivacionClientePesadoConsulta.aspx" />
-    <Content Include="Administracion.aspx" />
-    <Content Include="AdministracionCertificadosExplorador.aspx" />
-    <Content Include="AdministracionCompradorExplorador.aspx" />
-    <Content Include="AdministracionCuentaExplorador.aspx" />
-    <Content Include="AdministracionVendedorExplorador.aspx" />
     <Content Include="App_Themes\Cedeira\CedWeb.skin" />
     <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\css\default.css" />
     <Content Include="aspnet_client\system_web\2_0_50727\CrystalReportWebFormViewer3\html\calendar.html" />
@@ -795,7 +797,6 @@
     <None Include="Descargas\eFact-R-XL.zip" />
     <Content Include="Facturacion\Electronica\FacturaElectronica.Master" />
     <Content Include="Mensaje.aspx" />
-    <Content Include="PublicacionExplorador.aspx" />
     <Content Include="SoloDispPUsuariosActivCP.aspx" />
     <Content Include="SoloDispPUsuariosAdministradores.aspx" />
     <Content Include="SoloDispPUsuariosPremium.aspx" />
@@ -880,8 +881,15 @@
     <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\Certificados\Explorador.aspx" />
+    <Content Include="Admin\Comprador\Explorador.aspx" />
+    <Content Include="Admin\Cuenta\Explorador.aspx" />
+    <Content Include="Admin\Default.aspx" />
+    <Content Include="Admin\Publicacion\Explorador.aspx" />
+    <Content Include="Admin\Vendedor\Explorador.aspx" />
     <Content Include="Excepciones\Web.config" />
     <Content Include="Excepciones\CedeiraAJAX.Master" />
+    <Content Include="Admin\Administracion.Master" />
     <None Include="Facturacion\Electronica\Reportes\FREE3OF9.TTF" />
     <None Include="Facturacion\Electronica\Reportes\Factura.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -914,6 +922,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Admin\Temp\" />
     <Folder Include="Imagenes\Logos\" />
     <Folder Include="Temp\" />
     <Folder Include="UserControls\" />

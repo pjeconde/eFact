@@ -13,7 +13,8 @@ namespace CedeiraAJAX
 
         protected void Application_Start(object sender, EventArgs e)
         {
-
+			Application["Visitantes"] = 0;
+			Application["Registrados"] = 0;
         }
 
         protected void Application_End(object sender, EventArgs e)
@@ -28,6 +29,21 @@ namespace CedeiraAJAX
             s.CantidadDiasPremiumSinCostoEnAltaCuenta = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["CantidadDiasPremiumSinCostoEnAltaCuenta"]);
             CedWebRN.Flag.Leer(s.Flag, s);
             Session["Sesion"] = s;
-        }
+			Application.Lock();
+			Application["Visitantes"] = (int)Application["Visitantes"] + 1;
+			Application.UnLock();
+		}
+		protected void Session_End(object sender, EventArgs e)
+		{
+			Application.Lock();
+			Application["Visitantes"] = (int)Application["Visitantes"] - 1;
+			Application.UnLock();
+			if (!((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id.Equals(string.Empty))
+			{
+				Application.Lock();
+				Application["Registrados"] = (int)Application["Registrados"] - 1;
+				Application.UnLock();
+			}
+		}
     }
 }

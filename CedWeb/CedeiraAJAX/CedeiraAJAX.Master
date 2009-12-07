@@ -14,13 +14,13 @@
     <form id="MasterNoAutenticadoForm" runat="server">
         <table border="0" cellpadding="0px" cellspacing="0px" style="" width="100%">
             <tr>
-                <td rowspan="5" style="width: 50%; background-image: url('Imagenes/BgL.jpg'); background-repeat: repeat-y;
+                <td class="FondoIzq" rowspan="5" style="width: 50%; background-repeat: repeat-y;
                     background-position: right">
                 </td>
                 <td colspan="3" style="height: 4px; background-color: #c8d2dc">
                 </td>
-                <td rowspan="5" style="width: 50%; background-image: url('Imagenes/BgR.jpg'); background-repeat: repeat-y;
-                    background-position: left;">
+                <td class="FondoDer" rowspan="5" style="width: 50%;
+					background-repeat: repeat-y; background-position: left;">
                     <table border="0" cellpadding="0" cellspacing="0">
                         <tr>
                             <td style="background-color: #c8d2dc">
@@ -38,14 +38,14 @@
                             </td>
                             <td style="width: 180px; padding-top: 5px; text-align: left">
                                 <asp:Image ID="CedeiraSFimage" runat="server" AlternateText="Cedeira Logo" Height="66px"
-                                    ImageUrl="~/Imagenes/CedeiraSF_v1.jpg" Visible="true" Width="180px" />
+                                    ImageUrl="~/Imagenes/CedeiraSF_v1.jpg" Visible="true" Width="180px"></asp:Image>
                             </td>
                             <td style="width: 10px">
                             </td>
                         </tr>
                     </table>
                 </td>
-                <td style="height: 80px; width: 570px; background-image: url('Imagenes/LogoBienvenidos_v1.jpg')">
+                <td style="height: 80px; width: 570px;" class="LogoBienvenidos">
                     <table border="0" cellpadding="0" cellspacing="0">
                         <tr>
                             <td style="height: 16px; width: 335px">
@@ -94,8 +94,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3" style="background-image: url('Imagenes/eFact-Fondo.jpg'); background-repeat: repeat-x;
-                    height: 18px">
+                <td class="FondoEFact" colspan="3" style="background-repeat: repeat-x; height: 18px">
                     <table id="Table3" border="0" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
                             <td style="width: 50%">
@@ -126,7 +125,7 @@
                             </td>
                             <td style="padding-left: 10px; padding-right: 10px">
                                 <asp:LinkButton ID="AdministracionLinkButton" runat="server" CausesValidation="false"
-                                    Font-Bold="true" ForeColor="white" PostBackUrl="~/Administracion.aspx" Visible="false">Administración</asp:LinkButton>
+                                    Font-Bold="true" ForeColor="white" PostBackUrl="~/Admin/Default.aspx" Visible="false">Administración</asp:LinkButton>
                             </td>
                             <td style="width: 50%">
                             </td>
@@ -141,8 +140,7 @@
                 </td>
             </tr>
             <tr>
-                <td align="center" class="TextoComun" colspan="3" style="background-image: url('Imagenes/eFact-Fondo.jpg');
-                    background-repeat: repeat-x; height: 18px; color: White">
+                <td align="center" class="TextoComun, FondoEFact" colspan="3" style="background-repeat: repeat-x; height: 18px; color: White">
                     <b>© 2009 Cedeira Sofware Factory S.R.L. Todos los derechos reservados.</b>
                 </td>
             </tr>

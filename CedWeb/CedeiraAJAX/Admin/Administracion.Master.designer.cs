@@ -8,34 +8,34 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CedeiraAJAX.Excepciones {
+namespace CedeiraAJAX.Admin {
     
     
     /// <summary>
-    /// Clase CedeiraAJAX.
+    /// Clase Administracion.
     /// </summary>
     /// <remarks>
     /// Clase generada automáticamente.
     /// </remarks>
-    public partial class CedeiraAJAX {
+    public partial class Administracion {
         
         /// <summary>
-        /// Control CedWebHead.
+        /// Control AdministracionHead.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlHead CedWebHead;
+        protected global::System.Web.UI.HtmlControls.HtmlHead AdministracionHead;
         
         /// <summary>
-        /// Control MasterNoAutenticadoForm.
+        /// Control AdministracionForm.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm MasterNoAutenticadoForm;
+        protected global::System.Web.UI.HtmlControls.HtmlForm AdministracionForm;
         
         /// <summary>
         /// Control LabelEncaL.
@@ -209,12 +209,12 @@ namespace CedeiraAJAX.Excepciones {
         protected global::System.Web.UI.WebControls.LinkButton AdministracionLinkButton;
         
         /// <summary>
-        /// Control ContentPlaceHolderNoAutenticado.
+        /// Control AdministracionContentPlaceHolder.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderNoAutenticado;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder AdministracionContentPlaceHolder;
     }
 }

@@ -126,7 +126,7 @@
                             </td>
                             <td style="padding-left: 10px; padding-right: 10px">
                                 <asp:LinkButton ID="AdministracionLinkButton" runat="server" CausesValidation="false"
-                                    Font-Bold="true" ForeColor="white" PostBackUrl="~/Administracion.aspx" Visible="false">Administración</asp:LinkButton>
+                                    Font-Bold="true" ForeColor="white" PostBackUrl="~/Admin/Default.aspx" Visible="false">Administración</asp:LinkButton>
                             </td>
                             <td style="width: 50%">
                             </td>

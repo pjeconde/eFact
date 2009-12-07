@@ -8,213 +8,294 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CedeiraAJAX.Excepciones {
+namespace CedeiraAJAX.Admin {
     
     
     /// <summary>
-    /// Clase CedeiraAJAX.
+    /// Clase Default.
     /// </summary>
     /// <remarks>
     /// Clase generada automáticamente.
     /// </remarks>
-    public partial class CedeiraAJAX {
+    public partial class Default {
         
         /// <summary>
-        /// Control CedWebHead.
+        /// Control RegistradosLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlHead CedWebHead;
+        protected global::System.Web.UI.WebControls.Label RegistradosLabel;
         
         /// <summary>
-        /// Control MasterNoAutenticadoForm.
+        /// Control VisitantesLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm MasterNoAutenticadoForm;
+        protected global::System.Web.UI.WebControls.Label VisitantesLabel;
         
         /// <summary>
-        /// Control LabelEncaL.
+        /// Control Image2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelEncaL;
+        protected global::System.Web.UI.WebControls.Image Image2;
         
         /// <summary>
-        /// Control CedeiraSFimage.
+        /// Control TituloLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image CedeiraSFimage;
+        protected global::System.Web.UI.WebControls.Label TituloLabel;
         
         /// <summary>
-        /// Control MensajeGeneralLabel.
+        /// Control MedioImageMap.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MensajeGeneralLabel;
+        protected global::System.Web.UI.WebControls.ImageMap MedioImageMap;
         
         /// <summary>
-        /// Control ServicioPremiumEstadoLabel.
+        /// Control ProvinciaImageMap.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ServicioPremiumEstadoLabel;
+        protected global::System.Web.UI.WebControls.ImageMap ProvinciaImageMap;
         
         /// <summary>
-        /// Control ServicioPremiumVtoLabel.
+        /// Control HyperLink5.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ServicioPremiumVtoLabel;
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink5;
         
         /// <summary>
-        /// Control NombreCuentaLabel.
+        /// Control CuentasLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NombreCuentaLabel;
+        protected global::System.Web.UI.WebControls.Label CuentasLabel;
         
         /// <summary>
-        /// Control Separador1Label.
+        /// Control HyperLink6.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Separador1Label;
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink6;
         
         /// <summary>
-        /// Control ConfiguracionLinkButton.
+        /// Control VendedoresLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ConfiguracionLinkButton;
+        protected global::System.Web.UI.WebControls.Label VendedoresLabel;
         
         /// <summary>
-        /// Control Separador2Label.
+        /// Control HyperLink7.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Separador2Label;
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink7;
         
         /// <summary>
-        /// Control BackupLinkButton.
+        /// Control CompradoresLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton BackupLinkButton;
+        protected global::System.Web.UI.WebControls.Label CompradoresLabel;
         
         /// <summary>
-        /// Control Separador3Label.
+        /// Control HyperLink3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Separador3Label;
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink3;
         
         /// <summary>
-        /// Control SalirLinkButton.
+        /// Control PublicacionesLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton SalirLinkButton;
+        protected global::System.Web.UI.WebControls.Label PublicacionesLabel;
         
         /// <summary>
-        /// Control InicioLinkButton.
+        /// Control CertificadosHyperLink.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton InicioLinkButton;
+        protected global::System.Web.UI.WebControls.HyperLink CertificadosHyperLink;
         
         /// <summary>
-        /// Control FacturaElectronicaLinkButton.
+        /// Control CertificadosLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton FacturaElectronicaLinkButton;
+        protected global::System.Web.UI.WebControls.Label CertificadosLabel;
         
         /// <summary>
-        /// Control SolucionesLinkButton.
+        /// Control CreacionCuentaHabilitadaCheckBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton SolucionesLinkButton;
+        protected global::System.Web.UI.WebControls.CheckBox CreacionCuentaHabilitadaCheckBox;
         
         /// <summary>
-        /// Control EmpresaLinkButton.
+        /// Control PremiumSinCostoEnAltaCuentaCheckBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton EmpresaLinkButton;
+        protected global::System.Web.UI.WebControls.CheckBox PremiumSinCostoEnAltaCuentaCheckBox;
         
         /// <summary>
-        /// Control ClientesLinkButton.
+        /// Control CantidadDiasPremiumSinCostoEnAltaCuenta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ClientesLinkButton;
+        protected global::System.Web.UI.WebControls.Label CantidadDiasPremiumSinCostoEnAltaCuenta;
         
         /// <summary>
-        /// Control ContactoLinkButton.
+        /// Control ModoDepuracionCheckBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ContactoLinkButton;
+        protected global::System.Web.UI.WebControls.CheckBox ModoDepuracionCheckBox;
         
         /// <summary>
-        /// Control AdministracionLinkButton.
+        /// Control RecibeAvisoAltaCuentaCheckBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton AdministracionLinkButton;
+        protected global::System.Web.UI.WebControls.CheckBox RecibeAvisoAltaCuentaCheckBox;
         
         /// <summary>
-        /// Control ContentPlaceHolderNoAutenticado.
+        /// Control PruebaEmailBienvenidaPremiumLinkButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderNoAutenticado;
+        protected global::System.Web.UI.WebControls.LinkButton PruebaEmailBienvenidaPremiumLinkButton;
+        
+        /// <summary>
+        /// Control PruebaEmailSuspensionPremiumLinkButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton PruebaEmailSuspensionPremiumLinkButton;
+        
+        /// <summary>
+        /// Control PruebaSMSLinkButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton PruebaSMSLinkButton;
+        
+        /// <summary>
+        /// Control HyperLink1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+        
+        /// <summary>
+        /// Control Panel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel1;
+        
+        /// <summary>
+        /// Control UltimasAltasPagingGridView.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::CedeiraUIWebForms.PagingGridView UltimasAltasPagingGridView;
+        
+        /// <summary>
+        /// Control Panel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel;
+        
+        /// <summary>
+        /// Control UltimosComprobantesPagingGridView.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::CedeiraUIWebForms.PagingGridView UltimosComprobantesPagingGridView;
+        
+        /// <summary>
+        /// Control HyperLink2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink2;
+        
+        /// <summary>
+        /// Control MsgErrorLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MsgErrorLabel;
     }
 }
