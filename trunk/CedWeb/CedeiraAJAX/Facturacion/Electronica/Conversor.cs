@@ -315,13 +315,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 lcWS.comprobante[i] = cIBK;
 
             }
-
-            return lcWS;
-
-
-
-
-
             return lcWS;
         }
     }
