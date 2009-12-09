@@ -85,7 +85,8 @@ namespace CedeiraAJAX.Excepciones
         public void SalirLinkButton_Click(object sender, EventArgs e)
         {
             CaducarIdentificacion();
-        }
+			Response.Redirect("~/Inicio.aspx");
+		}
         public void CaducarIdentificacion()
         {
             CedWebEntidades.Sesion sesion = (CedWebEntidades.Sesion)Session["Sesion"];
@@ -99,7 +100,9 @@ namespace CedeiraAJAX.Excepciones
             SalirLinkButton.Visible = false;
             AdministracionLinkButton.Visible = false;
             Session["AceptarTYC"] = null;
+			Application.Lock();
+			Application["Registrados"] = (int)Application["Registrados"] - 1;
+			Application.UnLock();
         }
-
     }
 }

@@ -85,6 +85,7 @@ namespace CedeiraAJAX.Admin
 		public void SalirLinkButton_Click(object sender, EventArgs e)
 		{
 			CaducarIdentificacion();
+			Response.Redirect("~/Inicio.aspx");
 		}
 		public void CaducarIdentificacion()
 		{
@@ -99,6 +100,9 @@ namespace CedeiraAJAX.Admin
 			SalirLinkButton.Visible = false;
 			AdministracionLinkButton.Visible = false;
 			Session["AceptarTYC"] = null;
+			Application.Lock();
+			Application["Registrados"] = (int)Application["Registrados"] - 1;
+			Application.UnLock();
 		}
 	}
 }

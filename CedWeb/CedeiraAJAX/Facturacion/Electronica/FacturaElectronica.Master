@@ -136,8 +136,8 @@
             </tr>
             <tr style="vertical-align: top;">
                 <td colspan="3" style="vertical-align: top;">
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolderNoAutenticado" runat="server">
-                    </asp:ContentPlaceHolder>
+					<asp:ContentPlaceHolder ID="ContentPlaceHolderNoAutenticado" runat="server">
+					</asp:ContentPlaceHolder>
                 </td>
             </tr>
             <tr>
