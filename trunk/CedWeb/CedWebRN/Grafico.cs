@@ -21,7 +21,7 @@ namespace CedWebRN
             GraficoDeTorta.TabIndex = 9025;
             GraficoDeTorta.ToolTips = null;
             float[] desplazamiento = new float[Valores.Length];
-            Color[] colores = new Color[6];
+            Color[] colores = new Color[8];
             for(int i = 0; i< Valores.Length; i++)
             {
                 desplazamiento[i] = 0.00F;
@@ -39,7 +39,10 @@ namespace CedWebRN
             colores[2] = Color.FromArgb(122, Color.Khaki);
             colores[3] = Color.FromArgb(122, Color.Thistle);
             colores[4] = Color.FromArgb(122, Color.DarkSalmon);
-            colores[5] = Color.FromArgb(122, Color.White);
+            colores[5] = Color.FromArgb(122, Color.MediumAquamarine);
+			colores[6] = Color.FromArgb(122, Color.LightPink);
+			colores[7] = Color.FromArgb(122, Color.LightGray);
+
             GraficoDeTorta.Values = Valores;
             GraficoDeTorta.Texts = Textos;
             GraficoDeTorta.SliceRelativeDisplacements = desplazamiento;
