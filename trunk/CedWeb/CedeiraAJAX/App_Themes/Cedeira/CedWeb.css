@@ -270,3 +270,7 @@ A:hover {text-decoration: none; font-weight:normal; color: Blue;}
 {
 	background-image: url('/Imagenes/eFact-Fondo.jpg');
 }
+.bgFEAC
+{
+	background-image: url('/Imagenes/bgFEA-C.jpg');
+}
