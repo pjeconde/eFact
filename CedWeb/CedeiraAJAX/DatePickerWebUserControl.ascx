@@ -8,6 +8,6 @@
             <asp:TextBox ID="txt_Date" runat="server" Width="70"></asp:TextBox>&nbsp;</td>
         <td style="border-style: none; border-width: 0px; height: 30px;">
             <asp:Image ID="imgCalendar" runat="server" AlternateText="Calendario desplegable para ayudar a elegir fechas en formato AAAAMMDD"
-                ImageUrl="cal/calendar.gif" /></td>
+                ImageUrl="~/cal/calendar.gif" /></td>
     </tr>
 </table>

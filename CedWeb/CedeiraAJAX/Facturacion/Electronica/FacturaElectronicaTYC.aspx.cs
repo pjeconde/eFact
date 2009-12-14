@@ -31,7 +31,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     {
                         if (Page.Request.UrlReferrer.LocalPath.ToString() == "/CedWeb/FacturaElectronica.aspx" || Page.Request.UrlReferrer.LocalPath.ToString() == "/Cedeira/FacturaElectronica.aspx")
                         {
-                            Response.Redirect("~/Facturacion/Electronica/Lote.aspx");
+                            Response.Redirect("~/Facturacion/Electronica/Lote.aspx", true);
                         }
                     }
                 }
@@ -42,7 +42,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             if (CheckBoxAceptarTYC.Checked)
             {
                 Session["AceptarTYC"] = true;
-				Response.Redirect("~/Facturacion/Electronica/Lote.aspx");
+				Response.Redirect("~/Facturacion/Electronica/Lote.aspx", true);
             }
             else
             {
