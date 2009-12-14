@@ -119,11 +119,11 @@ function addHoliday (d, m, y, desc)
 
 if (dom)
 {
-    for	(i=0;i<imgsrc.length;i++)
-    {
-        img[i] = new Image
-        img[i].src= img + imgsrc[i]
-    }
+//    for	(i=0;i<imgsrc.length;i++)
+//    {
+//        img[i] = new Image
+//        img[i].src= img + imgsrc[i]
+//    }
     document.write ("<div onclick='bShow=true' id='calendar'	class='div-style'><table width="+((showWeekNumber==1)?250:220)+" class='table-style'><tr class='title-background-style' ><td><table width='"+((showWeekNumber==1)?248:218)+"'><tr><td class='title-style'><B><span id='caption'></span></B></td><td align=right style='text-align: right'><a href='javascript:hideCalendar()'><IMG id='closeimage' SRC='"+imgDir+"close.gif' WIDTH='15' HEIGHT='13' BORDER='0' ALT='Close the Calendar'></a></td></tr></table></td></tr><tr><td class='body-style'><span id='content'></span></td></tr>")
         
     if (showToday==1)

@@ -83,6 +83,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.DropDownList Tipo_De_ComprobanteDropDownList;
         
         /// <summary>
+        /// Control monedaUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel monedaUpdatePanel;
+        
+        /// <summary>
         /// Control MonedaComprobanteDropDownList.
         /// </summary>
         /// <remarks>
@@ -99,6 +108,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label MonedaComprobanteExclusivoPremiumLabel;
+        
+        /// <summary>
+        /// Control monedaUpdateProgress.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress monedaUpdateProgress;
         
         /// <summary>
         /// Control RequiredFieldValidator1.
@@ -497,6 +515,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.CheckBox Presta_ServCheckBox;
         
         /// <summary>
+        /// Control compradorUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel compradorUpdatePanel;
+        
+        /// <summary>
         /// Control CompradorDropDownList.
         /// </summary>
         /// <remarks>
@@ -506,13 +533,13 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.DropDownList CompradorDropDownList;
         
         /// <summary>
-        /// Control CompradorExclusivoPremiumLabel.
+        /// Control compradorUpdateProgress.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CompradorExclusivoPremiumLabel;
+        protected global::System.Web.UI.UpdateProgress compradorUpdateProgress;
         
         /// <summary>
         /// Control GLN_CompradorRegularExpressionValidator.
@@ -821,6 +848,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Condicion_De_PagoTextBox;
         
         /// <summary>
+        /// Control referenciasUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel referenciasUpdatePanel;
+        
+        /// <summary>
         /// Control referenciasGridView.
         /// </summary>
         /// <remarks>
@@ -828,6 +864,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView referenciasGridView;
+        
+        /// <summary>
+        /// Control referenciasUpdateProgress.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress referenciasUpdateProgress;
         
         /// <summary>
         /// Control ReferenciasEditValidationSummary.
@@ -857,6 +902,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox ComentariosTextBox;
         
         /// <summary>
+        /// Control detalleUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel detalleUpdatePanel;
+        
+        /// <summary>
         /// Control detallePanel.
         /// </summary>
         /// <remarks>
@@ -873,6 +927,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView detalleGridView;
+        
+        /// <summary>
+        /// Control detalleUpdateProgress.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress detalleUpdateProgress;
         
         /// <summary>
         /// Control GrillasValidationSummary.
@@ -893,6 +956,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.ValidationSummary FooterGrillasValidationSummary;
         
         /// <summary>
+        /// Control descuentosUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel descuentosUpdatePanel;
+        
+        /// <summary>
         /// Control descuentosGridView.
         /// </summary>
         /// <remarks>
@@ -900,6 +972,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView descuentosGridView;
+        
+        /// <summary>
+        /// Control descuentosUpdateProgress.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress descuentosUpdateProgress;
         
         /// <summary>
         /// Control DescuentosGlobalesEditValidationSummary.
@@ -920,6 +1001,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.ValidationSummary DescuentosGlobalesFooterValidationSummary;
         
         /// <summary>
+        /// Control impuestosUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel impuestosUpdatePanel;
+        
+        /// <summary>
         /// Control impuestosGridView.
         /// </summary>
         /// <remarks>
@@ -927,6 +1017,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView impuestosGridView;
+        
+        /// <summary>
+        /// Control impuestosUpdateProgress.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress impuestosUpdateProgress;
         
         /// <summary>
         /// Control ImpuestoEditItemValidationSummary.
@@ -999,6 +1098,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox MotivoTextBox;
+        
+        /// <summary>
+        /// Control tipoCambioUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel tipoCambioUpdatePanel;
         
         /// <summary>
         /// Control ImporteTotalNetoGravadoRegularExpressionValidator.
@@ -1269,6 +1377,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Tipo_de_cambioTextBox;
+        
+        /// <summary>
+        /// Control tipoCambioUpdateProgress.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress tipoCambioUpdateProgress;
         
         /// <summary>
         /// Control Observaciones_ResumenTextBox.
