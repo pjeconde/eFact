@@ -168,42 +168,32 @@ namespace CedeiraAJAX.Facturacion.Electronica
         }
         private void BindearDropDownLists()
         {
-			try
-			{
-				((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataValueField = "Codigo";
-				((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataTextField = "Descr";
-				((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataSource = FeaEntidades.CodigosImpuesto.CodigoImpuesto.Lista();
-				((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataBind();
-			}
-			catch 
-			{
-			}
-
-			try
-			{
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataValueField = "Codigo";
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataTextField = "Descr";
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.Lista();
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataBind();
-			}
-			catch
-			{
-			}
+			((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataValueField = "Codigo";
+			((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataTextField = "Descr";
+			((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+			((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
+			
+			((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataValueField = "Codigo";
+			((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataTextField = "Descr";
+			((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.Lista();
+			((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataBind();
 
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataValueField = "Codigo";
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataTextField = "Descr";
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.Lista();
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataBind();
+			((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).AppendDataBoundItems = false;
 
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataValueField = "Codigo";
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataTextField = "Descr";
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.ListaDetalle();
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataBind();
 
-            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataValueField = "Codigo";
-            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataTextField = "Descr";
-            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
-            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
+			((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataValueField = "Codigo";
+			((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataTextField = "Descr";
+			((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataSource = FeaEntidades.CodigosImpuesto.CodigoImpuesto.Lista();
+			((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataBind();
+
         }
 
         protected void detalleGridView_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -491,7 +481,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 catch (Exception ex)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
+					ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
                 }
             }
         }
@@ -501,8 +491,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             {
                 if (Punto_VentaTextBox.Text.Equals(string.Empty))
                 {
-					ScriptManager.RegisterStartupScript(this, this.GetType(), "ptoVenta", "alert('Debe definir el punto de venta antes de editar un detalle');", true);
-					return;
+					throw new Exception("Debe definir el punto de venta antes de editar un detalle");
                 }
 
                 cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"]);
@@ -773,15 +762,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
-            }
+				ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+			}
         }
         protected void detalleGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
         {
             if (e.Exception != null)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
-                e.ExceptionHandled = true;
+				ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+				e.ExceptionHandled = true;
             }
         }
         protected void detalleGridView_RowEditing(object sender, GridViewEditEventArgs e)
@@ -864,8 +853,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             if (e.Exception != null)
             {
-				ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
-                e.ExceptionHandled = true;
+				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+				e.ExceptionHandled = true;
             }
         }
         protected void GenerarButton_Click(object sender, EventArgs e)
@@ -1079,16 +1068,16 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 catch (Exception ex)
                 {
-					ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
-                }
+					ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+				}
             }
         }
         protected void impuestosGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
         {
             if (e.Exception != null)
             {
-				ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
-                e.ExceptionHandled = true;
+				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+				e.ExceptionHandled = true;
             }
         }
         protected void impuestosGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -1136,7 +1125,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             if (e.Exception != null)
             {
-				ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
+				ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
                 e.ExceptionHandled = true;
             }
         }
@@ -1172,8 +1161,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
             catch (Exception ex)
             {
-				ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
-            }
+				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+			}
         }
 
         protected void descuentosGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -1225,7 +1214,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 catch (Exception ex)
                 {
-					ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
+					ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
                 }
             }
         }
@@ -1233,8 +1222,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             if (e.Exception != null)
             {
-				ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
-                e.ExceptionHandled = true;
+				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+				e.ExceptionHandled = true;
             }
         }
         protected void descuentosGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -1270,7 +1259,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             if (e.Exception != null)
             {
-				ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
+				ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
                 e.ExceptionHandled = true;
             }
         }
@@ -1306,8 +1295,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
             catch (Exception ex)
             {
-				ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
-            }
+				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+			}
         }
 
         protected void referenciasGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -1356,7 +1345,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 catch (Exception ex)
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
+					ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
                 }
             }
         }
@@ -1364,8 +1353,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             if (e.Exception != null)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
-                e.ExceptionHandled = true;
+				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+				e.ExceptionHandled = true;
             }
         }
         protected void referenciasGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -1414,7 +1403,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             if (e.Exception != null)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
+				ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
                 e.ExceptionHandled = true;
             }
         }
@@ -1451,8 +1440,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
-            }
+				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+			}
         }
 
         protected void FileUploadButton_Click(object sender, EventArgs e)
@@ -2032,7 +2021,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
         }
         protected void MonedaComprobanteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-			System.Threading.Thread.Sleep(2000);
 			if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
             {
 				Response.Redirect("~/Inicio.aspx");
