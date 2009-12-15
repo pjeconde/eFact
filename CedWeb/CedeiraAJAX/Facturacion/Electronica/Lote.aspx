@@ -1,7 +1,7 @@
 ﻿<%@ Page AutoEventWireup="true" Buffer="true" Codebehind="Lote.aspx.cs" Culture="en-GB"
 	Inherits="CedeiraAJAX.Facturacion.Electronica.Lote" Language="C#" MaintainScrollPositionOnPostback="true"
 	MasterPageFile="~/Facturacion/Electronica/FacturaElectronica.Master" Title="Factura Electrónica Gratis(Interfacturas - AFIP)"
-	UICulture="en-GB" %>
+	UICulture="en-GB"  EnableEventValidation="false" ValidateRequest="false"%>
 
 <%@ Register Src="~/DatePickerWebUserControl.ascx" TagName="DatePickerWebUserControl"
 	TagPrefix="uc1" %>
@@ -2149,7 +2149,7 @@
 												<td colspan="3" style="width: 100%; padding-right: 3px">
 													<asp:Button ID="PDFButton" runat="server" BackColor="peachpuff" BorderColor="brown"
 														BorderStyle="Solid" BorderWidth="1px" CausesValidation="true" Font-Bold="true"
-														ForeColor="brown" Height="60px" OnClick="PDFButton_Click" Text="Imprimir comprobante"
+														ForeColor="brown" Height="60px" OnClick="PDFButton_Click" Text="Previsualizar comprobante"
 														ToolTip="Exclusivo SERVICIO PREMIUM" Width="100%" />
 												</td>
 											</tr>
