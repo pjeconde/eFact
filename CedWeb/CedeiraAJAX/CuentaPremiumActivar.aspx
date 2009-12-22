@@ -98,7 +98,7 @@
                                             Text="Activar" Width="100px" />
                                     </td>
                                     <td align="right" style="padding-top: 10px">
-                                        <asp:Button ID="CancelarButton" runat="server" CausesValidation="false" PostBackUrl="~/AdministracionCuentaExplorador.aspx"
+                                        <asp:Button ID="CancelarButton" runat="server" CausesValidation="false" PostBackUrl="~/Admin/Cuenta/Explorador.aspx"
                                             TabIndex="5" Text="Cancelar" Width="100px" />
                                     </td>
                                 </tr>
