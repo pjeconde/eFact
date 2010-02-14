@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace eFact_R_Bj.Entidades
+namespace eFact_R.Entidades
 {
     class Disco
     {

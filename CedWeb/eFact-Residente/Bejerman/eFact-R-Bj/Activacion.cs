@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
-namespace eFact_R_Bj
+namespace eFact_R
 {
     public partial class Activacion : Form
     {
