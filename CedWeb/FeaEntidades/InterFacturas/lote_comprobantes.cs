@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using FileHelpers;
+using FileHelpers.RunTime; 
 
 namespace FeaEntidades.InterFacturas
 {
@@ -11,12 +13,13 @@ namespace FeaEntidades.InterFacturas
 	[System.ComponentModel.DesignerCategoryAttribute("code")]
 	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://lote.schemas.cfe.ib.com.ar/")]
 	[System.Xml.Serialization.XmlRootAttribute(Namespace = "http://lote.schemas.cfe.ib.com.ar/", IsNullable = false)]
-	public partial class lote_comprobantes
+    [DelimitedRecord("|")] 
+    public partial class lote_comprobantes
 	{
 
 		private cabecera_lote cabecera_loteField;
 
-		private comprobante[] comprobanteField=new comprobante[1];
+		private comprobante[] comprobanteField=new comprobante[10000];
 
 		/// <comentarios/>
 		public cabecera_lote cabecera_lote

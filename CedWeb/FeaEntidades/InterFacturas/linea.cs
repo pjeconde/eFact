@@ -13,10 +13,12 @@ namespace FeaEntidades.InterFacturas
 	[FileHelpers.DelimitedRecord("|")]
 	public partial class linea
 	{
+        private string nombre_claseField = "<linea>";
 
 		private long gTINField;
 
-		private bool gTINFieldSpecified;
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool gTINFieldSpecified;
 
 		private string codigo_producto_vendedorField;
 
@@ -26,33 +28,39 @@ namespace FeaEntidades.InterFacturas
 
 		private double cantidadField;
 
-		private bool cantidadFieldSpecified;
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool cantidadFieldSpecified;
 
 		private string unidadField;
 
 		private double precio_unitarioField;
 
-		private bool precio_unitarioFieldSpecified;
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool precio_unitarioFieldSpecified;
 
 		private double importe_total_articuloField;
 
 		private double alicuota_ivaField;
 
-		private bool alicuota_ivaFieldSpecified;
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool alicuota_ivaFieldSpecified;
 
 		private double importe_ivaField;
 
-		private bool importe_ivaFieldSpecified;
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool importe_ivaFieldSpecified;
 
 		private string indicacion_exento_gravadoField;
 
 		private double importe_total_descuentosField;
 
-		private bool importe_total_descuentosFieldSpecified;
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool importe_total_descuentosFieldSpecified;
 
 		private double importe_total_impuestosField;
 
-		private bool importe_total_impuestosFieldSpecified;
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool importe_total_impuestosFieldSpecified;
 
 		private int numeroLineaField;
 
@@ -70,6 +78,15 @@ namespace FeaEntidades.InterFacturas
 		[FileHelpers.FieldIgnored()]
 		private lineaImpuestos[] impuestosField;
 
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string nombre_clase
+        {
+            get
+            {
+                return nombre_claseField;
+            }
+        }
 
 		/// <comentarios/>
 		public long GTIN

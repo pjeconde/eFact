@@ -14,8 +14,9 @@ namespace FeaEntidades.InterFacturas
 	[FileHelpers.DelimitedRecord("|")]
 	public partial class cabecera_lote
 	{
-
-		private long id_loteField;
+        private string nombre_claseField = "<cabecera_lote>";
+        
+        private long id_loteField;
 
 		private long cuit_canalField;
 
@@ -27,6 +28,7 @@ namespace FeaEntidades.InterFacturas
 
 		private int presta_servField;
 
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
 		private bool presta_servFieldSpecified;
 
 		private string fecha_envio_loteField;
@@ -36,7 +38,7 @@ namespace FeaEntidades.InterFacturas
 		private string resultadoField;
 
 		private string motivoField;
-
+        
 		/// <comentarios/>
 		public long id_lote
 		{
@@ -49,6 +51,16 @@ namespace FeaEntidades.InterFacturas
 				this.id_loteField = value;
 			}
 		}
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string nombre_clase
+        {
+            get
+            {
+                return nombre_claseField;
+            }
+        }
 
 		/// <comentarios/>
 		public long cuit_canal

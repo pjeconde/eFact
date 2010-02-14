@@ -14,6 +14,7 @@ namespace FeaEntidades.InterFacturas
 	[FileHelpers.DelimitedRecord("|")]
 	public partial class detalle
 	{
+        private string nombre_claseField = "<detalle>";
 
 		private string comentariosField;
 
@@ -21,6 +22,15 @@ namespace FeaEntidades.InterFacturas
 		[FileHelpers.FieldIgnored()]
 		private linea[] lineaField = new linea[1000];
 
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string nombre_clase
+        {
+            get
+            {
+                return nombre_claseField;
+            }
+        }
 		/// <comentarios/>
 		[System.Xml.Serialization.XmlElementAttribute("linea")]
 		public linea[] linea

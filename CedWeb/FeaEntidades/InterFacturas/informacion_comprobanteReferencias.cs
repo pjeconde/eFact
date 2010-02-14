@@ -13,13 +13,24 @@ namespace FeaEntidades.InterFacturas
 	[FileHelpers.DelimitedRecord("|")]
 	public partial class informacion_comprobanteReferencias
 	{
+        private string nombre_claseField = "<informacion_comprobanteReferencias>";
 
 		private int codigo_de_referenciaField;
 
         private string descripcioncodigo_de_referenciaField;
 
 		private long dato_de_referenciaField;
-        
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string nombre_clase
+        {
+            get
+            {
+                return nombre_claseField;
+            }
+        }
+
         /// <comentarios/>
 		public int codigo_de_referencia
 		{
