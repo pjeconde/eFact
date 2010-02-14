@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using eFact_R_Bj;
+using eFact_R;
 using System.Management;
 using System.Collections;
 
-namespace eFact_R_Bj.RN
+namespace eFact_R.RN
 {
     class Disco
     {
-        public static List<eFact_R_Bj.Entidades.Disco> Lista()
+        public static List<eFact_R.Entidades.Disco> Lista()
         {
             List<Entidades.Disco> discos = new List<Entidades.Disco>();
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Win32;
 
-namespace eFact_R_Bj.RN
+namespace eFact_R.RN
 {
     class Registro
     {

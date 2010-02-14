@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // La información general sobre un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos atributos para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("eFact-R-Bj")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("eFact-R")]
+[assembly: AssemblyDescription("Facturación Electrónica")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("eFact-R-Bj")]
-[assembly: AssemblyCopyright("©  2009")]
+[assembly: AssemblyCompany("Cedeira Software Factory S.R.L")]
+[assembly: AssemblyProduct("eFact-R")]
+[assembly: AssemblyCopyright("© Cedeira Software Factory 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,4 +29,4 @@ using System.Runtime.InteropServices;
 //      Número de versión de compilación
 //      Revisión
 //
-[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyVersion("1.6.0.0")]
