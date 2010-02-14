@@ -14,6 +14,7 @@ namespace FeaEntidades.InterFacturas
 	[FileHelpers.DelimitedRecord("|")]
 	public partial class informacion_comprobante
 	{
+        private string nombre_claseField = "<informacion_comprobante>";
 
 		private int tipo_de_comprobanteField;
 
@@ -30,7 +31,8 @@ namespace FeaEntidades.InterFacturas
 		private string fecha_serv_hastaField;
 
 		private int condicion_de_pagoField;
-
+        
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
 		private bool condicion_de_pagoFieldSpecified;
 
 		private string iva_computableField;
@@ -54,6 +56,15 @@ namespace FeaEntidades.InterFacturas
 		[FileHelpers.FieldIgnored()]
 		private informacion_comprobanteReferencias[] referenciasField = new informacion_comprobanteReferencias[10];
 
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string nombre_clase
+        {
+            get
+            {
+                return nombre_claseField;
+            }
+        }
 		/// <comentarios/>
 		public int tipo_de_comprobante
 		{

@@ -14,6 +14,8 @@ namespace FeaEntidades.InterFacturas
 	[FileHelpers.DelimitedRecord("|")]
 	public partial class resumen
 	{
+        private string nombre_claseField = "<resumen>";
+
 		private double importe_total_neto_gravadoField;
 
 		private double importe_total_concepto_no_gravadoField;
@@ -26,18 +28,22 @@ namespace FeaEntidades.InterFacturas
 
 		private double importe_total_impuestos_nacionalesField;
 
-		private bool importe_total_impuestos_nacionalesFieldSpecified;
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool importe_total_impuestos_nacionalesFieldSpecified;
 
 		private double importe_total_ingresos_brutosField;
 
-		private bool importe_total_ingresos_brutosFieldSpecified;
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool importe_total_ingresos_brutosFieldSpecified;
 
 		private double importe_total_impuestos_municipalesField;
 
-		private bool importe_total_impuestos_municipalesFieldSpecified;
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool importe_total_impuestos_municipalesFieldSpecified;
 
 		private double importe_total_impuestos_internosField;
 
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
 		private bool importe_total_impuestos_internosFieldSpecified;
 
 		private double importe_total_facturaField;
@@ -50,7 +56,8 @@ namespace FeaEntidades.InterFacturas
 
 		private int cant_alicuotas_ivaField;
 
-		private bool cant_alicuotas_ivaFieldSpecified;
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool cant_alicuotas_ivaFieldSpecified;
 
 		//[FileHelpers.FieldConverter(typeof(FeaEntidades.Converters.resumenImportes_moneda_origenConverter))]
 		[FileHelpers.FieldIgnored()]
@@ -65,6 +72,16 @@ namespace FeaEntidades.InterFacturas
 		//[FileHelpers.FieldConverter(typeof(FeaEntidades.Converters.resumenImpuestosConverter))]
 		[FileHelpers.FieldIgnored()]
 		private resumenImpuestos[] impuestosField;
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string nombre_clase
+        {
+            get
+            {
+                return nombre_claseField;
+            }
+        }
 
 		/// <comentarios/>
 		[System.Xml.Serialization.XmlElementAttribute("descuentos")]

@@ -14,10 +14,12 @@ namespace FeaEntidades.InterFacturas
 	[FileHelpers.DelimitedRecord("|")]
 	public partial class informacion_comprador
 	{
+        private string nombre_claseField = "<informacion_comprador>";
 
 		[FileHelpers.FieldNullValue(typeof(System.Int64), "0")]
 		private long gLNField;
-
+        
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
 		private bool gLNFieldSpecified;
 
 		private string codigo_internoField;
@@ -33,12 +35,14 @@ namespace FeaEntidades.InterFacturas
 		[FileHelpers.FieldNullValue(typeof(System.Int32), "0")]
 		private int condicion_IVAField;
 
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
 		private bool condicion_IVAFieldSpecified;
 
 		[FileHelpers.FieldNullValue(typeof(System.Int32), "0")]
 		private int condicion_ingresos_brutosField;
 
-		private bool condicion_ingresos_brutosFieldSpecified;
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool condicion_ingresos_brutosFieldSpecified;
 
 		private string nro_ingresos_brutosField;
 
@@ -69,7 +73,16 @@ namespace FeaEntidades.InterFacturas
 		private string emailField;
 
 		private string telefonoField;
-
+        
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string nombre_clase
+        {
+            get
+            {
+                return nombre_claseField;
+            }
+        }
 		/// <comentarios/>
 		public long GLN
 		{
