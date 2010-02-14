@@ -11,32 +11,51 @@ namespace eFact_R_XL.RN
         public static List<eFact_R_XL.Entidades.Disco> Lista()
         {
             List<eFact_R_XL.Entidades.Disco> discos = new List<eFact_R_XL.Entidades.Disco>();
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
-            foreach (ManagementObject wmi_HD in searcher.Get())
+            OperatingSystem os = System.Environment.OSVersion;
+            int OSVersion = os.Version.Major * 1000000 + os.Version.Minor;
+            if (OSVersion >= 5000001)
+            {
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+                foreach (ManagementObject wmi_HD in searcher.Get())
+                {
+                    eFact_R_XL.Entidades.Disco disco = new eFact_R_XL.Entidades.Disco();
+                    disco.Modelo = wmi_HD["Model"].ToString();
+                    disco.Tipo = wmi_HD["InterfaceType"].ToString();
+                    discos.Add(disco);
+                }
+                searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
+                int i = 0;
+                foreach (ManagementObject wmi_HD in searcher.Get())
+                {
+                    if (i >= discos.Count) { break; }
+                    // get the hard drive from collection using index
+                    eFact_R_XL.Entidades.Disco disco = (eFact_R_XL.Entidades.Disco)discos[i];
+                    // get the hardware serial no.    //wmi_HD["Name"]
+
+                    if (wmi_HD["SerialNumber"] == null)
+                    {
+                        disco.NroSerie = "None";
+                    }
+                    else
+                    {
+                        disco.NroSerie = wmi_HD["SerialNumber"].ToString();
+                    }
+                    ++i;
+                }
+            }
+            else
             {
                 eFact_R_XL.Entidades.Disco disco = new eFact_R_XL.Entidades.Disco();
-                disco.Modelo = wmi_HD["Model"].ToString();
-                disco.Tipo = wmi_HD["InterfaceType"].ToString();
+                disco.Modelo = "Ninguno";
+                disco.Tipo = "Ninguno";
+                //nombre de la PC
+                string s = System.Environment.MachineName;
+                //version framework
+                s += System.Environment.Version;
+                //version del sistema operativo
+                s += os.VersionString;
+                disco.NroSerie = s;
                 discos.Add(disco);
-            }
-            searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
-            int i = 0;
-            foreach (ManagementObject wmi_HD in searcher.Get())
-            {
-                if (i >= discos.Count) { break; }
-                // get the hard drive from collection using index
-                eFact_R_XL.Entidades.Disco disco = (eFact_R_XL.Entidades.Disco)discos[i];
-                // get the hardware serial no.    //wmi_HD["Name"]
-
-                if (wmi_HD["SerialNumber"] == null)
-                {
-                    disco.NroSerie = "None";
-                }
-                else
-                {
-                    disco.NroSerie = wmi_HD["SerialNumber"].ToString();
-                }
-                ++i;
             }
             return discos;
         }
