@@ -10,7 +10,12 @@ namespace Cedeira.SV
         /// <summary>
         /// Constructor para acceso al front-end de la aplicacion
         /// </summary>
-    	public static void Crear(string IdUsuario, string Password, string Dominio, string CnnStr, string IdAcceso, string Version, string VersionParaControl, CedEntidades.Sesion Sesion)
+        public static void Crear(string IdUsuario, string Password, string Dominio, string CnnStr, string CnnStrAplicExterna, string IdAcceso, string Version, string VersionParaControl, CedEntidades.Sesion Sesion)
+        {
+            Sesion.CnnStrAplicExterna = CnnStrAplicExterna;
+            Crear(IdUsuario, Password, Dominio, CnnStr, IdAcceso, Version, VersionParaControl, Sesion);
+        }
+        public static void Crear(string IdUsuario, string Password, string Dominio, string CnnStr, string IdAcceso, string Version, string VersionParaControl, CedEntidades.Sesion Sesion)
 		{
 			Sesion.IdAcceso = IdAcceso;
 			// Leo el CnnStr de la base de datos

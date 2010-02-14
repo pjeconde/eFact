@@ -7,10 +7,10 @@ namespace Cedeira.SV
 	/// </summary>
 	public class Autenticacion
 	{
-        public void Login(string Usuario, string Password, string Dominio, string CnnStr, string IdAcceso, string Version, string VersionParaControl, CedEntidades.Sesion sesion)
+        public void Login(string Usuario, string Password, string Dominio, string CnnStr, string CnnStrAplicExterna, string IdAcceso, string Version, string VersionParaControl, CedEntidades.Sesion sesion)
 		{
 			//System.Configuration.ConfigurationManager.AppSettings["Servidor"];
-            Cedeira.SV.Sesion.Crear(Usuario, Password, Dominio, CnnStr, IdAcceso, Version, VersionParaControl, sesion);
+            Cedeira.SV.Sesion.Crear(Usuario, Password, Dominio, CnnStr, CnnStrAplicExterna, IdAcceso, Version, VersionParaControl, sesion);
 		}
 	}
 }
