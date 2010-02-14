@@ -453,6 +453,61 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 			}
 		}
 	}
+    namespace Engine
+    {
+        [Serializable]
+        public class BaseApplicationException : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+        {
+            public BaseApplicationException(string TextoError)
+                : base(TextoError)
+            {
+            }
+            public BaseApplicationException(string TextoError, Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public BaseApplicationException(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
+        public class EntidadInexistente : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Cuentas.BaseApplicationException
+        {
+            static string TextoError = "Entidad inexistente.";
+            public EntidadInexistente()
+                : base(TextoError)
+            {
+            }
+            public EntidadInexistente(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public EntidadInexistente(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+    }
+    namespace Tablero
+    {
+        [Serializable]
+        public class BaseApplicationException : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+        {
+            public BaseApplicationException(string TextoError)
+                : base(TextoError)
+            {
+            }
+            public BaseApplicationException(string TextoError, Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public BaseApplicationException(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+    }
 	namespace db
 	{
 		[Serializable]
@@ -525,62 +580,6 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 			{
 			}
 		}
-		[Serializable]
-		public class TipoOpMepInexistente : Microsoft.ApplicationBlocks.ExceptionManagement.BaseApplicationException
-		{
-			static string TextoError = "Operatoria inexistente";
-			public TipoOpMepInexistente() : base(TextoError)
-			{
-			}
-			public TipoOpMepInexistente(Exception inner) : base(TextoError, inner)
-			{
-			}
-			public TipoOpMepInexistente(SerializationInfo info, StreamingContext context) : base(info, context)
-			{
-			}
-		}
-		[Serializable]
-		public class MepTransaccionalInsError : Microsoft.ApplicationBlocks.ExceptionManagement.BaseApplicationException
-		{
-			static string TextoError = "No se pudo impactar la transferencia en el Sistema MepTransaccional.  Reporte el problema al personal responsable del mantenimiento de la aplicacion inmediatamente.  La operacion debera ingresarse al Sistema Mep Transaccional mediante el procedimiento de contingencia.  MepEnv N° ";
-			public MepTransaccionalInsError(int IdMep) : base(TextoError + IdMep + ".")
-			{
-			}
-			public MepTransaccionalInsError(int IdMep, Exception inner) : base(TextoError + IdMep + ".", inner)
-			{
-			}
-			public MepTransaccionalInsError(SerializationInfo info, StreamingContext context) : base(info, context)
-			{
-			}
-		}
-		[Serializable]
-		public class MepUpdPk_nro_movimientoError : Microsoft.ApplicationBlocks.ExceptionManagement.BaseApplicationException
-		{
-			static string TextoError = "No se pudo registrar el N° de Movimiento de MepTransaccional en esta Aplicacion.  Reporte el problema al personal responsable del mantenimiento de la aplicacion inmediatamente.  El dato mencionado debera registrarse mediante el procedimiento de contingencia.  MepEnv N° ";
-			public MepUpdPk_nro_movimientoError(int IdMep) : base(TextoError + IdMep + ".")
-			{
-			}
-			public MepUpdPk_nro_movimientoError(int IdMep, Exception inner) : base(TextoError + IdMep + ".", inner)
-			{
-			}
-			public MepUpdPk_nro_movimientoError(SerializationInfo info, StreamingContext context) : base(info, context)
-			{
-			}
-		}
-		[Serializable]
-		public class MepUpdPk_nro_movimientoError2 : Microsoft.ApplicationBlocks.ExceptionManagement.BaseApplicationException
-		{
-			static string TextoError = "No se pudo registrar el N° de Movimiento de Mep Transaccional en esta Aplicacion porque el contenido de la transferencia ha sido modificado por otro usuario.  Reporte el problema al personal responsable del mantenimiento de la aplicacion inmediatamente.  El dato mencionado debera registrarse mediante el procedimiento de contingencia.  MepEnv N° ";
-			public MepUpdPk_nro_movimientoError2(int IdMep) : base(TextoError + IdMep)
-			{
-			}
-			public MepUpdPk_nro_movimientoError2(Exception inner) : base(TextoError, inner)
-			{
-			}
-			public MepUpdPk_nro_movimientoError2(SerializationInfo info, StreamingContext context) : base(info, context)
-			{
-			}
-		}
 	}
 	namespace Validaciones
 	{
@@ -594,104 +593,6 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 			{
 			}
 			public BaseApplicationException(SerializationInfo info, StreamingContext context) : base(info, context)
-			{
-			}
-		}
-		[Serializable]
-		public class CierreCambioNoEncontrado : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-		{
-			static string TextoError = "Cierre de Cambio no encontrado";
-			public CierreCambioNoEncontrado(string IdMoneda, DateTime Fecha) : base(TextoError + ".  Moneda: '" + IdMoneda + "', Dia: " + Fecha.ToString("dd/MM/yyyy"))
-			{
-			}
-			public CierreCambioNoEncontrado(Exception inner) : base(TextoError, inner)
-			{
-			}
-			public CierreCambioNoEncontrado(SerializationInfo info, StreamingContext context) : base(info, context)
-			{
-			}
-		}
-		[Serializable]
-		public class AjusteEnPrecancNoHabilitado : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-		{
-			static string TextoError = "Ajuste de tasa y/o plazo no habilitado en pfs precancelables";
-			public AjusteEnPrecancNoHabilitado() : base(TextoError)
-			{
-			}
-			public AjusteEnPrecancNoHabilitado(Exception inner) : base(TextoError, inner)
-			{
-			}
-			public AjusteEnPrecancNoHabilitado(SerializationInfo info, StreamingContext context) : base(info, context)
-			{
-			}
-		}
-		[Serializable]
-		public class TramoPrecancFueraDeRango : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-		{
-			static string TextoError = "La duración de algún tramo se superpone con el tramo siguiente";
-			public TramoPrecancFueraDeRango() : base(TextoError)
-			{
-			}
-			public TramoPrecancFueraDeRango(Exception inner) : base(TextoError, inner)
-			{
-			}
-			public TramoPrecancFueraDeRango(SerializationInfo info, StreamingContext context) : base(info, context)
-			{
-			}
-		}
-		[Serializable]
-		public class TramoPrecancTasaFueraDeRango : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-		{
-			static string TextoError = "Las tasas deben ser mayores a 0 e iguales o mayores a la del tramo anterior";
-			public TramoPrecancTasaFueraDeRango() : base(TextoError)
-			{
-			}
-			public TramoPrecancTasaFueraDeRango(Exception inner) : base(TextoError, inner)
-			{
-			}
-			public TramoPrecancTasaFueraDeRango(SerializationInfo info, StreamingContext context) : base(info, context)
-			{
-			}
-		}
-		[Serializable]
-		public class TramoPrecancNoEncontrado : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-		{
-			static string TextoError = "Definición de tramo no encontrada";
-			public TramoPrecancNoEncontrado() : base(TextoError)
-			{
-			}
-			public TramoPrecancNoEncontrado(Exception inner) : base(TextoError, inner)
-			{
-			}
-			public TramoPrecancNoEncontrado(SerializationInfo info, StreamingContext context) : base(info, context)
-			{
-			}
-		}
-		[Serializable]
-		public class PrecioNoEncontrado : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-		{
-			static string TextoError = "Precio no encontrado";
-			public PrecioNoEncontrado(string DescrEspecie, DateTime Fecha) : base(TextoError + ".  Especie: '" + DescrEspecie + "', Dia: " + Fecha.ToString("dd/MM/yyyy"))
-			{
-			}
-			public PrecioNoEncontrado(Exception inner) : base(TextoError, inner)
-			{
-			}
-			public PrecioNoEncontrado(SerializationInfo info, StreamingContext context) : base(info, context)
-			{
-			}
-		}
-		[Serializable]
-		public class PrecioNoEncontradoEnExcel : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-		{
-			static string TextoError = "Precio no encontrado en planilla Excel: ";
-			public PrecioNoEncontradoEnExcel(string DescrEspecie) : base(TextoError + DescrEspecie)
-			{
-			}
-			public PrecioNoEncontradoEnExcel(Exception inner) : base(TextoError, inner)
-			{
-			}
-			public PrecioNoEncontradoEnExcel(SerializationInfo info, StreamingContext context) : base(info, context)
 			{
 			}
 		}
@@ -712,7 +613,7 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 		[Serializable]
 		public class ElementoInexistente : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
 		{
-			static string TextoError = "inexistente";
+			static string TextoError = "Inexistente";
 			public ElementoInexistente(IDescrClase Elemento) : base(Elemento._Descripcion + " " + TextoError)
 			{
 			}
@@ -883,6 +784,22 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 			{
 			}
 		}
+        [Serializable]
+        public class NoHayDatos : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+        {
+            static string TextoError = "No hay datos.";
+            public NoHayDatos() : base(TextoError)
+            {
+            }
+            public NoHayDatos(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public NoHayDatos(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
 		[Serializable]
 		public class NoEsMultiploDe24 : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
 		{
@@ -914,11 +831,10 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
                 }
             }
         }
-
-		namespace CashFlow
+		namespace Lote
 		{
 			[Serializable]
-			public class BaseApplicationException : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+            public class BaseApplicationException : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
 			{
 				public BaseApplicationException(string TextoError) : base(TextoError)
 				{
@@ -930,21 +846,179 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 				{
 				}
 			}
-			[Serializable]
-			public class CtasMonConceptos : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.CashFlow.BaseApplicationException
-			{
-				static string TextoError = "Se modificaron los conceptos de ingresos y/o egresos de cuentas monetarias. Actualize parámetros del sistema";
-				public CtasMonConceptos() : base(TextoError)
-				{
-				}
-				public CtasMonConceptos(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public CtasMonConceptos(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-		}
+            [Serializable]
+            public class Existente : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+            {
+                static string TextoError = "Lote existente.";
+                public Existente(string Descr)
+                    : base(TextoError + "\r\n\r\n" + Descr)
+                {
+                }
+                public Existente(Exception inner)
+                    : base(TextoError, inner)
+                {
+                }
+                public Existente(SerializationInfo info, StreamingContext context)
+                    : base(info, context)
+                {
+                }
+            }
+            [Serializable]
+            public class Inexistente : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+            {
+                static string TextoError = "Lote inexistente.";
+                public Inexistente(string Descr)
+                    : base(TextoError + "\r\n\r\n" + Descr)
+                {
+                }
+                public Inexistente(Exception inner)
+                    : base(TextoError, inner)
+                {
+                }
+                public Inexistente(SerializationInfo info, StreamingContext context)
+                    : base(info, context)
+                {
+                }
+            }
+            [Serializable]
+            public class ProblemasEnvio : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+            {
+                static string TextoError = "Problemas al enviar el lote.";
+                public ProblemasEnvio(string Descr)
+                    : base(TextoError + "\r\n\r\n" + Descr)
+                {
+                }
+                public ProblemasEnvio(Exception inner)
+                    : base(TextoError, inner)
+                {
+                }
+                public ProblemasEnvio(SerializationInfo info, StreamingContext context)
+                    : base(info, context)
+                {
+                }
+            }
+            [Serializable]
+            public class ProblemasConsulta : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+            {
+                static string TextoError = "Problemas al consultar el lote.";
+                public ProblemasConsulta(string Descr)
+                    : base(TextoError + "\r\n\r\n" + Descr)
+                {
+                }
+                public ProblemasConsulta(Exception inner)
+                    : base(TextoError, inner)
+                {
+                }
+                public ProblemasConsulta(SerializationInfo info, StreamingContext context)
+                    : base(info, context)
+                {
+                }
+            }
+            [Serializable]
+            public class HayEnviosPosteriores : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+            {
+                static string TextoError = "No es posible realizar la operación. Hay envios posteriores del lote.";
+                public HayEnviosPosteriores(string Descr)
+                    : base(TextoError + "\r\n\r\n" + Descr)
+                {
+                }
+                public HayEnviosPosteriores(Exception inner)
+                    : base(TextoError, inner)
+                {
+                }
+                public HayEnviosPosteriores(SerializationInfo info, StreamingContext context)
+                    : base(info, context)
+                {
+                }
+            }
+            [Serializable]
+            public class HayEnviosPendientes : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+            {
+                static string TextoError = "No es posible realizar la operación. Hay un lote pendiente de envío.";
+                public HayEnviosPendientes(string Descr)
+                    : base(TextoError + "\r\n\r\n" + Descr)
+                {
+                }
+                public HayEnviosPendientes(Exception inner)
+                    : base(TextoError, inner)
+                {
+                }
+                public HayEnviosPendientes(SerializationInfo info, StreamingContext context)
+                    : base(info, context)
+                {
+                }
+            }
+            [Serializable]
+            public class ImposibleAsignarNuevoNroEnvio : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+            {
+                static string TextoError = "Es imposible realizar un nuevo envio del lote.";
+                public ImposibleAsignarNuevoNroEnvio(string Descr)
+                    : base(TextoError + "\r\n\r\n" + Descr)
+                {
+                }
+                public ImposibleAsignarNuevoNroEnvio(Exception inner)
+                    : base(TextoError, inner)
+                {
+                }
+                public ImposibleAsignarNuevoNroEnvio(SerializationInfo info, StreamingContext context)
+                    : base(info, context)
+                {
+                }
+            }
+        }
+        namespace Comprobante
+        {
+            [Serializable]
+            public class BaseApplicationException : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+            {
+                public BaseApplicationException(string TextoError)
+                    : base(TextoError)
+                {
+                }
+                public BaseApplicationException(string TextoError, Exception inner)
+                    : base(TextoError, inner)
+                {
+                }
+                public BaseApplicationException(SerializationInfo info, StreamingContext context)
+                    : base(info, context)
+                {
+                }
+            }
+            [Serializable]
+            public class Existente : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+            {
+                static string TextoError = "Comprobante existente.";
+                public Existente(string Descr)
+                    : base(TextoError + "\r\n\r\n" + Descr)
+                {
+                }
+                public Existente(Exception inner)
+                    : base(TextoError, inner)
+                {
+                }
+                public Existente(SerializationInfo info, StreamingContext context)
+                    : base(info, context)
+                {
+                }
+            }
+            [Serializable]
+            public class Inexistente : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+            {
+                static string TextoError = "Comprobante inexistente.";
+                public Inexistente(string Descr)
+                    : base(TextoError + "\r\n\r\n" + Descr)
+                {
+                }
+                public Inexistente(Exception inner)
+                    : base(TextoError, inner)
+                {
+                }
+                public Inexistente(SerializationInfo info, StreamingContext context)
+                    : base(info, context)
+                {
+                }
+            }
+        }
 		namespace Fechas
 		{
 			[Serializable]
@@ -1058,574 +1132,6 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 				}
 			}
 		}
-		namespace FCIs
-		{
-			[Serializable]
-			public class BaseApplicationException : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
-			{
-				public BaseApplicationException(string TextoError) : base(TextoError)
-				{
-				}
-				public BaseApplicationException(string TextoError, Exception inner) : base(TextoError, inner)
-				{
-				}
-				public BaseApplicationException(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class SociedadesIguales : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "La sociedad gerente y la depositaria no pueden ser la misma.";
-				public SociedadesIguales() : base(TextoError)
-				{
-				}
-				public SociedadesIguales(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public SociedadesIguales(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class Confirmacion : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "No se pudo confirmar porque falta calcular el valorCP de al menos un fondo";
-				public Confirmacion() : base(TextoError)
-				{
-				}
-				public Confirmacion(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public Confirmacion(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class EtapaCalculoConFCIsAsoc : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "No se puede dar de baja una Etapa de Calculo que tenga FCIs vinculados.  Desvincule los FCIs y vuelva a intentar la baja.";
-				public EtapaCalculoConFCIsAsoc() : base(TextoError)
-				{
-				}
-				public EtapaCalculoConFCIsAsoc(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public EtapaCalculoConFCIsAsoc(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class RevalyCalcCPsinSyRsPermitido : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "No está permitido ejecutar el proceso de Revaluo de Cartera y calculo Valor CP sin informacion de Suscripciones y Rescates.";
-				public RevalyCalcCPsinSyRsPermitido() : base(TextoError)
-				{
-				}
-				public RevalyCalcCPsinSyRsPermitido(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public RevalyCalcCPsinSyRsPermitido(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class EtapaCapturaConSubTipoEspeciesAsoc : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "No se puede dar de baja una Etapa de Captura que tenga Subtipos de especies vinculadas.  Desvincule los Subtipos de especies y vuelva a intentar la baja.";
-				public EtapaCapturaConSubTipoEspeciesAsoc() : base(TextoError)
-				{
-				}
-				public EtapaCapturaConSubTipoEspeciesAsoc(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public EtapaCapturaConSubTipoEspeciesAsoc(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class CedFCIxlsRegistro : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "CedFCIxls.dll no está correctamente registrada.";
-				public CedFCIxlsRegistro() : base(TextoError)
-				{
-				}
-				public CedFCIxlsRegistro(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public CedFCIxlsRegistro(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class CedFCIxlsProceso : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "Error al procesar planilla excel:";
-				public CedFCIxlsProceso(string Errores) : base(TextoError + Errores)
-				{
-				}
-				public CedFCIxlsProceso(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public CedFCIxlsProceso(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class CedFCIItfMensualNoFile : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "Error al procesar interfaz mensual:";
-				public CedFCIItfMensualNoFile(string Errores) : base(TextoError + Errores + ". Archivo inexistente.")
-				{
-				}
-				public CedFCIItfMensualNoFile(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public CedFCIItfMensualNoFile(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class CedFCIItfSemanalCtaSinTag : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "Error al procesar interfaz semanal. La cuenta no está asociada a un tag:";
-				public CedFCIItfSemanalCtaSinTag(string Errores) : base(TextoError + Errores + ".")
-				{
-				}
-				public CedFCIItfSemanalCtaSinTag(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public CedFCIItfSemanalCtaSinTag(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class CedFCINoSePuedeInformar : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "No se puede informar FCI Cartera en fondos que no sean de Clase";
-				public CedFCINoSePuedeInformar(string Errores) : base(TextoError + Errores)
-				{
-				}
-				public CedFCINoSePuedeInformar(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public CedFCINoSePuedeInformar(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class CedFCISinInformar : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "FCI Cartera sin informar";
-				public CedFCISinInformar(string Errores) : base(TextoError + Errores)
-				{
-				}
-				public CedFCISinInformar(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public CedFCISinInformar(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class CedFCICtasAsocAFondosDeClase : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "No se admite que los fondos de Clase tengan cuentas asociadas. Primero elimine o reclasifique las cuentas y luego reintente la retipificación del fondo";
-				public CedFCICtasAsocAFondosDeClase(string Errores) : base(TextoError + Errores)
-				{
-				}
-				public CedFCICtasAsocAFondosDeClase(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public CedFCICtasAsocAFondosDeClase(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class UNTipoCarteraConDependencias : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "No se puede dar de baja un Fondo de Cartera sin antes dar de baja sus Fondos de Clase";
-				public UNTipoCarteraConDependencias() : base(TextoError)
-				{
-				}
-				public UNTipoCarteraConDependencias(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public UNTipoCarteraConDependencias(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class NoInformado : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "El FCI no ha sido informado";
-				public NoInformado() : base(TextoError)
-				{
-				}
-				public NoInformado(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public NoInformado(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class ValorCPCalculado : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "Existe un valor de cuotaparte calculado";
-				public ValorCPCalculado() : base(TextoError)
-				{
-				}
-				public ValorCPCalculado(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public ValorCPCalculado(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class MonedaExtranjeraParaDiaSiguiente : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "Los fondos que publican precio para el día siguiente sólo pueden ser de moneda local.";
-				public MonedaExtranjeraParaDiaSiguiente() : base(TextoError)
-				{
-				}
-				public MonedaExtranjeraParaDiaSiguiente(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public MonedaExtranjeraParaDiaSiguiente(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class ValorCPdiferente : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-			{
-				static string TextoError = "Diferencia en valor de cuota calculado para el día de proceso con respecto al calculado el día anterior. El precio correcto es ";
-				public ValorCPdiferente(string IdUN, decimal PrecioCorrecto, decimal PrecioIncorrecto) : base("FCI " + IdUN + ":" + TextoError + PrecioCorrecto + " y es distinto a " + PrecioIncorrecto)
-				{
-				}
-				public ValorCPdiferente(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public ValorCPdiferente(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			namespace Proceso
-			{
-				[Serializable]
-				public class BaseApplicationException : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.BaseApplicationException
-				{
-					public BaseApplicationException(string TextoError) : base(TextoError)
-					{
-					}
-					public BaseApplicationException(string TextoError, Exception inner) : base(TextoError, inner)
-					{
-					}
-					public BaseApplicationException(SerializationInfo info, StreamingContext context) : base(info, context)
-					{
-					}
-				}
-				[Serializable]
-				public class CapturaSyrDefinitivas : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.FCIs.Proceso.BaseApplicationException
-				{
-					static string TextoError = "No se pueden capturar suscripciones ni rescates cuando la fecha actual difiere en más de un día hábil con la de proceso.";
-					public CapturaSyrDefinitivas() : base(TextoError)
-					{
-					}
-					public CapturaSyrDefinitivas(Exception inner) : base(TextoError, inner)
-					{
-					}
-					public CapturaSyrDefinitivas(SerializationInfo info, StreamingContext context) : base(info, context)
-					{
-					}
-				}
-			}
-		}
-		namespace Operaciones
-		{
-			[Serializable]
-			public class BaseApplicationException : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
-			{
-				public BaseApplicationException(string TextoError) : base(TextoError)
-				{
-				}
-				public BaseApplicationException(string TextoError, Exception inner) : base(TextoError, inner)
-				{
-				}
-				public BaseApplicationException(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class NoBalancea : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-			{
-				static string TextoError = "La operación no balancea.  Verifique la Diferencia.";
-				public NoBalancea() : base(TextoError)
-				{
-				}
-				public NoBalancea(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public NoBalancea(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class DetalleNoIngresado : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-			{
-				static string TextoError = "La operación debe contener, al menos, dos minutas";
-				public DetalleNoIngresado() : base(TextoError)
-				{
-				}
-				public DetalleNoIngresado(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public DetalleNoIngresado(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class MinutaAutomatica : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-			{
-				static string TextoError = "Opcion invalida en minuta automatica";
-				public MinutaAutomatica() : base(TextoError)
-				{
-				}
-				public MinutaAutomatica(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public MinutaAutomatica(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class CierreCambioNoIngresado : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-			{
-				static string TextoError = "Cierre de Cambio no ingresado";
-				public CierreCambioNoIngresado() : base(TextoError)
-				{
-				}
-				public CierreCambioNoIngresado(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public CierreCambioNoIngresado(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class UNincongruente : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-			{
-				static string TextoError = "Hay, al menos, una minuta que referencia a una cuenta de otra unidad de negocio";
-				public UNincongruente() : base(TextoError)
-				{
-				}
-				public UNincongruente(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public UNincongruente(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class Fechaincongruente : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-			{
-				static string TextoError = "Hay, al menos, una minuta con un vencimiento establecido. Para modificar la fecha de la operación, dé de baja la minuta y depure.";
-				public Fechaincongruente() : base(TextoError)
-				{
-				}
-				public Fechaincongruente(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public Fechaincongruente(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class NoEnEstadoFinal : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-			{
-				static string TextoError = "Existe al menos una operación que no se encuentra en estado final.";
-				public NoEnEstadoFinal() : base(TextoError)
-				{
-				}
-				public NoEnEstadoFinal(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public NoEnEstadoFinal(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class PreciosNoEnEstadoFinal : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-			{
-				static string TextoError = "Existe al menos un precio que no se encuentra en estado final.";
-				public PreciosNoEnEstadoFinal() : base(TextoError)
-				{
-				}
-				public PreciosNoEnEstadoFinal(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public PreciosNoEnEstadoFinal(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class TasaCAyCCENoEnEstadoFinal : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-			{
-				static string TextoError = "Existe al menos una tasa que no se encuentra en estado final.";
-				public TasaCAyCCENoEnEstadoFinal() : base(TextoError)
-				{
-				}
-				public TasaCAyCCENoEnEstadoFinal(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public TasaCAyCCENoEnEstadoFinal(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class CierreDeCambioNoEnEstadoFinal : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-			{
-				static string TextoError = "Existe al menos un cierre de cambio que no se encuentra en estado final.";
-				public CierreDeCambioNoEnEstadoFinal() : base(TextoError)
-				{
-				}
-				public CierreDeCambioNoEnEstadoFinal(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public CierreDeCambioNoEnEstadoFinal(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			namespace Minutas
-			{
-				[Serializable]
-				public class BaseApplicationException : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.BaseApplicationException
-				{
-					public BaseApplicationException(string TextoError) : base(TextoError)
-					{
-					}
-					public BaseApplicationException(string TextoError, Exception inner) : base(TextoError, inner)
-					{
-					}
-					public BaseApplicationException(SerializationInfo info, StreamingContext context) : base(info, context)
-					{
-					}
-				}
-				[Serializable]
-				public class UNincongruente : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.Minutas.BaseApplicationException
-				{
-					static string TextoError = "Unidad de Negocio incongruente.  No se incorporará la minuta.";
-					public UNincongruente() : base(TextoError)
-					{
-					}
-					public UNincongruente(Exception inner) : base(TextoError, inner)
-					{
-					}
-					public UNincongruente(SerializationInfo info, StreamingContext context) : base(info, context)
-					{
-					}
-				}
-				[Serializable]
-				public class IndiceFueraDeRango : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.Minutas.BaseApplicationException
-				{
-					static string TextoError = "Unidad de Negocio incongruente.  No se incorporará la minuta.";
-					public IndiceFueraDeRango() : base(TextoError)
-					{
-					}
-					public IndiceFueraDeRango(Exception inner) : base(TextoError, inner)
-					{
-					}
-					public IndiceFueraDeRango(SerializationInfo info, StreamingContext context) : base(info, context)
-					{
-					}
-				}
-				[Serializable]
-				public class ConvinacionTipoMovProductoInvalido : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.Minutas.BaseApplicationException
-				{
-					static string TextoError = "Tipo de movimiento, en Producto, inválido";
-					public ConvinacionTipoMovProductoInvalido() : base(TextoError)
-					{
-					}
-					public ConvinacionTipoMovProductoInvalido(Exception inner) : base(TextoError, inner)
-					{
-					}
-					public ConvinacionTipoMovProductoInvalido(SerializationInfo info, StreamingContext context) : base(info, context)
-					{
-					}
-				}
-				[Serializable]
-				public class CantidadCPResc : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.Minutas.BaseApplicationException
-				{
-					static string TextoError = "No se pueden rescatar mas cuotapartes de las suscriptas";
-					public CantidadCPResc() : base(TextoError)
-					{
-					}
-					public CantidadCPResc(Exception inner) : base(TextoError, inner)
-					{
-					}
-					public CantidadCPResc(SerializationInfo info, StreamingContext context) : base(info, context)
-					{
-					}
-				}
-				[Serializable]
-				public class ImporteAPagarNegativo : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.Minutas.BaseApplicationException
-				{
-					static string TextoError = "Las deducciones deben ser menor al capital más los intereses";
-					public ImporteAPagarNegativo() : base(TextoError)
-					{
-					}
-					public ImporteAPagarNegativo(Exception inner) : base(TextoError, inner)
-					{
-					}
-					public ImporteAPagarNegativo(SerializationInfo info, StreamingContext context) : base(info, context)
-					{
-					}
-				}
-				[Serializable]
-				public class VentaTitulos : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.Minutas.BaseApplicationException
-				{
-					static string TextoError = "La cantidad(VN) disponible no es suficiente: ";
-					public VentaTitulos(decimal Cantidad) : base(TextoError + Cantidad)
-					{
-					}
-					public VentaTitulos(Exception inner) : base(TextoError, inner)
-					{
-					}
-					public VentaTitulos(SerializationInfo info, StreamingContext context) : base(info, context)
-					{
-					}
-				}
-				[Serializable]
-				public class DifCamEnCtaPesos : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.Minutas.BaseApplicationException
-				{
-					static string TextoError = "Los movimientos de diferencia de cambio no se pueden aplicar a rubros en pesos";
-					public DifCamEnCtaPesos() : base(TextoError)
-					{
-					}
-					public DifCamEnCtaPesos(Exception inner) : base(TextoError, inner)
-					{
-					}
-					public DifCamEnCtaPesos(SerializationInfo info, StreamingContext context) : base(info, context)
-					{
-					}
-				}
-				[Serializable]
-				public class DifCamTipoMovInvalido : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Operaciones.Minutas.BaseApplicationException
-				{
-					static string TextoError = "Tipo de movimiento invalido en operacion de Diferencia de Cambio";
-					public DifCamTipoMovInvalido() : base(TextoError)
-					{
-					}
-					public DifCamTipoMovInvalido(Exception inner) : base(TextoError, inner)
-					{
-					}
-					public DifCamTipoMovInvalido(SerializationInfo info, StreamingContext context) : base(info, context)
-					{
-					}
-				}
-			}
-		}
 		namespace Cuentas
 		{
 			[Serializable]
@@ -1679,218 +1185,6 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 				{
 				}
 				public TasaDuplicada(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-		}
-		namespace Especies
-		{
-			[Serializable]
-			public class BaseApplicationException : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
-			{
-				public BaseApplicationException(string TextoError) : base(TextoError)
-				{
-				}
-				public BaseApplicationException(string TextoError, Exception inner) : base(TextoError, inner)
-				{
-				}
-				public BaseApplicationException(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class CodigoCV : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Especies.BaseApplicationException
-			{
-				static string TextoError = "El código de CV debe tener cinco dígitos";
-				public CodigoCV() : base(TextoError)
-				{
-				}
-				public CodigoCV(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public CodigoCV(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class CodBCRA : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Especies.BaseApplicationException
-			{
-				static string TextoError = "El código de moneda de BCRA no está cargado en el sistema:";
-				public CodBCRA(string CodBCRA) : base(TextoError + CodBCRA)
-				{
-				}
-				public CodBCRA(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public CodBCRA(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class EspecieSinCotizacionFCI : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Especies.BaseApplicationException
-			{
-				static string TextoError = "No hay precio ingresado/capturado para la especie de CódigoCV:";
-				public EspecieSinCotizacionFCI(string CodigoCV) : base(TextoError + CodigoCV)
-				{
-				}
-				public EspecieSinCotizacionFCI(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public EspecieSinCotizacionFCI(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class EspecieSinCotizacion : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Especies.BaseApplicationException
-			{
-				static string TextoError = "No hay último precio negociado en catálogo para la especie de CódigoCV:";
-				public EspecieSinCotizacion(string CodigoCV) : base(TextoError + CodigoCV)
-				{
-				}
-				public EspecieSinCotizacion(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public EspecieSinCotizacion(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class TasaBadlarSinCotizacion : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Especies.BaseApplicationException
-			{
-				static string TextoError = "No existe la tasa badlar para esa fecha en CU";
-				public TasaBadlarSinCotizacion() : base(TextoError)
-				{
-				}
-				public TasaBadlarSinCotizacion(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public TasaBadlarSinCotizacion(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class EspecieSinCroFecha : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Especies.BaseApplicationException
-			{
-				static string TextoError = "No se puede consultar a CedPM con fecha mayor a la de proceso";
-				public EspecieSinCroFecha() : base(TextoError)
-				{
-				}
-				public EspecieSinCroFecha(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public EspecieSinCroFecha(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class EspecieFechaConsultaPrecio : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Especies.BaseApplicationException
-			{
-				static string TextoError = "No se puede consultar a CU un precio de especie con fecha distinta a la del día";
-				public EspecieFechaConsultaPrecio() : base(TextoError)
-				{
-				}
-				public EspecieFechaConsultaPrecio(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public EspecieFechaConsultaPrecio(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class MonedaSinCotizacionBNA : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Especies.BaseApplicationException
-			{
-				static string TextoError = "No hay cotización para la moneda ";
-				public MonedaSinCotizacionBNA(string IdMoneda) : base(TextoError + IdMoneda)
-				{
-				}
-				public MonedaSinCotizacionBNA(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public MonedaSinCotizacionBNA(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class MonedaNoContemplada : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Especies.BaseApplicationException
-			{
-				static string TextoError = "El sistema no puede consultar precios de la moneda ";
-				public MonedaNoContemplada(string IdMoneda) : base(TextoError + IdMoneda)
-				{
-				}
-				public MonedaNoContemplada(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public MonedaNoContemplada(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class MercadoNoContemplado : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Especies.BaseApplicationException
-			{
-				static string TextoError = "No existe el mercado en el sistema: ";
-				public MercadoNoContemplado(string IdMercado) : base(TextoError + IdMercado)
-				{
-				}
-				public MercadoNoContemplado(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public MercadoNoContemplado(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class EspecieEnCartera : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Especies.BaseApplicationException
-			{
-				static string TextoError = "Especie actualmente en cartera de al menos un fondo";
-				public EspecieEnCartera() : base(TextoError)
-				{
-				}
-				public EspecieEnCartera(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public EspecieEnCartera(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class EspecieEnCarteraFondoDelDiaSiguiente : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Especies.BaseApplicationException
-			{
-				static string TextoError = "Especie con precio en moneda extranjera no admitida en un fondo que publica valor de cuotaparte del día siguiente";
-				public EspecieEnCarteraFondoDelDiaSiguiente() : base(TextoError)
-				{
-				}
-				public EspecieEnCarteraFondoDelDiaSiguiente(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public EspecieEnCarteraFondoDelDiaSiguiente(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class EspecieYaExistente : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Especies.BaseApplicationException
-			{
-				static string TextoError = "Esa especie ya existe en el sistema.";
-				public EspecieYaExistente() : base(TextoError)
-				{
-				}
-				public EspecieYaExistente(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public EspecieYaExistente(SerializationInfo info, StreamingContext context) : base(info, context)
-				{
-				}
-			}
-			[Serializable]
-			public class EspecieYaExistenteCAFCI : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Especies.BaseApplicationException
-			{
-				static string TextoError = "No se pudo dar de alta porque existe una especie con igual código CAFCI y tipo de código CAFCI.";
-				public EspecieYaExistenteCAFCI() : base(TextoError)
-				{
-				}
-				public EspecieYaExistenteCAFCI(Exception inner) : base(TextoError, inner)
-				{
-				}
-				public EspecieYaExistenteCAFCI(SerializationInfo info, StreamingContext context) : base(info, context)
 				{
 				}
 			}
@@ -2018,6 +1312,26 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 			{
 			}
 		}
+        public class CUITNoHabilitadoParaElUsuario: Microsoft.ApplicationBlocks.ExceptionManagement.BaseApplicationException
+        {
+            static string TextoError = "El usuario no puede procesar archivos del siguiente CUIT";
+            public CUITNoHabilitadoParaElUsuario()
+                : base(TextoError)
+            {
+            }
+            public CUITNoHabilitadoParaElUsuario(string Cuit)
+                : base(TextoError + ": " + Cuit)
+            {
+            }
+            public CUITNoHabilitadoParaElUsuario(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public CUITNoHabilitadoParaElUsuario(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
 		[Serializable]
 		public class ArchivoInconsistente : Microsoft.ApplicationBlocks.ExceptionManagement.BaseApplicationException
 		{
@@ -2052,6 +1366,27 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 			{
 			}
 		}
+        [Serializable]
+        public class TipoDeArchivoIncorrecto: Microsoft.ApplicationBlocks.ExceptionManagement.BaseApplicationException
+        {
+            static string TextoError = "Tipo de archivo incorrecto.";
+            public TipoDeArchivoIncorrecto()
+                : base(TextoError)
+            {
+            }
+            public TipoDeArchivoIncorrecto(string NombreArchivo)
+                : base(TextoError + ": " + NombreArchivo)
+            {
+            }
+            public TipoDeArchivoIncorrecto(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public TipoDeArchivoIncorrecto(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
 	}
 	namespace XML
 	{
