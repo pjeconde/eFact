@@ -33,7 +33,13 @@ namespace CedEntidades
 				fecha = value;
 			}
 		}
-
+        public string EventoDescr
+        {
+            get
+            {
+                return evento.Descr;
+            }
+        }
 		public Evento Evento
 		{
 			get
@@ -118,6 +124,13 @@ namespace CedEntidades
 			}
 		}
 
+        public string UsuarioNombre
+        {
+            get
+            {
+                return usuario.Nombre;
+            }
+        }
 		public Usuario Usuario
 		{
 			get

@@ -9,6 +9,7 @@ namespace CedEntidades
 	{
 		#region Atributos
 		private string cnnStr;
+        private string cnnStrAplicExterna;
 		private CedEntidades.Usuario usuario;
 		private string dominio;
 		private bool cXO;
@@ -36,6 +37,18 @@ namespace CedEntidades
 				cnnStr = value;
 			}
 		}
+
+        public string CnnStrAplicExterna
+        {
+            get
+            {
+                return cnnStrAplicExterna;
+            }
+            set
+            {
+                cnnStrAplicExterna = value;
+            }
+        }
 
 		public CedEntidades.Usuario Usuario
 		{
