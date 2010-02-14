@@ -24,6 +24,7 @@ namespace CedEntidades
 		private string idFlow = String.Empty;
 		private List<Evento> eventosXLotePosibles;
 		private List<Evento> eventosPosibles;
+        private List<EsqSegEvenPos> esquemaSegEventosPosibles;
 		private List<Log> log;
 		private string handler; 
 		#endregion
@@ -33,6 +34,7 @@ namespace CedEntidades
         {
             eventosXLotePosibles = new List<Evento>();
             eventosPosibles = new List<Evento>();
+            esquemaSegEventosPosibles = new List<EsqSegEvenPos>();
             log = new List<Log>();
 			sesion = new Sesion();
         }
@@ -192,31 +194,39 @@ namespace CedEntidades
 				idOp = value;
 			}
 		}
-
-		public List<Evento> EventosXLotePosibles
+        public List<Evento> EventosPosibles
+        {
+            get
+            {
+                return eventosPosibles;
+            }
+            set
+            {
+                eventosPosibles = value;
+            }
+        }
+        public List<EsqSegEvenPos> EsquemaSegEventosPosibles
 		{
 			get
 			{
-				return eventosXLotePosibles;
+                return esquemaSegEventosPosibles;
 			}
 			set
 			{
-				eventosXLotePosibles = value;
+                esquemaSegEventosPosibles = value;
 			}
 		}
-
-		public List<Evento> EventosPosibles
-		{
-			get
-			{
-				return eventosPosibles;
-			}
-			set
-			{
-				eventosPosibles = value;
-			}
-		}
-
+        public List<Evento> EventosXLotePosibles
+        {
+            get
+            {
+                return eventosXLotePosibles;
+            }
+            set
+            {
+                eventosXLotePosibles = value;
+            }
+        }
 		public List<Log> Log
 		{
 			get
