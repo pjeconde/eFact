@@ -102,15 +102,15 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 			// send notification email if operatorMail attribute was provided
 			if(m_OpMail.Length > 0)
 			{
-				string subject = "Notificación de excepción";
-				string body = strInfo.ToString();
-				MailMessage MyMail = new MailMessage();
-				MyMail.From = new MailAddress(AdditionalInfo.Get("ExceptionManager.AppDomainName") + "@cedeira.com.ar");
-				MyMail.To.Add(new MailAddress(m_OpMail));
-				MyMail.Subject = subject;
-				MyMail.Body = body;
-                SmtpClient SmtpClient = new SmtpClient("mail.cedeira.com.ar");
-				SmtpClient.Send(MyMail);
+                string body = strInfo.ToString();
+                string subject = "Notificación de excepción";
+                System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
+                System.Net.Mail.MailMessage mail;
+                mail = new System.Net.Mail.MailMessage("facturaelectronica@cedeira.com.ar", m_OpMail, subject, body);
+                mail.BodyEncoding = System.Text.Encoding.UTF8;
+                smtpClient.Host = "mail.cedeira.com.ar";
+                smtpClient.Credentials = new System.Net.NetworkCredential("pablo.conde@cedeira.com.ar", "cedeira123");
+                smtpClient.Send(mail);
 			}
 		}
 	}
