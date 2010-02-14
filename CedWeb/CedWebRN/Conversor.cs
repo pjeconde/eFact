@@ -125,14 +125,12 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_vendedor.provincia = lcIBK.comprobante[i].cabecera.informacion_vendedor.provincia;
                 cIBK.cabecera.informacion_vendedor.telefono = lcIBK.comprobante[i].cabecera.informacion_vendedor.telefono;
 
-
-                cIBK.extensiones = new FeaEntidades.InterFacturas.extensiones();
-
+                //cIBK.extensiones = new FeaEntidades.InterFacturas.extensiones();
 
                 FeaEntidades.InterFacturas.detalle d = new FeaEntidades.InterFacturas.detalle();
                 IBK.detalle detalle = (IBK.detalle)lcIBK.comprobante[i].Item;
                 d.linea = new FeaEntidades.InterFacturas.linea[detalle.linea.Length];
-
+                d.comentarios = detalle.comentarios;
                 for (int j = 0; j < detalle.linea.Length; j++)
                 {
                     if (detalle.linea[j] != null)

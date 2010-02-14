@@ -14,20 +14,16 @@ namespace CedWebRN
             lc.comprobante = new FeaEntidades.InterFacturas.comprobante[1];
             IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
             objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
-
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"]!=null)
             {
                 System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
                 string usuarioProxy = System.Configuration.ConfigurationManager.AppSettings["UsuarioProxy"];
                 string claveProxy = System.Configuration.ConfigurationManager.AppSettings["ClaveProxy"];
                 string dominioProxy = System.Configuration.ConfigurationManager.AppSettings["DominioProxy"];
-
                 System.Net.NetworkCredential networkCredential = new System.Net.NetworkCredential(usuarioProxy, claveProxy, dominioProxy);
                 wp.Credentials = networkCredential;
                 objIBK.Proxy = wp;
             }
-
-
             X509Store store = new X509Store(StoreLocation.LocalMachine);
             store.Open(OpenFlags.ReadOnly);
 			X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
@@ -35,31 +31,207 @@ namespace CedWebRN
 			{
 				objIBK.ClientCertificates.Add(col[0]);
 				IBK.consulta_lote_comprobantes_response clcr = objIBK.getLoteFacturasConSchema(clc);
-
+                IBK.consulta_lote_response clr;
                 try
                 {
-                    IBK.consulta_lote_response clr = (IBK.consulta_lote_response)clcr.Item;
+                    clr = (IBK.consulta_lote_response)clcr.Item;
                     IBK.lote_comprobantes lcIBK=(IBK.lote_comprobantes)clr.Item;
-
                     lc = Conversor.IBK2Entidad(lcIBK);
-
                 }
                 catch (InvalidCastException)
                 {
-                    string errorConsultaLote = ((IBK.consulta_lote_responseErrores_consulta)(((IBK.consulta_lote_response)(((IBK.consulta_lote_comprobantes_response)clcr).Item)).Item)).error[0].descripcion_error;
-                    throw new Exception(errorConsultaLote);
+                    StringBuilder errorText = new StringBuilder();
+                    if (clcr.Item != null)
+                    {
+                        errorText.Append("Nro. de Lote: [" + clc.id_lote  + "]\r\n");
+                        if (clcr.Item.GetType() == typeof(IBK.consulta_lote_response))
+                        {
+                            clr = (IBK.consulta_lote_response)clcr.Item;
+                            IBK.consulta_lote_responseErrores_consulta errores = (IBK.consulta_lote_responseErrores_consulta)clr.Item;
+                            foreach (IBK.error elote in errores.error)
+                            {
+                                errorText.Append(elote.codigo_error + " - " + elote.descripcion_error + "\r\n");
+                            }
+                        }
+                        else
+                        {
+                            IBK.consulta_lote_comprobantes_responseErrores_response clcrEr;
+                            clcrEr = (IBK.consulta_lote_comprobantes_responseErrores_response)clcr.Item;
+                            foreach (IBK.error elote in clcrEr.error)
+                            {
+                                errorText.Append(elote.codigo_error + " - " + elote.descripcion_error + "\r\n");
+                            }
+                        }
+                    }
+                    throw new Exception(errorText.ToString());
                 }
-                
-                
                 return lc;
 			}
 			else
 			{
 				throw new Exception("Su certificado no está disponible en nuestro repositorio");
 			}
-
         }
-
+        public FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(out IBK.error[] RespErroresLote, out IBK.error[] RespErroresComprobantes, IBK.consulta_lote_comprobantes clc, string certificado)
+        {
+            FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+            lc.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
+            lc.comprobante = new FeaEntidades.InterFacturas.comprobante[1];
+            IBK.error[] respErroresLote = new CedWebRN.IBK.error[0];
+            IBK.error[] respErroresComprobantes = new CedWebRN.IBK.error[0];
+            IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
+            objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
+            if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null)
+            {
+                System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
+                string usuarioProxy = System.Configuration.ConfigurationManager.AppSettings["UsuarioProxy"];
+                string claveProxy = System.Configuration.ConfigurationManager.AppSettings["ClaveProxy"];
+                string dominioProxy = System.Configuration.ConfigurationManager.AppSettings["DominioProxy"];
+                System.Net.NetworkCredential networkCredential = new System.Net.NetworkCredential(usuarioProxy, claveProxy, dominioProxy);
+                wp.Credentials = networkCredential;
+                objIBK.Proxy = wp;
+            }
+            X509Store store = new X509Store(StoreLocation.LocalMachine);
+            store.Open(OpenFlags.ReadOnly);
+            X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
+            if (col.Count.Equals(1))
+            {
+                objIBK.ClientCertificates.Add(col[0]);
+                IBK.consulta_lote_comprobantes_response clcr = objIBK.getLoteFacturasConSchema(clc);
+                IBK.consulta_lote_response clr;
+                try
+                {
+                    clr = (IBK.consulta_lote_response)clcr.Item;
+                    IBK.lote_comprobantes lcIBK = (IBK.lote_comprobantes)clr.Item;
+                    lc = Conversor.IBK2Entidad(lcIBK);
+                }
+                catch (InvalidCastException)
+                {
+                    StringBuilder errorText = new StringBuilder();
+                    if (clcr.Item != null)
+                    {
+                        errorText.Append("Nro. de Lote: [" + clc.id_lote + "]\r\n");
+                        if (clcr.Item.GetType() == typeof(IBK.consulta_lote_response))
+                        {
+                            clr = (IBK.consulta_lote_response)clcr.Item;
+                            IBK.consulta_lote_responseErrores_consulta errores = (IBK.consulta_lote_responseErrores_consulta)clr.Item;
+                            foreach (IBK.error elote in errores.error)
+                            {
+                                errorText.Append(elote.codigo_error + " - " + elote.descripcion_error + "\r\n");
+                            }
+                            RespErroresLote = errores.error;
+                        }
+                        else
+                        {
+                            IBK.consulta_lote_comprobantes_responseErrores_response clcrEr;
+                            clcrEr = (IBK.consulta_lote_comprobantes_responseErrores_response)clcr.Item;
+                            foreach (IBK.error elote in clcrEr.error)
+                            {
+                                errorText.Append(elote.codigo_error + " - " + elote.descripcion_error + "\r\n");
+                            }
+                            RespErroresComprobantes = clcrEr.error;
+                        }
+                    }
+                    throw new Exception(errorText.ToString());
+                }
+                RespErroresLote = respErroresLote;
+                RespErroresComprobantes = respErroresComprobantes;
+                return lc;
+            }
+            else
+            {
+                throw new Exception("Su certificado no está disponible en nuestro repositorio");
+            }
+        }
+        public void EnviarIBK(out CedWebRN.IBK.lote_response Lr, FeaEntidades.InterFacturas.lote_comprobantes lc, string certificado)
+        {
+            IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
+            lcIBK = Fea2Ibk(lc);
+            IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
+            objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
+            if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null)
+            {
+                System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
+                string usuarioProxy = System.Configuration.ConfigurationManager.AppSettings["UsuarioProxy"];
+                string claveProxy = System.Configuration.ConfigurationManager.AppSettings["ClaveProxy"];
+                string dominioProxy = System.Configuration.ConfigurationManager.AppSettings["DominioProxy"];
+                System.Net.NetworkCredential networkCredential = new System.Net.NetworkCredential(usuarioProxy, claveProxy, dominioProxy);
+                wp.Credentials = networkCredential;
+                objIBK.Proxy = wp;
+            }
+            X509Store store = new X509Store(StoreLocation.LocalMachine);
+            store.Open(OpenFlags.ReadOnly);
+            X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
+            if (col.Count.Equals(1))
+            {
+                objIBK.ClientCertificates.Add(col[0]);
+                //System.Threading.Thread.Sleep(3000);
+                IBK.lote_comprobantes_response lcr = objIBK.receiveFacturasConSchema(lcIBK);
+                IBK.lote_response lr = new CedWebRN.IBK.lote_response();
+                try
+                {
+                    lr = ((IBK.lote_response)lcr.Item);
+                    if (lr.estado == "OK")
+                    {
+                        Lr = lr;
+                    }
+                    else
+                    {
+                        Lr = lr;
+                        StringBuilder errorText = new StringBuilder();
+                        if (Lr.errores_lote != null)
+                        {
+                            errorText.Append("Nro. de Lote: [" + Lr.id_lote + "]\r\n");
+                            foreach (CedWebRN.IBK.error elote in Lr.errores_lote)
+                            {
+                                errorText.Append(elote.codigo_error + " - " + elote.descripcion_error + "\r\n");
+                            }
+                        }
+                        if (Lr.comprobante_response != null)
+                        {
+                            foreach (CedWebRN.IBK.comprobante_response comprobante in Lr.comprobante_response)
+                            {
+                                if (comprobante.errores_comprobante != null)
+                                {
+                                    if (Lr.errores_lote != null)
+                                    {
+                                        errorText.Append("\r\n");
+                                    }
+                                    errorText.Append("Punto de Venta: [" + comprobante.punto_de_venta + "]  Tipo de Comprobante: [" + comprobante.tipo_de_comprobante + "]  Nro. de Comprobante: [" + comprobante.numero_comprobante + "]\r\n");
+                                    foreach (CedWebRN.IBK.error ecomprobante in comprobante.errores_comprobante)
+                                    {
+                                        errorText.Append(ecomprobante.codigo_error + " - " + ecomprobante.descripcion_error + "\r\n");
+                                    }
+                                }
+                            }
+                        }
+                        throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Lote.ProblemasEnvio(errorText.ToString());
+                    }
+                }
+                catch (InvalidCastException)
+                {
+                    StringBuilder errorText = new StringBuilder();
+                    if (lcr.Item != null)
+                    {
+                        if (lcr.Item.GetType() == typeof(IBK.lote_comprobantes_responseErrores_response))
+                        {
+                            IBK.lote_comprobantes_responseErrores_response lcrEr = new CedWebRN.IBK.lote_comprobantes_responseErrores_response();
+                            errorText.Append("Nro. de Lote: [" + lc.cabecera_lote.id_lote + "]\r\n");
+                            lcrEr = (IBK.lote_comprobantes_responseErrores_response)lcr.Item;
+                            foreach (IBK.error error in lcrEr.error)
+                            {
+                                errorText.Append(error.codigo_error + " - " + error.descripcion_error + "\r\n");
+                            }
+                        }
+                    }
+                    throw new Exception(errorText.ToString());
+                }
+            }
+            else
+            {
+                throw new Exception("Su certificado no está disponible en nuestro repositorio");
+            }
+        }
         public string EnviarIBK(FeaEntidades.InterFacturas.lote_comprobantes lc, string certificado)
         {
             IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
@@ -113,7 +285,6 @@ namespace CedWebRN
 				throw new Exception("Su certificado no está disponible en nuestro repositorio");
 			}
 		}
-
         public FeaEntidades.InterFacturas.lote_comprobantes Ibk2FEA(CedWebRN.IBK.lote_comprobantes lcIBK)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lcFEA = new FeaEntidades.InterFacturas.lote_comprobantes();
@@ -418,7 +589,6 @@ namespace CedWebRN
 
             return lcFEA;
         }
-
         private CedWebRN.IBK.lote_comprobantes Fea2Ibk(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
             IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
@@ -532,13 +702,11 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_vendedor.provincia = lc.comprobante[i].cabecera.informacion_vendedor.provincia;
                 cIBK.cabecera.informacion_vendedor.telefono = lc.comprobante[i].cabecera.informacion_vendedor.telefono;
 
-
-                cIBK.extensiones = new IBK.extensiones();
-
+                //cIBK.extensiones = new IBK.extensiones();
 
                 IBK.detalle d = new IBK.detalle();
                 d.linea = new IBK.linea[lc.comprobante[i].detalle.linea.Length];
-
+                d.comentarios = lc.comprobante[i].detalle.comentarios;
                 for (int j = 0; j < lc.comprobante[i].detalle.linea.Length; j++)
                 {
                     if (lc.comprobante[i].detalle.linea[j] != null)
