@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Collections.Generic;
 using System.Text;
 using System.Data.Odbc;
-
+using System.Data.OleDb;
 
 namespace Cedeira.SV
 {
@@ -68,174 +68,257 @@ namespace Cedeira.SV
 						 2) NoAcepta: no activa la trasaccion
 						 3) Usa: activa la transaccion
 			*/
-			switch(Sql.GetType().FullName.ToString())
-			{
-				case "System.String[]":
-					sqls = (string[])Sql;
-					break;
-				default:	//case "System.String":
-					sqls = new String[] { (string)Sql };
-					break;
-			}
-			cantReg = new int[sqls.Length];
-			try
-			{
-				sqlConexion = new SqlConnection(CnnStrDB);
-				sqlConexion.Open();
-				switch(Transaccion)
-				{
-					case (Transaccion.Acepta):
-						usaTransaccion = (sqls.Length > 1);
-						break;
-					case (Transaccion.NoAcepta):
-						usaTransaccion = false;
-						break;
-					default: //(Transaccion.Usa):
-						usaTransaccion = true;
-						break;
-				}
-				if(usaTransaccion)
-					sqlTransaccion = sqlConexion.BeginTransaction();
-				switch(TipoRetorno)
-				{
-					case (TipoRetorno.None):
-					case (TipoRetorno.CantReg):
-						sqlCommand = new SqlCommand();
-						sqlCommand.Connection = sqlConexion;
-						sqlCommand.CommandTimeout = 90;
-						if(usaTransaccion)
-						{
-							sqlCommand.Transaction = sqlTransaccion;
-						}
-						for(i = 0; i < sqls.Length; i++)
-						{
-							sqlCommand.CommandText = sqls[i];
-							System.Diagnostics.Debug.WriteLine(sqlCommand.CommandText);
-							cantReg[i] = sqlCommand.ExecuteNonQuery();
-						}
-						break;
-					case (TipoRetorno.DS):
-					case (TipoRetorno.DV):
-					case (TipoRetorno.TB):
-						ds = new DataSet();
-						for(i = 0; i < sqls.Length; i++)
-						{
-							System.Diagnostics.Debug.WriteLine(sqls[i]);
-							sqlAdapter = new SqlDataAdapter(sqls[i], sqlConexion);
-							if(usaTransaccion)
-							{
-								sqlAdapter.SelectCommand.Transaction = sqlTransaccion;
-							}
-							sqlAdapter.SelectCommand.CommandTimeout = 90;
-							if(i == 0)
-							{
-								sqlAdapter.Fill(ds);
-							}
-							else
-							{
-								ds.Tables.Add();
-								sqlAdapter.Fill(ds.Tables[ds.Tables.Count - 1]);
-							}
-						}
-						switch(TipoRetorno)
-						{
-							case (TipoRetorno.DV):
-								if(ds.Tables.Count > 0)
-								{
-									dv = new DataView[ds.Tables.Count];
-									for(i = 0; i < ds.Tables.Count; i++)
-									{
-										dv[i] = ds.Tables[i].DefaultView;
-									}
-								}
-								break;
-							case (TipoRetorno.TB):
-								if(ds.Tables.Count > 0)
-								{
-									tb = new DataTable[ds.Tables.Count];
-									for(i = 0; i < ds.Tables.Count; i++)
-									{
-										tb[i] = ds.Tables[i];
-									}
-								}
-								break;
-							default:
-								break;
-						}
-						break;
-				}
-				if(usaTransaccion)
-				{
-					sqlTransaccion.Commit();
-				}
-				sqlConexion.Close();
-				switch(TipoRetorno)
-				{
-					case TipoRetorno.None:
-						return new System.Object();
-					case TipoRetorno.CantReg:
-						if(sqls.Length > 1)
-						{
-							return cantReg;
-						}
-						else
-						{
-							return cantReg[0];
-						}
-					case TipoRetorno.DS:
-						return ds;
-					case TipoRetorno.TB:
-						switch(ds.Tables.Count)
-						{
-							case 0:
-								return new DataTable();
-							case 1:
-								return tb[0];
-							default:
-								return tb;
-						}
-					default: //case TipoRetorno.Dv:
-						switch(ds.Tables.Count)
-						{
-							case 0:
-								return new DataView();
-							case 1:
-								return dv[0];
-							default:
-								return dv;
-						}
-				}
-			}
-			catch(System.Data.SqlClient.SqlException ex1)
-			{
-				if(((System.Data.SqlClient.SqlException)(ex1)).Procedure == "ConnectionOpen (Connect()).")
-				{
-					throw new Microsoft.ApplicationBlocks.ExceptionManagement.db.Conexion(ex1);
-				}
-				else
-				{
-					if(usaTransaccion)
-					{
-						try
-						{
-							sqlTransaccion.Rollback();
-							throw new Microsoft.ApplicationBlocks.ExceptionManagement.db.EjecucionConRollback(ex1);
-						}
-						catch(Microsoft.ApplicationBlocks.ExceptionManagement.db.EjecucionConRollback)
-						{
-							throw new Microsoft.ApplicationBlocks.ExceptionManagement.db.EjecucionConRollback(ex1);
-						}
-						catch
-						{
-							throw new Microsoft.ApplicationBlocks.ExceptionManagement.db.Rollback(ex1);
-						}
-					}
-					else
-					{
-						throw new Microsoft.ApplicationBlocks.ExceptionManagement.db.Ejecucion(ex1);
-					}
-				}
-			}
+            if (CnnStrDB != null && CnnStrDB.Contains("Microsoft.Jet.OLEDB"))
+            {
+                string StrConexion = CnnStrDB;
+                OleDbConnection Conexion = new OleDbConnection(StrConexion);
+                OleDbDataAdapter Adapter = new OleDbDataAdapter(Sql.ToString(), Conexion);
+                OleDbCommandBuilder SQLComandos = new OleDbCommandBuilder(Adapter);
+                switch (TipoRetorno)
+                {
+                    case (TipoRetorno.None):
+                    case (TipoRetorno.CantReg):
+                        Conexion.Open();
+                        Adapter.Fill(ds);
+                        cantReg[0] = ds.Tables[0].Rows.Count;
+                        Conexion.Close();
+                        break;
+                    case (TipoRetorno.DS):
+                    case (TipoRetorno.DV):
+                    case (TipoRetorno.TB):
+                        Conexion.Open();
+                        ds = new DataSet();
+                        Adapter.Fill(ds);
+                        Conexion.Close();
+                        switch (TipoRetorno)
+                        {
+                            case (TipoRetorno.DV):
+                                if (ds.Tables.Count > 0)
+                                {
+                                    dv = new DataView[ds.Tables.Count];
+                                    for (i = 0; i < ds.Tables.Count; i++)
+                                    {
+                                        dv[i] = ds.Tables[i].DefaultView;
+                                    }
+                                }
+                                break;
+                            case (TipoRetorno.TB):
+                                if (ds.Tables.Count > 0)
+                                {
+                                    tb = new DataTable[ds.Tables.Count];
+                                    for (i = 0; i < ds.Tables.Count; i++)
+                                    {
+                                        tb[i] = ds.Tables[i];
+                                    }
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                }
+                switch(TipoRetorno)
+			    {
+				    case TipoRetorno.None:
+					    return new System.Object();
+				    case TipoRetorno.CantReg:
+					    return cantReg;
+				    case TipoRetorno.DS:
+					    return ds;
+				    case TipoRetorno.TB:
+					    switch(ds.Tables.Count)
+					    {
+						    case 0:
+							    return new DataTable();
+						    case 1:
+							    return tb[0];
+						    default:
+							    return tb;
+					    }
+				    default: //case TipoRetorno.Dv:
+					    switch(ds.Tables.Count)
+					    {
+						    case 0:
+							    return new DataView();
+						    case 1:
+							    return dv[0];
+						    default:
+							    return dv;
+					    }
+			    }
+            }
+            else
+            //SQL Server
+            {
+                switch(Sql.GetType().FullName.ToString())
+			    {
+				    case "System.String[]":
+					    sqls = (string[])Sql;
+					    break;
+				    default:	//case "System.String":
+					    sqls = new String[] { (string)Sql };
+					    break;
+			    }
+			    cantReg = new int[sqls.Length];
+			    try
+			    {
+				    sqlConexion = new SqlConnection(CnnStrDB);
+				    sqlConexion.Open();
+				    switch(Transaccion)
+				    {
+					    case (Transaccion.Acepta):
+						    usaTransaccion = (sqls.Length > 1);
+						    break;
+					    case (Transaccion.NoAcepta):
+						    usaTransaccion = false;
+						    break;
+					    default: //(Transaccion.Usa):
+						    usaTransaccion = true;
+						    break;
+				    }
+				    if(usaTransaccion)
+					    sqlTransaccion = sqlConexion.BeginTransaction();
+				    switch(TipoRetorno)
+				    {
+					    case (TipoRetorno.None):
+					    case (TipoRetorno.CantReg):
+						    sqlCommand = new SqlCommand();
+						    sqlCommand.Connection = sqlConexion;
+						    sqlCommand.CommandTimeout = 90;
+						    if(usaTransaccion)
+						    {
+							    sqlCommand.Transaction = sqlTransaccion;
+						    }
+						    for(i = 0; i < sqls.Length; i++)
+						    {
+							    sqlCommand.CommandText = sqls[i];
+							    System.Diagnostics.Debug.WriteLine(sqlCommand.CommandText);
+							    cantReg[i] = sqlCommand.ExecuteNonQuery();
+						    }
+						    break;
+					    case (TipoRetorno.DS):
+					    case (TipoRetorno.DV):
+					    case (TipoRetorno.TB):
+						    ds = new DataSet();
+						    for(i = 0; i < sqls.Length; i++)
+						    {
+							    System.Diagnostics.Debug.WriteLine(sqls[i]);
+							    sqlAdapter = new SqlDataAdapter(sqls[i], sqlConexion);
+							    if(usaTransaccion)
+							    {
+								    sqlAdapter.SelectCommand.Transaction = sqlTransaccion;
+							    }
+							    sqlAdapter.SelectCommand.CommandTimeout = 90;
+							    if(i == 0)
+							    {
+								    sqlAdapter.Fill(ds);
+							    }
+							    else
+							    {
+								    ds.Tables.Add();
+								    sqlAdapter.Fill(ds.Tables[ds.Tables.Count - 1]);
+							    }
+						    }
+						    switch(TipoRetorno)
+						    {
+							    case (TipoRetorno.DV):
+								    if(ds.Tables.Count > 0)
+								    {
+									    dv = new DataView[ds.Tables.Count];
+									    for(i = 0; i < ds.Tables.Count; i++)
+									    {
+										    dv[i] = ds.Tables[i].DefaultView;
+									    }
+								    }
+								    break;
+							    case (TipoRetorno.TB):
+								    if(ds.Tables.Count > 0)
+								    {
+									    tb = new DataTable[ds.Tables.Count];
+									    for(i = 0; i < ds.Tables.Count; i++)
+									    {
+										    tb[i] = ds.Tables[i];
+									    }
+								    }
+								    break;
+							    default:
+								    break;
+						    }
+						    break;
+				    }
+				    if(usaTransaccion)
+				    {
+					    sqlTransaccion.Commit();
+				    }
+				    sqlConexion.Close();
+				    switch(TipoRetorno)
+				    {
+					    case TipoRetorno.None:
+						    return new System.Object();
+					    case TipoRetorno.CantReg:
+						    if(sqls.Length > 1)
+						    {
+							    return cantReg;
+						    }
+						    else
+						    {
+							    return cantReg[0];
+						    }
+					    case TipoRetorno.DS:
+						    return ds;
+					    case TipoRetorno.TB:
+						    switch(ds.Tables.Count)
+						    {
+							    case 0:
+								    return new DataTable();
+							    case 1:
+								    return tb[0];
+							    default:
+								    return tb;
+						    }
+					    default: //case TipoRetorno.Dv:
+						    switch(ds.Tables.Count)
+						    {
+							    case 0:
+								    return new DataView();
+							    case 1:
+								    return dv[0];
+							    default:
+								    return dv;
+						    }
+				    }
+			    }
+			    catch(System.Data.SqlClient.SqlException ex1)
+			    {
+				    if(((System.Data.SqlClient.SqlException)(ex1)).Procedure == "ConnectionOpen (Connect()).")
+				    {
+					    throw new Microsoft.ApplicationBlocks.ExceptionManagement.db.Conexion(ex1);
+				    }
+				    else
+				    {
+					    if(usaTransaccion)
+					    {
+						    try
+						    {
+							    sqlTransaccion.Rollback();
+							    throw new Microsoft.ApplicationBlocks.ExceptionManagement.db.EjecucionConRollback(ex1);
+						    }
+						    catch(Microsoft.ApplicationBlocks.ExceptionManagement.db.EjecucionConRollback)
+						    {
+							    throw new Microsoft.ApplicationBlocks.ExceptionManagement.db.EjecucionConRollback(ex1);
+						    }
+						    catch
+						    {
+							    throw new Microsoft.ApplicationBlocks.ExceptionManagement.db.Rollback(ex1);
+						    }
+					    }
+					    else
+					    {
+						    throw new Microsoft.ApplicationBlocks.ExceptionManagement.db.Ejecucion(ex1);
+					    }
+				    }
+			    }
+            }
 		}
 		public void TesteoConexion(string CnnStrDB)
 		{
@@ -595,7 +678,7 @@ namespace Cedeira.SV
 			}
 			if(ListaEventos == String.Empty)
 				ListaEventos = "''";
-			string a = "select WF_EsquemaSeg.IdEvento, WF_EsquemaSeg.CantInterv, WF_EsquemaSeg.IdGrupo, WF_EsquemaSeg.DebeSerSP, WF_EsquemaSeg.SupervisorNivelDsd, WF_EsquemaSeg.SupervisorNivelHst, WCTbGrupos.Descr as DescrGrupo, WF_Evento.DescrEvento " +
+            string a = "select WF_EsquemaSeg.IdEvento, WF_EsquemaSeg.CantInterv, WF_EsquemaSeg.IdGrupo, WF_EsquemaSeg.DebeSerSP, WF_EsquemaSeg.SupervisorNivelDsd, WF_EsquemaSeg.SupervisorNivelHst, WCTbGrupos.Descr as DescrGrupo, WF_Evento.DescrEvento, WF_Evento.Automatico, WF_Evento.CXO, WF_Evento.XLote " +
 				"from WF_EsquemaSeg, WCTbGrupos, WF_Evento " +
 				"where WF_EsquemaSeg.IdFlow='" + Wf.IdFlow + "' and WF_EsquemaSeg.IdCircuito='" + Wf.IdCircuito + "' and (WF_EsquemaSeg.IdNivSeg=" + Wf.IdNivSeg + " or WF_EsquemaSeg.IdNivSeg=0) and WF_EsquemaSeg.IdEvento in (" + ListaEventos + ") " +
 				"and WF_EsquemaSeg.IdGrupo=WCTbGrupos.IdGrupo " +
@@ -606,13 +689,16 @@ namespace Cedeira.SV
             {
                 CedEntidades.EsqSegEvenPos esqSegEvenPos = new CedEntidades.EsqSegEvenPos();
 				esqSegEvenPos.Evento.Id = Convert.ToString(dv.Table.Rows[i]["IdEvento"]);
+                esqSegEvenPos.Evento.Automatico = Convert.ToBoolean(dv.Table.Rows[i]["Automatico"]);
+                esqSegEvenPos.Evento.Automatico = Convert.ToBoolean(dv.Table.Rows[i]["CXO"]);
+                esqSegEvenPos.Evento.Automatico = Convert.ToBoolean(dv.Table.Rows[i]["XLote"]);
+                esqSegEvenPos.Evento.Descr = Convert.ToString(dv.Table.Rows[i]["DescrEvento"]);
                 esqSegEvenPos.CantInterv = Convert.ToInt32(dv.Table.Rows[i]["CantInterv"]);
                 esqSegEvenPos.Grupo.Id = Convert.ToString(dv.Table.Rows[i]["IdGrupo"]);
                 esqSegEvenPos.DebeSerSP = Convert.ToString(dv.Table.Rows[i]["DebeSerSP"]);
                 esqSegEvenPos.SupervisorNivelDsd = Convert.ToInt32(dv.Table.Rows[i]["SupervisorNivelDsd"]);
                 esqSegEvenPos.SupervisorNivelHst = Convert.ToInt32(dv.Table.Rows[i]["SupervisorNivelHst"]);
                 esqSegEvenPos.Grupo.Descr = Convert.ToString(dv.Table.Rows[i]["DescrGrupo"]);
-                esqSegEvenPos.Evento.Descr = Convert.ToString(dv.Table.Rows[i]["DescrEvento"]);
                 listaEsqSegEvenPos.Add(esqSegEvenPos);
             }
             return listaEsqSegEvenPos;

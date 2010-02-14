@@ -189,6 +189,14 @@ namespace Cedeira.SV
 			Cedeira.SV.db db = new Cedeira.SV.db(Wf.Sesion);
 			return db.WF_EventosXLotePosibles_qry(Wf);
 		}
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="Wf"></param>
+        //public static List<CedEntidades.EsqSegEvenPos> EsquemaSegEventosPosibles(CedEntidades.WF Wf) 
+        //{  
+        //    return LeerEsquemaSegEventosPosibles(Wf);  
+        //}
         /// <summary>
         /// 
         /// </summary>
