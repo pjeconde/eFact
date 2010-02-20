@@ -210,6 +210,7 @@ namespace FeaEntidades.InterFacturas
 		}
 
 		/// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
 		public string cae
 		{
 			get
@@ -223,6 +224,7 @@ namespace FeaEntidades.InterFacturas
 		}
 
 		/// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
 		public string fecha_vencimiento_cae
 		{
 			get
@@ -236,6 +238,7 @@ namespace FeaEntidades.InterFacturas
 		}
 
 		/// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
 		public string fecha_obtencion_cae
 		{
 			get
