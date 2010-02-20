@@ -88,7 +88,7 @@ namespace eFact_R.RN
             eFact_R.Entidades.Comprobante comprobante =new eFact_R.Entidades.Comprobante();
             for (int i = 0; i < Lc.comprobante.Length; i++)
             {
-                eFact_R.Entidades.Comprobante c = Lote.Comprobantes.Find((delegate(eFact_R.Entidades.Comprobante e1) { return e1.IdTipoComprobante == Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() &&  e1.NumeroComprobante == Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante.ToString(); }));
+                eFact_R.Entidades.Comprobante c = Lote.Comprobantes.Find((delegate(eFact_R.Entidades.Comprobante e1) { return e1.IdTipoComprobante == Convert.ToInt16(Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante.ToString()) &&  e1.NumeroComprobante == Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante.ToString(); }));
                 c.NumeroCAE = Lc.comprobante[i].cabecera.informacion_comprobante.cae.ToString();
                 string sFecha = Lc.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae.ToString();
                 c.FechaCAE = Convert.ToDateTime(sFecha.Substring(0, 4) + "/" + sFecha.Substring(4, 2) + "/" + sFecha.Substring(6, 2));

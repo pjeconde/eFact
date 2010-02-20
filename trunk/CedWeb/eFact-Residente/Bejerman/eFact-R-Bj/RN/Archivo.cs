@@ -117,9 +117,9 @@ namespace eFact_R.RN
             for (int i = 0; i < Lc.cabecera_lote.cantidad_reg; i++)
             {
                 eFact_R.Entidades.Comprobante c = new eFact_R.Entidades.Comprobante();
-                c.IdTipoComprobante = Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante.ToString();
+                c.IdTipoComprobante = Convert.ToInt16(Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante.ToString());
                 c.NumeroComprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante.ToString();
-                c.TipoDocComprador = Lc.comprobante[i].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString();
+                c.TipoDocComprador = Convert.ToInt16(Lc.comprobante[i].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString());
                 c.NroDocComprador = Lc.comprobante[i].cabecera.informacion_comprador.nro_doc_identificatorio.ToString();
                 c.NombreComprador = Lc.comprobante[i].cabecera.informacion_comprador.denominacion.ToString();
                 c.Fecha = ConvertirStringToDateTime(Lc.comprobante[i].cabecera.informacion_comprobante.fecha_emision.ToString());
