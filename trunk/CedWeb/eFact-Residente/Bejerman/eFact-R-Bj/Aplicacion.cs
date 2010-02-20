@@ -22,6 +22,7 @@ namespace eFact_R
         public static string ArchPathPDF;
         public static string CodigoAplic;
         public static string Modalidad;
+        public static string OtrosFiltrosArchivos;
         public static string OtrosFiltrosCuit;
         public static string OtrosFiltrosPuntoVta;
         public static DateTime FechaMin;
@@ -47,6 +48,7 @@ namespace eFact_R
                 ArchPathPDF = @System.Configuration.ConfigurationManager.AppSettings["ArchPathPDF"];
                 CodigoAplic = @System.Configuration.ConfigurationManager.AppSettings["CodigoAplic"];
                 Modalidad = @System.Configuration.ConfigurationManager.AppSettings["Modalidad"];
+                OtrosFiltrosArchivos = @System.Configuration.ConfigurationManager.AppSettings["OtrosFiltrosArchivos"];
                 OtrosFiltrosCuit = @System.Configuration.ConfigurationManager.AppSettings["OtrosFiltrosCuit"];
                 OtrosFiltrosPuntoVta = @System.Configuration.ConfigurationManager.AppSettings["OtrosFiltrosPuntoVta"];
                 FechaMin = Convert.ToDateTime("01/01/2001");

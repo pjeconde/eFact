@@ -34,6 +34,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Tablero));
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.BandejaEHorizontalSplitContainer = new System.Windows.Forms.SplitContainer();
@@ -54,7 +56,7 @@
             this.BandejaEBotonesPanel = new System.Windows.Forms.Panel();
             this.panel13 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
-            this.LimpiarBandejaEButton = new System.Windows.Forms.Button();
+            this.DescartarBandejaEButton = new System.Windows.Forms.Button();
             this.EnviarABandejaSButton = new System.Windows.Forms.Button();
             this.CabBandejaEPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -236,6 +238,14 @@
             this.BandejaEDataGridView.AllowUserToDeleteRows = false;
             this.BandejaEDataGridView.AllowUserToOrderColumns = true;
             this.BandejaEDataGridView.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BandejaEDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.BandejaEDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.BandejaEDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdArchivo,
@@ -264,8 +274,8 @@
             // 
             this.IdArchivo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.IdArchivo.DataPropertyName = "IdArchivo";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.IdArchivo.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.IdArchivo.DefaultCellStyle = dataGridViewCellStyle2;
             this.IdArchivo.HeaderText = "Id.Archivo";
             this.IdArchivo.Name = "IdArchivo";
             this.IdArchivo.ReadOnly = true;
@@ -274,8 +284,8 @@
             // IdLoteBandE
             // 
             this.IdLoteBandE.DataPropertyName = "IdLote";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.IdLoteBandE.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.IdLoteBandE.DefaultCellStyle = dataGridViewCellStyle3;
             this.IdLoteBandE.HeaderText = "Id.Lote";
             this.IdLoteBandE.Name = "IdLoteBandE";
             this.IdLoteBandE.ReadOnly = true;
@@ -284,8 +294,8 @@
             // Nombre
             // 
             this.Nombre.DataPropertyName = "Nombre";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.Nombre.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.Nombre.DefaultCellStyle = dataGridViewCellStyle4;
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
@@ -310,8 +320,8 @@
             // Tamaño
             // 
             this.Tamaño.DataPropertyName = "Tamaño";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.Tamaño.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.Tamaño.DefaultCellStyle = dataGridViewCellStyle5;
             this.Tamaño.HeaderText = "Tamaño";
             this.Tamaño.Name = "Tamaño";
             this.Tamaño.ReadOnly = true;
@@ -320,8 +330,8 @@
             // TamañoUMedida
             // 
             this.TamañoUMedida.DataPropertyName = "TamañoUMedida";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.TamañoUMedida.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.TamañoUMedida.DefaultCellStyle = dataGridViewCellStyle6;
             this.TamañoUMedida.HeaderText = "Unidad Medida";
             this.TamañoUMedida.Name = "TamañoUMedida";
             this.TamañoUMedida.ReadOnly = true;
@@ -388,7 +398,7 @@
             // 
             // panel11
             // 
-            this.panel11.Controls.Add(this.LimpiarBandejaEButton);
+            this.panel11.Controls.Add(this.DescartarBandejaEButton);
             this.panel11.Controls.Add(this.EnviarABandejaSButton);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel11.Location = new System.Drawing.Point(5, 5);
@@ -396,16 +406,16 @@
             this.panel11.Size = new System.Drawing.Size(512, 23);
             this.panel11.TabIndex = 8;
             // 
-            // LimpiarBandejaEButton
+            // DescartarBandejaEButton
             // 
-            this.LimpiarBandejaEButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LimpiarBandejaEButton.Location = new System.Drawing.Point(0, 0);
-            this.LimpiarBandejaEButton.Name = "LimpiarBandejaEButton";
-            this.LimpiarBandejaEButton.Size = new System.Drawing.Size(160, 23);
-            this.LimpiarBandejaEButton.TabIndex = 9;
-            this.LimpiarBandejaEButton.Text = "Descartar Bandeja de Entrada";
-            this.LimpiarBandejaEButton.UseVisualStyleBackColor = true;
-            this.LimpiarBandejaEButton.Click += new System.EventHandler(this.LimpiarBandejaEButton_Click);
+            this.DescartarBandejaEButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.DescartarBandejaEButton.Location = new System.Drawing.Point(0, 0);
+            this.DescartarBandejaEButton.Name = "DescartarBandejaEButton";
+            this.DescartarBandejaEButton.Size = new System.Drawing.Size(160, 23);
+            this.DescartarBandejaEButton.TabIndex = 9;
+            this.DescartarBandejaEButton.Text = "Descartar Bandeja de Entrada";
+            this.DescartarBandejaEButton.UseVisualStyleBackColor = true;
+            this.DescartarBandejaEButton.Click += new System.EventHandler(this.DescartarBandejaEButton_Click);
             // 
             // EnviarABandejaSButton
             // 
@@ -711,6 +721,14 @@
             this.BandejaSDataGridView.AllowUserToDeleteRows = false;
             this.BandejaSDataGridView.AllowUserToOrderColumns = true;
             this.BandejaSDataGridView.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BandejaSDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.BandejaSDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.BandejaSDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CuitVendedorBandS,
@@ -949,9 +967,9 @@
             this.PtesDiasAntCheckBox.AutoSize = true;
             this.PtesDiasAntCheckBox.Location = new System.Drawing.Point(10, 129);
             this.PtesDiasAntCheckBox.Name = "PtesDiasAntCheckBox";
-            this.PtesDiasAntCheckBox.Size = new System.Drawing.Size(221, 17);
+            this.PtesDiasAntCheckBox.Size = new System.Drawing.Size(122, 17);
             this.PtesDiasAntCheckBox.TabIndex = 35;
-            this.PtesDiasAntCheckBox.Text = "Lotes pendientes del dia o dias anteriores";
+            this.PtesDiasAntCheckBox.Text = "Ver lotes pendientes";
             this.PtesDiasAntCheckBox.UseVisualStyleBackColor = true;
             // 
             // panel9
@@ -1390,7 +1408,7 @@
         private System.Windows.Forms.Panel BandejaEBotonesPanel;
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.Button LimpiarBandejaEButton;
+        private System.Windows.Forms.Button DescartarBandejaEButton;
         private System.Windows.Forms.Button EnviarABandejaSButton;
         private System.Windows.Forms.CheckBox PtesDiasAntCheckBox;
         private System.Windows.Forms.StatusBarPanel OrigenDatosSBP;
