@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FeaEntidades.CodigosImpuesto
+namespace FeaEntidades.CodigosErrorAFIP
 {
-	public class IB : CodigoImpuesto
+    public class Cod13 : CodigoErrorAFIP
 	{
-		public IB()
+        public Cod13()
 		{
 			Codigo = "13";
             Descr = "EL COMPRADOR PERTENECE A TITULO I";

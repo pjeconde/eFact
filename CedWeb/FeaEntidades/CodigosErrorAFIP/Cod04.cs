@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FeaEntidades.CodigosImpuesto
+namespace FeaEntidades.CodigosErrorAFIP
 {
-	public class IB : CodigoImpuesto
+    public class Cod04 : CodigoErrorAFIP
 	{
-		public IB()
+        public Cod04()
 		{
 			Codigo = "04";
 			Descr = "EL PUNTO DE VENTA INFORMADO NO SE ENCUENTRA DECLARADO PARA SER UTILIZADO EN EL PRESENTE REGIMEN";

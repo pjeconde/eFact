@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FeaEntidades.CodigosImpuesto
+namespace FeaEntidades.CodigosErrorAFIP
 {
-	public class IB : CodigoImpuesto
+    public class Cod06 : CodigoErrorAFIP
 	{
-		public IB()
+        public Cod06()
 		{
 			Codigo = "06";
 			Descr = "LA CUIT INFORMADA NO SE ENCUENTRA AUTORIZADA A EMITIR COMPROBANTES CLASE A";

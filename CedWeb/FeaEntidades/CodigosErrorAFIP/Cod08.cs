@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FeaEntidades.CodigosImpuesto
+namespace FeaEntidades.CodigosErrorAFIP
 {
-	public class IB : CodigoImpuesto
+    public class Cod08 : CodigoErrorAFIP
 	{
-		public IB()
+        public Cod08()
 		{
 			Codigo = "08";
 			Descr = "LA CUIT INDICADA EN EL CAMPO NRO. DE IDENTIFICACION DEL COMPRADOR ES INVALIDA";

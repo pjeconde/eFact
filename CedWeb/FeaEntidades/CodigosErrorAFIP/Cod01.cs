@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FeaEntidades.CodigosImpuesto
+namespace FeaEntidades.CodigosErrorAFIP
 {
-	public class Cod01 : CodigosErrorAFIP
+    public class Cod01 : CodigoErrorAFIP
 	{
         public Cod01()
 		{
