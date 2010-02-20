@@ -508,7 +508,7 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 			}
 			catch(Exception exc)
 			{
-				throw new ConfigurationException(resourceManager.GetString("RES_EXCEPTION_LOADING_CONFIGURATION"), exc, section);
+				throw new System.Configuration.ConfigurationErrorsException(resourceManager.GetString("RES_EXCEPTION_LOADING_CONFIGURATION"), exc, section);
 			}
 		}
 
@@ -570,7 +570,7 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 						catch(TypeLoadException e)
 						{
 							// If the Type could not be created throw a configuration exception.
-							ExceptionManager.PublishInternalException(new ConfigurationException(resourceManager.GetString("RES_EXCEPTION_LOADING_CONFIGURATION"), e), null);
+							ExceptionManager.PublishInternalException(new System.Configuration.ConfigurationErrorsException(resourceManager.GetString("RES_EXCEPTION_LOADING_CONFIGURATION"), e), null);
 						}													
 					}
 				}
