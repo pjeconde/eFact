@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FeaEntidades.CodigosImpuesto
+namespace FeaEntidades.CodigosErrorAFIP
 {
-	public class IB : CodigoImpuesto
+	public class Cod03 : CodigoErrorAFIP
 	{
-		public IB()
+        public Cod03()
 		{
 			Codigo = "03";
 			Descr = "LA CUIT INFORMADA REGISTRA INCONVENIENTES CON EL DOMICILIO FISCAL";

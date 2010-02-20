@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FeaEntidades.CodigosImpuesto
+namespace FeaEntidades.CodigosErrorAFIP
 {
-	public class IB : CodigoImpuesto
+    public class Cod10 : CodigoErrorAFIP
 	{
-		public IB()
+        public Cod10()
 		{
 			Codigo = "10";
 			Descr = "LA CUIT INDICADA EN EL CAMPO NRO. DE IDENTIFICACION DEL COMPRADOR NO CORRESPONDE A UN RESPONSABLE INSCRIPTO EN EL IVA ACTIVO";
