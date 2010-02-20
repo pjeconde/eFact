@@ -51,6 +51,28 @@ namespace eFact_R
                 LogLoteDataGridView.DataSource = lote.WF.Log;
                 RN.Lote.MuestroEsquemaSegEventosPosibles(EsquemaSegEventosPosiblesTreeView, lote);
                 LogLoteDataGridView.Refresh();
+
+                DataGridViewComboBoxColumn colIdTipoComprobante = (DataGridViewComboBoxColumn)DetalleLoteDataGridView.Columns["IdTipoComprobante"];
+                colIdTipoComprobante.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
+                colIdTipoComprobante.DisplayMember = "Descr";
+                colIdTipoComprobante.ValueMember = "Codigo";
+                colIdTipoComprobante.DataPropertyName = "IdTipoComprobante";
+                colIdTipoComprobante.HeaderText = "Tipo de Comprobante";
+
+                DataGridViewComboBoxColumn colTipoDocComprador = (DataGridViewComboBoxColumn)DetalleLoteDataGridView.Columns["TipoDocComprador"];
+                colTipoDocComprador.DataSource = FeaEntidades.Documentos.Documento.Lista();
+                colTipoDocComprador.DisplayMember = "Descr";
+                colTipoDocComprador.ValueMember = "Codigo";
+                colTipoDocComprador.DataPropertyName = "TipoDocComprador";
+                colTipoDocComprador.HeaderText = "Tipo Doc. Comprador";
+
+                DataGridViewComboBoxColumn colIdMoneda = (DataGridViewComboBoxColumn)DetalleLoteDataGridView.Columns["IdMoneda"];
+                colIdMoneda.DataSource = FeaEntidades.CodigosMoneda.CodigoMoneda.Lista();
+                colIdMoneda.DisplayMember = "Descr";
+                colIdMoneda.ValueMember = "Codigo";
+                colIdMoneda.DataPropertyName = "IdMoneda";
+                colIdMoneda.HeaderText = "Mon.";
+
                 DetalleLoteDataGridView.AutoGenerateColumns = false;
                 DetalleLoteDataGridView.DataSource = new List<eFact_R.Entidades.Comprobante>();
                 DetalleLoteDataGridView.DataSource = lote.Comprobantes;
@@ -79,7 +101,12 @@ namespace eFact_R
                 FeaEntidades.InterFacturas.lote_comprobantes Lc = new FeaEntidades.InterFacturas.lote_comprobantes();
                 CedWebRN.IBK.error[] respErroresLote = new CedWebRN.IBK.error[0];
                 CedWebRN.IBK.error[] respErroresComprobantes = new CedWebRN.IBK.error[0];
-                eFact_R.RN.Lote.ConsultarLoteIF(out Lc, out respErroresLote, out respErroresComprobantes, lote, Aplicacion.Vendedores.Find(delegate(eFact_R.Entidades.Vendedor e1) { return e1.CuitVendedor == lote.CuitVendedor; }).NumeroSerieCertificado);
+                eFact_R.Entidades.Vendedor v = Aplicacion.Vendedores.Find(delegate(eFact_R.Entidades.Vendedor e1) { return e1.CuitVendedor == lote.CuitVendedor.ToString(); });
+                if (v == null)
+                {
+                    throw new Microsoft.ApplicationBlocks.ExceptionManagement.Vendedor.Inexistente("CUIT " + lote.CuitVendedor.ToString());
+                }
+                eFact_R.RN.Lote.ConsultarLoteIF(out Lc, out respErroresLote, out respErroresComprobantes, lote, v.NumeroSerieCertificado.ToString());
                 MessageBox.Show("Lote de comprobantes número " + lote.NumeroLote + " encontrado satisfactoriamente en Interfacturas.", "Consulta de Lotes", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
             }
             catch (Exception ex)
@@ -351,6 +378,13 @@ namespace eFact_R
                 {
                     MessageBox.Show("Los comprobantes seleccionados se han exportado satisfactoriamente.", "Exportar Comprobantes", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                 }
+            }
+        }
+
+        private void DetalleLoteDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (((DataGridView)sender).Name.ToString() == "DetalleLoteDataGridView")
+            {
             }
         }
     }

@@ -56,7 +56,7 @@ namespace eFact_R
                     StatusBar.Panels["CertificadosSBP"].Text = "Certificados: ERROR ";
                 }
             }
-            StatusBar.Panels["OrigenDatosSBP"].ToolTipText = "Directorio de Datos: " + Aplicacion.ArchPath + "\r\n" + "Hitoricos: " + Aplicacion.ArchPathHis + "\r\n" + "Interfaz manual: " + Aplicacion.ArchPathItf + "\r\n" + "Interfaz aut.: " + Aplicacion.ArchPathItfAut;
+            StatusBar.Panels["OrigenDatosSBP"].ToolTipText = "Directorio de Datos: " + Aplicacion.ArchPath + "\r\n" + "Hitoricos: " + Aplicacion.ArchPathHis + "\r\n" + "Interfaz manual: " + Aplicacion.ArchPathItf + "\r\n" + "Interfaz aut.: " + Aplicacion.ArchPathItfAut + "\r\n" + "PDFs: " + Aplicacion.ArchPathPDF;
             StatusBar.Panels["CXOSBP"].Text = "CXO: " + Aplicacion.Sesion.CXO;
             StatusBar.Panels["CXOSBP"].ToolTipText = "Control por oposición: " + Aplicacion.Sesion.CXO;
             eFact_R.RN.Vendedor.Consultar(Aplicacion.Vendedores, Aplicacion.Sesion);
@@ -139,7 +139,7 @@ namespace eFact_R
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 ActualizarBandejaEButton.Enabled = false;
                 System.Threading.Thread.Sleep(1000);
-                DescartarBandejaEntrada();
+                LimpiarBandejaEntrada();
                 if (ArchivosHistoricosRadioButton.Checked)
                 {
                     List<eFact_R.Entidades.Archivo> archivos = new List<eFact_R.Entidades.Archivo>();
@@ -190,12 +190,37 @@ namespace eFact_R
                         FileInfo ArchFileInfo = new FileInfo(d);
                         try
                         {
-                            List<eFact_R.Entidades.Archivo> Archivos = new List<eFact_R.Entidades.Archivo>();
-                            eFact_R.RN.Tablero.ActualizarBandejaEntrada(out Archivos, dtBandejaEntrada, ArchFileInfo, Aplicacion.Sesion);
-                            dtBandejaEntrada = Archivos;
-                            BandejaEDataGridView.DataSource = new List<eFact_R.Entidades.Archivo>();
-                            BandejaEDataGridView.DataSource = dtBandejaEntrada;
-                            BandejaEDataGridView.Refresh();
+                            bool incorporarALista = true;
+                            //Si esta activado el filtro de archivos con "SI", los archivos deben respetar los primeros 16 digitos con el formato: CUIT + "-" + Punto de Venta + "-yyyyMMddhhmmss.TXT" 
+                            //ej.: 30221234568-0004-20100228103500.TXT
+                            if (Aplicacion.OtrosFiltrosArchivos == "SI")
+                            {
+                                if (ArchFileInfo.Name.Length >= 11 && Aplicacion.OtrosFiltrosCuit != "")
+                                {
+                                    string cuit = ArchFileInfo.Name.Substring(0, 11);
+                                    if (cuit != Aplicacion.OtrosFiltrosCuit)
+                                    {
+                                        incorporarALista = false;
+                                    }
+                                }
+                                if (ArchFileInfo.Name.Length >= 16 && Aplicacion.OtrosFiltrosPuntoVta != "")
+                                {
+                                    string puntoventa = ArchFileInfo.Name.Substring(12, 4);
+                                    if (puntoventa != Aplicacion.OtrosFiltrosPuntoVta)
+                                    {
+                                        incorporarALista = false;
+                                    }
+                                }
+                            }
+                            if (incorporarALista)
+                            {
+                                List<eFact_R.Entidades.Archivo> Archivos = new List<eFact_R.Entidades.Archivo>();
+                                eFact_R.RN.Tablero.ActualizarBandejaEntrada(out Archivos, dtBandejaEntrada, ArchFileInfo, Aplicacion.Sesion);
+                                dtBandejaEntrada = Archivos;
+                                BandejaEDataGridView.DataSource = new List<eFact_R.Entidades.Archivo>();
+                                BandejaEDataGridView.DataSource = dtBandejaEntrada;
+                                BandejaEDataGridView.Refresh();
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -278,7 +303,13 @@ namespace eFact_R
                     if (Lc.cabecera_lote.resultado == "A")
                     {
                         eFact_R.RN.Lote.ActualizarDatosCAE(l, Lc);
-                        EjecutarEventoBandejaS("RegAceptAFIP", "", l);
+                        string comentario = ArmarTextoMotivo(Lc);
+                        EjecutarEventoBandejaS("RegAceptAFIP", comentario, l);
+                    }
+                    else if (Lc.cabecera_lote.resultado == "R")
+                    {
+                        string comentario = ArmarTextoMotivo(Lc);
+                        EjecutarEventoBandejaS("RegRechAFIP", comentario, l);
                     }
                 }
                 catch (Exception ex)
@@ -302,6 +333,37 @@ namespace eFact_R
             BandejaSDataGridView.Refresh();
             Cursor = System.Windows.Forms.Cursors.Default;
         }
+        private string ArmarTextoMotivo(FeaEntidades.InterFacturas.lote_comprobantes Lc)
+        {
+            string texto = "";
+            if (Lc.cabecera_lote.resultado == "A" || Lc.cabecera_lote.resultado == "R")
+            {
+                if (Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
+                {
+                    FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP codigosErrorAFIPLote = FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP.Lista().Find((delegate(FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP e1) { return e1.Codigo == Lc.cabecera_lote.motivo.Trim(); }));
+                    string descrCodigosErrorAFIPLote = "";
+                    if (codigosErrorAFIPLote != null)
+                    {
+                        descrCodigosErrorAFIPLote = codigosErrorAFIPLote.Descr;
+                    }
+                    texto += "Código de problema a nivel lote: " + Lc.cabecera_lote.motivo.Trim() + " " + descrCodigosErrorAFIPLote + "\r\n\r\n";
+                }
+                for (int i = 0; i < Lc.comprobante.Length; i++)
+                {
+                    if (Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "00" && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "")
+                    {
+                        FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP codigosErrorAFIPComprobante = FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP.Lista().Find((delegate(FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP e1) { return e1.Codigo == Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim(); }));
+                        string descrCodigosErrorAFIPComprobante = "";
+                        if (codigosErrorAFIPComprobante != null)
+                        {
+                            descrCodigosErrorAFIPComprobante = codigosErrorAFIPComprobante.Descr;
+                        }
+                        texto += "Código de problema a nivel comprobante ( renglon " + i.ToString() + "): " + Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() + " " + descrCodigosErrorAFIPComprobante + "\r\n";
+                    }
+                }
+            }
+            return texto;
+        }
         private void VerificarOtrosFiltrosFijos()
         {
             if (Aplicacion.OtrosFiltrosCuit != null && Aplicacion.OtrosFiltrosCuit != "")
@@ -312,34 +374,68 @@ namespace eFact_R
                 CuitVendedorTextBox.Text = Aplicacion.OtrosFiltrosCuit;
                 CuitVendedorTextBox.ReadOnly = true;
             }
-            else
-            {
-                CuitVendedorTextBox.Text = "";
-            }
             if (Aplicacion.OtrosFiltrosPuntoVta != null && Aplicacion.OtrosFiltrosPuntoVta != "")
             {
                 OtrosFiltrosBandejaSCheckBox.Checked = true;
                 OtrosFiltrosBandejaSCheckBox.Enabled = false;
                 OtrosFiltrosBandejaSPanel.Enabled = true;
-                PuntoVentaTextBox.Text = Aplicacion.OtrosFiltrosPuntoVta;
+                PuntoVentaTextBox.Text = Convert.ToInt32(Aplicacion.OtrosFiltrosPuntoVta).ToString();
                 PuntoVentaTextBox.ReadOnly = true;
             }
-            else
-            {
-                PuntoVentaTextBox.Text = "";
-            }
         }
-        private void LimpiarBandejaEButton_Click(object sender, EventArgs e)
+        private void DescartarBandejaEButton_Click(object sender, EventArgs e)
         {
-            DescartarBandejaEntrada();
+            DescartarBandejaE();
         }
 
-        private void DescartarBandejaEntrada()
+        private void DescartarBandejaE()
+        {
+            Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            EnviarABandejaSButton.Enabled = false;
+            try
+            {
+                if (BandejaEDataGridView.SelectedRows.Count != 0)
+                {
+                    DialogResult resp = MessageBox.Show("Desea descartar los archivos ?\r\n\r\nCantidad de archivos seleccionados (" + BandejaEDataGridView.SelectedRows.Count + ")\r\n\r\nLos mismos serán movidos al repositorio de archivos históricos.", "ATENCIÓN", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (resp == DialogResult.Yes)
+                    {
+                        for (int i = 0; i < BandejaEDataGridView.SelectedRows.Count; i++)
+                        {
+                            int renglon = BandejaEDataGridView.SelectedRows[i].Index;
+                            //Definir el nombre del archivo a guardar en el histórico como procesado, con o sin error.
+                            //Mas adelante se le agraga el prefijo ( BAK o ERR ).
+                            string NombreArchivo = dtBandejaEntrada[renglon].Nombre;
+                            string FechaTexto = DateTime.Now.ToString("yyyyMMdd-hhmmss");
+                            string ArchGuardarComoNombre = "";
+                            eFact_R.RN.Engine.GenerarNombreArch(out ArchGuardarComoNombre, "DES", NombreArchivo);
+                            //Remover archivo ( descartar ) --------
+                            Directory.Move(Aplicacion.ArchPath + "\\" + NombreArchivo, Aplicacion.ArchPathHis + ArchGuardarComoNombre);
+                            //--------------------------------------
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Seleccione por lo menos un archivo a descartar.", "ATENCIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
+            }
+            finally
+            {
+                ActualizarBandejaE();
+                Cursor = System.Windows.Forms.Cursors.Default;
+            }
+        }
+        private void LimpiarBandejaEntrada()
         {
             dtBandejaEntrada = new List<eFact_R.Entidades.Archivo>();
             BandejaEDataGridView.DataSource = new List<eFact_R.Entidades.Archivo>();
             BandejaEDataGridView.Refresh();
         }
+
 
         private void InicializarFiltrosTablero()
         {
@@ -389,8 +485,9 @@ namespace eFact_R
         private void EnviarABandejaSButton_Click(object sender, EventArgs e)
         {
             
-            Cursor = System.Windows.Forms.Cursors.Default;
+            Cursor = System.Windows.Forms.Cursors.WaitCursor;
             EnviarABandejaSButton.Enabled = false;
+            DescartarBandejaEButton.Enabled = false;
             try
             {
                 if (BandejaEDataGridView.SelectedRows.Count != 0)
@@ -438,21 +535,6 @@ namespace eFact_R
                             dtBandejaEntrada[renglon].FechaProceso = DateTime.Now;
                             eFact_R.RN.Archivo.Insertar(dtBandejaEntrada[renglon], false, Aplicacion.Sesion);
                         }
-                        //--------------------------------------
-                        //Actualizar las bandejas --------------
-                        RefreshBandejaSalida();
-                        dtBandejaEntrada.Remove(dtBandejaEntrada[renglon]);
-                        if (dtBandejaEntrada.Count == 0)
-                        {
-                            BandejaEDataGridView.DataSource = new List<eFact_R.Entidades.Archivo>();
-                        }
-                        else
-                        {
-                            BandejaEDataGridView.DataSource = new List<eFact_R.Entidades.Archivo>();
-                            BandejaEDataGridView.DataSource = dtBandejaEntrada;
-                        }
-                        BandejaEDataGridView.Refresh();
-                        //--------------------------------------
                         //Remover archivo ----------------------
                         //Directory.Move(Aplicacion.ArchPath + "\\" + NombreArchivo, Aplicacion.ArchPathHis + ArchGuardarComoNombre);
                         //--------------------------------------
@@ -466,8 +548,9 @@ namespace eFact_R
             //Actualizar Bandeja de entrada.
             try
             {
-                DescartarBandejaEntrada();
+                LimpiarBandejaEntrada();
                 ActualizarBandejaE();
+                RefreshBandejaSalida();
             }
             catch (Exception ex)
             {
@@ -476,6 +559,7 @@ namespace eFact_R
             finally
             {
                 EnviarABandejaSButton.Enabled = true;
+                DescartarBandejaEButton.Enabled = true;
                 Cursor = System.Windows.Forms.Cursors.Default;
             }
         }
@@ -538,7 +622,12 @@ namespace eFact_R
                         CedWebRN.IBK.lote_response Lr = new CedWebRN.IBK.lote_response();
                         try
                         {
-                            CedWebRNComprobante.EnviarIBK(out Lr, lc, Aplicacion.Vendedores.Find(delegate(eFact_R.Entidades.Vendedor e1) { return e1.CuitVendedor == lc.cabecera_lote.cuit_vendedor.ToString(); }).NumeroSerieCertificado);
+                            eFact_R.Entidades.Vendedor v = Aplicacion.Vendedores.Find(delegate(eFact_R.Entidades.Vendedor e1) { return e1.CuitVendedor == lc.cabecera_lote.cuit_vendedor.ToString(); });
+                            if (v == null)
+                            {
+                                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Vendedor.Inexistente("CUIT " + lc.cabecera_lote.cuit_vendedor.ToString());
+                            }
+                            CedWebRNComprobante.EnviarIBK(out Lr, lc, v.NumeroSerieCertificado.ToString());
                             EjecutarEventoBandejaS("RegAceptIF", "", lote);
                         }
                         catch (Exception ex2)
@@ -611,6 +700,7 @@ namespace eFact_R
         {
             try
             {
+                Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 if (BandejaSDataGridView.SelectedRows.Count != 0)
                 {
                     eFact_R.Entidades.Lote lote = new eFact_R.Entidades.Lote();
@@ -624,6 +714,10 @@ namespace eFact_R
             catch (Exception ex)
             {
                 Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
+            }
+            finally
+            {
+                Cursor = System.Windows.Forms.Cursors.Default;
             }
         }
 
@@ -702,7 +796,7 @@ namespace eFact_R
                 //Actualizar Bandeja de entrada.
                 try
                 {
-                    DescartarBandejaEntrada();
+                    LimpiarBandejaEntrada();
                     ActualizarBandejaE();
                 }
                 catch (Exception ex)
@@ -719,7 +813,7 @@ namespace eFact_R
             }
             else
             {
-                DescartarBandejaEntrada();
+                LimpiarBandejaEntrada();
                 ArchivosHistoricosPanel.Enabled = true;
                 EnviarABandejaSButton.Enabled = false;
             }
