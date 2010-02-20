@@ -23,7 +23,7 @@ namespace FeaEntidades.CodigosErrorAFIP
 
         public static List<CodigoErrorAFIP> Lista()
         {
-            List<CodigoImpuesto> lista = new List<CodigoImpuesto>();
+            List<CodigoErrorAFIP> lista = new List<CodigoErrorAFIP>();
             lista.Add(new Cod01());
             lista.Add(new Cod02());
             lista.Add(new Cod03());
@@ -39,7 +39,7 @@ namespace FeaEntidades.CodigosErrorAFIP
 
         public static List<CodigoErrorAFIP> ListaANivelLote()
 		{
-			List<CodigoImpuesto> lista = new List<CodigoImpuesto>();
+            List<CodigoErrorAFIP> lista = new List<CodigoErrorAFIP>();
 			lista.Add(new Cod01());
             lista.Add(new Cod02());
             lista.Add(new Cod03());
@@ -50,7 +50,7 @@ namespace FeaEntidades.CodigosErrorAFIP
 
         public static List<CodigoErrorAFIP> ListaANivelComprobante()
         {
-            List<CodigoImpuesto> lista = new List<CodigoImpuesto>();
+            List<CodigoErrorAFIP> lista = new List<CodigoErrorAFIP>();
             lista.Add(new Cod08());
             lista.Add(new Cod09());
             lista.Add(new Cod10());
