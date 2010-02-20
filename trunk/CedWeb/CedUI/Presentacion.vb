@@ -6,10 +6,8 @@ Public Class Bindear
     Public Shared Sub dv2Grid(ByVal dg As DataGrid, ByVal dv As DataView)
         Dim i, j As Integer
         Dim gr As Graphics
-        Dim sngGridNameWidth, sngDataWidth As Single
         Dim sngPadding As Single
         Dim dr As DataRow
-        Dim dcCol As DataColumn
         Dim ts As DataGridTableStyle
         Dim cs As DataGridColumnStyle
         ts = New DataGridTableStyle
