@@ -104,8 +104,14 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
                 System.Net.Mail.MailMessage mail;
                 mail = new System.Net.Mail.MailMessage("facturaelectronica@cedeira.com.ar", m_OpMail, subject, body);
                 mail.BodyEncoding = System.Text.Encoding.UTF8;
-                smtpClient.Host = "mail.cedeira.com.ar";
-                smtpClient.Credentials = new System.Net.NetworkCredential("pablo.conde@cedeira.com.ar", "cedeira123");
+                string MailServidorSmtp = System.Configuration.ConfigurationManager.AppSettings["MailServidorSmtp"];
+                string MailCredencialesUsr = System.Configuration.ConfigurationManager.AppSettings["MailCredencialesUsr"];
+                string MailCredencialesPsw = System.Configuration.ConfigurationManager.AppSettings["MailCredencialesPsw"];
+                smtpClient.Host = MailServidorSmtp;
+                if (MailCredencialesUsr != "")
+                {
+                    smtpClient.Credentials = new System.Net.NetworkCredential(MailCredencialesUsr, MailCredencialesPsw);
+                }
                 smtpClient.Send(mail);
 			}
 		}

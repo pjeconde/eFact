@@ -161,8 +161,7 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 
 				#region Publish the exception based on Configuration Settings
 				// Check for any settings in config file.
-				
-				if (ConfigurationSettings.GetConfig(EXCEPTIONMANAGEMENT_CONFIG_SECTION) == null)
+				if (System.Configuration.ConfigurationManager.GetSection(EXCEPTIONMANAGEMENT_CONFIG_SECTION) == null)
 				{
 					// Publish the exception and additional information to the default publisher if no settings are present.
 					PublishToDefaultPublisher(exception, additionalInfo);
@@ -170,7 +169,7 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 				else
 				{
 					// Get settings from config file
-					ExceptionManagementSettings config = (ExceptionManagementSettings)ConfigurationSettings.GetConfig(EXCEPTIONMANAGEMENT_CONFIG_SECTION);
+					ExceptionManagementSettings config = (ExceptionManagementSettings)System.Configuration.ConfigurationManager.GetSection(EXCEPTIONMANAGEMENT_CONFIG_SECTION);
 
 					// If the mode is not equal to "off" call the Publishers, otherwise do nothing.
 					if (config.Mode == ExceptionManagementMode.On)

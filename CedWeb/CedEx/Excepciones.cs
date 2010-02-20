@@ -1293,6 +1293,30 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 			}
 		}
 	}
+    namespace Vendedor
+    {
+        [Serializable]
+        public class Inexistente : Microsoft.ApplicationBlocks.ExceptionManagement.BaseApplicationException
+        {
+            static string TextoError = "Vendedor inexistente";
+            public Inexistente()
+                : base(TextoError)
+            {
+            }
+            public Inexistente(string msg)
+                : base(TextoError + ": " + msg)
+            {
+            }
+            public Inexistente(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public Inexistente(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+    }
 	namespace Archivo
 	{
 		[Serializable]
