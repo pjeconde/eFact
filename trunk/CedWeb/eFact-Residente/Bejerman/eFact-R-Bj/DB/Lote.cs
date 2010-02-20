@@ -129,12 +129,12 @@ namespace eFact_R.DB
             {
                 eFact_R.Entidades.Comprobante c = new eFact_R.Entidades.Comprobante();
                 c.IdLote = Convert.ToInt32(dr[i]["IdLote"]);
-                c.IdTipoComprobante = Convert.ToString(dr[i]["IdTipoComprobante"]);
+                c.IdTipoComprobante = Convert.ToInt16(dr[i]["IdTipoComprobante"]);
                 c.NumeroComprobante = Convert.ToString(dr[i]["NumeroComprobante"]);
                 c.IdMoneda = Convert.ToString(dr[i]["IdMoneda"]);
                 c.Importe = Convert.ToDecimal(dr[i]["Importe"]);
                 c.NroDocComprador = Convert.ToString(dr[i]["NroDocComprador"]);
-                c.TipoDocComprador = Convert.ToString(dr[i]["TipoDocComprador"]);
+                c.TipoDocComprador = Convert.ToInt16(dr[i]["TipoDocComprador"]);
                 c.NombreComprador = Convert.ToString(dr[i]["NombreComprador"]);
                 c.Fecha= Convert.ToDateTime(dr[i]["Fecha"]);
                 c.NumeroCAE = Convert.ToString(dr[i]["NumeroCAE"]);

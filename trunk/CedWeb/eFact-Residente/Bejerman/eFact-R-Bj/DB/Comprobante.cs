@@ -22,7 +22,7 @@ namespace eFact_R.DB
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.Acepta, sesion.CnnStr);
             Comprobante.IdLote = Convert.ToInt32(dt.Rows[0]["IdLote"].ToString());
-            Comprobante.TipoDocComprador = dt.Rows[0]["TipoDocComprador"].ToString();
+            Comprobante.TipoDocComprador = Convert.ToInt16(dt.Rows[0]["TipoDocComprador"]);
             Comprobante.NroDocComprador = dt.Rows[0]["NroDocComprador"].ToString();
             Comprobante.NombreComprador = dt.Rows[0]["NombreComprador"].ToString();
             Comprobante.Fecha = Convert.ToDateTime(dt.Rows[0]["Fecha"]);
