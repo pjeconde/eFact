@@ -33,6 +33,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodigosErrorAFIP\CodigoErrorAFIP.cs" />
+    <Compile Include="CodigosErrorAFIP\Cod01.cs" />
+    <Compile Include="CodigosErrorAFIP\Cod02.cs" />
+    <Compile Include="CodigosErrorAFIP\Cod03.cs" />
+    <Compile Include="CodigosErrorAFIP\Cod04.cs" />
+    <Compile Include="CodigosErrorAFIP\Cod06.cs" />
+    <Compile Include="CodigosErrorAFIP\Cod08.cs" />
+    <Compile Include="CodigosErrorAFIP\Cod09.cs" />
+    <Compile Include="CodigosErrorAFIP\Cod10.cs" />
+    <Compile Include="CodigosErrorAFIP\Cod11.cs" />
+    <Compile Include="CodigosErrorAFIP\Cod13.cs" />
     <Compile Include="CodigosImpuesto\CodigoImpuesto.cs" />
     <Compile Include="CodigosImpuesto\IB.cs" />
     <Compile Include="CodigosImpuesto\Internos.cs" />
