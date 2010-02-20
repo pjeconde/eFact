@@ -8,9 +8,9 @@ namespace eFact_R.Entidades
     public class Comprobante
     {
         private int idLote;
-        private string idTipoComprobante;
+        private short idTipoComprobante;
         private string numeroComprobante;
-        private string tipoDocComprador;
+        private short tipoDocComprador;
         private string nroDocComprador;
         private string nombreComprador;
         private DateTime fecha;
@@ -33,7 +33,7 @@ namespace eFact_R.Entidades
                 return idLote;
             }
         }
-        public string IdTipoComprobante
+        public short IdTipoComprobante
         {
 			set
 			{
@@ -55,18 +55,7 @@ namespace eFact_R.Entidades
                 return numeroComprobante;
             }
         }
-        public DateTime Fecha
-        {
-			set
-			{
-				fecha = value;
-			}
-            get
-            {
-                return fecha;
-            }
-        }
-        public string TipoDocComprador
+        public short TipoDocComprador
         {
             set
             {
@@ -97,6 +86,17 @@ namespace eFact_R.Entidades
             get
             {
                 return nombreComprador;
+            }
+        }
+        public DateTime Fecha
+        {
+            set
+            {
+                fecha = value;
+            }
+            get
+            {
+                return fecha;
             }
         }
         public string IdMoneda
