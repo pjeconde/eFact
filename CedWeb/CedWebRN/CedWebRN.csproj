@@ -109,10 +109,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="G:\CedWeb\CedWeb\CedWebRN\WSDL\FacturaWebServiceConSchema.xml">
+    <WebReferenceUrl Include="https://wsqacfe.interfacturas.com.ar/ws/FacturaWebServiceConSchema">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\IBK\</RelPath>
-      <UpdateFromURL>G:\CedWeb\CedWeb\CedWebRN\WSDL\FacturaWebServiceConSchema.xml</UpdateFromURL>
+      <UpdateFromURL>https://wsqacfe.interfacturas.com.ar/ws/FacturaWebServiceConSchema</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
