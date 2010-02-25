@@ -147,6 +147,7 @@ namespace eFact_R
             LoteConUnSoloComprobante.LoteXmlIF = Lote.LoteXmlIF;
             LoteConUnSoloComprobante.NumeroEnvio = Lote.NumeroEnvio;
             LoteConUnSoloComprobante.NumeroLote = Lote.NumeroLote;
+            LoteConUnSoloComprobante.PuntoVenta = Lote.PuntoVenta;
             LoteConUnSoloComprobante.CantidadRegistros = 1;
             LoteConUnSoloComprobante.Comprobantes.Add(Lote.Comprobantes[Renglon]);
             LoteConUnSoloComprobante.WF = Lote.WF;
@@ -217,62 +218,60 @@ namespace eFact_R
 
         private void AsignarCamposOpcionales(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
-            if (lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae == null)
-            {
-                lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae = string.Empty;
-            }
-            lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pagoSpecified = true;
+            //if (lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae == null)
+            //{
+            //    lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae = string.Empty;
+            //}
+            //lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pagoSpecified = true;
+            //lc.comprobante[0].cabecera.informacion_vendedor.condicion_ingresos_brutosSpecified = true;
+            //lc.comprobante[0].cabecera.informacion_vendedor.condicion_IVASpecified = true;
+            //if (lc.comprobante[0].cabecera.informacion_vendedor.provincia == null)
+            //{
+            //    lc.comprobante[0].cabecera.informacion_vendedor.provincia = string.Empty;
+            //}
+            //lc.comprobante[0].cabecera.informacion_comprador.condicion_ingresos_brutosSpecified = true;
+            //lc.comprobante[0].cabecera.informacion_comprador.condicion_IVASpecified = true;
+            //if (lc.comprobante[0].cabecera.informacion_comprador.domicilio_calle == null)
+            //{
+            //    lc.comprobante[0].cabecera.informacion_comprador.domicilio_calle = string.Empty;
+            //}
+            //if (lc.comprobante[0].cabecera.informacion_comprador.provincia == null)
+            //{
+            //    lc.comprobante[0].cabecera.informacion_comprador.provincia = string.Empty;
+            //}
 
-            lc.comprobante[0].cabecera.informacion_vendedor.condicion_ingresos_brutosSpecified = true;
-            lc.comprobante[0].cabecera.informacion_vendedor.condicion_IVASpecified = true;
-            if (lc.comprobante[0].cabecera.informacion_vendedor.provincia == null)
-            {
-                lc.comprobante[0].cabecera.informacion_vendedor.provincia = string.Empty;
-            }
+            //lc.comprobante[0].resumen.cant_alicuotas_ivaSpecified = true;
+            //lc.comprobante[0].resumen.importe_total_impuestos_internosSpecified = true;
+            //lc.comprobante[0].resumen.importe_total_impuestos_municipalesSpecified = true;
+            //lc.comprobante[0].resumen.importe_total_impuestos_nacionalesSpecified = true;
+            //lc.comprobante[0].resumen.importe_total_ingresos_brutosSpecified = true;
+            //for (int i = 0; i < lc.comprobante[0].detalle.linea.Length; i++)
+            //{
+            //    if (lc.comprobante[0].detalle.linea[i] != null)
+            //    {
+            //        lc.comprobante[0].detalle.linea[i].precio_unitarioSpecified = true;
+            //        lc.comprobante[0].detalle.linea[i].importe_ivaSpecified = true;
+            //        if (lc.comprobante[0].detalle.linea[i].alicuota_ivaSpecified.Equals(false))
+            //        {
+            //            lc.comprobante[0].detalle.linea[i].alicuota_ivaSpecified = true;
+            //            lc.comprobante[0].detalle.linea[i].alicuota_iva = 99;
+            //        }
+            //        lc.comprobante[0].detalle.linea[i].cantidadSpecified = true;
 
-            lc.comprobante[0].cabecera.informacion_comprador.condicion_ingresos_brutosSpecified = true;
-            lc.comprobante[0].cabecera.informacion_comprador.condicion_IVASpecified = true;
-            if (lc.comprobante[0].cabecera.informacion_comprador.domicilio_calle == null)
-            {
-                lc.comprobante[0].cabecera.informacion_comprador.domicilio_calle = string.Empty;
-            }
-            if (lc.comprobante[0].cabecera.informacion_comprador.provincia == null)
-            {
-                lc.comprobante[0].cabecera.informacion_comprador.provincia = string.Empty;
-            }
-
-            lc.comprobante[0].resumen.cant_alicuotas_ivaSpecified = true;
-            lc.comprobante[0].resumen.importe_total_impuestos_internosSpecified = true;
-            lc.comprobante[0].resumen.importe_total_impuestos_municipalesSpecified = true;
-            lc.comprobante[0].resumen.importe_total_impuestos_nacionalesSpecified = true;
-            lc.comprobante[0].resumen.importe_total_ingresos_brutosSpecified = true;
-            for (int i = 0; i < lc.comprobante[0].detalle.linea.Length; i++)
-            {
-                if (lc.comprobante[0].detalle.linea[i] != null)
-                {
-                    lc.comprobante[0].detalle.linea[i].precio_unitarioSpecified = true;
-                    lc.comprobante[0].detalle.linea[i].importe_ivaSpecified = true;
-                    if (lc.comprobante[0].detalle.linea[i].alicuota_ivaSpecified.Equals(false))
-                    {
-                        lc.comprobante[0].detalle.linea[i].alicuota_ivaSpecified = true;
-                        lc.comprobante[0].detalle.linea[i].alicuota_iva = 99;
-                    }
-                    lc.comprobante[0].detalle.linea[i].cantidadSpecified = true;
-
-                    if (lc.comprobante[0].detalle.linea[i].unidad == null)
-                    {
-                        lc.comprobante[0].detalle.linea[i].unidad = string.Empty;
-                    }
-                    if (lc.comprobante[0].detalle.linea[i].indicacion_exento_gravado == null)
-                    {
-                        lc.comprobante[0].detalle.linea[i].indicacion_exento_gravado = string.Empty;
-                    }
-                }
-                else
-                {
-                    break;
-                }
-            }
+            //        if (lc.comprobante[0].detalle.linea[i].unidad == null)
+            //        {
+            //            lc.comprobante[0].detalle.linea[i].unidad = string.Empty;
+            //        }
+            //        if (lc.comprobante[0].detalle.linea[i].indicacion_exento_gravado == null)
+            //        {
+            //            lc.comprobante[0].detalle.linea[i].indicacion_exento_gravado = string.Empty;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        break;
+            //    }
+            //}
         }
 
         private void AsignarParametros(double p)
@@ -318,7 +317,7 @@ namespace eFact_R
             CrearTabla();
             DataRow dr = this.dsImages.Tables["images"].NewRow();
             dr["path"] = "";
-            if (vendedor.Logo != null)
+            if (vendedor.Logo != null && vendedor.Logo.Length != 0)
             {
                 MemoryStream memorybits = new MemoryStream(vendedor.Logo);
                 byte[] bytesLogo = new byte[memorybits.Length - 1];
@@ -384,6 +383,13 @@ namespace eFact_R
         private void DetalleLoteDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             if (((DataGridView)sender).Name.ToString() == "DetalleLoteDataGridView")
+            {
+            }
+        }
+
+        private void LogLoteDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (((DataGridView)sender).Name.ToString() == "LogLoteDataGridView")
             {
             }
         }

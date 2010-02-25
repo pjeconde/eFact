@@ -101,6 +101,7 @@ namespace eFact_R.RN
             string handlerEvento = "";
             //VerificarAssemblyVersion();
             eFact_R.DB.Lote lote = new eFact_R.DB.Lote(Sesion);
+            string nombreArchivoProcesado = "";
             switch (Lote.WF.IdFlow)
             {
                 case "eFact":
@@ -135,17 +136,38 @@ namespace eFact_R.RN
                             {
                                 handlerEvento = Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
                                 lote.ActualizarDatosCAE(Lote, handlerEvento);
-                                string archivoProcesado = "";
                                 if (eFact_R.Aplicacion.TipoItfAut == "XML")
                                 {
-                                    GuardarItfXML(out archivoProcesado, Lote, eFact_R.Aplicacion.ArchPathItfAut, true);
+                                    GuardarItfXML(out nombreArchivoProcesado, Lote, "ROK", eFact_R.Aplicacion.ArchPathItfAut, true);
                                 }
                                 else if (eFact_R.Aplicacion.TipoItfAut == "TXT")
                                 {
-                                    GuardarItfTXT(out archivoProcesado, Lote, eFact_R.Aplicacion.ArchPathItfAut, true);
+                                    GuardarItfTXT(out nombreArchivoProcesado, Lote, "ROK", eFact_R.Aplicacion.ArchPathItfAut, true);
                                 }
                                 break;
                             }
+                        case "RegRechAFIP":
+                            Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, false);
+                            if (eFact_R.Aplicacion.TipoItfAut == "XML")
+                            {
+                                GuardarItfXML(out nombreArchivoProcesado, Lote, "RAF", eFact_R.Aplicacion.ArchPathItfAut, false);
+                            }
+                            else if (eFact_R.Aplicacion.TipoItfAut == "TXT")
+                            {
+                                GuardarItfTXT(out nombreArchivoProcesado, Lote, "RAF", eFact_R.Aplicacion.ArchPathItfAut, false);
+                            }
+                            break;
+                        case "RegRechIF":
+                            Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, false);
+                            if (eFact_R.Aplicacion.TipoItfAut == "XML")
+                            {
+                                GuardarItfXML(out nombreArchivoProcesado, Lote, "RIF", eFact_R.Aplicacion.ArchPathItfAut, false);
+                            }
+                            else if (eFact_R.Aplicacion.TipoItfAut == "TXT")
+                            {
+                                GuardarItfTXT(out nombreArchivoProcesado, Lote, "RIF", eFact_R.Aplicacion.ArchPathItfAut, false);
+                            }
+                            break;
                         default:
                             Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, false);
                             break;
@@ -191,7 +213,7 @@ namespace eFact_R.RN
             LoteXML = RN.Tablero.ByteArrayToString(ms.ToArray());
             ms.Close();
         }
-        public static void GuardarItfTXT(out string NombreProcesado, eFact_R.Entidades.Lote Lote, string Ruta, bool IF)
+        public static void GuardarItfTXT(out string NombreProcesado, eFact_R.Entidades.Lote Lote, string PreFijo, string Ruta, bool IF)
         {
             //Deserializar ( pasar de XML a FeaEntidades.InterFacturas.lote_comprobantes )
             FeaEntidades.InterFacturas.lote_comprobantes Lc = new FeaEntidades.InterFacturas.lote_comprobantes();
@@ -202,7 +224,7 @@ namespace eFact_R.RN
             clote.Add(Lc.cabecera_lote);
             FileHelperEngine e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.cabecera_lote));
             string nombreProcesado = "";
-            GenerarNombreArch(out nombreProcesado, Ruta, "Itf", Lote, "txt");
+            GenerarNombreArch(out nombreProcesado, Ruta, PreFijo, Lote, "txt");
             NombreProcesado = nombreProcesado;
             e.WriteFile(NombreProcesado, clote);
             for (int i = 0; i < Lc.cabecera_lote.cantidad_reg; i++)
@@ -242,7 +264,7 @@ namespace eFact_R.RN
                 e.AppendToFile(NombreProcesado, iresumen);
             }
         }
-        public static void GuardarItfXML(out string NombreProcesado, eFact_R.Entidades.Lote Lote, string Ruta, bool IF)
+        public static void GuardarItfXML(out string NombreProcesado, eFact_R.Entidades.Lote Lote, string PreFijo, string Ruta, bool IF)
         {
             System.Text.Encoding codificador;
             codificador = System.Text.Encoding.GetEncoding("iso-8859-1");
@@ -257,7 +279,7 @@ namespace eFact_R.RN
             }
             byte[] a = new byte[cadena.Length];
             a = codificador.GetBytes(cadena);
-            GenerarNombreArch(out NombreProcesado, Ruta, "Itf", Lote, "xml");
+            GenerarNombreArch(out NombreProcesado, Ruta, PreFijo, Lote, "xml");
             FileStream fs = File.Create(NombreProcesado);
             fs.Write(a, 0, a.Length);
             fs.Close();
@@ -270,7 +292,7 @@ namespace eFact_R.RN
             sb.Append("-");
             sb.Append(Lote.CuitVendedor);
             sb.Append("-");
-            sb.Append(Lote.PuntoVenta);
+            sb.Append(Convert.ToInt32(Lote.PuntoVenta).ToString("0000"));
             sb.Append("-");
             sb.Append(Lote.NumeroLote);
             sb.Append("-");

@@ -210,6 +210,9 @@
     <None Include="eFact-R-Ayuda.doc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Properties\DataSources\FeaEntidades.TiposDeComprobantes.Facturas.Factura.datasource" />
+    <None Include="Properties\DataSources\FeaEntidades.TiposDeComprobantes.TipoComprobante.datasource" />
+    <None Include="Properties\DataSources\FeaEntidades.TiposDeComprobantes.TipoComprobante1.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -252,6 +255,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Cedeira.ico" />
+    <Content Include="XMLqacfe.xml" />
+    <Content Include="XMLwsqacfe.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CedeiraAJAX\CedeiraAJAX.csproj">
