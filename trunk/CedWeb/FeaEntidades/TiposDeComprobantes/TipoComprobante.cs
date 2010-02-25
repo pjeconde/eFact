@@ -82,5 +82,15 @@ namespace FeaEntidades.TiposDeComprobantes
             lista.Add(new NotasCredito.B());
             return lista;
         }
+
+        public static List<TipoComprobante> ListaParaExportaciones()
+        {
+            List<TipoComprobante> lista = new List<TipoComprobante>();
+            lista.Add(new Exportaciones.FacturasDeExportacion());
+            lista.Add(new Exportaciones.NotaDeDebitoPorOperacionesConElExterior());
+            lista.Add(new Exportaciones.NotaDeCreditoPorOperacionesConElExterior());
+            return lista;
+        }
+
 	}
 }

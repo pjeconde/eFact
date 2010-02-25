@@ -73,8 +73,6 @@ namespace FeaEntidades.InterFacturas
 		[FileHelpers.FieldIgnored()]
 		private lineaDescuentos[] descuentosField;
 
-		//[FileHelpers.FieldArrayLength(1,1)]
-		//[FileHelpers.FieldConverter(typeof(FeaEntidades.Converters.lineaImpuestosConverter))]
 		[FileHelpers.FieldIgnored()]
 		private lineaImpuestos[] impuestosField;
 

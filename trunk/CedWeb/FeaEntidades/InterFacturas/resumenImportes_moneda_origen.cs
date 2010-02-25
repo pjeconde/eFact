@@ -13,6 +13,7 @@ namespace FeaEntidades.InterFacturas
 	[FileHelpers.DelimitedRecord("|")]
 	public partial class resumenImportes_moneda_origen
 	{
+        private string nombre_claseField = "<resumenImportes_moneda_origen>";
 
 		private double importe_total_neto_gravadoField;
 
@@ -41,6 +42,16 @@ namespace FeaEntidades.InterFacturas
 		private bool importe_total_impuestos_internosFieldSpecified;
 
 		private double importe_total_facturaField;
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string nombre_clase
+        {
+            get
+            {
+                return nombre_claseField;
+            }
+        }
 
 		/// <comentarios/>
 		public double importe_total_neto_gravado

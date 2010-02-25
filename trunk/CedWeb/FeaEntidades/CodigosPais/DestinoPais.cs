@@ -8,7 +8,7 @@ namespace FeaEntidades.DestinosPais
         private int codigo;
         private string descr;
 
-		public string Codigo
+		public int Codigo
         {
             get { return codigo; }
             set { codigo = value; }

@@ -30,7 +30,7 @@ namespace FeaEntidades.InterFacturas
 
 		private string fecha_serv_hastaField;
 
-		private int condicion_de_pagoField;
+		private string condicion_de_pagoField;
         
         [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
 		private bool condicion_de_pagoFieldSpecified;
@@ -41,9 +41,18 @@ namespace FeaEntidades.InterFacturas
 
 		private string caeField;
 
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool caeFieldSpecified;
+
 		private string fecha_vencimiento_caeField;
 
-		private string fecha_obtencion_caeField;
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool fecha_vencimiento_caeFieldSpecified;
+
+        private string fecha_obtencion_caeField;
+        
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool fecha_obtencion_caeFieldSpecified;
 
 		private string resultadoField;
 
@@ -56,6 +65,9 @@ namespace FeaEntidades.InterFacturas
 		[FileHelpers.FieldIgnored()]
 		private informacion_comprobanteReferencias[] referenciasField = new informacion_comprobanteReferencias[10];
 
+        [FileHelpers.FieldIgnored()]
+        private informacion_exportacion informacion_exportacionField;
+
         /// <comentarios/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string nombre_clase
@@ -65,6 +77,7 @@ namespace FeaEntidades.InterFacturas
                 return nombre_claseField;
             }
         }
+
 		/// <comentarios/>
 		public int tipo_de_comprobante
 		{
@@ -157,7 +170,7 @@ namespace FeaEntidades.InterFacturas
 		}
 
 		/// <comentarios/>
-		public int condicion_de_pago
+		public string condicion_de_pago
 		{
 			get
 			{
@@ -210,7 +223,6 @@ namespace FeaEntidades.InterFacturas
 		}
 
 		/// <comentarios/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
 		public string cae
 		{
 			get
@@ -223,8 +235,21 @@ namespace FeaEntidades.InterFacturas
 			}
 		}
 
-		/// <comentarios/>
+        /// <comentarios/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool caeSpecified
+        {
+            get
+            {
+                return this.caeFieldSpecified;
+            }
+            set
+            {
+                this.caeFieldSpecified = value;
+            }
+        }
+
+		/// <comentarios/>
 		public string fecha_vencimiento_cae
 		{
 			get
@@ -237,8 +262,21 @@ namespace FeaEntidades.InterFacturas
 			}
 		}
 
-		/// <comentarios/>
+        /// <comentarios/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool fecha_vencimiento_caeSpecified
+        {
+            get
+            {
+                return this.fecha_vencimiento_caeFieldSpecified;
+            }
+            set
+            {
+                this.fecha_vencimiento_caeFieldSpecified = value;
+            }
+        }
+
+		/// <comentarios/>
 		public string fecha_obtencion_cae
 		{
 			get
@@ -250,6 +288,20 @@ namespace FeaEntidades.InterFacturas
 				this.fecha_obtencion_caeField = value;
 			}
 		}
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool fecha_obtencion_caeSpecified
+        {
+            get
+            {
+                return this.fecha_obtencion_caeFieldSpecified;
+            }
+            set
+            {
+                this.fecha_obtencion_caeFieldSpecified = value;
+            }
+        }
 
 		/// <comentarios/>
 		public string resultado
@@ -303,5 +355,18 @@ namespace FeaEntidades.InterFacturas
 				this.referenciasField = value;
 			}
 		}
+        
+        /// <comentarios/>
+        public informacion_exportacion informacion_exportacion
+        {
+            get
+            {
+                return this.informacion_exportacionField;
+            }
+            set
+            {
+                this.informacion_exportacionField = value;
+            }
+        }
 	}
 }
