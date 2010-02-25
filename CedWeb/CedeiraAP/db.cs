@@ -690,8 +690,8 @@ namespace Cedeira.SV
                 CedEntidades.EsqSegEvenPos esqSegEvenPos = new CedEntidades.EsqSegEvenPos();
 				esqSegEvenPos.Evento.Id = Convert.ToString(dv.Table.Rows[i]["IdEvento"]);
                 esqSegEvenPos.Evento.Automatico = Convert.ToBoolean(dv.Table.Rows[i]["Automatico"]);
-                esqSegEvenPos.Evento.Automatico = Convert.ToBoolean(dv.Table.Rows[i]["CXO"]);
-                esqSegEvenPos.Evento.Automatico = Convert.ToBoolean(dv.Table.Rows[i]["XLote"]);
+                esqSegEvenPos.Evento.CXO = Convert.ToBoolean(dv.Table.Rows[i]["CXO"]);
+                esqSegEvenPos.Evento.XLote = Convert.ToBoolean(dv.Table.Rows[i]["XLote"]);
                 esqSegEvenPos.Evento.Descr = Convert.ToString(dv.Table.Rows[i]["DescrEvento"]);
                 esqSegEvenPos.CantInterv = Convert.ToInt32(dv.Table.Rows[i]["CantInterv"]);
                 esqSegEvenPos.Grupo.Id = Convert.ToString(dv.Table.Rows[i]["IdGrupo"]);
