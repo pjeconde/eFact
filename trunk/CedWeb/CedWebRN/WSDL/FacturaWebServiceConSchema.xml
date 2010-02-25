@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <s0:definitions name="FacturaWebServiceConSchemaDefinitions" targetNamespace="http://ar/com/ib/cfe/ejb/services" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://ar/com/ib/cfe/ejb/services" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/">
   <s0:documentation>Web Service para Emisores de Facturas de la Camara de Factura Electronica de interBANKING</s0:documentation>
   <s0:types>
@@ -7,7 +7,7 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element ref="tns:cabecera_lote"/>
-            <xs:element maxOccurs="10000" ref="tns:comprobante"/>
+            <xs:element maxOccurs="5000" ref="tns:comprobante"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -29,7 +29,7 @@
               <xs:simpleType>
                 <xs:restriction base="xs:int">
                   <xs:minInclusive value="1"/>
-                  <xs:maxInclusive value="10000"/>
+                  <xs:maxInclusive value="5000"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
@@ -101,7 +101,7 @@
             <xs:element name="fecha_vencimiento" type="xs:string"/>
             <xs:element minOccurs="0" name="fecha_serv_desde" type="xs:string"/>
             <xs:element minOccurs="0" name="fecha_serv_hasta" type="xs:string"/>
-            <xs:element minOccurs="0" name="condicion_de_pago" type="xs:int"/>
+            <xs:element minOccurs="0" name="condicion_de_pago" type="xs:string"/>
             <xs:element minOccurs="0" name="iva_computable" type="xs:string"/>
             <xs:element minOccurs="0" name="codigo_operacion" type="xs:string"/>
             <xs:element minOccurs="0" name="cae" type="xs:string"/>
@@ -114,7 +114,27 @@
               <xs:complexType>
                 <xs:sequence>
                   <xs:element name="codigo_de_referencia" type="xs:int"/>
-                  <xs:element name="dato_de_referencia" type="xs:long"/>
+                  <xs:element name="dato_de_referencia" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element maxOccurs="1" minOccurs="0" name="informacion_exportacion">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="destino_comprobante" type="xs:int"/>
+                  <xs:element name="tipo_exportacion" type="xs:int"/>
+                  <xs:element name="id_impositivo " type="xs:string" minOccurs="0"/>
+                  <xs:element name="incoterms”" type="xs:string" minOccurs="0"/>
+                  <xs:element name="descripcion_incoterms”" type="xs:string" minOccurs="0"/>
+                  <xs:element name="permiso_existente" type="xs:string" minOccurs="0"/>
+                  <xs:element maxOccurs="100" minOccurs="0" name="permisos">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="id_permiso" type="xs:string"/>
+                        <xs:element name="destino_mercaderia" type="xs:int"/>
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
                 </xs:sequence>
               </xs:complexType>
             </xs:element>
@@ -372,6 +392,14 @@
                 </xs:sequence>
               </xs:complexType>
             </xs:element>
+            <xs:element maxOccurs="10" minOccurs="0" name="informacion_adicional">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="tipo" type="xs:string"/>
+                  <xs:element name="valor" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
           </xs:sequence>
           <xs:attribute name="numeroLinea" use="required">
             <xs:simpleType>
@@ -547,6 +575,14 @@
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
+            <xs:element minOccurs="0" name="importe_total_impuestos_provinciales">
+              <xs:simpleType>
+                <xs:restriction base="xs:double">
+                  <xs:maxInclusive value="9999999999999.99"/>
+                  <xs:minInclusive value="0"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
             <xs:element name="importe_total_factura">
               <xs:simpleType>
                 <xs:restriction base="xs:double">
@@ -634,8 +670,18 @@
                       </xs:restriction>
                     </xs:simpleType>
                   </xs:element>
+                  <xs:element minOccurs="0" name="importe_total_impuestos_provinciales">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:double">
+                        <xs:maxInclusive value="9999999999999.99"/>
+                        <xs:minInclusive value="0"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
                   <xs:element name="importe_total_factura">
                     <xs:simpleType>
+                      Nivel de Seguridad: Restringido InterBanking, 2010 Página 12 de 153
+                      Anexo de Especificaciones de Web Service - WSDL v 1.3.doc
                       <xs:restriction base="xs:double">
                         <xs:maxInclusive value="9999999999999.99"/>
                         <xs:minInclusive value="0"/>
@@ -656,12 +702,50 @@
                 <xs:sequence>
                   <xs:element minOccurs="0" name="clave_de_vinculacion" type="xs:string"/>
                   <xs:element minOccurs="0" name="id_template" type="xs:string"/>
+                  <xs:element minOccurs="0" name="id_logo" type="xs:string"/>
+                  <xs:element minOccurs="0" name="id_idioma" type="xs:string"/>
                 </xs:sequence>
               </xs:complexType>
             </xs:element>
             <xs:element minOccurs="0" name="extensiones_datos_comerciales"/>
             <xs:element minOccurs="0" name="extensiones_datos_marketing" type="xs:string"/>
             <xs:element minOccurs="0" name="extensiones_signatures" type="xs:string"/>
+            <xs:element minOccurs="0" name="extensiones_destinatarios">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="5" minOccurs="0" name="destinatario">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="cuit" type="xs:long"/>
+                        <xs:element maxOccurs="5" minOccurs="0" name="restriccion">
+                          <xs:complexType>
+                            <xs:sequence>
+                              <xs:element name="tipo" type="xs:string"/>
+                              <xs:element name="id" type="xs:string"/>
+                            </xs:sequence>
+                          </xs:complexType>
+                        </xs:element>
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                  <xs:element minOccurs="0" name="email " type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="extensiones_remitentes">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="5" minOccurs="0" name="restriccion">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element name="tipo" type="xs:string"/>
+                        <xs:element name="id" type="xs:string"/>
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -704,7 +788,7 @@
               <xs:simpleType>
                 <xs:restriction base="xs:int">
                   <xs:minInclusive value="1"/>
-                  <xs:maxInclusive value="10000"/>
+                  <xs:maxInclusive value="5000"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
@@ -733,7 +817,7 @@
                 </xs:sequence>
               </xs:complexType>
             </xs:element>
-            <xs:element maxOccurs="10000" minOccurs="0" ref="tns:comprobante_response"/>
+            <xs:element maxOccurs="5000" minOccurs="0" ref="tns:comprobante_response"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -760,6 +844,8 @@
             <xs:element name="estado" type="xs:string"/>
             <xs:element minOccurs="0" name="errores_comprobante">
               <xs:complexType>
+                Nivel de Seguridad: Restringido InterBanking, 2010 Página 14 de 153
+                Anexo de Especificaciones de Web Service - WSDL v 1.3.doc
                 <xs:sequence>
                   <xs:element maxOccurs="60" ref="tns:error"/>
                 </xs:sequence>
@@ -922,6 +1008,8 @@
         </xs:complexType>
       </xs:element>
       <xs:element name="timestamp_response">
+        Nivel de Seguridad: Restringido InterBanking, 2010 Página 16 de 153
+        Anexo de Especificaciones de Web Service - WSDL v 1.3.doc
         <xs:complexType>
           <xs:sequence>
             <xs:element name="cuit_canal" type="xs:long"/>
@@ -1102,8 +1190,7 @@
   </s0:binding>
   <s0:service name="FacturaWebServiceConSchemaSoapBindingQSService">
     <s0:port binding="s1:FacturaWebServiceConSchemaSoapBinding" name="FacturaWebServiceConSchemaSoapBindingQSPort">
-      <s2:address location="https://qacfe.interbanking.com.ar/ws/FacturaWebServiceConSchema"/>
+      <s2:address location="https://wsqacfe.interfacturas.com.ar/ws/FacturaWebServiceConSchema"/>
     </s0:port>
   </s0:service>
-
 </s0:definitions>
