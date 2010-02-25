@@ -339,16 +339,31 @@ namespace CedWebRN
 
                 cIBK.cabecera.informacion_comprobante = new FeaEntidades.InterFacturas.informacion_comprobante();
                 cIBK.cabecera.informacion_comprobante.cae = lcIBK.comprobante[i].cabecera.informacion_comprobante.cae;
+                cIBK.cabecera.informacion_comprobante.caeSpecified = false;
+                if (cIBK.cabecera.informacion_comprobante.cae != "")
+                {
+                    cIBK.cabecera.informacion_comprobante.caeSpecified = true;
+                }
                 cIBK.cabecera.informacion_comprobante.codigo_operacion = lcIBK.comprobante[i].cabecera.informacion_comprobante.codigo_operacion;
                 cIBK.cabecera.informacion_comprobante.condicion_de_pago = lcIBK.comprobante[i].cabecera.informacion_comprobante.condicion_de_pago;
                 cIBK.cabecera.informacion_comprobante.condicion_de_pagoSpecified = lcIBK.comprobante[i].cabecera.informacion_comprobante.condicion_de_pagoSpecified;
                 cIBK.cabecera.informacion_comprobante.es_detalle_encriptado = lcIBK.comprobante[i].cabecera.informacion_comprobante.es_detalle_encriptado;
                 cIBK.cabecera.informacion_comprobante.fecha_emision = lcIBK.comprobante[i].cabecera.informacion_comprobante.fecha_emision;
                 cIBK.cabecera.informacion_comprobante.fecha_obtencion_cae = lcIBK.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae;
+                cIBK.cabecera.informacion_comprobante.fecha_obtencion_caeSpecified = false;
+                if (cIBK.cabecera.informacion_comprobante.fecha_obtencion_cae != "")
+                {
+                    cIBK.cabecera.informacion_comprobante.fecha_obtencion_caeSpecified = true;
+                }
                 cIBK.cabecera.informacion_comprobante.fecha_serv_desde = lcIBK.comprobante[i].cabecera.informacion_comprobante.fecha_serv_desde;
                 cIBK.cabecera.informacion_comprobante.fecha_serv_hasta = lcIBK.comprobante[i].cabecera.informacion_comprobante.fecha_serv_hasta;
                 cIBK.cabecera.informacion_comprobante.fecha_vencimiento = lcIBK.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento;
                 cIBK.cabecera.informacion_comprobante.fecha_vencimiento_cae = lcIBK.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento_cae;
+                cIBK.cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = false;
+                if (cIBK.cabecera.informacion_comprobante.fecha_vencimiento_cae != "")
+                {
+                    cIBK.cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
+                }
                 cIBK.cabecera.informacion_comprobante.iva_computable = lcIBK.comprobante[i].cabecera.informacion_comprobante.iva_computable;
                 cIBK.cabecera.informacion_comprobante.motivo = lcIBK.comprobante[i].cabecera.informacion_comprobante.motivo;
                 cIBK.cabecera.informacion_comprobante.numero_comprobante = lcIBK.comprobante[i].cabecera.informacion_comprobante.numero_comprobante;
@@ -637,13 +652,22 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_comprador.inicio_de_actividades = lc.comprobante[i].cabecera.informacion_comprador.inicio_de_actividades;
                 cIBK.cabecera.informacion_comprador.localidad = lc.comprobante[i].cabecera.informacion_comprador.localidad;
                 cIBK.cabecera.informacion_comprador.nro_doc_identificatorio = lc.comprobante[i].cabecera.informacion_comprador.nro_doc_identificatorio;
-                cIBK.cabecera.informacion_comprador.nro_ingresos_brutos = lc.comprobante[i].cabecera.informacion_comprador.nro_ingresos_brutos;
-                cIBK.cabecera.informacion_comprador.provincia = lc.comprobante[i].cabecera.informacion_comprador.provincia;
+                if (lc.comprobante[i].cabecera.informacion_comprador.nro_ingresos_brutos.Trim() != "")
+                {
+                    cIBK.cabecera.informacion_comprador.nro_ingresos_brutos = lc.comprobante[i].cabecera.informacion_comprador.nro_ingresos_brutos;
+                }
+                if (lc.comprobante[i].cabecera.informacion_comprador.provincia.Trim() != "")
+                {
+                    cIBK.cabecera.informacion_comprador.provincia = lc.comprobante[i].cabecera.informacion_comprador.provincia;
+                }
                 cIBK.cabecera.informacion_comprador.telefono = lc.comprobante[i].cabecera.informacion_comprador.telefono;
 
                 cIBK.cabecera.informacion_comprobante = new IBK.informacion_comprobante();
                 cIBK.cabecera.informacion_comprobante.cae = lc.comprobante[i].cabecera.informacion_comprobante.cae;
-                cIBK.cabecera.informacion_comprobante.codigo_operacion = lc.comprobante[i].cabecera.informacion_comprobante.codigo_operacion;
+                if (lc.comprobante[i].cabecera.informacion_comprobante.codigo_operacion.Trim() != "")
+                {
+                    cIBK.cabecera.informacion_comprobante.codigo_operacion = lc.comprobante[i].cabecera.informacion_comprobante.codigo_operacion;
+                }
                 cIBK.cabecera.informacion_comprobante.condicion_de_pago = lc.comprobante[i].cabecera.informacion_comprobante.condicion_de_pago;
                 cIBK.cabecera.informacion_comprobante.condicion_de_pagoSpecified = lc.comprobante[i].cabecera.informacion_comprobante.condicion_de_pagoSpecified;
                 cIBK.cabecera.informacion_comprobante.es_detalle_encriptado = lc.comprobante[i].cabecera.informacion_comprobante.es_detalle_encriptado;
@@ -653,7 +677,10 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_comprobante.fecha_serv_hasta = lc.comprobante[i].cabecera.informacion_comprobante.fecha_serv_hasta;
                 cIBK.cabecera.informacion_comprobante.fecha_vencimiento = lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento;
                 cIBK.cabecera.informacion_comprobante.fecha_vencimiento_cae = lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento_cae;
-                cIBK.cabecera.informacion_comprobante.iva_computable = lc.comprobante[i].cabecera.informacion_comprobante.iva_computable;
+                if (lc.comprobante[i].cabecera.informacion_comprobante.iva_computable.Trim() != "")
+                {
+                    cIBK.cabecera.informacion_comprobante.iva_computable = lc.comprobante[i].cabecera.informacion_comprobante.iva_computable;
+                }
                 cIBK.cabecera.informacion_comprobante.motivo = lc.comprobante[i].cabecera.informacion_comprobante.motivo;
                 cIBK.cabecera.informacion_comprobante.numero_comprobante = lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante;
                 cIBK.cabecera.informacion_comprobante.punto_de_venta = lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta;
@@ -661,7 +688,6 @@ namespace CedWebRN
 				if (lc.comprobante[i].cabecera.informacion_comprobante.referencias!=null)
 				{
 					cIBK.cabecera.informacion_comprobante.referencias = new IBK.informacion_comprobanteReferencias[lc.comprobante[i].cabecera.informacion_comprobante.referencias.Length];
-
 					for (int j = 0; j < lc.comprobante[i].cabecera.informacion_comprobante.referencias.Length; j++)
 					{
 						if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j] != null)
@@ -673,6 +699,29 @@ namespace CedWebRN
 					} 
 				}
 
+                if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion != null)
+                {
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion = new IBK.informacion_exportacion();
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante;
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion;
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.id_impositivo = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.id_impositivo;
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.incoterms = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.incoterms;
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms;
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.permiso_existente = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente;
+                    if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos != null)
+                    {
+                        cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos = new IBK.permisos[lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos.Length];
+                        for (int j = 0; j < lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos.Length; j++)
+                        {
+                            if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos[j] != null)
+                            {
+                                cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos[j] = new CedWebRN.IBK.permisos();
+                                cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos[j].id_permiso = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos[j].id_permiso;
+                                cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos[j].destino_mercaderia = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos[j].destino_mercaderia;
+                            }
+                        }
+                    }
+                }
 
                 cIBK.cabecera.informacion_comprobante.resultado = lc.comprobante[i].cabecera.informacion_comprobante.resultado;
                 cIBK.cabecera.informacion_comprobante.tipo_de_comprobante = lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante;
@@ -702,7 +751,10 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_vendedor.provincia = lc.comprobante[i].cabecera.informacion_vendedor.provincia;
                 cIBK.cabecera.informacion_vendedor.telefono = lc.comprobante[i].cabecera.informacion_vendedor.telefono;
 
-                //cIBK.extensiones = new IBK.extensiones();
+                cIBK.extensiones = new IBK.extensiones();
+                cIBK.extensiones.extensiones_camara_facturas = new IBK.extensionesExtensiones_camara_facturas();
+                cIBK.extensiones.extensiones_camara_facturas.id_idioma = lc.comprobante[i].extensiones.extensiones_camara_facturas.id_idioma;
+
 
                 IBK.detalle d = new IBK.detalle();
                 d.linea = new IBK.linea[lc.comprobante[i].detalle.linea.Length];
@@ -774,8 +826,10 @@ namespace CedWebRN
                                 d.linea[j].descuentos[k].porcentaje_descuentoSpecified = lc.comprobante[i].detalle.linea[j].descuentos[k].porcentaje_descuentoSpecified;
                             }
                         }
-
-                        d.linea[j].indicacion_exento_gravado = lc.comprobante[i].detalle.linea[j].indicacion_exento_gravado;
+                        if (lc.comprobante[i].detalle.linea[j].indicacion_exento_gravado.Trim() != "")
+                        {
+                            d.linea[j].indicacion_exento_gravado = lc.comprobante[i].detalle.linea[j].indicacion_exento_gravado;
+                        }
                         d.linea[j].numeroLinea = lc.comprobante[i].detalle.linea[j].numeroLinea;
                         d.linea[j].precio_unitario = lc.comprobante[i].detalle.linea[j].precio_unitario;
                         d.linea[j].precio_unitarioSpecified = lc.comprobante[i].detalle.linea[j].precio_unitarioSpecified;
@@ -788,7 +842,6 @@ namespace CedWebRN
                 }
 
                 cIBK.Item = d;
-
 
                 cIBK.resumen = new IBK.resumen();
                 cIBK.resumen.cant_alicuotas_iva = lc.comprobante[i].resumen.cant_alicuotas_iva;
