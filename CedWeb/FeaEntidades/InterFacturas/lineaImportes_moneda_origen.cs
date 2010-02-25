@@ -13,6 +13,7 @@ namespace FeaEntidades.InterFacturas
 	[FileHelpers.DelimitedRecord("|")]
 	public partial class lineaImportes_moneda_origen
 	{
+        private string nombre_claseField = "<lineaImportes_moneda_origen>";
 
 		private double precio_unitarioField;
 
@@ -33,6 +34,16 @@ namespace FeaEntidades.InterFacturas
 		private double importe_total_impuestosField;
 
 		private bool importe_total_impuestosFieldSpecified;
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string nombre_clase
+        {
+            get
+            {
+                return nombre_claseField;
+            }
+        }
 
 		/// <comentarios/>
 		public double precio_unitario
