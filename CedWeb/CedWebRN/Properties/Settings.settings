@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="CedWebRN_IBK_FacturaWebServiceConSchemaSoapBindingQSService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://qacfe.interbanking.com.ar/ws/FacturaWebServiceConSchema</Value>
+      <Value Profile="(Default)">https://wsqacfe.interfacturas.com.ar/ws/FacturaWebServiceConSchema</Value>
     </Setting>
   </Settings>
 </SettingsFile>
