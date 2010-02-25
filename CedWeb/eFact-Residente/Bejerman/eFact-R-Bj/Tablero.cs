@@ -212,6 +212,10 @@ namespace eFact_R
                                     }
                                 }
                             }
+                            else if (Aplicacion.OtrosFiltrosArchivos != "NO")
+                            {
+                                incorporarALista = false;
+                            }
                             if (incorporarALista)
                             {
                                 List<eFact_R.Entidades.Archivo> Archivos = new List<eFact_R.Entidades.Archivo>();
@@ -243,7 +247,7 @@ namespace eFact_R
             {
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 ActualizarBandejaSButton.Enabled = false;
-                System.Threading.Thread.Sleep(2000);
+                System.Threading.Thread.Sleep(1000);
                 ActualizarBandejaS();
             }
             catch (Exception ex)
@@ -484,7 +488,6 @@ namespace eFact_R
 
         private void EnviarABandejaSButton_Click(object sender, EventArgs e)
         {
-            
             Cursor = System.Windows.Forms.Cursors.WaitCursor;
             EnviarABandejaSButton.Enabled = false;
             DescartarBandejaEButton.Enabled = false;
@@ -645,6 +648,7 @@ namespace eFact_R
             }
             finally
             {
+                RefreshBandejaSalida();
                 EventosComboBox.Enabled = true;
                 Cursor = System.Windows.Forms.Cursors.Default;
             }
@@ -984,11 +988,11 @@ namespace eFact_R
                             }
                             if (((ComboBox)sender).Text.IndexOf("TXT") != -1)
                             {
-                                eFact_R.RN.Lote.GuardarItfTXT(out archivoProcesado, lote, Aplicacion.ArchPathItf, IF);
+                                eFact_R.RN.Lote.GuardarItfTXT(out archivoProcesado, lote, "ITF", Aplicacion.ArchPathItf, IF);
                             }
                             else
                             {
-                                eFact_R.RN.Lote.GuardarItfXML(out archivoProcesado, lote, Aplicacion.ArchPathItf, IF);
+                                eFact_R.RN.Lote.GuardarItfXML(out archivoProcesado, lote, "ITF", Aplicacion.ArchPathItf, IF);
                             }
                             MessageBox.Show("Interface generada satisfactoriamente con el nombre: " + archivoProcesado, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                         }

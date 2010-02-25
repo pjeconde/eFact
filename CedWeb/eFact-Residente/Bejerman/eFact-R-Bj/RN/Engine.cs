@@ -16,7 +16,7 @@ namespace eFact_R.RN
         {
             try
             {
-                Type[] types = new Type[8];
+                Type[] types = new Type[13];
                 types[0] = typeof(FeaEntidades.InterFacturas.cabecera_lote);
                 types[1] = typeof(FeaEntidades.InterFacturas.informacion_comprador);
                 types[2] = typeof(FeaEntidades.InterFacturas.informacion_comprobante);
@@ -24,21 +24,28 @@ namespace eFact_R.RN
                 types[4] = typeof(FeaEntidades.InterFacturas.informacion_vendedor);
                 types[5] = typeof(FeaEntidades.InterFacturas.detalle);
                 types[6] = typeof(FeaEntidades.InterFacturas.linea);
-                types[7] = typeof(FeaEntidades.InterFacturas.resumen);
+                types[7] = typeof(FeaEntidades.InterFacturas.lineaImportes_moneda_origen);
+                types[8] = typeof(FeaEntidades.InterFacturas.informacion_exportacion);
+                types[9] = typeof(FeaEntidades.InterFacturas.permisos);
+                types[10] = typeof(FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas);
+                types[11] = typeof(FeaEntidades.InterFacturas.resumenImportes_moneda_origen);
+                types[12] = typeof(FeaEntidades.InterFacturas.resumen);
 
-                engine = new MultiRecordEngine(types[0], types[1], types[2], types[3], types[4], types[5], types[6], types[7]);
+                engine = new MultiRecordEngine(types[0], types[1], types[2], types[3], types[4], types[5], types[6], types[7], types[8], types[9], types[10], types[11], types[12]);
                 engine.RecordSelector = new FileHelpers.RecordTypeSelector(cs);
                 object[] oC = engine.ReadFile(Archivo);
 
                 FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
                 int NroComprobante = 0;
-                int NroReferencias = 0;
-                int NroLinea = 0;
+                int NroLineaReferencias = 0;
+                int NroLineaPermisos = 0;
+                int NroLinea = -1;
+                FeaEntidades.InterFacturas.resumenImportes_moneda_origen importes_moneda_origen = new FeaEntidades.InterFacturas.resumenImportes_moneda_origen();
                 foreach (Object o in oC)
                 {
-
                     if (typeof(FeaEntidades.InterFacturas.cabecera_lote) == o.GetType())
                     {
+                        importes_moneda_origen = new FeaEntidades.InterFacturas.resumenImportes_moneda_origen();
                         lc.cabecera_lote = (FeaEntidades.InterFacturas.cabecera_lote)o;
                     }
                     if (typeof(FeaEntidades.InterFacturas.informacion_comprador) == o.GetType())
@@ -53,8 +60,8 @@ namespace eFact_R.RN
                     }
                     if (typeof(FeaEntidades.InterFacturas.informacion_comprobanteReferencias) == o.GetType())
                     {
-                        lc.comprobante[NroComprobante].cabecera.informacion_comprobante.referencias[NroReferencias] = (FeaEntidades.InterFacturas.informacion_comprobanteReferencias)o;
-                        ++NroReferencias;
+                        lc.comprobante[NroComprobante].cabecera.informacion_comprobante.referencias[NroLineaReferencias] = (FeaEntidades.InterFacturas.informacion_comprobanteReferencias)o;
+                        ++NroLineaReferencias;
                     }
                     if (typeof(FeaEntidades.InterFacturas.informacion_vendedor) == o.GetType())
                     {
@@ -66,16 +73,41 @@ namespace eFact_R.RN
                     }
                     if (typeof(FeaEntidades.InterFacturas.linea) == o.GetType())
                     {
+                        NroLinea = ((FeaEntidades.InterFacturas.linea)o).numeroLinea - 1;
                         lc.comprobante[NroComprobante].detalle.linea[NroLinea] = (FeaEntidades.InterFacturas.linea)o;
-                        ++NroLinea;
                     }
-
+                    if (typeof(FeaEntidades.InterFacturas.lineaImportes_moneda_origen) == o.GetType())
+                    {
+                        lc.comprobante[NroComprobante].detalle.linea[NroLinea].importes_moneda_origen = (FeaEntidades.InterFacturas.lineaImportes_moneda_origen)o;
+                    }
+                    if (typeof(FeaEntidades.InterFacturas.informacion_exportacion) == o.GetType())
+                    {
+                        lc.comprobante[NroComprobante].cabecera.informacion_comprobante.informacion_exportacion = (FeaEntidades.InterFacturas.informacion_exportacion)o;
+                    }
+                    if (typeof(FeaEntidades.InterFacturas.permisos) == o.GetType())
+                    {
+                        lc.comprobante[NroComprobante].cabecera.informacion_comprobante.informacion_exportacion.permisos[NroLineaPermisos] = (FeaEntidades.InterFacturas.permisos)o;
+                        ++NroLineaPermisos;
+                    }
+                    if (typeof(FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas) == o.GetType())
+                    {
+                        lc.comprobante[NroComprobante].extensiones = new FeaEntidades.InterFacturas.extensiones();
+                        lc.comprobante[NroComprobante].extensiones.extensiones_camara_facturas = (FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas)o;
+                    }
+                    if (typeof(FeaEntidades.InterFacturas.resumenImportes_moneda_origen) == o.GetType())
+                    {
+                        importes_moneda_origen = (FeaEntidades.InterFacturas.resumenImportes_moneda_origen)o;
+                    }
                     if (typeof(FeaEntidades.InterFacturas.resumen) == o.GetType())
                     {
                         lc.comprobante[NroComprobante].resumen = (FeaEntidades.InterFacturas.resumen)o;
+                        if (importes_moneda_origen != null)
+                        {
+                            lc.comprobante[NroComprobante].resumen.importes_moneda_origen = importes_moneda_origen;
+                        }
                         ++NroComprobante;
-                        NroReferencias = 0;
-                        NroLinea = 0;
+                        NroLineaReferencias = 0;
+                        NroLineaPermisos = 0;
                     }
                 }
                 Lc = lc;
@@ -117,11 +149,30 @@ namespace eFact_R.RN
                     {
                         return typeof(FeaEntidades.InterFacturas.linea);
                     }
+                case "<lineaImportes_moneda_origen>":
+                    {
+                        return typeof(FeaEntidades.InterFacturas.lineaImportes_moneda_origen);
+                    }
+                case "<informacion_exportacion>":
+                    {
+                        return typeof(FeaEntidades.InterFacturas.informacion_exportacion);
+                    }
+                case "<extensionesExtensiones_camara_facturas>":
+                    {
+                        return typeof(FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas);
+                    }
+                case "<permisos>":
+                    {
+                        return typeof(FeaEntidades.InterFacturas.permisos);
+                    }
+                case "<resumenImportes_moneda_origen>":
+                    {
+                        return typeof(FeaEntidades.InterFacturas.resumenImportes_moneda_origen);
+                    }
                 case "<resumen>":
                     {
                         return typeof(FeaEntidades.InterFacturas.resumen);
                     }
-
                 default:
                     {
                         throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.EntidadInexistente();
