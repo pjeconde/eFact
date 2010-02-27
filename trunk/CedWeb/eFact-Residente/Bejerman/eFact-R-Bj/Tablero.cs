@@ -68,32 +68,36 @@ namespace eFact_R
             OtrosFiltrosBandejaSPanel.Enabled = false;
             OtrosFiltrosBandejaEPanel.Enabled = false;
             ArchivosHistoricosPanel.Enabled = false;
-            
-            DirectoryInfo di;
-            if (!Directory.Exists(Aplicacion.ArchPath))
+
+            string CrearDirectorios = @System.Configuration.ConfigurationManager.AppSettings["CrearDirectorios"];
+            if (CrearDirectorios == "SI")
             {
-                di = Directory.CreateDirectory(Aplicacion.ArchPath);
-                MessageBox.Show("Se ha creado el repositorio para el procesamiento de archivos en el directorio: \r\n" + di.FullName + "\r\n\r\nEn este repositorio deberán ser copiados todos los archivos a procesar.");
-            }
-            if (!Directory.Exists(Aplicacion.ArchPathHis))
-            {
-                di = Directory.CreateDirectory(Aplicacion.ArchPathHis);
-                MessageBox.Show("Se ha creado el repositorio histórico de archivos procesados en el directorio: \r\n" + di.FullName + "\r\n\r\nA este repositorio se moverán automáticamente todos los archivos, los procesados satisfactoriamente y también los que no pudieran ser procesados por cualquier problema.");
-            }
-            if (!Directory.Exists(Aplicacion.ArchPathItf))
-            {
-                di = Directory.CreateDirectory(Aplicacion.ArchPathItf);
-                MessageBox.Show("Se ha creado el repositorio de salida de archivos en el directorio: \r\n" + di.FullName + "\r\n\r\nEn este repositorio se guardarán a pedido del usuario, los archivos de interfaz de salida que genere el usuario sobre lotes ya procesados.");
-            }
-            if (!Directory.Exists(Aplicacion.ArchPathItfAut))
-            {
-                di = Directory.CreateDirectory(Aplicacion.ArchPathItfAut);
-                MessageBox.Show("Se ha creado el repositorio de salida automática de archivos en el directorio: \r\n" + di.FullName + "\r\n\r\nEn este repositorio se guardarán automáticamente, los archivos de interfaz de salida con las respuestas obtenidas desde la AFIP sobre los lotes de comprobantes procesados satisfactoriamente.");
-            }
-            if (!Directory.Exists(Aplicacion.ArchPathPDF))
-            {
-                di = Directory.CreateDirectory(Aplicacion.ArchPathPDF);
-                MessageBox.Show("Se ha creado el repositorio para exportar comprobantes en formato PDF en el directorio: \r\n" + di.FullName + "");
+                DirectoryInfo di;
+                if (!Directory.Exists(Aplicacion.ArchPath))
+                {
+                    di = Directory.CreateDirectory(Aplicacion.ArchPath);
+                    MessageBox.Show("Se ha creado el repositorio para el procesamiento de archivos en el directorio: \r\n" + di.FullName + "\r\n\r\nEn este repositorio deberán ser copiados todos los archivos a procesar.");
+                }
+                if (!Directory.Exists(Aplicacion.ArchPathHis))
+                {
+                    di = Directory.CreateDirectory(Aplicacion.ArchPathHis);
+                    MessageBox.Show("Se ha creado el repositorio histórico de archivos procesados en el directorio: \r\n" + di.FullName + "\r\n\r\nA este repositorio se moverán automáticamente todos los archivos, los procesados satisfactoriamente y también los que no pudieran ser procesados por cualquier problema.");
+                }
+                if (!Directory.Exists(Aplicacion.ArchPathItf))
+                {
+                    di = Directory.CreateDirectory(Aplicacion.ArchPathItf);
+                    MessageBox.Show("Se ha creado el repositorio de salida de archivos en el directorio: \r\n" + di.FullName + "\r\n\r\nEn este repositorio se guardarán a pedido del usuario, los archivos de interfaz de salida que genere el usuario sobre lotes ya procesados.");
+                }
+                if (!Directory.Exists(Aplicacion.ArchPathItfAut))
+                {
+                    di = Directory.CreateDirectory(Aplicacion.ArchPathItfAut);
+                    MessageBox.Show("Se ha creado el repositorio de salida automática de archivos en el directorio: \r\n" + di.FullName + "\r\n\r\nEn este repositorio se guardarán automáticamente, los archivos de interfaz de salida con las respuestas obtenidas desde la AFIP sobre los lotes de comprobantes procesados satisfactoriamente.");
+                }
+                if (!Directory.Exists(Aplicacion.ArchPathPDF))
+                {
+                    di = Directory.CreateDirectory(Aplicacion.ArchPathPDF);
+                    MessageBox.Show("Se ha creado el repositorio para exportar comprobantes en formato PDF en el directorio: \r\n" + di.FullName + "");
+                }
             }
             ActualizarBandejaE();
             BandejaEDataGridView.DataSource = new List<eFact_R.Entidades.Archivo>();
@@ -354,7 +358,7 @@ namespace eFact_R
                 }
                 for (int i = 0; i < Lc.comprobante.Length; i++)
                 {
-                    if (Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "00" && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "")
+                    if (Lc.comprobante[i].cabecera.informacion_comprobante.motivo != null && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "00" && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "")
                     {
                         FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP codigosErrorAFIPComprobante = FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP.Lista().Find((delegate(FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP e1) { return e1.Codigo == Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim(); }));
                         string descrCodigosErrorAFIPComprobante = "";
@@ -1039,7 +1043,8 @@ namespace eFact_R
 
         private void menuItem3_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\eFact-R-Ayuda.doc");
+            string NombreArchAyuda = @System.Configuration.ConfigurationManager.AppSettings["NombreArchAyuda"];
+            System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\" + NombreArchAyuda);
         }
     }
 }
