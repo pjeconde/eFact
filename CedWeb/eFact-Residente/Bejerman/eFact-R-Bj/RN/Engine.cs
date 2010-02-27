@@ -5,6 +5,7 @@ using System.Data;
 using FileHelpers;
 using FileHelpers.RunTime;
 using System.IO;
+using System.Reflection;
 
 namespace eFact_R.RN
 {
@@ -53,10 +54,12 @@ namespace eFact_R.RN
                         lc.comprobante[NroComprobante] = new FeaEntidades.InterFacturas.comprobante();
                         lc.comprobante[NroComprobante].cabecera = new FeaEntidades.InterFacturas.cabecera();
                         lc.comprobante[NroComprobante].cabecera.informacion_comprador = (FeaEntidades.InterFacturas.informacion_comprador)o;
+                        GetPropiedades(o);
                     }
                     if (typeof(FeaEntidades.InterFacturas.informacion_comprobante) == o.GetType())
                     {
                         lc.comprobante[NroComprobante].cabecera.informacion_comprobante = (FeaEntidades.InterFacturas.informacion_comprobante)o;
+                        GetPropiedades(o);
                     }
                     if (typeof(FeaEntidades.InterFacturas.informacion_comprobanteReferencias) == o.GetType())
                     {
@@ -75,6 +78,7 @@ namespace eFact_R.RN
                     {
                         NroLinea = ((FeaEntidades.InterFacturas.linea)o).numeroLinea - 1;
                         lc.comprobante[NroComprobante].detalle.linea[NroLinea] = (FeaEntidades.InterFacturas.linea)o;
+                        GetPropiedades(o);
                     }
                     if (typeof(FeaEntidades.InterFacturas.lineaImportes_moneda_origen) == o.GetType())
                     {
@@ -93,6 +97,7 @@ namespace eFact_R.RN
                     {
                         lc.comprobante[NroComprobante].extensiones = new FeaEntidades.InterFacturas.extensiones();
                         lc.comprobante[NroComprobante].extensiones.extensiones_camara_facturas = (FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas)o;
+                        GetPropiedades(o);
                     }
                     if (typeof(FeaEntidades.InterFacturas.resumenImportes_moneda_origen) == o.GetType())
                     {
@@ -115,6 +120,24 @@ namespace eFact_R.RN
             catch (Exception ex)
             {
                 throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.BaseApplicationException("Problemas al procesar el archivo.\r\n\r\n" + ex.Message);
+            }
+        }
+        private void GetPropiedades(object o)
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            foreach (MemberInfo mi in o.GetType().GetMembers())
+            {
+                if (mi.MemberType == MemberTypes.Property)
+                {
+                    PropertyInfo pi = mi as PropertyInfo;
+                    if (pi != null)
+                    {
+                        if (pi.PropertyType == typeof(System.String) && pi.GetValue(o, null).ToString() == "")
+                        {
+                            pi.SetValue(o, null, null);
+                        }
+                    }
+                }
             }
         }
         private Type cs(MultiRecordEngine engine, string record)

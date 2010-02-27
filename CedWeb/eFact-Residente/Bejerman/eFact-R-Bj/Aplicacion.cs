@@ -96,6 +96,7 @@ namespace eFact_R
                         
                         eFact_R.Entidades.Aplicacion aplic = eFact_R.RN.Aplicacion.Crear();
                         Sesion = new CedEntidades.Sesion();
+                        string usuario = System.Environment.UserName;
                         eFact_R.RN.Sesion.Crear("Usr_eFact", "", "NONE", auxCnn.ToString(), auxCnnAplicExterna.ToString(), "FrontEnd", aplic.Version, aplic.VersionParaControl, Sesion);
                         if (Sesion != null)
                         {
