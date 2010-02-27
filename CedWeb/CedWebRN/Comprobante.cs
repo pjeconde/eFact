@@ -81,7 +81,7 @@ namespace CedWebRN
             IBK.error[] respErroresComprobantes = new CedWebRN.IBK.error[0];
             IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
             objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
-            if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null)
+            if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
             {
                 System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
                 string usuarioProxy = System.Configuration.ConfigurationManager.AppSettings["UsuarioProxy"];
@@ -149,7 +149,8 @@ namespace CedWebRN
             lcIBK = Fea2Ibk(lc);
             IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
             objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
-            if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null)
+            objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturas"];
+            if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
             {
                 System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
                 string usuarioProxy = System.Configuration.ConfigurationManager.AppSettings["UsuarioProxy"];
@@ -652,22 +653,13 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_comprador.inicio_de_actividades = lc.comprobante[i].cabecera.informacion_comprador.inicio_de_actividades;
                 cIBK.cabecera.informacion_comprador.localidad = lc.comprobante[i].cabecera.informacion_comprador.localidad;
                 cIBK.cabecera.informacion_comprador.nro_doc_identificatorio = lc.comprobante[i].cabecera.informacion_comprador.nro_doc_identificatorio;
-                if (lc.comprobante[i].cabecera.informacion_comprador.nro_ingresos_brutos.Trim() != "")
-                {
-                    cIBK.cabecera.informacion_comprador.nro_ingresos_brutos = lc.comprobante[i].cabecera.informacion_comprador.nro_ingresos_brutos;
-                }
-                if (lc.comprobante[i].cabecera.informacion_comprador.provincia.Trim() != "")
-                {
-                    cIBK.cabecera.informacion_comprador.provincia = lc.comprobante[i].cabecera.informacion_comprador.provincia;
-                }
+                cIBK.cabecera.informacion_comprador.nro_ingresos_brutos = lc.comprobante[i].cabecera.informacion_comprador.nro_ingresos_brutos;
+                cIBK.cabecera.informacion_comprador.provincia = lc.comprobante[i].cabecera.informacion_comprador.provincia;
                 cIBK.cabecera.informacion_comprador.telefono = lc.comprobante[i].cabecera.informacion_comprador.telefono;
 
                 cIBK.cabecera.informacion_comprobante = new IBK.informacion_comprobante();
                 cIBK.cabecera.informacion_comprobante.cae = lc.comprobante[i].cabecera.informacion_comprobante.cae;
-                if (lc.comprobante[i].cabecera.informacion_comprobante.codigo_operacion.Trim() != "")
-                {
-                    cIBK.cabecera.informacion_comprobante.codigo_operacion = lc.comprobante[i].cabecera.informacion_comprobante.codigo_operacion;
-                }
+                cIBK.cabecera.informacion_comprobante.codigo_operacion = lc.comprobante[i].cabecera.informacion_comprobante.codigo_operacion;
                 cIBK.cabecera.informacion_comprobante.condicion_de_pago = lc.comprobante[i].cabecera.informacion_comprobante.condicion_de_pago;
                 cIBK.cabecera.informacion_comprobante.condicion_de_pagoSpecified = lc.comprobante[i].cabecera.informacion_comprobante.condicion_de_pagoSpecified;
                 cIBK.cabecera.informacion_comprobante.es_detalle_encriptado = lc.comprobante[i].cabecera.informacion_comprobante.es_detalle_encriptado;
@@ -677,10 +669,7 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_comprobante.fecha_serv_hasta = lc.comprobante[i].cabecera.informacion_comprobante.fecha_serv_hasta;
                 cIBK.cabecera.informacion_comprobante.fecha_vencimiento = lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento;
                 cIBK.cabecera.informacion_comprobante.fecha_vencimiento_cae = lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento_cae;
-                if (lc.comprobante[i].cabecera.informacion_comprobante.iva_computable.Trim() != "")
-                {
-                    cIBK.cabecera.informacion_comprobante.iva_computable = lc.comprobante[i].cabecera.informacion_comprobante.iva_computable;
-                }
+                cIBK.cabecera.informacion_comprobante.iva_computable = lc.comprobante[i].cabecera.informacion_comprobante.iva_computable;
                 cIBK.cabecera.informacion_comprobante.motivo = lc.comprobante[i].cabecera.informacion_comprobante.motivo;
                 cIBK.cabecera.informacion_comprobante.numero_comprobante = lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante;
                 cIBK.cabecera.informacion_comprobante.punto_de_venta = lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta;
@@ -826,10 +815,7 @@ namespace CedWebRN
                                 d.linea[j].descuentos[k].porcentaje_descuentoSpecified = lc.comprobante[i].detalle.linea[j].descuentos[k].porcentaje_descuentoSpecified;
                             }
                         }
-                        if (lc.comprobante[i].detalle.linea[j].indicacion_exento_gravado.Trim() != "")
-                        {
-                            d.linea[j].indicacion_exento_gravado = lc.comprobante[i].detalle.linea[j].indicacion_exento_gravado;
-                        }
+                        d.linea[j].indicacion_exento_gravado = lc.comprobante[i].detalle.linea[j].indicacion_exento_gravado;
                         d.linea[j].numeroLinea = lc.comprobante[i].detalle.linea[j].numeroLinea;
                         d.linea[j].precio_unitario = lc.comprobante[i].detalle.linea[j].precio_unitario;
                         d.linea[j].precio_unitarioSpecified = lc.comprobante[i].detalle.linea[j].precio_unitarioSpecified;
