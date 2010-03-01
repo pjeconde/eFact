@@ -30,29 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Tablero));
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.BandejaEHorizontalSplitContainer = new System.Windows.Forms.SplitContainer();
             this.BandejaEGrillaPanel = new System.Windows.Forms.Panel();
             this.BandejaEDataGridView = new System.Windows.Forms.DataGridView();
-            this.IdArchivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdLoteBandE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaCreacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaModificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tamaño = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TamañoUMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Comentario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaProceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombreProcesado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BandejaEBotonesPanel = new System.Windows.Forms.Panel();
             this.panel13 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
@@ -144,6 +132,19 @@
             this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
+            this.IdArchivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdLoteBandE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaCreacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaModificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tamaño = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TamañoUMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Comentario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaProceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreProcesado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
             this.SplitContainer.SuspendLayout();
@@ -259,7 +260,8 @@
             this.Path,
             this.Tipo,
             this.FechaProceso,
-            this.NombreProcesado});
+            this.NombreProcesado,
+            this.IdUsuario});
             this.BandejaEDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BandejaEDataGridView.Location = new System.Drawing.Point(0, 0);
             this.BandejaEDataGridView.Name = "BandejaEDataGridView";
@@ -269,112 +271,6 @@
             this.BandejaEDataGridView.Size = new System.Drawing.Size(522, 306);
             this.BandejaEDataGridView.TabIndex = 7;
             this.BandejaEDataGridView.DoubleClick += new System.EventHandler(this.BandejaEDataGridView_DoubleClick);
-            // 
-            // IdArchivo
-            // 
-            this.IdArchivo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.IdArchivo.DataPropertyName = "IdArchivo";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.IdArchivo.DefaultCellStyle = dataGridViewCellStyle2;
-            this.IdArchivo.HeaderText = "Id.Archivo";
-            this.IdArchivo.Name = "IdArchivo";
-            this.IdArchivo.ReadOnly = true;
-            this.IdArchivo.Width = 60;
-            // 
-            // IdLoteBandE
-            // 
-            this.IdLoteBandE.DataPropertyName = "IdLote";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.IdLoteBandE.DefaultCellStyle = dataGridViewCellStyle3;
-            this.IdLoteBandE.HeaderText = "Id.Lote";
-            this.IdLoteBandE.Name = "IdLoteBandE";
-            this.IdLoteBandE.ReadOnly = true;
-            this.IdLoteBandE.Width = 60;
-            // 
-            // Nombre
-            // 
-            this.Nombre.DataPropertyName = "Nombre";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.Nombre.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 180;
-            // 
-            // FechaCreacion
-            // 
-            this.FechaCreacion.DataPropertyName = "FechaCreacion";
-            this.FechaCreacion.HeaderText = "Fecha Creación";
-            this.FechaCreacion.Name = "FechaCreacion";
-            this.FechaCreacion.ReadOnly = true;
-            this.FechaCreacion.Width = 120;
-            // 
-            // FechaModificacion
-            // 
-            this.FechaModificacion.DataPropertyName = "FechaModificacion";
-            this.FechaModificacion.HeaderText = "Fecha Ult. Modificación";
-            this.FechaModificacion.Name = "FechaModificacion";
-            this.FechaModificacion.ReadOnly = true;
-            this.FechaModificacion.Width = 120;
-            // 
-            // Tamaño
-            // 
-            this.Tamaño.DataPropertyName = "Tamaño";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.Tamaño.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Tamaño.HeaderText = "Tamaño";
-            this.Tamaño.Name = "Tamaño";
-            this.Tamaño.ReadOnly = true;
-            this.Tamaño.Width = 60;
-            // 
-            // TamañoUMedida
-            // 
-            this.TamañoUMedida.DataPropertyName = "TamañoUMedida";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.TamañoUMedida.DefaultCellStyle = dataGridViewCellStyle6;
-            this.TamañoUMedida.HeaderText = "Unidad Medida";
-            this.TamañoUMedida.Name = "TamañoUMedida";
-            this.TamañoUMedida.ReadOnly = true;
-            this.TamañoUMedida.Width = 50;
-            // 
-            // Comentario
-            // 
-            this.Comentario.DataPropertyName = "Comentario";
-            this.Comentario.HeaderText = "Comentario";
-            this.Comentario.Name = "Comentario";
-            this.Comentario.ReadOnly = true;
-            this.Comentario.Width = 300;
-            // 
-            // Path
-            // 
-            this.Path.DataPropertyName = "Path";
-            this.Path.HeaderText = "Path";
-            this.Path.Name = "Path";
-            this.Path.ReadOnly = true;
-            this.Path.Visible = false;
-            // 
-            // Tipo
-            // 
-            this.Tipo.DataPropertyName = "Tipo";
-            this.Tipo.HeaderText = "Tipo";
-            this.Tipo.Name = "Tipo";
-            this.Tipo.ReadOnly = true;
-            this.Tipo.Visible = false;
-            // 
-            // FechaProceso
-            // 
-            this.FechaProceso.DataPropertyName = "FechaProceso";
-            this.FechaProceso.HeaderText = "FechaProceso";
-            this.FechaProceso.Name = "FechaProceso";
-            this.FechaProceso.ReadOnly = true;
-            // 
-            // NombreProcesado
-            // 
-            this.NombreProcesado.DataPropertyName = "NombreProcesado";
-            this.NombreProcesado.HeaderText = "NombreProcesado";
-            this.NombreProcesado.Name = "NombreProcesado";
-            this.NombreProcesado.ReadOnly = true;
-            this.NombreProcesado.Width = 300;
             // 
             // BandejaEBotonesPanel
             // 
@@ -1303,6 +1199,119 @@
             this.menuItem3.Text = "Ayuda";
             this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
             // 
+            // IdArchivo
+            // 
+            this.IdArchivo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.IdArchivo.DataPropertyName = "IdArchivo";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.IdArchivo.DefaultCellStyle = dataGridViewCellStyle2;
+            this.IdArchivo.HeaderText = "Id.Archivo";
+            this.IdArchivo.Name = "IdArchivo";
+            this.IdArchivo.ReadOnly = true;
+            this.IdArchivo.Width = 60;
+            // 
+            // IdLoteBandE
+            // 
+            this.IdLoteBandE.DataPropertyName = "IdLote";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.IdLoteBandE.DefaultCellStyle = dataGridViewCellStyle3;
+            this.IdLoteBandE.HeaderText = "Id.Lote";
+            this.IdLoteBandE.Name = "IdLoteBandE";
+            this.IdLoteBandE.ReadOnly = true;
+            this.IdLoteBandE.Width = 60;
+            // 
+            // Nombre
+            // 
+            this.Nombre.DataPropertyName = "Nombre";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.Nombre.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 180;
+            // 
+            // FechaCreacion
+            // 
+            this.FechaCreacion.DataPropertyName = "FechaCreacion";
+            this.FechaCreacion.HeaderText = "Fecha Creación";
+            this.FechaCreacion.Name = "FechaCreacion";
+            this.FechaCreacion.ReadOnly = true;
+            this.FechaCreacion.Width = 120;
+            // 
+            // FechaModificacion
+            // 
+            this.FechaModificacion.DataPropertyName = "FechaModificacion";
+            this.FechaModificacion.HeaderText = "Fecha Ult. Modificación";
+            this.FechaModificacion.Name = "FechaModificacion";
+            this.FechaModificacion.ReadOnly = true;
+            this.FechaModificacion.Width = 120;
+            // 
+            // Tamaño
+            // 
+            this.Tamaño.DataPropertyName = "Tamaño";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.Tamaño.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Tamaño.HeaderText = "Tamaño";
+            this.Tamaño.Name = "Tamaño";
+            this.Tamaño.ReadOnly = true;
+            this.Tamaño.Width = 60;
+            // 
+            // TamañoUMedida
+            // 
+            this.TamañoUMedida.DataPropertyName = "TamañoUMedida";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.TamañoUMedida.DefaultCellStyle = dataGridViewCellStyle6;
+            this.TamañoUMedida.HeaderText = "Unidad Medida";
+            this.TamañoUMedida.Name = "TamañoUMedida";
+            this.TamañoUMedida.ReadOnly = true;
+            this.TamañoUMedida.Width = 50;
+            // 
+            // Comentario
+            // 
+            this.Comentario.DataPropertyName = "Comentario";
+            this.Comentario.HeaderText = "Comentario";
+            this.Comentario.Name = "Comentario";
+            this.Comentario.ReadOnly = true;
+            this.Comentario.Width = 300;
+            // 
+            // Path
+            // 
+            this.Path.DataPropertyName = "Path";
+            this.Path.HeaderText = "Path";
+            this.Path.Name = "Path";
+            this.Path.ReadOnly = true;
+            this.Path.Visible = false;
+            // 
+            // Tipo
+            // 
+            this.Tipo.DataPropertyName = "Tipo";
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.ReadOnly = true;
+            this.Tipo.Visible = false;
+            // 
+            // FechaProceso
+            // 
+            this.FechaProceso.DataPropertyName = "FechaProceso";
+            this.FechaProceso.HeaderText = "FechaProceso";
+            this.FechaProceso.Name = "FechaProceso";
+            this.FechaProceso.ReadOnly = true;
+            // 
+            // NombreProcesado
+            // 
+            this.NombreProcesado.DataPropertyName = "NombreProcesado";
+            this.NombreProcesado.HeaderText = "NombreProcesado";
+            this.NombreProcesado.Name = "NombreProcesado";
+            this.NombreProcesado.ReadOnly = true;
+            this.NombreProcesado.Width = 300;
+            // 
+            // IdUsuario
+            // 
+            this.IdUsuario.DataPropertyName = "IdUsuario";
+            this.IdUsuario.HeaderText = "Usuario";
+            this.IdUsuario.Name = "IdUsuario";
+            this.IdUsuario.ReadOnly = true;
+            // 
             // Tablero
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1435,18 +1444,6 @@
         private System.Windows.Forms.DateTimePicker FechaProcesoHstBandejaEDTP;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdArchivo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdLoteBandE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaCreacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaModificacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tamaño;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TamañoUMedida;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Comentario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Path;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaProceso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NombreProcesado;
         private System.Windows.Forms.RadioButton FechaProcesoRadioButton;
         private System.Windows.Forms.RadioButton FechaCreacionRadioButton;
         private System.Windows.Forms.ComboBox EventosComboBox;
@@ -1470,6 +1467,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IdLote;
         private System.Windows.Forms.DataGridViewTextBoxColumn LoteXML;
         private System.Windows.Forms.MenuItem menuItem3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdArchivo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdLoteBandE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaCreacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaModificacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tamaño;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TamañoUMedida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Comentario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Path;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaProceso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NombreProcesado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdUsuario;
     }
 }
 

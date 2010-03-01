@@ -543,7 +543,7 @@ namespace eFact_R
                             eFact_R.RN.Archivo.Insertar(dtBandejaEntrada[renglon], false, Aplicacion.Sesion);
                         }
                         //Remover archivo ----------------------
-                        //Directory.Move(Aplicacion.ArchPath + "\\" + NombreArchivo, Aplicacion.ArchPathHis + ArchGuardarComoNombre);
+                        Directory.Move(Aplicacion.ArchPath + "\\" + NombreArchivo, Aplicacion.ArchPathHis + ArchGuardarComoNombre);
                         //--------------------------------------
                     }
                 }
