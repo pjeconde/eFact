@@ -14,6 +14,7 @@ namespace CedWebRN
             lc.comprobante = new FeaEntidades.InterFacturas.comprobante[1];
             IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
             objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
+            objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturas"];
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"]!=null)
             {
                 System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
@@ -81,6 +82,7 @@ namespace CedWebRN
             IBK.error[] respErroresComprobantes = new CedWebRN.IBK.error[0];
             IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
             objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
+            objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturas"];
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
             {
                 System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
@@ -166,7 +168,7 @@ namespace CedWebRN
             if (col.Count.Equals(1))
             {
                 objIBK.ClientCertificates.Add(col[0]);
-                //System.Threading.Thread.Sleep(3000);
+                //System.Threading.Thread.Sleep(1000);
                 IBK.lote_comprobantes_response lcr = objIBK.receiveFacturasConSchema(lcIBK);
                 IBK.lote_response lr = new CedWebRN.IBK.lote_response();
                 try
