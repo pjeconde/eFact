@@ -69,6 +69,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_46C89BA1C6C845C58ABCEEE6173F1F93"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4A86761D3819AA94256B515ADCEC3FED"
         "OwnerKey" = "8:_363C94A71E2E3FF9A739A04AFF4A8A11"
         "MsmSig" = "8:_UNDEFINED"
@@ -147,18 +153,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6C00A3297E4E082FA860CEBD21933BD8"
-        "OwnerKey" = "8:_D9F597473F64B8B6661D6282047C784D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6C00A3297E4E082FA860CEBD21933BD8"
-        "OwnerKey" = "8:_99D02B7EA61341F088EDD739506D6E4C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_75E7512B40E3EA8FE10CC5E7DD63954B"
         "OwnerKey" = "8:_1B1C5C980F8C569F8C705DC7F608C11F"
         "MsmSig" = "8:_UNDEFINED"
@@ -178,18 +172,6 @@
         "Entry"
         {
         "MsmKey" = "8:_7D71BC7711A567E6559558757812E051"
-        "OwnerKey" = "8:_99D02B7EA61341F088EDD739506D6E4C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_87647E9944ED84550042A0B8144B8232"
-        "OwnerKey" = "8:_D9F597473F64B8B6661D6282047C784D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_87647E9944ED84550042A0B8144B8232"
         "OwnerKey" = "8:_99D02B7EA61341F088EDD739506D6E4C"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -273,24 +255,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C97332A8E4ADCC2C84BE800EB6229CC4"
-        "OwnerKey" = "8:_87647E9944ED84550042A0B8144B8232"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C97332A8E4ADCC2C84BE800EB6229CC4"
-        "OwnerKey" = "8:_99D02B7EA61341F088EDD739506D6E4C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C97332A8E4ADCC2C84BE800EB6229CC4"
-        "OwnerKey" = "8:_6C00A3297E4E082FA860CEBD21933BD8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_C99820FF57A53658584DD25C5ECE305F"
         "OwnerKey" = "8:_99D02B7EA61341F088EDD739506D6E4C"
         "MsmSig" = "8:_UNDEFINED"
@@ -341,12 +305,6 @@
         {
         "MsmKey" = "8:_D3AF1C1EBC0EFA9CCDD80D37EA6DCC4B"
         "OwnerKey" = "8:_1B1C5C980F8C569F8C705DC7F608C11F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D9315AAB9FC040F08B5D1D4E4EDFBF81"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -479,24 +437,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_ACDBCC82BD394B836F7254B93F44A1F6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6C00A3297E4E082FA860CEBD21933BD8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_87647E9944ED84550042A0B8144B8232"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C97332A8E4ADCC2C84BE800EB6229CC4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -751,6 +691,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_46C89BA1C6C845C58ABCEEE6173F1F93"
+            {
+            "SourcePath" = "8:..\\eFact-Residente\\eFact-R\\CedeiraSF-eFact-Especificaciones-InterfazTXT-Ayuda.pdf"
+            "TargetName" = "8:CedeiraSF-eFact-Especificaciones-InterfazTXT-Ayuda.pdf"
+            "Tag" = "8:"
+            "Folder" = "8:_FC528A4309414CE09F8C599464B2FC92"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4A86761D3819AA94256B515ADCEC3FED"
             {
             "AssemblyRegister" = "3:1"
@@ -926,37 +886,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6C00A3297E4E082FA860CEBD21933BD8"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Janus.Windows.UI.v2, Version=2.0.1105.0, Culture=neutral, PublicKeyToken=21d5517571b185bf"
-                "ScatterAssemblies"
-                {
-                    "_6C00A3297E4E082FA860CEBD21933BD8"
-                    {
-                    "Name" = "8:Janus.Windows.UI.v2.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Janus.Windows.UI.v2.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_FC528A4309414CE09F8C599464B2FC92"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_75E7512B40E3EA8FE10CC5E7DD63954B"
             {
             "AssemblyRegister" = "3:1"
@@ -1002,37 +931,6 @@
                     }
                 }
             "SourcePath" = "8:CedeiraAJAX.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_FC528A4309414CE09F8C599464B2FC92"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_87647E9944ED84550042A0B8144B8232"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Janus.Windows.GridEX.v2, Version=2.0.1105.0, Culture=neutral, PublicKeyToken=21d5517571b185bf"
-                "ScatterAssemblies"
-                {
-                    "_87647E9944ED84550042A0B8144B8232"
-                    {
-                    "Name" = "8:Janus.Windows.GridEX.v2.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Janus.Windows.GridEX.v2.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_FC528A4309414CE09F8C599464B2FC92"
@@ -1234,37 +1132,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C97332A8E4ADCC2C84BE800EB6229CC4"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Janus.Windows.Common.v2, Version=2.0.1105.0, Culture=neutral, PublicKeyToken=21d5517571b185bf"
-                "ScatterAssemblies"
-                {
-                    "_C97332A8E4ADCC2C84BE800EB6229CC4"
-                    {
-                    "Name" = "8:Janus.Windows.Common.v2.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Janus.Windows.Common.v2.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_FC528A4309414CE09F8C599464B2FC92"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C99820FF57A53658584DD25C5ECE305F"
             {
             "AssemblyRegister" = "3:1"
@@ -1356,26 +1223,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D9315AAB9FC040F08B5D1D4E4EDFBF81"
-            {
-            "SourcePath" = "8:..\\eFact-Residente\\eFact-R\\eFact-R-Ayuda.doc"
-            "TargetName" = "8:eFact-R-Ayuda.doc"
-            "Tag" = "8:"
-            "Folder" = "8:_FC528A4309414CE09F8C599464B2FC92"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D9F597473F64B8B6661D6282047C784D"
@@ -1579,14 +1426,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:eFact-R"
-        "ProductCode" = "8:{EB7CFB17-53F0-47FA-95EA-784F533DE038}"
-        "PackageCode" = "8:{1A45FA26-E3AD-4B0E-A2D1-3EE163EABF80}"
+        "ProductCode" = "8:{CD16E676-B21F-4EAB-94D0-996183D1EE6F}"
+        "PackageCode" = "8:{72E28C5B-9E8D-47B9-8C01-C71D59D4C4D0}"
         "UpgradeCode" = "8:{42C6C405-B3ED-403A-9F09-E4DCDC66475D}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.6.0"
+        "ProductVersion" = "8:1.6.1"
         "Manufacturer" = "8:Cedeira"
         "ARPHELPTELEPHONE" = "8:facturaelectronica@live.com"
         "ARPHELPLINK" = "8:http://www.cedeira.com.ar"
