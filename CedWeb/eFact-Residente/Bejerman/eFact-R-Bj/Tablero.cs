@@ -142,7 +142,7 @@ namespace eFact_R
             {
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 ActualizarBandejaEButton.Enabled = false;
-                System.Threading.Thread.Sleep(1000);
+                //System.Threading.Thread.Sleep(1000);
                 LimpiarBandejaEntrada();
                 if (ArchivosHistoricosRadioButton.Checked)
                 {
@@ -251,7 +251,7 @@ namespace eFact_R
             {
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 ActualizarBandejaSButton.Enabled = false;
-                System.Threading.Thread.Sleep(1000);
+                //System.Threading.Thread.Sleep(1000);
                 ActualizarBandejaS();
             }
             catch (Exception ex)
