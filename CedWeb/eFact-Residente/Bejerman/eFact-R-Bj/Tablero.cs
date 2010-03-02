@@ -113,26 +113,28 @@ namespace eFact_R
         {
             try
             {
-                if (Aplicacion.Modalidad != "Manual")
-                {
-                    this.serviceController1.MachineName = @System.Configuration.ConfigurationManager.AppSettings["MachineName"];
-                    this.serviceController1.ServiceName = @System.Configuration.ConfigurationManager.AppSettings["ServiceName"];
-                    this.serviceController1.Refresh();
-                    string status = this.serviceController1.Status.ToString();
-                    StatusBar.Panels["ModalidadSBP"].Text = "Modalidad: " + Aplicacion.Modalidad + "  Servicio: " + status;
-                    StatusBar.Panels["ModalidadSBP"].ToolTipText = "Modalidad = " + Aplicacion.Modalidad + "\r\nServicio: " + status + " Nombre de la PC: " + this.serviceController1.MachineName + " Nombre del servicio: " + this.serviceController1.ServiceName;
-                }
-                else 
-                {
-                    StatusBar.Panels["ModalidadSBP"].Text = "Modalidad: " + Aplicacion.Modalidad + "  Servicio: Desactivado";
-                    StatusBar.Panels["ModalidadSBP"].ToolTipText = "Modalidad = " + Aplicacion.Modalidad + "\r\nServicio: Desactivado" + " Nombre de la PC: " + this.serviceController1.MachineName + " Nombre del servicio: " + this.serviceController1.ServiceName;
-                }
+                string machineName = @System.Configuration.ConfigurationManager.AppSettings["MachineName"];
+                string serviceName = @System.Configuration.ConfigurationManager.AppSettings["ServiceName"];
+                this.serviceController1.MachineName = machineName;
+                this.serviceController1.ServiceName = serviceName;
+                this.serviceController1.Refresh();
+                string status = this.serviceController1.Status.ToString();
+                StatusBar.Panels["ModalidadSBP"].Text = "Modalidad: " + Aplicacion.Modalidad + "  Servicio: " + status;
+                StatusBar.Panels["ModalidadSBP"].ToolTipText = "Modalidad = " + Aplicacion.Modalidad + "\r\nServicio: " + status + "\r\nNombre de la PC: " + machineName + "\r\nNombre del servicio: " + serviceName;
             }
             catch (Exception ex)
             {
-                Aplicacion.Modalidad = "Manual";
-                StatusBar.Panels["ModalidadSBP"].Text = "Modalidad = Manual";
-                StatusBar.Panels["ModalidadSBP"].ToolTipText = "Mensaje: " + ex.Message;
+                string atencion = "";
+                if (Aplicacion.Modalidad != "Manual")
+                {
+                    Aplicacion.Modalidad = "Manual";
+                    atencion = " (!)";
+                }
+                StatusBar.Panels["ModalidadSBP"].Text = "Modalidad = Manual" + atencion + "  Servicio: Desactivado";
+                if (atencion != "")
+                {
+                    StatusBar.Panels["ModalidadSBP"].ToolTipText = "(!) El servicio no está disponible, por lo tanto se habilitará la opción de procesamiento de archivos manual.\r\n\r\n" + "Mensaje: " + ex.Message;
+                }
             }
         }
 
@@ -210,7 +212,16 @@ namespace eFact_R
                                 if (ArchFileInfo.Name.Length >= 16 && Aplicacion.OtrosFiltrosPuntoVta != "")
                                 {
                                     string puntoventa = ArchFileInfo.Name.Substring(12, 4);
-                                    if (puntoventa != Aplicacion.OtrosFiltrosPuntoVta)
+                                    string otrosFiltrosPuntoVta = "";
+                                    try
+                                    {
+                                        otrosFiltrosPuntoVta = Convert.ToInt32(Aplicacion.OtrosFiltrosPuntoVta).ToString("0000");
+                                    }
+                                    catch
+                                    {
+                                        throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorNoNumerico("Punto de Venta (filtro bandeja de salida)");
+                                    }
+                                    if (puntoventa != otrosFiltrosPuntoVta)
                                     {
                                         incorporarALista = false;
                                     }
@@ -543,7 +554,7 @@ namespace eFact_R
                             eFact_R.RN.Archivo.Insertar(dtBandejaEntrada[renglon], false, Aplicacion.Sesion);
                         }
                         //Remover archivo ----------------------
-                        Directory.Move(Aplicacion.ArchPath + "\\" + NombreArchivo, Aplicacion.ArchPathHis + ArchGuardarComoNombre);
+                        //Directory.Move(Aplicacion.ArchPath + "\\" + NombreArchivo, Aplicacion.ArchPathHis + ArchGuardarComoNombre);
                         //--------------------------------------
                     }
                 }
