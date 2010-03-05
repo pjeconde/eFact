@@ -120,7 +120,7 @@ namespace eFact_R.DB
             comandoSQL += ", CondicionIVA = " + Vendedor.CondicionIVA + " ";
             comandoSQL += ", CondicionIB = " + Vendedor.CondicionIB + " ";
             comandoSQL += ", NroIB = '" + Vendedor.NroIB + "' ";
-            if (Vendedor.InicioActividades.GetType() != Type.GetType("System.DBNull") && Vendedor.InicioActividades != Aplicacion.FechaMax)
+            if (Vendedor.InicioActividades.GetType() != Type.GetType("System.DBNull"))
             {
                 comandoSQL += ", InicioActividades = '" + Vendedor.InicioActividades.ToString("yyyyMMdd") + "' ";
             }
