@@ -159,15 +159,8 @@ namespace eFact_R
             vendedor.Nombre = VendedorNombreTextBox.Text;
             vendedor.NumeroSerieCertificado = VendedorNroSerieCertificadoTextBox.Text;
             vendedor.Codigo = VendedorCodigoTextBox.Text;
-            if (VendedorCondicionIVAComboBox.Text != "")
-            {
-                vendedor.CondicionIVA = Convert.ToInt32(VendedorCondicionIVAComboBox.SelectedValue);
-                //((FeaEntidades.CondicionesIVA.CondicionIVA)VendedorCondicionIVAComboBox.Items[VendedorCondicionIVAComboBox.SelectedIndex]).Codigo;
-            }
-            if (VendedorCondicionIBComboBox.Text != "")
-            {
-                vendedor.CondicionIB = Convert.ToInt32(VendedorCondicionIBComboBox.SelectedValue);
-            }
+            vendedor.CondicionIVA = Convert.ToInt32(VendedorCondicionIVAComboBox.SelectedValue);
+            vendedor.CondicionIB = Convert.ToInt32(VendedorCondicionIBComboBox.SelectedValue);
             vendedor.NroIB = VendedorNroIBTextBox.Text;
             if (VendedorInicioActividadesDTP.Checked == true)
             {
@@ -186,10 +179,7 @@ namespace eFact_R
             vendedor.DomicilioTorre = VendedorDomicilioTorreTextBox.Text;
             vendedor.DomicilioManzana = VendedorDomicilioManzanaTextBox.Text;
             vendedor.Localidad = VendedorLocalidadTextBox.Text;
-            if (VendedorProvinciaComboBox.Text != "")
-            {
-                vendedor.Provincia = VendedorProvinciaComboBox.SelectedValue.ToString();
-            }
+            vendedor.Provincia = VendedorProvinciaComboBox.SelectedValue.ToString();
             vendedor.CP = VendedorCPTextBox.Text;
             vendedor.EMail = VendedorEMailTextBox.Text;
             vendedor.Telefono = VendedorTelefonosTextBox.Text;
