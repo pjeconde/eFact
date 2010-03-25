@@ -109,10 +109,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="https://wsqacfe.interfacturas.com.ar/ws/FacturaWebServiceConSchema">
+    <WebReferenceUrl Include="D:\Usuarios\Claudio\Mis documentos\Cedeira y Asoc. S.A\GoogleCode-CedWeb\CedWeb\CedWebRN\WSDL\FacturaWebServiceConSchema.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\IBK\</RelPath>
-      <UpdateFromURL>https://wsqacfe.interfacturas.com.ar/ws/FacturaWebServiceConSchema</UpdateFromURL>
+      <UpdateFromURL>D:\Usuarios\Claudio\Mis documentos\Cedeira y Asoc. S.A\GoogleCode-CedWeb\CedWeb\CedWebRN\WSDL\FacturaWebServiceConSchema.wsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -141,9 +141,7 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="WSDL\FacturaWebServiceConSchema.xml" />
+    <None Include="WSDL\FacturaWebServiceConSchema.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

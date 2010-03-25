@@ -72,7 +72,7 @@ namespace CedWebRN
                 }
                 cIBK.cabecera.informacion_comprobante.codigo_operacion = lcIBK.comprobante[i].cabecera.informacion_comprobante.codigo_operacion;
                 cIBK.cabecera.informacion_comprobante.condicion_de_pago = lcIBK.comprobante[i].cabecera.informacion_comprobante.condicion_de_pago;
-                cIBK.cabecera.informacion_comprobante.condicion_de_pagoSpecified = lcIBK.comprobante[i].cabecera.informacion_comprobante.condicion_de_pagoSpecified;
+                cIBK.cabecera.informacion_comprobante.condicion_de_pagoSpecified = true;
                 cIBK.cabecera.informacion_comprobante.es_detalle_encriptado = lcIBK.comprobante[i].cabecera.informacion_comprobante.es_detalle_encriptado;
                 cIBK.cabecera.informacion_comprobante.fecha_emision = lcIBK.comprobante[i].cabecera.informacion_comprobante.fecha_emision;
                 cIBK.cabecera.informacion_comprobante.fecha_obtencion_cae = lcIBK.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae;
