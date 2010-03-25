@@ -26,7 +26,7 @@ namespace CedWebRN.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://wsqacfe.interfacturas.com.ar/ws/FacturaWebServiceConSchema")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ibcfealsb02-qa:6002/ws/FacturaWebServiceConSchema")]
         public string CedWebRN_IBK_FacturaWebServiceConSchemaSoapBindingQSService {
             get {
                 return ((string)(this["CedWebRN_IBK_FacturaWebServiceConSchemaSoapBindingQSService"]));
