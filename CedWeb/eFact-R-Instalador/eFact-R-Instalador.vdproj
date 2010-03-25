@@ -1426,14 +1426,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:eFact-R"
-        "ProductCode" = "8:{CD16E676-B21F-4EAB-94D0-996183D1EE6F}"
-        "PackageCode" = "8:{72E28C5B-9E8D-47B9-8C01-C71D59D4C4D0}"
+        "ProductCode" = "8:{C2BDB6B7-E9AE-421D-824B-57E0BDF61869}"
+        "PackageCode" = "8:{0DA5EB0E-341B-4343-A11E-F01DAE07A9C7}"
         "UpgradeCode" = "8:{42C6C405-B3ED-403A-9F09-E4DCDC66475D}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.6.1"
+        "ProductVersion" = "8:1.6.2"
         "Manufacturer" = "8:Cedeira"
         "ARPHELPTELEPHONE" = "8:facturaelectronica@live.com"
         "ARPHELPLINK" = "8:http://www.cedeira.com.ar"
@@ -1548,7 +1548,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_42611495C8FA45BCBA4F7215F37CE648"
             {
-            "Name" = "8:eFact-R v1.6"
+            "Name" = "8:eFact-R v1.6.2"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
