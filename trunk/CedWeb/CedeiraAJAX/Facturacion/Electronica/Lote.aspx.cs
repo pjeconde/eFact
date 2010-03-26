@@ -168,31 +168,31 @@ namespace CedeiraAJAX.Facturacion.Electronica
         }
         private void BindearDropDownLists()
         {
-			((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataValueField = "Codigo";
-			((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataTextField = "Descr";
-			((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
-			((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
-			
-			((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataValueField = "Codigo";
-			((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataTextField = "Descr";
-			((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.Lista();
-			((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataBind();
+            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataValueField = "Codigo";
+            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataTextField = "Descr";
+            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
+
+            ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataValueField = "Codigo";
+            ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataTextField = "Descr";
+            ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.Lista();
+            ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataBind();
 
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataValueField = "Codigo";
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataTextField = "Descr";
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.Lista();
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataBind();
-			((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).AppendDataBoundItems = false;
+            ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).AppendDataBoundItems = false;
 
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataValueField = "Codigo";
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataTextField = "Descr";
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.ListaDetalle();
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataBind();
 
-			((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataValueField = "Codigo";
-			((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataTextField = "Descr";
-			((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataSource = FeaEntidades.CodigosImpuesto.CodigoImpuesto.Lista();
-			((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataBind();
+            ((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataValueField = "Codigo";
+            ((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataTextField = "Descr";
+            ((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataSource = FeaEntidades.CodigosImpuesto.CodigoImpuesto.Lista();
+            ((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataBind();
 
         }
 
@@ -481,7 +481,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 catch (Exception ex)
                 {
-					ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
                 }
             }
         }
@@ -491,7 +491,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             {
                 if (Punto_VentaTextBox.Text.Equals(string.Empty))
                 {
-					throw new Exception("Debe definir el punto de venta antes de editar un detalle");
+                    throw new Exception("Debe definir el punto de venta antes de editar un detalle");
                 }
 
                 cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"]);
@@ -762,15 +762,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
             catch (Exception ex)
             {
-				ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
-			}
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+            }
         }
         protected void detalleGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
         {
             if (e.Exception != null)
             {
-				ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
-				e.ExceptionHandled = true;
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+                e.ExceptionHandled = true;
             }
         }
         protected void detalleGridView_RowEditing(object sender, GridViewEditEventArgs e)
@@ -853,8 +853,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             if (e.Exception != null)
             {
-				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
-				e.ExceptionHandled = true;
+                ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+                e.ExceptionHandled = true;
             }
         }
         protected void GenerarButton_Click(object sender, EventArgs e)
@@ -940,18 +940,25 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         mail.Attachments.Add(attachment);
                         mail.BodyEncoding = System.Text.Encoding.UTF8;
                         mail.Body = AgregarBody();
+                        smtpClient.Host = "localhost";
                         if (smtpXAmb.Equals("DESA"))
                         {
-                            smtpClient.Host = "vsmtpr.bancogalicia.com.ar";
-                        }
-                        else
-                        {
-                            smtpClient.Host = "localhost";
+                            string MailServidorSmtp = System.Configuration.ConfigurationManager.AppSettings["MailServidorSmtp"];
+                            if (MailServidorSmtp != "")
+                            {
+                                string MailCredencialesUsr = System.Configuration.ConfigurationManager.AppSettings["MailCredencialesUsr"];
+                                string MailCredencialesPsw = System.Configuration.ConfigurationManager.AppSettings["MailCredencialesPsw"];
+                                smtpClient.Host = MailServidorSmtp;
+                                if (MailCredencialesUsr != "")
+                                {
+                                    smtpClient.Credentials = new System.Net.NetworkCredential(MailCredencialesUsr, MailCredencialesPsw);
+                                }
+                                smtpClient.Credentials = new System.Net.NetworkCredential(MailCredencialesUsr, MailCredencialesPsw);
+                            }
                         }
                         smtpClient.Send(mail);
                     }
                     m.Close();
-
 
                     if (!smtpXAmb.Equals("DESA"))
                     {
@@ -1068,16 +1075,16 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 catch (Exception ex)
                 {
-					ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
-				}
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+                }
             }
         }
         protected void impuestosGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
         {
             if (e.Exception != null)
             {
-				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
-				e.ExceptionHandled = true;
+                ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+                e.ExceptionHandled = true;
             }
         }
         protected void impuestosGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -1125,7 +1132,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             if (e.Exception != null)
             {
-				ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
                 e.ExceptionHandled = true;
             }
         }
@@ -1161,8 +1168,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
             catch (Exception ex)
             {
-				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
-			}
+                ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+            }
         }
 
         protected void descuentosGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -1214,7 +1221,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 catch (Exception ex)
                 {
-					ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
                 }
             }
         }
@@ -1222,8 +1229,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             if (e.Exception != null)
             {
-				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
-				e.ExceptionHandled = true;
+                ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+                e.ExceptionHandled = true;
             }
         }
         protected void descuentosGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -1259,7 +1266,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             if (e.Exception != null)
             {
-				ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
                 e.ExceptionHandled = true;
             }
         }
@@ -1295,8 +1302,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
             catch (Exception ex)
             {
-				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
-			}
+                ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+            }
         }
 
         protected void referenciasGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -1326,7 +1333,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     string auxDatoRef = ((TextBox)referenciasGridView.FooterRow.FindControl("txtdato_de_referencia")).Text;
                     if (System.Text.RegularExpressions.Regex.IsMatch(auxDatoRef, "^[0-9]+$"))
                     {
-                        r.dato_de_referencia = Convert.ToInt64(auxDatoRef);
+                        r.dato_de_referencia = Convert.ToString(Convert.ToInt64(auxDatoRef));
                     }
                     else
                     {
@@ -1345,7 +1352,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 catch (Exception ex)
                 {
-					ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
                 }
             }
         }
@@ -1353,8 +1360,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             if (e.Exception != null)
             {
-				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
-				e.ExceptionHandled = true;
+                ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+                e.ExceptionHandled = true;
             }
         }
         protected void referenciasGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -1403,7 +1410,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             if (e.Exception != null)
             {
-				ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
                 e.ExceptionHandled = true;
             }
         }
@@ -1427,7 +1434,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 string auxDatoRef = ((TextBox)referenciasGridView.Rows[e.RowIndex].FindControl("txtdato_de_referencia")).Text;
                 if (System.Text.RegularExpressions.Regex.IsMatch(auxDatoRef, "^[0-9]+$"))
                 {
-                    r.dato_de_referencia = Convert.ToInt64(auxDatoRef);
+                    r.dato_de_referencia = Convert.ToString(Convert.ToInt64(auxDatoRef));
                 }
                 else
                 {
@@ -1440,8 +1447,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
             catch (Exception ex)
             {
-				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
-			}
+                ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+            }
         }
 
         protected void FileUploadButton_Click(object sender, EventArgs e)
@@ -1752,7 +1759,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             BindearDropDownLists();
         }
 
-   
+
         private void CompletarUI(org.dyndns.cedweb.consulta.ConsultarResult lc, EventArgs e)
         {
             //Cabecera
@@ -1782,8 +1789,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     {
                         FeaEntidades.InterFacturas.informacion_comprobanteReferencias icr = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
                         icr.codigo_de_referencia = r.codigo_de_referencia;
-                        icr.dato_de_referencia = r.dato_de_referencia;
-                        icr.descripcioncodigo_de_referencia=FeaEntidades.CodigosReferencia.CodigoReferencia.Lista()
+                        icr.dato_de_referencia = Convert.ToString(r.dato_de_referencia);
+                        icr.descripcioncodigo_de_referencia = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista()
                             .Find(
                             delegate(FeaEntidades.CodigosReferencia.CodigoReferencia c)
                             { return c.Codigo == Convert.ToString(icr.codigo_de_referencia); }
@@ -2021,14 +2028,14 @@ namespace CedeiraAJAX.Facturacion.Electronica
         }
         protected void MonedaComprobanteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-			if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+            if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
             {
-				Response.Redirect("~/Inicio.aspx");
+                Response.Redirect("~/Inicio.aspx");
             }
         }
         protected void CompradorDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-			if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+            if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
             {
                 ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
             }
@@ -2222,48 +2229,48 @@ namespace CedeiraAJAX.Facturacion.Electronica
         }
         protected void Punto_VentaTextBox_TextChanged(object sender, EventArgs e)
         {
-			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+            if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
             {
                 if (!((TextBox)sender).Text.Equals(string.Empty))
                 {
                     if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal != null)
                     {
                         System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
-						try
-						{
-							int auxPV = Convert.ToInt32(((TextBox)sender).Text);
-							if (listaPV.Contains(auxPV))
-							{
-								Presta_ServCheckBox.Checked = false;
-								Presta_ServCheckBox.Enabled = false;
-								FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
-								FechaServDesdeDatePickerWebUserControl.Visible = false;
-								FechaInicioServLabel.Visible = false;
-								FechaHstServLabel.Visible = false;
-								FechaServHastaDatePickerWebUserControl.CalendarDateString = string.Empty;
-								FechaServHastaDatePickerWebUserControl.Visible = false;
-								Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-								Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-								Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
-							}
-							else
-							{
-								Presta_ServCheckBox.Checked = true;
-								Presta_ServCheckBox.Enabled = true;
-								FechaServDesdeDatePickerWebUserControl.Visible = true;
-								FechaInicioServLabel.Visible = true;
-								FechaHstServLabel.Visible = true;
-								FechaServHastaDatePickerWebUserControl.Visible = true;
-								Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-								Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-								Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
-							}
-							Tipo_De_ComprobanteDropDownList.DataBind();
-						}
-						catch
-						{
-							//((TextBox)sender).Text = string.Empty;
-						}
+                        try
+                        {
+                            int auxPV = Convert.ToInt32(((TextBox)sender).Text);
+                            if (listaPV.Contains(auxPV))
+                            {
+                                Presta_ServCheckBox.Checked = false;
+                                Presta_ServCheckBox.Enabled = false;
+                                FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
+                                FechaServDesdeDatePickerWebUserControl.Visible = false;
+                                FechaInicioServLabel.Visible = false;
+                                FechaHstServLabel.Visible = false;
+                                FechaServHastaDatePickerWebUserControl.CalendarDateString = string.Empty;
+                                FechaServHastaDatePickerWebUserControl.Visible = false;
+                                Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                                Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                                Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
+                            }
+                            else
+                            {
+                                Presta_ServCheckBox.Checked = true;
+                                Presta_ServCheckBox.Enabled = true;
+                                FechaServDesdeDatePickerWebUserControl.Visible = true;
+                                FechaInicioServLabel.Visible = true;
+                                FechaHstServLabel.Visible = true;
+                                FechaServHastaDatePickerWebUserControl.Visible = true;
+                                Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                                Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                                Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
+                            }
+                            Tipo_De_ComprobanteDropDownList.DataBind();
+                        }
+                        catch
+                        {
+                            //((TextBox)sender).Text = string.Empty;
+                        }
                     }
                 }
             }
@@ -2298,12 +2305,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(cta.NroSerieCertificado, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
 
                         org.dyndns.cedweb.envio.EnvioIBK edyndns = new org.dyndns.cedweb.envio.EnvioIBK();
-                        
+
                         org.dyndns.cedweb.envio.lc lcIBK = new org.dyndns.cedweb.envio.lc();
 
                         FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
                         lcIBK = Conversor.Entidad2IBK(lcFea);
-
+                        //CedWebRN.Comprobante cc = new CedWebRN.Comprobante();
+                        //cc.EnviarIBK(lcFea, certificado);
                         string respuesta = edyndns.EnviarIBK(lcIBK, certificado);
 
                         ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "')</script>");
@@ -2437,7 +2445,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
             if (!Condicion_De_PagoTextBox.Text.Equals(string.Empty))
             {
-                infcomprob.condicion_de_pago = Convert.ToInt32(Condicion_De_PagoTextBox.Text);
+                infcomprob.condicion_de_pago = Condicion_De_PagoTextBox.Text;
                 infcomprob.condicion_de_pagoSpecified = true;
             }
             infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
@@ -2896,7 +2904,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                                 sw.WriteLine(ex.InnerException.Message);
                             }
                         }
-                    } 
+                    }
                     ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.Replace("\r", "").Replace("\n", "") + "');</script>");
                 }
                 catch (Exception ex)
@@ -2940,7 +2948,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             {
                 CedWebRN.Cuenta.RegistrarComprobante(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
             }
-           
+
             if (((CedWebEntidades.Sesion)Session["Sesion"]).Flag.ModoDepuracion)
             {
                 //ModoDepuracion encendido
@@ -2950,53 +2958,53 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
         }
 
-		private void ActualizarTipoDeCambio()
-		{
-			System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
-			if (!MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
-			{
-				Tipo_de_cambioLabel.Visible = true;
-				Tipo_de_cambioTextBox.Visible = true;
-				Tipo_de_cambioRequiredFieldValidator.Enabled = true;
-				Tipo_de_cambioRegularExpressionValidator.Enabled = true;
+        private void ActualizarTipoDeCambio()
+        {
+            System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
+            if (!MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
+            {
+                Tipo_de_cambioLabel.Visible = true;
+                Tipo_de_cambioTextBox.Visible = true;
+                Tipo_de_cambioRequiredFieldValidator.Enabled = true;
+                Tipo_de_cambioRegularExpressionValidator.Enabled = true;
 
-				for (int i = 0; i < listadelineas.Count; i++)
-				{
-					FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
-					limo.importe_total_articuloSpecified = true;
-					limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
-					limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
-					limo.importe_iva = listadelineas[i].importe_iva;
-					limo.precio_unitario = listadelineas[i].precio_unitario;
-					limo.precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
-					listadelineas[i].importes_moneda_origen = limo;
-				}
-			}
-			else
-			{
-				Tipo_de_cambioLabel.Visible = false;
-				Tipo_de_cambioTextBox.Visible = false;
-				Tipo_de_cambioTextBox.Text = null;
-				Tipo_de_cambioRequiredFieldValidator.Enabled = false;
-				Tipo_de_cambioRegularExpressionValidator.Enabled = false;
+                for (int i = 0; i < listadelineas.Count; i++)
+                {
+                    FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
+                    limo.importe_total_articuloSpecified = true;
+                    limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
+                    limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
+                    limo.importe_iva = listadelineas[i].importe_iva;
+                    limo.precio_unitario = listadelineas[i].precio_unitario;
+                    limo.precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+                    listadelineas[i].importes_moneda_origen = limo;
+                }
+            }
+            else
+            {
+                Tipo_de_cambioLabel.Visible = false;
+                Tipo_de_cambioTextBox.Visible = false;
+                Tipo_de_cambioTextBox.Text = null;
+                Tipo_de_cambioRequiredFieldValidator.Enabled = false;
+                Tipo_de_cambioRegularExpressionValidator.Enabled = false;
 
-				for (int i = 0; i < listadelineas.Count; i++)
-				{
-					if (listadelineas[i].importes_moneda_origen != null)
-					{
-						listadelineas[i].importe_total_articulo = listadelineas[i].importes_moneda_origen.importe_total_articulo;
-						listadelineas[i].importe_ivaSpecified = listadelineas[i].importes_moneda_origen.importe_ivaSpecified;
-						listadelineas[i].importe_iva = listadelineas[i].importes_moneda_origen.importe_iva;
-						listadelineas[i].precio_unitario = listadelineas[i].importes_moneda_origen.precio_unitario;
-						listadelineas[i].precio_unitarioSpecified = listadelineas[i].importes_moneda_origen.precio_unitarioSpecified;
-					}
-				}
-			}
-		}
+                for (int i = 0; i < listadelineas.Count; i++)
+                {
+                    if (listadelineas[i].importes_moneda_origen != null)
+                    {
+                        listadelineas[i].importe_total_articulo = listadelineas[i].importes_moneda_origen.importe_total_articulo;
+                        listadelineas[i].importe_ivaSpecified = listadelineas[i].importes_moneda_origen.importe_ivaSpecified;
+                        listadelineas[i].importe_iva = listadelineas[i].importes_moneda_origen.importe_iva;
+                        listadelineas[i].precio_unitario = listadelineas[i].importes_moneda_origen.precio_unitario;
+                        listadelineas[i].precio_unitarioSpecified = listadelineas[i].importes_moneda_origen.precio_unitarioSpecified;
+                    }
+                }
+            }
+        }
 
-		protected void tipoCambioUpdatePanel_Load(object sender, EventArgs e)
-		{
-			ActualizarTipoDeCambio();
-		}
+        protected void tipoCambioUpdatePanel_Load(object sender, EventArgs e)
+        {
+            ActualizarTipoDeCambio();
+        }
     }
 }
