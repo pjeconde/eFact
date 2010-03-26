@@ -91,6 +91,30 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CedeiraUIforms", "CedUI\Ced
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-I-Bj", "eFact-Interfaz\eFact-I-Bj\eFact-I-Bj.csproj", "{80E7AF64-D3DA-4D46-9C21-48BD3C140725}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "eFact-I-Bj-Instalador", "eFact-I-Bj-Instalador\eFact-I-Bj-Instalador.vdproj", "{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "eFact-R-Instalador", "eFact-R-Instalador\eFact-R-Instalador.vdproj", "{A0DBA393-A3DD-4740-8613-584B63A029C7}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-R", "eFact-Residente\eFact-R\eFact-R.csproj", "{38768D97-E8CF-427F-A6AB-E658A2B25AAC}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -333,6 +357,72 @@ Global
 		{48571E9A-0BCD-486E-875F-62B861186EBE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{48571E9A-0BCD-486E-875F-62B861186EBE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{48571E9A-0BCD-486E-875F-62B861186EBE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{80E7AF64-D3DA-4D46-9C21-48BD3C140725}.Cedeira|.NET.ActiveCfg = Release|Any CPU
+		{80E7AF64-D3DA-4D46-9C21-48BD3C140725}.Cedeira|Any CPU.ActiveCfg = Release|Any CPU
+		{80E7AF64-D3DA-4D46-9C21-48BD3C140725}.Cedeira|Any CPU.Build.0 = Release|Any CPU
+		{80E7AF64-D3DA-4D46-9C21-48BD3C140725}.Cedeira|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{80E7AF64-D3DA-4D46-9C21-48BD3C140725}.Cedeira|Mixed Platforms.Build.0 = Release|Any CPU
+		{80E7AF64-D3DA-4D46-9C21-48BD3C140725}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{80E7AF64-D3DA-4D46-9C21-48BD3C140725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80E7AF64-D3DA-4D46-9C21-48BD3C140725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80E7AF64-D3DA-4D46-9C21-48BD3C140725}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{80E7AF64-D3DA-4D46-9C21-48BD3C140725}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{80E7AF64-D3DA-4D46-9C21-48BD3C140725}.Release|.NET.ActiveCfg = Release|Any CPU
+		{80E7AF64-D3DA-4D46-9C21-48BD3C140725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80E7AF64-D3DA-4D46-9C21-48BD3C140725}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80E7AF64-D3DA-4D46-9C21-48BD3C140725}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{80E7AF64-D3DA-4D46-9C21-48BD3C140725}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Cedeira|.NET.ActiveCfg = Release
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Cedeira|.NET.Build.0 = Release
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Cedeira|Any CPU.ActiveCfg = Release
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Cedeira|Any CPU.Build.0 = Release
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Cedeira|Mixed Platforms.ActiveCfg = Release
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Cedeira|Mixed Platforms.Build.0 = Release
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Debug|.NET.ActiveCfg = Debug
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Debug|.NET.Build.0 = Debug
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Debug|Any CPU.ActiveCfg = Debug
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Debug|Any CPU.Build.0 = Debug
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Debug|Mixed Platforms.Build.0 = Debug
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Release|.NET.ActiveCfg = Release
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Release|.NET.Build.0 = Release
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Release|Any CPU.ActiveCfg = Release
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Release|Any CPU.Build.0 = Release
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Release|Mixed Platforms.ActiveCfg = Release
+		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Release|Mixed Platforms.Build.0 = Release
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Cedeira|.NET.ActiveCfg = Release
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Cedeira|.NET.Build.0 = Release
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Cedeira|Any CPU.ActiveCfg = Release
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Cedeira|Any CPU.Build.0 = Release
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Cedeira|Mixed Platforms.ActiveCfg = Release
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Cedeira|Mixed Platforms.Build.0 = Release
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Debug|.NET.ActiveCfg = Debug
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Debug|.NET.Build.0 = Debug
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Debug|Any CPU.ActiveCfg = Debug
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Debug|Any CPU.Build.0 = Debug
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Debug|Mixed Platforms.Build.0 = Debug
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Release|.NET.ActiveCfg = Release
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Release|.NET.Build.0 = Release
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Release|Any CPU.ActiveCfg = Release
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Release|Any CPU.Build.0 = Release
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Release|Mixed Platforms.ActiveCfg = Release
+		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Release|Mixed Platforms.Build.0 = Release
+		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Cedeira|.NET.ActiveCfg = Release|Any CPU
+		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Cedeira|Any CPU.ActiveCfg = Release|Any CPU
+		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Cedeira|Any CPU.Build.0 = Release|Any CPU
+		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Cedeira|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Cedeira|Mixed Platforms.Build.0 = Release|Any CPU
+		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Release|.NET.ActiveCfg = Release|Any CPU
+		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
