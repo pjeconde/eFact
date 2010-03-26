@@ -78,7 +78,7 @@ namespace FileHelpers
 
 		#region "  CreateAssingMethods  "
 
-#if NET_2_0
+
 
         private delegate object[] GetAllValuesCallback(object record);
         private GetAllValuesCallback mGetAllValuesHandler;
@@ -215,7 +215,7 @@ namespace FileHelpers
 		}
 
 
-	#endif
+
 		#endregion
 
 		
@@ -668,7 +668,7 @@ namespace FileHelpers
 	#endif
 
 
-		#if NET_2_0
+		
 
 		public static GetFieldValueCallback CreateGetFieldMethod(FieldInfo fi)
 		{
@@ -685,7 +685,7 @@ namespace FileHelpers
 
 		}
 	
-		#endif
+
 	}
 	
 }
