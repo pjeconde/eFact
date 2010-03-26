@@ -115,6 +115,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-R", "eFact-Residente\
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-R-XL", "eFact-Residente\XL\eFact-R-XL\eFact-R-XL.csproj", "{2A145857-3B75-4308-A56E-40F971142FE4}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileHelpers.ExcelStorage.2005", "FileHelpers.ExcelStorage\FileHelpers.ExcelStorage.2005.csproj", "{B3F2B976-73D5-49C7-BEAA-BF62E233132A}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -423,6 +435,36 @@ Global
 		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{38768D97-E8CF-427F-A6AB-E658A2B25AAC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Cedeira|.NET.ActiveCfg = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Cedeira|Any CPU.ActiveCfg = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Cedeira|Any CPU.Build.0 = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Cedeira|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Cedeira|Mixed Platforms.Build.0 = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Release|.NET.ActiveCfg = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2A145857-3B75-4308-A56E-40F971142FE4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B3F2B976-73D5-49C7-BEAA-BF62E233132A}.Cedeira|.NET.ActiveCfg = Release|Any CPU
+		{B3F2B976-73D5-49C7-BEAA-BF62E233132A}.Cedeira|Any CPU.ActiveCfg = Release|Any CPU
+		{B3F2B976-73D5-49C7-BEAA-BF62E233132A}.Cedeira|Any CPU.Build.0 = Release|Any CPU
+		{B3F2B976-73D5-49C7-BEAA-BF62E233132A}.Cedeira|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B3F2B976-73D5-49C7-BEAA-BF62E233132A}.Cedeira|Mixed Platforms.Build.0 = Release|Any CPU
+		{B3F2B976-73D5-49C7-BEAA-BF62E233132A}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{B3F2B976-73D5-49C7-BEAA-BF62E233132A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3F2B976-73D5-49C7-BEAA-BF62E233132A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3F2B976-73D5-49C7-BEAA-BF62E233132A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B3F2B976-73D5-49C7-BEAA-BF62E233132A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B3F2B976-73D5-49C7-BEAA-BF62E233132A}.Release|.NET.ActiveCfg = Release|Any CPU
+		{B3F2B976-73D5-49C7-BEAA-BF62E233132A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3F2B976-73D5-49C7-BEAA-BF62E233132A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3F2B976-73D5-49C7-BEAA-BF62E233132A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B3F2B976-73D5-49C7-BEAA-BF62E233132A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
