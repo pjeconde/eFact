@@ -257,35 +257,35 @@
     <Content Include="XMLwsqacfe.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CedeiraAJAX\CedeiraAJAX.csproj">
+    <ProjectReference Include="..\..\..\CedeiraAJAX\CedeiraAJAX.csproj">
       <Project>{A572E64D-02D8-4BCC-8BD6-7E28ABA46730}</Project>
       <Name>CedeiraAJAX</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CedeiraAP\CedeiraAP.csproj">
+    <ProjectReference Include="..\..\..\CedeiraAP\CedeiraAP.csproj">
       <Project>{DB0A7D76-F68E-43A7-ADBD-08DDF2AFAD36}</Project>
       <Name>CedeiraAP</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CedEntidades\CedEntidades.csproj">
+    <ProjectReference Include="..\..\..\CedEntidades\CedEntidades.csproj">
       <Project>{2D17A63F-789D-4C01-864A-C15411D577A7}</Project>
       <Name>CedEntidades</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CedEx\CedeiraEx.csproj">
+    <ProjectReference Include="..\..\..\CedEx\CedeiraEx.csproj">
       <Project>{883AB19F-36F5-42A4-A1A7-4206F84E7757}</Project>
       <Name>CedeiraEx</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CedUI\CedeiraUIforms.vbproj">
+    <ProjectReference Include="..\..\..\CedUI\CedeiraUIforms.vbproj">
       <Project>{48571E9A-0BCD-486E-875F-62B861186EBE}</Project>
       <Name>CedeiraUIforms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\CedWebRN\CedWebRN.csproj">
+    <ProjectReference Include="..\..\..\CedWebRN\CedWebRN.csproj">
       <Project>{9C229E72-6A86-4209-8730-91F573B4DF19}</Project>
       <Name>CedWebRN</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FeaEntidades\FeaEntidades.csproj">
+    <ProjectReference Include="..\..\..\FeaEntidades\FeaEntidades.csproj">
       <Project>{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}</Project>
       <Name>FeaEntidades</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\FileHelpers\FileHelpers.2005.csproj">
+    <ProjectReference Include="..\..\..\FileHelpers\FileHelpers.2005.csproj">
       <Project>{EB8633FF-CEED-40EE-8D1A-CA1BF5678C42}</Project>
       <Name>FileHelpers.2005</Name>
     </ProjectReference>
