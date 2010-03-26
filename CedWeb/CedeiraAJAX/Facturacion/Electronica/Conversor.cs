@@ -16,7 +16,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             org.dyndns.cedweb.envio.lc lcWS = new global::CedeiraAJAX.org.dyndns.cedweb.envio.lc();
 
-
             lcWS.cabecera_lote = new global::CedeiraAJAX.org.dyndns.cedweb.envio.lcCabecera_lote();
             lcWS.cabecera_lote.cantidad_reg = lc.cabecera_lote.cantidad_reg;
             lcWS.cabecera_lote.cod_interno_canal = lc.cabecera_lote.cod_interno_canal;
@@ -34,6 +33,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
             for (int i = 0; i < lc.comprobante.Length; i++)
             {
+                if (lc.comprobante[i] == null)
+                {
+                    break;
+                }
                 org.dyndns.cedweb.envio.lcComprobante cIBK = new global::CedeiraAJAX.org.dyndns.cedweb.envio.lcComprobante();
 
                 cIBK.cabecera = new global::CedeiraAJAX.org.dyndns.cedweb.envio.lcComprobanteCabecera();
@@ -68,8 +71,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 cIBK.cabecera.informacion_comprobante = new global::CedeiraAJAX.org.dyndns.cedweb.envio.lcComprobanteCabeceraInformacion_comprobante();
                 cIBK.cabecera.informacion_comprobante.cae = lc.comprobante[i].cabecera.informacion_comprobante.cae;
                 cIBK.cabecera.informacion_comprobante.codigo_operacion = lc.comprobante[i].cabecera.informacion_comprobante.codigo_operacion;
-                cIBK.cabecera.informacion_comprobante.condicion_de_pago = lc.comprobante[i].cabecera.informacion_comprobante.condicion_de_pago;
-                cIBK.cabecera.informacion_comprobante.condicion_de_pagoSpecified = lc.comprobante[i].cabecera.informacion_comprobante.condicion_de_pagoSpecified;
+                cIBK.cabecera.informacion_comprobante.condicion_de_pago = Convert.ToInt32(lc.comprobante[i].cabecera.informacion_comprobante.condicion_de_pago);
                 cIBK.cabecera.informacion_comprobante.es_detalle_encriptado = lc.comprobante[i].cabecera.informacion_comprobante.es_detalle_encriptado;
                 cIBK.cabecera.informacion_comprobante.fecha_emision = lc.comprobante[i].cabecera.informacion_comprobante.fecha_emision;
                 cIBK.cabecera.informacion_comprobante.fecha_obtencion_cae = lc.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae;
@@ -92,7 +94,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         {
                             cIBK.cabecera.informacion_comprobante.referencias[j] = new global::CedeiraAJAX.org.dyndns.cedweb.envio.lcComprobanteCabeceraInformacion_comprobanteReferencias();
                             cIBK.cabecera.informacion_comprobante.referencias[j].codigo_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].codigo_de_referencia;
-                            cIBK.cabecera.informacion_comprobante.referencias[j].dato_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].dato_de_referencia;
+                            cIBK.cabecera.informacion_comprobante.referencias[j].dato_de_referencia = Convert.ToInt64(lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].dato_de_referencia);
                         }
                     }
                 }
@@ -308,12 +310,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         }
                     }
                 }
-
                 cIBK.resumen.observaciones = lc.comprobante[i].resumen.observaciones;
                 cIBK.resumen.tipo_de_cambio = lc.comprobante[i].resumen.tipo_de_cambio;
-
                 lcWS.comprobante[i] = cIBK;
-
             }
             return lcWS;
         }
