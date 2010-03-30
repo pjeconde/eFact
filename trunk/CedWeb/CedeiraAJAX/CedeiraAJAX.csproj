@@ -490,13 +490,6 @@
     <Compile Include="Soluciones.aspx.designer.cs">
       <DependentUpon>Soluciones.aspx</DependentUpon>
     </Compile>
-    <Compile Include="TableroPremium.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>TableroPremium.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="TableroPremium.aspx.designer.cs">
-      <DependentUpon>TableroPremium.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Vendedor\Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
@@ -802,7 +795,6 @@
     <Content Include="SoloDispPUsuariosPremium.aspx" />
     <Content Include="SoloDispPUsuariosRegistrados.aspx" />
     <Content Include="Soluciones.aspx" />
-    <Content Include="TableroPremium.aspx" />
     <None Include="Imagenes\Ingreso\Box\LogoBienvenidos.psd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
