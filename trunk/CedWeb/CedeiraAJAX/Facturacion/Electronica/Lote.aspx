@@ -135,7 +135,7 @@
 															<td align="center" class="TextoResaltado" style="width: 240px">
 																INFORMACIÓN VENDEDOR<br />
 																<asp:HyperLink ID="ConfigurarVendedorHyperLink" runat="server" Font-Bold="false"
-																	NavigateUrl="~/Vendedor.aspx" SkinID="LinkMedianoClaro">Configurar</asp:HyperLink></td>
+																	NavigateUrl="~/Vendedor/Default.aspx" SkinID="LinkMedianoClaro">Configurar</asp:HyperLink></td>
 															<td style="width: 300px">
 																<table border="0" cellpadding="0" cellspacing="0" style="width: 300px">
 																	<tr>
