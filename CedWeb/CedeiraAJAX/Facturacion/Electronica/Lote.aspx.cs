@@ -2448,13 +2448,31 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 infcomprob.condicion_de_pago = Condicion_De_PagoTextBox.Text;
                 infcomprob.condicion_de_pagoSpecified = true;
             }
+
             infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
-            if (!CAETextBox.Text.Equals(string.Empty))
+			infcomprob.cae = CAETextBox.Text;
+			if (!CAETextBox.Text.Equals(string.Empty))
             {
-                infcomprob.cae = CAETextBox.Text;
-                infcomprob.fecha_obtencion_cae = FechaCAEObtencionDatePickerWebUserControl.CalendarDateString;
-                infcomprob.fecha_vencimiento_cae = FechaCAEVencimientoDatePickerWebUserControl.CalendarDateString;
-            }
+				infcomprob.caeSpecified = true;
+			}
+			infcomprob.fecha_obtencion_cae = FechaCAEObtencionDatePickerWebUserControl.CalendarDateString;
+			if (!FechaCAEObtencionDatePickerWebUserControl.CalendarDateString.ToString().Equals(string.Empty))
+			{
+				infcomprob.fecha_obtencion_caeSpecified = true;
+			}
+			infcomprob.fecha_vencimiento_cae = FechaCAEVencimientoDatePickerWebUserControl.CalendarDateString;
+			if (!FechaCAEVencimientoDatePickerWebUserControl.CalendarDateString.Equals(string.Empty))
+			{
+				infcomprob.fecha_vencimiento_caeSpecified = true;
+			}
+			if (!ResultadoTextBox.Text.Equals(string.Empty))
+			{
+				infcomprob.resultado = ResultadoTextBox.Text;
+			}
+			if (!MotivoTextBox.Text.Equals(string.Empty))
+			{
+				infcomprob.motivo = MotivoTextBox.Text;
+			}
 
             System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> listareferencias = (System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"];
             for (int i = 0; i < listareferencias.Count; i++)
@@ -2791,14 +2809,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     }
                 }
             }
-            if (!CAETextBox.Text.Equals(string.Empty))
-            {
-                comp.cabecera.informacion_comprobante.cae = CAETextBox.Text;
-                comp.cabecera.informacion_comprobante.fecha_obtencion_cae = FechaCAEObtencionDatePickerWebUserControl.CalendarDateString;
-                comp.cabecera.informacion_comprobante.fecha_vencimiento_cae = FechaCAEVencimientoDatePickerWebUserControl.CalendarDateString;
-                comp.cabecera.informacion_comprobante.resultado = ResultadoTextBox.Text;
-                comp.cabecera.informacion_comprobante.motivo = MotivoTextBox.Text;
-            }
             lote.comprobante[0] = comp;
             return lote;
         }
@@ -2936,7 +2946,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 else
                 {
                     FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
-                    Session["lote"] = lcFea;
+					if (lcFea.comprobante[0].cabecera.informacion_comprobante.cae.Equals(string.Empty))
+					{
+						lcFea.comprobante[0].cabecera.informacion_comprobante.cae = " ";
+					}
+					lcFea.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
+					lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
+					Session["lote"] = lcFea;
                     Response.Redirect("Reportes\\FacturaWebForm.aspx", true);
                 }
             }
