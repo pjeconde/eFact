@@ -21,6 +21,14 @@ namespace FeaEntidades.CodigosMoneda
 			set { descr = value; }
 		}
 
+		public static List<CodigoMoneda> ListaNoExportacion()
+		{
+			List<CodigoMoneda> lista = new List<CodigoMoneda>();
+			lista.Add(new PesosArgentinos());
+			lista.Add(new DolarEstadounidense());
+			return lista;
+		}
+
         public static List<CodigoMoneda> Lista()
         {
             List<CodigoMoneda> lista = new List<CodigoMoneda>();

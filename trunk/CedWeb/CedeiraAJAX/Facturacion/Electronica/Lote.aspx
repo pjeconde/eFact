@@ -66,7 +66,7 @@
 													<table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
 														<tr>
 															<td style="padding-top: 5px">
-																<asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px" ToolTip="Exclusivo SERVICIO PREMIUM">
+																<asp:FileUpload ID="XMLFileUpload" runat="server" Width="100%" Height="25px" ToolTip="Exclusivo SERVICIO PREMIUM">
 																</asp:FileUpload>
 															</td>
 														</tr>
@@ -1256,7 +1256,7 @@
 																Comentarios:
 															</td>
 															<td class="TextoLabelFEADescrLarga" style="padding: 5px;">
-																<asp:TextBox ID="ComentariosTextBox" runat="server" SkinID="TextoBoxFEADescrGr" TextMode="MultiLine">
+																<asp:TextBox ID="ComentariosTextBox" runat="server" Height="100px" SkinID="TextoBoxFEADescrGr" TextMode="MultiLine">
 																</asp:TextBox>
 															</td>
 														</tr>
@@ -2098,7 +2098,7 @@
 																Observaciones:
 															</td>
 															<td class="TextoLabelFEADescrLarga">
-																<asp:TextBox ID="Observaciones_ResumenTextBox" runat="server" SkinID="TextoBoxFEADescrGr"
+																<asp:TextBox ID="Observaciones_ResumenTextBox" runat="server" Height="100px" SkinID="TextoBoxFEADescrGr"
 																	TextMode="MultiLine">
 																</asp:TextBox>
 															</td>
