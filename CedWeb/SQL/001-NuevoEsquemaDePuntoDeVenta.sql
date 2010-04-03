@@ -57,9 +57,9 @@ ALTER TABLE [dbo].[PuntoDeVenta] CHECK CONSTRAINT [FK_PuntoDeVenta_TipoPuntoDeVe
 GO
 select * into PuntoDeVentaDepurado from PuntoDeVenta where 1=2
 go
-insert PuntoDeVenta select CUIT, PuntoDeVentaHabilitado, 'BFiscal', '', '', '', '', '', '', '', '', '', '', '', '' from BonoFiscal
+insert PuntoDeVenta select CUIT, PuntoDeVentaHabilitado, 'BFiscal', '', '', '', '', '', '', '', '', '', '', '' from BonoFiscal
 go
-insert PuntoDeVentaDepurado select CUIT, PuntoDeVentaHabilitado, 'BFiscal', '', '', '', '', '', '', '', '', '', '', '', '' from BonoFiscalDepurado
+insert PuntoDeVentaDepurado select CUIT, PuntoDeVentaHabilitado, 'BFiscal', '', '', '', '', '', '', '', '', '', '', '' from BonoFiscalDepurado
 go
 drop table dbo.BonoFiscal
 go
