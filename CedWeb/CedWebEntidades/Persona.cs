@@ -9,17 +9,7 @@ namespace CedWebEntidades
         private string idCuenta;
         private string nombreCuenta;
         private string razonSocial;
-        private string calle;
-        private string nro;
-        private string piso;
-        private string depto;
-        private string sector;
-        private string torre;
-        private string manzana;
-        private string localidad;
-        private string idProvincia;
-        private string descrProvincia;
-        private string codPost;
+        private Domicilio domicilio;
         private string nombreContacto;
         private string emailContacto;
         private string telefonoContacto;
@@ -69,125 +59,15 @@ namespace CedWebEntidades
                 return razonSocial;
             }
         }
-        public string Calle
+        public Domicilio Domicilio
         {
             set
             {
-                calle = value;
+                domicilio = value;
             }
             get
             {
-                return calle;
-            }
-        }
-        public string Nro
-        {
-            set
-            {
-                nro = value;
-            }
-            get
-            {
-                return nro;
-            }
-        }
-        public string Piso
-        {
-            set
-            {
-                piso = value;
-            }
-            get
-            {
-                return piso;
-            }
-        }
-        public string Depto
-        {
-            set
-            {
-                depto = value;
-            }
-            get
-            {
-                return depto;
-            }
-        }
-        public string Sector
-        {
-            set
-            {
-                sector = value;
-            }
-            get
-            {
-                return sector;
-            }
-        }
-        public string Torre
-        {
-            set
-            {
-                torre = value;
-            }
-            get
-            {
-                return torre;
-            }
-        }
-        public string Manzana
-        {
-            set
-            {
-                manzana = value;
-            }
-            get
-            {
-                return manzana;
-            }
-        }
-        public string Localidad
-        {
-            set
-            {
-                localidad = value;
-            }
-            get
-            {
-                return localidad;
-            }
-        }
-        public string IdProvincia
-        {
-            set
-            {
-                idProvincia = value;
-            }
-            get
-            {
-                return idProvincia;
-            }
-        }
-        public string DescrProvincia
-        {
-            set
-            {
-                descrProvincia = value;
-            }
-            get
-            {
-                return descrProvincia;
-            }
-        }
-        public string CodPost
-        {
-            set
-            {
-                codPost = value;
-            }
-            get
-            {
-                return codPost;
+                return domicilio;
             }
         }
         public string NombreContacto
