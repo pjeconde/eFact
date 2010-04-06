@@ -142,8 +142,6 @@ insert EstadoCuenta values ('Baja', 'De baja')
 insert EstadoCuenta values ('Suspend', 'Suspendida')
 go
 insert Cuenta values ('claudio.cedeira', 'Claudio A. Cedeira', '', 'claudio.cedeira@cedeira.com.ar', 'cedeira123', 'Cual es la sigla de mi escuela secundaria', 'encjm', 'Admin', 'Vigente')
-insert Cuenta values ('lucascolino', 'Lucas Colino', '', 'lucascolino@gmail.com', 'cedeira123', 'Cual es mi apellido materno', 'Del Hoyo', 'Admin', 'Vigente')
-insert Cuenta values ('carlosdeluxe83', 'Carlos Glorioso', '', 'carlosdeluxe83@gmail.com', 'cedeira123', 'Cual es mi apellido materno', 'Saunero', 'Admin', 'Vigente')
 insert Cuenta values ('lucas.legaspi', 'Lucas Legaspi', '', 'lucas.legaspi@gmail.com', 'cedeira123', 'Cual es mi apellido materno', 'Henderson', 'Admin', 'Vigente')
 insert Cuenta values ('fcedeira', 'Fernando J. Cedeira', '', 'fcedeira@gmail.com', 'cedeira123', 'Cual es mi apellido materno', 'Cuello', 'Admin', 'Vigente')
 insert Cuenta values ('marce.cdr', 'Marcela Crespi', '', 'marce.cdr@gmail.com', 'cedeira123', 'Cual es mi apellido materno', 'Rodriguez', 'Admin', 'Vigente')

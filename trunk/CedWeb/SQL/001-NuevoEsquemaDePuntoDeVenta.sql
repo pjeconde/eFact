@@ -28,7 +28,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[PuntoDeVenta](
 	[CUIT] [numeric](11, 0) NOT NULL,
-	[PuntoDeVenta] [numeric](4, 0) NOT NULL,
+	[IdPuntoDeVenta] [numeric](4, 0) NOT NULL,
 	[IdTipoPuntoDeVenta] [varchar](15) COLLATE Modern_Spanish_CI_AS NOT NULL,
 	[Calle] [varchar](30) COLLATE Modern_Spanish_CI_AS NOT NULL,
 	[Nro] [varchar](6) COLLATE Modern_Spanish_CI_AS NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE [dbo].[PuntoDeVenta](
  CONSTRAINT [PK_PuntoDeVenta] PRIMARY KEY CLUSTERED 
 (
 	[CUIT] ASC,
-	PuntoDeVenta ASC
+	[IdPuntoDeVenta] ASC
 )WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
