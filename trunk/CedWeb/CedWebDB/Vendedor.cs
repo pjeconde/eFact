@@ -22,8 +22,8 @@ namespace CedWebDB
             else
             {
                 Copiar(dt.Rows[0], Vendedor);
-                CedWebDB.BonoFiscal bonoFiscal = new BonoFiscal(sesion);
-                bonoFiscal.Leer(Vendedor);
+                CedWebDB.PuntoDeVenta puntoDeVenta = new PuntoDeVenta(sesion);
+                puntoDeVenta.Leer(Vendedor);
             }
         }
         private void Copiar(DataRow Desde, CedWebEntidades.Vendedor Hasta)
@@ -58,10 +58,10 @@ namespace CedWebDB
         public void Guardar(CedWebEntidades.Vendedor Vendedor)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("delete BonoFiscal where CUIT=" + Vendedor.CUIT.ToString() + " ");
+            a.Append("delete PuntoDeVenta where CUIT=" + Vendedor.CUIT.ToString() + " ");
             a.Append("if exists (select RazonSocial from Vendedor where IdCuenta='" + Vendedor.IdCuenta + "') ");
             a.Append("begin ");
-            a.Append("delete BonoFiscal from Vendedor, BonoFiscal where Vendedor.CUIT=BonoFiscal.CUIT and Vendedor.IdCuenta='" + Vendedor.IdCuenta + "' ");
+            a.Append("delete PuntoDeVenta from Vendedor, PuntoDeVenta where Vendedor.CUIT=PuntoDeVenta.CUIT and Vendedor.IdCuenta='" + Vendedor.IdCuenta + "' ");
             a.Append("update Vendedor set ");
             a.Append("RazonSocial='" + Vendedor.RazonSocial + "', ");
             a.Append("Calle='" + Vendedor.Domicilio.Calle + "', ");
@@ -120,9 +120,24 @@ namespace CedWebDB
             a.Append("'" + Vendedor.FechaInicioActividades.ToString("yyyyMMdd") + "' ");
             a.Append(") ");
 
-            for (int i = 0; i < Vendedor.BonoFiscal.PuntoDeVentaHabilitado.Count; i++)
+            for (int i = 0; i < Vendedor.PuntosDeVenta.Count; i++)
             {
-                a.Append("insert BonoFiscal values (" + Vendedor.CUIT.ToString() + ", " + Convert.ToString(Vendedor.BonoFiscal.PuntoDeVentaHabilitado[i]) + ") ");
+                a.Append("insert PuntoDeVenta values (");
+                a.Append(Vendedor.CUIT + ", ");
+                a.Append(Vendedor.PuntosDeVenta[i].Id + ", ");
+                a.Append("'" + Vendedor.PuntosDeVenta[i].Tipo.Id + "', ");
+                a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.Calle + "', ");
+                a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.Nro + "', ");
+                a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.Piso + "', ");
+                a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.Depto + "', ");
+                a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.Sector + "', ");
+                a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.Torre + "', ");
+                a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.Manzana + "', ");
+                a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.Localidad + "', ");
+                a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.IdProvincia + "', ");
+                a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.DescrProvincia + "', ");
+                a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.CodPost + "' ");
+                a.Append(") ");
             }
             Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
         }

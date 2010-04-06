@@ -255,7 +255,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         {
                             if (!Punto_VentaTextBox.Text.Equals(string.Empty))
                             {
-                                System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                                CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                                System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
                                 int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                                 if (listaPV.Contains(auxPV))
                                 {
@@ -285,7 +286,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     {
                         if (!Punto_VentaTextBox.Text.Equals(string.Empty))
                         {
-                            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                            CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
                             int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                             if (listaPV.Contains(auxPV))
                             {
@@ -327,7 +329,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
                             {
                                 if (!Punto_VentaTextBox.Text.Equals(string.Empty))
                                 {
-                                    System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                                    CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                                    System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
                                     int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                                     if (listaPV.Contains(auxPV))
                                     {
@@ -362,7 +365,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     {
                         if (!Punto_VentaTextBox.Text.Equals(string.Empty))
                         {
-                            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                            CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
                             int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                             if (listaPV.Contains(auxPV))
                             {
@@ -398,7 +402,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     {
                         if (!Punto_VentaTextBox.Text.Equals(string.Empty))
                         {
-                            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                            CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
                             int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                             if (listaPV.Contains(auxPV))
                             {
@@ -439,7 +444,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         {
                             if (!Punto_VentaTextBox.Text.Equals(string.Empty))
                             {
-                                System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                                CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                                System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
                                 int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                                 if (listaPV.Contains(auxPV))
                                 {
@@ -544,7 +550,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     {
                         if (!Punto_VentaTextBox.Text.Equals(string.Empty))
                         {
-                            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                            CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
                             int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                             if (listaPV.Contains(auxPV))
                             {
@@ -573,7 +580,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 {
                     if (!Punto_VentaTextBox.Text.Equals(string.Empty))
                     {
-                        System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                        CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                        System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
                         int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                         if (listaPV.Contains(auxPV))
                         {
@@ -615,7 +623,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         {
                             if (!Punto_VentaTextBox.Text.Equals(string.Empty))
                             {
-                                System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                                CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                                System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
                                 int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                                 if (listaPV.Contains(auxPV))
                                 {
@@ -650,7 +659,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 {
                     if (!Punto_VentaTextBox.Text.Equals(string.Empty))
                     {
-                        System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                        CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                        System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
                         int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                         if (listaPV.Contains(auxPV))
                         {
@@ -686,7 +696,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 {
                     if (!Punto_VentaTextBox.Text.Equals(string.Empty))
                     {
-                        System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                        CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                        System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
                         int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                         if (listaPV.Contains(auxPV))
                         {
@@ -728,7 +739,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     {
                         if (!Punto_VentaTextBox.Text.Equals(string.Empty))
                         {
-                            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
+                            CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
                             int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                             if (listaPV.Contains(auxPV))
                             {
@@ -2233,44 +2245,42 @@ namespace CedeiraAJAX.Facturacion.Electronica
             {
                 if (!((TextBox)sender).Text.Equals(string.Empty))
                 {
-                    if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal != null)
+                    CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                    System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
+                    try
                     {
-                        System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.BonoFiscal.PuntoDeVentaHabilitado;
-                        try
+                        int auxPV = Convert.ToInt32(((TextBox)sender).Text);
+                        if (listaPV.Contains(auxPV))
                         {
-                            int auxPV = Convert.ToInt32(((TextBox)sender).Text);
-                            if (listaPV.Contains(auxPV))
-                            {
-                                Presta_ServCheckBox.Checked = false;
-                                Presta_ServCheckBox.Enabled = false;
-                                FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
-                                FechaServDesdeDatePickerWebUserControl.Visible = false;
-                                FechaInicioServLabel.Visible = false;
-                                FechaHstServLabel.Visible = false;
-                                FechaServHastaDatePickerWebUserControl.CalendarDateString = string.Empty;
-                                FechaServHastaDatePickerWebUserControl.Visible = false;
-                                Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-                                Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-                                Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
-                            }
-                            else
-                            {
-                                Presta_ServCheckBox.Checked = true;
-                                Presta_ServCheckBox.Enabled = true;
-                                FechaServDesdeDatePickerWebUserControl.Visible = true;
-                                FechaInicioServLabel.Visible = true;
-                                FechaHstServLabel.Visible = true;
-                                FechaServHastaDatePickerWebUserControl.Visible = true;
-                                Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-                                Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-                                Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
-                            }
-                            Tipo_De_ComprobanteDropDownList.DataBind();
+                            Presta_ServCheckBox.Checked = false;
+                            Presta_ServCheckBox.Enabled = false;
+                            FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
+                            FechaServDesdeDatePickerWebUserControl.Visible = false;
+                            FechaInicioServLabel.Visible = false;
+                            FechaHstServLabel.Visible = false;
+                            FechaServHastaDatePickerWebUserControl.CalendarDateString = string.Empty;
+                            FechaServHastaDatePickerWebUserControl.Visible = false;
+                            Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                            Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                            Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
                         }
-                        catch
+                        else
                         {
-                            //((TextBox)sender).Text = string.Empty;
+                            Presta_ServCheckBox.Checked = true;
+                            Presta_ServCheckBox.Enabled = true;
+                            FechaServDesdeDatePickerWebUserControl.Visible = true;
+                            FechaInicioServLabel.Visible = true;
+                            FechaHstServLabel.Visible = true;
+                            FechaServHastaDatePickerWebUserControl.Visible = true;
+                            Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                            Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                            Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
                         }
+                        Tipo_De_ComprobanteDropDownList.DataBind();
+                    }
+                    catch
+                    {
+                        //((TextBox)sender).Text = string.Empty;
                     }
                 }
             }

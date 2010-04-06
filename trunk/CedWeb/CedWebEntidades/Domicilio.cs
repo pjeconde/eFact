@@ -4,19 +4,19 @@ using System.Text;
 namespace CedWebEntidades
 {
     [Serializable]
-    public abstract class Domicilio
+    public class Domicilio
     {
-        private string calle;
-        private string nro;
-        private string piso;
-        private string depto;
-        private string sector;
-        private string torre;
-        private string manzana;
-        private string localidad;
-        private string idProvincia;
-        private string descrProvincia;
-        private string codPost;
+        private string calle = string.Empty;
+        private string nro = string.Empty;
+        private string piso = string.Empty;
+        private string depto = string.Empty;
+        private string sector = string.Empty;
+        private string torre = string.Empty;
+        private string manzana = string.Empty;
+        private string localidad = string.Empty;
+        private string idProvincia = string.Empty;
+        private string descrProvincia = string.Empty;
+        private string codPost = string.Empty;
 
         public Domicilio()
         {

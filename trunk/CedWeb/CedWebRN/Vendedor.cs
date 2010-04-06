@@ -38,17 +38,7 @@ namespace CedWebRN
             VendedorHst.IdCuenta = VendedorDsd.IdCuenta;
             VendedorHst.NombreCuenta = VendedorDsd.NombreCuenta;
             VendedorHst.RazonSocial = VendedorDsd.RazonSocial;
-            VendedorHst.Domicilio.Calle = VendedorDsd.Domicilio.Calle;
-            VendedorHst.Domicilio.Nro = VendedorDsd.Domicilio.Nro;
-            VendedorHst.Domicilio.Piso = VendedorDsd.Domicilio.Piso;
-            VendedorHst.Domicilio.Depto = VendedorDsd.Domicilio.Depto;
-            VendedorHst.Domicilio.Sector = VendedorDsd.Domicilio.Sector;
-            VendedorHst.Domicilio.Torre = VendedorDsd.Domicilio.Torre;
-            VendedorHst.Domicilio.Manzana = VendedorDsd.Domicilio.Manzana;
-            VendedorHst.Domicilio.Localidad = VendedorDsd.Domicilio.Localidad;
-            VendedorHst.Domicilio.IdProvincia = VendedorDsd.Domicilio.IdProvincia;
-            VendedorHst.Domicilio.DescrProvincia = VendedorDsd.Domicilio.DescrProvincia;
-            VendedorHst.Domicilio.CodPost = VendedorDsd.Domicilio.CodPost;
+            VendedorHst.Domicilio = VendedorDsd.Domicilio;
             VendedorHst.NombreContacto = VendedorDsd.NombreContacto;
             VendedorHst.EmailContacto = VendedorDsd.EmailContacto;
             VendedorHst.TelefonoContacto = VendedorDsd.TelefonoContacto;
@@ -61,7 +51,7 @@ namespace CedWebRN
             VendedorHst.GLN = VendedorDsd.GLN;
             VendedorHst.CodigoInterno = VendedorDsd.CodigoInterno;
             VendedorHst.FechaInicioActividades = VendedorDsd.FechaInicioActividades;
-            VendedorHst.BonoFiscal = VendedorDsd.BonoFiscal;
+            VendedorHst.PuntosDeVenta = VendedorDsd.PuntosDeVenta;
         }
         public static List<CedWebEntidades.Vendedor> ListaAdministracion(int IndicePagina, int TamañoPagina, string OrderBy, CedEntidades.Sesion Sesion)
         {
