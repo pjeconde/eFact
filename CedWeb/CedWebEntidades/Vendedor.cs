@@ -7,10 +7,10 @@ namespace CedWebEntidades
     public class Vendedor : Persona
     {
         private long cUIT;
-        private BonoFiscal bonoFiscal;
+        private List<PuntoDeVenta> puntosDeVenta;
         public Vendedor()
         {
-            bonoFiscal = new BonoFiscal();
+            puntosDeVenta = new List<PuntoDeVenta>();
         }
         public long CUIT
         {
@@ -23,36 +23,28 @@ namespace CedWebEntidades
                 return cUIT;
             }
         }
-        public BonoFiscal BonoFiscal
+        public List<PuntoDeVenta> PuntosDeVenta
         {
-            set
-            {
-                bonoFiscal = value;
-            }
             get
             {
-                return bonoFiscal;
+                return puntosDeVenta;
             }
-        }
-    }
-    [Serializable]
-    public class BonoFiscal
-    {
-        private List<int> puntoDeVentaHabilitado;
-        public BonoFiscal()
-        {
-            puntoDeVentaHabilitado = new List<int>();
-        }
-        public List<int> PuntoDeVentaHabilitado
-        {
             set
             {
-                puntoDeVentaHabilitado = value;
+                puntosDeVenta = value;
             }
-            get
+        }
+        public List<int> PuntosDeVentaHabilitados(TiposPuntoDeVenta.TipoPuntoDeVenta TipoPuntoDeVenta)
+        {
+            List<int> bonofiscalPuntosDeVentaHabilitados = new List<int>();
+            for (int i=0; i<puntosDeVenta.Count; i++)
             {
-                return puntoDeVentaHabilitado;
+                if (puntosDeVenta[i].Tipo.Id==TipoPuntoDeVenta.Id)
+                {
+                    bonofiscalPuntosDeVentaHabilitados.Add(puntosDeVenta[i].Id);
+                }
             }
+            return bonofiscalPuntosDeVentaHabilitados;
         }
     }
 }

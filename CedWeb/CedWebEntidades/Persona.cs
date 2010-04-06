@@ -24,6 +24,7 @@ namespace CedWebEntidades
 
         public Persona()
         {
+            domicilio = new Domicilio();
         }
 
         public string IdCuenta
@@ -70,6 +71,129 @@ namespace CedWebEntidades
                 return domicilio;
             }
         }
+        #region Detalle Domicilio
+        public string Calle
+        {
+            set
+            {
+                domicilio.Calle = value;
+            }
+            get
+            {
+                return domicilio.Calle;
+            }
+        }
+        public string Nro
+        {
+            set
+            {
+                domicilio.Nro = value;
+            }
+            get
+            {
+                return domicilio.Nro;
+            }
+        }
+        public string Piso
+        {
+            set
+            {
+                domicilio.Piso = value;
+            }
+            get
+            {
+                return domicilio.Piso;
+            }
+        }
+        public string Depto
+        {
+            set
+            {
+                domicilio.Depto = value;
+            }
+            get
+            {
+                return domicilio.Depto;
+            }
+        }
+        public string Sector
+        {
+            set
+            {
+                domicilio.Sector = value;
+            }
+            get
+            {
+                return domicilio.Sector;
+            }
+        }
+        public string Torre
+        {
+            set
+            {
+                domicilio.Torre = value;
+            }
+            get
+            {
+                return domicilio.Torre;
+            }
+        }
+        public string Manzana
+        {
+            set
+            {
+                domicilio.Manzana = value;
+            }
+            get
+            {
+                return domicilio.Manzana;
+            }
+        }
+        public string Localidad
+        {
+            set
+            {
+                domicilio.Localidad = value;
+            }
+            get
+            {
+                return domicilio.Localidad;
+            }
+        }
+        public string IdProvincia
+        {
+            set
+            {
+                domicilio.IdProvincia = value;
+            }
+            get
+            {
+                return domicilio.IdProvincia;
+            }
+        }
+        public string DescrProvincia
+        {
+            set
+            {
+                domicilio.DescrProvincia = value;
+            }
+            get
+            {
+                return domicilio.DescrProvincia;
+            }
+        }
+        public string CodPost
+        {
+            set
+            {
+                domicilio.CodPost = value;
+            }
+            get
+            {
+                return domicilio.CodPost;
+            }
+        }
+        #endregion
         public string NombreContacto
         {
             set
