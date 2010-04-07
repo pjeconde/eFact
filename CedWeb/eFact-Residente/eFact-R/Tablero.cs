@@ -444,7 +444,9 @@ namespace eFact_R
             }
             finally
             {
+                LimpiarBandejaEntrada();
                 ActualizarBandejaE();
+                EnviarABandejaSButton.Enabled = true;
                 Cursor = System.Windows.Forms.Cursors.Default;
             }
         }
