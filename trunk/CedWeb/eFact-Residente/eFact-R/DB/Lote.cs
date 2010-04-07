@@ -226,15 +226,11 @@ namespace eFact_R.DB
             commandText.Append("inner join WF_Estado on WF_Op.IdEstado=WF_Estado.IdEstado ");
             if (TipoConsulta == eFact_R.RN.Tablero.TipoConsulta.FechaAlta)
             {
-                commandText.Append("where (Lotes.FechaAlta >='" + FechaDsd.ToString("yyyyMMdd") + "' and Lotes.FechaAlta < Dateadd ( Day, 1, '" + FechaHst.ToString("yyyyMMdd") + "') ");
+                commandText.Append("where (Lotes.FechaAlta >= '" + FechaDsd.ToString("yyyyMMdd") + "' and Lotes.FechaAlta < Dateadd ( Day, 1, '" + FechaHst.ToString("yyyyMMdd") + "') ");
             }
-            else if (TipoConsulta == eFact_R.RN.Tablero.TipoConsulta.FechaEnvio)
+            else 
             {
-                commandText.Append("where (Lotes.FechaEnvio >='" + FechaDsd.ToString("yyyyMMdd") + "' and Lotes.FechaEnvio <= '" + FechaHst.ToString("yyyyMMdd") + "' ");
-            }
-            else
-            {
-                commandText.Append("where (1=1 ");
+                commandText.Append("where (Lotes.FechaEnvio >= '" + FechaDsd.ToString("yyyyMMdd") + "' and Lotes.FechaEnvio <= Dateadd ( Day, 1, '" + FechaHst.ToString("yyyyMMdd") + "') ");
             }
             if (CuitVendedor != "")
             {

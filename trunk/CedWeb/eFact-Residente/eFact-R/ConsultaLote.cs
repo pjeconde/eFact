@@ -76,11 +76,11 @@ namespace eFact_R
                 DetalleLoteDataGridView.AutoGenerateColumns = false;
                 DetalleLoteDataGridView.DataSource = new List<eFact_R.Entidades.Comprobante>();
                 DetalleLoteDataGridView.DataSource = lote.Comprobantes;
-                if (IdEstadoTextBox.Text != "AceptadoAFIP")
-                {
+                //if (IdEstadoTextBox.Text != "AceptadoAFIP")
+                //{
                     ExportarComprobanteButton.Enabled = false;
                     ConsultarComprobanteButton.Enabled = false;
-                }
+                //}
                 DetalleLoteDataGridView.Refresh();
             }
             catch (Exception ex)

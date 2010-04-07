@@ -207,7 +207,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="App.config" />
-    <None Include="CedeiraSF-eFact-Especificaciones-InterfazTXT-Ayuda.pdf" />
+    <None Include="CedeiraSF-eFact-Especificaciones-InterfazTXT-Ayuda.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\DataSources\FeaEntidades.TiposDeComprobantes.Facturas.Factura.datasource" />
     <None Include="Properties\DataSources\FeaEntidades.TiposDeComprobantes.TipoComprobante.datasource" />
     <None Include="Properties\DataSources\FeaEntidades.TiposDeComprobantes.TipoComprobante1.datasource" />
