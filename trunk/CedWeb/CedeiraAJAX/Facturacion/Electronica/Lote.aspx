@@ -1,11 +1,10 @@
 ﻿<%@ Page AutoEventWireup="true" Buffer="true" Codebehind="Lote.aspx.cs" Culture="en-GB"
 	Inherits="CedeiraAJAX.Facturacion.Electronica.Lote" Language="C#" MaintainScrollPositionOnPostback="true"
 	MasterPageFile="~/Facturacion/Electronica/FacturaElectronica.Master" Title="Factura Electrónica Gratis(Interfacturas - AFIP)"
-	UICulture="en-GB"  EnableEventValidation="false" ValidateRequest="false"%>
+	UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false" %>
 
 <%@ Register Src="~/DatePickerWebUserControl.ascx" TagName="DatePickerWebUserControl"
 	TagPrefix="uc1" %>
-	
 <asp:Content ID="XMLContent" runat="Server" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado">
 	<asp:ScriptManager ID="loteScriptManager" runat="server">
 	</asp:ScriptManager>
@@ -65,8 +64,8 @@
 												<td>
 													<table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
 														<tr>
-															<td style="padding-top: 5px">
-																<asp:FileUpload ID="XMLFileUpload" runat="server" Width="100%" Height="25px" ToolTip="Exclusivo SERVICIO PREMIUM">
+															<td style="padding-top:5px">
+																<asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px" ToolTip="Exclusivo SERVICIO PREMIUM">
 																</asp:FileUpload>
 															</td>
 														</tr>
@@ -158,8 +157,12 @@
 																				</tr>
 																				<tr>
 																					<td style="width: 280px">
-																						<asp:DropDownList ID="Tipo_De_ComprobanteDropDownList" runat="server" SkinID="DropDownListCompradorGr">
-																						</asp:DropDownList>
+																						<asp:UpdatePanel ID="Tipo_De_ComprobanteUpdatePanel" runat="server">
+																							<ContentTemplate>
+																								<asp:DropDownList ID="Tipo_De_ComprobanteDropDownList" runat="server" SkinID="DropDownListCompradorGr">
+																								</asp:DropDownList>
+																							</ContentTemplate>
+																						</asp:UpdatePanel>
 																					</td>
 																				</tr>
 																				<tr>
@@ -233,12 +236,11 @@
 																</table>
 															</td>
 															<td style="">
-																<asp:UpdatePanel ID="ptoVentaUpdatePanel" runat="server" UpdateMode="Conditional"
-																	ChildrenAsTriggers="false">
+																<asp:UpdatePanel ID="ptoVentaUpdatePanel" runat="server" UpdateMode="Always" ChildrenAsTriggers="true">
 																	<ContentTemplate>
 																		<table border="0" cellpadding="0" cellspacing="0" style="">
 																			<tr>
-																				<td class="TextoLabelFEAVendedorDet" style="width: 20px">
+																				<td style="position: relative; border: 0px; padding-top: 5px;">
 																					<asp:UpdateProgress ID="ptoVentaUpdateProgress" runat="server" AssociatedUpdatePanelID="ptoVentaUpdatePanel"
 																						DisplayAfter="0">
 																						<ProgressTemplate>
@@ -247,18 +249,25 @@
 																						</ProgressTemplate>
 																					</asp:UpdateProgress>
 																				</td>
-																				<td class="TextoLabelFEAVendedor" style="">
+																				<td style="position: relative; border: 0px; width: 40px; padding-top: 5px;">
 																					<asp:RegularExpressionValidator ID="PtoVentaRegularExpressionValidator" runat="server"
 																						ControlToValidate="Punto_VentaTextBox" ErrorMessage="error de formateo en punto de venta"
 																						SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
+																				</td>
+																				<td style="position: relative; border: 0px; width: 40px; padding-top: 5px;">
 																					<asp:RequiredFieldValidator ID="puntoVentaRequiredFieldValidator" runat="server"
 																						ControlToValidate="Punto_VentaTextBox" ErrorMessage="punto de venta" SetFocusOnError="True">* </asp:RequiredFieldValidator>
+																				</td>
+																				<td class="TextoLabelFEAVendedor">
 																					Punto de venta:
 																				</td>
-																				<td class="TextoLabelFEAVendedorDet" style="">
+																				<td class="TextoLabelFEAVendedorChCh">
 																					<asp:TextBox ID="Punto_VentaTextBox" runat="server" AutoPostBack="True" OnTextChanged="Punto_VentaTextBox_TextChanged"
-																						SkinID="TextoBoxFEAVendedorDet">
+																						SkinID="TextoBoxFEAVendedorDetChCh">
 																					</asp:TextBox>
+																				</td>
+																				<td class="TextoFEASYP_DetCol1">
+																					<asp:Label ID="TipoPtoVentaLabel" runat="server" ></asp:Label>
 																				</td>
 																			</tr>
 																		</table>
@@ -624,80 +633,84 @@
 								</tr>
 							</table>
 							<br />
-							<!-- DATOS DEL LOTE -->
 							<table border="0" cellpadding="0" cellspacing="0">
+								<!-- DATOS DEL LOTE -->
 								<tr>
 									<td>
-										<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
-											<tr>
-												<td rowspan="6" style="width: 1px; background-color: Gray;">
-												</td>
-												<td colspan="1" style="height: 1px; background-color: Gray;">
-												</td>
-												<td rowspan="6" style="width: 1px; background-color: Gray;">
-												</td>
-											</tr>
-											<tr>
-												<td colspan="2" style="text-align: center; height: 10px;">
-												</td>
-											</tr>
-											<tr>
-												<td class="TextoResaltado" style="text-align: center;">
-													LOTE
-												</td>
-											</tr>
-											<tr>
-												<td style="text-align: center; height: 10px;">
-												</td>
-											</tr>
-											<tr>
-												<td style="text-align: center">
-													<table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
-														<tr>
-															<td class="TextoLabelFEAVendedor">
-																<asp:RegularExpressionValidator ID="NroLoteRegularExpressionValidator" runat="server"
-																	ControlToValidate="Id_LoteTextbox" ErrorMessage="error de formateo en número de lote"
-																	SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
-																<asp:RequiredFieldValidator ID="loteRequiredFieldValidator" runat="server" ControlToValidate="Id_LoteTextbox"
-																	Display="Static" ErrorMessage="número de lote" SetFocusOnError="True">* </asp:RequiredFieldValidator>Nro.
-																de lote:
-															</td>
-															<td class="TextoLabelFEAVendedor" style="">
-																<asp:TextBox ID="Id_LoteTextbox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Es un número correlativo y consecutivo que debe llevarse manualmente e identifica el número de envío del archivo xml que envía a Interfacturas (Upload). Este número NO SE PUEDE REPETIR.">
-																</asp:TextBox>
-															</td>
-															<td class="TextoLabelFEAVendedorMed">
-																Cuit canal:
-															</td>
-															<td class="TextoLabelFEAVendedorCh">
-																<asp:TextBox ID="Cuit_CanalTextBox" runat="server" ReadOnly="True" SkinID="TextoBoxFEAVendedorDetCh">30690783521</asp:TextBox>
-															</td>
-															<td class="TextoLabelFEAVendedorMed">
-																Presta servicios:
-															</td>
-															<td class="TextoLabelFEAVendedorChCh" style="text-align: left;">
-																<asp:CheckBox ID="Presta_ServCheckBox" runat="server"></asp:CheckBox>
-															</td>
-															<td style="width: 5px;">
-															</td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-											<tr>
-												<td style="text-align: center; height: 10px;">
-												</td>
-											</tr>
-											<tr>
-												<td rowspan="6" style="width: 1px; background-color: Gray;">
-												</td>
-												<td colspan="1" style="height: 1px; background-color: Gray;">
-												</td>
-												<td rowspan="6" style="width: 1px; background-color: Gray;">
-												</td>
-											</tr>
-										</table>
-										<br />
+										<asp:UpdatePanel ID="LoteUpdatePanel" runat="server" RenderMode="Block" UpdateMode="Always">
+											<ContentTemplate>
+												<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+													<tr>
+														<td rowspan="6" style="width: 1px; background-color: Gray;">
+														</td>
+														<td colspan="1" style="height: 1px; background-color: Gray;">
+														</td>
+														<td rowspan="6" style="width: 1px; background-color: Gray;">
+														</td>
+													</tr>
+													<tr>
+														<td colspan="2" style="text-align: center; height: 10px;">
+														</td>
+													</tr>
+													<tr>
+														<td class="TextoResaltado" style="text-align: center;">
+															LOTE
+														</td>
+													</tr>
+													<tr>
+														<td style="text-align: center; height: 10px;">
+														</td>
+													</tr>
+													<tr>
+														<td style="text-align: center">
+															<table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
+																<tr>
+																	<td class="TextoLabelFEAVendedor">
+																		<asp:RegularExpressionValidator ID="NroLoteRegularExpressionValidator" runat="server"
+																			ControlToValidate="Id_LoteTextbox" ErrorMessage="error de formateo en número de lote"
+																			SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
+																		<asp:RequiredFieldValidator ID="loteRequiredFieldValidator" runat="server" ControlToValidate="Id_LoteTextbox"
+																			Display="Static" ErrorMessage="número de lote" SetFocusOnError="True">* </asp:RequiredFieldValidator>Nro.
+																		de lote:
+																	</td>
+																	<td class="TextoLabelFEAVendedor" style="">
+																		<asp:TextBox ID="Id_LoteTextbox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Es un número correlativo y consecutivo que debe llevarse manualmente e identifica el número de envío del archivo xml que envía a Interfacturas (Upload). Este número NO SE PUEDE REPETIR.">
+																		</asp:TextBox>
+																	</td>
+																	<td class="TextoLabelFEAVendedorMed">
+																		Cuit canal:
+																	</td>
+																	<td class="TextoLabelFEAVendedorCh">
+																		<asp:TextBox ID="Cuit_CanalTextBox" runat="server" ReadOnly="True" SkinID="TextoBoxFEAVendedorDetCh">30690783521</asp:TextBox>
+																	</td>
+																	<td class="TextoLabelFEAVendedorMed">
+																		Presta servicios:
+																	</td>
+																	<td class="TextoLabelFEAVendedorChCh" style="text-align: left;">
+																		<asp:CheckBox ID="Presta_ServCheckBox" runat="server"></asp:CheckBox>
+																	</td>
+																	<td style="width: 5px;">
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+													<tr>
+														<td style="text-align: center; height: 10px;">
+														</td>
+													</tr>
+													<tr>
+														<td rowspan="6" style="width: 1px; background-color: Gray;">
+														</td>
+														<td colspan="1" style="height: 1px; background-color: Gray;">
+														</td>
+														<td rowspan="6" style="width: 1px; background-color: Gray;">
+														</td>
+													</tr>
+												</table>
+												<br />
+											</ContentTemplate>
+										</asp:UpdatePanel>
 									</td>
 								</tr>
 								<!-- DATOS DEL COMPRADOR -->
@@ -966,108 +979,112 @@
 								<!-- DATOS DEL COMPROBANTE -->
 								<tr>
 									<td>
-										<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
-											<tr>
-												<td rowspan="6" style="width: 1px; background-color: Gray;">
-												</td>
-												<td colspan="3" style="height: 1px; background-color: Gray;">
-												</td>
-												<td rowspan="6" style="width: 1px; background-color: Gray;">
-												</td>
-											</tr>
-											<tr>
-												<td colspan="3" style="text-align: center; height: 10px;">
-												</td>
-											</tr>
-											<tr>
-												<td class="TextoResaltado" colspan="3" style="text-align: center;">
-													INFORMACIÓN COMPROBANTE
-												</td>
-											</tr>
-											<tr>
-												<td class="TextoResaltado" colspan="3" style="text-align: center; height: 10px;">
-												</td>
-											</tr>
-											<tr>
-												<td align="left" valign="top">
-													<table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
-														<tr>
-															<td class="TextoLabelFEAVendedor">
-																<asp:RequiredFieldValidator ID="FechaVencimientoRequiredFieldValidator" runat="server"
-																	ControlToValidate="FechaVencimientoDatePickerWebUserControl:txt_Date" ErrorMessage="fecha de vencimiento"
-																	SetFocusOnError="True">* </asp:RequiredFieldValidator>Fecha de vencimiento:
-															</td>
-															<td style="padding-top: 3px;">
-																<uc1:DatePickerWebUserControl ID="FechaVencimientoDatePickerWebUserControl" runat="server"
-																	TextCssClass="DatePickerFecha"></uc1:DatePickerWebUserControl>
-															</td>
-														</tr>
-														<tr>
-															<td class="TextoLabelFEAVendedor">
-																IVA computable:
-															</td>
-															<td style="padding-top: 3px;">
-																<asp:DropDownList ID="IVAcomputableDropDownList" runat="server">
-																</asp:DropDownList>
-															</td>
-														</tr>
-														<tr>
-															<td class="TextoLabelFEAVendedor">
-																Código de operación:
-															</td>
-															<td style="padding-top: 8px;">
-																<asp:DropDownList ID="CodigoOperacionDropDownList" runat="server">
-																</asp:DropDownList>
-															</td>
-														</tr>
-													</table>
-												</td>
-												<td class="bgFEAC" rowspan="5" style="width: 40px; background-repeat: repeat-y;">
-												</td>
-												<td align="left" valign="top">
-													<table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
-														<tr>
-															<td class="TextoLabelFEAVendedor" style="">
-																<asp:Label ID="FechaInicioServLabel" runat="server" Text="Fecha inicio servicio:"></asp:Label>
-															</td>
-															<td style="">
-																<uc1:DatePickerWebUserControl ID="FechaServDesdeDatePickerWebUserControl" runat="server"
-																	TextCssClass="DatePickerFecha"></uc1:DatePickerWebUserControl>
-															</td>
-														</tr>
-														<tr>
-															<td class="TextoLabelFEAVendedor" style="">
-																<asp:Label ID="FechaHstServLabel" runat="server" Text="Fecha finalización servicio:">
-																</asp:Label>
-															</td>
-															<td style="padding-top: 3px;">
-																<uc1:DatePickerWebUserControl ID="FechaServHastaDatePickerWebUserControl" runat="server"
-																	TextCssClass="DatePickerFecha"></uc1:DatePickerWebUserControl>
-															</td>
-														</tr>
-														<tr>
-															<td class="TextoLabelFEAVendedor" style="">
-																<asp:RegularExpressionValidator ID="CondicionDePAgoRegularExpressionValidator" runat="server"
-																	ControlToValidate="Condicion_De_PagoTextBox" ErrorMessage="error de formateo en condición de pago"
-																	SetFocusOnError="True" ValidationExpression="[0-9]?[0-9]?[0-9]?">* </asp:RegularExpressionValidator>Condición
-																de pago(en días):</td>
-															<td style="padding-top: 3px;">
-																<asp:TextBox ID="Condicion_De_PagoTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-																</asp:TextBox></td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-											<tr>
-												<td class="TextoResaltado" colspan="3" style="text-align: center; height: 10px;">
-												</td>
-											</tr>
-											<tr>
-												<td colspan="5" style="height: 1px; background-color: Gray;">
-												</td>
-											</tr>
-										</table>
-										<br />
+										<asp:UpdatePanel ID="InfoComproUpdatePanel" runat="server" UpdateMode="Always">
+											<ContentTemplate>
+												<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+													<tr>
+														<td rowspan="6" style="width: 1px; background-color: Gray;">
+														</td>
+														<td colspan="3" style="height: 1px; background-color: Gray;">
+														</td>
+														<td rowspan="6" style="width: 1px; background-color: Gray;">
+														</td>
+													</tr>
+													<tr>
+														<td colspan="3" style="text-align: center; height: 10px;">
+														</td>
+													</tr>
+													<tr>
+														<td class="TextoResaltado" colspan="3" style="text-align: center;">
+															INFORMACIÓN COMPROBANTE
+														</td>
+													</tr>
+													<tr>
+														<td class="TextoResaltado" colspan="3" style="text-align: center; height: 10px;">
+														</td>
+													</tr>
+													<tr>
+														<td align="left" valign="top">
+															<table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
+																<tr>
+																	<td class="TextoLabelFEAVendedor">
+																		<asp:RequiredFieldValidator ID="FechaVencimientoRequiredFieldValidator" runat="server"
+																			ControlToValidate="FechaVencimientoDatePickerWebUserControl:txt_Date" ErrorMessage="fecha de vencimiento"
+																			SetFocusOnError="True">* </asp:RequiredFieldValidator>Fecha de vencimiento:
+																	</td>
+																	<td style="padding-top: 3px;">
+																		<uc1:DatePickerWebUserControl ID="FechaVencimientoDatePickerWebUserControl" runat="server"
+																			TextCssClass="DatePickerFecha"></uc1:DatePickerWebUserControl>
+																	</td>
+																</tr>
+																<tr>
+																	<td class="TextoLabelFEAVendedor">
+																		IVA computable:
+																	</td>
+																	<td style="padding-top: 3px;">
+																		<asp:DropDownList ID="IVAcomputableDropDownList" runat="server">
+																		</asp:DropDownList>
+																	</td>
+																</tr>
+																<tr>
+																	<td class="TextoLabelFEAVendedor">
+																		Código de operación:
+																	</td>
+																	<td style="padding-top: 8px;">
+																		<asp:DropDownList ID="CodigoOperacionDropDownList" runat="server">
+																		</asp:DropDownList>
+																	</td>
+																</tr>
+															</table>
+														</td>
+														<td class="bgFEAC" rowspan="5" style="width: 40px; background-repeat: repeat-y;">
+														</td>
+														<td align="left" valign="top">
+															<table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
+																<tr>
+																	<td class="TextoLabelFEAVendedor" style="">
+																		<asp:Label ID="FechaInicioServLabel" runat="server" Text="Fecha inicio servicio:"></asp:Label>
+																	</td>
+																	<td style="">
+																		<uc1:DatePickerWebUserControl ID="FechaServDesdeDatePickerWebUserControl" runat="server"
+																			TextCssClass="DatePickerFecha"></uc1:DatePickerWebUserControl>
+																	</td>
+																</tr>
+																<tr>
+																	<td class="TextoLabelFEAVendedor" style="">
+																		<asp:Label ID="FechaHstServLabel" runat="server" Text="Fecha finalización servicio:">
+																		</asp:Label>
+																	</td>
+																	<td style="padding-top: 3px;">
+																		<uc1:DatePickerWebUserControl ID="FechaServHastaDatePickerWebUserControl" runat="server"
+																			TextCssClass="DatePickerFecha"></uc1:DatePickerWebUserControl>
+																	</td>
+																</tr>
+																<tr>
+																	<td class="TextoLabelFEAVendedor" style="">
+																		<asp:RegularExpressionValidator ID="CondicionDePAgoRegularExpressionValidator" runat="server"
+																			ControlToValidate="Condicion_De_PagoTextBox" ErrorMessage="error de formateo en condición de pago"
+																			SetFocusOnError="True" ValidationExpression="[0-9]?[0-9]?[0-9]?">* </asp:RegularExpressionValidator>Condición
+																		de pago(en días):</td>
+																	<td style="padding-top: 3px;">
+																		<asp:TextBox ID="Condicion_De_PagoTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
+																		</asp:TextBox></td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+													<tr>
+														<td class="TextoResaltado" colspan="3" style="text-align: center; height: 10px;">
+														</td>
+													</tr>
+													<tr>
+														<td colspan="5" style="height: 1px; background-color: Gray;">
+														</td>
+													</tr>
+												</table>
+												<br />
+											</ContentTemplate>
+										</asp:UpdatePanel>
 									</td>
 								</tr>
 								<!-- CODIGOS DE REFERENCIAS -->
@@ -1256,7 +1273,8 @@
 																Comentarios:
 															</td>
 															<td class="TextoLabelFEADescrLarga" style="padding: 5px;">
-																<asp:TextBox ID="ComentariosTextBox" runat="server" Height="100px" SkinID="TextoBoxFEADescrGr" TextMode="MultiLine">
+																<asp:TextBox ID="ComentariosTextBox" runat="server" Height="100px" SkinID="TextoBoxFEADescrGr"
+																	TextMode="MultiLine">
 																</asp:TextBox>
 															</td>
 														</tr>

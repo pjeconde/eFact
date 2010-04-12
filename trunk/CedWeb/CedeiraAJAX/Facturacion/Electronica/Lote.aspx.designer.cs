@@ -74,6 +74,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.HyperLink ConfigurarVendedorHyperLink;
         
         /// <summary>
+        /// Control Tipo_De_ComprobanteUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel Tipo_De_ComprobanteUpdatePanel;
+        
+        /// <summary>
         /// Control Tipo_De_ComprobanteDropDownList.
         /// </summary>
         /// <remarks>
@@ -180,6 +189,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Punto_VentaTextBox;
+        
+        /// <summary>
+        /// Control TipoPtoVentaLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label TipoPtoVentaLabel;
         
         /// <summary>
         /// Control Domicilio_Calle_VendedorTextBox.
@@ -470,6 +488,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::CedeiraAJAX.DatePickerWebUserControl InicioDeActividadesVendedorDatePickerWebUserControl;
         
         /// <summary>
+        /// Control LoteUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel LoteUpdatePanel;
+        
+        /// <summary>
         /// Control NroLoteRegularExpressionValidator.
         /// </summary>
         /// <remarks>
@@ -756,6 +783,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList Condicion_IVA_CompradorDropDownList;
+        
+        /// <summary>
+        /// Control InfoComproUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel InfoComproUpdatePanel;
         
         /// <summary>
         /// Control FechaVencimientoRequiredFieldValidator.
