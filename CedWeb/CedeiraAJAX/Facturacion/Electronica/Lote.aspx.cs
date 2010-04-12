@@ -2245,43 +2245,63 @@ namespace CedeiraAJAX.Facturacion.Electronica
             {
                 if (!((TextBox)sender).Text.Equals(string.Empty))
                 {
-                    CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
-                    System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
+                    System.Collections.Generic.List<CedWebEntidades.PuntoDeVenta> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta;
                     try
                     {
                         int auxPV = Convert.ToInt32(((TextBox)sender).Text);
-                        if (listaPV.Contains(auxPV))
-                        {
-                            Presta_ServCheckBox.Checked = false;
-                            Presta_ServCheckBox.Enabled = false;
-                            FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
-                            FechaServDesdeDatePickerWebUserControl.Visible = false;
-                            FechaInicioServLabel.Visible = false;
-                            FechaHstServLabel.Visible = false;
-                            FechaServHastaDatePickerWebUserControl.CalendarDateString = string.Empty;
-                            FechaServHastaDatePickerWebUserControl.Visible = false;
-                            Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-                            Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-                            Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
-                        }
-                        else
-                        {
-                            Presta_ServCheckBox.Checked = true;
-                            Presta_ServCheckBox.Enabled = true;
-                            FechaServDesdeDatePickerWebUserControl.Visible = true;
-                            FechaInicioServLabel.Visible = true;
-                            FechaHstServLabel.Visible = true;
-                            FechaServHastaDatePickerWebUserControl.Visible = true;
-                            Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-                            Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-                            Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
-                        }
-                        Tipo_De_ComprobanteDropDownList.DataBind();
-                    }
+						string tipo=((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).DescrTipo;
+						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
+						Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+						Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+						switch (tipo)
+						{
+							case "Comun":
+								Presta_ServCheckBox.Checked = false;
+								Presta_ServCheckBox.Enabled = true;
+								FechaServDesdeDatePickerWebUserControl.Visible = true;
+								FechaInicioServLabel.Visible = true;
+								FechaHstServLabel.Visible = true;
+								FechaServHastaDatePickerWebUserControl.Visible = true;
+								Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
+								break;
+							case "BFiscal":
+								Presta_ServCheckBox.Checked = false;
+								Presta_ServCheckBox.Enabled = false;
+								FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
+								FechaServDesdeDatePickerWebUserControl.Visible = false;
+								FechaInicioServLabel.Visible = false;
+								FechaHstServLabel.Visible = false;
+								FechaServHastaDatePickerWebUserControl.CalendarDateString = string.Empty;
+								FechaServHastaDatePickerWebUserControl.Visible = false;
+								Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
+								break;
+							case "Export":
+								Presta_ServCheckBox.Checked = false;
+								Presta_ServCheckBox.Enabled = false;
+								FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
+								FechaServDesdeDatePickerWebUserControl.Visible = false;
+								FechaInicioServLabel.Visible = false;
+								FechaHstServLabel.Visible = false;
+								FechaServHastaDatePickerWebUserControl.CalendarDateString = string.Empty;
+								FechaServHastaDatePickerWebUserControl.Visible = false;
+								Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaExportaciones();
+								break;
+						}
+						Tipo_De_ComprobanteDropDownList.DataBind();
+						TipoPtoVentaLabel.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).DescrTipo;
+					}
                     catch
                     {
-                        //((TextBox)sender).Text = string.Empty;
-                    }
+						TipoPtoVentaLabel.Text="No definido";
+						Presta_ServCheckBox.Checked = false;
+						Presta_ServCheckBox.Enabled = true;
+						FechaServDesdeDatePickerWebUserControl.Visible = true;
+						FechaInicioServLabel.Visible = true;
+						FechaHstServLabel.Visible = true;
+						FechaServHastaDatePickerWebUserControl.Visible = true;
+						Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
+						Tipo_De_ComprobanteDropDownList.DataBind();
+					}
                 }
             }
         }
