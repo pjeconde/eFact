@@ -36,8 +36,8 @@ namespace CedWebDB
                     puntoDeVenta.Domicilio.Torre = Convert.ToString(dt.Rows[i]["Torre"]);
                     puntoDeVenta.Domicilio.Manzana = Convert.ToString(dt.Rows[i]["Manzana"]);
                     puntoDeVenta.Domicilio.Localidad = Convert.ToString(dt.Rows[i]["Localidad"]);
-                    puntoDeVenta.Domicilio.IdProvincia = Convert.ToString(dt.Rows[i]["IdProvincia"]);
-                    puntoDeVenta.Domicilio.DescrProvincia = Convert.ToString(dt.Rows[i]["DescrProvincia"]);
+                    puntoDeVenta.Domicilio.Provincia.Id = Convert.ToString(dt.Rows[i]["IdProvincia"]);
+                    puntoDeVenta.Domicilio.Provincia.Descr = Convert.ToString(dt.Rows[i]["DescrProvincia"]);
                     puntoDeVenta.Domicilio.CodPost = Convert.ToString(dt.Rows[i]["CodPost"]);
                     Vendedor.PuntosDeVenta.Add(puntoDeVenta);
                 }

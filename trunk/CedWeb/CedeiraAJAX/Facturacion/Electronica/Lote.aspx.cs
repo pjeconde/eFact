@@ -133,7 +133,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         Domicilio_Torre_VendedorTextBox.Text = v.Domicilio.Torre;
                         Domicilio_Manzana_VendedorTextBox.Text = v.Domicilio.Manzana;
                         Localidad_VendedorTextBox.Text = v.Domicilio.Localidad;
-                        Provincia_VendedorDropDownList.SelectedValue = v.Domicilio.IdProvincia;
+                        Provincia_VendedorDropDownList.SelectedValue = v.Domicilio.Provincia.Id;
                         Cp_VendedorTextBox.Text = v.Domicilio.CodPost;
                         Contacto_VendedorTextBox.Text = v.NombreContacto;
                         Email_VendedorTextBox.Text = v.EmailContacto;
@@ -2068,7 +2068,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     Domicilio_Torre_CompradorTextBox.Text = comprador.Domicilio.Torre;
                     Domicilio_Manzana_CompradorTextBox.Text = comprador.Domicilio.Manzana;
                     Localidad_CompradorTextBox.Text = comprador.Domicilio.Localidad;
-                    Provincia_CompradorDropDownList.SelectedValue = comprador.Domicilio.IdProvincia;
+                    Provincia_CompradorDropDownList.SelectedValue = comprador.Domicilio.Provincia.Id;
                     Cp_CompradorTextBox.Text = comprador.Domicilio.CodPost;
                     Contacto_CompradorTextBox.Text = comprador.NombreContacto;
                     Email_CompradorTextBox.Text = comprador.EmailContacto;

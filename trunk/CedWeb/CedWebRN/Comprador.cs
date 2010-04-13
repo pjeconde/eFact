@@ -62,8 +62,8 @@ namespace CedWebRN
             Comprador.Domicilio.Torre = null;
             Comprador.Domicilio.Manzana = null;
             Comprador.Domicilio.Localidad = null;
-            Comprador.Domicilio.IdProvincia = null;
-            Comprador.Domicilio.DescrProvincia = null;
+            Comprador.Domicilio.Provincia.Id = null;
+            Comprador.Domicilio.Provincia.Descr = null;
             Comprador.Domicilio.CodPost = null;
             Comprador.NombreContacto = null;
             Comprador.EmailContacto = null;
@@ -93,8 +93,8 @@ namespace CedWebRN
             CompradorHst.Domicilio.Torre = CompradorDsd.Domicilio.Torre;
             CompradorHst.Domicilio.Manzana = CompradorDsd.Domicilio.Manzana;
             CompradorHst.Domicilio.Localidad = CompradorDsd.Domicilio.Localidad;
-            CompradorHst.Domicilio.IdProvincia = CompradorDsd.Domicilio.IdProvincia;
-            CompradorHst.Domicilio.DescrProvincia = CompradorDsd.Domicilio.DescrProvincia;
+            CompradorHst.Domicilio.Provincia.Id = CompradorDsd.Domicilio.Provincia.Id;
+            CompradorHst.Domicilio.Provincia.Descr = CompradorDsd.Domicilio.Provincia.Descr;
             CompradorHst.Domicilio.CodPost = CompradorDsd.Domicilio.CodPost;
             CompradorHst.NombreContacto = CompradorDsd.NombreContacto;
             CompradorHst.EmailContacto = CompradorDsd.EmailContacto;

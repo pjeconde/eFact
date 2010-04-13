@@ -37,8 +37,8 @@ namespace CedWebDB
             Hasta.Domicilio.Torre = Convert.ToString(Desde["Torre"]);
             Hasta.Domicilio.Manzana = Convert.ToString(Desde["Manzana"]);
             Hasta.Domicilio.Localidad = Convert.ToString(Desde["Localidad"]);
-            Hasta.Domicilio.IdProvincia = Convert.ToString(Desde["IdProvincia"]);
-            Hasta.Domicilio.DescrProvincia = Convert.ToString(Desde["DescrProvincia"]);
+            Hasta.Domicilio.Provincia.Id = Convert.ToString(Desde["IdProvincia"]);
+            Hasta.Domicilio.Provincia.Descr = Convert.ToString(Desde["DescrProvincia"]);
             Hasta.Domicilio.CodPost = Convert.ToString(Desde["CodPost"]);
             Hasta.NombreContacto = Convert.ToString(Desde["NombreContacto"]);
             Hasta.EmailContacto = Convert.ToString(Desde["EmailContacto"]);
@@ -69,8 +69,8 @@ namespace CedWebDB
             a.Append("'" + Comprador.Domicilio.Torre + "', ");
             a.Append("'" + Comprador.Domicilio.Manzana + "', ");
             a.Append("'" + Comprador.Domicilio.Localidad + "', ");
-            a.Append("'" + Comprador.Domicilio.IdProvincia + "', ");
-            a.Append("'" + Comprador.Domicilio.DescrProvincia + "', ");
+            a.Append("'" + Comprador.Domicilio.Provincia.Id + "', ");
+            a.Append("'" + Comprador.Domicilio.Provincia.Descr + "', ");
             a.Append("'" + Comprador.Domicilio.CodPost + "', ");
             a.Append("'" + Comprador.NombreContacto + "', ");
             a.Append("'" + Comprador.EmailContacto + "', ");
@@ -101,8 +101,8 @@ namespace CedWebDB
             a.Append("Torre='" + Comprador.Domicilio.Torre + "', ");
             a.Append("Manzana='" + Comprador.Domicilio.Manzana + "', ");
             a.Append("Localidad='" + Comprador.Domicilio.Localidad + "', ");
-            a.Append("IdProvincia='" + Comprador.Domicilio.IdProvincia + "', ");
-            a.Append("DescrProvincia='" + Comprador.Domicilio.DescrProvincia + "', ");
+            a.Append("IdProvincia='" + Comprador.Domicilio.Provincia.Id + "', ");
+            a.Append("DescrProvincia='" + Comprador.Domicilio.Provincia.Descr + "', ");
             a.Append("CodPost='" + Comprador.Domicilio.CodPost + "', ");
             a.Append("NombreContacto='" + Comprador.NombreContacto + "', ");
             a.Append("EmailContacto='" + Comprador.EmailContacto + "', ");

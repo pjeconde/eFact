@@ -164,22 +164,22 @@ namespace CedWebEntidades
         {
             set
             {
-                domicilio.IdProvincia = value;
+                domicilio.Provincia.Id = value;
             }
             get
             {
-                return domicilio.IdProvincia;
+                return domicilio.Provincia.Id;
             }
         }
         public string DescrProvincia
         {
             set
             {
-                domicilio.DescrProvincia = value;
+                domicilio.Provincia.Descr = value;
             }
             get
             {
-                return domicilio.DescrProvincia;
+                return domicilio.Provincia.Descr;
             }
         }
         public string CodPost
