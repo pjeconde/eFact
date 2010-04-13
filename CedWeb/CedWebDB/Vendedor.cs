@@ -39,8 +39,8 @@ namespace CedWebDB
             Hasta.Domicilio.Torre = Convert.ToString(Desde["Torre"]);
             Hasta.Domicilio.Manzana = Convert.ToString(Desde["Manzana"]);
             Hasta.Domicilio.Localidad = Convert.ToString(Desde["Localidad"]);
-            Hasta.Domicilio.IdProvincia = Convert.ToString(Desde["IdProvincia"]);
-            Hasta.Domicilio.DescrProvincia = Convert.ToString(Desde["DescrProvincia"]);
+            Hasta.Domicilio.Provincia.Id = Convert.ToString(Desde["IdProvincia"]);
+            Hasta.Domicilio.Provincia.Descr = Convert.ToString(Desde["DescrProvincia"]);
             Hasta.Domicilio.CodPost = Convert.ToString(Desde["CodPost"]);
             Hasta.NombreContacto = Convert.ToString(Desde["NombreContacto"]);
             Hasta.EmailContacto = Convert.ToString(Desde["EmailContacto"]);
@@ -72,8 +72,8 @@ namespace CedWebDB
             a.Append("Torre='" + Vendedor.Domicilio.Torre + "', ");
             a.Append("Manzana='" + Vendedor.Domicilio.Manzana + "', ");
             a.Append("Localidad='" + Vendedor.Domicilio.Localidad + "', ");
-            a.Append("IdProvincia='" + Vendedor.Domicilio.IdProvincia + "', ");
-            a.Append("DescrProvincia='" + Vendedor.Domicilio.DescrProvincia + "', ");
+            a.Append("IdProvincia='" + Vendedor.Domicilio.Provincia.Id + "', ");
+            a.Append("DescrProvincia='" + Vendedor.Domicilio.Provincia.Descr + "', ");
             a.Append("CodPost='" + Vendedor.Domicilio.CodPost + "', ");
             a.Append("NombreContacto='" + Vendedor.NombreContacto + "', ");
             a.Append("EmailContacto='" + Vendedor.EmailContacto + "', ");
@@ -103,8 +103,8 @@ namespace CedWebDB
             a.Append("'" + Vendedor.Domicilio.Torre + "', ");
             a.Append("'" + Vendedor.Domicilio.Manzana + "', ");
             a.Append("'" + Vendedor.Domicilio.Localidad + "', ");
-            a.Append("'" + Vendedor.Domicilio.IdProvincia + "', ");
-            a.Append("'" + Vendedor.Domicilio.DescrProvincia + "', ");
+            a.Append("'" + Vendedor.Domicilio.Provincia.Id + "', ");
+            a.Append("'" + Vendedor.Domicilio.Provincia.Descr + "', ");
             a.Append("'" + Vendedor.Domicilio.CodPost + "', ");
             a.Append("'" + Vendedor.NombreContacto + "', ");
             a.Append("'" + Vendedor.EmailContacto + "', ");
@@ -134,12 +134,12 @@ namespace CedWebDB
                 a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.Torre + "', ");
                 a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.Manzana + "', ");
                 a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.Localidad + "', ");
-                a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.IdProvincia + "', ");
-                a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.DescrProvincia + "', ");
+                a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.Provincia.Id + "', ");
+                a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.Provincia.Descr + "', ");
                 a.Append("'" + Vendedor.PuntosDeVenta[i].Domicilio.CodPost + "' ");
                 a.Append(") ");
             }
-            Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.Usa, sesion.CnnStr);
         }
         public List<CedWebEntidades.Vendedor> ListaAdministracion(int IndicePagina, int TamañoPagina, string OrderBy)
         {

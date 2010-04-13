@@ -9,7 +9,7 @@ namespace CedWebEntidades.TiposPuntoDeVenta
         public SinInformar()
         {
             Id = string.Empty;
-            Descr = "Sin informar";
+            Descr = string.Empty;
         }
     }
 }

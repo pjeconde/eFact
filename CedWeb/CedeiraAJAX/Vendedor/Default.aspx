@@ -408,112 +408,291 @@
 						<td class="TextoResaltado" style="padding-left:30px; text-align:center">
 							<table border="0" cellpadding="0" cellspacing="0" style="width: 760px">
 								<tr>
-									<td rowspan="8" style="width: 1px; background-color: Gray;">
-									</td>
-									<td colspan="1" style="height: 1px; background-color: Gray;">
-									</td>
-									<td rowspan="8" style="width: 1px; background-color: Gray;">
-									</td>
-								</tr>
-								<tr>
-									<td style="text-align: center; height: 10px;">
-									</td>
-								</tr>
-								<tr>
 									<td class="TextoResaltado" style="text-align: center;">
 										PUNTOS DE VENTA
 									</td>
 								</tr>
 								<tr>
-									<td style="text-align: center; height: 10px;">
-									</td>
-								</tr>
-								<tr>
-									<td style="text-align: center; padding: 3px; font-weight: normal;">
+									<td style="text-align:center; padding:3px; font-weight:normal;">
 										<asp:UpdatePanel ID="puntosDeVentaUpdatePanel" runat="server">
 											<ContentTemplate>
-												<asp:GridView ID="puntosDeVentaGridView" runat="server" AutoGenerateColumns="False"
-													BorderColor="gray" BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70"
-													EmptyDataRowStyle-ForeColor="#071F70" EnableViewState="true" Font-Bold="false"
-													ForeColor="#071F70" GridLines="Both" HeaderStyle-ForeColor="#A52A2A" OnRowCancelingEdit="puntosDeVentaGridView_RowCancelingEdit"
-													OnRowCommand="puntosDeVentaGridView_RowCommand" OnRowDeleted="puntosDeVentaGridView_RowDeleted"
-													OnRowDeleting="puntosDeVentaGridView_RowDeleting" OnRowEditing="puntosDeVentaGridView_RowEditing"
-													OnRowUpdated="puntosDeVentaGridView_RowUpdated" OnRowUpdating="puntosDeVentaGridView_RowUpdating"
-													PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70"
-													ShowFooter="true" ShowHeader="True" ToolTip="El punto de venta debe ser un número entero">
-													<Columns>
-														<asp:TemplateField HeaderText="Tipo de Punto de Venta">
-															<ItemTemplate>
-																<asp:Label ID="lbltipo_de_punto_de_venta" runat="server" Text='<%# Eval("DescrTipo") %>'
-																	Width="140px"></asp:Label>
-															</ItemTemplate>
-															<EditItemTemplate>
-																<asp:DropDownList ID="ddltipo_de_punto_de_ventaEdit" runat="server" Width="140px">
-																</asp:DropDownList><asp:RequiredFieldValidator ID="ddltipo_de_punto_de_ventaEditItemRequiredFieldValidator"
-																	runat="server" ControlToValidate="ddltipo_de_punto_de_ventaEdit" ErrorMessage="Tipo de Punto de Venta en edición no informado"
-																	SetFocusOnError="True" ValidationGroup="PuntosDeVentaEditItem">*</asp:RequiredFieldValidator>
-															</EditItemTemplate>
-															<FooterTemplate>
-																<asp:DropDownList ID="ddltipo_de_punto_de_venta" runat="server" Width="140px">
-																</asp:DropDownList><asp:RequiredFieldValidator ID="ddldescripcionFooterRequiredFieldValidator"
-																	runat="server" ControlToValidate="ddltipo_de_punto_de_venta" ErrorMessage="Tipo de Punto de Venta a agregar no informado"
-																	SetFocusOnError="True" ValidationGroup="PuntosDeVentaFooter">*</asp:RequiredFieldValidator>
-															</FooterTemplate>
-															<ItemStyle HorizontalAlign="Center" Width="150px" />
-															<FooterStyle HorizontalAlign="Center" Width="150px" />
-															<HeaderStyle Font-Bold="False" />
-														</asp:TemplateField>
-														<asp:TemplateField HeaderText="Punto de Venta">
-															<ItemTemplate>
-																<asp:Label ID="lblpunto_de_venta" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
-															</ItemTemplate>
-															<EditItemTemplate>
-																<asp:TextBox ID="txtpunto_de_venta" runat="server" Text='<%# Eval("Id") %>'
-																	Width="80px"></asp:TextBox>
-																<asp:RequiredFieldValidator ID="txtpunto_de_ventaEditItemRequiredFieldValidator"
-																	runat="server" ControlToValidate="txtpunto_de_venta" ErrorMessage="Punto de Venta en edición no informado"
-																	SetFocusOnError="True" ValidationGroup="PuntosDeVentaEditItem">*</asp:RequiredFieldValidator>
-																<asp:RegularExpressionValidator ID="txtpunto_de_ventaEditItemRegularExpressionValidator"
-																	runat="server" ControlToValidate="txtpunto_de_venta" ErrorMessage="Punto de Venta en edición mal formateado"
-																	SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="PuntosDeVentaEditItem">*</asp:RegularExpressionValidator>
-															</EditItemTemplate>
-															<FooterTemplate>
-																<asp:TextBox ID="txtpunto_de_venta" runat="server" Text='' Width="80px"></asp:TextBox>
-																<asp:RegularExpressionValidator ID="txtpunto_de_ventaFooterRegularExpressionValidator"
-																	runat="server" ControlToValidate="txtpunto_de_venta" ErrorMessage="Punto de Venta a agregar mal formateado"
-																	SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="PuntosDeVentaFooter">*</asp:RegularExpressionValidator>
-																<asp:RequiredFieldValidator ID="txtpunto_de_ventaFooterRequiredFieldValidator"
-																	runat="server" ControlToValidate="txtpunto_de_venta" ErrorMessage="Punto de Venta a agregar no informado"
-																	SetFocusOnError="True" ValidationGroup="PuntosDeVentaFooter">*</asp:RequiredFieldValidator>
-															</FooterTemplate>
-															<ItemStyle HorizontalAlign="Center" Width="120px" />
-															<HeaderStyle HorizontalAlign="Center" Font-Bold="False" Width="120px" />
-														</asp:TemplateField>
-														<asp:CommandField CancelText="Cancelar" EditText="Editar" HeaderText="Acciones" DeleteText="Borrar"
-															ShowEditButton="True" ShowDeleteButton="True" UpdateText="Actualizar" ValidationGroup="PuntosDeVentaEditItem">
-															<ItemStyle HorizontalAlign="Center" Width="110px" />
-															<HeaderStyle Font-Bold="False" Width="110px" />
-														</asp:CommandField>
-														<asp:TemplateField HeaderText="Nuevo">
-															<ItemTemplate>
-<%--																<asp:LinkButton ID="linkDeletePuntosDeVenta" runat="server" CausesValidation="false"
-																	CommandName="Delete">Borrar</asp:LinkButton>--%>
-															</ItemTemplate>
-															<FooterTemplate>
-																<asp:LinkButton ID="linkAddpuntosDeVenta" runat="server" CausesValidation="true" CommandName="AddpuntosDeVenta"
-																	ValidationGroup="PuntosDeVentaFooter">Agregar</asp:LinkButton>
-															</FooterTemplate>
-															<ItemStyle HorizontalAlign="Center" Width="50px" />
-															<HeaderStyle Font-Bold="False" Width="50px" />
-														</asp:TemplateField>
-													</Columns>
-													<EmptyDataRowStyle ForeColor="#071F70" />
-													<RowStyle ForeColor="#071F70" />
-													<EditRowStyle ForeColor="#071F70" />
-													<SelectedRowStyle ForeColor="#071F70" />
-													<PagerStyle ForeColor="#071F70" />
-													<HeaderStyle ForeColor="Brown" />
-												</asp:GridView>
+											    <asp:Panel ID="detallePanel" runat="server" BorderStyle="Solid" BorderWidth="1px" BorderColor="gray" Height="200px" ScrollBars="Auto" Width="760px" Wrap="true">											
+												    <asp:GridView ID="puntosDeVentaGridView" runat="server" AutoGenerateColumns="False"
+													    BorderColor="gray" EditRowStyle-ForeColor="#071F70"
+													    EmptyDataRowStyle-ForeColor="#071F70" EnableViewState="true" Font-Bold="false"
+													    ForeColor="#071F70" GridLines="Both" HeaderStyle-ForeColor="#A52A2A" OnRowCancelingEdit="puntosDeVentaGridView_RowCancelingEdit"
+													    OnRowCommand="puntosDeVentaGridView_RowCommand" OnRowDeleted="puntosDeVentaGridView_RowDeleted"
+													    OnRowDeleting="puntosDeVentaGridView_RowDeleting" OnRowEditing="puntosDeVentaGridView_RowEditing"
+													    OnRowUpdated="puntosDeVentaGridView_RowUpdated" OnRowUpdating="puntosDeVentaGridView_RowUpdating"
+													    OnPreRender="puntosDeVentaGridView_PreRender" Width="1180px" 
+													    PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70"
+													    ShowFooter="true" ShowHeader="True" ToolTip="El punto de venta debe ser un número entero">
+													    <Columns>
+														    <asp:CommandField ButtonType="Button" CancelText="Cancelar" EditText="Editar" HeaderText="Acciones" DeleteText="Borrar"
+															    ShowEditButton="True" ShowDeleteButton="True" UpdateText="Actualizar" ValidationGroup="PuntosDeVentaEditItem">
+															    <ItemStyle HorizontalAlign="Center" Width="125px" />
+															    <HeaderStyle Font-Bold="False" Width="125px" />
+														    </asp:CommandField>
+														    <asp:TemplateField>
+															    <FooterTemplate>
+															        <asp:Button ID="ButtonAdd" runat="server" Text="Agregar" CausesValidation="true" CommandName="AddpuntosDeVenta" ValidationGroup="PuntosDeVentaFooter" Width="123px" />
+															    </FooterTemplate>
+															    <ItemStyle Width="0px" />
+															    <FooterStyle Width="0px" />
+															    <HeaderStyle Width="0px" />
+														    </asp:TemplateField>
+														    <asp:TemplateField HeaderText="Tipo de Punto de Venta">
+															    <ItemTemplate>
+																    <asp:Label ID="lbltipo_de_punto_de_venta" runat="server" Text='<%# Eval("DescrTipo") %>'
+																	    Width="140px"></asp:Label>
+															    </ItemTemplate>
+															    <EditItemTemplate>
+																    <asp:DropDownList ID="ddltipo_de_punto_de_ventaEdit" runat="server" Width="140px">
+																    </asp:DropDownList><asp:RequiredFieldValidator ID="ddltipo_de_punto_de_ventaEditItemRequiredFieldValidator"
+																	    runat="server" ControlToValidate="ddltipo_de_punto_de_ventaEdit" ErrorMessage="Tipo de Punto de Venta en edición no informado"
+																	    SetFocusOnError="True" ValidationGroup="PuntosDeVentaEditItem">*</asp:RequiredFieldValidator>
+															    </EditItemTemplate>
+															    <FooterTemplate>
+																    <asp:DropDownList ID="ddltipo_de_punto_de_venta" runat="server" Width="140px">
+																    </asp:DropDownList><asp:RequiredFieldValidator ID="ddldescripcionFooterRequiredFieldValidator"
+																	    runat="server" ControlToValidate="ddltipo_de_punto_de_venta" ErrorMessage="Tipo de Punto de Venta a agregar no informado"
+																	    SetFocusOnError="True" ValidationGroup="PuntosDeVentaFooter">*</asp:RequiredFieldValidator>
+															    </FooterTemplate>
+															    <ItemStyle HorizontalAlign="Center" Width="160px" />
+															    <HeaderStyle  HorizontalAlign="Center" Font-Bold="False" Width="160px" />
+														    </asp:TemplateField>
+														    <asp:TemplateField HeaderText="Punto de Venta">
+															    <ItemTemplate>
+																    <asp:Label ID="lblpunto_de_venta" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
+															    </ItemTemplate>
+															    <EditItemTemplate>
+																    <asp:TextBox ID="txtpunto_de_venta" runat="server" Text='<%# Eval("Id") %>'
+																	    Width="30px"></asp:TextBox>
+																    <asp:RequiredFieldValidator ID="txtpunto_de_ventaEditItemRequiredFieldValidator"
+																	    runat="server" ControlToValidate="txtpunto_de_venta" ErrorMessage="Punto de Venta en edición no informado"
+																	    SetFocusOnError="True" ValidationGroup="PuntosDeVentaEditItem">*</asp:RequiredFieldValidator>
+																    <asp:RegularExpressionValidator ID="txtpunto_de_ventaEditItemRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtpunto_de_venta" ErrorMessage="Punto de Venta en edición mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="PuntosDeVentaEditItem">*</asp:RegularExpressionValidator>
+															    </EditItemTemplate>
+															    <FooterTemplate>
+																    <asp:TextBox ID="txtpunto_de_venta" runat="server" Text='' Width="30px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtpunto_de_ventaFooterRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtpunto_de_venta" ErrorMessage="Punto de Venta a agregar mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="PuntosDeVentaFooter">*</asp:RegularExpressionValidator>
+																    <asp:RequiredFieldValidator ID="txtpunto_de_ventaFooterRequiredFieldValidator"
+																	    runat="server" ControlToValidate="txtpunto_de_venta" ErrorMessage="Punto de Venta a agregar no informado"
+																	    SetFocusOnError="True" ValidationGroup="PuntosDeVentaFooter">*</asp:RequiredFieldValidator>
+															    </FooterTemplate>
+															    <ItemStyle HorizontalAlign="Center" Width="100px" />
+															    <HeaderStyle HorizontalAlign="Center" Font-Bold="False" Width="100px" />
+														    </asp:TemplateField>
+														    <asp:TemplateField HeaderText="Calle">
+															    <ItemTemplate>
+																    <asp:Label ID="lblCalle" runat="server" Text='<%# Eval("Domicilio.Calle") %>'></asp:Label>
+															    </ItemTemplate>
+															    <EditItemTemplate>
+																    <asp:TextBox ID="txtCalle" runat="server" Text='<%# Eval("Domicilio.Calle") %>'
+																	    Width="80px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtCalleEditItemRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtCalle" ErrorMessage="Calle en edición mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaEditItem">*</asp:RegularExpressionValidator>
+															    </EditItemTemplate>
+															    <FooterTemplate>
+																    <asp:TextBox ID="txtCalle" runat="server" Text='' Width="80px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtCalleFooterRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtCalle" ErrorMessage="Calle a agregar mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaFooter">*</asp:RegularExpressionValidator>
+															    </FooterTemplate>
+															    <ItemStyle HorizontalAlign="Center" Width="100px" />
+															    <HeaderStyle HorizontalAlign="Center" Font-Bold="False" Width="100px" />
+														    </asp:TemplateField>														
+														    <asp:TemplateField HeaderText="Nro">
+															    <ItemTemplate>
+																    <asp:Label ID="lblNro" runat="server" Text='<%# Eval("Domicilio.Nro") %>'></asp:Label>
+															    </ItemTemplate>
+															    <EditItemTemplate>
+																    <asp:TextBox ID="txtNro" runat="server" Text='<%# Eval("Domicilio.Nro") %>'
+																	    Width="30px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtNroEditItemRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtNro" ErrorMessage="Nro en edición mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaEditItem">*</asp:RegularExpressionValidator>
+															    </EditItemTemplate>
+															    <FooterTemplate>
+																    <asp:TextBox ID="txtNro" runat="server" Text='' Width="30px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtNroFooterRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtNro" ErrorMessage="Nro a agregar mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaFooter">*</asp:RegularExpressionValidator>
+															    </FooterTemplate>
+															    <ItemStyle HorizontalAlign="Center" Width="50px" />
+															    <HeaderStyle HorizontalAlign="Center" Font-Bold="False" Width="50px" />
+														    </asp:TemplateField>
+														    <asp:TemplateField HeaderText="Piso">
+															    <ItemTemplate>
+																    <asp:Label ID="lblPiso" runat="server" Text='<%# Eval("Domicilio.Piso") %>'></asp:Label>
+															    </ItemTemplate>
+															    <EditItemTemplate>
+																    <asp:TextBox ID="txtPiso" runat="server" Text='<%# Eval("Domicilio.Piso") %>'
+																	    Width="20px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtPisoEditItemRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtPiso" ErrorMessage="Piso en edición mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaEditItem">*</asp:RegularExpressionValidator>
+															    </EditItemTemplate>
+															    <FooterTemplate>
+																    <asp:TextBox ID="txtPiso" runat="server" Text='' Width="20px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtPisoFooterRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtPiso" ErrorMessage="Piso a agregar mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaFooter">*</asp:RegularExpressionValidator>
+															    </FooterTemplate>
+															    <ItemStyle HorizontalAlign="Center" Width="40px" />
+															    <HeaderStyle HorizontalAlign="Center" Font-Bold="False" Width="40px" />
+														    </asp:TemplateField>
+														    <asp:TemplateField HeaderText="Depto">
+															    <ItemTemplate>
+																    <asp:Label ID="lblDepto" runat="server" Text='<%# Eval("Domicilio.Depto") %>'></asp:Label>
+															    </ItemTemplate>
+															    <EditItemTemplate>
+																    <asp:TextBox ID="txtDepto" runat="server" Text='<%# Eval("Domicilio.Depto") %>'
+																	    Width="30px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtDeptoEditItemRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtDepto" ErrorMessage="Depto en edición mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaEditItem">*</asp:RegularExpressionValidator>
+															    </EditItemTemplate>
+															    <FooterTemplate>
+																    <asp:TextBox ID="txtDepto" runat="server" Text='' Width="30px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtDeptoFooterRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtDepto" ErrorMessage="Depto a agregar mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaFooter">*</asp:RegularExpressionValidator>
+															    </FooterTemplate>
+															    <ItemStyle HorizontalAlign="Center" Width="50px" />
+															    <HeaderStyle HorizontalAlign="Center" Font-Bold="False" Width="50px" />
+														    </asp:TemplateField>	
+														    <asp:TemplateField HeaderText="Sector">
+															    <ItemTemplate>
+																    <asp:Label ID="lblSector" runat="server" Text='<%# Eval("Domicilio.Sector") %>'></asp:Label>
+															    </ItemTemplate>
+															    <EditItemTemplate>
+																    <asp:TextBox ID="txtSector" runat="server" Text='<%# Eval("Domicilio.Sector") %>'
+																	    Width="30px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtSectorEditItemRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtSector" ErrorMessage="Sector en edición mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaEditItem">*</asp:RegularExpressionValidator>
+															    </EditItemTemplate>
+															    <FooterTemplate>
+																    <asp:TextBox ID="txtSector" runat="server" Text='' Width="30px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtSectorFooterRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtSector" ErrorMessage="Sector a agregar mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaFooter">*</asp:RegularExpressionValidator>
+															    </FooterTemplate>
+															    <ItemStyle HorizontalAlign="Center" Width="50px" />
+															    <HeaderStyle HorizontalAlign="Center" Font-Bold="False" Width="50px" />
+														    </asp:TemplateField>
+														    <asp:TemplateField HeaderText="Torre">
+															    <ItemTemplate>
+																    <asp:Label ID="lblTorre" runat="server" Text='<%# Eval("Domicilio.Torre") %>'></asp:Label>
+															    </ItemTemplate>
+															    <EditItemTemplate>
+																    <asp:TextBox ID="txtTorre" runat="server" Text='<%# Eval("Domicilio.Torre") %>'
+																	    Width="20px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtTorreEditItemRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtTorre" ErrorMessage="Torre en edición mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaEditItem">*</asp:RegularExpressionValidator>
+															    </EditItemTemplate>
+															    <FooterTemplate>
+																    <asp:TextBox ID="txtTorre" runat="server" Text='' Width="20px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtTorreFooterRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtTorre" ErrorMessage="Torre a agregar mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaFooter">*</asp:RegularExpressionValidator>
+															    </FooterTemplate>
+															    <ItemStyle HorizontalAlign="Center" Width="40px" />
+															    <HeaderStyle HorizontalAlign="Center" Font-Bold="False" Width="40px" />
+														    </asp:TemplateField>
+														    <asp:TemplateField HeaderText="Manzana">
+															    <ItemTemplate>
+																    <asp:Label ID="lblManzana" runat="server" Text='<%# Eval("Domicilio.Manzana") %>'></asp:Label>
+															    </ItemTemplate>
+															    <EditItemTemplate>
+																    <asp:TextBox ID="txtManzana" runat="server" Text='<%# Eval("Domicilio.Manzana") %>'
+																	    Width="40px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtManzanaEditItemRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtManzana" ErrorMessage="Manzana en edición mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaEditItem">*</asp:RegularExpressionValidator>
+															    </EditItemTemplate>
+															    <FooterTemplate>
+																    <asp:TextBox ID="txtManzana" runat="server" Text='' Width="40px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtManzanaFooterRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtManzana" ErrorMessage="Manzana a agregar mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaFooter">*</asp:RegularExpressionValidator>
+															    </FooterTemplate>
+															    <ItemStyle HorizontalAlign="Center" Width="60px" />
+															    <HeaderStyle HorizontalAlign="Center" Font-Bold="False" Width="60px" />
+														    </asp:TemplateField>
+														    <asp:TemplateField HeaderText="Localidad">
+															    <ItemTemplate>
+																    <asp:Label ID="lblLocalidad" runat="server" Text='<%# Eval("Domicilio.Localidad") %>'></asp:Label>
+															    </ItemTemplate>
+															    <EditItemTemplate>
+																    <asp:TextBox ID="txtLocalidad" runat="server" Text='<%# Eval("Domicilio.Localidad") %>'
+																	    Width="80px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtLocalidadEditItemRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtLocalidad" ErrorMessage="Localidad en edición mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaEditItem">*</asp:RegularExpressionValidator>
+															    </EditItemTemplate>
+															    <FooterTemplate>
+																    <asp:TextBox ID="txtLocalidad" runat="server" Text='' Width="80px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtLocalidadFooterRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtLocalidad" ErrorMessage="Localidad a agregar mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaFooter">*</asp:RegularExpressionValidator>
+															    </FooterTemplate>
+															    <ItemStyle HorizontalAlign="Center" Width="100px" />
+															    <HeaderStyle HorizontalAlign="Center" Font-Bold="False" Width="100px" />
+														    </asp:TemplateField>
+														    <asp:TemplateField HeaderText="Provincia">
+															    <ItemTemplate>
+																    <asp:Label ID="lblProvincia" runat="server" Text='<%# Eval("Domicilio.Provincia.Descr") %>'
+																	    Width="140px"></asp:Label>
+															    </ItemTemplate>
+															    <EditItemTemplate>
+																    <asp:DropDownList ID="ddlProvinciaEdit" runat="server" Width="140px">
+																    </asp:DropDownList>
+															    </EditItemTemplate>
+															    <FooterTemplate>
+																    <asp:DropDownList ID="ddlProvincia" runat="server" Width="140px">
+																    </asp:DropDownList>
+															    </FooterTemplate>
+															    <ItemStyle HorizontalAlign="Center" Width="160px" />
+															    <FooterStyle HorizontalAlign="Center" Width="160px" />
+															    <HeaderStyle Font-Bold="False" Width="160px" />
+														    </asp:TemplateField>
+														    <asp:TemplateField HeaderText="CodPost">
+															    <ItemTemplate>
+																    <asp:Label ID="lblCodPost" runat="server" Text='<%# Eval("Domicilio.CodPost") %>'></asp:Label>
+															    </ItemTemplate>
+															    <EditItemTemplate>
+																    <asp:TextBox ID="txtCodPost" runat="server" Text='<%# Eval("Domicilio.CodPost") %>'
+																	    Width="80px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtCodPostEditItemRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtCodPost" ErrorMessage="CodPost en edición mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaEditItem">*</asp:RegularExpressionValidator>
+															    </EditItemTemplate>
+															    <FooterTemplate>
+																    <asp:TextBox ID="txtCodPost" runat="server" Text='' Width="80px"></asp:TextBox>
+																    <asp:RegularExpressionValidator ID="txtCodPostFooterRegularExpressionValidator"
+																	    runat="server" ControlToValidate="txtCodPost" ErrorMessage="CodPost a agregar mal formateado"
+																	    SetFocusOnError="true" ValidationExpression="[A-Za-z\- ,.0-9]*" ValidationGroup="PuntosDeVentaFooter">*</asp:RegularExpressionValidator>
+															    </FooterTemplate>
+															    <ItemStyle HorizontalAlign="Center" Width="100px" />
+															    <HeaderStyle HorizontalAlign="Center" Font-Bold="False" Width="100px" />
+														    </asp:TemplateField>
+													    </Columns>
+													    <EmptyDataRowStyle ForeColor="#071F70" />
+													    <RowStyle ForeColor="#071F70" />
+													    <EditRowStyle ForeColor="#071F70" />
+													    <SelectedRowStyle ForeColor="#071F70" />
+													    <PagerStyle ForeColor="#071F70" />
+													    <HeaderStyle ForeColor="Brown" />
+												    </asp:GridView>
+                                                </asp:Panel>
 											</ContentTemplate>
 										</asp:UpdatePanel>
 									</td>
@@ -530,25 +709,17 @@
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
+									<td colspan="2" style="text-align:center; padding:3px; font-weight:normal;">
 										<asp:ValidationSummary ID="PuntosDeVentaEditValidationSummary" runat="server" BorderColor="Gray"
 											BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:"
 											ShowMessageBox="True" ValidationGroup="PuntosDeVentaEditItem"></asp:ValidationSummary>
 									</td>
 								</tr>
 								<tr>
-									<td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
+									<td colspan="2" style="text-align:center; padding:3px; font-weight:normal;">
 										<asp:ValidationSummary ID="PuntosDeVentaFooterValidationSummary" runat="server" BorderColor="Gray"
 											BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:"
 											ShowMessageBox="True" ValidationGroup="PuntosDeVentaFooter"></asp:ValidationSummary>
-									</td>
-								</tr>
-								<tr>
-									<td rowspan="8" style="width: 1px; background-color: Gray;">
-									</td>
-									<td colspan="1" style="height: 1px; background-color: Gray;">
-									</td>
-									<td rowspan="8" style="width: 1px; background-color: Gray;">
 									</td>
 								</tr>
 							</table>
@@ -560,13 +731,11 @@
 						<td align="right" style="padding-left:30px; padding-top:10px" colspan="2">
 							<table border="0" cellpadding="0" cellspacing="0">
 								<tr>
-									<td align="left" style="height: 24px">
-										<asp:Button ID="GuardarButton" runat="server" OnClick="GuardarButton_Click" TabIndex="22"
-											Text="Guardar" Width="100px" />
+									<td align="left" style="height:24px">
+										<asp:Button ID="GuardarButton" runat="server" OnClick="GuardarButton_Click" TabIndex="22" Text="Guardar" Width="100px" />
 									</td>
-									<td align="right" style="width: 100%; height: 24px;">
-										<asp:Button ID="CancelarButton" runat="server" CausesValidation="false" OnClick="CancelarButton_Click"
-											TabIndex="23" Text="Cancelar" Width="100px" />
+									<td align="right" style="width:100%; height:24px;">
+										<asp:Button ID="CancelarButton" runat="server" CausesValidation="false" OnClick="CancelarButton_Click" TabIndex="23" Text="Cancelar" Width="100px" />
 									</td>
 								</tr>
 							</table>
@@ -582,7 +751,7 @@
 					</tr>
 				</table>
 			</td>
-			<td style="width: 30px" valign="top">
+			<td style="width:30px" valign="top">
 			</td>
 		</tr>
 	</table>

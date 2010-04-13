@@ -992,6 +992,15 @@ namespace CedeiraAJAX.Vendedor {
         protected global::System.Web.UI.UpdatePanel puntosDeVentaUpdatePanel;
         
         /// <summary>
+        /// Control detallePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel detallePanel;
+        
+        /// <summary>
         /// Control puntosDeVentaGridView.
         /// </summary>
         /// <remarks>

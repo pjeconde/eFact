@@ -29,24 +29,13 @@ namespace CedeiraAJAX.Vendedor
                     }
                     else
                     {
-                        ProvinciaDropDownList.DataValueField = "Codigo";
-                        ProvinciaDropDownList.DataTextField = "Descr";
-                        ProvinciaDropDownList.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.ListaInf();
-                        CondIVADropDownList.DataValueField = "Codigo";
-                        CondIVADropDownList.DataTextField = "Descr";
-                        CondIVADropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.ListaInf();
-                        CondIngBrutosDropDownList.DataValueField = "Codigo";
-                        CondIngBrutosDropDownList.DataTextField = "Descr";
-                        CondIngBrutosDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.ListaInf();
+                        BindearDropDownListsSueltos();
+
                         //Leo datos actuales
                         CedWebEntidades.Vendedor vendedor = new CedWebEntidades.Vendedor();
                         vendedor.IdCuenta = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id;
 
                         puntosDeVenta = new List<CedWebEntidades.PuntoDeVenta>();
-                        CedWebEntidades.PuntoDeVenta puntoDeVenta = new CedWebEntidades.PuntoDeVenta();
-                        puntosDeVenta.Add(puntoDeVenta);
-                        puntosDeVentaGridView.DataSource = puntosDeVenta;
-
                         try
                         {
                             CedWebRN.Vendedor.Leer(vendedor, (CedEntidades.Sesion)Session["Sesion"]);
@@ -59,7 +48,7 @@ namespace CedeiraAJAX.Vendedor
                             TorreTextBox.Text = vendedor.Domicilio.Torre;
                             ManzanaTextBox.Text = vendedor.Domicilio.Manzana;
                             LocalidadTextBox.Text = vendedor.Domicilio.Localidad;
-                            ProvinciaDropDownList.SelectedValue = vendedor.Domicilio.IdProvincia;
+                            ProvinciaDropDownList.SelectedValue = vendedor.Domicilio.Provincia.Id;
                             CodPostTextBox.Text = vendedor.Domicilio.CodPost;
                             NombreContactoTextBox.Text = vendedor.NombreContacto;
                             EmailContactoTextBox.Text = vendedor.EmailContacto;
@@ -89,8 +78,7 @@ namespace CedeiraAJAX.Vendedor
                         }
                         ViewState["puntosDeVenta"] = puntosDeVenta;
 
-                        DataBind();
-                        BindearDropDownLists();
+                        BindearGrillayDropDownLists(puntosDeVenta);
                     }
                 }
                 catch (System.Threading.ThreadAbortException)
@@ -132,8 +120,11 @@ namespace CedeiraAJAX.Vendedor
             vendedor.Domicilio.Torre = TorreTextBox.Text;
             vendedor.Domicilio.Manzana = ManzanaTextBox.Text;
             vendedor.Domicilio.Localidad = LocalidadTextBox.Text;
-            vendedor.Domicilio.IdProvincia = ProvinciaDropDownList.SelectedValue;
-            vendedor.Domicilio.DescrProvincia = ProvinciaDropDownList.SelectedItem.Text;
+            vendedor.Domicilio.Provincia.Id = ProvinciaDropDownList.SelectedValue;
+            if (vendedor.Domicilio.Provincia.Id != string.Empty)
+            {
+                vendedor.Domicilio.Provincia.Descr = ProvinciaDropDownList.SelectedItem.Text;
+            }
             vendedor.Domicilio.CodPost = CodPostTextBox.Text;
             vendedor.NombreContacto = NombreContactoTextBox.Text;
             vendedor.EmailContacto = EmailContactoTextBox.Text;
@@ -191,18 +182,61 @@ namespace CedeiraAJAX.Vendedor
         {
             Server.Transfer("~/FacturaElectronica.aspx");
         }
+        private void BindearGrillayDropDownLists(List<CedWebEntidades.PuntoDeVenta> Datos)
+        {
+            if (Datos.Count>0) 
+            {
+                puntosDeVentaGridView.DataSource = Datos; 
+                puntosDeVentaGridView.DataBind(); 
+            }
+            else
+            { 
+                CedWebEntidades.PuntoDeVenta vacio = new CedWebEntidades.PuntoDeVenta();
+                Datos.Add(vacio);
+                puntosDeVentaGridView.DataSource = Datos; 
+                puntosDeVentaGridView.DataBind();
+
+                int cantidadColumnas = puntosDeVentaGridView.Rows[0].Cells.Count;
+                puntosDeVentaGridView.Rows[0].Cells.Clear();
+                puntosDeVentaGridView.Rows[0].Cells.Add(new TableCell());
+                puntosDeVentaGridView.Rows[0].Cells[0].ColumnSpan = cantidadColumnas;
+                puntosDeVentaGridView.Rows[0].Cells[0].Text = "No hay registros"; 
+            }
+            BindearDropDownLists();
+        }
         private void BindearDropDownLists()
         {
             ((DropDownList)puntosDeVentaGridView.FooterRow.FindControl("ddltipo_de_punto_de_venta")).DataValueField = "Id";
             ((DropDownList)puntosDeVentaGridView.FooterRow.FindControl("ddltipo_de_punto_de_venta")).DataTextField = "Descr";
             ((DropDownList)puntosDeVentaGridView.FooterRow.FindControl("ddltipo_de_punto_de_venta")).DataSource = CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta.Lista();
             ((DropDownList)puntosDeVentaGridView.FooterRow.FindControl("ddltipo_de_punto_de_venta")).DataBind();
+
+            ((DropDownList)puntosDeVentaGridView.FooterRow.FindControl("ddlProvincia")).DataValueField = "Codigo";
+            ((DropDownList)puntosDeVentaGridView.FooterRow.FindControl("ddlProvincia")).DataTextField = "Descr";
+            ((DropDownList)puntosDeVentaGridView.FooterRow.FindControl("ddlProvincia")).DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+            ((DropDownList)puntosDeVentaGridView.FooterRow.FindControl("ddlProvincia")).DataBind();
+        }
+        private void BindearDropDownListsSueltos()
+        {
+            ProvinciaDropDownList.DataValueField = "Codigo";
+            ProvinciaDropDownList.DataTextField = "Descr";
+            ProvinciaDropDownList.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.ListaInf();
+            ProvinciaDropDownList.DataBind();
+
+            CondIVADropDownList.DataValueField = "Codigo";
+            CondIVADropDownList.DataTextField = "Descr";
+            CondIVADropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.ListaInf();
+            CondIVADropDownList.DataBind();
+
+            CondIngBrutosDropDownList.DataValueField = "Codigo";
+            CondIngBrutosDropDownList.DataTextField = "Descr";
+            CondIngBrutosDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.ListaInf();
+            CondIngBrutosDropDownList.DataBind();
         }
         protected void puntosDeVentaGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             puntosDeVentaGridView.EditIndex = -1;
-            puntosDeVentaGridView.DataSource = ViewState["puntosDeVenta"];
-            puntosDeVentaGridView.DataBind();
+            BindearGrillayDropDownLists(((List<CedWebEntidades.PuntoDeVenta>)ViewState["puntosDeVenta"]));
         }
         protected void puntosDeVentaGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -231,6 +265,17 @@ namespace CedeiraAJAX.Vendedor
                     {
                         throw new Exception("Punto de Venta no agregado porque el Punto de Venta debe ser numérico y entero");
                     }
+                    pv.Domicilio.Calle = ((TextBox)puntosDeVentaGridView.FooterRow.FindControl("txtCalle")).Text;
+                    pv.Domicilio.Nro = ((TextBox)puntosDeVentaGridView.FooterRow.FindControl("txtNro")).Text;
+                    pv.Domicilio.Piso = ((TextBox)puntosDeVentaGridView.FooterRow.FindControl("txtPiso")).Text;
+                    pv.Domicilio.Depto = ((TextBox)puntosDeVentaGridView.FooterRow.FindControl("txtDepto")).Text;
+                    pv.Domicilio.Sector = ((TextBox)puntosDeVentaGridView.FooterRow.FindControl("txtSector")).Text;
+                    pv.Domicilio.Torre = ((TextBox)puntosDeVentaGridView.FooterRow.FindControl("txtTorre")).Text;
+                    pv.Domicilio.Manzana = ((TextBox)puntosDeVentaGridView.FooterRow.FindControl("txtManzana")).Text;
+                    pv.Domicilio.Localidad = ((TextBox)puntosDeVentaGridView.FooterRow.FindControl("txtLocalidad")).Text;
+                    pv.Domicilio.Provincia.Id = ((DropDownList)puntosDeVentaGridView.FooterRow.FindControl("ddlProvincia")).SelectedValue.ToString();
+                    pv.Domicilio.Provincia.Descr = ((DropDownList)puntosDeVentaGridView.FooterRow.FindControl("ddlProvincia")).SelectedItem.Text;
+                    pv.Domicilio.CodPost = ((TextBox)puntosDeVentaGridView.FooterRow.FindControl("txtCodPost")).Text;
                     ((List<CedWebEntidades.PuntoDeVenta>)ViewState["puntosDeVenta"]).Add(pv);
                     //Me fijo si elimino la fila automática
                     List<CedWebEntidades.PuntoDeVenta> pvs = ((List<CedWebEntidades.PuntoDeVenta>)ViewState["puntosDeVenta"]);
@@ -238,9 +283,7 @@ namespace CedeiraAJAX.Vendedor
                     {
                         ((List<CedWebEntidades.PuntoDeVenta>)ViewState["puntosDeVenta"]).Remove(pvs[0]);
                     }
-                    puntosDeVentaGridView.DataSource = ViewState["puntosDeVenta"];
-                    puntosDeVentaGridView.DataBind();
-                    BindearDropDownLists();
+                    BindearGrillayDropDownLists(((List<CedWebEntidades.PuntoDeVenta>)ViewState["puntosDeVenta"]));
                 }
                 catch (Exception ex)
                 {
@@ -269,9 +312,7 @@ namespace CedeiraAJAX.Vendedor
                     pvs.Add(nuevo);
                 }
                 puntosDeVentaGridView.EditIndex = -1;
-                puntosDeVentaGridView.DataSource = ViewState["puntosDeVenta"];
-                puntosDeVentaGridView.DataBind();
-                BindearDropDownLists();
+                BindearGrillayDropDownLists(((List<CedWebEntidades.PuntoDeVenta>)ViewState["puntosDeVenta"]));
             }
             catch
             {
@@ -281,17 +322,23 @@ namespace CedeiraAJAX.Vendedor
         {
             puntosDeVentaGridView.EditIndex = e.NewEditIndex;
 
-            puntosDeVentaGridView.DataSource = ViewState["puntosDeVenta"];
-            puntosDeVentaGridView.DataBind();
-            BindearDropDownLists();
+            BindearGrillayDropDownLists(((List<CedWebEntidades.PuntoDeVenta>)ViewState["puntosDeVenta"]));
 
             ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddltipo_de_punto_de_ventaEdit")).DataValueField = "Id";
             ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddltipo_de_punto_de_ventaEdit")).DataTextField = "Descr";
             ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddltipo_de_punto_de_ventaEdit")).DataSource = CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta.Lista();
             ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddltipo_de_punto_de_ventaEdit")).DataBind();
+
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlProvinciaEdit")).DataValueField = "Codigo";
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlProvinciaEdit")).DataTextField = "Descr";
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlProvinciaEdit")).DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlProvinciaEdit")).DataBind();
+
             try
             {
                 ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddltipo_de_punto_de_ventaEdit")).Items.FindByValue(((List<CedWebEntidades.PuntoDeVenta>)ViewState["puntosDeVenta"])[e.NewEditIndex].IdTipo.ToString());
+                li.Selected = true;
+                li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlProvinciaEdit")).Items.FindByValue(((List<CedWebEntidades.PuntoDeVenta>)ViewState["puntosDeVenta"])[e.NewEditIndex].Domicilio.Provincia.Id);
                 li.Selected = true;
             }
             catch
@@ -332,15 +379,34 @@ namespace CedeiraAJAX.Vendedor
                 {
                     throw new Exception("Punto de Venta no agregado porque el Punto de Venta debe ser numérico y entero");
                 }
+                pv.Domicilio.Calle = ((TextBox)puntosDeVentaGridView.Rows[e.RowIndex].FindControl("txtCalle")).Text;
+                pv.Domicilio.Nro = ((TextBox)puntosDeVentaGridView.Rows[e.RowIndex].FindControl("txtNro")).Text;
+                pv.Domicilio.Piso = ((TextBox)puntosDeVentaGridView.Rows[e.RowIndex].FindControl("txtPiso")).Text;
+                pv.Domicilio.Depto = ((TextBox)puntosDeVentaGridView.Rows[e.RowIndex].FindControl("txtDepto")).Text;
+                pv.Domicilio.Sector = ((TextBox)puntosDeVentaGridView.Rows[e.RowIndex].FindControl("txtSector")).Text;
+                pv.Domicilio.Torre = ((TextBox)puntosDeVentaGridView.Rows[e.RowIndex].FindControl("txtTorre")).Text;
+                pv.Domicilio.Manzana = ((TextBox)puntosDeVentaGridView.Rows[e.RowIndex].FindControl("txtManzana")).Text;
+                pv.Domicilio.Localidad = ((TextBox)puntosDeVentaGridView.Rows[e.RowIndex].FindControl("txtLocalidad")).Text;
+                pv.Domicilio.Provincia.Id = ((DropDownList)puntosDeVentaGridView.Rows[e.RowIndex].FindControl("ddlProvinciaEdit")).SelectedValue.ToString();
+                pv.Domicilio.Provincia.Descr = ((DropDownList)puntosDeVentaGridView.Rows[e.RowIndex].FindControl("ddlProvinciaEdit")).SelectedItem.Text;
+                pv.Domicilio.CodPost = ((TextBox)puntosDeVentaGridView.Rows[e.RowIndex].FindControl("txtCodPost")).Text;
                 puntosDeVentaGridView.EditIndex = -1;
-                puntosDeVentaGridView.DataSource = ViewState["puntosDeVenta"];
-                puntosDeVentaGridView.DataBind();
-                BindearDropDownLists();
+                BindearGrillayDropDownLists(((List<CedWebEntidades.PuntoDeVenta>)ViewState["puntosDeVenta"]));
             }
             catch (Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
             }
+        }
+        protected void puntosDeVentaGridView_PreRender(object sender, EventArgs e)
+        {
+            int ultimaColumna = puntosDeVentaGridView.Columns.Count - 1;
+            TableCell cell1 = puntosDeVentaGridView.FooterRow.Cells[1];
+            TableCell cell0 = puntosDeVentaGridView.FooterRow.Cells[0];
+            puntosDeVentaGridView.FooterRow.Cells.RemoveAt(1);
+            puntosDeVentaGridView.FooterRow.Cells.RemoveAt(0);
+            puntosDeVentaGridView.FooterRow.Cells.AddAt(0, cell1);
+            puntosDeVentaGridView.FooterRow.Cells.AddAt(1, cell0);
         }
     }
 }

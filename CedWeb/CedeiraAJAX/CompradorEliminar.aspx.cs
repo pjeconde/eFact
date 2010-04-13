@@ -51,7 +51,7 @@ namespace CedeiraAJAX
                         TorreTextBox.Text = Comprador.Domicilio.Torre;
                         ManzanaTextBox.Text = Comprador.Domicilio.Manzana;
                         LocalidadTextBox.Text = Comprador.Domicilio.Localidad;
-                        ProvinciaDropDownList.SelectedValue = Comprador.Domicilio.IdProvincia;
+                        ProvinciaDropDownList.SelectedValue = Comprador.Domicilio.Provincia.Id;
                         CodPostTextBox.Text = Comprador.Domicilio.CodPost;
                         NombreContactoTextBox.Text = Comprador.NombreContacto;
                         EmailContactoTextBox.Text = Comprador.EmailContacto;
@@ -97,8 +97,8 @@ namespace CedeiraAJAX
                 comprador.Domicilio.Torre = TorreTextBox.Text;
                 comprador.Domicilio.Manzana = ManzanaTextBox.Text;
                 comprador.Domicilio.Localidad = LocalidadTextBox.Text;
-                comprador.Domicilio.IdProvincia = ProvinciaDropDownList.SelectedValue;
-                comprador.Domicilio.DescrProvincia = ProvinciaDropDownList.SelectedItem.Text;
+                comprador.Domicilio.Provincia.Id = ProvinciaDropDownList.SelectedValue;
+                comprador.Domicilio.Provincia.Descr = ProvinciaDropDownList.SelectedItem.Text;
                 comprador.Domicilio.CodPost = CodPostTextBox.Text;
                 comprador.NombreContacto = NombreContactoTextBox.Text;
                 comprador.EmailContacto = EmailContactoTextBox.Text;

@@ -14,12 +14,12 @@ namespace CedWebEntidades
         private string torre = string.Empty;
         private string manzana = string.Empty;
         private string localidad = string.Empty;
-        private string idProvincia = string.Empty;
-        private string descrProvincia = string.Empty;
+        private Provincia provincia;
         private string codPost = string.Empty;
 
         public Domicilio()
         {
+            provincia = new Provincia();
         }
 
         public string Calle
@@ -110,26 +110,15 @@ namespace CedWebEntidades
                 return localidad;
             }
         }
-        public string IdProvincia
+        public Provincia Provincia
         {
             set
             {
-                idProvincia = value;
+                provincia = value;
             }
             get
             {
-                return idProvincia;
-            }
-        }
-        public string DescrProvincia
-        {
-            set
-            {
-                descrProvincia = value;
-            }
-            get
-            {
-                return descrProvincia;
+                return provincia;
             }
         }
         public string CodPost
