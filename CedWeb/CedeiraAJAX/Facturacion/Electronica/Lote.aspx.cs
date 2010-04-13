@@ -360,39 +360,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         throw new Exception("Detalle no agregado porque el separador de decimales debe ser el punto");
                     }
 
-                    string auxcpcomprador = ((TextBox)detalleGridView.FooterRow.FindControl("txtcpcomprador")).Text;
-                    if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-                    {
-                        if (!Punto_VentaTextBox.Text.Equals(string.Empty))
-                        {
-                            CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
-                            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
-                            int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
-                            if (listaPV.Contains(auxPV))
-                            {
-                                if (auxcpcomprador.Equals(string.Empty))
-                                {
-                                    throw new Exception("Detalle no agregado porque el codigo producto comprador es obligatorio para bono fiscal");
-                                }
-                                else
-                                {
-                                    l.codigo_producto_comprador = auxcpcomprador;
-                                }
-                            }
-                            else
-                            {
-                                l.codigo_producto_comprador = auxcpcomprador;
-                            }
-                        }
-                        else
-                        {
-                            l.codigo_producto_comprador = auxcpcomprador;
-                        }
-                    }
-                    else
-                    {
-                        l.codigo_producto_comprador = auxcpcomprador;
-                    }
+					ValidarCodigoProductoComprador(l, ((TextBox)detalleGridView.FooterRow.FindControl("txtcpcomprador")).Text);
 
                     string auxcpvendedor = ((TextBox)detalleGridView.FooterRow.FindControl("txtcpvendedor")).Text;
                     l.codigo_producto_vendedor = auxcpvendedor;
@@ -654,39 +622,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     throw new Exception("Detalle no actualizado porque el separador de decimales debe ser el punto");
                 }
 
-                string auxcodigo_producto_comprador = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpcomprador")).Text;
-                if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-                {
-                    if (!Punto_VentaTextBox.Text.Equals(string.Empty))
-                    {
-                        CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
-                        System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
-                        int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
-                        if (listaPV.Contains(auxPV))
-                        {
-                            if (auxcodigo_producto_comprador.Equals(string.Empty))
-                            {
-                                throw new Exception("Detalle no actualizado porque el codigo producto comprador es obligatorio para bono fiscal");
-                            }
-                            else
-                            {
-                                l.codigo_producto_comprador = auxcodigo_producto_comprador;
-                            }
-                        }
-                        else
-                        {
-                            l.codigo_producto_comprador = auxcodigo_producto_comprador;
-                        }
-                    }
-                    else
-                    {
-                        l.codigo_producto_comprador = auxcodigo_producto_comprador;
-                    }
-                }
-                else
-                {
-                    l.codigo_producto_comprador = auxcodigo_producto_comprador;
-                }
+				ValidarCodigoProductoComprador(l, ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpcomprador")).Text);
 
                 string auxcodigo_producto_vendedor = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpvendedor")).Text;
                 l.codigo_producto_vendedor = auxcodigo_producto_vendedor;
@@ -2245,15 +2181,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
             {
                 if (!((TextBox)sender).Text.Equals(string.Empty))
                 {
-                    System.Collections.Generic.List<CedWebEntidades.PuntoDeVenta> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta;
-                    try
-                    {
-                        int auxPV = Convert.ToInt32(((TextBox)sender).Text);
-						string tipo=((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).DescrTipo;
+					int auxPV = Convert.ToInt32(((TextBox)sender).Text);
+					try
+					{
 						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
 						Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
 						Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-						switch (tipo)
+						switch (idtipo)
 						{
 							case "Comun":
 								Presta_ServCheckBox.Checked = false;
@@ -2290,9 +2224,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						Tipo_De_ComprobanteDropDownList.DataBind();
 						TipoPtoVentaLabel.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).DescrTipo;
 					}
-                    catch
-                    {
-						TipoPtoVentaLabel.Text="No definido";
+					catch
+					{
+						TipoPtoVentaLabel.Text = "No definido";
 						Presta_ServCheckBox.Checked = false;
 						Presta_ServCheckBox.Enabled = true;
 						FechaServDesdeDatePickerWebUserControl.Visible = true;
@@ -2302,9 +2236,40 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
 						Tipo_De_ComprobanteDropDownList.DataBind();
 					}
+					finally
+					{
+						if (ViewState["PuntoVenta"] != null)
+						{
+							int auxViewState = Convert.ToInt32(ViewState["PuntoVenta"]);
+							try
+							{
+								string idtipoAnterior = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxViewState; }).IdTipo;
+								string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
+								if (!idtipo.Equals(idtipoAnterior))
+								{
+									ResetearDetalles();
+								}
+							}
+							catch (System.NullReferenceException)
+							{
+								ResetearDetalles();
+							}
+						}
+						ViewState["PuntoVenta"] = auxPV;
+					}
                 }
             }
         }
+		private void ResetearDetalles()
+		{
+			lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
+			FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
+			lineas.Add(linea);
+			detalleGridView.DataSource = lineas;
+			ViewState["lineas"] = lineas;
+			detalleGridView.DataBind();
+			BindearDropDownLists();
+		}
         protected void EnviarIBKButton_Click(object sender, EventArgs e)
         {
             if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
@@ -3052,5 +3017,49 @@ namespace CedeiraAJAX.Facturacion.Electronica
         {
             ActualizarTipoDeCambio();
         }
+
+		private void ValidarCodigoProductoComprador(FeaEntidades.InterFacturas.linea l, string auxcpcomprador)
+		{
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				if (!Punto_VentaTextBox.Text.Equals(string.Empty))
+				{
+					int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+					try
+					{
+						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
+						switch (idtipo)
+						{
+							case "Comun":
+								l.codigo_producto_comprador = auxcpcomprador;
+								break;
+							case "BFiscal":
+							case "Export":
+								if (auxcpcomprador.Equals(string.Empty))
+								{
+									throw new Exception("Detalle no válido porque el codigo producto comprador es obligatorio");
+								}
+								else
+								{
+									l.codigo_producto_comprador = auxcpcomprador;
+								}
+								break;
+						}
+					}
+					catch (System.NullReferenceException)
+					{
+						l.codigo_producto_comprador = auxcpcomprador;
+					}
+				}
+				else
+				{
+					l.codigo_producto_comprador = auxcpcomprador;
+				}
+			}
+			else
+			{
+				l.codigo_producto_comprador = auxcpcomprador;
+			}
+		}
     }
 }
