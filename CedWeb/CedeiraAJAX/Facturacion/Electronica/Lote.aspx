@@ -263,7 +263,7 @@
 																				</td>
 																				<td class="TextoLabelFEAVendedorChCh">
 																					<asp:TextBox ID="Punto_VentaTextBox" runat="server" AutoPostBack="True" OnTextChanged="Punto_VentaTextBox_TextChanged"
-																						SkinID="TextoBoxFEAVendedorDetChCh">
+																						SkinID="TextoBoxFEAVendedorDetChCh" ToolTip="Muy importante! Si cambia el punto de venta a un tipo de punto de venta distinto, se eliminarán los datos de la grilla de detalle de artículos/servicios.">
 																					</asp:TextBox>
 																				</td>
 																				<td class="TextoFEASYP_DetCol1">
@@ -1258,7 +1258,7 @@
 											</tr>
 											<tr>
 												<td class="TextoResaltado" style="text-align: center;">
-													DETALLE
+													DETALLE DE ARTÍCULOS / SERVICIOS
 												</td>
 											</tr>
 											<tr>
