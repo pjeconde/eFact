@@ -1474,7 +1474,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
             Presta_ServCheckBox.Checked = Convert.ToBoolean(lc.cabecera_lote.presta_serv);
             Punto_VentaTextBox.Text = Convert.ToString(lc.cabecera_lote.punto_de_venta);
-            Punto_VentaTextBox_TextChanged(Punto_VentaTextBox, e);
+            AjustarCamposXPtaVentaChanged(Punto_VentaTextBox.Text);
             //Comprobante
             Numero_ComprobanteTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
             FechaEmisionDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
@@ -1715,7 +1715,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
             Presta_ServCheckBox.Checked = Convert.ToBoolean(lc.cabecera_lote.presta_serv);
             Punto_VentaTextBox.Text = Convert.ToString(lc.cabecera_lote.punto_de_venta);
-            Punto_VentaTextBox_TextChanged(Punto_VentaTextBox, e);
+            AjustarCamposXPtaVentaChanged(Punto_VentaTextBox.Text);
             //Comprobante
             Numero_ComprobanteTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
             FechaEmisionDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
@@ -2177,11 +2177,45 @@ namespace CedeiraAJAX.Facturacion.Electronica
         }
         protected void Punto_VentaTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-            {
-                if (!((TextBox)sender).Text.Equals(string.Empty))
-                {
-					int auxPV = Convert.ToInt32(((TextBox)sender).Text);
+			AjustarCamposXPtaVentaChanged(((TextBox)sender).Text);
+			int auxPV = Convert.ToInt32(((TextBox)sender).Text);
+			if (ViewState["PuntoVenta"] != null)
+			{
+				int auxViewState = Convert.ToInt32(ViewState["PuntoVenta"]);
+				try
+				{
+					string idtipoAnterior = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxViewState; }).IdTipo;
+					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
+					if (!idtipo.Equals(idtipoAnterior))
+					{
+						ResetearDetalles();
+					}
+				}
+				catch (System.NullReferenceException)
+				{
+					ResetearDetalles();
+				}
+			}
+			ViewState["PuntoVenta"] = auxPV;
+        }
+		private void ResetearDetalles()
+		{
+			lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
+			FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
+			lineas.Add(linea);
+			detalleGridView.DataSource = lineas;
+			ViewState["lineas"] = lineas;
+			detalleGridView.DataBind();
+			BindearDropDownLists();
+			ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Se han eliminado los artículos por haber cambiado el tipo de punto de venta');</SCRIPT>", false);
+		}
+		private void AjustarCamposXPtaVentaChanged(string PuntoDeVenta)
+		{
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				if (!PuntoDeVenta.Equals(string.Empty))
+				{
+					int auxPV = Convert.ToInt32(PuntoDeVenta);
 					try
 					{
 						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
@@ -2236,39 +2270,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
 						Tipo_De_ComprobanteDropDownList.DataBind();
 					}
-					finally
-					{
-						if (ViewState["PuntoVenta"] != null)
-						{
-							int auxViewState = Convert.ToInt32(ViewState["PuntoVenta"]);
-							try
-							{
-								string idtipoAnterior = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxViewState; }).IdTipo;
-								string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
-								if (!idtipo.Equals(idtipoAnterior))
-								{
-									ResetearDetalles();
-								}
-							}
-							catch (System.NullReferenceException)
-							{
-								ResetearDetalles();
-							}
-						}
-						ViewState["PuntoVenta"] = auxPV;
-					}
-                }
-            }
-        }
-		private void ResetearDetalles()
-		{
-			lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
-			FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
-			lineas.Add(linea);
-			detalleGridView.DataSource = lineas;
-			ViewState["lineas"] = lineas;
-			detalleGridView.DataBind();
-			BindearDropDownLists();
+				}
+			}
 		}
         protected void EnviarIBKButton_Click(object sender, EventArgs e)
         {
