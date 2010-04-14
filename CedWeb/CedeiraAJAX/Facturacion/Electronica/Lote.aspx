@@ -254,7 +254,7 @@
 																				<td style="position: relative; border: 0px; width: 40px; padding-top: 5px;">
 																					<asp:RegularExpressionValidator ID="PtoVentaRegularExpressionValidator" runat="server"
 																						ControlToValidate="Punto_VentaTextBox" ErrorMessage="error de formateo en punto de venta"
-																						SetFocusOnError="True" ValidationExpression="[0-9][0-9][0-9][0-9]">* </asp:RegularExpressionValidator>
+																						SetFocusOnError="True" ValidationExpression="[0-9]?[0-9]?[0-9]?[0-9]?">* </asp:RegularExpressionValidator>
 																				</td>
 																				<td style="position: relative; border: 0px; width: 40px; padding-top: 5px;">
 																					<asp:RequiredFieldValidator ID="puntoVentaRequiredFieldValidator" runat="server"
