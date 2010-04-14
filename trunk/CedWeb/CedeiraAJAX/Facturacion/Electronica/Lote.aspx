@@ -3,6 +3,8 @@
 	MasterPageFile="~/Facturacion/Electronica/FacturaElectronica.Master" Title="Factura Electrónica Gratis(Interfacturas - AFIP)"
 	UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
 <%@ Register Src="~/DatePickerWebUserControl.ascx" TagName="DatePickerWebUserControl"
 	TagPrefix="uc1" %>
 <asp:Content ID="XMLContent" runat="Server" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado">
@@ -252,7 +254,7 @@
 																				<td style="position: relative; border: 0px; width: 40px; padding-top: 5px;">
 																					<asp:RegularExpressionValidator ID="PtoVentaRegularExpressionValidator" runat="server"
 																						ControlToValidate="Punto_VentaTextBox" ErrorMessage="error de formateo en punto de venta"
-																						SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
+																						SetFocusOnError="True" ValidationExpression="[0-9][0-9][0-9][0-9]">* </asp:RegularExpressionValidator>
 																				</td>
 																				<td style="position: relative; border: 0px; width: 40px; padding-top: 5px;">
 																					<asp:RequiredFieldValidator ID="puntoVentaRequiredFieldValidator" runat="server"
@@ -261,8 +263,10 @@
 																				<td class="TextoLabelFEAVendedor">
 																					Punto de venta:
 																				</td>
-																				<td class="TextoLabelFEAVendedorChCh">
-																					<asp:TextBox ID="Punto_VentaTextBox" runat="server" AutoPostBack="True" OnTextChanged="Punto_VentaTextBox_TextChanged"
+																				<td style="position: relative; border: 0px; text-align: right; color: #A52A2A; font-weight: normal;
+																					font-size: 12px; font-family: Arial; font-style: normal; width: 50px; padding-top: 5px;">
+																					<cc1:FilteredTextBoxExtender ID="PtoVentaFilteredTextExtender" runat="server" TargetControlID="Punto_VentaTextBox" FilterType="Numbers"></cc1:FilteredTextBoxExtender>
+																					<asp:TextBox ID="Punto_VentaTextBox" runat="server" AutoPostBack="true" OnTextChanged="Punto_VentaTextBox_TextChanged"
 																						SkinID="TextoBoxFEAVendedorDetChCh" ToolTip="Muy importante! Si cambia el punto de venta a un tipo de punto de venta distinto, se eliminarán los datos de la grilla de detalle de artículos/servicios.">
 																					</asp:TextBox>
 																				</td>

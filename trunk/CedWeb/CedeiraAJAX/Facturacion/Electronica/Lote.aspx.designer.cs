@@ -182,6 +182,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator puntoVentaRequiredFieldValidator;
         
         /// <summary>
+        /// Control PtoVentaFilteredTextExtender.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.FilteredTextBoxExtender PtoVentaFilteredTextExtender;
+        
+        /// <summary>
         /// Control Punto_VentaTextBox.
         /// </summary>
         /// <remarks>
