@@ -2177,27 +2177,37 @@ namespace CedeiraAJAX.Facturacion.Electronica
         }
         protected void Punto_VentaTextBox_TextChanged(object sender, EventArgs e)
         {
-			AjustarCamposXPtaVentaChanged(((TextBox)sender).Text);
-			int auxPV = Convert.ToInt32(((TextBox)sender).Text);
-			if (ViewState["PuntoVenta"] != null)
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
 			{
-				int auxViewState = Convert.ToInt32(ViewState["PuntoVenta"]);
 				try
 				{
-					string idtipoAnterior = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxViewState; }).IdTipo;
-					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
-					if (!idtipo.Equals(idtipoAnterior))
+					AjustarCamposXPtaVentaChanged(((TextBox)sender).Text);
+					int auxPV = Convert.ToInt32(((TextBox)sender).Text);
+					if (ViewState["PuntoVenta"] != null)
 					{
-						ResetearDetalles();
+						int auxViewState = Convert.ToInt32(ViewState["PuntoVenta"]);
+						try
+						{
+							string idtipoAnterior = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxViewState; }).IdTipo;
+							string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
+							if (!idtipo.Equals(idtipoAnterior))
+							{
+								ResetearDetalles();
+							}
+						}
+						catch (System.NullReferenceException)
+						{
+							ResetearDetalles();
+						}
 					}
+					ViewState["PuntoVenta"] = auxPV;
 				}
-				catch (System.NullReferenceException)
+				catch
 				{
 					ResetearDetalles();
-				}
+				} 
 			}
-			ViewState["PuntoVenta"] = auxPV;
-        }
+		}
 		private void ResetearDetalles()
 		{
 			lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
@@ -2215,9 +2225,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			{
 				if (!PuntoDeVenta.Equals(string.Empty))
 				{
-					int auxPV = Convert.ToInt32(PuntoDeVenta);
+					int auxPV;
 					try
 					{
+						auxPV = Convert.ToInt32(PuntoDeVenta);
 						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
 						Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
 						Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
