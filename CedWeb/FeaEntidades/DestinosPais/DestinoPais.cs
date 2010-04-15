@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 namespace FeaEntidades.DestinosPais
 {
-    public class DestinoPais
+    public class DestinoPais : IComparable
     {
         private int codigo;
         private string descr;
@@ -19,6 +19,30 @@ namespace FeaEntidades.DestinosPais
             get { return descr; }
             set { descr = value; }
         }
+
+		public static List<DestinoPais> ListaSinInformar()
+		{
+			List<DestinoPais> lista = new List<DestinoPais>();
+			lista.Add(new SinInformar());
+			lista.AddRange(Lista());
+			lista.Sort();
+			return lista;
+		}
+
+		#region IComparable Members
+
+		public int CompareTo(object obj)
+		{
+			if (obj is DestinoPais)
+			{
+				DestinoPais dp2 = (DestinoPais)obj;
+				return descr.CompareTo(dp2.descr);
+			}
+			else
+				throw new ArgumentException("Object no es un DestinoPais.");
+		}
+
+		#endregion
 
         public static List<DestinoPais> Lista()
         {

@@ -28,5 +28,15 @@ namespace FeaEntidades.TiposExportacion
             lista.Add(new Otros());
             return lista;
         }
-    }
+
+		public static List<TipoExportacion> ListaSinInformar()
+		{
+			List<TipoExportacion> lista = new List<TipoExportacion>();
+			lista.Add(new SinInformar());
+			lista.Add(new ExportacionDefinitivaDeBienes());
+			lista.Add(new Servicios());
+			lista.Add(new Otros());
+			return lista;
+		}
+	}
 }

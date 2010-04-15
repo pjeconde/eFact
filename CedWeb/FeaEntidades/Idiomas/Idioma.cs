@@ -28,5 +28,14 @@ namespace FeaEntidades.Idiomas
             lista.Add(new Portugues());
             return lista;
         }
+		public static List<Idioma> ListaSinInformar()
+		{
+			List<Idioma> lista = new List<Idioma>();
+			lista.Add(new SinInformar());
+			lista.Add(new Espanol());
+			lista.Add(new Ingles());
+			lista.Add(new Portugues());
+			return lista;
+		}
     }
 }

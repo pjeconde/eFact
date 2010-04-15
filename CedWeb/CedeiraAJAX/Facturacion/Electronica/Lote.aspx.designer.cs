@@ -344,6 +344,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Localidad_VendedorTextBox;
         
         /// <summary>
+        /// Control TipoExpDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList TipoExpDropDownList;
+        
+        /// <summary>
         /// Control Provincia_VendedorDropDownList.
         /// </summary>
         /// <remarks>
@@ -353,6 +362,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.DropDownList Provincia_VendedorDropDownList;
         
         /// <summary>
+        /// Control PaisDestinoExpDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList PaisDestinoExpDropDownList;
+        
+        /// <summary>
         /// Control Cp_VendedorTextBox.
         /// </summary>
         /// <remarks>
@@ -360,6 +378,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Cp_VendedorTextBox;
+        
+        /// <summary>
+        /// Control IdiomaDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList IdiomaDropDownList;
         
         /// <summary>
         /// Control GLN_VendedorRegularExpressionValidator.
