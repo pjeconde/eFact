@@ -22,7 +22,7 @@
 					<tr>
 						<td style="width: 9px;">
 						</td>
-						<td colspan="3" style="" valign="top">
+						<td colspan="3"  valign="top">
 							<!-- @@@ TITULO DE LA PAGINA @@@-->
 							<table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
 								<tr>
@@ -108,7 +108,7 @@
 							valign="top">
 							<table border="0" cellpadding="0" cellspacing="0">
 								<tr>
-									<td style="">
+									<td >
 										<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
 											<tr>
 												<td rowspan="3" style="width: 1px; background-color: Gray;">
@@ -120,7 +120,7 @@
 											</tr>
 											<tr>
 												<td align="left" valign="top">
-													<table border="0" cellpadding="0" cellspacing="0" style="">
+													<table border="0" cellpadding="0" cellspacing="0" >
 														<tr>
 															<td style="width: 370px">
 															</td>
@@ -223,24 +223,24 @@
 														<!-- Datos del Vendedor: Razon Social / Comprobante -->
 														<tr>
 															<td>
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
-																		<td class="TextoLabelFEAVendedor" style="">
+																		<td class="TextoLabelFEAVendedor" >
 																			<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Razon_Social_VendedorTextBox"
 																				ErrorMessage="razón social" SetFocusOnError="True">* </asp:RequiredFieldValidator>Razón
 																			social:
 																		</td>
-																		<td class="TextoLabelFEAVendedorDet" style="">
+																		<td class="TextoLabelFEAVendedorDet" >
 																			<asp:TextBox ID="Razon_Social_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
 																			</asp:TextBox>
 																		</td>
 																	</tr>
 																</table>
 															</td>
-															<td style="">
+															<td >
 																<asp:UpdatePanel ID="ptoVentaUpdatePanel" runat="server" UpdateMode="Always" ChildrenAsTriggers="true">
 																	<ContentTemplate>
-																		<table border="0" cellpadding="0" cellspacing="0" style="">
+																		<table border="0" cellpadding="0" cellspacing="0" >
 																			<tr>
 																				<td style="position: relative; border: 0px; padding-top: 5px;">
 																					<asp:UpdateProgress ID="ptoVentaUpdateProgress" runat="server" AssociatedUpdatePanelID="ptoVentaUpdatePanel"
@@ -281,21 +281,21 @@
 														</tr>
 														<!-- Datos del Vendedor: Calle -->
 														<tr>
-															<td style="">
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+															<td >
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
-																		<td class="TextoLabelFEAVendedor" style="">
+																		<td class="TextoLabelFEAVendedor" >
 																			Calle:
 																		</td>
-																		<td class="TextoLabelFEAVendedorDet" style="">
+																		<td class="TextoLabelFEAVendedorDet" >
 																			<asp:TextBox ID="Domicilio_Calle_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
 																			</asp:TextBox>
 																		</td>
 																	</tr>
 																</table>
 															</td>
-															<td style="">
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+															<td >
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
 																		<td class="TextoLabelFEAVendedor">
 																			<asp:RegularExpressionValidator ID="Numero_comprobanteRegularExpressionValidator"
@@ -305,7 +305,7 @@
 																				ControlToValidate="Numero_ComprobanteTextBox" ErrorMessage="número de comprobante"
 																				SetFocusOnError="True">* </asp:RequiredFieldValidator>Número de comprobante:
 																		</td>
-																		<td class="TextoLabelFEAVendedorDet" style="">
+																		<td class="TextoLabelFEAVendedorDet" >
 																			<asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
 																				ToolTip="Debe ser correlativo al último ingresado por Punto de Venta y Tipo de Comprobante. No es necesario ingresar ceros a la izquierda. Si su factura es p.ej.0002-00000005, puede ingresar 5.">
 																			</asp:TextBox>
@@ -317,7 +317,7 @@
 														<!-- Datos del Vendedor: Nro.Calle, Piso y Dpto  / Fecha Emision -->
 														<tr>
 															<td>
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
 																		<!-- 25 + 80 + 40 + 60 + 40 + 80 + 40 + 5 padding = 370px -->
 																		<td style="width: 25px;">
@@ -347,7 +347,7 @@
 																</table>
 															</td>
 															<td>
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
 																		<td class="TextoLabelFEAVendedor">
 																			<asp:RequiredFieldValidator ID="FechaEmisionDatePickerRequiredFieldValidator" runat="server"
@@ -367,7 +367,7 @@
 														<!-- Datos del Vendedor: Sector, Torre y Manzana -->
 														<tr>
 															<td>
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
 																		<!-- 25 + 80 + 40 + 60 + 40 + 80 + 40 + 5 padding = 370px -->
 																		<td style="width: 25px;">
@@ -396,13 +396,13 @@
 																	</tr>
 																</table>
 															</td>
-															<td style="">
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+															<td >
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
-																		<td class="TextoLabelFEAVendedor" style="">
+																		<td class="TextoLabelFEAVendedor" >
 																			Código interno:
 																		</td>
-																		<td class="TextoLabelFEAVendedorDet" style="">
+																		<td class="TextoLabelFEAVendedorDet" >
 																			<asp:TextBox ID="Codigo_Interno_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
 																				ToolTip="<Opcional> Código utilizado para identificar al vendedor dentro de una empresa/organización. (Ej. Cod. de cliente, Proveedor, etc.)">
 																			</asp:TextBox>
@@ -414,9 +414,9 @@
 														<!-- Datos del Vendedor: Localidad -->
 														<tr>
 															<td>
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
-																		<td class="TextoLabelFEAVendedor" style="">
+																		<td class="TextoLabelFEAVendedor" >
 																			<asp:RequiredFieldValidator ID="Localidad_VendedorRequiredFieldValidator" runat="server"
 																				ControlToValidate="Localidad_VendedorTextBox" ErrorMessage="localidad" SetFocusOnError="True">* </asp:RequiredFieldValidator>Localidad:
 																		</td>
@@ -427,13 +427,24 @@
 																	</tr>
 																</table>
 															</td>
-															<td style="">
+															<td>
+																<table border="0" cellpadding="0" cellspacing="0" >
+																	<tr>
+																		<td class="TextoLabelFEAVendedor" >
+																			Tipo Exportación:
+																		</td>
+																		<td class="TextoLabelFEAVendedorDet">
+																			<asp:DropDownList ID="TipoExpDropDownList" runat="server" SkinID="DropDownListVendedor">
+																			</asp:DropDownList>
+																		</td>
+																	</tr>
+																</table>															
 															</td>
 														</tr>
 														<!-- Datos del Vendedor: Provincia -->
 														<tr>
 															<td>
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
 																		<td class="TextoLabelFEAVendedor">
 																			Provincia:
@@ -445,15 +456,27 @@
 																	</tr>
 																</table>
 															</td>
-															<td style="">
+															<td>
+																<table border="0" cellpadding="0" cellspacing="0" >
+																	<tr>
+																		<td class="TextoLabelFEAVendedor" >
+																			País Destino Exportación:
+																		</td>
+																		<td class="TextoLabelFEAVendedorDet">
+																			<asp:DropDownList ID="PaisDestinoExpDropDownList" runat="server" 
+																				SkinID="DropDownListVendedor">
+																			</asp:DropDownList>
+																		</td>
+																	</tr>
+																</table>
 															</td>
 														</tr>
 														<!-- Datos del Vendedor: Código Postal -->
 														<tr>
 															<td>
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
-																		<td class="TextoLabelFEAVendedor" style="">
+																		<td class="TextoLabelFEAVendedor" >
 																			Código Postal:
 																		</td>
 																		<td class="TextoLabelFEAVendedorDet">
@@ -464,19 +487,30 @@
 																</table>
 															</td>
 															<td>
+																<table border="0" cellpadding="0" cellspacing="0" >
+																	<tr>
+																		<td class="TextoLabelFEAVendedor" >
+																			Idioma para exportación:
+																		</td>
+																		<td class="TextoLabelFEAVendedorDet">
+																			<asp:DropDownList ID="IdiomaDropDownList" runat="server" SkinID="DropDownListVendedor">
+																			</asp:DropDownList>
+																		</td>
+																	</tr>
+																</table>
 															</td>
 														</tr>
 														<!-- Datos del Vendedor: GLN -->
 														<tr>
-															<td style="">
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+															<td >
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
-																		<td class="TextoLabelFEAVendedor" style="">
+																		<td class="TextoLabelFEAVendedor" >
 																			<asp:RegularExpressionValidator ID="GLN_VendedorRegularExpressionValidator" runat="server"
 																				ControlToValidate="GLN_VendedorTextBox" ErrorMessage="error de formateo en GLN del vendedor"
 																				SetFocusOnError="True" ValidationExpression="[0-9]{13}">* </asp:RegularExpressionValidator>GLN:
 																		</td>
-																		<td class="TextoLabelFEAVendedorDet" style="">
+																		<td class="TextoLabelFEAVendedorDet" >
 																			<asp:TextBox ID="GLN_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
 																				ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres.">
 																			</asp:TextBox>
@@ -484,28 +518,28 @@
 																	</tr>
 																</table>
 															</td>
-															<td style="">
+															<td >
 															</td>
 														</tr>
 														<!-- Datos del Vendedor: Nombre contacto -->
 														<tr>
-															<td style="">
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+															<td >
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
-																		<td class="TextoLabelFEAVendedor" style="">
+																		<td class="TextoLabelFEAVendedor" >
 																			Nombre contacto:
 																		</td>
-																		<td class="TextoLabelFEAVendedorDet" style="">
+																		<td class="TextoLabelFEAVendedorDet" >
 																			<asp:TextBox ID="Contacto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
 																			</asp:TextBox>
 																		</td>
 																	</tr>
 																</table>
 															</td>
-															<td style="">
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+															<td >
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
-																		<td class="TextoLabelFEAVendedor" style="">
+																		<td class="TextoLabelFEAVendedor" >
 																			<asp:RegularExpressionValidator ID="CUITVendedorRegularExpressionValidator" runat="server"
 																				ControlToValidate="Cuit_VendedorTextBox" ErrorMessage="error de formateo en CUIT del vendedor"
 																				SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
@@ -513,7 +547,7 @@
 																				ControlToValidate="Cuit_VendedorTextBox" ErrorMessage="CUIT del vendedor" SetFocusOnError="True">* </asp:RequiredFieldValidator>
 																			CUIT:
 																		</td>
-																		<td class="TextoLabelFEAVendedorDet" style="">
+																		<td class="TextoLabelFEAVendedorDet" >
 																			<asp:TextBox ID="Cuit_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
 																			</asp:TextBox>
 																		</td>
@@ -523,10 +557,10 @@
 														</tr>
 														<!-- Datos del Vendedor: Mail Contacto / CUIT -->
 														<tr>
-															<td style="">
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+															<td >
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
-																		<td class="TextoLabelFEAVendedor" style="">
+																		<td class="TextoLabelFEAVendedor" >
 																			<asp:RegularExpressionValidator ID="Email_VendedorRegularExpressionValidator" runat="server"
 																				ControlToValidate="Email_VendedorTextBox" ErrorMessage="error de formateo en mail contacto vendedor"
 																				SetFocusOnError="True" ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$"
@@ -535,15 +569,15 @@
 																				ControlToValidate="Email_VendedorTextBox" ErrorMessage="mail contacto del vendedor"
 																				SetFocusOnError="True">* </asp:RequiredFieldValidator>Mail Contacto:
 																		</td>
-																		<td class="TextoLabelFEAVendedorDet" style="">
+																		<td class="TextoLabelFEAVendedorDet" >
 																			<asp:TextBox ID="Email_VendedorTextBox" runat="server" AutoCompleteType="Email" SkinID="TextoBoxFEAVendedorDet">
 																			</asp:TextBox>
 																		</td>
 																	</tr>
 																</table>
 															</td>
-															<td style="">
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+															<td >
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
 																		<td class="TextoLabelFEAVendedor">
 																			Condición IB:
@@ -559,23 +593,23 @@
 														</tr>
 														<!-- Datos del Vendedor: Teléfono contacto -->
 														<tr>
-															<td style="">
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+															<td >
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
-																		<td class="TextoLabelFEAVendedor" style="">
+																		<td class="TextoLabelFEAVendedor" >
 																			Teléfono contacto:
 																		</td>
-																		<td class="TextoLabelFEAVendedorDet" style="">
+																		<td class="TextoLabelFEAVendedorDet" >
 																			<asp:TextBox ID="Telefono_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
 																			</asp:TextBox>
 																		</td>
 																	</tr>
 																</table>
 															</td>
-															<td style="">
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+															<td >
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
-																		<td class="TextoLabelFEAVendedor" style="">
+																		<td class="TextoLabelFEAVendedor" >
 																			<asp:RegularExpressionValidator ID="NumeroIBVendedorRegularExpressionValidator" runat="server"
 																				ControlToValidate="NroIBVendedorTextBox" ErrorMessage="error de formateo en nro IB del vendedor"
 																				SetFocusOnError="True" ValidationExpression="[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}">* </asp:RegularExpressionValidator>Número
@@ -592,13 +626,13 @@
 														</tr>
 														<!-- Datos del Vendedor: IVA / Inicio de actividades -->
 														<tr>
-															<td style="">
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+															<td >
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
-																		<td class="TextoLabelFEAVendedor" style="">
+																		<td class="TextoLabelFEAVendedor" >
 																			IVA:
 																		</td>
-																		<td class="TextoLabelFEAVendedorDet" style="">
+																		<td class="TextoLabelFEAVendedorDet" >
 																			<asp:DropDownList ID="Condicion_IVA_VendedorDropDownList" runat="server" SkinID="DropDownListVendedor">
 																			</asp:DropDownList>
 																		</td>
@@ -606,7 +640,7 @@
 																</table>
 															</td>
 															<td align="left" valign="top">
-																<table border="0" cellpadding="0" cellspacing="0" style="">
+																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
 																		<td class="TextoLabelFEAVendedor">
 																			Inicio de actividades:
@@ -677,7 +711,7 @@
 																			Display="Static" ErrorMessage="número de lote" SetFocusOnError="True">* </asp:RequiredFieldValidator>Nro.
 																		de lote:
 																	</td>
-																	<td class="TextoLabelFEAVendedor" style="">
+																	<td class="TextoLabelFEAVendedor" >
 																		<asp:TextBox ID="Id_LoteTextbox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Es un número correlativo y consecutivo que debe llevarse manualmente e identifica el número de envío del archivo xml que envía a Interfacturas (Upload). Este número NO SE PUEDE REPETIR.">
 																		</asp:TextBox>
 																	</td>
@@ -773,7 +807,7 @@
 																			ControlToValidate="GLN_VendedorTextBox" ErrorMessage="error de formateo en GLN del comprador"
 																			SetFocusOnError="True" ValidationExpression="[0-9]{13}">* </asp:RegularExpressionValidator>GLN:
 																	</td>
-																	<td class="TextoLabelFEAVendedorDet" style="">
+																	<td class="TextoLabelFEAVendedorDet" >
 																		<asp:TextBox ID="GLN_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
 																			ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres.">
 																		</asp:TextBox>
@@ -820,10 +854,10 @@
 																		</asp:TextBox></td>
 																</tr>
 																<tr>
-																	<td class="TextoLabelFEAVendedor" style="">
+																	<td class="TextoLabelFEAVendedor" >
 																		Calle:
 																	</td>
-																	<td class="TextoLabelFEAVendedorDet" style="">
+																	<td class="TextoLabelFEAVendedorDet" >
 																		<asp:TextBox ID="Domicilio_Calle_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
 																		</asp:TextBox>
 																	</td>
@@ -832,21 +866,21 @@
 																	<td colspan="2" style="padding-top: 5px; text-align: right;">
 																		<table border="0" cellpadding="0" cellspacing="0" style="text-align: right;">
 																			<tr>
-																				<td class="TextoLabelFEAVendedorCh" style="">
+																				<td class="TextoLabelFEAVendedorCh" >
 																					Nro.:
 																				</td>
-																				<td class="TextoBoxFEAVendedorDetChCh" style="">
+																				<td class="TextoBoxFEAVendedorDetChCh" >
 																					<asp:TextBox ID="Domicilio_Numero_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
 																					</asp:TextBox>
 																				</td>
-																				<td class="TextoLabelFEAVendedorChCh" style="">
+																				<td class="TextoLabelFEAVendedorChCh" >
 																					Piso:
 																				</td>
-																				<td class="TextoLabelFEADetVendedorChCh" style="">
+																				<td class="TextoLabelFEADetVendedorChCh" >
 																					<asp:TextBox ID="Domicilio_Piso_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
 																					</asp:TextBox>
 																				</td>
-																				<td class="TextoLabelFEAVendedorCh" style="">
+																				<td class="TextoLabelFEAVendedorCh" >
 																					Depto:
 																				</td>
 																				<td class="TextoBoxFEAVendedorDetChCh" style="padding-right: 5px">
@@ -861,20 +895,20 @@
 																	<td colspan="2" style="padding-top: 5px; text-align: right;">
 																		<table border="0" cellpadding="0" cellspacing="0" style="text-align: right;">
 																			<tr>
-																				<td class="TextoLabelFEAVendedorCh" style="">
+																				<td class="TextoLabelFEAVendedorCh" >
 																					Sector:
 																				</td>
-																				<td class="TextoLabelFEAVendedorDetChCh" style="">
+																				<td class="TextoLabelFEAVendedorDetChCh" >
 																					<asp:TextBox ID="Domicilio_Sector_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
 																					</asp:TextBox>
 																				</td>
-																				<td class="TextoLabelFEAVendedorChCh" style="">
+																				<td class="TextoLabelFEAVendedorChCh" >
 																					Torre:
 																				</td>
-																				<td class="TextoLabelFEAVendedorDetChCh" style="">
+																				<td class="TextoLabelFEAVendedorDetChCh" >
 																					<asp:TextBox ID="Domicilio_Torre_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
 																					</asp:TextBox></td>
-																				<td class="TextoLabelFEAVendedorCh" style="">
+																				<td class="TextoLabelFEAVendedorCh" >
 																					Manzana:
 																				</td>
 																				<td class="TextoLabelFEAVendedorDetChCh" style="padding-right: 5px">
@@ -895,10 +929,10 @@
 														<td align="left" valign="top">
 															<table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
 																<tr>
-																	<td class="TextoLabelFEAVendedor" style="">
+																	<td class="TextoLabelFEAVendedor" >
 																		Localidad:
 																	</td>
-																	<td class="TextoLabelFEAVendedorDet" style="">
+																	<td class="TextoLabelFEAVendedorDet" >
 																		<asp:TextBox ID="Localidad_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
 																		</asp:TextBox></td>
 																</tr>
@@ -911,10 +945,10 @@
 																		</asp:DropDownList></td>
 																</tr>
 																<tr>
-																	<td class="TextoLabelFEAVendedor" style="">
+																	<td class="TextoLabelFEAVendedor" >
 																		Código Postal:
 																	</td>
-																	<td class="TextoLabelFEAVendedorDet" style="">
+																	<td class="TextoLabelFEAVendedorDet" >
 																		<asp:TextBox ID="Cp_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
 																		</asp:TextBox></td>
 																</tr>
@@ -927,27 +961,27 @@
 																		</asp:TextBox></td>
 																</tr>
 																<tr>
-																	<td class="TextoLabelFEAVendedor" style="">
+																	<td class="TextoLabelFEAVendedor" >
 																		<asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="Email_CompradorTextBox"
 																			ErrorMessage="error de formateo en mail contacto comprador" SetFocusOnError="True"
 																			ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$">* </asp:RegularExpressionValidator>Mail
 																		Contacto:
 																	</td>
-																	<td class="TextoLabelFEAVendedorDet" style="">
+																	<td class="TextoLabelFEAVendedorDet" >
 																		<asp:TextBox ID="Email_CompradorTextBox" runat="server" AutoCompleteType="Email"
 																			SkinID="TextoBoxFEAVendedorDet">
 																		</asp:TextBox></td>
 																</tr>
 																<tr>
-																	<td class="TextoLabelFEAVendedor" style="">
+																	<td class="TextoLabelFEAVendedor" >
 																		Teléfono contacto:
 																	</td>
-																	<td class="TextoLabelFEAVendedorDet" style="">
+																	<td class="TextoLabelFEAVendedorDet" >
 																		<asp:TextBox ID="Telefono_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
 																		</asp:TextBox></td>
 																</tr>
 																<tr>
-																	<td class="TextoLabelFEAVendedor" style="">
+																	<td class="TextoLabelFEAVendedor" >
 																		Inicio de actividades:
 																	</td>
 																	<td class="" style="padding-top: 3px;">
@@ -1046,16 +1080,16 @@
 														<td align="left" valign="top">
 															<table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
 																<tr>
-																	<td class="TextoLabelFEAVendedor" style="">
+																	<td class="TextoLabelFEAVendedor" >
 																		<asp:Label ID="FechaInicioServLabel" runat="server" Text="Fecha inicio servicio:"></asp:Label>
 																	</td>
-																	<td style="">
+																	<td >
 																		<uc1:DatePickerWebUserControl ID="FechaServDesdeDatePickerWebUserControl" runat="server"
 																			TextCssClass="DatePickerFecha"></uc1:DatePickerWebUserControl>
 																	</td>
 																</tr>
 																<tr>
-																	<td class="TextoLabelFEAVendedor" style="">
+																	<td class="TextoLabelFEAVendedor" >
 																		<asp:Label ID="FechaHstServLabel" runat="server" Text="Fecha finalización servicio:">
 																		</asp:Label>
 																	</td>
@@ -1065,7 +1099,7 @@
 																	</td>
 																</tr>
 																<tr>
-																	<td class="TextoLabelFEAVendedor" style="">
+																	<td class="TextoLabelFEAVendedor" >
 																		<asp:RegularExpressionValidator ID="CondicionDePAgoRegularExpressionValidator" runat="server"
 																			ControlToValidate="Condicion_De_PagoTextBox" ErrorMessage="error de formateo en condición de pago"
 																			SetFocusOnError="True" ValidationExpression="[0-9]?[0-9]?[0-9]?">* </asp:RegularExpressionValidator>Condición

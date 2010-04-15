@@ -103,7 +103,19 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     MonedaComprobanteDropDownList.DataTextField = "Descr";
 					MonedaComprobanteDropDownList.DataSource = FeaEntidades.CodigosMoneda.CodigoMoneda.ListaNoExportacion();
 
-                    DataBind();
+                    TipoExpDropDownList.DataValueField = "Codigo";
+					TipoExpDropDownList.DataTextField = "Descr";
+					TipoExpDropDownList.DataSource = FeaEntidades.TiposExportacion.TipoExportacion.ListaSinInformar();
+
+                    IdiomaDropDownList.DataValueField = "Codigo";
+					IdiomaDropDownList.DataTextField = "Descr";
+					IdiomaDropDownList.DataSource = FeaEntidades.Idiomas.Idioma.ListaSinInformar();
+
+					PaisDestinoExpDropDownList.DataValueField = "Codigo";
+					PaisDestinoExpDropDownList.DataTextField = "Descr";
+					PaisDestinoExpDropDownList.DataSource = FeaEntidades.DestinosPais.DestinoPais.ListaSinInformar();
+
+					DataBind();
 
                     BindearDropDownLists();
 
