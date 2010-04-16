@@ -21,6 +21,11 @@ namespace FeaEntidades.CodigosMoneda
 			set { descr = value; }
 		}
 
+		public static string Local
+		{
+			get { return "PES"; }
+		}
+
 		public static List<CodigoMoneda> ListaNoExportacion()
 		{
 			List<CodigoMoneda> lista = new List<CodigoMoneda>();

@@ -16,6 +16,9 @@ namespace FeaEntidades.InterFacturas
 
 		private extensionesExtensiones_camara_facturas extensiones_camara_facturasField;
 
+		[FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+		private bool extensiones_camara_facturasFieldSpecified;
+
 		private object extensiones_datos_comercialesField;
 
 		private string extensiones_datos_marketingField;
@@ -34,6 +37,20 @@ namespace FeaEntidades.InterFacturas
 				this.extensiones_camara_facturasField = value;
 			}
 		}
+
+		[System.Xml.Serialization.XmlIgnoreAttribute()]
+		public bool extensiones_camara_facturasSpecified
+		{
+			get
+			{
+				return this.extensiones_camara_facturasFieldSpecified;
+			}
+			set
+			{
+				this.extensiones_camara_facturasFieldSpecified = value;
+			}
+		}
+
 
 		/// <comentarios/>
 		public object extensiones_datos_comerciales

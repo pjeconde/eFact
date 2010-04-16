@@ -519,6 +519,17 @@
 																</table>
 															</td>
 															<td >
+																<table border="0" cellpadding="0" cellspacing="0">
+																	<tr>
+																		<td class="TextoLabelFEAVendedor">
+																			Incoterms para exportación:
+																		</td>
+																		<td class="TextoLabelFEAVendedorDet">
+																			<asp:DropDownList ID="IncotermsDropDownList" runat="server" SkinID="DropDownListVendedor">
+																			</asp:DropDownList>
+																		</td>
+																	</tr>
+																</table>
 															</td>
 														</tr>
 														<!-- Datos del Vendedor: Nombre contacto -->
