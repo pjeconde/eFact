@@ -23,6 +23,10 @@ namespace FeaEntidades.InterFacturas
 
 		private extensiones extensionesField;
 
+		[FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+		private bool extensionesFieldSpecified;
+
+
 		/// <comentarios/>
 		public cabecera cabecera
 		{
@@ -72,6 +76,18 @@ namespace FeaEntidades.InterFacturas
 			set
 			{
 				this.extensionesField = value;
+			}
+		}
+		[System.Xml.Serialization.XmlIgnoreAttribute()]
+		public bool extensionesSpecified
+		{
+			get
+			{
+				return this.extensionesFieldSpecified;
+			}
+			set
+			{
+				this.extensionesFieldSpecified = value;
 			}
 		}
 	}

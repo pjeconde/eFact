@@ -115,6 +115,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					PaisDestinoExpDropDownList.DataTextField = "Descr";
 					PaisDestinoExpDropDownList.DataSource = FeaEntidades.DestinosPais.DestinoPais.ListaSinInformar();
 
+					IncotermsDropDownList.DataValueField = "Codigo";
+					IncotermsDropDownList.DataTextField = "Descr";
+					IncotermsDropDownList.DataSource = FeaEntidades.Incoterms.Incoterm.ListaSinInformar();
+
 					DataBind();
 
                     BindearDropDownLists();
@@ -1496,7 +1500,23 @@ namespace CedeiraAJAX.Facturacion.Electronica
             Condicion_De_PagoTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago);
             IVAcomputableDropDownList.SelectedIndex = IVAcomputableDropDownList.Items.IndexOf(IVAcomputableDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.iva_computable)));
             CodigoOperacionDropDownList.SelectedIndex = CodigoOperacionDropDownList.Items.IndexOf(CodigoOperacionDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.codigo_operacion)));
-            //Referencias
+
+			//Exportacion
+			if (lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion != null)
+			{
+				PaisDestinoExpDropDownList.SelectedIndex = PaisDestinoExpDropDownList.Items.IndexOf(PaisDestinoExpDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante)));
+				IncotermsDropDownList.SelectedIndex = IncotermsDropDownList.Items.IndexOf(IncotermsDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.incoterms)));
+				TipoExpDropDownList.SelectedIndex = TipoExpDropDownList.Items.IndexOf(TipoExpDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion)));
+			}
+			if (lc.comprobante[0].extensiones!=null)
+			{
+				if (lc.comprobante[0].extensiones.extensiones_camara_facturas!=null)
+				{
+					IdiomaDropDownList.SelectedIndex = IdiomaDropDownList.Items.IndexOf(IdiomaDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].extensiones.extensiones_camara_facturas.id_idioma)));
+				}
+			}
+			
+			//Referencias
             referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
             if (lc.comprobante[0].cabecera.informacion_comprobante.referencias != null)
             {
@@ -1667,7 +1687,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             //Resumen
             MonedaComprobanteDropDownList.SelectedIndex = MonedaComprobanteDropDownList.Items.IndexOf(MonedaComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].resumen.codigo_moneda)));
             Tipo_de_cambioTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.tipo_de_cambio);
-            if (lc.comprobante[0].resumen.codigo_moneda.Equals("PES"))
+            if (lc.comprobante[0].resumen.codigo_moneda.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
             {
                 Importe_Total_Neto_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_neto_gravado);
                 Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_concepto_no_gravado);
@@ -1694,7 +1714,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_ingresos_brutos);
             }
             Observaciones_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.observaciones);
-            if (!lc.comprobante[0].resumen.codigo_moneda.Equals("PES"))
+            if (!lc.comprobante[0].resumen.codigo_moneda.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
             {
                 Tipo_de_cambioLabel.Visible = true;
                 Tipo_de_cambioTextBox.Visible = true;
@@ -1737,7 +1757,21 @@ namespace CedeiraAJAX.Facturacion.Electronica
             Condicion_De_PagoTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago);
             IVAcomputableDropDownList.SelectedIndex = IVAcomputableDropDownList.Items.IndexOf(IVAcomputableDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.iva_computable)));
             CodigoOperacionDropDownList.SelectedIndex = CodigoOperacionDropDownList.Items.IndexOf(CodigoOperacionDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.codigo_operacion)));
-            //Referencias
+			//TODO Exportacion
+			//if (lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion != null)
+			//{
+			//    PaisDestinoExpDropDownList.SelectedIndex = PaisDestinoExpDropDownList.Items.IndexOf(PaisDestinoExpDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante)));
+			//    IncotermsDropDownList.SelectedIndex = IncotermsDropDownList.Items.IndexOf(IncotermsDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.incoterms)));
+			//    TipoExpDropDownList.SelectedIndex = TipoExpDropDownList.Items.IndexOf(TipoExpDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion)));
+			//}
+			//if (lc.comprobante[0].extensiones != null)
+			//{
+			//    if (lc.comprobante[0].extensiones.extensiones_camara_facturas != null)
+			//    {
+			//        IdiomaDropDownList.SelectedIndex = IdiomaDropDownList.Items.IndexOf(IdiomaDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].extensiones.extensiones_camara_facturas.id_idioma)));
+			//    }
+			//}
+			//Referencias
             if (lc.comprobante[0].cabecera.informacion_comprobante.referencias != null)
             {
                 referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
@@ -1935,7 +1969,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             //Resumen
             MonedaComprobanteDropDownList.SelectedIndex = MonedaComprobanteDropDownList.Items.IndexOf(MonedaComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].resumen.codigo_moneda)));
             Tipo_de_cambioTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.tipo_de_cambio);
-            if (lc.comprobante[0].resumen.codigo_moneda.Equals("PES"))
+            if (lc.comprobante[0].resumen.codigo_moneda.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
             {
                 Importe_Total_Neto_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_neto_gravado);
                 Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_concepto_no_gravado);
@@ -1962,7 +1996,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_ingresos_brutos);
             }
             Observaciones_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.observaciones);
-            if (!lc.comprobante[0].resumen.codigo_moneda.Equals("PES"))
+            if (!lc.comprobante[0].resumen.codigo_moneda.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
             {
                 Tipo_de_cambioLabel.Visible = true;
                 Tipo_de_cambioTextBox.Visible = true;
@@ -2377,6 +2411,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
         private FeaEntidades.InterFacturas.lote_comprobantes GenerarLote()
         {
             FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
+            FeaEntidades.InterFacturas.comprobante comp = new FeaEntidades.InterFacturas.comprobante();
             FeaEntidades.InterFacturas.cabecera_lote cab = new FeaEntidades.InterFacturas.cabecera_lote();
             cab.cantidad_reg = 1;
             cab.cuit_canal = Convert.ToInt64(Cuit_CanalTextBox.Text);
@@ -2391,7 +2426,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
             FeaEntidades.InterFacturas.informacion_comprador infcompra = new FeaEntidades.InterFacturas.informacion_comprador();
 
-            if (!MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
+            if (!MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
             {
                 Tipo_de_cambioLabel.Visible = true;
                 Tipo_de_cambioTextBox.Visible = true;
@@ -2506,6 +2541,38 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     infcomprob.referencias[i].dato_de_referencia = listareferencias[i].dato_de_referencia;
                 }
             }
+
+			FeaEntidades.InterFacturas.informacion_exportacion ie = new FeaEntidades.InterFacturas.informacion_exportacion();
+			bool exportacion = false;
+			if (!PaisDestinoExpDropDownList.SelectedValue.Equals("0"))
+			{
+				ie.destino_comprobante = Convert.ToInt32(PaisDestinoExpDropDownList.SelectedValue);
+				exportacion = true;
+			}
+			if (!IncotermsDropDownList.SelectedValue.Equals(string.Empty))
+			{
+				ie.incoterms = IncotermsDropDownList.SelectedValue;
+				exportacion = true;
+			}
+			if (!TipoExpDropDownList.SelectedValue.Equals("0"))
+			{
+				ie.tipo_exportacion = Convert.ToInt32(TipoExpDropDownList.SelectedValue);
+				exportacion = true;
+			}
+			if(!IdiomaDropDownList.SelectedValue.Equals("0"))
+			{
+				comp.extensiones = new FeaEntidades.InterFacturas.extensiones();
+				comp.extensiones.extensiones_camara_facturasSpecified = true;
+				comp.extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
+				comp.extensiones.extensiones_camara_facturas.id_idioma = IdiomaDropDownList.SelectedValue;			
+				exportacion = true;
+			}
+
+			if (exportacion)
+			{
+				infcomprob.informacion_exportacion = ie;
+			}
+
             compcab.informacion_comprobante = infcomprob;
 
             FeaEntidades.InterFacturas.informacion_vendedor infovend = new FeaEntidades.InterFacturas.informacion_vendedor();
@@ -2563,7 +2630,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
             infovend.telefono = Telefono_VendedorTextBox.Text;
             compcab.informacion_vendedor = infovend;
 
-            FeaEntidades.InterFacturas.comprobante comp = new FeaEntidades.InterFacturas.comprobante();
             comp.cabecera = compcab;
 
             FeaEntidades.InterFacturas.detalle det = new FeaEntidades.InterFacturas.detalle();
@@ -2597,7 +2663,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
                     }
                 }
-                if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
+                if (MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
                 {
                     det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
                     det.linea[i].importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
@@ -2639,7 +2705,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
             r.codigo_moneda = MonedaComprobanteDropDownList.SelectedValue;
 
-            if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
+            if (MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
             //Moneda local
             {
                 r.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
@@ -2789,7 +2855,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     comp.resumen.impuestos[i].descripcion = listadeimpuestos[i].descripcion;
                     comp.resumen.impuestos[i].porcentaje_impuesto = listadeimpuestos[i].porcentaje_impuesto;
                     comp.resumen.impuestos[i].porcentaje_impuestoSpecified = listadeimpuestos[i].porcentaje_impuestoSpecified;
-                    if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
+                    if (MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
                     {
                         comp.resumen.impuestos[i].importe_impuesto = listadeimpuestos[i].importe_impuesto;
                     }
@@ -2818,7 +2884,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     comp.resumen.descuentos[i].porcentaje_descuento = listadedescuentos[i].porcentaje_descuento;
                     comp.resumen.descuentos[i].porcentaje_descuentoSpecified = listadedescuentos[i].porcentaje_descuentoSpecified;
 
-                    if (MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
+                    if (MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
                     {
                         comp.resumen.descuentos[i].importe_descuento = listadedescuentos[i].importe_descuento;
                     }
@@ -2960,7 +3026,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
             else
             {
-                if (!MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
+                if (!MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
                 {
                     ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no habilitado para comprobantes en moneda extranjera.')</script>");
                 }
@@ -2998,7 +3064,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
         private void ActualizarTipoDeCambio()
         {
             System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
-            if (!MonedaComprobanteDropDownList.SelectedValue.Equals("PES"))
+            if (!MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
             {
                 Tipo_de_cambioLabel.Visible = true;
                 Tipo_de_cambioTextBox.Visible = true;

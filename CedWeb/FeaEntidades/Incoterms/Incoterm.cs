@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 namespace FeaEntidades.Incoterms
 {
-    public class Incoterm
+    public class Incoterm : IComparable
     {
         private string codigo;
         private string descr;
@@ -38,5 +38,29 @@ namespace FeaEntidades.Incoterms
             lista.Add(new DDP());
             return lista;
         }
-    }
+
+		public static List<Incoterm> ListaSinInformar()
+		{
+			List<Incoterm> lista = new List<Incoterm>();
+			lista.Add(new SinInformar());
+			lista.AddRange(Lista());
+			lista.Sort();
+			return lista;
+		}
+
+		#region IComparable Members
+
+		public int CompareTo(object obj)
+		{
+			if (obj is Incoterm)
+			{
+				Incoterm dp2 = (Incoterm)obj;
+				return descr.CompareTo(dp2.descr);
+			}
+			else
+				throw new ArgumentException("Object no es un Incoterm.");
+		}
+
+		#endregion
+	}
 }

@@ -1310,6 +1310,7 @@
     <Compile Include="Incoterms\FCA.cs" />
     <Compile Include="Incoterms\FOB.cs" />
     <Compile Include="Incoterms\Incoterm.cs" />
+    <Compile Include="Incoterms\SinInformar.cs" />
     <Compile Include="InterFacturas\cabecera.cs" />
     <Compile Include="InterFacturas\cabecera_lote.cs" />
     <Compile Include="InterFacturas\comprobante.cs" />
