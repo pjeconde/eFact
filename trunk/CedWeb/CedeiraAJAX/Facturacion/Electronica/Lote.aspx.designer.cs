@@ -911,15 +911,6 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::CedeiraAJAX.DatePickerWebUserControl FechaServHastaDatePickerWebUserControl;
         
         /// <summary>
-        /// Control CondicionDePAgoRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator CondicionDePAgoRegularExpressionValidator;
-        
-        /// <summary>
         /// Control Condicion_De_PagoTextBox.
         /// </summary>
         /// <remarks>
