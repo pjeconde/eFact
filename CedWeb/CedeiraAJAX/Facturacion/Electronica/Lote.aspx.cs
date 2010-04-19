@@ -1490,6 +1490,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
             Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
             Presta_ServCheckBox.Checked = Convert.ToBoolean(lc.cabecera_lote.presta_serv);
             Punto_VentaTextBox.Text = Convert.ToString(lc.cabecera_lote.punto_de_venta);
+			int auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
+			ViewState["PuntoVenta"] = auxPV;
             AjustarCamposXPtaVentaChanged(Punto_VentaTextBox.Text);
             //Comprobante
             Numero_ComprobanteTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
@@ -1747,6 +1749,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
             Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
             Presta_ServCheckBox.Checked = Convert.ToBoolean(lc.cabecera_lote.presta_serv);
             Punto_VentaTextBox.Text = Convert.ToString(lc.cabecera_lote.punto_de_venta);
+			int auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
+			ViewState["PuntoVenta"] = auxPV;
             AjustarCamposXPtaVentaChanged(Punto_VentaTextBox.Text);
             //Comprobante
             Numero_ComprobanteTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
@@ -2499,11 +2503,41 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 infcomprob.iva_computable = IVAcomputableDropDownList.SelectedValue;
             }
 
-            if (!Condicion_De_PagoTextBox.Text.Equals(string.Empty))
-            {
-                infcomprob.condicion_de_pago = Condicion_De_PagoTextBox.Text;
-                infcomprob.condicion_de_pagoSpecified = true;
-            }
+			if (!Condicion_De_PagoTextBox.Text.Equals(string.Empty))
+			{
+				infcomprob.condicion_de_pago = Condicion_De_PagoTextBox.Text;
+				infcomprob.condicion_de_pagoSpecified = true;
+			}
+			else
+			{
+				if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+				{
+					int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+					try
+					{
+						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
+						if (idtipo.Equals("Export"))
+						{
+							throw new Exception("La condición de pago es obligatoria para exportación");
+						}
+						else
+						{
+							infcomprob.condicion_de_pago = string.Empty;
+							infcomprob.condicion_de_pagoSpecified = false;
+						}
+					}
+					catch (System.NullReferenceException)
+					{
+						infcomprob.condicion_de_pago = Condicion_De_PagoTextBox.Text;
+						infcomprob.condicion_de_pagoSpecified = false;
+					}
+				}
+				else
+				{
+					infcomprob.condicion_de_pago = string.Empty;
+					infcomprob.condicion_de_pagoSpecified = false;
+				}				
+			}
 
             infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
 			infcomprob.cae = CAETextBox.Text;
