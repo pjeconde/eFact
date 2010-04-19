@@ -2478,6 +2478,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
 						if (idtipo.Equals("Export"))
 						{
+							Domicilio_Calle_CompradorTextBox.Focus();
 							throw new Exception("La calle del domicilio del comprador es obligatoria para exportación");
 						}
 						else
@@ -2500,7 +2501,39 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				infcompra.domicilio_calle = Domicilio_Calle_CompradorTextBox.Text;
 			}
 
-            infcompra.domicilio_numero = Domicilio_Numero_CompradorTextBox.Text;
+			//obligatorio para exportación
+			if (Domicilio_Numero_CompradorTextBox.Text.Equals(string.Empty))
+			{
+				if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+				{
+					int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+					try
+					{
+						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
+						if (idtipo.Equals("Export"))
+						{
+							Domicilio_Numero_CompradorTextBox.Focus();
+							throw new Exception("El número de la calle del domicilio del comprador es obligatorio para exportación");
+						}
+						else
+						{
+							infcompra.domicilio_numero = string.Empty;
+						}
+					}
+					catch (System.NullReferenceException)
+					{
+						infcompra.domicilio_numero = string.Empty;
+					}
+				}
+				else
+				{
+					infcompra.domicilio_numero = string.Empty;
+				}
+			}
+			else
+			{
+				infcompra.domicilio_numero = Domicilio_Numero_CompradorTextBox.Text;
+			}
             infcompra.domicilio_piso = Domicilio_Piso_CompradorTextBox.Text;
             infcompra.domicilio_depto = Domicilio_Depto_CompradorTextBox.Text;
             infcompra.domicilio_sector = Domicilio_Sector_CompradorTextBox.Text;
