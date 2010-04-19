@@ -2466,7 +2466,40 @@ namespace CedeiraAJAX.Facturacion.Electronica
             //infcompra.nro_ingresos_brutos
             infcompra.inicio_de_actividades = InicioDeActividadesCompradorDatePickerWebUserControl.CalendarDateString;
             infcompra.contacto = Contacto_CompradorTextBox.Text;
-            infcompra.domicilio_calle = Domicilio_Calle_CompradorTextBox.Text;
+			
+			//obligatorio para exportación
+			if (Domicilio_Calle_CompradorTextBox.Text.Equals(string.Empty))
+			{
+				if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+				{
+					int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+					try
+					{
+						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
+						if (idtipo.Equals("Export"))
+						{
+							throw new Exception("La calle del domicilio del comprador es obligatoria para exportación");
+						}
+						else
+						{
+							infcompra.domicilio_calle = string.Empty;
+						}
+					}
+					catch (System.NullReferenceException)
+					{
+						infcompra.domicilio_calle = string.Empty;
+					}
+				}
+				else
+				{
+					infcompra.domicilio_calle = string.Empty;
+				}
+			}
+			else
+			{
+				infcompra.domicilio_calle = Domicilio_Calle_CompradorTextBox.Text;
+			}
+
             infcompra.domicilio_numero = Domicilio_Numero_CompradorTextBox.Text;
             infcompra.domicilio_piso = Domicilio_Piso_CompradorTextBox.Text;
             infcompra.domicilio_depto = Domicilio_Depto_CompradorTextBox.Text;
