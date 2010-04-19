@@ -1114,7 +1114,8 @@
 																		Condición de pago:
 																	</td>
 																	<td style="padding-top: 3px;">
-																		<asp:TextBox ID="Condicion_De_PagoTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
+																		<asp:TextBox ID="Condicion_De_PagoTextBox" runat="server" BorderStyle="NotSet" ForeColor="#071F70"
+																			style="width: 175px" TextMode="MultiLine">
 																		</asp:TextBox></td>
 																</tr>
 															</table>
