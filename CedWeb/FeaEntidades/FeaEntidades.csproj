@@ -109,6 +109,7 @@
     <Compile Include="CodigosOperacion\NoGravado.cs" />
     <Compile Include="CodigosOperacion\OperacionesExentas.cs" />
     <Compile Include="CodigosOperacion\SinInformar.cs" />
+    <Compile Include="DestinosCuit\SinInformar.cs" />
     <Compile Include="DestinosPais\AaeTierraDelFuegoArgentina.cs" />
     <Compile Include="DestinosPais\Afganistan.cs" />
     <Compile Include="DestinosPais\Albania.cs" />

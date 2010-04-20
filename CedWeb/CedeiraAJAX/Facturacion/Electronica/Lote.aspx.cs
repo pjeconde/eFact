@@ -2422,7 +2422,32 @@ namespace CedeiraAJAX.Facturacion.Electronica
             cab.cuit_vendedor = Convert.ToInt64(Cuit_VendedorTextBox.Text);
             cab.id_lote = Convert.ToInt64(Id_LoteTextbox.Text);
             cab.presta_servSpecified = true;
-            cab.presta_serv = Convert.ToInt32(Presta_ServCheckBox.Checked);
+			//para exportación no se debe informar
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+				try
+				{
+					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
+					if (idtipo.Equals("Export"))
+					{
+						cab.presta_servSpecified = false;
+					}
+					else
+					{
+						cab.presta_serv = Convert.ToInt32(Presta_ServCheckBox.Checked);
+					}
+				}
+				catch (System.NullReferenceException)
+				{
+					cab.presta_serv = Convert.ToInt32(Presta_ServCheckBox.Checked);
+				}
+			}
+			else
+			{
+				cab.presta_serv = Convert.ToInt32(Presta_ServCheckBox.Checked);
+			}
+
             cab.punto_de_venta = Convert.ToInt32(Punto_VentaTextBox.Text);
             lote.cabecera_lote = cab;
 
@@ -2446,27 +2471,461 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 Tipo_de_cambioRegularExpressionValidator.Enabled = false;
             }
 
+			GenerarInfoComprador(compcab, infcompra);
 
-            if (!GLN_CompradorTextBox.Text.Equals(string.Empty))
+			FeaEntidades.InterFacturas.informacion_comprobante infcomprob = GenerarInfoComprobante();
+
+			GenerarReferencias(infcomprob);
+
+			GenerarInfoExportacion(comp, infcomprob);
+
+            compcab.informacion_comprobante = infcomprob;
+
+			GenerarInfoVendedor(compcab);
+
+            comp.cabecera = compcab;
+
+			FeaEntidades.InterFacturas.detalle det = GenerarDetalles();
+
+            det.comentarios = ComentariosTextBox.Text;
+
+            comp.detalle = det;
+
+            FeaEntidades.InterFacturas.resumen r = new FeaEntidades.InterFacturas.resumen();
+            if (Tipo_de_cambioTextBox.Text != string.Empty)
             {
-                infcompra.GLN = Convert.ToInt64(GLN_CompradorTextBox.Text);
+                r.tipo_de_cambio = Convert.ToDouble(Tipo_de_cambioTextBox.Text);
             }
-            infcompra.codigo_interno = Codigo_Interno_CompradorTextBox.Text;
-            infcompra.codigo_doc_identificatorio = Convert.ToInt32(Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue);
-            infcompra.nro_doc_identificatorio = Convert.ToInt64(Nro_Doc_Identificatorio_CompradorTextBox.Text);
-            infcompra.denominacion = Denominacion_CompradorTextBox.Text;
-            int auxCondIVACompra = Convert.ToInt32(Condicion_IVA_CompradorDropDownList.SelectedValue);
-            if (!auxCondIVACompra.Equals(0))
+            else
             {
-                infcompra.condicion_IVASpecified = true;
-                infcompra.condicion_IVA = auxCondIVACompra;
+                r.tipo_de_cambio = 1;
             }
-            //infcompra.condicion_ingresos_brutosSpecified = true;
-            //infcompra.condicion_ingresos_brutos = Convert.ToInt32(Condicion_Ingresos_Brutos_CompradorDropDownList.SelectedValue);
-            //infcompra.nro_ingresos_brutos
-            infcompra.inicio_de_actividades = InicioDeActividadesCompradorDatePickerWebUserControl.CalendarDateString;
-            infcompra.contacto = Contacto_CompradorTextBox.Text;
-			
+            r.codigo_moneda = MonedaComprobanteDropDownList.SelectedValue;
+
+            if (MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
+            //Moneda local
+            {
+				GenerarImportesMonedaLocal(r);
+            }
+            else
+            //Moneda extranjera
+            {
+				GenerarImportesMonedaExtranjera(r);
+            }
+
+            r.observaciones = Observaciones_ResumenTextBox.Text;
+
+            comp.resumen = r;
+
+            System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos = (System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"];
+
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+				try
+				{
+					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
+					if (idtipo.Equals("Export"))
+					{
+						if (listadeimpuestos[0].importe_impuesto != 0 || listadeimpuestos.Count>1)
+						{
+							impuestosGridView.Focus();
+							throw new Exception("Los impuestos globales no se deben informar para exportación");
+						}
+					}
+					else
+					{
+						GenerarImpuestos(comp, listadeimpuestos);
+					}
+				}
+				catch (System.NullReferenceException)
+				{
+					GenerarImpuestos(comp, listadeimpuestos);
+				}
+			}
+			else
+			{
+				GenerarImpuestos(comp, listadeimpuestos);
+			}
+
+			GenerarResumen(comp);
+
+            lote.comprobante[0] = comp;
+            return lote;
+        }
+
+		private FeaEntidades.InterFacturas.informacion_comprobante GenerarInfoComprobante()
+		{
+			FeaEntidades.InterFacturas.informacion_comprobante infcomprob = new FeaEntidades.InterFacturas.informacion_comprobante();
+			infcomprob.tipo_de_comprobante = Convert.ToInt32(Tipo_De_ComprobanteDropDownList.SelectedValue);
+			infcomprob.numero_comprobante = Convert.ToInt64(Numero_ComprobanteTextBox.Text);
+			infcomprob.punto_de_venta = Convert.ToInt32(Punto_VentaTextBox.Text);
+			infcomprob.fecha_emision = FechaEmisionDatePickerWebUserControl.CalendarDateString;
+			if (!FechaVencimientoDatePickerWebUserControl.CalendarDateString.Equals(string.Empty))
+			{
+				infcomprob.fecha_vencimiento = FechaVencimientoDatePickerWebUserControl.CalendarDateString;
+			}
+			infcomprob.fecha_serv_desde = FechaServDesdeDatePickerWebUserControl.CalendarDateString;
+			infcomprob.fecha_serv_hasta = FechaServHastaDatePickerWebUserControl.CalendarDateString;
+
+			GenerarIVAComputable(infcomprob);
+
+			if (!Condicion_De_PagoTextBox.Text.Equals(string.Empty))
+			{
+				infcomprob.condicion_de_pago = Condicion_De_PagoTextBox.Text;
+				infcomprob.condicion_de_pagoSpecified = true;
+			}
+			else
+			{
+				if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+				{
+					int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+					try
+					{
+						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
+						if (idtipo.Equals("Export"))
+						{
+							throw new Exception("La condición de pago es obligatoria para exportación");
+						}
+						else
+						{
+							infcomprob.condicion_de_pago = string.Empty;
+							infcomprob.condicion_de_pagoSpecified = false;
+						}
+					}
+					catch (System.NullReferenceException)
+					{
+						infcomprob.condicion_de_pago = Condicion_De_PagoTextBox.Text;
+						infcomprob.condicion_de_pagoSpecified = false;
+					}
+				}
+				else
+				{
+					infcomprob.condicion_de_pago = string.Empty;
+					infcomprob.condicion_de_pagoSpecified = false;
+				}
+			}
+
+			GenerarCodigoOperacion(infcomprob);
+			infcomprob.cae = CAETextBox.Text;
+			if (!CAETextBox.Text.Equals(string.Empty))
+			{
+				infcomprob.caeSpecified = true;
+			}
+			infcomprob.fecha_obtencion_cae = FechaCAEObtencionDatePickerWebUserControl.CalendarDateString;
+			if (!FechaCAEObtencionDatePickerWebUserControl.CalendarDateString.ToString().Equals(string.Empty))
+			{
+				infcomprob.fecha_obtencion_caeSpecified = true;
+			}
+			infcomprob.fecha_vencimiento_cae = FechaCAEVencimientoDatePickerWebUserControl.CalendarDateString;
+			if (!FechaCAEVencimientoDatePickerWebUserControl.CalendarDateString.Equals(string.Empty))
+			{
+				infcomprob.fecha_vencimiento_caeSpecified = true;
+			}
+			if (!ResultadoTextBox.Text.Equals(string.Empty))
+			{
+				infcomprob.resultado = ResultadoTextBox.Text;
+			}
+			if (!MotivoTextBox.Text.Equals(string.Empty))
+			{
+				infcomprob.motivo = MotivoTextBox.Text;
+			}
+			return infcomprob;
+		}
+
+		private void GenerarIVAComputable(FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
+		{
+			//No se tiene que informar para exportación
+			if (!IVAcomputableDropDownList.SelectedValue.Equals(string.Empty))
+			{
+				if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+				{
+					int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+					try
+					{
+						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
+						if (idtipo.Equals("Export"))
+						{
+							IVAcomputableDropDownList.Focus();
+							throw new Exception("El IVA computable no se debe informar para exportación");
+						}
+						else
+						{
+							infcomprob.iva_computable = IVAcomputableDropDownList.SelectedValue;
+						}
+					}
+					catch (System.NullReferenceException)
+					{
+						infcomprob.iva_computable = IVAcomputableDropDownList.SelectedValue;
+					}
+				}
+				else
+				{
+					infcomprob.iva_computable = IVAcomputableDropDownList.SelectedValue;
+				}
+			}
+		}
+
+		private void GenerarCodigoOperacion(FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
+		{
+			//No se tiene que informar para exportación
+			if (!CodigoOperacionDropDownList.SelectedValue.Equals(string.Empty))
+			{
+				if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+				{
+					int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+					try
+					{
+						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
+						if (idtipo.Equals("Export"))
+						{
+							CodigoOperacionDropDownList.Focus();
+							throw new Exception("El código de operación no se debe informar para exportación");
+						}
+						else
+						{
+							infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
+						}
+					}
+					catch (System.NullReferenceException)
+					{
+						infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
+					}
+				}
+				else
+				{
+					infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
+				}
+			}
+		}
+
+		private void GenerarReferencias(FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
+		{
+			System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> listareferencias = (System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"];
+			for (int i = 0; i < listareferencias.Count; i++)
+			{
+				if (listareferencias[i].descripcioncodigo_de_referencia != null)
+				{
+					infcomprob.referencias[i] = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
+					infcomprob.referencias[i].codigo_de_referencia = Convert.ToInt32(listareferencias[i].codigo_de_referencia);
+					infcomprob.referencias[i].descripcioncodigo_de_referencia = listareferencias[i].descripcioncodigo_de_referencia;
+					infcomprob.referencias[i].dato_de_referencia = listareferencias[i].dato_de_referencia;
+				}
+			}
+		}
+
+		private void GenerarInfoExportacion(FeaEntidades.InterFacturas.comprobante comp, FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
+		{
+			FeaEntidades.InterFacturas.informacion_exportacion ie = new FeaEntidades.InterFacturas.informacion_exportacion();
+			bool exportacion = false;
+			//TODO Hasta que esté la grilla de permisos
+			ie.permiso_existente = "N";
+			if (!PaisDestinoExpDropDownList.SelectedValue.Equals("0"))
+			{
+				ie.destino_comprobante = Convert.ToInt32(PaisDestinoExpDropDownList.SelectedValue);
+				exportacion = true;
+			}
+			if (!IncotermsDropDownList.SelectedValue.Equals(string.Empty))
+			{
+				ie.incoterms = IncotermsDropDownList.SelectedValue;
+				exportacion = true;
+			}
+			if (!TipoExpDropDownList.SelectedValue.Equals("0"))
+			{
+				ie.tipo_exportacion = Convert.ToInt32(TipoExpDropDownList.SelectedValue);
+				exportacion = true;
+			}
+			if (!IdiomaDropDownList.SelectedValue.Equals("0"))
+			{
+				comp.extensionesSpecified = true;
+				comp.extensiones = new FeaEntidades.InterFacturas.extensiones();
+				comp.extensiones.extensiones_camara_facturasSpecified = true;
+				comp.extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
+				comp.extensiones.extensiones_camara_facturas.id_idioma = IdiomaDropDownList.SelectedValue;
+				exportacion = true;
+			}
+
+			if (exportacion)
+			{
+				infcomprob.informacion_exportacion = ie;
+			}
+		}
+
+		private void GenerarResumen(FeaEntidades.InterFacturas.comprobante comp)
+		{
+			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> listadedescuentos = (System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"];
+			comp.resumen.descuentos = new FeaEntidades.InterFacturas.resumenDescuentos[listadedescuentos.Count];
+			for (int i = 0; i < listadedescuentos.Count; i++)
+			{
+				if (listadedescuentos[i].descripcion_descuento != null && !listadedescuentos[i].descripcion_descuento.Equals(string.Empty))
+				{
+					comp.resumen.descuentos[i] = new FeaEntidades.InterFacturas.resumenDescuentos();
+					comp.resumen.descuentos[i].alicuota_iva_descuento = listadedescuentos[i].alicuota_iva_descuento;
+					comp.resumen.descuentos[i].alicuota_iva_descuentoSpecified = listadedescuentos[i].alicuota_iva_descuentoSpecified;
+					comp.resumen.descuentos[i].descripcion_descuento = listadedescuentos[i].descripcion_descuento;
+					comp.resumen.descuentos[i].importe_iva_descuento = listadedescuentos[i].importe_iva_descuento;
+					comp.resumen.descuentos[i].importe_iva_descuento_moneda_origen = listadedescuentos[i].importe_iva_descuento_moneda_origen;
+					comp.resumen.descuentos[i].importe_iva_descuento_moneda_origenSpecified = listadedescuentos[i].importe_iva_descuento_moneda_origenSpecified;
+					comp.resumen.descuentos[i].importe_iva_descuentoSpecified = listadedescuentos[i].importe_iva_descuentoSpecified;
+					comp.resumen.descuentos[i].porcentaje_descuento = listadedescuentos[i].porcentaje_descuento;
+					comp.resumen.descuentos[i].porcentaje_descuentoSpecified = listadedescuentos[i].porcentaje_descuentoSpecified;
+
+					if (MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
+					{
+						comp.resumen.descuentos[i].importe_descuento = listadedescuentos[i].importe_descuento;
+					}
+					else
+					{
+						comp.resumen.descuentos[i].importe_descuento = Math.Round(listadedescuentos[i].importe_descuento * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
+						comp.resumen.descuentos[i].importe_descuento_moneda_origen = listadedescuentos[i].importe_descuento;
+						comp.resumen.descuentos[i].importe_descuento_moneda_origenSpecified = true;
+					}
+				}
+			}
+		}
+
+		private FeaEntidades.InterFacturas.detalle GenerarDetalles()
+		{
+			FeaEntidades.InterFacturas.detalle det = new FeaEntidades.InterFacturas.detalle();
+			System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
+			for (int i = 0; i < listadelineas.Count; i++)
+			{
+				det.linea[i] = new FeaEntidades.InterFacturas.linea();
+				det.linea[i].numeroLinea = i + 1;
+				if (listadelineas[i].descripcion == null)
+				{
+					throw new Exception("Debe informar al menos un artículo");
+				}
+				det.linea[i].descripcion = listadelineas[i].descripcion;
+				det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
+				if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+				{
+					det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
+				}
+				if (!listadelineas[i].unidad.Equals(Convert.ToString(new FeaEntidades.CodigosUnidad.SinInformar().Codigo)))
+				{
+					det.linea[i].unidad = listadelineas[i].unidad;
+				}
+				det.linea[i].cantidad = listadelineas[i].cantidad;
+				det.linea[i].cantidadSpecified = listadelineas[i].cantidadSpecified;
+				det.linea[i].codigo_producto_comprador = listadelineas[i].codigo_producto_comprador;
+				det.linea[i].codigo_producto_vendedor = listadelineas[i].codigo_producto_vendedor;
+				if (listadelineas[i].indicacion_exento_gravado != null)
+				{
+					if (!listadelineas[i].indicacion_exento_gravado.Equals(string.Empty))
+					{
+						det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
+					}
+				}
+				if (MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
+				{
+					det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
+					det.linea[i].importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
+					det.linea[i].importe_iva = listadelineas[i].importe_iva;
+					det.linea[i].precio_unitario = listadelineas[i].precio_unitario;
+					det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+				}
+				else
+				{
+					det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
+					det.linea[i].importe_iva = Math.Round(listadelineas[i].importe_iva * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
+					det.linea[i].importe_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
+					det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
+					det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+
+					FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
+					limo.importe_total_articuloSpecified = true;
+					limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
+					limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
+					limo.importe_iva = listadelineas[i].importe_iva;
+					limo.precio_unitario = listadelineas[i].precio_unitario;
+					limo.precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+					det.linea[i].importes_moneda_origen = limo;
+				}
+			}
+			return det;
+		}
+
+		private void GenerarInfoVendedor(FeaEntidades.InterFacturas.cabecera compcab)
+		{
+			FeaEntidades.InterFacturas.informacion_vendedor infovend = new FeaEntidades.InterFacturas.informacion_vendedor();
+			if (!GLN_VendedorTextBox.Text.Equals(string.Empty))
+			{
+				infovend.GLN = Convert.ToInt64(GLN_VendedorTextBox.Text);
+			}
+			infovend.codigo_interno = Codigo_Interno_VendedorTextBox.Text;
+			infovend.razon_social = Razon_Social_VendedorTextBox.Text;
+			infovend.cuit = Convert.ToInt64(Cuit_VendedorTextBox.Text);
+			int auxCondIVAVend = Convert.ToInt32(Condicion_IVA_VendedorDropDownList.SelectedValue);
+			if (!auxCondIVAVend.Equals(0))
+			{
+				infovend.condicion_IVASpecified = true;
+				infovend.condicion_IVA = auxCondIVAVend;
+			}
+
+			try
+			{
+				infovend.condicion_ingresos_brutos = Convert.ToInt32(Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue);
+				infovend.nro_ingresos_brutos = NroIBVendedorTextBox.Text;
+			}
+			catch
+			{
+
+			}
+			finally
+			{
+				if (infovend.condicion_ingresos_brutos != 0)
+				{
+					infovend.condicion_ingresos_brutosSpecified = true;
+				}
+				else
+				{
+					infovend.nro_ingresos_brutos = null;
+				}
+			}
+			infovend.inicio_de_actividades = InicioDeActividadesVendedorDatePickerWebUserControl.CalendarDateString;
+			infovend.contacto = Contacto_VendedorTextBox.Text;
+			infovend.domicilio_calle = Domicilio_Calle_VendedorTextBox.Text;
+			infovend.domicilio_numero = Domicilio_Numero_VendedorTextBox.Text;
+			infovend.domicilio_piso = Domicilio_Piso_VendedorTextBox.Text;
+			infovend.domicilio_depto = Domicilio_Depto_VendedorTextBox.Text;
+			infovend.domicilio_sector = Domicilio_Sector_VendedorTextBox.Text;
+			infovend.domicilio_torre = Domicilio_Torre_VendedorTextBox.Text;
+			infovend.domicilio_manzana = Domicilio_Manzana_VendedorTextBox.Text;
+			infovend.localidad = Localidad_VendedorTextBox.Text;
+			string auxCodProvVend = Convert.ToString(Provincia_VendedorDropDownList.SelectedValue);
+			if (!auxCodProvVend.Equals("0"))
+			{
+				infovend.provincia = auxCodProvVend;
+			}
+			infovend.cp = Cp_VendedorTextBox.Text;
+			infovend.email = Email_VendedorTextBox.Text;
+			infovend.telefono = Telefono_VendedorTextBox.Text;
+			compcab.informacion_vendedor = infovend;
+		}
+
+		private void GenerarInfoComprador(FeaEntidades.InterFacturas.cabecera compcab, FeaEntidades.InterFacturas.informacion_comprador infcompra)
+		{
+			if (!GLN_CompradorTextBox.Text.Equals(string.Empty))
+			{
+				infcompra.GLN = Convert.ToInt64(GLN_CompradorTextBox.Text);
+			}
+			infcompra.codigo_interno = Codigo_Interno_CompradorTextBox.Text;
+			infcompra.codigo_doc_identificatorio = Convert.ToInt32(Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue);
+			infcompra.nro_doc_identificatorio = Convert.ToInt64(Nro_Doc_Identificatorio_CompradorTextBox.Text);
+			infcompra.denominacion = Denominacion_CompradorTextBox.Text;
+			int auxCondIVACompra = Convert.ToInt32(Condicion_IVA_CompradorDropDownList.SelectedValue);
+			if (!auxCondIVACompra.Equals(0))
+			{
+				infcompra.condicion_IVASpecified = true;
+				infcompra.condicion_IVA = auxCondIVACompra;
+			}
+			//infcompra.condicion_ingresos_brutosSpecified = true;
+			//infcompra.condicion_ingresos_brutos = Convert.ToInt32(Condicion_Ingresos_Brutos_CompradorDropDownList.SelectedValue);
+			//infcompra.nro_ingresos_brutos
+			infcompra.inicio_de_actividades = InicioDeActividadesCompradorDatePickerWebUserControl.CalendarDateString;
+			infcompra.contacto = Contacto_CompradorTextBox.Text;
+
 			//obligatorio para exportación
 			if (Domicilio_Calle_CompradorTextBox.Text.Equals(string.Empty))
 			{
@@ -2534,47 +2993,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			{
 				infcompra.domicilio_numero = Domicilio_Numero_CompradorTextBox.Text;
 			}
-            infcompra.domicilio_piso = Domicilio_Piso_CompradorTextBox.Text;
-            infcompra.domicilio_depto = Domicilio_Depto_CompradorTextBox.Text;
-            infcompra.domicilio_sector = Domicilio_Sector_CompradorTextBox.Text;
-            infcompra.domicilio_torre = Domicilio_Torre_CompradorTextBox.Text;
-            infcompra.domicilio_manzana = Domicilio_Manzana_CompradorTextBox.Text;
-            infcompra.localidad = Localidad_CompradorTextBox.Text;
-            string auxCodProvCompra = Convert.ToString(Provincia_CompradorDropDownList.SelectedValue);
-            if (!auxCodProvCompra.Equals("0"))
-            {
-                infcompra.provincia = auxCodProvCompra;
-            }
-            infcompra.cp = Cp_CompradorTextBox.Text;
-            infcompra.email = Email_CompradorTextBox.Text;
-            infcompra.telefono = Telefono_CompradorTextBox.Text;
-
-            compcab.informacion_comprador = infcompra;
-
-            FeaEntidades.InterFacturas.informacion_comprobante infcomprob = new FeaEntidades.InterFacturas.informacion_comprobante();
-            infcomprob.tipo_de_comprobante = Convert.ToInt32(Tipo_De_ComprobanteDropDownList.SelectedValue);
-            infcomprob.numero_comprobante = Convert.ToInt64(Numero_ComprobanteTextBox.Text);
-            infcomprob.punto_de_venta = Convert.ToInt32(Punto_VentaTextBox.Text);
-            infcomprob.fecha_emision = FechaEmisionDatePickerWebUserControl.CalendarDateString;
-            if (!FechaVencimientoDatePickerWebUserControl.CalendarDateString.Equals(string.Empty))
-            {
-                infcomprob.fecha_vencimiento = FechaVencimientoDatePickerWebUserControl.CalendarDateString;
-            }
-            infcomprob.fecha_serv_desde = FechaServDesdeDatePickerWebUserControl.CalendarDateString;
-            infcomprob.fecha_serv_hasta = FechaServHastaDatePickerWebUserControl.CalendarDateString;
-
-            string auxIVAcompu = IVAcomputableDropDownList.SelectedValue;
-            if (!auxIVAcompu.Equals(string.Empty))
-            {
-                infcomprob.iva_computable = IVAcomputableDropDownList.SelectedValue;
-            }
-
-			if (!Condicion_De_PagoTextBox.Text.Equals(string.Empty))
-			{
-				infcomprob.condicion_de_pago = Condicion_De_PagoTextBox.Text;
-				infcomprob.condicion_de_pagoSpecified = true;
-			}
-			else
+			infcompra.domicilio_piso = Domicilio_Piso_CompradorTextBox.Text;
+			infcompra.domicilio_depto = Domicilio_Depto_CompradorTextBox.Text;
+			infcompra.domicilio_sector = Domicilio_Sector_CompradorTextBox.Text;
+			infcompra.domicilio_torre = Domicilio_Torre_CompradorTextBox.Text;
+			infcompra.domicilio_manzana = Domicilio_Manzana_CompradorTextBox.Text;
+			infcompra.localidad = Localidad_CompradorTextBox.Text;
+			string auxCodProvCompra = Convert.ToString(Provincia_CompradorDropDownList.SelectedValue);
+			//No se tiene que informar para exportación
+			if (!auxCodProvCompra.Equals("0"))
 			{
 				if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
 				{
@@ -2584,421 +3011,189 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
 						if (idtipo.Equals("Export"))
 						{
-							throw new Exception("La condición de pago es obligatoria para exportación");
+							Provincia_CompradorDropDownList.Focus();
+							throw new Exception("La provincia del domicilio del comprador no se debe informar para exportación");
 						}
 						else
 						{
-							infcomprob.condicion_de_pago = string.Empty;
-							infcomprob.condicion_de_pagoSpecified = false;
+							infcompra.provincia = auxCodProvCompra;
 						}
 					}
 					catch (System.NullReferenceException)
 					{
-						infcomprob.condicion_de_pago = Condicion_De_PagoTextBox.Text;
-						infcomprob.condicion_de_pagoSpecified = false;
+						infcompra.provincia = auxCodProvCompra;
 					}
 				}
 				else
 				{
-					infcomprob.condicion_de_pago = string.Empty;
-					infcomprob.condicion_de_pagoSpecified = false;
-				}				
+					infcompra.provincia = auxCodProvCompra;
+				}
 			}
+			infcompra.cp = Cp_CompradorTextBox.Text;
+			infcompra.email = Email_CompradorTextBox.Text;
+			infcompra.telefono = Telefono_CompradorTextBox.Text;
 
-            infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
-			infcomprob.cae = CAETextBox.Text;
-			if (!CAETextBox.Text.Equals(string.Empty))
-            {
-				infcomprob.caeSpecified = true;
-			}
-			infcomprob.fecha_obtencion_cae = FechaCAEObtencionDatePickerWebUserControl.CalendarDateString;
-			if (!FechaCAEObtencionDatePickerWebUserControl.CalendarDateString.ToString().Equals(string.Empty))
+			compcab.informacion_comprador = infcompra;
+		}
+
+		private void GenerarImportesMonedaExtranjera(FeaEntidades.InterFacturas.resumen r)
+		{
+			double tipodecambio = Convert.ToDouble(Tipo_de_cambioTextBox.Text);
+
+			FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo = new FeaEntidades.InterFacturas.resumenImportes_moneda_origen();
+
+			r.importe_total_neto_gravado = Math.Round(Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text) * tipodecambio, 2);
+			rimo.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
+			r.importe_total_concepto_no_gravado = Math.Round(Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text) * tipodecambio, 2);
+			rimo.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
+			r.importe_operaciones_exentas = Math.Round(Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text) * tipodecambio, 2);
+			rimo.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
+			r.impuesto_liq = Math.Round(Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text) * tipodecambio, 2);
+			rimo.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
+			r.impuesto_liq_rni = Math.Round(Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text) * tipodecambio, 2);
+			rimo.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
+
+			try
 			{
-				infcomprob.fecha_obtencion_caeSpecified = true;
+				r.importe_total_impuestos_nacionales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text) * tipodecambio, 2);
+				rimo.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+				if (r.importe_total_impuestos_nacionales != 0)
+				{
+					r.importe_total_impuestos_nacionalesSpecified = true;
+					rimo.importe_total_impuestos_nacionalesSpecified = true;
+				}
 			}
-			infcomprob.fecha_vencimiento_cae = FechaCAEVencimientoDatePickerWebUserControl.CalendarDateString;
-			if (!FechaCAEVencimientoDatePickerWebUserControl.CalendarDateString.Equals(string.Empty))
+			catch
 			{
-				infcomprob.fecha_vencimiento_caeSpecified = true;
 			}
-			if (!ResultadoTextBox.Text.Equals(string.Empty))
+			try
 			{
-				infcomprob.resultado = ResultadoTextBox.Text;
+				r.importe_total_ingresos_brutos = Math.Round(Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text) * tipodecambio, 2);
+				rimo.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+				if (r.importe_total_ingresos_brutos != 0)
+				{
+					r.importe_total_ingresos_brutosSpecified = true;
+					rimo.importe_total_ingresos_brutosSpecified = true;
+				}
 			}
-			if (!MotivoTextBox.Text.Equals(string.Empty))
+			catch
 			{
-				infcomprob.motivo = MotivoTextBox.Text;
 			}
-
-            System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> listareferencias = (System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"];
-            for (int i = 0; i < listareferencias.Count; i++)
-            {
-                if (listareferencias[i].descripcioncodigo_de_referencia != null)
-                {
-                    infcomprob.referencias[i] = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
-                    infcomprob.referencias[i].codigo_de_referencia = Convert.ToInt32(listareferencias[i].codigo_de_referencia);
-                    infcomprob.referencias[i].descripcioncodigo_de_referencia = listareferencias[i].descripcioncodigo_de_referencia;
-                    infcomprob.referencias[i].dato_de_referencia = listareferencias[i].dato_de_referencia;
-                }
-            }
-
-			FeaEntidades.InterFacturas.informacion_exportacion ie = new FeaEntidades.InterFacturas.informacion_exportacion();
-			bool exportacion = false;
-			if (!PaisDestinoExpDropDownList.SelectedValue.Equals("0"))
+			try
 			{
-				ie.destino_comprobante = Convert.ToInt32(PaisDestinoExpDropDownList.SelectedValue);
-				exportacion = true;
+				r.importe_total_impuestos_municipales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text) * tipodecambio, 2);
+				rimo.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+				if (r.importe_total_impuestos_municipales != 0)
+				{
+					r.importe_total_impuestos_municipalesSpecified = true;
+					rimo.importe_total_impuestos_municipalesSpecified = true;
+				}
 			}
-			if (!IncotermsDropDownList.SelectedValue.Equals(string.Empty))
+			catch
 			{
-				ie.incoterms = IncotermsDropDownList.SelectedValue;
-				exportacion = true;
 			}
-			if (!TipoExpDropDownList.SelectedValue.Equals("0"))
+			try
 			{
-				ie.tipo_exportacion = Convert.ToInt32(TipoExpDropDownList.SelectedValue);
-				exportacion = true;
+				r.importe_total_impuestos_internos = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text) * tipodecambio, 2);
+				rimo.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+				if (r.importe_total_impuestos_internos != 0)
+				{
+					r.importe_total_impuestos_internosSpecified = true;
+					rimo.importe_total_impuestos_internosSpecified = true;
+				}
 			}
-			if(!IdiomaDropDownList.SelectedValue.Equals("0"))
+			catch
 			{
-				comp.extensiones = new FeaEntidades.InterFacturas.extensiones();
-				comp.extensiones.extensiones_camara_facturasSpecified = true;
-				comp.extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
-				comp.extensiones.extensiones_camara_facturas.id_idioma = IdiomaDropDownList.SelectedValue;			
-				exportacion = true;
 			}
+			r.importe_total_factura = Math.Round(Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text) * tipodecambio, 2);
+			rimo.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
 
-			if (exportacion)
+			r.importes_moneda_origen = rimo;
+		}
+
+		private void GenerarImportesMonedaLocal(FeaEntidades.InterFacturas.resumen r)
+		{
+			r.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
+			r.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
+			r.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
+			r.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
+			r.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
+
+			try
 			{
-				infcomprob.informacion_exportacion = ie;
+				r.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+				if (r.importe_total_impuestos_nacionales != 0)
+				{
+					r.importe_total_impuestos_nacionalesSpecified = true;
+				}
 			}
+			catch
+			{
+			}
+			try
+			{
+				r.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+				if (r.importe_total_ingresos_brutos != 0)
+				{
+					r.importe_total_ingresos_brutosSpecified = true;
+				}
+			}
+			catch
+			{
+			}
+			try
+			{
+				r.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+				if (r.importe_total_impuestos_municipales != 0)
+				{
+					r.importe_total_impuestos_municipalesSpecified = true;
+				}
+			}
+			catch
+			{
+			}
+			try
+			{
+				r.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+				if (r.importe_total_impuestos_internos != 0)
+				{
+					r.importe_total_impuestos_internosSpecified = true;
+				}
+			}
+			catch
+			{
+			}
+			r.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
+		}
 
-            compcab.informacion_comprobante = infcomprob;
+		private void GenerarImpuestos(FeaEntidades.InterFacturas.comprobante comp, System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos)
+		{
+			comp.resumen.impuestos = new FeaEntidades.InterFacturas.resumenImpuestos[listadeimpuestos.Count];
+			for (int i = 0; i < listadeimpuestos.Count; i++)
+			{
+				if (!listadeimpuestos[i].codigo_impuesto.Equals(0))
+				{
+					comp.resumen.impuestos[i] = new FeaEntidades.InterFacturas.resumenImpuestos();
+					comp.resumen.impuestos[i].codigo_impuesto = listadeimpuestos[i].codigo_impuesto;
+					comp.resumen.impuestos[i].codigo_jurisdiccion = listadeimpuestos[i].codigo_jurisdiccion;
+					comp.resumen.impuestos[i].codigo_jurisdiccionSpecified = listadeimpuestos[i].codigo_jurisdiccionSpecified;
+					comp.resumen.impuestos[i].descripcion = listadeimpuestos[i].descripcion;
+					comp.resumen.impuestos[i].porcentaje_impuesto = listadeimpuestos[i].porcentaje_impuesto;
+					comp.resumen.impuestos[i].porcentaje_impuestoSpecified = listadeimpuestos[i].porcentaje_impuestoSpecified;
+					if (MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
+					{
+						comp.resumen.impuestos[i].importe_impuesto = listadeimpuestos[i].importe_impuesto;
+					}
+					else
+					{
+						comp.resumen.impuestos[i].importe_impuesto = Math.Round(listadeimpuestos[i].importe_impuesto * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
+						comp.resumen.impuestos[i].importe_impuesto_moneda_origen = listadeimpuestos[i].importe_impuesto;
+						comp.resumen.impuestos[i].importe_impuesto_moneda_origenSpecified = true;
+					}
+				}
+			}
+		}
 
-            FeaEntidades.InterFacturas.informacion_vendedor infovend = new FeaEntidades.InterFacturas.informacion_vendedor();
-            if (!GLN_VendedorTextBox.Text.Equals(string.Empty))
-            {
-                infovend.GLN = Convert.ToInt64(GLN_VendedorTextBox.Text);
-            }
-            infovend.codigo_interno = Codigo_Interno_VendedorTextBox.Text;
-            infovend.razon_social = Razon_Social_VendedorTextBox.Text;
-            infovend.cuit = Convert.ToInt64(Cuit_VendedorTextBox.Text);
-            int auxCondIVAVend = Convert.ToInt32(Condicion_IVA_VendedorDropDownList.SelectedValue);
-            if (!auxCondIVAVend.Equals(0))
-            {
-                infovend.condicion_IVASpecified = true;
-                infovend.condicion_IVA = auxCondIVAVend;
-            }
-
-            try
-            {
-                infovend.condicion_ingresos_brutos = Convert.ToInt32(Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue);
-                infovend.nro_ingresos_brutos = NroIBVendedorTextBox.Text;
-            }
-            catch
-            {
-
-            }
-            finally
-            {
-                if (infovend.condicion_ingresos_brutos != 0)
-                {
-                    infovend.condicion_ingresos_brutosSpecified = true;
-                }
-                else
-                {
-                    infovend.nro_ingresos_brutos = null;
-                }
-            }
-            infovend.inicio_de_actividades = InicioDeActividadesVendedorDatePickerWebUserControl.CalendarDateString;
-            infovend.contacto = Contacto_VendedorTextBox.Text;
-            infovend.domicilio_calle = Domicilio_Calle_VendedorTextBox.Text;
-            infovend.domicilio_numero = Domicilio_Numero_VendedorTextBox.Text;
-            infovend.domicilio_piso = Domicilio_Piso_VendedorTextBox.Text;
-            infovend.domicilio_depto = Domicilio_Depto_VendedorTextBox.Text;
-            infovend.domicilio_sector = Domicilio_Sector_VendedorTextBox.Text;
-            infovend.domicilio_torre = Domicilio_Torre_VendedorTextBox.Text;
-            infovend.domicilio_manzana = Domicilio_Manzana_VendedorTextBox.Text;
-            infovend.localidad = Localidad_VendedorTextBox.Text;
-            string auxCodProvVend = Convert.ToString(Provincia_VendedorDropDownList.SelectedValue);
-            if (!auxCodProvVend.Equals("0"))
-            {
-                infovend.provincia = auxCodProvVend;
-            }
-            infovend.cp = Cp_VendedorTextBox.Text;
-            infovend.email = Email_VendedorTextBox.Text;
-            infovend.telefono = Telefono_VendedorTextBox.Text;
-            compcab.informacion_vendedor = infovend;
-
-            comp.cabecera = compcab;
-
-            FeaEntidades.InterFacturas.detalle det = new FeaEntidades.InterFacturas.detalle();
-            System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
-            for (int i = 0; i < listadelineas.Count; i++)
-            {
-                det.linea[i] = new FeaEntidades.InterFacturas.linea();
-                det.linea[i].numeroLinea = i + 1;
-                if (listadelineas[i].descripcion == null)
-                {
-                    throw new Exception("Debe informar al menos un artículo");
-                }
-                det.linea[i].descripcion = listadelineas[i].descripcion;
-                det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
-                if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
-                {
-                    det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
-                }
-                if (!listadelineas[i].unidad.Equals(Convert.ToString(new FeaEntidades.CodigosUnidad.SinInformar().Codigo)))
-                {
-                    det.linea[i].unidad = listadelineas[i].unidad;
-                }
-                det.linea[i].cantidad = listadelineas[i].cantidad;
-                det.linea[i].cantidadSpecified = listadelineas[i].cantidadSpecified;
-                det.linea[i].codigo_producto_comprador = listadelineas[i].codigo_producto_comprador;
-                det.linea[i].codigo_producto_vendedor = listadelineas[i].codigo_producto_vendedor;
-                if (listadelineas[i].indicacion_exento_gravado != null)
-                {
-                    if (!listadelineas[i].indicacion_exento_gravado.Equals(string.Empty))
-                    {
-                        det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
-                    }
-                }
-                if (MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
-                {
-                    det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
-                    det.linea[i].importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
-                    det.linea[i].importe_iva = listadelineas[i].importe_iva;
-                    det.linea[i].precio_unitario = listadelineas[i].precio_unitario;
-                    det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
-                }
-                else
-                {
-                    det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
-                    det.linea[i].importe_iva = Math.Round(listadelineas[i].importe_iva * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
-                    det.linea[i].importe_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
-                    det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
-                    det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
-
-                    FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
-                    limo.importe_total_articuloSpecified = true;
-                    limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
-                    limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
-                    limo.importe_iva = listadelineas[i].importe_iva;
-                    limo.precio_unitario = listadelineas[i].precio_unitario;
-                    limo.precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
-                    det.linea[i].importes_moneda_origen = limo;
-                }
-            }
-
-            det.comentarios = ComentariosTextBox.Text;
-
-            comp.detalle = det;
-
-            FeaEntidades.InterFacturas.resumen r = new FeaEntidades.InterFacturas.resumen();
-            if (Tipo_de_cambioTextBox.Text != string.Empty)
-            {
-                r.tipo_de_cambio = Convert.ToDouble(Tipo_de_cambioTextBox.Text);
-            }
-            else
-            {
-                r.tipo_de_cambio = 1;
-            }
-            r.codigo_moneda = MonedaComprobanteDropDownList.SelectedValue;
-
-            if (MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
-            //Moneda local
-            {
-                r.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
-                r.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
-                r.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
-                r.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
-                r.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
-
-                try
-                {
-                    r.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
-                    if (r.importe_total_impuestos_nacionales != 0)
-                    {
-                        r.importe_total_impuestos_nacionalesSpecified = true;
-                    }
-                }
-                catch
-                {
-                }
-                try
-                {
-                    r.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
-                    if (r.importe_total_ingresos_brutos != 0)
-                    {
-                        r.importe_total_ingresos_brutosSpecified = true;
-                    }
-                }
-                catch
-                {
-                }
-                try
-                {
-                    r.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
-                    if (r.importe_total_impuestos_municipales != 0)
-                    {
-                        r.importe_total_impuestos_municipalesSpecified = true;
-                    }
-                }
-                catch
-                {
-                }
-                try
-                {
-                    r.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
-                    if (r.importe_total_impuestos_internos != 0)
-                    {
-                        r.importe_total_impuestos_internosSpecified = true;
-                    }
-                }
-                catch
-                {
-                }
-                r.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
-            }
-            else
-            //Moneda extranjera
-            {
-                double tipodecambio = Convert.ToDouble(Tipo_de_cambioTextBox.Text);
-
-                FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo = new FeaEntidades.InterFacturas.resumenImportes_moneda_origen();
-
-                r.importe_total_neto_gravado = Math.Round(Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text) * tipodecambio, 2);
-                rimo.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
-                r.importe_total_concepto_no_gravado = Math.Round(Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text) * tipodecambio, 2);
-                rimo.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
-                r.importe_operaciones_exentas = Math.Round(Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text) * tipodecambio, 2);
-                rimo.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
-                r.impuesto_liq = Math.Round(Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text) * tipodecambio, 2);
-                rimo.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
-                r.impuesto_liq_rni = Math.Round(Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text) * tipodecambio, 2);
-                rimo.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
-
-                try
-                {
-                    r.importe_total_impuestos_nacionales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text) * tipodecambio, 2);
-                    rimo.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
-                    if (r.importe_total_impuestos_nacionales != 0)
-                    {
-                        r.importe_total_impuestos_nacionalesSpecified = true;
-                        rimo.importe_total_impuestos_nacionalesSpecified = true;
-                    }
-                }
-                catch
-                {
-                }
-                try
-                {
-                    r.importe_total_ingresos_brutos = Math.Round(Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text) * tipodecambio, 2);
-                    rimo.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
-                    if (r.importe_total_ingresos_brutos != 0)
-                    {
-                        r.importe_total_ingresos_brutosSpecified = true;
-                        rimo.importe_total_ingresos_brutosSpecified = true;
-                    }
-                }
-                catch
-                {
-                }
-                try
-                {
-                    r.importe_total_impuestos_municipales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text) * tipodecambio, 2);
-                    rimo.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
-                    if (r.importe_total_impuestos_municipales != 0)
-                    {
-                        r.importe_total_impuestos_municipalesSpecified = true;
-                        rimo.importe_total_impuestos_municipalesSpecified = true;
-                    }
-                }
-                catch
-                {
-                }
-                try
-                {
-                    r.importe_total_impuestos_internos = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text) * tipodecambio, 2);
-                    rimo.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
-                    if (r.importe_total_impuestos_internos != 0)
-                    {
-                        r.importe_total_impuestos_internosSpecified = true;
-                        rimo.importe_total_impuestos_internosSpecified = true;
-                    }
-                }
-                catch
-                {
-                }
-                r.importe_total_factura = Math.Round(Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text) * tipodecambio, 2);
-                rimo.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
-
-                r.importes_moneda_origen = rimo;
-            }
-
-
-            r.observaciones = Observaciones_ResumenTextBox.Text;
-
-            comp.resumen = r;
-
-            System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos = (System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"];
-            comp.resumen.impuestos = new FeaEntidades.InterFacturas.resumenImpuestos[listadeimpuestos.Count];
-
-            for (int i = 0; i < listadeimpuestos.Count; i++)
-            {
-                if (!listadeimpuestos[i].codigo_impuesto.Equals(0))
-                {
-                    comp.resumen.impuestos[i] = new FeaEntidades.InterFacturas.resumenImpuestos();
-                    comp.resumen.impuestos[i].codigo_impuesto = listadeimpuestos[i].codigo_impuesto;
-                    comp.resumen.impuestos[i].codigo_jurisdiccion = listadeimpuestos[i].codigo_jurisdiccion;
-                    comp.resumen.impuestos[i].codigo_jurisdiccionSpecified = listadeimpuestos[i].codigo_jurisdiccionSpecified;
-                    comp.resumen.impuestos[i].descripcion = listadeimpuestos[i].descripcion;
-                    comp.resumen.impuestos[i].porcentaje_impuesto = listadeimpuestos[i].porcentaje_impuesto;
-                    comp.resumen.impuestos[i].porcentaje_impuestoSpecified = listadeimpuestos[i].porcentaje_impuestoSpecified;
-                    if (MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
-                    {
-                        comp.resumen.impuestos[i].importe_impuesto = listadeimpuestos[i].importe_impuesto;
-                    }
-                    else
-                    {
-                        comp.resumen.impuestos[i].importe_impuesto = Math.Round(listadeimpuestos[i].importe_impuesto * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
-                        comp.resumen.impuestos[i].importe_impuesto_moneda_origen = listadeimpuestos[i].importe_impuesto;
-                        comp.resumen.impuestos[i].importe_impuesto_moneda_origenSpecified = true;
-                    }
-                }
-            }
-            System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> listadedescuentos = (System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"];
-            comp.resumen.descuentos = new FeaEntidades.InterFacturas.resumenDescuentos[listadedescuentos.Count];
-            for (int i = 0; i < listadedescuentos.Count; i++)
-            {
-                if (listadedescuentos[i].descripcion_descuento != null && !listadedescuentos[i].descripcion_descuento.Equals(string.Empty))
-                {
-                    comp.resumen.descuentos[i] = new FeaEntidades.InterFacturas.resumenDescuentos();
-                    comp.resumen.descuentos[i].alicuota_iva_descuento = listadedescuentos[i].alicuota_iva_descuento;
-                    comp.resumen.descuentos[i].alicuota_iva_descuentoSpecified = listadedescuentos[i].alicuota_iva_descuentoSpecified;
-                    comp.resumen.descuentos[i].descripcion_descuento = listadedescuentos[i].descripcion_descuento;
-                    comp.resumen.descuentos[i].importe_iva_descuento = listadedescuentos[i].importe_iva_descuento;
-                    comp.resumen.descuentos[i].importe_iva_descuento_moneda_origen = listadedescuentos[i].importe_iva_descuento_moneda_origen;
-                    comp.resumen.descuentos[i].importe_iva_descuento_moneda_origenSpecified = listadedescuentos[i].importe_iva_descuento_moneda_origenSpecified;
-                    comp.resumen.descuentos[i].importe_iva_descuentoSpecified = listadedescuentos[i].importe_iva_descuentoSpecified;
-                    comp.resumen.descuentos[i].porcentaje_descuento = listadedescuentos[i].porcentaje_descuento;
-                    comp.resumen.descuentos[i].porcentaje_descuentoSpecified = listadedescuentos[i].porcentaje_descuentoSpecified;
-
-                    if (MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
-                    {
-                        comp.resumen.descuentos[i].importe_descuento = listadedescuentos[i].importe_descuento;
-                    }
-                    else
-                    {
-                        comp.resumen.descuentos[i].importe_descuento = Math.Round(listadedescuentos[i].importe_descuento * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
-                        comp.resumen.descuentos[i].importe_descuento_moneda_origen = listadedescuentos[i].importe_descuento;
-                        comp.resumen.descuentos[i].importe_descuento_moneda_origenSpecified = true;
-                    }
-                }
-            }
-            lote.comprobante[0] = comp;
-            return lote;
-        }
         protected void ConsultarLoteIBKButton_Click(object sender, EventArgs e)
         {
             using (FileStream fs = File.Open(Server.MapPath("~/Consultar.txt"), FileMode.Append, FileAccess.Write))
