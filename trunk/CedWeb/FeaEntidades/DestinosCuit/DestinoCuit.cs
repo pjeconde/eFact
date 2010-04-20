@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 namespace FeaEntidades.DestinosCuit
 {
-    public class DestinoCuit
+	public class DestinoCuit : IComparable
     {
         private string codigo;
         private string descr;
@@ -19,6 +19,31 @@ namespace FeaEntidades.DestinosCuit
             get { return descr; }
             set { descr = value; }
         }
+
+		public static List<DestinoCuit> ListaSinInformar()
+		{
+			List<DestinoCuit> lista = new List<DestinoCuit>();
+			lista.Add(new SinInformar());
+			lista.AddRange(Lista());
+			lista.Sort();
+			return lista;
+		}
+
+		#region IComparable Members
+
+		public int CompareTo(object obj)
+		{
+			if (obj is DestinoCuit)
+			{
+				DestinoCuit dp2 = (DestinoCuit)obj;
+				return descr.CompareTo(dp2.descr);
+			}
+			else
+				throw new ArgumentException("Object no es un DestinoCuit.");
+		}
+
+		#endregion
+
 
         public static List<DestinoCuit> Lista()
         {
