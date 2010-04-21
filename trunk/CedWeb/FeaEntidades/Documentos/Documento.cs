@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FeaEntidades.Documentos
 {
-	public class Documento
+	public class Documento : IComparable
 	{
 		private short codigo;
 		private string descr;
@@ -20,7 +20,22 @@ namespace FeaEntidades.Documentos
 			get { return descr; }
 			set { descr = value; }
 		}
-				
+
+		#region IComparable Members
+
+		public int CompareTo(object obj)
+		{
+			if (obj is Documento)
+			{
+				Documento dp2 = (Documento)obj;
+				return descr.CompareTo(dp2.descr);
+			}
+			else
+				throw new ArgumentException("Object no es un Documento.");
+		}
+
+		#endregion		
+		
 		public static List<Documento> Lista()
 		{
 			List<Documento> lista = new List<Documento>();
@@ -50,6 +65,8 @@ namespace FeaEntidades.Documentos
 			lista.Add(new Documentos.LC());
 			lista.Add(new Documentos.LE());
 			lista.Add(new Documentos.Pasaporte());
+			lista.Add(new Documentos.CUITPais());
+			lista.Sort();
 			return lista;
 		}
 

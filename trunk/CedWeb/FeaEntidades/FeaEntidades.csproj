@@ -1274,6 +1274,7 @@
     <Compile Include="Documentos\CI\Tucuman.cs" />
     <Compile Include="Documentos\CUIL.cs" />
     <Compile Include="Documentos\CUIT.cs" />
+    <Compile Include="Documentos\CUITPais.cs" />
     <Compile Include="Documentos\DNI.cs" />
     <Compile Include="Documentos\Documento.cs" />
     <Compile Include="Documentos\EnTramite.cs" />
