@@ -815,7 +815,7 @@
 																<tr>
 																	<td class="TextoLabelFEAVendedor">
 																		<asp:RegularExpressionValidator ID="GLN_CompradorRegularExpressionValidator" runat="server"
-																			ControlToValidate="GLN_VendedorTextBox" ErrorMessage="error de formateo en GLN del comprador"
+																			ControlToValidate="GLN_CompradorTextBox" ErrorMessage="error de formateo en GLN del comprador"
 																			SetFocusOnError="True" ValidationExpression="[0-9]{13}">* </asp:RegularExpressionValidator>GLN:
 																	</td>
 																	<td class="TextoLabelFEAVendedorDet" >
