@@ -3059,19 +3059,41 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			r.impuesto_liq_rni = Math.Round(Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text) * tipodecambio, 2);
 			rimo.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
 
+			//para exportación no se debe informar
 			try
 			{
-				r.importe_total_impuestos_nacionales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text) * tipodecambio, 2);
-				rimo.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
-				if (r.importe_total_impuestos_nacionales != 0)
+				double importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+				if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
 				{
-					r.importe_total_impuestos_nacionalesSpecified = true;
-					rimo.importe_total_impuestos_nacionalesSpecified = true;
+					int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+					try
+					{
+						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
+						if (idtipo.Equals("Export"))
+						{
+							r.importe_total_impuestos_nacionalesSpecified = false;
+							rimo.importe_total_impuestos_nacionalesSpecified = false;
+							throw new Exception("El importe total de impuestos nacionales en moneda extranjera no se debe informar para exportación");
+						}
+						else
+						{
+							GenerarImporteTotalImpuestosNacionesMonedaExtranjera(r, tipodecambio, rimo);
+						}
+					}
+					catch (System.NullReferenceException)
+					{
+						GenerarImporteTotalImpuestosNacionesMonedaExtranjera(r, tipodecambio, rimo);
+					}
+				}
+				else
+				{
+					GenerarImporteTotalImpuestosNacionesMonedaExtranjera(r, tipodecambio, rimo);
 				}
 			}
-			catch
+			catch (FormatException)
 			{
 			}
+
 			try
 			{
 				r.importe_total_ingresos_brutos = Math.Round(Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text) * tipodecambio, 2);
@@ -3115,6 +3137,17 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			rimo.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
 
 			r.importes_moneda_origen = rimo;
+		}
+
+		private void GenerarImporteTotalImpuestosNacionesMonedaExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
+		{
+			r.importe_total_impuestos_nacionales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text) * tipodecambio, 2);
+			rimo.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+			if (r.importe_total_impuestos_nacionales != 0)
+			{
+				r.importe_total_impuestos_nacionalesSpecified = true;
+				rimo.importe_total_impuestos_nacionalesSpecified = true;
+			}
 		}
 
 		private void GenerarImportesMonedaLocal(FeaEntidades.InterFacturas.resumen r)
