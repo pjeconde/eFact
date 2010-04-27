@@ -2306,6 +2306,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
 						Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
 						Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+						Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+						Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
 						switch (idtipo)
 						{
 							case "Comun":
@@ -2316,6 +2318,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								FechaHstServLabel.Visible = true;
 								FechaServHastaDatePickerWebUserControl.Visible = true;
 								Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
+								Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
 								break;
 							case "BFiscal":
 								Presta_ServCheckBox.Checked = false;
@@ -2327,6 +2330,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								FechaServHastaDatePickerWebUserControl.CalendarDateString = string.Empty;
 								FechaServHastaDatePickerWebUserControl.Visible = false;
 								Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
+								Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
 								break;
 							case "Export":
 								Presta_ServCheckBox.Checked = false;
@@ -2338,10 +2342,11 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								FechaServHastaDatePickerWebUserControl.CalendarDateString = string.Empty;
 								FechaServHastaDatePickerWebUserControl.Visible = false;
 								Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaExportaciones();
-								Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = "70";
+								Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
 								break;
 						}
 						Tipo_De_ComprobanteDropDownList.DataBind();
+						Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
 						TipoPtoVentaLabel.Text = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).DescrTipo;
 					}
 					catch
@@ -2355,6 +2360,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						FechaServHastaDatePickerWebUserControl.Visible = true;
 						Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
 						Tipo_De_ComprobanteDropDownList.DataBind();
+						Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
+						Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
 					}
 				}
 			}
