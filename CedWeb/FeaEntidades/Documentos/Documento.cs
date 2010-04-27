@@ -69,6 +69,11 @@ namespace FeaEntidades.Documentos
 			lista.Sort();
 			return lista;
 		}
-
+		public static List<Documento> ListaExportacion()
+		{
+			List<Documento> lista = new List<Documento>();
+			lista.Add(new Documentos.CUITPais());
+			return lista;
+		}
 	}
 }
