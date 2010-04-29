@@ -1549,7 +1549,14 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 GLN_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.GLN);
             }
             Codigo_Interno_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.codigo_interno);
-            Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio);
+			if (Nro_Doc_Identificatorio_CompradorTextBox.Visible)
+			{
+				Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio);
+			}
+			else
+			{
+				Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio)));
+			}
             Denominacion_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.denominacion);
             Domicilio_Calle_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.domicilio_calle);
             Domicilio_Numero_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.domicilio_numero);
@@ -2115,7 +2122,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     Contacto_CompradorTextBox.Text = string.Empty;
                     Email_CompradorTextBox.Text = string.Empty;
                     Telefono_CompradorTextBox.Text = string.Empty;
-                    Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = Convert.ToString(80);
                     Nro_Doc_Identificatorio_CompradorTextBox.Text = string.Empty;
                     Condicion_IVA_CompradorDropDownList.SelectedValue = Convert.ToString(0);
                     //NroIngBrutosTextBox.Text = comprador.NroIngBrutos;
@@ -2308,6 +2314,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
 						Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
 						Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
+						Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+						Nro_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
 						switch (idtipo)
 						{
 							case "Comun":
@@ -2319,6 +2327,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								FechaServHastaDatePickerWebUserControl.Visible = true;
 								Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
 								Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
+								Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
+								Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
 								break;
 							case "BFiscal":
 								Presta_ServCheckBox.Checked = false;
@@ -2331,6 +2341,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								FechaServHastaDatePickerWebUserControl.Visible = false;
 								Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
 								Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
+								Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
+								Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
 								break;
 							case "Export":
 								Presta_ServCheckBox.Checked = false;
@@ -2343,6 +2355,11 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								FechaServHastaDatePickerWebUserControl.Visible = false;
 								Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaExportaciones();
 								Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
+								Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
+								Nro_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.ListaSinInformar();
+								Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
+								Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Nro_Doc_Identificatorio_CompradorTextBox.Text));
+								Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
 								break;
 						}
 						Tipo_De_ComprobanteDropDownList.DataBind();
@@ -2362,6 +2379,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						Tipo_De_ComprobanteDropDownList.DataBind();
 						Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
 						Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
+						Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
+						Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
 					}
 				}
 			}
@@ -2990,7 +3009,14 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 			infcompra.codigo_interno = Codigo_Interno_CompradorTextBox.Text;
 			infcompra.codigo_doc_identificatorio = Convert.ToInt32(Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue);
-			infcompra.nro_doc_identificatorio = Convert.ToInt64(Nro_Doc_Identificatorio_CompradorTextBox.Text);
+			if (Nro_Doc_Identificatorio_CompradorTextBox.Visible)
+			{
+				infcompra.nro_doc_identificatorio = Convert.ToInt64(Nro_Doc_Identificatorio_CompradorTextBox.Text);
+			}
+			else
+			{
+				infcompra.nro_doc_identificatorio = Convert.ToInt64(Nro_Doc_Identificatorio_CompradorDropDownList.SelectedValue);
+			}
 			infcompra.denominacion = Denominacion_CompradorTextBox.Text;
 			int auxCondIVACompra = Convert.ToInt32(Condicion_IVA_CompradorDropDownList.SelectedValue);
 			if (!auxCondIVACompra.Equals(0))
@@ -3120,16 +3146,11 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 			FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo = new FeaEntidades.InterFacturas.resumenImportes_moneda_origen();
 
-			r.importe_total_neto_gravado = Math.Round(Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text) * tipodecambio, 2);
-			rimo.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
-			r.importe_total_concepto_no_gravado = Math.Round(Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text) * tipodecambio, 2);
-			rimo.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
-			r.importe_operaciones_exentas = Math.Round(Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text) * tipodecambio, 2);
-			rimo.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
-			r.impuesto_liq = Math.Round(Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text) * tipodecambio, 2);
-			rimo.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
-			r.impuesto_liq_rni = Math.Round(Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text) * tipodecambio, 2);
-			rimo.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
+			GenerarImporteTotalNetoGravadoExtranjera(r, tipodecambio, rimo);
+			GenerarImporteTotalConceptoNoGravadoExtranjera(r, tipodecambio, rimo);
+			GenerarImporteOperacionesExentasExtranjera(r, tipodecambio, rimo);
+			GenerarImpuestoLiqExtranjera(r, tipodecambio, rimo);
+			GenerarImpuestoLiqRNIExtranjera(r, tipodecambio, rimo);
 
 			//para exportación no se debe informar
 			try
@@ -3278,6 +3299,181 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			r.importes_moneda_origen = rimo;
 		}
 
+		private void GenerarImpuestoLiqRNIExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
+		{
+			//para exportación se debe informar en 0
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+				try
+				{
+					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+					{
+						return pv.Id == auxPV;
+					}).IdTipo;
+					if (idtipo.Equals("Export") && !Impuesto_Liq_Rni_ResumenTextBox.Text.Equals("0"))
+					{
+						throw new Exception("El Impuesto liquidado a RNI o percepción a no categorizados debe informarse en 0 para exportación.");
+					}
+					else
+					{
+						r.impuesto_liq_rni = Math.Round(Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text) * tipodecambio, 2);
+						rimo.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
+					}
+				}
+				catch (System.NullReferenceException)
+				{
+					r.impuesto_liq_rni = Math.Round(Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text) * tipodecambio, 2);
+					rimo.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
+				}
+			}
+			else
+			{
+				r.impuesto_liq_rni = Math.Round(Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text) * tipodecambio, 2);
+				rimo.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
+			}
+		}
+
+		private void GenerarImpuestoLiqExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
+		{
+			//para exportación se debe informar en 0
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+				try
+				{
+					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+					{
+						return pv.Id == auxPV;
+					}).IdTipo;
+					if (idtipo.Equals("Export") && !Impuesto_Liq_ResumenTextBox.Text.Equals("0"))
+					{
+						throw new Exception("El IVA Responsable inscripto debe informarse en 0 para exportación.");
+					}
+					else
+					{
+						r.impuesto_liq = Math.Round(Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text) * tipodecambio, 2);
+						rimo.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
+					}
+				}
+				catch (System.NullReferenceException)
+				{
+					r.impuesto_liq = Math.Round(Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text) * tipodecambio, 2);
+					rimo.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
+				}
+			}
+			else
+			{
+				r.impuesto_liq = Math.Round(Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text) * tipodecambio, 2);
+				rimo.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
+			}
+		}
+
+		private void GenerarImporteOperacionesExentasExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
+		{
+			//para exportación se debe informar en 0
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+				try
+				{
+					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+					{
+						return pv.Id == auxPV;
+					}).IdTipo;
+					if (idtipo.Equals("Export") && !Importe_Operaciones_Exentas_ResumenTextBox.Text.Equals("0"))
+					{
+						throw new Exception("El importe de operaciones exentas debe informarse en 0 para exportación.");
+					}
+					else
+					{
+						r.importe_operaciones_exentas = Math.Round(Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text) * tipodecambio, 2);
+						rimo.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
+					}
+				}
+				catch (System.NullReferenceException)
+				{
+					r.importe_operaciones_exentas = Math.Round(Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text) * tipodecambio, 2);
+					rimo.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
+				}
+			}
+			else
+			{
+				r.importe_operaciones_exentas = Math.Round(Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text) * tipodecambio, 2);
+				rimo.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
+			}
+		}
+
+		private void GenerarImporteTotalConceptoNoGravadoExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
+		{
+			//para exportación se debe informar en 0
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+				try
+				{
+					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+					{
+						return pv.Id == auxPV;
+					}).IdTipo;
+					if (idtipo.Equals("Export") && !Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text.Equals("0"))
+					{
+						throw new Exception("El importe total de conceptos que no integren el precio neto gravado debe informarse en 0 para exportación.");
+					}
+					else
+					{
+						r.importe_total_concepto_no_gravado = Math.Round(Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text) * tipodecambio, 2);
+						rimo.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
+					}
+				}
+				catch (System.NullReferenceException)
+				{
+					r.importe_total_concepto_no_gravado = Math.Round(Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text) * tipodecambio, 2);
+					rimo.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
+				}
+			}
+			else
+			{
+				r.importe_total_concepto_no_gravado = Math.Round(Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text) * tipodecambio, 2);
+				rimo.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
+			}
+		}
+
+		private void GenerarImporteTotalNetoGravadoExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
+		{
+			//para exportación se debe informar en 0
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+				try
+				{
+					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+					{
+						return pv.Id == auxPV;
+					}).IdTipo;
+					if (idtipo.Equals("Export") && !Importe_Total_Neto_Gravado_ResumenTextBox.Text.Equals("0"))
+					{
+						throw new Exception("El importe total neto gravado debe informarse en 0 para exportación.");
+					}
+					else
+					{
+						r.importe_total_neto_gravado = Math.Round(Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text) * tipodecambio, 2);
+						rimo.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
+					}
+				}
+				catch (System.NullReferenceException)
+				{
+					r.importe_total_neto_gravado = Math.Round(Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text) * tipodecambio, 2);
+					rimo.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
+				}
+			}
+			else
+			{
+				r.importe_total_neto_gravado = Math.Round(Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text) * tipodecambio, 2);
+				rimo.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
+			}
+		}
+
 		private void GenerarImporteTotalImpuestosInternosMonedaExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
 		{
 			r.importe_total_impuestos_internos = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text) * tipodecambio, 2);
@@ -3324,11 +3520,11 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 		private void GenerarImportesMonedaLocal(FeaEntidades.InterFacturas.resumen r)
 		{
-			r.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
-			r.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
-			r.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
-			r.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
-			r.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
+			GenerarImporteTotalNetoGravado(r);
+			GenerarImporteTotalConceptoNoGravado(r);
+			GenerarImporteOperacionesExentas(r);
+			GenerarImpuestoLiq(r);
+			GenerarImpuestoLiqRNI(r);
 
 			//para exportación no se debe informar
 			try
@@ -3467,6 +3663,167 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 
 			r.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
+		}
+
+		private void GenerarImpuestoLiqRNI(FeaEntidades.InterFacturas.resumen r)
+		{
+			//para exportación se debe informar en 0
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+				try
+				{
+					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+					{
+						return pv.Id == auxPV;
+					}).IdTipo;
+					if (idtipo.Equals("Export") && !Impuesto_Liq_Rni_ResumenTextBox.Text.Equals("0"))
+					{
+						throw new Exception("El Impuesto liquidado a RNI o percepción a no categorizados debe informarse en 0 para exportación.");
+					}
+					else
+					{
+						r.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
+					}
+				}
+				catch (System.NullReferenceException)
+				{
+					r.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
+				}
+			}
+			else
+			{
+				r.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
+			}
+		}
+
+		private void GenerarImpuestoLiq(FeaEntidades.InterFacturas.resumen r)
+		{
+			//para exportación se debe informar en 0
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+				try
+				{
+					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+					{
+						return pv.Id == auxPV;
+					}).IdTipo;
+					if (idtipo.Equals("Export") && !Impuesto_Liq_ResumenTextBox.Text.Equals("0"))
+					{
+						throw new Exception("El IVA Responsable inscripto debe informarse en 0 para exportación.");
+					}
+					else
+					{
+						r.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
+					}
+				}
+				catch (System.NullReferenceException)
+				{
+					r.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
+				}
+			}
+			else
+			{
+				r.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
+			}
+
+		}
+
+		private void GenerarImporteOperacionesExentas(FeaEntidades.InterFacturas.resumen r)
+		{
+			//para exportación se debe informar en 0
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+				try
+				{
+					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+					{
+						return pv.Id == auxPV;
+					}).IdTipo;
+					if (idtipo.Equals("Export") && !Importe_Operaciones_Exentas_ResumenTextBox.Text.Equals("0"))
+					{
+						throw new Exception("El importe de operaciones exentas debe informarse en 0 para exportación.");
+					}
+					else
+					{
+						r.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
+					}
+				}
+				catch (System.NullReferenceException)
+				{
+					r.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
+				}
+			}
+			else
+			{
+				r.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
+			}
+		}
+
+		private void GenerarImporteTotalConceptoNoGravado(FeaEntidades.InterFacturas.resumen r)
+		{
+			//para exportación se debe informar en 0
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+				try
+				{
+					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+					{
+						return pv.Id == auxPV;
+					}).IdTipo;
+					if (idtipo.Equals("Export") && !Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text.Equals("0"))
+					{
+						throw new Exception("El importe total de conceptos que no integren el precio neto gravado debe informarse en 0 para exportación.");
+					}
+					else
+					{
+						r.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
+					}
+				}
+				catch (System.NullReferenceException)
+				{
+					r.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
+				}
+			}
+			else
+			{
+				r.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
+			}
+		}
+
+		private void GenerarImporteTotalNetoGravado(FeaEntidades.InterFacturas.resumen r)
+		{
+			//para exportación se debe informar en 0
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+				try
+				{
+					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+					{
+						return pv.Id == auxPV;
+					}).IdTipo;
+					if (idtipo.Equals("Export") && !Importe_Total_Neto_Gravado_ResumenTextBox.Text.Equals("0"))
+					{
+						throw new Exception("El importe total neto gravado debe informarse en 0 para exportación.");
+					}
+					else
+					{
+						r.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
+					}
+				}
+				catch (System.NullReferenceException)
+				{
+					r.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
+				}
+			}
+			else
+			{
+				r.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
+			}
 		}
 
 		private void GenerarImporteTotalImpuestosInternos(FeaEntidades.InterFacturas.resumen r)

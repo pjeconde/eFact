@@ -853,7 +853,10 @@
 																	</td>
 																	<td class="TextoLabelFEAVendedorDet">
 																		<asp:TextBox ID="Nro_Doc_Identificatorio_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
-																		</asp:TextBox></td>
+																		</asp:TextBox>
+																		<asp:DropDownList ID="Nro_Doc_Identificatorio_CompradorDropDownList" runat="server"
+																			SkinID="DropDownListComprador" Visible="false">
+																		</asp:DropDownList></td>
 																</tr>
 																<tr>
 																	<td class="TextoLabelFEAVendedor">
