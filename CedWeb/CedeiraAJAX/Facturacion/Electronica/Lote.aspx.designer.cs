@@ -677,6 +677,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Nro_Doc_Identificatorio_CompradorTextBox;
         
         /// <summary>
+        /// Control Nro_Doc_Identificatorio_CompradorDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Nro_Doc_Identificatorio_CompradorDropDownList;
+        
+        /// <summary>
         /// Control Denominacion_CompradorTextBox.
         /// </summary>
         /// <remarks>
