@@ -69,7 +69,7 @@ namespace eFact_R.DB
                 vendedor.CuitVendedor = dt.Rows[i]["CuitVendedor"].ToString();
                 vendedor.Nombre = dt.Rows[i]["Nombre"].ToString();
                 vendedor.NumeroSerieCertificado = dt.Rows[i]["NumeroSerieCertificado"].ToString();
-                if (dt.Rows[i]["Logo"].GetType() != Type.GetType("System.DBNull"))
+                if (dt.Rows[i]["Logo"].GetType() != Type.GetType("System.DBNull") && ((System.Byte[])dt.Rows[i]["Logo"]).Length != 0)
                 {
                     vendedor.Logo = ((byte[])dt.Rows[0]["Logo"]);
                 }

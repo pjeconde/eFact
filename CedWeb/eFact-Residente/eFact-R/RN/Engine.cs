@@ -17,7 +17,7 @@ namespace eFact_R.RN
         {
             try
             {
-                Type[] types = new Type[13];
+                Type[] types = new Type[14];
                 types[0] = typeof(FeaEntidades.InterFacturas.cabecera_lote);
                 types[1] = typeof(FeaEntidades.InterFacturas.informacion_comprador);
                 types[2] = typeof(FeaEntidades.InterFacturas.informacion_comprobante);
@@ -28,11 +28,12 @@ namespace eFact_R.RN
                 types[7] = typeof(FeaEntidades.InterFacturas.lineaImportes_moneda_origen);
                 types[8] = typeof(FeaEntidades.InterFacturas.informacion_exportacion);
                 types[9] = typeof(FeaEntidades.InterFacturas.permisos);
-                types[10] = typeof(FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas);
-                types[11] = typeof(FeaEntidades.InterFacturas.resumenImportes_moneda_origen);
-                types[12] = typeof(FeaEntidades.InterFacturas.resumen);
+                types[10] = typeof(FeaEntidades.InterFacturas.extensiones);
+                types[11] = typeof(FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas);
+                types[12] = typeof(FeaEntidades.InterFacturas.resumenImportes_moneda_origen);
+                types[13] = typeof(FeaEntidades.InterFacturas.resumen);
 
-                engine = new MultiRecordEngine(types[0], types[1], types[2], types[3], types[4], types[5], types[6], types[7], types[8], types[9], types[10], types[11], types[12]);
+                engine = new MultiRecordEngine(types[0], types[1], types[2], types[3], types[4], types[5], types[6], types[7], types[8], types[9], types[10], types[11], types[12], types[13]);
                 engine.RecordSelector = new FileHelpers.RecordTypeSelector(cs);
                 object[] oC = engine.ReadFile(Archivo);
 
@@ -93,10 +94,24 @@ namespace eFact_R.RN
                         lc.comprobante[NroComprobante].cabecera.informacion_comprobante.informacion_exportacion.permisos[NroLineaPermisos] = (FeaEntidades.InterFacturas.permisos)o;
                         ++NroLineaPermisos;
                     }
+                    if (typeof(FeaEntidades.InterFacturas.extensiones) == o.GetType())
+                    {
+                        if (((FeaEntidades.InterFacturas.extensiones)o).extensiones_datos_comerciales != "")
+                        {
+                            lc.comprobante[NroComprobante].extensiones = new FeaEntidades.InterFacturas.extensiones();
+                            lc.comprobante[NroComprobante].extensionesSpecified = true;
+                            lc.comprobante[NroComprobante].extensiones = (FeaEntidades.InterFacturas.extensiones)o;
+                        }
+                    }
                     if (typeof(FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas) == o.GetType())
                     {
-                        lc.comprobante[NroComprobante].extensiones = new FeaEntidades.InterFacturas.extensiones();
+                        if (lc.comprobante[NroComprobante].extensiones == null)
+                        {
+                            lc.comprobante[NroComprobante].extensiones = new FeaEntidades.InterFacturas.extensiones();
+                            lc.comprobante[NroComprobante].extensionesSpecified = true;
+                        }
                         lc.comprobante[NroComprobante].extensiones.extensiones_camara_facturas = (FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas)o;
+                        lc.comprobante[NroComprobante].extensiones.extensiones_camara_facturasSpecified = true;
                         GetPropiedades(o);
                     }
                     if (typeof(FeaEntidades.InterFacturas.resumenImportes_moneda_origen) == o.GetType())
@@ -122,6 +137,17 @@ namespace eFact_R.RN
                 throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.BaseApplicationException("Problemas al procesar el archivo.\r\n\r\n" + ex.Message);
             }
         }
+        public string ConvertToHex(string asciiString)
+        {
+            string hex = "";
+            foreach (char c in asciiString)
+            {
+                int tmp = c;
+                hex += String.Format("{0:x2}", (uint)System.Convert.ToUInt32(tmp.ToString()));
+            }
+            return hex;
+        } 
+
         private void GetPropiedades(object o)
         {
             Dictionary<string, string> result = new Dictionary<string, string>();
@@ -179,6 +205,10 @@ namespace eFact_R.RN
                 case "<informacion_exportacion>":
                     {
                         return typeof(FeaEntidades.InterFacturas.informacion_exportacion);
+                    }
+                case "<extensiones>":
+                    {
+                        return typeof(FeaEntidades.InterFacturas.extensiones);
                     }
                 case "<extensionesExtensiones_camara_facturas>":
                     {
