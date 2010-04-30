@@ -53,7 +53,7 @@ namespace eFact_R
                 LogLoteDataGridView.Refresh();
 
                 DataGridViewComboBoxColumn colIdTipoComprobante = (DataGridViewComboBoxColumn)DetalleLoteDataGridView.Columns["IdTipoComprobante"];
-                colIdTipoComprobante.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
+                colIdTipoComprobante.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
                 colIdTipoComprobante.DisplayMember = "Descr";
                 colIdTipoComprobante.ValueMember = "Codigo";
                 colIdTipoComprobante.DataPropertyName = "IdTipoComprobante";

@@ -228,9 +228,13 @@ namespace eFact_R.DB
             {
                 commandText.Append("where (Lotes.FechaAlta >= '" + FechaDsd.ToString("yyyyMMdd") + "' and Lotes.FechaAlta < Dateadd ( Day, 1, '" + FechaHst.ToString("yyyyMMdd") + "') ");
             }
-            else 
+            else if (TipoConsulta == eFact_R.RN.Tablero.TipoConsulta.FechaEnvio)
             {
                 commandText.Append("where (Lotes.FechaEnvio >= '" + FechaDsd.ToString("yyyyMMdd") + "' and Lotes.FechaEnvio <= Dateadd ( Day, 1, '" + FechaHst.ToString("yyyyMMdd") + "') ");
+            }
+            else
+            {
+                commandText.Append("where (1=1 ");
             }
             if (CuitVendedor != "")
             {
