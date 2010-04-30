@@ -11,19 +11,33 @@ namespace FeaEntidades.InterFacturas
 	[System.ComponentModel.DesignerCategoryAttribute("code")]
 	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://lote.schemas.cfe.ib.com.ar/")]
 	[System.Xml.Serialization.XmlRootAttribute(Namespace = "http://lote.schemas.cfe.ib.com.ar/", IsNullable = false)]
+    [FileHelpers.DelimitedRecord("|")]
 	public partial class extensiones
 	{
+        private string nombre_claseField = "<extensiones>";
 
+        [FileHelpers.FieldIgnored()]
 		private extensionesExtensiones_camara_facturas extensiones_camara_facturasField;
-
+        
+        [FileHelpers.FieldIgnored()]
 		[FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
 		private bool extensiones_camara_facturasFieldSpecified;
 
-		private object extensiones_datos_comercialesField;
+		private string extensiones_datos_comercialesField;
 
 		private string extensiones_datos_marketingField;
 
 		private string extensiones_signaturesField;
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string nombre_clase
+        {
+            get
+            {
+                return nombre_claseField;
+            }
+        }
 
 		/// <comentarios/>
 		public extensionesExtensiones_camara_facturas extensiones_camara_facturas
@@ -53,7 +67,7 @@ namespace FeaEntidades.InterFacturas
 
 
 		/// <comentarios/>
-		public object extensiones_datos_comerciales
+		public string extensiones_datos_comerciales
 		{
 			get
 			{

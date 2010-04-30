@@ -419,9 +419,22 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_vendedor.provincia = lcIBK.comprobante[i].cabecera.informacion_vendedor.provincia;
                 cIBK.cabecera.informacion_vendedor.telefono = lcIBK.comprobante[i].cabecera.informacion_vendedor.telefono;
 
-
                 cIBK.extensiones = new FeaEntidades.InterFacturas.extensiones();
-
+                if (lcIBK.comprobante[i].extensiones.extensiones_camara_facturas != null)
+                {
+                    cIBK.extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
+                    cIBK.extensiones.extensiones_camara_facturas.clave_de_vinculacion = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion;
+                    cIBK.extensiones.extensiones_camara_facturas.id_idioma = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.id_idioma;
+                    cIBK.extensiones.extensiones_camara_facturas.id_template = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.id_template;
+                }
+                if (lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales != null)
+                {
+                    cIBK.extensiones.extensiones_datos_comerciales = lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales;
+                }
+                if (lcIBK.comprobante[i].extensiones.extensiones_datos_marketing != null)
+                {
+                    cIBK.extensiones.extensiones_datos_marketing = lcIBK.comprobante[i].extensiones.extensiones_datos_marketing;
+                }
 
                 FeaEntidades.InterFacturas.detalle d = new FeaEntidades.InterFacturas.detalle();
                 CedWebRN.IBK.detalle detalle = (CedWebRN.IBK.detalle)lcIBK.comprobante[i].Item;
@@ -760,6 +773,22 @@ namespace CedWebRN
                         cIBK.extensiones.extensiones_camara_facturas.id_idioma = lc.comprobante[i].extensiones.extensiones_camara_facturas.id_idioma;
                         cIBK.extensiones.extensiones_camara_facturas.id_template = lc.comprobante[i].extensiones.extensiones_camara_facturas.id_template;
                     }
+                    if (lc.comprobante[i].extensiones.extensiones_datos_comerciales != null && lc.comprobante[i].extensiones.extensiones_datos_comerciales != "")
+                    {
+                        //object o = lc.comprobante[i].extensiones.extensiones_datos_comerciales;
+                        //string aux = ConvertToHex(((System.Xml.XmlNode[])o)[0].OuterXml.ToString());
+                        //cIBK.extensiones.extensiones_datos_comerciales = aux;
+                        cIBK.extensiones.extensiones_datos_comerciales = lc.comprobante[i].extensiones.extensiones_datos_comerciales;
+                    }
+                    if (lc.comprobante[i].extensiones.extensiones_datos_marketing != null && lc.comprobante[i].extensiones.extensiones_datos_marketing != "")
+                    {
+                        string aux = ConvertToHex(lc.comprobante[i].extensiones.extensiones_datos_marketing.ToString());
+                        cIBK.extensiones.extensiones_datos_marketing = aux;
+                    }
+                    if (lc.comprobante[i].extensiones.extensiones_signatures != null && lc.comprobante[i].extensiones.extensiones_signatures != "")
+                    {
+                        cIBK.extensiones.extensiones_signatures = lc.comprobante[i].extensiones.extensiones_signatures;
+                    }
                 }
 
                 IBK.detalle d = new IBK.detalle();
@@ -945,6 +974,19 @@ namespace CedWebRN
 
             }
             return lcIBK;
+        }
+        public string ConvertToHex(string asciiString)
+        {
+            byte[] b = Encoding.ASCII.GetBytes(asciiString);
+            string salida = "";
+            for (int i = 0; i < b.Length; i++)
+            {
+                string ascii = b[i].ToString();
+                int n = Convert.ToInt32(ascii);
+                string r = n.ToString("x");
+                salida += "%" + r;
+            }
+            return salida;
         }
     }
 }
