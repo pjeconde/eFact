@@ -429,7 +429,7 @@ namespace CedWebRN
                 }
                 if (lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales != null)
                 {
-                    cIBK.extensiones.extensiones_datos_comerciales = lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales;
+                    cIBK.extensiones.extensiones_datos_comerciales = lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales.ToString();
                 }
                 if (lcIBK.comprobante[i].extensiones.extensiones_datos_marketing != null)
                 {
