@@ -184,10 +184,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
         }
         private void BindearDropDownLists()
         {
-            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataValueField = "Codigo";
-            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataTextField = "Descr";
-            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
-            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
+			AjustarCodigosDeReferenciaEnFooter();
 
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataValueField = "Codigo";
             ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataTextField = "Descr";
@@ -211,6 +208,64 @@ namespace CedeiraAJAX.Facturacion.Electronica
             ((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataBind();
 
         }
+
+		private void AjustarCodigosDeReferenciaEnFooter()
+		{
+			((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataValueField = "Codigo";
+			((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataTextField = "Descr";
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				if (!Punto_VentaTextBox.Text.Equals(string.Empty))
+				{
+					int auxPV;
+					try
+					{
+						auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
+						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+						{
+							return pv.Id == auxPV;
+						}).IdTipo;
+						switch (idtipo)
+						{
+							case "Comun":
+								((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+								((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
+								break;
+							case "BFiscal":
+								((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+								((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
+								break;
+							case "Export":
+								((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.Exportaciones.Exportacion.Lista();
+								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
+								((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = false;
+								break;
+						}
+					}
+					catch
+					{
+						((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+						((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+						((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
+					}
+				}
+				else
+				{
+					((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+					((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+					((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
+				}
+			}
+			else
+			{
+				((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+				((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+				((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
+			}
+			((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
+		}
 
         protected void detalleGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -1278,47 +1333,40 @@ namespace CedeiraAJAX.Facturacion.Electronica
         }
         protected void referenciasGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName.Equals("Addreferencias"))
-            {
-                try
-                {
-                    FeaEntidades.InterFacturas.informacion_comprobanteReferencias r = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
-                    string auxCodRef = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue.ToString();
-                    string auxDescrCodRef = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
-                    if (!auxCodRef.Equals(string.Empty))
-                    {
-                        r.codigo_de_referencia = Convert.ToInt32(auxCodRef);
-                        r.descripcioncodigo_de_referencia = auxDescrCodRef;
-                    }
-                    else
-                    {
-                        throw new Exception("Referencia no agregada porque el codigo de referencia no puede estar vacío");
-                    }
-                    string auxDatoRef = ((TextBox)referenciasGridView.FooterRow.FindControl("txtdato_de_referencia")).Text;
-                    if (System.Text.RegularExpressions.Regex.IsMatch(auxDatoRef, "^[0-9]+$"))
-                    {
-                        r.dato_de_referencia = Convert.ToString(Convert.ToInt64(auxDatoRef));
-                    }
-                    else
-                    {
-                        throw new Exception("Referencia no agregada porque el dato de referencia debe ser numérico y entero");
-                    }
-                    ((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"]).Add(r);
-                    //Me fijo si elimino la fila automática
-                    System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> refs = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"]);
-                    if (refs[0].codigo_de_referencia == 0)
-                    {
-                        ((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"]).Remove(refs[0]);
-                    }
-                    referenciasGridView.DataSource = ViewState["referencias"];
-                    referenciasGridView.DataBind();
-                    BindearDropDownLists();
-                }
-                catch (Exception ex)
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
-                }
-            }
+			if (e.CommandName.Equals("Addreferencias"))
+			{
+				try
+				{
+					FeaEntidades.InterFacturas.informacion_comprobanteReferencias r = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
+					string auxCodRef = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue.ToString();
+					string auxDescrCodRef = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
+					if (!auxCodRef.Equals(string.Empty))
+					{
+						r.codigo_de_referencia = Convert.ToInt32(auxCodRef);
+						r.descripcioncodigo_de_referencia = auxDescrCodRef;
+					}
+					else
+					{
+						throw new Exception("Referencia no agregada porque el codigo de referencia no puede estar vacío");
+					}
+					string auxDatoRef = ((TextBox)referenciasGridView.FooterRow.FindControl("txtdato_de_referencia")).Text;
+					r.dato_de_referencia = auxDatoRef;
+					((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"]).Add(r);
+					//Me fijo si elimino la fila automática
+					System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> refs = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"]);
+					if (refs[0].codigo_de_referencia == 0)
+					{
+						((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"]).Remove(refs[0]);
+					}
+					referenciasGridView.DataSource = ViewState["referencias"];
+					referenciasGridView.DataBind();
+					BindearDropDownLists();
+				}
+				catch (Exception ex)
+				{
+					ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
+				}
+			}
         }
         protected void referenciasGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
         {
@@ -1357,10 +1405,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
             referenciasGridView.DataBind();
             BindearDropDownLists();
 
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataValueField = "Codigo";
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataTextField = "Descr";
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataBind();
+			AjustarCodigoReferenciaEnEdicion(sender, e);
+
             try
             {
                 ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"])[e.NewEditIndex].codigo_de_referencia.ToString());
@@ -1370,6 +1416,64 @@ namespace CedeiraAJAX.Facturacion.Electronica
             {
             }
         }
+
+		private void AjustarCodigoReferenciaEnEdicion(object sender, GridViewEditEventArgs e)
+		{
+			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataValueField = "Codigo";
+			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataTextField = "Descr";
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				if (!Punto_VentaTextBox.Text.Equals(string.Empty))
+				{
+					int auxPV;
+					try
+					{
+						auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
+						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+						{
+							return pv.Id == auxPV;
+						}).IdTipo;
+						switch (idtipo)
+						{
+							case "Comun":
+								((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+								((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
+								((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
+								break;
+							case "BFiscal":
+								((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+								((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
+								((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
+								break;
+							case "Export":
+								((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.Exportaciones.Exportacion.Lista();
+								((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = true;
+								((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = false;
+								break;
+						}
+					}
+					catch
+					{
+						((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+						((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
+						((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
+					}
+				}
+				else
+				{
+					((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+					((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
+					((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
+				}
+			}
+			else
+			{
+				((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+				((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
+				((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
+			}
+			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataBind();
+		}
         protected void referenciasGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
         {
             if (e.Exception != null)
@@ -1396,14 +1500,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     throw new Exception("Referencia no actualizada porque el codigo de referencia no puede estar vacío");
                 }
                 string auxDatoRef = ((TextBox)referenciasGridView.Rows[e.RowIndex].FindControl("txtdato_de_referencia")).Text;
-                if (System.Text.RegularExpressions.Regex.IsMatch(auxDatoRef, "^[0-9]+$"))
-                {
-                    r.dato_de_referencia = Convert.ToString(Convert.ToInt64(auxDatoRef));
-                }
-                else
-                {
-                    throw new Exception("Referencia no agregada porque el dato de referencia debe ser numérico y entero");
-                }
+                r.dato_de_referencia = auxDatoRef;
                 referenciasGridView.EditIndex = -1;
                 referenciasGridView.DataSource = ViewState["referencias"];
                 referenciasGridView.DataBind();
@@ -1486,14 +1583,14 @@ namespace CedeiraAJAX.Facturacion.Electronica
         private void CompletarUI(FeaEntidades.InterFacturas.lote_comprobantes lc, EventArgs e)
         {
             //Cabecera
-            Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
             Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
             Presta_ServCheckBox.Checked = Convert.ToBoolean(lc.cabecera_lote.presta_serv);
             Punto_VentaTextBox.Text = Convert.ToString(lc.cabecera_lote.punto_de_venta);
 			int auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
 			ViewState["PuntoVenta"] = auxPV;
             AjustarCamposXPtaVentaChanged(Punto_VentaTextBox.Text);
-            //Comprobante
+			Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
+			//Comprobante
             Numero_ComprobanteTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
             FechaEmisionDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
             FechaVencimientoDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento);
@@ -1526,14 +1623,21 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 {
                     //descripcioncodigo_de_referencia ( XmlIgnoreAttribute )
                     //Se busca la descripción a través del código.
-                    if (r != null)
-                    {
-                        string descrcodigo = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
-                        ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue = r.codigo_de_referencia.ToString();
-                        descrcodigo = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
-                        r.descripcioncodigo_de_referencia = descrcodigo;
-                        referencias.Add(r);
-                    }
+					try
+					{
+						if (r != null)
+						{
+							string descrcodigo = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
+							((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue = r.codigo_de_referencia.ToString();
+							descrcodigo = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
+							r.descripcioncodigo_de_referencia = descrcodigo;
+							referencias.Add(r);
+						}
+					}
+					catch
+					//Referencia no valida
+					{
+					}
                 }
             }
             if (referencias.Count.Equals(0))
@@ -1557,6 +1661,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			{
 				Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio)));
 			}
+			Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Codigo_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Codigo_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio)));
             Denominacion_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.denominacion);
             Domicilio_Calle_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.domicilio_calle);
             Domicilio_Numero_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.domicilio_numero);
@@ -2272,23 +2377,23 @@ namespace CedeiraAJAX.Facturacion.Electronica
 							string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
 							if (!idtipo.Equals(idtipoAnterior))
 							{
-								ResetearDetalles();
+								ResetearGrillas();
 							}
 						}
 						catch (System.NullReferenceException)
 						{
-							ResetearDetalles();
+							ResetearGrillas();
 						}
 					}
 					ViewState["PuntoVenta"] = auxPV;
 				}
 				catch
 				{
-					ResetearDetalles();
+					ResetearGrillas();
 				} 
 			}
 		}
-		private void ResetearDetalles()
+		private void ResetearGrillas()
 		{
 			lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
 			FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
@@ -2296,8 +2401,16 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			detalleGridView.DataSource = lineas;
 			ViewState["lineas"] = lineas;
 			detalleGridView.DataBind();
+
+			referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
+			FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
+			referencias.Add(referencia);
+			referenciasGridView.DataSource = referencias;
+			ViewState["referencias"] = referencias;
+			referenciasGridView.DataBind();
+
 			BindearDropDownLists();
-			ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Se han eliminado los artículos por haber cambiado el tipo de punto de venta');</SCRIPT>", false);
+			ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Se han eliminado artículos y referencias por haber cambiado el tipo de punto de venta');</SCRIPT>", false);
 		}
 		private void AjustarCamposXPtaVentaChanged(string PuntoDeVenta)
 		{
@@ -2306,6 +2419,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				if (!PuntoDeVenta.Equals(string.Empty))
 				{
 					int auxPV;
+					AjustarCodigosDeReferenciaEnFooter();
 					try
 					{
 						auxPV = Convert.ToInt32(PuntoDeVenta);
@@ -2329,6 +2443,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
 								Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
 								Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
 								break;
 							case "BFiscal":
 								Presta_ServCheckBox.Checked = false;
@@ -2343,6 +2458,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
 								Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
 								Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
 								break;
 							case "Export":
 								Presta_ServCheckBox.Checked = false;
@@ -2360,6 +2476,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
 								Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Nro_Doc_Identificatorio_CompradorTextBox.Text));
 								Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
+								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
 								break;
 						}
 						Tipo_De_ComprobanteDropDownList.DataBind();
@@ -2381,6 +2498,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
 						Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
 						Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+						((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
 					}
 				}
 			}
@@ -2720,33 +2838,30 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		private void GenerarCodigoOperacion(FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
 		{
 			//No se tiene que informar para exportación
-			if (!CodigoOperacionDropDownList.SelectedValue.Equals(string.Empty))
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
 			{
-				if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+				try
 				{
-					int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
-					try
+					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
+					if (idtipo.Equals("Export"))
 					{
-						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
-						if (idtipo.Equals("Export"))
-						{
-							CodigoOperacionDropDownList.Focus();
-							throw new Exception("El código de operación no se debe informar para exportación");
-						}
-						else
-						{
-							infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
-						}
+						CodigoOperacionDropDownList.Focus();
+						throw new Exception("El código de operación no se debe informar para exportación");
 					}
-					catch (System.NullReferenceException)
+					else
 					{
 						infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
 					}
 				}
-				else
+				catch (System.NullReferenceException)
 				{
 					infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
 				}
+			}
+			else
+			{
+				infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
 			}
 		}
 
@@ -2949,6 +3064,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			if (!GLN_VendedorTextBox.Text.Equals(string.Empty))
 			{
 				infovend.GLN = Convert.ToInt64(GLN_VendedorTextBox.Text);
+				infovend.GLNSpecified = true;
 			}
 			infovend.codigo_interno = Codigo_Interno_VendedorTextBox.Text;
 			infovend.razon_social = Razon_Social_VendedorTextBox.Text;
@@ -3006,6 +3122,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			if (!GLN_CompradorTextBox.Text.Equals(string.Empty))
 			{
 				infcompra.GLN = Convert.ToInt64(GLN_CompradorTextBox.Text);
+				infcompra.GLNSpecified = true;
 			}
 			infcompra.codigo_interno = Codigo_Interno_CompradorTextBox.Text;
 			infcompra.codigo_doc_identificatorio = Convert.ToInt32(Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue);

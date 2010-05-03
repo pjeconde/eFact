@@ -8,7 +8,6 @@ namespace eFact_R.DB
 {
 	public class Tablero : db
 	{
-        private CedEntidades.Sesion sesion;
 
         public Tablero(CedEntidades.Sesion Sesion) : base(Sesion)
 		{

@@ -141,7 +141,7 @@ namespace eFact_R.DB
             System.Data.SqlClient.SqlCommand comando = new System.Data.SqlClient.SqlCommand(comandoSQL, conexion);
             if (Vendedor.Logo != null)
             {
-                comando.Parameters.Add("@Imagen", Vendedor.Logo);
+                comando.Parameters.AddWithValue("@Imagen", Vendedor.Logo);
             }
             //Ejecutamos y grabamos
             comando.ExecuteNonQuery();
