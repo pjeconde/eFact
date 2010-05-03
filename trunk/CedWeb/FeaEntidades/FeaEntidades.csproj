@@ -109,6 +109,11 @@
     <Compile Include="CodigosOperacion\NoGravado.cs" />
     <Compile Include="CodigosOperacion\OperacionesExentas.cs" />
     <Compile Include="CodigosOperacion\SinInformar.cs" />
+    <Compile Include="CodigosReferencia\Exportaciones\Exportacion.cs" />
+    <Compile Include="CodigosReferencia\Exportaciones\FacturasDeExportacion.cs" />
+    <Compile Include="CodigosReferencia\Exportaciones\NotaDeCreditoPorOperacionesConElExterior.cs" />
+    <Compile Include="CodigosReferencia\Exportaciones\NotaDeDebitoPorOperacionesConElExterior.cs" />
+    <Compile Include="CodigosReferencia\Exportaciones\SinInformar.cs" />
     <Compile Include="DestinosCuit\SinInformar.cs" />
     <Compile Include="DestinosPais\AaeTierraDelFuegoArgentina.cs" />
     <Compile Include="DestinosPais\Afganistan.cs" />

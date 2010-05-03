@@ -89,7 +89,7 @@ namespace TestWSConsoleApplication
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

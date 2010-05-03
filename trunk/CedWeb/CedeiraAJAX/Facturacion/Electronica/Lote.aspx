@@ -849,7 +849,11 @@
 																			SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
 																		<asp:RequiredFieldValidator ID="docCompradorRequiredFieldValidator" runat="server"
 																			ControlToValidate="Nro_Doc_Identificatorio_CompradorTextBox" ErrorMessage="documento del comprador"
-																			SetFocusOnError="True">* </asp:RequiredFieldValidator>Nro. de documento:
+																			SetFocusOnError="True">* </asp:RequiredFieldValidator>
+																		<asp:RequiredFieldValidator ID="listaDocCompradorRequiredFieldValidator" runat="server"
+																			ControlToValidate="Nro_Doc_Identificatorio_CompradorDropDownList" ErrorMessage="documento del comprador para exportación"
+																			SetFocusOnError="True">* </asp:RequiredFieldValidator>
+																			Nro. de documento:
 																	</td>
 																	<td class="TextoLabelFEAVendedorDet">
 																		<asp:TextBox ID="Nro_Doc_Identificatorio_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
@@ -1206,21 +1210,26 @@
 																		<EditItemTemplate>
 																			<asp:TextBox ID="txtdato_de_referencia" runat="server" Text='<%# Eval("dato_de_referencia") %>'
 																				Width="75%"></asp:TextBox>
+																			<cc1:MaskedEditExtender ID="txtdato_de_referenciaEditExpoMaskedEditExtender" runat="server"
+																				Mask="9999-99999999" MaskType="Number"  ClearMaskOnLostFocus="false" TargetControlID="txtdato_de_referencia" Enabled="false"></cc1:MaskedEditExtender>
+																			<cc1:FilteredTextBoxExtender ID="txtdato_de_referenciaEditExpoFilteredTextBoxExtender"
+																				runat="server" FilterMode="ValidChars" FilterType="Numbers" TargetControlID="txtdato_de_referencia"></cc1:FilteredTextBoxExtender>	
 																			<asp:RequiredFieldValidator ID="txtdato_de_referenciaEditItemRequiredFieldValidator"
 																				runat="server" ControlToValidate="txtdato_de_referencia" ErrorMessage="dato de referencia en edición no informado"
 																				SetFocusOnError="True" ValidationGroup="ReferenciasEditItem">*</asp:RequiredFieldValidator>
-																			<asp:RegularExpressionValidator ID="txtdato_de_referenciaEditItemRegularExpressionValidator"
-																				runat="server" ControlToValidate="txtdato_de_referencia" ErrorMessage="dato de referencia en edición mal formateado"
-																				SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="ReferenciasEditItem">*</asp:RegularExpressionValidator>
 																		</EditItemTemplate>
 																		<FooterTemplate>
 																			<asp:TextBox ID="txtdato_de_referencia" runat="server" Text='' Width="75%"></asp:TextBox>
-																			<asp:RegularExpressionValidator ID="txtdato_de_referenciaFooterRegularExpressionValidator"
-																				runat="server" ControlToValidate="txtdato_de_referencia" ErrorMessage="Dato de referencia a agregar mal formateado"
-																				SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="ReferenciasFooter">*</asp:RegularExpressionValidator>
+																			<cc1:MaskedEditExtender ID="txtdato_de_referenciaFooterExpoMaskedEditExtender" runat="server"
+																				ClearMaskOnLostFocus="false" Enabled="false" Mask="9999-99999999" MaskType="Number"
+																				TargetControlID="txtdato_de_referencia">
+																			</cc1:MaskedEditExtender>
+																			<cc1:FilteredTextBoxExtender ID="txtdato_de_referenciaFooterExpoFilteredTextBoxExtender"
+																				runat="server" FilterMode="ValidChars" FilterType="Numbers" TargetControlID="txtdato_de_referencia">
+																			</cc1:FilteredTextBoxExtender>
 																			<asp:RequiredFieldValidator ID="txtdato_de_referenciaFooterRequiredFieldValidator"
-																				runat="server" ControlToValidate="txtdato_de_referencia" ErrorMessage="Dato de referencia a agregar no informado"
-																				SetFocusOnError="True" ValidationGroup="ReferenciasFooter">*</asp:RequiredFieldValidator>
+																			runat="server" ControlToValidate="txtdato_de_referencia" ErrorMessage="Dato de referencia a agregar no informado"
+																			SetFocusOnError="True" ValidationGroup="ReferenciasFooter">*</asp:RequiredFieldValidator>
 																		</FooterTemplate>
 																		<ItemStyle HorizontalAlign="Right" />
 																		<HeaderStyle Font-Bold="False" />
