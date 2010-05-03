@@ -1607,12 +1607,26 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				IncotermsDropDownList.SelectedIndex = IncotermsDropDownList.Items.IndexOf(IncotermsDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.incoterms)));
 				TipoExpDropDownList.SelectedIndex = TipoExpDropDownList.Items.IndexOf(TipoExpDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion)));
 			}
-			if (lc.comprobante[0].extensiones!=null)
+			else
 			{
-				if (lc.comprobante[0].extensiones.extensiones_camara_facturas!=null)
+				PaisDestinoExpDropDownList.SelectedIndex = -1;
+				IncotermsDropDownList.SelectedIndex = -1;
+				TipoExpDropDownList.SelectedIndex = -1;
+			}
+			if (lc.comprobante[0].extensiones != null)
+			{
+				if (lc.comprobante[0].extensiones.extensiones_camara_facturas != null)
 				{
 					IdiomaDropDownList.SelectedIndex = IdiomaDropDownList.Items.IndexOf(IdiomaDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].extensiones.extensiones_camara_facturas.id_idioma)));
 				}
+				else
+				{
+					IdiomaDropDownList.SelectedIndex = -1;
+				}
+			}
+			else
+			{
+				IdiomaDropDownList.SelectedIndex = -1;
 			}
 			
 			//Referencias
