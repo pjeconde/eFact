@@ -668,6 +668,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator docCompradorRequiredFieldValidator;
         
         /// <summary>
+        /// Control listaDocCompradorRequiredFieldValidator.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator listaDocCompradorRequiredFieldValidator;
+        
+        /// <summary>
         /// Control Nro_Doc_Identificatorio_CompradorTextBox.
         /// </summary>
         /// <remarks>
@@ -972,6 +981,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary ReferenciasFooterValidationSummary;
+        
+        /// <summary>
+        /// Control Permisos1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::CedeiraAJAX.Facturacion.Electronica.Permisos Permisos1;
         
         /// <summary>
         /// Control ComentariosTextBox.

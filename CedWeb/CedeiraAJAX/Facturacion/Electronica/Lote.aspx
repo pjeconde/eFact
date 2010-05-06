@@ -3,6 +3,8 @@
 	MasterPageFile="~/Facturacion/Electronica/FacturaElectronica.Master" Title="Factura Electrónica Gratis(Interfacturas - AFIP)"
 	UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false" %>
 
+<%@ Register Src="Permisos.ascx" TagName="Permisos" TagPrefix="uc2" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <%@ Register Src="~/DatePickerWebUserControl.ascx" TagName="DatePickerWebUserControl"
@@ -1301,6 +1303,11 @@
 									</td>
 								</tr>
 								<!-- DATOS DEL DETALLE -->
+								<tr>
+									<td class="TextoResaltado" style="height: 19px; text-align: center">
+										<uc2:Permisos id="Permisos1" runat="server">
+										</uc2:Permisos></td>
+								</tr>
 								<tr>
 									<td class="TextoResaltado" style="text-align: center">
 										<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">

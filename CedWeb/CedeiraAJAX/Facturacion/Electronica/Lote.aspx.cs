@@ -22,7 +22,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
         System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> impuestos;
         System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> descuentos;
         System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> referencias;
-        private System.Globalization.CultureInfo cedeiraCultura;
+		private System.Globalization.CultureInfo cedeiraCultura;
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {

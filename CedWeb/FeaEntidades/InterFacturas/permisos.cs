@@ -18,6 +18,8 @@ namespace FeaEntidades.InterFacturas
 
         private int destino_mercaderiaField;
 
+		private string descripcion_destino_mercaderiaField;
+
         /// <comentarios/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string nombre_clase
@@ -53,5 +55,19 @@ namespace FeaEntidades.InterFacturas
 				this.destino_mercaderiaField = value;
 			}
 		}
+
+		[System.Xml.Serialization.XmlIgnoreAttribute()]
+		public string descripcion_destino_mercaderia
+		{
+			get
+			{
+				return this.descripcion_destino_mercaderiaField;
+			}
+			set
+			{
+				this.descripcion_destino_mercaderiaField = value;
+			}
+		}
+
     }
 }
