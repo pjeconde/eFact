@@ -352,6 +352,13 @@
     <Compile Include="Facturacion\Electronica\Lote.aspx.designer.cs">
       <DependentUpon>Lote.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Facturacion\Electronica\Permisos.ascx.cs">
+      <DependentUpon>Permisos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Permisos.ascx.designer.cs">
+      <DependentUpon>Permisos.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Facturacion\Electronica\Reportes\Code39.cs" />
     <Compile Include="Facturacion\Electronica\Reportes\CodigoBarra.cs">
       <AutoGen>True</AutoGen>
@@ -904,6 +911,7 @@
       <DependentUpon>lote_comprobantes.xsd</DependentUpon>
     </None>
     <Content Include="Excepciones\Excepcion.aspx" />
+    <Content Include="Facturacion\Electronica\Permisos.ascx" />
     <Content Include="Facturacion\Electronica\Reportes\Web.config" />
     <Content Include="Vendedor\Default.aspx" />
   </ItemGroup>
