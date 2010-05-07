@@ -1213,7 +1213,8 @@
 																			<asp:TextBox ID="txtdato_de_referencia" runat="server" Text='<%# Eval("dato_de_referencia") %>'
 																				Width="75%"></asp:TextBox>
 																			<cc1:MaskedEditExtender ID="txtdato_de_referenciaEditExpoMaskedEditExtender" runat="server"
-																				Mask="9999-99999999" MaskType="Number"  ClearMaskOnLostFocus="false" TargetControlID="txtdato_de_referencia" Enabled="false"></cc1:MaskedEditExtender>
+																				ClearMaskOnLostFocus="false" Enabled="false" Mask="9999-99999999"
+																				MaskType="Number" PromptCharacter="?" TargetControlID="txtdato_de_referencia"></cc1:MaskedEditExtender>
 																			<cc1:FilteredTextBoxExtender ID="txtdato_de_referenciaEditExpoFilteredTextBoxExtender"
 																				runat="server" FilterMode="ValidChars" FilterType="Numbers" TargetControlID="txtdato_de_referencia"></cc1:FilteredTextBoxExtender>	
 																			<asp:RequiredFieldValidator ID="txtdato_de_referenciaEditItemRequiredFieldValidator"
@@ -1223,7 +1224,7 @@
 																		<FooterTemplate>
 																			<asp:TextBox ID="txtdato_de_referencia" runat="server" Text='' Width="75%"></asp:TextBox>
 																			<cc1:MaskedEditExtender ID="txtdato_de_referenciaFooterExpoMaskedEditExtender" runat="server"
-																				ClearMaskOnLostFocus="false" Enabled="false" Mask="9999-99999999" MaskType="Number"
+																				ClearMaskOnLostFocus="false" Enabled="false" Mask="9999-99999999" MaskType="Number" PromptCharacter="?"
 																				TargetControlID="txtdato_de_referencia">
 																			</cc1:MaskedEditExtender>
 																			<cc1:FilteredTextBoxExtender ID="txtdato_de_referenciaFooterExpoFilteredTextBoxExtender"

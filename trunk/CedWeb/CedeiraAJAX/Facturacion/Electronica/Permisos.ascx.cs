@@ -65,6 +65,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			permisosGridView.EditIndex = -1;
 			permisosGridView.DataSource = ViewState["permisos"];
 			permisosGridView.DataBind();
+			BindearDropDownLists();
 		}
 
 		protected void permisosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
