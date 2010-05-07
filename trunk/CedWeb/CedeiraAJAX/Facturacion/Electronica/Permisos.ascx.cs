@@ -175,5 +175,32 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				ScriptManager.RegisterStartupScript(this.Parent.Page, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
 			}
 		}
+		public bool HayPermisos
+		{
+			get
+			{
+				System.Collections.Generic.List<FeaEntidades.InterFacturas.permisos> refs = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.permisos>)ViewState["permisos"]);
+				if (refs.Count > 1)
+				{
+					return true;
+				}
+				else if (refs[0].destino_mercaderia.Equals("0"))
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+		}
+		public System.Collections.Generic.List<FeaEntidades.InterFacturas.permisos> PermisosExportacion
+		{
+			get
+			{
+				System.Collections.Generic.List <FeaEntidades.InterFacturas.permisos> refs = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.permisos>)ViewState["permisos"]);
+				return refs;
+			}
+		}
 	}
 }
