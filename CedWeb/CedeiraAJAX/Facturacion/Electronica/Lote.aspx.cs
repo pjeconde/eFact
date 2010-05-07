@@ -1054,6 +1054,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             impuestosGridView.EditIndex = -1;
             impuestosGridView.DataSource = ViewState["impuestos"];
             impuestosGridView.DataBind();
+			BindearDropDownLists();
         }
         protected void impuestosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -1330,6 +1331,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             referenciasGridView.EditIndex = -1;
             referenciasGridView.DataSource = ViewState["referencias"];
             referenciasGridView.DataBind();
+			BindearDropDownLists();
         }
         protected void referenciasGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -1347,10 +1349,17 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					}
 					else
 					{
-						throw new Exception("Referencia no agregada porque el codigo de referencia no puede estar vacío");
+						throw new Exception("Referencia no agregada porque el código de referencia no puede estar vacío");
 					}
 					string auxDatoRef = ((TextBox)referenciasGridView.FooterRow.FindControl("txtdato_de_referencia")).Text;
-					r.dato_de_referencia = auxDatoRef;
+					if (auxDatoRef.Contains("?"))
+					{
+						throw new Exception("Referencia no agregada porque el número de referencia no respeta el formato para exportación");
+					}
+					else
+					{
+						r.dato_de_referencia = auxDatoRef;
+					}
 					((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"]).Add(r);
 					//Me fijo si elimino la fila automática
 					System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> refs = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"]);
@@ -1497,10 +1506,18 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 else
                 {
-                    throw new Exception("Referencia no actualizada porque el codigo de referencia no puede estar vacío");
+                    throw new Exception("Referencia no actualizada porque el código de referencia no puede estar vacío");
                 }
                 string auxDatoRef = ((TextBox)referenciasGridView.Rows[e.RowIndex].FindControl("txtdato_de_referencia")).Text;
-                r.dato_de_referencia = auxDatoRef;
+				if (auxDatoRef.Contains("?"))
+				{
+					throw new Exception("Referencia no actualizada porque el número de referencia no respeta el formato para exportación");
+				}
+				else
+				{
+					r.dato_de_referencia = auxDatoRef;
+				}
+
                 referenciasGridView.EditIndex = -1;
                 referenciasGridView.DataSource = ViewState["referencias"];
                 referenciasGridView.DataBind();
@@ -4262,7 +4279,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 							case "Export":
 								if (auxcpcomprador.Equals(string.Empty))
 								{
-									throw new Exception("Detalle no válido porque el codigo producto comprador es obligatorio");
+									throw new Exception("Detalle no válido porque el código producto comprador es obligatorio");
 								}
 								else
 								{
