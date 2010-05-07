@@ -2858,7 +2858,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				try
 				{
 					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv) { return pv.Id == auxPV; }).IdTipo;
-					if (idtipo.Equals("Export"))
+					if (idtipo.Equals("Export") && !CodigoOperacionDropDownList.SelectedValue.Equals(string.Empty))
 					{
 						CodigoOperacionDropDownList.Focus();
 						throw new Exception("El código de operación no se debe informar para exportación");
@@ -2927,7 +2927,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		{
 			FeaEntidades.InterFacturas.informacion_exportacion ie = new FeaEntidades.InterFacturas.informacion_exportacion();
 			bool exportacion = false;
-			//TODO Hasta que esté la grilla de permisos
 			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
 			{
 				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
@@ -2938,7 +2937,22 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					string tipoExp= TipoExpDropDownList.SelectedValue;
 					if (idtipo.Equals("Export") && tipoComp.Equals("19") && tipoExp.Equals("1"))
 					{
-						ie.permiso_existente = "N";
+						if (this.PermisosExpo.HayPermisos)
+						{
+							ie.permiso_existente = "S";
+							ie.permisos = new FeaEntidades.InterFacturas.permisos[5];
+							for (int i = 0; i < this.PermisosExpo.PermisosExportacion.Count; i++)
+							{
+								ie.permisos[i] = new FeaEntidades.InterFacturas.permisos();
+								ie.permisos[i].descripcion_destino_mercaderia = this.PermisosExpo.PermisosExportacion[i].descripcion_destino_mercaderia;
+								ie.permisos[i].destino_mercaderia = this.PermisosExpo.PermisosExportacion[i].destino_mercaderia;
+								ie.permisos[i].id_permiso = this.PermisosExpo.PermisosExportacion[i].id_permiso;
+							}
+						}
+						else
+						{
+							ie.permiso_existente = "N";
+						}
 					}
 				}
 				catch (System.NullReferenceException)

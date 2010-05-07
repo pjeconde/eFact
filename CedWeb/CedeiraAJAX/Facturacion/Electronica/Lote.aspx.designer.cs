@@ -983,13 +983,13 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.ValidationSummary ReferenciasFooterValidationSummary;
         
         /// <summary>
-        /// Control Permisos1.
+        /// Control PermisosExpo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedeiraAJAX.Facturacion.Electronica.Permisos Permisos1;
+        protected global::CedeiraAJAX.Facturacion.Electronica.Permisos PermisosExpo;
         
         /// <summary>
         /// Control ComentariosTextBox.

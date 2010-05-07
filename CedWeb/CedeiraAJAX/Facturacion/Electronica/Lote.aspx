@@ -1305,7 +1305,7 @@
 								<!-- DATOS DEL DETALLE -->
 								<tr>
 									<td class="TextoResaltado" style="height: 19px; text-align: center">
-										<uc2:Permisos id="Permisos1" runat="server">
+										<uc2:Permisos id="PermisosExpo" runat="server">
 										</uc2:Permisos></td>
 								</tr>
 								<tr>
