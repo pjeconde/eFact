@@ -1678,6 +1678,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
             referenciasGridView.DataSource = referencias;
             referenciasGridView.DataBind();
             ViewState["referencias"] = referencias;
+
+			PermisosExpo.CompletarPermisos(lc);
+
             //Comprador
             if (lc.comprobante[0].cabecera.informacion_comprador.GLN != 0)
             {
@@ -1907,6 +1910,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
             BindearDropDownLists();
         }
+
 
 
         private void CompletarUI(org.dyndns.cedweb.consulta.ConsultarResult lc, EventArgs e)
@@ -2441,7 +2445,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			referenciasGridView.DataBind();
 
 			BindearDropDownLists();
-			ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Se han eliminado artículos y referencias por haber cambiado el tipo de punto de venta');</SCRIPT>", false);
+
+			PermisosExpo.ResetearGrillas();
+
+			ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Se han eliminado artículos, referencias y permisos de exportación por haber cambiado el tipo de punto de venta');</SCRIPT>", false);
 		}
 		private void AjustarCamposXPtaVentaChanged(string PuntoDeVenta)
 		{

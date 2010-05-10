@@ -18,15 +18,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		{
 			if (!this.IsPostBack)
 			{
-				permisos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.permisos>();
-				FeaEntidades.InterFacturas.permisos permiso = new FeaEntidades.InterFacturas.permisos();
-				permisos.Add(permiso);
-				permisosGridView.DataSource = permisos;
-				ViewState["permisos"] = permisos;
-				DataBind();
-
-				BindearDropDownLists();
-
+				ResetearGrillas();
 			}
 		}
 
@@ -202,6 +194,52 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				System.Collections.Generic.List <FeaEntidades.InterFacturas.permisos> refs = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.permisos>)ViewState["permisos"]);
 				return refs;
 			}
+		}
+		public void CompletarPermisos(FeaEntidades.InterFacturas.lote_comprobantes lc)
+		{
+			//Permisos de exportación
+			permisos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.permisos>();
+			if (lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.permisos != null)
+			{
+				foreach (FeaEntidades.InterFacturas.permisos r in lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.permisos)
+				{
+					//descripcioncodigo_de_permiso ( XmlIgnoreAttribute )
+					//Se busca la descripción a través del código.
+					try
+					{
+						if (r != null)
+						{
+							string descrcodigo = ((DropDownList)permisosGridView.FooterRow.FindControl("ddlcodigo_de_permiso")).SelectedItem.Text;
+							((DropDownList)permisosGridView.FooterRow.FindControl("ddlcodigo_de_permiso")).SelectedValue = r.destino_mercaderia.ToString();
+							descrcodigo = ((DropDownList)permisosGridView.FooterRow.FindControl("ddlcodigo_de_permiso")).SelectedItem.Text;
+							r.descripcion_destino_mercaderia = descrcodigo;
+							permisos.Add(r);
+						}
+					}
+					catch
+					//Referencia no valida
+					{
+					}
+				}
+			}
+			if (permisos.Count.Equals(0))
+			{
+				permisos.Add(new FeaEntidades.InterFacturas.permisos());
+			}
+			permisosGridView.DataSource = permisos;
+			permisosGridView.DataBind();
+			ViewState["permisos"] = permisos;
+		}
+		public void ResetearGrillas()
+		{
+			permisos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.permisos>();
+			FeaEntidades.InterFacturas.permisos permiso = new FeaEntidades.InterFacturas.permisos();
+			permisos.Add(permiso);
+			permisosGridView.DataSource = permisos;
+			ViewState["permisos"] = permisos;
+			DataBind();
+
+			BindearDropDownLists();
 		}
 	}
 }
