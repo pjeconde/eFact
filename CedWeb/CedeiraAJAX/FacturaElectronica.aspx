@@ -77,7 +77,7 @@
                                                         <asp:Image ID="Image8" runat="server" ImageUrl="~/Imagenes/Bola4.png" />
                                                     </td>
                                                     <td align="left" style="padding-top: 5px; padding-left: 5px">
-                                                        <asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="~/CompradorExplorador.aspx"
+                                                        <asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="~/Comprador/Explorador.aspx"
                                                             SkinID="LinkGrandeClaro">Configure los <b>datos de Compradores (clientes)</b></asp:HyperLink>
                                                     </td>
                                                 </tr>
@@ -125,7 +125,7 @@
                                                         <asp:Image ID="Image12" runat="server" ImageUrl="~/Imagenes/Bola3.png" />
                                                     </td>
                                                     <td align="left" style="padding-top: 5px; padding-left: 5px">
-                                                        <asp:HyperLink ID="HyperLink13" runat="server" NavigateUrl="~/CompradorExplorador.aspx"
+                                                        <asp:HyperLink ID="HyperLink13" runat="server" NavigateUrl="~/Comprador/Explorador.aspx"
                                                             SkinID="LinkGrandeClaro">Configure los <b>datos de Compradores (clientes)</b></asp:HyperLink>
                                                     </td>
                                                 </tr>

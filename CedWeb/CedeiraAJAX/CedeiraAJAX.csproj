@@ -176,40 +176,40 @@
     <Compile Include="Clientes.aspx.designer.cs">
       <DependentUpon>Clientes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CompradorConsultar.aspx.cs">
+    <Compile Include="Comprador\Consultar.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>CompradorConsultar.aspx</DependentUpon>
+      <DependentUpon>Consultar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CompradorConsultar.aspx.designer.cs">
-      <DependentUpon>CompradorConsultar.aspx</DependentUpon>
+    <Compile Include="Comprador\Consultar.aspx.designer.cs">
+      <DependentUpon>Consultar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CompradorCrear.aspx.cs">
+    <Compile Include="Comprador\Crear.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>CompradorCrear.aspx</DependentUpon>
+      <DependentUpon>Crear.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CompradorCrear.aspx.designer.cs">
-      <DependentUpon>CompradorCrear.aspx</DependentUpon>
+    <Compile Include="Comprador\Crear.aspx.designer.cs">
+      <DependentUpon>Crear.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CompradorEliminar.aspx.cs">
+    <Compile Include="Comprador\Eliminar.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>CompradorEliminar.aspx</DependentUpon>
+      <DependentUpon>Eliminar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CompradorEliminar.aspx.designer.cs">
-      <DependentUpon>CompradorEliminar.aspx</DependentUpon>
+    <Compile Include="Comprador\Eliminar.aspx.designer.cs">
+      <DependentUpon>Eliminar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CompradorExplorador.aspx.cs">
+    <Compile Include="Comprador\Explorador.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>CompradorExplorador.aspx</DependentUpon>
+      <DependentUpon>Explorador.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CompradorExplorador.aspx.designer.cs">
-      <DependentUpon>CompradorExplorador.aspx</DependentUpon>
+    <Compile Include="Comprador\Explorador.aspx.designer.cs">
+      <DependentUpon>Explorador.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CompradorModificar.aspx.cs">
+    <Compile Include="Comprador\Modificar.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>CompradorModificar.aspx</DependentUpon>
+      <DependentUpon>Modificar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CompradorModificar.aspx.designer.cs">
-      <DependentUpon>CompradorModificar.aspx</DependentUpon>
+    <Compile Include="Comprador\Modificar.aspx.designer.cs">
+      <DependentUpon>Modificar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Configuracion.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -615,11 +615,6 @@
     <Content Include="CedFCI.aspx" />
     <Content Include="CedST.aspx" />
     <Content Include="Clientes.aspx" />
-    <Content Include="CompradorConsultar.aspx" />
-    <Content Include="CompradorCrear.aspx" />
-    <Content Include="CompradorEliminar.aspx" />
-    <Content Include="CompradorExplorador.aspx" />
-    <Content Include="CompradorModificar.aspx" />
     <Content Include="Configuracion.aspx" />
     <Content Include="Contacto.aspx" />
     <Content Include="CuentaCambiarPassword.aspx" />
@@ -889,6 +884,11 @@
     <Content Include="Admin\Default.aspx" />
     <Content Include="Admin\Publicacion\Explorador.aspx" />
     <Content Include="Admin\Vendedor\Explorador.aspx" />
+    <Content Include="Comprador\Consultar.aspx" />
+    <Content Include="Comprador\Crear.aspx" />
+    <Content Include="Comprador\Eliminar.aspx" />
+    <Content Include="Comprador\Explorador.aspx" />
+    <Content Include="Comprador\Modificar.aspx" />
     <Content Include="Excepciones\Web.config" />
     <Content Include="Excepciones\CedeiraAJAX.Master" />
     <Content Include="Admin\Administracion.Master" />
