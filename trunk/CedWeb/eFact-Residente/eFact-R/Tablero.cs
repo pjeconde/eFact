@@ -585,7 +585,7 @@ namespace eFact_R
         }
         private static int Comparer(eFact_R.Entidades.Lote x, eFact_R.Entidades.Lote y)
         {
-            return x.IdLote.CompareTo(y.IdLote);
+            return x.NumeroLote.CompareTo(y.NumeroLote);
         }
 
         public List<eFact_R.Entidades.Lote> SortListaLotes(List<eFact_R.Entidades.Lote> lLotes)

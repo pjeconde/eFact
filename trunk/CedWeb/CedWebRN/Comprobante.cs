@@ -37,7 +37,7 @@ namespace CedWebRN
                 {
                     clr = (IBK.consulta_lote_response)clcr.Item;
                     IBK.lote_comprobantes lcIBK = (IBK.lote_comprobantes)clr.Item;
-                    lc = Conversor.IBK2Entidad(lcIBK);
+                    lc = Ibk2Fea(lcIBK);
                 }
                 catch (InvalidCastException)
                 {
@@ -105,7 +105,7 @@ namespace CedWebRN
                 {
                     clr = (IBK.consulta_lote_response)clcr.Item;
                     IBK.lote_comprobantes lcIBK = (IBK.lote_comprobantes)clr.Item;
-                    lc = Conversor.IBK2Entidad(lcIBK);
+                    lc = Ibk2Fea(lcIBK);
                 }
                 catch (InvalidCastException)
                 {
@@ -288,7 +288,8 @@ namespace CedWebRN
                 throw new Exception("Su certificado no está disponible en nuestro repositorio");
             }
         }
-        public FeaEntidades.InterFacturas.lote_comprobantes Ibk2FEA(CedWebRN.IBK.lote_comprobantes lcIBK)
+
+        private FeaEntidades.InterFacturas.lote_comprobantes Ibk2Fea(CedWebRN.IBK.lote_comprobantes lcIBK)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lcFEA = new FeaEntidades.InterFacturas.lote_comprobantes();
 
@@ -309,10 +310,6 @@ namespace CedWebRN
 
             for (int i = 0; i < lcIBK.comprobante.Length; i++)
             {
-                if (lcIBK.comprobante[i] == null)
-                {
-                    break;
-                }
                 FeaEntidades.InterFacturas.comprobante cIBK = new FeaEntidades.InterFacturas.comprobante();
 
                 cIBK.cabecera = new FeaEntidades.InterFacturas.cabecera();
@@ -343,7 +340,6 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_comprador.nro_ingresos_brutos = lcIBK.comprobante[i].cabecera.informacion_comprador.nro_ingresos_brutos;
                 cIBK.cabecera.informacion_comprador.provincia = lcIBK.comprobante[i].cabecera.informacion_comprador.provincia;
                 cIBK.cabecera.informacion_comprador.telefono = lcIBK.comprobante[i].cabecera.informacion_comprador.telefono;
-
                 cIBK.cabecera.informacion_comprobante = new FeaEntidades.InterFacturas.informacion_comprobante();
                 cIBK.cabecera.informacion_comprobante.cae = lcIBK.comprobante[i].cabecera.informacion_comprobante.cae;
                 cIBK.cabecera.informacion_comprobante.caeSpecified = false;
@@ -391,6 +387,33 @@ namespace CedWebRN
                     }
                 }
 
+                if (lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion != null)
+                {
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion = new FeaEntidades.InterFacturas.informacion_exportacion();
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante;
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion;
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.id_impositivo = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.id_impositivo;
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.incoterms = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.incoterms;
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms;
+                    if (lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente != null && lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente != "")
+                    {
+                        cIBK.cabecera.informacion_comprobante.informacion_exportacion.permiso_existente = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente;
+                    }
+                    if (lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos != null)
+                    {
+                        cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos = new FeaEntidades.InterFacturas.permisos[lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos.Length];
+                        for (int j = 0; j < lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos.Length; j++)
+                        {
+                            if (lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos[j] != null)
+                            {
+                                cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos[j] = new FeaEntidades.InterFacturas.permisos();
+                                cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos[j].id_permiso = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos[j].id_permiso;
+                                cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos[j].destino_mercaderia = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos[j].destino_mercaderia;
+                            }
+                        }
+                    }
+                }
+
                 cIBK.cabecera.informacion_comprobante.resultado = lcIBK.comprobante[i].cabecera.informacion_comprobante.resultado;
                 cIBK.cabecera.informacion_comprobante.tipo_de_comprobante = lcIBK.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante;
 
@@ -420,8 +443,13 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_vendedor.telefono = lcIBK.comprobante[i].cabecera.informacion_vendedor.telefono;
 
                 cIBK.extensiones = new FeaEntidades.InterFacturas.extensiones();
+                if (lcIBK.comprobante[i].extensiones != null)
+                {
+                    cIBK.extensionesSpecified = true;
+                }
                 if (lcIBK.comprobante[i].extensiones.extensiones_camara_facturas != null)
                 {
+                    cIBK.extensiones.extensiones_camara_facturasSpecified = true;
                     cIBK.extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
                     cIBK.extensiones.extensiones_camara_facturas.clave_de_vinculacion = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion;
                     cIBK.extensiones.extensiones_camara_facturas.id_idioma = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.id_idioma;
@@ -437,8 +465,9 @@ namespace CedWebRN
                 }
 
                 FeaEntidades.InterFacturas.detalle d = new FeaEntidades.InterFacturas.detalle();
-                CedWebRN.IBK.detalle detalle = (CedWebRN.IBK.detalle)lcIBK.comprobante[i].Item;
+                IBK.detalle detalle = (IBK.detalle)lcIBK.comprobante[i].Item;
                 d.linea = new FeaEntidades.InterFacturas.linea[detalle.linea.Length];
+                d.comentarios = detalle.comentarios;
 
                 for (int j = 0; j < detalle.linea.Length; j++)
                 {
@@ -521,7 +550,6 @@ namespace CedWebRN
                 }
 
                 cIBK.detalle = d;
-
 
                 cIBK.resumen = new FeaEntidades.InterFacturas.resumen();
                 cIBK.resumen.cant_alicuotas_iva = lcIBK.comprobante[i].resumen.cant_alicuotas_iva;
@@ -614,16 +642,14 @@ namespace CedWebRN
                         }
                     }
                 }
-
                 cIBK.resumen.observaciones = lcIBK.comprobante[i].resumen.observaciones;
                 cIBK.resumen.tipo_de_cambio = lcIBK.comprobante[i].resumen.tipo_de_cambio;
 
                 lcFEA.comprobante[i] = cIBK;
-
             }
-
             return lcFEA;
         }
+
         private CedWebRN.IBK.lote_comprobantes Fea2Ibk(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
             IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
@@ -719,7 +745,10 @@ namespace CedWebRN
                     cIBK.cabecera.informacion_comprobante.informacion_exportacion.id_impositivo = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.id_impositivo;
                     cIBK.cabecera.informacion_comprobante.informacion_exportacion.incoterms = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.incoterms;
                     cIBK.cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms;
-                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.permiso_existente = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente;
+                    if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente != null && lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente != "")
+                    {
+                        cIBK.cabecera.informacion_comprobante.informacion_exportacion.permiso_existente = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente;
+                    }
                     if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos != null)
                     {
                         cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos = new IBK.informacion_comprobanteInformacion_exportacionPermisos[lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos.Length];
@@ -975,6 +1004,7 @@ namespace CedWebRN
             }
             return lcIBK;
         }
+
         public string ConvertToHex(string asciiString)
         {
             byte[] b = Encoding.ASCII.GetBytes(asciiString);
