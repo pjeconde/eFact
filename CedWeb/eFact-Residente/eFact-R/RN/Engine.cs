@@ -88,6 +88,10 @@ namespace eFact_R.RN
                     if (typeof(FeaEntidades.InterFacturas.informacion_exportacion) == o.GetType())
                     {
                         lc.comprobante[NroComprobante].cabecera.informacion_comprobante.informacion_exportacion = (FeaEntidades.InterFacturas.informacion_exportacion)o;
+                        if (lc.comprobante[NroComprobante].cabecera.informacion_comprobante.informacion_exportacion.id_impositivo == "")
+                        {
+                            lc.comprobante[NroComprobante].cabecera.informacion_comprobante.informacion_exportacion.id_impositivo = null;
+                        }
                     }
                     if (typeof(FeaEntidades.InterFacturas.permisos) == o.GetType())
                     {

@@ -110,6 +110,32 @@ namespace CedWebRN
                     }
                 }
 
+                if (lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion != null)
+                {
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion = new FeaEntidades.InterFacturas.informacion_exportacion();
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante;
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion;
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.id_impositivo = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.id_impositivo;
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.incoterms = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.incoterms;
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms;
+                    if (lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente != null && lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente != "")
+                    {
+                        cIBK.cabecera.informacion_comprobante.informacion_exportacion.permiso_existente = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente;
+                    }
+                    if (lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos != null)
+                    {
+                        cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos = new FeaEntidades.InterFacturas.permisos[lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos.Length];
+                        for (int j = 0; j < lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos.Length; j++)
+                        {
+                            if (lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos[j] != null)
+                            {
+                                cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos[j] = new FeaEntidades.InterFacturas.permisos();
+                                cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos[j].id_permiso = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos[j].id_permiso;
+                                cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos[j].destino_mercaderia = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos[j].destino_mercaderia;
+                            }
+                        }
+                    }
+                }
 
                 cIBK.cabecera.informacion_comprobante.resultado = lcIBK.comprobante[i].cabecera.informacion_comprobante.resultado;
                 cIBK.cabecera.informacion_comprobante.tipo_de_comprobante = lcIBK.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante;
@@ -139,12 +165,28 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_vendedor.provincia = lcIBK.comprobante[i].cabecera.informacion_vendedor.provincia;
                 cIBK.cabecera.informacion_vendedor.telefono = lcIBK.comprobante[i].cabecera.informacion_vendedor.telefono;
 
-                //cIBK.extensiones = new FeaEntidades.InterFacturas.extensiones();
+                cIBK.extensiones = new FeaEntidades.InterFacturas.extensiones();
+                if (lcIBK.comprobante[i].extensiones.extensiones_camara_facturas != null)
+                {
+                    cIBK.extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
+                    cIBK.extensiones.extensiones_camara_facturas.clave_de_vinculacion = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion;
+                    cIBK.extensiones.extensiones_camara_facturas.id_idioma = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.id_idioma;
+                    cIBK.extensiones.extensiones_camara_facturas.id_template = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.id_template;
+                }
+                if (lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales != null)
+                {
+                    cIBK.extensiones.extensiones_datos_comerciales = lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales.ToString();
+                }
+                if (lcIBK.comprobante[i].extensiones.extensiones_datos_marketing != null)
+                {
+                    cIBK.extensiones.extensiones_datos_marketing = lcIBK.comprobante[i].extensiones.extensiones_datos_marketing;
+                }
 
                 FeaEntidades.InterFacturas.detalle d = new FeaEntidades.InterFacturas.detalle();
                 IBK.detalle detalle = (IBK.detalle)lcIBK.comprobante[i].Item;
                 d.linea = new FeaEntidades.InterFacturas.linea[detalle.linea.Length];
                 d.comentarios = detalle.comentarios;
+
                 for (int j = 0; j < detalle.linea.Length; j++)
                 {
                     if (detalle.linea[j] != null)
@@ -226,7 +268,6 @@ namespace CedWebRN
                 }
 
                 cIBK.detalle = d;
-
 
                 cIBK.resumen = new FeaEntidades.InterFacturas.resumen();
                 cIBK.resumen.cant_alicuotas_iva = lcIBK.comprobante[i].resumen.cant_alicuotas_iva;
@@ -319,17 +360,12 @@ namespace CedWebRN
                         }
                     }
                 }
-
                 cIBK.resumen.observaciones = lcIBK.comprobante[i].resumen.observaciones;
                 cIBK.resumen.tipo_de_cambio = lcIBK.comprobante[i].resumen.tipo_de_cambio;
 
                 lcFEA.comprobante[i] = cIBK;
-
             }
-
             return lcFEA;
-
         }
-
     }
 }

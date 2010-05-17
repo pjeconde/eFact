@@ -245,6 +245,23 @@ namespace eFact_R.RN
                     e.AppendToFile(NombreProcesado, Lc.comprobante[i].cabecera.informacion_comprobante.referencias);
                 }
 
+                if (Lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion != null)
+                {
+                    e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.informacion_exportacion));
+                    e.AppendToFile(NombreProcesado, Lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion);
+                    if (Lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos != null)
+                    {
+                        e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.permisos));
+                        e.AppendToFile(NombreProcesado, Lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos);
+                    }
+                }
+                
+                if (Lc.comprobante[i].extensiones != null)
+                {
+                    e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.extensiones));
+                    e.AppendToFile(NombreProcesado, Lc.comprobante[i].extensiones);
+                }
+
                 List<FeaEntidades.InterFacturas.informacion_vendedor> ivendedor = new List<FeaEntidades.InterFacturas.informacion_vendedor>();
                 ivendedor.Add(Lc.comprobante[i].cabecera.informacion_vendedor);
                 e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.informacion_vendedor));
