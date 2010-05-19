@@ -1018,5 +1018,22 @@ namespace CedWebRN
             }
             return salida;
         }
+        public string HexStringToByteArray(string Hex)
+        {
+            byte[] Bytes;
+            int ByteLength;
+            string HexValue = "\x0\x1\x2\x3\x4\x5\x6\x7\x8\x9|||||||\xA\xB\xC\xD\xE\xF";
+            Hex = Hex.Replace("%", "");
+            ByteLength = Hex.Length / 2;
+            Bytes = new byte[ByteLength];
+            for (int x = 0, i = 0; i < Hex.Length; i += 2, x += 1)
+            {
+                Bytes[x] = (byte)(HexValue[Char.ToUpper(Hex[i + 0]) - '0'] << 4);
+                Bytes[x] |= (byte)(HexValue[Char.ToUpper(Hex[i + 1]) - '0']);
+            }
+            System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
+            string str = enc.GetString(Bytes);
+            return str;
+        }
     }
 }
