@@ -1018,7 +1018,7 @@ namespace CedWebRN
             }
             return salida;
         }
-        public string HexStringToByteArray(string Hex)
+        public string HexToString(string Hex)
         {
             byte[] Bytes;
             int ByteLength;
