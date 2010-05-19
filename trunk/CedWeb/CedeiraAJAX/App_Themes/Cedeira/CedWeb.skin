@@ -1,6 +1,8 @@
 <%@ Register Assembly="CedeiraUIWebForms" Namespace="CedeiraUIWebForms" TagPrefix="cc1" %>
 <%@ Register Assembly="CrystalDecisions.Web, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304"
     Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
 
 <asp:Label runat="server" Font-Size="14px" ForeColor="black" Font-Bold="True" SkinID="TituloPagina"></asp:Label>
 <asp:Label runat="server" Font-Size="12px" ForeColor="black" Font-Bold="True" SkinID="TituloMediano"></asp:Label>
@@ -43,6 +45,7 @@
 <asp:TextBox runat="server" Style="width: 180px" ForeColor="#071F70" SkinID="TextoBoxFEAVendedorDet" BorderStyle="NotSet"></asp:TextBox>
 <asp:TextBox runat="server" Style="width: 80px" ForeColor="#071F70" SkinID="TextoBoxFEAVendedorDetCh" BorderStyle="NotSet"></asp:TextBox>
 <asp:TextBox runat="server" Style="width: 40px" ForeColor="#071F70" SkinID="TextoBoxFEAVendedorDetChCh" BorderStyle="NotSet"></asp:TextBox>
+<asp:TextBox runat="server" Style="width: 60px" ForeColor="#071F70" SkinID="Fecha" BorderStyle="NotSet"></asp:TextBox>
 <asp:DropDownList runat="server" Style="width: 186px" ForeColor="#071F70" SkinID="DropDownListVendedor" BorderStyle="NotSet"></asp:DropDownList>
 <asp:DropDownList runat="server" Style="width: 200px" BackColor="peachpuff" ForeColor="brown" Font-Bold="true" SkinID="DropDownListPremium" BorderStyle="Solid" BorderColor="Brown" BorderWidth="1" ToolTip="Exclusivo SERVICIO PREMIUM"></asp:DropDownList>
 

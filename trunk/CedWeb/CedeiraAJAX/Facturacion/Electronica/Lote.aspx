@@ -3,12 +3,15 @@
 	MasterPageFile="~/Facturacion/Electronica/FacturaElectronica.Master" Title="Factura Electrónica Gratis(Interfacturas - AFIP)"
 	UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false" %>
 
+<%@ Register Src="Extensiones/Comerciales.ascx" TagName="Comerciales" TagPrefix="uc3" %>
+
 <%@ Register Src="Permisos.ascx" TagName="Permisos" TagPrefix="uc2" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <%@ Register Src="~/DatePickerWebUserControl.ascx" TagName="DatePickerWebUserControl"
 	TagPrefix="uc1" %>
+	
 <asp:Content ID="XMLContent" runat="Server" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado">
 	<asp:ScriptManager ID="loteScriptManager" runat="server">
 	</asp:ScriptManager>
@@ -1303,12 +1306,23 @@
 										<br />
 									</td>
 								</tr>
-								<!-- DATOS DEL DETALLE -->
+								<!-- PERMISOS EXPO-->
 								<tr>
 									<td class="TextoResaltado" style="height: 19px; text-align: center">
 										<uc2:Permisos id="PermisosExpo" runat="server">
 										</uc2:Permisos></td>
 								</tr>
+								<!-- DATOS COMERCIALES-->
+								<tr>
+									<td class="TextoResaltado" style="height: 19px; text-align: center">
+										<uc3:Comerciales ID="DatosComerciales" runat="server"></uc3:Comerciales>
+									</td>
+								</tr>
+								<tr>
+									<td style="text-align: center; height: 10px;">
+									</td>
+								</tr>
+								<!-- DATOS DEL DETALLE -->
 								<tr>
 									<td class="TextoResaltado" style="text-align: center">
 										<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">

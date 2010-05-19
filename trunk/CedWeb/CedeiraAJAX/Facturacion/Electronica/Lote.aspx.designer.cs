@@ -992,6 +992,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::CedeiraAJAX.Facturacion.Electronica.Permisos PermisosExpo;
         
         /// <summary>
+        /// Control DatosComerciales.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::CedeiraAJAX.Facturacion.Electronica.Extensiones.Comerciales DatosComerciales;
+        
+        /// <summary>
         /// Control ComentariosTextBox.
         /// </summary>
         /// <remarks>

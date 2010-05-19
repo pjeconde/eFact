@@ -331,6 +331,20 @@
       <DependentUpon>Excepcion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\Conversor.cs" />
+    <Compile Include="Facturacion\Electronica\Extensiones\Comerciales.ascx.cs">
+      <DependentUpon>Comerciales.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Extensiones\Comerciales.ascx.designer.cs">
+      <DependentUpon>Comerciales.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Extensiones\Marketing.ascx.cs">
+      <DependentUpon>Marketing.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Extensiones\Marketing.ascx.designer.cs">
+      <DependentUpon>Marketing.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Facturacion\Electronica\FacturaElectronica.Master.cs">
       <DependentUpon>FacturaElectronica.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -911,6 +925,8 @@
       <DependentUpon>lote_comprobantes.xsd</DependentUpon>
     </None>
     <Content Include="Excepciones\Excepcion.aspx" />
+    <Content Include="Facturacion\Electronica\Extensiones\Comerciales.ascx" />
+    <Content Include="Facturacion\Electronica\Extensiones\Marketing.ascx" />
     <Content Include="Facturacion\Electronica\Permisos.ascx" />
     <Content Include="Facturacion\Electronica\Reportes\Web.config" />
     <Content Include="Vendedor\Default.aspx" />
