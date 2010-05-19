@@ -207,6 +207,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
             ((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataSource = FeaEntidades.CodigosImpuesto.CodigoImpuesto.Lista();
             ((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataBind();
 
+			PermisosExpo.BindearDropDownLists();
+
         }
 
 		private void AjustarCodigosDeReferenciaEnFooter()
@@ -1640,6 +1642,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				{
 					IdiomaDropDownList.SelectedIndex = -1;
 				}
+				if (lc.comprobante[0].extensiones.extensiones_datos_comerciales != null)
+				{
+					DatosComerciales.Texto = lc.comprobante[0].extensiones.extensiones_datos_comerciales;
+				}
 			}
 			else
 			{
@@ -2686,6 +2692,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 			GenerarInfoExportacion(comp, infcomprob);
 
+			GenerarInfoExtensionesComerciales(comp);
+
             compcab.informacion_comprobante = infcomprob;
 
 			GenerarInfoVendedor(compcab);
@@ -2760,6 +2768,21 @@ namespace CedeiraAJAX.Facturacion.Electronica
             lote.comprobante[0] = comp;
             return lote;
         }
+
+		private void GenerarInfoExtensionesComerciales(FeaEntidades.InterFacturas.comprobante comp)
+		{
+			if (!DatosComerciales.Texto.Equals(string.Empty))
+			{
+				comp.extensionesSpecified = true;
+				if (comp.extensiones == null)
+				{
+					comp.extensiones = new FeaEntidades.InterFacturas.extensiones();
+				}
+				CedWebRN.Comprobante c = new CedWebRN.Comprobante();
+				string textoSinSaltoDeLinea = DatosComerciales.Texto.Replace(System.Environment.NewLine, "<br>");
+				comp.extensiones.extensiones_datos_comerciales = c.ConvertToHex(textoSinSaltoDeLinea);
+			}
+		}
 
 		private FeaEntidades.InterFacturas.informacion_comprobante GenerarInfoComprobante()
 		{
@@ -2886,10 +2909,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					{
 						CodigoOperacionDropDownList.Focus();
 						throw new Exception("El código de operación no se debe informar para exportación");
-					}
-					else
-					{
-						infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
 					}
 				}
 				catch (System.NullReferenceException)

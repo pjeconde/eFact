@@ -22,12 +22,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 		}
 
-		private void BindearDropDownLists()
+		public void BindearDropDownLists()
 		{
-			((DropDownList)permisosGridView.FooterRow.FindControl("ddlcodigo_de_permiso")).DataValueField = "Codigo";
-			((DropDownList)permisosGridView.FooterRow.FindControl("ddlcodigo_de_permiso")).DataTextField = "Descr";
-			((DropDownList)permisosGridView.FooterRow.FindControl("ddlcodigo_de_permiso")).DataSource = FeaEntidades.DestinosPais.DestinoPais.ListaSinInformar();
-			((DropDownList)permisosGridView.FooterRow.FindControl("ddlcodigo_de_permiso")).DataBind();
+			if (permisosGridView.FooterRow!=null)
+			{
+				((DropDownList)permisosGridView.FooterRow.FindControl("ddlcodigo_de_permiso")).DataValueField = "Codigo";
+				((DropDownList)permisosGridView.FooterRow.FindControl("ddlcodigo_de_permiso")).DataTextField = "Descr";
+				((DropDownList)permisosGridView.FooterRow.FindControl("ddlcodigo_de_permiso")).DataSource = FeaEntidades.DestinosPais.DestinoPais.ListaSinInformar();
+				((DropDownList)permisosGridView.FooterRow.FindControl("ddlcodigo_de_permiso")).DataBind();
+			}
 		}
 
 		protected void permisosGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
