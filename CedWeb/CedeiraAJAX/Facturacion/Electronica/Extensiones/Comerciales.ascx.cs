@@ -22,6 +22,7 @@ namespace CedeiraAJAX.Facturacion.Electronica.Extensiones
 			set
 			{
 				DatosComericalesTextBox.Text = value;
+				DatosComericalesTextBox.DataBind();
 			}
 		}
 	}

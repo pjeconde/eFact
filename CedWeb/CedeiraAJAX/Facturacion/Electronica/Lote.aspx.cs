@@ -1644,7 +1644,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 				if (lc.comprobante[0].extensiones.extensiones_datos_comerciales != null)
 				{
-					DatosComerciales.Texto = lc.comprobante[0].extensiones.extensiones_datos_comerciales;
+					CedWebRN.Comprobante cDC = new CedWebRN.Comprobante();
+					DatosComerciales.Texto = cDC.HexToString(lc.comprobante[0].extensiones.extensiones_datos_comerciales).Replace("<br>", System.Environment.NewLine);
 				}
 			}
 			else
