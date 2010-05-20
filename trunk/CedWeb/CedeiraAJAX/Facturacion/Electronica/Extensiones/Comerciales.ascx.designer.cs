@@ -27,5 +27,14 @@ namespace CedeiraAJAX.Facturacion.Electronica.Extensiones {
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox DatosComericalesTextBox;
+        
+        /// <summary>
+        /// Control DatosComFilteredTextBoxExtender.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.FilteredTextBoxExtender DatosComFilteredTextBoxExtender;
     }
 }
