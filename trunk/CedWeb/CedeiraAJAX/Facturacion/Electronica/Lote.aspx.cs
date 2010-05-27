@@ -1752,7 +1752,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
             foreach (FeaEntidades.InterFacturas.linea l in lc.comprobante[0].detalle.linea)
             {
                 FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
-                linea.descripcion = l.descripcion;
+				CedWebRN.Comprobante crn = new CedWebRN.Comprobante();
+				linea.descripcion = crn.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
                 if (l.alicuota_ivaSpecified)
                 {
                     linea.alicuota_iva = l.alicuota_iva;
@@ -3080,7 +3081,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				{
 					throw new Exception("Debe informar al menos un artículo");
 				}
-				det.linea[i].descripcion = listadelineas[i].descripcion;
+				CedWebRN.Comprobante c = new CedWebRN.Comprobante();
+				string textoSinSaltoDeLinea = listadelineas[i].descripcion.Replace(System.Environment.NewLine, "<br>");
+				det.linea[i].descripcion = c.ConvertToHex(textoSinSaltoDeLinea);
 				det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
 				if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
 				{

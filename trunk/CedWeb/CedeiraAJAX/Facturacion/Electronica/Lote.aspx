@@ -1368,7 +1368,7 @@
 															<td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
 																<asp:UpdatePanel runat="server" ID="detalleUpdatePanel">
 																	<ContentTemplate>
-																		<asp:Panel ID="detallePanel" runat="server" BorderStyle="Ridge" Height="200px" ScrollBars="Auto"
+																		<asp:Panel ID="detallePanel" runat="server" BorderStyle="Ridge" Height="300px" ScrollBars="Auto"
 																			Width="760px" Wrap="true">
 																			<asp:GridView ID="detalleGridView" runat="server" AutoGenerateColumns="False" BorderColor="Gray"
 																				BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70" EmptyDataRowStyle-ForeColor="#071F70"
@@ -1411,16 +1411,18 @@
 																					</asp:TemplateField>
 																					<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="200px" HeaderText="Descripción del artículo">
 																						<ItemTemplate>
-																							<asp:Label ID="lbldescripcion" runat="server" Text='<%# Eval("descripcion") %>' Width="200px"></asp:Label>
+																							<asp:TextBox ID="lbldescripcion" runat="server" Text='<%# Eval("descripcion") %>'
+																								Width="200px" TextMode="multiLine" ReadOnly="true">
+																							</asp:TextBox>
 																						</ItemTemplate>
 																						<EditItemTemplate>
-																							<asp:TextBox ID="txtdescripcion" runat="server" Text='<%# Eval("descripcion") %>'></asp:TextBox><asp:RequiredFieldValidator
+																							<asp:TextBox ID="txtdescripcion" runat="server" Text='<%# Eval("descripcion") %>' TextMode="MultiLine"></asp:TextBox><asp:RequiredFieldValidator
 																								ID="txtdescripcionEditRequiredFieldValidator" runat="server" ControlToValidate="txtdescripcion"
 																								ErrorMessage="Descripción del artículo en edición no informada" SetFocusOnError="True"
 																								ValidationGroup="DetalleEditItem">*</asp:RequiredFieldValidator>
 																						</EditItemTemplate>
 																						<FooterTemplate>
-																							<asp:TextBox ID="txtdescripcion" runat="server" Text=''></asp:TextBox><asp:RequiredFieldValidator
+																							<asp:TextBox ID="txtdescripcion" runat="server" Text='' TextMode="MultiLine"></asp:TextBox><asp:RequiredFieldValidator
 																								ID="txtdescripcionFooterRequiredFieldValidator" runat="server" ControlToValidate="txtdescripcion"
 																								ErrorMessage="Descripción del artículo a agregar no informada" SetFocusOnError="True"
 																								ValidationGroup="DetalleFooter">*</asp:RequiredFieldValidator>
