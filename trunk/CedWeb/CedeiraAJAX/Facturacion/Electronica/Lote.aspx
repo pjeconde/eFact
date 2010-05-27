@@ -1069,9 +1069,7 @@
 															<table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
 																<tr>
 																	<td class="TextoLabelFEAVendedor">
-																		<asp:RequiredFieldValidator ID="FechaVencimientoRequiredFieldValidator" runat="server"
-																			ControlToValidate="FechaVencimientoDatePickerWebUserControl:txt_Date" ErrorMessage="fecha de vencimiento"
-																			SetFocusOnError="True">* </asp:RequiredFieldValidator>Fecha de vencimiento:
+																		Fecha de vencimiento:
 																	</td>
 																	<td style="padding-top: 3px;">
 																		<uc1:DatePickerWebUserControl ID="FechaVencimientoDatePickerWebUserControl" runat="server"
