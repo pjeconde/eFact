@@ -100,8 +100,7 @@
             this.LoteXML = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BandejaSBotonesPanel = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
-            this.ExportarItfOrigComboBox = new System.Windows.Forms.ComboBox();
-            this.ExportarItfRespIFComboBox = new System.Windows.Forms.ComboBox();
+            this.ExportarItfComboBox = new System.Windows.Forms.ComboBox();
             this.panel10 = new System.Windows.Forms.Panel();
             this.ConsultarButton = new System.Windows.Forms.Button();
             this.SalirButton = new System.Windows.Forms.Button();
@@ -869,40 +868,27 @@
             // 
             // panel12
             // 
-            this.panel12.Controls.Add(this.ExportarItfOrigComboBox);
-            this.panel12.Controls.Add(this.ExportarItfRespIFComboBox);
+            this.panel12.Controls.Add(this.ExportarItfComboBox);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel12.Location = new System.Drawing.Point(5, 28);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(472, 23);
             this.panel12.TabIndex = 9;
             // 
-            // ExportarItfOrigComboBox
+            // ExportarItfComboBox
             // 
-            this.ExportarItfOrigComboBox.AutoCompleteCustomSource.AddRange(new string[] {
+            this.ExportarItfComboBox.AutoCompleteCustomSource.AddRange(new string[] {
             "( Exportar ITF original )",
             "Exportar Itf. original con formato TXT",
             "Exportar Itf. original con formato XML"});
-            this.ExportarItfOrigComboBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ExportarItfOrigComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ExportarItfOrigComboBox.FormattingEnabled = true;
-            this.ExportarItfOrigComboBox.Location = new System.Drawing.Point(0, 0);
-            this.ExportarItfOrigComboBox.Name = "ExportarItfOrigComboBox";
-            this.ExportarItfOrigComboBox.Size = new System.Drawing.Size(212, 21);
-            this.ExportarItfOrigComboBox.TabIndex = 18;
-            this.ExportarItfOrigComboBox.SelectedIndexChanged += new System.EventHandler(this.ExportarItf);
-            // 
-            // ExportarItfRespIFComboBox
-            // 
-            this.ExportarItfRespIFComboBox.AutoCompleteCustomSource.AddRange(new string[] {
-            "( Exportar ITF con las respuestas de IF )"});
-            this.ExportarItfRespIFComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ExportarItfRespIFComboBox.FormattingEnabled = true;
-            this.ExportarItfRespIFComboBox.Location = new System.Drawing.Point(214, 0);
-            this.ExportarItfRespIFComboBox.Name = "ExportarItfRespIFComboBox";
-            this.ExportarItfRespIFComboBox.Size = new System.Drawing.Size(258, 21);
-            this.ExportarItfRespIFComboBox.TabIndex = 17;
-            this.ExportarItfRespIFComboBox.SelectedIndexChanged += new System.EventHandler(this.ExportarItf);
+            this.ExportarItfComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ExportarItfComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ExportarItfComboBox.FormattingEnabled = true;
+            this.ExportarItfComboBox.Location = new System.Drawing.Point(0, 0);
+            this.ExportarItfComboBox.Name = "ExportarItfComboBox";
+            this.ExportarItfComboBox.Size = new System.Drawing.Size(472, 21);
+            this.ExportarItfComboBox.TabIndex = 18;
+            this.ExportarItfComboBox.SelectedIndexChanged += new System.EventHandler(this.ExportarItf);
             // 
             // panel10
             // 
@@ -1449,8 +1435,7 @@
         private System.Windows.Forms.ComboBox EventosComboBox;
         private System.Windows.Forms.Button ConsultarButton;
         private System.Windows.Forms.Button SalirButton;
-        private System.Windows.Forms.ComboBox ExportarItfOrigComboBox;
-        private System.Windows.Forms.ComboBox ExportarItfRespIFComboBox;
+        private System.Windows.Forms.ComboBox ExportarItfComboBox;
         private System.Windows.Forms.MainMenu mainMenu1;
         private System.Windows.Forms.MenuItem menuItem1;
         private System.Windows.Forms.MenuItem menuItem2;

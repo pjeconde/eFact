@@ -304,6 +304,13 @@ namespace eFact_R
                 otrosFiltrosNumeroLote = NumeroLoteTextBox.Text;
                 otrosFiltrosPuntoVenta = PuntoVentaTextBox.Text;
             }
+            List<CedEntidades.Evento> eventosXLote = new List<CedEntidades.Evento>();
+            InicializarEventosComboBox(out eventosXLote);
+
+            ExportarItfComboBox.Items.Clear();
+            ExportarItfComboBox.Items.Add("( Elegir una opción para Exportar )");
+            ExportarItfComboBox.SelectedIndex = 0;
+
             BandejaSDataGridView.AutoGenerateColumns = false;
             eFact_R.RN.Tablero.ActualizarBandejaSalida(out dtBandejaSalida, TipoConsulta, FechaDsd, FechaHst, otrosFiltrosCuitvendedor, otrosFiltrosNumeroLote, otrosFiltrosPuntoVenta, PtesDiasAntCheckBox.Checked, eFact_R.Aplicacion.Sesion);
             BandejaSDataGridView.DataSource = dtBandejaSalida;
@@ -351,6 +358,19 @@ namespace eFact_R
             BandejaSDataGridView.DataSource = dtBandejaSalida;
             BandejaSDataGridView.Refresh();
             Cursor = System.Windows.Forms.Cursors.Default;
+        }
+        private void InicializarEventosComboBox(out List<CedEntidades.Evento> EventosXLote)
+        {
+            List<CedEntidades.Evento> eventosXLote = new List<CedEntidades.Evento>();
+            CedEntidades.Evento evento = new CedEntidades.Evento();
+            evento.Id = "(ElegirAccion)";
+            evento.Descr = "( Eligir una acción )";
+            eventosXLote.Add(evento);
+            EventosComboBox.DisplayMember = "Descr"; //TextoAccion + " todas las seleccionadas"
+            EventosComboBox.ValueMember = "Id";
+            EventosComboBox.DataSource = eventosXLote;
+            EventosComboBox.SelectedIndex = 0;
+            EventosXLote = eventosXLote;
         }
         private string ArmarTextoMotivo(FeaEntidades.InterFacturas.lote_comprobantes Lc)
         {
@@ -874,27 +894,25 @@ namespace eFact_R
                         EventosComboBox.DisplayMember = "Descr";
                         EventosComboBox.ValueMember = "Id";
                         //Armado de ComboBox con las opciones de exportar con respuesta IF.
-                        ExportarItfOrigComboBox.Items.Clear();
-                        ExportarItfOrigComboBox.Items.Add("( Elegir una opción para exportar itf Orig. )");
-                        ExportarItfOrigComboBox.Items.Add("Exportar en formato TXT");
-                        ExportarItfOrigComboBox.Items.Add("Exportar en formato XML");
-                        ExportarItfOrigComboBox.SelectedIndex = 0;
-                        ExportarItfRespIFComboBox.Items.Clear();
-                        ExportarItfRespIFComboBox.Items.Add("( Elegir una opción para exportar itf c/Resp. AFIP )");
+                        ExportarItfComboBox.Items.Clear();
+                        ExportarItfComboBox.Items.Add("( Elegir una opción para Exportar )");
+                        ExportarItfComboBox.Items.Add("Exportar archivo original en formato TXT");
+                        ExportarItfComboBox.Items.Add("Exportar archivo original en formato XML");
+                        ExportarItfComboBox.Items.Add("Exportar archivo original en formato XML para subir a Interfacturas");
+                        ExportarItfComboBox.SelectedIndex = 0;
                         if (dtBandejaSalida[renglon].WF.IdEstado == "AceptadoAFIP")
                         {
-                            ExportarItfRespIFComboBox.Items.Add("Exportar en formato TXT con respuesta AFIP");
-                            ExportarItfRespIFComboBox.Items.Add("Exportar en formato XML con respuesta AFIP");
+                            ExportarItfComboBox.Items.Add("Exportar archivo con respuesta AFIP en formato TXT");
+                            ExportarItfComboBox.Items.Add("Exportar archivo con respuesta AFIP en formato XML");
                         }
-                        ExportarItfRespIFComboBox.SelectedIndex = 0;
-                        EventosComboBox.Select();
                         break;
                     default:
-                        ExportarItfOrigComboBox.Items.Clear();
-                        ExportarItfOrigComboBox.Items.Add("( Elegir una opción para exportar itf Orig. )");
-                        ExportarItfOrigComboBox.Items.Add("Exportar en formato TXT");
-                        ExportarItfOrigComboBox.Items.Add("Exportar en formato XML");
-                        ExportarItfOrigComboBox.SelectedIndex = 0;
+                        ExportarItfComboBox.Items.Clear();
+                        ExportarItfComboBox.Items.Add("( Elegir una opción para Exportar )");
+                        ExportarItfComboBox.Items.Add("Exportar archivo original en formato TXT");
+                        ExportarItfComboBox.Items.Add("Exportar archivo original en formato XML");
+                        ExportarItfComboBox.Items.Add("Exportar archivo original en formato XML para subir a Interfacturas");
+                        ExportarItfComboBox.SelectedIndex = 0;
                         ConfigBotonesEventosXLote();
                         break;
                 }
@@ -914,16 +932,16 @@ namespace eFact_R
         private void ConfigBotonesEventosXLote()
         {
 
-            ExportarItfRespIFComboBox.Items.Clear();
-            ExportarItfRespIFComboBox.Items.Add("( Elegir una opción para exportar itf c/Resp.AFIP )");
+            ExportarItfComboBox.Items.Clear();
+            ExportarItfComboBox.Items.Add("( Elegir una opción para Exportar )");
+            ExportarItfComboBox.Items.Add("Exportar archivo original en formato TXT");
+            ExportarItfComboBox.Items.Add("Exportar archivo original en formato XML");
+            ExportarItfComboBox.Items.Add("Exportar archivo original en formato XML para subir a Interfacturas");
             // Determinacion de eventos (XLote) comunes a todas las 
             // operaciones seleccionadas
-            List<CedEntidades.Evento> eventosXLote = new List<CedEntidades.Evento>();
             List<CedEntidades.Evento> eventosXLoteAux = new List<CedEntidades.Evento>();
-            CedEntidades.Evento evento = new CedEntidades.Evento();
-            evento.Id = "(ElegirAccion)";
-            evento.Descr = "( Eligir una acción )";
-            eventosXLote.Add(evento);
+            List<CedEntidades.Evento> eventosXLote = new List<CedEntidades.Evento>();
+            InicializarEventosComboBox(out eventosXLote);
             for (int i = 0; i < BandejaSDataGridView.SelectedRows.Count; i++)
             {
                 //string a = BandejaSDataGridView.SelectedRows[i].Cells["Repositorio"].Value.ToString();
@@ -952,16 +970,13 @@ namespace eFact_R
                     }
                     if (ExportarRespAFIPXLote)
                     {
-                        ExportarItfRespIFComboBox.Items.Add("Exportar en formato TXT con respuesta AFIP");
-                        ExportarItfRespIFComboBox.Items.Add("Exportar en formato XML con respuesta AFIP");
+                        ExportarItfComboBox.Items.Add("Exportar archivo con respuesta AFIP en formato TXT");
+                        ExportarItfComboBox.Items.Add("Exportar archivo con respuesta AFIP en formato XML");
                     }
                 }
             }
-            ExportarItfRespIFComboBox.SelectedIndex = 0;
-            // Botones X Lote
+            ExportarItfComboBox.SelectedIndex = 0;
             EventosComboBox.DataSource = eventosXLote;
-            EventosComboBox.DisplayMember = "Descr"; //TextoAccion + " todas las seleccionadas"
-            EventosComboBox.ValueMember = "Id";
         }
 
         private void EventosComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -988,8 +1003,7 @@ namespace eFact_R
                 if (((ComboBox)sender).SelectedIndex != 0)
                 {
                     Cursor = System.Windows.Forms.Cursors.WaitCursor;
-                    ExportarItfOrigComboBox.Enabled = false;
-                    ExportarItfRespIFComboBox.Enabled = false;
+                    ExportarItfComboBox.Enabled = false;
                     if (BandejaSDataGridView.SelectedRows.Count != 0)
                     {
                         for (int i = 0; i < BandejaSDataGridView.SelectedRows.Count; i++)
@@ -999,17 +1013,26 @@ namespace eFact_R
                             lote = dtBandejaSalida[renglon];
                             string archivoProcesado = "";
                             bool IF = false;
-                            if (((ComboBox)sender).Text.IndexOf("AFIP") != -1)
+                            if (((ComboBox)sender).SelectedIndex == 4 || ((ComboBox)sender).SelectedIndex == 5)
                             {
                                 IF = true;
                             }
-                            if (((ComboBox)sender).Text.IndexOf("TXT") != -1)
+                            // 1 y 4 archivos TXT 
+                            // 2, 3 y 5 archivos XML  
+                            if (((ComboBox)sender).SelectedIndex == 1 || ((ComboBox)sender).SelectedIndex == 4)
                             {
                                 eFact_R.RN.Lote.GuardarItfTXT(out archivoProcesado, lote, "ITF", Aplicacion.ArchPathItf, IF);
                             }
                             else
                             {
-                                eFact_R.RN.Lote.GuardarItfXML(out archivoProcesado, lote, "ITF", Aplicacion.ArchPathItf, IF);
+                                if (((ComboBox)sender).SelectedIndex == 3)
+                                {
+                                    eFact_R.RN.Lote.GuardarItfXML(out archivoProcesado, lote, "ITF", Aplicacion.ArchPathItf, IF, true);
+                                }
+                                else
+                                {
+                                    eFact_R.RN.Lote.GuardarItfXML(out archivoProcesado, lote, "ITF", Aplicacion.ArchPathItf, IF, false);
+                                }
                             }
                             MessageBox.Show("Interface generada satisfactoriamente con el nombre: " + archivoProcesado, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                         }
@@ -1022,8 +1045,7 @@ namespace eFact_R
             }
             finally
             {
-                ExportarItfOrigComboBox.Enabled = true;
-                ExportarItfRespIFComboBox.Enabled = true;
+                ExportarItfComboBox.Enabled = true;
                 Cursor = System.Windows.Forms.Cursors.Default;
             }
         }

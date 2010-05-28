@@ -138,7 +138,7 @@ namespace eFact_R.RN
                                 lote.ActualizarDatosCAE(Lote, handlerEvento);
                                 if (eFact_R.Aplicacion.TipoItfAut == "XML")
                                 {
-                                    GuardarItfXML(out nombreArchivoProcesado, Lote, "ROK", eFact_R.Aplicacion.ArchPathItfAut, true);
+                                    GuardarItfXML(out nombreArchivoProcesado, Lote, "ROK", eFact_R.Aplicacion.ArchPathItfAut, true, false);
                                 }
                                 else if (eFact_R.Aplicacion.TipoItfAut == "TXT")
                                 {
@@ -150,7 +150,7 @@ namespace eFact_R.RN
                             Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, false);
                             if (eFact_R.Aplicacion.TipoItfAut == "XML")
                             {
-                                GuardarItfXML(out nombreArchivoProcesado, Lote, "RAF", eFact_R.Aplicacion.ArchPathItfAut, false);
+                                GuardarItfXML(out nombreArchivoProcesado, Lote, "RAF", eFact_R.Aplicacion.ArchPathItfAut, false, false);
                             }
                             else if (eFact_R.Aplicacion.TipoItfAut == "TXT")
                             {
@@ -161,7 +161,7 @@ namespace eFact_R.RN
                             Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, false);
                             if (eFact_R.Aplicacion.TipoItfAut == "XML")
                             {
-                                GuardarItfXML(out nombreArchivoProcesado, Lote, "RIF", eFact_R.Aplicacion.ArchPathItfAut, false);
+                                GuardarItfXML(out nombreArchivoProcesado, Lote, "RIF", eFact_R.Aplicacion.ArchPathItfAut, false, false);
                             }
                             else if (eFact_R.Aplicacion.TipoItfAut == "TXT")
                             {
@@ -177,15 +177,7 @@ namespace eFact_R.RN
         }
         public static void DeserializarLc(out FeaEntidades.InterFacturas.lote_comprobantes Lc, eFact_R.Entidades.Lote Lote, bool IF)
         {
-            string cadena = "";
-            if (IF)
-            {
-                cadena = Lote.LoteXmlIF;
-            }
-            else
-            {
-                cadena = Lote.LoteXml;
-            }
+            string cadena = Cadena(Lote, IF);
             DeserializarLc(out Lc, cadena);
         }
         public static void DeserializarLc(out FeaEntidades.InterFacturas.lote_comprobantes Lc, string Cadena)
@@ -260,6 +252,11 @@ namespace eFact_R.RN
                 {
                     e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.extensiones));
                     e.AppendToFile(NombreProcesado, Lc.comprobante[i].extensiones);
+                    if (Lc.comprobante[i].extensiones.extensiones_camara_facturas != null)
+                    {
+                        e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas));
+                        e.AppendToFile(NombreProcesado, Lc.comprobante[i].extensiones.extensiones_camara_facturas);
+                    }
                 }
 
                 List<FeaEntidades.InterFacturas.informacion_vendedor> ivendedor = new List<FeaEntidades.InterFacturas.informacion_vendedor>();
@@ -281,10 +278,34 @@ namespace eFact_R.RN
                 e.AppendToFile(NombreProcesado, iresumen);
             }
         }
-        public static void GuardarItfXML(out string NombreProcesado, eFact_R.Entidades.Lote Lote, string PreFijo, string Ruta, bool IF)
+        public static void GuardarItfXML(out string NombreProcesado, eFact_R.Entidades.Lote Lote, string PreFijo, string Ruta, bool IF, bool ParaSubirAIF)
         {
             System.Text.Encoding codificador;
             codificador = System.Text.Encoding.GetEncoding("iso-8859-1");
+            string cadena = Cadena(Lote, IF);
+            if (ParaSubirAIF)
+            {
+                FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+                DeserializarLc(out lc, cadena);
+                for (int i = 0; i < lc.comprobante.Length; i++)
+                {
+                    Engine engine = new Engine(); 
+                    if (lc.comprobante[i].extensiones != null && (lc.comprobante[i].extensiones.extensiones_datos_comerciales != null && lc.comprobante[i].extensiones.extensiones_datos_comerciales != ""))
+                    {
+                        lc.comprobante[i].extensiones.extensiones_datos_comerciales = engine.ConvertToHex(lc.comprobante[i].extensiones.extensiones_datos_comerciales);
+                    }
+                }
+                SerializarLc(out cadena, lc);
+            }
+            byte[] a = new byte[cadena.Length];
+            a = codificador.GetBytes(cadena);
+            GenerarNombreArch(out NombreProcesado, Ruta, PreFijo, Lote, "xml");
+            FileStream fs = File.Create(NombreProcesado);
+            fs.Write(a, 0, a.Length);
+            fs.Close();
+        }
+        private static string Cadena(eFact_R.Entidades.Lote Lote, bool IF)  
+        {
             string cadena = "";
             if (IF)
             {
@@ -294,12 +315,7 @@ namespace eFact_R.RN
             {
                 cadena = Lote.LoteXml;
             }
-            byte[] a = new byte[cadena.Length];
-            a = codificador.GetBytes(cadena);
-            GenerarNombreArch(out NombreProcesado, Ruta, PreFijo, Lote, "xml");
-            FileStream fs = File.Create(NombreProcesado);
-            fs.Write(a, 0, a.Length);
-            fs.Close();
+            return cadena;
         }
         private static void GenerarNombreArch(out string NombreArch, string Ruta, string Prefijo, eFact_R.Entidades.Lote Lote, string Extension)
         {
