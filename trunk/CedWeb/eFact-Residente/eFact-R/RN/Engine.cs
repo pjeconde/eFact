@@ -105,6 +105,9 @@ namespace eFact_R.RN
                             lc.comprobante[NroComprobante].extensiones = new FeaEntidades.InterFacturas.extensiones();
                             lc.comprobante[NroComprobante].extensionesSpecified = true;
                             lc.comprobante[NroComprobante].extensiones = (FeaEntidades.InterFacturas.extensiones)o;
+                            lc.comprobante[NroComprobante].extensiones.extensiones_datos_comerciales.ToString();
+                            string prueba = ConvertToHex(lc.comprobante[NroComprobante].extensiones.extensiones_datos_comerciales.ToString());
+                            string pruebaResp = HexToString(prueba);
                         }
                     }
                     if (typeof(FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas) == o.GetType())
@@ -141,17 +144,46 @@ namespace eFact_R.RN
                 throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.BaseApplicationException("Problemas al procesar el archivo.\r\n\r\n" + ex.Message);
             }
         }
+        //public string ConvertToHex(string asciiString)
+        //{
+        //    string hex = "";
+        //    foreach (char c in asciiString)
+        //    {
+        //        int tmp = c;
+        //        hex += String.Format("{0:x2}", (uint)System.Convert.ToUInt32(tmp.ToString()));
+        //    }
+        //    return hex;
+        //}
         public string ConvertToHex(string asciiString)
         {
-            string hex = "";
-            foreach (char c in asciiString)
+            byte[] b = Encoding.ASCII.GetBytes(asciiString);
+            string salida = "";
+            for (int i = 0; i < b.Length; i++)
             {
-                int tmp = c;
-                hex += String.Format("{0:x2}", (uint)System.Convert.ToUInt32(tmp.ToString()));
+                string ascii = b[i].ToString();
+                int n = Convert.ToInt32(ascii);
+                string r = n.ToString("x");
+                salida += "%" + r;
             }
-            return hex;
-        } 
-
+            return salida;
+        }
+        public string HexToString(string Hex)
+        {
+            byte[] Bytes;
+            int ByteLength;
+            string HexValue = "\x0\x1\x2\x3\x4\x5\x6\x7\x8\x9|||||||\xA\xB\xC\xD\xE\xF";
+            Hex = Hex.Replace("%", ""); 
+            ByteLength = Hex.Length / 2;
+            Bytes = new byte[ByteLength];
+            for (int x = 0, i = 0; i < Hex.Length; i += 2, x += 1)
+            {
+                Bytes[x] = (byte)(HexValue[Char.ToUpper(Hex[i + 0]) - '0'] << 4);
+                Bytes[x] |= (byte)(HexValue[Char.ToUpper(Hex[i + 1]) - '0']);
+            }
+            System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
+            string str = enc.GetString(Bytes);
+            return str;
+        }
         private void GetPropiedades(object o)
         {
             Dictionary<string, string> result = new Dictionary<string, string>();
