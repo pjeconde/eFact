@@ -1757,7 +1757,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			{
 				FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
 				CedWebRN.Comprobante crn = new CedWebRN.Comprobante();
-				linea.descripcion = crn.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
+                //Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
+                if (l.descripcion.Substring(0, 1) == "%")
+                {
+                    linea.descripcion = crn.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
+                }
+                else
+                {
+                    linea.descripcion = l.descripcion.Replace("<br>", System.Environment.NewLine);
+                }
 				if (l.alicuota_ivaSpecified)
 				{
 					linea.alicuota_iva = l.alicuota_iva;
