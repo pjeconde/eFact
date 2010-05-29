@@ -127,7 +127,7 @@
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td style="padding-top: 3px">
-                                                    <asp:DropDownList ID="ProvinciaDropDownList" runat="server" ReadOnly="true" TabIndex="10"
+                                                    <asp:DropDownList ID="ProvinciaDropDownList" runat="server" Enabled="false" TabIndex="10"
                                                         Width="183px">
                                                     </asp:DropDownList>
                                                 </td>
@@ -173,6 +173,28 @@
                                             TabIndex="14" Width="400px"></asp:TextBox>
                                     </td>
                                 </tr>
+                                <!-- Comprador del extranjero -->
+                                <tr>
+                                    <td align="right" style="padding-right:5px; padding-top:3px">
+                                        <asp:Label ID="Label19" runat="server" Text="Comprador del extranjero"></asp:Label>
+                                    </td>
+                                    <td align="left" style="padding-top:3px">
+                                        <table border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td style="padding-top: 3px">
+                                                    <asp:CheckBox ID="CompradorDelExtranjeroCheckBox" runat="server" Enabled="false"/>
+                                                </td>
+                                                <td style="padding-left:5px; padding-top: 3px">
+                                                    <asp:Label ID="DestinosCuitLabel" runat="server" Text="Pais" Visible="false"></asp:Label>
+                                                </td>
+                                                <td style="padding-left:5px; padding-top: 3px">
+                                                    <asp:DropDownList ID="DestinosCuitDropDownList" runat="server" TabIndex="16" Width="351px" Visible="false" Enabled="false">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
                                 <!-- Documento: Tipo y Nro -->
                                 <tr>
                                     <td align="right" style="padding-right: 5px; padding-top: 3px; height: 25px;">
@@ -182,16 +204,15 @@
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td style="padding-top: 3px">
-                                                    <asp:DropDownList ID="TipoDocDropDownList" runat="server" ReadOnly="true" TabIndex="15"
-                                                        Width="183px">
+                                                    <asp:DropDownList ID="TipoDocDropDownList" runat="server" TabIndex="15" Width="183px" Enabled="false">
                                                     </asp:DropDownList>
                                                 </td>
                                                 <td align="right" style="padding-left: 14px; padding-right: 5px; padding-top: 3px">
-                                                    <asp:Label ID="Label54" runat="server" Text="Nro."></asp:Label>
+                                                    <asp:Label ID="NroDocLabel" runat="server" Text="Nro."></asp:Label>
                                                 </td>
                                                 <td align="left" style="padding-top: 3px">
-                                                    <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" ReadOnly="true" TabIndex="16"
-                                                        ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
+                                                    <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="16" ReadOnly="true"
+                                                        Width="80px"></asp:TextBox>
                                                 </td>
                                             </tr>
                                         </table>
@@ -208,7 +229,7 @@
                                                     <asp:Label ID="Label11" runat="server" Text="Cond.IVA"></asp:Label>
                                                 </td>
                                                 <td align="left" style="padding-top: 3px">
-                                                    <asp:DropDownList ID="CondIVADropDownList" runat="server" ReadOnly="true" TabIndex="17"
+                                                    <asp:DropDownList ID="CondIVADropDownList" runat="server" Enabled="false" TabIndex="17"
                                                         Width="255px">
                                                     </asp:DropDownList>
                                                 </td>
@@ -232,7 +253,7 @@
                                                     <asp:Label ID="Label18" runat="server" Text="Cond.Ing.Brutos"></asp:Label>
                                                 </td>
                                                 <td align="left" style="padding-top: 3px">
-                                                    <asp:DropDownList ID="CondIngBrutosDropDownList" runat="server" ReadOnly="true" TabIndex="19"
+                                                    <asp:DropDownList ID="CondIngBrutosDropDownList" runat="server" Enabled="false" TabIndex="19"
                                                         Width="216px">
                                                     </asp:DropDownList>
                                                 </td>
@@ -277,7 +298,7 @@
                                                 </td>
                                                 <td align="right" style="padding-left: 5px; padding-top: 3px">
                                                     <uc1:DatePickerWebUserControl ID="FechaInicioActividadesDatePickerWebUserControl"
-                                                        runat="server" TabIndex="21" TextCssClass="DatePickerFecha" />
+                                                        runat="server" TabIndex="21" TextCssClass="DatePickerFecha" ReadOnly="true" />
                                                 </td>
                                             </tr>
                                         </table>

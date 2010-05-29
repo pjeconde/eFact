@@ -16,7 +16,7 @@ namespace Cedeira.SV
 		{
 			if(CUIT.Length != 11 || !IsNumeric(CUIT) || CUIT == "00000000000")
 			{
-				throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorInvalido("CUIT/CUIL");
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorInvalido("CUIT/CUIT Pais/CUIL/Nro.Doc.");
 			}
 			int sum = 0;
 			for(int i = 0; i < CUIT.Length; i++)
@@ -25,7 +25,7 @@ namespace Cedeira.SV
 			}
 			if((sum % 11) != 0)
 			{
-				throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorInvalido("CUIT/CUIL");
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorInvalido("CUIT/CUIT Pais/CUIL/Nro.Doc.");
 			}
 		}
 		public static void VerifCBU(string CBU)

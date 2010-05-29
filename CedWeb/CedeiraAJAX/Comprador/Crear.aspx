@@ -235,6 +235,28 @@
                                             Width="400px"></asp:TextBox>
                                     </td>
                                 </tr>
+                                <!-- Comprador del extranjero -->
+                                <tr>
+                                    <td align="right" style="padding-right:5px; padding-top:3px">
+                                        <asp:Label ID="Label19" runat="server" Text="Comprador del extranjero"></asp:Label>
+                                    </td>
+                                    <td align="left" style="padding-top:3px">
+                                        <table border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td style="padding-top: 3px">
+                                                    <asp:CheckBox ID="CompradorDelExtranjeroCheckBox" runat="server" OnCheckedChanged="CompradorDelExtranjeroCheckBox_CheckedChanged" AutoPostBack="true"  />
+                                                </td>
+                                                <td style="padding-left:5px; padding-top: 3px">
+                                                    <asp:Label ID="DestinosCuitLabel" runat="server" Text="Pais" Visible="false"></asp:Label>
+                                                </td>
+                                                <td style="padding-left:5px; padding-top: 3px">
+                                                    <asp:DropDownList ID="DestinosCuitDropDownList" runat="server" TabIndex="16" Width="351px" Visible="false">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
                                 <!-- Documento: Tipo y Nro -->
                                 <tr>
                                     <td align="right" style="padding-right: 5px; padding-top: 3px; height: 25px;">
@@ -248,20 +270,11 @@
                                                     </asp:DropDownList>
                                                 </td>
                                                 <td align="right" style="padding-left: 14px; padding-right: 5px; padding-top: 3px">
-                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator18" runat="server"
-                                                        ControlToValidate="NroDocTextBox" ErrorMessage="Nro.Documento" SetFocusOnError="True"
-                                                        ValidationExpression="[0-9]{11}">
-                                                        <asp:Label ID="Label50" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                                                    </asp:RegularExpressionValidator>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="NroDocTextBox"
-                                                        ErrorMessage="Nro.Documento" SetFocusOnError="True">
-                                                        <asp:Label ID="Label53" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                                                    </asp:RequiredFieldValidator>
-                                                    <asp:Label ID="Label54" runat="server" Text="Nro."></asp:Label>
+                                                    <asp:Label ID="NroDocLabel" runat="server" Text="Nro."></asp:Label>
                                                 </td>
                                                 <td align="left" style="padding-top: 3px">
                                                     <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="16" ToolTip="Debe ingresar sólo números."
-                                                        Width="80px"></asp:TextBox>
+                                                        Width="80px" AutoPostBack="true" OnTextChanged="NroDocTextBox_TextChanged"></asp:TextBox>
                                                 </td>
                                             </tr>
                                         </table>

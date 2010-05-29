@@ -596,6 +596,42 @@ namespace CedeiraAJAX.Comprador {
         protected global::System.Web.UI.WebControls.TextBox TelefonoContactoTextBox;
         
         /// <summary>
+        /// Control Label19.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label19;
+        
+        /// <summary>
+        /// Control CompradorDelExtranjeroCheckBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox CompradorDelExtranjeroCheckBox;
+        
+        /// <summary>
+        /// Control DestinosCuitLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label DestinosCuitLabel;
+        
+        /// <summary>
+        /// Control DestinosCuitDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DestinosCuitDropDownList;
+        
+        /// <summary>
         /// Control Label30.
         /// </summary>
         /// <remarks>
@@ -614,49 +650,13 @@ namespace CedeiraAJAX.Comprador {
         protected global::System.Web.UI.WebControls.DropDownList TipoDocDropDownList;
         
         /// <summary>
-        /// Control RegularExpressionValidator18.
+        /// Control NroDocLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator18;
-        
-        /// <summary>
-        /// Control Label50.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label50;
-        
-        /// <summary>
-        /// Control RequiredFieldValidator4.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
-        
-        /// <summary>
-        /// Control Label53.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label53;
-        
-        /// <summary>
-        /// Control Label54.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label54;
+        protected global::System.Web.UI.WebControls.Label NroDocLabel;
         
         /// <summary>
         /// Control NroDocTextBox.

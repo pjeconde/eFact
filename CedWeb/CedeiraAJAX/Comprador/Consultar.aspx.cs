@@ -27,16 +27,16 @@ namespace CedeiraAJAX.Comprador
                     {
                         ProvinciaDropDownList.DataValueField = "Codigo";
                         ProvinciaDropDownList.DataTextField = "Descr";
-                        ProvinciaDropDownList.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.ListaInf();
+                        ProvinciaDropDownList.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
                         CondIVADropDownList.DataValueField = "Codigo";
                         CondIVADropDownList.DataTextField = "Descr";
                         CondIVADropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.ListaInf();
-                        TipoDocDropDownList.DataValueField = "Codigo";
-                        TipoDocDropDownList.DataTextField = "Descr";
-                        TipoDocDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
                         CondIngBrutosDropDownList.DataValueField = "Codigo";
                         CondIngBrutosDropDownList.DataTextField = "Descr";
                         CondIngBrutosDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.ListaInf();
+                        DestinosCuitDropDownList.DataValueField = "Codigo";
+                        DestinosCuitDropDownList.DataTextField = "Descr";
+                        DestinosCuitDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.Lista(); 
                         DataBind();
                         CedWebEntidades.Comprador Comprador = new CedWebEntidades.Comprador();
                         Comprador.IdCuenta = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Id;
@@ -56,8 +56,23 @@ namespace CedeiraAJAX.Comprador
                         NombreContactoTextBox.Text = Comprador.NombreContacto;
                         EmailContactoTextBox.Text = Comprador.EmailContacto;
                         TelefonoContactoTextBox.Text = Convert.ToString(Comprador.TelefonoContacto);
+                        if (Comprador.IdTipoDoc != ((FeaEntidades.Documentos.Documento)new FeaEntidades.Documentos.CUITPais()).Codigo)
+                        {
+                            InhabilitarCompradorDelExtranjero();
+                        }
+                        else
+                        {
+                            HabilitarCompradorDelExtranjero();
+                        } 
                         TipoDocDropDownList.SelectedValue = Convert.ToString(Comprador.IdTipoDoc);
-                        NroDocTextBox.Text = Convert.ToString(Comprador.NroDoc);
+                        if (!CompradorDelExtranjeroCheckBox.Checked)
+                        {
+                            NroDocTextBox.Text = Convert.ToString(Comprador.NroDoc);
+                        }
+                        else
+                        {
+                            DestinosCuitDropDownList.SelectedValue = Convert.ToString(Comprador.NroDoc);
+                        }
                         CondIVADropDownList.SelectedValue = Convert.ToString(Comprador.IdCondIVA);
                         NroIngBrutosTextBox.Text = Comprador.NroIngBrutos;
                         CondIngBrutosDropDownList.SelectedValue = Convert.ToString(Comprador.IdCondIngBrutos);
@@ -68,6 +83,7 @@ namespace CedeiraAJAX.Comprador
                         }
                         CodigoInternoTextBox.Text = Comprador.CodigoInterno;
                         FechaInicioActividadesDatePickerWebUserControl.CalendarDate = Comprador.FechaInicioActividades;
+                        CompradorDelExtranjeroCheckBox.Checked = Comprador.IdTipoDoc == ((FeaEntidades.Documentos.Documento)new FeaEntidades.Documentos.CUITPais()).Codigo;
                         CancelarButton.Focus();
                     }
                 }
@@ -84,6 +100,36 @@ namespace CedeiraAJAX.Comprador
         protected void CancelarButton_Click(object sender, EventArgs e)
         {
             Server.Transfer("~/Comprador/Explorador.aspx"); ;
+        }
+        private void HabilitarCompradorDelExtranjero()
+        {
+            MsgErrorLabel.Text = String.Empty;
+            TipoDocDropDownList.DataValueField = "Codigo";
+            TipoDocDropDownList.DataTextField = "Descr";
+            TipoDocDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
+            DataBind();
+            ProvinciaDropDownList.SelectedValue = ((FeaEntidades.CodigosProvincia.CodigoProvincia)new FeaEntidades.CodigosProvincia.SinInformar()).Codigo.ToString();
+            CompradorDelExtranjeroCheckBox.Checked = true;
+            TipoDocDropDownList.SelectedValue = ((FeaEntidades.Documentos.Documento)new FeaEntidades.Documentos.CUITPais()).Codigo.ToString();
+            DestinosCuitLabel.Visible = true;
+            NroDocLabel.Visible = false;
+            DestinosCuitDropDownList.Visible = true;
+            NroDocTextBox.Visible = false;
+        }
+        private void InhabilitarCompradorDelExtranjero()
+        {
+            MsgErrorLabel.Text = String.Empty;
+            TipoDocDropDownList.DataValueField = "Codigo";
+            TipoDocDropDownList.DataTextField = "Descr";
+            TipoDocDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaNoExportacion();
+            DataBind();
+            ProvinciaDropDownList.SelectedValue = ((FeaEntidades.CodigosProvincia.CodigoProvincia)new FeaEntidades.CodigosProvincia.CapitalFederal()).Codigo.ToString();
+            CompradorDelExtranjeroCheckBox.Checked = false;
+            TipoDocDropDownList.SelectedValue = ((FeaEntidades.Documentos.Documento)new FeaEntidades.Documentos.CUIT()).Codigo.ToString();
+            DestinosCuitLabel.Visible = false;
+            NroDocLabel.Visible = true;
+            DestinosCuitDropDownList.Visible = false;
+            NroDocTextBox.Visible = true;
         }
     }
 }
