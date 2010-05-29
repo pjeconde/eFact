@@ -14,19 +14,22 @@ namespace CedWebRN
             {
                 throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorNoInfo("Tipo Documento");
             }
+            if (Comprador.IdTipoDoc == Convert.ToInt32(((FeaEntidades.Documentos.Documento)new FeaEntidades.Documentos.CUIT()).Codigo) ||
+                Comprador.IdTipoDoc == Convert.ToInt32(((FeaEntidades.Documentos.Documento)new FeaEntidades.Documentos.CUIL()).Codigo) ||
+                Comprador.IdTipoDoc == Convert.ToInt32(((FeaEntidades.Documentos.Documento)new FeaEntidades.Documentos.CUITPais()).Codigo))
+            {
+                Cedeira.SV.Fun.VerifCUIT(Comprador.NroDoc.ToString());
+            }
             else
             {
                 if (Comprador.NroDoc == 0)
                 {
                     throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorNoInfo("Nro.Documento");
                 }
-                else
-                {
-                    if (Comprador.IdCondIVA == 0)
-                    {
-                        throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorNoInfo("Condición I.V.A.");
-                    }
-                }
+            }
+            if (Comprador.IdCondIVA == 0)
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorNoInfo("Condición I.V.A.");
             }
         }
         public static void Crear(CedWebEntidades.Comprador Comprador, CedEntidades.Sesion Sesion)
