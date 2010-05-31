@@ -1646,10 +1646,18 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				{
 					IdiomaDropDownList.SelectedIndex = -1;
 				}
-				if (lc.comprobante[0].extensiones.extensiones_datos_comerciales != null)
+                if (lc.comprobante[0].extensiones.extensiones_datos_comerciales != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != "")
 				{
-					CedWebRN.Comprobante cDC = new CedWebRN.Comprobante();
-					DatosComerciales.Texto = cDC.HexToString(lc.comprobante[0].extensiones.extensiones_datos_comerciales).Replace("<br>", System.Environment.NewLine);
+                    //Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
+                    if (lc.comprobante[0].extensiones.extensiones_datos_comerciales.Substring(0, 1) == "%")
+                    {
+                        CedWebRN.Comprobante cDC = new CedWebRN.Comprobante();
+                        DatosComerciales.Texto = cDC.HexToString(lc.comprobante[0].extensiones.extensiones_datos_comerciales).Replace("<br>", System.Environment.NewLine);
+                    }
+                    else
+                    {
+                        DatosComerciales.Texto = lc.comprobante[0].extensiones.extensiones_datos_comerciales.Replace("<br>", System.Environment.NewLine);
+                    }
 				}
 			}
 			else
