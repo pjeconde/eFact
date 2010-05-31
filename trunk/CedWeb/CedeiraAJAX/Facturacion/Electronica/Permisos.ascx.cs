@@ -202,7 +202,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		{
 			//Permisos de exportación
 			permisos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.permisos>();
-			if (lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.permisos != null)
+            if (lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion != null && lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.permisos != null)
 			{
 				foreach (FeaEntidades.InterFacturas.permisos r in lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.permisos)
 				{
