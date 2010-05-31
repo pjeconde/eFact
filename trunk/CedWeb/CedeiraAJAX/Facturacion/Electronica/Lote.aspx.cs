@@ -2260,8 +2260,30 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					Contacto_CompradorTextBox.Text = comprador.NombreContacto;
 					Email_CompradorTextBox.Text = comprador.EmailContacto;
 					Telefono_CompradorTextBox.Text = Convert.ToString(comprador.TelefonoContacto);
+
+					Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+					Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
+					if (!comprador.IdTipoDoc.Equals(70))
+					{
+						Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+						Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
+						Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(comprador.NroDoc);
+						Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaNoExportacion();
+					}
+					else
+					{
+						Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
+						Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
+						Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+						Nro_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
+						Nro_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.ListaSinInformar();
+						Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
+						Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(comprador.NroDoc)));
+						Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
+					}
+					Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
 					Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = Convert.ToString(comprador.IdTipoDoc);
-					Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(comprador.NroDoc);
+
 					Condicion_IVA_CompradorDropDownList.SelectedValue = Convert.ToString(comprador.IdCondIVA);
 					//NroIngBrutosTextBox.Text = comprador.NroIngBrutos;
 					//CondIngBrutosDropDownList.SelectedValue = Convert.ToString(comprador.IdCondIngBrutos);
@@ -2511,6 +2533,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
 						Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
 						Nro_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
+						System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores=new System.Collections.Generic.List<CedWebEntidades.Comprador>();
 						switch (idtipo)
 						{
 							case "Comun":
@@ -2525,6 +2548,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
 								Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
 								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+								listacompradores = CedWebRN.Comprador.ListaSinExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
 								break;
 							case "BFiscal":
 								Presta_ServCheckBox.Checked = false;
@@ -2540,6 +2564,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
 								Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
 								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+								listacompradores = CedWebRN.Comprador.ListaSinExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
 								break;
 							case "Export":
 								Presta_ServCheckBox.Checked = false;
@@ -2558,6 +2583,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Nro_Doc_Identificatorio_CompradorTextBox.Text));
 								Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
 								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
+								listacompradores = CedWebRN.Comprador.ListaExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
 								break;
 						}
 						Tipo_De_ComprobanteDropDownList.DataBind();
@@ -2566,6 +2592,21 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						{
 							return pv.Id == auxPV;
 						}).DescrTipo;
+						if (listacompradores.Count > 0)
+						{
+							CompradorDropDownList.Visible = true;
+							CompradorDropDownList.DataValueField = "RazonSocial";
+							CompradorDropDownList.DataTextField = "RazonSocial";
+							CompradorDropDownList.DataSource = listacompradores;
+							CompradorDropDownList.DataBind();
+							CompradorDropDownList.SelectedIndex=0;
+							CompradorDropDownList_SelectedIndexChanged(this, new EventArgs());
+						}
+						else
+						{
+							CompradorDropDownList.Visible = false;
+							CompradorDropDownList.DataSource = null;
+						}
 					}
 					catch
 					{
@@ -2583,6 +2624,22 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
 						Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
 						((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+						System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores = CedWebRN.Comprador.Lista(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
+						if (listacompradores.Count > 0)
+						{
+							CompradorDropDownList.Visible = true;
+							CompradorDropDownList.DataValueField = "RazonSocial";
+							CompradorDropDownList.DataTextField = "RazonSocial";
+							CompradorDropDownList.DataSource = listacompradores;
+							CompradorDropDownList.DataBind();
+							CompradorDropDownList.SelectedIndex = 0;
+							CompradorDropDownList_SelectedIndexChanged(this, new EventArgs());
+						}
+						else
+						{
+							CompradorDropDownList.Visible = false;
+							CompradorDropDownList.DataSource = null;
+						}
 					}
 				}
 			}

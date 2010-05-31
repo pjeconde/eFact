@@ -123,6 +123,26 @@ namespace CedWebRN
             CedWebDB.Comprador comprador = new CedWebDB.Comprador(Sesion);
             return comprador.Lista(Cuenta, ConSeleccionarComprador);
         }
+		public static List<CedWebEntidades.Comprador> ListaExportacion(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion, bool ConSeleccionarComprador)
+		{
+			CedWebDB.Comprador comprador = new CedWebDB.Comprador(Sesion);
+			List<CedWebEntidades.Comprador> lista = comprador.Lista(Cuenta, ConSeleccionarComprador);
+			lista = lista.FindAll(delegate(CedWebEntidades.Comprador c)
+			{
+				return c.IdTipoDoc.Equals(70) || c.RazonSocial.Equals("Seleccionar comprador");
+			});
+			return lista;
+		}
+		public static List<CedWebEntidades.Comprador> ListaSinExportacion(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion, bool ConSeleccionarComprador)
+		{
+			CedWebDB.Comprador comprador = new CedWebDB.Comprador(Sesion);
+			List<CedWebEntidades.Comprador> lista = comprador.Lista(Cuenta, ConSeleccionarComprador);
+			lista = lista.FindAll(delegate(CedWebEntidades.Comprador c)
+			{
+				return !c.IdTipoDoc.Equals(70) || c.RazonSocial.Equals("Seleccionar comprador");
+			});
+			return lista;
+		}
         public static List<CedWebEntidades.Comprador> Lista(CedWebEntidades.Cuenta Cuenta, int IndicePagina, int TamañoPagina, string OrderBy, CedEntidades.Sesion Sesion)
         {
             CedWebDB.Comprador comprador = new CedWebDB.Comprador(Sesion);
