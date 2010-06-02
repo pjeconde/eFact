@@ -433,17 +433,21 @@
 																</table>
 															</td>
 															<td>
-																<table border="0" cellpadding="0" cellspacing="0" >
-																	<tr>
-																		<td class="TextoLabelFEAVendedor" >
-																			Tipo Exportación:
-																		</td>
-																		<td class="TextoLabelFEAVendedorDet">
-																			<asp:DropDownList ID="TipoExpDropDownList" runat="server" SkinID="DropDownListVendedor">
-																			</asp:DropDownList>
-																		</td>
-																	</tr>
-																</table>															
+															<asp:UpdatePanel ID="TipoExpoUpdatePanel" runat="server" UpdateMode="Always">
+																<ContentTemplate>
+																	<table border="0" cellpadding="0" cellspacing="0">
+																		<tr>
+																			<td class="TextoLabelFEAVendedor">
+																				Tipo Exportación:
+																			</td>
+																			<td class="TextoLabelFEAVendedorDet">
+																				<asp:DropDownList ID="TipoExpDropDownList" runat="server" SkinID="DropDownListVendedor">
+																				</asp:DropDownList>
+																			</td>
+																		</tr>
+																	</table>
+																</ContentTemplate>
+															</asp:UpdatePanel>
 															</td>
 														</tr>
 														<!-- Datos del Vendedor: Provincia -->
@@ -462,18 +466,21 @@
 																</table>
 															</td>
 															<td>
-																<table border="0" cellpadding="0" cellspacing="0" >
-																	<tr>
-																		<td class="TextoLabelFEAVendedor" >
-																			País Destino Exportación:
-																		</td>
-																		<td class="TextoLabelFEAVendedorDet">
-																			<asp:DropDownList ID="PaisDestinoExpDropDownList" runat="server" 
-																				SkinID="DropDownListVendedor">
-																			</asp:DropDownList>
-																		</td>
-																	</tr>
-																</table>
+															<asp:UpdatePanel ID="PaisDestinoExpUpdatePanel" runat="server" UpdateMode="Always">
+																<ContentTemplate>
+																	<table border="0" cellpadding="0" cellspacing="0">
+																		<tr>
+																			<td class="TextoLabelFEAVendedor">
+																				País Destino Exportación:
+																			</td>
+																			<td class="TextoLabelFEAVendedorDet">
+																				<asp:DropDownList ID="PaisDestinoExpDropDownList" runat="server" SkinID="DropDownListVendedor">
+																				</asp:DropDownList>
+																			</td>
+																		</tr>
+																	</table>
+																</ContentTemplate>
+															</asp:UpdatePanel>
 															</td>
 														</tr>
 														<!-- Datos del Vendedor: Código Postal -->
@@ -492,17 +499,21 @@
 																</table>
 															</td>
 															<td>
-																<table border="0" cellpadding="0" cellspacing="0" >
-																	<tr>
-																		<td class="TextoLabelFEAVendedor" >
-																			Idioma para exportación:
-																		</td>
-																		<td class="TextoLabelFEAVendedorDet">
-																			<asp:DropDownList ID="IdiomaDropDownList" runat="server" SkinID="DropDownListVendedor">
-																			</asp:DropDownList>
-																		</td>
-																	</tr>
-																</table>
+															<asp:UpdatePanel ID="IdiomaUpdatePanel" runat="server" UpdateMode="Always">
+																<ContentTemplate>
+																	<table border="0" cellpadding="0" cellspacing="0">
+																		<tr>
+																			<td class="TextoLabelFEAVendedor">
+																				Idioma para exportación:
+																			</td>
+																			<td class="TextoLabelFEAVendedorDet">
+																				<asp:DropDownList ID="IdiomaDropDownList" runat="server" SkinID="DropDownListVendedor">
+																				</asp:DropDownList>
+																			</td>
+																		</tr>
+																	</table>
+																</ContentTemplate>
+															</asp:UpdatePanel>
 															</td>
 														</tr>
 														<!-- Datos del Vendedor: GLN -->
@@ -524,17 +535,21 @@
 																</table>
 															</td>
 															<td >
-																<table border="0" cellpadding="0" cellspacing="0">
-																	<tr>
-																		<td class="TextoLabelFEAVendedor">
-																			Incoterms para exportación:
-																		</td>
-																		<td class="TextoLabelFEAVendedorDet">
-																			<asp:DropDownList ID="IncotermsDropDownList" runat="server" SkinID="DropDownListVendedor">
-																			</asp:DropDownList>
-																		</td>
-																	</tr>
-																</table>
+															<asp:UpdatePanel ID="IncotermsUpdatePanel" runat="server" UpdateMode="always">
+																<ContentTemplate>
+																	<table border="0" cellpadding="0" cellspacing="0">
+																		<tr>
+																			<td class="TextoLabelFEAVendedor">
+																				Incoterms para exportación:
+																			</td>
+																			<td class="TextoLabelFEAVendedorDet">
+																				<asp:DropDownList ID="IncotermsDropDownList" runat="server" SkinID="DropDownListVendedor">
+																				</asp:DropDownList>
+																			</td>
+																		</tr>
+																	</table>
+																</ContentTemplate>
+															</asp:UpdatePanel>
 															</td>
 														</tr>
 														<!-- Datos del Vendedor: Nombre contacto -->
