@@ -3131,23 +3131,45 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					}).IdTipo;
 					string tipoComp = Tipo_De_ComprobanteDropDownList.SelectedValue;
 					string tipoExp = TipoExpDropDownList.SelectedValue;
-					if (idtipo.Equals("Export") && tipoComp.Equals("19") && tipoExp.Equals("1"))
+					if (idtipo.Equals("Export"))
 					{
-						if (this.PermisosExpo.HayPermisos)
+						if (tipoComp.Equals("19"))
 						{
-							ie.permiso_existente = "S";
-							ie.permisos = new FeaEntidades.InterFacturas.permisos[5];
-							for (int i = 0; i < this.PermisosExpo.PermisosExportacion.Count; i++)
+							if (PaisDestinoExpDropDownList.SelectedValue.Equals("0"))
 							{
-								ie.permisos[i] = new FeaEntidades.InterFacturas.permisos();
-								ie.permisos[i].descripcion_destino_mercaderia = this.PermisosExpo.PermisosExportacion[i].descripcion_destino_mercaderia;
-								ie.permisos[i].destino_mercaderia = this.PermisosExpo.PermisosExportacion[i].destino_mercaderia;
-								ie.permisos[i].id_permiso = this.PermisosExpo.PermisosExportacion[i].id_permiso;
+								throw new Exception("El país destino de exportación es obligatorio");
+							}
+							if (IncotermsDropDownList.SelectedValue.Equals(string.Empty))
+							{
+								throw new Exception("Incoterms es obligatorio");
+							}
+							if (tipoExp.Equals("0"))
+							{
+								throw new Exception("El tipo de exportación es obligatorio");
+							}
+							if (IdiomaDropDownList.SelectedValue.Equals("0"))
+							{
+								throw new Exception("El idioma es obligatorio");
+							}
+							if (tipoExp.Equals("1"))
+							{
+								GenerarInfoPermisosExportacion(ie);
 							}
 						}
-						else
+						else //NC y ND
 						{
-							ie.permiso_existente = "N";
+							if (PaisDestinoExpDropDownList.SelectedValue.Equals("0"))
+							{
+								throw new Exception("El país destino de exportación es obligatorio");
+							}
+							if (tipoExp.Equals("0"))
+							{
+								throw new Exception("El tipo de exportación es obligatorio");
+							}
+							if (IdiomaDropDownList.SelectedValue.Equals("0"))
+							{
+								throw new Exception("El idioma es obligatorio");
+							}
 						}
 					}
 				}
@@ -3184,6 +3206,26 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			if (exportacion)
 			{
 				infcomprob.informacion_exportacion = ie;
+			}
+		}
+
+		private void GenerarInfoPermisosExportacion(FeaEntidades.InterFacturas.informacion_exportacion ie)
+		{
+			if (this.PermisosExpo.HayPermisos)
+			{
+				ie.permiso_existente = "S";
+				ie.permisos = new FeaEntidades.InterFacturas.permisos[5];
+				for (int i = 0; i < this.PermisosExpo.PermisosExportacion.Count; i++)
+				{
+					ie.permisos[i] = new FeaEntidades.InterFacturas.permisos();
+					ie.permisos[i].descripcion_destino_mercaderia = this.PermisosExpo.PermisosExportacion[i].descripcion_destino_mercaderia;
+					ie.permisos[i].destino_mercaderia = this.PermisosExpo.PermisosExportacion[i].destino_mercaderia;
+					ie.permisos[i].id_permiso = this.PermisosExpo.PermisosExportacion[i].id_permiso;
+				}
+			}
+			else
+			{
+				ie.permiso_existente = "N";
 			}
 		}
 
