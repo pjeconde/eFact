@@ -2314,7 +2314,11 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					Contacto_CompradorTextBox.Text = string.Empty;
 					Email_CompradorTextBox.Text = string.Empty;
 					Telefono_CompradorTextBox.Text = string.Empty;
+					Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+					Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
 					Nro_Doc_Identificatorio_CompradorTextBox.Text = string.Empty;
+					Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
+					Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
 					Condicion_IVA_CompradorDropDownList.SelectedValue = Convert.ToString(0);
 					//NroIngBrutosTextBox.Text = comprador.NroIngBrutos;
 					//CondIngBrutosDropDownList.SelectedValue = Convert.ToString(comprador.IdCondIngBrutos);
