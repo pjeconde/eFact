@@ -344,6 +344,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Localidad_VendedorTextBox;
         
         /// <summary>
+        /// Control TipoExpoUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel TipoExpoUpdatePanel;
+        
+        /// <summary>
         /// Control TipoExpDropDownList.
         /// </summary>
         /// <remarks>
@@ -362,6 +371,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.DropDownList Provincia_VendedorDropDownList;
         
         /// <summary>
+        /// Control PaisDestinoExpUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel PaisDestinoExpUpdatePanel;
+        
+        /// <summary>
         /// Control PaisDestinoExpDropDownList.
         /// </summary>
         /// <remarks>
@@ -378,6 +396,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Cp_VendedorTextBox;
+        
+        /// <summary>
+        /// Control IdiomaUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel IdiomaUpdatePanel;
         
         /// <summary>
         /// Control IdiomaDropDownList.
@@ -405,6 +432,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox GLN_VendedorTextBox;
+        
+        /// <summary>
+        /// Control IncotermsUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel IncotermsUpdatePanel;
         
         /// <summary>
         /// Control IncotermsDropDownList.

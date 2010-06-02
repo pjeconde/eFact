@@ -81,7 +81,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 					Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
 					Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-					Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
+					Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
 
 					CodigoOperacionDropDownList.DataValueField = "Codigo";
 					CodigoOperacionDropDownList.DataTextField = "Descr";
@@ -2553,6 +2553,14 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
 								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
 								listacompradores = CedWebRN.Comprador.ListaSinExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
+								TipoExpDropDownList.SelectedIndex = -1;
+								TipoExpDropDownList.Enabled = false;
+								PaisDestinoExpDropDownList.SelectedIndex = -1;
+								PaisDestinoExpDropDownList.Enabled = false;
+								IdiomaDropDownList.SelectedIndex = -1;
+								IdiomaDropDownList.Enabled = false;
+								IncotermsDropDownList.SelectedIndex = -1;
+								IncotermsDropDownList.Enabled = false;
 								break;
 							case "BFiscal":
 								Presta_ServCheckBox.Checked = false;
@@ -2569,6 +2577,14 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
 								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
 								listacompradores = CedWebRN.Comprador.ListaSinExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
+								TipoExpDropDownList.SelectedIndex = -1;
+								TipoExpDropDownList.Enabled = false;
+								PaisDestinoExpDropDownList.SelectedIndex = -1;
+								PaisDestinoExpDropDownList.Enabled = false;
+								IdiomaDropDownList.SelectedIndex = -1;
+								IdiomaDropDownList.Enabled = false;
+								IncotermsDropDownList.SelectedIndex = -1;
+								IncotermsDropDownList.Enabled = false;
 								break;
 							case "Export":
 								Presta_ServCheckBox.Checked = false;
@@ -2588,6 +2604,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
 								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
 								listacompradores = CedWebRN.Comprador.ListaExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
+								TipoExpDropDownList.Enabled = true;
+								PaisDestinoExpDropDownList.Enabled = true;
+								IdiomaDropDownList.Enabled = true;
+								IncotermsDropDownList.Enabled = true;
 								break;
 						}
 						Tipo_De_ComprobanteDropDownList.DataBind();
@@ -2621,7 +2641,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						FechaInicioServLabel.Visible = true;
 						FechaHstServLabel.Visible = true;
 						FechaServHastaDatePickerWebUserControl.Visible = true;
-						Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
+						Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
 						Tipo_De_ComprobanteDropDownList.DataBind();
 						Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
 						Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
@@ -2644,6 +2664,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 							CompradorDropDownList.Visible = false;
 							CompradorDropDownList.DataSource = null;
 						}
+						TipoExpDropDownList.Enabled = true;
+						PaisDestinoExpDropDownList.Enabled = true;
+						IdiomaDropDownList.Enabled = true;
+						IncotermsDropDownList.Enabled = true;
 					}
 				}
 			}
@@ -3151,10 +3175,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 							{
 								throw new Exception("El idioma es obligatorio");
 							}
-							if (tipoExp.Equals("1"))
-							{
-								GenerarInfoPermisosExportacion(ie);
-							}
 						}
 						else //NC y ND
 						{
@@ -3201,6 +3221,11 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				comp.extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
 				comp.extensiones.extensiones_camara_facturas.id_idioma = IdiomaDropDownList.SelectedValue;
 				exportacion = true;
+			}
+
+			if (TipoExpDropDownList.SelectedValue.Equals("1"))
+			{
+				GenerarInfoPermisosExportacion(ie);
 			}
 
 			if (exportacion)
