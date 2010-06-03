@@ -1706,12 +1706,16 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				GLN_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.GLN);
 			}
 			Codigo_Interno_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.codigo_interno);
-			if (Nro_Doc_Identificatorio_CompradorTextBox.Visible)
+			if (!lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.Equals(70))
 			{
+				Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+				Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
 				Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio);
 			}
 			else
 			{
+				Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
+				Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
 				Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio)));
 			}
 			Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Codigo_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Codigo_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio)));
