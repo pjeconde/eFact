@@ -176,11 +176,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			get
 			{
 				System.Collections.Generic.List<FeaEntidades.InterFacturas.permisos> refs = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.permisos>)ViewState["permisos"]);
-				if (refs.Count > 1)
-				{
-					return true;
-				}
-				else if (refs[0].destino_mercaderia.Equals("0"))
+				if (refs[0].destino_mercaderia.Equals(0))
 				{
 					return false;
 				}
