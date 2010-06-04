@@ -4561,10 +4561,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						switch (idtipo)
 						{
 							case "Comun":
+							case "Export":
 								l.codigo_producto_comprador = auxcpcomprador;
 								break;
 							case "BFiscal":
-							case "Export":
 								if (auxcpcomprador.Equals(string.Empty))
 								{
 									throw new Exception("Detalle no válido porque el código producto comprador es obligatorio");
