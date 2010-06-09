@@ -5,16 +5,16 @@
 <asp:Content ID="Content2" runat="Server" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado">
     <table border="0" cellpadding="0" cellspacing="0" width="800px">
         <tr>
-            <td rowspan="11">
+            <td rowspan="12">
                 <asp:Image ID="Image3" runat="server" AlternateText="Factura Electrónica" ImageUrl="~/Imagenes/eFact-vertical.jpg" />
             </td>
-            <td rowspan="11" style="width: 5px">
+            <td rowspan="12" style="width: 5px">
             </td>
             <td align="center" colspan="2">
                 <asp:Label ID="Label14" runat="server" Font-Bold="True" Font-Size="X-Large" ForeColor="brown"
                     Text="Factura Electrónica"></asp:Label>
             </td>
-            <td rowspan="11" style="width: 5px">
+            <td rowspan="12" style="width: 5px">
             </td>
         </tr>
         <tr>
@@ -38,7 +38,16 @@
                 <asp:Label ID="Label13" runat="server" SkinID="TextoMediano" Text="Es gratuito, rápido, fácil y seguro."></asp:Label>
             </td>
         </tr>
-        <tr>
+		<tr>
+			<td style="width: 22px; height: 16px; padding-top: 3px" valign="top">
+				<asp:Image ID="Image10" runat="server" AlternateText="o" ImageUrl="~/Imagenes/CajaBrownPeru.ico">
+				</asp:Image>
+			</td>
+			<td align="left" style="height: 16px; padding-top: 3px" valign="top">
+				<asp:Label ID="Label1" runat="server" SkinID="TextoMediano" Text="Soporta los siguientes tipos de Factura Electrónica: Común (en Pesos o Dólares), Bono Fiscal (Bs. de Capital) y Exportacion (RG2758/2010)."></asp:Label>
+			</td>
+		</tr>
+		<tr>
             <td style="width: 22px; height: 16px; padding-top: 3px" valign="top">
                 <asp:Image ID="Image6" runat="server" AlternateText="o" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
             </td>
@@ -70,7 +79,7 @@
             </td>
             <td align="left" style="height: 16px; padding-top: 3px" valign="top">
                 <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/FacturaElectronicaExcel.aspx"
-                    SkinID="LinkMedianoClaro">Usa una planilla Excel como herramienta de facturación.&nbsp;&nbsp;La podemos integrar a la red de Interfacturas</asp:HyperLink>
+                    SkinID="LinkMedianoClaro">¿Usa una planilla Excel como herramienta de facturación?.La podemos integrar a la red de Interfacturas</asp:HyperLink>
             </td>
         </tr>
         <tr>
