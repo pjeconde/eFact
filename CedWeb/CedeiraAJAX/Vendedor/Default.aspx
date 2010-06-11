@@ -396,7 +396,7 @@
 					<!-- Puntos de Venta -->
 					<tr>
 						<td align="left" colspan="2" style="padding-left:30px; padding-top:15px">
-							<asp:Label ID="Label30" runat="server" Text="Configure los <B>Puntos de Venta</B> para <B>Bono Fiscal</B>, para <B>Exportación</B> o para facturas comunes (opcional)."></asp:Label>
+							<asp:Label ID="Label30" runat="server" Text="Configure los <B>Puntos de Venta</B> para <B>Bono Fiscal</B>, para <B>Exportación</B> o para facturas comunes."></asp:Label>
 						</td>
 					</tr>
 					<tr>

@@ -2380,15 +2380,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						}
 						totalIVA += listadelineas[i].importe_iva;
 					}
-					//Proceso DESCUENTOS GLOBALES
-					System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> listadedescuentos = (System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"];
-					for (int i = 0; i < listadedescuentos.Count; i++)
-					{
-						if (listadedescuentos[i].descripcion_descuento != null && !listadedescuentos[i].descripcion_descuento.Equals(string.Empty))
-						{
-							totalGravado -= listadedescuentos[i].importe_descuento;
-						}
-					}
 					//Proceso IMPUESTOS GLOBALES
 					double total_Impuestos_Nacionales = 0;
 					double total_Impuestos_Internos = 0;
@@ -2424,22 +2415,58 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						}
 					}
 					//Asigno totales
-					Importe_Total_Neto_Gravado_ResumenTextBox.Text = totalGravado.ToString();
-					Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = totalNoGravado.ToString();
-					if (Condicion_IVA_CompradorDropDownList.SelectedValue == (new FeaEntidades.CondicionesIVA.ResponsableNoInscripto()).Codigo.ToString() || Condicion_IVA_CompradorDropDownList.SelectedValue == (new FeaEntidades.CondicionesIVA.SujetoNoCategorizado()).Codigo.ToString())
+					if (!Punto_VentaTextBox.Text.Equals(string.Empty))
 					{
-						Impuesto_Liq_Rni_ResumenTextBox.Text = totalIVA.ToString();
+						int auxPV;
+						try
+						{
+							auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
+							string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+							{
+								return pv.Id == auxPV;
+							}).IdTipo;
+							double total;
+							switch (idtipo)
+							{
+								case "Comun":
+								case "BFiscal":
+									//Proceso DESCUENTOS GLOBALES
+									System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> listadedescuentos = (System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"];
+									for (int i = 0; i < listadedescuentos.Count; i++)
+									{
+										if (listadedescuentos[i].descripcion_descuento != null && !listadedescuentos[i].descripcion_descuento.Equals(string.Empty))
+										{
+											totalGravado -= listadedescuentos[i].importe_descuento;
+										}
+									}
+									Importe_Total_Neto_Gravado_ResumenTextBox.Text = totalGravado.ToString();
+									Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = totalNoGravado.ToString();
+									if (Condicion_IVA_CompradorDropDownList.SelectedValue == (new FeaEntidades.CondicionesIVA.ResponsableNoInscripto()).Codigo.ToString() || Condicion_IVA_CompradorDropDownList.SelectedValue == (new FeaEntidades.CondicionesIVA.SujetoNoCategorizado()).Codigo.ToString())
+									{
+										Impuesto_Liq_Rni_ResumenTextBox.Text = totalIVA.ToString();
+									}
+									else
+									{
+										Impuesto_Liq_ResumenTextBox.Text = totalIVA.ToString();
+									}
+									Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = total_Impuestos_Municipales.ToString();
+									Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = total_Impuestos_Nacionales.ToString();
+									Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = total_Ingresos_Brutos.ToString();
+									Importe_Total_Impuestos_Internos_ResumenTextBox.Text = total_Impuestos_Internos.ToString();
+									total = totalGravado + totalNoGravado + totalIVA + total_Impuestos_Nacionales + total_Impuestos_Internos + total_Ingresos_Brutos + total_Impuestos_Municipales;
+									Importe_Total_Factura_ResumenTextBox.Text = total.ToString();
+									break;
+								case "Export":
+									total = totalGravado + totalNoGravado + totalIVA;
+									Importe_Total_Factura_ResumenTextBox.Text = total.ToString();
+									break;
+							}
+						}
+						catch
+						{
+							throw new Exception("Para sugerir totales debe definir previamente el tipo del punto de venta(BF-Exp-Común) en la configuración de datos del vendedor");
+						}
 					}
-					else
-					{
-						Impuesto_Liq_ResumenTextBox.Text = totalIVA.ToString();
-					}
-					Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = total_Impuestos_Municipales.ToString();
-					Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = total_Impuestos_Nacionales.ToString();
-					Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = total_Ingresos_Brutos.ToString();
-					Importe_Total_Impuestos_Internos_ResumenTextBox.Text = total_Impuestos_Internos.ToString();
-					double total = totalGravado + totalNoGravado + totalIVA + total_Impuestos_Nacionales + total_Impuestos_Internos + total_Ingresos_Brutos + total_Impuestos_Municipales;
-					Importe_Total_Factura_ResumenTextBox.Text = total.ToString();
 				}
 				catch (Exception ex)
 				{
