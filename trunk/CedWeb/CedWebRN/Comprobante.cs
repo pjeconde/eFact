@@ -1007,7 +1007,8 @@ namespace CedWebRN
 
         public string ConvertToHex(string asciiString)
         {
-            byte[] b = Encoding.UTF8.GetBytes(asciiString);
+            asciiString = PonerEntityName(asciiString);
+            byte[] b = Encoding.ASCII.GetBytes(asciiString);
             string salida = "";
             for (int i = 0; i < b.Length; i++)
             {
@@ -1017,6 +1018,16 @@ namespace CedWebRN
                 salida += "%" + r;
             }
             return salida;
+        }
+        private string PonerEntityName(string texto)
+        {
+            texto = texto.Replace("á", "&aacute;");
+            texto = texto.Replace("é", "&eacute;");
+            texto = texto.Replace("í", "&iacute;");
+            texto = texto.Replace("ó", "&oacute;");
+            texto = texto.Replace("ú", "&uacute;");
+            texto = texto.Replace("º", "&ordm;");
+            return texto;
         }
         public string HexToString(string Hex)
         {
@@ -1031,9 +1042,20 @@ namespace CedWebRN
                 Bytes[x] = (byte)(HexValue[Char.ToUpper(Hex[i + 0]) - '0'] << 4);
                 Bytes[x] |= (byte)(HexValue[Char.ToUpper(Hex[i + 1]) - '0']);
             }
-            System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding();
+            System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
             string str = enc.GetString(Bytes);
+            str = SacarEntityName(str);
             return str;
+        }
+        private string SacarEntityName(string texto)
+        {
+            texto = texto.Replace("&aacute;", "á");
+            texto = texto.Replace("&eacute;", "é");
+            texto = texto.Replace("&iacute;", "í");
+            texto = texto.Replace("&oacute;", "ó");
+            texto = texto.Replace("&uacute;", "ú");
+            texto = texto.Replace("&ordm;", "º");
+            return texto;
         }
     }
 }
