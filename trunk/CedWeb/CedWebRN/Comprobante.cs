@@ -1007,7 +1007,7 @@ namespace CedWebRN
 
         public string ConvertToHex(string asciiString)
         {
-            byte[] b = Encoding.ASCII.GetBytes(asciiString);
+            byte[] b = Encoding.UTF8.GetBytes(asciiString);
             string salida = "";
             for (int i = 0; i < b.Length; i++)
             {
@@ -1031,7 +1031,7 @@ namespace CedWebRN
                 Bytes[x] = (byte)(HexValue[Char.ToUpper(Hex[i + 0]) - '0'] << 4);
                 Bytes[x] |= (byte)(HexValue[Char.ToUpper(Hex[i + 1]) - '0']);
             }
-            System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
+            System.Text.UTF8Encoding enc = new System.Text.UTF8Encoding();
             string str = enc.GetString(Bytes);
             return str;
         }
