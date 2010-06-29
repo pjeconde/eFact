@@ -4618,5 +4618,17 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				l.codigo_producto_comprador = auxcpcomprador;
 			}
 		}
+		protected string GetAlicuotaIVA(double alic)
+		{
+			if (alic != 99)
+			{
+				string aux = Convert.ToString(alic);
+				return aux;
+			}
+			else
+			{
+				return string.Empty;
+			}
+		}
 	}
 }
