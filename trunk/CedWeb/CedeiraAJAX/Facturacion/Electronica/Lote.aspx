@@ -1537,7 +1537,7 @@
 																					</asp:TemplateField>
 																					<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="50px" HeaderText="Alic.IVA %">
 																						<ItemTemplate>
-																							<asp:Label ID="lbl_alicuota_articulo" runat="server" Text='<%# Eval("alicuota_iva") %>'
+																							<asp:Label ID="lbl_alicuota_articulo" runat="server" Text='<%# GetAlicuotaIVA((double)Eval("alicuota_iva"))  %>'
 																								Width="50px"></asp:Label>
 																						</ItemTemplate>
 																						<EditItemTemplate>
