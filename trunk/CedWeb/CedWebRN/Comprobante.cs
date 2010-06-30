@@ -167,6 +167,7 @@ namespace CedWebRN
             X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
             if (col.Count.Equals(1))
             {
+                //objIBK.RequestEncoding = System.Text.Encoding.GetEncoding("iso-8859-1");
                 objIBK.ClientCertificates.Add(col[0]);
                 //System.Threading.Thread.Sleep(1000);
                 IBK.lote_comprobantes_response lcr = objIBK.receiveFacturasConSchema(lcIBK);
