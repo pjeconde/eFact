@@ -1046,22 +1046,13 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.UpdatePanel detalleUpdatePanel;
         
         /// <summary>
-        /// Control detallePanel.
+        /// Control DetalleLinea.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel detallePanel;
-        
-        /// <summary>
-        /// Control detalleGridView.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView detalleGridView;
+        protected global::CedeiraAJAX.Facturacion.Electronica.Detalle DetalleLinea;
         
         /// <summary>
         /// Control detalleUpdateProgress.

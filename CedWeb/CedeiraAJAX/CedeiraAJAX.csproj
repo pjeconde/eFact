@@ -331,6 +331,13 @@
       <DependentUpon>Excepcion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\Conversor.cs" />
+    <Compile Include="Facturacion\Electronica\Detalle.ascx.cs">
+      <DependentUpon>Detalle.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Detalle.ascx.designer.cs">
+      <DependentUpon>Detalle.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Facturacion\Electronica\Extensiones\Comerciales.ascx.cs">
       <DependentUpon>Comerciales.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -925,6 +932,7 @@
       <DependentUpon>lote_comprobantes.xsd</DependentUpon>
     </None>
     <Content Include="Excepciones\Excepcion.aspx" />
+    <Content Include="Facturacion\Electronica\Detalle.ascx" />
     <Content Include="Facturacion\Electronica\Extensiones\Comerciales.ascx" />
     <Content Include="Facturacion\Electronica\Extensiones\Marketing.ascx" />
     <Content Include="Facturacion\Electronica\Permisos.ascx" />
