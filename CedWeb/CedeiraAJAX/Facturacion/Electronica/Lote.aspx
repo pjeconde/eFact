@@ -1325,12 +1325,14 @@
 								<tr>
 									<td class="TextoResaltado" style="height: 19px; text-align: center">
 										<uc2:Permisos id="PermisosExpo" runat="server">
-										</uc2:Permisos></td>
+										</uc2:Permisos>
+									</td>
 								</tr>
 								<!-- DATOS COMERCIALES-->
 								<tr>
 									<td class="TextoResaltado" style="height: 19px; text-align: center">
-										<uc3:Comerciales ID="DatosComerciales" runat="server"></uc3:Comerciales>
+										<uc3:Comerciales ID="DatosComerciales" runat="server">
+										</uc3:Comerciales>
 									</td>
 								</tr>
 								<tr>

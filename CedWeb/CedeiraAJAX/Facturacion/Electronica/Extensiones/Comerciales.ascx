@@ -1,9 +1,8 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Comerciales.ascx.cs" Inherits="CedeiraAJAX.Facturacion.Electronica.Extensiones.Comerciales" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-
 <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
 	<tr>
-		<td rowspan="8" style="width: 1px; background-color: Gray;">
+		<td rowspan="8" style="width: 2px; background-color: Gray;">
 		</td>
 		<td colspan="1" style="height: 1px; background-color: Gray;">
 		</td>
@@ -32,7 +31,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td rowspan="8" style="width: 1px; background-color: Gray;">
+		<td rowspan="8" style="width: 2px; background-color: Gray;">
 		</td>
 		<td colspan="1" style="height: 1px; background-color: Gray;">
 		</td>
