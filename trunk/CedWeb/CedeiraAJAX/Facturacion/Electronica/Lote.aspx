@@ -473,7 +473,7 @@
 																	<table border="0" cellpadding="0" cellspacing="0">
 																		<tr>
 																			<td class="TextoLabelFEAVendedor">
-																				País Destino Exportación:
+																				País Destino Comprobante:
 																			</td>
 																			<td class="TextoLabelFEAVendedorDet">
 																				<asp:DropDownList ID="PaisDestinoExpDropDownList" runat="server" SkinID="DropDownListVendedor">
