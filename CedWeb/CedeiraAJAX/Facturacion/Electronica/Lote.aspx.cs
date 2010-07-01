@@ -1564,6 +1564,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					{
 						InicioDeActividadesCompradorDatePickerWebUserControl.CalendarDate = comprador.FechaInicioActividades;
 					}
+					else
+					{
+						InicioDeActividadesCompradorDatePickerWebUserControl.CalendarDateString = string.Empty;
+					}
 				}
 				catch (Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente)
 				{
