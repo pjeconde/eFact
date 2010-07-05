@@ -744,11 +744,24 @@ namespace CedWebRN
                     cIBK.cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante;
                     cIBK.cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion;
                     cIBK.cabecera.informacion_comprobante.informacion_exportacion.id_impositivo = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.id_impositivo;
-                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.incoterms = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.incoterms;
-                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms;
-                    if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente != null && lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente != "")
+                    if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.incoterms != null && lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.incoterms != "")
                     {
-                        cIBK.cabecera.informacion_comprobante.informacion_exportacion.permiso_existente = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente;
+                        cIBK.cabecera.informacion_comprobante.informacion_exportacion.incoterms = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.incoterms;
+                    }
+                    if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms != null && lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms != "")
+                    {
+                        cIBK.cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms;
+                    }
+                    if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente != null)
+                    {
+                        if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente != "")
+                        {
+                            cIBK.cabecera.informacion_comprobante.informacion_exportacion.permiso_existente = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente;
+                        }
+                        else
+                        {
+                            cIBK.cabecera.informacion_comprobante.informacion_exportacion.permiso_existente = null;
+                        }
                     }
                     if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos != null)
                     {
