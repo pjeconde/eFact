@@ -85,23 +85,88 @@ namespace eFact_R
             ndNuevo = new TreeNode(@System.Configuration.ConfigurationManager.AppSettings["VisualizarArchivos"]);
             nds[2].Nodes.Add(ndNuevo);
 
-            ndNuevo = new TreeNode("Fijar valores de Otros Filtros de la Bandeja de Salida");
-            ndNuevo.Tag = "";
+            ndNuevo = new TreeNode("Otros Filtros");
             nds.Add(ndNuevo);
-            ndNuevo = new TreeNode(Aplicacion.OtrosFiltrosArchivos);
+
+            ndNuevo = new TreeNode("Filtrar la Bandeja de Entrada");
             nds[3].Nodes.Add(ndNuevo);
+            ndNuevo = new TreeNode(Aplicacion.OtrosFiltrosFiltrarBE);
+            nds[3].Nodes[0].Nodes.Add(ndNuevo);
+
+            ndNuevo = new TreeNode("Filtrar la Bandeja de Salida");
+            nds[3].Nodes.Add(ndNuevo);
+            ndNuevo = new TreeNode(Aplicacion.OtrosFiltrosFiltrarBS);
+            nds[3].Nodes[1].Nodes.Add(ndNuevo);
 
             ndNuevo = new TreeNode("Cuit");
             nds[3].Nodes.Add(ndNuevo);
             ndNuevo = new TreeNode(Aplicacion.OtrosFiltrosCuit);
-            nds[3].Nodes[1].Nodes.Add(ndNuevo);
+            nds[3].Nodes[2].Nodes.Add(ndNuevo);
 
             ndNuevo = new TreeNode("Punto de venta");
             nds[3].Nodes.Add(ndNuevo);
             ndNuevo = new TreeNode(Aplicacion.OtrosFiltrosPuntoVta);
-            nds[3].Nodes[2].Nodes.Add(ndNuevo);
+            nds[3].Nodes[3].Nodes.Add(ndNuevo);
 
+            ndNuevo = new TreeNode("Servicio de correo");
+            nds.Add(ndNuevo);
+            ndNuevo = new TreeNode("Servidor SMTP");
+            nds[4].Nodes.Add(ndNuevo);
+            ndNuevo = new TreeNode(@System.Configuration.ConfigurationManager.AppSettings["MailServidorSmtp"]);
+            nds[4].Nodes[0].Nodes.Add(ndNuevo);
+
+            ndNuevo = new TreeNode("Credenciales: Nombre de usuario");
+            nds[4].Nodes.Add(ndNuevo);
+            ndNuevo = new TreeNode(@System.Configuration.ConfigurationManager.AppSettings["MailCredencialesUsr"]);
+            nds[4].Nodes[1].Nodes.Add(ndNuevo);
+
+            ndNuevo = new TreeNode("Credenciales: Clave");
+            nds[4].Nodes.Add(ndNuevo);
+            ndNuevo = new TreeNode(@System.Configuration.ConfigurationManager.AppSettings["MailCredencialesPsw"]);
+            nds[4].Nodes[2].Nodes.Add(ndNuevo);
+
+            ndNuevo = new TreeNode("Testear servicio ( mail de prueba: " + System.Configuration.ConfigurationManager.AppSettings["MailTest"] + " )");
+            nds[4].Nodes.Add(ndNuevo);
+            ndNuevo = new TreeNode("Hacer doble clic sobre este nodo.");
+            ndNuevo.Tag = "Clic";
+            nds[4].Nodes[3].Nodes.Add(ndNuevo);
+            nds[4].Nodes[3].Nodes[0].BackColor = Color.PeachPuff;
+                        
             treeView1.ExpandAll();
+        }
+
+        private void treeView1_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor = System.Windows.Forms.Cursors.WaitCursor;
+                if (treeView1.SelectedNode.Tag == "Clic")
+                {
+                    string body = "Mail de Prueba";
+                    string subject = "Notificación de excepción (Mail de Prueba)";
+                    System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
+                    System.Net.Mail.MailMessage mail;
+                    mail = new System.Net.Mail.MailMessage("facturaelectronica@cedeira.com.ar", System.Configuration.ConfigurationManager.AppSettings["MailTest"], subject, body);
+                    mail.BodyEncoding = System.Text.Encoding.UTF8;
+                    string MailServidorSmtp = System.Configuration.ConfigurationManager.AppSettings["MailServidorSmtp"];
+                    string MailCredencialesUsr = System.Configuration.ConfigurationManager.AppSettings["MailCredencialesUsr"];
+                    string MailCredencialesPsw = System.Configuration.ConfigurationManager.AppSettings["MailCredencialesPsw"];
+                    smtpClient.Host = MailServidorSmtp;
+                    if (MailCredencialesUsr != "")
+                    {
+                        smtpClient.Credentials = new System.Net.NetworkCredential(MailCredencialesUsr, MailCredencialesPsw);
+                    }
+                    smtpClient.Send(mail);
+                }
+            }
+            catch (Exception ex)
+            {
+                Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
+            }
+            finally
+            {
+                Cursor = System.Windows.Forms.Cursors.Default;
+            }
         }
     }
 }
