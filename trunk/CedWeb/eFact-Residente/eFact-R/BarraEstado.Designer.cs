@@ -38,6 +38,7 @@
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(584, 262);
             this.treeView1.TabIndex = 0;
+            this.treeView1.DoubleClick += new System.EventHandler(this.treeView1_DoubleClick);
             // 
             // BarraEstado
             // 
@@ -46,7 +47,7 @@
             this.ClientSize = new System.Drawing.Size(584, 262);
             this.Controls.Add(this.treeView1);
             this.Name = "BarraEstado";
-            this.Text = "BarraEstado";
+            this.Text = "Barra de Estado";
             this.ResumeLayout(false);
 
         }

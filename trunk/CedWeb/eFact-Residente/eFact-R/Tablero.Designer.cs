@@ -1230,6 +1230,7 @@
             this.StatusBar.ShowPanels = true;
             this.StatusBar.Size = new System.Drawing.Size(1008, 30);
             this.StatusBar.TabIndex = 4;
+            this.StatusBar.DoubleClick += new System.EventHandler(this.StatusBar_DoubleClick);
             // 
             // UsuarioSBP
             // 

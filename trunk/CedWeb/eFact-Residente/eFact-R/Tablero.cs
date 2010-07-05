@@ -26,7 +26,7 @@ namespace eFact_R
             ArchivosOtrosFiltros = eFact_R.RN.Archivo.OtrosFiltros.SinAplicar;
 
             StatusBar.Panels["UsuarioSBP"].Text = "Usuario: " + Aplicacion.Sesion.Usuario.Nombre;
-            StatusBar.Panels["UsuarioSBP"].ToolTipText = "Información del usuario\r\nNombre:" + Aplicacion.Sesion.Usuario.Nombre;
+            StatusBar.Panels["UsuarioSBP"].ToolTipText = "Información del usuario\r\nNombre: " + Aplicacion.Sesion.Usuario.Nombre;
 
             //<add key="Certificado" value="012425509e59" />
             List<eFact_R.Entidades.Vendedor> vendedores = new List<eFact_R.Entidades.Vendedor>();
@@ -196,49 +196,48 @@ namespace eFact_R
                         FileInfo ArchFileInfo = new FileInfo(d);
                         try
                         {
-                            bool incorporarALista = true;
-                            //Si esta activado el filtro de archivos con "SI", los archivos deben respetar los primeros 16 digitos con el formato: CUIT + "-" + Punto de Venta + "-yyyyMMddhhmmss.TXT" 
-                            //ej.: 30221234568-0004-20100228103500.TXT
-                            if (Aplicacion.OtrosFiltrosArchivos == "SI")
+                            if (Aplicacion.VisualizarArchivos == "SI")
                             {
-                                if (ArchFileInfo.Name.Length >= 11 && Aplicacion.OtrosFiltrosCuit != "")
+                                Boolean incorporarALista = true;
+                                //Si esta activado el filtro de archivos con "SI", los archivos deben respetar los primeros 16 digitos con el formato: CUIT + "-" + Punto de Venta + "-yyyyMMddhhmmss.TXT" 
+                                //ej.: 30221234568-0004-20100228103500.TXT
+                                if (Aplicacion.OtrosFiltrosFiltrarBE == "SI")
                                 {
-                                    string cuit = ArchFileInfo.Name.Substring(0, 11);
-                                    if (cuit != Aplicacion.OtrosFiltrosCuit)
+                                    if (ArchFileInfo.Name.Length >= 11 && Aplicacion.OtrosFiltrosCuit != "")
                                     {
-                                        incorporarALista = false;
+                                        string cuit = ArchFileInfo.Name.Substring(0, 11);
+                                        if (cuit != Aplicacion.OtrosFiltrosCuit)
+                                        {
+                                            incorporarALista = false;
+                                        }
+                                    }
+                                    if (ArchFileInfo.Name.Length >= 16 && Aplicacion.OtrosFiltrosPuntoVta != "")
+                                    {
+                                        string puntoventa = ArchFileInfo.Name.Substring(12, 4);
+                                        string otrosFiltrosPuntoVta = "";
+                                        try
+                                        {
+                                            otrosFiltrosPuntoVta = Convert.ToInt32(Aplicacion.OtrosFiltrosPuntoVta).ToString("0000");
+                                        }
+                                        catch
+                                        {
+                                            throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorNoNumerico("Punto de Venta (filtro bandeja de salida)");
+                                        }
+                                        if (puntoventa != otrosFiltrosPuntoVta)
+                                        {
+                                            incorporarALista = false;
+                                        }
                                     }
                                 }
-                                if (ArchFileInfo.Name.Length >= 16 && Aplicacion.OtrosFiltrosPuntoVta != "")
+                                if (incorporarALista)
                                 {
-                                    string puntoventa = ArchFileInfo.Name.Substring(12, 4);
-                                    string otrosFiltrosPuntoVta = "";
-                                    try
-                                    {
-                                        otrosFiltrosPuntoVta = Convert.ToInt32(Aplicacion.OtrosFiltrosPuntoVta).ToString("0000");
-                                    }
-                                    catch
-                                    {
-                                        throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorNoNumerico("Punto de Venta (filtro bandeja de salida)");
-                                    }
-                                    if (puntoventa != otrosFiltrosPuntoVta)
-                                    {
-                                        incorporarALista = false;
-                                    }
+                                    List<eFact_R.Entidades.Archivo> Archivos = new List<eFact_R.Entidades.Archivo>();
+                                    eFact_R.RN.Tablero.ActualizarBandejaEntrada(out Archivos, dtBandejaEntrada, ArchFileInfo, Aplicacion.Sesion);
+                                    dtBandejaEntrada = Archivos;
+                                    BandejaEDataGridView.DataSource = new List<eFact_R.Entidades.Archivo>();
+                                    BandejaEDataGridView.DataSource = dtBandejaEntrada;
+                                    BandejaEDataGridView.Refresh();
                                 }
-                            }
-                            else if (Aplicacion.OtrosFiltrosArchivos != "NO")
-                            {
-                                incorporarALista = false;
-                            }
-                            if (incorporarALista)
-                            {
-                                List<eFact_R.Entidades.Archivo> Archivos = new List<eFact_R.Entidades.Archivo>();
-                                eFact_R.RN.Tablero.ActualizarBandejaEntrada(out Archivos, dtBandejaEntrada, ArchFileInfo, Aplicacion.Sesion);
-                                dtBandejaEntrada = Archivos;
-                                BandejaEDataGridView.DataSource = new List<eFact_R.Entidades.Archivo>();
-                                BandejaEDataGridView.DataSource = dtBandejaEntrada;
-                                BandejaEDataGridView.Refresh();
                             }
                         }
                         catch (Exception ex)
@@ -294,7 +293,7 @@ namespace eFact_R
                 FechaDsd = FechaDsdLoteFecEnvioDTP.Value;
                 FechaHst = FechaHstLoteFecEnvioDTP.Value;
             }
-            VerificarOtrosFiltrosFijos();
+            OtrosFiltrosFiltrarBS();
             string otrosFiltrosCuitvendedor = "";
             string otrosFiltrosPuntoVenta = "";
             string otrosFiltrosNumeroLote = "";
@@ -403,23 +402,26 @@ namespace eFact_R
             }
             return texto;
         }
-        private void VerificarOtrosFiltrosFijos()
+        private void OtrosFiltrosFiltrarBS()
         {
-            if (Aplicacion.OtrosFiltrosCuit != null && Aplicacion.OtrosFiltrosCuit != "")
+            if (Aplicacion.OtrosFiltrosFiltrarBS == "SI")
             {
-                OtrosFiltrosBandejaSCheckBox.Checked = true;
-                OtrosFiltrosBandejaSCheckBox.Enabled = false;
-                OtrosFiltrosBandejaSPanel.Enabled = true;
-                CuitVendedorTextBox.Text = Aplicacion.OtrosFiltrosCuit;
-                CuitVendedorTextBox.ReadOnly = true;
-            }
-            if (Aplicacion.OtrosFiltrosPuntoVta != null && Aplicacion.OtrosFiltrosPuntoVta != "")
-            {
-                OtrosFiltrosBandejaSCheckBox.Checked = true;
-                OtrosFiltrosBandejaSCheckBox.Enabled = false;
-                OtrosFiltrosBandejaSPanel.Enabled = true;
-                PuntoVentaTextBox.Text = Convert.ToInt32(Aplicacion.OtrosFiltrosPuntoVta).ToString();
-                PuntoVentaTextBox.ReadOnly = true;
+                if (Aplicacion.OtrosFiltrosCuit != null && Aplicacion.OtrosFiltrosCuit != "")
+                {
+                    OtrosFiltrosBandejaSCheckBox.Checked = true;
+                    OtrosFiltrosBandejaSCheckBox.Enabled = false;
+                    OtrosFiltrosBandejaSPanel.Enabled = true;
+                    CuitVendedorTextBox.Text = Aplicacion.OtrosFiltrosCuit;
+                    CuitVendedorTextBox.ReadOnly = true;
+                }
+                if (Aplicacion.OtrosFiltrosPuntoVta != null && Aplicacion.OtrosFiltrosPuntoVta != "")
+                {
+                    OtrosFiltrosBandejaSCheckBox.Checked = true;
+                    OtrosFiltrosBandejaSCheckBox.Enabled = false;
+                    OtrosFiltrosBandejaSPanel.Enabled = true;
+                    PuntoVentaTextBox.Text = Convert.ToInt32(Aplicacion.OtrosFiltrosPuntoVta).ToString();
+                    PuntoVentaTextBox.ReadOnly = true;
+                }
             }
         }
         private void DescartarBandejaEButton_Click(object sender, EventArgs e)
@@ -487,7 +489,7 @@ namespace eFact_R
             FechaDsdLoteFecEnvioDTP.Value = DateTime.Today;
             FechaHstLoteFecEnvioDTP.Value = DateTime.Today;
             //Verifica y inicializa ( CuitVendedorTextBox y PuntoVentaTextBox )
-            VerificarOtrosFiltrosFijos();
+            OtrosFiltrosFiltrarBS();
             NumeroLoteTextBox.Text = "";
         }
 
@@ -1080,6 +1082,25 @@ namespace eFact_R
         {
             string NombreArchAyuda = @System.Configuration.ConfigurationManager.AppSettings["NombreArchAyuda"];
             System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\" + NombreArchAyuda);
+        }
+
+        private void StatusBar_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor = System.Windows.Forms.Cursors.WaitCursor;
+                BarraEstado c = new BarraEstado();
+                c.ShowDialog();
+                c = null;
+            }
+            catch (Exception ex)
+            {
+                Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
+            }
+            finally
+            {
+                Cursor = System.Windows.Forms.Cursors.Default;
+            }
         }
     }
 }
