@@ -37,6 +37,14 @@ namespace CedWebRN.IBK {
         private System.Threading.SendOrPostCallback consultaTimeStampConSchemaOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
+
+        protected override System.Net.WebRequest GetWebRequest(Uri uri)
+        {
+            System.Net.HttpWebRequest wr = (System.Net.HttpWebRequest)base.GetWebRequest(uri);
+            wr.KeepAlive = false;
+            wr.ServicePoint.MaxIdleTime = 1000;
+            return wr;
+        }
         
         /// <remarks/>
         public FacturaWebServiceConSchemaSoapBindingQSService() {
@@ -3013,7 +3021,7 @@ namespace CedWebRN.IBK {
         
         private extensionesExtensiones_camara_facturas extensiones_camara_facturasField;
         
-        private object extensiones_datos_comercialesField;
+        private string extensiones_datos_comercialesField;
         
         private string extensiones_datos_marketingField;
         
@@ -3034,7 +3042,7 @@ namespace CedWebRN.IBK {
         }
         
         /// <comentarios/>
-        public object extensiones_datos_comerciales {
+        public string extensiones_datos_comerciales {
             get {
                 return this.extensiones_datos_comercialesField;
             }
