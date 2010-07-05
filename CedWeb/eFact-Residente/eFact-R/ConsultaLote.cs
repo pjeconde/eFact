@@ -10,6 +10,7 @@ using System.Xml.Serialization;
 using eFact_R.Facturacion.Electronica.Reportes;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using System.Xml;
 
 namespace eFact_R
 {
@@ -82,6 +83,17 @@ namespace eFact_R
                     ConsultarComprobanteButton.Enabled = false;
                 //}
                 DetalleLoteDataGridView.Refresh();
+
+                this.webBrowser1.Navigate("about:blank");
+                //this.webBrowser1.Document.Write("<html><boby>" + lote.LoteXml + "</body></html>");
+                //this.webBrowser1.DocumentText = "<html><boby>" + lote.LoteXml + "</body></html>";
+
+                StreamWriter fileWriter;
+                fileWriter = File.CreateText(Aplicacion.ArchPathPDF + Aplicacion.Sesion.Usuario.IdUsuario + ".xml");
+                fileWriter.Write(lote.LoteXml);
+                fileWriter.Close();
+                webBrowser1.Navigate(Aplicacion.ArchPathPDF + Aplicacion.Sesion.Usuario.IdUsuario + ".xml"); 
+
             }
             catch (Exception ex)
             {
