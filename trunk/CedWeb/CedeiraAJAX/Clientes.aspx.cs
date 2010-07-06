@@ -21,7 +21,7 @@ namespace CedeiraAJAX
 
 				Arbol.Nodes.Add(new TreeNode("Agro"));
 				ultimoNodoPpal = Arbol.Nodes.Count - 1;
-				Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("K+S Argentina S.R.L."));
+				Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("K+S Argentina S.R.L. • ADM ARGENTINA S.A."));
 
 				Arbol.Nodes.Add(new TreeNode("Agroindustrial"));
 				ultimoNodoPpal = Arbol.Nodes.Count - 1;
@@ -38,10 +38,9 @@ namespace CedeiraAJAX
                 ultimoNodoPpal = Arbol.Nodes.Count - 1;
                 Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("Boris Lend Lease S.A. • Alhena S.A. • Blasi y Vazquez Constructora S.A."));
                 Arbol.Nodes[ultimoNodoPpal].CollapseAll();
-                Arbol.Nodes.Add(new TreeNode("Fondos Comunes de Inversión (administración)"));
+                Arbol.Nodes.Add(new TreeNode("Fondos Comunes de Inversión (Administración)"));
                 ultimoNodoPpal = Arbol.Nodes.Count - 1;
                 Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("Galicia Administradora de Fondos"));
-                Arbol.Nodes[ultimoNodoPpal].CollapseAll();
 
 				Arbol.Nodes.Add(new TreeNode("Frigoríficos"));
 				ultimoNodoPpal = Arbol.Nodes.Count - 1;
@@ -52,10 +51,9 @@ namespace CedeiraAJAX
                 Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("Disco S.A. • Supermercados La Gran Provisión • Casa Tía • Captar S.A. (Tarjeta de compra) • Supermercados Elefante (Mar del Plata)"));
                 Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("Carrefour Argentina S.A • Stop (minimercados en estaciones de servicio) • Provisión El Quijote"));
 
-                Arbol.Nodes.Add(new TreeNode("Industriales"));
+                Arbol.Nodes.Add(new TreeNode("Industria"));
                 ultimoNodoPpal = Arbol.Nodes.Count - 1;
-                Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("GRUPELEC S.A. • Integral Gráfica S.A. • Premium Gráfica • Grafo Stil S.R.L."));
-                Arbol.Nodes[ultimoNodoPpal].CollapseAll();
+				Arbol.Nodes[ultimoNodoPpal].ChildNodes.Add(new TreeNode("CERAMICA ALBERDI S.A. • GRUPELEC S.A. • Integral Gráfica S.A. • Premium Gráfica • Grafo Stil S.R.L."));
 
 				Arbol.Nodes.Add(new TreeNode("Informática"));
 				ultimoNodoPpal = Arbol.Nodes.Count - 1;
