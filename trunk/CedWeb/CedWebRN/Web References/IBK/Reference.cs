@@ -37,7 +37,6 @@ namespace CedWebRN.IBK {
         private System.Threading.SendOrPostCallback getLoteFacturasConSchemaOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
-<<<<<<< .mine
 
 		protected override System.Net.WebRequest GetWebRequest(Uri uri)
 		{
@@ -47,17 +46,7 @@ namespace CedWebRN.IBK {
 			return wr;
 		}
 
-=======
-
-        protected override System.Net.WebRequest GetWebRequest(Uri uri)
-        {
-            System.Net.HttpWebRequest wr = (System.Net.HttpWebRequest)base.GetWebRequest(uri);
-            wr.KeepAlive = false;
-            wr.ServicePoint.MaxIdleTime = 1000;
-            return wr;
-        }
         
->>>>>>> .r1001
         /// <remarks/>
         public FacturaWebServiceConSchema() {
             this.Url = global::CedWebRN.Properties.Settings.Default.CedWebRN_IBK_FacturaWebServiceConSchemaSoapBindingQSService;
