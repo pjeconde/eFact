@@ -101,7 +101,6 @@ namespace CedeiraAJAX.Admin
 				}
 			}
 			VisitantesLabel.Text = Convert.ToInt32(Application["Visitantes"]).ToString("0000");
-			RegistradosLabel.Text = Convert.ToInt32(Application["Registrados"]).ToString("0000");
 		}
 		protected void Page_Disposed(object sender, EventArgs e)
 		{

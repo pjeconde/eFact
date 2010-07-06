@@ -19,7 +19,6 @@
                             <table border="0" cellpadding="0" cellspacing="0">
 								<tr>
 									<td align="center" colspan="2" style="padding-top: 10px" valign="middle">
-										Usuarios registrados online:<asp:Label ID="RegistradosLabel" runat="server" Width="30px"></asp:Label>
 									</td>
 									<td align="center" colspan="2" style="padding-top: 10px" valign="middle">
 										Visitantes online:<asp:Label ID="VisitantesLabel" runat="server" Width="30px"></asp:Label>

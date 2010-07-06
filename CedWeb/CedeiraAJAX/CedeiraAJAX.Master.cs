@@ -100,11 +100,6 @@ namespace CedeiraAJAX
             SalirLinkButton.Visible = false;
             AdministracionLinkButton.Visible = false;
             Session["AceptarTYC"] = null;
-			Application.Lock();
-			Application["Registrados"] = (int)Application["Registrados"] - 1;
-			Application.UnLock();
-
         }
-
     }
 }
