@@ -44,9 +44,6 @@ namespace CedeiraAJAX
                 sesion.Cuenta.Id = UsuarioTextBox.Text;
                 sesion.Cuenta.Password = PasswordTextBox.Text;
                 CedWebRN.Cuenta.Login(sesion.Cuenta, (CedEntidades.Sesion)Session["Sesion"]);
-				Application.Lock();
-				Application["Registrados"] = (int)Application["Registrados"] + 1;
-				Application.UnLock();                
 				if (sesion.Cuenta.TipoCuenta.Id == "Admin")
                 {
                     CedWebRN.Cuenta.Depurar(sesion);
