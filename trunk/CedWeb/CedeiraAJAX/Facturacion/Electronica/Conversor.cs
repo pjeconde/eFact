@@ -71,7 +71,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 cIBK.cabecera.informacion_comprobante = new global::CedeiraAJAX.org.dyndns.cedweb.envio.lcComprobanteCabeceraInformacion_comprobante();
                 cIBK.cabecera.informacion_comprobante.cae = lc.comprobante[i].cabecera.informacion_comprobante.cae;
                 cIBK.cabecera.informacion_comprobante.codigo_operacion = lc.comprobante[i].cabecera.informacion_comprobante.codigo_operacion;
-                cIBK.cabecera.informacion_comprobante.condicion_de_pago = Convert.ToInt32(lc.comprobante[i].cabecera.informacion_comprobante.condicion_de_pago);
+                cIBK.cabecera.informacion_comprobante.condicion_de_pago = lc.comprobante[i].cabecera.informacion_comprobante.condicion_de_pago;
                 cIBK.cabecera.informacion_comprobante.es_detalle_encriptado = lc.comprobante[i].cabecera.informacion_comprobante.es_detalle_encriptado;
                 cIBK.cabecera.informacion_comprobante.fecha_emision = lc.comprobante[i].cabecera.informacion_comprobante.fecha_emision;
                 cIBK.cabecera.informacion_comprobante.fecha_obtencion_cae = lc.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae;
@@ -94,7 +94,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         {
                             cIBK.cabecera.informacion_comprobante.referencias[j] = new global::CedeiraAJAX.org.dyndns.cedweb.envio.lcComprobanteCabeceraInformacion_comprobanteReferencias();
                             cIBK.cabecera.informacion_comprobante.referencias[j].codigo_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].codigo_de_referencia;
-                            cIBK.cabecera.informacion_comprobante.referencias[j].dato_de_referencia = Convert.ToInt64(lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].dato_de_referencia);
+                            cIBK.cabecera.informacion_comprobante.referencias[j].dato_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].dato_de_referencia;
                         }
                     }
                 }

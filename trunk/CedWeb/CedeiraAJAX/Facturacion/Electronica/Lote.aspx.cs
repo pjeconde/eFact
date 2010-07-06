@@ -1275,20 +1275,49 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			Condicion_De_PagoTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago);
 			IVAcomputableDropDownList.SelectedIndex = IVAcomputableDropDownList.Items.IndexOf(IVAcomputableDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.iva_computable)));
 			CodigoOperacionDropDownList.SelectedIndex = CodigoOperacionDropDownList.Items.IndexOf(CodigoOperacionDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.codigo_operacion)));
-			//TODO Exportacion
-			//if (lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion != null)
-			//{
-			//    PaisDestinoExpDropDownList.SelectedIndex = PaisDestinoExpDropDownList.Items.IndexOf(PaisDestinoExpDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante)));
-			//    IncotermsDropDownList.SelectedIndex = IncotermsDropDownList.Items.IndexOf(IncotermsDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.incoterms)));
-			//    TipoExpDropDownList.SelectedIndex = TipoExpDropDownList.Items.IndexOf(TipoExpDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion)));
-			//}
-			//if (lc.comprobante[0].extensiones != null)
-			//{
-			//    if (lc.comprobante[0].extensiones.extensiones_camara_facturas != null)
-			//    {
-			//        IdiomaDropDownList.SelectedIndex = IdiomaDropDownList.Items.IndexOf(IdiomaDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].extensiones.extensiones_camara_facturas.id_idioma)));
-			//    }
-			//}
+			
+			//Exportacion
+			if (lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion != null)
+			{
+				PaisDestinoExpDropDownList.SelectedIndex = PaisDestinoExpDropDownList.Items.IndexOf(PaisDestinoExpDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante)));
+				IncotermsDropDownList.SelectedIndex = IncotermsDropDownList.Items.IndexOf(IncotermsDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.incoterms)));
+				TipoExpDropDownList.SelectedIndex = TipoExpDropDownList.Items.IndexOf(TipoExpDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion)));
+			}
+			else
+			{
+				PaisDestinoExpDropDownList.SelectedIndex = -1;
+				IncotermsDropDownList.SelectedIndex = -1;
+				TipoExpDropDownList.SelectedIndex = -1;
+			}
+			if (lc.comprobante[0].extensiones != null)
+			{
+				if (lc.comprobante[0].extensiones.extensiones_camara_facturas != null)
+				{
+					IdiomaDropDownList.SelectedIndex = IdiomaDropDownList.Items.IndexOf(IdiomaDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].extensiones.extensiones_camara_facturas.id_idioma)));
+				}
+				else
+				{
+					IdiomaDropDownList.SelectedIndex = -1;
+				}
+				if (lc.comprobante[0].extensiones.extensiones_datos_comerciales != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != "")
+				{
+					//Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
+					if (lc.comprobante[0].extensiones.extensiones_datos_comerciales.Substring(0, 1) == "%")
+					{
+						CedWebRN.Comprobante cDC = new CedWebRN.Comprobante();
+						DatosComerciales.Texto = cDC.HexToString(lc.comprobante[0].extensiones.extensiones_datos_comerciales).Replace("<br>", System.Environment.NewLine);
+					}
+					else
+					{
+						DatosComerciales.Texto = lc.comprobante[0].extensiones.extensiones_datos_comerciales.Replace("<br>", System.Environment.NewLine);
+					}
+				}
+			}
+			else
+			{
+				IdiomaDropDownList.SelectedIndex = -1;
+			}
+
 			//Referencias
 			if (lc.comprobante[0].cabecera.informacion_comprobante.referencias != null)
 			{
@@ -3695,6 +3724,14 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						{
 							break;
 						}
+					}
+					if (lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento == null)
+					{
+						lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento = string.Empty;
+					}
+					if (lcFea.cabecera_lote.presta_servSpecified == false)
+					{
+						lcFea.cabecera_lote.presta_serv = 0;
 					}
 					Session["lote"] = lcFea;
 					Response.Redirect("Reportes\\FacturaWebForm.aspx", true);

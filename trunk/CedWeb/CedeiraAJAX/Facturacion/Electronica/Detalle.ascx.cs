@@ -61,7 +61,16 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			foreach (org.dyndns.cedweb.consulta.ConsultarResultComprobanteDetalleLinea l in lc.comprobante[0].detalle.linea)
 			{
 				FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
-				linea.descripcion = l.descripcion;
+				//Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
+				CedWebRN.Comprobante crn = new CedWebRN.Comprobante();
+				if (l.descripcion.Substring(0, 1) == "%")
+				{
+					linea.descripcion = crn.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
+				}
+				else
+				{
+					linea.descripcion = l.descripcion.Replace("<br>", System.Environment.NewLine);
+				}
 				if (l.alicuota_ivaSpecified)
 				{
 					linea.alicuota_iva = l.alicuota_iva;

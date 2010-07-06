@@ -109,10 +109,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="D:\Usuarios\Claudio\Mis documentos\Cedeira y Asoc. S.A\GoogleCode-CedWeb\CedWeb\CedWebRN\WSDL\FacturaWebServiceConSchema.wsdl">
+    <WebReferenceUrl Include="C:\SVN\CedWeb\CedWebRN\WSDL\FacturaWebServiceConSchema.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\IBK\</RelPath>
-      <UpdateFromURL>D:\Usuarios\Claudio\Mis documentos\Cedeira y Asoc. S.A\GoogleCode-CedWeb\CedWeb\CedWebRN\WSDL\FacturaWebServiceConSchema.wsdl</UpdateFromURL>
+      <UpdateFromURL>C:\SVN\CedWeb\CedWebRN\WSDL\FacturaWebServiceConSchema.wsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
