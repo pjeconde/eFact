@@ -12,8 +12,8 @@ namespace CedWebRN
             FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
             lc.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
             lc.comprobante = new FeaEntidades.InterFacturas.comprobante[1];
-            IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
-            objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
+            IBK.FacturaWebServiceConSchema objIBK;
+			objIBK = new IBK.FacturaWebServiceConSchema();
             objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturas"];
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null)
             {
@@ -80,8 +80,8 @@ namespace CedWebRN
             lc.comprobante = new FeaEntidades.InterFacturas.comprobante[1];
             IBK.error[] respErroresLote = new CedWebRN.IBK.error[0];
             IBK.error[] respErroresComprobantes = new CedWebRN.IBK.error[0];
-            IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
-            objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
+			IBK.FacturaWebServiceConSchema objIBK;
+			objIBK = new IBK.FacturaWebServiceConSchema();
             objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturas"];
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
             {
@@ -149,8 +149,8 @@ namespace CedWebRN
         {
             IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
             lcIBK = Fea2Ibk(lc);
-            IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
-            objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
+			IBK.FacturaWebServiceConSchema objIBK;
+			objIBK = new IBK.FacturaWebServiceConSchema();
             objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturas"];
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null && System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
             {
@@ -241,8 +241,8 @@ namespace CedWebRN
             IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
             lcIBK = Fea2Ibk(lc);
 
-            IBK.FacturaWebServiceConSchemaSoapBindingQSService objIBK;
-            objIBK = new IBK.FacturaWebServiceConSchemaSoapBindingQSService();
+			IBK.FacturaWebServiceConSchema objIBK;
+			objIBK = new IBK.FacturaWebServiceConSchema();
             objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturas"];
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null && System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
             {

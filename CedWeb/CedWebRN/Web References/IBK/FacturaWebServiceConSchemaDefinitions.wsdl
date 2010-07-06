@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s0:definitions xmlns:s1="http://ar/com/ib/cfe/ejb/services" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/" name="FacturaWebServiceConSchemaDefinitions" targetNamespace="http://ar/com/ib/cfe/ejb/services" xmlns:s0="http://schemas.xmlsoap.org/wsdl/">
-  <s0:documentation>Web Service para Emisores de Facturas de la Camara de Factura Electronica de interBANKING</s0:documentation>
+<s0:definitions xmlns:s1="http://ar/com/ib/cfe/ejb/services" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="" name="FacturaWebServiceConSchemaDefinitions" targetNamespace="http://ar/com/ib/cfe/ejb/services" xmlns:s0="http://schemas.xmlsoap.org/wsdl/">
   <s0:types>
     <xs:schema xmlns:tns="http://lote.schemas.cfe.ib.com.ar/" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://lote.schemas.cfe.ib.com.ar/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="lote_comprobantes">
@@ -98,7 +97,7 @@
               </xs:simpleType>
             </xs:element>
             <xs:element name="fecha_emision" type="xs:string" />
-            <xs:element name="fecha_vencimiento" type="xs:string" />
+            <xs:element minOccurs="0" name="fecha_vencimiento" type="xs:string" />
             <xs:element minOccurs="0" name="fecha_serv_desde" type="xs:string" />
             <xs:element minOccurs="0" name="fecha_serv_hasta" type="xs:string" />
             <xs:element minOccurs="0" name="condicion_de_pago" type="xs:string" />
@@ -923,6 +922,7 @@
             <xs:element name="cuit_vendedor" type="xs:long" />
             <xs:element minOccurs="0" name="tipo_doc_comprador" type="xs:int" />
             <xs:element minOccurs="0" name="doc_comprador" type="xs:long" />
+            <xs:element minOccurs="0" name="denominacion_comprador" type="xs:string" />
             <xs:element minOccurs="0" name="fecha_emision_desde" type="xs:string" />
             <xs:element minOccurs="0" name="fecha_emision_hasta" type="xs:string" />
             <xs:element minOccurs="0" name="fecha_timestamp_desde" type="xs:string" />
@@ -965,6 +965,8 @@
                       <xs:enumeration value="RE" />
                       <xs:enumeration value="VI" />
                       <xs:enumeration value="NV" />
+                      <xs:enumeration value="PA" />
+                      <xs:enumeration value="RP" />
                     </xs:restriction>
                   </xs:simpleType>
                 </xs:list>
@@ -1048,6 +1050,7 @@
           <xs:sequence>
             <xs:element name="tipo_doc_comprador" type="xs:int" />
             <xs:element name="doc_comprador" type="xs:long" />
+            <xs:element minOccurs="0" name="denominacion_comprador" type="xs:string" />
             <xs:element name="tipo_de_comprobante" type="xs:int" />
             <xs:element name="numero_comprobante">
               <xs:simpleType>
@@ -1066,16 +1069,18 @@
               </xs:simpleType>
             </xs:element>
             <xs:element name="fecha_emision" type="xs:string" />
+            <xs:element minOccurs="0" name="fecha_vencimiento" type="xs:string" />
             <xs:element name="importe_total" type="xs:double" />
-            <xs:element name="fecha_timestamp" type="xs:string" />
-            <xs:element name="usuario_consulto" type="xs:string" />
+            <xs:element minOccurs="0" name="fecha_timestamp" type="xs:string" />
+            <xs:element minOccurs="0" name="usuario_consulto" type="xs:string" />
             <xs:element name="estado" type="xs:string" />
-            <xs:element name="motivo" type="xs:string" />
+            <xs:element minOccurs="0" name="motivo" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
     </xs:schema>
     <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ar/com/ib/cfe/ejb/services" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://lote.schemas.cfe.ib.com.ar/" />
       <xs:element name="receiveFacturasConSchema">
         <xs:complexType>
           <xs:sequence>
@@ -1087,20 +1092,6 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element xmlns:lote="http://lote.schemas.cfe.ib.com.ar/" ref="lote:lote_comprobantes_response" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getLoteFacturasConSchema">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element xmlns:lote="http://lote.schemas.cfe.ib.com.ar/" ref="lote:consulta_lote_comprobantes" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getLoteFacturasConSchemaResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element xmlns:lote="http://lote.schemas.cfe.ib.com.ar/" ref="lote:consulta_lote_comprobantes_response" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -1118,6 +1109,20 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="getLoteFacturasConSchema">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:lote="http://lote.schemas.cfe.ib.com.ar/" ref="lote:consulta_lote_comprobantes" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getLoteFacturasConSchemaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:lote="http://lote.schemas.cfe.ib.com.ar/" ref="lote:consulta_lote_comprobantes_response" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:schema>
   </s0:types>
   <s0:message name="receiveFacturasConSchema">
@@ -1126,45 +1131,36 @@
   <s0:message name="receiveFacturasConSchemaResponse">
     <s0:part name="parameters" element="s1:receiveFacturasConSchemaResponse" />
   </s0:message>
-  <s0:message name="getLoteFacturasConSchema">
-    <s0:part name="parameters" element="s1:getLoteFacturasConSchema" />
-  </s0:message>
-  <s0:message name="getLoteFacturasConSchemaResponse">
-    <s0:part name="parameters" element="s1:getLoteFacturasConSchemaResponse" />
-  </s0:message>
   <s0:message name="consultaTimeStampConSchema">
     <s0:part name="parameters" element="s1:consultaTimeStampConSchema" />
   </s0:message>
   <s0:message name="consultaTimeStampConSchemaResponse">
     <s0:part name="parameters" element="s1:consultaTimeStampConSchemaResponse" />
   </s0:message>
-  <s0:portType name="FacturaWebServiceConSchemaPortType">
+  <s0:message name="getLoteFacturasConSchema">
+    <s0:part name="parameters" element="s1:getLoteFacturasConSchema" />
+  </s0:message>
+  <s0:message name="getLoteFacturasConSchemaResponse">
+    <s0:part name="parameters" element="s1:getLoteFacturasConSchemaResponse" />
+  </s0:message>
+  <s0:portType name="FacturaWebServiceConSchemaPortTypeImpl">
     <s0:operation name="receiveFacturasConSchema" parameterOrder="parameters">
       <s0:input message="s1:receiveFacturasConSchema" />
       <s0:output message="s1:receiveFacturasConSchemaResponse" />
-    </s0:operation>
-    <s0:operation name="getLoteFacturasConSchema" parameterOrder="parameters">
-      <s0:input message="s1:getLoteFacturasConSchema" />
-      <s0:output message="s1:getLoteFacturasConSchemaResponse" />
     </s0:operation>
     <s0:operation name="consultaTimeStampConSchema" parameterOrder="parameters">
       <s0:input message="s1:consultaTimeStampConSchema" />
       <s0:output message="s1:consultaTimeStampConSchemaResponse" />
     </s0:operation>
+    <s0:operation name="getLoteFacturasConSchema" parameterOrder="parameters">
+      <s0:input message="s1:getLoteFacturasConSchema" />
+      <s0:output message="s1:getLoteFacturasConSchemaResponse" />
+    </s0:operation>
   </s0:portType>
-  <s0:binding name="FacturaWebServiceConSchemaSoapBinding" type="s1:FacturaWebServiceConSchemaPortType">
+  <s0:binding name="FacturaWebServiceConSchemaSoapBinding" type="s1:FacturaWebServiceConSchemaPortTypeImpl">
     <s2:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <s0:operation name="receiveFacturasConSchema">
       <s2:operation soapAction="http://ar/com/ib/cfe/ejb/services/receiveFacturasConSchema" style="document" />
-      <s0:input>
-        <s2:body use="literal" parts="parameters" />
-      </s0:input>
-      <s0:output>
-        <s2:body use="literal" parts="parameters" />
-      </s0:output>
-    </s0:operation>
-    <s0:operation name="getLoteFacturasConSchema">
-      <s2:operation soapAction="http://ar/com/ib/cfe/ejb/services/getLoteFacturasConSchema" style="document" />
       <s0:input>
         <s2:body use="literal" parts="parameters" />
       </s0:input>
@@ -1181,10 +1177,19 @@
         <s2:body use="literal" parts="parameters" />
       </s0:output>
     </s0:operation>
+    <s0:operation name="getLoteFacturasConSchema">
+      <s2:operation soapAction="http://ar/com/ib/cfe/ejb/services/getLoteFacturasConSchema" style="document" />
+      <s0:input>
+        <s2:body use="literal" parts="parameters" />
+      </s0:input>
+      <s0:output>
+        <s2:body use="literal" parts="parameters" />
+      </s0:output>
+    </s0:operation>
   </s0:binding>
-  <s0:service name="FacturaWebServiceConSchemaSoapBindingQSService">
-    <s0:port name="FacturaWebServiceConSchemaSoapBindingQSPort" binding="s1:FacturaWebServiceConSchemaSoapBinding">
-      <s2:address location="https://ibcfealsb02-qa:6002/ws/FacturaWebServiceConSchema" />
+  <s0:service name="FacturaWebServiceConSchema">
+    <s0:port name="FacturaWebServiceConSchemaPort" binding="s1:FacturaWebServiceConSchemaSoapBinding">
+      <s2:address location="https://bcfealsb02-qa:10001/ws/FacturaWebServiceConSchema" />
     </s0:port>
   </s0:service>
 </s0:definitions>

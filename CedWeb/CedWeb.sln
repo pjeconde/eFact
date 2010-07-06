@@ -391,7 +391,6 @@ Global
 		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Cedeira|Mixed Platforms.ActiveCfg = Release
 		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Cedeira|Mixed Platforms.Build.0 = Release
 		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Debug|.NET.ActiveCfg = Debug
-		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Debug|.NET.Build.0 = Debug
 		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Debug|Any CPU.ActiveCfg = Debug
 		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Debug|Any CPU.Build.0 = Debug
 		{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}.Debug|Mixed Platforms.ActiveCfg = Debug
@@ -408,7 +407,6 @@ Global
 		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Cedeira|Mixed Platforms.ActiveCfg = Release
 		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Cedeira|Mixed Platforms.Build.0 = Release
 		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Debug|.NET.ActiveCfg = Debug
-		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Debug|.NET.Build.0 = Debug
 		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Debug|Any CPU.ActiveCfg = Debug
 		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Debug|Any CPU.Build.0 = Debug
 		{A0DBA393-A3DD-4740-8613-584B63A029C7}.Debug|Mixed Platforms.ActiveCfg = Debug

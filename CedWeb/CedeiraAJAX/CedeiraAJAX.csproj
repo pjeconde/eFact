@@ -842,10 +842,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://cedweb.dyndns.org/cedweb/ConsultaIBK.asmx">
+    <WebReferenceUrl Include="http://localhost:4167/ConsultaIBK.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\org.dyndns.cedweb.consulta\</RelPath>
-      <UpdateFromURL>http://cedweb.dyndns.org/cedweb/ConsultaIBK.asmx</UpdateFromURL>
+      <UpdateFromURL>http://localhost:4167/ConsultaIBK.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
