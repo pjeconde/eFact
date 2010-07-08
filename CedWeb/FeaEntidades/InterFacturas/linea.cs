@@ -71,10 +71,13 @@ namespace FeaEntidades.InterFacturas
 		//[FileHelpers.FieldArrayLength(1,1)]
 		//[FileHelpers.FieldConverter(typeof(FeaEntidades.Converters.lineaDescuentosConverter))]
 		[FileHelpers.FieldIgnored()]
-		private lineaDescuentos[] descuentosField;
+		private lineaDescuentos[] descuentosField = new lineaDescuentos[50];
 
 		[FileHelpers.FieldIgnored()]
 		private lineaImpuestos[] impuestosField;
+
+        [FileHelpers.FieldIgnored()]
+        private lineaInformacion_adicional[] informacion_adicionalField = new lineaInformacion_adicional[10];
 
         /// <comentarios/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
@@ -433,5 +436,19 @@ namespace FeaEntidades.InterFacturas
 				this.numeroLineaField = value;
 			}
 		}
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlElementAttribute("informacion_adicional")]
+        public lineaInformacion_adicional[] informacion_adicional
+        {
+            get
+            {
+                return this.informacion_adicionalField;
+            }
+            set
+            {
+                this.informacion_adicionalField = value;
+            }
+        }
 	}
 }

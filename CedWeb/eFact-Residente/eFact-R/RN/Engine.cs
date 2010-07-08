@@ -17,7 +17,7 @@ namespace eFact_R.RN
         {
             try
             {
-                Type[] types = new Type[15];
+                Type[] types = new Type[17];
                 types[0] = typeof(FeaEntidades.InterFacturas.cabecera_lote);
                 types[1] = typeof(FeaEntidades.InterFacturas.informacion_comprador);
                 types[2] = typeof(FeaEntidades.InterFacturas.informacion_comprobante);
@@ -26,15 +26,17 @@ namespace eFact_R.RN
                 types[5] = typeof(FeaEntidades.InterFacturas.detalle);
                 types[6] = typeof(FeaEntidades.InterFacturas.linea);
                 types[7] = typeof(FeaEntidades.InterFacturas.lineaImportes_moneda_origen);
-                types[8] = typeof(FeaEntidades.InterFacturas.informacion_exportacion);
-                types[9] = typeof(FeaEntidades.InterFacturas.permisos);
-                types[10] = typeof(FeaEntidades.InterFacturas.extensiones);
-                types[11] = typeof(FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas);
-                types[12] = typeof(FeaEntidades.InterFacturas.resumenDescuentos);
-                types[13] = typeof(FeaEntidades.InterFacturas.resumenImportes_moneda_origen);
-                types[14] = typeof(FeaEntidades.InterFacturas.resumen);
+                types[8] = typeof(FeaEntidades.InterFacturas.lineaDescuentos);
+                types[9] = typeof(FeaEntidades.InterFacturas.lineaInformacion_adicional);
+                types[10] = typeof(FeaEntidades.InterFacturas.informacion_exportacion);
+                types[11] = typeof(FeaEntidades.InterFacturas.permisos);
+                types[12] = typeof(FeaEntidades.InterFacturas.extensiones);
+                types[13] = typeof(FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas);
+                types[14] = typeof(FeaEntidades.InterFacturas.resumenDescuentos);
+                types[15] = typeof(FeaEntidades.InterFacturas.resumenImportes_moneda_origen);
+                types[16] = typeof(FeaEntidades.InterFacturas.resumen);
 
-                engine = new MultiRecordEngine(types[0], types[1], types[2], types[3], types[4], types[5], types[6], types[7], types[8], types[9], types[10], types[11], types[12], types[13], types[14]);
+                engine = new MultiRecordEngine(types[0], types[1], types[2], types[3], types[4], types[5], types[6], types[7], types[8], types[9], types[10], types[11], types[12], types[13], types[14], types[15], types[16]);
                 engine.RecordSelector = new FileHelpers.RecordTypeSelector(cs);
                 object[] oC = engine.ReadFile(Archivo);
 
@@ -42,7 +44,9 @@ namespace eFact_R.RN
                 int NroComprobante = 0;
                 int NroLineaReferencias = 0;
                 int NroLineaPermisos = 0;
+                int NroLineaDescuento = 0;
                 int NroLineaDescuentos = 0;
+                int NroLineaInfoAdicional = 0;
                 int NroLinea = -1;
                 FeaEntidades.InterFacturas.resumenImportes_moneda_origen importes_moneda_origen = new FeaEntidades.InterFacturas.resumenImportes_moneda_origen();
                 foreach (Object o in oC)
@@ -87,6 +91,16 @@ namespace eFact_R.RN
                     if (typeof(FeaEntidades.InterFacturas.lineaImportes_moneda_origen) == o.GetType())
                     {
                         lc.comprobante[NroComprobante].detalle.linea[NroLinea].importes_moneda_origen = (FeaEntidades.InterFacturas.lineaImportes_moneda_origen)o;
+                    }
+                    if (typeof(FeaEntidades.InterFacturas.lineaDescuentos) == o.GetType())
+                    {
+                        lc.comprobante[NroComprobante].detalle.linea[NroLinea].descuentos[NroLineaDescuento] = (FeaEntidades.InterFacturas.lineaDescuentos)o;
+                        ++NroLineaDescuento;
+                    }
+                    if (typeof(FeaEntidades.InterFacturas.lineaInformacion_adicional) == o.GetType())
+                    {
+                        lc.comprobante[NroComprobante].detalle.linea[NroLinea].informacion_adicional[NroLineaInfoAdicional] = (FeaEntidades.InterFacturas.lineaInformacion_adicional)o;
+                        ++NroLineaInfoAdicional;
                     }
                     if (typeof(FeaEntidades.InterFacturas.informacion_exportacion) == o.GetType())
                     {
@@ -154,7 +168,9 @@ namespace eFact_R.RN
                         ++NroComprobante;
                         NroLineaReferencias = 0;
                         NroLineaPermisos = 0;
+                        NroLineaDescuento = 0;
                         NroLineaDescuentos = 0;
+                        NroLineaInfoAdicional = 0;
                     }
                 }
                 Lc = lc;
@@ -257,6 +273,14 @@ namespace eFact_R.RN
                 case "<lineaImportes_moneda_origen>":
                     {
                         return typeof(FeaEntidades.InterFacturas.lineaImportes_moneda_origen);
+                    }
+                case "<lineaDescuentos>":
+                    {
+                        return typeof(FeaEntidades.InterFacturas.lineaDescuentos);
+                    }
+                 case "<lineaInformacion_adicional>":
+                    {
+                        return typeof(FeaEntidades.InterFacturas.lineaInformacion_adicional);
                     }
                 case "<informacion_exportacion>":
                     {

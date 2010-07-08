@@ -13,6 +13,7 @@ namespace FeaEntidades.InterFacturas
 	[FileHelpers.DelimitedRecord("|")]
 	public partial class lineaDescuentos
 	{
+        private string nombre_claseField = "<lineaDescuentos>";
 
 		private string descripcion_descuentoField;
 
@@ -25,6 +26,16 @@ namespace FeaEntidades.InterFacturas
 		private double importe_descuento_moneda_origenField;
 
 		private bool importe_descuento_moneda_origenFieldSpecified;
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string nombre_clase
+        {
+            get
+            {
+                return nombre_claseField;
+            }
+        }
 
 		/// <comentarios/>
 		public string descripcion_descuento

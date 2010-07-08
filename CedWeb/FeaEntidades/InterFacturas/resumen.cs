@@ -66,7 +66,7 @@ namespace FeaEntidades.InterFacturas
 		//[FileHelpers.FieldArrayLength(1, 1)]
 		//[FileHelpers.FieldConverter(typeof(FeaEntidades.Converters.resumenDescuentosConverter))]
 		[FileHelpers.FieldIgnored()]
-		private resumenDescuentos[] descuentosField;
+		private resumenDescuentos[] descuentosField = new resumenDescuentos[50];
 
 		//[FileHelpers.FieldArrayLength(1, 1)]
 		//[FileHelpers.FieldConverter(typeof(FeaEntidades.Converters.resumenImpuestosConverter))]
