@@ -904,6 +904,16 @@ namespace CedWebRN
                                 d.linea[j].descuentos[k].porcentaje_descuentoSpecified = lc.comprobante[i].detalle.linea[j].descuentos[k].porcentaje_descuentoSpecified;
                             }
                         }
+                        if (lc.comprobante[i].detalle.linea[j].informacion_adicional != null)
+                        {
+                            d.linea[j].informacion_adicional = new IBK.lineaInformacion_adicional[lc.comprobante[i].detalle.linea[j].informacion_adicional.Length];
+                            for (int k = 0; k < d.linea[j].informacion_adicional.Length; k++)
+                            {
+                                d.linea[j].informacion_adicional[k] = new IBK.lineaInformacion_adicional();
+                                d.linea[j].informacion_adicional[k].tipo = lc.comprobante[i].detalle.linea[j].informacion_adicional[k].tipo;
+                                d.linea[j].informacion_adicional[k].valor = lc.comprobante[i].detalle.linea[j].informacion_adicional[k].valor;
+                            }
+                        }
                         d.linea[j].indicacion_exento_gravado = lc.comprobante[i].detalle.linea[j].indicacion_exento_gravado;
                         d.linea[j].numeroLinea = lc.comprobante[i].detalle.linea[j].numeroLinea;
                         d.linea[j].precio_unitario = lc.comprobante[i].detalle.linea[j].precio_unitario;

@@ -1333,6 +1333,7 @@
     <Compile Include="InterFacturas\lineaDescuentos.cs" />
     <Compile Include="InterFacturas\lineaImportes_moneda_origen.cs" />
     <Compile Include="InterFacturas\lineaImpuestos.cs" />
+    <Compile Include="InterFacturas\lineaInformacion_adicional.cs" />
     <Compile Include="InterFacturas\lineas.cs" />
     <Compile Include="InterFacturas\lineasImpuestos.cs" />
     <Compile Include="InterFacturas\lote_comprobantes.cs" />
