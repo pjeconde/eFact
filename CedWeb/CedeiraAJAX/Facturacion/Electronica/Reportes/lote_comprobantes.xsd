@@ -35,7 +35,7 @@
                           <xs:element minOccurs="0" maxOccurs="1" name="fecha_vencimiento" type="xs:string" />
                           <xs:element minOccurs="0" maxOccurs="1" name="fecha_serv_desde" type="xs:string" />
                           <xs:element minOccurs="0" maxOccurs="1" name="fecha_serv_hasta" type="xs:string" />
-                          <xs:element minOccurs="0" maxOccurs="1" name="condicion_de_pago" type="xs:int" />
+                          <xs:element minOccurs="0" maxOccurs="1" name="condicion_de_pago" type="xs:string" />
                           <xs:element minOccurs="0" maxOccurs="1" name="iva_computable" type="xs:string" />
                           <xs:element minOccurs="0" maxOccurs="1" name="codigo_operacion" type="xs:string" />
                           <xs:element minOccurs="0" maxOccurs="1" name="cae" type="xs:string" />
@@ -48,7 +48,27 @@
                             <xs:complexType>
                               <xs:sequence>
                                 <xs:element minOccurs="1" maxOccurs="1" name="codigo_de_referencia" type="xs:int" />
-                                <xs:element minOccurs="1" maxOccurs="1" name="dato_de_referencia" type="xs:long" />
+                                <xs:element minOccurs="0" maxOccurs="1" name="dato_de_referencia" type="xs:string" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element minOccurs="0" maxOccurs="1" name="informacion_exportacion">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element minOccurs="1" maxOccurs="1" name="destino_comprobante" type="xs:int" />
+                                <xs:element minOccurs="1" maxOccurs="1" name="tipo_exportacion" type="xs:int" />
+                                <xs:element minOccurs="0" maxOccurs="1" name="id_impositivo" type="xs:string" />
+                                <xs:element minOccurs="0" maxOccurs="1" name="incoterms" type="xs:string" />
+                                <xs:element minOccurs="0" maxOccurs="1" name="descripcion_incoterms" type="xs:string" />
+                                <xs:element minOccurs="0" maxOccurs="1" name="permiso_existente" type="xs:string" />
+                                <xs:element minOccurs="0" maxOccurs="unbounded" name="permisos">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element minOccurs="0" maxOccurs="1" name="id_permiso" type="xs:string" />
+                                      <xs:element minOccurs="1" maxOccurs="1" name="destino_mercaderia" type="xs:int" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
                               </xs:sequence>
                             </xs:complexType>
                           </xs:element>
@@ -242,10 +262,11 @@
                         <xs:sequence>
                           <xs:element minOccurs="0" maxOccurs="1" name="clave_de_vinculacion" type="xs:string" />
                           <xs:element minOccurs="0" maxOccurs="1" name="id_template" type="xs:string" />
+                          <xs:element minOccurs="0" maxOccurs="1" name="id_idioma" type="xs:string" />
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
-                    <xs:element minOccurs="0" maxOccurs="1" name="extensiones_datos_comerciales" />
+                    <xs:element minOccurs="0" maxOccurs="1" name="extensiones_datos_comerciales" type="xs:string" />
                     <xs:element minOccurs="0" maxOccurs="1" name="extensiones_datos_marketing" type="xs:string" />
                     <xs:element minOccurs="0" maxOccurs="1" name="extensiones_signatures" type="xs:string" />
                   </xs:sequence>
