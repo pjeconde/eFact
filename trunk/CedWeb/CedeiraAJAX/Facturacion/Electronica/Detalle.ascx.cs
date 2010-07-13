@@ -903,7 +903,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					throw new Exception("Debe informar al menos un artículo");
 				}
 				CedWebRN.Comprobante c = new CedWebRN.Comprobante();
-				string textoSinSaltoDeLinea = listadelineas[i].descripcion.Replace(System.Environment.NewLine, "<br>");
+				string textoSinSaltoDeLinea = listadelineas[i].descripcion.Replace("\n", "<br>").Replace("\r",string.Empty);
 				det.linea[i].descripcion = c.ConvertToHex(textoSinSaltoDeLinea);
 				det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
 				if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))

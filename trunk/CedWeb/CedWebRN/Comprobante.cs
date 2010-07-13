@@ -1051,7 +1051,24 @@ namespace CedWebRN
             texto = texto.Replace("ó", "&oacute;");
             texto = texto.Replace("ú", "&uacute;");
             texto = texto.Replace("º", "&ordm;");
-            return texto;
+			texto = texto.Replace("à", "&agrave;");
+			texto = texto.Replace("è", "&egrave;");
+			texto = texto.Replace("ì", "&igrave;");
+			texto = texto.Replace("ò", "&ograve;");
+			texto = texto.Replace("ù", "&ugrave;");
+			//Mayúsculas
+			texto = texto.Replace("Á", "&Aacute;");
+			texto = texto.Replace("É", "&Eacute;");
+			texto = texto.Replace("Í", "&Iacute;");
+			texto = texto.Replace("Ó", "&Oacute;");
+			texto = texto.Replace("Ú", "&Uacute;");
+			texto = texto.Replace("À", "&Agrave;");
+			texto = texto.Replace("È", "&Egrave;");
+			texto = texto.Replace("Ì", "&Igrave;");
+			texto = texto.Replace("Ò", "&Ograve;");
+			texto = texto.Replace("Ù", "&Ugrave;");
+
+			return texto;
         }
         public string HexToString(string Hex)
         {
@@ -1079,6 +1096,22 @@ namespace CedWebRN
             texto = texto.Replace("&oacute;", "ó");
             texto = texto.Replace("&uacute;", "ú");
             texto = texto.Replace("&ordm;", "º");
+			texto = texto.Replace("&agrave;", "à");
+			texto = texto.Replace("&egrave;", "è");
+			texto = texto.Replace("&igrave;", "ì");
+			texto = texto.Replace("&ograve;", "ò");
+			texto = texto.Replace("&ugrave;", "ù");
+			//Mayúsculas
+			texto = texto.Replace("&Aacute;", "Á");
+			texto = texto.Replace("&Eacute;", "É");
+			texto = texto.Replace("&Iacute;", "Í");
+			texto = texto.Replace("&Oacute;", "Ó");
+			texto = texto.Replace("&Uacute;", "Ú");
+			texto = texto.Replace("&Agrave;", "À");
+			texto = texto.Replace("&Egrave;", "È");
+			texto = texto.Replace("&Igrave;", "Ì");
+			texto = texto.Replace("&Ograve;", "Ò");
+			texto = texto.Replace("&Ugrave;", "Ù");
             return texto;
         }
     }

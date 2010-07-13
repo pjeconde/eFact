@@ -1,4 +1,5 @@
 <%@ Control Language="C#" AutoEventWireup="true" Codebehind="Detalle.ascx.cs" Inherits="CedeiraAJAX.Facturacion.Electronica.Detalle" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Panel ID="detallePanel" runat="server" BorderStyle="Ridge" Height="300px" ScrollBars="Auto"
 	Width="760px" Wrap="true">
 	<asp:GridView ID="detalleGridView" runat="server" AutoGenerateColumns="False" BorderColor="Gray"
@@ -51,12 +52,17 @@
 						TextMode="MultiLine"></asp:TextBox><asp:RequiredFieldValidator ID="txtdescripcionEditRequiredFieldValidator"
 							runat="server" ControlToValidate="txtdescripcion" ErrorMessage="Descripción del artículo en edición no informada"
 							SetFocusOnError="True" ValidationGroup="DetalleEditItem">*</asp:RequiredFieldValidator>
+					<cc1:filteredtextboxextender id="DescrEditFilteredTextBoxExtender" runat="server"
+						filtermode="InvalidChars" filtertype="Custom" invalidchars="<>" targetcontrolid="txtdescripcion"></cc1:filteredtextboxextender>
 				</EditItemTemplate>
 				<FooterTemplate>
 					<asp:TextBox ID="txtdescripcion" runat="server" Text='' TextMode="MultiLine"></asp:TextBox><asp:RequiredFieldValidator
 						ID="txtdescripcionFooterRequiredFieldValidator" runat="server" ControlToValidate="txtdescripcion"
 						ErrorMessage="Descripción del artículo a agregar no informada" SetFocusOnError="True"
 						ValidationGroup="DetalleFooter">*</asp:RequiredFieldValidator>
+					<cc1:FilteredTextBoxExtender ID="DescrFooterFilteredTextBoxExtender" runat="server"
+						FilterMode="InvalidChars" FilterType="Custom" InvalidChars="<>" TargetControlID="txtdescripcion">
+					</cc1:FilteredTextBoxExtender>
 				</FooterTemplate>
 				<ItemStyle HorizontalAlign="left" />
 				<FooterStyle HorizontalAlign="left" />

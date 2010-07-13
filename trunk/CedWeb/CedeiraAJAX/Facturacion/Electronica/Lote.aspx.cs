@@ -3732,6 +3732,11 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					if (lcFea.cabecera_lote.presta_servSpecified == false)
 					{
 						lcFea.cabecera_lote.presta_serv = 0;
+						lcFea.cabecera_lote.presta_servSpecified = true;
+					}
+					if (lcFea.comprobante[0].extensiones!=null && lcFea.comprobante[0].extensiones.extensiones_datos_comerciales!=null && !lcFea.comprobante[0].extensiones.extensiones_datos_comerciales.Equals(string.Empty))
+					{
+						lcFea.comprobante[0].extensiones.extensiones_datos_comerciales = cDC.HexToString(lcFea.comprobante[0].extensiones.extensiones_datos_comerciales);
 					}
 					Session["lote"] = lcFea;
 					Response.Redirect("Reportes\\FacturaWebForm.aspx", true);
