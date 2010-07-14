@@ -29,6 +29,9 @@ namespace FeaEntidades.InterFacturas
 
 		private string extensiones_signaturesField;
 
+        [FileHelpers.FieldIgnored()]
+        private extensionesExtensiones_destinatarios extensiones_destinatariosField;
+
         /// <comentarios/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string nombre_clase
@@ -104,5 +107,18 @@ namespace FeaEntidades.InterFacturas
 				this.extensiones_signaturesField = value;
 			}
 		}
+
+        /// <comentarios/>
+        public extensionesExtensiones_destinatarios extensiones_destinatarios
+        {
+            get
+            {
+                return this.extensiones_destinatariosField;
+            }
+            set
+            {
+                this.extensiones_destinatariosField = value;
+            }
+        }
 	}
 }
