@@ -832,6 +832,19 @@ namespace CedWebRN
                     {
                         cIBK.extensiones.extensiones_signatures = lc.comprobante[i].extensiones.extensiones_signatures;
                     }
+                    if (lc.comprobante[i].extensiones.extensiones_destinatarios != null && lc.comprobante[i].extensiones.extensiones_destinatarios.email != "")
+                    {
+                        cIBK.extensiones.extensiones_destinatarios = new CedWebRN.IBK.extensionesExtensiones_destinatarios();
+                        cIBK.extensiones.extensiones_destinatarios.email = lc.comprobante[i].extensiones.extensiones_destinatarios.email;
+                        //if (lc.comprobante[i].extensiones.extensiones_destinatarios.destinatario != null)
+                        //{
+                        //    for (int j = 0; j < lc.comprobante[i].extensiones.extensiones_destinatarios.destinatario.Length; j++)
+                        //    {
+                        //        cIBK.extensiones.extensiones_destinatarios.destinatario[j] = new CedWebRN.IBK.extensionesExtensiones_destinatariosDestinatario();
+                        //        cIBK.extensiones.extensiones_destinatarios.destinatario[j].cuit = lc.comprobante[i].extensiones.extensiones_destinatarios.destinatario[j].cuit;
+                        //    }
+                        //}
+                    }
                 }
 
                 IBK.detalle d = new IBK.detalle();
