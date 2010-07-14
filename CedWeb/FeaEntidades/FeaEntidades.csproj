@@ -1321,9 +1321,15 @@
     <Compile Include="InterFacturas\cabecera.cs" />
     <Compile Include="InterFacturas\cabecera_lote.cs" />
     <Compile Include="InterFacturas\comprobante.cs" />
+    <Compile Include="InterFacturas\comprobante_response.cs" />
     <Compile Include="InterFacturas\detalle.cs" />
+    <Compile Include="InterFacturas\error.cs" />
     <Compile Include="InterFacturas\extensiones.cs" />
     <Compile Include="InterFacturas\extensionesExtensiones_camara_facturas.cs" />
+    <Compile Include="InterFacturas\extensionesExtensiones_destinatarios.cs" />
+    <Compile Include="InterFacturas\extensionesExtensiones_destinatariosDestinatario.cs" />
+    <Compile Include="InterFacturas\extensionesExtensiones_destinatariosDestinatarioRestriccion.cs" />
+    <Compile Include="InterFacturas\extensionesRestriccion.cs" />
     <Compile Include="InterFacturas\informacion_comprador.cs" />
     <Compile Include="InterFacturas\informacion_comprobante.cs" />
     <Compile Include="InterFacturas\informacion_comprobanteReferencias.cs" />
@@ -1337,6 +1343,7 @@
     <Compile Include="InterFacturas\lineas.cs" />
     <Compile Include="InterFacturas\lineasImpuestos.cs" />
     <Compile Include="InterFacturas\lote_comprobantes.cs" />
+    <Compile Include="InterFacturas\lote_response.cs" />
     <Compile Include="InterFacturas\permisos.cs" />
     <Compile Include="InterFacturas\resumen.cs" />
     <Compile Include="InterFacturas\resumenDescuentos.cs" />
