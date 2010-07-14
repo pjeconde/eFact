@@ -51,6 +51,14 @@
             </xs:element>
             <xs:element minOccurs="0" name="resultado" type="xs:string" />
             <xs:element minOccurs="0" name="motivo" type="xs:string" />
+            <xs:element minOccurs="0" name="no_disponible">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="N" />
+                  <xs:enumeration value="S" />
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -701,6 +709,14 @@
                   <xs:element minOccurs="0" name="id_template" type="xs:string" />
                   <xs:element minOccurs="0" name="id_logo" type="xs:string" />
                   <xs:element minOccurs="0" name="id_idioma" type="xs:string" />
+                  <xs:element minOccurs="0" name="no_disponible">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:enumeration value="N" />
+                        <xs:enumeration value="S" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
                 </xs:sequence>
               </xs:complexType>
             </xs:element>
@@ -967,6 +983,7 @@
                       <xs:enumeration value="NV" />
                       <xs:enumeration value="PA" />
                       <xs:enumeration value="RP" />
+                      <xs:enumeration value="ND" />
                     </xs:restriction>
                   </xs:simpleType>
                 </xs:list>
