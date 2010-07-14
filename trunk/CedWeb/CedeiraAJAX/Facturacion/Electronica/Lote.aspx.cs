@@ -3706,40 +3706,53 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 				else
 				{
-					FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
-					if (lcFea.comprobante[0].cabecera.informacion_comprobante.cae.Equals(string.Empty))
+					try
 					{
-						lcFea.comprobante[0].cabecera.informacion_comprobante.cae = " ";
-					}
-					lcFea.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
-					lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
-					CedWebRN.Comprobante cDC = new CedWebRN.Comprobante();
-					foreach (FeaEntidades.InterFacturas.linea l in lcFea.comprobante[0].detalle.linea)
-					{
-						if (l != null)
+						FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
+						if (lcFea.comprobante[0].cabecera.informacion_comprobante.cae.Equals(string.Empty))
 						{
-							l.descripcion = cDC.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
+							lcFea.comprobante[0].cabecera.informacion_comprobante.cae = " ";
+						}
+						lcFea.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
+						lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
+						CedWebRN.Comprobante cDC = new CedWebRN.Comprobante();
+						foreach (FeaEntidades.InterFacturas.linea l in lcFea.comprobante[0].detalle.linea)
+						{
+							if (l != null)
+							{
+								l.descripcion = cDC.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
+							}
+							else
+							{
+								break;
+							}
+						}
+						if (lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento == null)
+						{
+							lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento = string.Empty;
+						}
+						if (lcFea.cabecera_lote.presta_servSpecified == false)
+						{
+							lcFea.cabecera_lote.presta_serv = 0;
+							lcFea.cabecera_lote.presta_servSpecified = true;
+						}
+						if (lcFea.comprobante[0].extensiones != null && lcFea.comprobante[0].extensiones.extensiones_datos_comerciales != null && !lcFea.comprobante[0].extensiones.extensiones_datos_comerciales.Equals(string.Empty))
+						{
+							lcFea.comprobante[0].extensiones.extensiones_datos_comerciales = cDC.HexToString(lcFea.comprobante[0].extensiones.extensiones_datos_comerciales);
 						}
 						else
 						{
-							break;
+							lcFea.comprobante[0].extensiones = new FeaEntidades.InterFacturas.extensiones();
 						}
+
+						Session["lote"] = lcFea;
+						Response.Redirect("Reportes\\FacturaWebForm.aspx", true);
+
 					}
-					if (lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento == null)
+					catch (Exception ex)
 					{
-						lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento = string.Empty;
+						ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al generar el pdf.\\n " + ex.Message + "');</script>");
 					}
-					if (lcFea.cabecera_lote.presta_servSpecified == false)
-					{
-						lcFea.cabecera_lote.presta_serv = 0;
-						lcFea.cabecera_lote.presta_servSpecified = true;
-					}
-					if (lcFea.comprobante[0].extensiones!=null && lcFea.comprobante[0].extensiones.extensiones_datos_comerciales!=null && !lcFea.comprobante[0].extensiones.extensiones_datos_comerciales.Equals(string.Empty))
-					{
-						lcFea.comprobante[0].extensiones.extensiones_datos_comerciales = cDC.HexToString(lcFea.comprobante[0].extensiones.extensiones_datos_comerciales);
-					}
-					Session["lote"] = lcFea;
-					Response.Redirect("Reportes\\FacturaWebForm.aspx", true);
 				}
 			}
 		}
