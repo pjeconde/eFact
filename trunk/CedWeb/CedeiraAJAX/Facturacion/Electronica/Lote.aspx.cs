@@ -3738,7 +3738,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						}
 						if (lcFea.comprobante[0].extensiones != null && lcFea.comprobante[0].extensiones.extensiones_datos_comerciales != null && !lcFea.comprobante[0].extensiones.extensiones_datos_comerciales.Equals(string.Empty))
 						{
-							lcFea.comprobante[0].extensiones.extensiones_datos_comerciales = cDC.HexToString(lcFea.comprobante[0].extensiones.extensiones_datos_comerciales);
+							string dc=cDC.HexToString(lcFea.comprobante[0].extensiones.extensiones_datos_comerciales);
+							lcFea.comprobante[0].extensiones.extensiones_datos_comerciales = dc.Replace("<br>", System.Environment.NewLine);
 						}
 						else
 						{

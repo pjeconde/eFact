@@ -104,17 +104,9 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section ReportFooterSection5 {
-            get {
-                return this.ReportDefinition.Sections[9];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
-                return this.ReportDefinition.Sections[10];
+                return this.ReportDefinition.Sections[9];
             }
         }
         
@@ -123,6 +115,14 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes {
         public CrystalDecisions.Shared.IParameterField Parameter_MonedaCant {
             get {
                 return this.DataDefinition.ParameterFields[0];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_resumen_MonedaCant {
+            get {
+                return this.DataDefinition.ParameterFields[1];
             }
         }
     }
