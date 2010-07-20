@@ -394,6 +394,20 @@ namespace eFact_R.DB
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.Usa, sesion.CnnStr);
         }
+        public void ActualizarDatosError(eFact_R.Entidades.Lote Lote, string HandlerEvento)
+        {
+            StringBuilder commandText = new StringBuilder();
+            string loteXmlIF = Lote.LoteXmlIF.Replace("'", "''");
+            commandText.Append(HandlerEvento);
+            commandText.Append(" Update Lotes set LoteXMLIF = '");
+            commandText.Append(loteXmlIF + "'");
+            commandText.Append(" where IdLote = " + Lote.IdLote);
+            commandText.Append(" declare @IdLote int select @IdLote=@@Identity");
+            commandText.Append(" end");
+            DataTable dt = new DataTable();
+            dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.Usa, sesion.CnnStr);
+        }
+
         public void ActualizarFechaEnvio(eFact_R.Entidades.Lote Lote, string HandlerEvento)
         {
             StringBuilder commandText = new StringBuilder();

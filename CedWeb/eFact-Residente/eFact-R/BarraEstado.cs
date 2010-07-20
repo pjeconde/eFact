@@ -71,7 +71,13 @@ namespace eFact_R
 
             ndNuevo = new TreeNode("ClaveProxy");
             nds[1].Nodes.Add(ndNuevo);
-            ndNuevo = new TreeNode(@System.Configuration.ConfigurationManager.AppSettings["ClaveProxy"]);
+            string clave = @System.Configuration.ConfigurationManager.AppSettings["ClaveProxy"];
+            string claveNoVisible = "";
+            for (int i = 0; i < clave.Length; i++)
+            {
+                claveNoVisible += "*"; 
+            }
+            ndNuevo = new TreeNode(claveNoVisible);
             nds[1].Nodes[3].Nodes.Add(ndNuevo);
             
             ndNuevo = new TreeNode("DominioProxy");
@@ -122,7 +128,13 @@ namespace eFact_R
 
             ndNuevo = new TreeNode("Credenciales: Clave");
             nds[4].Nodes.Add(ndNuevo);
-            ndNuevo = new TreeNode(@System.Configuration.ConfigurationManager.AppSettings["MailCredencialesPsw"]);
+            clave = @System.Configuration.ConfigurationManager.AppSettings["MailCredencialesPsw"];
+            claveNoVisible = "";
+            for (int i = 0; i < clave.Length; i++)
+            {
+                claveNoVisible += "*";
+            }
+            ndNuevo = new TreeNode(claveNoVisible);
             nds[4].Nodes[2].Nodes.Add(ndNuevo);
 
             ndNuevo = new TreeNode("Testear servicio ( mail de prueba: " + System.Configuration.ConfigurationManager.AppSettings["MailTest"] + " )");

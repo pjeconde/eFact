@@ -83,17 +83,37 @@ namespace eFact_R
                     ConsultarComprobanteButton.Enabled = false;
                 //}
                 DetalleLoteDataGridView.Refresh();
-
-                this.webBrowser1.Navigate("about:blank");
-                //this.webBrowser1.Document.Write("<html><boby>" + lote.LoteXml + "</body></html>");
-                //this.webBrowser1.DocumentText = "<html><boby>" + lote.LoteXml + "</body></html>";
-
-                StreamWriter fileWriter;
-                fileWriter = File.CreateText(Aplicacion.ArchPathPDF + Aplicacion.Sesion.Usuario.IdUsuario + ".xml");
-                fileWriter.Write(lote.LoteXml);
-                fileWriter.Close();
-                webBrowser1.Navigate(Aplicacion.ArchPathPDF + Aplicacion.Sesion.Usuario.IdUsuario + ".xml"); 
-
+                this.XMLWebBrowser.Navigate("about:blank");
+                try
+                {
+                    StreamWriter fileWriter;
+                    fileWriter = File.CreateText(System.IO.Path.GetTempPath() + Aplicacion.Sesion.Usuario.IdUsuario + "-XML.xml");
+                    string lotexml = lote.LoteXml.Replace("iso-8859-1", "UTF-8");
+                    fileWriter.Write(lotexml);
+                    fileWriter.Close();
+                    XMLWebBrowser.Navigate(System.IO.Path.GetTempPath() + Aplicacion.Sesion.Usuario.IdUsuario + "-XML.xml");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Solapa XML Origen", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                }
+                this.XMLIFWebBrowser.Navigate("about:blank");
+                try
+                {
+                    if (lote.LoteXmlIF != null && lote.LoteXmlIF != "")
+                    {
+                        StreamWriter fileWriter;
+                        fileWriter = File.CreateText(System.IO.Path.GetTempPath() + Aplicacion.Sesion.Usuario.IdUsuario + "-XMLIF.xml");
+                        string lotexml = lote.LoteXmlIF.Replace("iso-8859-1", "UTF-8");
+                        fileWriter.Write(lotexml);
+                        fileWriter.Close();
+                        XMLIFWebBrowser.Navigate(System.IO.Path.GetTempPath() + Aplicacion.Sesion.Usuario.IdUsuario + "-XMLIF.xml");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Solapa XML Respuesta", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                }
             }
             catch (Exception ex)
             {
@@ -195,6 +215,7 @@ namespace eFact_R
         
             ReporteDocumento = facturaRpt;
         }
+
         private void ConsultarComprobanteButton_Click(object sender, EventArgs e)
         {
             try
@@ -215,7 +236,6 @@ namespace eFact_R
                         c = null;
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -225,7 +245,6 @@ namespace eFact_R
             {
                 Cursor = System.Windows.Forms.Cursors.Default;
             }
-
         }
 
         private void AsignarCamposOpcionales(FeaEntidades.InterFacturas.lote_comprobantes lc)
