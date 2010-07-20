@@ -96,6 +96,24 @@ namespace eFact_R.RN
                 c.FechaVtoCAE = Convert.ToDateTime(sFecha.Substring(0, 4) + "/" + sFecha.Substring(4, 2) + "/" + sFecha.Substring(6, 2));
             }
         }
+        public static void ActualizarDatosError(eFact_R.Entidades.Lote Lote, CedWebRN.IBK.lote_response Lr)
+        {
+            MemoryStream ms;
+            System.Xml.XmlTextWriter writer;
+            System.Xml.Serialization.XmlSerializer x;
+            String XmlizedString;
+
+            //Actualizar lote
+            ms = new MemoryStream();
+            XmlizedString = null;
+            writer = new XmlTextWriter(ms, System.Text.Encoding.GetEncoding("ISO-8859-1"));
+            x = new System.Xml.Serialization.XmlSerializer(Lr.GetType());
+            x.Serialize(writer, Lr);
+            ms = (MemoryStream)writer.BaseStream;
+            XmlizedString = RN.Tablero.ByteArrayToString(ms.ToArray());
+            ms.Close();
+            Lote.LoteXmlIF = XmlizedString;
+        }
         public static void Ejecutar(eFact_R.Entidades.Lote Lote, CedEntidades.Evento Evento, string Handler, CedEntidades.Sesion Sesion)
         {
             string handlerEvento = "";
@@ -154,18 +172,19 @@ namespace eFact_R.RN
                             }
                             else if (eFact_R.Aplicacion.TipoItfAut == "TXT")
                             {
-                                GuardarItfTXT(out nombreArchivoProcesado, Lote, "RAF", eFact_R.Aplicacion.ArchPathItfAut, false);
+                                GuardarItfTXTlr(out nombreArchivoProcesado, Lote, "RAF", eFact_R.Aplicacion.ArchPathItfAut, false);
                             }
                             break;
                         case "RegRechIF":
-                            Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, false);
+                            handlerEvento = Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
+                            lote.ActualizarDatosError(Lote, handlerEvento);
                             if (eFact_R.Aplicacion.TipoItfAut == "XML")
                             {
-                                GuardarItfXML(out nombreArchivoProcesado, Lote, "RIF", eFact_R.Aplicacion.ArchPathItfAut, false, false);
+                                GuardarItfXML(out nombreArchivoProcesado, Lote, "RIF", eFact_R.Aplicacion.ArchPathItfAut, true, false);
                             }
                             else if (eFact_R.Aplicacion.TipoItfAut == "TXT")
                             {
-                                GuardarItfTXT(out nombreArchivoProcesado, Lote, "RIF", eFact_R.Aplicacion.ArchPathItfAut, false);
+                                GuardarItfTXTlr(out nombreArchivoProcesado, Lote, "RIF", eFact_R.Aplicacion.ArchPathItfAut, true);
                             }
                             break;
                         default:
@@ -194,6 +213,20 @@ namespace eFact_R.RN
             lc = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
             Lc = lc;
         }
+        public static void DeserializarLr(out FeaEntidades.InterFacturas.lote_response Lr, string Cadena)
+        {
+            //Deserializar ( pasar de string XML a CedWebRN.IBK.lote_response )
+            System.Text.Encoding codificador;
+            codificador = System.Text.Encoding.GetEncoding("iso-8859-1");
+            byte[] a = new byte[Cadena.Length];
+            a = codificador.GetBytes(Cadena);
+            MemoryStream ms = new MemoryStream(a);
+            ms.Seek(0, System.IO.SeekOrigin.Begin);
+            FeaEntidades.InterFacturas.lote_response lr = new FeaEntidades.InterFacturas.lote_response();
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lr.GetType());
+            lr = (FeaEntidades.InterFacturas.lote_response)x.Deserialize(ms);
+            Lr = lr;
+        }
         public static void SerializarLc(out string LoteXML, FeaEntidades.InterFacturas.lote_comprobantes Lc)
         {
             //Deserializar ( pasar de FeaEntidades.InterFacturas.lote_comprobantes a string XML )
@@ -203,6 +236,17 @@ namespace eFact_R.RN
             x.Serialize(writer, Lc);
             ms = (MemoryStream)writer.BaseStream;
             LoteXML = RN.Tablero.ByteArrayToString(ms.ToArray());
+            ms.Close();
+        }
+        public static void SerializarLr(out string LoteXMLIF, CedWebRN.IBK.lote_response Lr)
+        {
+            //Deserializar ( pasar de FeaEntidades.InterFacturas.lote_comprobantes a string XML )
+            MemoryStream ms = new MemoryStream();
+            XmlTextWriter writer = new XmlTextWriter(ms, System.Text.Encoding.GetEncoding("ISO-8859-1"));
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(Lr.GetType());
+            x.Serialize(writer, Lr);
+            ms = (MemoryStream)writer.BaseStream;
+            LoteXMLIF = RN.Tablero.ByteArrayToString(ms.ToArray());
             ms.Close();
         }
         public static void GuardarItfTXT(out string NombreProcesado, eFact_R.Entidades.Lote Lote, string PreFijo, string Ruta, bool IF)
@@ -276,6 +320,52 @@ namespace eFact_R.RN
                 iresumen.Add(Lc.comprobante[i].resumen);
                 e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.resumen));
                 e.AppendToFile(NombreProcesado, iresumen);
+            }
+        }
+        public static void GuardarItfTXTlr(out string NombreProcesado, eFact_R.Entidades.Lote Lote, string PreFijo, string Ruta, bool IF)
+        {
+            //Deserializar ( pasar de XML a FeaEntidades.InterFacturas.lote_comprobantes )
+            List<FeaEntidades.InterFacturas.lote_response> lLr = new List<FeaEntidades.InterFacturas.lote_response>();
+            FeaEntidades.InterFacturas.lote_response Lr = new FeaEntidades.InterFacturas.lote_response();
+            eFact_R.RN.Lote.DeserializarLr(out Lr, Lote.LoteXmlIF);
+            lLr.Add(Lr);
+
+            //Evento de escritura de txt
+            FileHelperEngine e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.lote_response));
+            string nombreProcesado = "";
+            GenerarNombreArch(out nombreProcesado, Ruta, PreFijo, Lote, "txt");
+            NombreProcesado = nombreProcesado;
+            e.WriteFile(NombreProcesado, lLr);
+
+            foreach (FeaEntidades.InterFacturas.error elote in Lr.errores_lote)
+            {
+                if (elote != null)
+                {
+                    List<FeaEntidades.InterFacturas.error> ierrores_lote = new List<FeaEntidades.InterFacturas.error>();
+                    ierrores_lote.Add(elote);
+                    e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.error));
+                    e.AppendToFile(NombreProcesado, ierrores_lote);
+                }
+            }
+            foreach (FeaEntidades.InterFacturas.comprobante_response comprobante in Lr.comprobante_response)
+            {
+                List<FeaEntidades.InterFacturas.comprobante_response> icr = new List<FeaEntidades.InterFacturas.comprobante_response>();
+                icr.Add(comprobante);
+                e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.comprobante_response));
+                e.AppendToFile(NombreProcesado, icr);
+                if (comprobante.errores_comprobante != null)
+                {
+                    foreach (FeaEntidades.InterFacturas.error ecomprobante in comprobante.errores_comprobante)
+                    {
+                        if (ecomprobante != null)
+                        {
+                            List<FeaEntidades.InterFacturas.error> ierrores_comprobante = new List<FeaEntidades.InterFacturas.error>();
+                            ierrores_comprobante.Add(ecomprobante);
+                            e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.error));
+                            e.AppendToFile(NombreProcesado, ierrores_comprobante);
+                        }
+                    }
+                }
             }
         }
         public static void GuardarItfXML(out string NombreProcesado, eFact_R.Entidades.Lote Lote, string PreFijo, string Ruta, bool IF, bool ParaSubirAIF)

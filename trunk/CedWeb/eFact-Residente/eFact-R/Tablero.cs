@@ -675,6 +675,7 @@ namespace eFact_R
                         catch (Exception ex2)
                         {
                             //Si el lote tiene errores al ser enviado, grabar el rechazo.
+                            eFact_R.RN.Lote.ActualizarDatosError(lote, Lr);
                             EjecutarEventoBandejaS("RegRechIF", ex2.Message.Replace(Convert.ToChar("'"),Convert.ToChar(" ")).ToString(), lote);
                             throw new Exception(ex2.Message);
                         }

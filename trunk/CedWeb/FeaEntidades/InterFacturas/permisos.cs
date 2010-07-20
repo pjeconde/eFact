@@ -18,6 +18,7 @@ namespace FeaEntidades.InterFacturas
 
         private int destino_mercaderiaField;
 
+        [FileHelpers.FieldIgnored()]
 		private string descripcion_destino_mercaderiaField;
 
         /// <comentarios/>

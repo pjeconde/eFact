@@ -12,7 +12,13 @@ Friend Class frmMensaje
         Text = Titulo
         txtMensaje.Text = Mensaje
         txtMensaje.SelectionLength = 0
-        pnlMensaje.Size = New System.Drawing.Size(pnlMensaje.Size.Width, Math.Max(CInt(SendMessage(txtMensaje.Handle, EM_GETLINECOUNT, 0, 0)), CInt(3)) * CSng(txtMensaje.CreateGraphics().MeasureString("M", txtMensaje.Font).Height))
+        Dim sds As System.Drawing.Size
+        sds = New System.Drawing.Size(pnlMensaje.Size.Width, Math.Max(CInt(SendMessage(txtMensaje.Handle, EM_GETLINECOUNT, 0, 0)), CInt(3)) * CSng(txtMensaje.CreateGraphics().MeasureString("M", txtMensaje.Font).Height))
+        If (sds.Height < 200) Then
+            pnlMensaje.Size = sds
+        Else
+            pnlMensaje.Size = New System.Drawing.Size(Me.Size.Width, 200)
+        End If
         txtMasDetalles.Text = MasDetalles
         txtMasDetalles.SelectionLength = 0
         pnlMasDetalles.Size = New System.Drawing.Size(pnlMasDetalles.Size.Width, CInt(SendMessage(txtMasDetalles.Handle, EM_GETLINECOUNT, 0, 0) * CSng(txtMasDetalles.CreateGraphics().MeasureString("M", txtMasDetalles.Font).Height)))
@@ -99,6 +105,7 @@ Friend Class frmMensaje
         Me.txtMensaje.Multiline = True
         Me.txtMensaje.Name = "txtMensaje"
         Me.txtMensaje.ReadOnly = True
+        Me.txtMensaje.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtMensaje.Size = New System.Drawing.Size(436, 72)
         Me.txtMensaje.TabIndex = 2
         '
@@ -236,9 +243,9 @@ Friend Class frmMensaje
                 SplitterMasDetalles.Visible = True
                 pnlMasDetalles.Visible = True
                 Me.Size = New System.Drawing.Size(Me.Size.Width, pnlMensaje.Size.Height + SplitterMensaje.Size.Height + 35 + 24 + 20 + SplitterMasDetalles.Size.Height + pnlMasDetalles.Size.Height)
-                If Me.Size.Height > 500 Then
-                    Me.Size = New System.Drawing.Size(Me.Size.Width, 500)
-                    pnlMasDetalles.Size = New System.Drawing.Size(pnlMasDetalles.Size.Width, 500 - pnlMensaje.Size.Height - SplitterMensaje.Size.Height - 35 - 24 - 20 - 10)
+                If Me.Size.Height > 300 Then
+                    Me.Size = New System.Drawing.Size(Me.Size.Width, 300)
+                    pnlMasDetalles.Size = New System.Drawing.Size(pnlMasDetalles.Size.Width, 300 - pnlMensaje.Size.Height - SplitterMensaje.Size.Height - 35 - 24 - 20 - 10)
                     txtMasDetalles.ScrollBars = ScrollBars.Vertical
                 End If
             Case "No ver detalles"
