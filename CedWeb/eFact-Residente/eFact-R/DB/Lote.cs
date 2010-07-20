@@ -236,22 +236,27 @@ namespace eFact_R.DB
             {
                 commandText.Append("where (1=1 ");
             }
+            //Otros Filtros
+            string queryOtrosFiltros = ""; 
             if (CuitVendedor != "")
             {
-                commandText.Append("and Lotes.CuitVendedor = '" + CuitVendedor + "' ");
+                queryOtrosFiltros += "and Lotes.CuitVendedor = '" + CuitVendedor + "' ";
+                commandText.Append(queryOtrosFiltros);
             }
             if (NumeroLote != "")
             {
-                commandText.Append("and Lotes.NumeroLote = '" + NumeroLote + "' ");
+                queryOtrosFiltros += "and Lotes.NumeroLote = '" + NumeroLote + "' ";
+                commandText.Append(queryOtrosFiltros);
             }
             if (PuntoVenta != "")
             {
-                commandText.Append("and Lotes.PuntoVenta = '" + PuntoVenta + "' ");
+                queryOtrosFiltros += "and Lotes.PuntoVenta = '" + PuntoVenta + "' ";
+                commandText.Append(queryOtrosFiltros);
             }
             commandText.Append(") ");
             if (VerPendientes)
             {
-                commandText.Append(" or (WF_Op.IdEstado in ('PteEnvio', 'PteRespIF', 'PteRespAFIP')) ");
+                commandText.Append(" or (WF_Op.IdEstado in ('PteEnvio', 'PteRespIF', 'PteRespAFIP') " + queryOtrosFiltros + ") ");
             }
             commandText.Append("select * from #Lotes order by IdLote Desc ");
             commandText.Append("IF @@ROWCOUNT > 0 ");
