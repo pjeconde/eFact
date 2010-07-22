@@ -14,10 +14,11 @@ Friend Class frmMensaje
         txtMensaje.SelectionLength = 0
         Dim sds As System.Drawing.Size
         sds = New System.Drawing.Size(pnlMensaje.Size.Width, Math.Max(CInt(SendMessage(txtMensaje.Handle, EM_GETLINECOUNT, 0, 0)), CInt(3)) * CSng(txtMensaje.CreateGraphics().MeasureString("M", txtMensaje.Font).Height))
-        If (sds.Height < 200) Then
+        If (sds.Height < 100) Then
             pnlMensaje.Size = sds
         Else
-            pnlMensaje.Size = New System.Drawing.Size(Me.Size.Width, 200)
+            pnlMensaje.Size = New System.Drawing.Size(Me.Size.Width, 100)
+            txtMensaje.ScrollBars = ScrollBars.Vertical
         End If
         txtMasDetalles.Text = MasDetalles
         txtMasDetalles.SelectionLength = 0
@@ -105,7 +106,6 @@ Friend Class frmMensaje
         Me.txtMensaje.Multiline = True
         Me.txtMensaje.Name = "txtMensaje"
         Me.txtMensaje.ReadOnly = True
-        Me.txtMensaje.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtMensaje.Size = New System.Drawing.Size(436, 72)
         Me.txtMensaje.TabIndex = 2
         '

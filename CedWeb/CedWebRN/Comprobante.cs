@@ -464,6 +464,11 @@ namespace CedWebRN
                 {
                     cIBK.extensiones.extensiones_datos_marketing = lcIBK.comprobante[i].extensiones.extensiones_datos_marketing;
                 }
+                if (lcIBK.comprobante[i].extensiones.extensiones_destinatarios != null)
+                {
+                    cIBK.extensiones.extensiones_destinatarios = new FeaEntidades.InterFacturas.extensionesExtensiones_destinatarios();
+                    cIBK.extensiones.extensiones_destinatarios.email = lcIBK.comprobante[i].extensiones.extensiones_destinatarios.email;
+                }
 
                 FeaEntidades.InterFacturas.detalle d = new FeaEntidades.InterFacturas.detalle();
                 IBK.detalle detalle = (IBK.detalle)lcIBK.comprobante[i].Item;

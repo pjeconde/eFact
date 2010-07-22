@@ -15,10 +15,6 @@ namespace eFact_R.DB
             StringBuilder commandText = new StringBuilder();
             commandText.Append("Select * from Comprobantes");
             commandText.Append(" where IdLote=" + Comprobante.IdLote + " and IdTipoComprobante = '" + Comprobante.IdTipoComprobante + "' and NumeroComprobante='" + Comprobante.NumeroComprobante + "'");
-            //if (Comprobante.NumeroDeEnvio != 0) 
-            //{
-            //    commandText.Append(+ "' and NumeroDeEnvio=" + Comprobante.NumeroDeEnvio);
-            //}
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.Acepta, sesion.CnnStr);
             Comprobante.IdLote = Convert.ToInt32(dt.Rows[0]["IdLote"].ToString());
@@ -28,6 +24,8 @@ namespace eFact_R.DB
             Comprobante.Fecha = Convert.ToDateTime(dt.Rows[0]["Fecha"]);
             Comprobante.IdMoneda = dt.Rows[0]["IdMoneda"].ToString();
             Comprobante.Importe = Convert.ToDecimal(dt.Rows[0]["Importe"]);
+            Comprobante.Importe = Convert.ToDecimal(dt.Rows[0]["ImporteMonedaOrigen"]);
+            Comprobante.Importe = Convert.ToDecimal(dt.Rows[0]["TipoCambio"]);
         }
     }
 }

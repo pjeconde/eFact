@@ -16,6 +16,8 @@ namespace eFact_R.Entidades
         private DateTime fecha;
         private string idMoneda;
         private decimal importe;
+        private decimal importeMonedaOrigen;
+        private decimal tipoCambio;
         private string numeroCAE;
         private DateTime fechaCAE;
         private DateTime fechaVtoCAE;
@@ -119,6 +121,28 @@ namespace eFact_R.Entidades
             get
             {
                 return importe;
+            }
+        }
+        public decimal ImporteMonedaOrigen
+        {
+            set
+            {
+                importeMonedaOrigen = value;
+            }
+            get
+            {
+                return importeMonedaOrigen;
+            }
+        }
+        public decimal TipoCambio
+        {
+            set
+            {
+                tipoCambio = value;
+            }
+            get
+            {
+                return tipoCambio;
             }
         }
         public string NumeroCAE

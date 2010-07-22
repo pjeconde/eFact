@@ -134,6 +134,11 @@ namespace eFact_R.RN
                 }
                 c.IdMoneda = Convert.ToString(Lc.comprobante[i].resumen.codigo_moneda);
                 c.Importe = Convert.ToDecimal(Lc.comprobante[i].resumen.importe_total_factura);
+                if (Lc.comprobante[i].resumen.importes_moneda_origen != null)
+                {
+                    c.ImporteMonedaOrigen = Convert.ToDecimal(Lc.comprobante[i].resumen.importes_moneda_origen.importe_total_factura);
+                }
+                c.TipoCambio = Convert.ToDecimal(Lc.comprobante[i].resumen.tipo_de_cambio);
                 lote.Comprobantes.Add(c);
             }
             Lote = lote;

@@ -148,6 +148,14 @@ namespace eFact_R.DB
                     dr[i]["FechaVtoCAE"] = "31/12/9998";
                 }
                 c.FechaVtoCAE = Convert.ToDateTime(dr[i]["FechaVtoCAE"]);
+                if (dr[i]["ImporteMonedaOrigen"].ToString() != "")
+                {
+                    c.ImporteMonedaOrigen = Convert.ToDecimal(dr[i]["ImporteMonedaOrigen"]);
+                }
+                if (dr[i]["ImporteMonedaOrigen"].ToString() != "")
+                {
+                    c.TipoCambio = Convert.ToDecimal(dr[i]["TipoCambio"]);
+                }
                 Hasta.Comprobantes.Add(c);
             }
             //WF
@@ -366,12 +374,14 @@ namespace eFact_R.DB
                 }
                 if (Lote.Comprobantes[i].FechaVtoCAE == null || Convert.ToInt32(Lote.Comprobantes[i].FechaVtoCAE.ToString("yyyyMMdd")) <= 20010101)
                 {
-                    commandText.Append("null) ");
+                    commandText.Append("null, ");
                 }
                 else
                 {
-                    commandText.Append("'" + Lote.Comprobantes[i].FechaVtoCAE.ToString("yyyyMMdd") + "') ");
+                    commandText.Append("'" + Lote.Comprobantes[i].FechaVtoCAE.ToString("yyyyMMdd") + "', ");
                 }
+                commandText.Append(Lote.Comprobantes[i].ImporteMonedaOrigen + ", ");
+                commandText.Append(Lote.Comprobantes[i].TipoCambio + ") ");
             }
             commandText.Append(HandlerArchivo);
             DataTable dt = new DataTable();

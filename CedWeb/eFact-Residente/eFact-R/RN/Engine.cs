@@ -17,7 +17,7 @@ namespace eFact_R.RN
         {
             try
             {
-                Type[] types = new Type[17];
+                Type[] types = new Type[18];
                 types[0] = typeof(FeaEntidades.InterFacturas.cabecera_lote);
                 types[1] = typeof(FeaEntidades.InterFacturas.informacion_comprador);
                 types[2] = typeof(FeaEntidades.InterFacturas.informacion_comprobante);
@@ -32,11 +32,12 @@ namespace eFact_R.RN
                 types[11] = typeof(FeaEntidades.InterFacturas.permisos);
                 types[12] = typeof(FeaEntidades.InterFacturas.extensiones);
                 types[13] = typeof(FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas);
-                types[14] = typeof(FeaEntidades.InterFacturas.resumenDescuentos);
-                types[15] = typeof(FeaEntidades.InterFacturas.resumenImportes_moneda_origen);
-                types[16] = typeof(FeaEntidades.InterFacturas.resumen);
+                types[14] = typeof(FeaEntidades.InterFacturas.extensionesExtensiones_destinatarios);
+                types[15] = typeof(FeaEntidades.InterFacturas.resumenDescuentos);
+                types[16] = typeof(FeaEntidades.InterFacturas.resumenImportes_moneda_origen);
+                types[17] = typeof(FeaEntidades.InterFacturas.resumen);
 
-                engine = new MultiRecordEngine(types[0], types[1], types[2], types[3], types[4], types[5], types[6], types[7], types[8], types[9], types[10], types[11], types[12], types[13], types[14], types[15], types[16]);
+                engine = new MultiRecordEngine(types[0], types[1], types[2], types[3], types[4], types[5], types[6], types[7], types[8], types[9], types[10], types[11], types[12], types[13], types[14], types[15], types[16], types[17]);
                 engine.RecordSelector = new FileHelpers.RecordTypeSelector(cs);
                 object[] oC = engine.ReadFile(Archivo);
 
@@ -137,6 +138,14 @@ namespace eFact_R.RN
                         lc.comprobante[NroComprobante].extensiones.extensiones_camara_facturas = (FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas)o;
                         lc.comprobante[NroComprobante].extensiones.extensiones_camara_facturasSpecified = true;
                         GetPropiedades(o);
+                    }
+                    if (typeof(FeaEntidades.InterFacturas.extensionesExtensiones_destinatarios) == o.GetType())
+                    {
+                        if (((FeaEntidades.InterFacturas.extensionesExtensiones_destinatarios)o).email != "")
+                        {
+                            lc.comprobante[NroComprobante].extensiones.extensiones_destinatarios = new FeaEntidades.InterFacturas.extensionesExtensiones_destinatarios();
+                            lc.comprobante[NroComprobante].extensiones.extensiones_destinatarios = (FeaEntidades.InterFacturas.extensionesExtensiones_destinatarios)o;
+                        }
                     }
                     if (typeof(FeaEntidades.InterFacturas.resumenDescuentos) == o.GetType())
                     {
@@ -293,6 +302,10 @@ namespace eFact_R.RN
                 case "<extensionesExtensiones_camara_facturas>":
                     {
                         return typeof(FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas);
+                    }
+                case "<extensionesExtensiones_destinatarios>":
+                    {
+                        return typeof(FeaEntidades.InterFacturas.extensionesExtensiones_destinatarios);
                     }
                 case "<permisos>":
                     {
