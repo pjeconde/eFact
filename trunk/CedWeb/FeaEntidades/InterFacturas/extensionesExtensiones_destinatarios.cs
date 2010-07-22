@@ -13,7 +13,7 @@ namespace FeaEntidades.InterFacturas
     [FileHelpers.DelimitedRecord("|")]
     public partial class extensionesExtensiones_destinatarios
     {
-        private string nombre_claseField = "<extensiones_destinatarios>";
+        private string nombre_claseField = "<extensionesExtensiones_destinatarios>";
         
         [FileHelpers.FieldIgnored()]
         private extensionesExtensiones_destinatariosDestinatario[] destinatarioField = new extensionesExtensiones_destinatariosDestinatario[5];
