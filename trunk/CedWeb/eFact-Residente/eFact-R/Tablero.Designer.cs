@@ -759,6 +759,7 @@
             this.BandejaSDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.BandejaSDataGridView.Size = new System.Drawing.Size(482, 306);
             this.BandejaSDataGridView.TabIndex = 6;
+            this.BandejaSDataGridView.DoubleClick += new System.EventHandler(this.BandejaSDataGridView_DoubleClick);
             this.BandejaSDataGridView.SelectionChanged += new System.EventHandler(this.BandejaSDataGridView_SelectionChanged);
             // 
             // CuitVendedorBandS

@@ -275,10 +275,35 @@ namespace eFact_R.RN
                 e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.informacion_comprobante));
                 e.AppendToFile(NombreProcesado, icomprobante);
 
+                List<FeaEntidades.InterFacturas.informacion_vendedor> ivendedor = new List<FeaEntidades.InterFacturas.informacion_vendedor>();
+                ivendedor.Add(Lc.comprobante[i].cabecera.informacion_vendedor);
+                e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.informacion_vendedor));
+                e.AppendToFile(NombreProcesado, ivendedor);
+
                 if (Lc.comprobante[i].cabecera.informacion_comprobante.referencias != null)
                 {
                     e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.informacion_comprobanteReferencias));
                     e.AppendToFile(NombreProcesado, Lc.comprobante[i].cabecera.informacion_comprobante.referencias);
+                }
+
+                List<FeaEntidades.InterFacturas.detalle> idetalle = new List<FeaEntidades.InterFacturas.detalle>();
+                idetalle.Add(Lc.comprobante[i].detalle);
+                e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.detalle));
+                e.AppendToFile(NombreProcesado, idetalle);
+
+                foreach (FeaEntidades.InterFacturas.linea linea in Lc.comprobante[i].detalle.linea)
+                {
+                    e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.linea));
+                    List<FeaEntidades.InterFacturas.linea> ilinea = new List<FeaEntidades.InterFacturas.linea>();
+                    ilinea.Add(linea);
+                    e.AppendToFile(NombreProcesado, ilinea);
+                    if (linea.importes_moneda_origen != null)
+                    {
+                        List<FeaEntidades.InterFacturas.lineaImportes_moneda_origen> ilineaImportesMonedaOrigen = new List<FeaEntidades.InterFacturas.lineaImportes_moneda_origen>();
+                        ilineaImportesMonedaOrigen.Add(linea.importes_moneda_origen);
+                        e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.lineaImportes_moneda_origen));
+                        e.AppendToFile(NombreProcesado, ilineaImportesMonedaOrigen);
+                    }
                 }
 
                 if (Lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion != null)
@@ -301,20 +326,20 @@ namespace eFact_R.RN
                         e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas));
                         e.AppendToFile(NombreProcesado, Lc.comprobante[i].extensiones.extensiones_camara_facturas);
                     }
+                    if (Lc.comprobante[i].extensiones.extensiones_destinatarios != null)
+                    {
+                        e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.extensionesExtensiones_destinatarios));
+                        e.AppendToFile(NombreProcesado, Lc.comprobante[i].extensiones.extensiones_destinatarios);
+                    }
                 }
 
-                List<FeaEntidades.InterFacturas.informacion_vendedor> ivendedor = new List<FeaEntidades.InterFacturas.informacion_vendedor>();
-                ivendedor.Add(Lc.comprobante[i].cabecera.informacion_vendedor);
-                e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.informacion_vendedor));
-                e.AppendToFile(NombreProcesado, ivendedor);
-
-                List<FeaEntidades.InterFacturas.detalle> idetalle = new List<FeaEntidades.InterFacturas.detalle>();
-                idetalle.Add(Lc.comprobante[i].detalle);
-                e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.detalle));
-                e.AppendToFile(NombreProcesado, idetalle);
-
-                e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.linea));
-                e.AppendToFile(NombreProcesado, Lc.comprobante[i].detalle.linea);
+                if (Lc.comprobante[i].resumen.importes_moneda_origen != null)
+                {
+                    List<FeaEntidades.InterFacturas.resumenImportes_moneda_origen> iresumenImportesMonedaOrigen = new List<FeaEntidades.InterFacturas.resumenImportes_moneda_origen>();
+                    iresumenImportesMonedaOrigen.Add(Lc.comprobante[i].resumen.importes_moneda_origen);
+                    e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.resumenImportes_moneda_origen));
+                    e.AppendToFile(NombreProcesado, iresumenImportesMonedaOrigen);
+                }
 
                 List<FeaEntidades.InterFacturas.resumen> iresumen = new List<FeaEntidades.InterFacturas.resumen>();
                 iresumen.Add(Lc.comprobante[i].resumen);
@@ -347,22 +372,25 @@ namespace eFact_R.RN
                     e.AppendToFile(NombreProcesado, ierrores_lote);
                 }
             }
-            foreach (FeaEntidades.InterFacturas.comprobante_response comprobante in Lr.comprobante_response)
+            if (Lr.comprobante_response != null)
             {
-                List<FeaEntidades.InterFacturas.comprobante_response> icr = new List<FeaEntidades.InterFacturas.comprobante_response>();
-                icr.Add(comprobante);
-                e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.comprobante_response));
-                e.AppendToFile(NombreProcesado, icr);
-                if (comprobante.errores_comprobante != null)
+                foreach (FeaEntidades.InterFacturas.comprobante_response comprobante in Lr.comprobante_response)
                 {
-                    foreach (FeaEntidades.InterFacturas.error ecomprobante in comprobante.errores_comprobante)
+                    List<FeaEntidades.InterFacturas.comprobante_response> icr = new List<FeaEntidades.InterFacturas.comprobante_response>();
+                    icr.Add(comprobante);
+                    e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.comprobante_response));
+                    e.AppendToFile(NombreProcesado, icr);
+                    if (comprobante.errores_comprobante != null)
                     {
-                        if (ecomprobante != null)
+                        foreach (FeaEntidades.InterFacturas.error ecomprobante in comprobante.errores_comprobante)
                         {
-                            List<FeaEntidades.InterFacturas.error> ierrores_comprobante = new List<FeaEntidades.InterFacturas.error>();
-                            ierrores_comprobante.Add(ecomprobante);
-                            e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.error));
-                            e.AppendToFile(NombreProcesado, ierrores_comprobante);
+                            if (ecomprobante != null)
+                            {
+                                List<FeaEntidades.InterFacturas.error> ierrores_comprobante = new List<FeaEntidades.InterFacturas.error>();
+                                ierrores_comprobante.Add(ecomprobante);
+                                e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.error));
+                                e.AppendToFile(NombreProcesado, ierrores_comprobante);
+                            }
                         }
                     }
                 }

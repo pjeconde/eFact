@@ -675,8 +675,21 @@ namespace eFact_R
                         catch (Exception ex2)
                         {
                             //Si el lote tiene errores al ser enviado, grabar el rechazo.
+                            string edescr = "";
+                            if (Lr.estado == null && Lr.errores_lote == null && Lr.comprobante_response == null)
+                            {
+                                //Cuando el error es local, previo a la respuesta de IF se usa el código 99 (Cedeira) para mostrar el error.
+                                //Ejemplo: cuando no está instalado el certificado.
+                                Lr.estado = "99";
+                                Lr.errores_lote = new CedWebRN.IBK.error[1];
+                                Lr.errores_lote[0] = new CedWebRN.IBK.error();
+                                Lr.errores_lote[0].codigo_error = 99;
+                                edescr = ex2.Message.Replace("'", "''");
+                                Lr.errores_lote[0].descripcion_error = edescr;
+                            }
                             eFact_R.RN.Lote.ActualizarDatosError(lote, Lr);
-                            EjecutarEventoBandejaS("RegRechIF", ex2.Message.Replace(Convert.ToChar("'"),Convert.ToChar(" ")).ToString(), lote);
+                            edescr = ex2.Message.Replace("'", "''");
+                            EjecutarEventoBandejaS("RegRechIF", edescr, lote);
                             throw new Exception(ex2.Message);
                         }
                     }
@@ -742,27 +755,7 @@ namespace eFact_R
 
         private void ConsultarButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Cursor = System.Windows.Forms.Cursors.WaitCursor;
-                if (BandejaSDataGridView.SelectedRows.Count != 0)
-                {
-                    eFact_R.Entidades.Lote lote = new eFact_R.Entidades.Lote();
-                    int renglon = BandejaSDataGridView.SelectedRows[0].Index;
-                    lote = dtBandejaSalida[renglon];
-                    ConsultaLote cl = new ConsultaLote(lote);
-                    cl.ShowDialog();
-                    cl = null;
-                }
-            }
-            catch (Exception ex)
-            {
-                Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
-            }
-            finally
-            {
-                Cursor = System.Windows.Forms.Cursors.Default;
-            }
+            ConsultarLote();
         }
 
         private void OtrosFiltrosBandejaSCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -1093,6 +1086,35 @@ namespace eFact_R
                 BarraEstado c = new BarraEstado();
                 c.ShowDialog();
                 c = null;
+            }
+            catch (Exception ex)
+            {
+                Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
+            }
+            finally
+            {
+                Cursor = System.Windows.Forms.Cursors.Default;
+            }
+        }
+
+        private void BandejaSDataGridView_DoubleClick(object sender, EventArgs e)
+        {
+            ConsultarLote();
+        }
+        private void ConsultarLote()
+        {
+            try
+            {
+                Cursor = System.Windows.Forms.Cursors.WaitCursor;
+                if (BandejaSDataGridView.SelectedRows.Count != 0)
+                {
+                    eFact_R.Entidades.Lote lote = new eFact_R.Entidades.Lote();
+                    int renglon = BandejaSDataGridView.SelectedRows[0].Index;
+                    lote = dtBandejaSalida[renglon];
+                    ConsultaLote cl = new ConsultaLote(lote);
+                    cl.ShowDialog();
+                    cl = null;
+                }
             }
             catch (Exception ex)
             {
