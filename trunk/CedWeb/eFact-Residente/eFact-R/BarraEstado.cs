@@ -85,54 +85,56 @@ namespace eFact_R
             ndNuevo = new TreeNode(@System.Configuration.ConfigurationManager.AppSettings["DominioProxy"]);
             nds[1].Nodes[4].Nodes.Add(ndNuevo);
 
-            ndNuevo = new TreeNode("StoreLocation");
-            nds[1].Nodes.Add(ndNuevo);
+            ndNuevo = new TreeNode("Certificados");
+            nds.Add(ndNuevo);
+            ndNuevo = new TreeNode("Lugar de almacenamiento (StoreLocation)");
+            nds[2].Nodes.Add(ndNuevo);
             ndNuevo = new TreeNode(@System.Configuration.ConfigurationManager.AppSettings["StoreLocation"]);
-            nds[1].Nodes[5].Nodes.Add(ndNuevo);
+            nds[2].Nodes[0].Nodes.Add(ndNuevo);
 
             ndNuevo = new TreeNode("Visualizar Archivos en la Bandeja de Entrada");
             ndNuevo.Tag = "";
             nds.Add(ndNuevo);
             ndNuevo = new TreeNode(@System.Configuration.ConfigurationManager.AppSettings["VisualizarArchivos"]);
-            nds[2].Nodes.Add(ndNuevo);
+            nds[3].Nodes.Add(ndNuevo);
 
             ndNuevo = new TreeNode("Otros Filtros");
             nds.Add(ndNuevo);
 
             ndNuevo = new TreeNode("Filtrar la Bandeja de Entrada");
-            nds[3].Nodes.Add(ndNuevo);
+            nds[4].Nodes.Add(ndNuevo);
             ndNuevo = new TreeNode(Aplicacion.OtrosFiltrosFiltrarBE);
-            nds[3].Nodes[0].Nodes.Add(ndNuevo);
+            nds[4].Nodes[0].Nodes.Add(ndNuevo);
 
             ndNuevo = new TreeNode("Filtrar la Bandeja de Salida");
-            nds[3].Nodes.Add(ndNuevo);
+            nds[4].Nodes.Add(ndNuevo);
             ndNuevo = new TreeNode(Aplicacion.OtrosFiltrosFiltrarBS);
-            nds[3].Nodes[1].Nodes.Add(ndNuevo);
+            nds[4].Nodes[1].Nodes.Add(ndNuevo);
 
             ndNuevo = new TreeNode("Cuit");
-            nds[3].Nodes.Add(ndNuevo);
+            nds[4].Nodes.Add(ndNuevo);
             ndNuevo = new TreeNode(Aplicacion.OtrosFiltrosCuit);
-            nds[3].Nodes[2].Nodes.Add(ndNuevo);
+            nds[4].Nodes[2].Nodes.Add(ndNuevo);
 
             ndNuevo = new TreeNode("Punto de venta");
-            nds[3].Nodes.Add(ndNuevo);
+            nds[4].Nodes.Add(ndNuevo);
             ndNuevo = new TreeNode(Aplicacion.OtrosFiltrosPuntoVta);
-            nds[3].Nodes[3].Nodes.Add(ndNuevo);
+            nds[4].Nodes[3].Nodes.Add(ndNuevo);
 
             ndNuevo = new TreeNode("Servicio de correo");
             nds.Add(ndNuevo);
             ndNuevo = new TreeNode("Servidor SMTP");
-            nds[4].Nodes.Add(ndNuevo);
+            nds[5].Nodes.Add(ndNuevo);
             ndNuevo = new TreeNode(@System.Configuration.ConfigurationManager.AppSettings["MailServidorSmtp"]);
-            nds[4].Nodes[0].Nodes.Add(ndNuevo);
+            nds[5].Nodes[0].Nodes.Add(ndNuevo);
 
             ndNuevo = new TreeNode("Credenciales: Nombre de usuario");
-            nds[4].Nodes.Add(ndNuevo);
+            nds[5].Nodes.Add(ndNuevo);
             ndNuevo = new TreeNode(@System.Configuration.ConfigurationManager.AppSettings["MailCredencialesUsr"]);
-            nds[4].Nodes[1].Nodes.Add(ndNuevo);
+            nds[5].Nodes[1].Nodes.Add(ndNuevo);
 
             ndNuevo = new TreeNode("Credenciales: Clave");
-            nds[4].Nodes.Add(ndNuevo);
+            nds[5].Nodes.Add(ndNuevo);
             clave = @System.Configuration.ConfigurationManager.AppSettings["MailCredencialesPsw"];
             claveNoVisible = "";
             for (int i = 0; i < clave.Length; i++)
@@ -140,14 +142,14 @@ namespace eFact_R
                 claveNoVisible += "*";
             }
             ndNuevo = new TreeNode(claveNoVisible);
-            nds[4].Nodes[2].Nodes.Add(ndNuevo);
+            nds[5].Nodes[2].Nodes.Add(ndNuevo);
 
             ndNuevo = new TreeNode("Testear servicio ( mail de prueba: " + System.Configuration.ConfigurationManager.AppSettings["MailTest"] + " )");
-            nds[4].Nodes.Add(ndNuevo);
+            nds[5].Nodes.Add(ndNuevo);
             ndNuevo = new TreeNode("Hacer doble clic sobre este nodo.");
             ndNuevo.Tag = "Clic";
-            nds[4].Nodes[3].Nodes.Add(ndNuevo);
-            nds[4].Nodes[3].Nodes[0].BackColor = Color.PeachPuff;
+            nds[5].Nodes[3].Nodes.Add(ndNuevo);
+            nds[5].Nodes[3].Nodes[0].BackColor = Color.PeachPuff;
 
             ndNuevo = new TreeNode("DB CnnStr");
             nds.Add(ndNuevo);
@@ -172,7 +174,7 @@ namespace eFact_R
                 }
             }
             ndNuevo = new TreeNode(cnnstr);
-            nds[5].Nodes.Add(ndNuevo);
+            nds[6].Nodes.Add(ndNuevo);
 
             treeView1.ExpandAll();
         }
