@@ -31,7 +31,7 @@ namespace eFact_R
         public static DateTime FechaMax;
         public static List<eFact_R.Entidades.Vendedor> Vendedores = new List<eFact_R.Entidades.Vendedor>();
         
-        public const string RegistroNombreClave = @"Software\Cedeira\eFact-R-Bj";
+        public const string RegistroNombreClave = @"Software\Cedeira\eFact-R";
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
@@ -101,8 +101,8 @@ namespace eFact_R
                         eFact_R.Entidades.Aplicacion aplic = eFact_R.RN.Aplicacion.Crear();
                         Sesion = new CedEntidades.Sesion();
                         string Usuario = System.Environment.UserName;
-                        //string Dominio = System.Environment.UserDomainName;
-                        eFact_R.RN.Sesion.Crear(Usuario, "", "NONE", auxCnn.ToString(), auxCnnAplicExterna.ToString(), "FrontEnd", aplic.Version, aplic.VersionParaControl, Sesion);
+                        string Dominio = System.Environment.UserDomainName;
+                        eFact_R.RN.Sesion.Crear(Usuario, "", Dominio, auxCnn.ToString(), auxCnnAplicExterna.ToString(), "FrontEnd", aplic.Version, aplic.VersionParaControl, Sesion);
                         if (Sesion != null)
                         {
                             Application.Run(new Tablero());

@@ -85,6 +85,11 @@ namespace eFact_R
             ndNuevo = new TreeNode(@System.Configuration.ConfigurationManager.AppSettings["DominioProxy"]);
             nds[1].Nodes[4].Nodes.Add(ndNuevo);
 
+            ndNuevo = new TreeNode("StoreLocation");
+            nds[1].Nodes.Add(ndNuevo);
+            ndNuevo = new TreeNode(@System.Configuration.ConfigurationManager.AppSettings["StoreLocation"]);
+            nds[1].Nodes[5].Nodes.Add(ndNuevo);
+
             ndNuevo = new TreeNode("Visualizar Archivos en la Bandeja de Entrada");
             ndNuevo.Tag = "";
             nds.Add(ndNuevo);
@@ -143,7 +148,32 @@ namespace eFact_R
             ndNuevo.Tag = "Clic";
             nds[4].Nodes[3].Nodes.Add(ndNuevo);
             nds[4].Nodes[3].Nodes[0].BackColor = Color.PeachPuff;
-                        
+
+            ndNuevo = new TreeNode("DB CnnStr");
+            nds.Add(ndNuevo);
+            Char[] c = new char[1];
+            c[0] = Convert.ToChar(";");
+            string[] s = Aplicacion.Sesion.CnnStr.Split(c);
+            string cnnstr = "";
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i].ToString().Trim().IndexOf("Password=") == -1)
+                {
+                    cnnstr += s[i].ToString() + ";";
+                }
+                else
+                {
+                    cnnstr += "Password=";
+                    for (int j = 0; j < s[i].Length - 9; j++)
+                    {
+                        cnnstr += "*";
+                    }
+                    cnnstr += ";";
+                }
+            }
+            ndNuevo = new TreeNode(cnnstr);
+            nds[5].Nodes.Add(ndNuevo);
+
             treeView1.ExpandAll();
         }
 
