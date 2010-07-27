@@ -38,7 +38,16 @@ namespace eFact_R
                 bool AllCertifOK = true;
                 foreach (eFact_R.Entidades.Vendedor v in vendedores)
                 {
-                    X509Store store = new X509Store(StoreLocation.LocalMachine);
+                    string storeLocation = System.Configuration.ConfigurationManager.AppSettings["StoreLocation"];
+                    X509Store store;
+                    if (storeLocation == "CurrentUser")
+                    {
+                        store = new X509Store(StoreLocation.CurrentUser);
+                    }
+                    else
+                    {
+                        store = new X509Store(StoreLocation.LocalMachine);
+                    }
                     store.Open(OpenFlags.ReadOnly);
                     X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, v.NumeroSerieCertificado, true);
                     if (col.Count == 0)
