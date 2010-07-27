@@ -331,6 +331,16 @@ namespace eFact_R.DB
         public void Insertar(eFact_R.Entidades.Lote Lote, string HandlerEvento, string HandlerArchivo)
         {
             StringBuilder commandText = new StringBuilder();
+            string loteXml = "";
+            string loteXmlIF = "";
+            if (Lote.LoteXml != null && Lote.LoteXml != "")
+            {
+                loteXml = Lote.LoteXml.Replace("'", "''");
+            }
+            if (Lote.LoteXmlIF != null && Lote.LoteXmlIF != "")
+            {
+                loteXmlIF = Lote.LoteXmlIF.Replace("'", "''");
+            }
             commandText.Append(HandlerEvento);
             commandText.Append(" insert Lotes values ('");
             commandText.Append(Lote.CuitVendedor + "', '");
@@ -342,17 +352,23 @@ namespace eFact_R.DB
             commandText.Append("null, ");
             commandText.Append(Lote.CantidadRegistros + ", '");
             commandText.Append(Lote.NombreArch + "', '");
-            commandText.Append(Lote.LoteXml + "', '");
-            commandText.Append(Lote.LoteXmlIF + "') ");
+            commandText.Append(loteXml + "', '");
+            commandText.Append(loteXmlIF + "') ");
             commandText.Append("declare @IdLote int select @IdLote=@@Identity");
+            string nombreComprador = "";
             for (int i = 0; i < Lote.Comprobantes.Count; i++)
             {
+                nombreComprador = "";
+                if (Lote.Comprobantes[i].NombreComprador != null && Lote.Comprobantes[i].NombreComprador != "")
+                {
+                    nombreComprador = Lote.Comprobantes[i].NombreComprador.Replace("'", "''");
+                }
                 commandText.Append(" insert Comprobantes values (@IdLote, '");
                 commandText.Append(Lote.Comprobantes[i].IdTipoComprobante + "', '");
                 commandText.Append(Lote.Comprobantes[i].NumeroComprobante + "', '");
                 commandText.Append(Lote.Comprobantes[i].TipoDocComprador + "', '");
                 commandText.Append(Lote.Comprobantes[i].NroDocComprador + "', '");
-                commandText.Append(Lote.Comprobantes[i].NombreComprador + "', '");
+                commandText.Append(nombreComprador + "', '");
                 commandText.Append(Lote.Comprobantes[i].Fecha.ToString("yyyyMMdd") + "', '");
                 commandText.Append(Lote.Comprobantes[i].IdMoneda + "', ");
                 commandText.Append(Lote.Comprobantes[i].Importe + ", ");
@@ -391,9 +407,14 @@ namespace eFact_R.DB
         public void ActualizarDatosCAE(eFact_R.Entidades.Lote Lote, string HandlerEvento)
         {
             StringBuilder commandText = new StringBuilder();
+            string loteXmlIF = "";
+            if (Lote.LoteXmlIF != null && Lote.LoteXmlIF != "")
+            {
+                loteXmlIF = Lote.LoteXmlIF.Replace("'", "''");
+            }
             commandText.Append(HandlerEvento);
             commandText.Append(" Update Lotes set LoteXMLIF = '");
-            commandText.Append(Lote.LoteXmlIF + "'");
+            commandText.Append(loteXmlIF + "'");
             commandText.Append(" where IdLote = " + Lote.IdLote);
             commandText.Append(" declare @IdLote int select @IdLote=@@Identity");
             for (int i = 0; i < Lote.Comprobantes.Count; i++)
@@ -412,7 +433,11 @@ namespace eFact_R.DB
         public void ActualizarDatosError(eFact_R.Entidades.Lote Lote, string HandlerEvento)
         {
             StringBuilder commandText = new StringBuilder();
-            string loteXmlIF = Lote.LoteXmlIF.Replace("'", "''");
+            string loteXmlIF = "";
+            if (Lote.LoteXmlIF != null && Lote.LoteXmlIF != "")
+            {
+                loteXmlIF = Lote.LoteXmlIF.Replace("'", "''");
+            }
             commandText.Append(HandlerEvento);
             commandText.Append(" Update Lotes set LoteXMLIF = '");
             commandText.Append(loteXmlIF + "'");
