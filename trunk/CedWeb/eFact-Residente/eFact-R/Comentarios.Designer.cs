@@ -79,6 +79,7 @@
             this.ComentariosTextBox.Location = new System.Drawing.Point(3, 3);
             this.ComentariosTextBox.Multiline = true;
             this.ComentariosTextBox.Name = "ComentariosTextBox";
+            this.ComentariosTextBox.ReadOnly = true;
             this.ComentariosTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.ComentariosTextBox.Size = new System.Drawing.Size(814, 326);
             this.ComentariosTextBox.TabIndex = 1;

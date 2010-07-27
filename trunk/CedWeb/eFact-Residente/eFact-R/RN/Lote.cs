@@ -304,6 +304,11 @@ namespace eFact_R.RN
                         e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.lineaImportes_moneda_origen));
                         e.AppendToFile(NombreProcesado, ilineaImportesMonedaOrigen);
                     }
+                    if (linea.informacion_adicional != null)
+                    {
+                        e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.lineaInformacion_adicional));
+                        e.AppendToFile(NombreProcesado, linea.informacion_adicional);
+                    }
                 }
 
                 if (Lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion != null)

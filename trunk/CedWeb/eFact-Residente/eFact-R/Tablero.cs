@@ -26,7 +26,7 @@ namespace eFact_R
             ArchivosOtrosFiltros = eFact_R.RN.Archivo.OtrosFiltros.SinAplicar;
 
             StatusBar.Panels["UsuarioSBP"].Text = "Usuario: " + Aplicacion.Sesion.Usuario.Nombre;
-            StatusBar.Panels["UsuarioSBP"].ToolTipText = "Información del usuario\r\nNombre: " + Aplicacion.Sesion.Usuario.Nombre;
+            StatusBar.Panels["UsuarioSBP"].ToolTipText = "Información del usuario\r\nNombre: " + Aplicacion.Sesion.Usuario.Nombre + "\r\nDominio: " + Aplicacion.Sesion.Dominio;
 
             //<add key="Certificado" value="012425509e59" />
             List<eFact_R.Entidades.Vendedor> vendedores = new List<eFact_R.Entidades.Vendedor>();
