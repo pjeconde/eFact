@@ -12,8 +12,8 @@ namespace CedWebDB
         public void Leer(CedWebEntidades.Comprador Comprador)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("select Comprador.IdCuenta, Cuenta.Nombre as NombreCuenta, Comprador.RazonSocial, Comprador.Calle, Comprador.Nro, Comprador.Piso, Comprador.Depto, Comprador.Sector, Comprador.Torre, Comprador.Manzana, Comprador.Localidad, Comprador.IdProvincia, Comprador.DescrProvincia, Comprador.CodPost, Comprador.NombreContacto, Comprador.EmailContacto, Comprador.TelefonoContacto, Comprador.IdTipoDoc, Comprador.DescrTipoDoc, Comprador.NroDoc, Comprador.IdCondIVA, Comprador.DescrCondIVA, Comprador.NroIngBrutos, Comprador.IdCondIngBrutos, Comprador.DescrCondIngBrutos, Comprador.GLN, Comprador.CodigoInterno, Comprador.FechaInicioActividades from Comprador, Cuenta ");
-            a.Append("where Comprador.IdCuenta='" + Comprador.IdCuenta + "' and Comprador.RazonSocial='" + Comprador.RazonSocial + "' and Comprador.IdCuenta=Cuenta.IdCuenta ");
+            a.Append("select Comprador.IdCuenta, Cuenta.Nombre as NombreCuenta, Comprador.RazonSocial, Comprador.Calle, Comprador.Nro, Comprador.Piso, Comprador.Depto, Comprador.Sector, Comprador.Torre, Comprador.Manzana, Comprador.Localidad, Comprador.IdProvincia, Comprador.DescrProvincia, Comprador.CodPost, Comprador.NombreContacto, Comprador.EmailContacto, Comprador.TelefonoContacto, Comprador.IdTipoDoc, Comprador.DescrTipoDoc, Comprador.NroDoc, Comprador.IdCondIVA, Comprador.DescrCondIVA, Comprador.NroIngBrutos, Comprador.IdCondIngBrutos, Comprador.DescrCondIngBrutos, Comprador.GLN, Comprador.CodigoInterno, Comprador.FechaInicioActividades, Comprador.EmailAvisoVisualizacion, Comprador.PasswordAvisoVisualizacion ");
+            a.Append("from Comprador, Cuenta where Comprador.IdCuenta='" + Comprador.IdCuenta + "' and Comprador.RazonSocial='" + Comprador.RazonSocial + "' and Comprador.IdCuenta=Cuenta.IdCuenta ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             if (dt.Rows.Count == 0)
             {
@@ -54,6 +54,8 @@ namespace CedWebDB
             Hasta.GLN = Convert.ToInt64(Desde["GLN"]);
             Hasta.CodigoInterno = Convert.ToString(Desde["CodigoInterno"]);
             Hasta.FechaInicioActividades = Convert.ToDateTime(Desde["FechaInicioActividades"]);
+            Hasta.EmailAvisoVisualizacion = Convert.ToString(Desde["EmailAvisoVisualizacion"]);
+            Hasta.PasswordAvisoVisualizacion = Convert.ToString(Desde["PasswordAvisoVisualizacion"]);
         }
         public void Crear(CedWebEntidades.Comprador Comprador)
         {
@@ -85,7 +87,9 @@ namespace CedWebDB
             a.Append("'" + Comprador.DescrCondIngBrutos + "', ");
             a.Append(Comprador.GLN + ", ");
             a.Append("'" + Comprador.CodigoInterno + "', ");
-            a.Append("'" + Comprador.FechaInicioActividades.ToString("yyyyMMdd") + "' ");
+            a.Append("'" + Comprador.FechaInicioActividades.ToString("yyyyMMdd") + "', ");
+            a.Append("'" + Comprador.EmailAvisoVisualizacion + "', ");
+            a.Append("'" + Comprador.PasswordAvisoVisualizacion + "' ");
             a.Append(") ");
             Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
         }
@@ -117,7 +121,9 @@ namespace CedWebDB
             a.Append("DescrCondIngBrutos='" + Comprador.DescrCondIngBrutos + "', ");
             a.Append("GLN=" + Comprador.GLN + ", ");
             a.Append("CodigoInterno='" + Comprador.CodigoInterno + "', ");
-            a.Append("FechaInicioActividades='" + Comprador.FechaInicioActividades.ToString("yyyyMMdd") + "' ");
+            a.Append("FechaInicioActividades='" + Comprador.FechaInicioActividades.ToString("yyyyMMdd") + "', ");
+            a.Append("EmailAvisoVisualizacion='" + Comprador.EmailAvisoVisualizacion + "', ");
+            a.Append("PasswordAvisoVisualizacion='" + Comprador.PasswordAvisoVisualizacion + "' ");
             a.Append("where IdCuenta='" + Comprador.IdCuenta + "' and RazonSocial='" + Comprador.RazonSocial + "' ");
             Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
         }
@@ -142,7 +148,7 @@ namespace CedWebDB
                 }
 				System.Text.StringBuilder a = new StringBuilder();
 				a.Append("select ");
-				a.Append("Comprador.IdCuenta, Cuenta.Nombre as NombreCuenta, Comprador.RazonSocial, Comprador.Calle, Comprador.Nro, Comprador.Piso, Comprador.Depto, Comprador.Sector, Comprador.Torre, Comprador.Manzana, Comprador.Localidad, Comprador.IdProvincia, Comprador.DescrProvincia, Comprador.CodPost, Comprador.NombreContacto, Comprador.EmailContacto, Comprador.TelefonoContacto, Comprador.IdTipoDoc, Comprador.DescrTipoDoc, Comprador.NroDoc, Comprador.IdCondIVA, Comprador.DescrCondIVA, Comprador.NroIngBrutos, Comprador.IdCondIngBrutos, Comprador.DescrCondIngBrutos, Comprador.GLN, Comprador.CodigoInterno, Comprador.FechaInicioActividades ");
+                a.Append("Comprador.IdCuenta, Cuenta.Nombre as NombreCuenta, Comprador.RazonSocial, Comprador.Calle, Comprador.Nro, Comprador.Piso, Comprador.Depto, Comprador.Sector, Comprador.Torre, Comprador.Manzana, Comprador.Localidad, Comprador.IdProvincia, Comprador.DescrProvincia, Comprador.CodPost, Comprador.NombreContacto, Comprador.EmailContacto, Comprador.TelefonoContacto, Comprador.IdTipoDoc, Comprador.DescrTipoDoc, Comprador.NroDoc, Comprador.IdCondIVA, Comprador.DescrCondIVA, Comprador.NroIngBrutos, Comprador.IdCondIngBrutos, Comprador.DescrCondIngBrutos, Comprador.GLN, Comprador.CodigoInterno, Comprador.FechaInicioActividades, Comprador.EmailAvisoVisualizacion, Comprador.PasswordAvisoVisualizacion ");
 				a.Append("from Comprador, Cuenta ");
 				a.Append("where Comprador.IdCuenta='" + Cuenta.Id + "' and Comprador.IdCuenta=Cuenta.IdCuenta ");
 				a.Append("order by Comprador.RazonSocial ");
@@ -165,7 +171,7 @@ namespace CedWebDB
             System.Text.StringBuilder a = new StringBuilder();
             a.Append("select * ");
             a.Append("from (select top {0} ROW_NUMBER() OVER (ORDER BY {1}) as ROW_NUM, ");
-            a.Append("Comprador.IdCuenta, Cuenta.Nombre as NombreCuenta, Comprador.RazonSocial, Comprador.Calle, Comprador.Nro, Comprador.Piso, Comprador.Depto, Comprador.Sector, Comprador.Torre, Comprador.Manzana, Comprador.Localidad, Comprador.IdProvincia, Comprador.DescrProvincia, Comprador.CodPost, Comprador.NombreContacto, Comprador.EmailContacto, Comprador.TelefonoContacto, Comprador.IdTipoDoc, Comprador.DescrTipoDoc, Comprador.NroDoc, Comprador.IdCondIVA, Comprador.DescrCondIVA, Comprador.NroIngBrutos, Comprador.IdCondIngBrutos, Comprador.DescrCondIngBrutos, Comprador.GLN, Comprador.CodigoInterno, Comprador.FechaInicioActividades ");
+            a.Append("Comprador.IdCuenta, Cuenta.Nombre as NombreCuenta, Comprador.RazonSocial, Comprador.Calle, Comprador.Nro, Comprador.Piso, Comprador.Depto, Comprador.Sector, Comprador.Torre, Comprador.Manzana, Comprador.Localidad, Comprador.IdProvincia, Comprador.DescrProvincia, Comprador.CodPost, Comprador.NombreContacto, Comprador.EmailContacto, Comprador.TelefonoContacto, Comprador.IdTipoDoc, Comprador.DescrTipoDoc, Comprador.NroDoc, Comprador.IdCondIVA, Comprador.DescrCondIVA, Comprador.NroIngBrutos, Comprador.IdCondIngBrutos, Comprador.DescrCondIngBrutos, Comprador.GLN, Comprador.CodigoInterno, Comprador.FechaInicioActividades, Comprador.EmailAvisoVisualizacion, Comprador.PasswordAvisoVisualizacion ");
             a.Append("from Comprador, Cuenta ");
             a.Append("where Comprador.IdCuenta='" + Cuenta.Id + "' and Comprador.IdCuenta=Cuenta.IdCuenta ");
             a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
@@ -196,7 +202,7 @@ namespace CedWebDB
             System.Text.StringBuilder a = new StringBuilder();
             a.Append("select * ");
             a.Append("from (select top {0} ROW_NUMBER() OVER (ORDER BY {1}) as ROW_NUM, ");
-            a.Append("Comprador.IdCuenta, Cuenta.Nombre as NombreCuenta, Comprador.RazonSocial, Comprador.Calle, Comprador.Nro, Comprador.Piso, Comprador.Depto, Comprador.Sector, Comprador.Torre, Comprador.Manzana, Comprador.Localidad, Comprador.IdProvincia, Comprador.DescrProvincia, Comprador.CodPost, Comprador.NombreContacto, Comprador.EmailContacto, Comprador.TelefonoContacto, Comprador.IdTipoDoc, Comprador.DescrTipoDoc, Comprador.NroDoc, Comprador.IdCondIVA, Comprador.DescrCondIVA, Comprador.NroIngBrutos, Comprador.IdCondIngBrutos, Comprador.DescrCondIngBrutos, Comprador.GLN, Comprador.CodigoInterno, Comprador.FechaInicioActividades ");
+            a.Append("Comprador.IdCuenta, Cuenta.Nombre as NombreCuenta, Comprador.RazonSocial, Comprador.Calle, Comprador.Nro, Comprador.Piso, Comprador.Depto, Comprador.Sector, Comprador.Torre, Comprador.Manzana, Comprador.Localidad, Comprador.IdProvincia, Comprador.DescrProvincia, Comprador.CodPost, Comprador.NombreContacto, Comprador.EmailContacto, Comprador.TelefonoContacto, Comprador.IdTipoDoc, Comprador.DescrTipoDoc, Comprador.NroDoc, Comprador.IdCondIVA, Comprador.DescrCondIVA, Comprador.NroIngBrutos, Comprador.IdCondIngBrutos, Comprador.DescrCondIngBrutos, Comprador.GLN, Comprador.CodigoInterno, Comprador.FechaInicioActividades, Comprador.EmailAvisoVisualizacion, Comprador.PasswordAvisoVisualizacion ");
             a.Append("from Comprador, Cuenta ");
             a.Append("where Comprador.IdCuenta=Cuenta.IdCuenta ");
             a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");

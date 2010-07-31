@@ -1019,7 +1019,43 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
                 }
             }
         }
-		namespace Fechas
+        namespace Comprador
+        {
+            [Serializable]
+            public class BaseApplicationException : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+            {
+                public BaseApplicationException(string TextoError)
+                    : base(TextoError)
+                {
+                }
+                public BaseApplicationException(string TextoError, Exception inner)
+                    : base(TextoError, inner)
+                {
+                }
+                public BaseApplicationException(SerializationInfo info, StreamingContext context)
+                    : base(info, context)
+                {
+                }
+            }
+            [Serializable]
+            public class AvisoVisualizacion : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+            {
+                static string TextoError = "Hay alguno de los campos del aviso para visualización (Email o Contraseña) sin informar.  Deben informarse ambos, o ninguno.";
+                public AvisoVisualizacion()
+                    : base(TextoError)
+                {
+                }
+                public AvisoVisualizacion(Exception inner)
+                    : base(TextoError, inner)
+                {
+                }
+                public AvisoVisualizacion(SerializationInfo info, StreamingContext context)
+                    : base(info, context)
+                {
+                }
+            }
+        }
+        namespace Fechas
 		{
 			[Serializable]
 			public class BaseApplicationException : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
