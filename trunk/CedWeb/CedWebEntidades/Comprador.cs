@@ -9,6 +9,8 @@ namespace CedWebEntidades
         private int idTipoDoc;
         private string descrTipoDoc;
         private long nroDoc;
+        private string emailAvisoVisualizacion;
+        private string passwordAvisoVisualizacion;
 
         public Comprador()
         {
@@ -45,6 +47,28 @@ namespace CedWebEntidades
             get
             {
                 return nroDoc;
+            }
+        }
+        public string EmailAvisoVisualizacion
+        {
+            set
+            {
+                emailAvisoVisualizacion = value;
+            }
+            get
+            {
+                return emailAvisoVisualizacion;
+            }
+        }
+        public string PasswordAvisoVisualizacion
+        {
+            set
+            {
+                passwordAvisoVisualizacion = value;
+            }
+            get
+            {
+                return passwordAvisoVisualizacion;
             }
         }
     }

@@ -87,6 +87,8 @@ namespace CedeiraAJAX.Comprador
                         CodigoInternoTextBox.Text = Comprador.CodigoInterno;
                         FechaInicioActividadesDatePickerWebUserControl.CalendarDate = Comprador.FechaInicioActividades;
                         CompradorDelExtranjeroCheckBox.Checked = Comprador.IdTipoDoc == ((FeaEntidades.Documentos.Documento)new FeaEntidades.Documentos.CUITPais()).Codigo;
+                        EmailAvisoVisualizacionTextBox.Text = Comprador.EmailAvisoVisualizacion;
+                        PasswordAvisoVisualizacionTextBox.Text = Comprador.PasswordAvisoVisualizacion;
                         AceptarButton.Focus();
                     }
                 }

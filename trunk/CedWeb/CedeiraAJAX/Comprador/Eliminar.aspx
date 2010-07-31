@@ -304,6 +304,45 @@
                                         </table>
                                     </td>
                                 </tr>
+                                <!-- Envío de aviso automático (para visualización de comprobante) -->
+                                <tr>
+                                    <td align="right" style="padding-right:5px; padding-top:3px;">
+                                        <asp:Label ID="Label38" runat="server" Text="Envío de <b>aviso</b> automático"></asp:Label><br />
+                                        <asp:Label ID="Label46" runat="server" Text="<b>para visualización</b> del comprobante"></asp:Label>
+                                    </td>
+                                    <td style="border-style:solid; border-color:Gray; border-width:1px">
+                                        <table border="0" cellpadding="0" cellspacing="0">
+                                            <!-- Email -->
+                                            <tr>
+                                                <td align="right" style="padding-right:5px; padding-top:3px">
+                                                    <asp:Label ID="Label45" runat="server" Text="Email"></asp:Label>
+                                                </td>
+                                                <td align="left" style="padding-top:3px">
+                                                    <asp:TextBox ID="EmailAvisoVisualizacionTextBox" runat="server" MaxLength="60" TabIndex="13"
+                                                        ToolTip="A esta dirección se enviará un mail de aviso para que el destinatario pueda visualizar el comprobante"
+                                                        Width="315px" ReadOnly="true"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <!-- Contraseña -->
+                                            <tr>
+                                                <td align="right" style="padding-right:5px; padding-top:3px">
+                                                    <asp:Label ID="Label42" runat="server" Text="Contraseña"></asp:Label>
+                                                </td>
+                                                <td align="left" style="padding-top:3px">
+                                                    <asp:TextBox ID="PasswordAvisoVisualizacionTextBox" runat="server" MaxLength="25" TabIndex="12"
+                                                        ToolTip="Para poder acceder al contenido del comprobante, se solicitará al destinatario el ingreso de esta contraseña"
+                                                        Width="100px" ReadOnly="true"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <!-- Aclaracion -->
+                                            <tr>
+                                                <td align="justify" style="padding-left:5px; padding-right:5px; padding-top:5px; font-size:xx-small" colspan="2">
+                                                    Interfacturas enviará, a última hora del día, un aviso (con un link) para que su destinatario<BR/>pueda visualizar el comprobante electrónico generado.  Esta funcionalidad puede ser usada,<BR/>por ejemplo, cuando, por cuestiones de seguridad, no se quiera enviar facturas por mail.
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
                                 <!-- Botones -->
                                 <tr>
                                     <td>

@@ -119,6 +119,8 @@ namespace CedeiraAJAX.Comprador
                 }
                 comprador.CodigoInterno = CodigoInternoTextBox.Text;
                 comprador.FechaInicioActividades = FechaInicioActividadesDatePickerWebUserControl.CalendarDate;
+                comprador.EmailAvisoVisualizacion = EmailAvisoVisualizacionTextBox.Text;
+                comprador.PasswordAvisoVisualizacion = PasswordAvisoVisualizacionTextBox.Text;
                 CedWebRN.Comprador.Validar(comprador, (CedEntidades.Sesion)Session["Sesion"]);
                 CedWebRN.Comprador.Crear(comprador, (CedEntidades.Sesion)Session["Sesion"]);
                 Server.Transfer("~/Comprador/Explorador.aspx", true);

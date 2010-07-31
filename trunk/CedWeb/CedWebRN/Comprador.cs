@@ -31,6 +31,12 @@ namespace CedWebRN
             {
                 throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ValorNoInfo("Condición I.V.A.");
             }
+            //Los campos del aviso de visualización (email y password) se informan ambos o ninguno
+            if ((Comprador.EmailAvisoVisualizacion != String.Empty && Comprador.PasswordAvisoVisualizacion == String.Empty) ||
+                (Comprador.EmailAvisoVisualizacion == String.Empty && Comprador.PasswordAvisoVisualizacion != String.Empty))
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Comprador.AvisoVisualizacion();
+            }
         }
         public static void Crear(CedWebEntidades.Comprador Comprador, CedEntidades.Sesion Sesion)
         {

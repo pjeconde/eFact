@@ -137,6 +137,14 @@
                                             <headerstyle horizontalalign="left" wrap="False" />
                                             <itemstyle horizontalalign="left" wrap="False" />
                                         </asp:BoundField>
+                                        <asp:BoundField DataField="EmailAvisoVisualizacion" HeaderText="Email aviso p/visualiz.de comprob." SortExpression="EmailAvisoVisualizacion">
+                                            <headerstyle horizontalalign="left" wrap="False" />
+                                            <itemstyle horizontalalign="left" wrap="False" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="PasswordAvisoVisualizacion" HeaderText="Contraseña" SortExpression="PasswordAvisoVisualizacion">
+                                            <headerstyle horizontalalign="left" wrap="False" />
+                                            <itemstyle horizontalalign="left" wrap="False" />
+                                        </asp:BoundField>
                                     </Columns>
                                 </cc1:PagingGridView>
                             </asp:Panel>
