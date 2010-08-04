@@ -403,7 +403,7 @@
                                             </tr>
                                             <!-- Contraseña -->
                                             <tr>
-                                                <td align="right" style="padding-right:5px; padding-top:3px">
+                                                <td align="right" style="padding-left:5px; padding-right:5px; padding-top:3px">
                                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator14" runat="server"
                                                         ControlToValidate="PasswordAvisoVisualizacionTextBox" ErrorMessage="Contraseña aviso automático para visualización" SetFocusOnError="True"
                                                         ValidationExpression="[A-Za-z\- ,.0-9]*">
@@ -415,6 +415,7 @@
                                                     <asp:TextBox ID="PasswordAvisoVisualizacionTextBox" runat="server" MaxLength="25" TabIndex="12"
                                                         ToolTip="Para poder acceder al contenido del comprobante, se solicitará al destinatario el ingreso de esta contraseña"
                                                         Width="100px"></asp:TextBox>
+                                                    <asp:Label ID="Label2" runat="server" Text="(Interfacturas la llama <b>Clave de Vinculación</b>)" Font-Size="XX-Small" ></asp:Label>
                                                 </td>
                                             </tr>
                                             <!-- Aclaracion -->
