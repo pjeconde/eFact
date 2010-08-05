@@ -151,7 +151,7 @@
                                             TabIndex="12" Width="400px"></asp:TextBox>
                                     </td>
                                 </tr>
-                                <!-- Mail Contacto -->
+                                <!-- Email Contacto -->
                                 <tr>
                                     <td align="right" style="padding-right: 5px; padding-top: 3px">
                                         <asp:Label ID="Label9" runat="server" Text="Email Contacto"></asp:Label>
@@ -318,7 +318,7 @@
                                                 </td>
                                                 <td align="left" style="padding-top:3px">
                                                     <asp:TextBox ID="EmailAvisoVisualizacionTextBox" runat="server" MaxLength="60" TabIndex="13"
-                                                        ToolTip="A esta dirección se enviará un mail de aviso para que el destinatario pueda visualizar el comprobante"
+                                                        ToolTip="A esta dirección se enviará un email de aviso para que el destinatario pueda visualizar el comprobante"
                                                         Width="315px" ReadOnly="true"></asp:TextBox>
                                                 </td>
                                             </tr>
@@ -338,7 +338,7 @@
                                             <!-- Aclaracion -->
                                             <tr>
                                                 <td align="justify" style="padding-left:5px; padding-right:5px; padding-top:5px; font-size:xx-small" colspan="2">
-                                                    Interfacturas enviará, a última hora del día, un aviso (con un link) para que su destinatario<BR/>pueda visualizar el comprobante electrónico generado.  Esta funcionalidad puede ser usada,<BR/>por ejemplo, cuando, por cuestiones de seguridad, no se quiera enviar facturas por mail.
+                                                    Interfacturas enviará, a última hora del día, un aviso (con un link) para que su destinatario<BR/>pueda visualizar el comprobante electrónico generado.  Esta funcionalidad puede ser usada,<BR/>por ejemplo, cuando, por cuestiones de seguridad, no se quiera enviar facturas por email.
                                                 </td>
                                             </tr>
                                         </table>
