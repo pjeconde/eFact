@@ -34,5 +34,19 @@ namespace eFact_R.RN
                 return true;
             }
         }
+        public static bool ExisteValor(RegistryKey raiz, String nombreClave, String nombreValor)
+        {
+            RegistryKey clave;
+            clave = raiz.OpenSubKey(nombreClave, true);
+            object valor = clave.GetValue(nombreValor);
+            if (valor == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }
