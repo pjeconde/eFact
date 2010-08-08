@@ -100,11 +100,13 @@
             this.LoteXML = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BandejaSBotonesPanel = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
+            this.BotonesBSLinea2SplitContainer = new System.Windows.Forms.SplitContainer();
             this.ExportarItfComboBox = new System.Windows.Forms.ComboBox();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.ConsultarButton = new System.Windows.Forms.Button();
             this.SalirButton = new System.Windows.Forms.Button();
+            this.BotonesBSlinea1Panel = new System.Windows.Forms.Panel();
+            this.BotonesBSLinea1SplitContainer = new System.Windows.Forms.SplitContainer();
             this.EventosComboBox = new System.Windows.Forms.ComboBox();
+            this.ConsultarButton = new System.Windows.Forms.Button();
             this.CabBandejaSPanel = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.PtesDiasAntCheckBox = new System.Windows.Forms.CheckBox();
@@ -166,7 +168,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.BandejaSDataGridView)).BeginInit();
             this.BandejaSBotonesPanel.SuspendLayout();
             this.panel12.SuspendLayout();
-            this.panel10.SuspendLayout();
+            this.BotonesBSLinea2SplitContainer.Panel1.SuspendLayout();
+            this.BotonesBSLinea2SplitContainer.Panel2.SuspendLayout();
+            this.BotonesBSLinea2SplitContainer.SuspendLayout();
+            this.BotonesBSlinea1Panel.SuspendLayout();
+            this.BotonesBSLinea1SplitContainer.Panel1.SuspendLayout();
+            this.BotonesBSLinea1SplitContainer.Panel2.SuspendLayout();
+            this.BotonesBSLinea1SplitContainer.SuspendLayout();
             this.CabBandejaSPanel.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -198,8 +206,8 @@
             this.SplitContainer.Panel2.Controls.Add(this.BandejaSHorizontalSplitContainer);
             this.SplitContainer.Panel2.Controls.Add(this.CabBandejaSPanel);
             this.SplitContainer.Panel2MinSize = 50;
-            this.SplitContainer.Size = new System.Drawing.Size(1008, 614);
-            this.SplitContainer.SplitterDistance = 522;
+            this.SplitContainer.Size = new System.Drawing.Size(1007, 479);
+            this.SplitContainer.SplitterDistance = 519;
             this.SplitContainer.TabIndex = 0;
             // 
             // BandejaEHorizontalSplitContainer
@@ -219,8 +227,8 @@
             // 
             this.BandejaEHorizontalSplitContainer.Panel2.Controls.Add(this.BandejaEBotonesPanel);
             this.BandejaEHorizontalSplitContainer.Panel2MinSize = 80;
-            this.BandejaEHorizontalSplitContainer.Size = new System.Drawing.Size(522, 391);
-            this.BandejaEHorizontalSplitContainer.SplitterDistance = 306;
+            this.BandejaEHorizontalSplitContainer.Size = new System.Drawing.Size(519, 256);
+            this.BandejaEHorizontalSplitContainer.SplitterDistance = 163;
             this.BandejaEHorizontalSplitContainer.TabIndex = 16;
             // 
             // BandejaEGrillaPanel
@@ -229,7 +237,7 @@
             this.BandejaEGrillaPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BandejaEGrillaPanel.Location = new System.Drawing.Point(0, 0);
             this.BandejaEGrillaPanel.Name = "BandejaEGrillaPanel";
-            this.BandejaEGrillaPanel.Size = new System.Drawing.Size(522, 306);
+            this.BandejaEGrillaPanel.Size = new System.Drawing.Size(519, 163);
             this.BandejaEGrillaPanel.TabIndex = 15;
             // 
             // BandejaEDataGridView
@@ -266,8 +274,9 @@
             this.BandejaEDataGridView.Name = "BandejaEDataGridView";
             this.BandejaEDataGridView.ReadOnly = true;
             this.BandejaEDataGridView.RowHeadersVisible = false;
+            this.BandejaEDataGridView.RowTemplate.Height = 24;
             this.BandejaEDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.BandejaEDataGridView.Size = new System.Drawing.Size(522, 306);
+            this.BandejaEDataGridView.Size = new System.Drawing.Size(519, 163);
             this.BandejaEDataGridView.TabIndex = 7;
             this.BandejaEDataGridView.DoubleClick += new System.EventHandler(this.BandejaEDataGridView_DoubleClick);
             // 
@@ -389,11 +398,11 @@
             this.BandejaEBotonesPanel.BackColor = System.Drawing.SystemColors.Control;
             this.BandejaEBotonesPanel.Controls.Add(this.panel13);
             this.BandejaEBotonesPanel.Controls.Add(this.panel11);
-            this.BandejaEBotonesPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BandejaEBotonesPanel.Location = new System.Drawing.Point(0, -4);
+            this.BandejaEBotonesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BandejaEBotonesPanel.Location = new System.Drawing.Point(0, 0);
             this.BandejaEBotonesPanel.Name = "BandejaEBotonesPanel";
             this.BandejaEBotonesPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.BandejaEBotonesPanel.Size = new System.Drawing.Size(522, 85);
+            this.BandejaEBotonesPanel.Size = new System.Drawing.Size(519, 89);
             this.BandejaEBotonesPanel.TabIndex = 13;
             // 
             // panel13
@@ -401,7 +410,7 @@
             this.panel13.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel13.Location = new System.Drawing.Point(5, 28);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(512, 23);
+            this.panel13.Size = new System.Drawing.Size(509, 23);
             this.panel13.TabIndex = 10;
             // 
             // panel11
@@ -411,7 +420,7 @@
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel11.Location = new System.Drawing.Point(5, 5);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(512, 23);
+            this.panel11.Size = new System.Drawing.Size(509, 23);
             this.panel11.TabIndex = 8;
             // 
             // DescartarBandejaEButton
@@ -428,7 +437,7 @@
             // EnviarABandejaSButton
             // 
             this.EnviarABandejaSButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.EnviarABandejaSButton.Location = new System.Drawing.Point(364, 0);
+            this.EnviarABandejaSButton.Location = new System.Drawing.Point(361, 0);
             this.EnviarABandejaSButton.Name = "EnviarABandejaSButton";
             this.EnviarABandejaSButton.Size = new System.Drawing.Size(148, 23);
             this.EnviarABandejaSButton.TabIndex = 8;
@@ -446,7 +455,7 @@
             this.CabBandejaEPanel.Location = new System.Drawing.Point(0, 0);
             this.CabBandejaEPanel.Name = "CabBandejaEPanel";
             this.CabBandejaEPanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.CabBandejaEPanel.Size = new System.Drawing.Size(522, 223);
+            this.CabBandejaEPanel.Size = new System.Drawing.Size(519, 223);
             this.CabBandejaEPanel.TabIndex = 15;
             // 
             // panel1
@@ -457,7 +466,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(522, 26);
+            this.panel1.Size = new System.Drawing.Size(519, 26);
             this.panel1.TabIndex = 10;
             // 
             // label1
@@ -500,7 +509,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(522, 195);
+            this.panel5.Size = new System.Drawing.Size(519, 195);
             this.panel5.TabIndex = 7;
             // 
             // ArchivosHistoricosRadioButton
@@ -687,7 +696,7 @@
             this.ActualizarBandejaEButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.ActualizarBandejaEButton.Location = new System.Drawing.Point(0, 195);
             this.ActualizarBandejaEButton.Name = "ActualizarBandejaEButton";
-            this.ActualizarBandejaEButton.Size = new System.Drawing.Size(522, 23);
+            this.ActualizarBandejaEButton.Size = new System.Drawing.Size(519, 23);
             this.ActualizarBandejaEButton.TabIndex = 6;
             this.ActualizarBandejaEButton.Text = "Actualizar Bandeja de Entrada";
             this.ActualizarBandejaEButton.UseVisualStyleBackColor = true;
@@ -710,8 +719,8 @@
             // 
             this.BandejaSHorizontalSplitContainer.Panel2.Controls.Add(this.BandejaSBotonesPanel);
             this.BandejaSHorizontalSplitContainer.Panel2MinSize = 80;
-            this.BandejaSHorizontalSplitContainer.Size = new System.Drawing.Size(482, 391);
-            this.BandejaSHorizontalSplitContainer.SplitterDistance = 306;
+            this.BandejaSHorizontalSplitContainer.Size = new System.Drawing.Size(484, 256);
+            this.BandejaSHorizontalSplitContainer.SplitterDistance = 163;
             this.BandejaSHorizontalSplitContainer.TabIndex = 10;
             // 
             // BandejaSGrillaPanel
@@ -720,7 +729,7 @@
             this.BandejaSGrillaPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BandejaSGrillaPanel.Location = new System.Drawing.Point(0, 0);
             this.BandejaSGrillaPanel.Name = "BandejaSGrillaPanel";
-            this.BandejaSGrillaPanel.Size = new System.Drawing.Size(482, 306);
+            this.BandejaSGrillaPanel.Size = new System.Drawing.Size(484, 163);
             this.BandejaSGrillaPanel.TabIndex = 9;
             // 
             // BandejaSDataGridView
@@ -757,7 +766,7 @@
             this.BandejaSDataGridView.ReadOnly = true;
             this.BandejaSDataGridView.RowHeadersVisible = false;
             this.BandejaSDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.BandejaSDataGridView.Size = new System.Drawing.Size(482, 306);
+            this.BandejaSDataGridView.Size = new System.Drawing.Size(484, 163);
             this.BandejaSDataGridView.TabIndex = 6;
             this.BandejaSDataGridView.DoubleClick += new System.EventHandler(this.BandejaSDataGridView_DoubleClick);
             this.BandejaSDataGridView.SelectionChanged += new System.EventHandler(this.BandejaSDataGridView_SelectionChanged);
@@ -859,22 +868,45 @@
             // 
             this.BandejaSBotonesPanel.BackColor = System.Drawing.SystemColors.Control;
             this.BandejaSBotonesPanel.Controls.Add(this.panel12);
-            this.BandejaSBotonesPanel.Controls.Add(this.panel10);
-            this.BandejaSBotonesPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.BandejaSBotonesPanel.Location = new System.Drawing.Point(0, -4);
+            this.BandejaSBotonesPanel.Controls.Add(this.BotonesBSlinea1Panel);
+            this.BandejaSBotonesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BandejaSBotonesPanel.Location = new System.Drawing.Point(0, 0);
             this.BandejaSBotonesPanel.Name = "BandejaSBotonesPanel";
             this.BandejaSBotonesPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.BandejaSBotonesPanel.Size = new System.Drawing.Size(482, 85);
+            this.BandejaSBotonesPanel.Size = new System.Drawing.Size(484, 89);
             this.BandejaSBotonesPanel.TabIndex = 9;
             // 
             // panel12
             // 
-            this.panel12.Controls.Add(this.ExportarItfComboBox);
+            this.panel12.Controls.Add(this.BotonesBSLinea2SplitContainer);
             this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel12.Location = new System.Drawing.Point(5, 28);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(472, 23);
+            this.panel12.Size = new System.Drawing.Size(474, 23);
             this.panel12.TabIndex = 9;
+            // 
+            // BotonesBSLinea2SplitContainer
+            // 
+            this.BotonesBSLinea2SplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BotonesBSLinea2SplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.BotonesBSLinea2SplitContainer.IsSplitterFixed = true;
+            this.BotonesBSLinea2SplitContainer.Location = new System.Drawing.Point(0, 0);
+            this.BotonesBSLinea2SplitContainer.Margin = new System.Windows.Forms.Padding(2);
+            this.BotonesBSLinea2SplitContainer.Name = "BotonesBSLinea2SplitContainer";
+            // 
+            // BotonesBSLinea2SplitContainer.Panel1
+            // 
+            this.BotonesBSLinea2SplitContainer.Panel1.Controls.Add(this.ExportarItfComboBox);
+            this.BotonesBSLinea2SplitContainer.Panel1MinSize = 120;
+            // 
+            // BotonesBSLinea2SplitContainer.Panel2
+            // 
+            this.BotonesBSLinea2SplitContainer.Panel2.Controls.Add(this.SalirButton);
+            this.BotonesBSLinea2SplitContainer.Panel2MinSize = 120;
+            this.BotonesBSLinea2SplitContainer.Size = new System.Drawing.Size(474, 23);
+            this.BotonesBSLinea2SplitContainer.SplitterDistance = 340;
+            this.BotonesBSLinea2SplitContainer.SplitterWidth = 1;
+            this.BotonesBSLinea2SplitContainer.TabIndex = 0;
             // 
             // ExportarItfComboBox
             // 
@@ -886,54 +918,79 @@
             this.ExportarItfComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ExportarItfComboBox.FormattingEnabled = true;
             this.ExportarItfComboBox.Location = new System.Drawing.Point(0, 0);
+            this.ExportarItfComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.ExportarItfComboBox.Name = "ExportarItfComboBox";
-            this.ExportarItfComboBox.Size = new System.Drawing.Size(472, 21);
-            this.ExportarItfComboBox.TabIndex = 18;
-            this.ExportarItfComboBox.SelectedIndexChanged += new System.EventHandler(this.ExportarItf);
-            // 
-            // panel10
-            // 
-            this.panel10.Controls.Add(this.ConsultarButton);
-            this.panel10.Controls.Add(this.SalirButton);
-            this.panel10.Controls.Add(this.EventosComboBox);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel10.Location = new System.Drawing.Point(5, 5);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(472, 23);
-            this.panel10.TabIndex = 5;
-            // 
-            // ConsultarButton
-            // 
-            this.ConsultarButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ConsultarButton.Location = new System.Drawing.Point(341, 0);
-            this.ConsultarButton.Name = "ConsultarButton";
-            this.ConsultarButton.Size = new System.Drawing.Size(61, 23);
-            this.ConsultarButton.TabIndex = 15;
-            this.ConsultarButton.Text = "Consultar";
-            this.ConsultarButton.UseVisualStyleBackColor = true;
-            this.ConsultarButton.Click += new System.EventHandler(this.ConsultarButton_Click);
+            this.ExportarItfComboBox.Size = new System.Drawing.Size(340, 21);
+            this.ExportarItfComboBox.TabIndex = 20;
+            this.ExportarItfComboBox.Click += new System.EventHandler(this.ExportarItf);
             // 
             // SalirButton
             // 
-            this.SalirButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.SalirButton.Location = new System.Drawing.Point(402, 0);
+            this.SalirButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SalirButton.Location = new System.Drawing.Point(0, 0);
+            this.SalirButton.Margin = new System.Windows.Forms.Padding(2);
             this.SalirButton.Name = "SalirButton";
-            this.SalirButton.Size = new System.Drawing.Size(70, 23);
-            this.SalirButton.TabIndex = 14;
+            this.SalirButton.Size = new System.Drawing.Size(133, 23);
+            this.SalirButton.TabIndex = 18;
             this.SalirButton.Text = "Salir";
             this.SalirButton.UseVisualStyleBackColor = true;
             this.SalirButton.Click += new System.EventHandler(this.SalirButton_Click);
             // 
+            // BotonesBSlinea1Panel
+            // 
+            this.BotonesBSlinea1Panel.Controls.Add(this.BotonesBSLinea1SplitContainer);
+            this.BotonesBSlinea1Panel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BotonesBSlinea1Panel.Location = new System.Drawing.Point(5, 5);
+            this.BotonesBSlinea1Panel.Name = "BotonesBSlinea1Panel";
+            this.BotonesBSlinea1Panel.Size = new System.Drawing.Size(474, 23);
+            this.BotonesBSlinea1Panel.TabIndex = 5;
+            // 
+            // BotonesBSLinea1SplitContainer
+            // 
+            this.BotonesBSLinea1SplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BotonesBSLinea1SplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.BotonesBSLinea1SplitContainer.IsSplitterFixed = true;
+            this.BotonesBSLinea1SplitContainer.Location = new System.Drawing.Point(0, 0);
+            this.BotonesBSLinea1SplitContainer.Margin = new System.Windows.Forms.Padding(2);
+            this.BotonesBSLinea1SplitContainer.Name = "BotonesBSLinea1SplitContainer";
+            // 
+            // BotonesBSLinea1SplitContainer.Panel1
+            // 
+            this.BotonesBSLinea1SplitContainer.Panel1.Controls.Add(this.EventosComboBox);
+            this.BotonesBSLinea1SplitContainer.Panel1MinSize = 120;
+            // 
+            // BotonesBSLinea1SplitContainer.Panel2
+            // 
+            this.BotonesBSLinea1SplitContainer.Panel2.Controls.Add(this.ConsultarButton);
+            this.BotonesBSLinea1SplitContainer.Panel2MinSize = 120;
+            this.BotonesBSLinea1SplitContainer.Size = new System.Drawing.Size(474, 23);
+            this.BotonesBSLinea1SplitContainer.SplitterDistance = 340;
+            this.BotonesBSLinea1SplitContainer.SplitterWidth = 1;
+            this.BotonesBSLinea1SplitContainer.TabIndex = 16;
+            // 
             // EventosComboBox
             // 
-            this.EventosComboBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.EventosComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EventosComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.EventosComboBox.FormattingEnabled = true;
             this.EventosComboBox.Location = new System.Drawing.Point(0, 0);
+            this.EventosComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.EventosComboBox.Name = "EventosComboBox";
-            this.EventosComboBox.Size = new System.Drawing.Size(341, 21);
-            this.EventosComboBox.TabIndex = 12;
-            this.EventosComboBox.SelectedIndexChanged += new System.EventHandler(this.EventosComboBox_SelectedIndexChanged);
+            this.EventosComboBox.Size = new System.Drawing.Size(340, 21);
+            this.EventosComboBox.TabIndex = 14;
+            this.EventosComboBox.Click += new System.EventHandler(this.EventosComboBox_SelectedIndexChanged);
+            // 
+            // ConsultarButton
+            // 
+            this.ConsultarButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ConsultarButton.Location = new System.Drawing.Point(0, 0);
+            this.ConsultarButton.Margin = new System.Windows.Forms.Padding(2);
+            this.ConsultarButton.Name = "ConsultarButton";
+            this.ConsultarButton.Size = new System.Drawing.Size(133, 23);
+            this.ConsultarButton.TabIndex = 16;
+            this.ConsultarButton.Text = "Consultar";
+            this.ConsultarButton.UseVisualStyleBackColor = true;
+            this.ConsultarButton.Click += new System.EventHandler(this.ConsultarButton_Click);
             // 
             // CabBandejaSPanel
             // 
@@ -945,7 +1002,7 @@
             this.CabBandejaSPanel.Location = new System.Drawing.Point(0, 0);
             this.CabBandejaSPanel.Name = "CabBandejaSPanel";
             this.CabBandejaSPanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.CabBandejaSPanel.Size = new System.Drawing.Size(482, 223);
+            this.CabBandejaSPanel.Size = new System.Drawing.Size(484, 223);
             this.CabBandejaSPanel.TabIndex = 1;
             // 
             // panel6
@@ -955,7 +1012,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(0, 24);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(482, 171);
+            this.panel6.Size = new System.Drawing.Size(484, 171);
             this.panel6.TabIndex = 24;
             // 
             // PtesDiasAntCheckBox
@@ -1162,7 +1219,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(482, 24);
+            this.panel7.Size = new System.Drawing.Size(484, 24);
             this.panel7.TabIndex = 22;
             // 
             // label11
@@ -1202,7 +1259,7 @@
             this.ActualizarBandejaSButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.ActualizarBandejaSButton.Location = new System.Drawing.Point(0, 195);
             this.ActualizarBandejaSButton.Name = "ActualizarBandejaSButton";
-            this.ActualizarBandejaSButton.Size = new System.Drawing.Size(482, 23);
+            this.ActualizarBandejaSButton.Size = new System.Drawing.Size(484, 23);
             this.ActualizarBandejaSButton.TabIndex = 19;
             this.ActualizarBandejaSButton.Text = "Actualizar Bandeja de Salida";
             this.ActualizarBandejaSButton.UseVisualStyleBackColor = true;
@@ -1212,9 +1269,9 @@
             // 
             this.StatusBarPanel.Controls.Add(this.StatusBar);
             this.StatusBarPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.StatusBarPanel.Location = new System.Drawing.Point(0, 584);
+            this.StatusBarPanel.Location = new System.Drawing.Point(0, 449);
             this.StatusBarPanel.Name = "StatusBarPanel";
-            this.StatusBarPanel.Size = new System.Drawing.Size(1008, 30);
+            this.StatusBarPanel.Size = new System.Drawing.Size(1007, 30);
             this.StatusBarPanel.TabIndex = 3;
             // 
             // StatusBar
@@ -1229,7 +1286,7 @@
             this.CertificadosSBP,
             this.ModalidadSBP});
             this.StatusBar.ShowPanels = true;
-            this.StatusBar.Size = new System.Drawing.Size(1008, 30);
+            this.StatusBar.Size = new System.Drawing.Size(1007, 30);
             this.StatusBar.TabIndex = 4;
             this.StatusBar.DoubleClick += new System.EventHandler(this.StatusBar_DoubleClick);
             // 
@@ -1304,7 +1361,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 614);
+            this.ClientSize = new System.Drawing.Size(1007, 479);
             this.Controls.Add(this.StatusBarPanel);
             this.Controls.Add(this.SplitContainer);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1338,7 +1395,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.BandejaSDataGridView)).EndInit();
             this.BandejaSBotonesPanel.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
+            this.BotonesBSLinea2SplitContainer.Panel1.ResumeLayout(false);
+            this.BotonesBSLinea2SplitContainer.Panel2.ResumeLayout(false);
+            this.BotonesBSLinea2SplitContainer.ResumeLayout(false);
+            this.BotonesBSlinea1Panel.ResumeLayout(false);
+            this.BotonesBSLinea1SplitContainer.Panel1.ResumeLayout(false);
+            this.BotonesBSLinea1SplitContainer.Panel2.ResumeLayout(false);
+            this.BotonesBSLinea1SplitContainer.ResumeLayout(false);
             this.CabBandejaSPanel.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
@@ -1392,9 +1455,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DateTimePicker FechaDsdLoteFecEnvioDTP;
         private System.Windows.Forms.SplitContainer BandejaSHorizontalSplitContainer;
-        private System.Windows.Forms.Panel BandejaSBotonesPanel;
-        private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Panel CabBandejaEPanel;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button ActualizarBandejaEButton;
@@ -1434,10 +1494,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.RadioButton FechaProcesoRadioButton;
         private System.Windows.Forms.RadioButton FechaCreacionRadioButton;
-        private System.Windows.Forms.ComboBox EventosComboBox;
-        private System.Windows.Forms.Button ConsultarButton;
-        private System.Windows.Forms.Button SalirButton;
-        private System.Windows.Forms.ComboBox ExportarItfComboBox;
         private System.Windows.Forms.MainMenu mainMenu1;
         private System.Windows.Forms.MenuItem menuItem1;
         private System.Windows.Forms.MenuItem menuItem2;
@@ -1467,6 +1523,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaProceso;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreProcesado;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdUsuario;
+        private System.Windows.Forms.Panel BandejaSBotonesPanel;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel BotonesBSlinea1Panel;
+        private System.Windows.Forms.SplitContainer BotonesBSLinea1SplitContainer;
+        private System.Windows.Forms.ComboBox EventosComboBox;
+        private System.Windows.Forms.Button ConsultarButton;
+        private System.Windows.Forms.SplitContainer BotonesBSLinea2SplitContainer;
+        private System.Windows.Forms.Button SalirButton;
+        private System.Windows.Forms.ComboBox ExportarItfComboBox;
     }
 }
 
