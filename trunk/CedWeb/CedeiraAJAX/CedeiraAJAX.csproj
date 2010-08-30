@@ -366,6 +366,13 @@
     <Compile Include="Facturacion\Electronica\FacturaElectronicaTYC.aspx.designer.cs">
       <DependentUpon>FacturaElectronicaTYC.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Facturacion\Electronica\Impuestos.ascx.cs">
+      <DependentUpon>Impuestos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Impuestos.ascx.designer.cs">
+      <DependentUpon>Impuestos.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Facturacion\Electronica\Lote.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Lote.aspx</DependentUpon>
@@ -935,6 +942,7 @@
     <Content Include="Facturacion\Electronica\Detalle.ascx" />
     <Content Include="Facturacion\Electronica\Extensiones\Comerciales.ascx" />
     <Content Include="Facturacion\Electronica\Extensiones\Marketing.ascx" />
+    <Content Include="Facturacion\Electronica\Impuestos.ascx" />
     <Content Include="Facturacion\Electronica\Permisos.ascx" />
     <Content Include="Facturacion\Electronica\Reportes\Web.config" />
     <Content Include="Vendedor\Default.aspx" />

@@ -18,7 +18,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 	{
 		#region Variables
 		string gvUniqueID = String.Empty;
-		System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> impuestos;
+
 		System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> descuentos;
 		System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> referencias;
 		#endregion
@@ -32,11 +32,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 				else
 				{
-					impuestos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>();
-					FeaEntidades.InterFacturas.resumenImpuestos impuesto = new FeaEntidades.InterFacturas.resumenImpuestos();
-					impuestos.Add(impuesto);
-					impuestosGridView.DataSource = impuestos;
-					ViewState["impuestos"] = impuestos;
+				
 
 					descuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>();
 					FeaEntidades.InterFacturas.resumenDescuentos descuento = new FeaEntidades.InterFacturas.resumenDescuentos();
@@ -173,18 +169,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 			}
 		}
+
 		private void BindearDropDownLists()
 		{
 			AjustarCodigosDeReferenciaEnFooter();
-
-			((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataValueField = "Codigo";
-			((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataTextField = "Descr";
-			((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataSource = FeaEntidades.CodigosImpuesto.CodigoImpuesto.Lista();
-			((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataBind();
-
+			ImpuestosGlobales.BindearDropDownLists();
 			PermisosExpo.BindearDropDownLists();
 			DetalleLinea.BindearDropDownLists();
-
 		}
 
 		private void AjustarCodigosDeReferenciaEnFooter()
@@ -418,150 +409,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			sb.AppendLine("Buenos Aires, Argentina");
 			return sb.ToString();
 		}
-		protected void impuestosGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-		{
-			impuestosGridView.EditIndex = -1;
-			impuestosGridView.DataSource = ViewState["impuestos"];
-			impuestosGridView.DataBind();
-			BindearDropDownLists();
-		}
-		protected void impuestosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
-		{
-			if (e.CommandName.Equals("AddImpuestoGlobal"))
-			{
-				try
-				{
-					FeaEntidades.InterFacturas.resumenImpuestos r = new FeaEntidades.InterFacturas.resumenImpuestos();
-					int auxcodigo_impuesto = Convert.ToInt32(((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).SelectedValue);
-					r.codigo_impuesto = auxcodigo_impuesto;
-					r.descripcion = ((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).SelectedItem.Text;
 
-					string auxTotal = ((TextBox)impuestosGridView.FooterRow.FindControl("txtimporte_impuesto")).Text;
-					if (!auxTotal.Contains(","))
-					{
-						r.importe_impuesto = Convert.ToDouble(auxTotal);
-					}
-					else
-					{
-						throw new Exception("Impuesto global no agregado porque el separador de decimales debe ser el punto");
-					}
-
-					((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]).Add(r);
-
-
-					//Me fijo si elimino la fila automática
-					System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> impuestos = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]);
-					FeaEntidades.InterFacturas.resumenImpuestos impuestoInicial = impuestos[0];
-					if (impuestoInicial.codigo_impuesto == 0)
-					{
-						((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]).Remove(impuestoInicial);
-					}
-
-					impuestosGridView.DataSource = ViewState["impuestos"];
-					impuestosGridView.DataBind();
-					BindearDropDownLists();
-
-				}
-				catch (Exception ex)
-				{
-					ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
-				}
-			}
-		}
-		protected void impuestosGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
-		{
-			if (e.Exception != null)
-			{
-				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
-				e.ExceptionHandled = true;
-			}
-		}
-		protected void impuestosGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
-		{
-			try
-			{
-				System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> impuestos = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]);
-				FeaEntidades.InterFacturas.resumenImpuestos r = impuestos[e.RowIndex];
-				impuestos.Remove(r);
-
-				if (impuestos.Count.Equals(0))
-				{
-					FeaEntidades.InterFacturas.resumenImpuestos nueva = new FeaEntidades.InterFacturas.resumenImpuestos();
-					impuestos.Add(nueva);
-				}
-				impuestosGridView.EditIndex = -1;
-				impuestosGridView.DataSource = ViewState["impuestos"];
-				impuestosGridView.DataBind();
-				BindearDropDownLists();
-			}
-			catch
-			{
-			}
-		}
-		protected void impuestosGridView_RowEditing(object sender, GridViewEditEventArgs e)
-		{
-			impuestosGridView.EditIndex = e.NewEditIndex;
-
-			impuestosGridView.DataSource = ViewState["impuestos"];
-			impuestosGridView.DataBind();
-			BindearDropDownLists();
-
-			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_impuestoEdit")).DataValueField = "Codigo";
-			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_impuestoEdit")).DataTextField = "Descr";
-			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_impuestoEdit")).DataSource = FeaEntidades.CodigosImpuesto.CodigoImpuesto.Lista();
-			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_impuestoEdit")).DataBind();
-			try
-			{
-				ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_impuestoEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"])[e.NewEditIndex].codigo_impuesto.ToString());
-				li.Selected = true;
-			}
-			catch
-			{
-			}
-		}
-		protected void impuestosGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
-		{
-			if (e.Exception != null)
-			{
-				ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
-				e.ExceptionHandled = true;
-			}
-		}
-		protected void impuestosGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
-		{
-
-			try
-			{
-				System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> impuestos = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]);
-
-				FeaEntidades.InterFacturas.resumenImpuestos r = impuestos[e.RowIndex];
-				int auxcodigo_impuesto = Convert.ToInt32(((DropDownList)impuestosGridView.Rows[e.RowIndex].FindControl("ddlcodigo_impuestoEdit")).SelectedValue);
-				r.codigo_impuesto = auxcodigo_impuesto;
-
-				string auxdescr_impuesto = ((DropDownList)impuestosGridView.Rows[e.RowIndex].FindControl("ddlcodigo_impuestoEdit")).SelectedItem.Text;
-				r.descripcion = auxdescr_impuesto;
-
-				string auxTotal = ((TextBox)impuestosGridView.Rows[e.RowIndex].FindControl("txtimporte_impuesto")).Text;
-				if (!auxTotal.Contains(","))
-				{
-					r.importe_impuesto = Convert.ToDouble(auxTotal);
-				}
-				else
-				{
-					throw new Exception("Impuesto global no actualizado porque el separador de decimales debe ser el punto");
-				}
-
-				impuestosGridView.EditIndex = -1;
-				impuestosGridView.DataSource = ViewState["impuestos"];
-				impuestosGridView.DataBind();
-				BindearDropDownLists();
-
-			}
-			catch (Exception ex)
-			{
-				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
-			}
-		}
 
 		protected void descuentosGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
 		{
@@ -1153,25 +1001,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			descuentosGridView.DataBind();
 			ViewState["descuentos"] = descuentos;
 			//impuestos globales
-			impuestos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>();
-			if (lc.comprobante[0].resumen.impuestos != null)
-			{
-				foreach (FeaEntidades.InterFacturas.resumenImpuestos imp in lc.comprobante[0].resumen.impuestos)
-				{
-					if (imp.importe_impuesto_moneda_origenSpecified)
-					{
-						imp.importe_impuesto = imp.importe_impuesto_moneda_origen;
-					}
-					impuestos.Add(imp);
-				}
-			}
-			if (impuestos.Count.Equals(0))
-			{
-				impuestos.Add(new FeaEntidades.InterFacturas.resumenImpuestos());
-			}
-			impuestosGridView.DataSource = impuestos;
-			impuestosGridView.DataBind();
-			ViewState["impuestos"] = impuestos;
+			ImpuestosGlobales.Completar(lc);
 
 			ComentariosTextBox.Text = lc.comprobante[0].detalle.comentarios;
 			//Resumen
@@ -1436,36 +1266,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				ViewState["descuentos"] = descuentos;
 			}
 			//impuestos globales
-			if (lc.comprobante[0].resumen.impuestos != null)
-			{
-				impuestos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>();
-				foreach (org.dyndns.cedweb.consulta.ConsultarResultComprobanteResumenImpuestos imp in lc.comprobante[0].resumen.impuestos)
-				{
-					if (imp.importe_impuesto_moneda_origenSpecified)
-					{
-						imp.importe_impuesto = imp.importe_impuesto_moneda_origen;
-					}
-					FeaEntidades.InterFacturas.resumenImpuestos ri = new FeaEntidades.InterFacturas.resumenImpuestos();
-					ri.codigo_impuesto = imp.codigo_impuesto;
-					ri.codigo_jurisdiccion = imp.codigo_jurisdiccion;
-					ri.codigo_jurisdiccionSpecified = imp.codigo_jurisdiccionSpecified;
-					ri.descripcion = imp.descripcion;
-					ri.importe_impuesto = imp.importe_impuesto;
-					ri.importe_impuesto_moneda_origen = imp.importe_impuesto_moneda_origen;
-					ri.importe_impuesto_moneda_origenSpecified = imp.importe_impuesto_moneda_origenSpecified;
-					ri.jurisdiccion_municipal = imp.jurisdiccion_municipal;
-					ri.porcentaje_impuesto = imp.porcentaje_impuesto;
-					ri.porcentaje_impuestoSpecified = imp.porcentaje_impuestoSpecified;
-					impuestos.Add(ri);
-				}
-				if (impuestos.Count.Equals(0))
-				{
-					impuestos.Add(new FeaEntidades.InterFacturas.resumenImpuestos());
-				}
-				impuestosGridView.DataSource = impuestos;
-				impuestosGridView.DataBind();
-				ViewState["impuestos"] = impuestos;
-			}
+			ImpuestosGlobales.CompletarWS(lc);
+
 			ComentariosTextBox.Text = lc.comprobante[0].detalle.comentarios;
 			//Resumen
 			MonedaComprobanteDropDownList.SelectedIndex = MonedaComprobanteDropDownList.Items.IndexOf(MonedaComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].resumen.codigo_moneda)));
@@ -1665,7 +1467,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					double total_Impuestos_Internos = 0;
 					double total_Ingresos_Brutos = 0;
 					double total_Impuestos_Municipales = 0;
-					System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos = (System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"];
+					System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos = ImpuestosGlobales.Lista;
 					for (int i = 0; i < listadeimpuestos.Count; i++)
 					{
 						if (!listadeimpuestos[i].codigo_impuesto.Equals(0))
@@ -2167,38 +1969,37 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 			comp.resumen = r;
 
-			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos = (System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"];
-
+			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos = ImpuestosGlobales.Lista;
 			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
 			{
-				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
-				try
-				{
-					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
-					{
-						return pv.Id == auxPV;
-					}).IdTipo;
-					if (idtipo.Equals("Export"))
-					{
-						if (listadeimpuestos[0].importe_impuesto != 0 || listadeimpuestos.Count > 1)
-						{
-							impuestosGridView.Focus();
-							throw new Exception("Los impuestos globales no se deben informar para exportación");
-						}
-					}
-					else
-					{
-						GenerarImpuestos(comp, listadeimpuestos);
-					}
-				}
-				catch (System.NullReferenceException)
-				{
-					GenerarImpuestos(comp, listadeimpuestos);
-				}
+			    int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+			    try
+			    {
+			        string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+			        {
+			            return pv.Id == auxPV;
+			        }).IdTipo;
+			        if (idtipo.Equals("Export"))
+			        {
+			            if (listadeimpuestos[0].importe_impuesto != 0 || listadeimpuestos.Count > 1)
+			            {
+			                ImpuestosGlobales.Focus();
+			                throw new Exception("Los impuestos globales no se deben informar para exportación");
+			            }
+			        }
+			        else
+			        {
+			            ImpuestosGlobales.GenerarImpuestos(comp, MonedaComprobanteDropDownList.SelectedValue, Tipo_de_cambioTextBox.Text );
+			        }
+			    }
+			    catch (System.NullReferenceException)
+			    {
+					ImpuestosGlobales.GenerarImpuestos(comp, MonedaComprobanteDropDownList.SelectedValue, Tipo_de_cambioTextBox.Text);
+			    }
 			}
 			else
 			{
-				GenerarImpuestos(comp, listadeimpuestos);
+				ImpuestosGlobales.GenerarImpuestos(comp, MonedaComprobanteDropDownList.SelectedValue, Tipo_de_cambioTextBox.Text);
 			}
 
 			GenerarResumen(comp);
@@ -3545,33 +3346,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			r.importe_total_impuestos_nacionalesSpecified = true;
 		}
 
-		private void GenerarImpuestos(FeaEntidades.InterFacturas.comprobante comp, System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos)
-		{
-			comp.resumen.impuestos = new FeaEntidades.InterFacturas.resumenImpuestos[listadeimpuestos.Count];
-			for (int i = 0; i < listadeimpuestos.Count; i++)
-			{
-				if (!listadeimpuestos[i].codigo_impuesto.Equals(0))
-				{
-					comp.resumen.impuestos[i] = new FeaEntidades.InterFacturas.resumenImpuestos();
-					comp.resumen.impuestos[i].codigo_impuesto = listadeimpuestos[i].codigo_impuesto;
-					comp.resumen.impuestos[i].codigo_jurisdiccion = listadeimpuestos[i].codigo_jurisdiccion;
-					comp.resumen.impuestos[i].codigo_jurisdiccionSpecified = listadeimpuestos[i].codigo_jurisdiccionSpecified;
-					comp.resumen.impuestos[i].descripcion = listadeimpuestos[i].descripcion;
-					comp.resumen.impuestos[i].porcentaje_impuesto = listadeimpuestos[i].porcentaje_impuesto;
-					comp.resumen.impuestos[i].porcentaje_impuestoSpecified = listadeimpuestos[i].porcentaje_impuestoSpecified;
-					if (MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
-					{
-						comp.resumen.impuestos[i].importe_impuesto = listadeimpuestos[i].importe_impuesto;
-					}
-					else
-					{
-						comp.resumen.impuestos[i].importe_impuesto = Math.Round(listadeimpuestos[i].importe_impuesto * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
-						comp.resumen.impuestos[i].importe_impuesto_moneda_origen = listadeimpuestos[i].importe_impuesto;
-						comp.resumen.impuestos[i].importe_impuesto_moneda_origenSpecified = true;
-					}
-				}
-			}
-		}
 
 		protected void ConsultarLoteIBKButton_Click(object sender, EventArgs e)
 		{
