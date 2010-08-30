@@ -194,13 +194,20 @@ namespace CedeiraAJAX.Facturacion.Electronica
                             d.linea[j].descuentos = new global::CedeiraAJAX.org.dyndns.cedweb.envio.lcComprobanteDetalleLineaDescuentos[detalle.linea[j].descuentos.Length];
                             for (int k = 0; k < d.linea[j].descuentos.Length; k++)
                             {
-                                d.linea[j].descuentos[k] = new global::CedeiraAJAX.org.dyndns.cedweb.envio.lcComprobanteDetalleLineaDescuentos();
-                                d.linea[j].descuentos[k].descripcion_descuento = detalle.linea[j].descuentos[k].descripcion_descuento;
-                                d.linea[j].descuentos[k].importe_descuento = detalle.linea[j].descuentos[k].importe_descuento;
-                                d.linea[j].descuentos[k].importe_descuento_moneda_origen = detalle.linea[j].descuentos[k].importe_descuento_moneda_origen;
-                                d.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified = detalle.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified;
-                                d.linea[j].descuentos[k].porcentaje_descuento = detalle.linea[j].descuentos[k].porcentaje_descuento;
-                                d.linea[j].descuentos[k].porcentaje_descuentoSpecified = detalle.linea[j].descuentos[k].porcentaje_descuentoSpecified;
+								if (d.linea[j].descuentos[k] != null)
+								{
+									d.linea[j].descuentos[k] = new global::CedeiraAJAX.org.dyndns.cedweb.envio.lcComprobanteDetalleLineaDescuentos();
+									d.linea[j].descuentos[k].descripcion_descuento = detalle.linea[j].descuentos[k].descripcion_descuento;
+									d.linea[j].descuentos[k].importe_descuento = detalle.linea[j].descuentos[k].importe_descuento;
+									d.linea[j].descuentos[k].importe_descuento_moneda_origen = detalle.linea[j].descuentos[k].importe_descuento_moneda_origen;
+									d.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified = detalle.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified;
+									d.linea[j].descuentos[k].porcentaje_descuento = detalle.linea[j].descuentos[k].porcentaje_descuento;
+									d.linea[j].descuentos[k].porcentaje_descuentoSpecified = detalle.linea[j].descuentos[k].porcentaje_descuentoSpecified;
+								}
+								else
+								{
+									break;
+								}
                             }
                         }
 
