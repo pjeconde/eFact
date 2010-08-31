@@ -1798,8 +1798,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			{
 				try
 				{
-					FeaEntidades.InterFacturas.lote_comprobantes lc = GenerarLote();
-
 					CedWebEntidades.Cuenta cta = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta;
 					if (cta.NroSerieCertificado.Equals(string.Empty))
 					{
