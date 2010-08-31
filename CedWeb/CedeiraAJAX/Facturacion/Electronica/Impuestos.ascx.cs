@@ -29,7 +29,26 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataTextField = "Descr";
 				((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataSource = FeaEntidades.CodigosImpuesto.CodigoImpuesto.Lista();
 				((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).DataBind();
+
+				((DropDownList)impuestosGridView.FooterRow.FindControl("ddljurisdiccion")).DataValueField = "Codigo";
+				((DropDownList)impuestosGridView.FooterRow.FindControl("ddljurisdiccion")).DataTextField = "Descr";
+				((DropDownList)impuestosGridView.FooterRow.FindControl("ddljurisdiccion")).DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+				((DropDownList)impuestosGridView.FooterRow.FindControl("ddljurisdiccion")).DataBind();
+
 			}
+			if (!impuestosGridView.EditIndex.Equals(-1))
+			{
+				((DropDownList)impuestosGridView.Rows[impuestosGridView.EditIndex].FindControl("ddlcodigo_impuestoEdit")).DataValueField = "Codigo";
+				((DropDownList)impuestosGridView.Rows[impuestosGridView.EditIndex].FindControl("ddlcodigo_impuestoEdit")).DataTextField = "Descr";
+				((DropDownList)impuestosGridView.Rows[impuestosGridView.EditIndex].FindControl("ddlcodigo_impuestoEdit")).DataSource = FeaEntidades.CodigosImpuesto.CodigoImpuesto.Lista();
+				((DropDownList)impuestosGridView.Rows[impuestosGridView.EditIndex].FindControl("ddlcodigo_impuestoEdit")).DataBind();
+
+				((DropDownList)impuestosGridView.Rows[impuestosGridView.EditIndex].FindControl("ddljurisdiccionEdit")).DataValueField = "Codigo";
+				((DropDownList)impuestosGridView.Rows[impuestosGridView.EditIndex].FindControl("ddljurisdiccionEdit")).DataTextField = "Descr";
+				((DropDownList)impuestosGridView.Rows[impuestosGridView.EditIndex].FindControl("ddljurisdiccionEdit")).DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+				((DropDownList)impuestosGridView.Rows[impuestosGridView.EditIndex].FindControl("ddljurisdiccionEdit")).DataBind();
+			}
+
 		}
 		public void ResetearGrillas()
 		{
@@ -123,14 +142,39 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				try
 				{
 					FeaEntidades.InterFacturas.resumenImpuestos r = new FeaEntidades.InterFacturas.resumenImpuestos();
+					
 					int auxcodigo_impuesto = Convert.ToInt32(((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).SelectedValue);
 					r.codigo_impuesto = auxcodigo_impuesto;
+
+					string auxpi = ((TextBox)impuestosGridView.FooterRow.FindControl("txtalicuota")).Text;
+					if (!auxpi.Equals(string.Empty))
+					{
+						double auxporcentaje_impuesto = Convert.ToDouble(auxpi);
+						r.porcentaje_impuesto = auxporcentaje_impuesto;
+						r.porcentaje_impuestoSpecified = true;
+					}
+					else
+					{
+						r.porcentaje_impuestoSpecified = false;
+					}
+
+					int auxcodigo_jurisdiccion = Convert.ToInt32(((DropDownList)impuestosGridView.FooterRow.FindControl("ddljurisdiccion")).SelectedValue);
+					r.codigo_jurisdiccion = auxcodigo_jurisdiccion;
+
 					r.descripcion = ((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).SelectedItem.Text;
 
 					string auxTotal = ((TextBox)impuestosGridView.FooterRow.FindControl("txtimporte_impuesto")).Text;
 					if (!auxTotal.Contains(","))
 					{
-						r.importe_impuesto = Convert.ToDouble(auxTotal);
+						double auxImp = Convert.ToDouble(auxTotal);
+						if (!auxImp.Equals(0))
+						{
+							r.importe_impuesto = auxImp;
+						}
+						else
+						{
+							throw new Exception("Impuesto global no agregado porque el importe debe ser mayor a 0");
+						}
 					}
 					else
 					{
@@ -155,7 +199,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 				catch (Exception ex)
 				{
-					ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+					ScriptManager.RegisterStartupScript(this.Parent.Page, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
 				}
 			}
 		}
@@ -163,7 +207,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		{
 			if (e.Exception != null)
 			{
-				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+				ScriptManager.RegisterStartupScript(this.Parent.Page, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
 				e.ExceptionHandled = true;
 			}
 		}
@@ -197,10 +241,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			impuestosGridView.DataBind();
 			BindearDropDownLists();
 
-			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_impuestoEdit")).DataValueField = "Codigo";
-			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_impuestoEdit")).DataTextField = "Descr";
-			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_impuestoEdit")).DataSource = FeaEntidades.CodigosImpuesto.CodigoImpuesto.Lista();
-			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_impuestoEdit")).DataBind();
+
 			try
 			{
 				ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_impuestoEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"])[e.NewEditIndex].codigo_impuesto.ToString());
@@ -209,12 +250,22 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			catch
 			{
 			}
+
+			try
+			{
+				ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddljurisdiccionEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"])[e.NewEditIndex].codigo_jurisdiccion.ToString());
+				li.Selected = true;
+			}
+			catch
+			{
+			}
+
 		}
 		protected void impuestosGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
 		{
 			if (e.Exception != null)
 			{
-				ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
+				ScriptManager.RegisterStartupScript(this.Parent.Page, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
 				e.ExceptionHandled = true;
 			}
 		}
@@ -234,7 +285,45 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				string auxTotal = ((TextBox)impuestosGridView.Rows[e.RowIndex].FindControl("txtimporte_impuesto")).Text;
 				if (!auxTotal.Contains(","))
 				{
-					r.importe_impuesto = Convert.ToDouble(auxTotal);
+					double auxImp = Convert.ToDouble(auxTotal);
+					if (!auxImp.Equals(0))
+					{
+						r.importe_impuesto = auxImp;
+					}
+					else
+					{
+						throw new Exception("Impuesto global no actualizado porque el importe debe ser mayor a 0");
+					}
+				}
+				else
+				{
+					throw new Exception("Impuesto global no actualizado porque el separador de decimales debe ser el punto");
+				}
+
+				int auxjurisdiccion= Convert.ToInt32(((DropDownList)impuestosGridView.Rows[e.RowIndex].FindControl("ddljurisdiccionEdit")).SelectedValue);
+				if (!auxjurisdiccion.Equals(0))
+				{
+					r.codigo_jurisdiccion = auxjurisdiccion;
+					r.codigo_jurisdiccionSpecified = true;
+				}
+				else
+				{
+					r.codigo_jurisdiccion = 0;
+					r.codigo_jurisdiccionSpecified = false;
+				}
+
+				string auxAlicuota = ((TextBox)impuestosGridView.Rows[e.RowIndex].FindControl("txtalicuota")).Text;
+				if (!auxAlicuota.Contains(","))
+				{
+					r.porcentaje_impuesto = Convert.ToDouble(auxAlicuota);
+					if (!r.porcentaje_impuesto.Equals(0))
+					{
+						r.porcentaje_impuestoSpecified = true;
+					}
+					else
+					{
+						r.porcentaje_impuestoSpecified = false;
+					}
 				}
 				else
 				{
@@ -249,7 +338,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 			catch (Exception ex)
 			{
-				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+				ScriptManager.RegisterStartupScript(this.Parent.Page, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
 			}
 		}
 		public bool HayImpuestos
@@ -294,6 +383,35 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						comp.resumen.impuestos[i].importe_impuesto_moneda_origenSpecified = true;
 					}
 				}
+			}
+		}
+		protected string GetJurisdiccion(int codjurisdiccion)
+		{
+			if (codjurisdiccion != 0)
+			{
+				string aux = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista()
+							.Find(
+							delegate(FeaEntidades.CodigosProvincia.CodigoProvincia cp)
+							{
+								return cp.Codigo == Convert.ToInt16(codjurisdiccion);
+							}
+							).Descr;
+				return aux;
+			}
+			else
+			{
+				return string.Empty;
+			}
+		}
+		protected string GetAlicuota(double alic)
+		{
+			if (alic != 0)
+			{
+				return Convert.ToString(alic);
+			}
+			else
+			{
+				return string.Empty;
 			}
 		}
 	}
