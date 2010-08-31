@@ -97,7 +97,7 @@
 										<FooterStyle HorizontalAlign="Left" Width="160px" />
 										<HeaderStyle Font-Bold="False" />
 									</asp:TemplateField>
-									<asp:TemplateField HeaderText="Alícuota">
+									<asp:TemplateField HeaderText="Alícuota %">
 										<ItemTemplate>
 											<asp:Label ID="lblalicuota" runat="server" Width="50px" Text='<%# GetAlicuota((double)Eval("porcentaje_impuesto")) %>'></asp:Label>
 										</ItemTemplate>
