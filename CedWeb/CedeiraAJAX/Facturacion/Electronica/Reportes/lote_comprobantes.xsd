@@ -161,7 +161,7 @@
                             </xs:complexType>
                           </xs:element>
                           <xs:element minOccurs="0" maxOccurs="1" name="importe_total_descuentos" type="xs:double" />
-                          <xs:element minOccurs="0" maxOccurs="unbounded" name="impuestos">
+                          <xs:element minOccurs="0" maxOccurs="unbounded" name="impuestosLinea">
                             <xs:complexType>
                               <xs:sequence>
                                 <xs:element minOccurs="1" maxOccurs="1" name="codigo_impuesto" type="xs:int" />
