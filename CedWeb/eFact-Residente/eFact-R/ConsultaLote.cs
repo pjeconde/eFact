@@ -80,7 +80,7 @@ namespace eFact_R
                 //if (IdEstadoTextBox.Text != "AceptadoAFIP")
                 //{
                     ExportarComprobanteButton.Enabled = false;
-                    ConsultarComprobanteButton.Enabled = false;
+                    ConsultarComprobanteButton.Enabled = true;
                 //}
                 DetalleLoteDataGridView.Refresh();
                 this.XMLWebBrowser.Navigate("about:blank");
@@ -166,7 +166,7 @@ namespace eFact_R
         private void ProcesarComprobante(out CrystalDecisions.CrystalReports.Engine.ReportDocument ReporteDocumento, eFact_R.Entidades.Lote Lote, int Renglon)
         {
             facturaRpt = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
-            facturaRpt.Load("Facturacion\\Electronica\\Reportes\\Factura.rpt");
+            facturaRpt.Load("Facturacion\\Electronica\\Reportes\\Factura2.rpt");
 
             //Crear un lote de un solo comprobante, para la impresion o exportacion del pdf.
             eFact_R.Entidades.Lote LoteConUnSoloComprobante = new eFact_R.Entidades.Lote();
@@ -205,14 +205,16 @@ namespace eFact_R
             StringReader objSR = new StringReader(objSW.ToString());
             ds.ReadXml(objSR);
 
+            ds.WriteXmlSchema(@System.IO.Path.GetTempPath() + "lote_comprobantes2.xsd");
             facturaRpt.SetDataSource(ds);
+            
             facturaRpt.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
             facturaRpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
 
-            IncrustarLogo();
-            GenerarCodigoBarras(lc.comprobante[0].cabecera.informacion_comprobante.cae);
+            //IncrustarLogo();
+            //GenerarCodigoBarras(lc.comprobante[0].cabecera.informacion_comprobante.cae);
             AsignarParametros(lc.comprobante[0].resumen.importe_total_factura);
-        
+
             ReporteDocumento = facturaRpt;
         }
 
@@ -371,44 +373,44 @@ namespace eFact_R
 
         private void ExportarComprobanteButton_Click(object sender, EventArgs e)
         {
-            if (DetalleLoteDataGridView.SelectedRows.Count != 0)
-            {
-                for (int i = 0; i < DetalleLoteDataGridView.SelectedRows.Count; i++)
-                {
-                    int renglon = DetalleLoteDataGridView.SelectedRows[i].Index;
-                    ReportDocument ReporteDocumento = new ReportDocument();
-                    ProcesarComprobante(out ReporteDocumento, lote, renglon);
+            //if (DetalleLoteDataGridView.SelectedRows.Count != 0)
+            //{
+            //    for (int i = 0; i < DetalleLoteDataGridView.SelectedRows.Count; i++)
+            //    {
+            //        int renglon = DetalleLoteDataGridView.SelectedRows[i].Index;
+            //        ReportDocument ReporteDocumento = new ReportDocument();
+            //        ProcesarComprobante(out ReporteDocumento, lote, renglon);
 
-                    //Nombre del comprobante ( pdf )
-                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                    sb.Append(lote.CuitVendedor);
-                    sb.Append("-");
-                    sb.Append(Convert.ToInt32(lote.PuntoVenta).ToString("0000"));
-                    sb.Append("-");
-                    sb.Append(Convert.ToInt32(lote.Comprobantes[renglon].IdTipoComprobante).ToString("00"));
-                    sb.Append("-");
-                    sb.Append(Convert.ToInt32(lote.Comprobantes[renglon].NumeroComprobante).ToString("00000000"));
-                    sb.Append(".pdf");
+            //        //Nombre del comprobante ( pdf )
+            //        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            //        sb.Append(lote.CuitVendedor);
+            //        sb.Append("-");
+            //        sb.Append(Convert.ToInt32(lote.PuntoVenta).ToString("0000"));
+            //        sb.Append("-");
+            //        sb.Append(Convert.ToInt32(lote.Comprobantes[renglon].IdTipoComprobante).ToString("00"));
+            //        sb.Append("-");
+            //        sb.Append(Convert.ToInt32(lote.Comprobantes[renglon].NumeroComprobante).ToString("00000000"));
+            //        sb.Append(".pdf");
 
-                    //ExportOptions
-                    DiskFileDestinationOptions crDiskFileDestinationOptions = new DiskFileDestinationOptions();
-                    crDiskFileDestinationOptions.DiskFileName = eFact_R.Aplicacion.ArchPathPDF + sb.ToString();
-                    ReporteDocumento.ExportOptions.ExportDestinationOptions = crDiskFileDestinationOptions;
-                    ReporteDocumento.ExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
-                    ReporteDocumento.ExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
-                    PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
-                    ReporteDocumento.ExportOptions.ExportFormatOptions = CrFormatTypeOptions;
-                    ReporteDocumento.Export();
-                }
-                if (DetalleLoteDataGridView.SelectedRows.Count == 1)
-                {
-                    MessageBox.Show("El comprobante seleccionado se ha exportado satisfactoriamente.", "Exportar Comprobantes", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                }
-                else
-                {
-                    MessageBox.Show("Los comprobantes seleccionados se han exportado satisfactoriamente.", "Exportar Comprobantes", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                }
-            }
+            //        //ExportOptions
+            //        DiskFileDestinationOptions crDiskFileDestinationOptions = new DiskFileDestinationOptions();
+            //        crDiskFileDestinationOptions.DiskFileName = eFact_R.Aplicacion.ArchPathPDF + sb.ToString();
+            //        ReporteDocumento.ExportOptions.ExportDestinationOptions = crDiskFileDestinationOptions;
+            //        ReporteDocumento.ExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+            //        ReporteDocumento.ExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
+            //        PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
+            //        ReporteDocumento.ExportOptions.ExportFormatOptions = CrFormatTypeOptions;
+            //        ReporteDocumento.Export();
+            //    }
+            //    if (DetalleLoteDataGridView.SelectedRows.Count == 1)
+            //    {
+            //        MessageBox.Show("El comprobante seleccionado se ha exportado satisfactoriamente.", "Exportar Comprobantes", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Los comprobantes seleccionados se han exportado satisfactoriamente.", "Exportar Comprobantes", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            //    }
+            //}
         }
 
         private void DetalleLoteDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
