@@ -430,6 +430,12 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]).Remove(lineaInicial);
 					}
 
+					//Saco de edición la fila que estén modificando
+					if (!detalleGridView.EditIndex.Equals(-1))
+					{
+						detalleGridView.EditIndex = -1;
+					}
+
 					detalleGridView.DataSource = ViewState["lineas"];
 					detalleGridView.DataBind();
 					BindearDropDownLists();
@@ -775,6 +781,23 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataTextField = "Descr";
 				((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.ListaDetalle();
 				((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataBind();
+			}
+			if (!detalleGridView.EditIndex.Equals(-1))
+			{
+				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit")).DataValueField = "Codigo";
+				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit")).DataTextField = "Descr";
+				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit")).DataSource = FeaEntidades.IVA.IVA.Lista();
+				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit")).DataBind();
+
+				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidadEdit")).DataValueField = "Codigo";
+				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidadEdit")).DataTextField = "Descr";
+				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidadEdit")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.Lista();
+				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidadEdit")).DataBind();
+
+				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).DataValueField = "Codigo";
+				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).DataTextField = "Descr";
+				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.ListaDetalle();
+				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).DataBind();
 			}
 		}
 		protected void detalleGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)

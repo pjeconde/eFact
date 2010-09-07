@@ -90,6 +90,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					{
 						((System.Collections.Generic.List<FeaEntidades.InterFacturas.permisos>)ViewState["permisos"]).Remove(refs[0]);
 					}
+
+					//Saco de edición la fila que estén modificando
+					if (!permisosGridView.EditIndex.Equals(-1))
+					{
+						permisosGridView.EditIndex = -1;
+					}
+
 					permisosGridView.DataSource = ViewState["permisos"];
 					permisosGridView.DataBind();
 					BindearDropDownLists();

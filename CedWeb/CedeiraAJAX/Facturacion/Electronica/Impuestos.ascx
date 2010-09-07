@@ -78,7 +78,7 @@
 												SetFocusOnError="True" ValidationGroup="ImpuestosGlobalesFooter">*</asp:RequiredFieldValidator>
 										</FooterTemplate>
 										<ItemStyle HorizontalAlign="Right" Width="60px" />
-										<HeaderStyle Font-Bold="False" Width="60px" />
+										<HeaderStyle Font-Bold="False" HorizontalAlign="Center" />
 									</asp:TemplateField>
 									<asp:TemplateField HeaderText="Jurisdicción">
 										<ItemTemplate>

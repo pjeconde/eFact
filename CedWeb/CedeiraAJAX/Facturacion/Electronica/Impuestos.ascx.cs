@@ -192,6 +192,12 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]).Remove(impuestoInicial);
 					}
 
+					//Saco de edición la fila que estén modificando
+					if (!impuestosGridView.EditIndex.Equals(-1))
+					{
+						impuestosGridView.EditIndex = -1;
+					}
+
 					impuestosGridView.DataSource = ViewState["impuestos"];
 					impuestosGridView.DataBind();
 					BindearDropDownLists();
