@@ -454,6 +454,12 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"]).Remove(rds[0]);
 					}
 
+					//Saco de edición la fila que estén modificando
+					if (!descuentosGridView.EditIndex.Equals(-1))
+					{
+						descuentosGridView.EditIndex = -1;
+					}
+
 					descuentosGridView.DataSource = ViewState["descuentos"];
 					descuentosGridView.DataBind();
 
@@ -586,6 +592,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					{
 						((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"]).Remove(refs[0]);
 					}
+
+					//Saco de edición la fila que estén modificando
+					if (!referenciasGridView.EditIndex.Equals(-1))
+					{
+						referenciasGridView.EditIndex = -1;
+					}
+
 					referenciasGridView.DataSource = ViewState["referencias"];
 					referenciasGridView.DataBind();
 					BindearDropDownLists();
