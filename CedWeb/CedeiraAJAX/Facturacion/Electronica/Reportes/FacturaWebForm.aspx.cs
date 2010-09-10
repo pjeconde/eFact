@@ -65,7 +65,12 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
                     facturaRpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
 
                     IncrustarLogo();
-					GenerarCodigoBarras(lc.cabecera_lote.cuit_vendedor + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00") + lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString("0000") + lc.comprobante[0].cabecera.informacion_comprobante.cae+System.DateTime.Now.ToString("yyyyMMdd"));
+					string cae = lc.comprobante[0].cabecera.informacion_comprobante.cae;
+					if (cae.Replace(" ",string.Empty).Equals(string.Empty))
+					{
+						cae = "99999999999999";
+					}
+					GenerarCodigoBarras(lc.cabecera_lote.cuit_vendedor + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00") + lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString("0000") + cae +System.DateTime.Now.ToString("yyyyMMdd"));
 					AsignarParametros(lc.comprobante[0].resumen.importe_total_factura);
 
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
