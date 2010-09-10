@@ -3530,7 +3530,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						{
 							lcFea.comprobante[0].extensiones = new FeaEntidades.InterFacturas.extensiones();
 						}
+						foreach (FeaEntidades.InterFacturas.resumenImpuestos imp in lcFea.comprobante[0].resumen.impuestos)
+						{
 
+							if (imp!=null)
+							{
+								imp.codigo_jurisdiccionSpecified = true;
+								imp.porcentaje_impuestoSpecified = true;
+							}
+						}
 						Session["lote"] = lcFea;
 						Response.Redirect("Reportes\\FacturaWebForm.aspx", true);
 
