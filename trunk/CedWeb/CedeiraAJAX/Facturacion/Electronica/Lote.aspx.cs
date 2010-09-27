@@ -962,6 +962,18 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			InicioDeActividadesCompradorDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.inicio_de_actividades);
 			Provincia_CompradorDropDownList.SelectedIndex = Provincia_CompradorDropDownList.Items.IndexOf(Provincia_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.provincia)));
 			Condicion_IVA_CompradorDropDownList.SelectedIndex = Condicion_IVA_CompradorDropDownList.Items.IndexOf(Condicion_IVA_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.condicion_IVA)));
+			if (lc.comprobante[0].extensionesSpecified)
+			{
+				if (lc.comprobante[0].extensiones.extensiones_camara_facturasSpecified)
+				{
+					PasswordAvisoVisualizacionTextBox.Text = lc.comprobante[0].extensiones.extensiones_camara_facturas.clave_de_vinculacion;
+				}
+				if (lc.comprobante[0].extensiones.extensiones_destinatarios!=null)
+				{
+					EmailAvisoVisualizacionTextBox.Text = lc.comprobante[0].extensiones.extensiones_destinatarios.email;
+				}
+			}
+
 			//Vendedor
 			if (lc.comprobante[0].cabecera.informacion_vendedor.razon_social != null)
 			{
@@ -1412,6 +1424,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					{
 						InicioDeActividadesCompradorDatePickerWebUserControl.CalendarDateString = string.Empty;
 					}
+					EmailAvisoVisualizacionTextBox.Text = comprador.EmailAvisoVisualizacion;
+					;
+					PasswordAvisoVisualizacionTextBox.Text = comprador.PasswordAvisoVisualizacion;
 				}
 				catch (Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente)
 				{
@@ -1440,6 +1455,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					GLN_CompradorTextBox.Text = string.Empty;
 					Codigo_Interno_CompradorTextBox.Text = string.Empty;
 					((TextBox)InicioDeActividadesCompradorDatePickerWebUserControl.FindControl("txt_Date")).Text = string.Empty;
+					EmailAvisoVisualizacionTextBox.Text = string.Empty;
+					PasswordAvisoVisualizacionTextBox.Text = string.Empty;
 				}
 			}
 		}
@@ -1942,6 +1959,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 			GenerarInfoExtensionesComerciales(comp);
 
+			GenerarInfoExtensionesCamaraFacturas(comp);
+
+			GenerarInfoExtensionesDestinatarios(comp);
+
 			compcab.informacion_comprobante = infcomprob;
 
 			GenerarInfoVendedor(compcab);
@@ -2019,6 +2040,20 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			return lote;
 		}
 
+		private void GenerarInfoExtensionesDestinatarios(FeaEntidades.InterFacturas.comprobante comp)
+		{
+			if (!EmailAvisoVisualizacionTextBox.Text.Equals(string.Empty))
+			{
+				comp.extensionesSpecified = true;
+				if (comp.extensiones == null)
+				{
+					comp.extensiones = new FeaEntidades.InterFacturas.extensiones();
+				}
+				comp.extensiones.extensiones_destinatarios = new FeaEntidades.InterFacturas.extensionesExtensiones_destinatarios();
+				comp.extensiones.extensiones_destinatarios.email=EmailAvisoVisualizacionTextBox.Text;
+			}
+		}
+
 		private void GenerarInfoExtensionesComerciales(FeaEntidades.InterFacturas.comprobante comp)
 		{
 			if (!DatosComerciales.Texto.Equals(string.Empty))
@@ -2031,6 +2066,20 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				CedWebRN.Comprobante c = new CedWebRN.Comprobante();
 				string textoSinSaltoDeLinea = DatosComerciales.Texto.Replace(System.Environment.NewLine, "<br>");
 				comp.extensiones.extensiones_datos_comerciales = c.ConvertToHex(textoSinSaltoDeLinea);
+			}
+		}
+
+		private void GenerarInfoExtensionesCamaraFacturas(FeaEntidades.InterFacturas.comprobante comp)
+		{
+			if (!PasswordAvisoVisualizacionTextBox.Text.Equals(string.Empty))
+			{
+				comp.extensionesSpecified = true;
+				if (comp.extensiones == null)
+				{
+					comp.extensiones = new FeaEntidades.InterFacturas.extensiones();
+				}
+				comp.extensiones.extensiones_camara_facturas.clave_de_vinculacion = PasswordAvisoVisualizacionTextBox.Text;
+				comp.extensiones.extensiones_camara_facturasSpecified = true;
 			}
 		}
 
@@ -2610,6 +2659,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			infcompra.cp = Cp_CompradorTextBox.Text;
 			infcompra.email = Email_CompradorTextBox.Text;
 			infcompra.telefono = Telefono_CompradorTextBox.Text;
+
+			
 
 			compcab.informacion_comprador = infcompra;
 		}

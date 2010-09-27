@@ -16,7 +16,7 @@
 	TagPrefix="uc1" %>
 	
 <%@ Register Src="~/Facturacion/Electronica/Impuestos.ascx" TagName="ImpuestosGlobales" TagPrefix="uc8" %>
-	
+
 	
 <asp:Content ID="XMLContent" runat="Server" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado">
 	<asp:ScriptManager ID="loteScriptManager" runat="server">
@@ -963,12 +963,18 @@
 																	</td>
 																</tr>
 																<tr>
-																	<td style="text-align: center; height: 10px;">
+																	<td class="TextoLabelFEAVendedor">
+																		Clave de vinculación :
+																	</td>
+																	<td class="TextoLabelFEAVendedorDet">
+																		<asp:TextBox ID="EmailAvisoVisualizacionTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+																			ToolTip="A esta dirección se enviará un email de aviso para que el destinatario pueda visualizar el comprobante">
+																		</asp:TextBox>
 																	</td>
 																</tr>
 															</table>
 														</td>
-														<td class="bgFEAC" rowspan="20" style="width: 40px; background-repeat: repeat-y;">
+														<td class="bgFEAC" rowspan="2" style="width: 40px; background-repeat: repeat-y;">
 														</td>
 														<td align="left" valign="top">
 															<table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
@@ -1042,6 +1048,21 @@
 																		</asp:DropDownList></td>
 																</tr>
 																<tr>
+																	<td class="TextoLabelFEAVendedor">
+																		Contraseña :
+																	</td>
+																	<td class="TextoLabelFEAVendedorDet">
+																		<asp:TextBox ID="PasswordAvisoVisualizacionTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+																			ToolTip="Para poder acceder al contenido del comprobante, se solicitará al destinatario el ingreso de esta contraseña">
+																		</asp:TextBox>
+																</tr>
+															</table>
+														</td>
+													</tr>
+													<tr>
+														<td align="left" colspan="3" valign="top">
+															<table border="0" cellpadding="0" cellspacing="0">
+																<tr>
 																	<td style="height: 10px;">
 																	</td>
 																</tr>
@@ -1049,7 +1070,7 @@
 														</td>
 													</tr>
 													<tr>
-														<td colspan="3" style="height: 1px; background-color: Gray;">
+														<td colspan="4" style="height: 1px; background-color: Gray;">
 														</td>
 													</tr>
 												</table>
