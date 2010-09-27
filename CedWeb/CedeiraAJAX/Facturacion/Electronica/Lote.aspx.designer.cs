@@ -803,6 +803,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Domicilio_Manzana_CompradorTextBox;
         
         /// <summary>
+        /// Control EmailAvisoVisualizacionTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox EmailAvisoVisualizacionTextBox;
+        
+        /// <summary>
         /// Control Localidad_CompradorTextBox.
         /// </summary>
         /// <remarks>
@@ -882,6 +891,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList Condicion_IVA_CompradorDropDownList;
+        
+        /// <summary>
+        /// Control PasswordAvisoVisualizacionTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PasswordAvisoVisualizacionTextBox;
         
         /// <summary>
         /// Control InfoComproUpdatePanel.
