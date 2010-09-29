@@ -791,7 +791,7 @@
 								<!-- DATOS DEL COMPRADOR -->
 								<tr>
 									<td>
-										<asp:UpdatePanel ID="compradorUpdatePanel" runat="server">
+										<asp:UpdatePanel ID="compradorUpdatePanel" runat="server" UpdateMode="always">
 											<ContentTemplate>
 												<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
 													<tr>
