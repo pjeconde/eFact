@@ -144,6 +144,7 @@
             this.serviceController1 = new System.ServiceProcess.ServiceController();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.menuItem1 = new System.Windows.Forms.MenuItem();
+            this.menuItem4 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
             this.SplitContainer.Panel1.SuspendLayout();
@@ -904,7 +905,7 @@
             this.BotonesBSLinea2SplitContainer.Panel2.Controls.Add(this.SalirButton);
             this.BotonesBSLinea2SplitContainer.Panel2MinSize = 120;
             this.BotonesBSLinea2SplitContainer.Size = new System.Drawing.Size(474, 23);
-            this.BotonesBSLinea2SplitContainer.SplitterDistance = 340;
+            this.BotonesBSLinea2SplitContainer.SplitterDistance = 353;
             this.BotonesBSLinea2SplitContainer.SplitterWidth = 1;
             this.BotonesBSLinea2SplitContainer.TabIndex = 0;
             // 
@@ -920,9 +921,9 @@
             this.ExportarItfComboBox.Location = new System.Drawing.Point(0, 0);
             this.ExportarItfComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.ExportarItfComboBox.Name = "ExportarItfComboBox";
-            this.ExportarItfComboBox.Size = new System.Drawing.Size(340, 21);
+            this.ExportarItfComboBox.Size = new System.Drawing.Size(353, 21);
             this.ExportarItfComboBox.TabIndex = 20;
-            this.ExportarItfComboBox.Click += new System.EventHandler(this.ExportarItf);
+            this.ExportarItfComboBox.SelectedIndexChanged += new System.EventHandler(this.ExportarItf);
             // 
             // SalirButton
             // 
@@ -930,7 +931,7 @@
             this.SalirButton.Location = new System.Drawing.Point(0, 0);
             this.SalirButton.Margin = new System.Windows.Forms.Padding(2);
             this.SalirButton.Name = "SalirButton";
-            this.SalirButton.Size = new System.Drawing.Size(133, 23);
+            this.SalirButton.Size = new System.Drawing.Size(120, 23);
             this.SalirButton.TabIndex = 18;
             this.SalirButton.Text = "Salir";
             this.SalirButton.UseVisualStyleBackColor = true;
@@ -964,7 +965,7 @@
             this.BotonesBSLinea1SplitContainer.Panel2.Controls.Add(this.ConsultarButton);
             this.BotonesBSLinea1SplitContainer.Panel2MinSize = 120;
             this.BotonesBSLinea1SplitContainer.Size = new System.Drawing.Size(474, 23);
-            this.BotonesBSLinea1SplitContainer.SplitterDistance = 340;
+            this.BotonesBSLinea1SplitContainer.SplitterDistance = 353;
             this.BotonesBSLinea1SplitContainer.SplitterWidth = 1;
             this.BotonesBSLinea1SplitContainer.TabIndex = 16;
             // 
@@ -976,9 +977,9 @@
             this.EventosComboBox.Location = new System.Drawing.Point(0, 0);
             this.EventosComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.EventosComboBox.Name = "EventosComboBox";
-            this.EventosComboBox.Size = new System.Drawing.Size(340, 21);
+            this.EventosComboBox.Size = new System.Drawing.Size(353, 21);
             this.EventosComboBox.TabIndex = 14;
-            this.EventosComboBox.Click += new System.EventHandler(this.EventosComboBox_SelectedIndexChanged);
+            this.EventosComboBox.SelectedIndexChanged += new System.EventHandler(this.EventosComboBox_SelectedIndexChanged);
             // 
             // ConsultarButton
             // 
@@ -986,7 +987,7 @@
             this.ConsultarButton.Location = new System.Drawing.Point(0, 0);
             this.ConsultarButton.Margin = new System.Windows.Forms.Padding(2);
             this.ConsultarButton.Name = "ConsultarButton";
-            this.ConsultarButton.Size = new System.Drawing.Size(133, 23);
+            this.ConsultarButton.Size = new System.Drawing.Size(120, 23);
             this.ConsultarButton.TabIndex = 16;
             this.ConsultarButton.Text = "Consultar";
             this.ConsultarButton.UseVisualStyleBackColor = true;
@@ -1336,6 +1337,7 @@
             // 
             this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem1,
+            this.menuItem4,
             this.menuItem2,
             this.menuItem3});
             // 
@@ -1345,15 +1347,21 @@
             this.menuItem1.Text = "Vendedores";
             this.menuItem1.Click += new System.EventHandler(this.menuItem1_Click);
             // 
+            // menuItem4
+            // 
+            this.menuItem4.Index = 1;
+            this.menuItem4.Text = "Contingencia";
+            this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
+            // 
             // menuItem2
             // 
-            this.menuItem2.Index = 1;
+            this.menuItem2.Index = 2;
             this.menuItem2.Text = "Acerca";
             this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
             // 
             // menuItem3
             // 
-            this.menuItem3.Index = 2;
+            this.menuItem3.Index = 3;
             this.menuItem3.Text = "Ayuda";
             this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
             // 
@@ -1532,6 +1540,7 @@
         private System.Windows.Forms.SplitContainer BotonesBSLinea2SplitContainer;
         private System.Windows.Forms.Button SalirButton;
         private System.Windows.Forms.ComboBox ExportarItfComboBox;
+        private System.Windows.Forms.MenuItem menuItem4;
     }
 }
 

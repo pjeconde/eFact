@@ -1120,7 +1120,7 @@ namespace eFact_R
                     eFact_R.Entidades.Lote lote = new eFact_R.Entidades.Lote();
                     int renglon = BandejaSDataGridView.SelectedRows[0].Index;
                     lote = dtBandejaSalida[renglon];
-                    ConsultaLote cl = new ConsultaLote(lote);
+                    ConsultaLote cl = new ConsultaLote(lote, ConsultaLote.Modo.Consulta);
                     cl.ShowDialog();
                     cl = null;
                 }
@@ -1133,6 +1133,14 @@ namespace eFact_R
             {
                 Cursor = System.Windows.Forms.Cursors.Default;
             }
+        }
+
+        private void menuItem4_Click(object sender, EventArgs e)
+        {
+            Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            ConsultaLote c = new ConsultaLote(ConsultaLote.Modo.Contingencia);
+            c.ShowDialog();
+            c = null;
         }
     }
 }
