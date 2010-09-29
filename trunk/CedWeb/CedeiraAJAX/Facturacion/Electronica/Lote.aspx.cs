@@ -1357,6 +1357,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		}
 		protected void CompradorDropDownList_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			AjustarComprador();
+		}
+		private void AjustarComprador()
+		{
 			if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
 			{
 				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
@@ -1415,6 +1419,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					{
 						GLN_CompradorTextBox.Text = auxGLN;
 					}
+					else
+					{
+						GLN_CompradorTextBox.Text = string.Empty;
+					}
 					Codigo_Interno_CompradorTextBox.Text = comprador.CodigoInterno;
 					if (!comprador.FechaInicioActividades.Equals(new DateTime(9999, 12, 31)))
 					{
@@ -1425,7 +1433,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						InicioDeActividadesCompradorDatePickerWebUserControl.CalendarDateString = string.Empty;
 					}
 					EmailAvisoVisualizacionTextBox.Text = comprador.EmailAvisoVisualizacion;
-					;
 					PasswordAvisoVisualizacionTextBox.Text = comprador.PasswordAvisoVisualizacion;
 				}
 				catch (Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente)
@@ -1444,11 +1451,46 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					Contacto_CompradorTextBox.Text = string.Empty;
 					Email_CompradorTextBox.Text = string.Empty;
 					Telefono_CompradorTextBox.Text = string.Empty;
-					Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
-					Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
-					Nro_Doc_Identificatorio_CompradorTextBox.Text = string.Empty;
-					Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
-					Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
+
+					try
+					{
+						int auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
+						string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+						{
+							return pv.Id == auxPV;
+						}).IdTipo;
+						Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+						Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
+						if (!idtipo.Equals("Export"))
+						{
+							Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+							Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
+							Nro_Doc_Identificatorio_CompradorTextBox.Text = string.Empty;
+							Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaNoExportacion();
+						}
+						else
+						{
+							Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
+							Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
+							Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+							Nro_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
+							Nro_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.ListaSinInformar();
+							Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
+							Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = -1;
+							Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
+						}
+						Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
+						Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = -1;
+					}
+					catch
+					{
+						Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+						Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
+						Nro_Doc_Identificatorio_CompradorTextBox.Text = string.Empty;
+						Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
+						Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
+					}
+
 					Condicion_IVA_CompradorDropDownList.SelectedValue = Convert.ToString(0);
 					//NroIngBrutosTextBox.Text = comprador.NroIngBrutos;
 					//CondIngBrutosDropDownList.SelectedValue = Convert.ToString(comprador.IdCondIngBrutos);
@@ -1678,76 +1720,17 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
 						Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
 						Nro_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
-						System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores=new System.Collections.Generic.List<CedWebEntidades.Comprador>();
+						System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores = new System.Collections.Generic.List<CedWebEntidades.Comprador>();
 						switch (idtipo)
 						{
 							case "Comun":
-								Presta_ServCheckBox.Enabled = true;
-								FechaServDesdeDatePickerWebUserControl.Visible = true;
-								FechaInicioServLabel.Visible = true;
-								FechaHstServLabel.Visible = true;
-								FechaServHastaDatePickerWebUserControl.Visible = true;
-								Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
-								Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
-								Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
-								Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
-								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
-								listacompradores = CedWebRN.Comprador.ListaSinExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
-								TipoExpDropDownList.SelectedIndex = -1;
-								TipoExpDropDownList.Enabled = false;
-								PaisDestinoExpDropDownList.SelectedIndex = -1;
-								PaisDestinoExpDropDownList.Enabled = false;
-								IdiomaDropDownList.SelectedIndex = -1;
-								IdiomaDropDownList.Enabled = false;
-								IncotermsDropDownList.SelectedIndex = -1;
-								IncotermsDropDownList.Enabled = false;
+								listacompradores = AjustarCamposXPtaVentaComun(listacompradores);
 								break;
 							case "BFiscal":
-								Presta_ServCheckBox.Checked = false;
-								Presta_ServCheckBox.Enabled = false;
-								FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
-								FechaServDesdeDatePickerWebUserControl.Visible = false;
-								FechaInicioServLabel.Visible = false;
-								FechaHstServLabel.Visible = false;
-								FechaServHastaDatePickerWebUserControl.CalendarDateString = string.Empty;
-								FechaServHastaDatePickerWebUserControl.Visible = false;
-								Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
-								Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
-								Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
-								Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
-								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
-								listacompradores = CedWebRN.Comprador.ListaSinExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
-								TipoExpDropDownList.SelectedIndex = -1;
-								TipoExpDropDownList.Enabled = false;
-								PaisDestinoExpDropDownList.SelectedIndex = -1;
-								PaisDestinoExpDropDownList.Enabled = false;
-								IdiomaDropDownList.SelectedIndex = -1;
-								IdiomaDropDownList.Enabled = false;
-								IncotermsDropDownList.SelectedIndex = -1;
-								IncotermsDropDownList.Enabled = false;
+								listacompradores = AjustarCamposXPtaVentaBonoFiscal(listacompradores);
 								break;
 							case "Export":
-								Presta_ServCheckBox.Checked = false;
-								Presta_ServCheckBox.Enabled = false;
-								FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
-								FechaServDesdeDatePickerWebUserControl.Visible = false;
-								FechaInicioServLabel.Visible = false;
-								FechaHstServLabel.Visible = false;
-								FechaServHastaDatePickerWebUserControl.CalendarDateString = string.Empty;
-								FechaServHastaDatePickerWebUserControl.Visible = false;
-								Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaExportaciones();
-								Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
-								Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
-								Nro_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.ListaSinInformar();
-								Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
-								Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Nro_Doc_Identificatorio_CompradorTextBox.Text));
-								Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
-								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
-								listacompradores = CedWebRN.Comprador.ListaExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
-								TipoExpDropDownList.Enabled = true;
-								PaisDestinoExpDropDownList.Enabled = true;
-								IdiomaDropDownList.Enabled = true;
-								IncotermsDropDownList.Enabled = true;
+								listacompradores = AjustarCamposXPtaVentaExport(listacompradores);
 								break;
 						}
 						Tipo_De_ComprobanteDropDownList.DataBind();
@@ -1763,8 +1746,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 							CompradorDropDownList.DataTextField = "RazonSocial";
 							CompradorDropDownList.DataSource = listacompradores;
 							CompradorDropDownList.DataBind();
-							CompradorDropDownList.SelectedIndex=0;
-							CompradorDropDownList_SelectedIndexChanged(this, new EventArgs());
+							CompradorDropDownList.SelectedIndex = 0;
+							AjustarComprador();
 						}
 						else
 						{
@@ -1774,42 +1757,133 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					}
 					catch
 					{
-						TipoPtoVentaLabel.Text = "No definido";
-						Presta_ServCheckBox.Enabled = true;
-						FechaServDesdeDatePickerWebUserControl.Visible = true;
-						FechaInicioServLabel.Visible = true;
-						FechaHstServLabel.Visible = true;
-						FechaServHastaDatePickerWebUserControl.Visible = true;
-						Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
-						Tipo_De_ComprobanteDropDownList.DataBind();
-						Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
-						Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
-						Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
-						Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
-						((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
-						System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores = CedWebRN.Comprador.Lista(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
-						if (listacompradores.Count > 0)
-						{
-							CompradorDropDownList.Visible = true;
-							CompradorDropDownList.DataValueField = "RazonSocial";
-							CompradorDropDownList.DataTextField = "RazonSocial";
-							CompradorDropDownList.DataSource = listacompradores;
-							CompradorDropDownList.DataBind();
-							CompradorDropDownList.SelectedIndex = 0;
-							CompradorDropDownList_SelectedIndexChanged(this, new EventArgs());
-						}
-						else
-						{
-							CompradorDropDownList.Visible = false;
-							CompradorDropDownList.DataSource = null;
-						}
-						TipoExpDropDownList.Enabled = true;
-						PaisDestinoExpDropDownList.Enabled = true;
-						IdiomaDropDownList.Enabled = true;
-						IncotermsDropDownList.Enabled = true;
+						AjustarCamposXPtaVentaIndefinido();
 					}
 				}
+				else
+				{
+					AjustarCamposXPtaVentaIndefinido();
+					ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Debe definir el punto de venta');</SCRIPT>", false);
+				}
 			}
+		}
+
+		private System.Collections.Generic.List<CedWebEntidades.Comprador> AjustarCamposXPtaVentaExport(System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores)
+		{
+			Presta_ServCheckBox.Checked = false;
+			Presta_ServCheckBox.Enabled = false;
+			FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
+			FechaServDesdeDatePickerWebUserControl.Visible = false;
+			FechaInicioServLabel.Visible = false;
+			FechaHstServLabel.Visible = false;
+			FechaServHastaDatePickerWebUserControl.CalendarDateString = string.Empty;
+			FechaServHastaDatePickerWebUserControl.Visible = false;
+			Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaExportaciones();
+
+			Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
+			Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
+			Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+			Nro_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
+			Nro_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.ListaSinInformar();
+			Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
+			Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Nro_Doc_Identificatorio_CompradorTextBox.Text));
+			Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
+
+			((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
+			listacompradores = CedWebRN.Comprador.ListaExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
+			TipoExpDropDownList.Enabled = true;
+			PaisDestinoExpDropDownList.Enabled = true;
+			IdiomaDropDownList.Enabled = true;
+			IncotermsDropDownList.Enabled = true;
+			return listacompradores;
+		}
+
+		private System.Collections.Generic.List<CedWebEntidades.Comprador> AjustarCamposXPtaVentaBonoFiscal(System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores)
+		{
+			Presta_ServCheckBox.Checked = false;
+			Presta_ServCheckBox.Enabled = false;
+			FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
+			FechaServDesdeDatePickerWebUserControl.Visible = false;
+			FechaInicioServLabel.Visible = false;
+			FechaHstServLabel.Visible = false;
+			FechaServHastaDatePickerWebUserControl.CalendarDateString = string.Empty;
+			FechaServHastaDatePickerWebUserControl.Visible = false;
+			Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
+			Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
+			Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
+			Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+			((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+			listacompradores = CedWebRN.Comprador.ListaSinExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
+			TipoExpDropDownList.SelectedIndex = -1;
+			TipoExpDropDownList.Enabled = false;
+			PaisDestinoExpDropDownList.SelectedIndex = -1;
+			PaisDestinoExpDropDownList.Enabled = false;
+			IdiomaDropDownList.SelectedIndex = -1;
+			IdiomaDropDownList.Enabled = false;
+			IncotermsDropDownList.SelectedIndex = -1;
+			IncotermsDropDownList.Enabled = false;
+			return listacompradores;
+		}
+
+		private System.Collections.Generic.List<CedWebEntidades.Comprador> AjustarCamposXPtaVentaComun(System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores)
+		{
+			Presta_ServCheckBox.Enabled = true;
+			FechaServDesdeDatePickerWebUserControl.Visible = true;
+			FechaInicioServLabel.Visible = true;
+			FechaHstServLabel.Visible = true;
+			FechaServHastaDatePickerWebUserControl.Visible = true;
+			Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
+			Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
+			Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
+			Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+			((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+			listacompradores = CedWebRN.Comprador.ListaSinExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
+			TipoExpDropDownList.SelectedIndex = -1;
+			TipoExpDropDownList.Enabled = false;
+			PaisDestinoExpDropDownList.SelectedIndex = -1;
+			PaisDestinoExpDropDownList.Enabled = false;
+			IdiomaDropDownList.SelectedIndex = -1;
+			IdiomaDropDownList.Enabled = false;
+			IncotermsDropDownList.SelectedIndex = -1;
+			IncotermsDropDownList.Enabled = false;
+			return listacompradores;
+		}
+
+		private void AjustarCamposXPtaVentaIndefinido()
+		{
+			TipoPtoVentaLabel.Text = "No definido";
+			Presta_ServCheckBox.Enabled = true;
+			FechaServDesdeDatePickerWebUserControl.Visible = true;
+			FechaInicioServLabel.Visible = true;
+			FechaHstServLabel.Visible = true;
+			FechaServHastaDatePickerWebUserControl.Visible = true;
+			Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
+			Tipo_De_ComprobanteDropDownList.DataBind();
+			Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
+			Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
+			Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
+			Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+			((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+			System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores = CedWebRN.Comprador.Lista(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
+			if (listacompradores.Count > 0)
+			{
+				CompradorDropDownList.Visible = true;
+				CompradorDropDownList.DataValueField = "RazonSocial";
+				CompradorDropDownList.DataTextField = "RazonSocial";
+				CompradorDropDownList.DataSource = listacompradores;
+				CompradorDropDownList.DataBind();
+				CompradorDropDownList.SelectedIndex = 0;
+				AjustarComprador();
+			}
+			else
+			{
+				CompradorDropDownList.Visible = false;
+				CompradorDropDownList.DataSource = null;
+			}
+			TipoExpDropDownList.Enabled = true;
+			PaisDestinoExpDropDownList.Enabled = true;
+			IdiomaDropDownList.Enabled = true;
+			IncotermsDropDownList.Enabled = true;
 		}
 		protected void EnviarIBKButton_Click(object sender, EventArgs e)
 		{
