@@ -380,6 +380,7 @@
     <Compile Include="Facturacion\Electronica\Lote.aspx.designer.cs">
       <DependentUpon>Lote.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Facturacion\Electronica\Mails\Body.cs" />
     <Compile Include="Facturacion\Electronica\Permisos.ascx.cs">
       <DependentUpon>Permisos.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
