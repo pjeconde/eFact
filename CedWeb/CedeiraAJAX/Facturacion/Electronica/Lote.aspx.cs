@@ -2152,6 +2152,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				{
 					comp.extensiones = new FeaEntidades.InterFacturas.extensiones();
 				}
+				if (comp.extensiones.extensiones_camara_facturas == null)
+				{
+					comp.extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
+				}
 				comp.extensiones.extensiones_camara_facturas.clave_de_vinculacion = PasswordAvisoVisualizacionTextBox.Text;
 				comp.extensiones.extensiones_camara_facturasSpecified = true;
 			}
@@ -2465,10 +2469,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				exportacion = true;
 			}
 
-			if (TipoExpDropDownList.SelectedValue.Equals("1"))
-			{
-				GenerarInfoPermisosExportacion(ie);
-			}
+			GenerarInfoPermisosExportacion(ie, infcomprob);
 
 			if (exportacion)
 			{
@@ -2476,23 +2477,33 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 		}
 
-		private void GenerarInfoPermisosExportacion(FeaEntidades.InterFacturas.informacion_exportacion ie)
+		private void GenerarInfoPermisosExportacion(FeaEntidades.InterFacturas.informacion_exportacion ie, FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
 		{
-			if (this.PermisosExpo.HayPermisos)
+			if (infcomprob.tipo_de_comprobante.Equals(19) && ie.tipo_exportacion.Equals(1))
 			{
-				ie.permiso_existente = "S";
-				ie.permisos = new FeaEntidades.InterFacturas.permisos[5];
-				for (int i = 0; i < this.PermisosExpo.PermisosExportacion.Count; i++)
+				if (this.PermisosExpo.HayPermisos)
 				{
-					ie.permisos[i] = new FeaEntidades.InterFacturas.permisos();
-					ie.permisos[i].descripcion_destino_mercaderia = this.PermisosExpo.PermisosExportacion[i].descripcion_destino_mercaderia;
-					ie.permisos[i].destino_mercaderia = this.PermisosExpo.PermisosExportacion[i].destino_mercaderia;
-					ie.permisos[i].id_permiso = this.PermisosExpo.PermisosExportacion[i].id_permiso;
+					ie.permiso_existente = "S";
+					ie.permisos = new FeaEntidades.InterFacturas.permisos[5];
+					for (int i = 0; i < this.PermisosExpo.PermisosExportacion.Count; i++)
+					{
+						ie.permisos[i] = new FeaEntidades.InterFacturas.permisos();
+						ie.permisos[i].descripcion_destino_mercaderia = this.PermisosExpo.PermisosExportacion[i].descripcion_destino_mercaderia;
+						ie.permisos[i].destino_mercaderia = this.PermisosExpo.PermisosExportacion[i].destino_mercaderia;
+						ie.permisos[i].id_permiso = this.PermisosExpo.PermisosExportacion[i].id_permiso;
+					}
+				}
+				else
+				{
+					ie.permiso_existente = "N";
 				}
 			}
 			else
 			{
-				ie.permiso_existente = "N";
+				if (this.PermisosExpo.HayPermisos)
+				{
+					throw new Exception("No se deben informar permisos de exportación para este tipo de comprobante");
+				}
 			}
 		}
 
