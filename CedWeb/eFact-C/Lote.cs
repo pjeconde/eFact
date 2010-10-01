@@ -38,7 +38,7 @@ namespace eFact_C
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message, ex);
             }
         }
         public FeaEntidades.InterFacturas.lote_response Enviar(FeaEntidades.InterFacturas.lote_comprobantes Lc, out List<FeaEntidades.InterFacturas.error> RespErroresLote, out List<FeaEntidades.InterFacturas.error> RespErroresComprobantes)
@@ -56,7 +56,7 @@ namespace eFact_C
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message, ex);
             }
         }
     }

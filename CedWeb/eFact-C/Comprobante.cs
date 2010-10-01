@@ -176,6 +176,7 @@ namespace eFact_C
                             {
                                 errorText.Append(error.codigo_error + " - " + error.descripcion_error + " \r\n");
                             }
+                            RespErroresLote = Ibk2Fea(lcrEr.error);
                         }
                     }
                     throw new Exception(errorText.ToString());
@@ -794,14 +795,17 @@ namespace eFact_C
                             d.linea[j].impuestos = new IBK.lineaImpuestos[lc.comprobante[i].detalle.linea[j].impuestos.Length];
                             for (int k = 0; k < d.linea[j].impuestos.Length; k++)
                             {
-                                d.linea[j].impuestos[k] = new IBK.lineaImpuestos();
-                                d.linea[j].impuestos[k].codigo_impuesto = lc.comprobante[i].detalle.linea[j].impuestos[k].codigo_impuesto;
-                                d.linea[j].impuestos[k].descripcion_impuesto = lc.comprobante[i].detalle.linea[j].impuestos[k].descripcion_impuesto;
-                                d.linea[j].impuestos[k].importe_impuesto = lc.comprobante[i].detalle.linea[j].impuestos[k].importe_impuesto;
-                                d.linea[j].impuestos[k].importe_impuesto_moneda_origen = lc.comprobante[i].detalle.linea[j].impuestos[k].importe_impuesto_moneda_origen;
-                                d.linea[j].impuestos[k].importe_impuesto_moneda_origenSpecified = lc.comprobante[i].detalle.linea[j].impuestos[k].importe_impuesto_moneda_origenSpecified;
-                                d.linea[j].impuestos[k].porcentaje_impuesto = lc.comprobante[i].detalle.linea[j].impuestos[k].porcentaje_impuesto;
-                                d.linea[j].impuestos[k].porcentaje_impuestoSpecified = lc.comprobante[i].detalle.linea[j].impuestos[k].porcentaje_impuestoSpecified;
+                                if (lc.comprobante[i].detalle.linea[j].impuestos[k] != null)
+                                {
+                                    d.linea[j].impuestos[k] = new IBK.lineaImpuestos();
+                                    d.linea[j].impuestos[k].codigo_impuesto = lc.comprobante[i].detalle.linea[j].impuestos[k].codigo_impuesto;
+                                    d.linea[j].impuestos[k].descripcion_impuesto = lc.comprobante[i].detalle.linea[j].impuestos[k].descripcion_impuesto;
+                                    d.linea[j].impuestos[k].importe_impuesto = lc.comprobante[i].detalle.linea[j].impuestos[k].importe_impuesto;
+                                    d.linea[j].impuestos[k].importe_impuesto_moneda_origen = lc.comprobante[i].detalle.linea[j].impuestos[k].importe_impuesto_moneda_origen;
+                                    d.linea[j].impuestos[k].importe_impuesto_moneda_origenSpecified = lc.comprobante[i].detalle.linea[j].impuestos[k].importe_impuesto_moneda_origenSpecified;
+                                    d.linea[j].impuestos[k].porcentaje_impuesto = lc.comprobante[i].detalle.linea[j].impuestos[k].porcentaje_impuesto;
+                                    d.linea[j].impuestos[k].porcentaje_impuestoSpecified = lc.comprobante[i].detalle.linea[j].impuestos[k].porcentaje_impuestoSpecified;
+                                }
                             }
                         }
                         if (lc.comprobante[i].detalle.linea[j].descuentos != null)
@@ -809,13 +813,16 @@ namespace eFact_C
                             d.linea[j].descuentos = new IBK.lineaDescuentos[lc.comprobante[i].detalle.linea[j].descuentos.Length];
                             for (int k = 0; k < d.linea[j].descuentos.Length; k++)
                             {
-                                d.linea[j].descuentos[k] = new IBK.lineaDescuentos();
-                                d.linea[j].descuentos[k].descripcion_descuento = lc.comprobante[i].detalle.linea[j].descuentos[k].descripcion_descuento;
-                                d.linea[j].descuentos[k].importe_descuento = lc.comprobante[i].detalle.linea[j].descuentos[k].importe_descuento;
-                                d.linea[j].descuentos[k].importe_descuento_moneda_origen = lc.comprobante[i].detalle.linea[j].descuentos[k].importe_descuento_moneda_origen;
-                                d.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified = lc.comprobante[i].detalle.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified;
-                                d.linea[j].descuentos[k].porcentaje_descuento = lc.comprobante[i].detalle.linea[j].descuentos[k].porcentaje_descuento;
-                                d.linea[j].descuentos[k].porcentaje_descuentoSpecified = lc.comprobante[i].detalle.linea[j].descuentos[k].porcentaje_descuentoSpecified;
+                                if (lc.comprobante[i].detalle.linea[j].descuentos[k] != null)
+                                {
+                                    d.linea[j].descuentos[k] = new IBK.lineaDescuentos();
+                                    d.linea[j].descuentos[k].descripcion_descuento = lc.comprobante[i].detalle.linea[j].descuentos[k].descripcion_descuento;
+                                    d.linea[j].descuentos[k].importe_descuento = lc.comprobante[i].detalle.linea[j].descuentos[k].importe_descuento;
+                                    d.linea[j].descuentos[k].importe_descuento_moneda_origen = lc.comprobante[i].detalle.linea[j].descuentos[k].importe_descuento_moneda_origen;
+                                    d.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified = lc.comprobante[i].detalle.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified;
+                                    d.linea[j].descuentos[k].porcentaje_descuento = lc.comprobante[i].detalle.linea[j].descuentos[k].porcentaje_descuento;
+                                    d.linea[j].descuentos[k].porcentaje_descuentoSpecified = lc.comprobante[i].detalle.linea[j].descuentos[k].porcentaje_descuentoSpecified;
+                                }
                             }
                         }
                         if (lc.comprobante[i].detalle.linea[j].informacion_adicional != null)
@@ -823,9 +830,12 @@ namespace eFact_C
                             d.linea[j].informacion_adicional = new IBK.lineaInformacion_adicional[lc.comprobante[i].detalle.linea[j].informacion_adicional.Length];
                             for (int k = 0; k < d.linea[j].informacion_adicional.Length; k++)
                             {
-                                d.linea[j].informacion_adicional[k] = new IBK.lineaInformacion_adicional();
-                                d.linea[j].informacion_adicional[k].tipo = lc.comprobante[i].detalle.linea[j].informacion_adicional[k].tipo;
-                                d.linea[j].informacion_adicional[k].valor = lc.comprobante[i].detalle.linea[j].informacion_adicional[k].valor;
+                                if (lc.comprobante[i].detalle.linea[j].informacion_adicional[k] != null)
+                                {
+                                    d.linea[j].informacion_adicional[k] = new IBK.lineaInformacion_adicional();
+                                    d.linea[j].informacion_adicional[k].tipo = lc.comprobante[i].detalle.linea[j].informacion_adicional[k].tipo;
+                                    d.linea[j].informacion_adicional[k].valor = lc.comprobante[i].detalle.linea[j].informacion_adicional[k].valor;
+                                }
                             }
                         }
                         d.linea[j].indicacion_exento_gravado = lc.comprobante[i].detalle.linea[j].indicacion_exento_gravado;
