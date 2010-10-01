@@ -35,8 +35,8 @@ namespace eFact_C_Tester
             proxy = new eFact_C.Entidades.Proxy();
             proxy = null;
             //proxy.Servidor = "proxy.com.ar:80"; //ejemplo
-            //proxy.Usuario = "";
-            //proxy.Clave = "";
+            //proxy.Usuario = "pepe";
+            //proxy.Clave = "123456";
             //proxy.Dominio = "";
         }
         private void ConsultaButton_Click(object sender, EventArgs e)
@@ -81,13 +81,95 @@ namespace eFact_C_Tester
             try
             {
                 eFact_C.Lote l = new eFact_C.Lote(url, certificado, proxy);
+
+                //Crear "lote_comprobantes"
                 FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+                //Crear "cabecera" del lote de comprobantes
+                lc.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
                 lc.cabecera_lote.cuit_canal = Convert.ToInt64("30690783521");
                 lc.cabecera_lote.cuit_vendedor = Convert.ToInt64(CuitTextBox.Text);
                 lc.cabecera_lote.punto_de_venta = Convert.ToInt32(PuntoVentaTextBox.Text);
                 lc.cabecera_lote.id_lote = Convert.ToInt64(NumeroLoteTextBox.Text);
-                //lc.cabecera_lote.presta_serv = 0;
+                lc.cabecera_lote.presta_serv = 0;
                 lc.cabecera_lote.presta_servSpecified = false;
+                //Cantidad de comprobantes por lote.
+                lc.cabecera_lote.cantidad_reg = 1;
+                
+                //Crear "comprobante" del lote de comprobantes
+                FeaEntidades.InterFacturas.comprobante c = new FeaEntidades.InterFacturas.comprobante();
+                //Crear "cabecera" del comprobante
+                c.cabecera = new FeaEntidades.InterFacturas.cabecera();
+                
+                ////Crear "informacion_comprador" de la cabecera del comprobante
+                c.cabecera.informacion_comprador = new FeaEntidades.InterFacturas.informacion_comprador();
+                c.cabecera.informacion_comprador.codigo_doc_identificatorio = 80;
+                c.cabecera.informacion_comprador.nro_doc_identificatorio = Convert.ToInt64("30561748140");
+                c.cabecera.informacion_comprador.condicion_IVA = 1;
+                c.cabecera.informacion_comprador.domicilio_calle = "Av.Corrientes";
+                c.cabecera.informacion_comprador.domicilio_numero = "1ºA";
+                
+                ////Crear "informacion_vendedor" de la cabecera del comprobante
+                c.cabecera.informacion_vendedor = new FeaEntidades.InterFacturas.informacion_vendedor();
+                c.cabecera.informacion_vendedor.razon_social = "Syspro Consulting";
+                c.cabecera.informacion_vendedor.cuit = Convert.ToInt64("30561748140");
+                c.cabecera.informacion_vendedor.condicion_IVA = 1;
+                c.cabecera.informacion_vendedor.domicilio_calle = "Av.Córdoba";
+                c.cabecera.informacion_vendedor.domicilio_numero = "7ºG";
+                c.cabecera.informacion_vendedor.telefono = "4235-2323";
+                
+                ////Crear "informacion_comprobante" de la cabecera del comprobante
+                c.cabecera.informacion_comprobante = new FeaEntidades.InterFacturas.informacion_comprobante();
+                c.cabecera.informacion_comprobante.tipo_de_comprobante = 1;
+                // --- Otra forma de asignar el codigo de tipo de comprobante utilizando la clase. ---
+                FeaEntidades.TiposDeComprobantes.Facturas.A tc = new FeaEntidades.TiposDeComprobantes.Facturas.A();
+                c.cabecera.informacion_comprobante.tipo_de_comprobante = tc.Codigo;
+                // -----------------------------------------------------------------------------------
+                c.cabecera.informacion_comprobante.numero_comprobante = 1;
+                c.cabecera.informacion_comprobante.punto_de_venta = 11;
+                c.cabecera.informacion_comprobante.fecha_emision = "01/10/2010";
+                c.cabecera.informacion_comprobante.fecha_vencimiento = "10/10/2010";
+                //Si es un comprobante de servicios
+                c.cabecera.informacion_comprobante.fecha_serv_desde = "";
+                c.cabecera.informacion_comprobante.fecha_serv_hasta = "";
+
+                //Crear "detalle" del comprobante.
+                c.detalle = new FeaEntidades.InterFacturas.detalle();
+                //Informar "comentarios" del comprobante. 
+                //Es un texto libre que se imprime antes del detalle ( los renglones ) del comprobante.
+                c.detalle.comentarios = "xxxxxxx xxxxx xxx xxxxxxxx.";
+                //Crear "linea" del detalle del comprobante.
+                FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
+                linea.numeroLinea = 1;
+                linea.descripcion = "Nombre del producto";
+                linea.precio_unitario = 100;
+                linea.cantidad = 3;
+                linea.alicuota_iva = 21;
+                // Otra forma de asignar el valor del IVA.;
+                FeaEntidades.IVA.Veintiuno iva = new FeaEntidades.IVA.Veintiuno();
+                linea.alicuota_iva = iva.Codigo;
+                // -----------------------------------------------------
+                linea.importe_iva = 63;     // = 100 * 3 * .21 
+                linea.unidad = "5";         //5 = Litros
+                // --- Otra forma de asignar la unidad. La clase FeaEntidades expone listas para el armado de combos de algunos campos.
+                //No es necesario utilizarlas, pero si conocer los códigos a ingresar.
+                FeaEntidades.CodigosUnidad.Litros unidad = new FeaEntidades.CodigosUnidad.Litros();
+                linea.unidad = unidad.Codigo.ToString();
+                c.detalle.linea[0] = linea;
+                // -----------------------------------------------------------------------------------
+
+                //Crear "resumen" del comprobante.
+                c.resumen = new FeaEntidades.InterFacturas.resumen();
+                //Es un comentario en el area de resumen del comprobante impreso.
+                c.resumen.observaciones = "xxxxxx xxxxx xxxx xxxx xxxx";
+                c.resumen.importe_total_neto_gravado = 300;
+                c.resumen.cant_alicuotas_iva = 1;
+                c.resumen.impuesto_liq = 63;
+                c.resumen.importe_total_factura = 361;
+                FeaEntidades.CodigosMoneda.PesosArgentinos moneda = new FeaEntidades.CodigosMoneda.PesosArgentinos();
+                c.resumen.codigo_moneda = moneda.Codigo;
+
+                //Asignar objeto comprobante dentro del lote de camprobantes.
+                lc.comprobante[0] = c; 
 
                 FeaEntidades.InterFacturas.lote_response Lr;
                 List<FeaEntidades.InterFacturas.error> listaNotificacionesLote;
@@ -98,6 +180,7 @@ namespace eFact_C_Tester
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "NOTIFICACION", MessageBoxButtons.OK);
+                //Guardar el ex.InnerException si tiene contenido para tener mas detalle del problema.
             }
         }
     }
