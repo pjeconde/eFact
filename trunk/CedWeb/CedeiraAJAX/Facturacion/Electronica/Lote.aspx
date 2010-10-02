@@ -599,12 +599,12 @@
 																	<tr>
 																		<td class="TextoLabelFEAVendedor" >
 																			<asp:RegularExpressionValidator ID="Email_VendedorRegularExpressionValidator" runat="server"
-																				ControlToValidate="Email_VendedorTextBox" ErrorMessage="error de formateo en mail contacto vendedor"
+																				ControlToValidate="Email_VendedorTextBox" ErrorMessage="error de formateo en e-mail contacto vendedor"
 																				SetFocusOnError="True" ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$"
 																				Width="11px">* </asp:RegularExpressionValidator>
 																			<asp:RequiredFieldValidator ID="Email_VendedorRequiredFieldValidator" runat="server"
-																				ControlToValidate="Email_VendedorTextBox" ErrorMessage="mail contacto del vendedor"
-																				SetFocusOnError="True">* </asp:RequiredFieldValidator>Mail Contacto:
+																				ControlToValidate="Email_VendedorTextBox" ErrorMessage="e-mail contacto del vendedor"
+																				SetFocusOnError="True">* </asp:RequiredFieldValidator>e-mail Contacto:
 																		</td>
 																		<td class="TextoLabelFEAVendedorDet" >
 																			<asp:TextBox ID="Email_VendedorTextBox" runat="server" AutoCompleteType="Email" SkinID="TextoBoxFEAVendedorDet">
@@ -964,7 +964,7 @@
 																</tr>
 																<tr>
 																	<td class="TextoLabelFEAVendedor">
-																		Clave de vinculación :
+																		e-mail para aviso :
 																	</td>
 																	<td class="TextoLabelFEAVendedorDet">
 																		<asp:TextBox ID="EmailAvisoVisualizacionTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
@@ -1013,8 +1013,8 @@
 																<tr>
 																	<td class="TextoLabelFEAVendedor" >
 																		<asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="Email_CompradorTextBox"
-																			ErrorMessage="error de formateo en mail contacto comprador" SetFocusOnError="True"
-																			ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$">* </asp:RegularExpressionValidator>Mail
+																			ErrorMessage="error de formateo en e-mail contacto comprador" SetFocusOnError="True"
+																			ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$">* </asp:RegularExpressionValidator>e-mail
 																		Contacto:
 																	</td>
 																	<td class="TextoLabelFEAVendedorDet" >
@@ -1049,7 +1049,7 @@
 																</tr>
 																<tr>
 																	<td class="TextoLabelFEAVendedor">
-																		Contraseña :
+																		Contraseña para aviso:
 																	</td>
 																	<td class="TextoLabelFEAVendedorDet">
 																		<asp:TextBox ID="PasswordAvisoVisualizacionTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
