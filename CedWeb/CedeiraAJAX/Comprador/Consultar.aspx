@@ -332,7 +332,6 @@
                                                         ToolTip="Para poder acceder al contenido del comprobante, se solicitará al destinatario el ingreso de esta contraseña"
                                                         Width="100px" ReadOnly="true">
                                                     </asp:TextBox>
-                                                    <asp:Label ID="Label2" runat="server" Text="(Interfacturas la llama <b>Clave de Vinculación</b>)" Font-Size="XX-Small" ></asp:Label>
                                                 </td>
                                             </tr>
                                             <!-- Aclaracion -->
