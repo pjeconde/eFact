@@ -791,7 +791,7 @@
 								<!-- DATOS DEL COMPRADOR -->
 								<tr>
 									<td>
-										<asp:UpdatePanel ID="compradorUpdatePanel" runat="server" UpdateMode="always">
+										<asp:UpdatePanel ID="compradorUpdatePanel" runat="server" UpdateMode="always" ChildrenAsTriggers="true">
 											<ContentTemplate>
 												<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
 													<tr>
@@ -885,7 +885,7 @@
 																		<asp:TextBox ID="Nro_Doc_Identificatorio_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
 																		</asp:TextBox>
 																		<asp:DropDownList ID="Nro_Doc_Identificatorio_CompradorDropDownList" runat="server"
-																			SkinID="DropDownListComprador" Visible="false">
+																			SkinID="DropDownListComprador" Visible="false" CausesValidation="false">
 																		</asp:DropDownList></td>
 																</tr>
 																<tr>

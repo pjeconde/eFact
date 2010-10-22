@@ -1732,6 +1732,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
 			Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Nro_Doc_Identificatorio_CompradorTextBox.Text));
 			Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
+			docCompradorRequiredFieldValidator.Enabled = false;
+			listaDocCompradorRequiredFieldValidator.Enabled = true;
+			docCompradorRequiredFieldValidator.DataBind();
+			listaDocCompradorRequiredFieldValidator.DataBind();
 
 			((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
 			listacompradores = CedWebRN.Comprador.ListaExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
@@ -1756,6 +1760,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
 			Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
 			Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+			docCompradorRequiredFieldValidator.Enabled = true;
+			listaDocCompradorRequiredFieldValidator.Enabled = false;
+			docCompradorRequiredFieldValidator.DataBind();
+			listaDocCompradorRequiredFieldValidator.DataBind();
 			((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
 			listacompradores = CedWebRN.Comprador.ListaSinExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
 			TipoExpDropDownList.SelectedIndex = -1;
@@ -1780,6 +1788,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
 			Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
 			Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+			docCompradorRequiredFieldValidator.Enabled = true;
+			listaDocCompradorRequiredFieldValidator.Enabled = false;
+			docCompradorRequiredFieldValidator.DataBind();
+			listaDocCompradorRequiredFieldValidator.DataBind();
 			((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
 			listacompradores = CedWebRN.Comprador.ListaSinExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
 			TipoExpDropDownList.SelectedIndex = -1;
@@ -1807,6 +1819,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
 			Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
 			Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+			docCompradorRequiredFieldValidator.Enabled = true;
+			listaDocCompradorRequiredFieldValidator.Enabled = false;
+			docCompradorRequiredFieldValidator.DataBind();
+			listaDocCompradorRequiredFieldValidator.DataBind();
 			((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
 			System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores = CedWebRN.Comprador.Lista(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
 			if (listacompradores.Count > 0)
@@ -2551,14 +2567,36 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				infcompra.GLNSpecified = true;
 			}
 			infcompra.codigo_interno = Codigo_Interno_CompradorTextBox.Text;
-			infcompra.codigo_doc_identificatorio = Convert.ToInt32(Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue);
+			try
+			{
+				infcompra.codigo_doc_identificatorio = Convert.ToInt32(Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue);
+			}
+			catch (FormatException)
+			{
+				throw new Exception("Tipo de documento del comprador no informado");
+			}
+			
 			if (Nro_Doc_Identificatorio_CompradorTextBox.Visible)
 			{
-				infcompra.nro_doc_identificatorio = Convert.ToInt64(Nro_Doc_Identificatorio_CompradorTextBox.Text);
+				try
+				{
+					infcompra.nro_doc_identificatorio = Convert.ToInt64(Nro_Doc_Identificatorio_CompradorTextBox.Text);
+				}
+				catch (FormatException)
+				{
+					throw new Exception("Nro documento del comprador no informado");
+				}
 			}
 			else
 			{
-				infcompra.nro_doc_identificatorio = Convert.ToInt64(Nro_Doc_Identificatorio_CompradorDropDownList.SelectedValue);
+				try
+				{
+					infcompra.nro_doc_identificatorio = Convert.ToInt64(Nro_Doc_Identificatorio_CompradorDropDownList.SelectedValue);
+				}
+				catch (FormatException)
+				{
+					throw new Exception("Nro documento del comprador para exportación no informado");
+				}
 			}
 			infcompra.denominacion = Denominacion_CompradorTextBox.Text;
 			int auxCondIVACompra = Convert.ToInt32(Condicion_IVA_CompradorDropDownList.SelectedValue);
