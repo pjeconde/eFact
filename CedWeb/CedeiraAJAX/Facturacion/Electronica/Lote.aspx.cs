@@ -1624,6 +1624,17 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					ResetearGrillas();
 				}
 			}
+			else
+			{
+				DetalleLinea.PuntoDeVenta = ((TextBox)sender).Text;
+				try
+				{
+					ViewState["PuntoVenta"] = Convert.ToInt32(((TextBox)sender).Text);
+				}
+				catch
+				{
+				}
+			}
 		}
 		private void ResetearGrillas()
 		{

@@ -1406,40 +1406,7 @@
 															<td colspan="2" style="text-align: center; height: 10px;">
 															</td>
 														</tr>
-														<tr>
-															<td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
-																<asp:UpdatePanel ID="detalleUpdatePanel" runat="server">
-																	<ContentTemplate>
-																		<uc4:Detalle ID="DetalleLinea" runat="server"></uc4:Detalle>
-																	</ContentTemplate>
-																</asp:UpdatePanel>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
-																<asp:UpdateProgress ID="detalleUpdateProgress" runat="server" AssociatedUpdatePanelID="detalleUpdatePanel"
-																	DisplayAfter="0">
-																	<ProgressTemplate>
-																		<asp:Image ID="detalleImage" runat="server" Height="25px" ImageUrl="~/Imagenes/CedeiraSF-icono-animado.gif">
-																		</asp:Image>
-																	</ProgressTemplate>
-																</asp:UpdateProgress>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
-																<asp:ValidationSummary ID="GrillasValidationSummary" runat="server" BorderColor="Gray"
-																	BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:"
-																	ShowMessageBox="True" ValidationGroup="DetalleEditItem"></asp:ValidationSummary>
-															</td>
-														</tr>
-														<tr>
-															<td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
-																<asp:ValidationSummary ID="FooterGrillasValidationSummary" runat="server" BorderColor="Gray"
-																	BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:"
-																	ShowMessageBox="True" ValidationGroup="DetalleFooter"></asp:ValidationSummary>
-															</td>
-														</tr>
+														<uc4:Detalle ID="DetalleLinea" runat="server"></uc4:Detalle>
 													</table>
 												</td>
 											</tr>

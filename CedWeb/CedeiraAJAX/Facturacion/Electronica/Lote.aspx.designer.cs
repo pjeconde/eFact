@@ -1055,15 +1055,6 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox ComentariosTextBox;
         
         /// <summary>
-        /// Control detalleUpdatePanel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel detalleUpdatePanel;
-        
-        /// <summary>
         /// Control DetalleLinea.
         /// </summary>
         /// <remarks>
@@ -1071,33 +1062,6 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::CedeiraAJAX.Facturacion.Electronica.Detalle DetalleLinea;
-        
-        /// <summary>
-        /// Control detalleUpdateProgress.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress detalleUpdateProgress;
-        
-        /// <summary>
-        /// Control GrillasValidationSummary.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary GrillasValidationSummary;
-        
-        /// <summary>
-        /// Control FooterGrillasValidationSummary.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary FooterGrillasValidationSummary;
         
         /// <summary>
         /// Control descuentosUpdatePanel.

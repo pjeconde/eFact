@@ -36,7 +36,7 @@
                                         Medio
                                         <br />
                                         <asp:ImageMap ID="MedioImageMap" runat="server" BorderColor="brown" BorderStyle="Solid"
-                                            BorderWidth="1px">
+                                            BorderWidth="1px" OnUnload="MedioImageMap_Unload">
                                         </asp:ImageMap>
                                     </td>
                                     <td align="left" rowspan="9" style="color: #A52A2A; font-weight: bold; padding-left: 20px"
@@ -44,7 +44,7 @@
                                         Provincia
                                         <br />
                                         <asp:ImageMap ID="ProvinciaImageMap" runat="server" BorderColor="brown" BorderStyle="Solid"
-                                            BorderWidth="1px">
+                                            BorderWidth="1px" OnUnload="ProvinciaImageMap_Unload">
                                         </asp:ImageMap>
                                     </td>
                                 </tr>

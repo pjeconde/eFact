@@ -16,7 +16,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 	{
 		System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas;
 		private System.Globalization.CultureInfo cedeiraCultura;
-		string puntoDeVenta=string.Empty;
+		string puntoDeVenta;
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -28,6 +28,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			{
 				puntoDeVenta = Convert.ToString(ViewState["puntoDeVenta"]);
 			}
+			
 		}
 		public void ResetearGrillas()
 		{
@@ -202,21 +203,39 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						throw new Exception("Detalle no agregado porque la descripción no puede estar vacía");
 					}
 					string auxTotal = ((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_total_articulo")).Text;
+					if (auxTotal.Equals(string.Empty))
+					{
+						throw new Exception("Detalle no agregado porque el importe debe ser informado");
+					}
 					if (!auxTotal.Contains(","))
 					{
-						l.importe_total_articulo = Convert.ToDouble(auxTotal, cedeiraCultura);
+						try
+						{
+							l.importe_total_articulo = Convert.ToDouble(auxTotal, cedeiraCultura);
+						}
+						catch
+						{
+							throw new Exception("Detalle no agregado porque el importe tiene más de un separador de decimales");
+						}
 					}
 					else
 					{
-						throw new Exception("Detalle no agregado porque el separador de decimales debe ser el punto");
+						throw new Exception("Detalle no agregado porque el separador de decimales en el importe debe ser el punto");
 					}
 
 					string auxNull = ((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo")).Text;
 					if (!auxNull.Equals(string.Empty) && !auxNull.Equals("0"))
 					{
-						double auxImporteIVA = Convert.ToDouble(auxNull, cedeiraCultura);
-						l.importe_ivaSpecified = true;
-						l.importe_iva = auxImporteIVA;
+						try
+						{
+							double auxImporteIVA = Convert.ToDouble(auxNull, cedeiraCultura);
+							l.importe_ivaSpecified = true;
+							l.importe_iva = auxImporteIVA;
+						}
+						catch
+						{
+							throw new Exception("Detalle no agregado porque el importe IVA tiene más de un separador de decimales");
+						}
 					}
 					else
 					{
@@ -301,8 +320,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					{
 						if (!auxCantidad.Equals(string.Empty) && !auxCantidad.Equals("0"))
 						{
-							l.cantidad = Convert.ToDouble(auxCantidad, cedeiraCultura);
-							l.cantidadSpecified = true;
+							try
+							{
+								l.cantidad = Convert.ToDouble(auxCantidad, cedeiraCultura);
+								l.cantidadSpecified = true;
+							}
+							catch
+							{
+								throw new Exception("Detalle no agregado porque la cantidad tiene más de un separador de decimales");
+							}
 						}
 						else
 						{
@@ -383,9 +409,16 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					string auxprecio_unitario = ((TextBox)detalleGridView.FooterRow.FindControl("txtprecio_unitario")).Text;
 					if (!auxprecio_unitario.Equals(string.Empty) && !auxprecio_unitario.Equals("0"))
 					{
-						double auxPU = Convert.ToDouble(auxprecio_unitario, cedeiraCultura);
-						l.precio_unitario = auxPU;
-						l.precio_unitarioSpecified = true;
+						try
+						{
+							double auxPU = Convert.ToDouble(auxprecio_unitario, cedeiraCultura);
+							l.precio_unitario = auxPU;
+							l.precio_unitarioSpecified = true;
+						}
+						catch
+						{
+							throw new Exception("Detalle no agregado porque el precio unitario tiene más de un separador de decimales");
+						}
 					}
 					else
 					{
@@ -442,7 +475,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 				catch (Exception ex)
 				{
-					ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+					ScriptManager.RegisterClientScriptBlock(this.Parent.Page, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
 				}
 			}
 		}
@@ -470,9 +503,20 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					throw new Exception("Detalle no actualizado porque la descripción no puede estar vacía");
 				}
 				string auxTotal = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_total_articulo")).Text;
+				if (auxTotal.Equals(string.Empty))
+				{
+					throw new Exception("Detalle no actualizado porque el importe debe ser informado");
+				}
 				if (!auxTotal.Contains(","))
 				{
-					l.importe_total_articulo = Convert.ToDouble(auxTotal, cedeiraCultura);
+					try
+					{
+						l.importe_total_articulo = Convert.ToDouble(auxTotal, cedeiraCultura);
+					}
+					catch
+					{
+						throw new Exception("Detalle no actualizado porque el importe tiene más de un separador de decimales");
+					}
 				}
 				else
 				{
@@ -482,9 +526,16 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				string auxNull = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_alicuota_articulo")).Text;
 				if (!auxNull.Equals(string.Empty) && !auxNull.Equals("0"))
 				{
-					double auxImporteIVA = Convert.ToDouble(auxNull);
-					l.importe_ivaSpecified = true;
-					l.importe_iva = auxImporteIVA;
+					try
+					{
+						double auxImporteIVA = Convert.ToDouble(auxNull);
+						l.importe_ivaSpecified = true;
+						l.importe_iva = auxImporteIVA;
+					}
+					catch
+					{
+						throw new Exception("Detalle no actualizado porque el importe IVA tiene más de un separador de decimales");
+					}
 				}
 				else
 				{
@@ -569,8 +620,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				{
 					if (!auxCantidad.Equals(string.Empty) && !auxCantidad.Equals("0"))
 					{
-						l.cantidad = Convert.ToDouble(auxCantidad, cedeiraCultura);
-						l.cantidadSpecified = true;
+						try
+						{
+							l.cantidad = Convert.ToDouble(auxCantidad, cedeiraCultura);
+							l.cantidadSpecified = true;
+						}
+						catch
+						{
+							throw new Exception("Detalle no actualizado porque la cantidad tiene más de un separador de decimales");
+						}
 					}
 					else
 					{
@@ -652,9 +710,16 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				string auxprecio_unitario = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtprecio_unitario")).Text;
 				if (!auxprecio_unitario.Equals(string.Empty) && !auxprecio_unitario.Equals("0"))
 				{
-					double auxPU = Convert.ToDouble(auxprecio_unitario, cedeiraCultura);
-					l.precio_unitario = auxPU;
-					l.precio_unitarioSpecified = true;
+					try
+					{
+						double auxPU = Convert.ToDouble(auxprecio_unitario);
+						l.precio_unitario = auxPU;
+						l.precio_unitarioSpecified = true;
+					}
+					catch
+					{
+						throw new Exception("Detalle no actualizado porque el precio unitario tiene más de un separador de decimales");
+					}
 				}
 				else
 				{
@@ -697,14 +762,14 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 			catch (Exception ex)
 			{
-				ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+				ScriptManager.RegisterClientScriptBlock(this.Parent.Page, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
 			}
 		}
 		protected void detalleGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
 		{
 			if (e.Exception != null)
 			{
-				ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+				ScriptManager.RegisterClientScriptBlock(this.Parent.Page, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
 				e.ExceptionHandled = true;
 			}
 		}
@@ -829,7 +894,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		{
 			if (e.Exception != null)
 			{
-				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+				ScriptManager.RegisterClientScriptBlock(this.Parent.Page, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
 				e.ExceptionHandled = true;
 			}
 		}
@@ -1008,6 +1073,104 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						listadelineas[i].precio_unitarioSpecified = listadelineas[i].importes_moneda_origen.precio_unitarioSpecified;
 					}
 				}
+			}
+		}
+		protected void CalcularImporteArtEnEdicion(object sender, EventArgs e)
+		{
+			try
+			{
+				double preUni = Convert.ToDouble(((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtprecio_unitario"))).Text);
+				double cant = Convert.ToDouble(((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtcantidad"))).Text);
+				if (!preUni.Equals(0) && !cant.Equals(0))
+				{
+					((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_total_articulo"))).Text = Convert.ToString(Math.Round(preUni * cant,2));
+				}
+				DropDownList ddl = ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit"));
+				if (!ddl.SelectedValue.Equals("0") && !ddl.SelectedValue.Equals("99"))
+				{
+					double imptot = Convert.ToDouble(((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_total_articulo"))).Text);
+					if (!imptot.Equals(0))
+					{
+						double aux = imptot * Convert.ToDouble(ddl.SelectedValue) / 100;
+						((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo"))).Text = Convert.ToString(Math.Round(aux, 2));
+					}
+				}
+				if (ddl.SelectedValue.Equals("99"))
+				{
+					((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo"))).Text = string.Empty;
+				}
+			}
+			catch
+			{
+			}
+		}
+		protected void CalcularImporteArtEnFooter(object sender, EventArgs e)
+		{
+			try
+			{
+				double preUni = Convert.ToDouble(((TextBox)(detalleGridView.FooterRow.FindControl("txtprecio_unitario"))).Text);
+				double cant = Convert.ToDouble(((TextBox)(detalleGridView.FooterRow.FindControl("txtcantidad"))).Text);
+				if (!preUni.Equals(0) && !cant.Equals(0))
+				{
+					((TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_total_articulo"))).Text = Convert.ToString(Math.Round(preUni * cant, 2));
+				}
+				DropDownList ddl = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articuloEdit"));
+				if (!ddl.SelectedValue.Equals("0") && !ddl.SelectedValue.Equals("99"))
+				{
+					double imptot = Convert.ToDouble(((TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_total_articulo"))).Text);
+					if (!imptot.Equals(0))
+					{
+						double aux = imptot * Convert.ToDouble(ddl.SelectedValue) / 100;
+						((TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"))).Text = Convert.ToString(Math.Round(aux, 2));
+					}
+				}
+				if (ddl.SelectedValue.Equals("99"))
+				{
+					((TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"))).Text = string.Empty;
+				}
+			}
+			catch
+			{
+			}
+		}
+		protected void ddlalicuota_articuloEdit_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			try
+			{
+				double imptot = Convert.ToDouble(((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_total_articulo"))).Text);
+				double alic=Convert.ToDouble(((DropDownList)sender).SelectedValue);
+				if (!imptot.Equals(0) && !alic.Equals(99))
+				{
+					double aux = imptot * alic / 100;
+					((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo"))).Text = Convert.ToString(Math.Round(aux,2));
+				}
+				if (alic.Equals(99))
+				{
+					((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo"))).Text = string.Empty;
+				}
+			}
+			catch
+			{
+			}
+		}
+		protected void ddlalicuota_articuloFooter_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			try
+			{
+				double imptot = Convert.ToDouble(((TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_total_articulo"))).Text);
+				double alic = Convert.ToDouble(((DropDownList)sender).SelectedValue);
+				if (!imptot.Equals(0) && !alic.Equals(99))
+				{
+					double aux = imptot * alic / 100;
+					((TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"))).Text = Convert.ToString(Math.Round(aux, 2));
+				}
+				if (alic.Equals(99))
+				{
+					((TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"))).Text = string.Empty;
+				}
+			}
+			catch
+			{
 			}
 		}
 	}
