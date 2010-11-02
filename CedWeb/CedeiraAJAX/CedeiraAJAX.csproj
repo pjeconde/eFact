@@ -878,6 +878,10 @@
       <Project>{B76ED545-1CF6-40BC-A3E1-52C34B0A0EFF}</Project>
       <Name>CaptchaDotNet2</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CedeiraAP\CedeiraAP.csproj">
+      <Project>{DB0A7D76-F68E-43A7-ADBD-08DDF2AFAD36}</Project>
+      <Name>CedeiraAP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CedeiraUIWebForms\CedeiraUIWebForms.csproj">
       <Project>{65404969-7DC6-45A2-BD12-40515251A60F}</Project>
       <Name>CedeiraUIWebForms</Name>
