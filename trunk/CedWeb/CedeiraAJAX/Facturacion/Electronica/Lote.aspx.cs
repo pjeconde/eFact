@@ -906,12 +906,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			InicioDeActividadesCompradorDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.inicio_de_actividades);
 			Provincia_CompradorDropDownList.SelectedIndex = Provincia_CompradorDropDownList.Items.IndexOf(Provincia_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.provincia)));
 			Condicion_IVA_CompradorDropDownList.SelectedIndex = Condicion_IVA_CompradorDropDownList.Items.IndexOf(Condicion_IVA_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.condicion_IVA)));
-			if (lc.comprobante[0].extensionesSpecified)
+			if (lc.comprobante[0].extensiones!=null)
 			{
-				if (lc.comprobante[0].extensiones.extensiones_camara_facturasSpecified)
-				{
-					PasswordAvisoVisualizacionTextBox.Text = lc.comprobante[0].extensiones.extensiones_camara_facturas.clave_de_vinculacion;
-				}
 				if (lc.comprobante[0].extensiones.extensiones_destinatarios!=null)
 				{
 					EmailAvisoVisualizacionTextBox.Text = lc.comprobante[0].extensiones.extensiones_destinatarios.email;
@@ -2127,8 +2123,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				{
 					comp.extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
 				}
-				comp.extensiones.extensiones_camara_facturas.clave_de_vinculacion = PasswordAvisoVisualizacionTextBox.Text;
+				comp.extensiones.extensiones_camara_facturas.clave_de_vinculacion = Cedeira.SV.Fun.CreateMD5Hash(PasswordAvisoVisualizacionTextBox.Text);
 				comp.extensiones.extensiones_camara_facturasSpecified = true;
+			}
+			else
+			{
+				comp.extensionesSpecified = false;
+				comp.extensiones.extensiones_camara_facturasSpecified = false;
 			}
 		}
 
