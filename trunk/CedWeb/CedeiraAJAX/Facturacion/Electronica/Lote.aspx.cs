@@ -720,6 +720,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 			else
 			{
+				FeaEntidades.InterFacturas.lote_comprobantes lc=new FeaEntidades.InterFacturas.lote_comprobantes();
 				if (XMLFileUpload.HasFile)
 				{
 					try
@@ -729,7 +730,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 						try
 						{
-							FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
 							System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lc.GetType());
 							lc = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
 							CompletarUI(lc, e);
@@ -741,14 +741,35 @@ namespace CedeiraAJAX.Facturacion.Electronica
 							{
 								try
 								{
+									//Formato detalle_factura IBK
 									ms.Seek(0, System.IO.SeekOrigin.Begin);
 									FeaEntidades.InterFacturas.comprobante c = new FeaEntidades.InterFacturas.comprobante();
 									System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(c.GetType());
 									c = (FeaEntidades.InterFacturas.comprobante)x.Deserialize(ms);
-
-									//TODO serializar un comprobante
-
-									ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Esquema de un solo comprobante no implementado');</script>");
+									FeaEntidades.InterFacturas.comprobante[] cArray = new FeaEntidades.InterFacturas.comprobante[1];
+									cArray[0] = c;
+									lc.comprobante = cArray;
+									CompletarUI(lc, e);
+									ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo de formato detalle_factura.xml');</script>");
+								}
+								catch (InvalidOperationException)
+								{
+									//try
+									//{
+									//    //Formato Lote IBK
+									//    ms.Seek(0, System.IO.SeekOrigin.Begin);
+									//    CedWebRN.IBK.consulta_lote_response clr = new CedWebRN.IBK.consulta_lote_response();
+									//    System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(clr.GetType());
+									//    clr = (CedWebRN.IBK.consulta_lote_response)x.Deserialize(ms);
+										
+									//    CompletarUI(lc, e);
+									//    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo de formato detalle_factura.xml');</script>");
+									//}
+									//catch
+									//{
+									//    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>");
+									//}
+									ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>");
 								}
 								catch
 								{
@@ -776,14 +797,26 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		private void CompletarUI(FeaEntidades.InterFacturas.lote_comprobantes lc, EventArgs e)
 		{
 			//Cabecera
-			Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
-			Presta_ServCheckBox.Checked = Convert.ToBoolean(lc.cabecera_lote.presta_serv);
-			Punto_VentaTextBox.Text = Convert.ToString(lc.cabecera_lote.punto_de_venta);
-			int auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
-			ViewState["PuntoVenta"] = auxPV;
-			DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
-			AjustarCamposXPtaVentaChanged(Punto_VentaTextBox.Text);
-			Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
+			try
+			{
+				Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
+				Presta_ServCheckBox.Checked = Convert.ToBoolean(lc.cabecera_lote.presta_serv);
+				Punto_VentaTextBox.Text = Convert.ToString(lc.cabecera_lote.punto_de_venta);
+				int auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
+				ViewState["PuntoVenta"] = auxPV;
+				DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
+				AjustarCamposXPtaVentaChanged(Punto_VentaTextBox.Text);
+				Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
+			}
+			catch (NullReferenceException)//detalle_factura.xml
+			{
+				Punto_VentaTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta);
+				int auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
+				ViewState["PuntoVenta"] = auxPV;
+				DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
+				AjustarCamposXPtaVentaChanged(Punto_VentaTextBox.Text);
+				Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
+			}
 			//Comprobante
 			Numero_ComprobanteTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
 			FechaEmisionDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
@@ -2125,11 +2158,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 				comp.extensiones.extensiones_camara_facturas.clave_de_vinculacion = Cedeira.SV.Fun.CreateMD5Hash(PasswordAvisoVisualizacionTextBox.Text);
 				comp.extensiones.extensiones_camara_facturasSpecified = true;
-			}
-			else
-			{
-				comp.extensionesSpecified = false;
-				comp.extensiones.extensiones_camara_facturasSpecified = false;
 			}
 		}
 
@@ -3660,13 +3688,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						{
 							lcFea.comprobante[0].extensiones = new FeaEntidades.InterFacturas.extensiones();
 						}
-						foreach (FeaEntidades.InterFacturas.resumenImpuestos imp in lcFea.comprobante[0].resumen.impuestos)
+						if (lcFea.comprobante[0].resumen.impuestos != null)
 						{
-
-							if (imp!=null)
+							foreach (FeaEntidades.InterFacturas.resumenImpuestos imp in lcFea.comprobante[0].resumen.impuestos)
 							{
-								imp.codigo_jurisdiccionSpecified = true;
-								imp.porcentaje_impuestoSpecified = true;
+								if (imp != null)
+								{
+									imp.codigo_jurisdiccionSpecified = true;
+									imp.porcentaje_impuestoSpecified = true;
+								}
 							}
 						}
 						Session["lote"] = lcFea;
