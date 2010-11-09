@@ -735,50 +735,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
 							CompletarUI(lc, e);
 							ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo');</script>");
 						}
-						catch (Exception ex)
+						catch (InvalidOperationException)
 						{
-							if (ex.Source.Equals("System.Xml"))
+							try
 							{
-								try
-								{
-									//Formato detalle_factura IBK
-									ms.Seek(0, System.IO.SeekOrigin.Begin);
-									FeaEntidades.InterFacturas.comprobante c = new FeaEntidades.InterFacturas.comprobante();
-									System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(c.GetType());
-									c = (FeaEntidades.InterFacturas.comprobante)x.Deserialize(ms);
-									FeaEntidades.InterFacturas.comprobante[] cArray = new FeaEntidades.InterFacturas.comprobante[1];
-									cArray[0] = c;
-									lc.comprobante = cArray;
-									CompletarUI(lc, e);
-									ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo de formato detalle_factura.xml');</script>");
-								}
-								catch (InvalidOperationException)
-								{
-									//try
-									//{
-									//    //Formato Lote IBK
-									//    ms.Seek(0, System.IO.SeekOrigin.Begin);
-									//    CedWebRN.IBK.consulta_lote_response clr = new CedWebRN.IBK.consulta_lote_response();
-									//    System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(clr.GetType());
-									//    clr = (CedWebRN.IBK.consulta_lote_response)x.Deserialize(ms);
-										
-									//    CompletarUI(lc, e);
-									//    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo de formato detalle_factura.xml');</script>");
-									//}
-									//catch
-									//{
-									//    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>");
-									//}
-									ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>");
-								}
-								catch
-								{
-									ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>");
-								}
+								LeerFormatoDetalleIBK(e, lc, ms);
 							}
-							else
+							catch (InvalidOperationException)
 							{
-								throw ex;
+								LeerFormatoLoteIBK(e, lc, ms);
 							}
 						}
 					}
@@ -791,6 +756,39 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				{
 					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Debe seleccionar un archivo');</script>");
 				}
+			}
+		}
+
+		private void LeerFormatoDetalleIBK(EventArgs e, FeaEntidades.InterFacturas.lote_comprobantes lc, System.IO.MemoryStream ms)
+		{
+			//Formato detalle_factura IBK
+			ms.Seek(0, System.IO.SeekOrigin.Begin);
+			FeaEntidades.InterFacturas.comprobante c = new FeaEntidades.InterFacturas.comprobante();
+			System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(c.GetType());
+			c = (FeaEntidades.InterFacturas.comprobante)x.Deserialize(ms);
+			FeaEntidades.InterFacturas.comprobante[] cArray = new FeaEntidades.InterFacturas.comprobante[1];
+			cArray[0] = c;
+			lc.comprobante = cArray;
+			CompletarUI(lc, e);
+			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo de formato detalle_factura.xml');</script>");
+		}
+
+		private void LeerFormatoLoteIBK(EventArgs e, FeaEntidades.InterFacturas.lote_comprobantes lc, System.IO.MemoryStream ms)
+		{
+			try
+			{
+				//Formato Lote IBK
+				ms.Seek(0, System.IO.SeekOrigin.Begin);
+				FeaEntidades.InterFacturas.XML.consulta_lote_comprobantes_response clr = new FeaEntidades.InterFacturas.XML.consulta_lote_comprobantes_response();
+				System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(clr.GetType());
+				clr = (FeaEntidades.InterFacturas.XML.consulta_lote_comprobantes_response)x.Deserialize(ms);
+				lc = clr.consulta_lote_response.lote_comprobantes;
+				CompletarUI(lc, e);
+				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo de formato Lote IBK');</script>");
+			}
+			catch(Exception ex)
+			{
+				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>");
 			}
 		}
 
@@ -850,23 +848,28 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				{
 					IdiomaDropDownList.SelectedIndex = -1;
 				}
-                if (lc.comprobante[0].extensiones.extensiones_datos_comerciales != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != "")
+				if (lc.comprobante[0].extensiones.extensiones_datos_comerciales != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != "")
 				{
-                    //Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
-                    if (lc.comprobante[0].extensiones.extensiones_datos_comerciales.Substring(0, 1) == "%")
-                    {
-                        CedWebRN.Comprobante cDC = new CedWebRN.Comprobante();
-                        DatosComerciales.Texto = cDC.HexToString(lc.comprobante[0].extensiones.extensiones_datos_comerciales).Replace("<br>", System.Environment.NewLine);
-                    }
-                    else
-                    {
-                        DatosComerciales.Texto = lc.comprobante[0].extensiones.extensiones_datos_comerciales.Replace("<br>", System.Environment.NewLine);
-                    }
+					//Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
+					if (lc.comprobante[0].extensiones.extensiones_datos_comerciales.Substring(0, 1) == "%")
+					{
+						CedWebRN.Comprobante cDC = new CedWebRN.Comprobante();
+						DatosComerciales.Texto = cDC.HexToString(lc.comprobante[0].extensiones.extensiones_datos_comerciales).Replace("<br>", System.Environment.NewLine);
+					}
+					else
+					{
+						DatosComerciales.Texto = lc.comprobante[0].extensiones.extensiones_datos_comerciales.Replace("<br>", System.Environment.NewLine);
+					}
+				}
+				else
+				{
+					DatosComerciales.Texto = string.Empty;
 				}
 			}
 			else
 			{
 				IdiomaDropDownList.SelectedIndex = -1;
+				DatosComerciales.Texto = string.Empty;
 			}
 
 			//Referencias

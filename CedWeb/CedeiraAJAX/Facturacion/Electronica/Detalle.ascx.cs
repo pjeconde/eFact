@@ -157,7 +157,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				linea.codigo_producto_vendedor = l.codigo_producto_vendedor;
 				linea.indicacion_exento_gravado = l.indicacion_exento_gravado;
 
-				if (l.importes_moneda_origen == null)
+				if (l.importes_moneda_origen == null || l.importes_moneda_origen.importe_total_articulo.Equals(0))
 				{
 					linea.importe_total_articulo = l.importe_total_articulo;
 					linea.importe_iva = l.importe_iva;
