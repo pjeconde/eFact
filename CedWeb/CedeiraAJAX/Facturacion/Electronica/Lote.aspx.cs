@@ -786,7 +786,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				CompletarUI(lc, e);
 				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo de formato Lote IBK');</script>");
 			}
-			catch(Exception ex)
+			catch
 			{
 				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>");
 			}
