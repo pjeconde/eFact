@@ -170,7 +170,11 @@
 																				</tr>
 																				<tr>
 																					<td style="width: 280px">
-																						<asp:UpdatePanel ID="Tipo_De_ComprobanteUpdatePanel" runat="server">
+																						<asp:UpdatePanel ID="Tipo_De_ComprobanteUpdatePanel" runat="server" ChildrenAsTriggers="true"
+																							UpdateMode="Conditional">
+																							<Triggers>
+																								<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+																							</Triggers>
 																							<ContentTemplate>
 																								<asp:DropDownList ID="Tipo_De_ComprobanteDropDownList" runat="server" SkinID="DropDownListCompradorGr">
 																								</asp:DropDownList>
@@ -195,7 +199,8 @@
 															</td>
 															<td align="center" style="width: 240px; color: #A52A2A" valign="middle">
 																Comprobante electrónico en
-																<asp:UpdatePanel ID="monedaUpdatePanel" runat="server">
+																<asp:UpdatePanel ID="monedaUpdatePanel" runat="server" ChildrenAsTriggers="true"
+																	UpdateMode="Conditional">
 																	<ContentTemplate>
 																		<asp:DropDownList ID="MonedaComprobanteDropDownList" runat="server" AutoPostBack="True"
 																			Enabled="false" OnSelectedIndexChanged="MonedaComprobanteDropDownList_SelectedIndexChanged"
@@ -249,7 +254,7 @@
 																</table>
 															</td>
 															<td >
-																<asp:UpdatePanel ID="ptoVentaUpdatePanel" runat="server" UpdateMode="Always" ChildrenAsTriggers="true">
+																<asp:UpdatePanel ID="ptoVentaUpdatePanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
 																	<ContentTemplate>
 																		<table border="0" cellpadding="0" cellspacing="0" >
 																			<tr>
@@ -439,7 +444,11 @@
 																</table>
 															</td>
 															<td>
-															<asp:UpdatePanel ID="TipoExpoUpdatePanel" runat="server" UpdateMode="Always">
+															<asp:UpdatePanel ID="TipoExpoUpdatePanel" runat="server" ChildrenAsTriggers="true"
+																UpdateMode="Conditional">
+																<Triggers>
+																	<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+																</Triggers>
 																<ContentTemplate>
 																	<table border="0" cellpadding="0" cellspacing="0">
 																		<tr>
@@ -472,7 +481,11 @@
 																</table>
 															</td>
 															<td>
-															<asp:UpdatePanel ID="PaisDestinoExpUpdatePanel" runat="server" UpdateMode="Always">
+															<asp:UpdatePanel ID="PaisDestinoExpUpdatePanel" runat="server" ChildrenAsTriggers="true"
+																UpdateMode="Conditional">
+																<Triggers>
+																	<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+																</Triggers>
 																<ContentTemplate>
 																	<table border="0" cellpadding="0" cellspacing="0">
 																		<tr>
@@ -505,7 +518,11 @@
 																</table>
 															</td>
 															<td>
-															<asp:UpdatePanel ID="IdiomaUpdatePanel" runat="server" UpdateMode="Always">
+															<asp:UpdatePanel ID="IdiomaUpdatePanel" runat="server" ChildrenAsTriggers="true"
+																UpdateMode="Conditional">
+																<Triggers>
+																	<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+																</Triggers>
 																<ContentTemplate>
 																	<table border="0" cellpadding="0" cellspacing="0">
 																		<tr>
@@ -541,7 +558,11 @@
 																</table>
 															</td>
 															<td >
-															<asp:UpdatePanel ID="IncotermsUpdatePanel" runat="server" UpdateMode="always">
+															<asp:UpdatePanel ID="IncotermsUpdatePanel" runat="server" ChildrenAsTriggers="true"
+																UpdateMode="Conditional">
+																<Triggers>
+																	<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+																</Triggers>
 																<ContentTemplate>
 																	<table border="0" cellpadding="0" cellspacing="0">
 																		<tr>
@@ -712,7 +733,7 @@
 								<!-- DATOS DEL LOTE -->
 								<tr>
 									<td>
-										<asp:UpdatePanel ID="LoteUpdatePanel" runat="server" RenderMode="Block" UpdateMode="Always">
+										<asp:UpdatePanel ID="LoteUpdatePanel" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
 											<ContentTemplate>
 												<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
 													<tr>
@@ -791,7 +812,11 @@
 								<!-- DATOS DEL COMPRADOR -->
 								<tr>
 									<td>
-										<asp:UpdatePanel ID="compradorUpdatePanel" runat="server" UpdateMode="always" ChildrenAsTriggers="true">
+										<asp:UpdatePanel ID="compradorUpdatePanel" runat="server" ChildrenAsTriggers="true"
+											UpdateMode="Conditional">
+											<Triggers>
+												<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+											</Triggers>
 											<ContentTemplate>
 												<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
 													<tr>
@@ -1082,7 +1107,8 @@
 								<!-- DATOS DEL COMPROBANTE -->
 								<tr>
 									<td>
-										<asp:UpdatePanel ID="InfoComproUpdatePanel" runat="server" UpdateMode="Always">
+										<asp:UpdatePanel ID="InfoComproUpdatePanel" runat="server" ChildrenAsTriggers="true"
+											UpdateMode="Conditional">
 											<ContentTemplate>
 												<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
 													<tr>
@@ -1214,7 +1240,11 @@
 											</tr>
 											<tr>
 												<td style="text-align: center; padding: 3px; font-weight: normal;">
-													<asp:UpdatePanel ID="referenciasUpdatePanel" runat="server">
+													<asp:UpdatePanel ID="referenciasUpdatePanel" runat="server" ChildrenAsTriggers="true"
+														UpdateMode="Conditional">
+														<Triggers>
+															<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+														</Triggers>
 														<ContentTemplate>
 															<asp:GridView ID="referenciasGridView" runat="server" AutoGenerateColumns="False"
 																BorderColor="gray" BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70"
@@ -1449,7 +1479,8 @@
 											</tr>
 											<tr>
 												<td style="text-align: center; padding: 3px; font-weight: normal;">
-													<asp:UpdatePanel runat="server" ID="descuentosUpdatePanel">
+													<asp:UpdatePanel ID="descuentosUpdatePanel" runat="server" ChildrenAsTriggers="true"
+														UpdateMode="Conditional">
 														<ContentTemplate>
 															<asp:GridView ID="descuentosGridView" runat="server" AutoGenerateColumns="False"
 																BorderColor="gray" BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70"
@@ -1649,7 +1680,11 @@
 												<td>
 												</td>
 												<td align="left" valign="top">
-													<asp:UpdatePanel ID="tipoCambioUpdatePanel" runat="server" OnLoad="tipoCambioUpdatePanel_Load">
+													<asp:UpdatePanel ID="tipoCambioUpdatePanel" runat="server" ChildrenAsTriggers="true"
+														OnLoad="tipoCambioUpdatePanel_Load" UpdateMode="Conditional">
+														<Triggers>
+															<asp:AsyncPostBackTrigger ControlID="MonedaComprobanteDropDownList" ></asp:AsyncPostBackTrigger>
+														</Triggers>
 														<ContentTemplate>
 															<table border="0" cellpadding="0" cellspacing="0">
 																<tr>
