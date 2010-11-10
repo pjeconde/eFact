@@ -4,7 +4,10 @@
 	<td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
 		<asp:Panel ID="detallePanel" runat="server" BorderStyle="Ridge" Height="300px" ScrollBars="Auto"
 			Width="760px" Wrap="true">
-			<asp:UpdatePanel ID="detalleUpdatePanel" runat="server">
+			<asp:UpdatePanel ID="detalleUpdatePanel" runat="server" UpdateMode="conditional" ChildrenAsTriggers="true">
+				<Triggers>
+					<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+				</Triggers>
 				<ContentTemplate>
 					<asp:GridView ID="detalleGridView" runat="server" AutoGenerateColumns="False" BorderColor="Gray"
 						BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70" EmptyDataRowStyle-ForeColor="#071F70"

@@ -24,7 +24,11 @@
 	</tr>
 	<tr>
 		<td style="text-align: center; padding: 3px; font-weight: normal;">
-			<asp:UpdatePanel ID="permisosUpdatePanel" runat="server">
+			<asp:UpdatePanel ID="permisosUpdatePanel" runat="server" ChildrenAsTriggers="true"
+				UpdateMode="Conditional">
+				<Triggers>
+					<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+				</Triggers>
 				<ContentTemplate>
 					<asp:GridView ID="permisosGridView" runat="server" AutoGenerateColumns="False" BorderColor="gray"
 						BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70" EmptyDataRowStyle-ForeColor="#071F70"
