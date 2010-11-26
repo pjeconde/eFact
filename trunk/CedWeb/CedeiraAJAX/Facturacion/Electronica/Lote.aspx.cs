@@ -2325,11 +2325,22 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					{
 						return pv.Id == auxPV;
 					}).IdTipo;
-					if (idtipo.Equals("Export") && !CodigoOperacionDropDownList.SelectedValue.Equals(string.Empty))
+					if (!CodigoOperacionDropDownList.SelectedValue.Equals(string.Empty))
 					{
-						CodigoOperacionDropDownList.Focus();
-						throw new Exception("El código de operación no se debe informar para exportación");
+                        if (idtipo.Equals("Export"))
+                        {
+                            CodigoOperacionDropDownList.Focus();
+                            throw new Exception("El código de operación no se debe informar para exportación");
+                        }
+                        else
+                        {
+                            infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
+                        }
 					}
+                    else
+                    {
+                        infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
+                    }
 				}
 				catch (System.NullReferenceException)
 				{
