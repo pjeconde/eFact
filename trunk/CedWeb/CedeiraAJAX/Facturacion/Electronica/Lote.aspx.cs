@@ -2339,7 +2339,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					}
                     else
                     {
-                        infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
+                        if (!idtipo.Equals("Export"))
+                        {
+                            infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
+                        }
                     }
 				}
 				catch (System.NullReferenceException)
