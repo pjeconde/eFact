@@ -1566,7 +1566,14 @@ namespace CedeiraAJAX.Facturacion.Electronica
 									{
 										if (listadedescuentos[i].descripcion_descuento != null && !listadedescuentos[i].descripcion_descuento.Equals(string.Empty))
 										{
-											totalGravado -= listadedescuentos[i].importe_descuento;
+											if (!Tipo_De_ComprobanteDropDownList.SelectedItem.Text.Equals("Facturas B"))
+											{
+												totalGravado -= listadedescuentos[i].importe_descuento;
+											}
+											else
+											{
+												totalNoGravado -= listadedescuentos[i].importe_descuento;
+											}
 										}
 									}
 									Importe_Total_Neto_Gravado_ResumenTextBox.Text = totalGravado.ToString();
