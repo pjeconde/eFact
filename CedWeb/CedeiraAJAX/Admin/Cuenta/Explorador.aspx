@@ -4,7 +4,7 @@
 
 <%@ Register Assembly="CedeiraUIWebForms" Namespace="CedeiraUIWebForms" TagPrefix="cc1" %>
 
-<asp:content id="AdminCuentaContent" runat="Server" contentplaceholderid="AdministracionContentPlaceHolder">
+<asp:Content id="AdminCuentaContent" runat="Server" contentplaceholderid="AdministracionContentPlaceHolder">
     <table border="0" cellpadding="0" cellspacing="0" class="TextoComun" style="height: 500px;
         width: 800px; text-align: left;">
         <tr>
@@ -35,16 +35,24 @@
                     <!-- @@@ OBJETOS ESPECIFICOS DE LA PAGINA @@@-->
                     <tr>
                         <td style="padding-left: 10px; padding-top: 10px" valign="top">
-                            <asp:Panel ID="Panel1" runat="server" BackColor="peachpuff" BorderColor="brown" BorderStyle="Solid"
+                            <asp:Panel ID="PanelCuentas" runat="server" BackColor="peachpuff" BorderColor="brown" BorderStyle="Solid"
                                 BorderWidth="1px" Height="373px" ScrollBars="Auto" Width="650px">
                                 <cc1:PagingGridView ID="CuentaPagingGridView" runat="server" OnPageIndexChanging="CuentaPagingGridView_PageIndexChanging"
                                     OnRowDataBound="CuentaPagingGridView_RowDataBound" OnSelectedIndexChanged="CuentaPagingGridView_SelectedIndexChanged"
-                                    OnSorting="CuentaPagingGridView_Sorting">
+                                    OnSorting="CuentaPagingGridView_Sorting" EmptyDataText="no hay datos" ShowHeader="true">
                                     <Columns>
-                                        <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="IdCuenta">
+                                        <asp:TemplateField HeaderText="Id" SortExpression="IdCuenta">
+                                            <itemtemplate>
+											<asp:Label ID="lblId" runat="server" Text='<%# Eval("Id") %>'
+												Width="300px"></asp:Label>
+										    </itemtemplate>
                                             <headerstyle horizontalalign="left" wrap="False" />
                                             <itemstyle horizontalalign="left" width="300px" wrap="False" />
-                                        </asp:BoundField>
+                                            <headertemplate>
+                                            Id:<asp:TextBox runat="server" ID="IdFilterTextBox"></asp:TextBox>
+                                            <asp:Button ID="IdFilterButton" runat="server" text="Filtrar" OnClick="IdFilterButton_Click"/>
+										    </headertemplate>
+                                        </asp:TemplateField>
                                         <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre">
                                             <headerstyle horizontalalign="left" wrap="False" />
                                             <itemstyle horizontalalign="left" wrap="False" />
