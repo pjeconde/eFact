@@ -201,7 +201,34 @@ namespace CedeiraAJAX.Admin.Cuenta
 			System.Collections.Generic.List<CedWebEntidades.Cuenta> lista = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
 			return (CedWebEntidades.Cuenta)lista[CuentaPagingGridView.SelectedIndex];
 		}
-		protected void BajaButton_Click(object sender, EventArgs e)
+        protected void IdFilterButton_Click(object sender, EventArgs e)
+        {
+            MsgErrorLabel.Text = String.Empty;
+            try
+            {
+                string filtro = ((TextBox)CuentaPagingGridView.HeaderRow.FindControl("IdFilterTextBox")).Text;
+                if (!filtro.Equals(String.Empty))
+                {
+                    System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
+                    lista = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
+                    CuentaPagingGridView.DataSource = lista.FindAll(delegate(CedWebEntidades.Cuenta c)
+                    {
+                        return c.Id.Contains(filtro);
+                    });
+                    CuentaPagingGridView.DataBind();
+                }
+                else
+                {
+                    CuentaPagingGridView.DataSource = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
+                    CuentaPagingGridView.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                MsgErrorLabel.Text = CedeiraUIWebForms.Excepciones.Detalle(ex);
+            }
+        }
+        protected void BajaButton_Click(object sender, EventArgs e)
 		{
 			MsgErrorLabel.Text = String.Empty;
 			try
