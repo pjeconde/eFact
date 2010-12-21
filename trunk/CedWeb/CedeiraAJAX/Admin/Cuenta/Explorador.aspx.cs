@@ -32,7 +32,7 @@ namespace CedeiraAJAX.Admin.Cuenta
 						}
 						else
 						{
-							CuentaPagingGridView.PageSize = 2;
+							CuentaPagingGridView.PageSize = 20;
 							BindPagingGrid();
 						}
 					}
@@ -204,6 +204,7 @@ namespace CedeiraAJAX.Admin.Cuenta
 						case "Vigente":
 							SuspenderPremiumButton.Enabled = true;
 							DesactivarPremiumButton.Enabled = true;
+							ActivarPremiumButton.Enabled = true;
 							break;
 						case "Suspend":
 							ActivarPremiumButton.Enabled = true;
