@@ -26,6 +26,29 @@ namespace CedWebDB
                 Copiar(dt.Rows[0], Cuenta);
             }
         }
+		public List<CedWebEntidades.Cuenta> Leer(string IdCuenta)
+		{
+			List<CedWebEntidades.Cuenta> ctas = new List<CedWebEntidades.Cuenta>();
+			StringBuilder a = new StringBuilder(string.Empty);
+			a.Append("select Cuenta.IdCuenta, Cuenta.Nombre, Cuenta.Telefono, Cuenta.Email, Cuenta.Password, Cuenta.Pregunta, Cuenta.Respuesta, Cuenta.IdTipoCuenta, TipoCuenta.DescrTipoCuenta, Cuenta.IdEstadoCuenta, EstadoCuenta.DescrEstadoCuenta, Cuenta.UltimoNroLote, Cuenta.FechaAlta, Cuenta.CantidadEnviosMail, Cuenta.FechaUltimoReenvioMail, Cuenta.ActivCP, Cuenta.NroSerieDisco, Cuenta.IdMedio, Medio.DescrMedio, Cuenta.EmailSMS, Cuenta.RecibeAvisoAltaCuenta, Cuenta.CantidadComprobantes, Cuenta.FechaUltimoComprobante, Cuenta.FechaVtoPremium, Cuenta.IdPaginaDefault, PaginaDefault.DescrPaginaDefault, PaginaDefault.URL, Cuenta.NroSerieCertificado ");
+			a.Append("from Cuenta, TipoCuenta, EstadoCuenta, Medio, PaginaDefault ");
+			a.Append(string.Format("where Cuenta.IdCuenta LIKE '%{0}%' and Cuenta.IdTipoCuenta=TipoCuenta.IdTipoCuenta and Cuenta.IdEstadoCuenta=EstadoCuenta.IdEstadoCuenta and Cuenta.IdMedio=Medio.IdMedio and Cuenta.IdPaginaDefault=PaginaDefault.IdPaginaDefault ",IdCuenta));
+			DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+			if (!dt.Rows.Count.Equals(0))
+			{
+				for (int i = 0; i < dt.Rows.Count; i++)
+				{
+					CedWebEntidades.Cuenta c = new CedWebEntidades.Cuenta();
+					Copiar(dt.Rows[i], c);
+					ctas.Add(c);
+				}
+			}
+			else
+			{
+				ctas.Add(new CedWebEntidades.Cuenta());
+			}
+			return ctas;
+		}
         private void Copiar(DataRow Desde, CedWebEntidades.Cuenta Hasta)
         {
             Hasta.Id = Convert.ToString(Desde["IdCuenta"]);
