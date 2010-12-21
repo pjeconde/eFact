@@ -50,7 +50,7 @@ namespace CedeiraUIWebForms
 			}
 		}
 
-		private int CurrentPageIndex
+		public int CurrentPageIndex
 		{
 			get
 			{
@@ -63,7 +63,7 @@ namespace CedeiraUIWebForms
 				ViewState["pgv_pageindex"] = value;
 			}
 		}
-		private bool CustomPaging
+		public bool CustomPaging
 		{
 			get
 			{

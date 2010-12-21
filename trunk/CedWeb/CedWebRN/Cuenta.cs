@@ -162,6 +162,14 @@ namespace CedWebRN
                 smtpClient.Send(mail);
             }
         }
+
+		public static List<CedWebEntidades.Cuenta> Leer(string IdCuenta, CedEntidades.Sesion Sesion)
+		{
+			CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
+			List<CedWebEntidades.Cuenta> ctas=cuenta.Leer(IdCuenta);
+			return ctas;
+		}
+
         public static void Leer(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);

@@ -32,7 +32,7 @@ namespace CedeiraAJAX.Admin.Cuenta
 						}
 						else
 						{
-							CuentaPagingGridView.PageSize = 15;
+							CuentaPagingGridView.PageSize = 2;
 							BindPagingGrid();
 						}
 					}
@@ -57,6 +57,7 @@ namespace CedeiraAJAX.Admin.Cuenta
 				ViewState["lista"] = lista;
 				CuentaPagingGridView.DataSource = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
 				CuentaPagingGridView.DataBind();
+				ViewState["filtro"] = null;
 			}
 			catch (System.Threading.ThreadAbortException)
 			{
@@ -70,10 +71,28 @@ namespace CedeiraAJAX.Admin.Cuenta
 				DesSeleccionarFilas();
 				CuentaPagingGridView.PageIndex = e.NewPageIndex;
 				System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
-				lista = CedWebRN.Cuenta.Lista(CuentaPagingGridView.PageIndex, CuentaPagingGridView.PageSize, CuentaPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
-				CuentaPagingGridView.VirtualItemCount = CedWebRN.Cuenta.CantidadDeFilas((CedEntidades.Sesion)Session["Sesion"]);
-				ViewState["lista"] = lista;
-				CuentaPagingGridView.DataSource = lista;
+				if (ViewState["filtro"] != null && !ViewState["filtro"].Equals(string.Empty))
+				{
+					CedeiraUIWebForms.PagingGridView pgv = (CedeiraUIWebForms.PagingGridView)sender;
+					int indice = pgv.PageIndex * CuentaPagingGridView.PageSize;
+					try
+					{
+						lista = ((System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"]).GetRange(indice, CuentaPagingGridView.PageSize);
+					}
+					catch
+					{
+						int total = ((System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"]).Count;
+						lista = ((System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"]).GetRange(indice, total - indice);
+					}
+					CuentaPagingGridView.DataSource = lista;
+				}
+				else
+				{
+					lista = CedWebRN.Cuenta.Lista(CuentaPagingGridView.PageIndex, CuentaPagingGridView.PageSize, CuentaPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
+					CuentaPagingGridView.VirtualItemCount = CedWebRN.Cuenta.CantidadDeFilas((CedEntidades.Sesion)Session["Sesion"]);
+					ViewState["lista"] = lista;
+					CuentaPagingGridView.DataSource = lista;
+				}
 				CuentaPagingGridView.DataBind();
 			}
 			catch (System.Threading.ThreadAbortException)
@@ -94,6 +113,7 @@ namespace CedeiraAJAX.Admin.Cuenta
 				lista = CedWebRN.Cuenta.Lista(CuentaPagingGridView.PageIndex, CuentaPagingGridView.PageSize, CuentaPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
 				ViewState["lista"] = lista;
 				CuentaPagingGridView.DataSource = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
+				CuentaPagingGridView.VirtualItemCount = CedWebRN.Cuenta.CantidadDeFilas((CedEntidades.Sesion)Session["Sesion"]);
 				CuentaPagingGridView.DataBind();
 			}
 			catch (System.Threading.ThreadAbortException)
@@ -110,9 +130,22 @@ namespace CedeiraAJAX.Admin.Cuenta
 			try
 			{
 				DeshabilitarAcciones();
-				System.Collections.Generic.List<CedWebEntidades.Cuenta> lista = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
 				CedWebEntidades.Cuenta cuenta = new CedWebEntidades.Cuenta();
-				cuenta = (CedWebEntidades.Cuenta)lista[((CedeiraUIWebForms.PagingGridView)sender).SelectedIndex];
+				System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
+				if (ViewState["filtro"] != null && !ViewState["filtro"].Equals(string.Empty))
+				{
+					lista = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
+					CedWebEntidades.Cuenta[] ctaArray = lista.ToArray();
+					CedeiraUIWebForms.PagingGridView pgv = (CedeiraUIWebForms.PagingGridView)sender;
+					int indice = pgv.CurrentPageIndex * CuentaPagingGridView.PageSize + pgv.SelectedIndex;
+					cuenta = ctaArray[indice];
+				}
+				else
+				{
+					lista = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
+					cuenta = (CedWebEntidades.Cuenta)lista[((CedeiraUIWebForms.PagingGridView)sender).SelectedIndex];				
+				}
+				
 				string auxCache = "Cuenta" + Session.SessionID;
 				Cache.Remove(auxCache);
 				Cache.Add(auxCache, cuenta, null, DateTime.UtcNow.AddSeconds(300), TimeSpan.Zero, System.Web.Caching.CacheItemPriority.NotRemovable, null);
@@ -141,6 +174,8 @@ namespace CedeiraAJAX.Admin.Cuenta
 		{
 			DeshabilitarAcciones();
 			CuentaPagingGridView.SelectedIndex = -1;
+			string auxCache = "Cuenta" + Session.SessionID;
+			Cache.Remove(auxCache);
 		}
 		private void HabilitarAcciones(CedWebEntidades.Cuenta Cuenta)
 		{
@@ -198,30 +233,23 @@ namespace CedeiraAJAX.Admin.Cuenta
 		}
 		protected CedWebEntidades.Cuenta CuentaSeleccionada()
 		{
-			System.Collections.Generic.List<CedWebEntidades.Cuenta> lista = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
-			return (CedWebEntidades.Cuenta)lista[CuentaPagingGridView.SelectedIndex];
+			string auxCache = "Cuenta" + Session.SessionID;
+			CedWebEntidades.Cuenta cta = (CedWebEntidades.Cuenta)Cache[auxCache];
+			return cta;
 		}
         protected void IdFilterButton_Click(object sender, EventArgs e)
         {
             MsgErrorLabel.Text = String.Empty;
             try
             {
-                string filtro = ((TextBox)CuentaPagingGridView.HeaderRow.FindControl("IdFilterTextBox")).Text;
-                if (!filtro.Equals(String.Empty))
-                {
-                    System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
-                    lista = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
-                    CuentaPagingGridView.DataSource = lista.FindAll(delegate(CedWebEntidades.Cuenta c)
-                    {
-                        return c.Id.Contains(filtro);
-                    });
-                    CuentaPagingGridView.DataBind();
-                }
-                else
-                {
-                    CuentaPagingGridView.DataSource = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
-                    CuentaPagingGridView.DataBind();
-                }
+				DesSeleccionarFilas();
+				string filtro = ((TextBox)CuentaPagingGridView.HeaderRow.FindControl("IdFilterTextBox")).Text;
+				System.Collections.Generic.List<CedWebEntidades.Cuenta> ctas=CedWebRN.Cuenta.Leer(filtro, (CedEntidades.Sesion)Session["Sesion"]);
+				CuentaPagingGridView.DataSource = ctas;
+				CuentaPagingGridView.VirtualItemCount = ctas.Count;
+				CuentaPagingGridView.DataBind();
+				ViewState["lista"] = ctas;
+				ViewState["filtro"]=filtro;
             }
             catch (Exception ex)
             {
@@ -301,7 +329,7 @@ namespace CedeiraAJAX.Admin.Cuenta
 		protected void ActivarPremiumButton_Click(object sender, EventArgs e)
 		{
 			Session["CuentaPremiumActivar-Id"] = CuentaSeleccionada().Id;
-			Server.Transfer("~/CuentaPremiumActivar.aspx", true);
+			Response.Redirect("~/CuentaPremiumActivar.aspx", true);
 		}
 		protected void DesactivarPremiumButton_Click(object sender, EventArgs e)
 		{
@@ -333,7 +361,12 @@ namespace CedeiraAJAX.Admin.Cuenta
 		}
 		protected void SalirButton_Click(object sender, EventArgs e)
 		{
-			Server.Transfer("~/Admin/Default.aspx");
+			Response.Redirect("~/Admin/Default.aspx");
+		}
+
+		protected void CuentaPagingGridView_PreRender(object sender, EventArgs e)
+		{
+			((TextBox)CuentaPagingGridView.HeaderRow.FindControl("IdFilterTextBox")).Text = Convert.ToString(ViewState["filtro"]);
 		}
 	}
 }
