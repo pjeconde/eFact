@@ -1684,6 +1684,7 @@
 														OnLoad="tipoCambioUpdatePanel_Load" UpdateMode="Conditional">
 														<Triggers>
 															<asp:AsyncPostBackTrigger ControlID="MonedaComprobanteDropDownList" ></asp:AsyncPostBackTrigger>
+															<asp:AsyncPostBackTrigger ControlID="CalcularTotalesButton" ></asp:AsyncPostBackTrigger>
 														</Triggers>
 														<ContentTemplate>
 															<table border="0" cellpadding="0" cellspacing="0">

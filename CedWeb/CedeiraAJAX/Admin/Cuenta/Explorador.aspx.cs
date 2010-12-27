@@ -32,7 +32,7 @@ namespace CedeiraAJAX.Admin.Cuenta
 						}
 						else
 						{
-							CuentaPagingGridView.PageSize = 20;
+							CuentaPagingGridView.PageSize = 2;
 							BindPagingGrid();
 						}
 					}
@@ -112,6 +112,7 @@ namespace CedeiraAJAX.Admin.Cuenta
 				System.Collections.Generic.List<CedWebEntidades.Cuenta> lista;
 				lista = CedWebRN.Cuenta.Lista(CuentaPagingGridView.PageIndex, CuentaPagingGridView.PageSize, CuentaPagingGridView.OrderBy, (CedEntidades.Sesion)Session["Sesion"]);
 				ViewState["lista"] = lista;
+				ViewState["filtro"] = null;
 				CuentaPagingGridView.DataSource = (System.Collections.Generic.List<CedWebEntidades.Cuenta>)ViewState["lista"];
 				CuentaPagingGridView.VirtualItemCount = CedWebRN.Cuenta.CantidadDeFilas((CedEntidades.Sesion)Session["Sesion"]);
 				CuentaPagingGridView.DataBind();
