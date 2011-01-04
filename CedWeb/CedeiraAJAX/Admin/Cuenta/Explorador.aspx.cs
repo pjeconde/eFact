@@ -32,7 +32,7 @@ namespace CedeiraAJAX.Admin.Cuenta
 						}
 						else
 						{
-							CuentaPagingGridView.PageSize = 2;
+							CuentaPagingGridView.PageSize = 25;
 							BindPagingGrid();
 						}
 					}
