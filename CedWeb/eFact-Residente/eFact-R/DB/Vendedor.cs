@@ -71,35 +71,35 @@ namespace eFact_R.DB
                 vendedor.NumeroSerieCertificado = dt.Rows[i]["NumeroSerieCertificado"].ToString();
                 if (dt.Rows[i]["Logo"].GetType() != Type.GetType("System.DBNull") && ((System.Byte[])dt.Rows[i]["Logo"]).Length != 0)
                 {
-                    vendedor.Logo = ((byte[])dt.Rows[0]["Logo"]);
+                    vendedor.Logo = ((byte[])dt.Rows[i]["Logo"]);
                 }
-                vendedor.Codigo = dt.Rows[0]["Codigo"].ToString();
-                if (dt.Rows[0]["CondicionIVA"].GetType() != Type.GetType("System.DBNull"))
+                vendedor.Codigo = dt.Rows[i]["Codigo"].ToString();
+                if (dt.Rows[i]["CondicionIVA"].GetType() != Type.GetType("System.DBNull"))
                 {
-                    vendedor.CondicionIVA = Convert.ToInt32(dt.Rows[0]["CondicionIVA"].ToString());
+                    vendedor.CondicionIVA = Convert.ToInt32(dt.Rows[i]["CondicionIVA"].ToString());
                 }
-                if (dt.Rows[0]["CondicionIB"].GetType() != Type.GetType("System.DBNull"))
+                if (dt.Rows[i]["CondicionIB"].GetType() != Type.GetType("System.DBNull"))
                 {
-                    vendedor.CondicionIB = Convert.ToInt32(dt.Rows[0]["CondicionIB"].ToString());
+                    vendedor.CondicionIB = Convert.ToInt32(dt.Rows[i]["CondicionIB"].ToString());
                 }
-                vendedor.NroIB = dt.Rows[0]["NroIB"].ToString();
-                if (dt.Rows[0]["InicioActividades"].GetType() != Type.GetType("System.DBNull"))
+                vendedor.NroIB = dt.Rows[i]["NroIB"].ToString();
+                if (dt.Rows[i]["InicioActividades"].GetType() != Type.GetType("System.DBNull"))
                 {
-                    vendedor.InicioActividades = Convert.ToDateTime(dt.Rows[0]["InicioActividades"].ToString());
+                    vendedor.InicioActividades = Convert.ToDateTime(dt.Rows[i]["InicioActividades"].ToString());
                 }
-                vendedor.Contacto = dt.Rows[0]["Contacto"].ToString();
-                vendedor.DomicilioCalle = dt.Rows[0]["DomicilioCalle"].ToString();
-                vendedor.DomicilioNumero = dt.Rows[0]["DomicilioNumero"].ToString();
-                vendedor.DomicilioPiso = dt.Rows[0]["DomicilioPiso"].ToString();
-                vendedor.DomicilioDepto = dt.Rows[0]["DomicilioDepto"].ToString();
-                vendedor.DomicilioSector = dt.Rows[0]["DomicilioSector"].ToString();
-                vendedor.DomicilioTorre = dt.Rows[0]["DomicilioTorre"].ToString();
-                vendedor.DomicilioManzana = dt.Rows[0]["DomicilioManzana"].ToString();
-                vendedor.Localidad = dt.Rows[0]["Localidad"].ToString();
-                vendedor.Provincia = dt.Rows[0]["Provincia"].ToString();
-                vendedor.CP = dt.Rows[0]["CP"].ToString();
-                vendedor.EMail = dt.Rows[0]["EMail"].ToString();
-                vendedor.Telefono = dt.Rows[0]["Telefono"].ToString();
+                vendedor.Contacto = dt.Rows[i]["Contacto"].ToString();
+                vendedor.DomicilioCalle = dt.Rows[i]["DomicilioCalle"].ToString();
+                vendedor.DomicilioNumero = dt.Rows[i]["DomicilioNumero"].ToString();
+                vendedor.DomicilioPiso = dt.Rows[i]["DomicilioPiso"].ToString();
+                vendedor.DomicilioDepto = dt.Rows[i]["DomicilioDepto"].ToString();
+                vendedor.DomicilioSector = dt.Rows[i]["DomicilioSector"].ToString();
+                vendedor.DomicilioTorre = dt.Rows[i]["DomicilioTorre"].ToString();
+                vendedor.DomicilioManzana = dt.Rows[i]["DomicilioManzana"].ToString();
+                vendedor.Localidad = dt.Rows[i]["Localidad"].ToString();
+                vendedor.Provincia = dt.Rows[i]["Provincia"].ToString();
+                vendedor.CP = dt.Rows[i]["CP"].ToString();
+                vendedor.EMail = dt.Rows[i]["EMail"].ToString();
+                vendedor.Telefono = dt.Rows[i]["Telefono"].ToString();
                 Vendedores.Add(vendedor);
             }
         }

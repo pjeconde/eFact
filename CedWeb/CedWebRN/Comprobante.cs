@@ -565,30 +565,32 @@ namespace CedWebRN
 
                 //Info Extensiones
                 cIBK.extensiones = new FeaEntidades.InterFacturas.extensiones();
+                cIBK.extensionesSpecified = false;
                 if (lcIBK.comprobante[i].extensiones != null)
                 {
+                    cIBK.extensiones = new FeaEntidades.InterFacturas.extensiones();
                     cIBK.extensionesSpecified = true;
-                }
-                if (lcIBK.comprobante[i].extensiones.extensiones_camara_facturas != null)
-                {
-                    cIBK.extensiones.extensiones_camara_facturasSpecified = true;
-                    cIBK.extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
-                    cIBK.extensiones.extensiones_camara_facturas.clave_de_vinculacion = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion;
-                    cIBK.extensiones.extensiones_camara_facturas.id_idioma = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.id_idioma;
-                    cIBK.extensiones.extensiones_camara_facturas.id_template = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.id_template;
-                }
-                if (lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales != null)
-                {
-                    cIBK.extensiones.extensiones_datos_comerciales = lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales.ToString();
-                }
-                if (lcIBK.comprobante[i].extensiones.extensiones_datos_marketing != null)
-                {
-                    cIBK.extensiones.extensiones_datos_marketing = lcIBK.comprobante[i].extensiones.extensiones_datos_marketing;
-                }
-                if (lcIBK.comprobante[i].extensiones.extensiones_destinatarios != null)
-                {
-                    cIBK.extensiones.extensiones_destinatarios = new FeaEntidades.InterFacturas.extensionesExtensiones_destinatarios();
-                    cIBK.extensiones.extensiones_destinatarios.email = lcIBK.comprobante[i].extensiones.extensiones_destinatarios.email;
+                    if (lcIBK.comprobante[i].extensiones.extensiones_camara_facturas != null)
+                    {
+                        cIBK.extensiones.extensiones_camara_facturasSpecified = true;
+                        cIBK.extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
+                        cIBK.extensiones.extensiones_camara_facturas.clave_de_vinculacion = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion;
+                        cIBK.extensiones.extensiones_camara_facturas.id_idioma = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.id_idioma;
+                        cIBK.extensiones.extensiones_camara_facturas.id_template = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.id_template;
+                    }
+                    if (lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales != null)
+                    {
+                        cIBK.extensiones.extensiones_datos_comerciales = lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales.ToString();
+                    }
+                    if (lcIBK.comprobante[i].extensiones.extensiones_datos_marketing != null)
+                    {
+                        cIBK.extensiones.extensiones_datos_marketing = lcIBK.comprobante[i].extensiones.extensiones_datos_marketing;
+                    }
+                    if (lcIBK.comprobante[i].extensiones.extensiones_destinatarios != null)
+                    {
+                        cIBK.extensiones.extensiones_destinatarios = new FeaEntidades.InterFacturas.extensionesExtensiones_destinatarios();
+                        cIBK.extensiones.extensiones_destinatarios.email = lcIBK.comprobante[i].extensiones.extensiones_destinatarios.email;
+                    }
                 }
 
                 cIBK.resumen = new FeaEntidades.InterFacturas.resumen();

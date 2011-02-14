@@ -29,4 +29,4 @@ using System.Runtime.InteropServices;
 //      Número de versión de compilación
 //      Revisión
 //
-[assembly: AssemblyVersion("1.6.10.0")]
+[assembly: AssemblyVersion("1.6.17.0")]

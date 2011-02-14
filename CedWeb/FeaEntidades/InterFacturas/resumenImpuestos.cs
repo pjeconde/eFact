@@ -13,6 +13,7 @@ namespace FeaEntidades.InterFacturas
 	[FileHelpers.DelimitedRecord("|")]
 	public partial class resumenImpuestos
 	{
+        private string nombre_claseField = "<resumenImpuestos>";
 
 		private int codigo_impuestoField;
 
@@ -33,6 +34,16 @@ namespace FeaEntidades.InterFacturas
 		private double importe_impuesto_moneda_origenField;
 
 		private bool importe_impuesto_moneda_origenFieldSpecified;
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string nombre_clase
+        {
+            get
+            {
+                return nombre_claseField;
+            }
+        }
 
 		/// <comentarios/>
 		public int codigo_impuesto
