@@ -7,7 +7,7 @@ namespace eFact_C
 {
     public class Comprobante
     {
-        public FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(out List<FeaEntidades.InterFacturas.error> RespErroresLote, out List<FeaEntidades.InterFacturas.error> RespErroresComprobantes, IBK.consulta_lote_comprobantes clc, string url, eFact_C.Entidades.Certificado Certificado, eFact_C.Entidades.Proxy Proxy)
+        public FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(out List<FeaEntidades.InterFacturas.error> RespErroresLote, out List<FeaEntidades.InterFacturas.error> RespErroresComprobantes, eFact_C.IBK.consulta_lote_comprobantes clc, string url, eFact_C.Entidades.Certificado Certificado, eFact_C.Entidades.Proxy Proxy)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
             lc.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
@@ -117,6 +117,8 @@ namespace eFact_C
                 objIBK.ClientCertificates.Add(col[0]);
                 IBK.lote_comprobantes_response lcr = objIBK.receiveFacturasConSchema(lcIBK);
                 IBK.lote_response lr = new IBK.lote_response();
+                RespErroresLote = new List<FeaEntidades.InterFacturas.error>();
+                RespErroresComprobantes = new List<FeaEntidades.InterFacturas.error>();
                 try
                 {
                     lr = ((IBK.lote_response)lcr.Item);
@@ -135,7 +137,7 @@ namespace eFact_C
                             {
                                 errorText.Append(elote.codigo_error + " - " + elote.descripcion_error + " \r\n");
                             }
-                            RespErroresLote = Ibk2Fea(lr.errores_lote);
+                            RespErroresLote.AddRange(Ibk2Fea(lr.errores_lote));
                         }
                         if (lr.comprobante_response != null)
                         {
@@ -152,14 +154,12 @@ namespace eFact_C
                                     {
                                         errorText.Append(ecomprobante.codigo_error + " - " + ecomprobante.descripcion_error + " \r\n");
                                     }
-                                    RespErroresComprobantes = Ibk2Fea(comprobante.errores_comprobante);
+                                    RespErroresComprobantes.AddRange(Ibk2Fea(comprobante.errores_comprobante));
                                 }
                             }
                         }
                         throw new Exception(errorText.ToString());
                     }
-                    RespErroresLote = new List<FeaEntidades.InterFacturas.error>();
-                    RespErroresComprobantes = new List<FeaEntidades.InterFacturas.error>();
                     return Lr;
                 }
                 catch (InvalidCastException)

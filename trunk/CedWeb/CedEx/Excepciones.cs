@@ -1635,6 +1635,26 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
 			}
 		}
 	}
+    namespace Activacion
+    {
+        [Serializable]
+        public class ClaveNoEncontrada : Microsoft.ApplicationBlocks.ExceptionManagement.Sesion.BaseApplicationException
+        {
+            static string TextoError = "Clave no encontrada";
+            public ClaveNoEncontrada()
+                : base(TextoError)
+            {
+            }
+            public ClaveNoEncontrada(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public ClaveNoEncontrada(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+    }
 	namespace WS
 	{
 		[Serializable]

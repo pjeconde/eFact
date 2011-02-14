@@ -114,10 +114,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Facturacion\Electronica\Reportes\Factura.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>Factura.rpt</DependentUpon>
       <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Facturacion\Electronica\Reportes\Imagen.cs">
@@ -220,6 +220,14 @@
     <None Include="CedeiraSF-eFact-Especificaciones-InterfazTXT-Ayuda.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsx">
+      <DependentUpon>lote_comprobantes.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\DataSources\FeaEntidades.TiposDeComprobantes.Facturas.Factura.datasource" />
     <None Include="Properties\DataSources\FeaEntidades.TiposDeComprobantes.TipoComprobante.datasource" />
     <None Include="Properties\DataSources\FeaEntidades.TiposDeComprobantes.TipoComprobante1.datasource" />
@@ -246,14 +254,6 @@
     </None>
     <None Include="Facturacion\Electronica\Reportes\Imagen.xsx">
       <DependentUpon>Imagen.xsd</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsx">
-      <DependentUpon>lote_comprobantes.xsd</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Facturacion\Electronica\Reportes\Web.config" />

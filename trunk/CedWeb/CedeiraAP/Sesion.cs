@@ -25,10 +25,8 @@ namespace Cedeira.SV
 			// Chequeo de version del assembly
 			VerificarAssemblyVersion(Sesion);
 			Cedeira.SV.db db = new Cedeira.SV.db(Sesion);
-			if (db.WF_Acceso_lst().FindAll(delegate(CedEntidades.Acceso e)
-			{
-				return e.IdAcceso == IdAcceso;
-			}).Count == 0)
+            List<CedEntidades.Acceso> acceso = db.WF_Acceso_lst().FindAll(delegate(CedEntidades.Acceso e) { return e.IdAcceso == IdAcceso; });
+			if (acceso.Count == 0)
 			{
 				throw new Microsoft.ApplicationBlocks.ExceptionManagement.Sesion.AplicInvalida();
 			}

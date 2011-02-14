@@ -118,6 +118,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.CancelarButton = new System.Windows.Forms.Button();
             this.PpalPanel.SuspendLayout();
             this.DetPanel.SuspendLayout();
             this.SplitContainer.Panel1.SuspendLayout();
@@ -585,6 +586,7 @@
             // 
             // BotonesPanel
             // 
+            this.BotonesPanel.Controls.Add(this.CancelarButton);
             this.BotonesPanel.Controls.Add(this.ExportarComprobanteButton);
             this.BotonesPanel.Controls.Add(this.ConsultarComprobanteButton);
             this.BotonesPanel.Controls.Add(this.ConsultarLoteIFButton);
@@ -781,13 +783,13 @@
             this.PuntoVentaTextBox.Location = new System.Drawing.Point(96, 61);
             this.PuntoVentaTextBox.Name = "PuntoVentaTextBox";
             this.PuntoVentaTextBox.ReadOnly = true;
-            this.PuntoVentaTextBox.Size = new System.Drawing.Size(119, 20);
+            this.PuntoVentaTextBox.Size = new System.Drawing.Size(120, 20);
             this.PuntoVentaTextBox.TabIndex = 7;
             this.PuntoVentaTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // NumeroLoteTextBox
             // 
-            this.NumeroLoteTextBox.Location = new System.Drawing.Point(95, 8);
+            this.NumeroLoteTextBox.Location = new System.Drawing.Point(96, 8);
             this.NumeroLoteTextBox.Name = "NumeroLoteTextBox";
             this.NumeroLoteTextBox.ReadOnly = true;
             this.NumeroLoteTextBox.Size = new System.Drawing.Size(120, 20);
@@ -847,6 +849,17 @@
             this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "IdLote: ";
+            // 
+            // CancelarButton
+            // 
+            this.CancelarButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.CancelarButton.Location = new System.Drawing.Point(423, 3);
+            this.CancelarButton.Name = "CancelarButton";
+            this.CancelarButton.Size = new System.Drawing.Size(140, 23);
+            this.CancelarButton.TabIndex = 21;
+            this.CancelarButton.Text = "Cancelar";
+            this.CancelarButton.UseVisualStyleBackColor = true;
+            this.CancelarButton.Click += new System.EventHandler(this.CancelarButton_Click);
             // 
             // ConsultaLote
             // 
@@ -946,6 +959,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NumeroCAE;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaCAE;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaVtoCAE;
+        private System.Windows.Forms.Button CancelarButton;
 
     }
 }
