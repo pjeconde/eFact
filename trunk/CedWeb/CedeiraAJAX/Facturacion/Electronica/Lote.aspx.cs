@@ -22,6 +22,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> descuentos;
 		System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> referencias;
 		#endregion
+
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (!this.IsPostBack)
@@ -361,6 +362,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			descuentosGridView.DataSource = ViewState["descuentos"];
 			descuentosGridView.DataBind();
 		}
+
 		protected void descuentosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
 		{
 			if (e.CommandName.Equals("Adddescuentos"))
@@ -414,6 +416,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 			}
 		}
+		
 		protected void descuentosGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
 		{
 			if (e.Exception != null)
@@ -422,6 +425,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				e.ExceptionHandled = true;
 			}
 		}
+		
 		protected void descuentosGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
 		{
 			try
@@ -445,12 +449,14 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			{
 			}
 		}
+		
 		protected void descuentosGridView_RowEditing(object sender, GridViewEditEventArgs e)
 		{
 			descuentosGridView.EditIndex = e.NewEditIndex;
 			descuentosGridView.DataSource = ViewState["descuentos"];
 			descuentosGridView.DataBind();
 		}
+		
 		protected void descuentosGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
 		{
 			if (e.Exception != null)
@@ -459,6 +465,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				e.ExceptionHandled = true;
 			}
 		}
+		
 		protected void descuentosGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
 		{
 			try
@@ -502,6 +509,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			referenciasGridView.DataBind();
 			BindearDropDownLists();
 		}
+		
 		protected void referenciasGridView_RowCommand(object sender, GridViewCommandEventArgs e)
 		{
 			if (e.CommandName.Equals("Addreferencias"))
@@ -553,6 +561,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 			}
 		}
+		
 		protected void referenciasGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
 		{
 			if (e.Exception != null)
@@ -561,6 +570,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				e.ExceptionHandled = true;
 			}
 		}
+		
 		protected void referenciasGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
 		{
 			try
@@ -582,6 +592,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			{
 			}
 		}
+		
 		protected void referenciasGridView_RowEditing(object sender, GridViewEditEventArgs e)
 		{
 			referenciasGridView.EditIndex = e.NewEditIndex;
@@ -659,6 +670,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataBind();
 		}
+		
 		protected void referenciasGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
 		{
 			if (e.Exception != null)
@@ -667,6 +679,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				e.ExceptionHandled = true;
 			}
 		}
+		
 		protected void referenciasGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
 		{
 			try
@@ -1084,8 +1097,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			BindearDropDownLists();
 		}
 
-
-
 		private void CompletarUI(org.dyndns.cedweb.consulta.ConsultarResult lc, EventArgs e)
 		{
 			//Cabecera
@@ -1324,6 +1335,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 			BindearDropDownLists();
 		}
+		
 		protected void MonedaComprobanteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
@@ -1331,10 +1343,12 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				Response.Redirect("~/Inicio.aspx");
 			}
 		}
+		
 		protected void CompradorDropDownList_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			AjustarComprador();
 		}
+		
 		private void AjustarComprador()
 		{
 			if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
@@ -1478,6 +1492,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 			}
 		}
+		
 		protected void CalcularTotalesButton_Click(object sender, EventArgs e)
 		{
 			if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
@@ -1675,6 +1690,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 			}
 		}
+		
 		private void ResetearGrillas()
 		{
 			DetalleLinea.ResetearGrillas();
@@ -1693,6 +1709,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 			ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Se han eliminado artículos, referencias y permisos de exportación por haber cambiado el tipo de punto de venta');</SCRIPT>", false);
 		}
+		
 		private void AjustarCamposXPtaVentaChanged(string PuntoDeVenta)
 		{
 			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
@@ -1895,6 +1912,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			IdiomaDropDownList.Enabled = true;
 			IncotermsDropDownList.Enabled = true;
 		}
+		
 		protected void EnviarIBKButton_Click(object sender, EventArgs e)
 		{
 			if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
@@ -3539,7 +3557,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			r.importe_total_impuestos_nacionalesSpecified = true;
 		}
 
-
 		protected void ConsultarLoteIBKButton_Click(object sender, EventArgs e)
 		{
 			using (FileStream fs = File.Open(Server.MapPath("~/Consultar.txt"), FileMode.Append, FileAccess.Write))
@@ -3734,6 +3751,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 			}
 		}
+		
 		private void RegistrarActividad(FeaEntidades.InterFacturas.lote_comprobantes lote, System.Text.StringBuilder sb, System.Net.Mail.SmtpClient smtpClient, string smtpXAmb, System.IO.MemoryStream m)
 		{
 			//Registro cantidad de comprobantes
