@@ -169,7 +169,7 @@ namespace CedeiraAJAX.Comprador
                 comprador.PasswordAvisoVisualizacion = PasswordAvisoVisualizacionTextBox.Text; 
                 CedWebRN.Comprador.Validar(comprador, (CedEntidades.Sesion)Session["Sesion"]);
                 CedWebRN.Comprador.Modificar(comprador, (CedEntidades.Sesion)Session["Sesion"]);
-                Server.Transfer("~/Comprador/Explorador.aspx", true);
+                Response.Redirect("~/Comprador/Explorador.aspx");
             }
             catch (Exception ex)
             {
@@ -178,7 +178,7 @@ namespace CedeiraAJAX.Comprador
         }
         protected void CancelarButton_Click(object sender, EventArgs e)
         {
-            Server.Transfer("~/Comprador/Explorador.aspx"); ;
+            Response.Redirect("~/Comprador/Explorador.aspx"); ;
         }
         protected void CompradorDelExtranjeroCheckBox_CheckedChanged(object sender, EventArgs e)
         {

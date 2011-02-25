@@ -149,22 +149,22 @@ namespace CedeiraAJAX.Comprador
         }
         protected void CrearButton_Click(object sender, EventArgs e)
         {
-            Server.Transfer("~/Comprador/Crear.aspx", true);
+            Response.Redirect("~/Comprador/Crear.aspx", true);
         }
         protected void EliminarButton_Click(object sender, EventArgs e)
         {
             Session["CompradorSeleccionado"] = CompradorSeleccionado().RazonSocial;
-            Server.Transfer("~/Comprador/Eliminar.aspx", true);
+            Response.Redirect("~/Comprador/Eliminar.aspx", true);
         }
         protected void ModificarButton_Click(object sender, EventArgs e)
         {
             Session["CompradorSeleccionado"] = CompradorSeleccionado().RazonSocial;
-            Server.Transfer("~/Comprador/Modificar.aspx", true);
+            Response.Redirect("~/Comprador/Modificar.aspx");
         }
         protected void ConsultarButton_Click(object sender, EventArgs e)
         {
             Session["CompradorSeleccionado"] = CompradorSeleccionado().RazonSocial;
-            Server.Transfer("~/Comprador/Consultar.aspx", true);
+            Response.Redirect("~/Comprador/Consultar.aspx", true);
         }
         protected CedWebEntidades.Comprador CompradorSeleccionado()
         {
@@ -195,14 +195,14 @@ namespace CedeiraAJAX.Comprador
                     System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + nombreArchivo), System.IO.FileMode.Create);
                     m.WriteTo(fs);
                     fs.Close();
-                    Server.Transfer("~/DescargaTemporarios.aspx?archivo=" + nombreArchivo, false);
+                    Response.Redirect("~/DescargaTemporarios.aspx?archivo=" + nombreArchivo, false);
                 }
 
             }
         }
         protected void SalirButton_Click(object sender, EventArgs e)
         {
-            Server.Transfer("~/FacturaElectronica.aspx", true);
+            Response.Redirect("~/FacturaElectronica.aspx", true);
         }
     }
 }

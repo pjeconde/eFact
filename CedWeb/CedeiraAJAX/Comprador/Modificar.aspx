@@ -1,7 +1,11 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/CedeiraAJAX.Master" AutoEventWireup="true" CodeBehind="Modificar.aspx.cs" Inherits="CedeiraAJAX.Comprador.Modificar" %>
 
 <%@ Register Src="~/DatePickerWebUserControl.ascx" TagName="DatePickerWebUserControl" TagPrefix="uc1" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
 <asp:Content ID="Content2" runat="Server" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado">
+   <asp:ScriptManager ID="ModificarCompradorScriptManager" runat="server" ></asp:ScriptManager> 
     <table border="0" cellpadding="0" cellspacing="0" style="height: 500px; width: 800px">
         <tr>
             <td valign="top">
@@ -52,10 +56,9 @@
                                 <!-- Calle, Nro, Piso y Depto -->
                                 <tr>
                                     <td align="right" style="padding-right: 5px; padding-top: 3px">
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="CalleTextBox"
-                                            ErrorMessage="Calle" SetFocusOnError="True" ValidationExpression="[A-Za-z\- ,.0-9]*">
-                                            <asp:Label ID="Label25" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                                        </asp:RegularExpressionValidator>
+										<cc1:FilteredTextBoxExtender ID="CalleFilteredTextBoxExtender" runat="server" FilterMode="InvalidChars"
+											FilterType="Custom" InvalidChars="'" TargetControlID="CalleTextBox">
+										</cc1:FilteredTextBoxExtender> 
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="CalleTextBox"
                                             ErrorMessage="Calle" SetFocusOnError="True">
                                             <asp:Label ID="Label26" runat="server" SkinID="IndicadorValidacion"></asp:Label>
@@ -274,7 +277,7 @@
                                                 </td>
                                                 <td align="left" style="padding-top: 3px">
                                                     <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="16" ToolTip="Debe ingresar sólo números."
-                                                        Width="80px" AutoPostBack="true" OnTextChanged="NroDocTextBox_TextChanged"></asp:TextBox>
+                                                        Width="80px"></asp:TextBox>
                                                 </td>
                                             </tr>
                                         </table>

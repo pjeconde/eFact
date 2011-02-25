@@ -20,6 +20,15 @@ namespace CedeiraAJAX.Comprador {
     public partial class Crear {
         
         /// <summary>
+        /// Control CrearCompradorScriptManager.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager CrearCompradorScriptManager;
+        
+        /// <summary>
         /// Control Image2.
         /// </summary>
         /// <remarks>
@@ -92,22 +101,13 @@ namespace CedeiraAJAX.Comprador {
         protected global::System.Web.UI.WebControls.TextBox RazonSocialTextBox;
         
         /// <summary>
-        /// Control RegularExpressionValidator2.
+        /// Control CalleFilteredTextBoxExtender.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
-        
-        /// <summary>
-        /// Control Label25.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label25;
+        protected global::AjaxControlToolkit.FilteredTextBoxExtender CalleFilteredTextBoxExtender;
         
         /// <summary>
         /// Control RequiredFieldValidator2.

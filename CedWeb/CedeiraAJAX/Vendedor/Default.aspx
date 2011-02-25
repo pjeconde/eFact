@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/CedeiraAJAX.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="CedeiraAJAX.Vendedor.Default" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
 <%@ Register Src="~/DatePickerWebUserControl.ascx" TagName="DatePickerWebUserControl"
 	TagPrefix="uc1" %>
 	
@@ -66,10 +68,8 @@
 								<!-- Calle, Nro, Piso y Depto -->
 								<tr>
 									<td align="right" style="padding-right: 5px; padding-top: 3px">
-										<asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="CalleTextBox"
-											ErrorMessage="Calle" SetFocusOnError="True" ValidationExpression="[A-Za-z\- ,.0-9]*">
-											<asp:Label ID="Label25" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-										</asp:RegularExpressionValidator>
+										<cc1:FilteredTextBoxExtender ID="CalleFilteredTextBoxExtender" runat="server"  FilterType="Custom" InvalidChars="'" FilterMode="InvalidChars" TargetControlID="CalleTextBox">
+										</cc1:FilteredTextBoxExtender>
 										<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="CalleTextBox"
 											ErrorMessage="Calle" SetFocusOnError="True">
 											<asp:Label ID="Label26" runat="server" SkinID="IndicadorValidacion"></asp:Label>
