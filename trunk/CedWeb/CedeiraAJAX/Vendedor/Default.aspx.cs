@@ -99,7 +99,7 @@ namespace CedeiraAJAX.Vendedor
                 CedWebRN.Vendedor.Validar(vendedor, (CedEntidades.Sesion)Session["Sesion"]);
                 CedWebRN.Vendedor.Guardar(vendedor, (CedEntidades.Sesion)Session["Sesion"]);
                 CedWebRN.Vendedor.Copiar(vendedor, ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor);
-                Server.Transfer("~/FacturaElectronica.aspx", true);
+                Response.Redirect("~/FacturaElectronica.aspx");
             }
             catch (Exception ex)
             {
@@ -175,12 +175,12 @@ namespace CedeiraAJAX.Vendedor
                 System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + nombreArchivo), System.IO.FileMode.Create);
                 m.WriteTo(fs);
                 fs.Close();
-                Server.Transfer("~/DescargaTemporarios.aspx?archivo=" + nombreArchivo, false);
+                Response.Redirect("~/DescargaTemporarios.aspx?archivo=" + nombreArchivo, false);
             }
         }
         protected void CancelarButton_Click(object sender, EventArgs e)
         {
-            Server.Transfer("~/FacturaElectronica.aspx");
+            Response.Redirect("~/FacturaElectronica.aspx");
         }
         private void BindearGrillayDropDownLists(List<CedWebEntidades.PuntoDeVenta> Datos)
         {

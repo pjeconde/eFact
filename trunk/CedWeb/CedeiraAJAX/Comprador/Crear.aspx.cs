@@ -123,7 +123,7 @@ namespace CedeiraAJAX.Comprador
                 comprador.PasswordAvisoVisualizacion = PasswordAvisoVisualizacionTextBox.Text;
                 CedWebRN.Comprador.Validar(comprador, (CedEntidades.Sesion)Session["Sesion"]);
                 CedWebRN.Comprador.Crear(comprador, (CedEntidades.Sesion)Session["Sesion"]);
-                Server.Transfer("~/Comprador/Explorador.aspx", true);
+                Response.Redirect("~/Comprador/Explorador.aspx");
             }
             catch (Exception ex)
             {
