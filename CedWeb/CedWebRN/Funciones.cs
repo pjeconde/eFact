@@ -26,10 +26,9 @@ namespace CedWebRN
         {
             return !EstaLogueadoUnUsuarioPremium(Sesion);
         }
-        public static bool NoActivCP(CedWebEntidades.Sesion Sesion)
+        public static bool ActivacionCPhabilitada(CedWebEntidades.Sesion Sesion)
         {
-            bool b = !Sesion.Cuenta.ActivCP;
-            return b;
+            return Sesion.Cuenta.CantidadActivacionesCPs > 0;
         }
     }
 }

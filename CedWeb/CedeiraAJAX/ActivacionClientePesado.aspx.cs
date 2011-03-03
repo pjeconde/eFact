@@ -23,7 +23,7 @@ namespace CedeiraAJAX
                 }
                 else
                 {
-                    if (CedWebRN.Fun.NoActivCP((CedWebEntidades.Sesion)Session["Sesion"]))
+                    if (!CedWebRN.Fun.ActivacionCPhabilitada((CedWebEntidades.Sesion)Session["Sesion"]))
                     {
                         CedeiraUIWebForms.Excepciones.Redireccionar("Opcion", TituloParte1Label.Text + TituloParte2Label.Text, "~/SoloDispPUsuariosActivCP.aspx");
                     }
@@ -39,7 +39,15 @@ namespace CedeiraAJAX
         }
         protected void SolicitarActivCPButton_Click(object sender, EventArgs e)
         {
-            ClaveActivCPTextBox.Text = CedWebRN.Cuenta.ObtenerClaveActivCP(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ClaveSolicitudTextBox.Text, (CedEntidades.Sesion)Session["Sesion"]);
+            if (CedWebRN.Fun.ActivacionCPhabilitada((CedWebEntidades.Sesion)Session["Sesion"]))
+            {
+                ClaveActivCPTextBox.Text = CedWebRN.Cuenta.ObtenerClaveActivCP(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ClaveSolicitudTextBox.Text, (CedEntidades.Sesion)Session["Sesion"]);
+            }
+            else
+            {
+                ClaveActivCPTextBox.Text = String.Empty;
+                MsgErrorLabel.Text = "Ya se han agotado todas las instancias de activación del programa eFact-Residente.  Por favor, póngase en contacto con Cedeira Software Factory, para solucionar el inconveniente.  Muchas gracias.";
+            }
         }
         protected void SalirButton_Click(object sender, EventArgs e)
         {

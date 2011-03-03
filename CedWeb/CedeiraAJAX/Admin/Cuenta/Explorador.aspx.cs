@@ -305,7 +305,8 @@ namespace CedeiraAJAX.Admin.Cuenta
 			MsgErrorLabel.Text = String.Empty;
 			try
 			{
-				CedWebRN.Cuenta.CambiarActivCP(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
+                CuentaSeleccionada().CantidadActivacionesCPs = Convert.ToInt32(CantidadActivacionesCPsTextBox.Text);
+				CedWebRN.Cuenta.CambiarCantidadActivacionesCPs(CuentaSeleccionada(), (CedEntidades.Sesion)Session["Sesion"]);
 				BindPagingGrid();
 				DesSeleccionarFilas();
 			}
