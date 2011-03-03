@@ -21,8 +21,6 @@ namespace CedWebEntidades
         private DateTime fechaAlta;
         private int cantidadEnviosMail;
         private DateTime fechaUltimoReenvioMail;
-        private bool activCP;
-        private string nroSerieDisco;
         private Medio medio;
         private string emailSMS;
         private bool recibeAvisoAltaCuenta;
@@ -31,6 +29,7 @@ namespace CedWebEntidades
         private DateTime fechaVtoPremium;
         private PaginaDefault paginaDefault;
 		private string nroSerieCertificado;
+        private int cantidadActivacionesCPs;
 
         public Cuenta()
         {
@@ -234,28 +233,6 @@ namespace CedWebEntidades
                 return fechaUltimoReenvioMail;
             }
         }
-        public bool ActivCP
-        {
-            set
-            {
-                activCP = value;
-            }
-            get
-            {
-                return activCP;
-            }
-        }
-        public string NroSerieDisco
-        {
-            set
-            {
-                nroSerieDisco = value;
-            }
-            get
-            {
-                return nroSerieDisco;
-            }
-        }
         public Medio Medio
         {
             set
@@ -358,5 +335,16 @@ namespace CedWebEntidades
 				return nroSerieCertificado;
 			}
 		}
-	}
+        public int CantidadActivacionesCPs
+        {
+            set
+            {
+                cantidadActivacionesCPs = value;
+            }
+            get
+            {
+                return cantidadActivacionesCPs;
+            }
+        }
+    }
 }

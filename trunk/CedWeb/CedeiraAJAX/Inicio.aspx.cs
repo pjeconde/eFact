@@ -48,7 +48,7 @@ namespace CedeiraAJAX
                 {
                     CedWebRN.Cuenta.Depurar(sesion);
                 }
-                if (sesion.Cuenta.ActivCP)
+                if (sesion.Cuenta.CantidadActivacionesCPs > 0)
                 {
                     Server.Transfer("~/ActivacionClientePesado.aspx", true);
                 }

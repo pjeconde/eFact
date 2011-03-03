@@ -23,14 +23,14 @@ namespace CedeiraAJAX
                 }
                 else
                 {
-                    if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.NroSerieDisco == String.Empty)
-                    {
-                        MsgErrorLabel.Text = "No se registra que se haya generado la clave de activación";
-                    }
-                    else
-                    {
-                        ClaveActivCPTextBox.Text = CedWebRN.Cuenta.ObtenerClaveActivCP(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.NroSerieDisco, (CedEntidades.Sesion)Session["Sesion"]);
-                    }
+                    //if (((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.NroSerieDisco == String.Empty)
+                    //{
+                    //    MsgErrorLabel.Text = "No se registra que se haya generado la clave de activación";
+                    //}
+                    //else
+                    //{
+                    //    ClaveActivCPTextBox.Text = CedWebRN.Cuenta.ObtenerClaveActivCP(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.NroSerieDisco, (CedEntidades.Sesion)Session["Sesion"]);
+                    //}
                 }
             }
         }

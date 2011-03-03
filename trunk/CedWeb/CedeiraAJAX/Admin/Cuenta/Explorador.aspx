@@ -73,10 +73,10 @@
 													<headerstyle horizontalalign="left" wrap="False" />
 													<itemstyle horizontalalign="left" wrap="False" />
 												</asp:BoundField>
-												<asp:CheckBoxField DataField="ActivCP" HeaderText="ActivCP" SortExpression="ActivCP">
+												<asp:BoundField DataField="CantidadActivacionesCPs" HeaderText="CantActivCP" SortExpression="Cuenta.CantidadActivacionesCPs">
 													<headerstyle horizontalalign="left" wrap="False" />
-													<itemstyle horizontalalign="center" wrap="False" />
-												</asp:CheckBoxField>
+													<itemstyle horizontalalign="right" wrap="False" />
+												</asp:BoundField>
 												<asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email">
 													<headerstyle horizontalalign="left" wrap="False" />
 													<itemstyle horizontalalign="left" wrap="False" />
@@ -106,10 +106,6 @@
 													<itemstyle horizontalalign="left" wrap="False" />
 												</asp:BoundField>
 												<asp:BoundField DataField="Telefono" HeaderText="Telefono" SortExpression="Telefono">
-													<headerstyle horizontalalign="left" wrap="False" />
-													<itemstyle horizontalalign="left" wrap="False" />
-												</asp:BoundField>
-												<asp:BoundField DataField="NroSerieDisco" HeaderText="Clave solic.ActivCP" SortExpression="NroSerieDisco">
 													<headerstyle horizontalalign="left" wrap="False" />
 													<itemstyle horizontalalign="left" wrap="False" />
 												</asp:BoundField>
@@ -153,8 +149,8 @@
 										<tr>
 											<td style="padding-top: 5px">
 												<asp:Button ID="ActivCPButton" runat="server" Enabled="false" OnClick="ActivCPButton_Click"
-													Text="± Activ.CP" Width="100px" />
-											</td>
+													Text="Activ.CP" Width="70px" />
+                                                <asp:TextBox ID="CantidadActivacionesCPsTextBox" runat="server" Width="20px" Text="1"></asp:TextBox></td>
 										</tr>
 										<tr>
 											<td align="center" class="TextoResaltado" style="padding-top: 10px">

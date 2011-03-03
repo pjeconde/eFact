@@ -107,10 +107,10 @@ namespace CedWebRN
             cuenta.RegistrarReenvioMail(Cuenta);
             EnviarMailBienvenidaeFact("Ahora dispone de una nueva cuenta eFact (reenvio)", Cuenta);
         }
-        public static void CambiarActivCP(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
+        public static void CambiarCantidadActivacionesCPs(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
-            cuenta.CambiarActivCP(Cuenta);
+            cuenta.CambiarCantidadActivacionesCPs(Cuenta);
         }
         private static void EnviarMailBienvenidaeFact(string Asunto, CedWebEntidades.Cuenta Cuenta)
         {
@@ -459,8 +459,7 @@ namespace CedWebRN
         public static string ObtenerClaveActivCP(CedWebEntidades.Cuenta Cuenta, string ClaveSolicitud, CedEntidades.Sesion Sesion)
         {
             CedWebDB.Cuenta cuenta = new CedWebDB.Cuenta(Sesion);
-            cuenta.ApagarActivCP(Cuenta, ClaveSolicitud);
-            Cuenta.ActivCP = false;
+            cuenta.RegistrarActivacionCP(Cuenta, ClaveSolicitud);
             return Encryptor.Encrypt(ClaveSolicitud, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
         }
         public static List<CedWebEntidades.Estadistica> EstadisticaMedio(CedEntidades.Sesion Sesion)
