@@ -2979,7 +2979,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			{
 			}
 
-			r.importe_total_factura = Math.Round(Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text) * tipodecambio, 2);
+			r.importe_total_factura = 0;
 			rimo.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
 
 			r.importes_moneda_origen = rimo;
@@ -3003,7 +3003,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					}
 					else
 					{
-						r.impuesto_liq_rni = Math.Round(Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text) * tipodecambio, 2);
+						r.impuesto_liq_rni = 0;
 						rimo.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
 					}
 				}
@@ -3038,7 +3038,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					}
 					else
 					{
-						r.impuesto_liq = Math.Round(Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text) * tipodecambio, 2);
+						r.impuesto_liq = 0;
 						rimo.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
 					}
 				}
@@ -3073,7 +3073,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					}
 					else
 					{
-						r.importe_operaciones_exentas = Math.Round(Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text) * tipodecambio, 2);
+						r.importe_operaciones_exentas = 0;
 						rimo.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
 					}
 				}
@@ -3108,7 +3108,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					}
 					else
 					{
-						r.importe_total_concepto_no_gravado = Math.Round(Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text) * tipodecambio, 2);
+						r.importe_total_concepto_no_gravado = 0;
 						rimo.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
 					}
 				}
@@ -3143,7 +3143,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					}
 					else
 					{
-						r.importe_total_neto_gravado = Math.Round(Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text) * tipodecambio, 2);
+						r.importe_total_neto_gravado = 0;
 						rimo.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
 					}
 				}
@@ -3162,9 +3162,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 		private void GenerarImporteTotalImpuestosInternosMonedaExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
 		{
-			r.importe_total_impuestos_internos = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text) * tipodecambio, 2);
+			r.importe_total_impuestos_internos = 0;
 			rimo.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
-			if (r.importe_total_impuestos_internos != 0)
+			if (rimo.importe_total_impuestos_internos != 0)
 			{
 				r.importe_total_impuestos_internosSpecified = true;
 				rimo.importe_total_impuestos_internosSpecified = true;
@@ -3173,9 +3173,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 		private void GenerarImporteTotalImpuestosMunicipalesMonedaExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
 		{
-			r.importe_total_impuestos_municipales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text) * tipodecambio, 2);
+			r.importe_total_impuestos_municipales = 0;
 			rimo.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
-			if (r.importe_total_impuestos_municipales != 0)
+			if (rimo.importe_total_impuestos_municipales != 0)
 			{
 				r.importe_total_impuestos_municipalesSpecified = true;
 				rimo.importe_total_impuestos_municipalesSpecified = true;
@@ -3184,9 +3184,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 		private void GenerarImporteTotalIngresosBrutosMonedaExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
 		{
-			r.importe_total_ingresos_brutos = Math.Round(Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text) * tipodecambio, 2);
+			r.importe_total_ingresos_brutos = 0;
 			rimo.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
-			if (r.importe_total_ingresos_brutos != 0)
+			if (rimo.importe_total_ingresos_brutos != 0)
 			{
 				r.importe_total_ingresos_brutosSpecified = true;
 				rimo.importe_total_ingresos_brutosSpecified = true;
@@ -3195,9 +3195,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 		private void GenerarImporteTotalImpuestosNacionalesMonedaExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
 		{
-			r.importe_total_impuestos_nacionales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text) * tipodecambio, 2);
+			r.importe_total_impuestos_nacionales = 0;
 			rimo.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
-			if (r.importe_total_impuestos_nacionales != 0)
+			if (rimo.importe_total_impuestos_nacionales != 0)
 			{
 				r.importe_total_impuestos_nacionalesSpecified = true;
 				rimo.importe_total_impuestos_nacionalesSpecified = true;
