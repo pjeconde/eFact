@@ -808,6 +808,84 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		private void CompletarUI(FeaEntidades.InterFacturas.lote_comprobantes lc, EventArgs e)
 		{
 			//Cabecera
+			CompletarCabecera(lc);
+
+			//Comprobante
+			CompletarComprobante(lc);
+
+			//Exportacion
+			CompletarExportacion(lc);
+
+			//Referencias
+			CompletarReferencias(lc);
+
+			PermisosExpo.CompletarPermisos(lc);
+
+			//Comprador
+			CompletarComprador(lc);
+
+			//Vendedor
+			CompletarVendedor(lc);
+
+			//Detalle
+			DetalleLinea.CompletarDetalles(lc);
+
+			//Descuentos globales
+			CompletarDescGlobales(lc);
+
+			//impuestos globales
+			ImpuestosGlobales.Completar(lc);
+
+			ComentariosTextBox.Text = lc.comprobante[0].detalle.comentarios;
+
+			//Resumen
+			CompletarResumen(lc);
+
+			Observaciones_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.observaciones);
+			if (!lc.comprobante[0].resumen.codigo_moneda.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
+			{
+				Tipo_de_cambioLabel.Visible = true;
+				Tipo_de_cambioTextBox.Visible = true;
+				Tipo_de_cambioRequiredFieldValidator.Enabled = true;
+				Tipo_de_cambioRegularExpressionValidator.Enabled = true;
+			}
+			else
+			{
+				Tipo_de_cambioLabel.Visible = false;
+				Tipo_de_cambioTextBox.Visible = false;
+				Tipo_de_cambioTextBox.Text = null;
+				Tipo_de_cambioRequiredFieldValidator.Enabled = false;
+				Tipo_de_cambioRegularExpressionValidator.Enabled = false;
+			}
+			//CAE
+			CompletarCAE(lc);
+
+			BindearDropDownLists();
+		}
+
+		private void CompletarCAE(FeaEntidades.InterFacturas.lote_comprobantes lc)
+		{
+			CAETextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.cae;
+			FechaCAEObtencionDatePickerWebUserControl.CalendarDateString = lc.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae;
+			FechaCAEVencimientoDatePickerWebUserControl.CalendarDateString = lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae;
+			ResultadoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.resultado;
+			MotivoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.motivo;
+		}
+
+		private void CompletarComprobante(FeaEntidades.InterFacturas.lote_comprobantes lc)
+		{
+			Numero_ComprobanteTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
+			FechaEmisionDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
+			FechaVencimientoDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento);
+			FechaServDesdeDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde);
+			FechaServHastaDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta);
+			Condicion_De_PagoTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago);
+			IVAcomputableDropDownList.SelectedIndex = IVAcomputableDropDownList.Items.IndexOf(IVAcomputableDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.iva_computable)));
+			CodigoOperacionDropDownList.SelectedIndex = CodigoOperacionDropDownList.Items.IndexOf(CodigoOperacionDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.codigo_operacion)));
+		}
+
+		private void CompletarCabecera(FeaEntidades.InterFacturas.lote_comprobantes lc)
+		{
 			try
 			{
 				Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
@@ -817,6 +895,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				ViewState["PuntoVenta"] = auxPV;
 				DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
 				AjustarCamposXPtaVentaChanged(Punto_VentaTextBox.Text);
+				AjustarCamposXVersion(lc);
 				Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
 			}
 			catch (NullReferenceException)//detalle_factura.xml
@@ -826,19 +905,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				ViewState["PuntoVenta"] = auxPV;
 				DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
 				AjustarCamposXPtaVentaChanged(Punto_VentaTextBox.Text);
+				AjustarCamposXVersion(lc);
 				Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
 			}
-			//Comprobante
-			Numero_ComprobanteTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
-			FechaEmisionDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
-			FechaVencimientoDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento);
-			FechaServDesdeDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde);
-			FechaServHastaDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta);
-			Condicion_De_PagoTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago);
-			IVAcomputableDropDownList.SelectedIndex = IVAcomputableDropDownList.Items.IndexOf(IVAcomputableDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.iva_computable)));
-			CodigoOperacionDropDownList.SelectedIndex = CodigoOperacionDropDownList.Items.IndexOf(CodigoOperacionDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.codigo_operacion)));
+		}
 
-			//Exportacion
+		private void CompletarExportacion(FeaEntidades.InterFacturas.lote_comprobantes lc)
+		{
 			if (lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion != null)
 			{
 				PaisDestinoExpDropDownList.SelectedIndex = PaisDestinoExpDropDownList.Items.IndexOf(PaisDestinoExpDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante)));
@@ -884,8 +957,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				IdiomaDropDownList.SelectedIndex = -1;
 				DatosComerciales.Texto = string.Empty;
 			}
+		}
 
-			//Referencias
+		private void CompletarReferencias(FeaEntidades.InterFacturas.lote_comprobantes lc)
+		{
 			referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
 			if (lc.comprobante[0].cabecera.informacion_comprobante.referencias != null)
 			{
@@ -917,10 +992,64 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			referenciasGridView.DataSource = referencias;
 			referenciasGridView.DataBind();
 			ViewState["referencias"] = referencias;
+		}
 
-			PermisosExpo.CompletarPermisos(lc);
+		private void CompletarDescGlobales(FeaEntidades.InterFacturas.lote_comprobantes lc)
+		{
+			descuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>();
+			if (lc.comprobante[0].resumen.descuentos != null)
+			{
+				foreach (FeaEntidades.InterFacturas.resumenDescuentos r in lc.comprobante[0].resumen.descuentos)
+				{
+					if (r.importe_descuento_moneda_origenSpecified)
+					{
+						r.importe_descuento = r.importe_descuento_moneda_origen;
+					}
+					descuentos.Add(r);
+				}
+			}
+			if (descuentos.Count.Equals(0))
+			{
+				descuentos.Add(new FeaEntidades.InterFacturas.resumenDescuentos());
+			}
+			descuentosGridView.DataSource = descuentos;
+			descuentosGridView.DataBind();
+			ViewState["descuentos"] = descuentos;
+		}
 
-			//Comprador
+		private void CompletarVendedor(FeaEntidades.InterFacturas.lote_comprobantes lc)
+		{
+			if (lc.comprobante[0].cabecera.informacion_vendedor.razon_social != null)
+			{
+				Razon_Social_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.razon_social);
+			}
+			Localidad_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.localidad);
+			if (lc.comprobante[0].cabecera.informacion_vendedor.GLN != 0)
+			{
+				GLN_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.GLN);
+			}
+			Email_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.email);
+			Cuit_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.cuit);
+			Provincia_VendedorDropDownList.SelectedIndex = Provincia_VendedorDropDownList.Items.IndexOf(Provincia_VendedorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.provincia)));
+			Condicion_IVA_VendedorDropDownList.SelectedIndex = Condicion_IVA_VendedorDropDownList.Items.IndexOf(Condicion_IVA_VendedorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.condicion_IVA)));
+			Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedIndex = Condicion_Ingresos_Brutos_VendedorDropDownList.Items.IndexOf(Condicion_Ingresos_Brutos_VendedorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.condicion_ingresos_brutos)));
+			Cp_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.cp);
+			Contacto_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.contacto);
+			Telefono_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.telefono);
+			Codigo_Interno_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.codigo_interno);
+			NroIBVendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.nro_ingresos_brutos);
+			InicioDeActividadesVendedorDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.inicio_de_actividades);
+			Domicilio_Calle_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_calle);
+			Domicilio_Numero_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_numero);
+			Domicilio_Piso_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_piso);
+			Domicilio_Depto_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_depto);
+			Domicilio_Sector_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_sector);
+			Domicilio_Torre_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_torre);
+			Domicilio_Manzana_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_manzana);
+		}
+
+		private void CompletarComprador(FeaEntidades.InterFacturas.lote_comprobantes lc)
+		{
 			if (lc.comprobante[0].cabecera.informacion_comprador.GLN != 0)
 			{
 				GLN_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.GLN);
@@ -955,70 +1084,17 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			InicioDeActividadesCompradorDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.inicio_de_actividades);
 			Provincia_CompradorDropDownList.SelectedIndex = Provincia_CompradorDropDownList.Items.IndexOf(Provincia_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.provincia)));
 			Condicion_IVA_CompradorDropDownList.SelectedIndex = Condicion_IVA_CompradorDropDownList.Items.IndexOf(Condicion_IVA_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.condicion_IVA)));
-			if (lc.comprobante[0].extensiones!=null)
+			if (lc.comprobante[0].extensiones != null)
 			{
-				if (lc.comprobante[0].extensiones.extensiones_destinatarios!=null)
+				if (lc.comprobante[0].extensiones.extensiones_destinatarios != null)
 				{
 					EmailAvisoVisualizacionTextBox.Text = lc.comprobante[0].extensiones.extensiones_destinatarios.email;
 				}
 			}
+		}
 
-			//Vendedor
-			if (lc.comprobante[0].cabecera.informacion_vendedor.razon_social != null)
-			{
-				Razon_Social_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.razon_social);
-			}
-			Localidad_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.localidad);
-			if (lc.comprobante[0].cabecera.informacion_vendedor.GLN != 0)
-			{
-				GLN_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.GLN);
-			}
-			Email_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.email);
-			Cuit_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.cuit);
-			Provincia_VendedorDropDownList.SelectedIndex = Provincia_VendedorDropDownList.Items.IndexOf(Provincia_VendedorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.provincia)));
-			Condicion_IVA_VendedorDropDownList.SelectedIndex = Condicion_IVA_VendedorDropDownList.Items.IndexOf(Condicion_IVA_VendedorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.condicion_IVA)));
-			Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedIndex = Condicion_Ingresos_Brutos_VendedorDropDownList.Items.IndexOf(Condicion_Ingresos_Brutos_VendedorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.condicion_ingresos_brutos)));
-			Cp_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.cp);
-			Contacto_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.contacto);
-			Telefono_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.telefono);
-			Codigo_Interno_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.codigo_interno);
-			NroIBVendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.nro_ingresos_brutos);
-			InicioDeActividadesVendedorDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.inicio_de_actividades);
-			Domicilio_Calle_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_calle);
-			Domicilio_Numero_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_numero);
-			Domicilio_Piso_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_piso);
-			Domicilio_Depto_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_depto);
-			Domicilio_Sector_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_sector);
-			Domicilio_Torre_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_torre);
-			Domicilio_Manzana_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_manzana);
-			//Detalle
-			DetalleLinea.CompletarDetalles(lc);
-
-			//Descuentos globales
-			descuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>();
-			if (lc.comprobante[0].resumen.descuentos != null)
-			{
-				foreach (FeaEntidades.InterFacturas.resumenDescuentos r in lc.comprobante[0].resumen.descuentos)
-				{
-					if (r.importe_descuento_moneda_origenSpecified)
-					{
-						r.importe_descuento = r.importe_descuento_moneda_origen;
-					}
-					descuentos.Add(r);
-				}
-			}
-			if (descuentos.Count.Equals(0))
-			{
-				descuentos.Add(new FeaEntidades.InterFacturas.resumenDescuentos());
-			}
-			descuentosGridView.DataSource = descuentos;
-			descuentosGridView.DataBind();
-			ViewState["descuentos"] = descuentos;
-			//impuestos globales
-			ImpuestosGlobales.Completar(lc);
-
-			ComentariosTextBox.Text = lc.comprobante[0].detalle.comentarios;
-			//Resumen
+		private void CompletarResumen(FeaEntidades.InterFacturas.lote_comprobantes lc)
+		{
 			MonedaComprobanteDropDownList.SelectedIndex = MonedaComprobanteDropDownList.Items.IndexOf(MonedaComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].resumen.codigo_moneda)));
 			Tipo_de_cambioTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.tipo_de_cambio);
 			if (lc.comprobante[0].resumen.codigo_moneda.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
@@ -1033,17 +1109,33 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				{
 					Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_impuestos_nacionales);
 				}
+				else
+				{
+					Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = string.Empty;
+				}
 				if (lc.comprobante[0].resumen.importe_total_impuestos_municipalesSpecified.Equals(true))
 				{
 					Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_impuestos_municipales);
+				}
+				else
+				{
+					Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = string.Empty;
 				}
 				if (lc.comprobante[0].resumen.importe_total_impuestos_internosSpecified.Equals(true))
 				{
 					Importe_Total_Impuestos_Internos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_impuestos_internos);
 				}
+				else
+				{
+					Importe_Total_Impuestos_Internos_ResumenTextBox.Text = string.Empty;
+				}
 				if (lc.comprobante[0].resumen.importe_total_ingresos_brutosSpecified.Equals(true))
 				{
 					Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_ingresos_brutos);
+				}
+				else
+				{
+					Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = string.Empty;
 				}
 			}
 			else
@@ -1058,43 +1150,35 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				{
 					Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_nacionales);
 				}
+				else
+				{
+					Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = string.Empty;
+				}
 				if (lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_municipalesSpecified.Equals(true))
 				{
 					Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_municipales);
+				}
+				else
+				{
+					Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = string.Empty;
 				}
 				if (lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_internosSpecified.Equals(true))
 				{
 					Importe_Total_Impuestos_Internos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_internos);
 				}
+				else
+				{
+					Importe_Total_Impuestos_Internos_ResumenTextBox.Text = string.Empty;
+				}
 				if (lc.comprobante[0].resumen.importes_moneda_origen.importe_total_ingresos_brutosSpecified.Equals(true))
 				{
 					Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_ingresos_brutos);
 				}
+				else
+				{
+					Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = string.Empty;
+				}
 			}
-			Observaciones_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.observaciones);
-			if (!lc.comprobante[0].resumen.codigo_moneda.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
-			{
-				Tipo_de_cambioLabel.Visible = true;
-				Tipo_de_cambioTextBox.Visible = true;
-				Tipo_de_cambioRequiredFieldValidator.Enabled = true;
-				Tipo_de_cambioRegularExpressionValidator.Enabled = true;
-			}
-			else
-			{
-				Tipo_de_cambioLabel.Visible = false;
-				Tipo_de_cambioTextBox.Visible = false;
-				Tipo_de_cambioTextBox.Text = null;
-				Tipo_de_cambioRequiredFieldValidator.Enabled = false;
-				Tipo_de_cambioRegularExpressionValidator.Enabled = false;
-			}
-			//CAE
-			CAETextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.cae;
-			FechaCAEObtencionDatePickerWebUserControl.CalendarDateString = lc.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae;
-			FechaCAEVencimientoDatePickerWebUserControl.CalendarDateString = lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae;
-			ResultadoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.resultado;
-			MotivoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.motivo;
-
-			BindearDropDownLists();
 		}
 
 		private void CompletarUI(org.dyndns.cedweb.consulta.ConsultarResult lc, EventArgs e)
@@ -1108,6 +1192,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			ViewState["PuntoVenta"] = auxPV;
 			DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
 			AjustarCamposXPtaVentaChanged(Punto_VentaTextBox.Text);
+			AjustarCamposXVersion(lc);
 			//Comprobante
 			Numero_ComprobanteTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
 			FechaEmisionDatePickerWebUserControl.CalendarDateString = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
@@ -1709,6 +1794,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 			ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Se han eliminado artículos, referencias y permisos de exportación por haber cambiado el tipo de punto de venta');</SCRIPT>", false);
 		}
+
 		
 		private void AjustarCamposXPtaVentaChanged(string PuntoDeVenta)
 		{
@@ -1783,6 +1869,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		{
 			Presta_ServCheckBox.Checked = false;
 			Presta_ServCheckBox.Enabled = false;
+			Presta_ServCheckBox.Visible = true;
+			Presta_ServLabel.Visible = true;
 			FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
 			FechaServDesdeDatePickerWebUserControl.Visible = false;
 			FechaInicioServLabel.Visible = false;
@@ -1810,6 +1898,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			PaisDestinoExpDropDownList.Enabled = true;
 			IdiomaDropDownList.Enabled = true;
 			IncotermsDropDownList.Enabled = true;
+			Version0RadioButton.Visible = false;
+			Version1RadioButton.Visible = false;
 			return listacompradores;
 		}
 
@@ -1817,6 +1907,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		{
 			Presta_ServCheckBox.Checked = false;
 			Presta_ServCheckBox.Enabled = false;
+			Presta_ServCheckBox.Visible = true;
+			Presta_ServLabel.Visible = true;
 			FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
 			FechaServDesdeDatePickerWebUserControl.Visible = false;
 			FechaInicioServLabel.Visible = false;
@@ -1841,12 +1933,16 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			IdiomaDropDownList.Enabled = false;
 			IncotermsDropDownList.SelectedIndex = -1;
 			IncotermsDropDownList.Enabled = false;
+			Version0RadioButton.Visible = false;
+			Version1RadioButton.Visible = false;
 			return listacompradores;
 		}
 
 		private System.Collections.Generic.List<CedWebEntidades.Comprador> AjustarCamposXPtaVentaComun(System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores)
 		{
 			Presta_ServCheckBox.Enabled = true;
+			Presta_ServCheckBox.Visible = true;
+			Presta_ServLabel.Visible = true;
 			FechaServDesdeDatePickerWebUserControl.Visible = true;
 			FechaInicioServLabel.Visible = true;
 			FechaHstServLabel.Visible = true;
@@ -1869,6 +1965,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			IdiomaDropDownList.Enabled = false;
 			IncotermsDropDownList.SelectedIndex = -1;
 			IncotermsDropDownList.Enabled = false;
+			Version0RadioButton.Visible = true;
+			Version0RadioButton.Checked = true;
+			Version1RadioButton.Visible = true;
+			Version1RadioButton.Checked = false;
 			return listacompradores;
 		}
 
@@ -1876,6 +1976,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		{
 			TipoPtoVentaLabel.Text = "No definido";
 			Presta_ServCheckBox.Enabled = true;
+			Presta_ServCheckBox.Visible = true;
+			Presta_ServLabel.Visible = true;
 			FechaServDesdeDatePickerWebUserControl.Visible = true;
 			FechaInicioServLabel.Visible = true;
 			FechaHstServLabel.Visible = true;
@@ -1911,6 +2013,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			PaisDestinoExpDropDownList.Enabled = true;
 			IdiomaDropDownList.Enabled = true;
 			IncotermsDropDownList.Enabled = true;
+			Version0RadioButton.Visible = false;
+			Version1RadioButton.Visible = false;
 		}
 		
 		protected void EnviarIBKButton_Click(object sender, EventArgs e)
@@ -1998,35 +2102,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			cab.cuit_canal = Convert.ToInt64(Cuit_CanalTextBox.Text);
 			cab.cuit_vendedor = Convert.ToInt64(Cuit_VendedorTextBox.Text);
 			cab.id_lote = Convert.ToInt64(Id_LoteTextbox.Text);
-			cab.presta_servSpecified = true;
-			//para exportación no se debe informar
-			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-			{
-				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
-				try
-				{
-					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
-					{
-						return pv.Id == auxPV;
-					}).IdTipo;
-					if (idtipo.Equals("Export"))
-					{
-						cab.presta_servSpecified = false;
-					}
-					else
-					{
-						cab.presta_serv = Convert.ToInt32(Presta_ServCheckBox.Checked);
-					}
-				}
-				catch (System.NullReferenceException)
-				{
-					cab.presta_serv = Convert.ToInt32(Presta_ServCheckBox.Checked);
-				}
-			}
-			else
-			{
-				cab.presta_serv = Convert.ToInt32(Presta_ServCheckBox.Checked);
-			}
+
+			GenerarPrestaServicio(cab);
 
 			cab.punto_de_venta = Convert.ToInt32(Punto_VentaTextBox.Text);
 			lote.cabecera_lote = cab;
@@ -2140,6 +2217,55 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 			lote.comprobante[0] = comp;
 			return lote;
+		}
+
+		private void GenerarPrestaServicio(FeaEntidades.InterFacturas.cabecera_lote cab)
+		{
+			cab.presta_servSpecified = true;
+			//para exportación no se debe informar
+			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+			{
+				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+				try
+				{
+					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+					{
+						return pv.Id == auxPV;
+					}).IdTipo;
+					if (idtipo.Equals("Export"))
+					{
+						cab.presta_servSpecified = false;
+					}
+					else if (idtipo.Equals("Comun"))
+					{
+						GenerarV0oV1(cab);
+					}
+					else
+					{
+						cab.presta_serv = Convert.ToInt32(Presta_ServCheckBox.Checked);
+					}
+				}
+				catch (System.NullReferenceException)
+				{
+					cab.presta_serv = Convert.ToInt32(Presta_ServCheckBox.Checked);
+				}
+			}
+			else
+			{
+				cab.presta_serv = Convert.ToInt32(Presta_ServCheckBox.Checked);
+			}
+		}
+
+		private void GenerarV0oV1(FeaEntidades.InterFacturas.cabecera_lote cab)
+		{
+			if (Version0RadioButton.Checked)
+			{
+				cab.presta_serv = Convert.ToInt32(Presta_ServCheckBox.Checked);
+			}
+			else
+			{
+				cab.presta_servSpecified = false;
+			}
 		}
 
 		private void GenerarInfoExtensionesDestinatarios(FeaEntidades.InterFacturas.comprobante comp)
@@ -3792,6 +3918,50 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		protected void tipoCambioUpdatePanel_Load(object sender, EventArgs e)
 		{
 			ActualizarTipoDeCambio();
+		}
+
+		protected void Version0RadioButton_CheckedChanged(object sender, EventArgs e)
+		{
+			AjustarPrestaServxVersiones();
+		}
+
+		protected void Version1RadioButton_CheckedChanged(object sender, EventArgs e)
+		{
+			AjustarPrestaServxVersiones();
+		}
+
+		private void AjustarPrestaServxVersiones()
+		{
+			if (Version0RadioButton.Checked)
+			{
+				Presta_ServCheckBox.Visible = true;
+				Presta_ServLabel.Visible = true;
+			}
+			else
+			{
+				Presta_ServCheckBox.Visible = false;
+				Presta_ServLabel.Visible = false;
+			}
+		}
+
+		private void AjustarCamposXVersion(org.dyndns.cedweb.consulta.ConsultarResult lc)
+		{
+
+		}
+
+		private void AjustarCamposXVersion(FeaEntidades.InterFacturas.lote_comprobantes lc)
+		{
+			if (lc.cabecera_lote.presta_servSpecified)
+			{
+				Version0RadioButton.Checked = true;
+				Version1RadioButton.Checked=false;
+			}
+			else
+			{
+				Version1RadioButton.Checked = true;
+				Version0RadioButton.Checked=false;
+			}
+			AjustarPrestaServxVersiones();
 		}
 
 	}
