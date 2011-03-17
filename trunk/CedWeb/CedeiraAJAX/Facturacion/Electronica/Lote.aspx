@@ -258,15 +258,6 @@
 																	<ContentTemplate>
 																		<table border="0" cellpadding="0" cellspacing="0" >
 																			<tr>
-																				<td style="position: relative; border: 0px; padding-top: 5px;">
-																					<asp:UpdateProgress ID="ptoVentaUpdateProgress" runat="server" AssociatedUpdatePanelID="ptoVentaUpdatePanel"
-																						DisplayAfter="0">
-																						<ProgressTemplate>
-																							<asp:Image ID="ptoVentaImage" runat="server" Height="20px" ImageUrl="~/Imagenes/CedeiraSF-icono-animado.gif">
-																							</asp:Image>
-																						</ProgressTemplate>
-																					</asp:UpdateProgress>
-																				</td>
 																				<td style="position: relative; border: 0px; width: 40px; padding-top: 5px;">
 																					<asp:RegularExpressionValidator ID="PtoVentaRegularExpressionValidator" runat="server"
 																						ControlToValidate="Punto_VentaTextBox" ErrorMessage="error de formateo en punto de venta"
@@ -288,6 +279,18 @@
 																				</td>
 																				<td class="TextoFEASYP_DetCol1">
 																					<asp:Label ID="TipoPtoVentaLabel" runat="server" ></asp:Label>
+																					<asp:RadioButton ID="Version0RadioButton"  runat="server" Visible="false" GroupName="Version"  Text="V.0" Checked="true" AutoPostBack="true" OnCheckedChanged="Version0RadioButton_CheckedChanged"></asp:RadioButton>
+																					<asp:RadioButton ID="Version1RadioButton" runat="server" GroupName="Version" Text="V.1" AutoPostBack="true"
+																						Visible="false" OnCheckedChanged="Version1RadioButton_CheckedChanged"></asp:RadioButton>
+																				</td>
+																				<td style="width:100px">
+																					<asp:UpdateProgress ID="ptoVentaUpdateProgress" runat="server" AssociatedUpdatePanelID="ptoVentaUpdatePanel"
+																						DisplayAfter="0">
+																						<ProgressTemplate>
+																							<asp:Image ID="ptoVentaImage" runat="server" Height="18px" ImageUrl="~/Imagenes/CedeiraSF-icono-animado.gif">
+																							</asp:Image>
+																						</ProgressTemplate>
+																					</asp:UpdateProgress>
 																				</td>
 																			</tr>
 																		</table>
@@ -481,7 +484,7 @@
 																</table>
 															</td>
 															<td>
-															<asp:UpdatePanel ID="PaisDestinoExpUpdatePanel" runat="server" ChildrenAsTriggers="true"
+															<asp:UpdatePanel ID="PaisDestinoExpUpdatePanel" runat="server"
 																UpdateMode="Conditional">
 																<Triggers>
 																	<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
@@ -734,6 +737,12 @@
 								<tr>
 									<td>
 										<asp:UpdatePanel ID="LoteUpdatePanel" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
+											<Triggers>
+												<asp:AsyncPostBackTrigger ControlID="Version0RadioButton" EventName="CheckedChanged"></asp:AsyncPostBackTrigger>
+												<asp:AsyncPostBackTrigger ControlID="Version1RadioButton" EventName="CheckedChanged"></asp:AsyncPostBackTrigger>
+												<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox" EventName="TextChanged"></asp:AsyncPostBackTrigger>
+												<asp:PostBackTrigger ControlID="FileUploadButton"></asp:PostBackTrigger>
+											</Triggers>
 											<ContentTemplate>
 												<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
 													<tr>
@@ -779,8 +788,8 @@
 																	<td class="TextoLabelFEAVendedorCh">
 																		<asp:TextBox ID="Cuit_CanalTextBox" runat="server" ReadOnly="True" SkinID="TextoBoxFEAVendedorDetCh">30690783521</asp:TextBox>
 																	</td>
-																	<td class="TextoLabelFEAVendedorMed">
-																		Presta servicios:
+																	<td class="TextoLabelFEAVendedor">
+																		<asp:Label ID="Presta_ServLabel" Text="Presta servicios:" runat="server"></asp:Label>
 																	</td>
 																	<td class="TextoLabelFEAVendedorChCh" style="text-align: left;">
 																		<asp:CheckBox ID="Presta_ServCheckBox" runat="server"></asp:CheckBox>
