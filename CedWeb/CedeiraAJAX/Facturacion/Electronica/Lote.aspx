@@ -1118,6 +1118,16 @@
 									<td>
 										<asp:UpdatePanel ID="InfoComproUpdatePanel" runat="server" ChildrenAsTriggers="true"
 											UpdateMode="Conditional">
+											<Triggers>
+													<asp:AsyncPostBackTrigger ControlID="Version0RadioButton" EventName="CheckedChanged">
+													</asp:AsyncPostBackTrigger>
+													<asp:AsyncPostBackTrigger ControlID="Version1RadioButton" EventName="CheckedChanged">
+													</asp:AsyncPostBackTrigger>
+													<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox" EventName="TextChanged">
+													</asp:AsyncPostBackTrigger>
+													<asp:PostBackTrigger ControlID="FileUploadButton">
+													</asp:PostBackTrigger>
+											</Triggers>
 											<ContentTemplate>
 												<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
 													<tr>
@@ -1168,6 +1178,15 @@
 																	</td>
 																	<td style="padding-top: 8px;">
 																		<asp:DropDownList ID="CodigoOperacionDropDownList" runat="server">
+																		</asp:DropDownList>
+																	</td>
+																</tr>
+																<tr>
+																	<td class="TextoLabelFEAVendedor">
+																		<asp:Label ID="CodigoConceptoLabel" runat="server" Text="Código de concepto:" Visible="false"></asp:Label>
+																	</td>
+																	<td style="padding-top: 8px;">
+																		<asp:DropDownList ID="CodigoConceptoDropDownList" runat="server" Visible="false">
 																		</asp:DropDownList>
 																	</td>
 																</tr>
