@@ -18,7 +18,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 	{
 		#region Variables
 		string gvUniqueID = String.Empty;
-
 		System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> descuentos;
 		System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> referencias;
 		#endregion
@@ -33,8 +32,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 				else
 				{
-				
-
 					descuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>();
 					FeaEntidades.InterFacturas.resumenDescuentos descuento = new FeaEntidades.InterFacturas.resumenDescuentos();
 					descuentos.Add(descuento);
@@ -106,6 +103,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					IncotermsDropDownList.DataValueField = "Codigo";
 					IncotermsDropDownList.DataTextField = "Descr";
 					IncotermsDropDownList.DataSource = FeaEntidades.Incoterms.Incoterm.ListaSinInformar();
+
+					CodigoConceptoDropDownList.DataValueField = "Codigo";
+					CodigoConceptoDropDownList.DataTextField = "Descr";
+					CodigoConceptoDropDownList.DataSource = FeaEntidades.CodigosConcepto.CodigosConcepto.Lista();
 
 					DataBind();
 
@@ -882,6 +883,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			Condicion_De_PagoTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago);
 			IVAcomputableDropDownList.SelectedIndex = IVAcomputableDropDownList.Items.IndexOf(IVAcomputableDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.iva_computable)));
 			CodigoOperacionDropDownList.SelectedIndex = CodigoOperacionDropDownList.Items.IndexOf(CodigoOperacionDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.codigo_operacion)));
+			CodigoConceptoDropDownList.SelectedIndex = CodigoConceptoDropDownList.Items.IndexOf(CodigoConceptoDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.codigo_concepto)));
 		}
 
 		private void CompletarCabecera(FeaEntidades.InterFacturas.lote_comprobantes lc)
@@ -1871,6 +1873,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			Presta_ServCheckBox.Enabled = false;
 			Presta_ServCheckBox.Visible = true;
 			Presta_ServLabel.Visible = true;
+			Version0RadioButton.Visible = false;
+			Version1RadioButton.Visible = false;
+			CodigoConceptoLabel.Visible = false;
+			CodigoConceptoDropDownList.Visible = false;
 			FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
 			FechaServDesdeDatePickerWebUserControl.Visible = false;
 			FechaInicioServLabel.Visible = false;
@@ -1898,8 +1904,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			PaisDestinoExpDropDownList.Enabled = true;
 			IdiomaDropDownList.Enabled = true;
 			IncotermsDropDownList.Enabled = true;
-			Version0RadioButton.Visible = false;
-			Version1RadioButton.Visible = false;
 			return listacompradores;
 		}
 
@@ -1909,6 +1913,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			Presta_ServCheckBox.Enabled = false;
 			Presta_ServCheckBox.Visible = true;
 			Presta_ServLabel.Visible = true;
+			Version0RadioButton.Visible = false;
+			Version1RadioButton.Visible = false;
+			CodigoConceptoLabel.Visible = false;
+			CodigoConceptoDropDownList.Visible = false;
 			FechaServDesdeDatePickerWebUserControl.CalendarDateString = string.Empty;
 			FechaServDesdeDatePickerWebUserControl.Visible = false;
 			FechaInicioServLabel.Visible = false;
@@ -1933,16 +1941,19 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			IdiomaDropDownList.Enabled = false;
 			IncotermsDropDownList.SelectedIndex = -1;
 			IncotermsDropDownList.Enabled = false;
-			Version0RadioButton.Visible = false;
-			Version1RadioButton.Visible = false;
 			return listacompradores;
 		}
 
 		private System.Collections.Generic.List<CedWebEntidades.Comprador> AjustarCamposXPtaVentaComun(System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores)
 		{
 			Presta_ServCheckBox.Enabled = true;
-			Presta_ServCheckBox.Visible = true;
-			Presta_ServLabel.Visible = true;
+			Version0RadioButton.Visible = true;
+			Version0RadioButton.Checked = true;
+			Version1RadioButton.Visible = true;
+			Version1RadioButton.Checked = false;
+
+			AjustarPrestaServxVersiones();
+
 			FechaServDesdeDatePickerWebUserControl.Visible = true;
 			FechaInicioServLabel.Visible = true;
 			FechaHstServLabel.Visible = true;
@@ -1965,10 +1976,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			IdiomaDropDownList.Enabled = false;
 			IncotermsDropDownList.SelectedIndex = -1;
 			IncotermsDropDownList.Enabled = false;
-			Version0RadioButton.Visible = true;
-			Version0RadioButton.Checked = true;
-			Version1RadioButton.Visible = true;
-			Version1RadioButton.Checked = false;
 			return listacompradores;
 		}
 
@@ -1978,6 +1985,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			Presta_ServCheckBox.Enabled = true;
 			Presta_ServCheckBox.Visible = true;
 			Presta_ServLabel.Visible = true;
+			Version0RadioButton.Visible = false;
+			Version1RadioButton.Visible = false;
+			CodigoConceptoLabel.Visible = false;
+			CodigoConceptoDropDownList.Visible = false;
 			FechaServDesdeDatePickerWebUserControl.Visible = true;
 			FechaInicioServLabel.Visible = true;
 			FechaHstServLabel.Visible = true;
@@ -2013,8 +2024,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			PaisDestinoExpDropDownList.Enabled = true;
 			IdiomaDropDownList.Enabled = true;
 			IncotermsDropDownList.Enabled = true;
-			Version0RadioButton.Visible = false;
-			Version1RadioButton.Visible = false;
+			
 		}
 		
 		protected void EnviarIBKButton_Click(object sender, EventArgs e)
@@ -2265,6 +2275,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			else
 			{
 				cab.presta_servSpecified = false;
+				
 			}
 		}
 
@@ -2368,6 +2379,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 
 			GenerarCodigoOperacion(infcomprob);
+			GenerarCodigoConcepto(infcomprob);
 			infcomprob.cae = CAETextBox.Text;
 			if (!CAETextBox.Text.Equals(string.Empty))
 			{
@@ -2506,6 +2518,21 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
 			}
 		}
+
+		private void GenerarCodigoConcepto(FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
+		{
+			//Se tiene que informar para versión 1 de punto común
+			if (CodigoConceptoDropDownList.Visible)
+			{
+				infcomprob.codigo_concepto = Convert.ToInt32(CodigoConceptoDropDownList.SelectedValue);
+				infcomprob.codigo_conceptoSpecified = true;
+			}
+			else
+			{
+				infcomprob.codigo_conceptoSpecified = false;
+			}
+		}
+
 
 		private void GenerarReferencias(FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
 		{
@@ -3932,15 +3959,19 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 		private void AjustarPrestaServxVersiones()
 		{
-			if (Version0RadioButton.Checked)
+			if (Version0RadioButton.Checked && Version0RadioButton.Visible)
 			{
 				Presta_ServCheckBox.Visible = true;
 				Presta_ServLabel.Visible = true;
+				CodigoConceptoLabel.Visible = false;
+				CodigoConceptoDropDownList.Visible = false;
 			}
-			else
+			if (Version1RadioButton.Checked && Version1RadioButton.Visible)
 			{
 				Presta_ServCheckBox.Visible = false;
 				Presta_ServLabel.Visible = false;
+				CodigoConceptoLabel.Visible = true;
+				CodigoConceptoDropDownList.Visible = true;
 			}
 		}
 

@@ -965,6 +965,24 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.DropDownList CodigoOperacionDropDownList;
         
         /// <summary>
+        /// Control CodigoConceptoLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CodigoConceptoLabel;
+        
+        /// <summary>
+        /// Control CodigoConceptoDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList CodigoConceptoDropDownList;
+        
+        /// <summary>
         /// Control FechaInicioServLabel.
         /// </summary>
         /// <remarks>

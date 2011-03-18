@@ -33,6 +33,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodigosConcepto\CodigosConcepto.cs" />
+    <Compile Include="CodigosConcepto\Productos.cs" />
+    <Compile Include="CodigosConcepto\ProductosYServicios.cs" />
+    <Compile Include="CodigosConcepto\Servicios.cs" />
     <Compile Include="CodigosErrorAFIP\CodigoErrorAFIP.cs" />
     <Compile Include="CodigosErrorAFIP\Cod01.cs" />
     <Compile Include="CodigosErrorAFIP\Cod02.cs" />
