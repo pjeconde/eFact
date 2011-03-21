@@ -15,6 +15,8 @@ namespace FeaEntidades.InterFacturas
     {
         private string nombre_claseField = "<informacion_comprobanteReferencias>";
 
+        private string tipo_comprobante_afipField; 
+
         private int codigo_de_referenciaField;
 
         private string descripcioncodigo_de_referenciaField;
@@ -28,6 +30,19 @@ namespace FeaEntidades.InterFacturas
             get
             {
                 return nombre_claseField;
+            }
+        }
+
+        /// <comentarios/>
+        public string tipo_comprobante_afip
+        {
+            get
+            {
+                return this.tipo_comprobante_afipField;
+            }
+            set
+            {
+                this.tipo_comprobante_afipField = value;
             }
         }
 

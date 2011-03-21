@@ -39,6 +39,14 @@ namespace FeaEntidades.InterFacturas
 
 		private string motivoField;
         
+        private string no_disponibleField;
+
+        private bool no_disponibleFieldSpecified;
+
+        private string gestionar_afipField;
+
+        private bool gestionar_afipFieldSpecified;
+        
 		/// <comentarios/>
 		public long id_lote
 		{
@@ -192,5 +200,59 @@ namespace FeaEntidades.InterFacturas
 				this.motivoField = value;
 			}
 		}
+
+        /// <comentarios/>
+        public string no_disponible
+        {
+            get
+            {
+                return this.no_disponibleField;
+            }
+            set
+            {
+                this.no_disponibleField = value;
+            }
+        }
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool no_disponibleSpecified
+        {
+            get
+            {
+                return this.no_disponibleFieldSpecified;
+            }
+            set
+            {
+                this.no_disponibleFieldSpecified = value;
+            }
+        }
+
+        /// <comentarios/>
+        public string gestionar_afip
+        {
+            get
+            {
+                return this.gestionar_afipField;
+            }
+            set
+            {
+                this.gestionar_afipField = value;
+            }
+        }
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool gestionar_afipSpecified
+        {
+            get
+            {
+                return this.gestionar_afipFieldSpecified;
+            }
+            set
+            {
+                this.gestionar_afipFieldSpecified = value;
+            }
+        }
 	}
 }
