@@ -1613,39 +1613,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					double totalIVA = 0;
 					DetalleLinea.CalcularTotalesLineas(ref totalGravado, ref totalNoGravado, ref totalIVA);
 					//Proceso IMPUESTOS GLOBALES
-					double total_Impuestos_Nacionales = 0;
-					double total_Impuestos_Internos = 0;
-					double total_Ingresos_Brutos = 0;
-					double total_Impuestos_Municipales = 0;
-					System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos = ImpuestosGlobales.Lista;
-					for (int i = 0; i < listadeimpuestos.Count; i++)
-					{
-						if (!listadeimpuestos[i].codigo_impuesto.Equals(0))
-						{
-							if (listadeimpuestos[i].codigo_impuesto == new FeaEntidades.CodigosImpuesto.IVA().Codigo ||
-								listadeimpuestos[i].codigo_impuesto == new FeaEntidades.CodigosImpuesto.Otros().Codigo ||
-								listadeimpuestos[i].codigo_impuesto == new FeaEntidades.CodigosImpuesto.Nacionales().Codigo)
-							{
-								total_Impuestos_Nacionales += listadeimpuestos[i].importe_impuesto;
-							}
-							else if (listadeimpuestos[i].codigo_impuesto == new FeaEntidades.CodigosImpuesto.Internos().Codigo)
-							{
-								total_Impuestos_Internos += listadeimpuestos[i].importe_impuesto;
-							}
-							else if (listadeimpuestos[i].codigo_impuesto == new FeaEntidades.CodigosImpuesto.IB().Codigo)
-							{
-								total_Ingresos_Brutos += listadeimpuestos[i].importe_impuesto;
-							}
-							else if (listadeimpuestos[i].codigo_impuesto == new FeaEntidades.CodigosImpuesto.Municipales().Codigo)
-							{
-								total_Impuestos_Municipales += listadeimpuestos[i].importe_impuesto;
-							}
-							else
-							{
-								throw new Exception("Código del impuesto inválido");
-							}
-						}
-					}
+					double total_Impuestos_Nacionales;
+					double total_Impuestos_Internos;
+					double total_Ingresos_Brutos;
+					double total_Impuestos_Municipales;
+
+					CalcularImpuestos(out total_Impuestos_Nacionales, out total_Impuestos_Internos, out total_Ingresos_Brutos, out total_Impuestos_Municipales);
+					
 					//Asigno totales
 					if (!Punto_VentaTextBox.Text.Equals(string.Empty))
 					{
@@ -1722,6 +1696,47 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = String.Empty;
 					if (Importe_Total_Impuestos_Internos_ResumenTextBox.Text == "0")
 						Importe_Total_Impuestos_Internos_ResumenTextBox.Text = String.Empty;
+				}
+			}
+		}
+
+		private void CalcularImpuestos(out double total_Impuestos_Nacionales, out double total_Impuestos_Internos, out double total_Ingresos_Brutos, out double total_Impuestos_Municipales)
+		{
+			total_Impuestos_Nacionales = 0;
+			total_Impuestos_Internos = 0;
+			total_Ingresos_Brutos = 0;
+			total_Impuestos_Municipales = 0;
+			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos = ImpuestosGlobales.Lista;
+			for (int i = 0; i < listadeimpuestos.Count; i++)
+			{
+				if (!listadeimpuestos[i].codigo_impuesto.Equals(0))
+				{
+					switch (listadeimpuestos[i].codigo_impuesto)
+					{
+						case 1://IVA
+							if (!CodigoConceptoDropDownList.Visible)
+							{
+								total_Impuestos_Nacionales += listadeimpuestos[i].importe_impuesto;
+							}
+							break;
+						case 3://Otros
+							total_Impuestos_Nacionales += listadeimpuestos[i].importe_impuesto;
+							break;
+						case 4://Nacionales
+							total_Impuestos_Nacionales += listadeimpuestos[i].importe_impuesto;
+							break;
+						case 2://Internos
+							total_Impuestos_Internos += listadeimpuestos[i].importe_impuesto;
+							break;
+						case 5://IB
+							total_Ingresos_Brutos += listadeimpuestos[i].importe_impuesto;
+							break;
+						case 6://Municipales
+							total_Impuestos_Municipales += listadeimpuestos[i].importe_impuesto;
+							break;
+						default:
+							throw new Exception("Código del impuesto inválido");
+					}
 				}
 			}
 		}
