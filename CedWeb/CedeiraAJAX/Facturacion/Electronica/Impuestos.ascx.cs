@@ -128,6 +128,19 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				return refs;
 			}
 		}
+		public System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> EliminarImpuestosIVA()
+		{
+			impuestos = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]);
+			impuestos.RemoveAll(delegate(FeaEntidades.InterFacturas.resumenImpuestos e)
+				{
+					return e.codigo_impuesto == new FeaEntidades.CodigosImpuesto.IVA().Codigo;
+				});
+			impuestosGridView.DataSource = impuestos;
+			impuestosGridView.DataBind();
+			ViewState["impuestos"] = impuestos;
+			BindearDropDownLists();
+			return impuestos;
+		}
 		protected void impuestosGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
 		{
 			impuestosGridView.EditIndex = -1;
@@ -419,6 +432,45 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			{
 				return string.Empty;
 			}
+		}
+
+		internal void AgregarImpuestosIVA(System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas)
+		{
+			System.Collections.Generic.List<FeaEntidades.IVA.IVA> listaIVA = FeaEntidades.IVA.IVA.ListaMinima();
+			double[] impivas = new double[listaIVA.Count];
+			for (int i = 0; i < listadelineas.Count; i++)
+			{
+				if (listadelineas[i].importe_iva != 0)
+				{
+					if (listadelineas[i].alicuota_ivaSpecified)
+					{
+						int k=listaIVA.FindIndex(delegate(FeaEntidades.IVA.IVA e)
+						{
+							return e.Codigo == listadelineas[i].alicuota_iva;
+						});
+						impivas[k] += listadelineas[i].importe_iva;
+					}
+				}
+			}
+			for (int j = 0; j<impivas.Length; j++)
+			{
+				if (impivas[j] != 0)
+				{
+					impuestos = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]);
+					FeaEntidades.InterFacturas.resumenImpuestos imp = new FeaEntidades.InterFacturas.resumenImpuestos();
+					FeaEntidades.CodigosImpuesto.IVA iva = new FeaEntidades.CodigosImpuesto.IVA();
+					imp.codigo_impuesto = iva.Codigo;
+					imp.importe_impuesto = impivas[j];
+					imp.porcentaje_impuestoSpecified = true;
+					imp.porcentaje_impuesto = FeaEntidades.IVA.IVA.ListaMinima()[j].Codigo;
+					imp.descripcion = iva.Descr;
+					impuestos.Add(imp);
+				}
+			}
+			impuestosGridView.DataSource = impuestos;
+			impuestosGridView.DataBind();
+			ViewState["impuestos"] = impuestos;
+			BindearDropDownLists();
 		}
 	}
 }

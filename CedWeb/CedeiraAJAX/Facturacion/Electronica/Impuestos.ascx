@@ -26,6 +26,9 @@
 				<td style="text-align: center; padding: 3px; font-weight: normal;">
 					<asp:UpdatePanel ID="impuestosUpdatePanel" runat="server" ChildrenAsTriggers="true"
 						UpdateMode="Conditional">
+						<Triggers>
+							<asp:AsyncPostBackTrigger ControlID="CalcularTotalesButton"></asp:AsyncPostBackTrigger>
+						</Triggers>
 						<ContentTemplate>
 							<asp:GridView ID="impuestosGridView" runat="server" AutoGenerateColumns="False" BorderColor="gray"
 								BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70" EmptyDataRowStyle-ForeColor="#071F70"

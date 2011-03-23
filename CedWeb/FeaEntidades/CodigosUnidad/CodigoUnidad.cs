@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FeaEntidades.CodigosUnidad
 {
-    public class CodigoUnidad
+	public class CodigoUnidad : IComparable
     {
         private short codigo;
         private string descr;
@@ -76,9 +76,28 @@ namespace FeaEntidades.CodigosUnidad
             lista.Add(new Pack());
             lista.Add(new Horma());
             lista.Add(new OtrasUnidades());
-
+			lista.Add(new Anticipos());
+			lista.Add(new Bonificacion());
+			lista.Sort();
             return lista;
         }
 
-    }
+
+		#region Miembros de IComparable
+
+		int IComparable.CompareTo(object obj)
+		{
+			if (obj is CodigoUnidad)
+			{
+				CodigoUnidad dp2 = (CodigoUnidad)obj;
+				return descr.CompareTo(dp2.descr);
+			}
+			else
+			{
+				throw new ArgumentException("Object no es un CodigoUnidad.");
+			}
+		}
+
+		#endregion
+	}
 }
