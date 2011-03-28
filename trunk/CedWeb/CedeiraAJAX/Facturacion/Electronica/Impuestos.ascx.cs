@@ -135,6 +135,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				{
 					return e.codigo_impuesto == new FeaEntidades.CodigosImpuesto.IVA().Codigo;
 				});
+
+			if (impuestos.Count.Equals(0))
+			{
+				FeaEntidades.InterFacturas.resumenImpuestos nueva = new FeaEntidades.InterFacturas.resumenImpuestos();
+				impuestos.Add(nueva);
+			}
+
 			impuestosGridView.DataSource = impuestos;
 			impuestosGridView.DataBind();
 			ViewState["impuestos"] = impuestos;
@@ -198,12 +205,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 
 					//Me fijo si elimino la fila automática
-					System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> impuestos = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]);
-					FeaEntidades.InterFacturas.resumenImpuestos impuestoInicial = impuestos[0];
-					if (impuestoInicial.codigo_impuesto == 0)
-					{
-						((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]).Remove(impuestoInicial);
-					}
+					EliminarFilaAutomatica();
 
 					//Saco de edición la fila que estén modificando
 					if (!impuestosGridView.EditIndex.Equals(-1))
@@ -222,6 +224,17 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 			}
 		}
+
+		private void EliminarFilaAutomatica()
+		{
+			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> impuestos = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]);
+			FeaEntidades.InterFacturas.resumenImpuestos impuestoInicial = impuestos[0];
+			if (impuestoInicial.codigo_impuesto == 0)
+			{
+				((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]).Remove(impuestoInicial);
+			}
+		}
+
 		protected void impuestosGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
 		{
 			if (e.Exception != null)
@@ -464,6 +477,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					imp.porcentaje_impuestoSpecified = true;
 					imp.porcentaje_impuesto = FeaEntidades.IVA.IVA.ListaMinima()[j].Codigo;
 					imp.descripcion = iva.Descr;
+					EliminarFilaAutomatica();
 					impuestos.Add(imp);
 				}
 			}
