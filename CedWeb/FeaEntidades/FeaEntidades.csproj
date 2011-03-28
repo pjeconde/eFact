@@ -118,6 +118,8 @@
     <Compile Include="CodigosReferencia\Exportaciones\NotaDeCreditoPorOperacionesConElExterior.cs" />
     <Compile Include="CodigosReferencia\Exportaciones\NotaDeDebitoPorOperacionesConElExterior.cs" />
     <Compile Include="CodigosReferencia\Exportaciones\SinInformar.cs" />
+    <Compile Include="CodigosUnidad\Anticipos.cs" />
+    <Compile Include="CodigosUnidad\Bonificacion.cs" />
     <Compile Include="DestinosCuit\SinInformar.cs" />
     <Compile Include="DestinosPais\AaeTierraDelFuegoArgentina.cs" />
     <Compile Include="DestinosPais\Afganistan.cs" />
