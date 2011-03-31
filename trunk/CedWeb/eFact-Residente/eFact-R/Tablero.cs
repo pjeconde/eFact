@@ -340,8 +340,22 @@ namespace eFact_R
                         string comentario = ArmarTextoMotivo(Lc);
                         EjecutarEventoBandejaS("RegAceptAFIP", comentario, l);
                     }
+                    else if (Lc.cabecera_lote.resultado == "O")
+                    {
+                        eFact_R.RN.Lote.ActualizarDatosCAE(l, Lc);
+                        string comentario = ArmarTextoMotivo(Lc);
+                        EjecutarEventoBandejaS("RegAceptAFIP", comentario, l);
+                    }
+                    else if (Lc.cabecera_lote.resultado == "P")
+                    {
+                        eFact_R.RN.Lote.ActualizarDatosCAE(l, Lc);
+                        string comentario = ArmarTextoMotivo(Lc);
+                        EjecutarEventoBandejaS("RegAceptAFIP", comentario, l);
+                    }
                     else if (Lc.cabecera_lote.resultado == "R")
                     {
+                        CedWebRN.IBK.lote_response lr = ArmarLoteResponse(Lc);
+                        eFact_R.RN.Lote.ActualizarDatosError(l, lr);
                         string comentario = ArmarTextoMotivo(Lc);
                         EjecutarEventoBandejaS("RegRechAFIP", comentario, l);
                     }
@@ -410,6 +424,46 @@ namespace eFact_R
                 }
             }
             return texto;
+        }
+        private CedWebRN.IBK.lote_response ArmarLoteResponse(FeaEntidades.InterFacturas.lote_comprobantes Lc)
+        {
+            string texto = "";
+            CedWebRN.IBK.lote_response lrCompleto = new CedWebRN.IBK.lote_response();
+            CedWebRN.IBK.error[] errores = new CedWebRN.IBK.error[1];
+            if (Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
+            {
+                errores[0] = new CedWebRN.IBK.error();
+                errores[0].codigo_error = 0;
+                errores[0].descripcion_error = Lc.cabecera_lote.motivo.Trim();
+                lrCompleto.errores_lote = errores;
+            }
+            int CantMotivoError = 0;
+            for (int i = 0; i < Lc.comprobante.Length; i++)
+            {
+                if (Lc.comprobante[i].cabecera.informacion_comprobante.motivo != null && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "00" && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "")
+                {
+                    CantMotivoError++;
+                }
+            }
+            int NroMotivo = 0;
+            for (int i = 0; i < Lc.comprobante.Length; i++)
+            {
+                CedWebRN.IBK.error[] erroresComprobante = new CedWebRN.IBK.error[1];
+                if (Lc.comprobante[i].cabecera.informacion_comprobante.motivo != null && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "00" && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "")
+                {
+                    if (lrCompleto.comprobante_response == null)
+                    {
+                        lrCompleto.comprobante_response = new CedWebRN.IBK.comprobante_response[CantMotivoError];
+                    }
+                    erroresComprobante[NroMotivo] = new CedWebRN.IBK.error();
+                    erroresComprobante[NroMotivo].codigo_error = 0;
+                    erroresComprobante[NroMotivo].descripcion_error = Lc.comprobante[i].cabecera.informacion_comprobante.motivo;
+                    lrCompleto.comprobante_response[NroMotivo] = new CedWebRN.IBK.comprobante_response();
+                    lrCompleto.comprobante_response[NroMotivo].errores_comprobante = erroresComprobante;
+                    NroMotivo++;
+                }
+            }
+            return lrCompleto;
         }
         private void OtrosFiltrosFiltrarBS()
         {
