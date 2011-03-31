@@ -39,6 +39,8 @@ namespace FeaEntidades.InterFacturas
 
 		private bool importe_iva_descuento_moneda_origenFieldSpecified;
 
+        private string indicacion_exento_gravado_descuentoField;
+
         /// <comentarios/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string nombre_clase
@@ -209,5 +211,18 @@ namespace FeaEntidades.InterFacturas
 				this.importe_iva_descuento_moneda_origenFieldSpecified = value;
 			}
 		}
+
+        /// <comentarios/>
+        public string indicacion_exento_gravado_descuento
+        {
+            get
+            {
+                return this.indicacion_exento_gravado_descuentoField;
+            }
+            set
+            {
+                this.indicacion_exento_gravado_descuentoField = value;
+            }
+        }
 	}
 }
