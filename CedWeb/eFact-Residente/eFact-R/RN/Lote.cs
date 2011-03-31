@@ -96,6 +96,24 @@ namespace eFact_R.RN
                 c.FechaVtoCAE = Convert.ToDateTime(sFecha.Substring(0, 4) + "/" + sFecha.Substring(4, 2) + "/" + sFecha.Substring(6, 2));
             }
         }
+        public static void ActualizarDatos(eFact_R.Entidades.Lote Lote, FeaEntidades.InterFacturas.lote_comprobantes Lc)
+        {
+            MemoryStream ms;
+            System.Xml.XmlTextWriter writer;
+            System.Xml.Serialization.XmlSerializer x;
+            String XmlizedString;
+
+            //Actualizar lote
+            ms = new MemoryStream();
+            XmlizedString = null;
+            writer = new XmlTextWriter(ms, System.Text.Encoding.GetEncoding("ISO-8859-1"));
+            x = new System.Xml.Serialization.XmlSerializer(Lc.GetType());
+            x.Serialize(writer, Lc);
+            ms = (MemoryStream)writer.BaseStream;
+            XmlizedString = RN.Tablero.ByteArrayToString(ms.ToArray());
+            ms.Close();
+            Lote.LoteXmlIF = XmlizedString;
+        }
         public static void ActualizarDatosError(eFact_R.Entidades.Lote Lote, CedWebRN.IBK.lote_response Lr)
         {
             MemoryStream ms;
@@ -126,53 +144,48 @@ namespace eFact_R.RN
                     switch (Evento.Id)
                     {
                         case "EnvBandSalida":
-                            {
-                                if (Lote.NumeroEnvio > 1)
-                                { 
-                                    eFact_R.Entidades.Lote l = new eFact_R.Entidades.Lote();
-                                    l.CuitVendedor = Lote.CuitVendedor;
-                                    l.PuntoVenta = Lote.PuntoVenta;
-                                    l.NumeroLote = Lote.NumeroLote;
-                                    l.NumeroEnvio = Lote.NumeroEnvio - 1;
-                                    eFact_R.RN.Lote.Leer(l, Sesion);
-                                    //Busca el evento automático, para anular el envio anterior.
-                                    CedEntidades.Evento evento = l.WF.EventosPosibles.Find((delegate(CedEntidades.Evento e1) { return e1.Automatico == true && (e1.Id == "AnularRechIF" || e1.Id == "AnularCancel"); }));
-                                    handlerEvento = Cedeira.SV.WF.EjecutarEvento(l.WF, evento, true);
-                                    handlerEvento += " end ";
-                                }
-                                handlerEvento += Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
-                                lote.Insertar(Lote, handlerEvento, Handler);
-                                break;
+                            if (Lote.NumeroEnvio > 1)
+                            { 
+                                eFact_R.Entidades.Lote l = new eFact_R.Entidades.Lote();
+                                l.CuitVendedor = Lote.CuitVendedor;
+                                l.PuntoVenta = Lote.PuntoVenta;
+                                l.NumeroLote = Lote.NumeroLote;
+                                l.NumeroEnvio = Lote.NumeroEnvio - 1;
+                                eFact_R.RN.Lote.Leer(l, Sesion);
+                                //Busca el evento automático, para anular el envio anterior.
+                                CedEntidades.Evento evento = l.WF.EventosPosibles.Find((delegate(CedEntidades.Evento e1) { return e1.Automatico == true && (e1.Id == "AnularRechIF" || e1.Id == "AnularCancel"); }));
+                                handlerEvento = Cedeira.SV.WF.EjecutarEvento(l.WF, evento, true);
+                                handlerEvento += " end ";
                             }
+                            handlerEvento += Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
+                            lote.Insertar(Lote, handlerEvento, Handler);
+                            break;
                         case "EnviarAIF":
-                            {
-                                handlerEvento += Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
-                                lote.ActualizarFechaEnvio(Lote, handlerEvento);
-                                break;
-                            }
+                            handlerEvento += Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
+                            lote.ActualizarFechaEnvio(Lote, handlerEvento);
+                            break;
                         case "RegAceptAFIP":
-                            {
-                                handlerEvento = Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
-                                lote.ActualizarDatosCAE(Lote, handlerEvento);
-                                if (eFact_R.Aplicacion.TipoItfAut == "XML")
-                                {
-                                    GuardarItfXML(out nombreArchivoProcesado, Lote, "ROK", eFact_R.Aplicacion.ArchPathItfAut, true, false);
-                                }
-                                else if (eFact_R.Aplicacion.TipoItfAut == "TXT")
-                                {
-                                    GuardarItfTXT(out nombreArchivoProcesado, Lote, "ROK", eFact_R.Aplicacion.ArchPathItfAut, true);
-                                }
-                                break;
-                            }
-                        case "RegRechAFIP":
-                            Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, false);
+                            handlerEvento = Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
+                            lote.ActualizarDatosCAE(Lote, handlerEvento);
                             if (eFact_R.Aplicacion.TipoItfAut == "XML")
                             {
-                                GuardarItfXML(out nombreArchivoProcesado, Lote, "RAF", eFact_R.Aplicacion.ArchPathItfAut, false, false);
+                                GuardarItfXML(out nombreArchivoProcesado, Lote, "ROK", eFact_R.Aplicacion.ArchPathItfAut, true, false);
                             }
                             else if (eFact_R.Aplicacion.TipoItfAut == "TXT")
                             {
-                                GuardarItfTXTlr(out nombreArchivoProcesado, Lote, "RAF", eFact_R.Aplicacion.ArchPathItfAut, false);
+                                GuardarItfTXT(out nombreArchivoProcesado, Lote, "ROK", eFact_R.Aplicacion.ArchPathItfAut, true);
+                            }
+                            break;
+                        case "RegRechAFIP":
+                            handlerEvento = Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
+                            lote.ActualizarDatosError(Lote, handlerEvento);
+                            if (eFact_R.Aplicacion.TipoItfAut == "XML")
+                            {
+                                GuardarItfXML(out nombreArchivoProcesado, Lote, "RAF", eFact_R.Aplicacion.ArchPathItfAut, true, false);
+                            }
+                            else if (eFact_R.Aplicacion.TipoItfAut == "TXT")
+                            {
+                                GuardarItfTXTlr(out nombreArchivoProcesado, Lote, "RAF", eFact_R.Aplicacion.ArchPathItfAut, true);
                             }
                             break;
                         case "RegRechIF":
@@ -416,6 +429,10 @@ namespace eFact_R.RN
                     if (lc.comprobante[i].extensiones != null && (lc.comprobante[i].extensiones.extensiones_datos_comerciales != null && lc.comprobante[i].extensiones.extensiones_datos_comerciales != ""))
                     {
                         lc.comprobante[i].extensiones.extensiones_datos_comerciales = engine.ConvertToHex(lc.comprobante[i].extensiones.extensiones_datos_comerciales);
+                    }
+                    if (lc.comprobante[i].extensiones != null && (lc.comprobante[i].extensiones.extensiones_datos_marketing != null && lc.comprobante[i].extensiones.extensiones_datos_marketing != ""))
+                    {
+                        lc.comprobante[i].extensiones.extensiones_datos_marketing = engine.ConvertToHex(lc.comprobante[i].extensiones.extensiones_datos_marketing);
                     }
                 }
                 SerializarLc(out cadena, lc);

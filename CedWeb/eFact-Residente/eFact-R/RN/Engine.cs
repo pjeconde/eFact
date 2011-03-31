@@ -125,9 +125,20 @@ namespace eFact_R.RN
                             lc.comprobante[NroComprobante].extensiones = new FeaEntidades.InterFacturas.extensiones();
                             lc.comprobante[NroComprobante].extensionesSpecified = true;
                             lc.comprobante[NroComprobante].extensiones = (FeaEntidades.InterFacturas.extensiones)o;
-                            lc.comprobante[NroComprobante].extensiones.extensiones_datos_comerciales.ToString();
-                            string prueba = ConvertToHex(lc.comprobante[NroComprobante].extensiones.extensiones_datos_comerciales.ToString());
-                            string pruebaResp = HexToString(prueba);
+                            if (lc.comprobante[NroComprobante].extensiones.extensiones_datos_comerciales != null && lc.comprobante[NroComprobante].extensiones.extensiones_datos_comerciales != "")
+                            {
+                                if (lc.comprobante[NroComprobante].extensiones.extensiones_datos_comerciales.Substring(0, 1) == "%")
+                                {
+                                    lc.comprobante[NroComprobante].extensiones.extensiones_datos_comerciales = HexToString(lc.comprobante[NroComprobante].extensiones.extensiones_datos_comerciales.ToString());
+                                }
+                            }
+                            if (lc.comprobante[NroComprobante].extensiones.extensiones_datos_marketing != null && lc.comprobante[NroComprobante].extensiones.extensiones_datos_marketing != "")
+                            {
+                                if (lc.comprobante[NroComprobante].extensiones.extensiones_datos_marketing.Substring(0, 1) == "%")
+                                {
+                                    lc.comprobante[NroComprobante].extensiones.extensiones_datos_marketing = HexToString(lc.comprobante[NroComprobante].extensiones.extensiones_datos_marketing.ToString());
+                                }
+                            }
                         }
                     }
                     if (typeof(FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas) == o.GetType())
@@ -335,7 +346,7 @@ namespace eFact_R.RN
                     {
                         return typeof(FeaEntidades.InterFacturas.permisos);
                     }
-                case "<resumendescuentos>":
+                case "<resumenDescuentos>":
                     {
                         return typeof(FeaEntidades.InterFacturas.resumenDescuentos);
                     }
