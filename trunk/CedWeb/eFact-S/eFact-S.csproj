@@ -1,0 +1,112 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7D82E548-CC8D-49AB-A97B-1A35771D50A4}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>eFact_S</RootNamespace>
+    <AssemblyName>eFact-S</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ProjectInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProjectInstaller.Designer.cs">
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Service1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Service1.Designer.cs">
+      <DependentUpon>Service1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProjectInstaller.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Service1.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Service1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CaptchaDotNet2\CaptchaDotNet2.csproj">
+      <Project>{B76ED545-1CF6-40BC-A3E1-52C34B0A0EFF}</Project>
+      <Name>CaptchaDotNet2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CedeiraAP\CedeiraAP.csproj">
+      <Project>{DB0A7D76-F68E-43A7-ADBD-08DDF2AFAD36}</Project>
+      <Name>CedeiraAP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CedEntidades\CedEntidades.csproj">
+      <Project>{2D17A63F-789D-4C01-864A-C15411D577A7}</Project>
+      <Name>CedEntidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CedEx\CedeiraEx.csproj">
+      <Project>{883AB19F-36F5-42A4-A1A7-4206F84E7757}</Project>
+      <Name>CedeiraEx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CedWebRN\CedWebRN.csproj">
+      <Project>{9C229E72-6A86-4209-8730-91F573B4DF19}</Project>
+      <Name>CedWebRN</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eFact-Entidades\eFact-Entidades.csproj">
+      <Project>{88FDF572-3FF0-4019-8EE5-53D0BD47EA0D}</Project>
+      <Name>eFact-Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eFact-RN\eFact-RN.csproj">
+      <Project>{709FF43D-659A-4AA2-A184-892CD2B35F32}</Project>
+      <Name>eFact-RN</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FeaEntidades\FeaEntidades.csproj">
+      <Project>{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}</Project>
+      <Name>FeaEntidades</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
