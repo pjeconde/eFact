@@ -489,6 +489,59 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
             }
         }
     }
+    namespace Servicio
+    {
+        [Serializable]
+        public class BaseApplicationException : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+        {
+            public BaseApplicationException(string TextoError)
+                : base(TextoError)
+            {
+            }
+            public BaseApplicationException(string TextoError, Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public BaseApplicationException(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
+        public class Registracion : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Cuentas.BaseApplicationException
+        {
+            static string TextoError = "Problemas con la Registración";
+            public Registracion()
+                : base(TextoError)
+            {
+            }
+            public Registracion(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public Registracion(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
+        public class DesRegistracion : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Cuentas.BaseApplicationException
+        {
+            static string TextoError = "Problemas con la DesRegistración";
+            public DesRegistracion()
+                : base(TextoError)
+            {
+            }
+            public DesRegistracion(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public DesRegistracion(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+    }
     namespace Tablero
     {
         [Serializable]
