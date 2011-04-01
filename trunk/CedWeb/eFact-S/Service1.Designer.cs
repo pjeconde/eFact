@@ -34,12 +34,12 @@
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 5000;
+            this.timer1.Interval = 4000;
             this.timer1.Elapsed += new System.Timers.ElapsedEventHandler(this.timer1_Elapsed);
             // 
             // Service1
             // 
-            this.ServiceName = "Servicio eFact";
+            this.ServiceName = "Servicio-eFact";
             ((System.ComponentModel.ISupportInitialize)(this.timer1)).EndInit();
 
         }

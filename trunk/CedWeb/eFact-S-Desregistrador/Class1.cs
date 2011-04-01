@@ -29,14 +29,18 @@ namespace eFact_S_Desregistrador
 
                 ProcessStartInfo psi = new ProcessStartInfo();
                 psi.FileName = Environment.GetEnvironmentVariable("windir") + "\\Microsoft.Net\\Framework\\" + version + "\\" + "installutil.exe";
+                System.Console.WriteLine(psi.FileName);
                 string aux = " /u \"" + @args[0] + "\\eFact-S.exe" + "\"";
                 psi.Arguments = aux;
-
                 System.Console.WriteLine(psi.Arguments);
+
                 psi.UseShellExecute = false;
                 psi.RedirectStandardOutput = true;
+                System.Console.WriteLine("Asignar ProcessStartInfo");
                 pro.StartInfo = psi;
+                System.Console.WriteLine("Ejecutar el Start Process");
                 pro.Start();
+                System.Console.WriteLine("Start Process listo");
                 Console.WriteLine(pro.StandardOutput.ReadToEnd());
                 pro.WaitForExit();
             }
@@ -44,6 +48,8 @@ namespace eFact_S_Desregistrador
             {
                 Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
             }
+            Console.WriteLine("Presione una tecla para continuar");
+            Console.ReadLine();
         }
     }
 }

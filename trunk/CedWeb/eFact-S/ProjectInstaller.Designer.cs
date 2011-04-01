@@ -41,6 +41,7 @@
             this.serviceInstaller1.Description = "Procesa archivos ( XML y TXT )";
             this.serviceInstaller1.DisplayName = "Servicio de captura eFact";
             this.serviceInstaller1.ServiceName = "Servicio-eFact";
+            this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller
             // 
@@ -52,7 +53,8 @@
 
         #endregion
 
-        private System.ServiceProcess.ServiceProcessInstaller serviceProcessInstaller1;
-        private System.ServiceProcess.ServiceInstaller serviceInstaller1;
+        internal System.ServiceProcess.ServiceProcessInstaller serviceProcessInstaller1;
+        internal System.ServiceProcess.ServiceInstaller serviceInstaller1;
+
     }
 }

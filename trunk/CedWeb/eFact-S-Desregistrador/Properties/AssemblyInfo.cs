@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("eFact-S-Desregistrador")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("Cedeira")]
 [assembly: AssemblyProduct("eFact-S-Desregistrador")]
-[assembly: AssemblyCopyright("© Microsoft 2011")]
+[assembly: AssemblyCopyright("© Cedeira")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
