@@ -45,6 +45,12 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
             {
                 try
                 {
+                    string lcomp = Server.MapPath("~/Facturacion/Electronica/Reportes/lote_comprobantes.xsd");
+                    System.IO.File.Copy(lcomp, @System.IO.Path.GetTempPath() + "lote_comprobantes.xsd", true);
+
+                    string imagen = Server.MapPath("~/Facturacion/Electronica/Reportes/Imagen.xsd");
+                    System.IO.File.Copy(imagen, @System.IO.Path.GetTempPath() + "Imagen.xsd", true);
+
                     facturaRpt = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
                     string reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/Factura.rpt");
                     facturaRpt.Load(reportPath);
