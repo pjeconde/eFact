@@ -397,7 +397,7 @@ namespace eFact_R
         private string ArmarTextoMotivo(FeaEntidades.InterFacturas.lote_comprobantes Lc)
         {
             string texto = "";
-            if (Lc.cabecera_lote.resultado == "A" || Lc.cabecera_lote.resultado == "R")
+            if (Lc.cabecera_lote.resultado == "A" || Lc.cabecera_lote.resultado == "R" || Lc.cabecera_lote.resultado == "O")
             {
                 if (Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
                 {

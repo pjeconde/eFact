@@ -78,6 +78,9 @@ namespace eFact_S
                 NombrePC = System.Environment.MachineName;
                 Inicializar();
 
+                //Actualizar Estado AFIP de los Lotes Ptes de Respuesta.
+                ActualizarEstadoAFIPLotes();
+
                 string[] files = Directory.GetFiles(Aplicacion.ArchPath, "*.*");
                 List<eFact_Entidades.Archivo> Archivos = new List<eFact_Entidades.Archivo>();
                 foreach (string d in files)
@@ -139,9 +142,14 @@ namespace eFact_S
                         elem.FechaProceso = DateTime.Now;
                         eFact_RN.Archivo.Insertar(elem, false, Aplicacion.Sesion);
                     }
+                    
                     //Remover archivo ----------------------
                     Directory.Move(Aplicacion.ArchPath + "\\" + NombreArchivo, Aplicacion.ArchPathHis + ArchGuardarComoNombre);
                     //--------------------------------------
+
+                    //Solo procesa un archivo y sale, para poder recibir posteriormente la respuesta AFIP. 
+                    //Cuando se vuelve a iniciar el timer de servicio se ejecuta la funcion "ActualizarEstadoAFIPLotes()".
+                    break;
                 }
             }
             catch (Exception ex)
@@ -156,6 +164,95 @@ namespace eFact_S
         private static int ordenarPorFecha(eFact_Entidades.Archivo A1, eFact_Entidades.Archivo A2)
         {
             return A1.FechaModificacion.CompareTo(A2.FechaModificacion);
+        }
+        private void ActualizarEstadoAFIPLotes()
+        {
+            List<eFact_Entidades.Lote> lotes = new List<eFact_Entidades.Lote>();
+            eFact_RN.Tablero.ActualizarBandejaSalida(out lotes, eFact_Entidades.Lote.TipoConsulta.SinAplicarFechas, Convert.ToDateTime("01/01/1980"), Convert.ToDateTime("31/12/2064"), "", "", "", false, Aplicacion.Sesion);
+            //Verificar Ptes.Respuesta AFIP.
+            List<eFact_Entidades.Lote> lotesFind = lotes.FindAll((delegate(eFact_Entidades.Lote e1) { return e1.WF.IdEstado == "PteRespAFIP"; }));
+            foreach (eFact_Entidades.Lote l in lotesFind)
+            {
+                FeaEntidades.InterFacturas.lote_comprobantes Lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+                CedWebRN.IBK.error[] respErroresLote = new CedWebRN.IBK.error[0];
+                CedWebRN.IBK.error[] respErroresComprobantes = new CedWebRN.IBK.error[0];
+                try
+                {
+                    //Consultar si exite el lote en Interfacturas
+                    eFact_RN.Lote.ConsultarLoteIF(out Lc, out respErroresLote, out respErroresComprobantes, l, Aplicacion.Vendedores.Find(delegate(eFact_Entidades.Vendedor e1) { return e1.CuitVendedor == l.CuitVendedor; }).NumeroSerieCertificado);
+                    //Ejecutar evento ( cambia el estado )
+                    if (Lc.cabecera_lote.resultado == "A")
+                    {
+                        eFact_RN.Lote.ActualizarDatosCAE(l, Lc);
+                        string comentario = ArmarTextoMotivo(Lc);
+                        EjecutarEventoBandejaS("RegAceptAFIP", comentario, l);
+                    }
+                    else if (Lc.cabecera_lote.resultado == "O")
+                    {
+                        eFact_RN.Lote.ActualizarDatosCAE(l, Lc);
+                        string comentario = ArmarTextoMotivo(Lc);
+                        EjecutarEventoBandejaS("RegAceptAFIP", comentario, l);
+                    }
+                    //else if (Lc.cabecera_lote.resultado == "P")
+                    //{
+                    //    eFact_RN.Lote.ActualizarDatosCAE(l, Lc);
+                    //    string comentario = ArmarTextoMotivo(Lc);
+                    //    EjecutarEventoBandejaS("RegAceptAFIP", comentario, l);
+                    //}
+                    else if (Lc.cabecera_lote.resultado == "R")
+                    {
+                        CedWebRN.IBK.lote_response lr = ArmarLoteResponse(Lc);
+                        eFact_RN.Lote.ActualizarDatosError(l, lr);
+                        string comentario = ArmarTextoMotivo(Lc);
+                        EjecutarEventoBandejaS("RegRechAFIP", comentario, l);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (respErroresLote.Length != 0)
+                    {
+                        if (respErroresLote[0].codigo_error != Convert.ToInt32("401"))
+                        {
+                            EjecutarEventoBandejaS("RegRechAFIP", ex.Message, l);
+                        }
+                    }
+                    else
+                    {
+                        Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
+                    }
+                }
+            }
+        }
+        private string ArmarTextoMotivo(FeaEntidades.InterFacturas.lote_comprobantes Lc)
+        {
+            string texto = "";
+            if (Lc.cabecera_lote.resultado == "A" || Lc.cabecera_lote.resultado == "R")
+            {
+                if (Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
+                {
+                    FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP codigosErrorAFIPLote = FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP.Lista().Find((delegate(FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP e1) { return e1.Codigo == Lc.cabecera_lote.motivo.Trim(); }));
+                    string descrCodigosErrorAFIPLote = "";
+                    if (codigosErrorAFIPLote != null)
+                    {
+                        descrCodigosErrorAFIPLote = codigosErrorAFIPLote.Descr;
+                    }
+                    texto += "Código de problema a nivel lote: " + Lc.cabecera_lote.motivo.Trim() + " " + descrCodigosErrorAFIPLote + "\r\n\r\n";
+                }
+                for (int i = 0; i < Lc.comprobante.Length; i++)
+                {
+                    if (Lc.comprobante[i].cabecera.informacion_comprobante.motivo != null && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "00" && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "")
+                    {
+                        FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP codigosErrorAFIPComprobante = FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP.Lista().Find((delegate(FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP e1) { return e1.Codigo == Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim(); }));
+                        string descrCodigosErrorAFIPComprobante = "";
+                        if (codigosErrorAFIPComprobante != null)
+                        {
+                            descrCodigosErrorAFIPComprobante = codigosErrorAFIPComprobante.Descr;
+                        }
+                        texto += "Código de problema a nivel comprobante ( renglon " + i.ToString() + "): " + Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() + " " + descrCodigosErrorAFIPComprobante + "\r\n";
+                    }
+                }
+            }
+            return texto;
         }
         private void Inicializar()
         {
@@ -263,6 +360,46 @@ namespace eFact_S
             Cedeira.SV.WF.LeerEvento(evento, Aplicacion.Sesion);
             eFact_RN.Lote.VerificarEnviosPosteriores(false, lote.CuitVendedor, lote.NumeroLote, lote.PuntoVenta, lote.NumeroEnvio, Aplicacion.Sesion);
             eFact_RN.Lote.Ejecutar(lote, evento, "", Aplicacion, Aplicacion.Sesion);
+        }
+        private CedWebRN.IBK.lote_response ArmarLoteResponse(FeaEntidades.InterFacturas.lote_comprobantes Lc)
+        {
+            string texto = "";
+            CedWebRN.IBK.lote_response lrCompleto = new CedWebRN.IBK.lote_response();
+            CedWebRN.IBK.error[] errores = new CedWebRN.IBK.error[1];
+            if (Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
+            {
+                errores[0] = new CedWebRN.IBK.error();
+                errores[0].codigo_error = 0;
+                errores[0].descripcion_error = Lc.cabecera_lote.motivo.Trim();
+                lrCompleto.errores_lote = errores;
+            }
+            int CantMotivoError = 0;
+            for (int i = 0; i < Lc.comprobante.Length; i++)
+            {
+                if (Lc.comprobante[i].cabecera.informacion_comprobante.motivo != null && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "00" && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "")
+                {
+                    CantMotivoError++;
+                }
+            }
+            int NroMotivo = 0;
+            for (int i = 0; i < Lc.comprobante.Length; i++)
+            {
+                CedWebRN.IBK.error[] erroresComprobante = new CedWebRN.IBK.error[1];
+                if (Lc.comprobante[i].cabecera.informacion_comprobante.motivo != null && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "00" && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "")
+                {
+                    if (lrCompleto.comprobante_response == null)
+                    {
+                        lrCompleto.comprobante_response = new CedWebRN.IBK.comprobante_response[CantMotivoError];
+                    }
+                    erroresComprobante[NroMotivo] = new CedWebRN.IBK.error();
+                    erroresComprobante[NroMotivo].codigo_error = 0;
+                    erroresComprobante[NroMotivo].descripcion_error = Lc.comprobante[i].cabecera.informacion_comprobante.motivo;
+                    lrCompleto.comprobante_response[NroMotivo] = new CedWebRN.IBK.comprobante_response();
+                    lrCompleto.comprobante_response[NroMotivo].errores_comprobante = erroresComprobante;
+                    NroMotivo++;
+                }
+            }
+            return lrCompleto;
         }
     }
 }
