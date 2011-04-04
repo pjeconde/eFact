@@ -86,14 +86,26 @@ namespace eFact_R.RN
             Lote.LoteXmlIF = XmlizedString;
 
             eFact_R.Entidades.Comprobante comprobante =new eFact_R.Entidades.Comprobante();
+            string sFecha = "";
             for (int i = 0; i < Lc.comprobante.Length; i++)
             {
                 eFact_R.Entidades.Comprobante c = Lote.Comprobantes.Find((delegate(eFact_R.Entidades.Comprobante e1) { return e1.IdTipoComprobante == Convert.ToInt16(Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante.ToString()) &&  e1.NumeroComprobante == Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante.ToString(); }));
-                c.NumeroCAE = Lc.comprobante[i].cabecera.informacion_comprobante.cae.ToString();
-                string sFecha = Lc.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae.ToString();
-                c.FechaCAE = Convert.ToDateTime(sFecha.Substring(0, 4) + "/" + sFecha.Substring(4, 2) + "/" + sFecha.Substring(6, 2));
-                sFecha = Lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento_cae.ToString();
-                c.FechaVtoCAE = Convert.ToDateTime(sFecha.Substring(0, 4) + "/" + sFecha.Substring(4, 2) + "/" + sFecha.Substring(6, 2));
+                if (Lc.comprobante[i].cabecera.informacion_comprobante.cae != null)
+                {
+                    c.NumeroCAE = Lc.comprobante[i].cabecera.informacion_comprobante.cae.ToString();
+                }
+                if (Lc.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae != null)
+                {
+                    sFecha = Lc.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae.ToString();
+                    c.FechaCAE = Convert.ToDateTime(sFecha.Substring(0, 4) + "/" + sFecha.Substring(4, 2) + "/" + sFecha.Substring(6, 2));
+                }
+                if (Lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento_cae != null)
+                {
+                    sFecha = Lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento_cae.ToString();
+                    c.FechaVtoCAE = Convert.ToDateTime(sFecha.Substring(0, 4) + "/" + sFecha.Substring(4, 2) + "/" + sFecha.Substring(6, 2));
+                }
+                c.EstadoIFoAFIP = Lc.comprobante[i].cabecera.informacion_comprobante.resultado;
+                c.ComentarioIFoAFIP = Lc.comprobante[i].cabecera.informacion_comprobante.motivo;
             }
         }
         public static void ActualizarDatos(eFact_R.Entidades.Lote Lote, FeaEntidades.InterFacturas.lote_comprobantes Lc)
@@ -174,6 +186,30 @@ namespace eFact_R.RN
                             else if (eFact_R.Aplicacion.TipoItfAut == "TXT")
                             {
                                 GuardarItfTXT(out nombreArchivoProcesado, Lote, "ROK", eFact_R.Aplicacion.ArchPathItfAut, true);
+                            }
+                            break;
+                        case "RegAceptAFIPO":
+                            handlerEvento = Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
+                            lote.ActualizarDatosCAE(Lote, handlerEvento);
+                            if (eFact_R.Aplicacion.TipoItfAut == "XML")
+                            {
+                                GuardarItfXML(out nombreArchivoProcesado, Lote, "ROO", eFact_R.Aplicacion.ArchPathItfAut, true, false);
+                            }
+                            else if (eFact_R.Aplicacion.TipoItfAut == "TXT")
+                            {
+                                GuardarItfTXT(out nombreArchivoProcesado, Lote, "ROO", eFact_R.Aplicacion.ArchPathItfAut, true);
+                            }
+                            break;
+                        case "RegAceptAFIPP":
+                            handlerEvento = Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
+                            lote.ActualizarDatosCAE(Lote, handlerEvento);
+                            if (eFact_R.Aplicacion.TipoItfAut == "XML")
+                            {
+                                GuardarItfXML(out nombreArchivoProcesado, Lote, "ROP", eFact_R.Aplicacion.ArchPathItfAut, true, false);
+                            }
+                            else if (eFact_R.Aplicacion.TipoItfAut == "TXT")
+                            {
+                                GuardarItfTXT(out nombreArchivoProcesado, Lote, "ROP", eFact_R.Aplicacion.ArchPathItfAut, true);
                             }
                             break;
                         case "RegRechAFIP":

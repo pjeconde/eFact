@@ -344,13 +344,13 @@ namespace eFact_R
                     {
                         eFact_R.RN.Lote.ActualizarDatosCAE(l, Lc);
                         string comentario = ArmarTextoMotivo(Lc);
-                        EjecutarEventoBandejaS("RegAceptAFIP", comentario, l);
+                        EjecutarEventoBandejaS("RegAceptAFIPO", comentario, l);
                     }
                     else if (Lc.cabecera_lote.resultado == "P")
                     {
                         eFact_R.RN.Lote.ActualizarDatosCAE(l, Lc);
                         string comentario = ArmarTextoMotivo(Lc);
-                        EjecutarEventoBandejaS("RegAceptAFIP", comentario, l);
+                        EjecutarEventoBandejaS("RegAceptAFIPP", comentario, l);
                     }
                     else if (Lc.cabecera_lote.resultado == "R")
                     {
@@ -397,7 +397,7 @@ namespace eFact_R
         private string ArmarTextoMotivo(FeaEntidades.InterFacturas.lote_comprobantes Lc)
         {
             string texto = "";
-            if (Lc.cabecera_lote.resultado == "A" || Lc.cabecera_lote.resultado == "R" || Lc.cabecera_lote.resultado == "O")
+            if (Lc.cabecera_lote.resultado == "A" || Lc.cabecera_lote.resultado == "R" || Lc.cabecera_lote.resultado == "O" || Lc.cabecera_lote.resultado == "P")
             {
                 if (Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
                 {
@@ -419,7 +419,13 @@ namespace eFact_R
                         {
                             descrCodigosErrorAFIPComprobante = codigosErrorAFIPComprobante.Descr;
                         }
-                        texto += "Código de problema a nivel comprobante ( renglon " + i.ToString() + "): " + Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() + " " + descrCodigosErrorAFIPComprobante + "\r\n";
+                        int renglon = i + 1;
+                        string resultado = "";
+                        if (Lc.comprobante[i].cabecera.informacion_comprobante != null)
+                        {
+                            resultado = Lc.comprobante[i].cabecera.informacion_comprobante.resultado + " ";
+                        }
+                        texto += "Código de problema a nivel comprobante ( renglon " + renglon.ToString() + "): " + resultado + Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() + " " + descrCodigosErrorAFIPComprobante + "\r\n";
                     }
                 }
             }
@@ -430,6 +436,15 @@ namespace eFact_R
             string texto = "";
             CedWebRN.IBK.lote_response lrCompleto = new CedWebRN.IBK.lote_response();
             CedWebRN.IBK.error[] errores = new CedWebRN.IBK.error[1];
+            lrCompleto.cantidad_reg = Lc.cabecera_lote.cantidad_reg;
+            lrCompleto.cuit_canal = Lc.cabecera_lote.cuit_canal;
+            lrCompleto.cuit_vendedor = Lc.cabecera_lote.cuit_vendedor;
+            lrCompleto.estado = Lc.cabecera_lote.resultado;
+            lrCompleto.fecha_envio_lote = Lc.cabecera_lote.fecha_envio_lote;
+            lrCompleto.id_lote = Lc.cabecera_lote.id_lote;
+            lrCompleto.presta_serv = Lc.cabecera_lote.presta_serv;
+            lrCompleto.presta_servSpecified = Lc.cabecera_lote.presta_servSpecified;
+            lrCompleto.punto_de_venta = Lc.cabecera_lote.punto_de_venta;
             if (Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
             {
                 errores[0] = new CedWebRN.IBK.error();
@@ -454,6 +469,10 @@ namespace eFact_R
                     if (lrCompleto.comprobante_response == null)
                     {
                         lrCompleto.comprobante_response = new CedWebRN.IBK.comprobante_response[CantMotivoError];
+                        lrCompleto.comprobante_response[i].numero_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante;
+                        lrCompleto.comprobante_response[i].punto_de_venta = Lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta;
+                        lrCompleto.comprobante_response[i].tipo_de_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante;
+                        lrCompleto.comprobante_response[i].estado = Lc.comprobante[i].cabecera.informacion_comprobante.resultado;
                     }
                     erroresComprobante[NroMotivo] = new CedWebRN.IBK.error();
                     erroresComprobante[NroMotivo].codigo_error = 0;

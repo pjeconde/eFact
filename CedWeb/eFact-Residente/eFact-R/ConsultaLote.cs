@@ -355,6 +355,11 @@ namespace eFact_R
                 lc.cabecera_lote.presta_serv = 1;
                 lc.cabecera_lote.presta_servSpecified = true;
             }
+            if (lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago == null)
+            {
+                lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago = "";
+                lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pagoSpecified = true;
+            }
             lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde = "";
             lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta = "";
             lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pagoSpecified = true;
@@ -409,6 +414,11 @@ namespace eFact_R
             if (lc.comprobante[0].cabecera.informacion_comprador.cp == null)
             {
                 lc.comprobante[0].cabecera.informacion_comprador.cp = string.Empty;
+            }
+            for (int i = 0; i < lc.comprobante[0].resumen.impuestos.Length; i++)
+            {
+                lc.comprobante[0].resumen.impuestos[i].codigo_jurisdiccion = 0;
+                lc.comprobante[0].resumen.impuestos[i].codigo_jurisdiccionSpecified = true;
             }
             lc.comprobante[0].resumen.cant_alicuotas_ivaSpecified = true;
             lc.comprobante[0].resumen.importe_total_impuestos_internosSpecified = true;

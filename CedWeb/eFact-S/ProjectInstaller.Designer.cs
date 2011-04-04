@@ -39,7 +39,7 @@
             // serviceInstaller1
             // 
             this.serviceInstaller1.Description = "Procesa archivos ( XML y TXT )";
-            this.serviceInstaller1.DisplayName = "Servicio de captura eFact";
+            this.serviceInstaller1.DisplayName = "eFact-S";
             this.serviceInstaller1.ServiceName = "Servicio-eFact";
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
