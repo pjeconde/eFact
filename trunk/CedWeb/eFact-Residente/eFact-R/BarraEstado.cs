@@ -201,6 +201,7 @@ namespace eFact_R
                         smtpClient.Credentials = new System.Net.NetworkCredential(MailCredencialesUsr, MailCredencialesPsw);
                     }
                     smtpClient.Send(mail);
+                    MessageBox.Show("Mail de prueba generado satisfactoriamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                 }
             }
             catch (Exception ex)

@@ -21,6 +21,8 @@ namespace eFact_R.Entidades
         private string numeroCAE;
         private DateTime fechaCAE;
         private DateTime fechaVtoCAE;
+        private string estadoIFoAFIP;
+        private string comentarioIFoAFIP;
         public Comprobante()
         {
         }
@@ -176,6 +178,28 @@ namespace eFact_R.Entidades
             get
             {
                 return fechaVtoCAE;
+            }
+        }
+        public string EstadoIFoAFIP
+        {
+            set
+            {
+                estadoIFoAFIP = value;
+            }
+            get
+            {
+                return estadoIFoAFIP;
+            }
+        }
+        public string ComentarioIFoAFIP
+        {
+            set
+            {
+                comentarioIFoAFIP = value;
+            }
+            get
+            {
+                return comentarioIFoAFIP;
             }
         }
     }

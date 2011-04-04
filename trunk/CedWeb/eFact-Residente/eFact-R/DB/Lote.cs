@@ -156,6 +156,14 @@ namespace eFact_R.DB
                 {
                     c.TipoCambio = Convert.ToDecimal(dr[i]["TipoCambio"]);
                 }
+                if (dr[i]["EstadoIFoAFIP"].ToString() != "")
+                {
+                    c.EstadoIFoAFIP = Convert.ToString(dr[i]["EstadoIFoAFIP"]);
+                }
+                if (dr[i]["ComentarioIFoAFIP"].ToString() != "")
+                {
+                    c.ComentarioIFoAFIP = Convert.ToString(dr[i]["ComentarioIFoAFIP"]);
+                }
                 Hasta.Comprobantes.Add(c);
             }
             //WF
@@ -397,7 +405,23 @@ namespace eFact_R.DB
                     commandText.Append("'" + Lote.Comprobantes[i].FechaVtoCAE.ToString("yyyyMMdd") + "', ");
                 }
                 commandText.Append(Lote.Comprobantes[i].ImporteMonedaOrigen + ", ");
-                commandText.Append(Lote.Comprobantes[i].TipoCambio + ") ");
+                commandText.Append(Lote.Comprobantes[i].TipoCambio + ", ");
+                if (Lote.Comprobantes[i].EstadoIFoAFIP == null)
+                {
+                    commandText.Append("null, ");
+                }
+                else
+                {
+                    commandText.Append("'" + Lote.Comprobantes[i].EstadoIFoAFIP + "', ");
+                }
+                if (Lote.Comprobantes[i].ComentarioIFoAFIP == null)
+                {
+                    commandText.Append("null) ");
+                }
+                else
+                {
+                    commandText.Append("'" + Lote.Comprobantes[i].ComentarioIFoAFIP + "') ");
+                }
             }
             commandText.Append(HandlerArchivo);
             DataTable dt = new DataTable();
@@ -423,6 +447,14 @@ namespace eFact_R.DB
                 commandText.Append(Lote.Comprobantes[i].NumeroCAE + "', FechaCAE = '");
                 commandText.Append(Lote.Comprobantes[i].FechaCAE.ToString("yyyyMMdd") + "', FechaVtoCAE = '");
                 commandText.Append(Lote.Comprobantes[i].FechaVtoCAE.ToString("yyyyMMdd") + "' ");
+                if (Lote.Comprobantes[i].EstadoIFoAFIP != null)
+                {
+                    commandText.Append(", EstadoIFoAFIP = '" + Lote.Comprobantes[i].EstadoIFoAFIP + "' ");
+                }
+                if (Lote.Comprobantes[i].ComentarioIFoAFIP != null)
+                {
+                    commandText.Append(", ComentarioIFoAFIP = '" + Lote.Comprobantes[i].ComentarioIFoAFIP + "' ");
+                }
                 commandText.Append("where IdLote = " + Lote.IdLote + " and IdTipoComprobante = '" + Lote.Comprobantes[i].IdTipoComprobante + "' ");
                 commandText.Append("and NumeroComprobante = '" + Lote.Comprobantes[i].NumeroComprobante + "' "); 
             }
