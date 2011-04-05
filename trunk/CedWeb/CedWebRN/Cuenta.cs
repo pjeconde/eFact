@@ -233,7 +233,7 @@ namespace CedWebRN
                 Leer(Cuenta, (CedEntidades.Sesion)Sesion);
                 CedWebRN.Cuenta.EnviarMailBienvenidaPremium(Cuenta, Sesion);
             }
-            EnviarSMS("Alta cuenta n° " + CantidadDeFilas((CedEntidades.Sesion)Sesion).ToString(), Cuenta.Nombre, cuenta.DestinatariosAvisoAltaCuenta());  
+            EnviarSMS("Alta cuenta " + CantidadDeFilas((CedEntidades.Sesion)Sesion).ToString(), Cuenta.Nombre, cuenta.DestinatariosAvisoAltaCuenta());  
         }
         public static bool IdCuentaDisponible(CedWebEntidades.Cuenta Cuenta, CedEntidades.Sesion Sesion)
         {
