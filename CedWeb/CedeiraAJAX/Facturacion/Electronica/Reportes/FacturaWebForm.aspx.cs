@@ -57,7 +57,8 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
 
                     FeaEntidades.InterFacturas.lote_comprobantes lc = (FeaEntidades.InterFacturas.lote_comprobantes)Session["lote"];
                     AsignarCamposOpcionales(lc);
-                    DataSet ds = new DataSet();
+					ReemplarResumenImportesMonedaExtranjera(lc);
+					DataSet ds = new DataSet();
 
                     XmlSerializer objXS = new XmlSerializer(lc.GetType());
                     StringWriter objSW = new StringWriter();
@@ -147,6 +148,7 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
             lc.comprobante[0].resumen.importe_total_impuestos_municipalesSpecified = true;
             lc.comprobante[0].resumen.importe_total_impuestos_nacionalesSpecified = true;
             lc.comprobante[0].resumen.importe_total_ingresos_brutosSpecified = true;
+
             for (int i = 0; i < lc.comprobante[0].detalle.linea.Length;i++)
             {
                 if (lc.comprobante[0].detalle.linea[i]!=null)
@@ -175,6 +177,36 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
                 }
             }
         }
+
+		private static void ReemplarResumenImportesMonedaExtranjera(FeaEntidades.InterFacturas.lote_comprobantes lc)
+		{
+			if (!lc.comprobante[0].resumen.codigo_moneda.Equals("PES"))
+			{
+				lc.comprobante[0].resumen.importe_total_neto_gravado = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_neto_gravado;
+
+				lc.comprobante[0].resumen.importe_total_concepto_no_gravado = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_concepto_no_gravado;
+				lc.comprobante[0].resumen.importe_operaciones_exentas = lc.comprobante[0].resumen.importes_moneda_origen.importe_operaciones_exentas;
+				lc.comprobante[0].resumen.impuesto_liq = lc.comprobante[0].resumen.importes_moneda_origen.impuesto_liq;
+				lc.comprobante[0].resumen.impuesto_liq_rni = lc.comprobante[0].resumen.importes_moneda_origen.impuesto_liq_rni;
+				lc.comprobante[0].resumen.importe_total_impuestos_municipales = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_municipales;
+				lc.comprobante[0].resumen.importe_total_impuestos_nacionales = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_nacionales;
+				lc.comprobante[0].resumen.importe_total_ingresos_brutos = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_ingresos_brutos;
+				lc.comprobante[0].resumen.importe_total_impuestos_internos = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_internos;
+
+				lc.comprobante[0].resumen.importe_total_factura = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_factura;
+
+				if (lc.comprobante[0].resumen.descuentos != null)
+				{
+					for (int i = 0; i < lc.comprobante[0].resumen.descuentos.Length; i++)
+					{
+						if (lc.comprobante[0].resumen.descuentos[i] != null)
+						{
+							lc.comprobante[0].resumen.descuentos[i].importe_descuento = lc.comprobante[0].resumen.descuentos[i].importe_descuento_moneda_origen;
+						}
+					}
+				}
+			}
+		}
 
         private void GenerarCodigoBarras(string code)
         {
