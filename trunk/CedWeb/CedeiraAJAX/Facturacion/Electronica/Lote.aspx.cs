@@ -3866,70 +3866,64 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 			else
 			{
-				if (!MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
+				try
 				{
-					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no habilitado para comprobantes en moneda extranjera.')</script>");
-				}
-				else
-				{
-					try
+					FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
+					if (lcFea.comprobante[0].cabecera.informacion_comprobante.cae.Equals(string.Empty))
 					{
-						FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
-						if (lcFea.comprobante[0].cabecera.informacion_comprobante.cae.Equals(string.Empty))
+						lcFea.comprobante[0].cabecera.informacion_comprobante.cae = " ";
+					}
+					lcFea.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
+					lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
+					CedWebRN.Comprobante cDC = new CedWebRN.Comprobante();
+					foreach (FeaEntidades.InterFacturas.linea l in lcFea.comprobante[0].detalle.linea)
+					{
+						if (l != null)
 						{
-							lcFea.comprobante[0].cabecera.informacion_comprobante.cae = " ";
-						}
-						lcFea.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
-						lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
-						CedWebRN.Comprobante cDC = new CedWebRN.Comprobante();
-						foreach (FeaEntidades.InterFacturas.linea l in lcFea.comprobante[0].detalle.linea)
-						{
-							if (l != null)
-							{
-								l.descripcion = cDC.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
-							}
-							else
-							{
-								break;
-							}
-						}
-						if (lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento == null)
-						{
-							lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento = string.Empty;
-						}
-						if (lcFea.cabecera_lote.presta_servSpecified == false)
-						{
-							lcFea.cabecera_lote.presta_serv = 0;
-							lcFea.cabecera_lote.presta_servSpecified = true;
-						}
-						if (lcFea.comprobante[0].extensiones != null && lcFea.comprobante[0].extensiones.extensiones_datos_comerciales != null && !lcFea.comprobante[0].extensiones.extensiones_datos_comerciales.Equals(string.Empty))
-						{
-							string dc=cDC.HexToString(lcFea.comprobante[0].extensiones.extensiones_datos_comerciales);
-							lcFea.comprobante[0].extensiones.extensiones_datos_comerciales = dc.Replace("<br>", System.Environment.NewLine);
+							l.descripcion = cDC.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
 						}
 						else
 						{
-							lcFea.comprobante[0].extensiones = new FeaEntidades.InterFacturas.extensiones();
+							break;
 						}
-						if (lcFea.comprobante[0].resumen.impuestos != null)
+					}
+					if (lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento == null)
+					{
+						lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento = string.Empty;
+					}
+					if (lcFea.cabecera_lote.presta_servSpecified == false)
+					{
+						lcFea.cabecera_lote.presta_serv = 0;
+						lcFea.cabecera_lote.presta_servSpecified = true;
+					}
+					if (lcFea.comprobante[0].extensiones != null && lcFea.comprobante[0].extensiones.extensiones_datos_comerciales != null && !lcFea.comprobante[0].extensiones.extensiones_datos_comerciales.Equals(string.Empty))
+					{
+						string dc = cDC.HexToString(lcFea.comprobante[0].extensiones.extensiones_datos_comerciales);
+						lcFea.comprobante[0].extensiones.extensiones_datos_comerciales = dc.Replace("<br>", System.Environment.NewLine);
+					}
+					else
+					{
+						lcFea.comprobante[0].extensiones = new FeaEntidades.InterFacturas.extensiones();
+					}
+					if (lcFea.comprobante[0].resumen.impuestos != null)
+					{
+						foreach (FeaEntidades.InterFacturas.resumenImpuestos imp in lcFea.comprobante[0].resumen.impuestos)
 						{
-							foreach (FeaEntidades.InterFacturas.resumenImpuestos imp in lcFea.comprobante[0].resumen.impuestos)
+							if (imp != null)
 							{
-								if (imp != null)
-								{
-									imp.codigo_jurisdiccionSpecified = true;
-									imp.porcentaje_impuestoSpecified = true;
-								}
+								imp.codigo_jurisdiccionSpecified = true;
+								imp.porcentaje_impuestoSpecified = true;
+								imp.importe_impuesto_moneda_origenSpecified = true;
 							}
 						}
-						Session["lote"] = lcFea;
-						Response.Redirect("Reportes\\FacturaWebForm.aspx", true);
+					}
+					Session["lote"] = lcFea;
+					Response.Redirect("Reportes\\FacturaWebForm.aspx", true);
 
-					}
-					catch (Exception ex)
-					{
-						ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al generar el pdf.\\n " + ex.Message + "');</script>");
-					}
+				}
+				catch (Exception ex)
+				{
+					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al generar el pdf.\\n " + ex.Message + "');</script>");
 				}
 			}
 		}
