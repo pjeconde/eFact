@@ -473,7 +473,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					FeaEntidades.InterFacturas.resumenImpuestos imp = new FeaEntidades.InterFacturas.resumenImpuestos();
 					FeaEntidades.CodigosImpuesto.IVA iva = new FeaEntidades.CodigosImpuesto.IVA();
 					imp.codigo_impuesto = iva.Codigo;
-					imp.importe_impuesto = impivas[j];
+					imp.importe_impuesto = Math.Round(impivas[j],2);
 					imp.porcentaje_impuestoSpecified = true;
 					imp.porcentaje_impuesto = FeaEntidades.IVA.IVA.ListaMinima()[j].Codigo;
 					imp.descripcion = iva.Descr;
