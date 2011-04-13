@@ -1514,21 +1514,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 				catch (Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.ElementoInexistente)
 				{
-					Denominacion_CompradorTextBox.Text = string.Empty;
-					Domicilio_Calle_CompradorTextBox.Text = string.Empty;
-					Domicilio_Numero_CompradorTextBox.Text = string.Empty;
-					Domicilio_Piso_CompradorTextBox.Text = string.Empty;
-					Domicilio_Depto_CompradorTextBox.Text = string.Empty;
-					Domicilio_Sector_CompradorTextBox.Text = string.Empty;
-					Domicilio_Torre_CompradorTextBox.Text = string.Empty;
-					Domicilio_Manzana_CompradorTextBox.Text = string.Empty;
-					Localidad_CompradorTextBox.Text = string.Empty;
-					Provincia_CompradorDropDownList.SelectedValue = Convert.ToString(0);
-					Cp_CompradorTextBox.Text = string.Empty;
-					Contacto_CompradorTextBox.Text = string.Empty;
-					Email_CompradorTextBox.Text = string.Empty;
-					Telefono_CompradorTextBox.Text = string.Empty;
-
 					try
 					{
 						int auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
@@ -1567,17 +1552,35 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
 						Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
 					}
-
-					Condicion_IVA_CompradorDropDownList.SelectedValue = Convert.ToString(0);
-					//NroIngBrutosTextBox.Text = comprador.NroIngBrutos;
-					//CondIngBrutosDropDownList.SelectedValue = Convert.ToString(comprador.IdCondIngBrutos);
-					GLN_CompradorTextBox.Text = string.Empty;
-					Codigo_Interno_CompradorTextBox.Text = string.Empty;
-					((TextBox)InicioDeActividadesCompradorDatePickerWebUserControl.FindControl("txt_Date")).Text = string.Empty;
-					EmailAvisoVisualizacionTextBox.Text = string.Empty;
-					PasswordAvisoVisualizacionTextBox.Text = string.Empty;
+					ResetearComprador();
 				}
 			}
+		}
+
+		private void ResetearComprador()
+		{
+			Denominacion_CompradorTextBox.Text = string.Empty;
+			Domicilio_Calle_CompradorTextBox.Text = string.Empty;
+			Domicilio_Numero_CompradorTextBox.Text = string.Empty;
+			Domicilio_Piso_CompradorTextBox.Text = string.Empty;
+			Domicilio_Depto_CompradorTextBox.Text = string.Empty;
+			Domicilio_Sector_CompradorTextBox.Text = string.Empty;
+			Domicilio_Torre_CompradorTextBox.Text = string.Empty;
+			Domicilio_Manzana_CompradorTextBox.Text = string.Empty;
+			Localidad_CompradorTextBox.Text = string.Empty;
+			Provincia_CompradorDropDownList.SelectedValue = Convert.ToString(0);
+			Cp_CompradorTextBox.Text = string.Empty;
+			Contacto_CompradorTextBox.Text = string.Empty;
+			Email_CompradorTextBox.Text = string.Empty;
+			Telefono_CompradorTextBox.Text = string.Empty;
+			Condicion_IVA_CompradorDropDownList.SelectedValue = Convert.ToString(0);
+			//NroIngBrutosTextBox.Text = comprador.NroIngBrutos;
+			//CondIngBrutosDropDownList.SelectedValue = Convert.ToString(comprador.IdCondIngBrutos);
+			GLN_CompradorTextBox.Text = string.Empty;
+			Codigo_Interno_CompradorTextBox.Text = string.Empty;
+			((TextBox)InicioDeActividadesCompradorDatePickerWebUserControl.FindControl("txt_Date")).Text = string.Empty;
+			EmailAvisoVisualizacionTextBox.Text = string.Empty;
+			PasswordAvisoVisualizacionTextBox.Text = string.Empty;
 		}
 		
 		protected void CalcularTotalesButton_Click(object sender, EventArgs e)
@@ -4016,6 +4019,73 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				Version0RadioButton.Checked=false;
 			}
 			AjustarPrestaServxVersiones();
+		}
+
+		protected void PaisDestinoExpDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (!CompradorDropDownList.Visible)
+			{
+				return;
+			}
+			System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores;
+			Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+			Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
+			CompradorDropDownList.DataValueField = "RazonSocial";
+			CompradorDropDownList.DataTextField = "RazonSocial";
+			if (PaisDestinoExpDropDownList.SelectedItem.Text.ToUpper().Contains("ARGENTINA"))
+			{
+				listacompradores = CedWebRN.Comprador.ListaSinExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
+				Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+				Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
+				Nro_Doc_Identificatorio_CompradorTextBox.Text = string.Empty;
+				Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaNoExportacion();
+			}
+			else if (PaisDestinoExpDropDownList.SelectedItem.Text.Equals(string.Empty))
+			{
+				try
+				{
+					int auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
+					string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+					{
+						return pv.Id == auxPV;
+					}).IdTipo;
+					listacompradores = CedWebRN.Comprador.ListaExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
+					Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
+					Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
+					Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+					Nro_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
+					Nro_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.ListaSinInformar();
+					Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
+					Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = -1;
+					Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
+				}
+				catch
+				{
+					listacompradores = CedWebRN.Comprador.Lista(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
+					Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+					Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
+					Nro_Doc_Identificatorio_CompradorTextBox.Text = string.Empty;
+					Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
+				}
+			}
+			else
+			{
+				listacompradores = CedWebRN.Comprador.ListaExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
+				Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
+				Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
+				Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+				Nro_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
+				Nro_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.ListaSinInformar();
+				Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
+				Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = -1;
+				Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
+			}
+			CompradorDropDownList.DataSource = listacompradores;
+			CompradorDropDownList.DataBind();
+			CompradorDropDownList.SelectedIndex = 0;
+			Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
+			Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = -1;
+			ResetearComprador();
 		}
 
 	}

@@ -486,9 +486,6 @@
 															<td>
 															<asp:UpdatePanel ID="PaisDestinoExpUpdatePanel" runat="server"
 																UpdateMode="Conditional">
-																<Triggers>
-																	<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
-																</Triggers>
 																<ContentTemplate>
 																	<table border="0" cellpadding="0" cellspacing="0">
 																		<tr>
@@ -496,12 +493,23 @@
 																				País Destino Comprobante:
 																			</td>
 																			<td class="TextoLabelFEAVendedorDet">
-																				<asp:DropDownList ID="PaisDestinoExpDropDownList" runat="server" SkinID="DropDownListVendedor">
+																				<asp:DropDownList ID="PaisDestinoExpDropDownList" runat="server" OnSelectedIndexChanged="PaisDestinoExpDropDownList_SelectedIndexChanged"
+																					SkinID="DropDownListVendedor" AutoPostBack="true">
 																				</asp:DropDownList>
+																				<asp:UpdateProgress ID="PaisDestinoUpdateProgress" runat="server" AssociatedUpdatePanelID="PaisDestinoExpUpdatePanel"
+																					DisplayAfter="0">
+																					<ProgressTemplate>
+																						<asp:Image ID="PaisDestinoImage" runat="server" Height="18px" ImageUrl="~/Imagenes/CedeiraSF-icono-animado.gif">
+																						</asp:Image>
+																					</ProgressTemplate>
+																				</asp:UpdateProgress>
 																			</td>
 																		</tr>
 																	</table>
 																</ContentTemplate>
+																<Triggers>
+																<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+																</Triggers>
 															</asp:UpdatePanel>
 															</td>
 														</tr>
@@ -825,6 +833,7 @@
 											UpdateMode="Conditional">
 											<Triggers>
 												<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+												<asp:AsyncPostBackTrigger ControlID="PaisDestinoExpDropDownList"></asp:AsyncPostBackTrigger>
 											</Triggers>
 											<ContentTemplate>
 												<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
@@ -1270,9 +1279,6 @@
 												<td style="text-align: center; padding: 3px; font-weight: normal;">
 													<asp:UpdatePanel ID="referenciasUpdatePanel" runat="server" ChildrenAsTriggers="true"
 														UpdateMode="Conditional">
-														<Triggers>
-															<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
-														</Triggers>
 														<ContentTemplate>
 															<asp:GridView ID="referenciasGridView" runat="server" AutoGenerateColumns="False"
 																BorderColor="gray" BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70"
@@ -1364,6 +1370,9 @@
 																<HeaderStyle ForeColor="Brown" />
 															</asp:GridView>
 														</ContentTemplate>
+														<Triggers>
+															<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+														</Triggers>
 													</asp:UpdatePanel>
 												</td>
 											</tr>
