@@ -170,6 +170,14 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
                     {
                         lc.comprobante[0].detalle.linea[i].indicacion_exento_gravado = string.Empty;
                     }
+					if (lc.comprobante[0].detalle.linea[i].importes_moneda_origen != null)
+					{
+						lc.comprobante[0].detalle.linea[i].importes_moneda_origen.importe_ivaSpecified = true;
+						lc.comprobante[0].detalle.linea[i].importes_moneda_origen.importe_total_articuloSpecified = true;
+						lc.comprobante[0].detalle.linea[i].importes_moneda_origen.importe_total_descuentosSpecified = true;
+						lc.comprobante[0].detalle.linea[i].importes_moneda_origen.importe_total_impuestosSpecified = true;
+						lc.comprobante[0].detalle.linea[i].importes_moneda_origen.precio_unitarioSpecified = true;
+					}
                 }
                 else
                 {
