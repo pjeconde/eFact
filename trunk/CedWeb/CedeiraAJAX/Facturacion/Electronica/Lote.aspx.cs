@@ -2190,7 +2190,12 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 			comp.cabecera = compcab;
 
-			FeaEntidades.InterFacturas.detalle det = DetalleLinea.GenerarDetalles(MonedaComprobanteDropDownList.SelectedValue, Tipo_de_cambioTextBox.Text);
+			int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+			string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+					{
+						return pv.Id == auxPV;
+					}).IdTipo;
+			FeaEntidades.InterFacturas.detalle det = DetalleLinea.GenerarDetalles(MonedaComprobanteDropDownList.SelectedValue, Tipo_de_cambioTextBox.Text, idtipo, Tipo_De_ComprobanteDropDownList.SelectedValue);
 
 			det.comentarios = ComentariosTextBox.Text;
 
@@ -2225,10 +2230,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos = ImpuestosGlobales.Lista;
 			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
 			{
-			    int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
+			    auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
 			    try
 			    {
-			        string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+			        idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
 			        {
 			            return pv.Id == auxPV;
 			        }).IdTipo;
