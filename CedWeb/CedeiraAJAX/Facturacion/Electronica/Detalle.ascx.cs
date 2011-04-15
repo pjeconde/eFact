@@ -978,7 +978,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 		}
 
-		public FeaEntidades.InterFacturas.detalle GenerarDetalles(string MonedaComprobante, string TipoDeCambio)
+		public FeaEntidades.InterFacturas.detalle GenerarDetalles(string MonedaComprobante, string TipoDeCambio, string TipoPtoVta, string TipoCbte)
 		{
 			FeaEntidades.InterFacturas.detalle det = new FeaEntidades.InterFacturas.detalle();
 			System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
@@ -993,11 +993,41 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				CedWebRN.Comprobante c = new CedWebRN.Comprobante();
 				string textoSinSaltoDeLinea = listadelineas[i].descripcion.Replace("\n", "<br>").Replace("\r",string.Empty);
 				det.linea[i].descripcion = c.ConvertToHex(textoSinSaltoDeLinea);
-				det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
-				if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+
+				if (!TipoPtoVta.Equals("Comun"))
 				{
-					det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
+					det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
+					if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+					{
+						det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
+					}
 				}
+				else
+				{
+					switch (TipoCbte)
+					{
+						case "6":
+						case "7":
+						case "8":
+						case "9":
+						case "10":
+						case "40":
+						case "61":
+						case "64":
+							det.linea[i].alicuota_ivaSpecified = false;
+							det.linea[i].alicuota_iva = 0;
+							break;
+						default:
+							det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
+							if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+							{
+								det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
+							}
+							break;
+					}
+
+				}
+
 				if (!listadelineas[i].unidad.Equals(Convert.ToString(new FeaEntidades.CodigosUnidad.SinInformar().Codigo)))
 				{
 					det.linea[i].unidad = listadelineas[i].unidad;
@@ -1010,32 +1040,111 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				{
 					if (!listadelineas[i].indicacion_exento_gravado.Equals(string.Empty))
 					{
-						det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
+						if (!TipoPtoVta.Equals("Comun"))
+						{
+							det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
+						}
+						else
+						{
+							switch (TipoCbte)
+							{
+								case "6":
+								case "7":
+								case "8":
+								case "9":
+								case "10":
+								case "40":
+								case "61":
+								case "64":
+									det.linea[i].indicacion_exento_gravado = null;
+									break;
+								default:
+									det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
+									break;
+							}
+						}
 					}
 				}
 				if (MonedaComprobante.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
 				{
-					det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
-					det.linea[i].importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
-					det.linea[i].importe_iva = listadelineas[i].importe_iva;
-					det.linea[i].precio_unitario = listadelineas[i].precio_unitario;
+					
+					switch (TipoCbte)
+					{
+						case "6":
+						case "7":
+						case "8":
+						case "9":
+						case "10":
+						case "40":
+						case "61":
+						case "64":
+							det.linea[i].precio_unitario = listadelineas[i].precio_unitario * (1 + listadelineas[i].alicuota_iva / 100);
+							det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo + listadelineas[i].importe_iva;
+							det.linea[i].importe_ivaSpecified = false;
+							det.linea[i].importe_iva = 0;
+							break;
+						default:
+							det.linea[i].precio_unitario = listadelineas[i].precio_unitario;
+							det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
+							det.linea[i].importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
+							det.linea[i].importe_iva = listadelineas[i].importe_iva;
+							break;
+					}
 					det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
 				}
 				else
 				{
-					det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo * Convert.ToDouble(TipoDeCambio), 2);
-					det.linea[i].importe_iva = Math.Round(listadelineas[i].importe_iva * Convert.ToDouble(TipoDeCambio), 2);
-					det.linea[i].importe_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
-					det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(TipoDeCambio), 2);
 					det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+					switch (TipoCbte)
+					{
+						case "6":
+						case "7":
+						case "8":
+						case "9":
+						case "10":
+						case "40":
+						case "61":
+						case "64":
+							det.linea[i].importe_iva =0;
+							det.linea[i].importe_ivaSpecified = false;
+							det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(TipoDeCambio) * (1 + listadelineas[i].alicuota_iva / 100), 2);
+							det.linea[i].importe_total_articulo = Math.Round(((listadelineas[i].importe_total_articulo) + listadelineas[i].importe_iva ) * Convert.ToDouble(TipoDeCambio), 2);
+							break;
+						default:
+							det.linea[i].importe_iva = Math.Round(listadelineas[i].importe_iva * Convert.ToDouble(TipoDeCambio), 2);
+							det.linea[i].importe_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
+							det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(TipoDeCambio), 2);
+							det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo * Convert.ToDouble(TipoDeCambio), 2);
+							break;
+					}
 
 					FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
 					limo.importe_total_articuloSpecified = true;
-					limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
-					limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
-					limo.importe_iva = listadelineas[i].importe_iva;
-					limo.precio_unitario = listadelineas[i].precio_unitario;
+					
 					limo.precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+
+					switch (TipoCbte)
+					{
+						case "6":
+						case "7":
+						case "8":
+						case "9":
+						case "10":
+						case "40":
+						case "61":
+						case "64":
+							limo.importe_ivaSpecified = false;
+							limo.importe_iva = 0;
+							limo.precio_unitario = listadelineas[i].precio_unitario * (1 + listadelineas[i].alicuota_iva / 100);
+							limo.importe_total_articulo = listadelineas[i].importe_total_articulo + listadelineas[i].importe_iva;
+							break;
+						default:
+							limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
+							limo.importe_iva = listadelineas[i].importe_iva;
+							limo.precio_unitario = listadelineas[i].precio_unitario;
+							limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
+							break;
+					}
 					det.linea[i].importes_moneda_origen = limo;
 				}
 			}
