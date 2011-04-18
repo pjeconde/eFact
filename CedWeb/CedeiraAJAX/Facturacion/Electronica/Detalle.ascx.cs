@@ -1135,8 +1135,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						case "64":
 							limo.importe_ivaSpecified = false;
 							limo.importe_iva = 0;
-							limo.precio_unitario = listadelineas[i].precio_unitario * (1 + listadelineas[i].alicuota_iva / 100);
-							limo.importe_total_articulo = listadelineas[i].importe_total_articulo + listadelineas[i].importe_iva;
+							limo.precio_unitario = Math.Round(listadelineas[i].precio_unitario * (1 + listadelineas[i].alicuota_iva / 100),2);
+							limo.importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo + listadelineas[i].importe_iva,2);
 							break;
 						default:
 							limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
