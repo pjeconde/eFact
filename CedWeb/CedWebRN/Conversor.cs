@@ -242,16 +242,16 @@ namespace CedWebRN
                         }
                         if (detalle.linea[j].descuentos != null)
                         {
-                            d.linea[j].descuentos = new FeaEntidades.InterFacturas.lineaDescuentos[detalle.linea[j].descuentos.Length];
-                            for (int k = 0; k < d.linea[j].descuentos.Length; k++)
+                            d.linea[j].lineaDescuentos = new FeaEntidades.InterFacturas.lineaDescuentos[detalle.linea[j].descuentos.Length];
+                            for (int k = 0; k < d.linea[j].lineaDescuentos.Length; k++)
                             {
-                                d.linea[j].descuentos[k] = new FeaEntidades.InterFacturas.lineaDescuentos();
-                                d.linea[j].descuentos[k].descripcion_descuento = detalle.linea[j].descuentos[k].descripcion_descuento;
-                                d.linea[j].descuentos[k].importe_descuento = detalle.linea[j].descuentos[k].importe_descuento;
-                                d.linea[j].descuentos[k].importe_descuento_moneda_origen = detalle.linea[j].descuentos[k].importe_descuento_moneda_origen;
-                                d.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified = detalle.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified;
-                                d.linea[j].descuentos[k].porcentaje_descuento = detalle.linea[j].descuentos[k].porcentaje_descuento;
-                                d.linea[j].descuentos[k].porcentaje_descuentoSpecified = detalle.linea[j].descuentos[k].porcentaje_descuentoSpecified;
+                                d.linea[j].lineaDescuentos[k] = new FeaEntidades.InterFacturas.lineaDescuentos();
+                                d.linea[j].lineaDescuentos[k].descripcion_descuento = detalle.linea[j].descuentos[k].descripcion_descuento;
+                                d.linea[j].lineaDescuentos[k].importe_descuento = detalle.linea[j].descuentos[k].importe_descuento;
+                                d.linea[j].lineaDescuentos[k].importe_descuento_moneda_origen = detalle.linea[j].descuentos[k].importe_descuento_moneda_origen;
+                                d.linea[j].lineaDescuentos[k].importe_descuento_moneda_origenSpecified = detalle.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified;
+                                d.linea[j].lineaDescuentos[k].porcentaje_descuento = detalle.linea[j].descuentos[k].porcentaje_descuento;
+                                d.linea[j].lineaDescuentos[k].porcentaje_descuentoSpecified = detalle.linea[j].descuentos[k].porcentaje_descuentoSpecified;
                             }
                         }
 

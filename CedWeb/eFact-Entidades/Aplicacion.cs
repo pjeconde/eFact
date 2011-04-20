@@ -32,6 +32,8 @@ namespace eFact_Entidades
 
         private CedEntidades.Sesion sesion;
         private List<eFact_Entidades.Vendedor> vendedores;
+
+        private string storeLocation;
         
         public Aplicacion()
         {
@@ -260,6 +262,18 @@ namespace eFact_Entidades
             get
             {
                 return vendedores;
+            }
+        }
+
+        public string StoreLocation
+        {
+            set
+            {
+                storeLocation = value;
+            }
+            get
+            {
+                return storeLocation;
             }
         }
     }

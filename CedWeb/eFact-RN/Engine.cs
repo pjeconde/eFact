@@ -97,7 +97,7 @@ namespace eFact_RN
                     }
                     if (typeof(FeaEntidades.InterFacturas.lineaDescuentos) == o.GetType())
                     {
-                        lc.comprobante[NroComprobante].detalle.linea[NroLinea].descuentos[NroLineaDescuento] = (FeaEntidades.InterFacturas.lineaDescuentos)o;
+                        lc.comprobante[NroComprobante].detalle.linea[NroLinea].lineaDescuentos[NroLineaDescuento] = (FeaEntidades.InterFacturas.lineaDescuentos)o;
                         ++NroLineaDescuento;
                     }
                     if (typeof(FeaEntidades.InterFacturas.lineaInformacion_adicional) == o.GetType())

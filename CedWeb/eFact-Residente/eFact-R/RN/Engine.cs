@@ -87,6 +87,8 @@ namespace eFact_R.RN
                     }
                     if (typeof(FeaEntidades.InterFacturas.linea) == o.GetType())
                     {
+                        NroLineaDescuento = 0;
+                        NroLineaInfoAdicional = 0;
                         NroLinea = ((FeaEntidades.InterFacturas.linea)o).numeroLinea - 1;
                         lc.comprobante[NroComprobante].detalle.linea[NroLinea] = (FeaEntidades.InterFacturas.linea)o;
                         GetPropiedades(o);
@@ -97,7 +99,7 @@ namespace eFact_R.RN
                     }
                     if (typeof(FeaEntidades.InterFacturas.lineaDescuentos) == o.GetType())
                     {
-                        lc.comprobante[NroComprobante].detalle.linea[NroLinea].descuentos[NroLineaDescuento] = (FeaEntidades.InterFacturas.lineaDescuentos)o;
+                        lc.comprobante[NroComprobante].detalle.linea[NroLinea].lineaDescuentos[NroLineaDescuento] = (FeaEntidades.InterFacturas.lineaDescuentos)o;
                         ++NroLineaDescuento;
                     }
                     if (typeof(FeaEntidades.InterFacturas.lineaInformacion_adicional) == o.GetType())

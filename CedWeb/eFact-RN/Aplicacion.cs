@@ -23,12 +23,14 @@ namespace eFact_RN
 
             aplic.MailServidorSmtp = @System.Configuration.ConfigurationManager.AppSettings["MailServidorSmtp"];
             aplic.MailCredencialesUsr = @System.Configuration.ConfigurationManager.AppSettings["MailCredencialesUsr"];
-            aplic.MailCredencialesPsw = @System.Configuration.ConfigurationSettings.AppSettings["MailCredencialesPsw"];
-            aplic.MailTest = @System.Configuration.ConfigurationSettings.AppSettings["MailTest"];
+            aplic.MailCredencialesPsw = System.Configuration.ConfigurationManager.AppSettings["MailCredencialesPsw"];
+            aplic.MailTest = @System.Configuration.ConfigurationManager.AppSettings["MailTest"];
 
-            aplic.CodigoAplic = System.Configuration.ConfigurationSettings.AppSettings["CodigoAplic"];
+            aplic.CodigoAplic = @System.Configuration.ConfigurationManager.AppSettings["CodigoAplic"];
 
-            aplic.OtrosFiltrosCuit = System.Configuration.ConfigurationSettings.AppSettings["OtrosFiltrosCuit"];
+            aplic.StoreLocation = @System.Configuration.ConfigurationManager.AppSettings["StoreLocation"];
+
+            aplic.OtrosFiltrosCuit = @System.Configuration.ConfigurationManager.AppSettings["OtrosFiltrosCuit"];
 			return aplic;
 		}
 	}

@@ -330,7 +330,7 @@ namespace FeaEntidades.InterFacturas
 
 		/// <comentarios/>
 		[System.Xml.Serialization.XmlElementAttribute("descuentos")]
-		public lineaDescuentos[] descuentos
+		public lineaDescuentos[] lineaDescuentos
 		{
 			get
 			{

@@ -42,10 +42,10 @@ namespace CedWebRN.IBK {
         {
             System.Net.HttpWebRequest wr = (System.Net.HttpWebRequest)base.GetWebRequest(uri);
             wr.KeepAlive = false;
-            wr.ServicePoint.MaxIdleTime = 1000;
+            wr.ServicePoint.MaxIdleTime = 1;
             return wr;
         }
-        
+
         /// <remarks/>
         public FacturaWebServiceConSchema() {
             this.Url = global::CedWebRN.Properties.Settings.Default.CedWebRN_IBK_FacturaWebServiceConSchemaSoapBindingQSService;

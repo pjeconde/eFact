@@ -189,7 +189,15 @@ namespace CedEntidades
 			{
 				grupo = value;
 			}
-		} 
+		}
+
+        public string IdGrupo
+        {
+            get
+            {
+                return Grupo.Id;
+            }
+        }
 		#endregion
 	}
 }
