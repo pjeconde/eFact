@@ -994,7 +994,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				string textoSinSaltoDeLinea = listadelineas[i].descripcion.Replace("\n", "<br>").Replace("\r",string.Empty);
 				det.linea[i].descripcion = c.ConvertToHex(textoSinSaltoDeLinea);
 
-				if (!TipoPtoVta.Equals("Comun"))
+				if (TipoPtoVta.Equals("Export"))
 				{
 					det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
 					if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
@@ -1040,7 +1040,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				{
 					if (!listadelineas[i].indicacion_exento_gravado.Equals(string.Empty))
 					{
-						if (!TipoPtoVta.Equals("Comun"))
+						if (TipoPtoVta.Equals("Export"))
 						{
 							det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
 						}
