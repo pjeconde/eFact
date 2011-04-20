@@ -17,6 +17,7 @@ namespace eFact_R
         eFact_R.RN.Tablero.TipoConsulta TipoConsulta;
         eFact_R.RN.Tablero.TipoConsultaArchivos TipoConsultaArchivos;
         eFact_R.RN.Archivo.OtrosFiltros ArchivosOtrosFiltros;
+        public bool ServicioOK;
 
         public Tablero()
         {
@@ -69,7 +70,7 @@ namespace eFact_R
             StatusBar.Panels["CXOSBP"].Text = "CXO: " + Aplicacion.Sesion.CXO;
             StatusBar.Panels["CXOSBP"].ToolTipText = "Control por oposición: " + Aplicacion.Sesion.CXO;
             eFact_R.RN.Vendedor.Consultar(Aplicacion.Vendedores, Aplicacion.Sesion);
-            VerificarCaptServicio();
+            VerificarServicio();
         }
 
         private void Tablero_Load(object sender, EventArgs e)
@@ -118,32 +119,61 @@ namespace eFact_R
             BandejaSDataGridView.Refresh();
         }
 
-        private void VerificarCaptServicio()
+        private void VerificarServicio()
         {
             try
             {
+                Cursor = System.Windows.Forms.Cursors.WaitCursor;
+                ServicioOK = true;
+                System.Threading.Thread.Sleep(100);
+                //foreach (System.ServiceProcess.ServiceController service in System.ServiceProcess.ServiceController.GetServices("Pol-PC"))
+                //{
+                //    if (service.ServiceName == "Servicio-eFact")
+                //    {
+                //        Console.WriteLine(service.DisplayName);
+                //    }
+                //}
                 string machineName = @System.Configuration.ConfigurationManager.AppSettings["MachineName"];
                 string serviceName = @System.Configuration.ConfigurationManager.AppSettings["ServiceName"];
                 this.serviceController1.MachineName = machineName;
                 this.serviceController1.ServiceName = serviceName;
                 this.serviceController1.Refresh();
                 string status = this.serviceController1.Status.ToString();
+                if (status.ToUpper() != "RUNNING")
+                {
+                    ServicioOK = false;
+                }
                 StatusBar.Panels["ModalidadSBP"].Text = "Modalidad: " + Aplicacion.Modalidad + "  Servicio: " + status;
-                StatusBar.Panels["ModalidadSBP"].ToolTipText = "Modalidad = " + Aplicacion.Modalidad + "\r\nServicio: " + status + "\r\nNombre de la PC: " + machineName + "\r\nNombre del servicio: " + serviceName;
+                StatusBar.Panels["ModalidadSBP"].ToolTipText = "Modalidad = " + Aplicacion.Modalidad + "\r\nServicio: " + status + "\r\nNombre de la PC: " + machineName + "\r\nNombre del servicio: " + serviceName + "\r\n\r\n( Hacer clic para actualizar el estado )";
+                if (Aplicacion.Modalidad != "Automatica" || ServicioOK == false)
+                {
+                    DescartarBandejaEButton.Enabled = true;
+                    EnviarABandejaSButton.Enabled = true;
+                }
+                else
+                {
+                    DescartarBandejaEButton.Enabled = false;
+                    EnviarABandejaSButton.Enabled = false;                    
+                }
             }
             catch (Exception ex)
             {
-                string atencion = "";
-                if (Aplicacion.Modalidad != "Manual")
+                ServicioOK = false;
+                DescartarBandejaEButton.Enabled = true;
+                EnviarABandejaSButton.Enabled = true;
+                StatusBar.Panels["ModalidadSBP"].Text = "Modalidad = " + Aplicacion.Modalidad + "  Servicio: (!)";
+                if (Aplicacion.Modalidad != "Automatica")
                 {
-                    Aplicacion.Modalidad = "Manual";
-                    atencion = " (!)";
+                    StatusBar.Panels["ModalidadSBP"].ToolTipText = "(!) El servicio no está disponible, por lo tanto se habilitará la opción de procesamiento de archivos manual.\r\n\r\n" + "Mensaje: " + ex.Message + "\r\n\r\n( Hacer clic para actualizar el estado )";
                 }
-                StatusBar.Panels["ModalidadSBP"].Text = "Modalidad = Manual" + atencion + "  Servicio: Desactivado";
-                if (atencion != "")
+                else
                 {
-                    StatusBar.Panels["ModalidadSBP"].ToolTipText = "(!) El servicio no está disponible, por lo tanto se habilitará la opción de procesamiento de archivos manual.\r\n\r\n" + "Mensaje: " + ex.Message;
+                    StatusBar.Panels["ModalidadSBP"].ToolTipText = "(!) El servicio no está disponible.\r\n\r\n" + "Mensaje: " + ex.Message + "\r\n\r\n( Hacer clic para actualizar el estado )";
                 }
+            }
+            finally
+            {
+                Cursor = System.Windows.Forms.Cursors.Default;
             }
         }
 
@@ -153,7 +183,6 @@ namespace eFact_R
             {
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 ActualizarBandejaEButton.Enabled = false;
-                //System.Threading.Thread.Sleep(1000);
                 LimpiarBandejaEntrada();
                 if (ArchivosHistoricosRadioButton.Checked)
                 {
@@ -191,6 +220,7 @@ namespace eFact_R
         private void ActualizarBandejaE()
         {
             Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            VerificarServicio();
             switch (eFact_R.Aplicacion.CodigoAplic.ToString())
             {
                 case "eFactInterface":
@@ -270,7 +300,6 @@ namespace eFact_R
             {
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 ActualizarBandejaSButton.Enabled = false;
-                //System.Threading.Thread.Sleep(1000);
                 ActualizarBandejaS();
             }
             catch (Exception ex)
@@ -292,6 +321,7 @@ namespace eFact_R
             Cursor = System.Windows.Forms.Cursors.WaitCursor;
             DateTime FechaDsd;
             DateTime FechaHst;
+            VerificarServicio();
             if (TipoConsulta == eFact_R.RN.Tablero.TipoConsulta.FechaAlta)
             {
                 FechaDsd = FechaDsdLoteFecAltaDTP.Value;
@@ -322,62 +352,65 @@ namespace eFact_R
             BandejaSDataGridView.AutoGenerateColumns = false;
             eFact_R.RN.Tablero.ActualizarBandejaSalida(out dtBandejaSalida, TipoConsulta, FechaDsd, FechaHst, otrosFiltrosCuitvendedor, otrosFiltrosNumeroLote, otrosFiltrosPuntoVenta, PtesDiasAntCheckBox.Checked, eFact_R.Aplicacion.Sesion);
             BandejaSDataGridView.DataSource = dtBandejaSalida;
-            //Verificar Ptes.Respuesta AFIP.
-            List<eFact_R.Entidades.Lote> dtBandejaSalidaFind = dtBandejaSalida.FindAll((delegate(eFact_R.Entidades.Lote e1) { return e1.WF.IdEstado == "PteRespAFIP"; }));
-            foreach (eFact_R.Entidades.Lote l in dtBandejaSalidaFind)
+            if (Aplicacion.Modalidad != "Automatica" || ServicioOK == false)
             {
-                FeaEntidades.InterFacturas.lote_comprobantes Lc = new FeaEntidades.InterFacturas.lote_comprobantes();
-                CedWebRN.IBK.error[] respErroresLote = new CedWebRN.IBK.error[0];
-                CedWebRN.IBK.error[] respErroresComprobantes = new CedWebRN.IBK.error[0];
-                try
+                //Verificar Ptes.Respuesta AFIP.
+                List<eFact_R.Entidades.Lote> dtBandejaSalidaFind = dtBandejaSalida.FindAll((delegate(eFact_R.Entidades.Lote e1) { return e1.WF.IdEstado == "PteRespAFIP"; }));
+                foreach (eFact_R.Entidades.Lote l in dtBandejaSalidaFind)
                 {
-                    //Consultar si exite el lote en Interfacturas
-                    eFact_R.RN.Lote.ConsultarLoteIF(out Lc, out respErroresLote, out respErroresComprobantes, l, Aplicacion.Vendedores.Find(delegate(eFact_R.Entidades.Vendedor e1) { return e1.CuitVendedor == l.CuitVendedor; }).NumeroSerieCertificado);
-                    //Ejecutar evento ( cambia el estado )
-                    if (Lc.cabecera_lote.resultado == "A")
+                    FeaEntidades.InterFacturas.lote_comprobantes Lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+                    CedWebRN.IBK.error[] respErroresLote = new CedWebRN.IBK.error[0];
+                    CedWebRN.IBK.error[] respErroresComprobantes = new CedWebRN.IBK.error[0];
+                    try
                     {
-                        eFact_R.RN.Lote.ActualizarDatosCAE(l, Lc);
-                        string comentario = ArmarTextoMotivo(Lc);
-                        EjecutarEventoBandejaS("RegAceptAFIP", comentario, l);
-                    }
-                    else if (Lc.cabecera_lote.resultado == "O")
-                    {
-                        eFact_R.RN.Lote.ActualizarDatosCAE(l, Lc);
-                        string comentario = ArmarTextoMotivo(Lc);
-                        EjecutarEventoBandejaS("RegAceptAFIPO", comentario, l);
-                    }
-                    else if (Lc.cabecera_lote.resultado == "P")
-                    {
-                        eFact_R.RN.Lote.ActualizarDatosCAE(l, Lc);
-                        string comentario = ArmarTextoMotivo(Lc);
-                        EjecutarEventoBandejaS("RegAceptAFIPP", comentario, l);
-                    }
-                    else if (Lc.cabecera_lote.resultado == "R")
-                    {
-                        CedWebRN.IBK.lote_response lr = ArmarLoteResponse(Lc);
-                        eFact_R.RN.Lote.ActualizarDatosError(l, lr);
-                        string comentario = ArmarTextoMotivo(Lc);
-                        EjecutarEventoBandejaS("RegRechAFIP", comentario, l);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    if (respErroresLote.Length != 0)
-                    {
-                        if (respErroresLote[0].codigo_error != Convert.ToInt32("401"))
+                        //Consultar si exite el lote en Interfacturas
+                        eFact_R.RN.Lote.ConsultarLoteIF(out Lc, out respErroresLote, out respErroresComprobantes, l, Aplicacion.Vendedores.Find(delegate(eFact_R.Entidades.Vendedor e1) { return e1.CuitVendedor == l.CuitVendedor; }).NumeroSerieCertificado);
+                        //Ejecutar evento ( cambia el estado )
+                        if (Lc.cabecera_lote.resultado == "A")
                         {
-                            EjecutarEventoBandejaS("RegRechAFIP", ex.Message, l);
+                            eFact_R.RN.Lote.ActualizarDatosCAE(l, Lc);
+                            string comentario = ArmarTextoMotivo(Lc);
+                            EjecutarEventoBandejaS("RegAceptAFIP", comentario, l);
+                        }
+                        else if (Lc.cabecera_lote.resultado == "O")
+                        {
+                            eFact_R.RN.Lote.ActualizarDatosCAE(l, Lc);
+                            string comentario = ArmarTextoMotivo(Lc);
+                            EjecutarEventoBandejaS("RegAceptAFIPO", comentario, l);
+                        }
+                        else if (Lc.cabecera_lote.resultado == "P")
+                        {
+                            eFact_R.RN.Lote.ActualizarDatosCAE(l, Lc);
+                            string comentario = ArmarTextoMotivo(Lc);
+                            EjecutarEventoBandejaS("RegAceptAFIPP", comentario, l);
+                        }
+                        else if (Lc.cabecera_lote.resultado == "R")
+                        {
+                            CedWebRN.IBK.lote_response lr = ArmarLoteResponse(Lc);
+                            eFact_R.RN.Lote.ActualizarDatosError(l, lr);
+                            string comentario = ArmarTextoMotivo(Lc);
+                            EjecutarEventoBandejaS("RegRechAFIP", comentario, l);
                         }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
+                        if (respErroresLote.Length != 0)
+                        {
+                            if (respErroresLote[0].codigo_error != Convert.ToInt32("401"))
+                            {
+                                EjecutarEventoBandejaS("RegRechAFIP", ex.Message, l);
+                            }
+                        }
+                        else
+                        {
+                            Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
+                        }
                     }
                 }
+                eFact_R.RN.Tablero.ActualizarBandejaSalida(out dtBandejaSalida, TipoConsulta, FechaDsd, FechaHst, otrosFiltrosCuitvendedor, otrosFiltrosNumeroLote, otrosFiltrosPuntoVenta, PtesDiasAntCheckBox.Checked, eFact_R.Aplicacion.Sesion);
+                BandejaSDataGridView.DataSource = new List<eFact_R.Entidades.Lote>();
+                BandejaSDataGridView.DataSource = dtBandejaSalida;
             }
-            eFact_R.RN.Tablero.ActualizarBandejaSalida(out dtBandejaSalida, TipoConsulta, FechaDsd, FechaHst, otrosFiltrosCuitvendedor, otrosFiltrosNumeroLote, otrosFiltrosPuntoVenta, PtesDiasAntCheckBox.Checked, eFact_R.Aplicacion.Sesion);
-            BandejaSDataGridView.DataSource = new List<eFact_R.Entidades.Lote>();
-            BandejaSDataGridView.DataSource = dtBandejaSalida;
             BandejaSDataGridView.Refresh();
             Cursor = System.Windows.Forms.Cursors.Default;
         }
@@ -407,12 +440,18 @@ namespace eFact_R
                     {
                         descrCodigosErrorAFIPLote = codigosErrorAFIPLote.Descr;
                     }
-                    texto += "Código de problema a nivel lote: " + Lc.cabecera_lote.motivo.Trim() + " " + descrCodigosErrorAFIPLote + "\r\n\r\n";
+                    texto += "Problema a nivel lote: " + Lc.cabecera_lote.motivo.Trim() + " " + descrCodigosErrorAFIPLote + "\r\n\r\n";
                 }
+                string TextoHeaderComprobante = "";
                 for (int i = 0; i < Lc.comprobante.Length; i++)
                 {
                     if (Lc.comprobante[i].cabecera.informacion_comprobante.motivo != null && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "00" && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "")
                     {
+                        if (TextoHeaderComprobante == "")
+                        {
+                            texto += "Problema a nivel comprobante.\r\n";
+                            TextoHeaderComprobante = "Problema a nivel comprobante.\r\n";
+                        }
                         FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP codigosErrorAFIPComprobante = FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP.Lista().Find((delegate(FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP e1) { return e1.Codigo == Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim(); }));
                         string descrCodigosErrorAFIPComprobante = "";
                         if (codigosErrorAFIPComprobante != null)
@@ -425,7 +464,7 @@ namespace eFact_R
                         {
                             resultado = Lc.comprobante[i].cabecera.informacion_comprobante.resultado + " ";
                         }
-                        texto += "Código de problema a nivel comprobante ( renglon " + renglon.ToString() + "): " + resultado + Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() + " " + descrCodigosErrorAFIPComprobante + "\r\n";
+                        texto += "Punto de Venta: [" + Lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta + "]  Tipo de Comprobante: [" + Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante + "]  Nro. de Comprobante: [" + Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante + "]\r\n" + resultado + Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() + " " + descrCodigosErrorAFIPComprobante + "\r\n";
                     }
                 }
             }
@@ -445,7 +484,7 @@ namespace eFact_R
             lrCompleto.presta_serv = Lc.cabecera_lote.presta_serv;
             lrCompleto.presta_servSpecified = Lc.cabecera_lote.presta_servSpecified;
             lrCompleto.punto_de_venta = Lc.cabecera_lote.punto_de_venta;
-            if (Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
+            if (Lc.cabecera_lote.motivo != null && Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
             {
                 errores[0] = new CedWebRN.IBK.error();
                 errores[0].codigo_error = 0;
@@ -469,15 +508,15 @@ namespace eFact_R
                     if (lrCompleto.comprobante_response == null)
                     {
                         lrCompleto.comprobante_response = new CedWebRN.IBK.comprobante_response[CantMotivoError];
-                        lrCompleto.comprobante_response[i].numero_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante;
-                        lrCompleto.comprobante_response[i].punto_de_venta = Lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta;
-                        lrCompleto.comprobante_response[i].tipo_de_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante;
-                        lrCompleto.comprobante_response[i].estado = Lc.comprobante[i].cabecera.informacion_comprobante.resultado;
                     }
                     erroresComprobante[NroMotivo] = new CedWebRN.IBK.error();
                     erroresComprobante[NroMotivo].codigo_error = 0;
                     erroresComprobante[NroMotivo].descripcion_error = Lc.comprobante[i].cabecera.informacion_comprobante.motivo;
                     lrCompleto.comprobante_response[NroMotivo] = new CedWebRN.IBK.comprobante_response();
+                    lrCompleto.comprobante_response[NroMotivo].numero_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante;
+                    lrCompleto.comprobante_response[NroMotivo].punto_de_venta = Lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta;
+                    lrCompleto.comprobante_response[NroMotivo].tipo_de_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante;
+                    lrCompleto.comprobante_response[NroMotivo].estado = Lc.comprobante[i].cabecera.informacion_comprobante.resultado;
                     lrCompleto.comprobante_response[NroMotivo].errores_comprobante = erroresComprobante;
                     NroMotivo++;
                 }
@@ -514,7 +553,14 @@ namespace eFact_R
         private void DescartarBandejaE()
         {
             Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            VerificarServicio();
+            if (Aplicacion.Modalidad == "Automatica" && ServicioOK == true)
+            {
+                MessageBox.Show("No es posible descartar archivos, mientras el Servicio-eFact se encuentre activo.", "ATENCIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             EnviarABandejaSButton.Enabled = false;
+            DescartarBandejaEButton.Enabled = false;
             try
             {
                 if (BandejaEDataGridView.SelectedRows.Count != 0)
@@ -548,9 +594,10 @@ namespace eFact_R
             }
             finally
             {
+                EnviarABandejaSButton.Enabled = true;
+                DescartarBandejaEButton.Enabled = true;
                 LimpiarBandejaEntrada();
                 ActualizarBandejaE();
-                EnviarABandejaSButton.Enabled = true;
                 Cursor = System.Windows.Forms.Cursors.Default;
             }
         }
@@ -560,7 +607,6 @@ namespace eFact_R
             BandejaEDataGridView.DataSource = new List<eFact_R.Entidades.Archivo>();
             BandejaEDataGridView.Refresh();
         }
-
 
         private void InicializarFiltrosTablero()
         {
@@ -610,6 +656,12 @@ namespace eFact_R
         private void EnviarABandejaSButton_Click(object sender, EventArgs e)
         {
             Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            VerificarServicio();
+            if (Aplicacion.Modalidad == "Automatica" && ServicioOK == true)
+            {
+                MessageBox.Show("No es posible enviar archivos a la bandeja de salida, mientras el Servicio-eFact se encuentre activo.", "ATENCIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             EnviarABandejaSButton.Enabled = false;
             DescartarBandejaEButton.Enabled = false;
             try
@@ -653,6 +705,10 @@ namespace eFact_R
                         {
                             Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
                             dtBandejaEntrada[renglon].Comentario = ex.Message;
+                            if (ex.InnerException != null)
+                            {
+                                dtBandejaEntrada[renglon].Comentario += "\r\n" + ex.InnerException.Message;
+                            }
                             //Agregar datos del proceso a la entidad Archivo
                             ArchGuardarComoNombre = "ERR-" + ArchGuardarComoNombre;
                             dtBandejaEntrada[renglon].NombreProcesado = ArchGuardarComoNombre;
@@ -1061,6 +1117,12 @@ namespace eFact_R
         {
             if (((ComboBox)sender).SelectedIndex != 0)
             {
+                VerificarServicio();
+                if (Aplicacion.Modalidad == "Automatica" && ServicioOK == true)
+                {
+                    MessageBox.Show("No es posible ejecutar eventos manuales, mientras el Servicio-eFact se encuentre activo.", "ATENCIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 string evento = ((CedEntidades.Evento)(((ComboBox)sender).SelectedItem)).Id;
                 switch (evento)
                 {
@@ -1160,25 +1222,6 @@ namespace eFact_R
             System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\" + NombreArchAyuda);
         }
 
-        private void StatusBar_DoubleClick(object sender, EventArgs e)
-        {
-            try
-            {
-                Cursor = System.Windows.Forms.Cursors.WaitCursor;
-                BarraEstado c = new BarraEstado();
-                c.ShowDialog();
-                c = null;
-            }
-            catch (Exception ex)
-            {
-                Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
-            }
-            finally
-            {
-                Cursor = System.Windows.Forms.Cursors.Default;
-            }
-        }
-
         private void BandejaSDataGridView_DoubleClick(object sender, EventArgs e)
         {
             ConsultarLote();
@@ -1216,6 +1259,33 @@ namespace eFact_R
                 ConsultaLote c = new ConsultaLote(ConsultaLote.Modo.Contingencia);
                 c.ShowDialog();
                 c = null;
+            }
+            catch (Exception ex)
+            {
+                Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
+            }
+            finally
+            {
+                Cursor = System.Windows.Forms.Cursors.Default;
+            }
+        }
+
+        private void StatusBar_PanelClick(object sender, System.Windows.Forms.StatusBarPanelClickEventArgs e)
+        {
+            try
+            {
+                Cursor = System.Windows.Forms.Cursors.WaitCursor;
+                switch (e.StatusBarPanel.Name)
+                {
+                    case "OrigenDatosSBP":
+                        BarraEstado c = new BarraEstado();
+                        c.ShowDialog();
+                        c = null;
+                        break;
+                    case "ModalidadSBP":
+                        VerificarServicio();
+                        break;
+                }
             }
             catch (Exception ex)
             {

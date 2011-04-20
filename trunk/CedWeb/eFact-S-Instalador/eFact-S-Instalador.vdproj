@@ -88,13 +88,19 @@
         "Entry"
         {
         "MsmKey" = "8:_2671DF95E13A65EA63A5E8D3A3244305"
-        "OwnerKey" = "8:_EB8057C5AE904C0DA343CC1ABC9F1501"
+        "OwnerKey" = "8:_44F43C080DF4D6F0CDD58B42B4680F03"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_2671DF95E13A65EA63A5E8D3A3244305"
         "OwnerKey" = "8:_F694FC53FBFF46FC8341689F33D99658"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2671DF95E13A65EA63A5E8D3A3244305"
+        "OwnerKey" = "8:_EB8057C5AE904C0DA343CC1ABC9F1501"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -125,12 +131,6 @@
         {
         "MsmKey" = "8:_2671DF95E13A65EA63A5E8D3A3244305"
         "OwnerKey" = "8:_3F5AC579827E44FFB9C4ADECE70A4E4F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2671DF95E13A65EA63A5E8D3A3244305"
-        "OwnerKey" = "8:_44F43C080DF4D6F0CDD58B42B4680F03"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -424,18 +424,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1B1A57DDC5EAA68F3CF231CDCDCD841D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_19E989B8593139AFB8EB938F585356B4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_2671DF95E13A65EA63A5E8D3A3244305"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -451,6 +439,18 @@
         "OwnerKey" = "8:_C3E8D73E389EE7A766ECAA0EB03A3AAE"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_1B1A57DDC5EAA68F3CF231CDCDCD841D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_19E989B8593139AFB8EB938F585356B4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -459,7 +459,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\eFact-S-Instalador.msi"
+        "OutputFilename" = "8:..\\..\\eFact-R-Docs\\aaInstaladoresYGuiasDeInstalacion\\06-Sistema eFact-S - Instalador Paquete\\v1.0.3\\eFact-S-Instalador-v1.0.3.msi"
         "PackageFilesAs" = "3:1"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -469,6 +469,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.2.0"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 2.0"
+                    "ProductCode" = "8:Microsoft.Net.Framework.2.0"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -485,6 +501,17 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                }
+            }
         }
     }
     "Deployable"
@@ -1062,14 +1089,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:eFact-S"
-        "ProductCode" = "8:{278904A7-DC50-40ED-9C06-123F7FC5FEF9}"
-        "PackageCode" = "8:{25157FE4-D264-476F-8450-7098DD6BC930}"
+        "ProductCode" = "8:{99AA702A-A26D-4F5C-8E0C-603D4BC458B2}"
+        "PackageCode" = "8:{06D6DDC4-AF85-4630-BBF3-371BFA0ED3BD}"
         "UpgradeCode" = "8:{8FC2597B-DAF2-4770-9D21-58A4A5DE2CC4}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
-        "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "InstallAllUsers" = "11:TRUE"
+        "ProductVersion" = "8:1.0.3"
         "Manufacturer" = "8:Cedeira"
         "ARPHELPTELEPHONE" = "8:54.11 4778-1744"
         "ARPHELPLINK" = "8:http://www.cedeira.com.ar"

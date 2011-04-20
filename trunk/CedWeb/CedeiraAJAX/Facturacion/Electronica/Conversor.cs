@@ -189,20 +189,20 @@ namespace CedeiraAJAX.Facturacion.Electronica
                                 d.linea[j].impuestos[k].porcentaje_impuestoSpecified = detalle.linea[j].impuestos[k].porcentaje_impuestoSpecified;
                             }
                         }
-                        if (detalle.linea[j].descuentos != null)
+                        if (detalle.linea[j].lineaDescuentos != null)
                         {
-                            d.linea[j].descuentos = new global::CedeiraAJAX.org.dyndns.cedweb.envio.lcComprobanteDetalleLineaDescuentos[detalle.linea[j].descuentos.Length];
+                            d.linea[j].descuentos = new global::CedeiraAJAX.org.dyndns.cedweb.envio.lcComprobanteDetalleLineaDescuentos[detalle.linea[j].lineaDescuentos.Length];
                             for (int k = 0; k < d.linea[j].descuentos.Length; k++)
                             {
 								if (d.linea[j].descuentos[k] != null)
 								{
 									d.linea[j].descuentos[k] = new global::CedeiraAJAX.org.dyndns.cedweb.envio.lcComprobanteDetalleLineaDescuentos();
-									d.linea[j].descuentos[k].descripcion_descuento = detalle.linea[j].descuentos[k].descripcion_descuento;
-									d.linea[j].descuentos[k].importe_descuento = detalle.linea[j].descuentos[k].importe_descuento;
-									d.linea[j].descuentos[k].importe_descuento_moneda_origen = detalle.linea[j].descuentos[k].importe_descuento_moneda_origen;
-									d.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified = detalle.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified;
-									d.linea[j].descuentos[k].porcentaje_descuento = detalle.linea[j].descuentos[k].porcentaje_descuento;
-									d.linea[j].descuentos[k].porcentaje_descuentoSpecified = detalle.linea[j].descuentos[k].porcentaje_descuentoSpecified;
+									d.linea[j].descuentos[k].descripcion_descuento = detalle.linea[j].lineaDescuentos[k].descripcion_descuento;
+                                    d.linea[j].descuentos[k].importe_descuento = detalle.linea[j].lineaDescuentos[k].importe_descuento;
+                                    d.linea[j].descuentos[k].importe_descuento_moneda_origen = detalle.linea[j].lineaDescuentos[k].importe_descuento_moneda_origen;
+                                    d.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified = detalle.linea[j].lineaDescuentos[k].importe_descuento_moneda_origenSpecified;
+                                    d.linea[j].descuentos[k].porcentaje_descuento = detalle.linea[j].lineaDescuentos[k].porcentaje_descuento;
+                                    d.linea[j].descuentos[k].porcentaje_descuentoSpecified = detalle.linea[j].lineaDescuentos[k].porcentaje_descuentoSpecified;
 								}
 								else
 								{

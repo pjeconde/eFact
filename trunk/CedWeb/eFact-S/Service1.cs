@@ -8,6 +8,7 @@ using System.Text;
 using System.IO;
 using System.Globalization;
 using System.Web.Mail;
+using System.Threading; 
 
 namespace eFact_S
 {
@@ -23,7 +24,6 @@ namespace eFact_S
 
         protected override void OnStart(string[] args)
         {
-            Inicializar();
             NombrePC = "";
             try
             {
@@ -69,7 +69,7 @@ namespace eFact_S
             }
             smtpClient.Send(mail);
         }
-
+        
         private void timer1_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             try 
@@ -97,7 +97,7 @@ namespace eFact_S
                         Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
                     }
                 }
-                Archivos.Sort(ordenarPorFecha);
+                Archivos.Sort(ordenarPorNombre);
                 foreach (eFact_Entidades.Archivo elem in Archivos)
                 {
                     string NombreArchivo = elem.Nombre;
@@ -136,6 +136,19 @@ namespace eFact_S
                     {
                         Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
                         elem.Comentario = ex.Message;
+                        if (ex.InnerException != null)
+                        {
+                            elem.Comentario += "\r\n" + ex.InnerException.Message;
+                        }
+                        if (ex.StackTrace != null)
+                        {
+                            string st = ex.StackTrace;
+                            if (st.Length > 2000)
+                            {
+                                st = st.Substring(0, 2000);
+                            }
+                            elem.Comentario += "\r\n\r\n" + st;
+                        }
                         //Agregar datos del proceso a la entidad Archivo
                         ArchGuardarComoNombre = "ERR-" + ArchGuardarComoNombre;
                         elem.NombreProcesado = ArchGuardarComoNombre;
@@ -165,6 +178,10 @@ namespace eFact_S
         {
             return A1.FechaModificacion.CompareTo(A2.FechaModificacion);
         }
+        private static int ordenarPorNombre(eFact_Entidades.Archivo A1, eFact_Entidades.Archivo A2)
+        {
+            return A1.Nombre.CompareTo(A2.Nombre);
+        }
         private void ActualizarEstadoAFIPLotes()
         {
             List<eFact_Entidades.Lote> lotes = new List<eFact_Entidades.Lote>();
@@ -191,14 +208,14 @@ namespace eFact_S
                     {
                         eFact_RN.Lote.ActualizarDatosCAE(l, Lc);
                         string comentario = ArmarTextoMotivo(Lc);
-                        EjecutarEventoBandejaS("RegAceptAFIP", comentario, l);
+                        EjecutarEventoBandejaS("RegAceptAFIPO", comentario, l);
                     }
-                    //else if (Lc.cabecera_lote.resultado == "P")
-                    //{
-                    //    eFact_RN.Lote.ActualizarDatosCAE(l, Lc);
-                    //    string comentario = ArmarTextoMotivo(Lc);
-                    //    EjecutarEventoBandejaS("RegAceptAFIP", comentario, l);
-                    //}
+                    else if (Lc.cabecera_lote.resultado == "P")
+                    {
+                        eFact_RN.Lote.ActualizarDatosCAE(l, Lc);
+                        string comentario = ArmarTextoMotivo(Lc);
+                        EjecutarEventoBandejaS("RegAceptAFIPP", comentario, l);
+                    }
                     else if (Lc.cabecera_lote.resultado == "R")
                     {
                         CedWebRN.IBK.lote_response lr = ArmarLoteResponse(Lc);
@@ -226,7 +243,7 @@ namespace eFact_S
         private string ArmarTextoMotivo(FeaEntidades.InterFacturas.lote_comprobantes Lc)
         {
             string texto = "";
-            if (Lc.cabecera_lote.resultado == "A" || Lc.cabecera_lote.resultado == "R")
+            if (Lc.cabecera_lote.resultado == "A" || Lc.cabecera_lote.resultado == "R" || Lc.cabecera_lote.resultado == "O" || Lc.cabecera_lote.resultado == "P")
             {
                 if (Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
                 {
@@ -248,7 +265,13 @@ namespace eFact_S
                         {
                             descrCodigosErrorAFIPComprobante = codigosErrorAFIPComprobante.Descr;
                         }
-                        texto += "Código de problema a nivel comprobante ( renglon " + i.ToString() + "): " + Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() + " " + descrCodigosErrorAFIPComprobante + "\r\n";
+                        int renglon = i + 1;
+                        string resultado = "";
+                        if (Lc.comprobante[i].cabecera.informacion_comprobante != null)
+                        {
+                            resultado = Lc.comprobante[i].cabecera.informacion_comprobante.resultado + " ";
+                        }
+                        texto += "Código de problema a nivel comprobante ( renglon " + renglon.ToString() + "): " + resultado + Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() + " " + descrCodigosErrorAFIPComprobante + "\r\n";
                     }
                 }
             }
@@ -256,7 +279,10 @@ namespace eFact_S
         }
         private void Inicializar()
         {
-            //Thread.CurrentThread.CurrentCulture = new CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"]);
+            CultureInfo cedeiraCultura = new CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
+            cedeiraCultura.DateTimeFormat = new CultureInfo(System.Configuration.ConfigurationManager.AppSettings["CulturaDateTimeFormat"], false).DateTimeFormat;
+            Thread.CurrentThread.CurrentCulture = cedeiraCultura;
+
             System.Text.StringBuilder auxCnn = new System.Text.StringBuilder();
             auxCnn.Append(System.Configuration.ConfigurationManager.AppSettings["CnnStr"]);
 
@@ -366,6 +392,15 @@ namespace eFact_S
             string texto = "";
             CedWebRN.IBK.lote_response lrCompleto = new CedWebRN.IBK.lote_response();
             CedWebRN.IBK.error[] errores = new CedWebRN.IBK.error[1];
+            lrCompleto.cantidad_reg = Lc.cabecera_lote.cantidad_reg;
+            lrCompleto.cuit_canal = Lc.cabecera_lote.cuit_canal;
+            lrCompleto.cuit_vendedor = Lc.cabecera_lote.cuit_vendedor;
+            lrCompleto.estado = Lc.cabecera_lote.resultado;
+            lrCompleto.fecha_envio_lote = Lc.cabecera_lote.fecha_envio_lote;
+            lrCompleto.id_lote = Lc.cabecera_lote.id_lote;
+            lrCompleto.presta_serv = Lc.cabecera_lote.presta_serv;
+            lrCompleto.presta_servSpecified = Lc.cabecera_lote.presta_servSpecified;
+            lrCompleto.punto_de_venta = Lc.cabecera_lote.punto_de_venta;
             if (Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
             {
                 errores[0] = new CedWebRN.IBK.error();
@@ -395,6 +430,10 @@ namespace eFact_S
                     erroresComprobante[NroMotivo].codigo_error = 0;
                     erroresComprobante[NroMotivo].descripcion_error = Lc.comprobante[i].cabecera.informacion_comprobante.motivo;
                     lrCompleto.comprobante_response[NroMotivo] = new CedWebRN.IBK.comprobante_response();
+                    lrCompleto.comprobante_response[NroMotivo].numero_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante;
+                    lrCompleto.comprobante_response[NroMotivo].punto_de_venta = Lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta;
+                    lrCompleto.comprobante_response[NroMotivo].tipo_de_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante;
+                    lrCompleto.comprobante_response[NroMotivo].estado = Lc.comprobante[i].cabecera.informacion_comprobante.resultado;
                     lrCompleto.comprobante_response[NroMotivo].errores_comprobante = erroresComprobante;
                     NroMotivo++;
                 }
