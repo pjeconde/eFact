@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Este archivo lo genera de forma automática el Diseñador de esquemas XML. Contiene información de diseño para componentes de la superficie de diseño.-->
-<XSDDesignerLayout Style="LeftRight" layoutVersion="2" viewPortLeft="10548" viewPortTop="-7039" zoom="100">
+<XSDDesignerLayout Style="LeftRight" layoutVersion="2" viewPortLeft="10548" viewPortTop="-1846" zoom="100">
     <lote_comprobantes_XmlElement left="317" top="254" width="5292" height="3149" selected="0" zOrder="1" index="0" expanded="1">
-        <cabecera_lote_XmlElement left="6243" top="-8023" width="5292" height="3149" selected="0" zOrder="36" index="0" expanded="1" />
-        <comprobante_XmlElement left="6243" top="8531" width="5292" height="3149" selected="0" zOrder="2" index="1" expanded="1">
-            <cabecera_XmlElement left="12169" top="-2472" width="5292" height="3149" selected="0" zOrder="5" index="0" expanded="1">
-                <informacion_comprobante_XmlElement left="18095" top="-6195" width="5292" height="3149" selected="0" zOrder="38" index="0" expanded="1">
-                    <referencias_XmlElement left="24021" top="-8023" width="5292" height="3149" selected="0" zOrder="40" index="16" expanded="1" />
-                    <informacion_exportacion_XmlElement left="24021" top="-4234" width="5292" height="3149" selected="0" zOrder="42" index="17" expanded="1">
-                        <permisos_XmlElement left="29947" top="-4234" width="5292" height="3149" selected="0" zOrder="44" index="6" expanded="1" />
+        <cabecera_lote_XmlElement left="6243" top="-7973" width="5292" height="3149" selected="0" zOrder="38" index="0" expanded="1" />
+        <comprobante_XmlElement left="6243" top="8482" width="5292" height="3149" selected="0" zOrder="2" index="1" expanded="1">
+            <cabecera_XmlElement left="12169" top="-2488" width="5292" height="3149" selected="0" zOrder="5" index="0" expanded="1">
+                <informacion_comprobante_XmlElement left="18095" top="-6145" width="5292" height="3149" selected="0" zOrder="41" index="0" expanded="1">
+                    <referencias_XmlElement left="24021" top="-7973" width="5292" height="3149" selected="0" zOrder="44" index="16" expanded="1" />
+                    <informacion_exportacion_XmlElement left="24021" top="-4316" width="5292" height="3149" selected="0" zOrder="47" index="17" expanded="1">
+                        <permisos_XmlElement left="29947" top="-4316" width="5292" height="3149" selected="0" zOrder="50" index="6" expanded="1" />
                     </informacion_exportacion_XmlElement>
                 </informacion_comprobante_XmlElement>
-                <informacion_vendedor_XmlElement left="18095" top="-2406" width="5292" height="3149" selected="0" zOrder="8" index="1" expanded="1" />
-                <informacion_comprador_XmlElement left="18095" top="1251" width="5292" height="3149" selected="0" zOrder="11" index="2" expanded="1" />
+                <informacion_vendedor_XmlElement left="18095" top="-2488" width="5292" height="3149" selected="0" zOrder="8" index="1" expanded="1" />
+                <informacion_comprador_XmlElement left="18095" top="1169" width="5292" height="3149" selected="0" zOrder="11" index="2" expanded="1" />
             </cabecera_XmlElement>
-            <detalle_XmlElement left="12169" top="4908" width="5292" height="3149" selected="0" zOrder="14" index="1" expanded="1">
-                <linea_XmlElement left="18095" top="4908" width="5292" height="3149" selected="0" zOrder="17" index="0" expanded="1">
-                    <descuentosLinea_XmlElement left="24021" top="1252" width="9843" height="3148" selected="0" zOrder="20" index="11" expanded="1" />
-                    <impuestosLinea_XmlElement left="24021" top="4908" width="9896" height="3149" selected="0" zOrder="23" index="13" expanded="1" />
-                    <importes_moneda_origen_XmlElement left="24021" top="8565" width="9869" height="3149" selected="0" zOrder="25" index="15" expanded="1" />
+            <detalle_XmlElement left="12169" top="4826" width="5292" height="3149" selected="0" zOrder="14" index="1" expanded="1">
+                <linea_XmlElement left="18095" top="4826" width="5292" height="3149" selected="0" zOrder="17" index="0" expanded="1">
+                    <lineaDescuentos_XmlElement left="24021" top="1170" width="9843" height="3148" selected="0" zOrder="20" index="11" expanded="1" />
+                    <impuestosLinea_XmlElement left="24021" top="4826" width="9896" height="3149" selected="0" zOrder="23" index="13" expanded="1" />
+                    <importes_moneda_origen_XmlElement left="24021" top="8483" width="9869" height="3149" selected="0" zOrder="26" index="15" expanded="1" />
                 </linea_XmlElement>
             </detalle_XmlElement>
-            <resumen_XmlElement left="12169" top="12222" width="5292" height="3149" selected="0" zOrder="27" index="2" expanded="1">
-                <descuentos_XmlElement left="18095" top="8565" width="5292" height="3149" selected="0" zOrder="30" index="0" expanded="1" />
-                <impuestos_XmlElement left="18095" top="12222" width="13150" height="3149" selected="0" zOrder="33" index="6" expanded="1" />
-                <importes_moneda_origen_XmlElement left="18095" top="15879" width="13150" height="3149" selected="0" zOrder="46" index="16" expanded="1" />
+            <resumen_XmlElement left="12169" top="12140" width="5292" height="3149" selected="0" zOrder="29" index="2" expanded="1">
+                <descuentos_XmlElement left="18095" top="8483" width="5292" height="3149" selected="0" zOrder="32" index="0" expanded="1" />
+                <impuestos_XmlElement left="18095" top="12140" width="13150" height="3149" selected="0" zOrder="35" index="6" expanded="1" />
+                <importes_moneda_origen_XmlElement left="18095" top="15797" width="13150" height="3149" selected="0" zOrder="53" index="16" expanded="1" />
             </resumen_XmlElement>
-            <extensiones_XmlElement left="12169" top="19535" width="5292" height="3149" selected="0" zOrder="48" index="3" expanded="1">
-                <extensiones_camara_facturas_XmlElement left="18095" top="19536" width="13177" height="3148" selected="0" zOrder="50" index="0" expanded="1" />
+            <extensiones_XmlElement left="12169" top="19453" width="5292" height="3149" selected="0" zOrder="55" index="3" expanded="1">
+                <extensiones_camara_facturas_XmlElement left="18095" top="19454" width="13177" height="3148" selected="0" zOrder="57" index="0" expanded="1" />
             </extensiones_XmlElement>
         </comprobante_XmlElement>
     </lote_comprobantes_XmlElement>

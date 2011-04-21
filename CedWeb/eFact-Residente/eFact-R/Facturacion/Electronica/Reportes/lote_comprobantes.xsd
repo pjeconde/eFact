@@ -150,7 +150,7 @@
 													<xs:element minOccurs="0" maxOccurs="1" name="alicuota_iva" type="xs:double" />
 													<xs:element minOccurs="0" maxOccurs="1" name="importe_iva" type="xs:double" />
 													<xs:element minOccurs="0" maxOccurs="1" name="indicacion_exento_gravado" type="xs:string" />
-													<xs:element minOccurs="0" maxOccurs="unbounded" name="descuentosLinea">
+													<xs:element minOccurs="0" maxOccurs="unbounded" name="lineaDescuentos">
 														<xs:complexType>
 															<xs:sequence>
 																<xs:element minOccurs="0" maxOccurs="1" name="descripcion_descuento" type="xs:string" />
