@@ -262,6 +262,21 @@ namespace eFact_R.RN
             lc = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
             Lc = lc;
         }
+        public static void DeserializarLc(out FeaEntidades.Reporte.lote_comprobantes Lc, eFact_R.Entidades.Lote Lote)
+        {
+            string cadena = Cadena(Lote, true);
+            //Deserializar ( pasar de string XML a FeaEntidades.Reporte.lote_comprobantes )
+            System.Text.Encoding codificador;
+            codificador = System.Text.Encoding.GetEncoding("iso-8859-1");
+            byte[] a = new byte[cadena.Length];
+            a = codificador.GetBytes(cadena);
+            MemoryStream ms = new MemoryStream(a);
+            ms.Seek(0, System.IO.SeekOrigin.Begin);
+            FeaEntidades.Reporte.lote_comprobantes lc = new FeaEntidades.Reporte.lote_comprobantes();
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lc.GetType());
+            lc = (FeaEntidades.Reporte.lote_comprobantes)x.Deserialize(ms);
+            Lc = lc;
+        }
         public static void DeserializarLr(out FeaEntidades.InterFacturas.lote_response Lr, string Cadena)
         {
             //Deserializar ( pasar de string XML a CedWebRN.IBK.lote_response )

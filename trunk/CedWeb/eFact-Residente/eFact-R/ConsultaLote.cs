@@ -283,23 +283,28 @@ namespace eFact_R
             LoteConUnSoloComprobante.WF = Lote.WF;
             FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
             eFact_R.RN.Lote.DeserializarLc(out lc, LoteConUnSoloComprobante, true);
+            //Entidad para reporte crystal. Al desserializar se pierden los descuentos de la entidad original.
+            FeaEntidades.Reporte.lote_comprobantes lcReporte = new FeaEntidades.Reporte.lote_comprobantes();
+            eFact_R.RN.Lote.DeserializarLc(out lcReporte, LoteConUnSoloComprobante);
             for (int i = 0; i < lc.comprobante.Length; i++)
             {
                 if (i == 0)
                 {
                     lc.comprobante[i] = lc.comprobante[Renglon];
+                    lcReporte.comprobante[i] = lcReporte.comprobante[Renglon];
                 }
                 else
                 {
                     lc.comprobante[i] = null;
+                    lcReporte.comprobante[i] = null;
                 }
             }
-            AsignarCamposOpcionales(lc);
-            ReemplarResumenImportesMonedaExtranjera(lc);
+            AsignarCamposOpcionales(lcReporte);
+            ReemplarResumenImportesMonedaExtranjera(lcReporte);
             DataSet ds = new DataSet();
-            XmlSerializer objXS = new XmlSerializer(lc.GetType());
+            XmlSerializer objXS = new XmlSerializer(lcReporte.GetType());
             StringWriter objSW = new StringWriter();
-            objXS.Serialize(objSW, lc);
+            objXS.Serialize(objSW, lcReporte);
             StringReader objSR = new StringReader(objSW.ToString());
             ds.ReadXml(objSR);
             
@@ -321,7 +326,7 @@ namespace eFact_R
             ReporteDocumento = facturaRpt;
         }
 
-        private static void ReemplarResumenImportesMonedaExtranjera(FeaEntidades.InterFacturas.lote_comprobantes lc)
+        private static void ReemplarResumenImportesMonedaExtranjera(FeaEntidades.Reporte.lote_comprobantes lc)
         {
             if (!lc.comprobante[0].resumen.codigo_moneda.Equals("PES"))
             {
@@ -393,7 +398,7 @@ namespace eFact_R
             }
         }
 
-        private void AsignarCamposOpcionales(FeaEntidades.InterFacturas.lote_comprobantes lc)
+        private void AsignarCamposOpcionales(FeaEntidades.Reporte.lote_comprobantes lc)
         {
             if (lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento == null)
             {
@@ -480,8 +485,8 @@ namespace eFact_R
             lc.comprobante[0].resumen.importe_total_ingresos_brutosSpecified = true;
             if (lc.comprobante[0].resumen.descuentos == null)
             {
-                lc.comprobante[0].resumen.descuentos = new FeaEntidades.InterFacturas.resumenDescuentos[1];
-                lc.comprobante[0].resumen.descuentos[0] = new FeaEntidades.InterFacturas.resumenDescuentos();
+                lc.comprobante[0].resumen.descuentos = new FeaEntidades.Reporte.resumenDescuentos[1];
+                lc.comprobante[0].resumen.descuentos[0] = new FeaEntidades.Reporte.resumenDescuentos();
                 lc.comprobante[0].resumen.descuentos[0].alicuota_iva_descuentoSpecified = true;
                 lc.comprobante[0].resumen.descuentos[0].importe_iva_descuentoSpecified = true;
             }
@@ -501,7 +506,7 @@ namespace eFact_R
             {
                 if (lc.comprobante[0].detalle.linea[i] != null)
                 {
-                    lc.comprobante[0].detalle.linea[i].importes_moneda_origen = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
+                    lc.comprobante[0].detalle.linea[i].importes_moneda_origen = new FeaEntidades.Reporte.lineaImportes_moneda_origen();
                     lc.comprobante[0].detalle.linea[i].importes_moneda_origen.importe_ivaSpecified = true;
                     lc.comprobante[0].detalle.linea[i].importes_moneda_origen.importe_total_articuloSpecified = true;
                     lc.comprobante[0].detalle.linea[i].importes_moneda_origen.precio_unitarioSpecified = true;
@@ -512,6 +517,39 @@ namespace eFact_R
                     }
                     lc.comprobante[0].detalle.linea[i].importe_total_descuentosSpecified = true;
                     
+                    //Prueba
+                    if (i == 4)
+                    {
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos = new FeaEntidades.Reporte.lineaDescuentos[2];
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0] = new FeaEntidades.Reporte.lineaDescuentos();
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].descripcion_descuento = "BOCHA MALOTE";
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].importe_descuento = i;
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].porcentaje_descuento = 5;
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].porcentaje_descuentoSpecified = true;
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].importe_descuento_moneda_origen = 0;
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].importe_descuento_moneda_origenSpecified = true;
+
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[1] = new FeaEntidades.Reporte.lineaDescuentos();
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[1].descripcion_descuento = "BOCHA MALOTE";
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[1].importe_descuento = i + 100;
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[1].porcentaje_descuento = 5;
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[1].porcentaje_descuentoSpecified = true;
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[1].importe_descuento_moneda_origen = 0;
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[1].importe_descuento_moneda_origenSpecified = true;
+                    }
+                    else
+                    {
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos = new FeaEntidades.Reporte.lineaDescuentos[1];
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0] = new FeaEntidades.Reporte.lineaDescuentos();
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].descripcion_descuento = "BOCHA MALOTE";
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].importe_descuento = i;
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].porcentaje_descuento = 0;
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].porcentaje_descuentoSpecified = true;
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].importe_descuento_moneda_origen = 0;
+                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].importe_descuento_moneda_origenSpecified = true;
+                    }
+                    
+
                     lc.comprobante[0].detalle.linea[i].precio_unitarioSpecified = true;
                     lc.comprobante[0].detalle.linea[i].importe_ivaSpecified = true;
                     if (lc.comprobante[0].detalle.linea[i].alicuota_ivaSpecified.Equals(false))
