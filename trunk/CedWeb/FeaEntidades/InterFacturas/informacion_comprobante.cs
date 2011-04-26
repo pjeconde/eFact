@@ -73,6 +73,9 @@ namespace FeaEntidades.InterFacturas
 		[FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
 		private bool codigo_conceptoFieldSpecified;
 
+        [FileHelpers.FieldIgnored()]
+        private informacion_adicional_comprobante[] informacion_adicional_comprobanteField;
+
         /// <comentarios/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string nombre_clase
@@ -399,6 +402,20 @@ namespace FeaEntidades.InterFacturas
             set
             {
                 this.codigo_conceptoFieldSpecified = value;
+            }
+        }
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlElementAttribute("informacion_adicional_comprobante")]
+        public Informacion_adicional_comprobante[] informacion_adicional_comprobante
+        {
+            get
+            {
+                return this.informacion_adicional_comprobanteField;
+            }
+            set
+            {
+                this.informacion_adicional_comprobanteField = value;
             }
         }
 
