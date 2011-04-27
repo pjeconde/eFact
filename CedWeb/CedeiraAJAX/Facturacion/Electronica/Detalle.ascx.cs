@@ -752,13 +752,11 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						l.precio_unitarioSpecified = false;
 					}
 				}
-
-
 				detalleGridView.EditIndex = -1;
-				detalleGridView.DataSource = ViewState["lineas"];
+				detalleGridView.DataSource = lineas;
 				detalleGridView.DataBind();
 				BindearDropDownLists();
-
+				ViewState["lineas"] = lineas;
 			}
 			catch (Exception ex)
 			{
@@ -1078,8 +1076,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						case "40":
 						case "61":
 						case "64":
-							det.linea[i].precio_unitario = listadelineas[i].precio_unitario * (1 + listadelineas[i].alicuota_iva / 100);
-							det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo + listadelineas[i].importe_iva;
+							if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+							{
+								det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * (1 + listadelineas[i].alicuota_iva / 100), 3);
+							}
+							else
+							{
+								det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario, 3);
+							}
+							det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo + listadelineas[i].importe_iva,2);
 							det.linea[i].importe_ivaSpecified = false;
 							det.linea[i].importe_iva = 0;
 							break;
@@ -1107,13 +1112,20 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						case "64":
 							det.linea[i].importe_iva =0;
 							det.linea[i].importe_ivaSpecified = false;
-							det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(TipoDeCambio) * (1 + listadelineas[i].alicuota_iva / 100), 2);
+							if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+							{
+								det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(TipoDeCambio) * (1 + listadelineas[i].alicuota_iva / 100), 3);
+							}
+							else
+							{
+								det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(TipoDeCambio), 3);
+							}
 							det.linea[i].importe_total_articulo = Math.Round(((listadelineas[i].importe_total_articulo) + listadelineas[i].importe_iva ) * Convert.ToDouble(TipoDeCambio), 2);
 							break;
 						default:
 							det.linea[i].importe_iva = Math.Round(listadelineas[i].importe_iva * Convert.ToDouble(TipoDeCambio), 2);
 							det.linea[i].importe_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
-							det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(TipoDeCambio), 2);
+							det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(TipoDeCambio), 3);
 							det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo * Convert.ToDouble(TipoDeCambio), 2);
 							break;
 					}
@@ -1135,7 +1147,14 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						case "64":
 							limo.importe_ivaSpecified = false;
 							limo.importe_iva = 0;
-							limo.precio_unitario = Math.Round(listadelineas[i].precio_unitario * (1 + listadelineas[i].alicuota_iva / 100),2);
+							if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+							{
+								limo.precio_unitario = Math.Round(listadelineas[i].precio_unitario * (1 + listadelineas[i].alicuota_iva / 100), 3);
+							}
+							else
+							{
+								limo.precio_unitario = Math.Round(listadelineas[i].precio_unitario, 3);
+							}
 							limo.importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo + listadelineas[i].importe_iva,2);
 							break;
 						default:
