@@ -118,6 +118,10 @@ namespace eFact_DB
             {
                 comandoSQL += ", Logo = @Imagen ";
             }
+            else
+            {
+                comandoSQL += ", Logo = null ";
+            }
             comandoSQL += ", Codigo = '" + Vendedor.Codigo + "' ";
             comandoSQL += ", CondicionIVA = " + Vendedor.CondicionIVA + " ";
             comandoSQL += ", CondicionIB = " + Vendedor.CondicionIB + " ";

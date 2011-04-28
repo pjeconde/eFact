@@ -3,153 +3,29 @@ using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography.X509Certificates;
 
-namespace CedWebRN
+namespace eFact_Tester
 {
     public class Comprobante
     {
-        public FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(IBK.consulta_lote_comprobantes clc, string certificado)
+        public FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(out List<FeaEntidades.InterFacturas.error> RespErroresLote, out List<FeaEntidades.InterFacturas.error> RespErroresComprobantes, eFact_Tester.IBK.consulta_lote_comprobantes clc, string url, eFact_Tester.Entidades.Certificado Certificado, eFact_Tester.Entidades.Proxy Proxy)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
             lc.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
             lc.comprobante = new FeaEntidades.InterFacturas.comprobante[1];
-            IBK.FacturaWebServiceConSchema objIBK;
-			objIBK = new IBK.FacturaWebServiceConSchema();
-            objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturas"];
-            if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null)
-            {
-                System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
-                string usuarioProxy = System.Configuration.ConfigurationManager.AppSettings["UsuarioProxy"];
-                string claveProxy = System.Configuration.ConfigurationManager.AppSettings["ClaveProxy"];
-                string dominioProxy = System.Configuration.ConfigurationManager.AppSettings["DominioProxy"];
-                System.Net.NetworkCredential networkCredential = new System.Net.NetworkCredential(usuarioProxy, claveProxy, dominioProxy);
-                wp.Credentials = networkCredential;
-                objIBK.Proxy = wp;
-            }
-            X509Store store = new X509Store(StoreLocation.LocalMachine);
-            store.Open(OpenFlags.ReadOnly);
-            X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
-            if (col.Count.Equals(1))
-            {
-                objIBK.ClientCertificates.Add(col[0]);
-                IBK.consulta_lote_comprobantes_response clcr = objIBK.getLoteFacturasConSchema(clc);
-                IBK.consulta_lote_response clr;
-                try
-                {
-                    clr = (IBK.consulta_lote_response)clcr.Item;
-                    IBK.lote_comprobantes lcIBK = (IBK.lote_comprobantes)clr.Item;
-                    lc = Ibk2Fea(lcIBK);
-                }
-                catch (InvalidCastException)
-                {
-                    StringBuilder errorText = new StringBuilder();
-                    if (clcr.Item != null)
-                    {
-                        errorText.Append("Nro. de Lote: [" + clc.id_lote + "]\r\n");
-                        if (clcr.Item.GetType() == typeof(IBK.consulta_lote_response))
-                        {
-                            clr = (IBK.consulta_lote_response)clcr.Item;
-                            IBK.consulta_lote_responseErrores_consulta errores = (IBK.consulta_lote_responseErrores_consulta)clr.Item;
-                            foreach (IBK.error elote in errores.error)
-                            {
-                                errorText.Append(elote.codigo_error + " - " + elote.descripcion_error + "\r\n");
-                            }
-                        }
-                        else
-                        {
-                            IBK.consulta_lote_comprobantes_responseErrores_response clcrEr;
-                            clcrEr = (IBK.consulta_lote_comprobantes_responseErrores_response)clcr.Item;
-                            foreach (IBK.error elote in clcrEr.error)
-                            {
-                                errorText.Append(elote.codigo_error + " - " + elote.descripcion_error + "\r\n");
-                            }
-                        }
-                    }
-                    throw new Exception(errorText.ToString());
-                }
-                return lc;
-            }
-            else
-            {
-                throw new Exception("Su certificado no está disponible en nuestro repositorio");
-            }
-        }
-        public string EnviarIBK(FeaEntidades.InterFacturas.lote_comprobantes lc, string certificado)
-        {
-            IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
-            lcIBK = Fea2Ibk(lc);
-
-            IBK.FacturaWebServiceConSchema objIBK;
-            objIBK = new IBK.FacturaWebServiceConSchema();
-            objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturas"];
-            if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null && System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
-            {
-                System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
-                string usuarioProxy = System.Configuration.ConfigurationManager.AppSettings["UsuarioProxy"];
-                string claveProxy = System.Configuration.ConfigurationManager.AppSettings["ClaveProxy"];
-                string dominioProxy = System.Configuration.ConfigurationManager.AppSettings["DominioProxy"];
-
-                System.Net.NetworkCredential networkCredential = new System.Net.NetworkCredential(usuarioProxy, claveProxy, dominioProxy);
-                wp.Credentials = networkCredential;
-                objIBK.Proxy = wp;
-            }
-
-            X509Store store = new X509Store(StoreLocation.LocalMachine);
-            store.Open(OpenFlags.ReadOnly);
-            X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
-            if (col.Count.Equals(1))
-            {
-                objIBK.ClientCertificates.Add(col[0]);
-                IBK.lote_comprobantes_response lcr = objIBK.receiveFacturasConSchema(lcIBK);
-
-                string resultado = string.Empty;
-
-                if (!((IBK.lote_response)(lcr.Item)).estado.Equals("OK"))
-                {
-                    if (((IBK.lote_response)lcr.Item).errores_lote != null)
-                    {
-                        resultado = ((IBK.lote_response)lcr.Item).errores_lote[0].descripcion_error;
-                    }
-                    else
-                    {
-                        resultado = ((IBK.lote_response)lcr.Item).comprobante_response[0].errores_comprobante[0].descripcion_error;
-                    }
-                    throw new Exception(resultado);
-                }
-                else
-                {
-                    resultado = "Comprobante enviado satisfactoriamente a Interfacturas";
-                }
-                return resultado;
-            }
-            else
-            {
-                throw new Exception("Su certificado no está disponible en nuestro repositorio");
-            }
-        }
-
-        public FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(out IBK.error[] RespErroresLote, out IBK.error[] RespErroresComprobantes, IBK.consulta_lote_comprobantes clc, string certificado)
-        {
-            FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
-            lc.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
-            lc.comprobante = new FeaEntidades.InterFacturas.comprobante[1];
-            IBK.error[] respErroresLote = new CedWebRN.IBK.error[0];
-            IBK.error[] respErroresComprobantes = new CedWebRN.IBK.error[0];
+            IBK.error[] respErroresLote = new IBK.error[0];
+            IBK.error[] respErroresComprobantes = new IBK.error[0];
 			IBK.FacturaWebServiceConSchema objIBK;
 			objIBK = new IBK.FacturaWebServiceConSchema();
-            objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturas"];
-            if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
+            objIBK.Url = url;
+            if (Proxy != null)
             {
-                System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
-                string usuarioProxy = System.Configuration.ConfigurationManager.AppSettings["UsuarioProxy"];
-                string claveProxy = System.Configuration.ConfigurationManager.AppSettings["ClaveProxy"];
-                string dominioProxy = System.Configuration.ConfigurationManager.AppSettings["DominioProxy"];
-                System.Net.NetworkCredential networkCredential = new System.Net.NetworkCredential(usuarioProxy, claveProxy, dominioProxy);
+                System.Net.WebProxy wp = new System.Net.WebProxy(Proxy.Servidor, false);
+                System.Net.NetworkCredential networkCredential = new System.Net.NetworkCredential(Proxy.Usuario, Proxy.Clave, Proxy.Dominio);
                 wp.Credentials = networkCredential;
                 objIBK.Proxy = wp;
             }
-            string storeLocation = System.Configuration.ConfigurationManager.AppSettings["StoreLocation"];
             X509Store store;
-            if (storeLocation == "CurrentUser")
+            if (Certificado.LugarDeAlmacenamiento == eFact_Tester.Entidades.Certificado.Almacenamiento.CurrentUser)
             {
                 store = new X509Store(StoreLocation.CurrentUser);
             }
@@ -158,7 +34,7 @@ namespace CedWebRN
                 store = new X509Store(StoreLocation.LocalMachine);
             }
             store.Open(OpenFlags.ReadOnly);
-            X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
+            X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, Certificado.Numero, true);
             if (col.Count.Equals(1))
             {
                 objIBK.ClientCertificates.Add(col[0]);
@@ -184,7 +60,7 @@ namespace CedWebRN
                             {
                                 errorText.Append(elote.codigo_error + " - " + elote.descripcion_error + " \r\n");
                             }
-                            RespErroresLote = errores.error;
+                            RespErroresLote = Ibk2Fea(errores.error);
                         }
                         else
                         {
@@ -194,13 +70,13 @@ namespace CedWebRN
                             {
                                 errorText.Append(elote.codigo_error + " - " + elote.descripcion_error + " \r\n");
                             }
-                            RespErroresComprobantes = clcrEr.error;
+                            RespErroresComprobantes = Ibk2Fea(clcrEr.error);
                         }
                     }
                     throw new Exception(errorText.ToString());
                 }
-                RespErroresLote = respErroresLote;
-                RespErroresComprobantes = respErroresComprobantes;
+                RespErroresLote = new List<FeaEntidades.InterFacturas.error>();
+                RespErroresComprobantes = new List<FeaEntidades.InterFacturas.error>();
                 return lc;
             }
             else
@@ -208,81 +84,83 @@ namespace CedWebRN
                 throw new Exception("Su certificado no está disponible en nuestro repositorio");
             }
         }
-        public void EnviarIBK(out CedWebRN.IBK.lote_response Lr, FeaEntidades.InterFacturas.lote_comprobantes lc, string certificado)
+        public FeaEntidades.InterFacturas.lote_response EnviarIBK(out List<FeaEntidades.InterFacturas.error> RespErroresLote, out List<FeaEntidades.InterFacturas.error> RespErroresComprobantes, FeaEntidades.InterFacturas.lote_comprobantes lc, string url, eFact_Tester.Entidades.Certificado Certificado, eFact_Tester.Entidades.Proxy Proxy)
         {
+            FeaEntidades.InterFacturas.lote_response Lr = new FeaEntidades.InterFacturas.lote_response();
             IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
             lcIBK = Fea2Ibk(lc);
-			IBK.FacturaWebServiceConSchema objIBK;
-			objIBK = new IBK.FacturaWebServiceConSchema();
-            objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturas"];
-            if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null && System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
+            IBK.error[] respErroresLote = new IBK.error[0];
+            IBK.error[] respErroresComprobantes = new IBK.error[0];
+            IBK.FacturaWebServiceConSchema objIBK;
+            objIBK = new IBK.FacturaWebServiceConSchema();
+            objIBK.Url = url;
+            if (Proxy != null)
             {
-                System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
-                string usuarioProxy = System.Configuration.ConfigurationManager.AppSettings["UsuarioProxy"];
-                string claveProxy = System.Configuration.ConfigurationManager.AppSettings["ClaveProxy"];
-                string dominioProxy = System.Configuration.ConfigurationManager.AppSettings["DominioProxy"];
-                System.Net.NetworkCredential networkCredential = new System.Net.NetworkCredential(usuarioProxy, claveProxy, dominioProxy);
+                System.Net.WebProxy wp = new System.Net.WebProxy(Proxy.Servidor, false);
+                System.Net.NetworkCredential networkCredential = new System.Net.NetworkCredential(Proxy.Usuario, Proxy.Clave, Proxy.Dominio);
                 wp.Credentials = networkCredential;
                 objIBK.Proxy = wp;
             }
-            string storeLocation = System.Configuration.ConfigurationManager.AppSettings["StoreLocation"];
             X509Store store;
-            if (storeLocation == "CurrentUser")
+            if (Certificado.LugarDeAlmacenamiento == eFact_Tester.Entidades.Certificado.Almacenamiento.CurrentUser)
             {
                 store = new X509Store(StoreLocation.CurrentUser);
             }
-            else 
+            else
             {
                 store = new X509Store(StoreLocation.LocalMachine);
             }
             store.Open(OpenFlags.ReadOnly);
-            X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
+            X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, Certificado.Numero, true);
             if (col.Count.Equals(1))
             {
-                //objIBK.RequestEncoding = System.Text.Encoding.GetEncoding("iso-8859-1");
                 objIBK.ClientCertificates.Add(col[0]);
-                //System.Threading.Thread.Sleep(1000);
                 IBK.lote_comprobantes_response lcr = objIBK.receiveFacturasConSchema(lcIBK);
-                IBK.lote_response lr = new CedWebRN.IBK.lote_response();
+                IBK.lote_response lr = new IBK.lote_response();
+                RespErroresLote = new List<FeaEntidades.InterFacturas.error>();
+                RespErroresComprobantes = new List<FeaEntidades.InterFacturas.error>();
                 try
                 {
                     lr = ((IBK.lote_response)lcr.Item);
                     if (lr.estado == "OK")
                     {
-                        Lr = lr;
+                        Lr = Ibk2Fea(lr);
                     }
                     else
                     {
-                        Lr = lr;
+                        Lr = Ibk2Fea(lr);
                         StringBuilder errorText = new StringBuilder();
-                        if (Lr.errores_lote != null)
+                        if (lr.errores_lote != null)
                         {
                             errorText.Append("Nro. de Lote: [" + Lr.id_lote + "] \r\n");
-                            foreach (CedWebRN.IBK.error elote in Lr.errores_lote)
+                            foreach (IBK.error elote in lr.errores_lote)
                             {
                                 errorText.Append(elote.codigo_error + " - " + elote.descripcion_error + " \r\n");
                             }
+                            RespErroresLote.AddRange(Ibk2Fea(lr.errores_lote));
                         }
-                        if (Lr.comprobante_response != null)
+                        if (lr.comprobante_response != null)
                         {
-                            foreach (CedWebRN.IBK.comprobante_response comprobante in Lr.comprobante_response)
+                            foreach (IBK.comprobante_response comprobante in lr.comprobante_response)
                             {
                                 if (comprobante.errores_comprobante != null)
                                 {
-                                    if (Lr.errores_lote != null)
+                                    if (lr.errores_lote != null)
                                     {
                                         errorText.Append("\r\n");
                                     }
                                     errorText.Append("Punto de Venta: [" + comprobante.punto_de_venta + "]  Tipo de Comprobante: [" + comprobante.tipo_de_comprobante + "]  Nro. de Comprobante: [" + comprobante.numero_comprobante + "] \r\n");
-                                    foreach (CedWebRN.IBK.error ecomprobante in comprobante.errores_comprobante)
+                                    foreach (IBK.error ecomprobante in comprobante.errores_comprobante)
                                     {
                                         errorText.Append(ecomprobante.codigo_error + " - " + ecomprobante.descripcion_error + " \r\n");
                                     }
+                                    RespErroresComprobantes.AddRange(Ibk2Fea(comprobante.errores_comprobante));
                                 }
                             }
                         }
-                        throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Lote.ProblemasEnvio(errorText.ToString());
+                        throw new Exception(errorText.ToString());
                     }
+                    return Lr;
                 }
                 catch (InvalidCastException)
                 {
@@ -291,13 +169,14 @@ namespace CedWebRN
                     {
                         if (lcr.Item.GetType() == typeof(IBK.lote_comprobantes_responseErrores_response))
                         {
-                            IBK.lote_comprobantes_responseErrores_response lcrEr = new CedWebRN.IBK.lote_comprobantes_responseErrores_response();
+                            IBK.lote_comprobantes_responseErrores_response lcrEr = new IBK.lote_comprobantes_responseErrores_response();
                             errorText.Append("Nro. de Lote: [" + lc.cabecera_lote.id_lote + "] \r\n");
                             lcrEr = (IBK.lote_comprobantes_responseErrores_response)lcr.Item;
                             foreach (IBK.error error in lcrEr.error)
                             {
                                 errorText.Append(error.codigo_error + " - " + error.descripcion_error + " \r\n");
                             }
+                            RespErroresLote = Ibk2Fea(lcrEr.error);
                         }
                     }
                     throw new Exception(errorText.ToString());
@@ -308,8 +187,7 @@ namespace CedWebRN
                 throw new Exception("Su certificado no está disponible en nuestro repositorio");
             }
         }
-
-        private FeaEntidades.InterFacturas.lote_comprobantes Ibk2Fea(CedWebRN.IBK.lote_comprobantes lcIBK)
+        private FeaEntidades.InterFacturas.lote_comprobantes Ibk2Fea(IBK.lote_comprobantes lcIBK)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lcFEA = new FeaEntidades.InterFacturas.lote_comprobantes();
 
@@ -366,7 +244,7 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_comprobante = new FeaEntidades.InterFacturas.informacion_comprobante();
                 cIBK.cabecera.informacion_comprobante.cae = lcIBK.comprobante[i].cabecera.informacion_comprobante.cae;
                 cIBK.cabecera.informacion_comprobante.caeSpecified = false;
-                if (cIBK.cabecera.informacion_comprobante.cae != null && cIBK.cabecera.informacion_comprobante.cae != "")
+                if (cIBK.cabecera.informacion_comprobante.cae != "")
                 {
                     cIBK.cabecera.informacion_comprobante.caeSpecified = true;
                 }
@@ -377,7 +255,7 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_comprobante.fecha_emision = lcIBK.comprobante[i].cabecera.informacion_comprobante.fecha_emision;
                 cIBK.cabecera.informacion_comprobante.fecha_obtencion_cae = lcIBK.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae;
                 cIBK.cabecera.informacion_comprobante.fecha_obtencion_caeSpecified = false;
-                if (cIBK.cabecera.informacion_comprobante.fecha_obtencion_cae != null && cIBK.cabecera.informacion_comprobante.fecha_obtencion_cae != "")
+                if (cIBK.cabecera.informacion_comprobante.fecha_obtencion_cae != "")
                 {
                     cIBK.cabecera.informacion_comprobante.fecha_obtencion_caeSpecified = true;
                 }
@@ -386,7 +264,7 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_comprobante.fecha_vencimiento = lcIBK.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento;
                 cIBK.cabecera.informacion_comprobante.fecha_vencimiento_cae = lcIBK.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento_cae;
                 cIBK.cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = false;
-                if (cIBK.cabecera.informacion_comprobante.fecha_vencimiento_cae != null && cIBK.cabecera.informacion_comprobante.fecha_vencimiento_cae != "")
+                if (cIBK.cabecera.informacion_comprobante.fecha_vencimiento_cae != "")
                 {
                     cIBK.cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
                 }
@@ -396,8 +274,6 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_comprobante.punto_de_venta = lcIBK.comprobante[i].cabecera.informacion_comprobante.punto_de_venta;
                 cIBK.cabecera.informacion_comprobante.resultado = lcIBK.comprobante[i].cabecera.informacion_comprobante.resultado;
                 cIBK.cabecera.informacion_comprobante.tipo_de_comprobante = lcIBK.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante;
-                cIBK.cabecera.informacion_comprobante.codigo_concepto = lcIBK.comprobante[i].cabecera.informacion_comprobante.codigo_concepto;
-                cIBK.cabecera.informacion_comprobante.codigo_conceptoSpecified = lcIBK.comprobante[i].cabecera.informacion_comprobante.codigo_conceptoSpecified;
 
                 //Info Vendedor
                 cIBK.cabecera.informacion_vendedor = new FeaEntidades.InterFacturas.informacion_vendedor();
@@ -436,33 +312,12 @@ namespace CedWebRN
                         if (lcIBK.comprobante[i].cabecera.informacion_comprobante.referencias[j] != null)
                         {
                             cIBK.cabecera.informacion_comprobante.referencias[j] = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
-                            if (lcIBK.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip == CedWebRN.IBK.informacion_comprobanteReferenciasTipo_comprobante_afip.S)
-                            {
-                                cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip = "S";
-                            }
-                            else if (lcIBK.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip == CedWebRN.IBK.informacion_comprobanteReferenciasTipo_comprobante_afip.N)
-                            {
-                                cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip = "N";
-                            }
                             cIBK.cabecera.informacion_comprobante.referencias[j].codigo_de_referencia = lcIBK.comprobante[i].cabecera.informacion_comprobante.referencias[j].codigo_de_referencia;
                             cIBK.cabecera.informacion_comprobante.referencias[j].dato_de_referencia = lcIBK.comprobante[i].cabecera.informacion_comprobante.referencias[j].dato_de_referencia;
                         }
                     }
                 }
-                
-                //Info Informacion Adicional Comprobante
-                if (lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante != null)
-                {
-                    cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante = new FeaEntidades.InterFacturas.informacion_adicional_comprobante[lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante.Length];
 
-                    for (int j = 0; j < lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante.Length; j++)
-                    {
-                        cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante[j] = new FeaEntidades.InterFacturas.informacion_adicional_comprobante();
-                        cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante[j].tipo = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante[j].tipo;
-                        cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante[j].valor = lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante[j].valor;
-                    }
-                }
-                
                 //Info Exportación
                 if (lcIBK.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion != null)
                 {
@@ -588,32 +443,30 @@ namespace CedWebRN
 
                 //Info Extensiones
                 cIBK.extensiones = new FeaEntidades.InterFacturas.extensiones();
-                cIBK.extensionesSpecified = false;
                 if (lcIBK.comprobante[i].extensiones != null)
                 {
-                    cIBK.extensiones = new FeaEntidades.InterFacturas.extensiones();
                     cIBK.extensionesSpecified = true;
-                    if (lcIBK.comprobante[i].extensiones.extensiones_camara_facturas != null)
-                    {
-                        cIBK.extensiones.extensiones_camara_facturasSpecified = true;
-                        cIBK.extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
-                        cIBK.extensiones.extensiones_camara_facturas.clave_de_vinculacion = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion;
-                        cIBK.extensiones.extensiones_camara_facturas.id_idioma = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.id_idioma;
-                        cIBK.extensiones.extensiones_camara_facturas.id_template = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.id_template;
-                    }
-                    if (lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales != null)
-                    {
-                        cIBK.extensiones.extensiones_datos_comerciales = lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales.ToString();
-                    }
-                    if (lcIBK.comprobante[i].extensiones.extensiones_datos_marketing != null)
-                    {
-                        cIBK.extensiones.extensiones_datos_marketing = lcIBK.comprobante[i].extensiones.extensiones_datos_marketing;
-                    }
-                    if (lcIBK.comprobante[i].extensiones.extensiones_destinatarios != null)
-                    {
-                        cIBK.extensiones.extensiones_destinatarios = new FeaEntidades.InterFacturas.extensionesExtensiones_destinatarios();
-                        cIBK.extensiones.extensiones_destinatarios.email = lcIBK.comprobante[i].extensiones.extensiones_destinatarios.email;
-                    }
+                }
+                if (lcIBK.comprobante[i].extensiones.extensiones_camara_facturas != null)
+                {
+                    cIBK.extensiones.extensiones_camara_facturasSpecified = true;
+                    cIBK.extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
+                    cIBK.extensiones.extensiones_camara_facturas.clave_de_vinculacion = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion;
+                    cIBK.extensiones.extensiones_camara_facturas.id_idioma = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.id_idioma;
+                    cIBK.extensiones.extensiones_camara_facturas.id_template = lcIBK.comprobante[i].extensiones.extensiones_camara_facturas.id_template;
+                }
+                if (lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales != null)
+                {
+                    cIBK.extensiones.extensiones_datos_comerciales = lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales.ToString();
+                }
+                if (lcIBK.comprobante[i].extensiones.extensiones_datos_marketing != null)
+                {
+                    cIBK.extensiones.extensiones_datos_marketing = lcIBK.comprobante[i].extensiones.extensiones_datos_marketing;
+                }
+                if (lcIBK.comprobante[i].extensiones.extensiones_destinatarios != null)
+                {
+                    cIBK.extensiones.extensiones_destinatarios = new FeaEntidades.InterFacturas.extensionesExtensiones_destinatarios();
+                    cIBK.extensiones.extensiones_destinatarios.email = lcIBK.comprobante[i].extensiones.extensiones_destinatarios.email;
                 }
 
                 cIBK.resumen = new FeaEntidades.InterFacturas.resumen();
@@ -682,7 +535,6 @@ namespace CedWebRN
                             cIBK.resumen.descuentos[l].importe_iva_descuentoSpecified = lcIBK.comprobante[i].resumen.descuentos[l].importe_iva_descuentoSpecified;
                             cIBK.resumen.descuentos[l].porcentaje_descuento = lcIBK.comprobante[i].resumen.descuentos[l].porcentaje_descuento;
                             cIBK.resumen.descuentos[l].porcentaje_descuentoSpecified = lcIBK.comprobante[i].resumen.descuentos[l].porcentaje_descuentoSpecified;
-                            cIBK.resumen.descuentos[l].indicacion_exento_gravado_descuento = lcIBK.comprobante[i].resumen.descuentos[l].indicacion_exento_gravado_descuento;
                         }
                     }
                 }
@@ -715,8 +567,28 @@ namespace CedWebRN
             }
             return lcFEA;
         }
-
-        private CedWebRN.IBK.lote_comprobantes Fea2Ibk(FeaEntidades.InterFacturas.lote_comprobantes lc)
+        private List<FeaEntidades.InterFacturas.error> Ibk2Fea(IBK.error[] errorIBK)
+        {
+            List<FeaEntidades.InterFacturas.error> errorFEAlista = new List<FeaEntidades.InterFacturas.error>();
+            for (int i = 0; i < errorIBK.Length; i++)
+            {
+                FeaEntidades.InterFacturas.error errorFEA = new FeaEntidades.InterFacturas.error();
+                errorFEA.codigo_error = errorIBK[i].codigo_error;
+                errorFEA.descripcion_error = errorIBK[i].descripcion_error;
+                errorFEAlista.Add(errorFEA);
+            }
+            return errorFEAlista;
+        }
+        private FeaEntidades.InterFacturas.lote_response Ibk2Fea(IBK.lote_response lrIBK)
+        {
+            FeaEntidades.InterFacturas.lote_response lr = new FeaEntidades.InterFacturas.lote_response();
+            lr.cuit_canal = lrIBK.cuit_canal;
+            lr.cuit_vendedor = lrIBK.cuit_vendedor;
+            lr.punto_de_venta = lrIBK.punto_de_venta;
+            lr.id_lote = lrIBK.id_lote;
+            return lr;
+        }
+        private IBK.lote_comprobantes Fea2Ibk(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
             IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
 
@@ -732,18 +604,7 @@ namespace CedWebRN
             lcIBK.cabecera_lote.presta_servSpecified = lc.cabecera_lote.presta_servSpecified;
             lcIBK.cabecera_lote.punto_de_venta = lc.cabecera_lote.punto_de_venta;
             lcIBK.cabecera_lote.resultado = lc.cabecera_lote.resultado;
-            //gestionar_afip
-            CedWebRN.IBK.cabecera_loteGestionar_afip gestionar_afip;
-            if (lc.cabecera_lote.gestionar_afip == "N")
-            {
-                lcIBK.cabecera_lote.gestionar_afip = CedWebRN.IBK.cabecera_loteGestionar_afip.N;
-            }
-            else if (lc.cabecera_lote.gestionar_afip == "S")
-            {
-                lcIBK.cabecera_lote.gestionar_afip = CedWebRN.IBK.cabecera_loteGestionar_afip.S;
-            }
-            lcIBK.cabecera_lote.gestionar_afipSpecified = lc.cabecera_lote.gestionar_afipSpecified;
-            //fin gestionar_afip
+
             lcIBK.comprobante = new IBK.comprobante[lc.comprobante.Length];
 
             for (int i = 0; i < lc.comprobante.Length; i++)
@@ -755,103 +616,35 @@ namespace CedWebRN
                 IBK.comprobante cIBK = new IBK.comprobante();
 
                 cIBK.cabecera = new IBK.cabecera();
-                
+
                 //Comprador
                 cIBK.cabecera.informacion_comprador = new IBK.informacion_comprador();
                 cIBK.cabecera.informacion_comprador.codigo_doc_identificatorio = lc.comprobante[i].cabecera.informacion_comprador.codigo_doc_identificatorio;
                 cIBK.cabecera.informacion_comprador.codigo_interno = lc.comprobante[i].cabecera.informacion_comprador.codigo_interno;
-                if (lc.comprobante[i].cabecera.informacion_comprador.codigo_interno != null)
-                {
-                    cIBK.cabecera.informacion_comprador.codigo_interno = lc.comprobante[i].cabecera.informacion_comprador.codigo_interno.Trim();
-                }
                 cIBK.cabecera.informacion_comprador.condicion_ingresos_brutos = lc.comprobante[i].cabecera.informacion_comprador.condicion_ingresos_brutos;
                 cIBK.cabecera.informacion_comprador.condicion_ingresos_brutosSpecified = lc.comprobante[i].cabecera.informacion_comprador.condicion_ingresos_brutosSpecified;
                 cIBK.cabecera.informacion_comprador.condicion_IVA = lc.comprobante[i].cabecera.informacion_comprador.condicion_IVA;
                 cIBK.cabecera.informacion_comprador.condicion_IVASpecified = lc.comprobante[i].cabecera.informacion_comprador.condicion_IVASpecified;
                 cIBK.cabecera.informacion_comprador.contacto = lc.comprobante[i].cabecera.informacion_comprador.contacto;
-                if (lc.comprobante[i].cabecera.informacion_comprador.contacto != null)
-                {
-                    cIBK.cabecera.informacion_comprador.contacto = lc.comprobante[i].cabecera.informacion_comprador.contacto.Trim();
-                }
                 cIBK.cabecera.informacion_comprador.cp = lc.comprobante[i].cabecera.informacion_comprador.cp;
-                if (lc.comprobante[i].cabecera.informacion_comprador.cp != null)
-                {
-                    cIBK.cabecera.informacion_comprador.cp = lc.comprobante[i].cabecera.informacion_comprador.cp.Trim();
-                }
                 cIBK.cabecera.informacion_comprador.denominacion = lc.comprobante[i].cabecera.informacion_comprador.denominacion;
-                if (lc.comprobante[i].cabecera.informacion_comprador.denominacion != null)
-                {
-                    cIBK.cabecera.informacion_comprador.denominacion = lc.comprobante[i].cabecera.informacion_comprador.denominacion.Trim();
-                }
                 cIBK.cabecera.informacion_comprador.domicilio_calle = lc.comprobante[i].cabecera.informacion_comprador.domicilio_calle;
-                if (lc.comprobante[i].cabecera.informacion_comprador.domicilio_calle != null)
-                {
-                    cIBK.cabecera.informacion_comprador.domicilio_calle = lc.comprobante[i].cabecera.informacion_comprador.domicilio_calle.Trim();
-                }
                 cIBK.cabecera.informacion_comprador.domicilio_depto = lc.comprobante[i].cabecera.informacion_comprador.domicilio_depto;
-                if (lc.comprobante[i].cabecera.informacion_comprador.domicilio_depto != null)
-                {
-                    cIBK.cabecera.informacion_comprador.domicilio_depto = lc.comprobante[i].cabecera.informacion_comprador.domicilio_depto.Trim();
-                }
                 cIBK.cabecera.informacion_comprador.domicilio_manzana = lc.comprobante[i].cabecera.informacion_comprador.domicilio_manzana;
-                if (lc.comprobante[i].cabecera.informacion_comprador.domicilio_manzana != null)
-                {
-                    cIBK.cabecera.informacion_comprador.domicilio_manzana = lc.comprobante[i].cabecera.informacion_comprador.domicilio_manzana.Trim();
-                }
                 cIBK.cabecera.informacion_comprador.domicilio_numero = lc.comprobante[i].cabecera.informacion_comprador.domicilio_numero;
-                if (lc.comprobante[i].cabecera.informacion_comprador.domicilio_numero != null)
-                {
-                    cIBK.cabecera.informacion_comprador.domicilio_numero = lc.comprobante[i].cabecera.informacion_comprador.domicilio_numero.Trim();
-                }
                 cIBK.cabecera.informacion_comprador.domicilio_piso = lc.comprobante[i].cabecera.informacion_comprador.domicilio_piso;
-                if (lc.comprobante[i].cabecera.informacion_comprador.domicilio_piso != null)
-                {
-                    cIBK.cabecera.informacion_comprador.domicilio_piso = lc.comprobante[i].cabecera.informacion_comprador.domicilio_piso.Trim();
-                }
                 cIBK.cabecera.informacion_comprador.domicilio_sector = lc.comprobante[i].cabecera.informacion_comprador.domicilio_sector;
-                if (lc.comprobante[i].cabecera.informacion_comprador.domicilio_sector != null)
-                {
-                    cIBK.cabecera.informacion_comprador.domicilio_sector = lc.comprobante[i].cabecera.informacion_comprador.domicilio_sector.Trim();
-                }
                 cIBK.cabecera.informacion_comprador.domicilio_torre = lc.comprobante[i].cabecera.informacion_comprador.domicilio_torre;
-                if (lc.comprobante[i].cabecera.informacion_comprador.domicilio_torre != null)
-                {
-                    cIBK.cabecera.informacion_comprador.domicilio_torre = lc.comprobante[i].cabecera.informacion_comprador.domicilio_torre.Trim();
-                }
                 cIBK.cabecera.informacion_comprador.email = lc.comprobante[i].cabecera.informacion_comprador.email;
-                if (lc.comprobante[i].cabecera.informacion_comprador.email != null)
-                {
-                    cIBK.cabecera.informacion_comprador.email = lc.comprobante[i].cabecera.informacion_comprador.email.Trim();
-                }
                 cIBK.cabecera.informacion_comprador.GLN = lc.comprobante[i].cabecera.informacion_comprador.GLN;
                 cIBK.cabecera.informacion_comprador.GLNSpecified = lc.comprobante[i].cabecera.informacion_comprador.GLNSpecified;
                 cIBK.cabecera.informacion_comprador.inicio_de_actividades = lc.comprobante[i].cabecera.informacion_comprador.inicio_de_actividades;
-                if (lc.comprobante[i].cabecera.informacion_comprador.inicio_de_actividades != null)
-                {
-                    cIBK.cabecera.informacion_comprador.inicio_de_actividades = lc.comprobante[i].cabecera.informacion_comprador.inicio_de_actividades.Trim();
-                }
                 cIBK.cabecera.informacion_comprador.localidad = lc.comprobante[i].cabecera.informacion_comprador.localidad;
-                if (lc.comprobante[i].cabecera.informacion_comprador.localidad != null)
-                {
-                    cIBK.cabecera.informacion_comprador.localidad = lc.comprobante[i].cabecera.informacion_comprador.localidad.Trim();
-                }
                 cIBK.cabecera.informacion_comprador.nro_doc_identificatorio = lc.comprobante[i].cabecera.informacion_comprador.nro_doc_identificatorio;
                 cIBK.cabecera.informacion_comprador.nro_ingresos_brutos = lc.comprobante[i].cabecera.informacion_comprador.nro_ingresos_brutos;
-                if (lc.comprobante[i].cabecera.informacion_comprador.nro_ingresos_brutos != null)
-                {
-                    cIBK.cabecera.informacion_comprador.nro_ingresos_brutos = lc.comprobante[i].cabecera.informacion_comprador.nro_ingresos_brutos.Trim();
-                }
                 cIBK.cabecera.informacion_comprador.provincia = lc.comprobante[i].cabecera.informacion_comprador.provincia;
-                if (lc.comprobante[i].cabecera.informacion_comprador.provincia != null)
-                {
-                    cIBK.cabecera.informacion_comprador.provincia = lc.comprobante[i].cabecera.informacion_comprador.provincia.Trim();
-                }
                 cIBK.cabecera.informacion_comprador.telefono = lc.comprobante[i].cabecera.informacion_comprador.telefono;
-                if (lc.comprobante[i].cabecera.informacion_comprador.telefono != null)
-                {
-                    cIBK.cabecera.informacion_comprador.telefono = lc.comprobante[i].cabecera.informacion_comprador.telefono.Trim();
-                }
-                
+
                 //Info Comprobante
                 cIBK.cabecera.informacion_comprobante = new IBK.informacion_comprobante();
                 cIBK.cabecera.informacion_comprobante.cae = lc.comprobante[i].cabecera.informacion_comprobante.cae;
@@ -871,105 +664,34 @@ namespace CedWebRN
                 cIBK.cabecera.informacion_comprobante.punto_de_venta = lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta;
                 cIBK.cabecera.informacion_comprobante.resultado = lc.comprobante[i].cabecera.informacion_comprobante.resultado;
                 cIBK.cabecera.informacion_comprobante.tipo_de_comprobante = lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante;
-                cIBK.cabecera.informacion_comprobante.codigo_concepto = lc.comprobante[i].cabecera.informacion_comprobante.codigo_concepto;
-                cIBK.cabecera.informacion_comprobante.codigo_conceptoSpecified = lc.comprobante[i].cabecera.informacion_comprobante.codigo_conceptoSpecified;
 
                 //Info Vendedor
                 cIBK.cabecera.informacion_vendedor = new IBK.informacion_vendedor();
                 cIBK.cabecera.informacion_vendedor.codigo_interno = lc.comprobante[i].cabecera.informacion_vendedor.codigo_interno;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.codigo_interno != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.codigo_interno = lc.comprobante[i].cabecera.informacion_vendedor.codigo_interno.Trim();
-                }
                 cIBK.cabecera.informacion_vendedor.razon_social = lc.comprobante[i].cabecera.informacion_vendedor.razon_social;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.razon_social != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.razon_social = lc.comprobante[i].cabecera.informacion_vendedor.razon_social.Trim();
-                }
-
                 cIBK.cabecera.informacion_vendedor.condicion_ingresos_brutos = lc.comprobante[i].cabecera.informacion_vendedor.condicion_ingresos_brutos;
                 cIBK.cabecera.informacion_vendedor.condicion_ingresos_brutosSpecified = lc.comprobante[i].cabecera.informacion_vendedor.condicion_ingresos_brutosSpecified;
                 cIBK.cabecera.informacion_vendedor.condicion_IVA = lc.comprobante[i].cabecera.informacion_vendedor.condicion_IVA;
                 cIBK.cabecera.informacion_vendedor.condicion_IVASpecified = lc.comprobante[i].cabecera.informacion_vendedor.condicion_IVASpecified;
                 cIBK.cabecera.informacion_vendedor.contacto = lc.comprobante[i].cabecera.informacion_vendedor.contacto;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.contacto != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.contacto = lc.comprobante[i].cabecera.informacion_vendedor.contacto.Trim();
-                }
                 cIBK.cabecera.informacion_vendedor.cp = lc.comprobante[i].cabecera.informacion_vendedor.cp;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.cp != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.cp = lc.comprobante[i].cabecera.informacion_vendedor.cp.Trim();
-                }
                 cIBK.cabecera.informacion_vendedor.cuit = lc.comprobante[i].cabecera.informacion_vendedor.cuit;
                 cIBK.cabecera.informacion_vendedor.domicilio_calle = lc.comprobante[i].cabecera.informacion_vendedor.domicilio_calle;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.domicilio_calle != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.domicilio_calle = lc.comprobante[i].cabecera.informacion_vendedor.domicilio_calle.Trim();
-                }
                 cIBK.cabecera.informacion_vendedor.domicilio_depto = lc.comprobante[i].cabecera.informacion_vendedor.domicilio_depto;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.domicilio_depto != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.domicilio_depto = lc.comprobante[i].cabecera.informacion_vendedor.domicilio_depto.Trim();
-                }
                 cIBK.cabecera.informacion_vendedor.domicilio_manzana = lc.comprobante[i].cabecera.informacion_vendedor.domicilio_manzana;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.domicilio_manzana != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.domicilio_manzana = lc.comprobante[i].cabecera.informacion_vendedor.domicilio_manzana.Trim();
-                }
                 cIBK.cabecera.informacion_vendedor.domicilio_numero = lc.comprobante[i].cabecera.informacion_vendedor.domicilio_numero;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.domicilio_numero != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.domicilio_numero = lc.comprobante[i].cabecera.informacion_vendedor.domicilio_numero.Trim();
-                }
                 cIBK.cabecera.informacion_vendedor.domicilio_piso = lc.comprobante[i].cabecera.informacion_vendedor.domicilio_piso;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.domicilio_piso != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.domicilio_piso = lc.comprobante[i].cabecera.informacion_vendedor.domicilio_piso.Trim();
-                }
                 cIBK.cabecera.informacion_vendedor.domicilio_sector = lc.comprobante[i].cabecera.informacion_vendedor.domicilio_sector;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.domicilio_sector != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.domicilio_sector = lc.comprobante[i].cabecera.informacion_vendedor.domicilio_sector.Trim();
-                }
                 cIBK.cabecera.informacion_vendedor.domicilio_torre = lc.comprobante[i].cabecera.informacion_vendedor.domicilio_torre;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.domicilio_torre != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.domicilio_torre = lc.comprobante[i].cabecera.informacion_vendedor.domicilio_torre.Trim();
-                }
                 cIBK.cabecera.informacion_vendedor.email = lc.comprobante[i].cabecera.informacion_vendedor.email;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.email != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.email = lc.comprobante[i].cabecera.informacion_vendedor.email.Trim();
-                }
                 cIBK.cabecera.informacion_vendedor.GLN = lc.comprobante[i].cabecera.informacion_vendedor.GLN;
                 cIBK.cabecera.informacion_vendedor.GLNSpecified = lc.comprobante[i].cabecera.informacion_vendedor.GLNSpecified;
                 cIBK.cabecera.informacion_vendedor.inicio_de_actividades = lc.comprobante[i].cabecera.informacion_vendedor.inicio_de_actividades;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.inicio_de_actividades != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.inicio_de_actividades = lc.comprobante[i].cabecera.informacion_vendedor.inicio_de_actividades.Trim();
-                }
                 cIBK.cabecera.informacion_vendedor.localidad = lc.comprobante[i].cabecera.informacion_vendedor.localidad;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.localidad != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.localidad = lc.comprobante[i].cabecera.informacion_vendedor.localidad.Trim();
-                }
                 cIBK.cabecera.informacion_vendedor.nro_ingresos_brutos = lc.comprobante[i].cabecera.informacion_vendedor.nro_ingresos_brutos;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.nro_ingresos_brutos != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.nro_ingresos_brutos = lc.comprobante[i].cabecera.informacion_vendedor.nro_ingresos_brutos.Trim();
-                }
                 cIBK.cabecera.informacion_vendedor.provincia = lc.comprobante[i].cabecera.informacion_vendedor.provincia;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.provincia != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.provincia = lc.comprobante[i].cabecera.informacion_vendedor.provincia.Trim();
-                }
                 cIBK.cabecera.informacion_vendedor.telefono = lc.comprobante[i].cabecera.informacion_vendedor.telefono;
-                if (lc.comprobante[i].cabecera.informacion_vendedor.telefono != null)
-                {
-                    cIBK.cabecera.informacion_vendedor.telefono = lc.comprobante[i].cabecera.informacion_vendedor.telefono.Trim();
-                }
-                
+
                 //Info Comprobantes de Referencia
                 if (lc.comprobante[i].cabecera.informacion_comprobante.referencias != null)
                 {
@@ -978,31 +700,10 @@ namespace CedWebRN
                     {
                         if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j] != null)
                         {
-                            cIBK.cabecera.informacion_comprobante.referencias[j] = new CedWebRN.IBK.informacion_comprobanteReferencias();
-                            if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip.Trim().ToUpper() == "S")
-                            {
-                                cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip = CedWebRN.IBK.informacion_comprobanteReferenciasTipo_comprobante_afip.S;
-                            }
-                            else if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip.Trim().ToUpper() == "N")
-                            {
-                                cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip = CedWebRN.IBK.informacion_comprobanteReferenciasTipo_comprobante_afip.N;
-                            }
+                            cIBK.cabecera.informacion_comprobante.referencias[j] = new IBK.informacion_comprobanteReferencias();
                             cIBK.cabecera.informacion_comprobante.referencias[j].codigo_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].codigo_de_referencia;
-                            cIBK.cabecera.informacion_comprobante.referencias[j].dato_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].dato_de_referencia.Trim();
+                            cIBK.cabecera.informacion_comprobante.referencias[j].dato_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].dato_de_referencia;
                         }
-                    }
-                }
-
-                //Info Informacion Adicional Comprobante
-                if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante != null)
-                {
-                    cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante = new IBK.informacion_comprobanteInformacion_adicional_comprobante[lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante.Length];
-
-                    for (int j = 0; j < lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante.Length; j++)
-                    {
-                        cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante[j] = new IBK.informacion_comprobanteInformacion_adicional_comprobante();
-                        cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante[j].tipo = lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante[j].tipo;
-                        cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante[j].valor = lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante[j].valor;
                     }
                 }
 
@@ -1039,7 +740,7 @@ namespace CedWebRN
                         {
                             if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos[j] != null)
                             {
-                                cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos[j] = new CedWebRN.IBK.informacion_comprobanteInformacion_exportacionPermisos();
+                                cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos[j] = new IBK.informacion_comprobanteInformacion_exportacionPermisos();
                                 cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos[j].id_permiso = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos[j].id_permiso;
                                 cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos[j].destino_mercaderia = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos[j].destino_mercaderia;
                             }
@@ -1073,7 +774,7 @@ namespace CedWebRN
                         d.linea[j].importe_total_descuentosSpecified = lc.comprobante[i].detalle.linea[j].importe_total_descuentosSpecified;
                         d.linea[j].importe_total_impuestos = lc.comprobante[i].detalle.linea[j].importe_total_impuestos;
                         d.linea[j].importe_total_impuestosSpecified = lc.comprobante[i].detalle.linea[j].importe_total_impuestosSpecified;
-                        
+
                         if (lc.comprobante[i].detalle.linea[j].importes_moneda_origen != null)
                         {
                             d.linea[j].importes_moneda_origen = new IBK.lineaImportes_moneda_origen();
@@ -1094,14 +795,17 @@ namespace CedWebRN
                             d.linea[j].impuestos = new IBK.lineaImpuestos[lc.comprobante[i].detalle.linea[j].impuestos.Length];
                             for (int k = 0; k < d.linea[j].impuestos.Length; k++)
                             {
-                                d.linea[j].impuestos[k] = new IBK.lineaImpuestos();
-                                d.linea[j].impuestos[k].codigo_impuesto = lc.comprobante[i].detalle.linea[j].impuestos[k].codigo_impuesto;
-                                d.linea[j].impuestos[k].descripcion_impuesto = lc.comprobante[i].detalle.linea[j].impuestos[k].descripcion_impuesto;
-                                d.linea[j].impuestos[k].importe_impuesto = lc.comprobante[i].detalle.linea[j].impuestos[k].importe_impuesto;
-                                d.linea[j].impuestos[k].importe_impuesto_moneda_origen = lc.comprobante[i].detalle.linea[j].impuestos[k].importe_impuesto_moneda_origen;
-                                d.linea[j].impuestos[k].importe_impuesto_moneda_origenSpecified = lc.comprobante[i].detalle.linea[j].impuestos[k].importe_impuesto_moneda_origenSpecified;
-                                d.linea[j].impuestos[k].porcentaje_impuesto = lc.comprobante[i].detalle.linea[j].impuestos[k].porcentaje_impuesto;
-                                d.linea[j].impuestos[k].porcentaje_impuestoSpecified = lc.comprobante[i].detalle.linea[j].impuestos[k].porcentaje_impuestoSpecified;
+                                if (lc.comprobante[i].detalle.linea[j].impuestos[k] != null)
+                                {
+                                    d.linea[j].impuestos[k] = new IBK.lineaImpuestos();
+                                    d.linea[j].impuestos[k].codigo_impuesto = lc.comprobante[i].detalle.linea[j].impuestos[k].codigo_impuesto;
+                                    d.linea[j].impuestos[k].descripcion_impuesto = lc.comprobante[i].detalle.linea[j].impuestos[k].descripcion_impuesto;
+                                    d.linea[j].impuestos[k].importe_impuesto = lc.comprobante[i].detalle.linea[j].impuestos[k].importe_impuesto;
+                                    d.linea[j].impuestos[k].importe_impuesto_moneda_origen = lc.comprobante[i].detalle.linea[j].impuestos[k].importe_impuesto_moneda_origen;
+                                    d.linea[j].impuestos[k].importe_impuesto_moneda_origenSpecified = lc.comprobante[i].detalle.linea[j].impuestos[k].importe_impuesto_moneda_origenSpecified;
+                                    d.linea[j].impuestos[k].porcentaje_impuesto = lc.comprobante[i].detalle.linea[j].impuestos[k].porcentaje_impuesto;
+                                    d.linea[j].impuestos[k].porcentaje_impuestoSpecified = lc.comprobante[i].detalle.linea[j].impuestos[k].porcentaje_impuestoSpecified;
+                                }
                             }
                         }
                         if (lc.comprobante[i].detalle.linea[j].lineaDescuentos != null)
@@ -1109,13 +813,16 @@ namespace CedWebRN
                             d.linea[j].descuentos = new IBK.lineaDescuentos[lc.comprobante[i].detalle.linea[j].lineaDescuentos.Length];
                             for (int k = 0; k < d.linea[j].descuentos.Length; k++)
                             {
-                                d.linea[j].descuentos[k] = new IBK.lineaDescuentos();
-                                d.linea[j].descuentos[k].descripcion_descuento = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].descripcion_descuento;
-                                d.linea[j].descuentos[k].importe_descuento = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].importe_descuento;
-                                d.linea[j].descuentos[k].importe_descuento_moneda_origen = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].importe_descuento_moneda_origen;
-                                d.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].importe_descuento_moneda_origenSpecified;
-                                d.linea[j].descuentos[k].porcentaje_descuento = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].porcentaje_descuento;
-                                d.linea[j].descuentos[k].porcentaje_descuentoSpecified = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].porcentaje_descuentoSpecified;
+                                if (lc.comprobante[i].detalle.linea[j].lineaDescuentos[k] != null)
+                                {
+                                    d.linea[j].descuentos[k] = new IBK.lineaDescuentos();
+                                    d.linea[j].descuentos[k].descripcion_descuento = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].descripcion_descuento;
+                                    d.linea[j].descuentos[k].importe_descuento = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].importe_descuento;
+                                    d.linea[j].descuentos[k].importe_descuento_moneda_origen = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].importe_descuento_moneda_origen;
+                                    d.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].importe_descuento_moneda_origenSpecified;
+                                    d.linea[j].descuentos[k].porcentaje_descuento = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].porcentaje_descuento;
+                                    d.linea[j].descuentos[k].porcentaje_descuentoSpecified = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].porcentaje_descuentoSpecified;
+                                }
                             }
                         }
                         if (lc.comprobante[i].detalle.linea[j].informacion_adicional != null)
@@ -1123,9 +830,12 @@ namespace CedWebRN
                             d.linea[j].informacion_adicional = new IBK.lineaInformacion_adicional[lc.comprobante[i].detalle.linea[j].informacion_adicional.Length];
                             for (int k = 0; k < d.linea[j].informacion_adicional.Length; k++)
                             {
-                                d.linea[j].informacion_adicional[k] = new IBK.lineaInformacion_adicional();
-                                d.linea[j].informacion_adicional[k].tipo = lc.comprobante[i].detalle.linea[j].informacion_adicional[k].tipo;
-                                d.linea[j].informacion_adicional[k].valor = lc.comprobante[i].detalle.linea[j].informacion_adicional[k].valor;
+                                if (lc.comprobante[i].detalle.linea[j].informacion_adicional[k] != null)
+                                {
+                                    d.linea[j].informacion_adicional[k] = new IBK.lineaInformacion_adicional();
+                                    d.linea[j].informacion_adicional[k].tipo = lc.comprobante[i].detalle.linea[j].informacion_adicional[k].tipo;
+                                    d.linea[j].informacion_adicional[k].valor = lc.comprobante[i].detalle.linea[j].informacion_adicional[k].valor;
+                                }
                             }
                         }
                         d.linea[j].indicacion_exento_gravado = lc.comprobante[i].detalle.linea[j].indicacion_exento_gravado;
@@ -1140,7 +850,7 @@ namespace CedWebRN
                     }
                 }
                 cIBK.Item = d;
-                
+
                 //Info Extensiones
                 if (lc.comprobante[i].extensiones != null)
                 {
@@ -1154,8 +864,10 @@ namespace CedWebRN
                     }
                     if (lc.comprobante[i].extensiones.extensiones_datos_comerciales != null && lc.comprobante[i].extensiones.extensiones_datos_comerciales != "")
                     {
-                        string aux = ConvertToHex(lc.comprobante[i].extensiones.extensiones_datos_comerciales.ToString());
-                        cIBK.extensiones.extensiones_datos_comerciales = aux;
+                        //object o = lc.comprobante[i].extensiones.extensiones_datos_comerciales;
+                        //string aux = ConvertToHex(((System.Xml.XmlNode[])o)[0].OuterXml.ToString());
+                        //cIBK.extensiones.extensiones_datos_comerciales = aux;
+                        cIBK.extensiones.extensiones_datos_comerciales = lc.comprobante[i].extensiones.extensiones_datos_comerciales;
                     }
                     if (lc.comprobante[i].extensiones.extensiones_datos_marketing != null && lc.comprobante[i].extensiones.extensiones_datos_marketing != "")
                     {
@@ -1168,7 +880,7 @@ namespace CedWebRN
                     }
                     if (lc.comprobante[i].extensiones.extensiones_destinatarios != null && lc.comprobante[i].extensiones.extensiones_destinatarios.email != "")
                     {
-                        cIBK.extensiones.extensiones_destinatarios = new CedWebRN.IBK.extensionesExtensiones_destinatarios();
+                        cIBK.extensiones.extensiones_destinatarios = new IBK.extensionesExtensiones_destinatarios();
                         cIBK.extensiones.extensiones_destinatarios.email = lc.comprobante[i].extensiones.extensiones_destinatarios.email;
                         //if (lc.comprobante[i].extensiones.extensiones_destinatarios.destinatario != null)
                         //{
@@ -1247,7 +959,6 @@ namespace CedWebRN
                             cIBK.resumen.descuentos[l].importe_iva_descuentoSpecified = lc.comprobante[i].resumen.descuentos[l].importe_iva_descuentoSpecified;
                             cIBK.resumen.descuentos[l].porcentaje_descuento = lc.comprobante[i].resumen.descuentos[l].porcentaje_descuento;
                             cIBK.resumen.descuentos[l].porcentaje_descuentoSpecified = lc.comprobante[i].resumen.descuentos[l].porcentaje_descuentoSpecified;
-                            cIBK.resumen.descuentos[l].indicacion_exento_gravado_descuento = lc.comprobante[i].resumen.descuentos[l].indicacion_exento_gravado_descuento;
                         }
                     }
                 }
@@ -1280,7 +991,6 @@ namespace CedWebRN
             }
             return lcIBK;
         }
-
         public string ConvertToHex(string asciiString)
         {
             asciiString = PonerEntityName(asciiString);
@@ -1319,7 +1029,6 @@ namespace CedWebRN
 			texto = texto.Replace("Ì", "&Igrave;");
 			texto = texto.Replace("Ò", "&Ograve;");
 			texto = texto.Replace("Ù", "&Ugrave;");
-
 			return texto;
         }
         public string HexToString(string Hex)

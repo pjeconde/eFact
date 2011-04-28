@@ -74,7 +74,7 @@ namespace FeaEntidades.InterFacturas
 		private bool codigo_conceptoFieldSpecified;
 
         [FileHelpers.FieldIgnored()]
-        private informacion_adicional_comprobante[] informacion_adicional_comprobanteField;
+        private informacion_adicional_comprobante[] informacion_adicional_comprobanteField = new informacion_adicional_comprobante[50];
 
         /// <comentarios/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
@@ -407,7 +407,7 @@ namespace FeaEntidades.InterFacturas
 
         /// <comentarios/>
         [System.Xml.Serialization.XmlElementAttribute("informacion_adicional_comprobante")]
-        public Informacion_adicional_comprobante[] informacion_adicional_comprobante
+        public informacion_adicional_comprobante[] informacion_adicional_comprobante
         {
             get
             {
