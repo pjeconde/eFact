@@ -32,6 +32,7 @@ namespace eFact_R
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 BuscarImagenButton.Enabled = false;
                 ModificarButton.Enabled = false;
+                BorrarImagenButton.Enabled = false;
                 List<eFact_R.Entidades.Vendedor> vendedores = new List<eFact_R.Entidades.Vendedor>();
                 eFact_R.RN.Vendedor.Consultar(vendedores, Aplicacion.Sesion);
                 CuitVendedorComboBox.Items.Clear();
@@ -98,6 +99,7 @@ namespace eFact_R
                 VerLogo(vendedor.Logo);
                 BuscarImagenButton.Enabled = true;
                 ModificarButton.Enabled = true;
+                BorrarImagenButton.Enabled = true;
             }
             else 
             {
@@ -126,6 +128,7 @@ namespace eFact_R
                 VendedorLogoPictureBox.Image = null;
                 BuscarImagenButton.Enabled = false;
                 ModificarButton.Enabled = false;
+                BorrarImagenButton.Enabled = false;
             }
         }
 
@@ -234,6 +237,12 @@ namespace eFact_R
                 Bitmap bitmap = new Bitmap(memorybits);
                 VendedorLogoPictureBox.Image = bitmap;
             }
+        }
+
+        private void BorrarImagenButton_Click(object sender, EventArgs e)
+        {
+            vendedor.Logo = null;
+            VendedorLogoPictureBox.Image = null;
         }
     }
 }

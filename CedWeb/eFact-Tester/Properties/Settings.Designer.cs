@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace eFact_C_Tester.Properties {
+namespace eFact_Tester.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -20,6 +20,16 @@ namespace eFact_C_Tester.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://bcfealsb02-qa:10001/ws/FacturaWebServiceConSchema")]
+        public string eFact_Tester_IBK_FacturaWebServiceConSchema {
+            get {
+                return ((string)(this["eFact_Tester_IBK_FacturaWebServiceConSchema"]));
             }
         }
     }

@@ -32,6 +32,7 @@
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.VendedoresPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.VendedorProvinciaComboBox = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
             this.VendedorContactoTextBox = new System.Windows.Forms.TextBox();
             this.VendedorEMailTextBox = new System.Windows.Forms.TextBox();
@@ -82,7 +83,7 @@
             this.SalirButton = new System.Windows.Forms.Button();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.VendedorProvinciaComboBox = new System.Windows.Forms.ComboBox();
+            this.BorrarImagenButton = new System.Windows.Forms.Button();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
             this.SplitContainer.SuspendLayout();
@@ -124,6 +125,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.BorrarImagenButton);
             this.panel1.Controls.Add(this.VendedorProvinciaComboBox);
             this.panel1.Controls.Add(this.label22);
             this.panel1.Controls.Add(this.VendedorContactoTextBox);
@@ -173,6 +175,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(669, 496);
             this.panel1.TabIndex = 14;
+            // 
+            // VendedorProvinciaComboBox
+            // 
+            this.VendedorProvinciaComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.VendedorProvinciaComboBox.FormattingEnabled = true;
+            this.VendedorProvinciaComboBox.Location = new System.Drawing.Point(367, 356);
+            this.VendedorProvinciaComboBox.Name = "VendedorProvinciaComboBox";
+            this.VendedorProvinciaComboBox.Size = new System.Drawing.Size(205, 21);
+            this.VendedorProvinciaComboBox.TabIndex = 62;
             // 
             // label22
             // 
@@ -474,7 +485,7 @@
             // 
             this.BuscarImagenButton.Location = new System.Drawing.Point(117, 244);
             this.BuscarImagenButton.Name = "BuscarImagenButton";
-            this.BuscarImagenButton.Size = new System.Drawing.Size(545, 23);
+            this.BuscarImagenButton.Size = new System.Drawing.Size(436, 23);
             this.BuscarImagenButton.TabIndex = 22;
             this.BuscarImagenButton.Text = "Buscar imagen ...";
             this.BuscarImagenButton.UseVisualStyleBackColor = true;
@@ -583,14 +594,15 @@
             this.SalirButton.UseVisualStyleBackColor = true;
             this.SalirButton.Click += new System.EventHandler(this.SalirButton_Click);
             // 
-            // VendedorProvinciaComboBox
+            // BorrarImagenButton
             // 
-            this.VendedorProvinciaComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.VendedorProvinciaComboBox.FormattingEnabled = true;
-            this.VendedorProvinciaComboBox.Location = new System.Drawing.Point(367, 356);
-            this.VendedorProvinciaComboBox.Name = "VendedorProvinciaComboBox";
-            this.VendedorProvinciaComboBox.Size = new System.Drawing.Size(205, 21);
-            this.VendedorProvinciaComboBox.TabIndex = 62;
+            this.BorrarImagenButton.Location = new System.Drawing.Point(559, 244);
+            this.BorrarImagenButton.Name = "BorrarImagenButton";
+            this.BorrarImagenButton.Size = new System.Drawing.Size(102, 23);
+            this.BorrarImagenButton.TabIndex = 63;
+            this.BorrarImagenButton.Text = "Borrar imagen";
+            this.BorrarImagenButton.UseVisualStyleBackColor = true;
+            this.BorrarImagenButton.Click += new System.EventHandler(this.BorrarImagenButton_Click);
             // 
             // ConsultaVendedor
             // 
@@ -670,5 +682,6 @@
         private System.Windows.Forms.TextBox VendedorContactoTextBox;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ComboBox VendedorProvinciaComboBox;
+        private System.Windows.Forms.Button BorrarImagenButton;
     }
 }

@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace CedWebRN.IBK {
+namespace eFact_Tester.IBK {
     using System.Diagnostics;
     using System.Web.Services;
     using System.ComponentModel;
@@ -48,7 +48,7 @@ namespace CedWebRN.IBK {
         
         /// <remarks/>
         public FacturaWebServiceConSchema() {
-            this.Url = global::CedWebRN.Properties.Settings.Default.CedWebRN_IBK_FacturaWebServiceConSchemaSoapBindingQSService;
+            this.Url = global::eFact_Tester.Properties.Settings.Default.eFact_Tester_IBK_FacturaWebServiceConSchema;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -3421,7 +3421,7 @@ namespace CedWebRN.IBK {
         
         private extensionesExtensiones_camara_facturas extensiones_camara_facturasField;
         
-        private string extensiones_datos_comercialesField;
+        private object extensiones_datos_comercialesField;
         
         private string extensiones_datos_marketingField;
         
@@ -3442,7 +3442,7 @@ namespace CedWebRN.IBK {
         }
         
         /// <comentarios/>
-        public string extensiones_datos_comerciales {
+        public object extensiones_datos_comerciales {
             get {
                 return this.extensiones_datos_comercialesField;
             }

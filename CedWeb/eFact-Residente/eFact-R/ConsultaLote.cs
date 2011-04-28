@@ -263,67 +263,111 @@ namespace eFact_R
 
         private void ProcesarComprobante(out CrystalDecisions.CrystalReports.Engine.ReportDocument ReporteDocumento, eFact_R.Entidades.Lote Lote, int Renglon)
         {
-            facturaRpt = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
-            facturaRpt.Load("Facturacion\\Electronica\\Reportes\\Factura.rpt");
-
-            //Crear un lote de un solo comprobante, para la impresion o exportacion del pdf.
-            eFact_R.Entidades.Lote LoteConUnSoloComprobante = new eFact_R.Entidades.Lote();
-            LoteConUnSoloComprobante.CuitVendedor = Lote.CuitVendedor;
-            LoteConUnSoloComprobante.FechaAlta = Lote.FechaAlta;
-            LoteConUnSoloComprobante.FechaEnvio = Lote.FechaEnvio;
-            LoteConUnSoloComprobante.IdLote = Lote.IdLote;
-            LoteConUnSoloComprobante.IdOp = Lote.IdOp;
-            LoteConUnSoloComprobante.LoteXml = Lote.LoteXml;
-            LoteConUnSoloComprobante.LoteXmlIF = Lote.LoteXmlIF;
-            LoteConUnSoloComprobante.NumeroEnvio = Lote.NumeroEnvio;
-            LoteConUnSoloComprobante.NumeroLote = Lote.NumeroLote;
-            LoteConUnSoloComprobante.PuntoVenta = Lote.PuntoVenta;
-            LoteConUnSoloComprobante.CantidadRegistros = 1;
-            LoteConUnSoloComprobante.Comprobantes.Add(Lote.Comprobantes[Renglon]);
-            LoteConUnSoloComprobante.WF = Lote.WF;
-            FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
-            eFact_R.RN.Lote.DeserializarLc(out lc, LoteConUnSoloComprobante, true);
-            //Entidad para reporte crystal. Al desserializar se pierden los descuentos de la entidad original.
-            FeaEntidades.Reporte.lote_comprobantes lcReporte = new FeaEntidades.Reporte.lote_comprobantes();
-            eFact_R.RN.Lote.DeserializarLc(out lcReporte, LoteConUnSoloComprobante);
-            for (int i = 0; i < lc.comprobante.Length; i++)
+            try
             {
-                if (i == 0)
+                Cursor = System.Windows.Forms.Cursors.WaitCursor;
+                facturaRpt = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
+                facturaRpt.Load("Facturacion\\Electronica\\Reportes\\Factura.rpt");
+
+                //Crear un lote de un solo comprobante, para la impresion o exportacion del pdf.
+                eFact_R.Entidades.Lote LoteConUnSoloComprobante = new eFact_R.Entidades.Lote();
+                LoteConUnSoloComprobante.CuitVendedor = Lote.CuitVendedor;
+                LoteConUnSoloComprobante.FechaAlta = Lote.FechaAlta;
+                LoteConUnSoloComprobante.FechaEnvio = Lote.FechaEnvio;
+                LoteConUnSoloComprobante.IdLote = Lote.IdLote;
+                LoteConUnSoloComprobante.IdOp = Lote.IdOp;
+                LoteConUnSoloComprobante.LoteXml = Lote.LoteXml;
+                LoteConUnSoloComprobante.LoteXmlIF = Lote.LoteXmlIF;
+                LoteConUnSoloComprobante.NumeroEnvio = Lote.NumeroEnvio;
+                LoteConUnSoloComprobante.NumeroLote = Lote.NumeroLote;
+                LoteConUnSoloComprobante.PuntoVenta = Lote.PuntoVenta;
+                LoteConUnSoloComprobante.CantidadRegistros = 1;
+                LoteConUnSoloComprobante.Comprobantes.Add(Lote.Comprobantes[Renglon]);
+                LoteConUnSoloComprobante.WF = Lote.WF;
+                FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+                eFact_R.RN.Lote.DeserializarLc(out lc, LoteConUnSoloComprobante, true);
+                //Entidad para reporte crystal. Al desserializar se pierden los descuentos de la entidad original.
+                FeaEntidades.Reporte.lote_comprobantes lcReporte = new FeaEntidades.Reporte.lote_comprobantes();
+                eFact_R.RN.Lote.DeserializarLc(out lcReporte, LoteConUnSoloComprobante);
+                for (int i = 0; i < lc.comprobante.Length; i++)
                 {
-                    lc.comprobante[i] = lc.comprobante[Renglon];
-                    lcReporte.comprobante[i] = lcReporte.comprobante[Renglon];
+                    if (i == 0)
+                    {
+                        lc.comprobante[i] = lc.comprobante[Renglon];
+                        lcReporte.comprobante[i] = lcReporte.comprobante[Renglon];
+                        for (int l = 0; l < lc.comprobante[i].detalle.linea.Length; l++)
+                        {
+                            if (lc.comprobante[i].detalle.linea[l].lineaDescuentos != null)
+                            {
+                                lcReporte.comprobante[i].detalle.linea[l].lineaDescuentos = new FeaEntidades.Reporte.lineaDescuentos[lc.comprobante[i].detalle.linea[l].lineaDescuentos.Length];
+                                for (int d = 0; d < lcReporte.comprobante[i].detalle.linea[l].lineaDescuentos.Length; d++)
+                                {
+                                    lcReporte.comprobante[i].detalle.linea[l].lineaDescuentos[d] = new FeaEntidades.Reporte.lineaDescuentos();
+                                    lcReporte.comprobante[i].detalle.linea[l].lineaDescuentos[d].descripcion_descuento = lc.comprobante[i].detalle.linea[l].lineaDescuentos[d].descripcion_descuento;
+                                    lcReporte.comprobante[i].detalle.linea[l].lineaDescuentos[d].importe_descuento = lc.comprobante[i].detalle.linea[l].lineaDescuentos[d].importe_descuento;
+                                    lcReporte.comprobante[i].detalle.linea[l].lineaDescuentos[d].importe_descuento_moneda_origen = lc.comprobante[i].detalle.linea[l].lineaDescuentos[d].importe_descuento_moneda_origen;
+                                    lcReporte.comprobante[i].detalle.linea[l].lineaDescuentos[d].importe_descuento_moneda_origenSpecified = lc.comprobante[i].detalle.linea[l].lineaDescuentos[d].importe_descuento_moneda_origenSpecified;
+                                    lcReporte.comprobante[i].detalle.linea[l].lineaDescuentos[d].importe_descuento_moneda_origenSpecified = true;
+                                    lcReporte.comprobante[i].detalle.linea[l].lineaDescuentos[d].porcentaje_descuento = lc.comprobante[i].detalle.linea[l].lineaDescuentos[d].porcentaje_descuento;
+                                    lcReporte.comprobante[i].detalle.linea[l].lineaDescuentos[d].porcentaje_descuentoSpecified = lc.comprobante[i].detalle.linea[l].lineaDescuentos[d].porcentaje_descuentoSpecified;
+                                    lcReporte.comprobante[i].detalle.linea[l].lineaDescuentos[d].porcentaje_descuentoSpecified = true;
+                                }
+                            }
+                            else
+                            {
+                                lcReporte.comprobante[0].detalle.linea[l].lineaDescuentos = new FeaEntidades.Reporte.lineaDescuentos[1];
+                                lcReporte.comprobante[0].detalle.linea[l].lineaDescuentos[0] = new FeaEntidades.Reporte.lineaDescuentos();
+                                lcReporte.comprobante[0].detalle.linea[l].lineaDescuentos[0].descripcion_descuento = "";
+                                lcReporte.comprobante[0].detalle.linea[l].lineaDescuentos[0].importe_descuento = 0;
+                                lcReporte.comprobante[0].detalle.linea[l].lineaDescuentos[0].porcentaje_descuento = 0;
+                                lcReporte.comprobante[0].detalle.linea[l].lineaDescuentos[0].porcentaje_descuentoSpecified = true;
+                                lcReporte.comprobante[0].detalle.linea[l].lineaDescuentos[0].importe_descuento_moneda_origen = 0;
+                                lcReporte.comprobante[0].detalle.linea[l].lineaDescuentos[0].importe_descuento_moneda_origenSpecified = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        lc.comprobante[i] = null;
+                        lcReporte.comprobante[i] = null;
+                    }
                 }
-                else
-                {
-                    lc.comprobante[i] = null;
-                    lcReporte.comprobante[i] = null;
-                }
+                
+                AsignarCamposOpcionales(lcReporte);
+                ReemplarResumenImportesMonedaExtranjera(lcReporte);
+                DataSet ds = new DataSet();
+                XmlSerializer objXS = new XmlSerializer(lcReporte.GetType());
+                StringWriter objSW = new StringWriter();
+                objXS.Serialize(objSW, lcReporte);
+                StringReader objSR = new StringReader(objSW.ToString());
+                ds.ReadXml(objSR);
+                
+                string pxsd = string.Format("{0}\\Facturacion\\Electronica\\Reportes\\lote_comprobantes.xsd",System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
+                System.IO.File.Copy(pxsd, @System.IO.Path.GetTempPath() + "lote_comprobantes.xsd", true);
+                
+                string imagen = string.Format("{0}\\Facturacion\\Electronica\\Reportes\\Imagen.xsd",System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
+                System.IO.File.Copy(imagen, @System.IO.Path.GetTempPath() + "Imagen.xsd", true);
+
+                facturaRpt.SetDataSource(ds);
+
+                facturaRpt.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
+                facturaRpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
+
+                IncrustarLogo();
+                GenerarCodigoBarras(lc.cabecera_lote.cuit_vendedor + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00") + lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString("0000") + lc.comprobante[0].cabecera.informacion_comprobante.cae + lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae);
+                AsignarParametros(lc.comprobante[0].resumen.importe_total_factura);
+
+                ReporteDocumento = facturaRpt;
             }
-            AsignarCamposOpcionales(lcReporte);
-            ReemplarResumenImportesMonedaExtranjera(lcReporte);
-            DataSet ds = new DataSet();
-            XmlSerializer objXS = new XmlSerializer(lcReporte.GetType());
-            StringWriter objSW = new StringWriter();
-            objXS.Serialize(objSW, lcReporte);
-            StringReader objSR = new StringReader(objSW.ToString());
-            ds.ReadXml(objSR);
-            
-            string pxsd = string.Format("{0}\\Facturacion\\Electronica\\Reportes\\lote_comprobantes.xsd",System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
-            System.IO.File.Copy(pxsd, @System.IO.Path.GetTempPath() + "lote_comprobantes.xsd", true);
-            
-            string imagen = string.Format("{0}\\Facturacion\\Electronica\\Reportes\\Imagen.xsd",System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
-            System.IO.File.Copy(imagen, @System.IO.Path.GetTempPath() + "Imagen.xsd", true);
-
-            facturaRpt.SetDataSource(ds);
-
-            facturaRpt.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
-            facturaRpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
-
-            IncrustarLogo();
-            GenerarCodigoBarras(lc.cabecera_lote.cuit_vendedor + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00") + lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString("0000") + lc.comprobante[0].cabecera.informacion_comprobante.cae + System.DateTime.Now.ToString("yyyyMMdd"));
-            AsignarParametros(lc.comprobante[0].resumen.importe_total_factura);
-
-            ReporteDocumento = facturaRpt;
+            catch (Exception ex)
+            {
+                ReporteDocumento = null;
+                MessageBox.Show(ex.Message, "Problemas al procesar el comprobante", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            }
+            finally
+            {
+                Cursor = System.Windows.Forms.Cursors.Default;
+            }
         }
 
         private static void ReemplarResumenImportesMonedaExtranjera(FeaEntidades.Reporte.lote_comprobantes lc)
@@ -418,6 +462,10 @@ namespace eFact_R
                 lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago = "";
                 lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pagoSpecified = true;
             }
+            if (lc.comprobante[0].cabecera.informacion_comprobante.motivo == null)
+            {
+                lc.comprobante[0].cabecera.informacion_comprobante.motivo = "";
+            }
             lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde = "";
             lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta = "";
             lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pagoSpecified = true;
@@ -475,7 +523,7 @@ namespace eFact_R
             }
             for (int i = 0; i < lc.comprobante[0].resumen.impuestos.Length; i++)
             {
-                lc.comprobante[0].resumen.impuestos[i].codigo_jurisdiccion = 0;
+                //lc.comprobante[0].resumen.impuestos[i].codigo_jurisdiccion = 0;
                 lc.comprobante[0].resumen.impuestos[i].codigo_jurisdiccionSpecified = true;
             }
             lc.comprobante[0].resumen.cant_alicuotas_ivaSpecified = true;
@@ -511,44 +559,7 @@ namespace eFact_R
                     lc.comprobante[0].detalle.linea[i].importes_moneda_origen.importe_total_articuloSpecified = true;
                     lc.comprobante[0].detalle.linea[i].importes_moneda_origen.precio_unitarioSpecified = true;
 
-                    if (lc.comprobante[0].detalle.linea[i].importe_total_descuentos == null)
-                    {
-                        lc.comprobante[0].detalle.linea[i].importe_total_descuentos = 0;
-                    }
                     lc.comprobante[0].detalle.linea[i].importe_total_descuentosSpecified = true;
-                    
-                    //Prueba
-                    if (i == 4)
-                    {
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos = new FeaEntidades.Reporte.lineaDescuentos[2];
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0] = new FeaEntidades.Reporte.lineaDescuentos();
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].descripcion_descuento = "BOCHA MALOTE";
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].importe_descuento = i;
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].porcentaje_descuento = 5;
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].porcentaje_descuentoSpecified = true;
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].importe_descuento_moneda_origen = 0;
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].importe_descuento_moneda_origenSpecified = true;
-
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[1] = new FeaEntidades.Reporte.lineaDescuentos();
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[1].descripcion_descuento = "BOCHA MALOTE";
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[1].importe_descuento = i + 100;
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[1].porcentaje_descuento = 5;
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[1].porcentaje_descuentoSpecified = true;
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[1].importe_descuento_moneda_origen = 0;
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[1].importe_descuento_moneda_origenSpecified = true;
-                    }
-                    else
-                    {
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos = new FeaEntidades.Reporte.lineaDescuentos[1];
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0] = new FeaEntidades.Reporte.lineaDescuentos();
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].descripcion_descuento = "BOCHA MALOTE";
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].importe_descuento = i;
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].porcentaje_descuento = 0;
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].porcentaje_descuentoSpecified = true;
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].importe_descuento_moneda_origen = 0;
-                        lc.comprobante[0].detalle.linea[i].lineaDescuentos[0].importe_descuento_moneda_origenSpecified = true;
-                    }
-                    
 
                     lc.comprobante[0].detalle.linea[i].precio_unitarioSpecified = true;
                     lc.comprobante[0].detalle.linea[i].importe_ivaSpecified = true;
@@ -642,43 +653,55 @@ namespace eFact_R
 
         private void ExportarComprobanteButton_Click(object sender, EventArgs e)
         {
-            if (DetalleLoteDataGridView.SelectedRows.Count != 0)
+            try
             {
-                for (int i = 0; i < DetalleLoteDataGridView.SelectedRows.Count; i++)
+                Cursor = System.Windows.Forms.Cursors.WaitCursor;
+                if (DetalleLoteDataGridView.SelectedRows.Count != 0)
                 {
-                    int renglon = DetalleLoteDataGridView.SelectedRows[i].Index;
-                    ReportDocument ReporteDocumento = new ReportDocument();
-                    ProcesarComprobante(out ReporteDocumento, lote, renglon);
+                    for (int i = 0; i < DetalleLoteDataGridView.SelectedRows.Count; i++)
+                    {
+                        int renglon = DetalleLoteDataGridView.SelectedRows[i].Index;
+                        ReportDocument ReporteDocumento = new ReportDocument();
+                        ProcesarComprobante(out ReporteDocumento, lote, renglon);
 
-                    //Nombre del comprobante ( pdf )
-                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                    sb.Append(lote.CuitVendedor);
-                    sb.Append("-");
-                    sb.Append(Convert.ToInt32(lote.PuntoVenta).ToString("0000"));
-                    sb.Append("-");
-                    sb.Append(Convert.ToInt32(lote.Comprobantes[renglon].IdTipoComprobante).ToString("00"));
-                    sb.Append("-");
-                    sb.Append(Convert.ToInt32(lote.Comprobantes[renglon].NumeroComprobante).ToString("00000000"));
-                    sb.Append(".pdf");
+                        //Nombre del comprobante ( pdf )
+                        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                        sb.Append(lote.CuitVendedor);
+                        sb.Append("-");
+                        sb.Append(Convert.ToInt32(lote.PuntoVenta).ToString("0000"));
+                        sb.Append("-");
+                        sb.Append(Convert.ToInt32(lote.Comprobantes[renglon].IdTipoComprobante).ToString("00"));
+                        sb.Append("-");
+                        sb.Append(Convert.ToInt32(lote.Comprobantes[renglon].NumeroComprobante).ToString("00000000"));
+                        sb.Append(".pdf");
 
-                    //ExportOptions
-                    DiskFileDestinationOptions crDiskFileDestinationOptions = new DiskFileDestinationOptions();
-                    crDiskFileDestinationOptions.DiskFileName = eFact_R.Aplicacion.ArchPathPDF + sb.ToString();
-                    ReporteDocumento.ExportOptions.ExportDestinationOptions = crDiskFileDestinationOptions;
-                    ReporteDocumento.ExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
-                    ReporteDocumento.ExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
-                    PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
-                    ReporteDocumento.ExportOptions.ExportFormatOptions = CrFormatTypeOptions;
-                    ReporteDocumento.Export();
+                        //ExportOptions
+                        DiskFileDestinationOptions crDiskFileDestinationOptions = new DiskFileDestinationOptions();
+                        crDiskFileDestinationOptions.DiskFileName = eFact_R.Aplicacion.ArchPathPDF + sb.ToString();
+                        ReporteDocumento.ExportOptions.ExportDestinationOptions = crDiskFileDestinationOptions;
+                        ReporteDocumento.ExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+                        ReporteDocumento.ExportOptions.ExportFormatType = ExportFormatType.PortableDocFormat;
+                        PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
+                        ReporteDocumento.ExportOptions.ExportFormatOptions = CrFormatTypeOptions;
+                        ReporteDocumento.Export();
+                    }
+                    if (DetalleLoteDataGridView.SelectedRows.Count == 1)
+                    {
+                        MessageBox.Show("El comprobante seleccionado se ha exportado satisfactoriamente.", "Exportar Comprobantes", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Los comprobantes seleccionados se han exportado satisfactoriamente.", "Exportar Comprobantes", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                    }
                 }
-                if (DetalleLoteDataGridView.SelectedRows.Count == 1)
-                {
-                    MessageBox.Show("El comprobante seleccionado se ha exportado satisfactoriamente.", "Exportar Comprobantes", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                }
-                else
-                {
-                    MessageBox.Show("Los comprobantes seleccionados se han exportado satisfactoriamente.", "Exportar Comprobantes", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Problemas al procesar el comprobante", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            }
+            finally
+            {
+                Cursor = System.Windows.Forms.Cursors.Default;
             }
         }
 
