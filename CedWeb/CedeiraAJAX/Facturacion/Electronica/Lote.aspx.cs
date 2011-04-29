@@ -2977,8 +2977,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						}).IdTipo;
 						if (idtipo.Equals("Export"))
 						{
-							Provincia_CompradorDropDownList.Focus();
-							throw new Exception("La provincia del domicilio del comprador no se debe informar para exportación");
+							if (!PaisDestinoExpDropDownList.SelectedItem.Text.ToUpper().Contains("ARGENTINA"))
+							{
+								Provincia_CompradorDropDownList.Focus();
+								throw new Exception("La provincia del domicilio del comprador no se debe informar para exportación");
+							}
+							else
+							{
+								infcompra.provincia = auxCodProvCompra;
+							}
 						}
 						else
 						{
