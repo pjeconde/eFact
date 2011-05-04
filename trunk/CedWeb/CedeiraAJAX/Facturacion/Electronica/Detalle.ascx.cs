@@ -992,39 +992,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				string textoSinSaltoDeLinea = listadelineas[i].descripcion.Replace("\n", "<br>").Replace("\r",string.Empty);
 				det.linea[i].descripcion = c.ConvertToHex(textoSinSaltoDeLinea);
 
-				if (TipoPtoVta.Equals("Export"))
-				{
-					det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
-					if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
-					{
-						det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
-					}
-				}
-				else
-				{
-					switch (TipoCbte)
-					{
-						case "6":
-						case "7":
-						case "8":
-						case "9":
-						case "10":
-						case "40":
-						case "61":
-						case "64":
-							det.linea[i].alicuota_ivaSpecified = false;
-							det.linea[i].alicuota_iva = 0;
-							break;
-						default:
-							det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
-							if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
-							{
-								det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
-							}
-							break;
-					}
-
-				}
+				GenerarDetallesAlicuotaIVA(TipoPtoVta, TipoCbte, det, listadelineas, i);
 
 				if (!listadelineas[i].unidad.Equals(Convert.ToString(new FeaEntidades.CodigosUnidad.SinInformar().Codigo)))
 				{
@@ -1034,140 +1002,194 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				det.linea[i].cantidadSpecified = listadelineas[i].cantidadSpecified;
 				det.linea[i].codigo_producto_comprador = listadelineas[i].codigo_producto_comprador;
 				det.linea[i].codigo_producto_vendedor = listadelineas[i].codigo_producto_vendedor;
-				if (listadelineas[i].indicacion_exento_gravado != null)
-				{
-					if (!listadelineas[i].indicacion_exento_gravado.Equals(string.Empty))
-					{
-						if (TipoPtoVta.Equals("Export"))
-						{
-							det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
-						}
-						else
-						{
-							switch (TipoCbte)
-							{
-								case "6":
-								case "7":
-								case "8":
-								case "9":
-								case "10":
-								case "40":
-								case "61":
-								case "64":
-									det.linea[i].indicacion_exento_gravado = null;
-									break;
-								default:
-									det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
-									break;
-							}
-						}
-					}
-				}
+
+				GenerarDetallesIndExGravado(TipoPtoVta, TipoCbte, det, listadelineas, i);
+
 				if (MonedaComprobante.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
 				{
-					
-					switch (TipoCbte)
-					{
-						case "6":
-						case "7":
-						case "8":
-						case "9":
-						case "10":
-						case "40":
-						case "61":
-						case "64":
-							if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
-							{
-								det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * (1 + listadelineas[i].alicuota_iva / 100), 3);
-							}
-							else
-							{
-								det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario, 3);
-							}
-							det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo + listadelineas[i].importe_iva,2);
-							det.linea[i].importe_ivaSpecified = false;
-							det.linea[i].importe_iva = 0;
-							break;
-						default:
-							det.linea[i].precio_unitario = listadelineas[i].precio_unitario;
-							det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
-							det.linea[i].importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
-							det.linea[i].importe_iva = listadelineas[i].importe_iva;
-							break;
-					}
-					det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+
+					GenerarDetalleMonedaLocal(TipoCbte, det, listadelineas, i);
 				}
 				else
 				{
-					det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
-					switch (TipoCbte)
-					{
-						case "6":
-						case "7":
-						case "8":
-						case "9":
-						case "10":
-						case "40":
-						case "61":
-						case "64":
-							det.linea[i].importe_iva =0;
-							det.linea[i].importe_ivaSpecified = false;
-							if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
-							{
-								det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(TipoDeCambio) * (1 + listadelineas[i].alicuota_iva / 100), 3);
-							}
-							else
-							{
-								det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(TipoDeCambio), 3);
-							}
-							det.linea[i].importe_total_articulo = Math.Round(((listadelineas[i].importe_total_articulo) + listadelineas[i].importe_iva ) * Convert.ToDouble(TipoDeCambio), 2);
-							break;
-						default:
-							det.linea[i].importe_iva = Math.Round(listadelineas[i].importe_iva * Convert.ToDouble(TipoDeCambio), 2);
-							det.linea[i].importe_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
-							det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(TipoDeCambio), 3);
-							det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo * Convert.ToDouble(TipoDeCambio), 2);
-							break;
-					}
-
-					FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
-					limo.importe_total_articuloSpecified = true;
-					
-					limo.precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
-
-					switch (TipoCbte)
-					{
-						case "6":
-						case "7":
-						case "8":
-						case "9":
-						case "10":
-						case "40":
-						case "61":
-						case "64":
-							limo.importe_ivaSpecified = false;
-							limo.importe_iva = 0;
-							if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
-							{
-								limo.precio_unitario = Math.Round(listadelineas[i].precio_unitario * (1 + listadelineas[i].alicuota_iva / 100), 3);
-							}
-							else
-							{
-								limo.precio_unitario = Math.Round(listadelineas[i].precio_unitario, 3);
-							}
-							limo.importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo + listadelineas[i].importe_iva,2);
-							break;
-						default:
-							limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
-							limo.importe_iva = listadelineas[i].importe_iva;
-							limo.precio_unitario = listadelineas[i].precio_unitario;
-							limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
-							break;
-					}
-					det.linea[i].importes_moneda_origen = limo;
+					GenerarDetalleMonedaExtranjera(TipoDeCambio, TipoCbte, det, listadelineas, i);
 				}
 			}
 			return det;
+		}
+
+		private static void GenerarDetalleMonedaExtranjera(string TipoDeCambio, string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i)
+		{
+			det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+			switch (TipoCbte)
+			{
+				case "6":
+				case "7":
+				case "8":
+				case "9":
+				case "10":
+				case "40":
+				case "61":
+				case "64":
+					det.linea[i].importe_iva = 0;
+					det.linea[i].importe_ivaSpecified = false;
+					if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+					{
+						det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(TipoDeCambio) * (1 + listadelineas[i].alicuota_iva / 100), 3);
+					}
+					else
+					{
+						det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(TipoDeCambio), 3);
+					}
+					det.linea[i].importe_total_articulo = Math.Round(((listadelineas[i].importe_total_articulo) + listadelineas[i].importe_iva) * Convert.ToDouble(TipoDeCambio), 2);
+					break;
+				default:
+					det.linea[i].importe_iva = Math.Round(listadelineas[i].importe_iva * Convert.ToDouble(TipoDeCambio), 2);
+					det.linea[i].importe_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
+					det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(TipoDeCambio), 3);
+					det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo * Convert.ToDouble(TipoDeCambio), 2);
+					break;
+			}
+
+			FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
+			limo.importe_total_articuloSpecified = true;
+
+			limo.precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+
+			switch (TipoCbte)
+			{
+				case "6":
+				case "7":
+				case "8":
+				case "9":
+				case "10":
+				case "40":
+				case "61":
+				case "64":
+					limo.importe_ivaSpecified = false;
+					limo.importe_iva = 0;
+					if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+					{
+						limo.precio_unitario = Math.Round(listadelineas[i].precio_unitario * (1 + listadelineas[i].alicuota_iva / 100), 3);
+					}
+					else
+					{
+						limo.precio_unitario = Math.Round(listadelineas[i].precio_unitario, 3);
+					}
+					limo.importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo + listadelineas[i].importe_iva, 2);
+					break;
+				default:
+					limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
+					limo.importe_iva = listadelineas[i].importe_iva;
+					limo.precio_unitario = listadelineas[i].precio_unitario;
+					limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
+					break;
+			}
+			det.linea[i].importes_moneda_origen = limo;
+		}
+
+		private static void GenerarDetalleMonedaLocal(string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i)
+		{
+			switch (TipoCbte)
+			{
+				case "6":
+				case "7":
+				case "8":
+				case "9":
+				case "10":
+				case "40":
+				case "61":
+				case "64":
+					if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+					{
+						det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * (1 + listadelineas[i].alicuota_iva / 100), 3);
+					}
+					else
+					{
+						det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario, 3);
+					}
+					det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo + listadelineas[i].importe_iva, 2);
+					det.linea[i].importe_ivaSpecified = false;
+					det.linea[i].importe_iva = 0;
+					break;
+				default:
+					det.linea[i].precio_unitario = listadelineas[i].precio_unitario;
+					det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
+					det.linea[i].importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
+					det.linea[i].importe_iva = listadelineas[i].importe_iva;
+					break;
+			}
+			det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+		}
+
+		private static void GenerarDetallesIndExGravado(string TipoPtoVta, string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i)
+		{
+			if (listadelineas[i].indicacion_exento_gravado != null)
+			{
+				if (!listadelineas[i].indicacion_exento_gravado.Equals(string.Empty))
+				{
+					if (TipoPtoVta.Equals("Export"))
+					{
+						det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
+					}
+					else
+					{
+						switch (TipoCbte)
+						{
+							case "6":
+							case "7":
+							case "8":
+							case "9":
+							case "10":
+							case "40":
+							case "61":
+							case "64":
+								det.linea[i].indicacion_exento_gravado = null;
+								break;
+							default:
+								det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
+								break;
+						}
+					}
+				}
+			}
+		}
+
+		private static void GenerarDetallesAlicuotaIVA(string TipoPtoVta, string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i)
+		{
+			if (TipoPtoVta.Equals("Export"))
+			{
+				det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
+				if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+				{
+					det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
+				}
+			}
+			else
+			{
+				switch (TipoCbte)
+				{
+					case "6":
+					case "7":
+					case "8":
+					case "9":
+					case "10":
+					case "40":
+					case "61":
+					case "64":
+						det.linea[i].alicuota_ivaSpecified = false;
+						det.linea[i].alicuota_iva = 0;
+						break;
+					default:
+						det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
+						if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+						{
+							det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
+						}
+						break;
+				}
+
+			}
 		}
 
 
