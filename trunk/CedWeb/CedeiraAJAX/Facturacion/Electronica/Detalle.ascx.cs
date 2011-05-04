@@ -1128,7 +1128,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			{
 				if (!listadelineas[i].indicacion_exento_gravado.Equals(string.Empty))
 				{
-					if (TipoPtoVta.Equals("Export"))
+					if (!TipoPtoVta.Equals("Comun"))
 					{
 						det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
 					}
@@ -1157,7 +1157,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 		private static void GenerarDetallesAlicuotaIVA(string TipoPtoVta, string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i)
 		{
-			if (TipoPtoVta.Equals("Export"))
+			if (!TipoPtoVta.Equals("Comun"))
 			{
 				det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
 				if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
