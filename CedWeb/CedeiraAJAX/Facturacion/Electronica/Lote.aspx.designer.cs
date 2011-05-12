@@ -1118,49 +1118,13 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::CedeiraAJAX.Facturacion.Electronica.Detalle DetalleLinea;
         
         /// <summary>
-        /// Control descuentosUpdatePanel.
+        /// Control DescuentosGlobales.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel descuentosUpdatePanel;
-        
-        /// <summary>
-        /// Control descuentosGridView.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView descuentosGridView;
-        
-        /// <summary>
-        /// Control descuentosUpdateProgress.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress descuentosUpdateProgress;
-        
-        /// <summary>
-        /// Control DescuentosGlobalesEditValidationSummary.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary DescuentosGlobalesEditValidationSummary;
-        
-        /// <summary>
-        /// Control DescuentosGlobalesFooterValidationSummary.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificar, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary DescuentosGlobalesFooterValidationSummary;
+        protected global::CedeiraAJAX.Facturacion.Electronica.Descuentos DescuentosGlobales;
         
         /// <summary>
         /// Control ImpuestosGlobales.
