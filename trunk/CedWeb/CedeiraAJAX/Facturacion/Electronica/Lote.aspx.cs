@@ -18,7 +18,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 	{
 		#region Variables
 		string gvUniqueID = String.Empty;
-		System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> descuentos;
 		System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> referencias;
 		#endregion
 
@@ -32,12 +31,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 				else
 				{
-					descuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>();
-					FeaEntidades.InterFacturas.resumenDescuentos descuento = new FeaEntidades.InterFacturas.resumenDescuentos();
-					descuentos.Add(descuento);
-					descuentosGridView.DataSource = descuentos;
-					ViewState["descuentos"] = descuentos;
-
 					referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
 					FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
 					referencias.Add(referencia);
@@ -357,151 +350,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 		}
 
-		protected void descuentosGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-		{
-			descuentosGridView.EditIndex = -1;
-			descuentosGridView.DataSource = ViewState["descuentos"];
-			descuentosGridView.DataBind();
-		}
-
-		protected void descuentosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
-		{
-			if (e.CommandName.Equals("Adddescuentos"))
-			{
-				try
-				{
-					FeaEntidades.InterFacturas.resumenDescuentos rd = new FeaEntidades.InterFacturas.resumenDescuentos();
-
-					string auxDescr = ((TextBox)descuentosGridView.FooterRow.FindControl("txtdescripcion")).Text;
-					if (!auxDescr.Equals(string.Empty))
-					{
-						rd.descripcion_descuento = auxDescr;
-					}
-					else
-					{
-						throw new Exception("Descuento no agregado porque la descripción no puede estar vacía");
-					}
-					string auxTotal = ((TextBox)descuentosGridView.FooterRow.FindControl("txtimporte_descuento")).Text;
-					if (!auxTotal.Contains(","))
-					{
-						rd.importe_descuento = Convert.ToDouble(auxTotal);
-					}
-					else
-					{
-						throw new Exception("Descuento no agregado porque el separador de decimales debe ser el punto");
-					}
-
-					((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"]).Add(rd);
-
-
-					//Me fijo si elimino la fila automática
-					System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> rds = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"]);
-					if (rds[0].descripcion_descuento == null)
-					{
-						((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"]).Remove(rds[0]);
-					}
-
-					//Saco de edición la fila que estén modificando
-					if (!descuentosGridView.EditIndex.Equals(-1))
-					{
-						descuentosGridView.EditIndex = -1;
-					}
-
-					descuentosGridView.DataSource = ViewState["descuentos"];
-					descuentosGridView.DataBind();
-
-				}
-				catch (Exception ex)
-				{
-					ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + ex.Message.ToString().Replace("'", "") + "');", true);
-				}
-			}
-		}
-		
-		protected void descuentosGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
-		{
-			if (e.Exception != null)
-			{
-				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
-				e.ExceptionHandled = true;
-			}
-		}
-		
-		protected void descuentosGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
-		{
-			try
-			{
-				System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> rds = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"]);
-				FeaEntidades.InterFacturas.resumenDescuentos rd = rds[e.RowIndex];
-				rds.Remove(rd);
-
-				if (rds.Count.Equals(0))
-				{
-					FeaEntidades.InterFacturas.resumenDescuentos nuevo = new FeaEntidades.InterFacturas.resumenDescuentos();
-					rds.Add(nuevo);
-				}
-
-				descuentosGridView.EditIndex = -1;
-
-				descuentosGridView.DataSource = ViewState["descuentos"];
-				descuentosGridView.DataBind();
-			}
-			catch
-			{
-			}
-		}
-		
-		protected void descuentosGridView_RowEditing(object sender, GridViewEditEventArgs e)
-		{
-			descuentosGridView.EditIndex = e.NewEditIndex;
-			descuentosGridView.DataSource = ViewState["descuentos"];
-			descuentosGridView.DataBind();
-		}
-		
-		protected void descuentosGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
-		{
-			if (e.Exception != null)
-			{
-				ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + e.Exception.Message.ToString().Replace("'", "") + "');", true);
-				e.ExceptionHandled = true;
-			}
-		}
-		
-		protected void descuentosGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
-		{
-			try
-			{
-				System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> rds = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"]);
-
-				FeaEntidades.InterFacturas.resumenDescuentos rd = rds[e.RowIndex];
-				string auxDescr = ((TextBox)descuentosGridView.Rows[e.RowIndex].FindControl("txtdescripcion")).Text;
-				if (!auxDescr.Equals(string.Empty))
-				{
-					rd.descripcion_descuento = auxDescr;
-				}
-				else
-				{
-					throw new Exception("Descuento no actualizado porque la descripción no puede estar vacía");
-				}
-				string auxTotal = ((TextBox)descuentosGridView.Rows[e.RowIndex].FindControl("txtimporte_descuento")).Text;
-				if (!auxTotal.Contains(","))
-				{
-					rd.importe_descuento = Convert.ToDouble(auxTotal);
-				}
-				else
-				{
-					throw new Exception("Descuento no actualizado porque el separador de decimales debe ser el punto");
-				}
-
-				descuentosGridView.EditIndex = -1;
-				descuentosGridView.DataSource = ViewState["descuentos"];
-				descuentosGridView.DataBind();
-			}
-			catch (Exception ex)
-			{
-				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
-			}
-		}
 
 		protected void referenciasGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
 		{
@@ -832,7 +680,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			DetalleLinea.CompletarDetalles(lc);
 
 			//Descuentos globales
-			CompletarDescGlobales(lc);
+			DescuentosGlobales.Completar(lc);
 
 			//impuestos globales
 			ImpuestosGlobales.Completar(lc);
@@ -996,28 +844,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			ViewState["referencias"] = referencias;
 		}
 
-		private void CompletarDescGlobales(FeaEntidades.InterFacturas.lote_comprobantes lc)
-		{
-			descuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>();
-			if (lc.comprobante[0].resumen.descuentos != null)
-			{
-				foreach (FeaEntidades.InterFacturas.resumenDescuentos r in lc.comprobante[0].resumen.descuentos)
-				{
-					if (r.importe_descuento_moneda_origenSpecified)
-					{
-						r.importe_descuento = r.importe_descuento_moneda_origen;
-					}
-					descuentos.Add(r);
-				}
-			}
-			if (descuentos.Count.Equals(0))
-			{
-				descuentos.Add(new FeaEntidades.InterFacturas.resumenDescuentos());
-			}
-			descuentosGridView.DataSource = descuentos;
-			descuentosGridView.DataBind();
-			ViewState["descuentos"] = descuentos;
-		}
 
 		private void CompletarVendedor(FeaEntidades.InterFacturas.lote_comprobantes lc)
 		{
@@ -1329,41 +1155,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			Domicilio_Sector_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_sector);
 			Domicilio_Torre_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_torre);
 			Domicilio_Manzana_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_manzana);
+			
 			//Detalle
 			DetalleLinea.CompletarDetallesWS(lc);
+			
 			//Descuentos globales
-			if (lc.comprobante[0].resumen.descuentos != null)
-			{
-				descuentos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>();
-				foreach (org.dyndns.cedweb.consulta.ConsultarResultComprobanteResumenDescuentos r in lc.comprobante[0].resumen.descuentos)
-				{
-					if (r.importe_descuento_moneda_origenSpecified)
-					{
-						r.importe_descuento = r.importe_descuento_moneda_origen;
-					}
-					FeaEntidades.InterFacturas.resumenDescuentos rd = new FeaEntidades.InterFacturas.resumenDescuentos();
-					rd.alicuota_iva_descuento = r.alicuota_iva_descuento;
-					rd.alicuota_iva_descuentoSpecified = r.alicuota_iva_descuentoSpecified;
-					rd.descripcion_descuento = r.descripcion_descuento;
-					rd.importe_descuento = r.importe_descuento;
-					rd.importe_descuento_moneda_origen = r.importe_descuento_moneda_origen;
-					rd.importe_descuento_moneda_origenSpecified = r.importe_descuento_moneda_origenSpecified;
-					rd.importe_iva_descuento = r.importe_iva_descuento;
-					rd.importe_iva_descuento_moneda_origen = r.importe_iva_descuento_moneda_origen;
-					rd.importe_iva_descuento_moneda_origenSpecified = r.importe_iva_descuento_moneda_origenSpecified;
-					rd.importe_iva_descuentoSpecified = r.importe_iva_descuentoSpecified;
-					rd.porcentaje_descuento = r.porcentaje_descuento;
-					rd.porcentaje_descuentoSpecified = r.porcentaje_descuentoSpecified;
-					descuentos.Add(rd);
-				}
-				if (descuentos.Count.Equals(0))
-				{
-					descuentos.Add(new FeaEntidades.InterFacturas.resumenDescuentos());
-				}
-				descuentosGridView.DataSource = descuentos;
-				descuentosGridView.DataBind();
-				ViewState["descuentos"] = descuentos;
-			}
+			DescuentosGlobales.CompletarDetallesWS(lc);
+
 			//impuestos globales
 			ImpuestosGlobales.CompletarWS(lc);
 
@@ -2260,7 +2058,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				ImpuestosGlobales.GenerarImpuestos(comp, MonedaComprobanteDropDownList.SelectedValue, Tipo_de_cambioTextBox.Text);
 			}
 
-			GenerarResumen(comp);
+			DescuentosGlobales.GenerarResumen(comp, MonedaComprobanteDropDownList.SelectedValue, Tipo_de_cambioTextBox.Text);
 
 			lote.comprobante[0] = comp;
 			return lote;
@@ -2739,38 +2537,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 		}
 
-		private void GenerarResumen(FeaEntidades.InterFacturas.comprobante comp)
-		{
-			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> listadedescuentos = (System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"];
-			comp.resumen.descuentos = new FeaEntidades.InterFacturas.resumenDescuentos[listadedescuentos.Count];
-			for (int i = 0; i < listadedescuentos.Count; i++)
-			{
-				if (listadedescuentos[i].descripcion_descuento != null && !listadedescuentos[i].descripcion_descuento.Equals(string.Empty))
-				{
-					comp.resumen.descuentos[i] = new FeaEntidades.InterFacturas.resumenDescuentos();
-					comp.resumen.descuentos[i].alicuota_iva_descuento = listadedescuentos[i].alicuota_iva_descuento;
-					comp.resumen.descuentos[i].alicuota_iva_descuentoSpecified = listadedescuentos[i].alicuota_iva_descuentoSpecified;
-					comp.resumen.descuentos[i].descripcion_descuento = listadedescuentos[i].descripcion_descuento;
-					comp.resumen.descuentos[i].importe_iva_descuento = listadedescuentos[i].importe_iva_descuento;
-					comp.resumen.descuentos[i].importe_iva_descuento_moneda_origen = listadedescuentos[i].importe_iva_descuento_moneda_origen;
-					comp.resumen.descuentos[i].importe_iva_descuento_moneda_origenSpecified = listadedescuentos[i].importe_iva_descuento_moneda_origenSpecified;
-					comp.resumen.descuentos[i].importe_iva_descuentoSpecified = listadedescuentos[i].importe_iva_descuentoSpecified;
-					comp.resumen.descuentos[i].porcentaje_descuento = listadedescuentos[i].porcentaje_descuento;
-					comp.resumen.descuentos[i].porcentaje_descuentoSpecified = listadedescuentos[i].porcentaje_descuentoSpecified;
-
-					if (MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
-					{
-						comp.resumen.descuentos[i].importe_descuento = listadedescuentos[i].importe_descuento;
-					}
-					else
-					{
-						comp.resumen.descuentos[i].importe_descuento = Math.Round(listadedescuentos[i].importe_descuento * Convert.ToDouble(Tipo_de_cambioTextBox.Text), 2);
-						comp.resumen.descuentos[i].importe_descuento_moneda_origen = listadedescuentos[i].importe_descuento;
-						comp.resumen.descuentos[i].importe_descuento_moneda_origenSpecified = true;
-					}
-				}
-			}
-		}
 
 		private void GenerarInfoVendedor(FeaEntidades.InterFacturas.cabecera compcab)
 		{
