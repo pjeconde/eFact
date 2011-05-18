@@ -102,18 +102,10 @@ namespace eFact_R.RN
             //Verificar bandeja de salida.
             int numeroEnvioDisponible = 0;
             eFact_R.RN.Lote.ObtenerNumeroEnvioDisponible(out numeroEnvioDisponible, lote.CuitVendedor, lote.NumeroLote, lote.PuntoVenta, eFact_R.Aplicacion.Sesion);
-            //Verificar bandeja de entrada.
-            //List<eFact_R_Bj.Entidades.Archivo> la = new List<eFact_R_Bj.Entidades.Archivo>();
-            //la = archivos.FindAll((delegate(eFact_R_Bj.Entidades.Archivo e) { return e.Lote.CuitVendedor == lote.CuitVendedor && e.Lote.PuntoVenta == lote.PuntoVenta && e.Lote.NumeroLote == lote.NumeroLote; }));
-            //if (la.Count != 0)
-            //{
-            //    throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Lote.Existente("Encontrado en la bandeja de entrada. Nombre del archivo: " + Archivo.Nombre);
-            //}
-            string loteXml = "";
-            eFact_R.RN.Lote.SerializarLc(out loteXml, Lc);
+
             lote.NumeroEnvio = numeroEnvioDisponible;
             lote.NombreArch = Archivo.Nombre;
-            lote.LoteXml = loteXml;
+          
             for (int i = 0; i < Lc.cabecera_lote.cantidad_reg; i++)
             {
                 eFact_R.Entidades.Comprobante c = new eFact_R.Entidades.Comprobante();
@@ -139,8 +131,26 @@ namespace eFact_R.RN
                     c.ImporteMonedaOrigen = Convert.ToDecimal(Lc.comprobante[i].resumen.importes_moneda_origen.importe_total_factura);
                 }
                 c.TipoCambio = Convert.ToDecimal(Lc.comprobante[i].resumen.tipo_de_cambio);
+                if (Lc.comprobante[i].extensiones != null)
+                {
+                    if (Lc.comprobante[i].extensiones.extensiones_camara_facturas != null)
+                    {
+                        if (Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion != null)
+                        {
+                            Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion = Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion.Trim();
+                            if (Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion.Length != 0 && Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion.Length != 32)
+                            {
+                                Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion = Cedeira.SV.Fun.CreateMD5Hash(Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion);
+                            }
+                        }
+                    }
+                }
                 lote.Comprobantes.Add(c);
             }
+            string loteXml = "";
+            eFact_R.RN.Lote.SerializarLc(out loteXml, Lc);
+            lote.LoteXml = loteXml;
+            
             Lote = lote;
         }
         private static DateTime ConvertirStringToDateTime(String sFecha)
