@@ -83,11 +83,19 @@
             this.XMLIFWebBrowser = new System.Windows.Forms.WebBrowser();
             this.LogTabPage = new System.Windows.Forms.TabPage();
             this.LogLoteDataGridView = new System.Windows.Forms.DataGridView();
+            this.IdLog = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EventoDescr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UsuarioNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Comentario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SupervisorNivel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.IdNivSeg = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Grupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EventosPosiblesTabPage = new System.Windows.Forms.TabPage();
             this.EsquemaSegEventosPosiblesTreeView = new System.Windows.Forms.TreeView();
             this.PiePanel = new System.Windows.Forms.Panel();
             this.BotonesPanel = new System.Windows.Forms.Panel();
-            this.CancelarButton = new System.Windows.Forms.Button();
             this.ExportarComprobanteButton = new System.Windows.Forms.Button();
             this.ConsultarComprobanteButton = new System.Windows.Forms.Button();
             this.ConsultarLoteIFButton = new System.Windows.Forms.Button();
@@ -113,15 +121,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.IdLog = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EventoDescr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UsuarioNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Comentario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SupervisorNivel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.IdNivSeg = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Grupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ActualizarButton = new System.Windows.Forms.Button();
+            this.CancelarButton = new System.Windows.Forms.Button();
             this.PpalPanel.SuspendLayout();
             this.DetPanel.SuspendLayout();
             this.SplitContainer.Panel1.SuspendLayout();
@@ -502,6 +503,86 @@
             this.LogLoteDataGridView.DoubleClick += new System.EventHandler(this.LogLoteDataGridView_DoubleClick);
             this.LogLoteDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.LogLoteDataGridView_DataError);
             // 
+            // IdLog
+            // 
+            this.IdLog.DataPropertyName = "IdLog";
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.IdLog.DefaultCellStyle = dataGridViewCellStyle18;
+            this.IdLog.HeaderText = "Id.Log";
+            this.IdLog.Name = "IdLog";
+            this.IdLog.Width = 80;
+            // 
+            // EventoDescr
+            // 
+            this.EventoDescr.DataPropertyName = "EventoDescr";
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.EventoDescr.DefaultCellStyle = dataGridViewCellStyle19;
+            this.EventoDescr.HeaderText = "Evento";
+            this.EventoDescr.Name = "EventoDescr";
+            this.EventoDescr.Width = 180;
+            // 
+            // UsuarioNombre
+            // 
+            this.UsuarioNombre.DataPropertyName = "UsuarioNombre";
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.UsuarioNombre.DefaultCellStyle = dataGridViewCellStyle20;
+            this.UsuarioNombre.HeaderText = "Usuario";
+            this.UsuarioNombre.Name = "UsuarioNombre";
+            // 
+            // Fecha
+            // 
+            this.Fecha.DataPropertyName = "Fecha";
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.Fecha.DefaultCellStyle = dataGridViewCellStyle21;
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            // 
+            // Estado
+            // 
+            this.Estado.DataPropertyName = "Estado";
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.Estado.DefaultCellStyle = dataGridViewCellStyle22;
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.Width = 150;
+            // 
+            // Comentario
+            // 
+            this.Comentario.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Comentario.DataPropertyName = "Comentario";
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.Comentario.DefaultCellStyle = dataGridViewCellStyle23;
+            this.Comentario.HeaderText = "Comentario";
+            this.Comentario.Name = "Comentario";
+            this.Comentario.Width = 600;
+            // 
+            // SupervisorNivel
+            // 
+            this.SupervisorNivel.DataPropertyName = "SupervisorNivel";
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle24.NullValue = false;
+            this.SupervisorNivel.DefaultCellStyle = dataGridViewCellStyle24;
+            this.SupervisorNivel.HeaderText = "Supervisor";
+            this.SupervisorNivel.Name = "SupervisorNivel";
+            this.SupervisorNivel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.SupervisorNivel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.SupervisorNivel.Width = 80;
+            // 
+            // IdNivSeg
+            // 
+            this.IdNivSeg.DataPropertyName = "IdNivSeg";
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.IdNivSeg.DefaultCellStyle = dataGridViewCellStyle25;
+            this.IdNivSeg.HeaderText = "Nivel Seg.";
+            this.IdNivSeg.Name = "IdNivSeg";
+            this.IdNivSeg.Width = 80;
+            // 
+            // Grupo
+            // 
+            this.Grupo.DataPropertyName = "IdGrupo";
+            this.Grupo.HeaderText = "Grupo";
+            this.Grupo.Name = "Grupo";
+            // 
             // EventosPosiblesTabPage
             // 
             this.EventosPosiblesTabPage.Controls.Add(this.EsquemaSegEventosPosiblesTreeView);
@@ -533,6 +614,7 @@
             // BotonesPanel
             // 
             this.BotonesPanel.Controls.Add(this.CancelarButton);
+            this.BotonesPanel.Controls.Add(this.ActualizarButton);
             this.BotonesPanel.Controls.Add(this.ExportarComprobanteButton);
             this.BotonesPanel.Controls.Add(this.ConsultarComprobanteButton);
             this.BotonesPanel.Controls.Add(this.ConsultarLoteIFButton);
@@ -543,17 +625,6 @@
             this.BotonesPanel.Padding = new System.Windows.Forms.Padding(3);
             this.BotonesPanel.Size = new System.Drawing.Size(882, 29);
             this.BotonesPanel.TabIndex = 13;
-            // 
-            // CancelarButton
-            // 
-            this.CancelarButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.CancelarButton.Location = new System.Drawing.Point(423, 3);
-            this.CancelarButton.Name = "CancelarButton";
-            this.CancelarButton.Size = new System.Drawing.Size(140, 23);
-            this.CancelarButton.TabIndex = 21;
-            this.CancelarButton.Text = "Cancelar";
-            this.CancelarButton.UseVisualStyleBackColor = true;
-            this.CancelarButton.Click += new System.EventHandler(this.CancelarButton_Click);
             // 
             // ExportarComprobanteButton
             // 
@@ -807,85 +878,26 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "IdLote: ";
             // 
-            // IdLog
+            // ActualizarButton
             // 
-            this.IdLog.DataPropertyName = "IdLog";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.IdLog.DefaultCellStyle = dataGridViewCellStyle18;
-            this.IdLog.HeaderText = "Id.Log";
-            this.IdLog.Name = "IdLog";
-            this.IdLog.Width = 80;
+            this.ActualizarButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ActualizarButton.Location = new System.Drawing.Point(423, 3);
+            this.ActualizarButton.Name = "ActualizarButton";
+            this.ActualizarButton.Size = new System.Drawing.Size(140, 23);
+            this.ActualizarButton.TabIndex = 22;
+            this.ActualizarButton.Text = "Actualizar";
+            this.ActualizarButton.UseVisualStyleBackColor = true;
+            this.ActualizarButton.Click += new System.EventHandler(this.ActualizarButton_Click);
             // 
-            // EventoDescr
+            // CancelarButton
             // 
-            this.EventoDescr.DataPropertyName = "EventoDescr";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.EventoDescr.DefaultCellStyle = dataGridViewCellStyle19;
-            this.EventoDescr.HeaderText = "Evento";
-            this.EventoDescr.Name = "EventoDescr";
-            this.EventoDescr.Width = 180;
-            // 
-            // UsuarioNombre
-            // 
-            this.UsuarioNombre.DataPropertyName = "UsuarioNombre";
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.UsuarioNombre.DefaultCellStyle = dataGridViewCellStyle20;
-            this.UsuarioNombre.HeaderText = "Usuario";
-            this.UsuarioNombre.Name = "UsuarioNombre";
-            // 
-            // Fecha
-            // 
-            this.Fecha.DataPropertyName = "Fecha";
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.Fecha.DefaultCellStyle = dataGridViewCellStyle21;
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.Name = "Fecha";
-            // 
-            // Estado
-            // 
-            this.Estado.DataPropertyName = "Estado";
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.Estado.DefaultCellStyle = dataGridViewCellStyle22;
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.Width = 150;
-            // 
-            // Comentario
-            // 
-            this.Comentario.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Comentario.DataPropertyName = "Comentario";
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.Comentario.DefaultCellStyle = dataGridViewCellStyle23;
-            this.Comentario.HeaderText = "Comentario";
-            this.Comentario.Name = "Comentario";
-            this.Comentario.Width = 600;
-            // 
-            // SupervisorNivel
-            // 
-            this.SupervisorNivel.DataPropertyName = "SupervisorNivel";
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle24.NullValue = false;
-            this.SupervisorNivel.DefaultCellStyle = dataGridViewCellStyle24;
-            this.SupervisorNivel.HeaderText = "Supervisor";
-            this.SupervisorNivel.Name = "SupervisorNivel";
-            this.SupervisorNivel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.SupervisorNivel.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.SupervisorNivel.Width = 80;
-            // 
-            // IdNivSeg
-            // 
-            this.IdNivSeg.DataPropertyName = "IdNivSeg";
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.IdNivSeg.DefaultCellStyle = dataGridViewCellStyle25;
-            this.IdNivSeg.HeaderText = "Nivel Seg.";
-            this.IdNivSeg.Name = "IdNivSeg";
-            this.IdNivSeg.Width = 80;
-            // 
-            // Grupo
-            // 
-            this.Grupo.DataPropertyName = "IdGrupo";
-            this.Grupo.HeaderText = "Grupo";
-            this.Grupo.Name = "Grupo";
+            this.CancelarButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.CancelarButton.Location = new System.Drawing.Point(563, 3);
+            this.CancelarButton.Name = "CancelarButton";
+            this.CancelarButton.Size = new System.Drawing.Size(140, 23);
+            this.CancelarButton.TabIndex = 23;
+            this.CancelarButton.Text = "Cancelar";
+            this.CancelarButton.UseVisualStyleBackColor = true;
             // 
             // ConsultaLote
             // 
@@ -963,7 +975,6 @@
         private System.Windows.Forms.WebBrowser XMLWebBrowser;
         private System.Windows.Forms.TabPage LoteXMLIFTabPage;
         private System.Windows.Forms.WebBrowser XMLIFWebBrowser;
-        private System.Windows.Forms.Button CancelarButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdLote;
         private System.Windows.Forms.DataGridViewComboBoxColumn IdTipoComprobante;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
@@ -989,6 +1000,8 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn SupervisorNivel;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdNivSeg;
         private System.Windows.Forms.DataGridViewTextBoxColumn Grupo;
+        private System.Windows.Forms.Button CancelarButton;
+        private System.Windows.Forms.Button ActualizarButton;
 
     }
 }

@@ -227,6 +227,7 @@ namespace eFact_R
                     DetalleLoteDataGridView.DataSource = new List<eFact_R.Entidades.Comprobante>();
                     DetalleLoteDataGridView.DataSource = lote.Comprobantes;
                     CancelarButton.Visible = true;
+                    ActualizarButton.Visible = true;
                     ConsultarLoteIFButton.Enabled = false;
                 }
                 else
@@ -354,8 +355,8 @@ namespace eFact_R
                 facturaRpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
 
                 IncrustarLogo();
-                GenerarCodigoBarras(lc.cabecera_lote.cuit_vendedor + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00") + lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString("0000") + lc.comprobante[0].cabecera.informacion_comprobante.cae + lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae);
-                AsignarParametros(lc.comprobante[0].resumen.importe_total_factura);
+                GenerarCodigoBarras(lcReporte.cabecera_lote.cuit_vendedor + lcReporte.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00") + lcReporte.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString("0000") + lcReporte.comprobante[0].cabecera.informacion_comprobante.cae + lcReporte.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae);
+                AsignarParametros(lcReporte.comprobante[0].resumen.importe_total_factura);
 
                 ReporteDocumento = facturaRpt;
             }
@@ -521,10 +522,19 @@ namespace eFact_R
             {
                 lc.comprobante[0].cabecera.informacion_comprador.cp = string.Empty;
             }
+            if (lc.comprobante[0].cabecera.informacion_comprador.contacto == null)
+            {
+                lc.comprobante[0].cabecera.informacion_comprador.contacto = string.Empty;
+            }
+            if (lc.comprobante[0].cabecera.informacion_comprador.email == null)
+            {
+                lc.comprobante[0].cabecera.informacion_comprador.email = string.Empty;
+            }
             for (int i = 0; i < lc.comprobante[0].resumen.impuestos.Length; i++)
             {
                 //lc.comprobante[0].resumen.impuestos[i].codigo_jurisdiccion = 0;
                 lc.comprobante[0].resumen.impuestos[i].codigo_jurisdiccionSpecified = true;
+                lc.comprobante[0].resumen.impuestos[i].importe_impuesto_moneda_origenSpecified = true;
             }
             lc.comprobante[0].resumen.cant_alicuotas_ivaSpecified = true;
             lc.comprobante[0].resumen.importe_total_impuestos_internosSpecified = true;
@@ -554,7 +564,10 @@ namespace eFact_R
             {
                 if (lc.comprobante[0].detalle.linea[i] != null)
                 {
-                    lc.comprobante[0].detalle.linea[i].importes_moneda_origen = new FeaEntidades.Reporte.lineaImportes_moneda_origen();
+                    if (lc.comprobante[0].detalle.linea[i].importes_moneda_origen == null)
+                    {
+                        lc.comprobante[0].detalle.linea[i].importes_moneda_origen = new FeaEntidades.Reporte.lineaImportes_moneda_origen();
+                    }
                     lc.comprobante[0].detalle.linea[i].importes_moneda_origen.importe_ivaSpecified = true;
                     lc.comprobante[0].detalle.linea[i].importes_moneda_origen.importe_total_articuloSpecified = true;
                     lc.comprobante[0].detalle.linea[i].importes_moneda_origen.precio_unitarioSpecified = true;
@@ -599,13 +612,14 @@ namespace eFact_R
         {
             if (code != null)
             {
+                string codigo = code + CodigoBarrasCalculoDelDigitoVerificador(code);
                 Code39 c39 = new Code39();
                 MemoryStream ms = new MemoryStream();
                 c39.FontFamilyName = "Free 3 of 9";
                 c39.FontFileName = "Facturacion\\Electronica\\Reportes\\FREE3OF9.TTF";
                 c39.FontSize = 30;
                 c39.ShowCodeString = true;
-                System.Drawing.Bitmap objBitmap = c39.GenerateBarcode(code);
+                System.Drawing.Bitmap objBitmap = c39.GenerateBarcode(codigo);
                 objBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
 
                 codigobarrasRpt = facturaRpt.OpenSubreport("CodigoBarra.rpt");
@@ -621,6 +635,53 @@ namespace eFact_R
             }
         }
 
+        private string CodigoBarrasCalculoDelDigitoVerificador(string Code)
+        {
+            //RUTINA PARA EL CALCULO DEL DIGITO VERIFICADOR
+            string respuesta = "";
+            //Se considera para efectuar el cálculo el siguiente ejemplo:
+            //01234567890
+            //Etapa 1: Comenzar desde la izquierda, sumar todos los caracteres ubicados en las posiciones
+            //impares.
+            //0 + 2 + 4 + 6 + 8 + 0 = 20
+            int codeImpar = 0;
+            for (int i = 0; i < Code.Length; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    codeImpar += Convert.ToInt32(Code.Substring(i, 1));
+                }
+            }
+            //Etapa 2: Multiplicar la suma obtenida en la etapa 1 por el número 3.
+            //20 x 3 = 60
+            codeImpar = codeImpar * 3;
+            //Etapa 3: Comenzar desde la izquierda, sumar todos los caracteres que están ubicados en las
+            //posiciones pares.
+            //1 + 3 + 5+ 7 + 9 = 25
+            int codePar = 0;
+            for (int i = 0; i < Code.Length; i++)
+            {
+                if (i % 2 != 0)
+                {
+                    codePar += Convert.ToInt32(Code.Substring(i, 1));
+                }
+            }
+            //Etapa 4: Sumar los resultados obtenidos en las etapas 2 y 3.
+            //60 + 25 = 85
+            int suma = codeImpar + codePar;
+            //Etapa 5: Buscar el menor número que sumado al resultado obtenido en la etapa 4 dé un número
+            //múltiplo de 10. Este será el valor del dígito verificador del módulo 10.
+            //85 + 5 = 90
+            for (int i = 0; i < 10; i++)
+            {
+                if ((suma + i) % 10 == 0)
+                {
+                    respuesta += i.ToString();
+                    break;
+                }
+            }
+            return respuesta;
+        }
         private void IncrustarLogo()
         {
             eFact_R.Entidades.Vendedor vendedor = new eFact_R.Entidades.Vendedor();
@@ -741,6 +802,29 @@ namespace eFact_R
             DetalleLoteDataGridView.DataSource = new List<eFact_R.Entidades.Comprobante>();
             CancelarButton.Visible = false;
             ConsultarLoteIFButton.Enabled = true;
+        }
+
+        private void ActualizarButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor = System.Windows.Forms.Cursors.WaitCursor;
+                if (modoActual == Modo.Contingencia)
+                {
+                    //Verificar si el Lote se encuentra en el estado "AceptadoBCRA" en la aplicación, en ese caso
+                    //actualizar la info de CAE y el estadoIFoAFIP de cada comprobante. De lo contrario, 
+                    //incorporar el Lote con un evento de contingencia.
+                }
+                MessageBox.Show("Lote actualizado satisfactoriamente.", "Contingencia", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Contingencia", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            }
+            finally
+            {
+                Cursor = System.Windows.Forms.Cursors.Default;
+            }
         }
     }
 }
