@@ -26,6 +26,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			descuentosGridView.EditIndex = -1;
 			descuentosGridView.DataSource = ViewState["descuentos"];
 			descuentosGridView.DataBind();
+			BindearDropDownLists();
 		}
 
 		protected void descuentosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -45,15 +46,54 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					{
 						throw new Exception("Descuento no agregado porque la descripción no puede estar vacía");
 					}
-					string auxTotal = ((TextBox)descuentosGridView.FooterRow.FindControl("txtimporte_descuento")).Text;
-					if (!auxTotal.Contains(","))
+
+					double pd = Convert.ToDouble(((TextBox)descuentosGridView.FooterRow.FindControl("txtporcentaje")).Text);
+					rd.porcentaje_descuento = pd;
+					if (!pd.Equals(0))
 					{
-						rd.importe_descuento = Convert.ToDouble(auxTotal);
+						rd.porcentaje_descuentoSpecified = true;
 					}
 					else
 					{
-						throw new Exception("Descuento no agregado porque el separador de decimales debe ser el punto");
+						rd.porcentaje_descuentoSpecified = false;
 					}
+
+					string auxTotal = ((TextBox)descuentosGridView.FooterRow.FindControl("txtimporte_descuento")).Text;
+					rd.importe_descuento = Convert.ToDouble(auxTotal);
+
+					double auxAliIVA = Convert.ToDouble(((DropDownList)descuentosGridView.FooterRow.FindControl("ddlalicuota_iva")).SelectedValue);
+					string auxDescAliIVA = ((DropDownList)descuentosGridView.FooterRow.FindControl("ddlalicuota_iva")).SelectedItem.Text;
+					if (!auxDescAliIVA.Equals(string.Empty))
+					{
+						rd.alicuota_iva_descuentoSpecified = true;
+						rd.alicuota_iva_descuento = auxAliIVA;
+					}
+					else
+					{
+						rd.alicuota_iva_descuentoSpecified = false;
+						rd.alicuota_iva_descuento = new FeaEntidades.IVA.SinInformar().Codigo;
+					}
+
+					try
+					{
+						double iid = Convert.ToDouble(((TextBox)descuentosGridView.FooterRow.FindControl("txtimporte_iva")).Text);
+						rd.importe_iva_descuento = iid;
+						if (!iid.Equals(0))
+						{
+							rd.importe_iva_descuentoSpecified = true;
+						}
+						else
+						{
+							rd.importe_iva_descuentoSpecified = false;
+						}
+					}
+					catch
+					{
+						rd.importe_iva_descuento = 0;
+						rd.importe_iva_descuentoSpecified = false;
+					}
+
+
 
 					((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"]).Add(rd);
 
@@ -73,7 +113,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 					descuentosGridView.DataSource = ViewState["descuentos"];
 					descuentosGridView.DataBind();
-
+					BindearDropDownLists();
 				}
 				catch (Exception ex)
 				{
@@ -109,6 +149,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 				descuentosGridView.DataSource = ViewState["descuentos"];
 				descuentosGridView.DataBind();
+				BindearDropDownLists();
 			}
 			catch
 			{
@@ -120,6 +161,21 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			descuentosGridView.EditIndex = e.NewEditIndex;
 			descuentosGridView.DataSource = ViewState["descuentos"];
 			descuentosGridView.DataBind();
+			BindearDropDownLists();
+
+			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_ivaEdit")).DataValueField = "Codigo";
+			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_ivaEdit")).DataTextField = "Descr";
+			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_ivaEdit")).DataSource = FeaEntidades.IVA.IVA.Lista();
+			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_ivaEdit")).DataBind();
+			try
+			{
+				ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_ivaEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"])[e.NewEditIndex].alicuota_iva_descuento.ToString());
+				li.Selected = true;
+			}
+			catch
+			{
+			}
+
 		}
 
 		protected void descuentosGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
@@ -147,19 +203,72 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				{
 					throw new Exception("Descuento no actualizado porque la descripción no puede estar vacía");
 				}
+
+				double pd = Convert.ToDouble(((TextBox)descuentosGridView.Rows[e.RowIndex].FindControl("txtporcentaje")).Text);
+				rd.porcentaje_descuento = pd;
+				if (!pd.Equals(0))
+				{
+					rd.porcentaje_descuentoSpecified = true;
+				}
+				else
+				{
+					rd.porcentaje_descuentoSpecified = false;
+				}
+
 				string auxTotal = ((TextBox)descuentosGridView.Rows[e.RowIndex].FindControl("txtimporte_descuento")).Text;
 				if (!auxTotal.Contains(","))
 				{
-					rd.importe_descuento = Convert.ToDouble(auxTotal);
+					double id=Convert.ToDouble(auxTotal);
+					if (id.Equals(0))
+					{
+						throw new Exception("El importe del impuesto global no puede informarse en 0");
+					}
+					else
+					{
+						rd.importe_descuento = id;
+					}
 				}
 				else
 				{
 					throw new Exception("Descuento no actualizado porque el separador de decimales debe ser el punto");
 				}
 
+				double auxAliIVA = Convert.ToDouble(((DropDownList)descuentosGridView.Rows[e.RowIndex].FindControl("ddlalicuota_ivaEdit")).SelectedValue);
+				string auxDescAliIVA = ((DropDownList)descuentosGridView.Rows[e.RowIndex].FindControl("ddlalicuota_ivaEdit")).SelectedItem.Text;
+				if (!auxDescAliIVA.Equals(string.Empty))
+				{
+					rd.alicuota_iva_descuentoSpecified = true;
+					rd.alicuota_iva_descuento = auxAliIVA;
+				}
+				else
+				{
+					rd.alicuota_iva_descuentoSpecified = false;
+					rd.alicuota_iva_descuento = new FeaEntidades.IVA.SinInformar().Codigo;
+				}
+
+				try
+				{
+					double iid = Convert.ToDouble(((TextBox)descuentosGridView.Rows[e.RowIndex].FindControl("txtimporte_iva")).Text);
+					rd.importe_iva_descuento = iid;
+					if (!iid.Equals(0))
+					{
+						rd.importe_iva_descuentoSpecified = true;
+					}
+					else
+					{
+						rd.importe_iva_descuentoSpecified = false;
+					}
+				}
+				catch
+				{
+					rd.importe_iva_descuento = 0;
+					rd.importe_iva_descuentoSpecified = false;
+				}
+
 				descuentosGridView.EditIndex = -1;
 				descuentosGridView.DataSource = ViewState["descuentos"];
 				descuentosGridView.DataBind();
+				BindearDropDownLists();
 			}
 			catch (Exception ex)
 			{
@@ -178,6 +287,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					{
 						r.importe_descuento = r.importe_descuento_moneda_origen;
 					}
+					if (r.importe_iva_descuento_moneda_origenSpecified)
+					{
+						r.importe_iva_descuento = r.importe_iva_descuento_moneda_origen;
+					}
 					descuentos.Add(r);
 				}
 			}
@@ -187,6 +300,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 			descuentosGridView.DataSource = descuentos;
 			descuentosGridView.DataBind();
+			BindearDropDownLists();
 			ViewState["descuentos"] = descuentos;
 		}
 		public void ResetearGrillas()
@@ -239,10 +353,17 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		{
 			if (descuentosGridView.FooterRow != null)
 			{
-				//((DropDownList)descuentosGridView.FooterRow.FindControl("ddlcodigo_de_permiso")).DataValueField = "Codigo";
-				//((DropDownList)descuentosGridView.FooterRow.FindControl("ddlcodigo_de_permiso")).DataTextField = "Descr";
-				//((DropDownList)descuentosGridView.FooterRow.FindControl("ddlcodigo_de_permiso")).DataSource = FeaEntidades.DestinosPais.DestinoPais.ListaSinInformar();
-				//((DropDownList)descuentosGridView.FooterRow.FindControl("ddlcodigo_de_permiso")).DataBind();
+				((DropDownList)descuentosGridView.FooterRow.FindControl("ddlalicuota_iva")).DataValueField = "Codigo";
+				((DropDownList)descuentosGridView.FooterRow.FindControl("ddlalicuota_iva")).DataTextField = "Descr";
+				((DropDownList)descuentosGridView.FooterRow.FindControl("ddlalicuota_iva")).DataSource = FeaEntidades.IVA.IVA.Lista();
+				((DropDownList)descuentosGridView.FooterRow.FindControl("ddlalicuota_iva")).DataBind();
+			}
+			if (!descuentosGridView.EditIndex.Equals(-1))
+			{
+				((DropDownList)descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("ddlalicuota_ivaEdit")).DataValueField = "Codigo";
+				((DropDownList)descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("ddlalicuota_ivaEdit")).DataTextField = "Descr";
+				((DropDownList)descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("ddlalicuota_ivaEdit")).DataSource = FeaEntidades.IVA.IVA.Lista();
+				((DropDownList)descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("ddlalicuota_ivaEdit")).DataBind();
 			}
 		}
 
@@ -274,10 +395,81 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						comp.resumen.descuentos[i].importe_descuento = Math.Round(listadedescuentos[i].importe_descuento * Convert.ToDouble(tipoDeCambio), 2);
 						comp.resumen.descuentos[i].importe_descuento_moneda_origen = listadedescuentos[i].importe_descuento;
 						comp.resumen.descuentos[i].importe_descuento_moneda_origenSpecified = true;
+						if (!comp.resumen.descuentos[i].importe_iva_descuento.Equals(0))
+						{
+							comp.resumen.descuentos[i].importe_iva_descuento = Math.Round(listadedescuentos[i].importe_iva_descuento * Convert.ToDouble(tipoDeCambio), 2);
+							comp.resumen.descuentos[i].importe_iva_descuento_moneda_origen = listadedescuentos[i].importe_iva_descuento;
+							comp.resumen.descuentos[i].importe_iva_descuento_moneda_origenSpecified = true;
+						}
 					}
 				}
 			}
 		}
-
+		protected string GetAlicuotaIVA(double alic)
+		{
+			if (alic != 99)
+			{
+				string aux = Convert.ToString(alic);
+				return aux;
+			}
+			else
+			{
+				return string.Empty;
+			}
+		}
+		protected string Formatear2Decimales(double aux)
+		{
+			return aux.ToString("0.00");
+		}
+		protected void ddlalicuota_ivaEdit_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			try
+			{
+				((AjaxControlToolkit.MaskedEditExtender)descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("importe_iva_descuentoEditMaskedEditExtender")).Enabled = false;
+				double imptot = Convert.ToDouble(((TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_descuento"))).Text);
+				double alic = Convert.ToDouble(((DropDownList)sender).SelectedValue);
+				if (!imptot.Equals(0) && !alic.Equals(99))
+				{
+					double aux = imptot * alic / 100;
+					((TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_iva"))).Text = Math.Round(aux, 2).ToString("0.00");
+				}
+				if (alic.Equals(99))
+				{
+					((TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_iva"))).Text = string.Empty;
+				}
+			}
+			catch
+			{
+			}
+			finally
+			{
+				((AjaxControlToolkit.MaskedEditExtender)descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("importe_iva_descuentoEditMaskedEditExtender")).Enabled = true;
+			}
+		}
+		protected void ddlalicuota_ivaFooter_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			try
+			{
+				((AjaxControlToolkit.MaskedEditExtender)descuentosGridView.FooterRow.FindControl("importe_iva_descuentoFooterMaskedEditExtender")).Enabled = false;
+				double imptot = Convert.ToDouble(((TextBox)(descuentosGridView.FooterRow.FindControl("txtimporte_descuento"))).Text);
+				double alic = Convert.ToDouble(((DropDownList)sender).SelectedValue);
+				if (!imptot.Equals(0) && !alic.Equals(99))
+				{
+					double aux = imptot * alic / 100;
+					((TextBox)(descuentosGridView.FooterRow.FindControl("txtimporte_iva"))).Text = Math.Round(aux, 2).ToString("0.00");
+				}
+				if (alic.Equals(99))
+				{
+					((TextBox)(descuentosGridView.FooterRow.FindControl("txtimporte_iva"))).Text = string.Empty;
+				}
+			}
+			catch
+			{
+			}
+			finally
+			{
+				((AjaxControlToolkit.MaskedEditExtender)descuentosGridView.FooterRow.FindControl("importe_iva_descuentoFooterMaskedEditExtender")).Enabled = true;
+			}
+		}
 	}
 }
