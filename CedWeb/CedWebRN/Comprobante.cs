@@ -31,6 +31,7 @@ namespace CedWebRN
             if (col.Count.Equals(1))
             {
                 objIBK.ClientCertificates.Add(col[0]);
+                System.Threading.Thread.Sleep(1000);
                 IBK.consulta_lote_comprobantes_response clcr = objIBK.getLoteFacturasConSchema(clc);
                 IBK.consulta_lote_response clr;
                 try
@@ -99,6 +100,7 @@ namespace CedWebRN
             if (col.Count.Equals(1))
             {
                 objIBK.ClientCertificates.Add(col[0]);
+                System.Threading.Thread.Sleep(1000);
                 IBK.lote_comprobantes_response lcr = objIBK.receiveFacturasConSchema(lcIBK);
 
                 string resultado = string.Empty;
@@ -162,6 +164,7 @@ namespace CedWebRN
             if (col.Count.Equals(1))
             {
                 objIBK.ClientCertificates.Add(col[0]);
+                System.Threading.Thread.Sleep(1000);
                 IBK.consulta_lote_comprobantes_response clcr = objIBK.getLoteFacturasConSchema(clc);
                 IBK.consulta_lote_response clr;
                 try
@@ -241,7 +244,7 @@ namespace CedWebRN
             {
                 //objIBK.RequestEncoding = System.Text.Encoding.GetEncoding("iso-8859-1");
                 objIBK.ClientCertificates.Add(col[0]);
-                //System.Threading.Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(1000);
                 IBK.lote_comprobantes_response lcr = objIBK.receiveFacturasConSchema(lcIBK);
                 IBK.lote_response lr = new CedWebRN.IBK.lote_response();
                 try
@@ -1148,9 +1151,15 @@ namespace CedWebRN
                     if (lc.comprobante[i].extensiones.extensiones_camara_facturas != null)
                     {
                         cIBK.extensiones.extensiones_camara_facturas = new IBK.extensionesExtensiones_camara_facturas();
-                        cIBK.extensiones.extensiones_camara_facturas.clave_de_vinculacion = lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion;
-                        cIBK.extensiones.extensiones_camara_facturas.id_idioma = lc.comprobante[i].extensiones.extensiones_camara_facturas.id_idioma;
-                        cIBK.extensiones.extensiones_camara_facturas.id_template = lc.comprobante[i].extensiones.extensiones_camara_facturas.id_template;
+                        if (lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion != null)
+                        {
+                            cIBK.extensiones.extensiones_camara_facturas.clave_de_vinculacion = lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion.Trim();
+                        }
+                        cIBK.extensiones.extensiones_camara_facturas.id_idioma = lc.comprobante[i].extensiones.extensiones_camara_facturas.id_idioma.Trim();
+                        if (lc.comprobante[i].extensiones.extensiones_camara_facturas.id_template != null)
+                        {
+                            cIBK.extensiones.extensiones_camara_facturas.id_template = lc.comprobante[i].extensiones.extensiones_camara_facturas.id_template.Trim();
+                        }
                     }
                     if (lc.comprobante[i].extensiones.extensiones_datos_comerciales != null && lc.comprobante[i].extensiones.extensiones_datos_comerciales != "")
                     {
@@ -1169,7 +1178,7 @@ namespace CedWebRN
                     if (lc.comprobante[i].extensiones.extensiones_destinatarios != null && lc.comprobante[i].extensiones.extensiones_destinatarios.email != "")
                     {
                         cIBK.extensiones.extensiones_destinatarios = new CedWebRN.IBK.extensionesExtensiones_destinatarios();
-                        cIBK.extensiones.extensiones_destinatarios.email = lc.comprobante[i].extensiones.extensiones_destinatarios.email;
+                        cIBK.extensiones.extensiones_destinatarios.email = lc.comprobante[i].extensiones.extensiones_destinatarios.email.Trim();
                         //if (lc.comprobante[i].extensiones.extensiones_destinatarios.destinatario != null)
                         //{
                         //    for (int j = 0; j < lc.comprobante[i].extensiones.extensiones_destinatarios.destinatario.Length; j++)

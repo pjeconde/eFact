@@ -37,6 +37,14 @@ namespace CedWebRN.IBK {
         private System.Threading.SendOrPostCallback getLoteFacturasConSchemaOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
+
+        protected override System.Net.WebRequest GetWebRequest(Uri uri)
+        {
+            System.Net.HttpWebRequest wr = (System.Net.HttpWebRequest)base.GetWebRequest(uri);
+            wr.KeepAlive = false;
+            wr.ServicePoint.MaxIdleTime = 1;
+            return wr;
+        }
         
         /// <remarks/>
         public FacturaWebServiceConSchema() {
@@ -3093,6 +3101,14 @@ namespace CedWebRN.IBK {
         
         private bool importe_impuesto_moneda_origenFieldSpecified;
         
+        private double base_imponibleField;
+        
+        private bool base_imponibleFieldSpecified;
+        
+        private double base_imponible_moneda_origenField;
+        
+        private bool base_imponible_moneda_origenFieldSpecified;
+        
         /// <comentarios/>
         public int codigo_impuesto {
             get {
@@ -3193,6 +3209,48 @@ namespace CedWebRN.IBK {
             }
             set {
                 this.importe_impuesto_moneda_origenFieldSpecified = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public double base_imponible {
+            get {
+                return this.base_imponibleField;
+            }
+            set {
+                this.base_imponibleField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool base_imponibleSpecified {
+            get {
+                return this.base_imponibleFieldSpecified;
+            }
+            set {
+                this.base_imponibleFieldSpecified = value;
+            }
+        }
+        
+        /// <comentarios/>
+        public double base_imponible_moneda_origen {
+            get {
+                return this.base_imponible_moneda_origenField;
+            }
+            set {
+                this.base_imponible_moneda_origenField = value;
+            }
+        }
+        
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool base_imponible_moneda_origenSpecified {
+            get {
+                return this.base_imponible_moneda_origenFieldSpecified;
+            }
+            set {
+                this.base_imponible_moneda_origenFieldSpecified = value;
             }
         }
     }
@@ -3413,7 +3471,7 @@ namespace CedWebRN.IBK {
         
         private extensionesExtensiones_camara_facturas extensiones_camara_facturasField;
         
-        private object extensiones_datos_comercialesField;
+        private string extensiones_datos_comercialesField;
         
         private string extensiones_datos_marketingField;
         
@@ -3434,7 +3492,7 @@ namespace CedWebRN.IBK {
         }
         
         /// <comentarios/>
-        public object extensiones_datos_comerciales {
+        public string extensiones_datos_comerciales {
             get {
                 return this.extensiones_datos_comercialesField;
             }

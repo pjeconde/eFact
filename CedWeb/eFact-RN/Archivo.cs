@@ -94,11 +94,9 @@ namespace eFact_RN
             int numeroEnvioDisponible = 0;
             eFact_RN.Lote.ObtenerNumeroEnvioDisponible(out numeroEnvioDisponible, lote.CuitVendedor, lote.NumeroLote, lote.PuntoVenta, Sesion);
             
-            string loteXml = "";
-            eFact_RN.Lote.SerializarLc(out loteXml, Lc);
             lote.NumeroEnvio = numeroEnvioDisponible;
             lote.NombreArch = Archivo.Nombre;
-            lote.LoteXml = loteXml;
+
             for (int i = 0; i < Lc.cabecera_lote.cantidad_reg; i++)
             {
                 eFact_Entidades.Comprobante c = new eFact_Entidades.Comprobante();
@@ -124,8 +122,26 @@ namespace eFact_RN
                     c.ImporteMonedaOrigen = Convert.ToDecimal(Lc.comprobante[i].resumen.importes_moneda_origen.importe_total_factura);
                 }
                 c.TipoCambio = Convert.ToDecimal(Lc.comprobante[i].resumen.tipo_de_cambio);
+                if (Lc.comprobante[i].extensiones != null)
+                {
+                    if (Lc.comprobante[i].extensiones.extensiones_camara_facturas != null)
+                    {
+                        if (Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion != null)
+                        {
+                            Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion = Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion.Trim();
+                            if (Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion.Length != 0 && Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion.Length != 32)
+                            {
+                                Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion = Cedeira.SV.Fun.CreateMD5Hash(Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion);
+                            }
+                        }
+                    }
+                }
                 lote.Comprobantes.Add(c);
             }
+            string loteXml = "";
+            eFact_RN.Lote.SerializarLc(out loteXml, Lc);
+            lote.LoteXml = loteXml;
+
             Lote = lote;
         }
         private static DateTime ConvertirStringToDateTime(String sFecha)

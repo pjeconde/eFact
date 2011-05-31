@@ -177,6 +177,7 @@ namespace eFact_R.RN
                             lote.ActualizarFechaEnvio(Lote, handlerEvento);
                             break;
                         case "RegAceptAFIP":
+                        case "RegActAFIP":
                             handlerEvento = Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
                             lote.ActualizarDatosCAE(Lote, handlerEvento);
                             if (eFact_R.Aplicacion.TipoItfAut == "XML")
@@ -189,6 +190,7 @@ namespace eFact_R.RN
                             }
                             break;
                         case "RegAceptAFIPO":
+                        case "RegActAFIPO":
                             handlerEvento = Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
                             lote.ActualizarDatosCAE(Lote, handlerEvento);
                             if (eFact_R.Aplicacion.TipoItfAut == "XML")
@@ -201,6 +203,7 @@ namespace eFact_R.RN
                             }
                             break;
                         case "RegAceptAFIPP":
+                        case "RegActAFIPP":
                             handlerEvento = Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
                             lote.ActualizarDatosCAE(Lote, handlerEvento);
                             if (eFact_R.Aplicacion.TipoItfAut == "XML")
@@ -210,6 +213,26 @@ namespace eFact_R.RN
                             else if (eFact_R.Aplicacion.TipoItfAut == "TXT")
                             {
                                 GuardarItfTXT(out nombreArchivoProcesado, Lote, "ROP", eFact_R.Aplicacion.ArchPathItfAut, true);
+                            }
+                            break;
+                        case "RegContAFIP":
+                        case "RegContAFIPO":
+                        case "RegContAFIPP":
+                            handlerEvento = Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
+                            DataTable dt = lote.Insertar(Lote, handlerEvento, "");
+                            Lote.IdLote = Convert.ToInt32(dt.Rows[0][0].ToString());
+                            Leer(Lote, Sesion);
+                            CedEntidades.Evento eventoAct = new CedEntidades.Evento();
+                            eventoAct = Lote.WF.EventosPosibles[0];
+                            handlerEvento = Cedeira.SV.WF.EjecutarEvento(Lote.WF, eventoAct, true);
+                            lote.ActualizarDatosCAE(Lote, handlerEvento);
+                            if (eFact_R.Aplicacion.TipoItfAut == "XML")
+                            {
+                                GuardarItfXML(out nombreArchivoProcesado, Lote, "ROK", eFact_R.Aplicacion.ArchPathItfAut, true, false);
+                            }
+                            else if (eFact_R.Aplicacion.TipoItfAut == "TXT")
+                            {
+                                GuardarItfTXT(out nombreArchivoProcesado, Lote, "ROK", eFact_R.Aplicacion.ArchPathItfAut, true);
                             }
                             break;
                         case "RegRechAFIP":
@@ -535,10 +558,17 @@ namespace eFact_R.RN
             try
             {
                 CedWebRN.Comprobante CedWebRNComprobante = new CedWebRN.Comprobante();
-                if (Lote.LoteXml != null)
+                if (Lote.LoteXml != null || Lote.LoteXmlIF != null)
                 {
                     FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
-                    eFact_R.RN.Lote.DeserializarLc(out lc, Lote, false);
+                    if (Lote.LoteXmlIF != null)
+                    {
+                        eFact_R.RN.Lote.DeserializarLc(out lc, Lote, true);
+                    }
+                    else
+                    {
+                        eFact_R.RN.Lote.DeserializarLc(out lc, Lote, false);
+                    }
                     clc.cod_interno_canal = lc.cabecera_lote.cod_interno_canal;
                     clc.cuit_canal = lc.cabecera_lote.cuit_canal;
                     clc.cuit_vendedor = lc.cabecera_lote.cuit_vendedor;
@@ -651,7 +681,14 @@ namespace eFact_R.RN
             lote.PuntoVenta = Lc.cabecera_lote.punto_de_venta.ToString();
             lote.NumeroLote = Lc.cabecera_lote.id_lote.ToString();
             lote.FechaAlta = DateTime.Now;
-            lote.FechaEnvio = ConvertirStringToDateTime(Lc.cabecera_lote.fecha_envio_lote.ToString());
+            if (Lc.cabecera_lote.fecha_envio_lote != null)
+            {
+                lote.FechaEnvio = ConvertirStringToDateTime(Lc.cabecera_lote.fecha_envio_lote.ToString());
+            }
+            else
+            {
+                lote.FechaEnvio = Convert.ToDateTime("31/12/9998");
+            }
             lote.CantidadRegistros = Convert.ToInt32(Lc.cabecera_lote.cantidad_reg.ToString());
             
             //Verificar bandeja de salida.
@@ -687,6 +724,14 @@ namespace eFact_R.RN
                 if (Lc.comprobante[i].resumen.importes_moneda_origen != null)
                 {
                     c.ImporteMonedaOrigen = Convert.ToDecimal(Lc.comprobante[i].resumen.importes_moneda_origen.importe_total_factura);
+                }
+                if (Lc.comprobante[i].cabecera.informacion_comprobante.resultado != null)
+                {
+                    c.EstadoIFoAFIP = Convert.ToString(Lc.comprobante[i].cabecera.informacion_comprobante.resultado);
+                }
+                if (Lc.comprobante[i].cabecera.informacion_comprobante.motivo != null)
+                {
+                    c.ComentarioIFoAFIP = Convert.ToString(Lc.comprobante[i].cabecera.informacion_comprobante.motivo);
                 }
                 c.TipoCambio = Convert.ToDecimal(Lc.comprobante[i].resumen.tipo_de_cambio);
                 lote.Comprobantes.Add(c);

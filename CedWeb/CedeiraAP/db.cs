@@ -860,7 +860,8 @@ namespace Cedeira.SV
 				TipoRetorno.DV,
 				Transaccion.NoAcepta,
 				sesion.CnnStr);
-			Evento.Descr = Convert.ToString(dv.Table.Rows[0]["Id"]);
+            Evento.Id = Convert.ToString(dv.Table.Rows[0]["Id"]);
+			Evento.Descr = Convert.ToString(dv.Table.Rows[0]["Descr"]);
 			Evento.TextoAccion = Convert.ToString(dv.Table.Rows[0]["TextoAccion"]);
 			Evento.IdEstadoDsd.IdEstado = Convert.ToString(dv.Table.Rows[0]["IdEstadoDsd"]);
 			Evento.IdEstadoHst.IdEstado = Convert.ToString(dv.Table.Rows[0]["IdEstadoHst"]);

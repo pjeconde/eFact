@@ -209,6 +209,7 @@
             this.ProxyAutoRadioButton.TabIndex = 22;
             this.ProxyAutoRadioButton.Text = "Automático";
             this.ProxyAutoRadioButton.UseVisualStyleBackColor = true;
+            this.ProxyAutoRadioButton.Visible = false;
             this.ProxyAutoRadioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
             // ProxyManualRadioButton
@@ -234,6 +235,7 @@
             this.ProxyAutoPanel.Name = "ProxyAutoPanel";
             this.ProxyAutoPanel.Size = new System.Drawing.Size(274, 166);
             this.ProxyAutoPanel.TabIndex = 20;
+            this.ProxyAutoPanel.Visible = false;
             // 
             // label4
             // 
