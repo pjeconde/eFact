@@ -1,4 +1,5 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Descuentos.ascx.cs" Inherits="CedeiraAJAX.Facturacion.Electronica.Descuentos" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
 	<tr>
@@ -44,49 +45,113 @@
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:TextBox ID="txtdescripcion" runat="server" Text='<%# Eval("descripcion_descuento") %>'
-										Width="90%"></asp:TextBox>
+										Width="80%"></asp:TextBox>
 									<asp:RequiredFieldValidator ID="txtdescripcionEditItemRequiredFieldValidator" runat="server"
 										ControlToValidate="txtdescripcion" ErrorMessage="Descripción del descuento global en edición no informada"
 										SetFocusOnError="True" ValidationGroup="DescuentosGlobalesEditItem">*</asp:RequiredFieldValidator>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:TextBox ID="txtdescripcion" runat="server" Text='' Width="90%"></asp:TextBox>
+									<asp:TextBox ID="txtdescripcion" runat="server" Text='' Width="80%"></asp:TextBox>
 									<asp:RequiredFieldValidator ID="txtdescripcionFooterRequiredFieldValidator" runat="server"
 										ControlToValidate="txtdescripcion" ErrorMessage="Descripción del descuento global a agregar no informada"
 										SetFocusOnError="True" ValidationGroup="DescuentosGlobalesFooter">*</asp:RequiredFieldValidator>
 								</FooterTemplate>
-								<ItemStyle HorizontalAlign="left" />
-								<FooterStyle HorizontalAlign="left" />
+								<ItemStyle HorizontalAlign="Left" />
+								<FooterStyle HorizontalAlign="Left" />
+								<HeaderStyle Width="200px" />
 							</asp:TemplateField>
-							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe total">
+							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Porcentaje del descuento">
+								<ItemTemplate>
+									<asp:Label ID="lblporcentaje" runat="server" Text='<%# Eval("porcentaje_descuento") %>'></asp:Label>
+								</ItemTemplate>
+								<EditItemTemplate>
+									<asp:TextBox ID="txtporcentaje" runat="server" Text='<%# Eval("porcentaje_descuento") %>'
+										Width="35px"></asp:TextBox>
+									<cc1:MaskedEditExtender ID="porcentajeEditMaskedEditExtender" runat="server" Mask="99.99"
+										MaskType="Number" TargetControlID="txtporcentaje" ClearMaskOnLostFocus="true" ></cc1:MaskedEditExtender>
+								</EditItemTemplate>
+								<FooterTemplate>
+									<asp:TextBox ID="txtporcentaje" runat="server" Text='' Width="35px"></asp:TextBox>
+									<cc1:MaskedEditExtender ID="porcentajeFooterMaskedEditExtender" runat="server" Mask="99.99"
+										MaskType="Number" TargetControlID="txtporcentaje">
+									</cc1:MaskedEditExtender>
+								</FooterTemplate>
+								<ItemStyle HorizontalAlign="Right" />
+								<FooterStyle HorizontalAlign="Right" />
+								<HeaderStyle Width="35px" />
+							</asp:TemplateField>
+							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe Dto.">
 								<ItemTemplate>
 									<asp:Label ID="lblimporte_descuento" runat="server" Text='<%# Eval("importe_descuento") %>'></asp:Label>
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:TextBox ID="txtimporte_descuento" runat="server" Text='<%# Eval("importe_descuento") %>'
-										Width="80%"></asp:TextBox>
+										Width="80px"></asp:TextBox>
 									<asp:RequiredFieldValidator ID="txtimporte_descuentoEditItemRequiredFieldValidator"
 										runat="server" ControlToValidate="txtimporte_descuento" ErrorMessage="Importe del descuento global en edición no informado"
 										SetFocusOnError="True" ValidationGroup="DescuentosGlobalesEditItem">*</asp:RequiredFieldValidator>
-									<asp:RegularExpressionValidator ID="txtimporte_descuentoEditItemRegularExpressionValidator"
-										runat="server" ControlToValidate="txtimporte_descuento" ErrorMessage="Importe total descuento global en edición mal formateado"
-										SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DescuentosGlobalesEditItem">*</asp:RegularExpressionValidator>
+									<cc1:MaskedEditExtender ID="importe_descuentoEditMaskedEditExtender" runat="server" Mask="99999999.99"
+										MaskType="Number" TargetControlID="txtimporte_descuento">
+									</cc1:MaskedEditExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:TextBox ID="txtimporte_descuento" runat="server" Text='' Width="80%"></asp:TextBox>
-									<asp:RegularExpressionValidator ID="txtimporte_descuentoFooterRegularExpressionValidator"
-										runat="server" ControlToValidate="txtimporte_descuento" ErrorMessage="Importe total descuento global a agregar mal formateado"
-										SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="DescuentosGlobalesFooter">*</asp:RegularExpressionValidator>
+									<asp:TextBox ID="txtimporte_descuento" runat="server" Text='' Width="80px"></asp:TextBox>
+									<cc1:MaskedEditExtender ID="importe_descuentoFooterMaskedEditExtender" runat="server"
+										Mask="99999999.99" MaskType="Number" TargetControlID="txtimporte_descuento">
+									</cc1:MaskedEditExtender>
 									<asp:RequiredFieldValidator ID="txtimporte_descuentoFooterRequiredFieldValidator"
 										runat="server" ControlToValidate="txtimporte_descuento" ErrorMessage="Importe total descuento global a agregar no informado"
 										SetFocusOnError="True" ValidationGroup="DescuentosGlobalesFooter">*</asp:RequiredFieldValidator>
 								</FooterTemplate>
 								<ItemStyle HorizontalAlign="Right" />
+								<FooterStyle HorizontalAlign="Right" />
+								<HeaderStyle Width="80px" />
+							</asp:TemplateField>
+							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Alícuota %">
+								<ItemTemplate>
+									<asp:Label ID="lblalicuota_iva" runat="server" Text='<%# GetAlicuotaIVA((double)Eval("alicuota_iva_descuento"))  %>'
+										Width="65px"></asp:Label>
+								</ItemTemplate>
+								<EditItemTemplate>
+									<asp:DropDownList ID="ddlalicuota_ivaEdit" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlalicuota_ivaEdit_SelectedIndexChanged"
+										Width="65px">
+									</asp:DropDownList>
+								</EditItemTemplate>
+								<FooterTemplate>
+									<asp:DropDownList ID="ddlalicuota_iva" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlalicuota_ivaFooter_SelectedIndexChanged"
+										Width="65px">
+									</asp:DropDownList>
+								</FooterTemplate>
+								<ItemStyle HorizontalAlign="Right" />
+								<FooterStyle HorizontalAlign="Right" />
+								<HeaderStyle Width="65px" />
+							</asp:TemplateField>
+							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe IVA Dto.">
+								<ItemTemplate>
+									<asp:Label ID="lblimporte_iva" runat="server" Text='<%# Eval("importe_iva_descuento") %>'></asp:Label>
+								</ItemTemplate>
+								<EditItemTemplate>
+									<asp:TextBox ID="txtimporte_iva" runat="server" Text='<%# Eval("importe_iva_descuento") %>'
+										Width="80px"></asp:TextBox>
+									<cc1:MaskedEditExtender ID="importe_iva_descuentoEditMaskedEditExtender" runat="server"
+										Mask="99999999.99" MaskType="Number" TargetControlID="txtimporte_iva" ClearMaskOnLostFocus="true" >
+									</cc1:MaskedEditExtender>
+								</EditItemTemplate>
+								<FooterTemplate>
+									<asp:TextBox ID="txtimporte_iva" runat="server" Text='' Width="80px"></asp:TextBox>
+									<cc1:MaskedEditExtender ID="importe_iva_descuentoFooterMaskedEditExtender" runat="server"
+										ClearMaskOnLostFocus="true" Mask="99999999.99" MaskType="Number" TargetControlID="txtimporte_iva">
+									</cc1:MaskedEditExtender>
+								</FooterTemplate>
+								<ItemStyle HorizontalAlign="Right" />
+								<FooterStyle HorizontalAlign="Right" />
+								<HeaderStyle Width="80px" />
 							</asp:TemplateField>
 							<asp:CommandField CancelText="Cancelar" CausesValidation="true" EditText="Editar"
 								HeaderStyle-Font-Bold="false" HeaderText="Edici&#243;n" ShowEditButton="True"
 								UpdateText="Actualizar" ValidationGroup="DescuentosGlobalesEditItem">
-								<ItemStyle HorizontalAlign="Center" />
+								<ItemStyle HorizontalAlign="Center" Width="50px" />
+								<HeaderStyle Width="50px" />
 							</asp:CommandField>
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Eliminaci&#243;n / Incorporaci&#243;n">
 								<ItemTemplate>
@@ -98,6 +163,7 @@
 										ValidationGroup="DescuentosGlobalesFooter">Agregar</asp:LinkButton>
 								</FooterTemplate>
 								<ItemStyle HorizontalAlign="Center" />
+								<HeaderStyle Width="80px" />
 							</asp:TemplateField>
 						</Columns>
 					</asp:GridView>
