@@ -45,6 +45,7 @@ namespace eFact_Tester
                 {
                     throw new Exception("Ingresar el Nro.Serie del Certificado.");
                 }
+                proxy = Proxy;
                 if (Proxy != null)
                 {
                     wp = new System.Net.WebProxy(Proxy.Servidor, false);

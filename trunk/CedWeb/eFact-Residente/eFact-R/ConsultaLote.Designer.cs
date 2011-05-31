@@ -96,6 +96,8 @@
             this.EsquemaSegEventosPosiblesTreeView = new System.Windows.Forms.TreeView();
             this.PiePanel = new System.Windows.Forms.Panel();
             this.BotonesPanel = new System.Windows.Forms.Panel();
+            this.CancelarButton = new System.Windows.Forms.Button();
+            this.ActualizarButton = new System.Windows.Forms.Button();
             this.ExportarComprobanteButton = new System.Windows.Forms.Button();
             this.ConsultarComprobanteButton = new System.Windows.Forms.Button();
             this.ConsultarLoteIFButton = new System.Windows.Forms.Button();
@@ -121,8 +123,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.ActualizarButton = new System.Windows.Forms.Button();
-            this.CancelarButton = new System.Windows.Forms.Button();
             this.PpalPanel.SuspendLayout();
             this.DetPanel.SuspendLayout();
             this.SplitContainer.Panel1.SuspendLayout();
@@ -626,6 +626,28 @@
             this.BotonesPanel.Size = new System.Drawing.Size(882, 29);
             this.BotonesPanel.TabIndex = 13;
             // 
+            // CancelarButton
+            // 
+            this.CancelarButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.CancelarButton.Location = new System.Drawing.Point(563, 3);
+            this.CancelarButton.Name = "CancelarButton";
+            this.CancelarButton.Size = new System.Drawing.Size(140, 23);
+            this.CancelarButton.TabIndex = 23;
+            this.CancelarButton.Text = "Cancelar";
+            this.CancelarButton.UseVisualStyleBackColor = true;
+            this.CancelarButton.Click += new System.EventHandler(this.CancelarButton_Click);
+            // 
+            // ActualizarButton
+            // 
+            this.ActualizarButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ActualizarButton.Location = new System.Drawing.Point(423, 3);
+            this.ActualizarButton.Name = "ActualizarButton";
+            this.ActualizarButton.Size = new System.Drawing.Size(140, 23);
+            this.ActualizarButton.TabIndex = 22;
+            this.ActualizarButton.Text = "Actualizar";
+            this.ActualizarButton.UseVisualStyleBackColor = true;
+            this.ActualizarButton.Click += new System.EventHandler(this.ActualizarButton_Click);
+            // 
             // ExportarComprobanteButton
             // 
             this.ExportarComprobanteButton.Dock = System.Windows.Forms.DockStyle.Left;
@@ -877,27 +899,6 @@
             this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "IdLote: ";
-            // 
-            // ActualizarButton
-            // 
-            this.ActualizarButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ActualizarButton.Location = new System.Drawing.Point(423, 3);
-            this.ActualizarButton.Name = "ActualizarButton";
-            this.ActualizarButton.Size = new System.Drawing.Size(140, 23);
-            this.ActualizarButton.TabIndex = 22;
-            this.ActualizarButton.Text = "Actualizar";
-            this.ActualizarButton.UseVisualStyleBackColor = true;
-            this.ActualizarButton.Click += new System.EventHandler(this.ActualizarButton_Click);
-            // 
-            // CancelarButton
-            // 
-            this.CancelarButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.CancelarButton.Location = new System.Drawing.Point(563, 3);
-            this.CancelarButton.Name = "CancelarButton";
-            this.CancelarButton.Size = new System.Drawing.Size(140, 23);
-            this.CancelarButton.TabIndex = 23;
-            this.CancelarButton.Text = "Cancelar";
-            this.CancelarButton.UseVisualStyleBackColor = true;
             // 
             // ConsultaLote
             // 

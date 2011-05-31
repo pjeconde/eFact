@@ -336,7 +336,7 @@ namespace eFact_R.DB
             Lotes = lotes;
         }
 
-        public void Insertar(eFact_R.Entidades.Lote Lote, string HandlerEvento, string HandlerArchivo)
+        public DataTable Insertar(eFact_R.Entidades.Lote Lote, string HandlerEvento, string HandlerArchivo)
         {
             StringBuilder commandText = new StringBuilder();
             string loteXml = "";
@@ -424,8 +424,10 @@ namespace eFact_R.DB
                 }
             }
             commandText.Append(HandlerArchivo);
+            commandText.Append(" Select @IdLote ");
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.Usa, sesion.CnnStr);
+            return dt;
         }
 
         public void ActualizarDatosCAE(eFact_R.Entidades.Lote Lote, string HandlerEvento)
@@ -458,7 +460,10 @@ namespace eFact_R.DB
                 commandText.Append("where IdLote = " + Lote.IdLote + " and IdTipoComprobante = '" + Lote.Comprobantes[i].IdTipoComprobante + "' ");
                 commandText.Append("and NumeroComprobante = '" + Lote.Comprobantes[i].NumeroComprobante + "' "); 
             }
-            commandText.Append(" end");
+            if (HandlerEvento != "")
+            {
+                commandText.Append(" end");
+            }
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.Usa, sesion.CnnStr);
         }

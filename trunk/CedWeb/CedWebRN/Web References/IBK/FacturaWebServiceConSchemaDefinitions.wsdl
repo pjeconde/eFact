@@ -625,6 +625,22 @@
                       </xs:restriction>
                     </xs:simpleType>
                   </xs:element>
+                  <xs:element minOccurs="0" name="base_imponible">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:double">
+                        <xs:maxInclusive value="9999999999999.99" />
+                        <xs:minInclusive value="0" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element minOccurs="0" name="base_imponible_moneda_origen">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:double">
+                        <xs:maxInclusive value="9999999999999.99" />
+                        <xs:minInclusive value="0" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
                 </xs:sequence>
               </xs:complexType>
             </xs:element>

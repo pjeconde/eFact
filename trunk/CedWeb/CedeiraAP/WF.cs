@@ -193,10 +193,10 @@ namespace Cedeira.SV
         ///// 
         ///// </summary>
         ///// <param name="Wf"></param>
-        //public static List<CedEntidades.EsqSegEvenPos> EsquemaSegEventosPosibles(CedEntidades.WF Wf) 
-        //{  
-        //    return LeerEsquemaSegEventosPosibles(Wf);  
-        //}
+        public static List<CedEntidades.EsqSegEvenPos> EsquemaSegEventosPosibles(CedEntidades.WF Wf) 
+        {  
+            return LeerEsquemaSegEventosPosibles(Wf);  
+        }
         /// <summary>
         /// 
         /// </summary>

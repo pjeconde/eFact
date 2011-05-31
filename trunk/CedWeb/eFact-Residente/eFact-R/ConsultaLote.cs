@@ -22,7 +22,7 @@ namespace eFact_R
         CrystalDecisions.CrystalReports.Engine.ReportDocument codigobarrasRpt;
         Modo modoActual;
         DataSet dsImages = new DataSet();
-        
+        CedEntidades.Evento eventoContingencia;
         public enum Modo
         {
             Consulta,
@@ -74,18 +74,6 @@ namespace eFact_R
                 if (lote != null)
                 {
                     BindingControles();
-
-                    LogLoteDataGridView.AutoGenerateColumns = false;
-                    LogLoteDataGridView.DataSource = new List<CedEntidades.Evento>();
-                    LogLoteDataGridView.DataSource = lote.WF.Log;
-                    RN.Lote.MuestroEsquemaSegEventosPosibles(EsquemaSegEventosPosiblesTreeView, lote);
-                    LogLoteDataGridView.Refresh();
-
-                    DetalleLoteDataGridView.AutoGenerateColumns = false;
-                    DetalleLoteDataGridView.DataSource = new List<eFact_R.Entidades.Comprobante>();
-                    lote.Comprobantes.Sort(ordenarPorNroComprobante);
-                    DetalleLoteDataGridView.DataSource = lote.Comprobantes;
-                    DetalleLoteDataGridView.Refresh();
                 }
                 else
                 {
@@ -94,14 +82,13 @@ namespace eFact_R
                     CuitVendedorTextBox.ReadOnly = false;
                     PuntoVentaTextBox.ReadOnly = false;
                 }
+                ActualizarButton.Visible = false;
                 CancelarButton.Visible = false;
                 if (IdEstadoTextBox.Text != "AceptadoAFIP" && IdEstadoTextBox.Text != "AceptadoAFIPO" && IdEstadoTextBox.Text != "AceptadoAFIPP")
                 {
                     ExportarComprobanteButton.Enabled = false;
                     ConsultarComprobanteButton.Enabled = false;
                 }
-                //ConsultarComprobanteButton.Enabled = false;
-                //ExportarComprobanteButton.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -140,6 +127,19 @@ namespace eFact_R
             NombreArchTextBox.DataBindings.Add("Text", lote, "NombreArch");
             IdEstadoTextBox.DataBindings.Clear();
             IdEstadoTextBox.DataBindings.Add("Text", lote, "IdEstado");
+
+            LogLoteDataGridView.AutoGenerateColumns = false;
+            LogLoteDataGridView.DataSource = new List<CedEntidades.Evento>();
+            LogLoteDataGridView.DataSource = lote.WF.Log;
+            RN.Lote.MuestroEsquemaSegEventosPosibles(EsquemaSegEventosPosiblesTreeView, lote);
+            LogLoteDataGridView.Refresh();
+
+            DetalleLoteDataGridView.AutoGenerateColumns = false;
+            DetalleLoteDataGridView.DataSource = new List<eFact_R.Entidades.Comprobante>();
+            lote.Comprobantes.Sort(ordenarPorNroComprobante);
+            DetalleLoteDataGridView.DataSource = lote.Comprobantes;
+            DetalleLoteDataGridView.Refresh();
+
             //XML Origen
             this.XMLWebBrowser.Navigate("about:blank");
             try
@@ -182,6 +182,9 @@ namespace eFact_R
             try
             {
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
+                NumeroLoteTextBox.ReadOnly = true;
+                CuitVendedorTextBox.ReadOnly = true;
+                PuntoVentaTextBox.ReadOnly = true;
                 FeaEntidades.InterFacturas.lote_comprobantes Lc = new FeaEntidades.InterFacturas.lote_comprobantes();
                 CedWebRN.IBK.error[] respErroresLote = new CedWebRN.IBK.error[0];
                 CedWebRN.IBK.error[] respErroresComprobantes = new CedWebRN.IBK.error[0];
@@ -221,7 +224,51 @@ namespace eFact_R
                     }
                     lote.PuntoVenta = PuntoVentaTextBox.Text;
                     eFact_R.RN.Lote.ConsultarLoteIF(out Lc, out respErroresLote, out respErroresComprobantes, lote, v.NumeroSerieCertificado.ToString());
-                    eFact_R.RN.Lote.Lc2Lote(out lote, Lc, Aplicacion.Sesion);
+                    
+                    //Verificar si existe en la base de datos como AceptadaAFIP
+                    eFact_R.Entidades.Lote loteAceptadoAFIP = new eFact_R.Entidades.Lote();
+                    List<eFact_R.Entidades.Lote> lotes = new List<eFact_R.Entidades.Lote>();
+                    eFact_R.RN.Lote.Consultar(out lotes, eFact_R.RN.Tablero.TipoConsulta.SinAplicarFechas, DateTime.Today, DateTime.Today, CuitVendedorTextBox.Text, NumeroLoteTextBox.Text, PuntoVentaTextBox.Text, false, Aplicacion.Sesion);
+                    loteAceptadoAFIP = lotes.Find(delegate(eFact_R.Entidades.Lote e1) { return e1.IdEstado == "AceptadoAFIP" || e1.IdEstado == "AceptadoAFIPO" || e1.IdEstado == "AceptadoAFIPP"; });
+                    if (loteAceptadoAFIP != null && loteAceptadoAFIP.IdOp != 0)
+                    {
+                        //Verificar si cambio el XML de respuesta
+                        string loteXml = "";
+                        eFact_R.RN.Lote.SerializarLc(out loteXml, Lc);
+                        if (!(loteAceptadoAFIP.LoteXmlIF.Equals(loteXml)))
+                        {
+                            MessageBox.Show("El XML de respuesta actual, difiere del XML de respuesta obtenido en esta consulta. Si actualiza los datos, quedará registrado este último XML de respuesta.", "ATENCION", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                        }
+                        lote = loteAceptadoAFIP;
+                        lote.LoteXmlIF = loteXml;
+                    }
+                    else
+                    {
+                        eFact_R.RN.Lote.Lc2Lote(out lote, Lc, Aplicacion.Sesion);
+                        eventoContingencia = new CedEntidades.Evento();
+                        CedEntidades.Flow flow = new CedEntidades.Flow();
+                        flow.IdFlow = "eFact";
+                        eventoContingencia.Flow = flow;
+                        switch (Lc.comprobante[0].cabecera.informacion_comprobante.resultado.ToString())
+                        {
+                            case "A":
+                                eventoContingencia.Id = "RegContAFIP";
+                                break;
+                            case "O":
+                                eventoContingencia.Id = "RegContAFIPO";
+                                break;
+                            case "P":
+                                eventoContingencia.Id = "RegContAFIPP";
+                                break;
+                            default:
+                                break;
+                        }
+                        Cedeira.SV.WF.LeerEvento(eventoContingencia, Aplicacion.Sesion);
+                        lote.WF.EventosPosibles.Clear();
+                        lote.WF.EventosPosibles.Add(eventoContingencia);
+                    }
+                    lote.WF.EsquemaSegEventosPosibles = Cedeira.SV.WF.EsquemaSegEventosPosibles(lote.WF);
+                    RN.Lote.MuestroEsquemaSegEventosPosibles(EsquemaSegEventosPosiblesTreeView, lote);
                     BindingControles();
                     DetalleLoteDataGridView.AutoGenerateColumns = false;
                     DetalleLoteDataGridView.DataSource = new List<eFact_R.Entidades.Comprobante>();
@@ -363,7 +410,8 @@ namespace eFact_R
             catch (Exception ex)
             {
                 ReporteDocumento = null;
-                MessageBox.Show(ex.Message, "Problemas al procesar el comprobante", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                //MessageBox.Show(ex.Message, "Problemas al procesar el comprobante", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Reporte.ProblemasProcesando(ex);
             }
             finally
             {
@@ -435,7 +483,7 @@ namespace eFact_R
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Consulta de Comprobante", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
             }
             finally
             {
@@ -445,6 +493,7 @@ namespace eFact_R
 
         private void AsignarCamposOpcionales(FeaEntidades.Reporte.lote_comprobantes lc)
         {
+            eFact_R.RN.Engine engine = new eFact_R.RN.Engine();
             if (lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento == null)
             {
                 lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento = string.Empty;
@@ -530,11 +579,23 @@ namespace eFact_R
             {
                 lc.comprobante[0].cabecera.informacion_comprador.email = string.Empty;
             }
-            for (int i = 0; i < lc.comprobante[0].resumen.impuestos.Length; i++)
+            if (lc.comprobante[0].resumen.impuestos != null)
             {
-                //lc.comprobante[0].resumen.impuestos[i].codigo_jurisdiccion = 0;
-                lc.comprobante[0].resumen.impuestos[i].codigo_jurisdiccionSpecified = true;
-                lc.comprobante[0].resumen.impuestos[i].importe_impuesto_moneda_origenSpecified = true;
+                for (int i = 0; i < lc.comprobante[0].resumen.impuestos.Length; i++)
+                {
+                    lc.comprobante[0].resumen.impuestos[i].codigo_jurisdiccionSpecified = true;
+                    lc.comprobante[0].resumen.impuestos[i].importe_impuesto_moneda_origenSpecified = true;
+                    lc.comprobante[0].resumen.impuestos[0].porcentaje_impuestoSpecified = true;
+                }
+            }
+            else
+            {
+                //Exportacion no usa impuestos. Crear uno en cero.
+                lc.comprobante[0].resumen.impuestos = new FeaEntidades.Reporte.resumenImpuestos[1];
+                lc.comprobante[0].resumen.impuestos[0] = new FeaEntidades.Reporte.resumenImpuestos();
+                lc.comprobante[0].resumen.impuestos[0].codigo_jurisdiccionSpecified = true;
+                lc.comprobante[0].resumen.impuestos[0].importe_impuesto_moneda_origenSpecified = true;
+                lc.comprobante[0].resumen.impuestos[0].porcentaje_impuestoSpecified = true;
             }
             lc.comprobante[0].resumen.cant_alicuotas_ivaSpecified = true;
             lc.comprobante[0].resumen.importe_total_impuestos_internosSpecified = true;
@@ -556,7 +617,6 @@ namespace eFact_R
                 }
                 else
                 {
-                    eFact_R.RN.Engine engine = new eFact_R.RN.Engine();
                     lc.comprobante[0].extensiones.extensiones_datos_comerciales = engine.HexToString(lc.comprobante[0].extensiones.extensiones_datos_comerciales.ToString());
                 }
             }
@@ -564,6 +624,10 @@ namespace eFact_R
             {
                 if (lc.comprobante[0].detalle.linea[i] != null)
                 {
+                    if (lc.comprobante[0].detalle.linea[i].descripcion.Substring(0, 1) == "%")
+                    {
+                        lc.comprobante[0].detalle.linea[i].descripcion = engine.HexToString(lc.comprobante[0].detalle.linea[i].descripcion);
+                    }
                     if (lc.comprobante[0].detalle.linea[i].importes_moneda_origen == null)
                     {
                         lc.comprobante[0].detalle.linea[i].importes_moneda_origen = new FeaEntidades.Reporte.lineaImportes_moneda_origen();
@@ -788,9 +852,9 @@ namespace eFact_R
         {
             lote = new eFact_R.Entidades.Lote();
             IdLoteTextBox.Text = "";
-            //CuitVendedorTextBox.Text = "";
-            //NumeroLoteTextBox.Text = "";
-            //PuntoVentaTextBox.Text = "";
+            CuitVendedorTextBox.ReadOnly = false;
+            NumeroLoteTextBox.ReadOnly = false;
+            PuntoVentaTextBox.ReadOnly = false;
             CantidadRegistrosTextBox.Text = "";
             NumeroEnvioTextBox.Text = "";
             FechaAltaDTP.Text = "";
@@ -799,7 +863,13 @@ namespace eFact_R
             IdEstadoTextBox.Text = "";
             this.XMLWebBrowser.Navigate("about:blank");
             this.XMLIFWebBrowser.Navigate("about:blank");
-            DetalleLoteDataGridView.DataSource = new List<eFact_R.Entidades.Comprobante>();
+            DetalleLoteDataGridView.DataSource = null;
+            DetalleLoteDataGridView.Refresh();
+            LogLoteDataGridView.DataSource = null;
+            LogLoteDataGridView.Refresh();
+            EsquemaSegEventosPosiblesTreeView.Nodes.Clear();
+            EsquemaSegEventosPosiblesTreeView.Refresh();
+            ActualizarButton.Visible = false;
             CancelarButton.Visible = false;
             ConsultarLoteIFButton.Enabled = true;
         }
@@ -814,8 +884,27 @@ namespace eFact_R
                     //Verificar si el Lote se encuentra en el estado "AceptadoBCRA" en la aplicación, en ese caso
                     //actualizar la info de CAE y el estadoIFoAFIP de cada comprobante. De lo contrario, 
                     //incorporar el Lote con un evento de contingencia.
+                    if (lote.IdOp != 0)
+                    {
+                        if (MessageBox.Show("Desea actualizar los datos del lote obtenidos de Interfacturas ?", "Contingencia", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                        {
+                            //Actualizar datos CAE y resultado/motivo
+                            CedEntidades.Evento evento = new CedEntidades.Evento();
+                            evento = lote.WF.EventosPosibles[0];
+                            eFact_R.RN.Lote.Ejecutar(lote, evento, "", Aplicacion.Sesion);
+                            MessageBox.Show("Lote actualizado satisfactoriamente.", "Contingencia", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                        }
+                    }
+                    else
+                    {
+                        if (MessageBox.Show("Desea incorporar el lote obtenido de Interfacturas ?", "Contingencia", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                        {
+                            //Incorporar nuevo Lote por contingencia desde IF.
+                            eFact_R.RN.Lote.Ejecutar(lote, eventoContingencia, "", Aplicacion.Sesion);
+                            MessageBox.Show("Lote actualizado satisfactoriamente.", "Contingencia", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                        }
+                    }
                 }
-                MessageBox.Show("Lote actualizado satisfactoriamente.", "Contingencia", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
             }
             catch (Exception ex)
             {
@@ -823,6 +912,7 @@ namespace eFact_R
             }
             finally
             {
+                Cancelar();
                 Cursor = System.Windows.Forms.Cursors.Default;
             }
         }

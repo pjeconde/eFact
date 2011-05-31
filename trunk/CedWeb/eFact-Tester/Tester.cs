@@ -88,7 +88,15 @@ namespace eFact_Tester
                 CrearCertificadoYProxy();
                 string url = URLTextBox.Text;
                 //Constructor del Lote
-                eFact_Tester.Lote l = new eFact_Tester.Lote(url, certificado, proxy);
+                eFact_Tester.Lote l;
+                if (wpDefault != null)
+                {
+                    l = new eFact_Tester.Lote(url, certificado, wpDefault);
+                }
+                else
+                {
+                    l = new eFact_Tester.Lote(url, certificado, proxy);
+                }
 
                 //Crear entidad "consulta_lote_comprobantes" utilizada como primer parametro en la Consulta de Lote
                 FeaEntidades.InterFacturas.consulta_lote_comprobantes consultalotecomprobantes = new FeaEntidades.InterFacturas.consulta_lote_comprobantes();
@@ -108,6 +116,7 @@ namespace eFact_Tester
                 List<FeaEntidades.InterFacturas.error> listaNotificacionesComprobantes;
 
                 //Metodo de Consulta de Lote
+                
                 Lc = l.Consultar(consultalotecomprobantes, out listaNotificacionesLote, out listaNotificacionesComprobantes);
                 MessageBox.Show("Lote encontrado satisfactoriamente", "NOTIFICACION", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -156,7 +165,7 @@ namespace eFact_Tester
         {
             try
             {
-                System.Net.WebProxy wpDefault = new System.Net.WebProxy();
+                wpDefault = new System.Net.WebProxy();
                 wpDefault = System.Net.WebProxy.GetDefaultProxy();
                 if (wpDefault.Address == null)
                 {
@@ -165,8 +174,8 @@ namespace eFact_Tester
                 else
                 {
                     wpDefaultTextBox.Text = "URI: " + wpDefault.Address.AbsoluteUri + "\r\nPuerto: " + wpDefault.Address.Port;
-                    //wp.Credentials = System.Net.WebProxy.GetDefaultProxy().Credentials;
-                    //wp.Address = System.Net.WebProxy.GetDefaultProxy().Address;
+                    //wpDefault.Credentials = System.Net.WebProxy.GetDefaultProxy().Credentials;
+                    //wpDefault.Address = System.Net.WebProxy.GetDefaultProxy().Address;
                 }
             }
             catch (Exception ex)

@@ -188,6 +188,30 @@ namespace eFact_RN
                                 GuardarItfTXT(out nombreArchivoProcesado, Lote, "ROK", Aplicacion.ArchPathItfAut, true);
                             }
                             break;
+                        case "RegAceptAFIPO":
+                            handlerEvento = Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
+                            lote.ActualizarDatosCAE(Lote, handlerEvento);
+                            if (Aplicacion.TipoItfAut == "XML")
+                            {
+                                GuardarItfXML(out nombreArchivoProcesado, Lote, "ROO", Aplicacion.ArchPathItfAut, true, false);
+                            }
+                            else if (Aplicacion.TipoItfAut == "TXT")
+                            {
+                                GuardarItfTXT(out nombreArchivoProcesado, Lote, "ROO", Aplicacion.ArchPathItfAut, true);
+                            }
+                            break;
+                        case "RegAceptAFIPP":
+                            handlerEvento = Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
+                            lote.ActualizarDatosCAE(Lote, handlerEvento);
+                            if (Aplicacion.TipoItfAut == "XML")
+                            {
+                                GuardarItfXML(out nombreArchivoProcesado, Lote, "ROP", Aplicacion.ArchPathItfAut, true, false);
+                            }
+                            else if (Aplicacion.TipoItfAut == "TXT")
+                            {
+                                GuardarItfTXT(out nombreArchivoProcesado, Lote, "ROP", Aplicacion.ArchPathItfAut, true);
+                            }
+                            break;
                         case "RegRechAFIP":
                             handlerEvento = Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
                             lote.ActualizarDatosError(Lote, handlerEvento);

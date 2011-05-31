@@ -489,6 +489,42 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
             }
         }
     }
+    namespace Reporte
+    {
+        [Serializable]
+        public class BaseApplicationException : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+        {
+            public BaseApplicationException(string TextoError)
+                : base(TextoError)
+            {
+            }
+            public BaseApplicationException(string TextoError, Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public BaseApplicationException(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
+        public class ProblemasProcesando : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Cuentas.BaseApplicationException
+        {
+            static string TextoError = "Problemas procesando el reporte.";
+            public ProblemasProcesando()
+                : base(TextoError)
+            {
+            }
+            public ProblemasProcesando(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public ProblemasProcesando(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+    }
     namespace Servicio
     {
         [Serializable]

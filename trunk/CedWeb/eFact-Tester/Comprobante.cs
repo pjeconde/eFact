@@ -38,6 +38,7 @@ namespace eFact_Tester
             if (col.Count.Equals(1))
             {
                 objIBK.ClientCertificates.Add(col[0]);
+                System.Threading.Thread.Sleep(1000);
                 IBK.consulta_lote_comprobantes_response clcr = objIBK.getLoteFacturasConSchema(clc);
                 IBK.consulta_lote_response clr;
                 try
