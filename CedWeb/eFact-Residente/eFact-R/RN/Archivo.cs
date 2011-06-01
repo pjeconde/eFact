@@ -153,7 +153,7 @@ namespace eFact_R.RN
             
             Lote = lote;
         }
-        private static DateTime ConvertirStringToDateTime(String sFecha)
+        public static DateTime ConvertirStringToDateTime(String sFecha)
         {
             return Convert.ToDateTime(sFecha.Substring(0, 4) + "/" + sFecha.Substring(4, 2) + "/" + sFecha.Substring(6, 2));
         }

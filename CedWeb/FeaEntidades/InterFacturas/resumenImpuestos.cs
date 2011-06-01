@@ -35,6 +35,14 @@ namespace FeaEntidades.InterFacturas
 
 		private bool importe_impuesto_moneda_origenFieldSpecified;
 
+        private double base_imponibleField;
+
+        private bool base_imponibleFieldSpecified;
+
+        private double base_imponible_moneda_origenField;
+
+        private bool base_imponible_moneda_origenFieldSpecified;
+
         /// <comentarios/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string nombre_clase
@@ -177,5 +185,59 @@ namespace FeaEntidades.InterFacturas
 				this.importe_impuesto_moneda_origenFieldSpecified = value;
 			}
 		}
+
+        /// <comentarios/>
+        public double base_imponible
+        {
+            get
+            {
+                return this.base_imponibleField;
+            }
+            set
+            {
+                this.base_imponibleField = value;
+            }
+        }
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool base_imponibleSpecified
+        {
+            get
+            {
+                return this.base_imponibleFieldSpecified;
+            }
+            set
+            {
+                this.base_imponibleFieldSpecified = value;
+            }
+        }
+
+        /// <comentarios/>
+        public double base_imponible_moneda_origen
+        {
+            get
+            {
+                return this.base_imponible_moneda_origenField;
+            }
+            set
+            {
+                this.base_imponible_moneda_origenField = value;
+            }
+        }
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool base_imponible_moneda_origenSpecified
+        {
+            get
+            {
+                return this.base_imponible_moneda_origenFieldSpecified;
+            }
+            set
+            {
+                this.base_imponible_moneda_origenFieldSpecified = value;
+            }
+        }
 	}
 }

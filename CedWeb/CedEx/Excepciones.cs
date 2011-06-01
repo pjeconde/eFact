@@ -1054,6 +1054,23 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
                 {
                 }
             }
+            [Serializable]
+            public class EstadoNoPermitido : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.BaseApplicationException
+            {
+                static string TextoError = "Estado no permitido.";
+                public EstadoNoPermitido(string Descr)
+                    : base(TextoError + "\r\n\r\n" + Descr)
+                {
+                }
+                public EstadoNoPermitido(Exception inner)
+                    : base(TextoError, inner)
+                {
+                }
+                public EstadoNoPermitido(SerializationInfo info, StreamingContext context)
+                    : base(info, context)
+                {
+                }
+            }
         }
         namespace Comprobante
         {

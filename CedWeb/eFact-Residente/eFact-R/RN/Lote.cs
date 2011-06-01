@@ -425,6 +425,29 @@ namespace eFact_R.RN
                     }
                 }
 
+                
+                if (Lc.comprobante[i].resumen.descuentos != null)
+                {
+                    foreach (FeaEntidades.InterFacturas.resumenDescuentos descuento in Lc.comprobante[i].resumen.descuentos)
+                    {
+                        List<FeaEntidades.InterFacturas.resumenDescuentos> iresumenDescuentos = new List<FeaEntidades.InterFacturas.resumenDescuentos>();
+                        iresumenDescuentos.Add(descuento);
+                        e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.resumenDescuentos));
+                        e.AppendToFile(NombreProcesado, iresumenDescuentos);
+                    }
+                }
+
+                if (Lc.comprobante[i].resumen.impuestos != null)
+                {
+                    foreach (FeaEntidades.InterFacturas.resumenImpuestos impuesto in Lc.comprobante[i].resumen.impuestos)
+                    {
+                        List<FeaEntidades.InterFacturas.resumenImpuestos> iresumenImpuestos = new List<FeaEntidades.InterFacturas.resumenImpuestos>();
+                        iresumenImpuestos.Add(impuesto);
+                        e = new FileHelperEngine(typeof(FeaEntidades.InterFacturas.resumenImpuestos));
+                        e.AppendToFile(NombreProcesado, iresumenImpuestos);
+                    }
+                }
+
                 if (Lc.comprobante[i].resumen.importes_moneda_origen != null)
                 {
                     List<FeaEntidades.InterFacturas.resumenImportes_moneda_origen> iresumenImportesMonedaOrigen = new List<FeaEntidades.InterFacturas.resumenImportes_moneda_origen>();
@@ -561,7 +584,7 @@ namespace eFact_R.RN
                 if (Lote.LoteXml != null || Lote.LoteXmlIF != null)
                 {
                     FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
-                    if (Lote.LoteXmlIF != null)
+                    if (Lote.LoteXmlIF != null && Lote.LoteXmlIF != "")
                     {
                         eFact_R.RN.Lote.DeserializarLc(out lc, Lote, true);
                     }
