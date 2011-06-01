@@ -1028,7 +1028,7 @@ namespace CedWebRN
                     {
                         if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente != "")
                         {
-                            cIBK.cabecera.informacion_comprobante.informacion_exportacion.permiso_existente = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente;
+                            cIBK.cabecera.informacion_comprobante.informacion_exportacion.permiso_existente = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente.Trim();
                         }
                         else
                         {

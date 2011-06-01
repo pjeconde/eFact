@@ -241,6 +241,17 @@ namespace eFact_R
                         }
                         lote = loteAceptadoAFIP;
                         lote.LoteXmlIF = loteXml;
+                        for (int i = 0; i < lote.Comprobantes.Count; i++)
+                        {
+                            if (Lc.comprobante[i].cabecera.informacion_comprobante.cae != null)
+                            {
+                                lote.Comprobantes[i].NumeroCAE = Lc.comprobante[i].cabecera.informacion_comprobante.cae;
+                                lote.Comprobantes[i].FechaCAE = eFact_R.RN.Archivo.ConvertirStringToDateTime(Lc.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae.Trim());
+                                lote.Comprobantes[i].FechaVtoCAE = eFact_R.RN.Archivo.ConvertirStringToDateTime(Lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento_cae.Trim());
+                            }
+                            lote.Comprobantes[i].EstadoIFoAFIP = Lc.comprobante[i].cabecera.informacion_comprobante.resultado;
+                            lote.Comprobantes[i].ComentarioIFoAFIP = Lc.comprobante[i].cabecera.informacion_comprobante.motivo;
+                        }
                     }
                     else
                     {
@@ -249,7 +260,14 @@ namespace eFact_R
                         CedEntidades.Flow flow = new CedEntidades.Flow();
                         flow.IdFlow = "eFact";
                         eventoContingencia.Flow = flow;
-                        switch (Lc.comprobante[0].cabecera.informacion_comprobante.resultado.ToString())
+                        string resultado = "";
+                        string resultadoTexto = "";
+                        if (Lc.cabecera_lote.resultado != null && Lc.cabecera_lote.resultado.ToString().Trim() != "")
+                        {
+                            resultado = Lc.cabecera_lote.resultado.ToString();
+                            resultadoTexto = "\r\nEl lote consultado se encuentra en estado: " + Lc.cabecera_lote.resultado.ToString();
+                        }
+                        switch (resultado)
                         {
                             case "A":
                                 eventoContingencia.Id = "RegContAFIP";
@@ -261,6 +279,7 @@ namespace eFact_R
                                 eventoContingencia.Id = "RegContAFIPP";
                                 break;
                             default:
+                                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Lote.EstadoNoPermitido("Solo es posible operar en contingencia con lotes Aceptados por AFIP." + resultadoTexto);
                                 break;
                         }
                         Cedeira.SV.WF.LeerEvento(eventoContingencia, Aplicacion.Sesion);
