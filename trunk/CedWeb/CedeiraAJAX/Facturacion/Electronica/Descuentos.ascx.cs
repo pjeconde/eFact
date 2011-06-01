@@ -163,6 +163,16 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			descuentosGridView.DataBind();
 			BindearDropDownLists();
 
+			double aux;
+			aux = Convert.ToDouble(((System.Web.UI.WebControls.TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_iva"))).Text);
+			((System.Web.UI.WebControls.TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_iva"))).Text = aux.ToString("0.00");
+
+			aux = Convert.ToDouble(((System.Web.UI.WebControls.TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtporcentaje"))).Text);
+			((System.Web.UI.WebControls.TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtporcentaje"))).Text = aux.ToString("0.00");
+
+			aux = Convert.ToDouble(((System.Web.UI.WebControls.TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_descuento"))).Text);
+			((System.Web.UI.WebControls.TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_descuento"))).Text = aux.ToString("0.00");
+
 			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_ivaEdit")).DataValueField = "Codigo";
 			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_ivaEdit")).DataTextField = "Descr";
 			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_ivaEdit")).DataSource = FeaEntidades.IVA.IVA.Lista();
@@ -420,6 +430,18 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		protected string Formatear2Decimales(double aux)
 		{
 			return aux.ToString("0.00");
+		}
+		protected void CalcularImporteDtoEdit(object sender, EventArgs e)
+		{
+			double aux = ((Lote)this.Parent.Page).Articulos.CalcularTotalImporte();
+			aux = aux * Convert.ToDouble(((TextBox)sender).Text) / 100;
+			((TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_descuento"))).Text = Math.Round(aux, 2).ToString("0.00");
+		}
+		protected void CalcularImporteDtoFooter(object sender, EventArgs e)
+		{
+			double aux = ((Lote)this.Parent.Page).Articulos.CalcularTotalImporte();
+			aux = aux * Convert.ToDouble(((TextBox)sender).Text) / 100;
+			((TextBox)(descuentosGridView.FooterRow.FindControl("txtimporte_descuento"))).Text = Math.Round(aux, 2).ToString("0.00");
 		}
 		protected void ddlalicuota_ivaEdit_SelectedIndexChanged(object sender, EventArgs e)
 		{

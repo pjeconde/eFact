@@ -976,6 +976,21 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 		}
 
+		public double CalcularTotalImporte()
+		{
+			System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
+			double total = 0;
+			for (int i = 0; i < listadelineas.Count; i++)
+			{
+				if (listadelineas[i].descripcion == null)
+				{
+					throw new Exception("Debe informar al menos un artículo");
+				}
+				total += listadelineas[i].importe_total_articulo;
+			}
+			return total;
+		}
+
 		public FeaEntidades.InterFacturas.detalle GenerarDetalles(string MonedaComprobante, string TipoDeCambio, string TipoPtoVta, string TipoCbte)
 		{
 			FeaEntidades.InterFacturas.detalle det = new FeaEntidades.InterFacturas.detalle();
