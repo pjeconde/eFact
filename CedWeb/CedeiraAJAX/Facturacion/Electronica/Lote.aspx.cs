@@ -3865,6 +3865,12 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = -1;
 			ResetearComprador();
 		}
-
+		public Detalle Articulos
+		{
+			get
+			{
+				return this.DetalleLinea;
+			}
+		}
 	}
 }

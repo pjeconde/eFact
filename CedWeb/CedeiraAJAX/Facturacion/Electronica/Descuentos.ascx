@@ -66,12 +66,13 @@
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:TextBox ID="txtporcentaje" runat="server" Text='<%# Eval("porcentaje_descuento") %>'
-										Width="35px"></asp:TextBox>
+										Width="35px" OnTextChanged="CalcularImporteDtoEdit" AutoPostBack="true"></asp:TextBox>
 									<cc1:MaskedEditExtender ID="porcentajeEditMaskedEditExtender" runat="server" Mask="99.99"
 										MaskType="Number" TargetControlID="txtporcentaje" ClearMaskOnLostFocus="true" ></cc1:MaskedEditExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:TextBox ID="txtporcentaje" runat="server" Text='' Width="35px"></asp:TextBox>
+									<asp:TextBox ID="txtporcentaje" runat="server" AutoPostBack="true" OnTextChanged="CalcularImporteDtoFooter"
+										Text='' Width="35px"></asp:TextBox>
 									<cc1:MaskedEditExtender ID="porcentajeFooterMaskedEditExtender" runat="server" Mask="99.99"
 										MaskType="Number" TargetControlID="txtporcentaje">
 									</cc1:MaskedEditExtender>
