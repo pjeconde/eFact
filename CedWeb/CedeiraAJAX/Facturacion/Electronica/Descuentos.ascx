@@ -111,38 +111,38 @@
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="G / E / N">
 								<ItemTemplate>
 									<asp:Label ID="lblindicacion" runat="server" Text='<%# Eval("indicacion_exento_gravado_descuento")  %>'
-										Width="65px"></asp:Label>
+										Width="40px"></asp:Label>
 								</ItemTemplate>
 								<EditItemTemplate>
-									<asp:DropDownList ID="ddlindicacionEdit" runat="server" Width="45px">
+									<asp:DropDownList ID="ddlindicacionEdit" runat="server" Width="40px">
 									</asp:DropDownList>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:DropDownList ID="ddlindicacion" runat="server" Width="45px">
+									<asp:DropDownList ID="ddlindicacion" runat="server" Width="40px">
 									</asp:DropDownList>
 								</FooterTemplate>
 								<ItemStyle HorizontalAlign="Right" />
 								<FooterStyle HorizontalAlign="Right" />
-								<HeaderStyle Width="45px" />
+								<HeaderStyle Width="40px" />
 							</asp:TemplateField>
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Alícuota %">
 								<ItemTemplate>
 									<asp:Label ID="lblalicuota_iva" runat="server" Text='<%# GetAlicuotaIVA((double)Eval("alicuota_iva_descuento"))  %>'
-										Width="45px"></asp:Label>
+										Width="65px"></asp:Label>
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:DropDownList ID="ddlalicuota_ivaEdit" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlalicuota_ivaEdit_SelectedIndexChanged"
-										Width="45px">
+										Width="65px">
 									</asp:DropDownList>
 								</EditItemTemplate>
 								<FooterTemplate>
 									<asp:DropDownList ID="ddlalicuota_iva" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlalicuota_ivaFooter_SelectedIndexChanged"
-										Width="45px">
+										Width="65px">
 									</asp:DropDownList>
 								</FooterTemplate>
 								<ItemStyle HorizontalAlign="Right" />
 								<FooterStyle HorizontalAlign="Right" />
-								<HeaderStyle Width="45px" />
+								<HeaderStyle Width="65px" />
 							</asp:TemplateField>
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe IVA Dto.">
 								<ItemTemplate>
