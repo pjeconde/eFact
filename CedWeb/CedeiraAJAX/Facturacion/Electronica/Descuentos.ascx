@@ -60,7 +60,7 @@
 								<FooterStyle HorizontalAlign="Left" />
 								<HeaderStyle Width="200px" />
 							</asp:TemplateField>
-							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Porcentaje del descuento">
+							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="%">
 								<ItemTemplate>
 									<asp:Label ID="lblporcentaje" runat="server" Text='<%# Eval("porcentaje_descuento") %>'></asp:Label>
 								</ItemTemplate>
@@ -87,7 +87,7 @@
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:TextBox ID="txtimporte_descuento" runat="server" Text='<%# Eval("importe_descuento") %>'
-										Width="80px"></asp:TextBox>
+										Width="90px" ></asp:TextBox>
 									<asp:RequiredFieldValidator ID="txtimporte_descuentoEditItemRequiredFieldValidator"
 										runat="server" ControlToValidate="txtimporte_descuento" ErrorMessage="Importe del descuento global en edición no informado"
 										SetFocusOnError="True" ValidationGroup="DescuentosGlobalesEditItem">*</asp:RequiredFieldValidator>
@@ -96,7 +96,7 @@
 									</cc1:MaskedEditExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:TextBox ID="txtimporte_descuento" runat="server" Text='' Width="80px"></asp:TextBox>
+									<asp:TextBox ID="txtimporte_descuento" runat="server" Text='' Width="90px"></asp:TextBox>
 									<cc1:MaskedEditExtender ID="importe_descuentoFooterMaskedEditExtender" runat="server"
 										Mask="99999999.99" MaskType="Number" TargetControlID="txtimporte_descuento">
 									</cc1:MaskedEditExtender>
@@ -106,26 +106,43 @@
 								</FooterTemplate>
 								<ItemStyle HorizontalAlign="Right" />
 								<FooterStyle HorizontalAlign="Right" />
-								<HeaderStyle Width="80px" />
+								<HeaderStyle Width="100px" />
 							</asp:TemplateField>
-							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Alícuota %">
+							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="G / E / N">
 								<ItemTemplate>
-									<asp:Label ID="lblalicuota_iva" runat="server" Text='<%# GetAlicuotaIVA((double)Eval("alicuota_iva_descuento"))  %>'
+									<asp:Label ID="lblindicacion" runat="server" Text='<%# Eval("indicacion_exento_gravado_descuento")  %>'
 										Width="65px"></asp:Label>
 								</ItemTemplate>
 								<EditItemTemplate>
-									<asp:DropDownList ID="ddlalicuota_ivaEdit" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlalicuota_ivaEdit_SelectedIndexChanged"
-										Width="65px">
+									<asp:DropDownList ID="ddlindicacionEdit" runat="server" Width="45px">
 									</asp:DropDownList>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:DropDownList ID="ddlalicuota_iva" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlalicuota_ivaFooter_SelectedIndexChanged"
-										Width="65px">
+									<asp:DropDownList ID="ddlindicacion" runat="server" Width="45px">
 									</asp:DropDownList>
 								</FooterTemplate>
 								<ItemStyle HorizontalAlign="Right" />
 								<FooterStyle HorizontalAlign="Right" />
-								<HeaderStyle Width="65px" />
+								<HeaderStyle Width="45px" />
+							</asp:TemplateField>
+							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Alícuota %">
+								<ItemTemplate>
+									<asp:Label ID="lblalicuota_iva" runat="server" Text='<%# GetAlicuotaIVA((double)Eval("alicuota_iva_descuento"))  %>'
+										Width="45px"></asp:Label>
+								</ItemTemplate>
+								<EditItemTemplate>
+									<asp:DropDownList ID="ddlalicuota_ivaEdit" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlalicuota_ivaEdit_SelectedIndexChanged"
+										Width="45px">
+									</asp:DropDownList>
+								</EditItemTemplate>
+								<FooterTemplate>
+									<asp:DropDownList ID="ddlalicuota_iva" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlalicuota_ivaFooter_SelectedIndexChanged"
+										Width="45px">
+									</asp:DropDownList>
+								</FooterTemplate>
+								<ItemStyle HorizontalAlign="Right" />
+								<FooterStyle HorizontalAlign="Right" />
+								<HeaderStyle Width="45px" />
 							</asp:TemplateField>
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe IVA Dto.">
 								<ItemTemplate>
