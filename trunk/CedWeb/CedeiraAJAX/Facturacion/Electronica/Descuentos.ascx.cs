@@ -47,14 +47,22 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						throw new Exception("Descuento no agregado porque la descripción no puede estar vacía");
 					}
 
-					double pd = Convert.ToDouble(((TextBox)descuentosGridView.FooterRow.FindControl("txtporcentaje")).Text);
-					rd.porcentaje_descuento = pd;
-					if (!pd.Equals(0))
+					try
 					{
-						rd.porcentaje_descuentoSpecified = true;
+						double pd = Convert.ToDouble(((TextBox)descuentosGridView.FooterRow.FindControl("txtporcentaje")).Text);
+						rd.porcentaje_descuento = pd;
+						if (!pd.Equals(0))
+						{
+							rd.porcentaje_descuentoSpecified = true;
+						}
+						else
+						{
+							rd.porcentaje_descuentoSpecified = false;
+						}
 					}
-					else
+					catch
 					{
+						rd.porcentaje_descuento = 0;
 						rd.porcentaje_descuentoSpecified = false;
 					}
 
@@ -220,15 +228,23 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					throw new Exception("Descuento no actualizado porque la descripción no puede estar vacía");
 				}
 
-				double pd = Convert.ToDouble(((TextBox)descuentosGridView.Rows[e.RowIndex].FindControl("txtporcentaje")).Text);
-				rd.porcentaje_descuento = pd;
-				if (!pd.Equals(0))
+				try
 				{
-					rd.porcentaje_descuentoSpecified = true;
+					double pd = Convert.ToDouble(((TextBox)descuentosGridView.Rows[e.RowIndex].FindControl("txtporcentaje")).Text);
+					rd.porcentaje_descuento = pd;
+					if (!pd.Equals(0))
+					{
+						rd.porcentaje_descuentoSpecified = true;
+					}
+					else
+					{
+						rd.porcentaje_descuentoSpecified = false;
+					}
 				}
-				else
+				catch
 				{
 					rd.porcentaje_descuentoSpecified = false;
+					rd.porcentaje_descuento = 0;
 				}
 
 				string auxTotal = ((TextBox)descuentosGridView.Rows[e.RowIndex].FindControl("txtimporte_descuento")).Text;
@@ -408,8 +424,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					comp.resumen.descuentos[i].alicuota_iva_descuentoSpecified = listadedescuentos[i].alicuota_iva_descuentoSpecified;
 					comp.resumen.descuentos[i].descripcion_descuento = listadedescuentos[i].descripcion_descuento;
 					comp.resumen.descuentos[i].importe_iva_descuento = listadedescuentos[i].importe_iva_descuento;
-					comp.resumen.descuentos[i].importe_iva_descuento_moneda_origen = listadedescuentos[i].importe_iva_descuento_moneda_origen;
-					comp.resumen.descuentos[i].importe_iva_descuento_moneda_origenSpecified = listadedescuentos[i].importe_iva_descuento_moneda_origenSpecified;
 					comp.resumen.descuentos[i].importe_iva_descuentoSpecified = listadedescuentos[i].importe_iva_descuentoSpecified;
 					comp.resumen.descuentos[i].porcentaje_descuento = listadedescuentos[i].porcentaje_descuento;
 					comp.resumen.descuentos[i].porcentaje_descuentoSpecified = listadedescuentos[i].porcentaje_descuentoSpecified;
@@ -452,9 +466,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		}
 		protected void CalcularImporteDtoEdit(object sender, EventArgs e)
 		{
-			double aux = ((Lote)this.Parent.Page).Articulos.CalcularTotalImporte();
-			aux = aux * Convert.ToDouble(((TextBox)sender).Text) / 100;
-			((TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_descuento"))).Text = Math.Round(aux, 2).ToString("0.00");
+			try
+			{
+				double aux = ((Lote)this.Parent.Page).Articulos.CalcularTotalImporte();
+				aux = aux * Convert.ToDouble(((TextBox)sender).Text) / 100;
+				((TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_descuento"))).Text = Math.Round(aux, 2).ToString("0.00");
+			}
+			catch
+			{
+			}
 		}
 		protected void CalcularImporteDtoFooter(object sender, EventArgs e)
 		{
