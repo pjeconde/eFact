@@ -984,7 +984,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			{
 				if (listadelineas[i].descripcion == null)
 				{
-					throw new Exception("Debe informar al menos un artículo");
+					break;
 				}
 				total += listadelineas[i].importe_total_articulo;
 			}

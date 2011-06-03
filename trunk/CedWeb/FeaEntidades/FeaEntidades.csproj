@@ -1324,6 +1324,11 @@
     <Compile Include="Incoterms\FOB.cs" />
     <Compile Include="Incoterms\Incoterm.cs" />
     <Compile Include="Incoterms\SinInformar.cs" />
+    <Compile Include="Indicacion\Exento.cs" />
+    <Compile Include="Indicacion\Gravado.cs" />
+    <Compile Include="Indicacion\Indicacion.cs" />
+    <Compile Include="Indicacion\NoGravado.cs" />
+    <Compile Include="Indicacion\SinInformar.cs" />
     <Compile Include="InterFacturas\cabecera.cs" />
     <Compile Include="InterFacturas\cabecera_lote.cs" />
     <Compile Include="InterFacturas\comprobante.cs" />

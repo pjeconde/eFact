@@ -93,7 +93,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						rd.importe_iva_descuentoSpecified = false;
 					}
 
-
+					rd.indicacion_exento_gravado_descuento = ((DropDownList)descuentosGridView.FooterRow.FindControl("ddlindicacion")).SelectedValue;
 
 					((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"]).Add(rd);
 
@@ -173,13 +173,19 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			aux = Convert.ToDouble(((System.Web.UI.WebControls.TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_descuento"))).Text);
 			((System.Web.UI.WebControls.TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_descuento"))).Text = aux.ToString("0.00");
 
-			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_ivaEdit")).DataValueField = "Codigo";
-			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_ivaEdit")).DataTextField = "Descr";
-			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_ivaEdit")).DataSource = FeaEntidades.IVA.IVA.Lista();
-			((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_ivaEdit")).DataBind();
+			ListItem li;
 			try
 			{
-				ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_ivaEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"])[e.NewEditIndex].alicuota_iva_descuento.ToString());
+				li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_ivaEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"])[e.NewEditIndex].alicuota_iva_descuento.ToString());
+				li.Selected = true;
+			}
+			catch
+			{
+			}
+
+			try
+			{
+				li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacionEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"])[e.NewEditIndex].indicacion_exento_gravado_descuento.ToString());
 				li.Selected = true;
 			}
 			catch
@@ -275,6 +281,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					rd.importe_iva_descuentoSpecified = false;
 				}
 
+				rd.indicacion_exento_gravado_descuento = ((DropDownList)descuentosGridView.Rows[e.RowIndex].FindControl("ddlindicacionEdit")).SelectedValue;
+
 				descuentosGridView.EditIndex = -1;
 				descuentosGridView.DataSource = ViewState["descuentos"];
 				descuentosGridView.DataBind();
@@ -367,6 +375,11 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				((DropDownList)descuentosGridView.FooterRow.FindControl("ddlalicuota_iva")).DataTextField = "Descr";
 				((DropDownList)descuentosGridView.FooterRow.FindControl("ddlalicuota_iva")).DataSource = FeaEntidades.IVA.IVA.Lista();
 				((DropDownList)descuentosGridView.FooterRow.FindControl("ddlalicuota_iva")).DataBind();
+
+				((DropDownList)descuentosGridView.FooterRow.FindControl("ddlindicacion")).DataValueField = "Codigo";
+				((DropDownList)descuentosGridView.FooterRow.FindControl("ddlindicacion")).DataTextField = "Descr";
+				((DropDownList)descuentosGridView.FooterRow.FindControl("ddlindicacion")).DataSource = FeaEntidades.Indicacion.Indicacion.Lista();
+				((DropDownList)descuentosGridView.FooterRow.FindControl("ddlindicacion")).DataBind();
 			}
 			if (!descuentosGridView.EditIndex.Equals(-1))
 			{
@@ -374,6 +387,11 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				((DropDownList)descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("ddlalicuota_ivaEdit")).DataTextField = "Descr";
 				((DropDownList)descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("ddlalicuota_ivaEdit")).DataSource = FeaEntidades.IVA.IVA.Lista();
 				((DropDownList)descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("ddlalicuota_ivaEdit")).DataBind();
+
+				((DropDownList)descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("ddlindicacionEdit")).DataValueField = "Codigo";
+				((DropDownList)descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("ddlindicacionEdit")).DataTextField = "Descr";
+				((DropDownList)descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("ddlindicacionEdit")).DataSource = FeaEntidades.Indicacion.Indicacion.Lista();
+				((DropDownList)descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("ddlindicacionEdit")).DataBind();
 			}
 		}
 
@@ -395,6 +413,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					comp.resumen.descuentos[i].importe_iva_descuentoSpecified = listadedescuentos[i].importe_iva_descuentoSpecified;
 					comp.resumen.descuentos[i].porcentaje_descuento = listadedescuentos[i].porcentaje_descuento;
 					comp.resumen.descuentos[i].porcentaje_descuentoSpecified = listadedescuentos[i].porcentaje_descuentoSpecified;
+					comp.resumen.descuentos[i].indicacion_exento_gravado_descuento = listadedescuentos[i].indicacion_exento_gravado_descuento;
 
 					if (monedaComprobante.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
 					{
