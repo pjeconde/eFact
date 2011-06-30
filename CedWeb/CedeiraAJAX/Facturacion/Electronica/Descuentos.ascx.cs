@@ -532,5 +532,61 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				((AjaxControlToolkit.MaskedEditExtender)descuentosGridView.FooterRow.FindControl("importe_iva_descuentoFooterMaskedEditExtender")).Enabled = true;
 			}
 		}
+		public void AplicarDtosATotales(ref double totalGravado, ref double totalNoGravado, ref double total_Operaciones_Exentas, ref double totalIVA)
+		{
+			//Proceso DESCUENTOS GLOBALES
+			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> listadedescuentos = (System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"];
+			for (int i = 0; i < listadedescuentos.Count; i++)
+			{
+				if (listadedescuentos[i].descripcion_descuento != null && !listadedescuentos[i].descripcion_descuento.Equals(string.Empty))
+				{
+					switch (listadedescuentos[i].indicacion_exento_gravado_descuento)
+					{
+						case "G":
+							totalGravado -= listadedescuentos[i].importe_descuento;
+							totalIVA -= listadedescuentos[i].importe_iva_descuento;
+							break;
+						case "N":
+							totalNoGravado -= listadedescuentos[i].importe_descuento;
+							break;
+						case "E":
+							total_Operaciones_Exentas -= listadedescuentos[i].importe_descuento;
+							break;
+					}
+				}
+			}
+		}
+		internal void RestarDescuentosAImpuestosGlobales(System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> impuestos)
+		{
+			descuentos = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"]);
+			
+			System.Collections.Generic.List<FeaEntidades.IVA.IVA> listaIVA = FeaEntidades.IVA.IVA.ListaMinima();
+			double[] impivas = new double[listaIVA.Count];
+			for (int i = 0; i < descuentos.Count; i++)
+			{
+				if (descuentos[i].importe_iva_descuento != 0)
+				{
+					if (descuentos[i].alicuota_iva_descuentoSpecified)
+					{
+						FeaEntidades.IVA.IVA auxIVA=listaIVA.Find(delegate(FeaEntidades.IVA.IVA e)
+						{
+							return e.Codigo == descuentos[i].alicuota_iva_descuento;
+						});
+						FeaEntidades.InterFacturas.resumenImpuestos ri = impuestos.Find(delegate(FeaEntidades.InterFacturas.resumenImpuestos r)
+						{
+							return auxIVA.Codigo == r.porcentaje_impuesto;
+						});
+						if (ri != null)
+						{
+							ri.importe_impuesto -= descuentos[i].importe_iva_descuento;
+						}
+						else
+						{
+							ScriptManager.RegisterStartupScript(this.Parent.Page, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('La alícuota de IVA de un descuento (" + auxIVA.Codigo + ") no coincide con ninguna alícuota de los impuestos');</SCRIPT>", false);
+						}
+					}
+				}
+			}
+		}
 	}
 }

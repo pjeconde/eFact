@@ -1412,7 +1412,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					double totalGravado = 0;
 					double totalNoGravado = 0;
 					double totalIVA = 0;
-					DetalleLinea.CalcularTotalesLineas(ref totalGravado, ref totalNoGravado, ref totalIVA);
+					double total_Operaciones_Exentas = 0;
+
+					DetalleLinea.CalcularTotalesLineas(ref totalGravado, ref totalNoGravado, ref totalIVA, ref total_Operaciones_Exentas);
 					//Proceso IMPUESTOS GLOBALES
 					double total_Impuestos_Nacionales;
 					double total_Impuestos_Internos;
@@ -1436,15 +1438,18 @@ namespace CedeiraAJAX.Facturacion.Electronica
 							switch (idtipo)
 							{
 								case "Comun":
-									total = CalcularTotalesExceptoExportacion(ref totalGravado, ref totalNoGravado, totalIVA, total_Impuestos_Nacionales, total_Impuestos_Internos, total_Ingresos_Brutos, total_Impuestos_Municipales);
+									CalcularTotalesExceptoExportacion(ref totalGravado, ref totalNoGravado, totalIVA, total_Impuestos_Nacionales, total_Impuestos_Internos, total_Ingresos_Brutos, total_Impuestos_Municipales, total_Operaciones_Exentas);
 									if (CodigoConceptoDropDownList.Visible)
 									{
 										ImpuestosGlobales.EliminarImpuestosIVA();
 										ImpuestosGlobales.AgregarImpuestosIVA(DetalleLinea.Lineas);
+										//Descontar descuentos a impuestos
+										DescuentosGlobales.RestarDescuentosAImpuestosGlobales(ImpuestosGlobales.Lista);
+										ImpuestosGlobales.Actualizar(ImpuestosGlobales.Lista);
 									}
 									break;
 								case "BFiscal":
-									total = CalcularTotalesExceptoExportacion(ref totalGravado, ref totalNoGravado, totalIVA, total_Impuestos_Nacionales, total_Impuestos_Internos, total_Ingresos_Brutos, total_Impuestos_Municipales);
+									CalcularTotalesExceptoExportacion(ref totalGravado, ref totalNoGravado, totalIVA, total_Impuestos_Nacionales, total_Impuestos_Internos, total_Ingresos_Brutos, total_Impuestos_Municipales, total_Operaciones_Exentas);
 									break;
 								case "Export":
 									total = totalGravado + totalNoGravado + totalIVA;
@@ -1477,27 +1482,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 		}
 
-		private double CalcularTotalesExceptoExportacion(ref double totalGravado, ref double totalNoGravado, double totalIVA, double total_Impuestos_Nacionales, double total_Impuestos_Internos, double total_Ingresos_Brutos, double total_Impuestos_Municipales)
+		private void CalcularTotalesExceptoExportacion(ref double totalGravado, ref double totalNoGravado, double totalIVA, double total_Impuestos_Nacionales, double total_Impuestos_Internos, double total_Ingresos_Brutos, double total_Impuestos_Municipales, double total_Operaciones_Exentas)
 		{
 			double total;
-			//Proceso DESCUENTOS GLOBALES
-			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos> listadedescuentos = (System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenDescuentos>)ViewState["descuentos"];
-			for (int i = 0; i < listadedescuentos.Count; i++)
-			{
-				if (listadedescuentos[i].descripcion_descuento != null && !listadedescuentos[i].descripcion_descuento.Equals(string.Empty))
-				{
-					if (!Tipo_De_ComprobanteDropDownList.SelectedItem.Text.Equals("Facturas B"))
-					{
-						totalGravado -= listadedescuentos[i].importe_descuento;
-					}
-					else
-					{
-						totalNoGravado -= listadedescuentos[i].importe_descuento;
-					}
-				}
-			}
+			DescuentosGlobales.AplicarDtosATotales(ref totalGravado, ref totalNoGravado, ref total_Operaciones_Exentas, ref totalIVA);
 			Importe_Total_Neto_Gravado_ResumenTextBox.Text = totalGravado.ToString();
 			Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = totalNoGravado.ToString();
+			Importe_Operaciones_Exentas_ResumenTextBox.Text = total_Operaciones_Exentas.ToString();
 			if (Condicion_IVA_CompradorDropDownList.SelectedValue == (new FeaEntidades.CondicionesIVA.ResponsableNoInscripto()).Codigo.ToString() || Condicion_IVA_CompradorDropDownList.SelectedValue == (new FeaEntidades.CondicionesIVA.SujetoNoCategorizado()).Codigo.ToString())
 			{
 				Impuesto_Liq_Rni_ResumenTextBox.Text = totalIVA.ToString();
@@ -1512,8 +1503,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			Importe_Total_Impuestos_Internos_ResumenTextBox.Text = total_Impuestos_Internos.ToString();
 			total = totalGravado + totalNoGravado + totalIVA + total_Impuestos_Nacionales + total_Impuestos_Internos + total_Ingresos_Brutos + total_Impuestos_Municipales;
 			Importe_Total_Factura_ResumenTextBox.Text = total.ToString();
-			return total;
 		}
+
+		
 
 		private void CalcularImpuestos(out double total_Impuestos_Nacionales, out double total_Impuestos_Internos, out double total_Ingresos_Brutos, out double total_Impuestos_Municipales)
 		{
