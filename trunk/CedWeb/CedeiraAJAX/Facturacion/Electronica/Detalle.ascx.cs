@@ -955,7 +955,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 		}
 
-		public void CalcularTotalesLineas(ref double totalGravado, ref double totalNoGravado, ref double totalIVA)
+		public void CalcularTotalesLineas(ref double totalGravado, ref double totalNoGravado, ref double totalIVA, ref double total_Operaciones_Exentas)
 		{
 			System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
 			for (int i = 0; i < listadelineas.Count; i++)
@@ -967,6 +967,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				if (listadelineas[i].importe_iva != 0)
 				{
 					totalGravado += listadelineas[i].importe_total_articulo;
+				}
+				else if (listadelineas[i].indicacion_exento_gravado.Equals("E"))
+				{
+					total_Operaciones_Exentas += listadelineas[i].importe_total_articulo;
 				}
 				else
 				{

@@ -486,5 +486,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			ViewState["impuestos"] = impuestos;
 			BindearDropDownLists();
 		}
+
+		internal void Actualizar(System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> i)
+		{
+			impuestosGridView.DataSource = i;
+			impuestosGridView.DataBind();
+			ViewState["impuestos"] = i;
+			BindearDropDownLists();
+		}
 	}
 }
