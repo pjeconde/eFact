@@ -81,6 +81,9 @@ namespace eFact_S
                 //Actualizar Estado AFIP de los Lotes Ptes de Respuesta.
                 ActualizarEstadoAFIPLotes();
 
+                //Enviar a Interfacturas Lotes Ptes de Envío.
+                EnviarAIFLotesPtesDeEnvio();
+
                 string[] files = Directory.GetFiles(Aplicacion.ArchPath, "*.*");
                 List<eFact_Entidades.Archivo> Archivos = new List<eFact_Entidades.Archivo>();
                 foreach (string d in files)
@@ -181,6 +184,24 @@ namespace eFact_S
         private static int ordenarPorNombre(eFact_Entidades.Archivo A1, eFact_Entidades.Archivo A2)
         {
             return A1.Nombre.CompareTo(A2.Nombre);
+        }
+        private void EnviarAIFLotesPtesDeEnvio()
+        {
+            try
+            {
+                //Leer el Lote procesado.
+                List<eFact_Entidades.Lote> lotesPtesDeEnvio = new List<eFact_Entidades.Lote>();
+                eFact_RN.Lote.ConsultarXEstado(out lotesPtesDeEnvio, "'PteEnvio'", Aplicacion.Sesion);
+                foreach (eFact_Entidades.Lote l in lotesPtesDeEnvio)
+                {
+                    //Enviar el Lote a IF.
+                    EnviarAIF(l);
+                }
+            }
+            catch (Exception ex)
+            {
+                Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
+            }
         }
         private void ActualizarEstadoAFIPLotes()
         {
@@ -368,6 +389,20 @@ namespace eFact_S
                     eFact_RN.Lote.ActualizarDatosError(lote, Lr);
                     edescr = ex2.Message.Replace("'", "''");
                     EjecutarEventoBandejaS("RegRechIF", edescr, lote);
+                    //Va a revertir el rechazo (si el error es "Timed Out" hasta 10 ocurrencias.
+                    if (Lr.estado == "99" && Lr.errores_lote[0].descripcion_error.ToUpper().Trim() == "THE OPERATION HAS TIMED OUT")
+                    {
+                        eFact_Entidades.Lote loteAux = new eFact_Entidades.Lote();
+                        loteAux.IdLote = lote.IdLote;
+                        eFact_RN.Lote.Leer(loteAux, Aplicacion.Sesion);
+                        List<CedEntidades.Log> log = loteAux.WF.Log.FindAll(delegate(CedEntidades.Log e1) { return e1.Comentario.ToUpper().Trim() == "THE OPERATION HAS TIMED OUT"; });
+                        if (log != null && log.Count > 0 && log.Count < 10)
+                        {
+                            //Actualizar el WF del lote.
+                            eFact_RN.Lote.Leer(lote, Aplicacion.Sesion);
+                            EjecutarEventoBandejaS("RevertirRechIFA", "", lote);
+                        }
+                    }
                     throw new Exception(ex2.Message);
                 }
             }

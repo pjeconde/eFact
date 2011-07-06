@@ -20,6 +20,13 @@ namespace eFact_R.RN
             l.Consultar(out lotes, TipoConsulta, FechaDsd, FechaHst, CuitVendedor, NumeroLote, PuntoVenta, VerPendientes);
             Lotes = lotes;
         }
+        public static void ConsultarXEstado(out List<eFact_R.Entidades.Lote> Lotes, string ListaEstados, CedEntidades.Sesion Sesion)
+        {
+            List<eFact_R.Entidades.Lote> lotes = new List<eFact_R.Entidades.Lote>();
+            eFact_R.DB.Lote l = new eFact_R.DB.Lote(Sesion);
+            l.ConsultarXEstado(out lotes, ListaEstados);
+            Lotes = lotes;
+        }
         public static void VerificarEnviosPosteriores(bool LoteNuevo, string CuitVendedor, string NumeroLote, string PuntoVenta, int NumeroEnvio, CedEntidades.Sesion Sesion)
         {
             List<eFact_R.Entidades.Lote> lotes = new List<eFact_R.Entidades.Lote>();
@@ -584,7 +591,7 @@ namespace eFact_R.RN
                 if (Lote.LoteXml != null || Lote.LoteXmlIF != null)
                 {
                     FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
-                    if (Lote.LoteXmlIF != null && Lote.LoteXmlIF != "")
+                    if (Lote.LoteXmlIF != null && (Lote.LoteXmlIF != "" && (Lote.IdEstado != null && (Lote.IdEstado == "AceptadoAFIP" || Lote.IdEstado == "AceptadoAFIPO" || Lote.IdEstado == "AceptadoAFIPP"))))
                     {
                         eFact_R.RN.Lote.DeserializarLc(out lc, Lote, true);
                     }

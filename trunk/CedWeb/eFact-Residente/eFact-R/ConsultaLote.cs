@@ -535,8 +535,14 @@ namespace eFact_R
             {
                 lc.comprobante[0].cabecera.informacion_comprobante.motivo = "";
             }
-            lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde = "";
-            lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta = "";
+            if (lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde == null)
+            {
+                lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde = "";
+            }
+            if (lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta == null)
+            {
+                lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta = "";
+            }
             lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pagoSpecified = true;
             lc.comprobante[0].cabecera.informacion_vendedor.condicion_ingresos_brutosSpecified = true;
             lc.comprobante[0].cabecera.informacion_vendedor.condicion_IVASpecified = true;
@@ -602,9 +608,13 @@ namespace eFact_R
             {
                 for (int i = 0; i < lc.comprobante[0].resumen.impuestos.Length; i++)
                 {
+                    if (lc.comprobante[0].resumen.impuestos[i].descripcion == null)
+                    {
+                        lc.comprobante[0].resumen.impuestos[i].descripcion = "";
+                    }
                     lc.comprobante[0].resumen.impuestos[i].codigo_jurisdiccionSpecified = true;
                     lc.comprobante[0].resumen.impuestos[i].importe_impuesto_moneda_origenSpecified = true;
-                    lc.comprobante[0].resumen.impuestos[0].porcentaje_impuestoSpecified = true;
+                    lc.comprobante[0].resumen.impuestos[i].porcentaje_impuestoSpecified = true;
                 }
             }
             else
@@ -612,6 +622,7 @@ namespace eFact_R
                 //Exportacion no usa impuestos. Crear uno en cero.
                 lc.comprobante[0].resumen.impuestos = new FeaEntidades.Reporte.resumenImpuestos[1];
                 lc.comprobante[0].resumen.impuestos[0] = new FeaEntidades.Reporte.resumenImpuestos();
+                lc.comprobante[0].resumen.impuestos[0].descripcion = "";
                 lc.comprobante[0].resumen.impuestos[0].codigo_jurisdiccionSpecified = true;
                 lc.comprobante[0].resumen.impuestos[0].importe_impuesto_moneda_origenSpecified = true;
                 lc.comprobante[0].resumen.impuestos[0].porcentaje_impuestoSpecified = true;
@@ -657,6 +668,10 @@ namespace eFact_R
 
                     lc.comprobante[0].detalle.linea[i].importe_total_descuentosSpecified = true;
 
+                    if (lc.comprobante[0].detalle.linea[i].codigo_producto_vendedor == null)
+                    {
+                        lc.comprobante[0].detalle.linea[i].codigo_producto_vendedor = "";
+                    }
                     lc.comprobante[0].detalle.linea[i].precio_unitarioSpecified = true;
                     lc.comprobante[0].detalle.linea[i].importe_ivaSpecified = true;
                     if (lc.comprobante[0].detalle.linea[i].alicuota_ivaSpecified.Equals(false))

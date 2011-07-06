@@ -453,9 +453,17 @@ namespace eFact_R.DB
                 {
                     commandText.Append(", EstadoIFoAFIP = '" + Lote.Comprobantes[i].EstadoIFoAFIP + "' ");
                 }
+                else
+                {
+                    commandText.Append(", EstadoIFoAFIP = NULL ");
+                }
                 if (Lote.Comprobantes[i].ComentarioIFoAFIP != null)
                 {
                     commandText.Append(", ComentarioIFoAFIP = '" + Lote.Comprobantes[i].ComentarioIFoAFIP + "' ");
+                }
+                else
+                {
+                    commandText.Append(", ComentarioIFoAFIP = NULL ");
                 }
                 commandText.Append("where IdLote = " + Lote.IdLote + " and IdTipoComprobante = '" + Lote.Comprobantes[i].IdTipoComprobante + "' ");
                 commandText.Append("and NumeroComprobante = '" + Lote.Comprobantes[i].NumeroComprobante + "' "); 
@@ -495,6 +503,82 @@ namespace eFact_R.DB
             commandText.Append(" end");
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.Usa, sesion.CnnStr);
+        }
+
+        public void ConsultarXEstado(out List<eFact_R.Entidades.Lote> Lotes, string ListaEstados)
+        {
+            StringBuilder commandText = new StringBuilder();
+            //Query PF
+            commandText.Append("select ");
+            commandText.Append("Lotes.*, WF_Op.IdFlow ,WF_Op.IdCircuito, WF_Op.IdNivSeg, WF_Op.IdEstado, WF_Op.DescrOp, WF_Op.UltActualiz, WF_Flow.DescrFlow, WF_Circuito.DescrCircuito , WF_NivSeg.DescrNivSeg, WF_Estado.DescrEstado ");
+            commandText.Append("INTO #Lotes ");
+            commandText.Append("from Lotes ");
+            commandText.Append("inner join WF_Op on Lotes.IdOp = WF_Op.IdOp ");
+            commandText.Append("inner join WF_Flow on WF_Op.IdFlow=WF_Flow.IdFlow ");
+            commandText.Append("inner join WF_Circuito on WF_Op.IdCircuito=WF_Circuito.IdCircuito ");
+            commandText.Append("inner join WF_NivSeg on WF_Op.IdNivSeg=WF_NivSeg.IdNivSeg ");
+            commandText.Append("inner join WF_Estado on WF_Op.IdEstado=WF_Estado.IdEstado ");
+            commandText.Append("where WF_Op.IdEstado in (" + ListaEstados + ") ");
+            commandText.Append("select * from #Lotes order by IdLote Desc ");
+            commandText.Append("IF @@ROWCOUNT > 0 ");
+            commandText.Append("BEGIN ");
+            //Select Comprobantes
+            commandText.Append("select Comprobantes.* from #Lotes ");
+            commandText.Append("inner join Comprobantes on Comprobantes.IdLote = #Lotes.IdLote ");
+            //Select WF_LOG
+            commandText.Append("Select #Lotes.IdLote, ");
+            commandText.Append("WF_Log.Fecha, WF_Evento.DescrEvento as Evento, WF_Estado.DescrEstado as Estado, WCUsuarios.Nombre+' ('+WF_Log.IdUsuario+')' as Responsable, WCUsuarios.Nombre as Nombre, ");
+            commandText.Append("WF_Log.Comentario, WF_Log.IdLog, WF_Log.IdFlow, WF_Log.IdCircuito, WF_Log.IdNivSeg, WF_Log.IdGrupo, WF_Log.Supervisor, WF_Log.IdUsuario, ");
+            commandText.Append("WF_Log.SupervisorNivel, WF_Log.IdEvento, WF_Log.IdEstado, WF_Flow.DescrFlow, WF_Circuito.DescrCircuito, WCTbGrupos.Descr as DescrGrupo ");
+            commandText.Append("from #Lotes, WF_Log, WCUsuarios, WF_Evento, WF_Estado, WF_Flow, WF_Circuito, WCTbGrupos ");
+            commandText.Append("where WF_Log.IdOp = #Lotes.IdOp ");
+            commandText.Append("and WF_Log.IdUsuario=WCUsuarios.IdUsuario ");
+            commandText.Append("and WF_Log.IdFlow=WF_Evento.IdFlow ");
+            commandText.Append("and WF_Log.IdFlow=WF_Flow.IdFlow ");
+            commandText.Append("and WF_Log.IdCircuito=WF_Circuito.IdCircuito ");
+            commandText.Append("and WF_Log.IdGrupo=WCTbGrupos.IdGrupo ");
+            commandText.Append("and WF_Log.IdEvento=WF_Evento.IdEvento ");
+            commandText.Append("and WF_Log.IdEstado=WF_Estado.IdEstado ");
+            //Select Eventos Posibles del WF    
+            commandText.Append("Select #Lotes.IdLote, ");
+            commandText.Append("WF_Evento.IdFlow, IdEvento, DescrEvento, TextoAccion, IdEstadoDsd, IdEstadoHst, Automatico, CXO, XLote, WF_Flow.DescrFlow, EstadoDsd.DescrEstado as DescrEstadoDsd, EstadoHst.DescrEstado as DescrEstadoHst ");
+            commandText.Append("from #Lotes ");
+            commandText.Append("inner join WF_Evento on WF_Evento.IdFlow = #Lotes.IdFlow ");
+            commandText.Append("inner join WF_Flow on WF_Flow.IdFlow = #Lotes.IdFlow ");
+            commandText.Append("inner join WF_Estado EstadoDsd on EstadoDsd.IdEstado=WF_Evento.IdEstadoDsd ");
+            commandText.Append("inner join WF_Estado EstadoHst on EstadoHst.IdEstado=WF_Evento.IdEstadoHst ");
+            commandText.Append("where WF_Evento.IdEvento in (select IdEvento from WF_EsquemaSeg where IdCircuito = #Lotes.IdCircuito and IdFlow = #Lotes.IdFlow ) ");
+            commandText.Append("and WF_Evento.IdEstadoDsd = #Lotes.IdEstado or WF_Evento.IdEstadoDsd = '<EstadoNoFinal>' ");
+            //Select Eventos Posibles por lote
+            commandText.Append("Select #Lotes.IdLote, ");
+            commandText.Append("WF_Evento.IdFlow, IdEvento, DescrEvento, TextoAccion, IdEstadoDsd, IdEstadoHst, Automatico, CXO, XLote, WF_Flow.DescrFlow, EstadoDsd.DescrEstado as DescrEstadoDsd, EstadoHst.DescrEstado as DescrEstadoHst ");
+            commandText.Append("from #Lotes ");
+            commandText.Append("inner join WF_Evento on WF_Evento.IdFlow = #Lotes.IdFlow and WF_Evento.XLote=1 ");
+            commandText.Append("inner join WF_Flow on WF_Flow.IdFlow = #Lotes.IdFlow ");
+            commandText.Append("inner join WF_Estado EstadoDsd on EstadoDsd.IdEstado=WF_Evento.IdEstadoDsd ");
+            commandText.Append("inner join WF_Estado EstadoHst on EstadoHst.IdEstado=WF_Evento.IdEstadoHst ");
+            commandText.Append("where WF_Evento.IdEvento in (select IdEvento from WF_EsquemaSeg where IdCircuito = #Lotes.IdCircuito and IdFlow = #Lotes.IdFlow ) ");
+            commandText.Append("and WF_Evento.IdEstadoDsd = #Lotes.IdEstado or WF_Evento.IdEstadoDsd = '<EstadoNoFinal>' ");
+            commandText.Append("END ");
+            commandText.Append("DROP TABLE #Lotes ");
+            DataSet ds = new DataSet();
+            ds = (DataSet)Ejecutar(commandText.ToString(), TipoRetorno.DS, Transaccion.Usa, sesion.CnnStr);
+            List<eFact_R.Entidades.Lote> lotes = new List<eFact_R.Entidades.Lote>();
+            if (ds.Tables.Count == 0)
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.NoHayDatos();
+            }
+            else
+            {
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    eFact_R.Entidades.Lote Lote = new eFact_R.Entidades.Lote();
+                    Copiar(ds, i, Lote);
+                    Lote.WF.EsquemaSegEventosPosibles = WF_EsquemaSegEventosPosibles_qry(Lote.WF);
+                    lotes.Add(Lote);
+                }
+            }
+            Lotes = lotes;
         }
     }
 }
