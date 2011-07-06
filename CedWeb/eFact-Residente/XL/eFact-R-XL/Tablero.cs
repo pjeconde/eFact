@@ -61,7 +61,7 @@ namespace eFact_R_XL
 						{
 							FileHelpers.DataLink.ExcelStorage providerInterno = new FileHelpers.DataLink.ExcelStorage(System.Type.GetType("FeaEntidades.InterFacturas." + ((FeaEntidades.Excel.Ubicador)o).Tipo + ", FeaEntidades"));
 							providerInterno.StartRow = ((FeaEntidades.Excel.Ubicador)o).Y;
-							providerInterno.StartColumn = ((FeaEntidades.Excel.Ubicador)o).X + 1;
+							providerInterno.StartColumn = ((FeaEntidades.Excel.Ubicador)o).X;
 							providerInterno.FileName = @archivo;
 							providerInterno.SheetName = "XML";
 							Object[] oArrayInterno = (Object[])System.Array.CreateInstance(System.Type.GetType("FeaEntidades.InterFacturas." + ((FeaEntidades.Excel.Ubicador)o).Tipo + ", FeaEntidades"), 10);

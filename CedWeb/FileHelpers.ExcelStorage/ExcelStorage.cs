@@ -426,7 +426,7 @@ namespace FileHelpers.DataLink
 				this.InitExcel();
 				this.OpenWorkbook(this.mFileName);
 
-				while (CellAsString(cRow, mStartColumn) != String.Empty)
+				while (CellAsString(cRow, mStartColumn + 1) != String.Empty)
 				{
 					try
 					{

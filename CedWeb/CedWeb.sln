@@ -187,6 +187,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-Tester", "eFact-Teste
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "eFact-R-XL Instalador", "eFact-Residente\XL\Instalador\Instalador\Instalador.vdproj", "{A74ACAD3-4D05-41EC-BF68-CE554A76D5A6}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -519,6 +525,18 @@ Global
 		{B8AD562A-0C5D-4BE5-9333-8E53DF705B82}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B8AD562A-0C5D-4BE5-9333-8E53DF705B82}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B8AD562A-0C5D-4BE5-9333-8E53DF705B82}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A74ACAD3-4D05-41EC-BF68-CE554A76D5A6}.Debug|.NET.ActiveCfg = Debug
+		{A74ACAD3-4D05-41EC-BF68-CE554A76D5A6}.Debug|.NET.Build.0 = Debug
+		{A74ACAD3-4D05-41EC-BF68-CE554A76D5A6}.Debug|Any CPU.ActiveCfg = Debug
+		{A74ACAD3-4D05-41EC-BF68-CE554A76D5A6}.Debug|Any CPU.Build.0 = Debug
+		{A74ACAD3-4D05-41EC-BF68-CE554A76D5A6}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{A74ACAD3-4D05-41EC-BF68-CE554A76D5A6}.Debug|Mixed Platforms.Build.0 = Debug
+		{A74ACAD3-4D05-41EC-BF68-CE554A76D5A6}.Release|.NET.ActiveCfg = Release
+		{A74ACAD3-4D05-41EC-BF68-CE554A76D5A6}.Release|.NET.Build.0 = Release
+		{A74ACAD3-4D05-41EC-BF68-CE554A76D5A6}.Release|Any CPU.ActiveCfg = Release
+		{A74ACAD3-4D05-41EC-BF68-CE554A76D5A6}.Release|Any CPU.Build.0 = Release
+		{A74ACAD3-4D05-41EC-BF68-CE554A76D5A6}.Release|Mixed Platforms.ActiveCfg = Release
+		{A74ACAD3-4D05-41EC-BF68-CE554A76D5A6}.Release|Mixed Platforms.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
