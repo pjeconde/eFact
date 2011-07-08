@@ -152,6 +152,20 @@ namespace eFact_I_Bj
             {
                 if (ConsultaComprobantesDataGridView.SelectedRows.Count != 0)
                 {
+
+
+                    ////Actualizar lote
+                    //ms = new MemoryStream();
+                    //XmlizedString = null;
+                    //writer = new XmlTextWriter(ms, System.Text.Encoding.GetEncoding("ISO-8859-1"));
+                    //x = new System.Xml.Serialization.XmlSerializer(Lc.GetType());
+                    //x.Serialize(writer, Lc);
+                    //ms = (MemoryStream)writer.BaseStream;
+                    //XmlizedString = RN.Tablero.ByteArrayToString(ms.ToArray());
+                    //ms.Close();
+                    //Lote.LoteXmlIF = XmlizedString;
+
+
                     int renglon = ConsultaComprobantesDataGridView.SelectedRows[0].Index;
                     string nombreProcesado = "";
                     eFact_I_Bj.DB.ComprobanteBj c = new eFact_I_Bj.DB.ComprobanteBj(Aplicacion.Sesion);
