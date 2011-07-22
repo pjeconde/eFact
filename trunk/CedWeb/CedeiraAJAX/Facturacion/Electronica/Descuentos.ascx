@@ -68,13 +68,14 @@
 									<asp:TextBox ID="txtporcentaje" runat="server" Text='<%# Eval("porcentaje_descuento") %>'
 										Width="35px" OnTextChanged="CalcularImporteDtoEdit" AutoPostBack="true"></asp:TextBox>
 									<cc1:MaskedEditExtender ID="porcentajeEditMaskedEditExtender" runat="server" Mask="99.99"
-										MaskType="Number" TargetControlID="txtporcentaje" ClearMaskOnLostFocus="true" ></cc1:MaskedEditExtender>
+										MaskType="Number" TargetControlID="txtporcentaje" ClearMaskOnLostFocus="true" PromptCharacter=" " InputDirection="RightToLeft" ></cc1:MaskedEditExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
 									<asp:TextBox ID="txtporcentaje" runat="server" AutoPostBack="true" OnTextChanged="CalcularImporteDtoFooter"
 										Text='' Width="35px"></asp:TextBox>
-									<cc1:MaskedEditExtender ID="porcentajeFooterMaskedEditExtender" runat="server" Mask="99.99"
-										MaskType="Number" TargetControlID="txtporcentaje">
+									<cc1:MaskedEditExtender ID="porcentajeFooterMaskedEditExtender" runat="server" ClearMaskOnLostFocus="true"
+										InputDirection="RightToLeft" Mask="99.99" MaskType="Number" PromptCharacter=" "
+										TargetControlID="txtporcentaje">
 									</cc1:MaskedEditExtender>
 								</FooterTemplate>
 								<ItemStyle HorizontalAlign="Right" />
@@ -91,14 +92,16 @@
 									<asp:RequiredFieldValidator ID="txtimporte_descuentoEditItemRequiredFieldValidator"
 										runat="server" ControlToValidate="txtimporte_descuento" ErrorMessage="Importe del descuento global en edición no informado"
 										SetFocusOnError="True" ValidationGroup="DescuentosGlobalesEditItem">*</asp:RequiredFieldValidator>
-									<cc1:MaskedEditExtender ID="importe_descuentoEditMaskedEditExtender" runat="server" Mask="99999999.99"
-										MaskType="Number" TargetControlID="txtimporte_descuento">
+									<cc1:MaskedEditExtender ID="importe_descuentoEditMaskedEditExtender" runat="server"
+										ClearMaskOnLostFocus="true" InputDirection="RightToLeft" Mask="99999999.99" MaskType="Number"
+										PromptCharacter=" " TargetControlID="txtimporte_descuento">
 									</cc1:MaskedEditExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
 									<asp:TextBox ID="txtimporte_descuento" runat="server" Text='' Width="90px"></asp:TextBox>
 									<cc1:MaskedEditExtender ID="importe_descuentoFooterMaskedEditExtender" runat="server"
-										Mask="99999999.99" MaskType="Number" TargetControlID="txtimporte_descuento">
+										ClearMaskOnLostFocus="true" InputDirection="RightToLeft" Mask="99999999.99" MaskType="Number"
+										PromptCharacter=" " TargetControlID="txtimporte_descuento">
 									</cc1:MaskedEditExtender>
 									<asp:RequiredFieldValidator ID="txtimporte_descuentoFooterRequiredFieldValidator"
 										runat="server" ControlToValidate="txtimporte_descuento" ErrorMessage="Importe total descuento global a agregar no informado"
@@ -152,13 +155,15 @@
 									<asp:TextBox ID="txtimporte_iva" runat="server" Text='<%# Eval("importe_iva_descuento") %>'
 										Width="80px"></asp:TextBox>
 									<cc1:MaskedEditExtender ID="importe_iva_descuentoEditMaskedEditExtender" runat="server"
-										Mask="99999999.99" MaskType="Number" TargetControlID="txtimporte_iva" ClearMaskOnLostFocus="true" >
+										ClearMaskOnLostFocus="true" InputDirection="RightToLeft" Mask="99999999.99" MaskType="Number"
+										PromptCharacter=" " TargetControlID="txtimporte_iva" >
 									</cc1:MaskedEditExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
 									<asp:TextBox ID="txtimporte_iva" runat="server" Text='' Width="80px"></asp:TextBox>
 									<cc1:MaskedEditExtender ID="importe_iva_descuentoFooterMaskedEditExtender" runat="server"
-										ClearMaskOnLostFocus="true" Mask="99999999.99" MaskType="Number" TargetControlID="txtimporte_iva">
+										ClearMaskOnLostFocus="true" InputDirection="RightToLeft" Mask="99999999.99" MaskType="Number"
+										PromptCharacter=" " TargetControlID="txtimporte_iva"  >
 									</cc1:MaskedEditExtender>
 								</FooterTemplate>
 								<ItemStyle HorizontalAlign="Right" />

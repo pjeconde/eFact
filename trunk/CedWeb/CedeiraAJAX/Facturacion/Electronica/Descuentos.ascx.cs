@@ -471,6 +471,16 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				double aux = ((Lote)this.Parent.Page).Articulos.CalcularTotalImporte();
 				aux = aux * Convert.ToDouble(((TextBox)sender).Text) / 100;
 				((TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_descuento"))).Text = Math.Round(aux, 2).ToString("0.00");
+				string auxImpIVAString = ((DropDownList)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("ddlalicuota_ivaEdit"))).SelectedValue;
+				if (!auxImpIVAString.Equals("99"))
+				{
+					double auxImpIVA = aux * Convert.ToDouble(auxImpIVAString);
+					((TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_iva"))).Text = Math.Round(auxImpIVA / 100, 2).ToString("0.00");
+				}
+				else
+				{
+					((TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_iva"))).Text = "";
+				}
 			}
 			catch
 			{
@@ -481,6 +491,16 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			double aux = ((Lote)this.Parent.Page).Articulos.CalcularTotalImporte();
 			aux = aux * Convert.ToDouble(((TextBox)sender).Text) / 100;
 			((TextBox)(descuentosGridView.FooterRow.FindControl("txtimporte_descuento"))).Text = Math.Round(aux, 2).ToString("0.00");
+			string auxImpIVAString = ((DropDownList)(descuentosGridView.FooterRow.FindControl("ddlalicuota_iva"))).SelectedValue;
+			if (!auxImpIVAString.Equals("99"))
+			{
+				double auxImpIVA = aux * Convert.ToDouble(auxImpIVAString);
+				((TextBox)(descuentosGridView.FooterRow.FindControl("txtimporte_iva"))).Text = Math.Round(auxImpIVA / 100, 2).ToString("0.00");
+			}
+			else
+			{
+				((TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_iva"))).Text = "";
+			}
 		}
 		protected void ddlalicuota_ivaEdit_SelectedIndexChanged(object sender, EventArgs e)
 		{
