@@ -58,6 +58,14 @@
     <Compile Include="ConsultaComprobanteBj.Designer.cs">
       <DependentUpon>ConsultaComprobanteBj.cs</DependentUpon>
     </Compile>
+    <Compile Include="DB\Plantilla.cs" />
+    <Compile Include="Entidades\Plantilla.cs" />
+    <Compile Include="Plantilla.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plantilla.designer.cs">
+      <DependentUpon>Plantilla.cs</DependentUpon>
+    </Compile>
     <Compile Include="DB\ComprobanteBj.cs" />
     <Compile Include="DB\db.cs" />
     <Compile Include="DB\Lote.cs" />
@@ -70,6 +78,7 @@
     <Compile Include="RN\Aplicacion.cs" />
     <Compile Include="RN\ComprobanteBj.cs" />
     <Compile Include="RN\Lote.cs" />
+    <Compile Include="RN\Plantilla.cs" />
     <Compile Include="RN\Registro.cs" />
     <Compile Include="RN\Sesion.cs" />
     <Compile Include="RN\TableroBj.cs" />
@@ -91,6 +100,10 @@
     <EmbeddedResource Include="ConsultaComprobanteBj.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ConsultaComprobanteBj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plantilla.resx">
+      <DependentUpon>Plantilla.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TableroBj.resx">
       <SubType>Designer</SubType>
