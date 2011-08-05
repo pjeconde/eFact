@@ -67,16 +67,16 @@
 								<EditItemTemplate>
 									<asp:TextBox ID="txtporcentaje" runat="server" Text='<%# Eval("porcentaje_descuento") %>'
 										Width="35px" OnTextChanged="CalcularImporteDtoEdit" AutoPostBack="true"></asp:TextBox>
-									<cc1:MaskedEditExtender ID="porcentajeEditMaskedEditExtender" runat="server" Mask="99.99"
-										MaskType="Number" TargetControlID="txtporcentaje" ClearMaskOnLostFocus="true" PromptCharacter=" " InputDirection="RightToLeft" ></cc1:MaskedEditExtender>
+									<cc1:FilteredTextBoxExtender ID="porcentajeEditFilteredTextBoxExtender" runat="server"
+										FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtporcentaje" ValidChars="0123456789.">
+									</cc1:FilteredTextBoxExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
 									<asp:TextBox ID="txtporcentaje" runat="server" AutoPostBack="true" OnTextChanged="CalcularImporteDtoFooter"
 										Text='' Width="35px"></asp:TextBox>
-									<cc1:MaskedEditExtender ID="porcentajeFooterMaskedEditExtender" runat="server" ClearMaskOnLostFocus="true"
-										InputDirection="RightToLeft" Mask="99.99" MaskType="Number" PromptCharacter=" "
-										TargetControlID="txtporcentaje">
-									</cc1:MaskedEditExtender>
+									<cc1:FilteredTextBoxExtender ID="porcentajeFooterFilteredTextBoxExtender" runat="server"
+										FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtporcentaje" ValidChars="0123456789.">
+									</cc1:FilteredTextBoxExtender>
 								</FooterTemplate>
 								<ItemStyle HorizontalAlign="Right" />
 								<FooterStyle HorizontalAlign="Right" />
@@ -92,17 +92,17 @@
 									<asp:RequiredFieldValidator ID="txtimporte_descuentoEditItemRequiredFieldValidator"
 										runat="server" ControlToValidate="txtimporte_descuento" ErrorMessage="Importe del descuento global en edición no informado"
 										SetFocusOnError="True" ValidationGroup="DescuentosGlobalesEditItem">*</asp:RequiredFieldValidator>
-									<cc1:MaskedEditExtender ID="importe_descuentoEditMaskedEditExtender" runat="server"
-										ClearMaskOnLostFocus="true" InputDirection="RightToLeft" Mask="99999999.99" MaskType="Number"
-										PromptCharacter=" " TargetControlID="txtimporte_descuento">
-									</cc1:MaskedEditExtender>
+									<cc1:FilteredTextBoxExtender ID="importe_descuentoEditFilteredTextBoxExtender" runat="server"
+										FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtimporte_descuento"
+										ValidChars="0123456789.">
+									</cc1:FilteredTextBoxExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
 									<asp:TextBox ID="txtimporte_descuento" runat="server" Text='' Width="90px"></asp:TextBox>
-									<cc1:MaskedEditExtender ID="importe_descuentoFooterMaskedEditExtender" runat="server"
-										ClearMaskOnLostFocus="true" InputDirection="RightToLeft" Mask="99999999.99" MaskType="Number"
-										PromptCharacter=" " TargetControlID="txtimporte_descuento">
-									</cc1:MaskedEditExtender>
+									<cc1:FilteredTextBoxExtender ID="importe_descuentoFooterFilteredTextBoxExtender"
+										runat="server" FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtimporte_descuento"
+										ValidChars="0123456789.">
+									</cc1:FilteredTextBoxExtender>
 									<asp:RequiredFieldValidator ID="txtimporte_descuentoFooterRequiredFieldValidator"
 										runat="server" ControlToValidate="txtimporte_descuento" ErrorMessage="Importe total descuento global a agregar no informado"
 										SetFocusOnError="True" ValidationGroup="DescuentosGlobalesFooter">*</asp:RequiredFieldValidator>
@@ -154,17 +154,17 @@
 								<EditItemTemplate>
 									<asp:TextBox ID="txtimporte_iva" runat="server" Text='<%# Eval("importe_iva_descuento") %>'
 										Width="80px"></asp:TextBox>
-									<cc1:MaskedEditExtender ID="importe_iva_descuentoEditMaskedEditExtender" runat="server"
-										ClearMaskOnLostFocus="true" InputDirection="RightToLeft" Mask="99999999.99" MaskType="Number"
-										PromptCharacter=" " TargetControlID="txtimporte_iva" >
-									</cc1:MaskedEditExtender>
+									<cc1:FilteredTextBoxExtender ID="importe_iva_descuentoEditFilteredTextBoxExtender"
+										runat="server" FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtimporte_iva"
+										ValidChars="0123456789.">
+									</cc1:FilteredTextBoxExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
 									<asp:TextBox ID="txtimporte_iva" runat="server" Text='' Width="80px"></asp:TextBox>
-									<cc1:MaskedEditExtender ID="importe_iva_descuentoFooterMaskedEditExtender" runat="server"
-										ClearMaskOnLostFocus="true" InputDirection="RightToLeft" Mask="99999999.99" MaskType="Number"
-										PromptCharacter=" " TargetControlID="txtimporte_iva"  >
-									</cc1:MaskedEditExtender>
+									<cc1:FilteredTextBoxExtender ID="importe_iva_descuentoFooterFilteredTextBoxExtender"
+										runat="server" FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtimporte_iva"
+										ValidChars="0123456789.">
+									</cc1:FilteredTextBoxExtender>
 								</FooterTemplate>
 								<ItemStyle HorizontalAlign="Right" />
 								<FooterStyle HorizontalAlign="Right" />
