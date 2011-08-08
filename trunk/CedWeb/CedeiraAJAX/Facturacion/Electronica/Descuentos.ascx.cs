@@ -286,14 +286,23 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				{
 					throw new Exception("Descuento no actualizado porque hay más de un separador de decimales en el importe IVA dto");
 				}
-				double iid = Convert.ToDouble(((TextBox)descuentosGridView.Rows[e.RowIndex].FindControl("txtimporte_iva")).Text);
-				rd.importe_iva_descuento = iid;
-				if (!iid.Equals(0))
+				try
 				{
-					rd.importe_iva_descuentoSpecified = true;
+
+					double iid = Convert.ToDouble(((TextBox)descuentosGridView.Rows[e.RowIndex].FindControl("txtimporte_iva")).Text);
+					rd.importe_iva_descuento = iid;
+					if (!iid.Equals(0))
+					{
+						rd.importe_iva_descuentoSpecified = true;
+					}
+					else
+					{
+						rd.importe_iva_descuentoSpecified = false;
+					}
 				}
-				else
+				catch (FormatException)
 				{
+					rd.importe_iva_descuento = 0;
 					rd.importe_iva_descuentoSpecified = false;
 				}
 			
@@ -470,8 +479,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			try
 			{
 				double aux = ((Lote)this.Parent.Page).Articulos.CalcularTotalImporte();
-				aux = aux * Convert.ToDouble(((TextBox)sender).Text) / 100;
-				((TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_descuento"))).Text = Math.Round(aux, 2).ToString("0.00");
+				try
+				{
+					aux = aux * Convert.ToDouble(((TextBox)sender).Text) / 100;
+					((TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_descuento"))).Text = Math.Round(aux, 2).ToString("0.00");
+				}
+				catch (FormatException)
+				{
+					aux = Convert.ToDouble(((TextBox)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("txtimporte_descuento"))).Text);
+				}
 				string auxImpIVAString = ((DropDownList)(descuentosGridView.Rows[descuentosGridView.EditIndex].FindControl("ddlalicuota_ivaEdit"))).SelectedValue;
 				if (!auxImpIVAString.Equals("99"))
 				{
@@ -493,8 +509,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			try
 			{
 				double aux = ((Lote)this.Parent.Page).Articulos.CalcularTotalImporte();
-				aux = aux * Convert.ToDouble(((TextBox)sender).Text) / 100;
-				((TextBox)(descuentosGridView.FooterRow.FindControl("txtimporte_descuento"))).Text = Math.Round(aux, 2).ToString("0.00");
+				try
+				{
+					aux = aux * Convert.ToDouble(((TextBox)sender).Text) / 100;
+					((TextBox)(descuentosGridView.FooterRow.FindControl("txtimporte_descuento"))).Text = Math.Round(aux, 2).ToString("0.00");
+				}
+				catch (FormatException)
+				{
+					aux = Convert.ToDouble(((TextBox)(descuentosGridView.FooterRow.FindControl("txtimporte_descuento"))).Text);
+				}
 				string auxImpIVAString = ((DropDownList)(descuentosGridView.FooterRow.FindControl("ddlalicuota_iva"))).SelectedValue;
 				if (!auxImpIVAString.Equals("99"))
 				{
