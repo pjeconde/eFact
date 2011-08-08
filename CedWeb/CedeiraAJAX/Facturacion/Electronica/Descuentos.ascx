@@ -87,8 +87,8 @@
 									<asp:Label ID="lblimporte_descuento" runat="server" Text='<%# Eval("importe_descuento") %>'></asp:Label>
 								</ItemTemplate>
 								<EditItemTemplate>
-									<asp:TextBox ID="txtimporte_descuento" runat="server" Text='<%# Eval("importe_descuento") %>'
-										Width="90px" ></asp:TextBox>
+									<asp:TextBox ID="txtimporte_descuento" runat="server" OnTextChanged="CalcularImporteDtoEdit"
+										Text='<%# Eval("importe_descuento") %>' Width="90px" AutoPostBack="true"></asp:TextBox>
 									<asp:RequiredFieldValidator ID="txtimporte_descuentoEditItemRequiredFieldValidator"
 										runat="server" ControlToValidate="txtimporte_descuento" ErrorMessage="Importe del descuento global en edición no informado"
 										SetFocusOnError="True" ValidationGroup="DescuentosGlobalesEditItem">*</asp:RequiredFieldValidator>
@@ -98,7 +98,8 @@
 									</cc1:FilteredTextBoxExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:TextBox ID="txtimporte_descuento" runat="server" Text='' Width="90px"></asp:TextBox>
+									<asp:TextBox ID="txtimporte_descuento" runat="server" OnTextChanged="CalcularImporteDtoFooter"
+										Text='' Width="90px" AutoPostBack="true"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="importe_descuentoFooterFilteredTextBoxExtender"
 										runat="server" FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtimporte_descuento"
 										ValidChars="0123456789.">
