@@ -27,6 +27,13 @@ namespace eFact_RN
             l.ConsultarXEstado(out lotes, ListaEstados);
             Lotes = lotes;
         }
+        public static void ConsultarNovedades(out List<eFact_Entidades.Lote> Lotes, CedEntidades.Sesion Sesion)
+        {
+            List<eFact_Entidades.Lote> lotes = new List<eFact_Entidades.Lote>();
+            eFact_DB.Lote l = new eFact_DB.Lote(Sesion);
+            l.ConsultarNovedades(out lotes);
+            Lotes = lotes;
+        }
         public static void VerificarEnviosPosteriores(bool LoteNuevo, string CuitVendedor, string NumeroLote, string PuntoVenta, int NumeroEnvio, CedEntidades.Sesion Sesion)
         {
             List<eFact_Entidades.Lote> lotes = new List<eFact_Entidades.Lote>();
@@ -150,6 +157,26 @@ namespace eFact_RN
             XmlizedString = eFact_RN.Tablero.ByteArrayToString(ms.ToArray());
             ms.Close();
             Lote.LoteXmlIF = XmlizedString;
+
+            if (Lr.comprobante_response != null)
+            {
+                for (int i = 0; i < Lr.comprobante_response.Length; i++)
+                {
+                    eFact_R.Entidades.Comprobante c = Lote.Comprobantes.Find((delegate(eFact_R.Entidades.Comprobante e1) { return e1.IdTipoComprobante == Convert.ToInt16(Lr.comprobante_response[i].tipo_de_comprobante.ToString()) && e1.NumeroComprobante == Lr.comprobante_response[i].numero_comprobante.ToString(); }));
+                    c.EstadoIFoAFIP = "";
+
+                    //Actualizar comentario del comprobante
+                    ms = new MemoryStream();
+                    XmlizedString = null;
+                    writer = new XmlTextWriter(ms, System.Text.Encoding.GetEncoding("ISO-8859-1"));
+                    x = new System.Xml.Serialization.XmlSerializer(Lr.comprobante_response[i].GetType());
+                    x.Serialize(writer, Lr.comprobante_response[i]);
+                    ms = (MemoryStream)writer.BaseStream;
+                    XmlizedString = RN.Tablero.ByteArrayToString(ms.ToArray());
+                    ms.Close();
+                    c.ComentarioIFoAFIP = XmlizedString;
+                }
+            }
         }
         public static void Ejecutar(eFact_Entidades.Lote Lote, CedEntidades.Evento Evento, string Handler, eFact_Entidades.Aplicacion Aplicacion, CedEntidades.Sesion Sesion)
         {
@@ -698,7 +725,6 @@ namespace eFact_RN
             nds[0].Expand();
             nds = null;
         }
-
         public static void Lc2Lote(out eFact_Entidades.Lote Lote, FeaEntidades.InterFacturas.lote_comprobantes Lc, eFact_Entidades.Aplicacion Aplicacion, CedEntidades.Sesion Sesion)
         {
             if (Lc.cabecera_lote.cuit_vendedor.ToString().Trim() != Aplicacion.OtrosFiltrosCuit.Trim() && Aplicacion.OtrosFiltrosCuit.Trim() != "")
@@ -770,6 +796,11 @@ namespace eFact_RN
         private static DateTime ConvertirStringToDateTime(String sFecha)
         {
             return Convert.ToDateTime(sFecha.Substring(0, 4) + "/" + sFecha.Substring(4, 2) + "/" + sFecha.Substring(6, 2));
+        }
+        public static void GuardarNovedades(eFact_Entidades.Novedades novedad, CedEntidades.Sesion Sesion)
+        {
+            eFact_DB.Lote lote = new eFact_DB.Lote(Sesion);
+            lote.GuardarNovedades(novedad);
         }
     }
 }

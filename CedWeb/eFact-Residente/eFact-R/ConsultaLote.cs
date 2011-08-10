@@ -554,6 +554,14 @@ namespace eFact_R
             {
                 lc.comprobante[0].cabecera.informacion_vendedor.provincia = string.Empty;
             }
+            if (lc.comprobante[0].cabecera.informacion_vendedor.domicilio_piso == null)
+            {
+                lc.comprobante[0].cabecera.informacion_vendedor.domicilio_piso = string.Empty;
+            }
+            if (lc.comprobante[0].cabecera.informacion_vendedor.domicilio_numero == null)
+            {
+                lc.comprobante[0].cabecera.informacion_vendedor.domicilio_numero = string.Empty;
+            }
             lc.comprobante[0].cabecera.informacion_comprador.condicion_ingresos_brutosSpecified = true;
             lc.comprobante[0].cabecera.informacion_comprador.condicion_IVASpecified = true;
             if (lc.comprobante[0].cabecera.informacion_comprador.domicilio_calle == null)
@@ -603,6 +611,10 @@ namespace eFact_R
             if (lc.comprobante[0].cabecera.informacion_comprador.email == null)
             {
                 lc.comprobante[0].cabecera.informacion_comprador.email = string.Empty;
+            }
+            if (lc.comprobante[0].cabecera.informacion_comprador.telefono == null)
+            {
+                lc.comprobante[0].cabecera.informacion_comprador.telefono = string.Empty;
             }
             if (lc.comprobante[0].resumen.impuestos != null)
             {
@@ -947,6 +959,35 @@ namespace eFact_R
             finally
             {
                 Cancelar();
+                Cursor = System.Windows.Forms.Cursors.Default;
+            }
+        }
+
+        private void DetalleLoteDataGridView_DoubleClick(object sender, EventArgs e)
+        {
+            ConsultarLote();
+        }
+
+        private void ConsultarLote()
+        {
+            try
+            {
+                Cursor = System.Windows.Forms.Cursors.WaitCursor;
+                if (DetalleLoteDataGridView.SelectedRows.Count != 0)
+                {
+                    eFact_R.Entidades.Comprobante c = new eFact_R.Entidades.Comprobante();
+                    int renglon = DetalleLoteDataGridView.SelectedRows[0].Index;
+                    ComentariosXComprobante cxc = new ComentariosXComprobante(lote.Comprobantes[renglon].ComentarioIFoAFIP);
+                    cxc.ShowDialog();
+                    cxc = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
+            }
+            finally
+            {
                 Cursor = System.Windows.Forms.Cursors.Default;
             }
         }

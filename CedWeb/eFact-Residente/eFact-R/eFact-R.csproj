@@ -93,6 +93,12 @@
     <Compile Include="ConsultaLote.Designer.cs">
       <DependentUpon>ConsultaLote.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComentariosXComprobante.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComentariosXComprobante.Designer.cs">
+      <DependentUpon>ComentariosXComprobante.cs</DependentUpon>
+    </Compile>
     <Compile Include="DB\Archivo.cs" />
     <Compile Include="DB\Comprobante.cs" />
     <Compile Include="DB\Vendedor.cs" />
@@ -186,6 +192,10 @@
     <EmbeddedResource Include="ConsultaVendedor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ConsultaVendedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComentariosXComprobante.resx">
+      <DependentUpon>ComentariosXComprobante.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Facturacion\Electronica\Reportes\Factura.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

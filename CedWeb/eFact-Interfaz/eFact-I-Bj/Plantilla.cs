@@ -43,8 +43,8 @@ namespace eFact_I_Bj
             Leyenda3TextBox.Text = "";
             Leyenda4TextBox.Text = "";
             Leyenda5TextBox.Text = "";
-            LeyendaMonedaTextBox = "";
-            LeyendaMonedaTextBox = "";
+            LeyendaMonedaTextBox.Text = "";
+            LeyendaMonedaTextBox.Text = "";
         }
 
         private void EjecutarButton_Click(object sender, EventArgs e)
@@ -73,7 +73,7 @@ namespace eFact_I_Bj
         {
             eFact_I_Bj.DB.Plantilla db = new eFact_I_Bj.DB.Plantilla(Aplicacion.Sesion);
             eFact_I_Bj.Entidades.Plantilla plantilla = new eFact_I_Bj.Entidades.Plantilla();
-            plantilla.IdPlantilla = DescrPlantillaComboBox.SelectedValue;
+            plantilla.IdPlantilla = Convert.ToInt32(DescrPlantillaComboBox.SelectedValue.ToString());
             db.Leer(plantilla);
             if (plantilla.DescrPlantilla != "")
             {

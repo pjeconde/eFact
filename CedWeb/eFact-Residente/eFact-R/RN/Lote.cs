@@ -150,6 +150,26 @@ namespace eFact_R.RN
             XmlizedString = RN.Tablero.ByteArrayToString(ms.ToArray());
             ms.Close();
             Lote.LoteXmlIF = XmlizedString;
+
+            if (Lr.comprobante_response != null)
+            {
+                for (int i = 0; i < Lr.comprobante_response.Length; i++)
+                {
+                    eFact_R.Entidades.Comprobante c = Lote.Comprobantes.Find((delegate(eFact_R.Entidades.Comprobante e1) { return e1.IdTipoComprobante == Convert.ToInt16(Lr.comprobante_response[i].tipo_de_comprobante.ToString()) && e1.NumeroComprobante == Lr.comprobante_response[i].numero_comprobante.ToString(); }));
+                    c.EstadoIFoAFIP = "";
+                    
+                    //Actualizar comentario del comprobante
+                    ms = new MemoryStream();
+                    XmlizedString = null;
+                    writer = new XmlTextWriter(ms, System.Text.Encoding.GetEncoding("ISO-8859-1"));
+                    x = new System.Xml.Serialization.XmlSerializer(Lr.comprobante_response[i].GetType());
+                    x.Serialize(writer, Lr.comprobante_response[i]);
+                    ms = (MemoryStream)writer.BaseStream;
+                    XmlizedString = RN.Tablero.ByteArrayToString(ms.ToArray());
+                    ms.Close();
+                    c.ComentarioIFoAFIP = XmlizedString;
+                }
+            }
         }
         public static void Ejecutar(eFact_R.Entidades.Lote Lote, CedEntidades.Evento Evento, string Handler, CedEntidades.Sesion Sesion)
         {

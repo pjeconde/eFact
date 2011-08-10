@@ -26,8 +26,7 @@ namespace eFact_I_Bj.DB
         public void Lista(List<eFact_I_Bj.Entidades.Plantilla> Plantilla)
         {
             StringBuilder commandText = new StringBuilder();
-            commandText.Append("Select * from Plantillas where Plantillas.IdPlantilla = ");
-            commandText.Append("where Plantillas.IdPlantilla = " + Plantilla.IdPlantilla);
+            commandText.Append("Select * from Plantillas");
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.Acepta, sesion.CnnStr);
             if (dt.Rows.Count != 0)
@@ -71,15 +70,15 @@ namespace eFact_I_Bj.DB
         }
         private void Copiar(DataTable dt, int Row ,eFact_I_Bj.Entidades.Plantilla Hasta)
         {
-            Hasta.IdPlantilla = dt.Rows[Row]["IdPlantilla"];
-            Hasta.DescrPlantilla = dt.Rows[Row]["DescrPlantilla"];
-            Hasta.DescrPlantilla = dt.Rows[Row]["Leyenda1"];
-            Hasta.DescrPlantilla = dt.Rows[Row]["Leyenda2"];
-            Hasta.DescrPlantilla = dt.Rows[Row]["Leyenda3"];
-            Hasta.DescrPlantilla = dt.Rows[Row]["Leyenda4"];
-            Hasta.DescrPlantilla = dt.Rows[Row]["Leyenda5"];
-            Hasta.LeyendaMoneda = dt.Rows[Row]["LeyendaMoneda"];
-            Hasta.LeyendaBanco = dt.Rows[Row]["LeyendaBanco"];
+            Hasta.IdPlantilla = Convert.ToInt32(dt.Rows[Row]["IdPlantilla"].ToString());
+            Hasta.DescrPlantilla = dt.Rows[Row]["DescrPlantilla"].ToString();
+            Hasta.Leyenda1 = dt.Rows[Row]["Leyenda1"].ToString();
+            Hasta.Leyenda2 = dt.Rows[Row]["Leyenda2"].ToString();
+            Hasta.Leyenda3 = dt.Rows[Row]["Leyenda3"].ToString();
+            Hasta.Leyenda4 = dt.Rows[Row]["Leyenda4"].ToString();
+            Hasta.Leyenda5 = dt.Rows[Row]["Leyenda5"].ToString();
+            Hasta.LeyendaMoneda = dt.Rows[Row]["LeyendaMoneda"].ToString();
+            Hasta.LeyendaBanco = dt.Rows[Row]["LeyendaBanco"].ToString();
         }
     }
 }
