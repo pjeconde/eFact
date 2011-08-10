@@ -262,6 +262,7 @@
             this.DetalleLoteDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DetalleLoteDataGridView.Size = new System.Drawing.Size(868, 254);
             this.DetalleLoteDataGridView.TabIndex = 15;
+            this.DetalleLoteDataGridView.DoubleClick += new System.EventHandler(this.DetalleLoteDataGridView_DoubleClick);
             this.DetalleLoteDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DetalleLoteDataGridView_DataError);
             // 
             // IdLote

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // La información general sobre un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos atributos para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("eFact-R")]
-[assembly: AssemblyDescription("Facturación Electrónica")]
+[assembly: AssemblyTitle("eFact-N-Desregistrador")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Cedeira Software Factory S.R.L")]
-[assembly: AssemblyProduct("eFact-R")]
-[assembly: AssemblyCopyright("© Cedeira Software Factory 2009")]
+[assembly: AssemblyCompany("Cedeira")]
+[assembly: AssemblyProduct("eFact-N-Desregistrador")]
+[assembly: AssemblyCopyright("© Cedeira")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // El siguiente GUID sirve como identificador de la biblioteca de tipos si este proyecto se expone a COM
-[assembly: Guid("e49d0bd0-ce13-43d2-8bb7-1afb45b973ad")]
+[assembly: Guid("8dd5d0cc-6876-46c6-8db8-e843682cd613")]
 
 // La información de versión de un ensamblado consta de los cuatro valores siguientes:
 //
@@ -29,4 +29,7 @@ using System.Runtime.InteropServices;
 //      Número de versión de compilación
 //      Revisión
 //
-[assembly: AssemblyVersion("1.6.32.0")]
+// Puede especificar todos los valores o puede establecer como valores predeterminados los números de revisión y generación 
+// mediante el asterisco ('*'), como se muestra a continuación:
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

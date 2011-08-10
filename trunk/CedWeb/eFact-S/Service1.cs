@@ -28,46 +28,54 @@ namespace eFact_S
             try
             {
                 NombrePC = System.Environment.MachineName;
+                string body = "Vacío";
+                string subject = NombrePC + " Inicio del servicio eFact-S a las " + System.DateTime.Now.ToLongTimeString();
+                subject = subject + " Versión:" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major + "." + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor + "." + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build;
+                System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
+                System.Net.Mail.MailMessage mail;
+                mail = new System.Net.Mail.MailMessage("facturaelectronica@cedeira.com.ar", System.Configuration.ConfigurationManager.AppSettings["MailTest"], subject, body);
+                mail.BodyEncoding = System.Text.Encoding.UTF8;
+                string MailServidorSmtp = System.Configuration.ConfigurationManager.AppSettings["MailServidorSmtp"];
+                string MailCredencialesUsr = System.Configuration.ConfigurationManager.AppSettings["MailCredencialesUsr"];
+                string MailCredencialesPsw = System.Configuration.ConfigurationManager.AppSettings["MailCredencialesPsw"];
+                smtpClient.Host = MailServidorSmtp;
+                if (MailCredencialesUsr != "")
+                {
+                    smtpClient.Credentials = new System.Net.NetworkCredential(MailCredencialesUsr, MailCredencialesPsw);
+                }
+                smtpClient.Send(mail);
             }
             catch
             {
             }
-            string body = "Vacío";
-            string subject = NombrePC + " Inicio del servicio eFact-S a las " + System.DateTime.Now.ToLongTimeString();
-            subject = subject + " Versión:" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major + "." + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor + "." + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build;
-            System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
-            System.Net.Mail.MailMessage mail;
-            mail = new System.Net.Mail.MailMessage("facturaelectronica@cedeira.com.ar", System.Configuration.ConfigurationManager.AppSettings["MailTest"], subject, body);
-            mail.BodyEncoding = System.Text.Encoding.UTF8;
-            string MailServidorSmtp = System.Configuration.ConfigurationManager.AppSettings["MailServidorSmtp"];
-            string MailCredencialesUsr = System.Configuration.ConfigurationManager.AppSettings["MailCredencialesUsr"];
-            string MailCredencialesPsw = System.Configuration.ConfigurationManager.AppSettings["MailCredencialesPsw"];
-            smtpClient.Host = MailServidorSmtp;
-            if (MailCredencialesUsr != "")
-            {
-                smtpClient.Credentials = new System.Net.NetworkCredential(MailCredencialesUsr, MailCredencialesPsw);
-            }
-            smtpClient.Send(mail);
         }
 
         protected override void OnStop()
         {
-            string body = "Vacío";
-            string subject = NombrePC + " Parada del servicio eFact-S a las " + System.DateTime.Now.ToLongTimeString();
-            subject = subject + " Versión:" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major + "." + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor + "." + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build;
-            System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
-            System.Net.Mail.MailMessage mail;
-            mail = new System.Net.Mail.MailMessage("facturaelectronica@cedeira.com.ar", System.Configuration.ConfigurationManager.AppSettings["MailTest"], subject, body);
-            mail.BodyEncoding = System.Text.Encoding.UTF8;
-            string MailServidorSmtp = System.Configuration.ConfigurationManager.AppSettings["MailServidorSmtp"];
-            string MailCredencialesUsr = System.Configuration.ConfigurationManager.AppSettings["MailCredencialesUsr"];
-            string MailCredencialesPsw = System.Configuration.ConfigurationManager.AppSettings["MailCredencialesPsw"];
-            smtpClient.Host = MailServidorSmtp;
-            if (MailCredencialesUsr != "")
+            NombrePC = "";
+            try
             {
-                smtpClient.Credentials = new System.Net.NetworkCredential(MailCredencialesUsr, MailCredencialesPsw);
+                NombrePC = System.Environment.MachineName;
+                string body = "Vacío";
+                string subject = NombrePC + " Parada del servicio eFact-S a las " + System.DateTime.Now.ToLongTimeString();
+                subject = subject + " Versión:" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major + "." + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Minor + "." + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Build;
+                System.Net.Mail.SmtpClient smtpClient = new System.Net.Mail.SmtpClient();
+                System.Net.Mail.MailMessage mail;
+                mail = new System.Net.Mail.MailMessage("facturaelectronica@cedeira.com.ar", System.Configuration.ConfigurationManager.AppSettings["MailTest"], subject, body);
+                mail.BodyEncoding = System.Text.Encoding.UTF8;
+                string MailServidorSmtp = System.Configuration.ConfigurationManager.AppSettings["MailServidorSmtp"];
+                string MailCredencialesUsr = System.Configuration.ConfigurationManager.AppSettings["MailCredencialesUsr"];
+                string MailCredencialesPsw = System.Configuration.ConfigurationManager.AppSettings["MailCredencialesPsw"];
+                smtpClient.Host = MailServidorSmtp;
+                if (MailCredencialesUsr != "")
+                {
+                    smtpClient.Credentials = new System.Net.NetworkCredential(MailCredencialesUsr, MailCredencialesPsw);
+                }
+                smtpClient.Send(mail);
             }
-            smtpClient.Send(mail);
+            catch
+            {
+            }
         }
         
         private void timer1_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -390,7 +398,7 @@ namespace eFact_S
                     edescr = ex2.Message.Replace("'", "''");
                     EjecutarEventoBandejaS("RegRechIF", edescr, lote);
                     //Va a revertir el rechazo (si el error es "Timed Out" hasta 10 ocurrencias.
-                    if (Lr.estado == "99" && Lr.errores_lote[0].descripcion_error.ToUpper().Trim() == "THE OPERATION HAS TIMED OUT")
+                    if (Lr.estado == "99" && Lr.errores_lote != null && Lr.errores_lote[0].descripcion_error.ToUpper().Trim() == "THE OPERATION HAS TIMED OUT")
                     {
                         eFact_Entidades.Lote loteAux = new eFact_Entidades.Lote();
                         loteAux.IdLote = lote.IdLote;

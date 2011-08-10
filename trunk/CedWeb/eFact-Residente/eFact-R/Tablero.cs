@@ -391,6 +391,10 @@ namespace eFact_R
                             string comentario = ArmarTextoMotivo(Lc);
                             EjecutarEventoBandejaS("RegRechAFIP", comentario, l);
                         }
+                        else
+                        {
+                            throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Lote.ProblemasConsulta("Estado del lote [" + Lc.cabecera_lote.resultado + "] no definido.");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -432,7 +436,7 @@ namespace eFact_R
             string texto = "";
             if (Lc.cabecera_lote.resultado == "A" || Lc.cabecera_lote.resultado == "R" || Lc.cabecera_lote.resultado == "O" || Lc.cabecera_lote.resultado == "P")
             {
-                if (Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
+                if (Lc.cabecera_lote.motivo != null && Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
                 {
                     FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP codigosErrorAFIPLote = FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP.Lista().Find((delegate(FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP e1) { return e1.Codigo == Lc.cabecera_lote.motivo.Trim(); }));
                     string descrCodigosErrorAFIPLote = "";
@@ -829,7 +833,7 @@ namespace eFact_R
                             edescr = ex2.Message.Replace("'", "''");
                             EjecutarEventoBandejaS("RegRechIF", edescr, lote);
                             //Va a revertir el rechazo (si el error es "Timed Out" hasta 10 ocurrencias.
-                            if (Lr.estado == "99" && Lr.errores_lote[0].descripcion_error.ToUpper().Trim() == "THE OPERATION HAS TIMED OUT")
+                            if (Lr.estado == "99" && Lr.errores_lote != null && Lr.errores_lote[0].descripcion_error.ToUpper().Trim() == "THE OPERATION HAS TIMED OUT")
                             {
                                 eFact_R.Entidades.Lote loteAux = new eFact_R.Entidades.Lote();
                                 loteAux.IdLote = lote.IdLote;

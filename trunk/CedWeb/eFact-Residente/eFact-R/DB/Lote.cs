@@ -488,7 +488,35 @@ namespace eFact_R.DB
             commandText.Append(loteXmlIF + "'");
             commandText.Append(" where IdLote = " + Lote.IdLote);
             commandText.Append(" declare @IdLote int select @IdLote=@@Identity");
-            commandText.Append(" end");
+            for (int i = 0; i < Lote.Comprobantes.Count; i++)
+            {
+                if (Lote.Comprobantes[i].EstadoIFoAFIP != null || Lote.Comprobantes[i].EstadoIFoAFIP != null)
+                {
+                    commandText.Append(" Update Comprobantes set ");
+                    if (Lote.Comprobantes[i].EstadoIFoAFIP != null)
+                    {
+                        commandText.Append("EstadoIFoAFIP = '" + Lote.Comprobantes[i].EstadoIFoAFIP + "', ");
+                    }
+                    else
+                    {
+                        commandText.Append("EstadoIFoAFIP = NULL, ");
+                    }
+                    if (Lote.Comprobantes[i].ComentarioIFoAFIP != null)
+                    {
+                        commandText.Append("ComentarioIFoAFIP = '" + Lote.Comprobantes[i].ComentarioIFoAFIP + "' ");
+                    }
+                    else
+                    {
+                        commandText.Append("ComentarioIFoAFIP = NULL ");
+                    }
+                    commandText.Append("where IdLote = " + Lote.IdLote + " and IdTipoComprobante = '" + Lote.Comprobantes[i].IdTipoComprobante + "' ");
+                    commandText.Append("and NumeroComprobante = '" + Lote.Comprobantes[i].NumeroComprobante + "' ");
+                }
+            }
+            if (HandlerEvento != "")
+            {
+                commandText.Append(" end");
+            }
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.Usa, sesion.CnnStr);
         }
