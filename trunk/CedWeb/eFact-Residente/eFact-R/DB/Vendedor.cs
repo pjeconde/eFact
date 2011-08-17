@@ -11,7 +11,7 @@ namespace eFact_R.DB
             : base(Sesion)
         {
         }
-        public void Leer(eFact_R.Entidades.Vendedor Vendedor)
+        public void Leer(eFact_Entidades.Vendedor Vendedor)
         {
             StringBuilder commandText = new StringBuilder();
             commandText.Append("Select * from Vendedores");
@@ -57,7 +57,7 @@ namespace eFact_R.DB
             Vendedor.EMail = dt.Rows[0]["EMail"].ToString();
             Vendedor.Telefono = dt.Rows[0]["Telefono"].ToString();
         }
-        public void Consultar(List<eFact_R.Entidades.Vendedor> Vendedores)
+        public void Consultar(List<eFact_Entidades.Vendedor> Vendedores)
         {
             StringBuilder commandText = new StringBuilder();
             commandText.Append("Select * from Vendedores");
@@ -65,7 +65,7 @@ namespace eFact_R.DB
             dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.Acepta, sesion.CnnStr);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                eFact_R.Entidades.Vendedor vendedor = new eFact_R.Entidades.Vendedor();
+                eFact_Entidades.Vendedor vendedor = new eFact_Entidades.Vendedor();
                 vendedor.CuitVendedor = dt.Rows[i]["CuitVendedor"].ToString();
                 vendedor.Nombre = dt.Rows[i]["Nombre"].ToString();
                 vendedor.NumeroSerieCertificado = dt.Rows[i]["NumeroSerieCertificado"].ToString();
@@ -103,7 +103,7 @@ namespace eFact_R.DB
                 Vendedores.Add(vendedor);
             }
         }
-        public void Modificar(eFact_R.Entidades.Vendedor Vendedor)
+        public void Modificar(eFact_Entidades.Vendedor Vendedor)
         {
             //Declaramos y abrimos la conexión con la base de datos donde la variable de conexión especifica el path de nuestro archivo sdf
             System.Data.SqlClient.SqlConnection conexion = new System.Data.SqlClient.SqlConnection(eFact_R.Aplicacion.Sesion.CnnStr);
