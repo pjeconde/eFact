@@ -125,6 +125,7 @@ namespace eFact_R.DB
             Hasta.WF.Sesion = sesion;
             //Comprobantes
             DataRow[] dr = ds.Tables[1].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
+            Hasta.Comprobantes = new List<eFact_R.Entidades.Comprobante>();
             for (int i = 0; i < dr.Length; i++)
             {
                 eFact_R.Entidades.Comprobante c = new eFact_R.Entidades.Comprobante();
@@ -168,6 +169,7 @@ namespace eFact_R.DB
             }
             //WF
             dr = ds.Tables[2].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
+            Hasta.WF.Log = new List<CedEntidades.Log>();
             for (int i = 0; i < dr.Length; i++)
             {
                 CedEntidades.Log l = new CedEntidades.Log();
@@ -190,6 +192,7 @@ namespace eFact_R.DB
                 Hasta.WF.Log.Add(l);
             }
             dr = ds.Tables[3].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
+            Hasta.WF.EventosPosibles = new List<CedEntidades.Evento>();
             for (int i = 0; i < dr.Length; i++)
             {
                 CedEntidades.Evento evento = new CedEntidades.Evento();
@@ -208,6 +211,7 @@ namespace eFact_R.DB
                 Hasta.WF.EventosPosibles.Add(evento);
             }
             dr = ds.Tables[4].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
+            Hasta.WF.EventosXLotePosibles = new List<CedEntidades.Evento>();
             for (int i = 0; i < dr.Length; i++)
             {
                 CedEntidades.Evento evento = new CedEntidades.Evento();
