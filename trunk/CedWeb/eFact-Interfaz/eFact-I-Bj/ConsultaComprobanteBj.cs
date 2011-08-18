@@ -81,7 +81,7 @@ namespace eFact_I_Bj
                 CompradorCondIVAComboBox.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
                 CompradorCondIVAComboBox.DisplayMember = "Descr";
                 CompradorCondIVAComboBox.ValueMember = "Codigo";
-                CompradorCondIVAComboBox.SelectedValue = Convert.ToInt16(comprobante.Comprador.CondicionIVA);
+                CompradorCondIVAComboBox.SelectedValue = Convert.ToInt16(1);
                 CompradorProvinciaComboBox.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
                 CompradorProvinciaComboBox.DisplayMember = "Descr";
                 CompradorProvinciaComboBox.ValueMember = "Codigo";
