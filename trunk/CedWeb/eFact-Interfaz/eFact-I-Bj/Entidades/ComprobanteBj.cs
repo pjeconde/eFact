@@ -10,8 +10,8 @@ namespace eFact_I_Bj.Entidades
         private int clave;
         private eFact_R.Entidades.Vendedor vendedor;
         private eFact_I_Bj.Entidades.Comprador comprador;
-        private short idTipoComprobante;
-        private string puntoVenta;
+        private string idTipoComprobante;
+        private int puntoVenta;
         private string numeroComprobante;
         private DateTime fecha;
         private DateTime fechaVto;
@@ -34,6 +34,8 @@ namespace eFact_I_Bj.Entidades
         private DateTime fechaVtoCAE;
         private List<eFact_I_Bj.Entidades.ComprobanteBjLinea> lineas;
         private string idEstado;
+        private List<string> leyendas;
+        private double tipoDeCambio;
         public ComprobanteBj()
         {
             vendedor = new eFact_R.Entidades.Vendedor();
@@ -114,7 +116,7 @@ namespace eFact_I_Bj.Entidades
                 return comprador.EMail;
             }
         }
-        public short IdTipoComprobante
+        public string IdTipoComprobante
         {
 			set
 			{
@@ -125,7 +127,7 @@ namespace eFact_I_Bj.Entidades
                 return idTipoComprobante;
             }
         }
-        public string PuntoVenta
+        public int PuntoVenta
         {
             set
             {
@@ -350,6 +352,28 @@ namespace eFact_I_Bj.Entidades
             get
             {
                 return idEstado;
+            }
+        }
+        public List<string> Leyendas
+        {
+            set
+            {
+                leyendas = value;
+            }
+            get
+            {
+                return leyendas;
+            }
+        }
+        public double TipoDeCambio
+        {
+            set
+            {
+                tipoDeCambio = value;
+            }
+            get
+            {
+                return tipoDeCambio;
             }
         }
     }
