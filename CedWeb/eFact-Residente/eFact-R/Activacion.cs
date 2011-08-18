@@ -26,11 +26,11 @@ namespace eFact_R
             {
                 if (Aplicacion.StoreLocationActivacion == "CurrentUser")
                 {
-                    RN.Registro.Guardar(Registry.CurrentUser, Aplicacion.RegistroNombreClave, "k", ClaveActivacionTextBox.Text);
+                    eFact_RN.Registro.Guardar(Registry.CurrentUser, Aplicacion.RegistroNombreClave, "k", ClaveActivacionTextBox.Text);
                 }
                 else
                 {
-                    RN.Registro.Guardar(Registry.LocalMachine, Aplicacion.RegistroNombreClave, "k", ClaveActivacionTextBox.Text);
+                    eFact_RN.Registro.Guardar(Registry.LocalMachine, Aplicacion.RegistroNombreClave, "k", ClaveActivacionTextBox.Text);
                 }
                 MessageBox.Show("La aplicación fué activada satisfactoriamente.  Vuelva a ingresar para operar normalmente.", "IMPORTANTE", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 Close();
