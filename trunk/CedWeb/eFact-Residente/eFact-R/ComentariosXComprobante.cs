@@ -22,6 +22,7 @@ namespace eFact_R
 
         private void SalirButton_Click(object sender, EventArgs e)
         {
+            XMLWebBrowser.Dispose();
             this.Close();
         }
 

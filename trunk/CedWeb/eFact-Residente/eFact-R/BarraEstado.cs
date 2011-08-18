@@ -25,22 +25,22 @@ namespace eFact_R
             //StatusBar.Panels["CXOSBP"].ToolTipText = "Control por oposición: " + Aplicacion.Sesion.CXO;
             ndNuevo = new TreeNode("Directorio de Datos");
             nds[0].Nodes.Add(ndNuevo);
-            ndNuevo = new TreeNode(Aplicacion.ArchPath);
+            ndNuevo = new TreeNode(Aplicacion.Aplic.ArchPath);
             nds[0].Nodes[0].Nodes.Add(ndNuevo);
             
             ndNuevo = new TreeNode("Históricos");
             nds[0].Nodes.Add(ndNuevo);
-            ndNuevo = new TreeNode(Aplicacion.ArchPathHis);
+            ndNuevo = new TreeNode(Aplicacion.Aplic.ArchPathHis);
             nds[0].Nodes[1].Nodes.Add(ndNuevo);
 
             ndNuevo = new TreeNode("Interfaz manual");
             nds[0].Nodes.Add(ndNuevo);
-            ndNuevo = new TreeNode(Aplicacion.ArchPathItf);
+            ndNuevo = new TreeNode(Aplicacion.Aplic.ArchPathItf);
             nds[0].Nodes[2].Nodes.Add(ndNuevo);
 
             ndNuevo = new TreeNode("Interfaz automática");
             nds[0].Nodes.Add(ndNuevo);
-            ndNuevo = new TreeNode(Aplicacion.ArchPathItfAut);
+            ndNuevo = new TreeNode(Aplicacion.Aplic.ArchPathItfAut);
             nds[0].Nodes[3].Nodes.Add(ndNuevo);
             
             ndNuevo = new TreeNode("Tipo de archivo ( Valores posibles: XML / TXT / NONE )");
@@ -50,7 +50,7 @@ namespace eFact_R
 
             ndNuevo = new TreeNode("PDFs:");
             nds[0].Nodes.Add(ndNuevo);
-            ndNuevo = new TreeNode(Aplicacion.ArchPathPDF);
+            ndNuevo = new TreeNode(Aplicacion.Aplic.ArchPathPDF);
             nds[0].Nodes[4].Nodes.Add(ndNuevo);
 
             ndNuevo = new TreeNode("URL");
@@ -184,7 +184,7 @@ namespace eFact_R
             try
             {
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
-                if (treeView1.SelectedNode.Tag == "Clic")
+                if (treeView1.SelectedNode.Tag.ToString() == "Clic")
                 {
                     string body = "Mail de Prueba";
                     string subject = "Notificación de excepción (Mail de Prueba)";

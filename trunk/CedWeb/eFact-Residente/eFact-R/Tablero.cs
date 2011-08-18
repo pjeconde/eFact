@@ -12,32 +12,32 @@ namespace eFact_R
 {
     public partial class Tablero : Form
     {
-        public List<eFact_R.Entidades.Archivo> dtBandejaEntrada = new List<eFact_R.Entidades.Archivo>();
-        public List<eFact_R.Entidades.Lote> dtBandejaSalida = new List<eFact_R.Entidades.Lote>();
-        eFact_R.RN.Tablero.TipoConsulta TipoConsulta;
-        eFact_R.RN.Tablero.TipoConsultaArchivos TipoConsultaArchivos;
-        eFact_R.RN.Archivo.OtrosFiltros ArchivosOtrosFiltros;
+        public List<eFact_Entidades.Archivo> dtBandejaEntrada = new List<eFact_Entidades.Archivo>();
+        public List<eFact_Entidades.Lote> dtBandejaSalida = new List<eFact_Entidades.Lote>();
+        eFact_Entidades.Lote.TipoConsulta TipoConsulta;
+        eFact_Entidades.Archivo.TipoConsultaArchivos TipoConsultaArchivos;
+        eFact_Entidades.Archivo.OtrosFiltros ArchivosOtrosFiltros;
         public bool ServicioOK;
 
         public Tablero()
         {
             InitializeComponent();
-            TipoConsulta = eFact_R.RN.Tablero.TipoConsulta.FechaAlta;
-            TipoConsultaArchivos = eFact_R.RN.Tablero.TipoConsultaArchivos.FechaProceso;
-            ArchivosOtrosFiltros = eFact_R.RN.Archivo.OtrosFiltros.SinAplicar;
+            TipoConsulta = eFact_Entidades.Lote.TipoConsulta.FechaAlta;
+            TipoConsultaArchivos = eFact_Entidades.Archivo.TipoConsultaArchivos.FechaProceso;
+            ArchivosOtrosFiltros = eFact_Entidades.Archivo.OtrosFiltros.SinAplicar;
 
             StatusBar.Panels["UsuarioSBP"].Text = "Usuario: " + Aplicacion.Sesion.Usuario.Nombre;
             StatusBar.Panels["UsuarioSBP"].ToolTipText = "Información del usuario\r\nNombre: " + Aplicacion.Sesion.Usuario.Nombre + "\r\nDominio: " + Aplicacion.Sesion.Dominio;
 
             //<add key="Certificado" value="012425509e59" />
-            List<eFact_R.Entidades.Vendedor> vendedores = new List<eFact_R.Entidades.Vendedor>();
-            eFact_R.RN.Vendedor.Consultar(vendedores, Aplicacion.Sesion);
+            List<eFact_Entidades.Vendedor> vendedores = new List<eFact_Entidades.Vendedor>();
+            eFact_RN.Vendedor.Consultar(vendedores, Aplicacion.Sesion);
             if (vendedores.Count > 0)
             {
                 StatusBar.Panels["CertificadosSBP"].Text = "Certificados: OK";
                 StatusBar.Panels["CertificadosSBP"].ToolTipText = "";
                 bool AllCertifOK = true;
-                foreach (eFact_R.Entidades.Vendedor v in vendedores)
+                foreach (eFact_Entidades.Vendedor v in vendedores)
                 {
                     string storeLocation = System.Configuration.ConfigurationManager.AppSettings["StoreLocation"];
                     X509Store store;
@@ -66,10 +66,10 @@ namespace eFact_R
                     StatusBar.Panels["CertificadosSBP"].Text = "Certificados: ERROR ";
                 }
             }
-            StatusBar.Panels["OrigenDatosSBP"].ToolTipText = "Directorio de Datos: " + Aplicacion.ArchPath + "\r\n" + "Hitoricos: " + Aplicacion.ArchPathHis + "\r\n" + "Interfaz manual: " + Aplicacion.ArchPathItf + "\r\n" + "Interfaz aut.: " + Aplicacion.ArchPathItfAut + "\r\n" + "PDFs: " + Aplicacion.ArchPathPDF;
+            StatusBar.Panels["OrigenDatosSBP"].ToolTipText = "Directorio de Datos: " + Aplicacion.Aplic.ArchPath + "\r\n" + "Hitoricos: " + Aplicacion.Aplic.ArchPathHis + "\r\n" + "Interfaz manual: " + Aplicacion.Aplic.ArchPathItf + "\r\n" + "Interfaz aut.: " + Aplicacion.Aplic.ArchPathItfAut + "\r\n" + "PDFs: " + Aplicacion.Aplic.ArchPathPDF;
             StatusBar.Panels["CXOSBP"].Text = "CXO: " + Aplicacion.Sesion.CXO;
             StatusBar.Panels["CXOSBP"].ToolTipText = "Control por oposición: " + Aplicacion.Sesion.CXO;
-            eFact_R.RN.Vendedor.Consultar(Aplicacion.Vendedores, Aplicacion.Sesion);
+            eFact_RN.Vendedor.Consultar(Aplicacion.Vendedores, Aplicacion.Sesion);
             VerificarServicio();
         }
 
@@ -83,38 +83,38 @@ namespace eFact_R
             if (CrearDirectorios == "SI")
             {
                 DirectoryInfo di;
-                if (!Directory.Exists(Aplicacion.ArchPath))
+                if (!Directory.Exists(Aplicacion.Aplic.ArchPath))
                 {
-                    di = Directory.CreateDirectory(Aplicacion.ArchPath);
+                    di = Directory.CreateDirectory(Aplicacion.Aplic.ArchPath);
                     MessageBox.Show("Se ha creado el repositorio para el procesamiento de archivos en el directorio: \r\n" + di.FullName + "\r\n\r\nEn este repositorio deberán ser copiados todos los archivos a procesar.");
                 }
-                if (!Directory.Exists(Aplicacion.ArchPathHis))
+                if (!Directory.Exists(Aplicacion.Aplic.ArchPathHis))
                 {
-                    di = Directory.CreateDirectory(Aplicacion.ArchPathHis);
+                    di = Directory.CreateDirectory(Aplicacion.Aplic.ArchPathHis);
                     MessageBox.Show("Se ha creado el repositorio histórico de archivos procesados en el directorio: \r\n" + di.FullName + "\r\n\r\nA este repositorio se moverán automáticamente todos los archivos, los procesados satisfactoriamente y también los que no pudieran ser procesados por cualquier problema.");
                 }
-                if (!Directory.Exists(Aplicacion.ArchPathItf))
+                if (!Directory.Exists(Aplicacion.Aplic.ArchPathItf))
                 {
-                    di = Directory.CreateDirectory(Aplicacion.ArchPathItf);
+                    di = Directory.CreateDirectory(Aplicacion.Aplic.ArchPathItf);
                     MessageBox.Show("Se ha creado el repositorio de salida de archivos en el directorio: \r\n" + di.FullName + "\r\n\r\nEn este repositorio se guardarán a pedido del usuario, los archivos de interfaz de salida que genere el usuario sobre lotes ya procesados.");
                 }
-                if (!Directory.Exists(Aplicacion.ArchPathItfAut))
+                if (!Directory.Exists(Aplicacion.Aplic.ArchPathItfAut))
                 {
-                    di = Directory.CreateDirectory(Aplicacion.ArchPathItfAut);
+                    di = Directory.CreateDirectory(Aplicacion.Aplic.ArchPathItfAut);
                     MessageBox.Show("Se ha creado el repositorio de salida automática de archivos en el directorio: \r\n" + di.FullName + "\r\n\r\nEn este repositorio se guardarán automáticamente, los archivos de interfaz de salida con las respuestas obtenidas desde la AFIP sobre los lotes de comprobantes procesados satisfactoriamente.");
                 }
-                if (!Directory.Exists(Aplicacion.ArchPathPDF))
+                if (!Directory.Exists(Aplicacion.Aplic.ArchPathPDF))
                 {
-                    di = Directory.CreateDirectory(Aplicacion.ArchPathPDF);
+                    di = Directory.CreateDirectory(Aplicacion.Aplic.ArchPathPDF);
                     MessageBox.Show("Se ha creado el repositorio para exportar comprobantes en formato PDF en el directorio: \r\n" + di.FullName + "");
                 }
             }
             ActualizarBandejaE();
-            BandejaEDataGridView.DataSource = new List<eFact_R.Entidades.Archivo>();
+            BandejaEDataGridView.DataSource = new List<eFact_Entidades.Archivo>();
             BandejaEDataGridView.DataSource = dtBandejaEntrada;
             BandejaEDataGridView.Refresh();
             ActualizarBandejaS();
-            BandejaSDataGridView.DataSource = new List<eFact_R.Entidades.Lote>();
+            BandejaSDataGridView.DataSource = new List<eFact_Entidades.Lote>();
             BandejaSDataGridView.DataSource = dtBandejaSalida;
             BandejaSDataGridView.Refresh();
         }
@@ -186,14 +186,14 @@ namespace eFact_R
                 LimpiarBandejaEntrada();
                 if (ArchivosHistoricosRadioButton.Checked)
                 {
-                    List<eFact_R.Entidades.Archivo> archivos = new List<eFact_R.Entidades.Archivo>();
-                    if (TipoConsultaArchivos == eFact_R.RN.Tablero.TipoConsultaArchivos.FechaCreacion)
+                    List<eFact_Entidades.Archivo> archivos = new List<eFact_Entidades.Archivo>();
+                    if (TipoConsultaArchivos == eFact_Entidades.Archivo.TipoConsultaArchivos.FechaCreacion)
                     {
-                        eFact_R.RN.Archivo.Consultar(out archivos, TipoConsultaArchivos, ArchivosOtrosFiltros, FechaAltaDsdBandejaEDTP.Value, FechaAltaHstBandejaEDTP.Value, Aplicacion.Sesion);
+                        eFact_RN.Archivo.Consultar(out archivos, TipoConsultaArchivos, ArchivosOtrosFiltros, FechaAltaDsdBandejaEDTP.Value, FechaAltaHstBandejaEDTP.Value, Aplicacion.Sesion);
                     }
                     else
                     {
-                        eFact_R.RN.Archivo.Consultar(out archivos, TipoConsultaArchivos, ArchivosOtrosFiltros, FechaProcesoDsdBandejaEDTP.Value, FechaProcesoHstBandejaEDTP.Value, Aplicacion.Sesion);
+                        eFact_RN.Archivo.Consultar(out archivos, TipoConsultaArchivos, ArchivosOtrosFiltros, FechaProcesoDsdBandejaEDTP.Value, FechaProcesoHstBandejaEDTP.Value, Aplicacion.Sesion);
                     }
                     dtBandejaEntrada = archivos;
                 }
@@ -209,7 +209,7 @@ namespace eFact_R
             }
             finally
             {
-                BandejaEDataGridView.DataSource = new List<eFact_R.Entidades.Archivo>();
+                BandejaEDataGridView.DataSource = new List<eFact_Entidades.Archivo>();
                 BandejaEDataGridView.DataSource = dtBandejaEntrada;
                 BandejaEDataGridView.Refresh();
                 ActualizarBandejaEButton.Enabled = true;
@@ -221,13 +221,13 @@ namespace eFact_R
         {
             Cursor = System.Windows.Forms.Cursors.WaitCursor;
             VerificarServicio();
-            switch (eFact_R.Aplicacion.CodigoAplic.ToString())
+            switch (Aplicacion.Aplic.CodigoAplic.ToString())
             {
                 case "eFactInterface":
                 {
                     BandejaEDataGridView.AutoGenerateColumns = false;
-                    string[] files = Directory.GetFiles(eFact_R.Aplicacion.ArchPath, "*.*");
-                    BandejaEDataGridView.DataSource = new List<eFact_R.Entidades.Archivo>();
+                    string[] files = Directory.GetFiles(Aplicacion.Aplic.ArchPath, "*.*");
+                    BandejaEDataGridView.DataSource = new List<eFact_Entidades.Archivo>();
                     BandejaEDataGridView.DataSource = dtBandejaEntrada;
                     BandejaEDataGridView.Refresh();
                     foreach (string d in files)
@@ -270,10 +270,10 @@ namespace eFact_R
                                 }
                                 if (incorporarALista)
                                 {
-                                    List<eFact_R.Entidades.Archivo> Archivos = new List<eFact_R.Entidades.Archivo>();
-                                    eFact_R.RN.Tablero.ActualizarBandejaEntrada(out Archivos, dtBandejaEntrada, ArchFileInfo, Aplicacion.Sesion);
+                                    List<eFact_Entidades.Archivo> Archivos = new List<eFact_Entidades.Archivo>();
+                                    eFact_RN.Tablero.ActualizarBandejaEntrada(out Archivos, dtBandejaEntrada, ArchFileInfo, Aplicacion.Sesion);
                                     dtBandejaEntrada = Archivos;
-                                    BandejaEDataGridView.DataSource = new List<eFact_R.Entidades.Archivo>();
+                                    BandejaEDataGridView.DataSource = new List<eFact_Entidades.Archivo>();
                                     BandejaEDataGridView.DataSource = dtBandejaEntrada;
                                     BandejaEDataGridView.Refresh();
                                 }
@@ -308,7 +308,7 @@ namespace eFact_R
             }
             finally
             {
-                BandejaSDataGridView.DataSource = new List<eFact_R.Entidades.Lote>();
+                BandejaSDataGridView.DataSource = new List<eFact_Entidades.Lote>();
                 BandejaSDataGridView.DataSource = dtBandejaSalida;
                 BandejaSDataGridView.Refresh();
                 ActualizarBandejaSButton.Enabled = true;
@@ -322,7 +322,7 @@ namespace eFact_R
             DateTime FechaDsd;
             DateTime FechaHst;
             VerificarServicio();
-            if (TipoConsulta == eFact_R.RN.Tablero.TipoConsulta.FechaAlta)
+            if (TipoConsulta == eFact_Entidades.Lote.TipoConsulta.FechaAlta)
             {
                 FechaDsd = FechaDsdLoteFecAltaDTP.Value;
                 FechaHst = FechaHstLoteFecAltaDTP.Value;
@@ -350,13 +350,13 @@ namespace eFact_R
             ExportarItfComboBox.SelectedIndex = 0;
 
             BandejaSDataGridView.AutoGenerateColumns = false;
-            eFact_R.RN.Tablero.ActualizarBandejaSalida(out dtBandejaSalida, TipoConsulta, FechaDsd, FechaHst, otrosFiltrosCuitvendedor, otrosFiltrosNumeroLote, otrosFiltrosPuntoVenta, PtesDiasAntCheckBox.Checked, eFact_R.Aplicacion.Sesion);
+            eFact_RN.Tablero.ActualizarBandejaSalida(out dtBandejaSalida, TipoConsulta, FechaDsd, FechaHst, otrosFiltrosCuitvendedor, otrosFiltrosNumeroLote, otrosFiltrosPuntoVenta, PtesDiasAntCheckBox.Checked, eFact_R.Aplicacion.Sesion);
             BandejaSDataGridView.DataSource = dtBandejaSalida;
             if (Aplicacion.Modalidad != "Automatica" || ServicioOK == false)
             {
                 //Verificar Ptes.Respuesta AFIP.
-                List<eFact_R.Entidades.Lote> dtBandejaSalidaFind = dtBandejaSalida.FindAll((delegate(eFact_R.Entidades.Lote e1) { return e1.WF.IdEstado == "PteRespAFIP"; }));
-                foreach (eFact_R.Entidades.Lote l in dtBandejaSalidaFind)
+                List<eFact_Entidades.Lote> dtBandejaSalidaFind = dtBandejaSalida.FindAll((delegate(eFact_Entidades.Lote e1) { return e1.WF.IdEstado == "PteRespAFIP"; }));
+                foreach (eFact_Entidades.Lote l in dtBandejaSalidaFind)
                 {
                     FeaEntidades.InterFacturas.lote_comprobantes Lc = new FeaEntidades.InterFacturas.lote_comprobantes();
                     CedWebRN.IBK.error[] respErroresLote = new CedWebRN.IBK.error[0];
@@ -364,30 +364,30 @@ namespace eFact_R
                     try
                     {
                         //Consultar si exite el lote en Interfacturas
-                        eFact_R.RN.Lote.ConsultarLoteIF(out Lc, out respErroresLote, out respErroresComprobantes, l, Aplicacion.Vendedores.Find(delegate(eFact_R.Entidades.Vendedor e1) { return e1.CuitVendedor == l.CuitVendedor; }).NumeroSerieCertificado);
+                        eFact_RN.Lote.ConsultarLoteIF(out Lc, out respErroresLote, out respErroresComprobantes, l, Aplicacion.Vendedores.Find(delegate(eFact_Entidades.Vendedor e1) { return e1.CuitVendedor == l.CuitVendedor; }).NumeroSerieCertificado);
                         //Ejecutar evento ( cambia el estado )
                         if (Lc.cabecera_lote.resultado == "A")
                         {
-                            eFact_R.RN.Lote.ActualizarDatosCAE(l, Lc);
+                            eFact_RN.Lote.ActualizarDatosCAE(l, Lc);
                             string comentario = ArmarTextoMotivo(Lc);
                             EjecutarEventoBandejaS("RegAceptAFIP", comentario, l);
                         }
                         else if (Lc.cabecera_lote.resultado == "O")
                         {
-                            eFact_R.RN.Lote.ActualizarDatosCAE(l, Lc);
+                            eFact_RN.Lote.ActualizarDatosCAE(l, Lc);
                             string comentario = ArmarTextoMotivo(Lc);
                             EjecutarEventoBandejaS("RegAceptAFIPO", comentario, l);
                         }
                         else if (Lc.cabecera_lote.resultado == "P")
                         {
-                            eFact_R.RN.Lote.ActualizarDatosCAE(l, Lc);
+                            eFact_RN.Lote.ActualizarDatosCAE(l, Lc);
                             string comentario = ArmarTextoMotivo(Lc);
                             EjecutarEventoBandejaS("RegAceptAFIPP", comentario, l);
                         }
                         else if (Lc.cabecera_lote.resultado == "R")
                         {
                             CedWebRN.IBK.lote_response lr = ArmarLoteResponse(Lc);
-                            eFact_R.RN.Lote.ActualizarDatosError(l, lr);
+                            eFact_RN.Lote.ActualizarDatosError(l, lr);
                             string comentario = ArmarTextoMotivo(Lc);
                             EjecutarEventoBandejaS("RegRechAFIP", comentario, l);
                         }
@@ -411,8 +411,8 @@ namespace eFact_R
                         }
                     }
                 }
-                eFact_R.RN.Tablero.ActualizarBandejaSalida(out dtBandejaSalida, TipoConsulta, FechaDsd, FechaHst, otrosFiltrosCuitvendedor, otrosFiltrosNumeroLote, otrosFiltrosPuntoVenta, PtesDiasAntCheckBox.Checked, eFact_R.Aplicacion.Sesion);
-                BandejaSDataGridView.DataSource = new List<eFact_R.Entidades.Lote>();
+                eFact_RN.Tablero.ActualizarBandejaSalida(out dtBandejaSalida, TipoConsulta, FechaDsd, FechaHst, otrosFiltrosCuitvendedor, otrosFiltrosNumeroLote, otrosFiltrosPuntoVenta, PtesDiasAntCheckBox.Checked, eFact_R.Aplicacion.Sesion);
+                BandejaSDataGridView.DataSource = new List<eFact_Entidades.Lote>();
                 BandejaSDataGridView.DataSource = dtBandejaSalida;
             }
             BandejaSDataGridView.Refresh();
@@ -580,9 +580,9 @@ namespace eFact_R
                             string NombreArchivo = dtBandejaEntrada[renglon].Nombre;
                             string FechaTexto = DateTime.Now.ToString("yyyyMMdd-hhmmss");
                             string ArchGuardarComoNombre = "";
-                            eFact_R.RN.Engine.GenerarNombreArch(out ArchGuardarComoNombre, "DES", NombreArchivo);
+                            eFact_RN.Engine.GenerarNombreArch(out ArchGuardarComoNombre, "DES", NombreArchivo);
                             //Remover archivo ( descartar ) --------
-                            Directory.Move(Aplicacion.ArchPath + "\\" + NombreArchivo, Aplicacion.ArchPathHis + ArchGuardarComoNombre);
+                            Directory.Move(Aplicacion.Aplic.ArchPath + "\\" + NombreArchivo, Aplicacion.Aplic.ArchPathHis + ArchGuardarComoNombre);
                             //--------------------------------------
                         }
                     }
@@ -607,8 +607,8 @@ namespace eFact_R
         }
         private void LimpiarBandejaEntrada()
         {
-            dtBandejaEntrada = new List<eFact_R.Entidades.Archivo>();
-            BandejaEDataGridView.DataSource = new List<eFact_R.Entidades.Archivo>();
+            dtBandejaEntrada = new List<eFact_Entidades.Archivo>();
+            BandejaEDataGridView.DataSource = new List<eFact_Entidades.Archivo>();
             BandejaEDataGridView.Refresh();
         }
 
@@ -627,18 +627,18 @@ namespace eFact_R
 
         private void RefreshBandejaSalida()
         {
-            eFact_R.RN.Tablero.TipoConsulta tipoConsulta;
+            eFact_Entidades.Lote.TipoConsulta tipoConsulta;
             DateTime fechaDsd;
             DateTime fechaHst;
             if (FechaAltaLoteRadioButton.Checked)
             {
-                tipoConsulta = eFact_R.RN.Tablero.TipoConsulta.FechaAlta;
+                tipoConsulta = eFact_Entidades.Lote.TipoConsulta.FechaAlta;
                 fechaDsd = FechaDsdLoteFecAltaDTP.Value;
                 fechaHst = FechaHstLoteFecAltaDTP.Value;
             }
             else
             {
-                tipoConsulta = eFact_R.RN.Tablero.TipoConsulta.FechaEnvio;
+                tipoConsulta = eFact_Entidades.Lote.TipoConsulta.FechaEnvio;
                 fechaDsd = FechaDsdLoteFecEnvioDTP.Value;
                 fechaHst = FechaHstLoteFecEnvioDTP.Value;
             }
@@ -651,8 +651,8 @@ namespace eFact_R
                 numeroLote = NumeroLoteTextBox.Text;
                 puntoVenta = PuntoVentaTextBox.Text;
             }
-            eFact_R.RN.Lote.Consultar(out dtBandejaSalida, tipoConsulta, fechaDsd, fechaHst, cuitVendedor, numeroLote, puntoVenta, PtesDiasAntCheckBox.Checked, Aplicacion.Sesion);
-            BandejaSDataGridView.DataSource = new List<eFact_R.Entidades.Lote>();
+            eFact_RN.Lote.Consultar(out dtBandejaSalida, tipoConsulta, fechaDsd, fechaHst, cuitVendedor, numeroLote, puntoVenta, PtesDiasAntCheckBox.Checked, Aplicacion.Sesion);
+            BandejaSDataGridView.DataSource = new List<eFact_Entidades.Lote>();
             BandejaSDataGridView.DataSource = dtBandejaSalida;
             BandejaSDataGridView.Refresh();
         }
@@ -682,18 +682,18 @@ namespace eFact_R
                         string NombreArchivo = dtBandejaEntrada[renglon].Nombre;
                         string FechaTexto = DateTime.Now.ToString("yyyyMMdd-hhmmss");
                         string ArchGuardarComoNombre = "";
-                        eFact_R.RN.Engine.GenerarNombreArch(out ArchGuardarComoNombre, "", NombreArchivo);
+                        eFact_RN.Engine.GenerarNombreArch(out ArchGuardarComoNombre, "", NombreArchivo);
                         //--------------------------------------
                         //Procesar el archivo seleccionado.
                         try
                         {
-                            eFact_R.Entidades.Lote lote = new eFact_R.Entidades.Lote();
-                            eFact_R.RN.Archivo.Procesar(out lote, dtBandejaEntrada[renglon], Aplicacion.Sesion);
+                            eFact_Entidades.Lote lote = new eFact_Entidades.Lote();
+                            eFact_RN.Archivo.Procesar(out lote, dtBandejaEntrada[renglon], Aplicacion.Aplic, Aplicacion.Sesion);
                             //Agregar datos del proceso a la entidad Archivo
                             ArchGuardarComoNombre = "BAK-" + ArchGuardarComoNombre;
                             dtBandejaEntrada[renglon].NombreProcesado = ArchGuardarComoNombre;
                             dtBandejaEntrada[renglon].FechaProceso = DateTime.Now;
-                            string handler = eFact_R.RN.Archivo.Insertar(dtBandejaEntrada[renglon], true, Aplicacion.Sesion);
+                            string handler = eFact_RN.Archivo.Insertar(dtBandejaEntrada[renglon], true, Aplicacion.Sesion);
                             //Ejecutar el insert local del "Lote".
                             CedEntidades.Evento evento = new CedEntidades.Evento();
                             evento.Id = "EnvBandSalida";
@@ -701,9 +701,9 @@ namespace eFact_R
                             evento.Flow.DescrFlow = "Facturación Electrónica";
                             Cedeira.SV.WF.LeerEvento(evento, Aplicacion.Sesion);
                             lote.WF = Cedeira.SV.WF.Nueva("eFact", "Fact", 0, "Facturacion Electrónica", Aplicacion.Sesion);
-                            eFact_R.RN.Lote.VerificarEnviosPosteriores(true, lote.CuitVendedor, lote.NumeroLote, lote.PuntoVenta, lote.NumeroEnvio, eFact_R.Aplicacion.Sesion);
+                            eFact_RN.Lote.VerificarEnviosPosteriores(true, lote.CuitVendedor, lote.NumeroLote, lote.PuntoVenta, lote.NumeroEnvio, eFact_R.Aplicacion.Sesion);
                             //Generar nombre de archivo procesado para ser enviado al histórico.
-                            eFact_R.RN.Lote.Ejecutar(lote, evento, handler, Aplicacion.Sesion);
+                            eFact_RN.Lote.Ejecutar(lote, evento, handler, Aplicacion.Aplic, Aplicacion.Sesion);
                         }
                         catch (Exception ex)
                         {
@@ -717,10 +717,10 @@ namespace eFact_R
                             ArchGuardarComoNombre = "ERR-" + ArchGuardarComoNombre;
                             dtBandejaEntrada[renglon].NombreProcesado = ArchGuardarComoNombre;
                             dtBandejaEntrada[renglon].FechaProceso = DateTime.Now;
-                            eFact_R.RN.Archivo.Insertar(dtBandejaEntrada[renglon], false, Aplicacion.Sesion);
+                            eFact_RN.Archivo.Insertar(dtBandejaEntrada[renglon], false, Aplicacion.Sesion);
                         }
                         //Remover archivo ----------------------
-                        Directory.Move(Aplicacion.ArchPath + "\\" + NombreArchivo, Aplicacion.ArchPathHis + ArchGuardarComoNombre);
+                        Directory.Move(Aplicacion.Aplic.ArchPath + "\\" + NombreArchivo, Aplicacion.Aplic.ArchPathHis + ArchGuardarComoNombre);
                         //--------------------------------------
                     }
                 }
@@ -747,12 +747,12 @@ namespace eFact_R
                 Cursor = System.Windows.Forms.Cursors.Default;
             }
         }
-        private static int Comparer(eFact_R.Entidades.Lote x, eFact_R.Entidades.Lote y)
+        private static int Comparer(eFact_Entidades.Lote x, eFact_Entidades.Lote y)
         {
             return x.NumeroLote.CompareTo(y.NumeroLote);
         }
 
-        public List<eFact_R.Entidades.Lote> SortListaLotes(List<eFact_R.Entidades.Lote> lLotes)
+        public List<eFact_Entidades.Lote> SortListaLotes(List<eFact_Entidades.Lote> lLotes)
         {
             lLotes.Sort(Comparer);
             return lLotes;
@@ -766,8 +766,8 @@ namespace eFact_R
                 EventosComboBox.Enabled = false;
                 if (BandejaSDataGridView.SelectedRows.Count != 0)
                 {
-                    eFact_R.Entidades.Lote l = new eFact_R.Entidades.Lote();
-                    List<eFact_R.Entidades.Lote> llotes = new List<eFact_R.Entidades.Lote>();
+                    eFact_Entidades.Lote l = new eFact_Entidades.Lote();
+                    List<eFact_Entidades.Lote> llotes = new List<eFact_Entidades.Lote>();
                     for (int i = 0; i < BandejaSDataGridView.SelectedRows.Count; i++)
                     {
                         int renglon = BandejaSDataGridView.SelectedRows[i].Index;
@@ -778,7 +778,7 @@ namespace eFact_R
                     for (int i = 0; i < llotes.Count; i++)
                     {
                         //Envio del lote a IF
-                        eFact_R.Entidades.Lote lote = new eFact_R.Entidades.Lote();
+                        eFact_Entidades.Lote lote = new eFact_Entidades.Lote();
                         lote = llotes[i];
                         List<CedEntidades.Evento> eventosposibles = new List<CedEntidades.Evento>();
                         eventosposibles = lote.WF.EventosPosibles.FindAll((delegate(CedEntidades.Evento e1) { return e1.IdEstadoDsd.IdEstado.ToString() == "PteEnvio"; }));
@@ -788,12 +788,12 @@ namespace eFact_R
                             break;
                         }
                         FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
-                        eFact_R.RN.Lote.DeserializarLc(out lc, lote, false);
+                        eFact_RN.Lote.DeserializarLc(out lc, lote, false);
 
                         //Antes de ejecutar el envio a Interfacturas, cambiar el estado.
                         EjecutarEventoBandejaS("EnviarAIF", "", lote);
                         //Actualizar el WF del lote.
-                        eFact_R.RN.Lote.Leer(lote, Aplicacion.Sesion);
+                        eFact_RN.Lote.Leer(lote, Aplicacion.Sesion);
 
                         //Consultar si exite el lote en Interfacturas
                         FeaEntidades.InterFacturas.lote_comprobantes Lc = new FeaEntidades.InterFacturas.lote_comprobantes();
@@ -806,7 +806,7 @@ namespace eFact_R
                         CedWebRN.IBK.lote_response Lr = new CedWebRN.IBK.lote_response();
                         try
                         {
-                            eFact_R.Entidades.Vendedor v = Aplicacion.Vendedores.Find(delegate(eFact_R.Entidades.Vendedor e1) { return e1.CuitVendedor == lc.cabecera_lote.cuit_vendedor.ToString(); });
+                            eFact_Entidades.Vendedor v = Aplicacion.Vendedores.Find(delegate(eFact_Entidades.Vendedor e1) { return e1.CuitVendedor == lc.cabecera_lote.cuit_vendedor.ToString(); });
                             if (v == null)
                             {
                                 throw new Microsoft.ApplicationBlocks.ExceptionManagement.Vendedor.Inexistente("CUIT " + lc.cabecera_lote.cuit_vendedor.ToString());
@@ -828,21 +828,29 @@ namespace eFact_R
                                 Lr.errores_lote[0].codigo_error = 99;
                                 edescr = ex2.Message.Replace("'", "''");
                                 Lr.errores_lote[0].descripcion_error = edescr;
+                                if (edescr.IndexOf("500 - error") != -1)
+                                {
+                                    Lr.errores_lote[0].codigo_error = 500;
+                                }
+                                if (edescr.IndexOf("600 - error") != -1)
+                                {
+                                    Lr.errores_lote[0].codigo_error = 600;
+                                }
                             }
-                            eFact_R.RN.Lote.ActualizarDatosError(lote, Lr);
+                            eFact_RN.Lote.ActualizarDatosError(lote, Lr);
                             edescr = ex2.Message.Replace("'", "''");
                             EjecutarEventoBandejaS("RegRechIF", edescr, lote);
                             //Va a revertir el rechazo (si el error es "Timed Out" hasta 10 ocurrencias.
                             if (Lr.estado == "99" && Lr.errores_lote != null && Lr.errores_lote[0].descripcion_error.ToUpper().Trim() == "THE OPERATION HAS TIMED OUT")
                             {
-                                eFact_R.Entidades.Lote loteAux = new eFact_R.Entidades.Lote();
+                                eFact_Entidades.Lote loteAux = new eFact_Entidades.Lote();
                                 loteAux.IdLote = lote.IdLote;
-                                eFact_R.RN.Lote.Leer(loteAux, Aplicacion.Sesion);
+                                eFact_RN.Lote.Leer(loteAux, Aplicacion.Sesion);
                                 List<CedEntidades.Log> log = loteAux.WF.Log.FindAll(delegate(CedEntidades.Log e1) { return e1.Comentario.ToUpper().Trim() == "THE OPERATION HAS TIMED OUT"; });
                                 if (log != null && log.Count > 0 && log.Count < 10)
                                 {
                                     //Actualizar el WF del lote.
-                                    eFact_R.RN.Lote.Leer(lote, Aplicacion.Sesion);
+                                    eFact_RN.Lote.Leer(lote, Aplicacion.Sesion);
                                     EjecutarEventoBandejaS("RevertirRechIFA", "", lote);
                                 }
                             }
@@ -873,7 +881,7 @@ namespace eFact_R
                 {
                     for (int i = 0; i < BandejaSDataGridView.SelectedRows.Count; i++)
                     {
-                        eFact_R.Entidades.Lote lote = new eFact_R.Entidades.Lote();
+                        eFact_Entidades.Lote lote = new eFact_Entidades.Lote();
                         int renglon = BandejaSDataGridView.SelectedRows[i].Index;
                         lote = dtBandejaSalida[renglon];
                         EjecutarEventoBandejaS(Evento, "", lote);
@@ -891,7 +899,7 @@ namespace eFact_R
             }
         }
 
-        private void EjecutarEventoBandejaS(string IdEvento, string Comentario, eFact_R.Entidades.Lote lote)
+        private void EjecutarEventoBandejaS(string IdEvento, string Comentario, eFact_Entidades.Lote lote)
         {
             CedEntidades.Evento evento = new CedEntidades.Evento();
             evento.Id = IdEvento;
@@ -899,8 +907,8 @@ namespace eFact_R
             evento.Flow.DescrFlow = "Facturación Electrónica";
             evento.Comentario = Comentario;
             Cedeira.SV.WF.LeerEvento(evento, Aplicacion.Sesion);
-            eFact_R.RN.Lote.VerificarEnviosPosteriores(false, lote.CuitVendedor, lote.NumeroLote, lote.PuntoVenta, lote.NumeroEnvio, eFact_R.Aplicacion.Sesion);
-            eFact_R.RN.Lote.Ejecutar(lote, evento, "", Aplicacion.Sesion);
+            eFact_RN.Lote.VerificarEnviosPosteriores(false, lote.CuitVendedor, lote.NumeroLote, lote.PuntoVenta, lote.NumeroEnvio, eFact_R.Aplicacion.Sesion);
+            eFact_RN.Lote.Ejecutar(lote, evento, "", Aplicacion.Aplic, Aplicacion.Sesion);
             RefreshBandejaSalida();
         }
 
@@ -928,22 +936,22 @@ namespace eFact_R
 
         private void FechaEnvioLoteRadioButton_Click(object sender, EventArgs e)
         {
-            TipoConsulta = eFact_R.RN.Tablero.TipoConsulta.FechaEnvio;
+            TipoConsulta = eFact_Entidades.Lote.TipoConsulta.FechaEnvio;
         }
 
         private void FechaAltaLoteRadioButton_Click(object sender, EventArgs e)
         {
-            TipoConsulta = eFact_R.RN.Tablero.TipoConsulta.FechaAlta;
+            TipoConsulta = eFact_Entidades.Lote.TipoConsulta.FechaAlta;
         }
 
         private void ArchivoOKRadioButton_Click(object sender, EventArgs e)
         {
-            ArchivosOtrosFiltros = eFact_R.RN.Archivo.OtrosFiltros.OK;
+            ArchivosOtrosFiltros = eFact_Entidades.Archivo.OtrosFiltros.OK;
         }
 
         private void ArchivosNotOKRadioButton_Click(object sender, EventArgs e)
         {
-            ArchivosOtrosFiltros = eFact_R.RN.Archivo.OtrosFiltros.NotOk;
+            ArchivosOtrosFiltros = eFact_Entidades.Archivo.OtrosFiltros.NotOk;
         }
 
         private void OtrosFiltrosBandejaECheckBox_CheckedChanged(object sender, EventArgs e)
@@ -951,12 +959,12 @@ namespace eFact_R
             if (((CheckBox)sender).Checked)
             {
                 OtrosFiltrosBandejaEPanel.Enabled = true;
-                ArchivosOtrosFiltros = eFact_R.RN.Archivo.OtrosFiltros.OK;
+                ArchivosOtrosFiltros = eFact_Entidades.Archivo.OtrosFiltros.OK;
             }
             else
             {
                 OtrosFiltrosBandejaEPanel.Enabled = false;
-                ArchivosOtrosFiltros = eFact_R.RN.Archivo.OtrosFiltros.SinAplicar;
+                ArchivosOtrosFiltros = eFact_Entidades.Archivo.OtrosFiltros.SinAplicar;
             }
         }
 
@@ -1016,11 +1024,11 @@ namespace eFact_R
         {
             if (((RadioButton)sender).Checked && ((RadioButton)sender).Name == "FechaCreacionRadioButton")
             {
-                TipoConsultaArchivos = eFact_R.RN.Tablero.TipoConsultaArchivos.FechaCreacion;
+                TipoConsultaArchivos = eFact_Entidades.Archivo.TipoConsultaArchivos.FechaCreacion;
             }
             else
             {
-                TipoConsultaArchivos = eFact_R.RN.Tablero.TipoConsultaArchivos.FechaProceso;
+                TipoConsultaArchivos = eFact_Entidades.Archivo.TipoConsultaArchivos.FechaProceso;
             }
         }
 
@@ -1167,7 +1175,7 @@ namespace eFact_R
                         for (int i = 0; i < BandejaSDataGridView.SelectedRows.Count; i++)
                         {
                             int renglon = BandejaSDataGridView.SelectedRows[i].Index;
-                            eFact_R.Entidades.Lote lote = new eFact_R.Entidades.Lote();
+                            eFact_Entidades.Lote lote = new eFact_Entidades.Lote();
                             lote = dtBandejaSalida[renglon];
                             string archivoProcesado = "";
                             bool IF = false;
@@ -1179,17 +1187,17 @@ namespace eFact_R
                             // 2, 3 y 5 archivos XML  
                             if (((ComboBox)sender).SelectedIndex == 1 || ((ComboBox)sender).SelectedIndex == 4)
                             {
-                                eFact_R.RN.Lote.GuardarItfTXT(out archivoProcesado, lote, "ITF", Aplicacion.ArchPathItf, IF);
+                                eFact_RN.Lote.GuardarItfTXT(out archivoProcesado, lote, "ITF", Aplicacion.Aplic.ArchPathItf, IF);
                             }
                             else
                             {
                                 if (((ComboBox)sender).SelectedIndex == 3)
                                 {
-                                    eFact_R.RN.Lote.GuardarItfXML(out archivoProcesado, lote, "ITF", Aplicacion.ArchPathItf, IF, true);
+                                    eFact_RN.Lote.GuardarItfXML(out archivoProcesado, lote, "ITF", Aplicacion.Aplic.ArchPathItf, IF, true);
                                 }
                                 else
                                 {
-                                    eFact_R.RN.Lote.GuardarItfXML(out archivoProcesado, lote, "ITF", Aplicacion.ArchPathItf, IF, false);
+                                    eFact_RN.Lote.GuardarItfXML(out archivoProcesado, lote, "ITF", Aplicacion.Aplic.ArchPathItf, IF, false);
                                 }
                             }
                             MessageBox.Show("Interface generada satisfactoriamente con el nombre: " + archivoProcesado, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
@@ -1215,7 +1223,7 @@ namespace eFact_R
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 ConsultaVendedor c = new ConsultaVendedor(StatusBar);
                 c.ShowDialog();
-                c = null;
+                c.Dispose();
             }
             catch (Exception ex)
             {
@@ -1251,7 +1259,7 @@ namespace eFact_R
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 if (BandejaSDataGridView.SelectedRows.Count != 0)
                 {
-                    eFact_R.Entidades.Lote lote = new eFact_R.Entidades.Lote();
+                    eFact_Entidades.Lote lote = new eFact_Entidades.Lote();
                     int renglon = BandejaSDataGridView.SelectedRows[0].Index;
                     lote = dtBandejaSalida[renglon];
                     ConsultaLote cl = new ConsultaLote(lote, ConsultaLote.Modo.Consulta);

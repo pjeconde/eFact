@@ -99,18 +99,6 @@
     <Compile Include="ComentariosXComprobante.Designer.cs">
       <DependentUpon>ComentariosXComprobante.cs</DependentUpon>
     </Compile>
-    <Compile Include="DB\Archivo.cs" />
-    <Compile Include="DB\Comprobante.cs" />
-    <Compile Include="DB\Vendedor.cs" />
-    <Compile Include="DB\db.cs" />
-    <Compile Include="DB\Lote.cs" />
-    <Compile Include="DB\Tablero.cs" />
-    <Compile Include="Entidades\Aplicacion.cs" />
-    <Compile Include="Entidades\Archivo.cs" />
-    <Compile Include="Entidades\Comprobante.cs" />
-    <Compile Include="Entidades\Vendedor.cs" />
-    <Compile Include="Entidades\Disco.cs" />
-    <Compile Include="Entidades\Lote.cs" />
     <Compile Include="Facturacion\Electronica\Reportes\Code39.cs" />
     <Compile Include="Facturacion\Electronica\Reportes\CodigoBarra.cs">
       <AutoGen>True</AutoGen>
@@ -146,17 +134,6 @@
       <DependentUpon>ConsultaVendedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\Reportes\NumALet.cs" />
-    <Compile Include="RN\Aplicacion.cs" />
-    <Compile Include="RN\Archivo.cs" />
-    <Compile Include="RN\Comprobante.cs" />
-    <Compile Include="RN\Vendedor.cs" />
-    <Compile Include="RN\Disco.cs" />
-    <Compile Include="RN\Encryptor.cs" />
-    <Compile Include="RN\Engine.cs" />
-    <Compile Include="RN\Lote.cs" />
-    <Compile Include="RN\Registro.cs" />
-    <Compile Include="RN\Sesion.cs" />
-    <Compile Include="RN\Tablero.cs" />
     <Compile Include="Tablero.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -302,6 +279,18 @@
     <ProjectReference Include="..\..\CedWebRN\CedWebRN.csproj">
       <Project>{9C229E72-6A86-4209-8730-91F573B4DF19}</Project>
       <Name>CedWebRN</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\eFact-DB\eFact-DB.csproj">
+      <Project>{40CCD1A7-45DD-4C54-998E-24DE8D117760}</Project>
+      <Name>eFact-DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\eFact-Entidades\eFact-Entidades.csproj">
+      <Project>{88FDF572-3FF0-4019-8EE5-53D0BD47EA0D}</Project>
+      <Name>eFact-Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\eFact-RN\eFact-RN.csproj">
+      <Project>{709FF43D-659A-4AA2-A184-892CD2B35F32}</Project>
+      <Name>eFact-RN</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\FeaEntidades\FeaEntidades.csproj">
       <Project>{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}</Project>
