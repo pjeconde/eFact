@@ -6,12 +6,15 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace eFact_I_Bj
 {
     public partial class TableroBj : Form
     {
         private List<eFact_I_Bj.Entidades.ComprobanteBj> Comprobantes;
+        private FeaEntidades.InterFacturas.lote_comprobantes Lc;
         private eFact_I_Bj.RN.TableroBj.TipoConsulta TipoConsulta;
         public TableroBj()
         {
@@ -24,6 +27,7 @@ namespace eFact_I_Bj
             StatusBar.Panels["CXOSBP"].ToolTipText = "Control por oposición: " + Aplicacion.Sesion.CXO;
             StatusBar.Panels["OrigenDatosSBP"].ToolTipText = "Directorio de Datos: " + Aplicacion.ArchPath + "\r\n";
             Comprobantes = new List<eFact_I_Bj.Entidades.ComprobanteBj>();
+            Lc = new FeaEntidades.InterFacturas.lote_comprobantes();
             TipoConsulta = eFact_I_Bj.RN.TableroBj.TipoConsulta.ComprobantesAProcesar;
             ConsultaComprobantesDataGridView.AutoGenerateColumns = false;
             ConsultaComprobantesDataGridView.DataSource = new List<eFact_I_Bj.Entidades.ComprobanteBj>();
@@ -87,7 +91,7 @@ namespace eFact_I_Bj
             try
             {
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
-                eFact_I_Bj.RN.TableroBj.ConsultarComprobantes(out Comprobantes, TipoConsulta, FechaComprobantesDsdDTP.Value, FechaComprobantesHstDTP.Value, IdTipoComprobanteComboBox.SelectedValue.ToString(), PuntoVentaTextBox.Text, NumeroComprobanteTextBox.Text, TestingVerificarExistenciaCAECheckBox.Checked, Aplicacion.Sesion);
+                eFact_I_Bj.RN.TableroBj.ConsultarComprobantes(out Comprobantes, out Lc, TipoConsulta, FechaComprobantesDsdDTP.Value, FechaComprobantesHstDTP.Value, IdTipoComprobanteComboBox.SelectedValue.ToString(), PuntoVentaTextBox.Text, NumeroComprobanteTextBox.Text, TestingVerificarExistenciaCAECheckBox.Checked, Aplicacion.Sesion);
                 ConsultaComprobantesDataGridView.DataSource = Comprobantes;
                 if (Comprobantes.Count == 0)
                 {
@@ -152,9 +156,74 @@ namespace eFact_I_Bj
             {
                 if (ConsultaComprobantesDataGridView.SelectedRows.Count != 0)
                 {
-
-
-                    ////Actualizar lote
+                    int renglon = ConsultaComprobantesDataGridView.SelectedRows[0].Index;
+                    try
+                    {
+                        eFact_I_Bj.Entidades.Plantilla plantillaExpuesta = new eFact_I_Bj.Entidades.Plantilla();
+                        Plantilla plantilla = new Plantilla(eFact_I_Bj.RN.Plantilla.Modo.Consulta, plantillaExpuesta);
+                        plantilla.ShowDialog();
+                        plantillaExpuesta = plantilla.plantillaExpuesta;
+                        plantilla = null;
+                        string observaciones = string.Empty;
+                        if (plantillaExpuesta != null)
+                        {
+                            //foreach (eFact_I_Bj.Entidades.ComprobanteBj comprobante in Comprobantes)
+                            //{
+                                //if (Comprobantes[renglon].Leyendas[0].ToString() != string.Empty)
+                                //{
+                                //    string leyenda = Comprobantes[renglon].Leyendas[0].ToString();
+                                //    observaciones = observaciones + plantillaExpuesta.Leyenda1 + " " + leyenda + " ";
+                                //}
+                                if (Comprobantes[renglon].Leyendas[1].ToString() != string.Empty)
+                                {
+                                    string leyenda = Comprobantes[renglon].Leyendas[1].ToString();
+                                    observaciones = observaciones + plantillaExpuesta.Leyenda2 + " " + leyenda + " ";
+                                }
+                                if (Comprobantes[renglon].Leyendas[2].ToString() != string.Empty)
+                                {
+                                    string leyenda = Comprobantes[renglon].Leyendas[2].ToString();
+                                    observaciones = observaciones + plantillaExpuesta.Leyenda3 + " " + leyenda + " ";
+                                }
+                                if (Comprobantes[renglon].Leyendas[3].ToString() != string.Empty)
+                                {
+                                    string leyenda = Comprobantes[renglon].Leyendas[3].ToString();
+                                    observaciones = observaciones + plantillaExpuesta.Leyenda4 + " " + leyenda + " ";
+                                }
+                                if (Comprobantes[renglon].Leyendas[4].ToString() != string.Empty)
+                                {
+                                    string leyenda = Comprobantes[renglon].Leyendas[4].ToString();
+                                    observaciones = observaciones + plantillaExpuesta.Leyenda5 + " " + leyenda + " ";
+                                }
+                                observaciones = observaciones + plantillaExpuesta.LeyendaMoneda + " " + " ";
+                                Lc.comprobante[renglon].extensiones = new FeaEntidades.InterFacturas.extensiones();
+                                Lc.comprobante[renglon].extensiones.extensiones_datos_comerciales = observaciones;
+                                Lc.comprobante[renglon].extensionesSpecified = true;
+                                Lc.comprobante[renglon].resumen.observaciones = plantillaExpuesta.LeyendaBanco;
+                            //}
+                            
+                        }
+                        
+                        //Crear "lote_comprobantes"
+                        string LoteXML;
+                        //Metodo estático para el armado del Lote en formato XML, no necesita usar el constructor con la URL, proxy y certificados.
+                        //Para Contingencias: El string LoteXML deberá guardarse en un archivo para se subido al Sitio Web de Interfacturas.
+                        FeaEntidades.InterFacturas.lote_comprobantes lcComprobanteSelec = new FeaEntidades.InterFacturas.lote_comprobantes();
+                        lcComprobanteSelec.comprobante[0] = Lc.comprobante[renglon];
+                        LoteXML = ArmarLoteXML(lcComprobanteSelec);
+                        //Definir ruta y nombre del archivo.
+                        FileStream fs = File.Create(@"c:\\efact-c-contingencia.xml");
+                        System.Text.Encoding codificador;
+                        codificador = System.Text.Encoding.GetEncoding("iso-8859-1");
+                        fs.Write(codificador.GetBytes(LoteXML), 0, LoteXML.Length);
+                        fs.Close();
+                        MessageBox.Show("Lote XML generado satisfactoriamente", "NOTIFICACION", MessageBoxButtons.OK);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "NOTIFICACION", MessageBoxButtons.OK);
+                        //Guardar el ex.InnerException si tiene contenido para tener mas detalle del problema.
+                    }
+                    //Actualizar lote
                     //ms = new MemoryStream();
                     //XmlizedString = null;
                     //writer = new XmlTextWriter(ms, System.Text.Encoding.GetEncoding("ISO-8859-1"));
@@ -166,6 +235,107 @@ namespace eFact_I_Bj
                     //Lote.LoteXmlIF = XmlizedString;
 
 
+<<<<<<< .mine
+                    //int renglon = ConsultaComprobantesDataGridView.SelectedRows[0].Index;
+                    //string nombreProcesado = "";
+                    //eFact_I_Bj.DB.ComprobanteBj c = new eFact_I_Bj.DB.ComprobanteBj(Aplicacion.Sesion);
+                    //DateTime fechaYHora = c.FechaDB;
+                    //GenerarNombreArch(out nombreProcesado, Aplicacion.ArchPath, "Itf", fechaYHora, Comprobantes[renglon], "txt");
+                    //FileStream fs = File.Create(nombreProcesado);
+                    //System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    //sb.Append("<cabecera_lote>|" + fechaYHora.ToString("yyyyMMddhhmmss") + "|30690783521||" + Comprobantes[0].VendedorCuit + "|" + ConsultaComprobantesDataGridView.SelectedRows.Count);
+                    ////Presta servicios / Presta servicios especificado
+                    //sb.Append("|1|1");
+                    //sb.Append("|" + DateTime.Now.ToString("yyyyMMdd hhmmss"));
+                    //sb.AppendLine("|" + Comprobantes[0].PuntoVenta + "||");
+                    //for (int i = 0; i < ConsultaComprobantesDataGridView.SelectedRows.Count; i++)
+                    //{
+                    //    sb.Append("<informacion_comprador>");
+                    //    sb.Append("||0|");
+                    //    string TipoDoc = "";
+                    //    TipoDoc = Comprobantes[i].CompradorTipoDoc.ToString();
+                    //    sb.Append("|" + TipoDoc + "|" + Comprobantes[i].CompradorNroDoc + "|" + Comprobantes[i].CompradorNombre);
+                    //    //condicion de IVA + especificado + condicion IB + especificado
+                    //    sb.Append("|" + Comprobantes[i].Comprador.CondicionIVA + "|1||0|||||||||||");
+                    //    //Cod.Provincia
+                    //    sb.Append("|" + Comprobantes[i].Comprador.Provincia);
+                    //    sb.AppendLine("|||");
+                    //    sb.Append("<informacion_comprobante>");
+                    //    sb.Append("|" + Comprobantes[i].IdTipoComprobante.ToString() + "|" + Comprobantes[i].NumeroComprobante);
+                    //    sb.Append("|" + Comprobantes[i].PuntoVenta + "|" + Comprobantes[i].Fecha.ToString("yyyyMMdd"));
+                    //    sb.Append("|" + Comprobantes[i].FechaVto.ToString("yyyyMMdd"));
+                    //    //Fecha de Servicios
+                    //    sb.Append("|" + Comprobantes[i].Fecha.ToString("yyyyMMdd") + "|" + Comprobantes[i].Fecha.ToString("yyyyMMdd"));
+                    //    //Condicion de pago
+                    //    sb.Append("|0|0");
+                    //    //IVA computable
+                    //    sb.Append("|N");
+                    //    //Cod.Operacion
+                    //    sb.Append("|");
+                    //    //CAE
+                    //    sb.Append("|");
+                    //    if (Comprobantes[i].NumeroCAE != "" && Comprobantes[i].NumeroCAE != "0")
+                    //    {
+                    //        sb.Append(Comprobantes[i].NumeroCAE);
+                    //    }
+                    //    //Fecha Vto. CAE
+                    //    sb.Append("|");
+                    //    if (Comprobantes[i].NumeroCAE != "" && Comprobantes[i].NumeroCAE != "0")
+                    //    {
+                    //        sb.Append(Comprobantes[i].FechaVtoCAE.ToString("yyyyMMdd"));
+                    //    }
+                    //    //Fecha Obtención CAE
+                    //    sb.Append("|");
+                    //    sb.AppendLine("|||N");
+                    //    sb.Append("<informacion_vendedor>");
+                    //    sb.Append("||0|");
+                    //    sb.Append("|" + Comprobantes[i].Vendedor.Nombre + "|" + Comprobantes[i].VendedorCuit);
+                    //    //condicion de IVA + especificado
+                    //    sb.Append("|" + Comprobantes[i].Vendedor.CondicionIVA + "|1");
+                    //    //condicion de IB + especificado + Nro. IB
+                    //    sb.Append("|" + Comprobantes[i].Vendedor.CondicionIB + "|1" + "|" + Comprobantes[i].Vendedor.NroIB);
+                    //    //fecha inicio de actividades + contacto
+                    //    sb.Append("|" + Comprobantes[i].Vendedor.InicioActividades.ToString("yyyyMMdd") + "|" + Comprobantes[i].Vendedor.Contacto);
+                    //    //datos de la empresa ( domicilio, mail, etc. )
+                    //    sb.Append("|" + Comprobantes[i].Vendedor.DomicilioCalle + "|" + Comprobantes[i].Vendedor.DomicilioNumero);
+                    //    sb.Append("|" + Comprobantes[i].Vendedor.DomicilioPiso + "|" + Comprobantes[i].Vendedor.DomicilioDepto + "|" + Comprobantes[i].Vendedor.DomicilioSector);
+                    //    sb.Append("|" + Comprobantes[i].Vendedor.DomicilioTorre + "|" + Comprobantes[i].Vendedor.DomicilioManzana + "|" + Comprobantes[i].Vendedor.Localidad + "|" + Comprobantes[i].Vendedor.Provincia);
+                    //    sb.AppendLine("|" + Comprobantes[i].Vendedor.CP + "|" + Comprobantes[i].Vendedor.EMail + "|" + Comprobantes[i].Vendedor.Telefono);
+                    //    sb.AppendLine("<detalle>|");
+                    //    //Lineas
+                    //    for (int j = 0; j < Comprobantes[i].Lineas.Count; j++)
+                    //    {
+                    //        sb.Append("<linea>");
+                    //        sb.Append("|0|0||");
+                    //        sb.Append("|" + Comprobantes[i].Lineas[j].Descripcion + "|" + Comprobantes[i].Lineas[j].Cantidad + "|1");
+                    //        //Unidad de medida
+                    //        sb.Append("|" );
+                    //        sb.Append("|" + Comprobantes[i].Lineas[j].Precio_unitario + "|1|" + Comprobantes[i].Lineas[j].Importe_total_articulo);
+                    //        sb.Append("|" + Comprobantes[i].Lineas[j].Alicuota_iva + "|1|" + Comprobantes[i].Lineas[j].Importe_iva + "|1");
+                    //        sb.Append("|" + Comprobantes[i].Lineas[j].Indicacion_exento_gravado);
+                    //        sb.Append("|" + Comprobantes[i].Lineas[j].Importe_total_descuentos + "|1|" + Comprobantes[i].Lineas[j].Importe_total_impuestos + "|1");
+                    //        sb.AppendLine("|" + Comprobantes[i].Lineas[j].Renglon);
+                    //    }
+                    //    sb.Append("<resumen>");
+                    //    sb.Append("|" + Comprobantes[i].ImporteNetoGravado + "|" + Comprobantes[i].ImporteNetoNoGravado + "|" + Comprobantes[i].ImporteOpsExentas);
+                    //    sb.Append("|" + Comprobantes[i].ImpuestoLiq + "|" + Comprobantes[i].ImpuestoRNI + "|" + Comprobantes[i].ImpuestosNacionales + "|1");
+                    //    //Importe total IB
+                    //    sb.Append("|0|0");
+                    //    //Impuestos municipales
+                    //    sb.Append("|0|0");
+                    //    //Impuestos internos
+                    //    sb.Append("|0|0");
+                    //    //Importe total comprobante + tipo de cambio + moneda ( 'PES' va fijo )
+                    //    sb.Append("|" + Comprobantes[i].Importe + "|1|" + Comprobantes[i].IdMoneda);
+                    //    sb.Append("|");
+                    //    sb.AppendLine("|" + Comprobantes[i].CantAlicuotasIVA + "|0");
+                    //}
+                    //System.Text.ASCIIEncoding oEncoder = new ASCIIEncoding();
+                    //Byte[] b = oEncoder.GetBytes(sb.ToString());
+                    //fs.Write(b, 0, b.Length);
+                    //fs.Close();
+                    MessageBox.Show("Interfaz generada satisfactoriamente.\r\n\r\nNombre del archivo: ", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+=======
                     int renglon = ConsultaComprobantesDataGridView.SelectedRows[0].Index;
                     string nombreProcesado = "";
                     eFact_I_Bj.DB.ComprobanteBj c = new eFact_I_Bj.DB.ComprobanteBj(Aplicacion.Sesion);
@@ -265,6 +435,7 @@ namespace eFact_I_Bj
                     fs.Write(b, 0, b.Length);
                     fs.Close();
                     MessageBox.Show("Interfaz generada satisfactoriamente.\r\n\r\nNombre del archivo: " + nombreProcesado, "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+>>>>>>> .r1139
                 }
             }
             catch (Exception ex)
@@ -291,6 +462,38 @@ namespace eFact_I_Bj
         private void ConsultaComprobantesDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             string a = e.Exception.Message;
+        }
+        private string ArmarLoteXML(FeaEntidades.InterFacturas.lote_comprobantes Lc)
+        {
+            //Deserializar ( pasar de FeaEntidades.InterFacturas.lote_comprobantes a string XML )
+            MemoryStream ms = new MemoryStream();
+            XmlTextWriter writer = new XmlTextWriter(ms, System.Text.Encoding.GetEncoding("ISO-8859-1"));
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(Lc.GetType());
+            x.Serialize(writer, Lc);
+            ms = (MemoryStream)writer.BaseStream;
+            string LoteXML = ByteArrayToString(ms.ToArray());
+            ms.Close();
+            return LoteXML;
+        }
+        private string ByteArrayToString(byte[] characters)
+        {
+            System.Text.Encoding e = System.Text.Encoding.GetEncoding("ISO-8859-1");
+            String constructedString = e.GetString(characters);
+            return (constructedString);
+        }
+
+        private void menuItem4_Click(object sender, EventArgs e)
+        {
+            Plantilla plantilla = new Plantilla(eFact_I_Bj.RN.Plantilla.Modo.Alta);
+            plantilla.ShowDialog();
+            plantilla = null;
+        }
+
+        private void menuItem5_Click(object sender, EventArgs e)
+        {
+            Plantilla plantilla = new Plantilla(eFact_I_Bj.RN.Plantilla.Modo.Modificacion);
+            plantilla.ShowDialog();
+            plantilla = null;
         }
     }
 }
