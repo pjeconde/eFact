@@ -12,7 +12,7 @@ namespace eFact_R
 {
     public partial class ConsultaVendedor : Form
     {
-        private eFact_R.Entidades.Vendedor vendedor = new eFact_R.Entidades.Vendedor();
+        private eFact_Entidades.Vendedor vendedor = new eFact_Entidades.Vendedor();
         private StatusBar statusBar;
         public ConsultaVendedor(StatusBar SBar)
         {
@@ -33,13 +33,13 @@ namespace eFact_R
                 BuscarImagenButton.Enabled = false;
                 ModificarButton.Enabled = false;
                 BorrarImagenButton.Enabled = false;
-                List<eFact_R.Entidades.Vendedor> vendedores = new List<eFact_R.Entidades.Vendedor>();
-                eFact_R.RN.Vendedor.Consultar(vendedores, Aplicacion.Sesion);
+                List<eFact_Entidades.Vendedor> vendedores = new List<eFact_Entidades.Vendedor>();
+                eFact_RN.Vendedor.Consultar(vendedores, Aplicacion.Sesion);
                 CuitVendedorComboBox.Items.Clear();
                 CuitVendedorComboBox.Items.Add("( Elegir un Vendedor )");
                 if (vendedores.Count > 0)
                 {
-                    foreach(eFact_R.Entidades.Vendedor v in vendedores)
+                    foreach(eFact_Entidades.Vendedor v in vendedores)
                     {
                         CuitVendedorComboBox.Items.Add(v.CuitVendedor);
                     }
@@ -72,7 +72,7 @@ namespace eFact_R
             {
                 string CuitVendedor = ((ComboBox)sender).SelectedItem.ToString().Trim();
                 vendedor.CuitVendedor = CuitVendedor;
-                eFact_R.RN.Vendedor.Leer(vendedor, Aplicacion.Sesion);
+                eFact_RN.Vendedor.Leer(vendedor, Aplicacion.Sesion);
                 VendedorNombreTextBox.Text = vendedor.Nombre;
                 VendedorNroSerieCertificadoTextBox.Text = vendedor.NumeroSerieCertificado;
                 VendedorCodigoTextBox.Text = vendedor.Codigo;
@@ -103,7 +103,7 @@ namespace eFact_R
             }
             else 
             {
-                vendedor = new eFact_R.Entidades.Vendedor();
+                vendedor = new eFact_Entidades.Vendedor();
                 VendedorNombreTextBox.Text = "";
                 VendedorNroSerieCertificadoTextBox.Text = "";
                 VendedorCodigoTextBox.Text = "";
@@ -186,16 +186,16 @@ namespace eFact_R
             vendedor.CP = VendedorCPTextBox.Text;
             vendedor.EMail = VendedorEMailTextBox.Text;
             vendedor.Telefono = VendedorTelefonosTextBox.Text;
-            eFact_R.RN.Vendedor.Modificar(vendedor, Aplicacion.Sesion);
-            List<eFact_R.Entidades.Vendedor> vendedores = new List<eFact_R.Entidades.Vendedor>();
+            eFact_RN.Vendedor.Modificar(vendedor, Aplicacion.Sesion);
+            List<eFact_Entidades.Vendedor> vendedores = new List<eFact_Entidades.Vendedor>();
 
-            eFact_R.RN.Vendedor.Consultar(vendedores, Aplicacion.Sesion);
+            eFact_RN.Vendedor.Consultar(vendedores, Aplicacion.Sesion);
             if (vendedores.Count > 0)
             {
                 statusBar.Panels["CertificadosSBP"].Text = "Certificados: OK";
                 statusBar.Panels["CertificadosSBP"].ToolTipText = "";
                 bool AllCertifOK = true;
-                foreach (eFact_R.Entidades.Vendedor v in vendedores)
+                foreach (eFact_Entidades.Vendedor v in vendedores)
                 {
                     string storeLocation = System.Configuration.ConfigurationManager.AppSettings["StoreLocation"];
                     X509Store store;
@@ -229,6 +229,7 @@ namespace eFact_R
             MessageBox.Show("Modificación realizada satisfactoriamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
             CuitVendedorComboBox.SelectedIndex = 0;
         }
+
         private void VerLogo(Byte[] Logo)
         {
             if (Logo != null && Logo.Length != 0)

@@ -10,8 +10,8 @@ namespace eFact_R
 {
     public partial class ConsultaArchivo : Form
     {
-        private List<eFact_R.Entidades.Archivo> archivos;
-        public ConsultaArchivo(List<eFact_R.Entidades.Archivo> Archivos)
+        private List<eFact_Entidades.Archivo> archivos;
+        public ConsultaArchivo(List<eFact_Entidades.Archivo> Archivos)
         {
             InitializeComponent();
             archivos = Archivos;
@@ -26,7 +26,7 @@ namespace eFact_R
             {
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 ArchivosDataGridView.AutoGenerateColumns = false;
-                ArchivosDataGridView.DataSource = new List<eFact_R.Entidades.Archivo>();
+                ArchivosDataGridView.DataSource = new List<eFact_Entidades.Archivo>();
                 ArchivosDataGridView.DataSource = archivos;
                 ArchivosDataGridView.Refresh();
             }
