@@ -92,6 +92,9 @@
             this.LimpiarConsultaCButton = new System.Windows.Forms.Button();
             this.GenerarArchivoButton = new System.Windows.Forms.Button();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
+            this.menuItem1 = new System.Windows.Forms.MenuItem();
+            this.menuItem4 = new System.Windows.Forms.MenuItem();
+            this.menuItem5 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
             this.SplitContainer.Panel1.SuspendLayout();
@@ -320,6 +323,7 @@
             this.FechaComprobantesDsdDTP.Name = "FechaComprobantesDsdDTP";
             this.FechaComprobantesDsdDTP.Size = new System.Drawing.Size(94, 20);
             this.FechaComprobantesDsdDTP.TabIndex = 45;
+            this.FechaComprobantesDsdDTP.Value = new System.DateTime(1910, 1, 1, 11, 14, 0, 0);
             // 
             // FechaComprobantesHstDTP
             // 
@@ -682,18 +686,39 @@
             // mainMenu1
             // 
             this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem1,
             this.menuItem2,
             this.menuItem3});
             // 
+            // menuItem1
+            // 
+            this.menuItem1.Index = 0;
+            this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem4,
+            this.menuItem5});
+            this.menuItem1.Text = "Plantilla";
+            // 
+            // menuItem4
+            // 
+            this.menuItem4.Index = 0;
+            this.menuItem4.Text = "Alta";
+            this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
+            // 
+            // menuItem5
+            // 
+            this.menuItem5.Index = 1;
+            this.menuItem5.Text = "Modificación";
+            this.menuItem5.Click += new System.EventHandler(this.menuItem5_Click);
+            // 
             // menuItem2
             // 
-            this.menuItem2.Index = 0;
+            this.menuItem2.Index = 1;
             this.menuItem2.Text = "Acerca";
             this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
             // 
             // menuItem3
             // 
-            this.menuItem3.Index = 1;
+            this.menuItem3.Index = 2;
             this.menuItem3.Text = "Ayuda";
             this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
             // 
@@ -788,6 +813,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaVtoCAE;
         private System.Windows.Forms.DataGridViewComboBoxColumn IdMoneda;
         private System.Windows.Forms.DataGridViewTextBoxColumn Importe;
+        private System.Windows.Forms.MenuItem menuItem1;
+        private System.Windows.Forms.MenuItem menuItem4;
+        private System.Windows.Forms.MenuItem menuItem5;
     }
 }
 
