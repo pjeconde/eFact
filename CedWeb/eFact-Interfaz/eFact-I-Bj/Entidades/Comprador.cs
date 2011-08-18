@@ -10,7 +10,7 @@ namespace eFact_I_Bj.Entidades
         private short tipoDoc;
         private string nroDoc;
         private string nombre;
-        private int condicionIVA;
+        private string condicionIVA;
         private int condicionIB;
         private string nroIB;
         private DateTime inicioActividades;
@@ -60,7 +60,7 @@ namespace eFact_I_Bj.Entidades
                 return nombre;
             }
         }
-        public int CondicionIVA
+        public string CondicionIVA
         {
             set
             {
