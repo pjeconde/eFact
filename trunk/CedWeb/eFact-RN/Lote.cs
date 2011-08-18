@@ -162,7 +162,7 @@ namespace eFact_RN
             {
                 for (int i = 0; i < Lr.comprobante_response.Length; i++)
                 {
-                    eFact_R.Entidades.Comprobante c = Lote.Comprobantes.Find((delegate(eFact_R.Entidades.Comprobante e1) { return e1.IdTipoComprobante == Convert.ToInt16(Lr.comprobante_response[i].tipo_de_comprobante.ToString()) && e1.NumeroComprobante == Lr.comprobante_response[i].numero_comprobante.ToString(); }));
+                    eFact_Entidades.Comprobante c = Lote.Comprobantes.Find((delegate(eFact_Entidades.Comprobante e1) { return e1.IdTipoComprobante == Convert.ToInt16(Lr.comprobante_response[i].tipo_de_comprobante.ToString()) && e1.NumeroComprobante == Lr.comprobante_response[i].numero_comprobante.ToString(); }));
                     c.EstadoIFoAFIP = "";
 
                     //Actualizar comentario del comprobante
@@ -172,7 +172,7 @@ namespace eFact_RN
                     x = new System.Xml.Serialization.XmlSerializer(Lr.comprobante_response[i].GetType());
                     x.Serialize(writer, Lr.comprobante_response[i]);
                     ms = (MemoryStream)writer.BaseStream;
-                    XmlizedString = RN.Tablero.ByteArrayToString(ms.ToArray());
+                    XmlizedString = eFact_RN.Tablero.ByteArrayToString(ms.ToArray());
                     ms.Close();
                     c.ComentarioIFoAFIP = XmlizedString;
                 }
