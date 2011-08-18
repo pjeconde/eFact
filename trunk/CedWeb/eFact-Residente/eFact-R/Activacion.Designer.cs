@@ -100,11 +100,11 @@ namespace eFact_R
             // 
             // discoBindingSource1
             // 
-            this.discoBindingSource1.DataSource = typeof(eFact_R.Entidades.Disco);
+            this.discoBindingSource1.DataSource = typeof(eFact_Entidades.Disco);
             // 
             // discoBindingSource
             // 
-            this.discoBindingSource.DataSource = typeof(eFact_R.Entidades.Disco);
+            this.discoBindingSource.DataSource = typeof(eFact_Entidades.Disco);
             // 
             // Activacion
             // 

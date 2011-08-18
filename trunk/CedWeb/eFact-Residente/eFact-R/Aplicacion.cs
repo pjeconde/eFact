@@ -14,14 +14,7 @@ namespace eFact_R
         public static string ClaveSolicitud;
         public static CedEntidades.Sesion Sesion;
         public static string ArchDb;
-        public static string ArchPath;
-        public static string ArchPathHis;
-        public static string ArchPathItf;
-        public static string ArchPathItfAut;
         public static string VisualizarArchivos;
-        public static string TipoItfAut;
-        public static string ArchPathPDF;
-        public static string CodigoAplic;
         public static string Modalidad;
         public static string OtrosFiltrosFiltrarBE;
         public static string OtrosFiltrosFiltrarBS;
@@ -30,8 +23,9 @@ namespace eFact_R
         public static DateTime FechaMin;
         public static DateTime FechaMax;
         public static string StoreLocationActivacion;
-        public static List<eFact_R.Entidades.Vendedor> Vendedores = new List<eFact_R.Entidades.Vendedor>();
+        public static List<eFact_Entidades.Vendedor> Vendedores = new List<eFact_Entidades.Vendedor>();
         public const string RegistroNombreClave = @"Software\Cedeira\eFact-R";
+        public static eFact_Entidades.Aplicacion Aplic;
 
         /// <summary>
         /// Punto de entrada principal para la aplicación.
@@ -43,14 +37,7 @@ namespace eFact_R
             {
                 Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
                 ArchDb = @System.Configuration.ConfigurationManager.AppSettings["ArchDb"];
-                ArchPath = @System.Configuration.ConfigurationManager.AppSettings["ArchPath"];
-                ArchPathHis = @System.Configuration.ConfigurationManager.AppSettings["ArchPathHis"];
-                ArchPathItf = @System.Configuration.ConfigurationManager.AppSettings["ArchPathItf"];
-                ArchPathItfAut = @System.Configuration.ConfigurationManager.AppSettings["ArchPathItfAut"];
                 VisualizarArchivos = @System.Configuration.ConfigurationManager.AppSettings["VisualizarArchivos"];
-                TipoItfAut = @System.Configuration.ConfigurationManager.AppSettings["TipoItfAut"];
-                ArchPathPDF = @System.Configuration.ConfigurationManager.AppSettings["ArchPathPDF"];
-                CodigoAplic = @System.Configuration.ConfigurationManager.AppSettings["CodigoAplic"];
                 Modalidad = @System.Configuration.ConfigurationManager.AppSettings["Modalidad"];
                 OtrosFiltrosFiltrarBE = @System.Configuration.ConfigurationManager.AppSettings["OtrosFiltrosFiltrarBE"];
                 OtrosFiltrosFiltrarBS = @System.Configuration.ConfigurationManager.AppSettings["OtrosFiltrosFiltrarBS"];
@@ -68,56 +55,56 @@ namespace eFact_R
                 Application.SetCompatibleTextRenderingDefault(false);
                 if (StoreLocationActivacion == "CurrentUser")
                 {
-                    if (!RN.Registro.Existe(Registry.CurrentUser, RegistroNombreClave))
+                    if (!eFact_RN.Registro.Existe(Registry.CurrentUser, RegistroNombreClave))
                     {
                         //Registracion
                         changüí = Encryptor.Encrypt("0", "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-                        RN.Registro.Guardar(Registry.CurrentUser, RegistroNombreClave, "q", changüí);
-                        RN.Registro.Guardar(Registry.CurrentUser, RegistroNombreClave, "k", "");
+                        eFact_RN.Registro.Guardar(Registry.CurrentUser, RegistroNombreClave, "q", changüí);
+                        eFact_RN.Registro.Guardar(Registry.CurrentUser, RegistroNombreClave, "k", "");
                     }
                     else
                     {
-                        if (!RN.Registro.ExisteValor(Registry.CurrentUser, RegistroNombreClave, "q"))
+                        if (!eFact_RN.Registro.ExisteValor(Registry.CurrentUser, RegistroNombreClave, "q"))
                         {
                             changüí = Encryptor.Encrypt("0", "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-                            RN.Registro.Guardar(Registry.CurrentUser, RegistroNombreClave, "q", changüí);
+                            eFact_RN.Registro.Guardar(Registry.CurrentUser, RegistroNombreClave, "q", changüí);
                         }
-                        if (!RN.Registro.ExisteValor(Registry.CurrentUser, RegistroNombreClave, "k"))
+                        if (!eFact_RN.Registro.ExisteValor(Registry.CurrentUser, RegistroNombreClave, "k"))
                         {
-                            RN.Registro.Guardar(Registry.CurrentUser, RegistroNombreClave, "k", "");
+                            eFact_RN.Registro.Guardar(Registry.CurrentUser, RegistroNombreClave, "k", "");
                         }
                     }
                 }
                 else
                 {
-                    if (!RN.Registro.Existe(Registry.LocalMachine, RegistroNombreClave))
+                    if (!eFact_RN.Registro.Existe(Registry.LocalMachine, RegistroNombreClave))
                     {
                         //Registracion
                         changüí = Encryptor.Encrypt("0", "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-                        RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "q", changüí);
-                        RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "k", "");
+                        eFact_RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "q", changüí);
+                        eFact_RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "k", "");
                     }
                     else
                     {
-                        if (!RN.Registro.ExisteValor(Registry.LocalMachine, RegistroNombreClave, "q"))
+                        if (!eFact_RN.Registro.ExisteValor(Registry.LocalMachine, RegistroNombreClave, "q"))
                         {
                             changüí = Encryptor.Encrypt("0", "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-                            RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "q", changüí);
+                            eFact_RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "q", changüí);
                         }
-                        if (!RN.Registro.ExisteValor(Registry.LocalMachine, RegistroNombreClave, "k"))
+                        if (!eFact_RN.Registro.ExisteValor(Registry.LocalMachine, RegistroNombreClave, "k"))
                         {
-                            RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "k", "");
+                            eFact_RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "k", "");
                         }
                     }
                 }
                 //Verificar changüí
                 if (StoreLocationActivacion == "CurrentUser")
                 {
-                    RN.Registro.Leer(Registry.CurrentUser, RegistroNombreClave, "q", out changüí);
+                    eFact_RN.Registro.Leer(Registry.CurrentUser, RegistroNombreClave, "q", out changüí);
                 }
                 else
                 {
-                    RN.Registro.Leer(Registry.LocalMachine, RegistroNombreClave, "q", out changüí);
+                    eFact_RN.Registro.Leer(Registry.LocalMachine, RegistroNombreClave, "q", out changüí);
                 }
                 int i = Convert.ToInt32(Encryptor.Decrypt(changüí.ToString(), "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")));
                 if (i > 0)
@@ -126,43 +113,44 @@ namespace eFact_R
                     changüí = Encryptor.Encrypt(i.ToString(), "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
                     if (StoreLocationActivacion == "CurrentUser")
                     {
-                        RN.Registro.Guardar(Registry.CurrentUser, RegistroNombreClave, "q", changüí);
+                        eFact_RN.Registro.Guardar(Registry.CurrentUser, RegistroNombreClave, "q", changüí);
                     }
                     else
                     {
-                        RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "q", changüí);
+                        eFact_RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "q", changüí);
                     }
                     Application.Run(new Tablero());
                 }
                 else
                 {
                     //Verificar activacion
-                    ClaveSolicitud = RN.Disco.ClaveSolicitud();
+                    ClaveSolicitud = eFact_RN.Disco.ClaveSolicitud();
                     string claveSolicitud = Encryptor.Encrypt(ClaveSolicitud, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
                     object claveActivacion;
                     if (StoreLocationActivacion == "CurrentUser")
                     {
-                        RN.Registro.Leer(Registry.CurrentUser, RegistroNombreClave, "k", out claveActivacion);
+                        eFact_RN.Registro.Leer(Registry.CurrentUser, RegistroNombreClave, "k", out claveActivacion);
                     }
                     else
                     {
-                        RN.Registro.Leer(Registry.LocalMachine, RegistroNombreClave, "k", out claveActivacion);
+                        eFact_RN.Registro.Leer(Registry.LocalMachine, RegistroNombreClave, "k", out claveActivacion);
                     }
                     if (claveSolicitud == claveActivacion.ToString())
                     {
+                        Aplic = eFact_RN.Aplicacion.Crear();
+
                         System.Text.StringBuilder auxCnn = new System.Text.StringBuilder();
                         auxCnn.Append(System.Configuration.ConfigurationManager.AppSettings["CnnStr"]);
                         
                         System.Text.StringBuilder auxCnnAplicExterna = new System.Text.StringBuilder();
                         auxCnnAplicExterna.Append(System.Configuration.ConfigurationManager.AppSettings["CnnStrAplicExterna"]);
-                        auxCnnAplicExterna.Append(ArchPath);
+                        auxCnnAplicExterna.Append(Aplic.ArchPath);
                         auxCnnAplicExterna.Append(ArchDb);
-                        
-                        eFact_R.Entidades.Aplicacion aplic = eFact_R.RN.Aplicacion.Crear();
+ 
                         Sesion = new CedEntidades.Sesion();
                         string Usuario = System.Environment.UserName;
                         string Dominio = System.Environment.UserDomainName;
-                        eFact_R.RN.Sesion.Crear(Usuario, "", Dominio, auxCnn.ToString(), auxCnnAplicExterna.ToString(), "FrontEnd", aplic.Version, aplic.VersionParaControl, Sesion);
+                        eFact_RN.Sesion.Crear(Usuario, "", Dominio, auxCnn.ToString(), auxCnnAplicExterna.ToString(), "FrontEnd", Aplic.Version, Aplic.VersionParaControl, Sesion);
                         if (Sesion != null)
                         {
                             Application.Run(new Tablero());
@@ -182,7 +170,8 @@ namespace eFact_R
             {
 			    Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
 			}
-			finally {
+			finally 
+            {
 				Cursor.Current=System.Windows.Forms.Cursors.Default;
 			}
 
