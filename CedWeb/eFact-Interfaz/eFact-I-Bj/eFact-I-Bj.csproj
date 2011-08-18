@@ -69,12 +69,20 @@
     <Compile Include="DB\ComprobanteBj.cs" />
     <Compile Include="DB\db.cs" />
     <Compile Include="DB\Lote.cs" />
+    <Compile Include="DB\Plantilla.cs" />
     <Compile Include="Entidades\Aplicacion.cs" />
     <Compile Include="Entidades\Comprador.cs" />
     <Compile Include="Entidades\ComprobanteBj.cs" />
     <Compile Include="Entidades\ComprobanteBjLinea.cs" />
     <Compile Include="Entidades\Disco.cs" />
+    <Compile Include="Entidades\Plantilla.cs" />
     <Compile Include="Entidades\Vendedor.cs" />
+    <Compile Include="Plantilla.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plantilla.designer.cs">
+      <DependentUpon>Plantilla.cs</DependentUpon>
+    </Compile>
     <Compile Include="RN\Aplicacion.cs" />
     <Compile Include="RN\ComprobanteBj.cs" />
     <Compile Include="RN\Lote.cs" />
