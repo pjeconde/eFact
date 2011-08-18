@@ -19,11 +19,13 @@ namespace eFact_I_Bj.RN
             /// <comentarios/>
             ComprobantesProcesados, 
         }
-        public static void ConsultarComprobantes(out List<eFact_I_Bj.Entidades.ComprobanteBj> Comprobantes, TipoConsulta TipoConsulta, DateTime FechaDsd, DateTime FechaHst, string IdTipoComprobante, string PuntoVenta, string NumeroComprobante, bool VerificarExistenciaCAE, CedEntidades.Sesion Sesion)
+        public static void ConsultarComprobantes(out List<eFact_I_Bj.Entidades.ComprobanteBj> Comprobantes, out FeaEntidades.InterFacturas.lote_comprobantes Lc, TipoConsulta TipoConsulta, DateTime FechaDsd, DateTime FechaHst, string IdTipoComprobante, string PuntoVenta, string NumeroComprobante, bool VerificarExistenciaCAE, CedEntidades.Sesion Sesion)
         {
             List<eFact_I_Bj.Entidades.ComprobanteBj> comprobantes = new List<eFact_I_Bj.Entidades.ComprobanteBj>();
-            eFact_I_Bj.RN.ComprobanteBj.Consultar(comprobantes, TipoConsulta, FechaDsd, FechaHst, IdTipoComprobante, PuntoVenta, NumeroComprobante, VerificarExistenciaCAE, Sesion);
+            FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+            eFact_I_Bj.RN.ComprobanteBj.Consultar(comprobantes, lc, TipoConsulta, FechaDsd, FechaHst, IdTipoComprobante, PuntoVenta, NumeroComprobante, VerificarExistenciaCAE, Sesion);
             Comprobantes = comprobantes;
+            Lc = lc;
         }
         public static string ByteArrayToString(byte[] characters)
         {
