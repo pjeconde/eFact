@@ -11,6 +11,7 @@ namespace eFact_I_Bj
     public partial class Plantilla : Form
     {
         private eFact_I_Bj.RN.Plantilla.Modo modo;
+        public eFact_I_Bj.Entidades.Plantilla plantillaExpuesta;
 
         public Plantilla(eFact_I_Bj.RN.Plantilla.Modo Modo)
         {
@@ -22,11 +23,33 @@ namespace eFact_I_Bj
             {
                 DescrPlantillaComboBox.Visible = false;
                 EjecutarButton.Enabled = true;
+                SeleccionarButton.Visible = false;
+                SeleccionarButton.Enabled = false;
             }
-            else
+            else if (eFact_I_Bj.RN.Plantilla.Modo.Modificacion == modo)
             {
                 DescrPlantillaComboBox.Visible = true;
                 EjecutarButton.Enabled = false;
+                LlenarCombo();
+                SeleccionarButton.Visible = false;
+                SeleccionarButton.Enabled = false;
+            }
+        }
+        public Plantilla(eFact_I_Bj.RN.Plantilla.Modo Modo, eFact_I_Bj.Entidades.Plantilla plantillaParaExponer)
+        {
+            InitializeComponent();
+            modo = Modo;
+            this.Text = "Plantilla (" + modo.ToString() + ")";
+            SeleccionarButton.Text = "Seleccionar";
+            plantillaExpuesta = plantillaParaExponer;
+            if (eFact_I_Bj.RN.Plantilla.Modo.Consulta == modo)
+            {
+                DescrPlantillaComboBox.Visible = true;
+                EjecutarButton.Enabled = false;
+                EjecutarButton.Visible = false;
+                SeleccionarButton.Visible = true;
+                SeleccionarButton.Enabled = true;
+                LlenarCombo();
             }
         }
 
@@ -51,6 +74,7 @@ namespace eFact_I_Bj
         {
             eFact_I_Bj.DB.Plantilla db = new eFact_I_Bj.DB.Plantilla(Aplicacion.Sesion);
             eFact_I_Bj.Entidades.Plantilla plantilla = new eFact_I_Bj.Entidades.Plantilla();
+            plantilla.IdPlantilla = Convert.ToInt32(DescrPlantillaComboBox.SelectedValue.ToString());
             plantilla.DescrPlantilla = DescrPlantillaTextBox.Text;
             plantilla.Leyenda1 = Leyenda1TextBox.Text;
             plantilla.Leyenda2 = Leyenda2TextBox.Text;
@@ -73,21 +97,40 @@ namespace eFact_I_Bj
         {
             eFact_I_Bj.DB.Plantilla db = new eFact_I_Bj.DB.Plantilla(Aplicacion.Sesion);
             eFact_I_Bj.Entidades.Plantilla plantilla = new eFact_I_Bj.Entidades.Plantilla();
-            plantilla.IdPlantilla = Convert.ToInt32(DescrPlantillaComboBox.SelectedValue.ToString());
-            db.Leer(plantilla);
-            if (plantilla.DescrPlantilla != "")
+            if (DescrPlantillaComboBox.SelectedValue != null)
             {
-                EjecutarButton.Enabled = true;
-                DescrPlantillaTextBox.Text = "";
-                Leyenda1TextBox.Text = plantilla.Leyenda1;
-                Leyenda2TextBox.Text = plantilla.Leyenda2;
-                Leyenda3TextBox.Text = plantilla.Leyenda3;
-                Leyenda4TextBox.Text = plantilla.Leyenda4;
-                Leyenda5TextBox.Text = plantilla.Leyenda5;
-                LeyendaMonedaTextBox.Text = plantilla.LeyendaMoneda;
-                LeyendaBancoTextBox.Text = plantilla.LeyendaBanco;
-                EjecutarButton.Enabled = true;
+                plantilla.IdPlantilla = Convert.ToInt32(DescrPlantillaComboBox.SelectedValue.ToString());
+                db.Leer(plantilla);
+                if (plantilla.DescrPlantilla != "")
+                {
+                    EjecutarButton.Enabled = true;
+                    DescrPlantillaTextBox.Text = plantilla.DescrPlantilla;
+                    Leyenda1TextBox.Text = plantilla.Leyenda1;
+                    Leyenda2TextBox.Text = plantilla.Leyenda2;
+                    Leyenda3TextBox.Text = plantilla.Leyenda3;
+                    Leyenda4TextBox.Text = plantilla.Leyenda4;
+                    Leyenda5TextBox.Text = plantilla.Leyenda5;
+                    LeyendaMonedaTextBox.Text = plantilla.LeyendaMoneda;
+                    LeyendaBancoTextBox.Text = plantilla.LeyendaBanco;
+                    EjecutarButton.Enabled = true;
+                }
             }
+        }
+        private void LlenarCombo()
+        {
+            eFact_I_Bj.DB.Plantilla db = new eFact_I_Bj.DB.Plantilla(Aplicacion.Sesion);
+            List<eFact_I_Bj.Entidades.Plantilla> listPlantillas = new List<eFact_I_Bj.Entidades.Plantilla>();
+            db.Lista(listPlantillas);
+            DescrPlantillaComboBox.ValueMember = "IdPlantilla";
+            DescrPlantillaComboBox.DisplayMember = "DescrPlantilla";
+            DescrPlantillaComboBox.DataSource = listPlantillas;
+            DescrPlantillaComboBox.SelectedIndex = -1;
+        }
+
+        private void SeleccionarButton_Click(object sender, EventArgs e)
+        {
+            plantillaExpuesta = (eFact_I_Bj.Entidades.Plantilla) DescrPlantillaComboBox.SelectedItem;
+            this.Close();
         }
     }
 }

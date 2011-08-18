@@ -31,14 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Plantilla));
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.ComentariosPanel = new System.Windows.Forms.Panel();
-            this.DescrPlantillaTextBox = new System.Windows.Forms.TextBox();
-            this.PlantillaLabel = new System.Windows.Forms.Label();
-            this.DescrPlantillaComboBox = new System.Windows.Forms.ComboBox();
-            this.PiePanel = new System.Windows.Forms.Panel();
-            this.BotonesPanel = new System.Windows.Forms.Panel();
-            this.CancelarButton = new System.Windows.Forms.Button();
-            this.EjecutarButton = new System.Windows.Forms.Button();
-            this.SalirButton = new System.Windows.Forms.Button();
             this.DatosPanel = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.LeyendaBancoTextBox = new System.Windows.Forms.TextBox();
@@ -54,13 +46,22 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.Leyenda1TextBox = new System.Windows.Forms.TextBox();
+            this.DescrPlantillaTextBox = new System.Windows.Forms.TextBox();
+            this.PlantillaLabel = new System.Windows.Forms.Label();
+            this.DescrPlantillaComboBox = new System.Windows.Forms.ComboBox();
+            this.PiePanel = new System.Windows.Forms.Panel();
+            this.BotonesPanel = new System.Windows.Forms.Panel();
+            this.CancelarButton = new System.Windows.Forms.Button();
+            this.EjecutarButton = new System.Windows.Forms.Button();
+            this.SalirButton = new System.Windows.Forms.Button();
+            this.SeleccionarButton = new System.Windows.Forms.Button();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
             this.SplitContainer.SuspendLayout();
             this.ComentariosPanel.SuspendLayout();
+            this.DatosPanel.SuspendLayout();
             this.PiePanel.SuspendLayout();
             this.BotonesPanel.SuspendLayout();
-            this.DatosPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // SplitContainer
@@ -94,85 +95,6 @@
             this.ComentariosPanel.Padding = new System.Windows.Forms.Padding(3);
             this.ComentariosPanel.Size = new System.Drawing.Size(832, 409);
             this.ComentariosPanel.TabIndex = 4;
-            // 
-            // DescrPlantillaTextBox
-            // 
-            this.DescrPlantillaTextBox.Location = new System.Drawing.Point(100, 3);
-            this.DescrPlantillaTextBox.Name = "DescrPlantillaTextBox";
-            this.DescrPlantillaTextBox.Size = new System.Drawing.Size(714, 20);
-            this.DescrPlantillaTextBox.TabIndex = 17;
-            // 
-            // PlantillaLabel
-            // 
-            this.PlantillaLabel.AutoSize = true;
-            this.PlantillaLabel.Location = new System.Drawing.Point(8, 6);
-            this.PlantillaLabel.Name = "PlantillaLabel";
-            this.PlantillaLabel.Size = new System.Drawing.Size(86, 13);
-            this.PlantillaLabel.TabIndex = 16;
-            this.PlantillaLabel.Text = "Nombre Plantilla:";
-            // 
-            // DescrPlantillaComboBox
-            // 
-            this.DescrPlantillaComboBox.FormattingEnabled = true;
-            this.DescrPlantillaComboBox.Location = new System.Drawing.Point(17, 12);
-            this.DescrPlantillaComboBox.Name = "DescrPlantillaComboBox";
-            this.DescrPlantillaComboBox.Size = new System.Drawing.Size(803, 21);
-            this.DescrPlantillaComboBox.TabIndex = 15;
-            this.DescrPlantillaComboBox.SelectedValueChanged += new System.EventHandler(this.DescrPlantillaComboBox_SelectedValueChanged);
-            // 
-            // PiePanel
-            // 
-            this.PiePanel.Controls.Add(this.BotonesPanel);
-            this.PiePanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PiePanel.Location = new System.Drawing.Point(0, 0);
-            this.PiePanel.Name = "PiePanel";
-            this.PiePanel.Size = new System.Drawing.Size(832, 30);
-            this.PiePanel.TabIndex = 5;
-            // 
-            // BotonesPanel
-            // 
-            this.BotonesPanel.Controls.Add(this.CancelarButton);
-            this.BotonesPanel.Controls.Add(this.EjecutarButton);
-            this.BotonesPanel.Controls.Add(this.SalirButton);
-            this.BotonesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BotonesPanel.Location = new System.Drawing.Point(0, 0);
-            this.BotonesPanel.Name = "BotonesPanel";
-            this.BotonesPanel.Padding = new System.Windows.Forms.Padding(3);
-            this.BotonesPanel.Size = new System.Drawing.Size(832, 30);
-            this.BotonesPanel.TabIndex = 13;
-            // 
-            // CancelarButton
-            // 
-            this.CancelarButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.CancelarButton.Location = new System.Drawing.Point(667, 3);
-            this.CancelarButton.Name = "CancelarButton";
-            this.CancelarButton.Size = new System.Drawing.Size(102, 24);
-            this.CancelarButton.TabIndex = 11;
-            this.CancelarButton.Text = "Cancelar";
-            this.CancelarButton.UseVisualStyleBackColor = true;
-            this.CancelarButton.Click += new System.EventHandler(this.CancelarButton_Click);
-            // 
-            // EjecutarButton
-            // 
-            this.EjecutarButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.EjecutarButton.Location = new System.Drawing.Point(3, 3);
-            this.EjecutarButton.Name = "EjecutarButton";
-            this.EjecutarButton.Size = new System.Drawing.Size(102, 24);
-            this.EjecutarButton.TabIndex = 10;
-            this.EjecutarButton.Text = "Ejecutar";
-            this.EjecutarButton.UseVisualStyleBackColor = true;
-            this.EjecutarButton.Click += new System.EventHandler(this.EjecutarButton_Click);
-            // 
-            // SalirButton
-            // 
-            this.SalirButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.SalirButton.Location = new System.Drawing.Point(769, 3);
-            this.SalirButton.Name = "SalirButton";
-            this.SalirButton.Size = new System.Drawing.Size(60, 24);
-            this.SalirButton.TabIndex = 9;
-            this.SalirButton.Text = "Salir";
-            this.SalirButton.UseVisualStyleBackColor = true;
-            this.SalirButton.Click += new System.EventHandler(this.SalirButton_Click);
             // 
             // DatosPanel
             // 
@@ -323,6 +245,97 @@
             this.Leyenda1TextBox.Size = new System.Drawing.Size(714, 38);
             this.Leyenda1TextBox.TabIndex = 18;
             // 
+            // DescrPlantillaTextBox
+            // 
+            this.DescrPlantillaTextBox.Location = new System.Drawing.Point(100, 3);
+            this.DescrPlantillaTextBox.Name = "DescrPlantillaTextBox";
+            this.DescrPlantillaTextBox.Size = new System.Drawing.Size(714, 20);
+            this.DescrPlantillaTextBox.TabIndex = 17;
+            // 
+            // PlantillaLabel
+            // 
+            this.PlantillaLabel.AutoSize = true;
+            this.PlantillaLabel.Location = new System.Drawing.Point(8, 6);
+            this.PlantillaLabel.Name = "PlantillaLabel";
+            this.PlantillaLabel.Size = new System.Drawing.Size(86, 13);
+            this.PlantillaLabel.TabIndex = 16;
+            this.PlantillaLabel.Text = "Nombre Plantilla:";
+            // 
+            // DescrPlantillaComboBox
+            // 
+            this.DescrPlantillaComboBox.FormattingEnabled = true;
+            this.DescrPlantillaComboBox.Location = new System.Drawing.Point(17, 12);
+            this.DescrPlantillaComboBox.Name = "DescrPlantillaComboBox";
+            this.DescrPlantillaComboBox.Size = new System.Drawing.Size(803, 21);
+            this.DescrPlantillaComboBox.TabIndex = 15;
+            this.DescrPlantillaComboBox.SelectedValueChanged += new System.EventHandler(this.DescrPlantillaComboBox_SelectedValueChanged);
+            // 
+            // PiePanel
+            // 
+            this.PiePanel.Controls.Add(this.BotonesPanel);
+            this.PiePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PiePanel.Location = new System.Drawing.Point(0, 0);
+            this.PiePanel.Name = "PiePanel";
+            this.PiePanel.Size = new System.Drawing.Size(832, 30);
+            this.PiePanel.TabIndex = 5;
+            // 
+            // BotonesPanel
+            // 
+            this.BotonesPanel.Controls.Add(this.SeleccionarButton);
+            this.BotonesPanel.Controls.Add(this.CancelarButton);
+            this.BotonesPanel.Controls.Add(this.EjecutarButton);
+            this.BotonesPanel.Controls.Add(this.SalirButton);
+            this.BotonesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BotonesPanel.Location = new System.Drawing.Point(0, 0);
+            this.BotonesPanel.Name = "BotonesPanel";
+            this.BotonesPanel.Padding = new System.Windows.Forms.Padding(3);
+            this.BotonesPanel.Size = new System.Drawing.Size(832, 30);
+            this.BotonesPanel.TabIndex = 13;
+            // 
+            // CancelarButton
+            // 
+            this.CancelarButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.CancelarButton.Location = new System.Drawing.Point(667, 3);
+            this.CancelarButton.Name = "CancelarButton";
+            this.CancelarButton.Size = new System.Drawing.Size(102, 24);
+            this.CancelarButton.TabIndex = 11;
+            this.CancelarButton.Text = "Cancelar";
+            this.CancelarButton.UseVisualStyleBackColor = true;
+            this.CancelarButton.Click += new System.EventHandler(this.CancelarButton_Click);
+            // 
+            // EjecutarButton
+            // 
+            this.EjecutarButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.EjecutarButton.Location = new System.Drawing.Point(3, 3);
+            this.EjecutarButton.Name = "EjecutarButton";
+            this.EjecutarButton.Size = new System.Drawing.Size(102, 24);
+            this.EjecutarButton.TabIndex = 10;
+            this.EjecutarButton.Text = "Ejecutar";
+            this.EjecutarButton.UseVisualStyleBackColor = true;
+            this.EjecutarButton.Click += new System.EventHandler(this.EjecutarButton_Click);
+            // 
+            // SalirButton
+            // 
+            this.SalirButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.SalirButton.Location = new System.Drawing.Point(769, 3);
+            this.SalirButton.Name = "SalirButton";
+            this.SalirButton.Size = new System.Drawing.Size(60, 24);
+            this.SalirButton.TabIndex = 9;
+            this.SalirButton.Text = "Salir";
+            this.SalirButton.UseVisualStyleBackColor = true;
+            this.SalirButton.Click += new System.EventHandler(this.SalirButton_Click);
+            // 
+            // SeleccionarButton
+            // 
+            this.SeleccionarButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.SeleccionarButton.Location = new System.Drawing.Point(105, 3);
+            this.SeleccionarButton.Name = "SeleccionarButton";
+            this.SeleccionarButton.Size = new System.Drawing.Size(102, 24);
+            this.SeleccionarButton.TabIndex = 12;
+            this.SeleccionarButton.Text = "Seleccionar";
+            this.SeleccionarButton.UseVisualStyleBackColor = true;
+            this.SeleccionarButton.Click += new System.EventHandler(this.SeleccionarButton_Click);
+            // 
             // Plantilla
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -336,10 +349,10 @@
             this.SplitContainer.Panel2.ResumeLayout(false);
             this.SplitContainer.ResumeLayout(false);
             this.ComentariosPanel.ResumeLayout(false);
-            this.PiePanel.ResumeLayout(false);
-            this.BotonesPanel.ResumeLayout(false);
             this.DatosPanel.ResumeLayout(false);
             this.DatosPanel.PerformLayout();
+            this.PiePanel.ResumeLayout(false);
+            this.BotonesPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -371,6 +384,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox Leyenda1TextBox;
+        private System.Windows.Forms.Button SeleccionarButton;
 
     }
 }
