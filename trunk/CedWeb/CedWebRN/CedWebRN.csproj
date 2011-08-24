@@ -65,6 +65,11 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Texto.cs" />
     <Compile Include="Vendedor.cs" />
+    <Compile Include="Web References\IBKC\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\IBK\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -109,6 +114,17 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="C:\eFact-R-Docs\ConsultaFacturaWebServiceConSchema.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\IBKC\</RelPath>
+      <UpdateFromURL>C:\eFact-R-Docs\ConsultaFacturaWebServiceConSchema.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedWebRN_IBKC_ConsultaFacturaWebServiceConSchema</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="C:\SVN\CedWebRN\WSDL\FacturaWebServiceConSchema.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\IBK\</RelPath>
@@ -126,6 +142,26 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\IBKC\ConsultaFacturaWebServiceConSchemaDefinitions.wsdl" />
+    <None Include="Web References\IBKC\consulta_agrupado_comprobante_response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\IBKC\consulta_detalle_comprobante_response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\IBKC\consulta_listado_comprobante_response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\IBKC\consulta_receptor_timestamp_comprobante_response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\IBKC\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\IBKC\set_timestamp_comprobantes_response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\IBK\consulta_lote_comprobantes_response.datasource">
       <DependentUpon>Reference.map</DependentUpon>

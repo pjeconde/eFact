@@ -1375,5 +1375,123 @@ namespace CedWebRN
 			texto = texto.Replace("&Ugrave;", "Ù");
             return texto;
         }
+
+        public FeaEntidades.InterFacturas.comprobante ConsultarIBKC(IBKC.consulta_detalle_comprobante cdc, string certificado)
+        {
+            FeaEntidades.InterFacturas.comprobante c = new FeaEntidades.InterFacturas.comprobante();
+            IBKC.ConsultaFacturaWebServiceConSchema objIBKC;
+            objIBKC = new IBKC.ConsultaFacturaWebServiceConSchema();
+            objIBKC.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturasC"];
+            if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null && System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
+            {
+                System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
+                string usuarioProxy = System.Configuration.ConfigurationManager.AppSettings["UsuarioProxy"];
+                string claveProxy = System.Configuration.ConfigurationManager.AppSettings["ClaveProxy"];
+                string dominioProxy = System.Configuration.ConfigurationManager.AppSettings["DominioProxy"];
+                System.Net.NetworkCredential networkCredential = new System.Net.NetworkCredential(usuarioProxy, claveProxy, dominioProxy);
+                wp.Credentials = networkCredential;
+                objIBKC.Proxy = wp;
+            }
+            X509Store store = new X509Store(StoreLocation.CurrentUser);
+            store.Open(OpenFlags.ReadOnly);
+            X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
+            if (col.Count.Equals(1))
+            {
+                objIBKC.ClientCertificates.Add(col[0]);
+                System.Threading.Thread.Sleep(1000);
+                IBKC.consulta_detalle_comprobante_response cdcr = objIBKC.consultaDetalleConSchema(cdc);
+                IBKC.consulta_detalle_response cdr;
+                try
+                {
+                    cdr = (IBKC.consulta_detalle_response)cdcr.Item;
+                    IBKC.comprobante cIBK = (IBKC.comprobante)cdr.Item;
+                    //c = Ibk2Fea(cIBK);
+                }
+                catch (InvalidCastException)
+                {
+                    string errorText = "";
+                    throw new Exception(errorText.ToString());
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                return c;
+            }
+            else
+            {
+                throw new Exception("Su certificado no está disponible en nuestro repositorio");
+            }
+        }
+
+        public List<FeaEntidades.InterFacturas.comprobante_listado> ConsultarListadoIBKC(IBKC.consulta_listado_comprobante clc, string certificado)
+        {
+            List<FeaEntidades.InterFacturas.comprobante_listado> lc = new List<FeaEntidades.InterFacturas.comprobante_listado>();
+            IBKC.ConsultaFacturaWebServiceConSchema objIBKC;
+            objIBKC = new IBKC.ConsultaFacturaWebServiceConSchema();
+            objIBKC.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturasP"];
+            if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null && System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
+            {
+                System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
+                string usuarioProxy = System.Configuration.ConfigurationManager.AppSettings["UsuarioProxy"];
+                string claveProxy = System.Configuration.ConfigurationManager.AppSettings["ClaveProxy"];
+                string dominioProxy = System.Configuration.ConfigurationManager.AppSettings["DominioProxy"];
+                System.Net.NetworkCredential networkCredential = new System.Net.NetworkCredential(usuarioProxy, claveProxy, dominioProxy);
+                wp.Credentials = networkCredential;
+                objIBKC.Proxy = wp;
+            }
+            X509Store store = new X509Store(StoreLocation.CurrentUser);
+            store.Open(OpenFlags.ReadOnly);
+            X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
+            if (col.Count.Equals(1))
+            {
+                objIBKC.ClientCertificates.Add(col[0]);
+                System.Threading.Thread.Sleep(1000);
+                IBKC.consulta_listado_comprobante_response clcr = objIBKC.consultaListadoConSchema(clc);
+                IBKC.consulta_listado_response clr;
+                try
+                {
+                    clr = (IBKC.consulta_listado_response)clcr.Item;
+                    IBKC.consulta_listado_responseComprobantes_listado cIBK = (IBKC.consulta_listado_responseComprobantes_listado)clr.Item;
+                    lc = IbkC2Fea(cIBK.comprobante_listado);
+                }
+                catch (InvalidCastException)
+                {
+                    string errorText = "";
+                    throw new Exception(errorText.ToString());
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                return lc;
+            }
+            else
+            {
+                throw new Exception("Su certificado no está disponible en nuestro repositorio");
+            }
+        }
+        private List<FeaEntidades.InterFacturas.comprobante_listado> IbkC2Fea(CedWebRN.IBKC.comprobante_listado[] lcIBK)
+        {
+            List<FeaEntidades.InterFacturas.comprobante_listado> resultado = new List<FeaEntidades.InterFacturas.comprobante_listado>();
+            foreach (CedWebRN.IBKC.comprobante_listado cIBK in lcIBK)
+            {
+                FeaEntidades.InterFacturas.comprobante_listado c = new FeaEntidades.InterFacturas.comprobante_listado();
+                c.cuit_vendedor = cIBK.cuit_vendedor;
+                c.estado_timestamp = cIBK.estado_timestamp;
+                c.fecha_emision = cIBK.fecha_emision;
+                c.fecha_timestamp = cIBK.fecha_timestamp;
+                c.fecha_vencimiento = cIBK.fecha_vencimiento;
+                c.numero_comprobante = cIBK.numero_comprobante;
+                c.punto_de_venta = cIBK.punto_de_venta;
+                c.razon_social = cIBK.razon_social;
+                c.requiere_vinculacion = cIBK.requiere_vinculacion;
+                c.requiere_vinculacionSpecified = cIBK.requiere_vinculacionSpecified;
+                c.tipo_de_comprobante = cIBK.tipo_de_comprobante;
+                c.valor_total_factura = cIBK.valor_total_factura;
+                resultado.Add(c); 
+            }
+            return resultado;
+        }
     }
 }

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // La información general sobre un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos atributos para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("eFact-N")]
+[assembly: AssemblyTitle("eFact-P")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("eFact-N")]
+[assembly: AssemblyProduct("eFact-P")]
 [assembly: AssemblyCopyright("© Microsoft 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // El siguiente GUID sirve como identificador de la biblioteca de tipos si este proyecto se expone a COM
-[assembly: Guid("4c5d4195-368f-478c-899e-fcdc9ce06105")]
+[assembly: Guid("3a33eec7-2081-4ba2-84af-578809070c4a")]
 
 // La información de versión de un ensamblado consta de los cuatro valores siguientes:
 //
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Número de versión de compilación
 //      Revisión
 //
-[assembly: AssemblyVersion("1.0.3.0")]
-[assembly: AssemblyFileVersion("1.0.3.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

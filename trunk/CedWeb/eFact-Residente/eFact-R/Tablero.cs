@@ -980,7 +980,7 @@ namespace eFact_R
                     {
                         Comentarios c = new Comentarios(comentario);
                         c.ShowDialog();
-                        c = null;
+                        c.Dispose();
                     }
                 }
             }
@@ -1264,7 +1264,7 @@ namespace eFact_R
                     lote = dtBandejaSalida[renglon];
                     ConsultaLote cl = new ConsultaLote(lote, ConsultaLote.Modo.Consulta);
                     cl.ShowDialog();
-                    cl = null;
+                    cl.Dispose();
                 }
             }
             catch (Exception ex)
@@ -1284,7 +1284,7 @@ namespace eFact_R
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 ConsultaLote c = new ConsultaLote(ConsultaLote.Modo.Contingencia);
                 c.ShowDialog();
-                c = null;
+                c.Dispose();
             }
             catch (Exception ex)
             {
@@ -1306,7 +1306,7 @@ namespace eFact_R
                     case "OrigenDatosSBP":
                         BarraEstado c = new BarraEstado();
                         c.ShowDialog();
-                        c = null;
+                        c.Dispose();
                         break;
                     case "ModalidadSBP":
                         VerificarServicio();

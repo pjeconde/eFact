@@ -48,7 +48,7 @@ namespace eFact_R
                 string comentario = archivos[renglon].Comentario;
                 Comentarios c = new Comentarios(comentario);
                 c.ShowDialog();
-                c = null;
+                c.Dispose();
             }
         }
     }
