@@ -9,9 +9,9 @@ namespace eFact_RN
 		public static eFact_Entidades.Aplicacion Crear()
 		{
 			eFact_Entidades.Aplicacion aplic = new eFact_Entidades.Aplicacion();
-			aplic.Nombre = System.Configuration.ConfigurationManager.AppSettings["NombreAplic"].ToString(); ;
+			aplic.Nombre = System.Configuration.ConfigurationManager.AppSettings["NombreAplic"].ToString();
 			aplic.Codigo = System.Configuration.ConfigurationManager.AppSettings["CodigoAplic"].ToString();
-			aplic.Propietario = System.Configuration.ConfigurationManager.AppSettings["Propietario"].ToString(); ;
+			aplic.Propietario = System.Configuration.ConfigurationManager.AppSettings["Propietario"].ToString();
 			aplic.Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
 			aplic.VersionParaControl = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(2);
 
