@@ -58,14 +58,6 @@
     <Compile Include="ConsultaComprobanteBj.Designer.cs">
       <DependentUpon>ConsultaComprobanteBj.cs</DependentUpon>
     </Compile>
-    <Compile Include="DB\Plantilla.cs" />
-    <Compile Include="Entidades\Plantilla.cs" />
-    <Compile Include="Plantilla.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Plantilla.designer.cs">
-      <DependentUpon>Plantilla.cs</DependentUpon>
-    </Compile>
     <Compile Include="DB\ComprobanteBj.cs" />
     <Compile Include="DB\db.cs" />
     <Compile Include="DB\Lote.cs" />
