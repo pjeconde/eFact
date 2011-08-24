@@ -211,6 +211,12 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "eFact-N-Instalador", "eFact
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-P", "eFact-Residente\eFact-P\eFact-P.csproj", "{4A108C58-8EB9-4BC0-B693-C497894C4386}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -587,6 +593,16 @@ Global
 		{27D4DD72-5D0C-48BF-9B63-E4AE00A5E08E}.Release|Any CPU.Build.0 = Release
 		{27D4DD72-5D0C-48BF-9B63-E4AE00A5E08E}.Release|Mixed Platforms.ActiveCfg = Release
 		{27D4DD72-5D0C-48BF-9B63-E4AE00A5E08E}.Release|Mixed Platforms.Build.0 = Release
+		{4A108C58-8EB9-4BC0-B693-C497894C4386}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{4A108C58-8EB9-4BC0-B693-C497894C4386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A108C58-8EB9-4BC0-B693-C497894C4386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A108C58-8EB9-4BC0-B693-C497894C4386}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4A108C58-8EB9-4BC0-B693-C497894C4386}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4A108C58-8EB9-4BC0-B693-C497894C4386}.Release|.NET.ActiveCfg = Release|Any CPU
+		{4A108C58-8EB9-4BC0-B693-C497894C4386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A108C58-8EB9-4BC0-B693-C497894C4386}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A108C58-8EB9-4BC0-B693-C497894C4386}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4A108C58-8EB9-4BC0-B693-C497894C4386}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

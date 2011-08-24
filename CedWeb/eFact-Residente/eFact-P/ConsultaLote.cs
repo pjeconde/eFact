@@ -318,14 +318,14 @@ namespace eFact_R
 
         private void LogLoteDataGridView_DoubleClick(object sender, EventArgs e)
         {
-            if (LogLoteDataGridView.SelectedRows.Count != 0)
-            {
-                int renglon = LogLoteDataGridView.SelectedRows[0].Index;
-                string comentario = lote.WF.Log[renglon].Comentario;
-                Comentarios c = new Comentarios(comentario);
-                c.ShowDialog();
-                c.Dispose();
-            }
+            //if (LogLoteDataGridView.SelectedRows.Count != 0)
+            //{
+            //    int renglon = LogLoteDataGridView.SelectedRows[0].Index;
+            //    string comentario = lote.WF.Log[renglon].Comentario;
+            //    Comentarios c = new Comentarios(comentario);
+            //    c.ShowDialog();
+            //    c.Dispose();
+            //}
         }
 
         private void ProcesarComprobante(out CrystalDecisions.CrystalReports.Engine.ReportDocument ReporteDocumento, eFact_Entidades.Lote Lote, int Renglon)
@@ -975,11 +975,11 @@ namespace eFact_R
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 if (DetalleLoteDataGridView.SelectedRows.Count != 0)
                 {
-                    eFact_Entidades.Comprobante c = new eFact_Entidades.Comprobante();
-                    int renglon = DetalleLoteDataGridView.SelectedRows[0].Index;
-                    ComentariosXComprobante cxc = new ComentariosXComprobante(lote.Comprobantes[renglon].ComentarioIFoAFIP);
-                    cxc.ShowDialog();
-                    cxc.Dispose();
+                    //eFact_Entidades.Comprobante c = new eFact_Entidades.Comprobante();
+                    //int renglon = DetalleLoteDataGridView.SelectedRows[0].Index;
+                    //ComentariosXComprobante cxc = new ComentariosXComprobante(lote.Comprobantes[renglon].ComentarioIFoAFIP);
+                    //cxc.ShowDialog();
+                    //cxc.Dispose();
                 }
             }
             catch (Exception ex)

@@ -393,6 +393,14 @@ namespace eFact_S
                         Lr.errores_lote[0].codigo_error = 99;
                         edescr = ex2.Message.Replace("'", "''");
                         Lr.errores_lote[0].descripcion_error = edescr;
+                        if (edescr.IndexOf("500 - error") != -1)
+                        {
+                            Lr.errores_lote[0].codigo_error = 500;
+                        }
+                        if (edescr.IndexOf("600 - error") != -1)
+                        {
+                            Lr.errores_lote[0].codigo_error = 600;
+                        }
                     }
                     eFact_RN.Lote.ActualizarDatosError(lote, Lr);
                     edescr = ex2.Message.Replace("'", "''");
