@@ -33,6 +33,14 @@ namespace eFact_I_Bj
                 LlenarCombo();
                 SeleccionarButton.Visible = false;
                 SeleccionarButton.Enabled = false;
+				DescrPlantillaTextBox.Text = "";
+				Leyenda1TextBox.Text = "";
+				Leyenda2TextBox.Text = "";
+				Leyenda3TextBox.Text = "";
+				Leyenda4TextBox.Text = "";
+				Leyenda5TextBox.Text = "";
+				LeyendaMonedaTextBox.Text = "";
+				LeyendaBancoTextBox.Text = "";
             }
         }
         public Plantilla(eFact_I_Bj.RN.Plantilla.Modo Modo, eFact_I_Bj.Entidades.Plantilla plantillaParaExponer)
@@ -74,7 +82,6 @@ namespace eFact_I_Bj
         {
             eFact_I_Bj.DB.Plantilla db = new eFact_I_Bj.DB.Plantilla(Aplicacion.Sesion);
             eFact_I_Bj.Entidades.Plantilla plantilla = new eFact_I_Bj.Entidades.Plantilla();
-            plantilla.IdPlantilla = Convert.ToInt32(DescrPlantillaComboBox.SelectedValue.ToString());
             plantilla.DescrPlantilla = DescrPlantillaTextBox.Text;
             plantilla.Leyenda1 = Leyenda1TextBox.Text;
             plantilla.Leyenda2 = Leyenda2TextBox.Text;
@@ -86,10 +93,13 @@ namespace eFact_I_Bj
             if (eFact_I_Bj.RN.Plantilla.Modo.Alta == modo)
             {
                 db.Insertar(plantilla);
+				MessageBox.Show("Alta efectuada", "Atención", MessageBoxButtons.OK);
             }
             else
             {
-                db.Modificar(plantilla);
+				plantilla.IdPlantilla = Convert.ToInt32(DescrPlantillaComboBox.SelectedValue.ToString());
+				db.Modificar(plantilla);
+				MessageBox.Show("Modificación efectuada", "Atención", MessageBoxButtons.OK);
             }
         }
 
