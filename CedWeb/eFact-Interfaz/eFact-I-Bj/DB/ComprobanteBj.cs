@@ -16,13 +16,20 @@ namespace eFact_I_Bj.DB
             commandText.Append("DECLARE @FechaDsd as Datetime DECLARE @FechaHst as Datetime DECLARE @NroComp as Varchar(250) ");
             commandText.Append("SET @FechaDsd='" + FechaDsd + "' ");
             commandText.Append("SET @FechaHst='" + FechaHst + "' ");
-            commandText.Append("SET @NroComp='" + NumeroComprobante + "' ");
+            
+			if (NumeroComprobante != string.Empty)
+			{
+				commandText.Append("SET @NroComp='" + NumeroComprobante + "' ");
+			}
             commandText.Append("select gva12.id_gva12, gva12.cod_client, gva12.cat_iva, gva12.fecha_emis, gva12.n_comp, gva12.t_comp, gva12.cotiz, gva12.importe_iv, round(gva12.importe_iv * gva12.cotiz, 6) as importe_iv_pesos, gva12.unidades, gva12.importe, round((gva12.unidades - gva12.importe_iv) * gva12.cotiz, 6) as ImpTotalNetoGravado, gva12.pto_vta, gva12.leyenda_1, gva12.leyenda_2, gva12.leyenda_3, gva12.leyenda_4, gva12.leyenda_5, gva12.MON_CTE, ");
             commandText.Append("gva14.c_postal, gva14.cod_provin, gva14.cuit, gva14.dir_com, gva14.localidad, gva14.nom_com, gva14.tipo_doc ");
             commandText.Append("from GVA12 ");
             commandText.Append("inner join gva14 on gva12.cod_client=gva14.cod_client ");
-            commandText.Append("where fecha_emis >= @FechaDsd and fecha_emis < Dateadd (Day, 1, @FechaHst) and gva12.n_comp like '%'+@NroComp+'%' ");
-
+            commandText.Append("where fecha_emis >= @FechaDsd and fecha_emis < Dateadd (Day, 1, @FechaHst) ");
+			if (NumeroComprobante != string.Empty)
+			{
+				commandText.Append("and gva12.n_comp like '%'+@NroComp+'%' ");
+			}
 
             commandText.Append("select gva12.id_gva12, gva12.cod_client, gva12.cat_iva, gva12.fecha_emis, gva12.n_comp, gva12.t_comp, gva12.cotiz, gva12.importe_iv, gva12.unidades, gva12.importe, ");
             commandText.Append("gva14.id_gva14, gva14.c_postal, gva14.cod_provin, gva14.cuit, gva14.dir_com, gva14.localidad, gva14.nom_com, gva14.tipo_doc, ");
@@ -35,7 +42,11 @@ namespace eFact_I_Bj.DB
             commandText.Append("inner join gva63 on gva63.N_comp=gva12.n_comp and gva63.t_comp=gva12.t_comp ");
             commandText.Append("inner join sta11 on gva53.COD_ARTICU=sta11.cod_articu ");
             commandText.Append("inner join medida on gva53.ID_MEDIDA_VENTAS=medida.id_medida ");
-            commandText.Append("where fecha_emis >= @FechaDsd and fecha_emis < Dateadd (Day, 1, @FechaHst) and gva12.n_comp like '%'+@NroComp+'%' ");
+            commandText.Append("where fecha_emis >= @FechaDsd and fecha_emis < Dateadd (Day, 1, @FechaHst) ");
+			if (NumeroComprobante != string.Empty)
+			{
+				commandText.Append("and gva12.n_comp like '%'+@NroComp+'%' ");
+			}
       
             DataSet ds = new DataSet();
             ds = (DataSet)Ejecutar(commandText.ToString(), TipoRetorno.DS, Transaccion.Acepta, sesion.CnnStrAplicExterna);
@@ -63,293 +74,305 @@ namespace eFact_I_Bj.DB
             }
             else
             {
-                DataTable dt = ds.Tables[0];
-                DataTable dt2 = ds.Tables[2];
-                DataTable dtTComprobantes = ds.Tables[3];
-                //Crear "cabecera" del lote de comprobantes
-                Lc.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
-                Lc.cabecera_lote.cuit_canal = Convert.ToInt64(@System.Configuration.ConfigurationManager.AppSettings["CuitCanal"].ToString());
-                Lc.cabecera_lote.cuit_vendedor = Convert.ToInt64(dt2.Rows[0]["CuitVendedor"]);
-                Lc.cabecera_lote.cantidad_reg = dt.Rows.Count;
-                Lc.cabecera_lote.id_lote = Convert.ToInt64(DateTime.Now.ToString("yyyyMMddHHmmss"));
-                Lc.cabecera_lote.fecha_envio_lote = DateTime.Now.ToString("yyyyMMdd")+ " " + DateTime.Now.ToString("HHmmss");
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    eFact_I_Bj.Entidades.ComprobanteBj Comprobante = new eFact_I_Bj.Entidades.ComprobanteBj();
-                    //Crear "lote_comprobantes"
-                    //FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
-                    //Crear "comprobante" del lote de comprobantes
-                    FeaEntidades.InterFacturas.comprobante c = new FeaEntidades.InterFacturas.comprobante();
-                    //Crear "cabecera" del comprobante
-                    c.cabecera = new FeaEntidades.InterFacturas.cabecera();
-                    //Crear "informacion_comprador" de la cabecera del comprobante
-                    c.cabecera.informacion_comprador = new FeaEntidades.InterFacturas.informacion_comprador();
-                    //Crear "informacion_vendedor" de la cabecera del comprobante
-                    c.cabecera.informacion_vendedor = new FeaEntidades.InterFacturas.informacion_vendedor();
-                    //Crear "informacion_comprobante" de la cabecera del comprobante
-                    c.cabecera.informacion_comprobante = new FeaEntidades.InterFacturas.informacion_comprobante();
-                    //Crear "detalle" del comprobante.
-                    c.detalle = new FeaEntidades.InterFacturas.detalle();
-                    //Crear "resumen" del comprobante.
-                    c.resumen = new FeaEntidades.InterFacturas.resumen();
-                    
-                    Comprobante.Clave = Convert.ToInt32(dt.Rows[i]["id_gva12"]);
-                    //Comprobante.Vendedor.Codigo = dt.Rows[i]["Codigo"].ToString();
-                    // Armar switch con cada tipo de comprobante de Tango a Cedeira
-                    string letraComprobante = dt.Rows[i]["n_comp"].ToString().Substring(0, 1);
-                    switch (dt.Rows[i]["t_comp"].ToString())
-                    {
-                        case "FAC":
-                            if (letraComprobante == "A")
-                            {
-                                FeaEntidades.TiposDeComprobantes.Facturas.A tc = new FeaEntidades.TiposDeComprobantes.Facturas.A();
-                                c.cabecera.informacion_comprobante.tipo_de_comprobante = tc.Codigo;
-                                Comprobante.IdTipoComprobante = tc.Codigo.ToString();
-                            }
-                            else
-                            {
-                                FeaEntidades.TiposDeComprobantes.Facturas.B tc = new FeaEntidades.TiposDeComprobantes.Facturas.B();
-                                c.cabecera.informacion_comprobante.tipo_de_comprobante = tc.Codigo;
-                                Comprobante.IdTipoComprobante = tc.Codigo.ToString();
-                            }
-                            break;
-                        case "N/D":
-                            if (letraComprobante == "A")
-                            {
-                                FeaEntidades.TiposDeComprobantes.NotasDebito.A tc = new FeaEntidades.TiposDeComprobantes.NotasDebito.A();
-                                c.cabecera.informacion_comprobante.tipo_de_comprobante = tc.Codigo;
-                                Comprobante.IdTipoComprobante = tc.Codigo.ToString();
-                            }
-                            else
-                            {
-                                FeaEntidades.TiposDeComprobantes.NotasDebito.B tc = new FeaEntidades.TiposDeComprobantes.NotasDebito.B();
-                                c.cabecera.informacion_comprobante.tipo_de_comprobante = tc.Codigo;
-                                Comprobante.IdTipoComprobante = tc.Codigo.ToString();
-                            }
-                            break;
-                        case "N/C":
-                            break;
-                        case "LIQ":
-                            if (letraComprobante == "A")
-                            {
-                                FeaEntidades.TiposDeComprobantes.Liquidacion.A tc = new FeaEntidades.TiposDeComprobantes.Liquidacion.A();
-                                c.cabecera.informacion_comprobante.tipo_de_comprobante = tc.Codigo;
-                                Comprobante.IdTipoComprobante = tc.Codigo.ToString();
-                            }
-                            else
-                            {
-                                FeaEntidades.TiposDeComprobantes.Liquidacion.B tc = new FeaEntidades.TiposDeComprobantes.Liquidacion.B();
-                                c.cabecera.informacion_comprobante.tipo_de_comprobante = tc.Codigo;
-                                Comprobante.IdTipoComprobante = tc.Codigo.ToString();
-                            }
-                            break;
-                        case "NDI":
-                            break;
-                        case "NCI":
-                            break;
+				try
+				{
+					DataTable dt = ds.Tables[0];
+					DataTable dt2 = ds.Tables[2];
+					DataTable dtTComprobantes = ds.Tables[3];
+					//Crear "cabecera" del lote de comprobantes
+					Lc.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
+					Lc.cabecera_lote.cuit_canal = Convert.ToInt64(@System.Configuration.ConfigurationManager.AppSettings["CuitCanal"].ToString());
+					Lc.cabecera_lote.cuit_vendedor = Convert.ToInt64(dt2.Rows[0]["CuitVendedor"]);
+					Lc.cabecera_lote.cantidad_reg = dt.Rows.Count;
+					Lc.cabecera_lote.id_lote = Convert.ToInt64(DateTime.Now.ToString("yyyyMMddHHmmss"));
+					Lc.cabecera_lote.fecha_envio_lote = DateTime.Now.ToString("yyyyMMdd") + " " + DateTime.Now.ToString("HHmmss");
+					for (int i = 0; i < dt.Rows.Count; i++)
+					{
+						eFact_I_Bj.Entidades.ComprobanteBj Comprobante = new eFact_I_Bj.Entidades.ComprobanteBj();
+						//Crear "lote_comprobantes"
+						//FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+						//Crear "comprobante" del lote de comprobantes
+						FeaEntidades.InterFacturas.comprobante c = new FeaEntidades.InterFacturas.comprobante();
+						//Crear "cabecera" del comprobante
+						c.cabecera = new FeaEntidades.InterFacturas.cabecera();
+						//Crear "informacion_comprador" de la cabecera del comprobante
+						c.cabecera.informacion_comprador = new FeaEntidades.InterFacturas.informacion_comprador();
+						//Crear "informacion_vendedor" de la cabecera del comprobante
+						c.cabecera.informacion_vendedor = new FeaEntidades.InterFacturas.informacion_vendedor();
+						//Crear "informacion_comprobante" de la cabecera del comprobante
+						c.cabecera.informacion_comprobante = new FeaEntidades.InterFacturas.informacion_comprobante();
+						//Crear "detalle" del comprobante.
+						c.detalle = new FeaEntidades.InterFacturas.detalle();
+						//Crear "resumen" del comprobante.
+						c.resumen = new FeaEntidades.InterFacturas.resumen();
 
-                    }
-                    FeaEntidades.InterFacturas.informacion_comprador feaEntidadinfComprador = new FeaEntidades.InterFacturas.informacion_comprador();
-                    Comprobante.NumeroComprobante = dt.Rows[i]["n_comp"].ToString();
-                    c.cabecera.informacion_comprobante.numero_comprobante = Convert.ToInt64(Comprobante.NumeroComprobante.Substring(5, Comprobante.NumeroComprobante.Length - 5));
+						Comprobante.Clave = Convert.ToInt32(dt.Rows[i]["id_gva12"]);
+						//Comprobante.Vendedor.Codigo = dt.Rows[i]["Codigo"].ToString();
+						// Armar switch con cada tipo de comprobante de Tango a Cedeira
+						string letraComprobante = dt.Rows[i]["n_comp"].ToString().Substring(0, 1);
+						switch (dt.Rows[i]["t_comp"].ToString())
+						{
+							case "FAC":
+								if (letraComprobante == "A")
+								{
+									FeaEntidades.TiposDeComprobantes.Facturas.A tc = new FeaEntidades.TiposDeComprobantes.Facturas.A();
+									c.cabecera.informacion_comprobante.tipo_de_comprobante = tc.Codigo;
+									Comprobante.IdTipoComprobante = tc.Codigo.ToString();
+								}
+								else
+								{
+									FeaEntidades.TiposDeComprobantes.Facturas.B tc = new FeaEntidades.TiposDeComprobantes.Facturas.B();
+									c.cabecera.informacion_comprobante.tipo_de_comprobante = tc.Codigo;
+									Comprobante.IdTipoComprobante = tc.Codigo.ToString();
+								}
+								break;
+							case "N/D":
+								if (letraComprobante == "A")
+								{
+									FeaEntidades.TiposDeComprobantes.NotasDebito.A tc = new FeaEntidades.TiposDeComprobantes.NotasDebito.A();
+									c.cabecera.informacion_comprobante.tipo_de_comprobante = tc.Codigo;
+									Comprobante.IdTipoComprobante = tc.Codigo.ToString();
+								}
+								else
+								{
+									FeaEntidades.TiposDeComprobantes.NotasDebito.B tc = new FeaEntidades.TiposDeComprobantes.NotasDebito.B();
+									c.cabecera.informacion_comprobante.tipo_de_comprobante = tc.Codigo;
+									Comprobante.IdTipoComprobante = tc.Codigo.ToString();
+								}
+								break;
+							case "N/C":
+								break;
+							case "LIQ":
+								if (letraComprobante == "A")
+								{
+									FeaEntidades.TiposDeComprobantes.Liquidacion.A tc = new FeaEntidades.TiposDeComprobantes.Liquidacion.A();
+									c.cabecera.informacion_comprobante.tipo_de_comprobante = tc.Codigo;
+									Comprobante.IdTipoComprobante = tc.Codigo.ToString();
+								}
+								else
+								{
+									FeaEntidades.TiposDeComprobantes.Liquidacion.B tc = new FeaEntidades.TiposDeComprobantes.Liquidacion.B();
+									c.cabecera.informacion_comprobante.tipo_de_comprobante = tc.Codigo;
+									Comprobante.IdTipoComprobante = tc.Codigo.ToString();
+								}
+								break;
+							case "NDI":
+								break;
+							case "NCI":
+								break;
 
-                    Comprobante.PuntoVenta = 22;//Convert.ToInt32(Comprobante.NumeroComprobante.Substring(1, 4));
-                    Lc.cabecera_lote.punto_de_venta = Comprobante.PuntoVenta;
-                    c.cabecera.informacion_comprobante.punto_de_venta = Comprobante.PuntoVenta;
-                    
+						}
+						FeaEntidades.InterFacturas.informacion_comprador feaEntidadinfComprador = new FeaEntidades.InterFacturas.informacion_comprador();
+						Comprobante.NumeroComprobante = dt.Rows[i]["n_comp"].ToString();
+						c.cabecera.informacion_comprobante.numero_comprobante = Convert.ToInt64(Comprobante.NumeroComprobante.Substring(5, Comprobante.NumeroComprobante.Length - 5));
 
-                    // Armar switch con cada tipo doc de Tango a Cedeira
-                    Comprobante.Comprador.TipoDoc = Convert.ToInt16(dt.Rows[i]["tipo_doc"]);
-                    feaEntidadinfComprador.codigo_doc_identificatorio = Comprobante.Comprador.TipoDoc;
+						Comprobante.PuntoVenta = Convert.ToInt32(Comprobante.NumeroComprobante.Substring(1, 4));
+						Lc.cabecera_lote.punto_de_venta = Comprobante.PuntoVenta;
+						c.cabecera.informacion_comprobante.punto_de_venta = Comprobante.PuntoVenta;
 
-                    Comprobante.Comprador.NroDoc = dt.Rows[i]["cuit"].ToString();
-                    feaEntidadinfComprador.nro_doc_identificatorio = Convert.ToInt64(Comprobante.Comprador.NroDoc.Replace("-", string.Empty));
 
-                    Comprobante.Comprador.Nombre = dt.Rows[i]["nom_com"].ToString();
-                    feaEntidadinfComprador.denominacion = Comprobante.Comprador.Nombre;
-                    feaEntidadinfComprador.denominacion = Comprobante.Comprador.Nombre;
-                    Comprobante.Comprador.DomicilioCalle = dt.Rows[i]["dir_com"].ToString();
-                    feaEntidadinfComprador.domicilio_calle = Comprobante.Comprador.DomicilioCalle;
-                    Comprobante.Comprador.CondicionIVA = dt.Rows[i]["cat_iva"].ToString();
-                    FeaEntidades.CondicionesIVA.ResponsableInscripto condicionIVA = new FeaEntidades.CondicionesIVA.ResponsableInscripto();
-                    feaEntidadinfComprador.condicion_IVA = condicionIVA.Codigo;
-                    feaEntidadinfComprador.condicion_IVASpecified = true;
-                    Comprobante.Comprador.Localidad = dt.Rows[i]["localidad"].ToString();
-                    feaEntidadinfComprador.localidad = Comprobante.Comprador.Localidad;
-                    Comprobante.Comprador.Provincia = Convert.ToInt16(dt.Rows[i]["cod_provin"]);
-                    feaEntidadinfComprador.provincia = dt.Rows[i]["cod_provin"].ToString();
-                    Comprobante.Comprador.CP = dt.Rows[i]["c_postal"].ToString();
-                    feaEntidadinfComprador.cp = Comprobante.Comprador.CP;
-                    //Comprobante.Comprador.Telefono = dt.Rows[i]["Comprador_telefono"].ToString();
-                    //Comprobante.Comprador.EMail = dt.Rows[i]["Comprador_email"].ToString();
-                    Comprobante.Fecha = Convert.ToDateTime(dt.Rows[i]["fecha_emis"]);
-                    c.cabecera.informacion_comprobante.fecha_emision = Comprobante.Fecha.ToString("yyyyMMdd");
-                    if (!dt.Rows[i]["leyenda_1"].ToString().Equals(string.Empty))
-                    {
-                        Comprobante.FechaVto = Convert.ToDateTime(dt.Rows[i]["leyenda_1"].ToString(), cedeiraCultura.DateTimeFormat);
-                        c.cabecera.informacion_comprobante.fecha_vencimiento = Comprobante.FechaVto.ToString("yyyyMMdd");
-                    }
-                    //Comprobante.Importe = Convert.ToDecimal(dt.Rows[i]["importe"]);
-                    //Comprobante.ImporteNetoGravado = Convert.ToDecimal(dt.Rows[i]["PRECIO_NET"]);
-                    //Comprobante.ImporteNetoNoGravado = Convert.ToDecimal(dt.Rows[i]["importe"]);
-                    //feaEntidadComprobante.Imp_neto = Comprobante.ImporteNetoNoGravado;
-                    //Comprobante.ImporteOpsExentas = Convert.ToDecimal(dt.Rows[i]["Resumen_importe_operaciones_exentas"]);
-                    //Comprobante.ImpuestoLiq = Convert.ToDecimal(dt.Rows[i]["Resumen_impuesto_liq"]);
-                    //Comprobante.ImpuestoRNI = Convert.ToDecimal(dt.Rows[i]["Resumen_impuesto_liq_rni"]);
-                    //Comprobante.ImpuestosNacionales = Convert.ToDecimal(dt.Rows[i]["Resumen_importe_total_impuestos_nacionales"]);
-                    //Comprobante.CantAlicuotasIVA = Convert.ToInt32(dt.Rows[i]["Resumen_cant_alicuotas_iva"]);
-                    //if (dt.Rows[i]["Comprobante_cae"] != System.DBNull.Value && dt.Rows[i]["Comprobante_cae"].ToString() != "")
-                    //{
-                    //    Comprobante.NumeroCAE = dt.Rows[i]["Comprobante_cae"].ToString();
-                    //    Comprobante.FechaVtoCAE = Convert.ToDateTime(dt.Rows[i]["Comprobante_fecha_vencimiento_cae"]);
-                    //}
-                    Comprobante.Vendedor.CuitVendedor = dt2.Rows[0]["CuitVendedor"].ToString();
-                    FeaEntidades.InterFacturas.informacion_vendedor feaEntidadInfVendedor = new FeaEntidades.InterFacturas.informacion_vendedor();
-                    feaEntidadInfVendedor.cuit = Convert.ToInt64("20225018805"); //Convert.ToInt64(Comprobante.Vendedor.CuitVendedor.Replace("-", string.Empty));
-                    Comprobante.Vendedor.Nombre = dt2.Rows[0]["Nombre"].ToString();
-                    feaEntidadInfVendedor.razon_social = Comprobante.Vendedor.Nombre;
-                    Comprobante.Vendedor.NumeroSerieCertificado = dt2.Rows[0]["NumeroSerieCertificado"].ToString();
-                    //System.IO.MemoryStream memStream = new System.IO.MemoryStream(dt2.Rows[i]["Logo"]);
-                    //Byte[] logo = memStream.GetBuffer();
-                    //Comprobante.Vendedor.Logo = dt2.Rows[i]["Logo"];
-                    Comprobante.Vendedor.Codigo = dt2.Rows[0]["Codigo"].ToString();
-                    feaEntidadInfVendedor.codigo_interno = Comprobante.Vendedor.Codigo;
-                    Comprobante.Vendedor.InicioActividades = Convert.ToDateTime(dt2.Rows[0]["InicioActividades"]);
-                    feaEntidadInfVendedor.inicio_de_actividades = Comprobante.Vendedor.InicioActividades.ToString("yyyyMMdd");
-                    Comprobante.Vendedor.Contacto = dt2.Rows[0]["Contacto"].ToString();
-                    feaEntidadInfVendedor.contacto = Comprobante.Vendedor.Contacto;
-                    Comprobante.Vendedor.DomicilioCalle = dt2.Rows[0]["DomicilioCalle"].ToString();
-                    feaEntidadInfVendedor.domicilio_calle = Comprobante.Vendedor.DomicilioCalle;
-                    Comprobante.Vendedor.DomicilioNumero = dt2.Rows[0]["DomicilioNumero"].ToString();
-                    feaEntidadInfVendedor.domicilio_numero = Comprobante.Vendedor.DomicilioNumero;
-                    Comprobante.Vendedor.DomicilioPiso = dt2.Rows[0]["DomicilioPiso"].ToString();
-                    feaEntidadInfVendedor.domicilio_piso = Comprobante.Vendedor.DomicilioPiso;
-                    Comprobante.Vendedor.DomicilioDepto = dt2.Rows[0]["DomicilioDepto"].ToString();
-                    feaEntidadInfVendedor.domicilio_depto = Comprobante.Vendedor.DomicilioDepto;
-                    Comprobante.Vendedor.DomicilioSector = dt2.Rows[0]["DomicilioSector"].ToString();
-                    feaEntidadInfVendedor.domicilio_sector = Comprobante.Vendedor.DomicilioSector;
-                    Comprobante.Vendedor.DomicilioTorre = dt2.Rows[0]["DomicilioTorre"].ToString();
-                    feaEntidadInfVendedor.domicilio_torre = Comprobante.Vendedor.DomicilioTorre;
-                    Comprobante.Vendedor.DomicilioManzana = dt2.Rows[0]["DomicilioManzana"].ToString();
-                    feaEntidadInfVendedor.domicilio_manzana = Comprobante.Vendedor.DomicilioManzana;
-                    Comprobante.Vendedor.CondicionIVA = Convert.ToInt32(dt2.Rows[0]["CondicionIVA"]);
-                    feaEntidadInfVendedor.condicion_IVA = Comprobante.Vendedor.CondicionIVA;
-                    feaEntidadInfVendedor.condicion_IVASpecified = true;
-                    Comprobante.Vendedor.CondicionIB = Convert.ToInt32(dt2.Rows[0]["CondicionIB"]);
-                    feaEntidadInfVendedor.condicion_ingresos_brutos = Comprobante.Vendedor.CondicionIB;
-                    feaEntidadInfVendedor.condicion_ingresos_brutosSpecified = true;
-                    Comprobante.Vendedor.NroIB = dt2.Rows[0]["NroIB"].ToString();
-                    feaEntidadInfVendedor.nro_ingresos_brutos = Comprobante.Vendedor.NroIB;
-                    Comprobante.Vendedor.Localidad = dt2.Rows[0]["Localidad"].ToString();
-                    feaEntidadInfVendedor.localidad = Comprobante.Vendedor.Localidad;
-                    Comprobante.Vendedor.Provincia = dt2.Rows[0]["Provincia"].ToString();
-                    //feaEntidadInfVendedor.provincia = Comprobante.Vendedor.Provincia;
-                    Comprobante.Vendedor.CP = dt2.Rows[0]["CP"].ToString();
-                    feaEntidadInfVendedor.cp = Comprobante.Vendedor.CP;
-                    Comprobante.Vendedor.Telefono = dt2.Rows[0]["Telefono"].ToString();
-                    feaEntidadInfVendedor.telefono = Comprobante.Vendedor.Telefono;
-                    Comprobante.Vendedor.EMail = dt2.Rows[0]["EMail"].ToString();
-                    feaEntidadInfVendedor.email = Comprobante.Vendedor.EMail;
-                    c.cabecera.informacion_comprador = feaEntidadinfComprador;
-                    c.cabecera.informacion_vendedor = feaEntidadInfVendedor;
+						// Armar switch con cada tipo doc de Tango a Cedeira
+						Comprobante.Comprador.TipoDoc = Convert.ToInt16(dt.Rows[i]["tipo_doc"]);
+						feaEntidadinfComprador.codigo_doc_identificatorio = Comprobante.Comprador.TipoDoc;
 
-                    c.resumen.tipo_de_cambio = Convert.ToDouble(dt.Rows[0]["cotiz"]);
-                    Comprobante.TipoDeCambio = Convert.ToDouble(dt.Rows[0]["cotiz"]);
-                    c.resumen.importe_total_factura = Math.Round(Convert.ToDouble(dt.Rows[0]["importe"]), 2);
-                    c.resumen.importe_total_neto_gravado = Math.Round(Convert.ToDouble(dt.Rows[0]["ImpTotalNetoGravado"]), 2);
-                    c.resumen.impuesto_liq = Math.Round(Convert.ToDouble(dt.Rows[0]["importe_iv_pesos"]), 2);
-                    
-                    //Guardar Leyendas
-                    List<string> leyendas = new List<string>();
-                    leyendas.Add(dt.Rows[i]["leyenda_1"].ToString());
-                    leyendas.Add(dt.Rows[i]["leyenda_2"].ToString());
-                    leyendas.Add(dt.Rows[i]["leyenda_3"].ToString());
-                    leyendas.Add(dt.Rows[i]["leyenda_4"].ToString());
-                    leyendas.Add(dt.Rows[i]["leyenda_5"].ToString());
-                    Comprobante.Leyendas = leyendas;
-                                        
-                    //List<FeaEntidades.CodigosMoneda.CodigoMoneda> listaCodMoneda = FeaEntidades.CodigosMoneda.CodigoMoneda.Lista();
-                    if (!Convert.ToBoolean(dt.Rows[0]["MON_CTE"]))
-                    {
-                        c.resumen.codigo_moneda = "DOL";
-                        Comprobante.IdMoneda = "DOL";
-                        c.resumen.importes_moneda_origen = new FeaEntidades.InterFacturas.resumenImportes_moneda_origen();
-                        c.resumen.importes_moneda_origen.impuesto_liq = Math.Round(Convert.ToDouble(dt.Rows[0]["importe_iv"]), 2);
-                        c.resumen.importes_moneda_origen.importe_total_factura = Math.Round(Convert.ToDouble(dt.Rows[0]["unidades"]), 2);
-                        c.resumen.importes_moneda_origen.importe_total_neto_gravado = Math.Round(c.resumen.importes_moneda_origen.importe_total_factura - c.resumen.importes_moneda_origen.impuesto_liq, 2);
-                    }
-                    else
-                    {
-                        c.resumen.codigo_moneda = "PES";
-                        Comprobante.IdMoneda = "PES";
-                    }
-                    FeaEntidades.InterFacturas.lineas feaEntidadLineas = new FeaEntidades.InterFacturas.lineas();
-                    DataRow[] drDetDesc = ds.Tables[1].Select("id_gva12 = " + Comprobante.Clave);
-                    double porcIVA = 0;
-                    for (int j = 0; j < drDetDesc.Length; j++)
-                    {
-                        eFact_I_Bj.Entidades.ComprobanteBjLinea linea = new eFact_I_Bj.Entidades.ComprobanteBjLinea();
-                        FeaEntidades.InterFacturas.linea lineaFEA = new FeaEntidades.InterFacturas.linea();
-                        DataRow dr = drDetDesc[j];
-                        linea.Clave = Convert.ToInt32(Comprobante.Clave);
-                        linea.Descripcion = dr["descripcio"].ToString();
-                        lineaFEA.numeroLinea = j+1;
-                        lineaFEA.descripcion = linea.Descripcion;
-                        linea.Cantidad = Convert.ToDecimal(dr["cantidad"]);
-                        lineaFEA.cantidad = Convert.ToDouble(linea.Cantidad);
-                        lineaFEA.cantidadSpecified = true;
-                        linea.Precio_unitario = Convert.ToDecimal(dr["precio_net_pesos"]);
-                        lineaFEA.precio_unitario = Math.Round(Convert.ToDouble(dr["precio_net_pesos"]), 6);
-                        lineaFEA.precio_unitarioSpecified = true;
-                        linea.Alicuota_iva = Convert.ToDecimal(dr["porc_iva"]);
-                        lineaFEA.alicuota_iva = Convert.ToDouble(linea.Alicuota_iva);
-                        lineaFEA.alicuota_ivaSpecified = true;
-                        linea.Importe_total_articulo = Convert.ToDecimal(dr["IMP_NETO_P_pesos"]);
-                        lineaFEA.importe_total_articulo = Math.Round(Convert.ToDouble(dr["IMP_NETO_P_pesos"]), 3);
-                        lineaFEA.importe_iva = Math.Round(lineaFEA.importe_total_articulo * (lineaFEA.alicuota_iva / 100), 2);
-                        lineaFEA.importe_ivaSpecified = true;
-                        linea.Importe_iva = Convert.ToDecimal(lineaFEA.importe_iva);
-                        //linea.Indicacion_exento_gravado = dr[0]["Linea_indicacion_exento_gravado"].ToString();
-                        //linea.Importe_total_descuentos = Convert.ToDecimal(dr[0]["Linea_importe_total_descuentos"]);
-                        //linea.Importe_total_impuestos = Convert.ToDecimal(dr[0]["Linea_Importe_total_impuestos"]);
-                        if (lineaFEA.alicuota_iva != 0)
-                        {
-                            porcIVA = lineaFEA.alicuota_iva;
-                        }
-                        if (c.resumen.codigo_moneda == "DOL")
-                        {
-                            lineaFEA.importes_moneda_origen = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
-                            lineaFEA.importes_moneda_origen.importe_total_articulo = Math.Round(Convert.ToDouble(dr["IMP_NETO_P"]), 3);
-                            lineaFEA.importes_moneda_origen.importe_total_articuloSpecified = true;
-                            lineaFEA.importes_moneda_origen.importe_iva = Math.Round(lineaFEA.importes_moneda_origen.importe_total_articulo * (lineaFEA.alicuota_iva /100), 2);
-                            lineaFEA.importes_moneda_origen.importe_ivaSpecified = true;
-                            lineaFEA.importes_moneda_origen.precio_unitario = Math.Round(Convert.ToDouble(dr["PRECIO_NET"]), 6);
-                            lineaFEA.importes_moneda_origen.precio_unitarioSpecified = true;
-                        }
+						Comprobante.Comprador.NroDoc = dt.Rows[i]["cuit"].ToString();
+						feaEntidadinfComprador.nro_doc_identificatorio = Convert.ToInt64(Comprobante.Comprador.NroDoc.Replace("-", string.Empty));
 
-                        FeaEntidades.InterFacturas.resumenImpuestos imp = new FeaEntidades.InterFacturas.resumenImpuestos();
-                        imp.codigo_impuesto = 1;
-                        imp.descripcion = "IVA";
-                        if (porcIVA != 0)
-                        {
-                            imp.porcentaje_impuesto = porcIVA;
-                            imp.porcentaje_impuestoSpecified = true;
-                        }
-                        if (c.resumen.codigo_moneda == "DOL")
-                        {
-                            imp.importe_impuesto = c.resumen.impuesto_liq;
-                            imp.importe_impuesto_moneda_origen = c.resumen.importes_moneda_origen.impuesto_liq;
-                            imp.importe_impuesto_moneda_origenSpecified = true;
-                        }
-                        c.resumen.impuestos = new FeaEntidades.InterFacturas.resumenImpuestos[10];
-                        c.resumen.impuestos[0] = imp;
+						Comprobante.Comprador.Nombre = dt.Rows[i]["nom_com"].ToString();
+						feaEntidadinfComprador.denominacion = Comprobante.Comprador.Nombre;
+						feaEntidadinfComprador.denominacion = Comprobante.Comprador.Nombre;
+						Comprobante.Comprador.DomicilioCalle = dt.Rows[i]["dir_com"].ToString();
+						feaEntidadinfComprador.domicilio_calle = Comprobante.Comprador.DomicilioCalle;
+						Comprobante.Comprador.CondicionIVA = dt.Rows[i]["cat_iva"].ToString();
+						FeaEntidades.CondicionesIVA.ResponsableInscripto condicionIVA = new FeaEntidades.CondicionesIVA.ResponsableInscripto();
+						feaEntidadinfComprador.condicion_IVA = condicionIVA.Codigo;
+						feaEntidadinfComprador.condicion_IVASpecified = true;
+						Comprobante.Comprador.Localidad = dt.Rows[i]["localidad"].ToString();
+						feaEntidadinfComprador.localidad = Comprobante.Comprador.Localidad;
+						Comprobante.Comprador.Provincia = Convert.ToInt16(dt.Rows[i]["cod_provin"]);
+						feaEntidadinfComprador.provincia = dt.Rows[i]["cod_provin"].ToString();
+						Comprobante.Comprador.CP = dt.Rows[i]["c_postal"].ToString();
+						feaEntidadinfComprador.cp = Comprobante.Comprador.CP;
+						//Comprobante.Comprador.Telefono = dt.Rows[i]["Comprador_telefono"].ToString();
+						//Comprobante.Comprador.EMail = dt.Rows[i]["Comprador_email"].ToString();
+						Comprobante.Fecha = Convert.ToDateTime(dt.Rows[i]["fecha_emis"]);
+						c.cabecera.informacion_comprobante.fecha_emision = Comprobante.Fecha.ToString("yyyyMMdd");
+						if (!dt.Rows[i]["leyenda_1"].ToString().Equals(string.Empty))
+						{
+							Comprobante.FechaVto = Convert.ToDateTime(dt.Rows[i]["leyenda_1"].ToString(), cedeiraCultura.DateTimeFormat);
+							c.cabecera.informacion_comprobante.fecha_vencimiento = Comprobante.FechaVto.ToString("yyyyMMdd");
+						}
+						else
+						{
+							Comprobante.FechaVto = Convert.ToDateTime("2008/05/22", cedeiraCultura.DateTimeFormat);
+							c.cabecera.informacion_comprobante.fecha_vencimiento = Comprobante.FechaVto.ToString("yyyyMMdd");
+						}
+						//Comprobante.Importe = Convert.ToDecimal(dt.Rows[i]["importe"]);
+						//Comprobante.ImporteNetoGravado = Convert.ToDecimal(dt.Rows[i]["PRECIO_NET"]);
+						//Comprobante.ImporteNetoNoGravado = Convert.ToDecimal(dt.Rows[i]["importe"]);
+						//feaEntidadComprobante.Imp_neto = Comprobante.ImporteNetoNoGravado;
+						//Comprobante.ImporteOpsExentas = Convert.ToDecimal(dt.Rows[i]["Resumen_importe_operaciones_exentas"]);
+						//Comprobante.ImpuestoLiq = Convert.ToDecimal(dt.Rows[i]["Resumen_impuesto_liq"]);
+						//Comprobante.ImpuestoRNI = Convert.ToDecimal(dt.Rows[i]["Resumen_impuesto_liq_rni"]);
+						//Comprobante.ImpuestosNacionales = Convert.ToDecimal(dt.Rows[i]["Resumen_importe_total_impuestos_nacionales"]);
+						//Comprobante.CantAlicuotasIVA = Convert.ToInt32(dt.Rows[i]["Resumen_cant_alicuotas_iva"]);
+						//if (dt.Rows[i]["Comprobante_cae"] != System.DBNull.Value && dt.Rows[i]["Comprobante_cae"].ToString() != "")
+						//{
+						//    Comprobante.NumeroCAE = dt.Rows[i]["Comprobante_cae"].ToString();
+						//    Comprobante.FechaVtoCAE = Convert.ToDateTime(dt.Rows[i]["Comprobante_fecha_vencimiento_cae"]);
+						//}
+						Comprobante.Vendedor.CuitVendedor = dt2.Rows[0]["CuitVendedor"].ToString();
+						FeaEntidades.InterFacturas.informacion_vendedor feaEntidadInfVendedor = new FeaEntidades.InterFacturas.informacion_vendedor();
+						feaEntidadInfVendedor.cuit = Convert.ToInt64(Comprobante.Vendedor.CuitVendedor.Replace("-", string.Empty));
+						Comprobante.Vendedor.Nombre = dt2.Rows[0]["Nombre"].ToString();
+						feaEntidadInfVendedor.razon_social = Comprobante.Vendedor.Nombre;
+						Comprobante.Vendedor.NumeroSerieCertificado = dt2.Rows[0]["NumeroSerieCertificado"].ToString();
+						//System.IO.MemoryStream memStream = new System.IO.MemoryStream(dt2.Rows[i]["Logo"]);
+						//Byte[] logo = memStream.GetBuffer();
+						//Comprobante.Vendedor.Logo = dt2.Rows[i]["Logo"];
+						Comprobante.Vendedor.Codigo = dt2.Rows[0]["Codigo"].ToString();
+						feaEntidadInfVendedor.codigo_interno = Comprobante.Vendedor.Codigo;
+						Comprobante.Vendedor.InicioActividades = Convert.ToDateTime(dt2.Rows[0]["InicioActividades"]);
+						feaEntidadInfVendedor.inicio_de_actividades = Comprobante.Vendedor.InicioActividades.ToString("yyyyMMdd");
+						Comprobante.Vendedor.Contacto = dt2.Rows[0]["Contacto"].ToString();
+						feaEntidadInfVendedor.contacto = Comprobante.Vendedor.Contacto;
+						Comprobante.Vendedor.DomicilioCalle = dt2.Rows[0]["DomicilioCalle"].ToString();
+						feaEntidadInfVendedor.domicilio_calle = Comprobante.Vendedor.DomicilioCalle;
+						Comprobante.Vendedor.DomicilioNumero = dt2.Rows[0]["DomicilioNumero"].ToString();
+						feaEntidadInfVendedor.domicilio_numero = Comprobante.Vendedor.DomicilioNumero;
+						Comprobante.Vendedor.DomicilioPiso = dt2.Rows[0]["DomicilioPiso"].ToString();
+						feaEntidadInfVendedor.domicilio_piso = Comprobante.Vendedor.DomicilioPiso;
+						Comprobante.Vendedor.DomicilioDepto = dt2.Rows[0]["DomicilioDepto"].ToString();
+						feaEntidadInfVendedor.domicilio_depto = Comprobante.Vendedor.DomicilioDepto;
+						Comprobante.Vendedor.DomicilioSector = dt2.Rows[0]["DomicilioSector"].ToString();
+						feaEntidadInfVendedor.domicilio_sector = Comprobante.Vendedor.DomicilioSector;
+						Comprobante.Vendedor.DomicilioTorre = dt2.Rows[0]["DomicilioTorre"].ToString();
+						feaEntidadInfVendedor.domicilio_torre = Comprobante.Vendedor.DomicilioTorre;
+						Comprobante.Vendedor.DomicilioManzana = dt2.Rows[0]["DomicilioManzana"].ToString();
+						feaEntidadInfVendedor.domicilio_manzana = Comprobante.Vendedor.DomicilioManzana;
+						Comprobante.Vendedor.CondicionIVA = Convert.ToInt32(dt2.Rows[0]["CondicionIVA"]);
+						feaEntidadInfVendedor.condicion_IVA = Comprobante.Vendedor.CondicionIVA;
+						feaEntidadInfVendedor.condicion_IVASpecified = true;
+						Comprobante.Vendedor.CondicionIB = Convert.ToInt32(dt2.Rows[0]["CondicionIB"]);
+						feaEntidadInfVendedor.condicion_ingresos_brutos = Comprobante.Vendedor.CondicionIB;
+						feaEntidadInfVendedor.condicion_ingresos_brutosSpecified = true;
+						Comprobante.Vendedor.NroIB = dt2.Rows[0]["NroIB"].ToString();
+						feaEntidadInfVendedor.nro_ingresos_brutos = Comprobante.Vendedor.NroIB;
+						Comprobante.Vendedor.Localidad = dt2.Rows[0]["Localidad"].ToString();
+						feaEntidadInfVendedor.localidad = Comprobante.Vendedor.Localidad;
+						Comprobante.Vendedor.Provincia = dt2.Rows[0]["Provincia"].ToString();
+						//feaEntidadInfVendedor.provincia = Comprobante.Vendedor.Provincia;
+						Comprobante.Vendedor.CP = dt2.Rows[0]["CP"].ToString();
+						feaEntidadInfVendedor.cp = Comprobante.Vendedor.CP;
+						Comprobante.Vendedor.Telefono = dt2.Rows[0]["Telefono"].ToString();
+						feaEntidadInfVendedor.telefono = Comprobante.Vendedor.Telefono;
+						Comprobante.Vendedor.EMail = dt2.Rows[0]["EMail"].ToString();
+						feaEntidadInfVendedor.email = Comprobante.Vendedor.EMail;
+						c.cabecera.informacion_comprador = feaEntidadinfComprador;
+						c.cabecera.informacion_vendedor = feaEntidadInfVendedor;
 
-                        Comprobante.Lineas.Add(linea);
-                        c.detalle.linea[j] = lineaFEA;
-                    }
-                        Comprobantes.Add(Comprobante);
-                        Lc.comprobante[i] = c;
-                    }
+						c.resumen.tipo_de_cambio = Convert.ToDouble(dt.Rows[i]["cotiz"]);
+						Comprobante.TipoDeCambio = Convert.ToDouble(dt.Rows[i]["cotiz"]);
+						c.resumen.importe_total_factura = Math.Round(Convert.ToDouble(dt.Rows[i]["importe"]), 2);
+						Comprobante.Importe = Convert.ToDecimal(dt.Rows[i]["importe"]);
+						c.resumen.importe_total_neto_gravado = Math.Round(Convert.ToDouble(dt.Rows[i]["ImpTotalNetoGravado"]), 2);
+						c.resumen.impuesto_liq = Math.Round(Convert.ToDouble(dt.Rows[i]["importe_iv_pesos"]), 2);
+
+						//Guardar Leyendas
+						List<string> leyendas = new List<string>();
+						leyendas.Add(dt.Rows[i]["leyenda_1"].ToString());
+						leyendas.Add(dt.Rows[i]["leyenda_2"].ToString());
+						leyendas.Add(dt.Rows[i]["leyenda_3"].ToString());
+						leyendas.Add(dt.Rows[i]["leyenda_4"].ToString());
+						leyendas.Add(dt.Rows[i]["leyenda_5"].ToString());
+						Comprobante.Leyendas = leyendas;
+
+						//List<FeaEntidades.CodigosMoneda.CodigoMoneda> listaCodMoneda = FeaEntidades.CodigosMoneda.CodigoMoneda.Lista();
+						if (!Convert.ToBoolean(dt.Rows[i]["MON_CTE"]))
+						{
+							c.resumen.codigo_moneda = "DOL";
+							Comprobante.IdMoneda = "DOL";
+							c.resumen.importes_moneda_origen = new FeaEntidades.InterFacturas.resumenImportes_moneda_origen();
+							c.resumen.importes_moneda_origen.impuesto_liq = Math.Round(Convert.ToDouble(dt.Rows[i]["importe_iv"]), 2);
+							c.resumen.importes_moneda_origen.importe_total_factura = Math.Round(Convert.ToDouble(dt.Rows[i]["unidades"]), 2);
+							c.resumen.importes_moneda_origen.importe_total_neto_gravado = Math.Round(c.resumen.importes_moneda_origen.importe_total_factura - c.resumen.importes_moneda_origen.impuesto_liq, 2);
+						}
+						else
+						{
+							c.resumen.codigo_moneda = "PES";
+							Comprobante.IdMoneda = "PES";
+						}
+						FeaEntidades.InterFacturas.lineas feaEntidadLineas = new FeaEntidades.InterFacturas.lineas();
+						DataRow[] drDetDesc = ds.Tables[1].Select("id_gva12 = " + Comprobante.Clave);
+						double porcIVA = 0;
+						for (int j = 0; j < drDetDesc.Length; j++)
+						{
+							eFact_I_Bj.Entidades.ComprobanteBjLinea linea = new eFact_I_Bj.Entidades.ComprobanteBjLinea();
+							FeaEntidades.InterFacturas.linea lineaFEA = new FeaEntidades.InterFacturas.linea();
+							DataRow dr = drDetDesc[j];
+							linea.Clave = Convert.ToInt32(Comprobante.Clave);
+							linea.Descripcion = dr["descripcio"].ToString();
+							lineaFEA.numeroLinea = j + 1;
+							lineaFEA.descripcion = linea.Descripcion;
+							linea.Cantidad = Convert.ToDecimal(dr["cantidad"]);
+							lineaFEA.cantidad = Convert.ToDouble(linea.Cantidad);
+							lineaFEA.cantidadSpecified = true;
+							linea.Precio_unitario = Convert.ToDecimal(dr["precio_net_pesos"]);
+							lineaFEA.precio_unitario = Math.Round(Convert.ToDouble(dr["precio_net_pesos"]), 6);
+							lineaFEA.precio_unitarioSpecified = true;
+							linea.Alicuota_iva = Convert.ToDecimal(dr["porc_iva"]);
+							lineaFEA.alicuota_iva = Convert.ToDouble(linea.Alicuota_iva);
+							lineaFEA.alicuota_ivaSpecified = true;
+							linea.Importe_total_articulo = Convert.ToDecimal(dr["IMP_NETO_P_pesos"]);
+							lineaFEA.importe_total_articulo = Math.Round(Convert.ToDouble(dr["IMP_NETO_P_pesos"]), 3);
+							lineaFEA.importe_iva = Math.Round(lineaFEA.importe_total_articulo * (lineaFEA.alicuota_iva / 100), 2);
+							lineaFEA.importe_ivaSpecified = true;
+							linea.Importe_iva = Convert.ToDecimal(lineaFEA.importe_iva);
+							//linea.Indicacion_exento_gravado = dr[0]["Linea_indicacion_exento_gravado"].ToString();
+							//linea.Importe_total_descuentos = Convert.ToDecimal(dr[0]["Linea_importe_total_descuentos"]);
+							//linea.Importe_total_impuestos = Convert.ToDecimal(dr[0]["Linea_Importe_total_impuestos"]);
+							if (lineaFEA.alicuota_iva != 0)
+							{
+								porcIVA = lineaFEA.alicuota_iva;
+							}
+							if (c.resumen.codigo_moneda == "DOL")
+							{
+								lineaFEA.importes_moneda_origen = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
+								lineaFEA.importes_moneda_origen.importe_total_articulo = Math.Round(Convert.ToDouble(dr["IMP_NETO_P"]), 3);
+								lineaFEA.importes_moneda_origen.importe_total_articuloSpecified = true;
+								lineaFEA.importes_moneda_origen.importe_iva = Math.Round(lineaFEA.importes_moneda_origen.importe_total_articulo * (lineaFEA.alicuota_iva / 100), 2);
+								lineaFEA.importes_moneda_origen.importe_ivaSpecified = true;
+								lineaFEA.importes_moneda_origen.precio_unitario = Math.Round(Convert.ToDouble(dr["PRECIO_NET"]), 6);
+								lineaFEA.importes_moneda_origen.precio_unitarioSpecified = true;
+							}
+
+							FeaEntidades.InterFacturas.resumenImpuestos imp = new FeaEntidades.InterFacturas.resumenImpuestos();
+							imp.codigo_impuesto = 1;
+							imp.descripcion = "IVA";
+							if (porcIVA != 0)
+							{
+								imp.porcentaje_impuesto = porcIVA;
+								imp.porcentaje_impuestoSpecified = true;
+							}
+							if (c.resumen.codigo_moneda == "DOL")
+							{
+								imp.importe_impuesto = c.resumen.impuesto_liq;
+								imp.importe_impuesto_moneda_origen = c.resumen.importes_moneda_origen.impuesto_liq;
+								imp.importe_impuesto_moneda_origenSpecified = true;
+							}
+							c.resumen.impuestos = new FeaEntidades.InterFacturas.resumenImpuestos[10];
+							c.resumen.impuestos[0] = imp;
+
+							Comprobante.Lineas.Add(linea);
+							c.detalle.linea[j] = lineaFEA;
+						}
+						Comprobantes.Add(Comprobante);
+						Lc.comprobante[i] = c;
+					}
+				}
+				catch
+				{
+				}
                     
                 }
             }
