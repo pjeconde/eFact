@@ -108,6 +108,7 @@ namespace eFact_I_Bj
 
                 //eFact_I_Bj.RN.Lote.Consultar(comprobante, Aplicacion.Sesion);
                 IdEstadoTextBox.Text = comprobante.IdEstado;
+				TabControl.TabPages.Remove(TabControl.TabPages[3]);
             }
             catch (Exception ex)
             {
