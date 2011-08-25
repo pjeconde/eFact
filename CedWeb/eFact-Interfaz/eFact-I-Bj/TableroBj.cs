@@ -210,7 +210,8 @@ namespace eFact_I_Bj
                         lcComprobanteSelec.comprobante[0] = Lc.comprobante[renglon];
                         LoteXML = ArmarLoteXML(lcComprobanteSelec);
                         //Definir ruta y nombre del archivo.
-                        FileStream fs = File.Create(@"c:\\efact-c-contingencia.xml");
+						string archPath = System.Configuration.ConfigurationManager.AppSettings["ArchPath"];
+                        FileStream fs = File.Create(@archPath + "\\efact-c-contingencia.xml");
                         System.Text.Encoding codificador;
                         codificador = System.Text.Encoding.GetEncoding("iso-8859-1");
                         fs.Write(codificador.GetBytes(LoteXML), 0, LoteXML.Length);
