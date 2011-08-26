@@ -36,13 +36,14 @@ namespace eFact_I_Bj
                 TestingPanel.Visible = true;
             }
             //Cabecera
-            IdTipoComprobanteComboBox.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaSinInf();
+            IdTipoComprobanteComboBox.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
             IdTipoComprobanteComboBox.DisplayMember = "Descr";
             IdTipoComprobanteComboBox.ValueMember = "Codigo";
 
             ((DataGridViewComboBoxColumn)ConsultaComprobantesDataGridView.Columns["IdTipoComprobante"]).DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
             ((DataGridViewComboBoxColumn)ConsultaComprobantesDataGridView.Columns["IdTipoComprobante"]).DisplayMember = "Descr";
             ((DataGridViewComboBoxColumn)ConsultaComprobantesDataGridView.Columns["IdTipoComprobante"]).ValueMember = "Codigo";
+			((DataGridViewComboBoxColumn)ConsultaComprobantesDataGridView.Columns["IdTipoComprobante"]).DataPropertyName = "IdTipoComprobante";
 
             ((DataGridViewComboBoxColumn)ConsultaComprobantesDataGridView.Columns["IdMoneda"]).DataSource = FeaEntidades.CodigosMoneda.CodigoMoneda.Lista();
             ((DataGridViewComboBoxColumn)ConsultaComprobantesDataGridView.Columns["IdMoneda"]).DisplayMember = "Descr";
@@ -74,6 +75,8 @@ namespace eFact_I_Bj
             colCompradorNombre.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             colCompradorNombre.Width = 400;
             ConsultaComprobantesDataGridView.Columns.Add(colCompradorNombre);
+			FechaComprobantesDsdDTP.Value = DateTime.Now;
+			FechaComprobantesHstDTP.Value = DateTime.Now;
         }
 
         private void TableroBj_Load(object sender, EventArgs e)
@@ -207,7 +210,19 @@ namespace eFact_I_Bj
                         //Metodo estático para el armado del Lote en formato XML, no necesita usar el constructor con la URL, proxy y certificados.
                         //Para Contingencias: El string LoteXML deberá guardarse en un archivo para se subido al Sitio Web de Interfacturas.
                         FeaEntidades.InterFacturas.lote_comprobantes lcComprobanteSelec = new FeaEntidades.InterFacturas.lote_comprobantes();
+						lcComprobanteSelec.cabecera_lote = Lc.cabecera_lote;
                         lcComprobanteSelec.comprobante[0] = Lc.comprobante[renglon];
+						if (lcComprobanteSelec.comprobante[0].resumen.codigo_moneda == "DOL")
+						{
+							lcComprobanteSelec.comprobante[0].resumen.cant_alicuotas_ivaSpecified = false;
+							lcComprobanteSelec.comprobante[0].resumen.importe_total_factura = 0;
+							lcComprobanteSelec.comprobante[0].resumen.impuesto_liq = 0;
+							lcComprobanteSelec.comprobante[0].resumen.importe_total_neto_gravado = 0;
+							lcComprobanteSelec.comprobante[0].resumen.importe_total_concepto_no_gravado = 0;
+							lcComprobanteSelec.comprobante[0].resumen.impuesto_liq_rni = 0;
+							lcComprobanteSelec.comprobante[0].resumen.importe_operaciones_exentas = 0;
+
+						}
                         LoteXML = ArmarLoteXML(lcComprobanteSelec);
                         //Definir ruta y nombre del archivo.
 						string archPath = System.Configuration.ConfigurationManager.AppSettings["ArchPath"];
