@@ -211,7 +211,32 @@ namespace eFact_I_Bj
                         //Para Contingencias: El string LoteXML deberá guardarse en un archivo para se subido al Sitio Web de Interfacturas.
                         FeaEntidades.InterFacturas.lote_comprobantes lcComprobanteSelec = new FeaEntidades.InterFacturas.lote_comprobantes();
 						lcComprobanteSelec.cabecera_lote = Lc.cabecera_lote;
+						lcComprobanteSelec.cabecera_lote.cantidad_reg = 1;
                         lcComprobanteSelec.comprobante[0] = Lc.comprobante[renglon];
+						if (plantillaExpuesta.DescrPlantilla.Equals("Diferencia de Cambio"))
+						{
+							for (int i = 1; i < lcComprobanteSelec.comprobante[0].detalle.linea.Length; i++)
+							{
+								if (lcComprobanteSelec.comprobante[0].detalle.linea[i] != null)
+								{
+									lcComprobanteSelec.comprobante[0].detalle.linea[i] = null;
+								}
+							}
+							lcComprobanteSelec.comprobante[0].detalle.linea[0].cantidadSpecified = false;
+							lcComprobanteSelec.comprobante[0].detalle.linea[0].precio_unitarioSpecified = false;
+							lcComprobanteSelec.comprobante[0].detalle.linea[0].importe_ivaSpecified = false;
+							lcComprobanteSelec.comprobante[0].detalle.linea[0].alicuota_ivaSpecified = false;
+							lcComprobanteSelec.comprobante[0].detalle.linea[0].descripcion = string.Empty;
+							if (lcComprobanteSelec.comprobante[0].resumen.codigo_moneda == "DOL")
+							{
+								lcComprobanteSelec.comprobante[0].detalle.linea[0].importe_total_articulo = lcComprobanteSelec.comprobante[0].resumen.importes_moneda_origen.importe_total_neto_gravado;
+							}
+							else
+							{
+								lcComprobanteSelec.comprobante[0].detalle.linea[0].importe_total_articulo = lcComprobanteSelec.comprobante[0].resumen.importe_total_neto_gravado;
+							}
+
+						}
 						if (lcComprobanteSelec.comprobante[0].resumen.codigo_moneda == "DOL")
 						{
 							lcComprobanteSelec.comprobante[0].resumen.cant_alicuotas_ivaSpecified = false;
