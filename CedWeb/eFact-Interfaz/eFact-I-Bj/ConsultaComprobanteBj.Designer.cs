@@ -182,7 +182,7 @@
 			// 
 			this.SplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.SplitContainer.Location = new System.Drawing.Point(0, 181);
-			this.SplitContainer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.SplitContainer.Margin = new System.Windows.Forms.Padding(4);
 			this.SplitContainer.Name = "SplitContainer";
 			this.SplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
 			// 
@@ -205,7 +205,7 @@
 			this.ConsultaLotePanel.Controls.Add(this.TabControl);
 			this.ConsultaLotePanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ConsultaLotePanel.Location = new System.Drawing.Point(0, 0);
-			this.ConsultaLotePanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ConsultaLotePanel.Margin = new System.Windows.Forms.Padding(4);
 			this.ConsultaLotePanel.Name = "ConsultaLotePanel";
 			this.ConsultaLotePanel.Size = new System.Drawing.Size(1284, 364);
 			this.ConsultaLotePanel.TabIndex = 4;
@@ -218,7 +218,7 @@
 			this.TabControl.Controls.Add(this.ResumenTabPage);
 			this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TabControl.Location = new System.Drawing.Point(0, 0);
-			this.TabControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.TabControl.Margin = new System.Windows.Forms.Padding(4);
 			this.TabControl.Name = "TabControl";
 			this.TabControl.SelectedIndex = 0;
 			this.TabControl.Size = new System.Drawing.Size(1284, 364);
@@ -228,9 +228,9 @@
 			// 
 			this.DetalleTabPage.Controls.Add(this.DetalleComprobanteDataGridView);
 			this.DetalleTabPage.Location = new System.Drawing.Point(4, 25);
-			this.DetalleTabPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.DetalleTabPage.Margin = new System.Windows.Forms.Padding(4);
 			this.DetalleTabPage.Name = "DetalleTabPage";
-			this.DetalleTabPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.DetalleTabPage.Padding = new System.Windows.Forms.Padding(4);
 			this.DetalleTabPage.Size = new System.Drawing.Size(1276, 335);
 			this.DetalleTabPage.TabIndex = 0;
 			this.DetalleTabPage.Text = "Detalle del Comprobante";
@@ -261,7 +261,7 @@
             this.Importe_total_articulo});
 			this.DetalleComprobanteDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.DetalleComprobanteDataGridView.Location = new System.Drawing.Point(4, 4);
-			this.DetalleComprobanteDataGridView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.DetalleComprobanteDataGridView.Margin = new System.Windows.Forms.Padding(4);
 			this.DetalleComprobanteDataGridView.Name = "DetalleComprobanteDataGridView";
 			this.DetalleComprobanteDataGridView.ReadOnly = true;
 			this.DetalleComprobanteDataGridView.RowHeadersVisible = false;
@@ -382,9 +382,9 @@
 			// 
 			this.VendedorTabPage.Controls.Add(this.panel1);
 			this.VendedorTabPage.Location = new System.Drawing.Point(4, 25);
-			this.VendedorTabPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorTabPage.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorTabPage.Name = "VendedorTabPage";
-			this.VendedorTabPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorTabPage.Padding = new System.Windows.Forms.Padding(4);
 			this.VendedorTabPage.Size = new System.Drawing.Size(1276, 335);
 			this.VendedorTabPage.TabIndex = 3;
 			this.VendedorTabPage.Text = "Vendedor";
@@ -434,7 +434,7 @@
 			this.panel1.Controls.Add(this.VendedorCuitTextBox);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(4, 4);
-			this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.panel1.Margin = new System.Windows.Forms.Padding(4);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(1268, 327);
 			this.panel1.TabIndex = 0;
@@ -474,7 +474,7 @@
 			this.VendedorProvinciaComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.VendedorProvinciaComboBox.FormattingEnabled = true;
 			this.VendedorProvinciaComboBox.Location = new System.Drawing.Point(491, 145);
-			this.VendedorProvinciaComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorProvinciaComboBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorProvinciaComboBox.Name = "VendedorProvinciaComboBox";
 			this.VendedorProvinciaComboBox.Size = new System.Drawing.Size(239, 24);
 			this.VendedorProvinciaComboBox.TabIndex = 95;
@@ -492,7 +492,7 @@
 			// VendedorContactoTextBox
 			// 
 			this.VendedorContactoTextBox.Location = new System.Drawing.Point(157, 284);
-			this.VendedorContactoTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorContactoTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorContactoTextBox.Name = "VendedorContactoTextBox";
 			this.VendedorContactoTextBox.ReadOnly = true;
 			this.VendedorContactoTextBox.Size = new System.Drawing.Size(724, 22);
@@ -501,7 +501,7 @@
 			// VendedorEMailTextBox
 			// 
 			this.VendedorEMailTextBox.Location = new System.Drawing.Point(491, 178);
-			this.VendedorEMailTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorEMailTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorEMailTextBox.Name = "VendedorEMailTextBox";
 			this.VendedorEMailTextBox.ReadOnly = true;
 			this.VendedorEMailTextBox.Size = new System.Drawing.Size(391, 22);
@@ -520,7 +520,7 @@
 			// VendedorTelefonosTextBox
 			// 
 			this.VendedorTelefonosTextBox.Location = new System.Drawing.Point(157, 180);
-			this.VendedorTelefonosTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorTelefonosTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorTelefonosTextBox.Name = "VendedorTelefonosTextBox";
 			this.VendedorTelefonosTextBox.ReadOnly = true;
 			this.VendedorTelefonosTextBox.Size = new System.Drawing.Size(233, 22);
@@ -539,7 +539,7 @@
 			// VendedorCPTextBox
 			// 
 			this.VendedorCPTextBox.Location = new System.Drawing.Point(791, 145);
-			this.VendedorCPTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorCPTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorCPTextBox.Name = "VendedorCPTextBox";
 			this.VendedorCPTextBox.ReadOnly = true;
 			this.VendedorCPTextBox.Size = new System.Drawing.Size(92, 22);
@@ -558,7 +558,7 @@
 			// VendedorLocalidadTextBox
 			// 
 			this.VendedorLocalidadTextBox.Location = new System.Drawing.Point(159, 145);
-			this.VendedorLocalidadTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorLocalidadTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorLocalidadTextBox.Name = "VendedorLocalidadTextBox";
 			this.VendedorLocalidadTextBox.ReadOnly = true;
 			this.VendedorLocalidadTextBox.Size = new System.Drawing.Size(233, 22);
@@ -577,7 +577,7 @@
 			// VendedorDomicilioManzanaTextBox
 			// 
 			this.VendedorDomicilioManzanaTextBox.Location = new System.Drawing.Point(697, 113);
-			this.VendedorDomicilioManzanaTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorDomicilioManzanaTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorDomicilioManzanaTextBox.Name = "VendedorDomicilioManzanaTextBox";
 			this.VendedorDomicilioManzanaTextBox.ReadOnly = true;
 			this.VendedorDomicilioManzanaTextBox.Size = new System.Drawing.Size(185, 22);
@@ -586,7 +586,7 @@
 			// VendedorDomicilioTorreTextBox
 			// 
 			this.VendedorDomicilioTorreTextBox.Location = new System.Drawing.Point(413, 113);
-			this.VendedorDomicilioTorreTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorDomicilioTorreTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorDomicilioTorreTextBox.Name = "VendedorDomicilioTorreTextBox";
 			this.VendedorDomicilioTorreTextBox.ReadOnly = true;
 			this.VendedorDomicilioTorreTextBox.Size = new System.Drawing.Size(185, 22);
@@ -595,7 +595,7 @@
 			// VendedorDomicilioSectorTextBox
 			// 
 			this.VendedorDomicilioSectorTextBox.Location = new System.Drawing.Point(157, 113);
-			this.VendedorDomicilioSectorTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorDomicilioSectorTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorDomicilioSectorTextBox.Name = "VendedorDomicilioSectorTextBox";
 			this.VendedorDomicilioSectorTextBox.ReadOnly = true;
 			this.VendedorDomicilioSectorTextBox.Size = new System.Drawing.Size(185, 22);
@@ -627,7 +627,7 @@
 			this.VendedorInicioActividadesDTP.CustomFormat = "dd/MM/yyyy";
 			this.VendedorInicioActividadesDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
 			this.VendedorInicioActividadesDTP.Location = new System.Drawing.Point(716, 250);
-			this.VendedorInicioActividadesDTP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorInicioActividadesDTP.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorInicioActividadesDTP.Name = "VendedorInicioActividadesDTP";
 			this.VendedorInicioActividadesDTP.ShowCheckBox = true;
 			this.VendedorInicioActividadesDTP.Size = new System.Drawing.Size(165, 22);
@@ -636,7 +636,7 @@
 			// VendedorNroIBTextBox
 			// 
 			this.VendedorNroIBTextBox.Location = new System.Drawing.Point(617, 215);
-			this.VendedorNroIBTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorNroIBTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorNroIBTextBox.Name = "VendedorNroIBTextBox";
 			this.VendedorNroIBTextBox.ReadOnly = true;
 			this.VendedorNroIBTextBox.Size = new System.Drawing.Size(264, 22);
@@ -657,7 +657,7 @@
 			this.VendedorCondicionIVAComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.VendedorCondicionIVAComboBox.FormattingEnabled = true;
 			this.VendedorCondicionIVAComboBox.Location = new System.Drawing.Point(157, 250);
-			this.VendedorCondicionIVAComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorCondicionIVAComboBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorCondicionIVAComboBox.Name = "VendedorCondicionIVAComboBox";
 			this.VendedorCondicionIVAComboBox.Size = new System.Drawing.Size(364, 24);
 			this.VendedorCondicionIVAComboBox.TabIndex = 76;
@@ -688,7 +688,7 @@
 			this.VendedorCondicionIBComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.VendedorCondicionIBComboBox.FormattingEnabled = true;
 			this.VendedorCondicionIBComboBox.Location = new System.Drawing.Point(157, 214);
-			this.VendedorCondicionIBComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorCondicionIBComboBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorCondicionIBComboBox.Name = "VendedorCondicionIBComboBox";
 			this.VendedorCondicionIBComboBox.Size = new System.Drawing.Size(364, 24);
 			this.VendedorCondicionIBComboBox.TabIndex = 73;
@@ -697,7 +697,7 @@
 			// VendedorDomicilioDptoTextBox
 			// 
 			this.VendedorDomicilioDptoTextBox.Location = new System.Drawing.Point(831, 79);
-			this.VendedorDomicilioDptoTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorDomicilioDptoTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorDomicilioDptoTextBox.Name = "VendedorDomicilioDptoTextBox";
 			this.VendedorDomicilioDptoTextBox.ReadOnly = true;
 			this.VendedorDomicilioDptoTextBox.Size = new System.Drawing.Size(52, 22);
@@ -716,7 +716,7 @@
 			// VendedorDomicilioPisoTextBox
 			// 
 			this.VendedorDomicilioPisoTextBox.Location = new System.Drawing.Point(713, 79);
-			this.VendedorDomicilioPisoTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorDomicilioPisoTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorDomicilioPisoTextBox.Name = "VendedorDomicilioPisoTextBox";
 			this.VendedorDomicilioPisoTextBox.ReadOnly = true;
 			this.VendedorDomicilioPisoTextBox.Size = new System.Drawing.Size(52, 22);
@@ -735,7 +735,7 @@
 			// VendedorDomicilioNroTextBox
 			// 
 			this.VendedorDomicilioNroTextBox.Location = new System.Drawing.Point(591, 79);
-			this.VendedorDomicilioNroTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorDomicilioNroTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorDomicilioNroTextBox.Name = "VendedorDomicilioNroTextBox";
 			this.VendedorDomicilioNroTextBox.ReadOnly = true;
 			this.VendedorDomicilioNroTextBox.Size = new System.Drawing.Size(52, 22);
@@ -764,7 +764,7 @@
 			// VendedorDomicilioCalleTextBox
 			// 
 			this.VendedorDomicilioCalleTextBox.Location = new System.Drawing.Point(157, 79);
-			this.VendedorDomicilioCalleTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorDomicilioCalleTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorDomicilioCalleTextBox.Name = "VendedorDomicilioCalleTextBox";
 			this.VendedorDomicilioCalleTextBox.ReadOnly = true;
 			this.VendedorDomicilioCalleTextBox.Size = new System.Drawing.Size(365, 22);
@@ -773,7 +773,7 @@
 			// VendedorCodigoTextBox
 			// 
 			this.VendedorCodigoTextBox.Location = new System.Drawing.Point(531, 47);
-			this.VendedorCodigoTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorCodigoTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorCodigoTextBox.Name = "VendedorCodigoTextBox";
 			this.VendedorCodigoTextBox.ReadOnly = true;
 			this.VendedorCodigoTextBox.Size = new System.Drawing.Size(235, 22);
@@ -792,7 +792,7 @@
 			// VendedorNombreTextBox
 			// 
 			this.VendedorNombreTextBox.Location = new System.Drawing.Point(157, 15);
-			this.VendedorNombreTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorNombreTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorNombreTextBox.Name = "VendedorNombreTextBox";
 			this.VendedorNombreTextBox.ReadOnly = true;
 			this.VendedorNombreTextBox.Size = new System.Drawing.Size(1117, 22);
@@ -821,7 +821,7 @@
 			// VendedorCuitTextBox
 			// 
 			this.VendedorCuitTextBox.Location = new System.Drawing.Point(157, 47);
-			this.VendedorCuitTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.VendedorCuitTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.VendedorCuitTextBox.Name = "VendedorCuitTextBox";
 			this.VendedorCuitTextBox.ReadOnly = true;
 			this.VendedorCuitTextBox.Size = new System.Drawing.Size(167, 22);
@@ -832,9 +832,9 @@
 			this.CompradorTabPage.AutoScroll = true;
 			this.CompradorTabPage.Controls.Add(this.panel2);
 			this.CompradorTabPage.Location = new System.Drawing.Point(4, 25);
-			this.CompradorTabPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.CompradorTabPage.Margin = new System.Windows.Forms.Padding(4);
 			this.CompradorTabPage.Name = "CompradorTabPage";
-			this.CompradorTabPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.CompradorTabPage.Padding = new System.Windows.Forms.Padding(4);
 			this.CompradorTabPage.Size = new System.Drawing.Size(1276, 335);
 			this.CompradorTabPage.TabIndex = 4;
 			this.CompradorTabPage.Text = "Comprador";
@@ -864,7 +864,7 @@
 			this.panel2.Controls.Add(this.label10);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel2.Location = new System.Drawing.Point(4, 4);
-			this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.panel2.Margin = new System.Windows.Forms.Padding(4);
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(1268, 327);
 			this.panel2.TabIndex = 1;
@@ -872,7 +872,7 @@
 			// CompradorEMailTextBox
 			// 
 			this.CompradorEMailTextBox.Location = new System.Drawing.Point(491, 212);
-			this.CompradorEMailTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.CompradorEMailTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.CompradorEMailTextBox.Name = "CompradorEMailTextBox";
 			this.CompradorEMailTextBox.ReadOnly = true;
 			this.CompradorEMailTextBox.Size = new System.Drawing.Size(391, 22);
@@ -892,8 +892,8 @@
 			// 
 			// CompradorTelefonoTextBox
 			// 
-			this.CompradorTelefonoTextBox.Location = new System.Drawing.Point(157, 212);
-			this.CompradorTelefonoTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.CompradorTelefonoTextBox.Location = new System.Drawing.Point(490, 245);
+			this.CompradorTelefonoTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.CompradorTelefonoTextBox.Name = "CompradorTelefonoTextBox";
 			this.CompradorTelefonoTextBox.ReadOnly = true;
 			this.CompradorTelefonoTextBox.Size = new System.Drawing.Size(233, 22);
@@ -903,7 +903,7 @@
 			// label38
 			// 
 			this.label38.AutoSize = true;
-			this.label38.Location = new System.Drawing.Point(73, 215);
+			this.label38.Location = new System.Drawing.Point(406, 248);
 			this.label38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label38.Name = "label38";
 			this.label38.Size = new System.Drawing.Size(75, 17);
@@ -924,7 +924,7 @@
 			// CompradorDomicilioCalleTextBox
 			// 
 			this.CompradorDomicilioCalleTextBox.Location = new System.Drawing.Point(157, 47);
-			this.CompradorDomicilioCalleTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.CompradorDomicilioCalleTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.CompradorDomicilioCalleTextBox.Name = "CompradorDomicilioCalleTextBox";
 			this.CompradorDomicilioCalleTextBox.ReadOnly = true;
 			this.CompradorDomicilioCalleTextBox.Size = new System.Drawing.Size(365, 22);
@@ -933,7 +933,7 @@
 			// label35
 			// 
 			this.label35.AutoSize = true;
-			this.label35.Location = new System.Drawing.Point(753, 183);
+			this.label35.Location = new System.Drawing.Point(121, 213);
 			this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label35.Name = "label35";
 			this.label35.Size = new System.Drawing.Size(30, 17);
@@ -942,8 +942,8 @@
 			// 
 			// CompradorCPTextBox
 			// 
-			this.CompradorCPTextBox.Location = new System.Drawing.Point(789, 180);
-			this.CompradorCPTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.CompradorCPTextBox.Location = new System.Drawing.Point(157, 210);
+			this.CompradorCPTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.CompradorCPTextBox.Name = "CompradorCPTextBox";
 			this.CompradorCPTextBox.ReadOnly = true;
 			this.CompradorCPTextBox.Size = new System.Drawing.Size(92, 22);
@@ -952,7 +952,7 @@
 			// CompradorLocalidadTextBox
 			// 
 			this.CompradorLocalidadTextBox.Location = new System.Drawing.Point(157, 180);
-			this.CompradorLocalidadTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.CompradorLocalidadTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.CompradorLocalidadTextBox.Name = "CompradorLocalidadTextBox";
 			this.CompradorLocalidadTextBox.ReadOnly = true;
 			this.CompradorLocalidadTextBox.Size = new System.Drawing.Size(233, 22);
@@ -984,7 +984,7 @@
 			this.CompradorProvinciaComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.CompradorProvinciaComboBox.FormattingEnabled = true;
 			this.CompradorProvinciaComboBox.Location = new System.Drawing.Point(492, 178);
-			this.CompradorProvinciaComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.CompradorProvinciaComboBox.Margin = new System.Windows.Forms.Padding(4);
 			this.CompradorProvinciaComboBox.Name = "CompradorProvinciaComboBox";
 			this.CompradorProvinciaComboBox.Size = new System.Drawing.Size(239, 24);
 			this.CompradorProvinciaComboBox.TabIndex = 79;
@@ -995,7 +995,7 @@
 			this.CompradorTipoDocComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.CompradorTipoDocComboBox.FormattingEnabled = true;
 			this.CompradorTipoDocComboBox.Location = new System.Drawing.Point(157, 79);
-			this.CompradorTipoDocComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.CompradorTipoDocComboBox.Margin = new System.Windows.Forms.Padding(4);
 			this.CompradorTipoDocComboBox.Name = "CompradorTipoDocComboBox";
 			this.CompradorTipoDocComboBox.Size = new System.Drawing.Size(364, 24);
 			this.CompradorTipoDocComboBox.TabIndex = 78;
@@ -1005,7 +1005,7 @@
 			this.CompradorCondIVAComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.CompradorCondIVAComboBox.FormattingEnabled = true;
 			this.CompradorCondIVAComboBox.Location = new System.Drawing.Point(157, 146);
-			this.CompradorCondIVAComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.CompradorCondIVAComboBox.Margin = new System.Windows.Forms.Padding(4);
 			this.CompradorCondIVAComboBox.Name = "CompradorCondIVAComboBox";
 			this.CompradorCondIVAComboBox.Size = new System.Drawing.Size(364, 24);
 			this.CompradorCondIVAComboBox.TabIndex = 77;
@@ -1023,7 +1023,7 @@
 			// CompradorNroDocTextBox
 			// 
 			this.CompradorNroDocTextBox.Location = new System.Drawing.Point(157, 114);
-			this.CompradorNroDocTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.CompradorNroDocTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.CompradorNroDocTextBox.Name = "CompradorNroDocTextBox";
 			this.CompradorNroDocTextBox.ReadOnly = true;
 			this.CompradorNroDocTextBox.Size = new System.Drawing.Size(159, 22);
@@ -1052,7 +1052,7 @@
 			// CompradorNombreTextBox
 			// 
 			this.CompradorNombreTextBox.Location = new System.Drawing.Point(157, 15);
-			this.CompradorNombreTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.CompradorNombreTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.CompradorNombreTextBox.Name = "CompradorNombreTextBox";
 			this.CompradorNombreTextBox.ReadOnly = true;
 			this.CompradorNombreTextBox.Size = new System.Drawing.Size(1121, 22);
@@ -1073,9 +1073,9 @@
 			this.ResumenTabPage.AutoScroll = true;
 			this.ResumenTabPage.Controls.Add(this.ResumenPanel);
 			this.ResumenTabPage.Location = new System.Drawing.Point(4, 25);
-			this.ResumenTabPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ResumenTabPage.Margin = new System.Windows.Forms.Padding(4);
 			this.ResumenTabPage.Name = "ResumenTabPage";
-			this.ResumenTabPage.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ResumenTabPage.Padding = new System.Windows.Forms.Padding(4);
 			this.ResumenTabPage.Size = new System.Drawing.Size(1276, 335);
 			this.ResumenTabPage.TabIndex = 5;
 			this.ResumenTabPage.Text = "Resumen";
@@ -1099,7 +1099,7 @@
 			this.ResumenPanel.Controls.Add(this.ResumenNetoGravadoTextBox);
 			this.ResumenPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ResumenPanel.Location = new System.Drawing.Point(4, 4);
-			this.ResumenPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ResumenPanel.Margin = new System.Windows.Forms.Padding(4);
 			this.ResumenPanel.Name = "ResumenPanel";
 			this.ResumenPanel.Size = new System.Drawing.Size(1268, 327);
 			this.ResumenPanel.TabIndex = 0;
@@ -1107,7 +1107,7 @@
 			// ResumenCantAlicuotasIVATextBox
 			// 
 			this.ResumenCantAlicuotasIVATextBox.Location = new System.Drawing.Point(629, 17);
-			this.ResumenCantAlicuotasIVATextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ResumenCantAlicuotasIVATextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.ResumenCantAlicuotasIVATextBox.Name = "ResumenCantAlicuotasIVATextBox";
 			this.ResumenCantAlicuotasIVATextBox.ReadOnly = true;
 			this.ResumenCantAlicuotasIVATextBox.Size = new System.Drawing.Size(75, 22);
@@ -1127,7 +1127,7 @@
 			// ResumenImpuestosNacionalesTextBox
 			// 
 			this.ResumenImpuestosNacionalesTextBox.Location = new System.Drawing.Point(219, 177);
-			this.ResumenImpuestosNacionalesTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ResumenImpuestosNacionalesTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.ResumenImpuestosNacionalesTextBox.Name = "ResumenImpuestosNacionalesTextBox";
 			this.ResumenImpuestosNacionalesTextBox.ReadOnly = true;
 			this.ResumenImpuestosNacionalesTextBox.Size = new System.Drawing.Size(159, 22);
@@ -1147,7 +1147,7 @@
 			// ResumenImpuestosLiqRNITextBox
 			// 
 			this.ResumenImpuestosLiqRNITextBox.Location = new System.Drawing.Point(219, 145);
-			this.ResumenImpuestosLiqRNITextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ResumenImpuestosLiqRNITextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.ResumenImpuestosLiqRNITextBox.Name = "ResumenImpuestosLiqRNITextBox";
 			this.ResumenImpuestosLiqRNITextBox.ReadOnly = true;
 			this.ResumenImpuestosLiqRNITextBox.Size = new System.Drawing.Size(159, 22);
@@ -1167,7 +1167,7 @@
 			// ResumenImpuestosLiqTextBox
 			// 
 			this.ResumenImpuestosLiqTextBox.Location = new System.Drawing.Point(219, 113);
-			this.ResumenImpuestosLiqTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ResumenImpuestosLiqTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.ResumenImpuestosLiqTextBox.Name = "ResumenImpuestosLiqTextBox";
 			this.ResumenImpuestosLiqTextBox.ReadOnly = true;
 			this.ResumenImpuestosLiqTextBox.Size = new System.Drawing.Size(159, 22);
@@ -1187,7 +1187,7 @@
 			// ResumenOperacionesExentasTextBox
 			// 
 			this.ResumenOperacionesExentasTextBox.Location = new System.Drawing.Point(219, 81);
-			this.ResumenOperacionesExentasTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ResumenOperacionesExentasTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.ResumenOperacionesExentasTextBox.Name = "ResumenOperacionesExentasTextBox";
 			this.ResumenOperacionesExentasTextBox.ReadOnly = true;
 			this.ResumenOperacionesExentasTextBox.Size = new System.Drawing.Size(159, 22);
@@ -1207,7 +1207,7 @@
 			// ResumenConceptoNoGravadoTextBox
 			// 
 			this.ResumenConceptoNoGravadoTextBox.Location = new System.Drawing.Point(219, 49);
-			this.ResumenConceptoNoGravadoTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ResumenConceptoNoGravadoTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.ResumenConceptoNoGravadoTextBox.Name = "ResumenConceptoNoGravadoTextBox";
 			this.ResumenConceptoNoGravadoTextBox.ReadOnly = true;
 			this.ResumenConceptoNoGravadoTextBox.Size = new System.Drawing.Size(159, 22);
@@ -1237,7 +1237,7 @@
 			// ResumenNetoGravadoTextBox
 			// 
 			this.ResumenNetoGravadoTextBox.Location = new System.Drawing.Point(219, 17);
-			this.ResumenNetoGravadoTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ResumenNetoGravadoTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.ResumenNetoGravadoTextBox.Name = "ResumenNetoGravadoTextBox";
 			this.ResumenNetoGravadoTextBox.ReadOnly = true;
 			this.ResumenNetoGravadoTextBox.Size = new System.Drawing.Size(159, 22);
@@ -1249,7 +1249,7 @@
 			this.PiePanel.Controls.Add(this.BotonesPanel);
 			this.PiePanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.PiePanel.Location = new System.Drawing.Point(0, 0);
-			this.PiePanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.PiePanel.Margin = new System.Windows.Forms.Padding(4);
 			this.PiePanel.Name = "PiePanel";
 			this.PiePanel.Size = new System.Drawing.Size(1284, 41);
 			this.PiePanel.TabIndex = 5;
@@ -1259,9 +1259,9 @@
 			this.BotonesPanel.Controls.Add(this.SalirButton);
 			this.BotonesPanel.Dock = System.Windows.Forms.DockStyle.Top;
 			this.BotonesPanel.Location = new System.Drawing.Point(0, 0);
-			this.BotonesPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.BotonesPanel.Margin = new System.Windows.Forms.Padding(4);
 			this.BotonesPanel.Name = "BotonesPanel";
-			this.BotonesPanel.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.BotonesPanel.Padding = new System.Windows.Forms.Padding(4);
 			this.BotonesPanel.Size = new System.Drawing.Size(1284, 36);
 			this.BotonesPanel.TabIndex = 13;
 			// 
@@ -1269,7 +1269,7 @@
 			// 
 			this.SalirButton.Dock = System.Windows.Forms.DockStyle.Right;
 			this.SalirButton.Location = new System.Drawing.Point(1200, 4);
-			this.SalirButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.SalirButton.Margin = new System.Windows.Forms.Padding(4);
 			this.SalirButton.Name = "SalirButton";
 			this.SalirButton.Size = new System.Drawing.Size(80, 28);
 			this.SalirButton.TabIndex = 9;
@@ -1310,7 +1310,7 @@
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(777, 50);
+			this.label5.Location = new System.Drawing.Point(382, 83);
 			this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(121, 17);
@@ -1320,7 +1320,7 @@
 			// NumeroComprobanteTextBox
 			// 
 			this.NumeroComprobanteTextBox.Location = new System.Drawing.Point(167, 82);
-			this.NumeroComprobanteTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.NumeroComprobanteTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.NumeroComprobanteTextBox.Name = "NumeroComprobanteTextBox";
 			this.NumeroComprobanteTextBox.ReadOnly = true;
 			this.NumeroComprobanteTextBox.Size = new System.Drawing.Size(159, 22);
@@ -1330,7 +1330,7 @@
 			// PuntoVentaTextBox
 			// 
 			this.PuntoVentaTextBox.Location = new System.Drawing.Point(167, 50);
-			this.PuntoVentaTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.PuntoVentaTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.PuntoVentaTextBox.Name = "PuntoVentaTextBox";
 			this.PuntoVentaTextBox.ReadOnly = true;
 			this.PuntoVentaTextBox.Size = new System.Drawing.Size(79, 22);
@@ -1349,8 +1349,8 @@
 			// 
 			// CantidadRenglonesTextBox
 			// 
-			this.CantidadRenglonesTextBox.Location = new System.Drawing.Point(908, 47);
-			this.CantidadRenglonesTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.CantidadRenglonesTextBox.Location = new System.Drawing.Point(513, 80);
+			this.CantidadRenglonesTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.CantidadRenglonesTextBox.Name = "CantidadRenglonesTextBox";
 			this.CantidadRenglonesTextBox.ReadOnly = true;
 			this.CantidadRenglonesTextBox.Size = new System.Drawing.Size(79, 22);
@@ -1364,7 +1364,7 @@
 			this.FechaEmisionDTP.Enabled = false;
 			this.FechaEmisionDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
 			this.FechaEmisionDTP.Location = new System.Drawing.Point(513, 18);
-			this.FechaEmisionDTP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.FechaEmisionDTP.Margin = new System.Windows.Forms.Padding(4);
 			this.FechaEmisionDTP.Name = "FechaEmisionDTP";
 			this.FechaEmisionDTP.ShowCheckBox = true;
 			this.FechaEmisionDTP.Size = new System.Drawing.Size(159, 22);
@@ -1377,7 +1377,7 @@
 			this.FechaVtoDTP.Enabled = false;
 			this.FechaVtoDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
 			this.FechaVtoDTP.Location = new System.Drawing.Point(513, 50);
-			this.FechaVtoDTP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.FechaVtoDTP.Margin = new System.Windows.Forms.Padding(4);
 			this.FechaVtoDTP.Name = "FechaVtoDTP";
 			this.FechaVtoDTP.ShowCheckBox = true;
 			this.FechaVtoDTP.Size = new System.Drawing.Size(159, 22);
@@ -1402,15 +1402,17 @@
 			this.IdEstadoLabel.Size = new System.Drawing.Size(60, 17);
 			this.IdEstadoLabel.TabIndex = 20;
 			this.IdEstadoLabel.Text = "Estado: ";
+			this.IdEstadoLabel.Visible = false;
 			// 
 			// IdEstadoTextBox
 			// 
 			this.IdEstadoTextBox.Location = new System.Drawing.Point(908, 15);
-			this.IdEstadoTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.IdEstadoTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.IdEstadoTextBox.Name = "IdEstadoTextBox";
 			this.IdEstadoTextBox.ReadOnly = true;
 			this.IdEstadoTextBox.Size = new System.Drawing.Size(200, 22);
 			this.IdEstadoTextBox.TabIndex = 21;
+			this.IdEstadoTextBox.Visible = false;
 			// 
 			// label4
 			// 
@@ -1425,7 +1427,7 @@
 			// ImporteTextBox
 			// 
 			this.ImporteTextBox.Location = new System.Drawing.Point(167, 146);
-			this.ImporteTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.ImporteTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.ImporteTextBox.Name = "ImporteTextBox";
 			this.ImporteTextBox.ReadOnly = true;
 			this.ImporteTextBox.Size = new System.Drawing.Size(159, 22);
@@ -1445,42 +1447,46 @@
 			// label11
 			// 
 			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(429, 86);
+			this.label11.Location = new System.Drawing.Point(819, 87);
 			this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(70, 17);
 			this.label11.TabIndex = 30;
 			this.label11.Text = "CAE Nro.:";
+			this.label11.Visible = false;
 			// 
 			// label12
 			// 
 			this.label12.AutoSize = true;
-			this.label12.Location = new System.Drawing.Point(387, 118);
+			this.label12.Location = new System.Drawing.Point(777, 119);
 			this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label12.Name = "label12";
 			this.label12.Size = new System.Drawing.Size(111, 17);
 			this.label12.TabIndex = 31;
 			this.label12.Text = "CAE Fecha Vto.:";
+			this.label12.Visible = false;
 			// 
 			// CAENroTextBox
 			// 
-			this.CAENroTextBox.Location = new System.Drawing.Point(513, 82);
-			this.CAENroTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.CAENroTextBox.Location = new System.Drawing.Point(903, 83);
+			this.CAENroTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.CAENroTextBox.Name = "CAENroTextBox";
 			this.CAENroTextBox.ReadOnly = true;
 			this.CAENroTextBox.Size = new System.Drawing.Size(159, 22);
 			this.CAENroTextBox.TabIndex = 32;
 			this.CAENroTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.CAENroTextBox.Visible = false;
 			// 
 			// CAEFechaVtoTextBox
 			// 
-			this.CAEFechaVtoTextBox.Location = new System.Drawing.Point(513, 114);
-			this.CAEFechaVtoTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.CAEFechaVtoTextBox.Location = new System.Drawing.Point(903, 115);
+			this.CAEFechaVtoTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.CAEFechaVtoTextBox.Name = "CAEFechaVtoTextBox";
 			this.CAEFechaVtoTextBox.ReadOnly = true;
 			this.CAEFechaVtoTextBox.Size = new System.Drawing.Size(159, 22);
 			this.CAEFechaVtoTextBox.TabIndex = 33;
 			this.CAEFechaVtoTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.CAEFechaVtoTextBox.Visible = false;
 			// 
 			// CabPanel
 			// 
@@ -1508,7 +1514,7 @@
 			this.CabPanel.Controls.Add(this.label1);
 			this.CabPanel.Dock = System.Windows.Forms.DockStyle.Top;
 			this.CabPanel.Location = new System.Drawing.Point(0, 0);
-			this.CabPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.CabPanel.Margin = new System.Windows.Forms.Padding(4);
 			this.CabPanel.Name = "CabPanel";
 			this.CabPanel.Size = new System.Drawing.Size(1284, 181);
 			this.CabPanel.TabIndex = 3;
@@ -1518,7 +1524,7 @@
 			this.MonedaComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.MonedaComboBox.FormattingEnabled = true;
 			this.MonedaComboBox.Location = new System.Drawing.Point(167, 113);
-			this.MonedaComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.MonedaComboBox.Margin = new System.Windows.Forms.Padding(4);
 			this.MonedaComboBox.Name = "MonedaComboBox";
 			this.MonedaComboBox.Size = new System.Drawing.Size(159, 24);
 			this.MonedaComboBox.TabIndex = 64;
@@ -1528,7 +1534,7 @@
 			this.IdTipoComprobanteComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.IdTipoComprobanteComboBox.FormattingEnabled = true;
 			this.IdTipoComprobanteComboBox.Location = new System.Drawing.Point(167, 15);
-			this.IdTipoComprobanteComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.IdTipoComprobanteComboBox.Margin = new System.Windows.Forms.Padding(4);
 			this.IdTipoComprobanteComboBox.Name = "IdTipoComprobanteComboBox";
 			this.IdTipoComprobanteComboBox.Size = new System.Drawing.Size(159, 24);
 			this.IdTipoComprobanteComboBox.TabIndex = 63;
@@ -1540,7 +1546,7 @@
 			this.ClientSize = new System.Drawing.Size(1284, 591);
 			this.Controls.Add(this.SplitContainer);
 			this.Controls.Add(this.CabPanel);
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "ConsultaComprobanteBj";
 			this.Text = "Consulta del Comprobante";
 			this.Load += new System.EventHandler(this.ConsultaComprobanteBj_Load);
