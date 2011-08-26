@@ -361,12 +361,12 @@ namespace eFact_I_Bj.DB
 							{
 								imp.porcentaje_impuesto = porcIVA;
 								imp.porcentaje_impuestoSpecified = true;
-							}
-							if (c.resumen.codigo_moneda == "DOL")
-							{
 								imp.importe_impuesto = c.resumen.impuesto_liq;
-								imp.importe_impuesto_moneda_origen = c.resumen.importes_moneda_origen.impuesto_liq;
-								imp.importe_impuesto_moneda_origenSpecified = true;
+								if (c.resumen.codigo_moneda == "DOL")
+								{
+									imp.importe_impuesto_moneda_origen = c.resumen.importes_moneda_origen.impuesto_liq;
+									imp.importe_impuesto_moneda_origenSpecified = true;
+								}
 							}
 							c.resumen.impuestos = new FeaEntidades.InterFacturas.resumenImpuestos[10];
 							c.resumen.impuestos[0] = imp;
