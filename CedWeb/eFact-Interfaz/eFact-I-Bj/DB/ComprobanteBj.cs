@@ -14,9 +14,9 @@ namespace eFact_I_Bj.DB
         {
             StringBuilder commandText = new StringBuilder();
             commandText.Append("DECLARE @FechaDsd as Datetime DECLARE @FechaHst as Datetime DECLARE @NroComp as Varchar(250) ");
-            commandText.Append("SET @FechaDsd='" + FechaDsd + "' ");
-            commandText.Append("SET @FechaHst='" + FechaHst + "' ");
-            
+			commandText.Append("SET @FechaDsd='" + FechaDsd.ToString("yyyyMMdd") + "' ");
+			commandText.Append("SET @FechaHst='" + FechaHst.ToString("yyyyMMdd") + "' ");
+
 			if (NumeroComprobante != string.Empty)
 			{
 				commandText.Append("SET @NroComp='" + NumeroComprobante + "' ");
@@ -25,10 +25,13 @@ namespace eFact_I_Bj.DB
             commandText.Append("gva14.c_postal, gva14.cod_provin, gva14.cuit, gva14.dir_com, gva14.localidad, gva14.nom_com, gva14.tipo_doc ");
             commandText.Append("from GVA12 ");
             commandText.Append("inner join gva14 on gva12.cod_client=gva14.cod_client ");
-            commandText.Append("where fecha_emis >= @FechaDsd and fecha_emis < Dateadd (Day, 1, @FechaHst) ");
 			if (NumeroComprobante != string.Empty)
 			{
 				commandText.Append("and gva12.n_comp like '%'+@NroComp+'%' ");
+			}
+			else
+			{
+				commandText.Append("where fecha_emis >= @FechaDsd and fecha_emis < Dateadd (Day, 1, @FechaHst) ");
 			}
 
             commandText.Append("select gva12.id_gva12, gva12.cod_client, gva12.cat_iva, gva12.fecha_emis, gva12.n_comp, gva12.t_comp, gva12.cotiz, gva12.importe_iv, gva12.unidades, gva12.importe, ");
@@ -39,13 +42,16 @@ namespace eFact_I_Bj.DB
             commandText.Append("from GVA12 ");
             commandText.Append("inner join gva14 on gva12.cod_client=gva14.cod_client ");
             commandText.Append("inner join gva53 on gva53.N_comp=gva12.n_comp and gva53.t_comp=gva12.t_comp ");
-            commandText.Append("inner join gva63 on gva63.N_comp=gva12.n_comp and gva63.t_comp=gva12.t_comp ");
             commandText.Append("inner join sta11 on gva53.COD_ARTICU=sta11.cod_articu ");
             commandText.Append("inner join medida on gva53.ID_MEDIDA_VENTAS=medida.id_medida ");
-            commandText.Append("where fecha_emis >= @FechaDsd and fecha_emis < Dateadd (Day, 1, @FechaHst) ");
+            
 			if (NumeroComprobante != string.Empty)
 			{
 				commandText.Append("and gva12.n_comp like '%'+@NroComp+'%' ");
+			}
+			else
+			{
+				commandText.Append("where fecha_emis >= @FechaDsd and fecha_emis < Dateadd (Day, 1, @FechaHst) ");
 			}
       
             DataSet ds = new DataSet();
@@ -204,8 +210,8 @@ namespace eFact_I_Bj.DB
 						}
 						else
 						{
-							Comprobante.FechaVto = Convert.ToDateTime("2008/05/22", cedeiraCultura.DateTimeFormat);
-							c.cabecera.informacion_comprobante.fecha_vencimiento = Comprobante.FechaVto.ToString("yyyyMMdd");
+							Comprobante.FechaVto = Convert.ToDateTime("1970/05/22", cedeiraCultura.DateTimeFormat);
+							//c.cabecera.informacion_comprobante.fecha_vencimiento = Comprobante.FechaVto.ToString("yyyyMMdd");
 						}
 						//Comprobante.Importe = Convert.ToDecimal(dt.Rows[i]["importe"]);
 						//Comprobante.ImporteNetoGravado = Convert.ToDecimal(dt.Rows[i]["PRECIO_NET"]);
@@ -274,7 +280,6 @@ namespace eFact_I_Bj.DB
 						c.resumen.tipo_de_cambio = Convert.ToDouble(dt.Rows[i]["cotiz"]);
 						Comprobante.TipoDeCambio = Convert.ToDouble(dt.Rows[i]["cotiz"]);
 						c.resumen.importe_total_factura = Math.Round(Convert.ToDouble(dt.Rows[i]["importe"]), 2);
-						Comprobante.Importe = Convert.ToDecimal(dt.Rows[i]["importe"]);
 						c.resumen.importe_total_neto_gravado = Math.Round(Convert.ToDouble(dt.Rows[i]["ImpTotalNetoGravado"]), 2);
 						c.resumen.impuesto_liq = Math.Round(Convert.ToDouble(dt.Rows[i]["importe_iv_pesos"]), 2);
 
@@ -296,11 +301,14 @@ namespace eFact_I_Bj.DB
 							c.resumen.importes_moneda_origen.impuesto_liq = Math.Round(Convert.ToDouble(dt.Rows[i]["importe_iv"]), 2);
 							c.resumen.importes_moneda_origen.importe_total_factura = Math.Round(Convert.ToDouble(dt.Rows[i]["unidades"]), 2);
 							c.resumen.importes_moneda_origen.importe_total_neto_gravado = Math.Round(c.resumen.importes_moneda_origen.importe_total_factura - c.resumen.importes_moneda_origen.impuesto_liq, 2);
+							Comprobante.Importe = Math.Round(Convert.ToDecimal(dt.Rows[i]["unidades"]), 2);
 						}
 						else
 						{
 							c.resumen.codigo_moneda = "PES";
 							Comprobante.IdMoneda = "PES";
+							Comprobante.Importe = Math.Round(Convert.ToDecimal(dt.Rows[i]["importe"]), 2);
+							;
 						}
 						FeaEntidades.InterFacturas.lineas feaEntidadLineas = new FeaEntidades.InterFacturas.lineas();
 						DataRow[] drDetDesc = ds.Tables[1].Select("id_gva12 = " + Comprobante.Clave);
