@@ -283,7 +283,7 @@
 			// label6
 			// 
 			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(96, 40);
+			this.label6.Location = new System.Drawing.Point(158, 35);
 			this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(43, 17);
@@ -292,10 +292,10 @@
 			// 
 			// NumeroComprobanteTextBox
 			// 
-			this.NumeroComprobanteTextBox.Location = new System.Drawing.Point(141, 34);
+			this.NumeroComprobanteTextBox.Location = new System.Drawing.Point(207, 36);
 			this.NumeroComprobanteTextBox.Margin = new System.Windows.Forms.Padding(4);
 			this.NumeroComprobanteTextBox.Name = "NumeroComprobanteTextBox";
-			this.NumeroComprobanteTextBox.Size = new System.Drawing.Size(104, 22);
+			this.NumeroComprobanteTextBox.Size = new System.Drawing.Size(124, 22);
 			this.NumeroComprobanteTextBox.TabIndex = 68;
 			this.NumeroComprobanteTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			// 
@@ -323,7 +323,7 @@
 			// label8
 			// 
 			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(5, 41);
+			this.label8.Location = new System.Drawing.Point(69, 35);
 			this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(93, 17);
@@ -348,7 +348,7 @@
 			this.FechaComprobantesDsdDTP.Name = "FechaComprobantesDsdDTP";
 			this.FechaComprobantesDsdDTP.Size = new System.Drawing.Size(124, 22);
 			this.FechaComprobantesDsdDTP.TabIndex = 45;
-			this.FechaComprobantesDsdDTP.Value = new System.DateTime(1910, 1, 1, 11, 14, 0, 0);
+			this.FechaComprobantesDsdDTP.Value = new System.DateTime(2011, 8, 25, 0, 0, 0, 0);
 			// 
 			// FechaComprobantesHstDTP
 			// 
@@ -537,6 +537,7 @@
 			this.NumeroCAE.HeaderText = "Cae";
 			this.NumeroCAE.Name = "NumeroCAE";
 			this.NumeroCAE.ReadOnly = true;
+			this.NumeroCAE.Visible = false;
 			// 
 			// FechaVtoCAE
 			// 
@@ -548,6 +549,7 @@
 			this.FechaVtoCAE.HeaderText = "Fecha de Vto. Cae";
 			this.FechaVtoCAE.Name = "FechaVtoCAE";
 			this.FechaVtoCAE.ReadOnly = true;
+			this.FechaVtoCAE.Visible = false;
 			this.FechaVtoCAE.Width = 80;
 			// 
 			// IdMoneda
@@ -848,20 +850,20 @@
         private System.Windows.Forms.TextBox NumeroComprobanteTextBox;
         private System.Windows.Forms.TextBox PuntoVentaTextBox;
         private System.Windows.Forms.Label PuntoVentaLabel;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn VendedorCuit;
-        private System.Windows.Forms.DataGridViewComboBoxColumn IdTipoComprobante;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PuntoVenta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroComprobante;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaVto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroCAE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaVtoCAE;
-        private System.Windows.Forms.DataGridViewComboBoxColumn IdMoneda;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Importe;
+		private System.Windows.Forms.Label label8;
         private System.Windows.Forms.MenuItem menuItem1;
         private System.Windows.Forms.MenuItem menuItem4;
         private System.Windows.Forms.MenuItem menuItem5;
+		private System.Windows.Forms.DataGridViewTextBoxColumn VendedorCuit;
+		private System.Windows.Forms.DataGridViewComboBoxColumn IdTipoComprobante;
+		private System.Windows.Forms.DataGridViewTextBoxColumn PuntoVenta;
+		private System.Windows.Forms.DataGridViewTextBoxColumn NumeroComprobante;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
+		private System.Windows.Forms.DataGridViewTextBoxColumn FechaVto;
+		private System.Windows.Forms.DataGridViewTextBoxColumn NumeroCAE;
+		private System.Windows.Forms.DataGridViewTextBoxColumn FechaVtoCAE;
+		private System.Windows.Forms.DataGridViewComboBoxColumn IdMoneda;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Importe;
     }
 }
 
