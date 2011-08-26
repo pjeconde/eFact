@@ -601,14 +601,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:eFact-I-Bj"
-        "ProductCode" = "8:{B09040C1-992D-4A82-82FE-2D065D94661F}"
-        "PackageCode" = "8:{97F038A5-10F2-4907-832A-657EFBE93D29}"
+        "ProductCode" = "8:{9A7257EF-83B8-4FBD-8C32-9EFDF42071E3}"
+        "PackageCode" = "8:{06F1C807-566D-4831-B8BA-27B2D4D4C7E9}"
         "UpgradeCode" = "8:{8D299D08-B63D-46E7-B130-DF95919A1138}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.2"
         "Manufacturer" = "8:Cedeira"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -723,7 +723,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_1079E8BC7AD043FD8D51C93C6503D4DF"
             {
-            "Name" = "8:eFact-I-Bj-v1.0"
+            "Name" = "8:eFact-I-Bj-v1.2"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
