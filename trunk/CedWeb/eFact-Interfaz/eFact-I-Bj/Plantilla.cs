@@ -58,6 +58,14 @@ namespace eFact_I_Bj
                 SeleccionarButton.Visible = true;
                 SeleccionarButton.Enabled = true;
                 LlenarCombo();
+				DescrPlantillaTextBox.Text = "";
+				Leyenda1TextBox.Text = "";
+				Leyenda2TextBox.Text = "";
+				Leyenda3TextBox.Text = "";
+				Leyenda4TextBox.Text = "";
+				Leyenda5TextBox.Text = "";
+				LeyendaMonedaTextBox.Text = "";
+				LeyendaBancoTextBox.Text = "";
             }
         }
 
@@ -75,7 +83,7 @@ namespace eFact_I_Bj
             Leyenda4TextBox.Text = "";
             Leyenda5TextBox.Text = "";
             LeyendaMonedaTextBox.Text = "";
-            LeyendaMonedaTextBox.Text = "";
+            LeyendaBancoTextBox.Text = "";
         }
 
         private void EjecutarButton_Click(object sender, EventArgs e)
