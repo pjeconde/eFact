@@ -960,22 +960,29 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
 			for (int i = 0; i < listadelineas.Count; i++)
 			{
-				if (listadelineas[i].descripcion == null)
-				{
-					throw new Exception("Debe informar al menos un artículo");
-				}
-				if (listadelineas[i].importe_iva != 0)
-				{
-					totalGravado += listadelineas[i].importe_total_articulo;
-				}
-				else if (listadelineas[i].indicacion_exento_gravado.Equals("E"))
-				{
-					total_Operaciones_Exentas += listadelineas[i].importe_total_articulo;
-				}
-				else
-				{
-					totalNoGravado += listadelineas[i].importe_total_articulo;
-				}
+                try
+                {
+                    if (listadelineas[i].descripcion == null)
+                    {
+                        throw new Exception("Debe informar al menos un artículo");
+                    }
+                    if (listadelineas[i].importe_iva != 0)
+                    {
+                        totalGravado += listadelineas[i].importe_total_articulo;
+                    }
+                    else if (listadelineas[i].indicacion_exento_gravado.Equals("E"))
+                    {
+                        total_Operaciones_Exentas += listadelineas[i].importe_total_articulo;
+                    }
+                    else
+                    {
+                        totalNoGravado += listadelineas[i].importe_total_articulo;
+                    }
+                }
+                catch (NullReferenceException)
+                {
+                    totalNoGravado += listadelineas[i].importe_total_articulo;
+                }
 				totalIVA += listadelineas[i].importe_iva;
 			}
 		}

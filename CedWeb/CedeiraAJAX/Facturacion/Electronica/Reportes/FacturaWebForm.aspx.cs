@@ -149,6 +149,18 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
             lc.comprobante[0].resumen.importe_total_impuestos_nacionalesSpecified = true;
             lc.comprobante[0].resumen.importe_total_ingresos_brutosSpecified = true;
 
+            for (int i = 0; i < lc.comprobante[0].resumen.descuentos.Length; i++)
+            {
+                if (lc.comprobante[0].resumen.descuentos[i].importe_iva_descuentoSpecified.Equals(false))
+                {
+                    lc.comprobante[0].resumen.descuentos[i].importe_iva_descuentoSpecified = true;
+                }
+                if (lc.comprobante[0].resumen.descuentos[i].alicuota_iva_descuentoSpecified.Equals(false))
+                {
+                    lc.comprobante[0].resumen.descuentos[i].alicuota_iva_descuentoSpecified = true;
+                }
+            }
+
             for (int i = 0; i < lc.comprobante[0].detalle.linea.Length;i++)
             {
                 if (lc.comprobante[0].detalle.linea[i]!=null)
