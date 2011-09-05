@@ -151,13 +151,20 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
 
             for (int i = 0; i < lc.comprobante[0].resumen.descuentos.Length; i++)
             {
-                if (lc.comprobante[0].resumen.descuentos[i].importe_iva_descuentoSpecified.Equals(false))
+                if (lc.comprobante[0].resumen.descuentos[i]!=null)
                 {
-                    lc.comprobante[0].resumen.descuentos[i].importe_iva_descuentoSpecified = true;
-                }
-                if (lc.comprobante[0].resumen.descuentos[i].alicuota_iva_descuentoSpecified.Equals(false))
-                {
-                    lc.comprobante[0].resumen.descuentos[i].alicuota_iva_descuentoSpecified = true;
+                    if (lc.comprobante[0].resumen.descuentos[i].importe_iva_descuentoSpecified.Equals(false))
+                    {
+                        lc.comprobante[0].resumen.descuentos[i].importe_iva_descuentoSpecified = true;
+                    }
+                    if (lc.comprobante[0].resumen.descuentos[i].alicuota_iva_descuentoSpecified.Equals(false))
+                    {
+                        lc.comprobante[0].resumen.descuentos[i].alicuota_iva_descuentoSpecified = true;
+                    }
+                    if (lc.comprobante[0].resumen.descuentos[i].porcentaje_descuentoSpecified.Equals(false))
+                    {
+                        lc.comprobante[0].resumen.descuentos[i].porcentaje_descuentoSpecified = true;
+                    }
                 }
             }
 
@@ -222,6 +229,7 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
 						if (lc.comprobante[0].resumen.descuentos[i] != null)
 						{
 							lc.comprobante[0].resumen.descuentos[i].importe_descuento = lc.comprobante[0].resumen.descuentos[i].importe_descuento_moneda_origen;
+                            lc.comprobante[0].resumen.descuentos[i].importe_iva_descuento = lc.comprobante[0].resumen.descuentos[i].importe_iva_descuento_moneda_origen;
 						}
 					}
 				}
