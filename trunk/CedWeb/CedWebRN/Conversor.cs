@@ -368,35 +368,35 @@ namespace CedWebRN
             return lcFEA;
         }
 
-        static internal FeaEntidades.InterFacturas.comprobante IBKC2FeaEntidad2(IBKC.comprobante cIBKC)
+        static internal FeaEntidades.InterFacturas.comprobante IBKP2FeaEntidad2(IBKP.comprobante cIBKP)
         {
             FeaEntidades.InterFacturas.comprobante cIBK = new FeaEntidades.InterFacturas.comprobante();
             cIBK.cabecera.informacion_comprador = new FeaEntidades.InterFacturas.informacion_comprador();
-            cIBK.cabecera.informacion_comprador.codigo_doc_identificatorio = cIBKC.cabecera.informacion_comprador.codigo_doc_identificatorio;
-            cIBK.cabecera.informacion_comprador.codigo_interno = cIBKC.cabecera.informacion_comprador.codigo_interno;
-            cIBK.cabecera.informacion_comprador.condicion_ingresos_brutos = cIBKC.cabecera.informacion_comprador.condicion_ingresos_brutos;
-            cIBK.cabecera.informacion_comprador.condicion_ingresos_brutosSpecified = cIBKC.cabecera.informacion_comprador.condicion_ingresos_brutosSpecified;
-            cIBK.cabecera.informacion_comprador.condicion_IVA = cIBKC.cabecera.informacion_comprador.condicion_IVA;
-            cIBK.cabecera.informacion_comprador.condicion_IVASpecified = cIBKC.cabecera.informacion_comprador.condicion_IVASpecified;
-            cIBK.cabecera.informacion_comprador.contacto = cIBKC.cabecera.informacion_comprador.contacto;
-            cIBK.cabecera.informacion_comprador.cp = cIBKC.cabecera.informacion_comprador.cp;
-            cIBK.cabecera.informacion_comprador.denominacion = cIBKC.cabecera.informacion_comprador.denominacion;
-            cIBK.cabecera.informacion_comprador.domicilio_calle = cIBKC.cabecera.informacion_comprador.domicilio_calle;
-            cIBK.cabecera.informacion_comprador.domicilio_depto = cIBKC.cabecera.informacion_comprador.domicilio_depto;
-            cIBK.cabecera.informacion_comprador.domicilio_manzana = cIBKC.cabecera.informacion_comprador.domicilio_manzana;
-            cIBK.cabecera.informacion_comprador.domicilio_numero = cIBKC.cabecera.informacion_comprador.domicilio_numero;
-            cIBK.cabecera.informacion_comprador.domicilio_piso = cIBKC.cabecera.informacion_comprador.domicilio_piso;
-            cIBK.cabecera.informacion_comprador.domicilio_sector = cIBKC.cabecera.informacion_comprador.domicilio_sector;
-            cIBK.cabecera.informacion_comprador.domicilio_torre = cIBKC.cabecera.informacion_comprador.domicilio_torre;
-            cIBK.cabecera.informacion_comprador.email = cIBKC.cabecera.informacion_comprador.email;
-            cIBK.cabecera.informacion_comprador.GLN = cIBKC.cabecera.informacion_comprador.GLN;
-            cIBK.cabecera.informacion_comprador.GLNSpecified = cIBKC.cabecera.informacion_comprador.GLNSpecified;
-            cIBK.cabecera.informacion_comprador.inicio_de_actividades = cIBKC.cabecera.informacion_comprador.inicio_de_actividades;
-            cIBK.cabecera.informacion_comprador.localidad = cIBKC.cabecera.informacion_comprador.localidad;
-            cIBK.cabecera.informacion_comprador.nro_doc_identificatorio = cIBKC.cabecera.informacion_comprador.nro_doc_identificatorio;
-            cIBK.cabecera.informacion_comprador.nro_ingresos_brutos = cIBKC.cabecera.informacion_comprador.nro_ingresos_brutos;
-            cIBK.cabecera.informacion_comprador.provincia = cIBKC.cabecera.informacion_comprador.provincia;
-            cIBK.cabecera.informacion_comprador.telefono = cIBKC.cabecera.informacion_comprador.telefono;
+            cIBK.cabecera.informacion_comprador.codigo_doc_identificatorio = cIBKP.cabecera.informacion_comprador.codigo_doc_identificatorio;
+            cIBK.cabecera.informacion_comprador.codigo_interno = cIBKP.cabecera.informacion_comprador.codigo_interno;
+            cIBK.cabecera.informacion_comprador.condicion_ingresos_brutos = cIBKP.cabecera.informacion_comprador.condicion_ingresos_brutos;
+            cIBK.cabecera.informacion_comprador.condicion_ingresos_brutosSpecified = cIBKP.cabecera.informacion_comprador.condicion_ingresos_brutosSpecified;
+            cIBK.cabecera.informacion_comprador.condicion_IVA = cIBKP.cabecera.informacion_comprador.condicion_IVA;
+            cIBK.cabecera.informacion_comprador.condicion_IVASpecified = cIBKP.cabecera.informacion_comprador.condicion_IVASpecified;
+            cIBK.cabecera.informacion_comprador.contacto = cIBKP.cabecera.informacion_comprador.contacto;
+            cIBK.cabecera.informacion_comprador.cp = cIBKP.cabecera.informacion_comprador.cp;
+            cIBK.cabecera.informacion_comprador.denominacion = cIBKP.cabecera.informacion_comprador.denominacion;
+            cIBK.cabecera.informacion_comprador.domicilio_calle = cIBKP.cabecera.informacion_comprador.domicilio_calle;
+            cIBK.cabecera.informacion_comprador.domicilio_depto = cIBKP.cabecera.informacion_comprador.domicilio_depto;
+            cIBK.cabecera.informacion_comprador.domicilio_manzana = cIBKP.cabecera.informacion_comprador.domicilio_manzana;
+            cIBK.cabecera.informacion_comprador.domicilio_numero = cIBKP.cabecera.informacion_comprador.domicilio_numero;
+            cIBK.cabecera.informacion_comprador.domicilio_piso = cIBKP.cabecera.informacion_comprador.domicilio_piso;
+            cIBK.cabecera.informacion_comprador.domicilio_sector = cIBKP.cabecera.informacion_comprador.domicilio_sector;
+            cIBK.cabecera.informacion_comprador.domicilio_torre = cIBKP.cabecera.informacion_comprador.domicilio_torre;
+            cIBK.cabecera.informacion_comprador.email = cIBKP.cabecera.informacion_comprador.email;
+            cIBK.cabecera.informacion_comprador.GLN = cIBKP.cabecera.informacion_comprador.GLN;
+            cIBK.cabecera.informacion_comprador.GLNSpecified = cIBKP.cabecera.informacion_comprador.GLNSpecified;
+            cIBK.cabecera.informacion_comprador.inicio_de_actividades = cIBKP.cabecera.informacion_comprador.inicio_de_actividades;
+            cIBK.cabecera.informacion_comprador.localidad = cIBKP.cabecera.informacion_comprador.localidad;
+            cIBK.cabecera.informacion_comprador.nro_doc_identificatorio = cIBKP.cabecera.informacion_comprador.nro_doc_identificatorio;
+            cIBK.cabecera.informacion_comprador.nro_ingresos_brutos = cIBKP.cabecera.informacion_comprador.nro_ingresos_brutos;
+            cIBK.cabecera.informacion_comprador.provincia = cIBKP.cabecera.informacion_comprador.provincia;
+            cIBK.cabecera.informacion_comprador.telefono = cIBKP.cabecera.informacion_comprador.telefono;
             return cIBK;
         }
     }

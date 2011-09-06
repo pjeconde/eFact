@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="consulta_agrupado_comprobante_response" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>CedWebRN.IBKC.consulta_agrupado_comprobante_response</TypeInfo>
+   <TypeInfo>CedWebRN.IBKP.consulta_agrupado_comprobante_response</TypeInfo>
 </GenericObjectDataSource>

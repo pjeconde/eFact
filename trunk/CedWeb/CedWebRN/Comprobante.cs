@@ -1317,6 +1317,8 @@ namespace CedWebRN
 			texto = texto.Replace("ì", "&igrave;");
 			texto = texto.Replace("ò", "&ograve;");
 			texto = texto.Replace("ù", "&ugrave;");
+            texto = texto.Replace("ñ", "&ntilde;");
+            texto = texto.Replace("$", "&#36");
 			//Mayúsculas
 			texto = texto.Replace("Á", "&Aacute;");
 			texto = texto.Replace("É", "&Eacute;");
@@ -1328,7 +1330,7 @@ namespace CedWebRN
 			texto = texto.Replace("Ì", "&Igrave;");
 			texto = texto.Replace("Ò", "&Ograve;");
 			texto = texto.Replace("Ù", "&Ugrave;");
-
+            texto = texto.Replace("Ñ", "&Ntilde;");
 			return texto;
         }
         public string HexToString(string Hex)
@@ -1362,6 +1364,8 @@ namespace CedWebRN
 			texto = texto.Replace("&igrave;", "ì");
 			texto = texto.Replace("&ograve;", "ò");
 			texto = texto.Replace("&ugrave;", "ù");
+            texto = texto.Replace("&ntilde;", "ñ");
+            texto = texto.Replace("&#36", "$");
 			//Mayúsculas
 			texto = texto.Replace("&Aacute;", "Á");
 			texto = texto.Replace("&Eacute;", "É");
@@ -1373,15 +1377,16 @@ namespace CedWebRN
 			texto = texto.Replace("&Igrave;", "Ì");
 			texto = texto.Replace("&Ograve;", "Ò");
 			texto = texto.Replace("&Ugrave;", "Ù");
+            texto = texto.Replace("&Ntilde;", "Ñ");
             return texto;
         }
 
-        public FeaEntidades.InterFacturas.comprobante ConsultarIBKC(IBKC.consulta_detalle_comprobante cdc, string certificado)
+        public FeaEntidades.InterFacturas.comprobante ConsultarIBKP(IBKP.consulta_detalle_comprobante cdc, string certificado)
         {
             FeaEntidades.InterFacturas.comprobante c = new FeaEntidades.InterFacturas.comprobante();
-            IBKC.ConsultaFacturaWebServiceConSchema objIBKC;
-            objIBKC = new IBKC.ConsultaFacturaWebServiceConSchema();
-            objIBKC.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturasC"];
+            IBKP.ConsultaFacturaWebServiceConSchema objIBKP;
+            objIBKP = new IBKP.ConsultaFacturaWebServiceConSchema();
+            objIBKP.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturasC"];
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null && System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
             {
                 System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
@@ -1390,21 +1395,21 @@ namespace CedWebRN
                 string dominioProxy = System.Configuration.ConfigurationManager.AppSettings["DominioProxy"];
                 System.Net.NetworkCredential networkCredential = new System.Net.NetworkCredential(usuarioProxy, claveProxy, dominioProxy);
                 wp.Credentials = networkCredential;
-                objIBKC.Proxy = wp;
+                objIBKP.Proxy = wp;
             }
             X509Store store = new X509Store(StoreLocation.CurrentUser);
             store.Open(OpenFlags.ReadOnly);
             X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
             if (col.Count.Equals(1))
             {
-                objIBKC.ClientCertificates.Add(col[0]);
+                objIBKP.ClientCertificates.Add(col[0]);
                 System.Threading.Thread.Sleep(1000);
-                IBKC.consulta_detalle_comprobante_response cdcr = objIBKC.consultaDetalleConSchema(cdc);
-                IBKC.consulta_detalle_response cdr;
+                IBKP.consulta_detalle_comprobante_response cdcr = objIBKP.consultaDetalleConSchema(cdc);
+                IBKP.consulta_detalle_response cdr;
                 try
                 {
-                    cdr = (IBKC.consulta_detalle_response)cdcr.Item;
-                    IBKC.comprobante cIBK = (IBKC.comprobante)cdr.Item;
+                    cdr = (IBKP.consulta_detalle_response)cdcr.Item;
+                    IBKP.comprobante cIBK = (IBKP.comprobante)cdr.Item;
                     //c = Ibk2Fea(cIBK);
                 }
                 catch (InvalidCastException)
@@ -1424,12 +1429,12 @@ namespace CedWebRN
             }
         }
 
-        public List<FeaEntidades.InterFacturas.comprobante_listado> ConsultarListadoIBKC(IBKC.consulta_listado_comprobante clc, string certificado)
+        public List<FeaEntidades.InterFacturas.comprobante_listado> ConsultarListadoIBKP(IBKP.consulta_listado_comprobante clc, string certificado)
         {
             List<FeaEntidades.InterFacturas.comprobante_listado> lc = new List<FeaEntidades.InterFacturas.comprobante_listado>();
-            IBKC.ConsultaFacturaWebServiceConSchema objIBKC;
-            objIBKC = new IBKC.ConsultaFacturaWebServiceConSchema();
-            objIBKC.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturasP"];
+            IBKP.ConsultaFacturaWebServiceConSchema objIBKP;
+            objIBKP = new IBKP.ConsultaFacturaWebServiceConSchema();
+            objIBKP.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturasP"];
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null && System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
             {
                 System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
@@ -1438,22 +1443,22 @@ namespace CedWebRN
                 string dominioProxy = System.Configuration.ConfigurationManager.AppSettings["DominioProxy"];
                 System.Net.NetworkCredential networkCredential = new System.Net.NetworkCredential(usuarioProxy, claveProxy, dominioProxy);
                 wp.Credentials = networkCredential;
-                objIBKC.Proxy = wp;
+                objIBKP.Proxy = wp;
             }
             X509Store store = new X509Store(StoreLocation.CurrentUser);
             store.Open(OpenFlags.ReadOnly);
             X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
             if (col.Count.Equals(1))
             {
-                objIBKC.ClientCertificates.Add(col[0]);
+                objIBKP.ClientCertificates.Add(col[0]);
                 System.Threading.Thread.Sleep(1000);
-                IBKC.consulta_listado_comprobante_response clcr = objIBKC.consultaListadoConSchema(clc);
-                IBKC.consulta_listado_response clr;
+                IBKP.consulta_listado_comprobante_response clcr = objIBKP.consultaListadoConSchema(clc);
+                IBKP.consulta_listado_response clr;
                 try
                 {
-                    clr = (IBKC.consulta_listado_response)clcr.Item;
-                    IBKC.consulta_listado_responseComprobantes_listado cIBK = (IBKC.consulta_listado_responseComprobantes_listado)clr.Item;
-                    lc = IbkC2Fea(cIBK.comprobante_listado);
+                    clr = (IBKP.consulta_listado_response)clcr.Item;
+                    IBKP.consulta_listado_responseComprobantes_listado cIBK = (IBKP.consulta_listado_responseComprobantes_listado)clr.Item;
+                    lc = IBKP2Fea(cIBK.comprobante_listado);
                 }
                 catch (InvalidCastException)
                 {
@@ -1471,10 +1476,10 @@ namespace CedWebRN
                 throw new Exception("Su certificado no está disponible en nuestro repositorio");
             }
         }
-        private List<FeaEntidades.InterFacturas.comprobante_listado> IbkC2Fea(CedWebRN.IBKC.comprobante_listado[] lcIBK)
+        private List<FeaEntidades.InterFacturas.comprobante_listado> IBKP2Fea(CedWebRN.IBKP.comprobante_listado[] lcIBK)
         {
             List<FeaEntidades.InterFacturas.comprobante_listado> resultado = new List<FeaEntidades.InterFacturas.comprobante_listado>();
-            foreach (CedWebRN.IBKC.comprobante_listado cIBK in lcIBK)
+            foreach (CedWebRN.IBKP.comprobante_listado cIBK in lcIBK)
             {
                 FeaEntidades.InterFacturas.comprobante_listado c = new FeaEntidades.InterFacturas.comprobante_listado();
                 c.cuit_vendedor = cIBK.cuit_vendedor;
