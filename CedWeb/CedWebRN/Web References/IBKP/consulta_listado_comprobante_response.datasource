@@ -5,6 +5,6 @@
     Renaming the file extension or editing the content of this file may   
     cause the file to be unrecognizable by the program.
 -->
-<GenericObjectDataSource DisplayName="set_timestamp_comprobantes_response" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>CedWebRN.IBKC.set_timestamp_comprobantes_response</TypeInfo>
+<GenericObjectDataSource DisplayName="consulta_listado_comprobante_response" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+   <TypeInfo>CedWebRN.IBKP.consulta_listado_comprobante_response</TypeInfo>
 </GenericObjectDataSource>

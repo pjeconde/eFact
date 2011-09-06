@@ -37,9 +37,9 @@ namespace CedWebRN.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("https://bcfealsb02-qa:10001/ws/ConsultaFacturaWebServiceConSchema")]
-        public string CedWebRN_IBKC_ConsultaFacturaWebServiceConSchema {
+        public string CedWebRN_IBKP_ConsultaFacturaWebServiceConSchema {
             get {
-                return ((string)(this["CedWebRN_IBKC_ConsultaFacturaWebServiceConSchema"]));
+                return ((string)(this["CedWebRN_IBKP_ConsultaFacturaWebServiceConSchema"]));
             }
         }
     }

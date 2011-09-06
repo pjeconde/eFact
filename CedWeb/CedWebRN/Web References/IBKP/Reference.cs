@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace CedWebRN.IBKC {
+namespace CedWebRN.IBKP {
     using System.Diagnostics;
     using System.Web.Services;
     using System.ComponentModel;
@@ -46,7 +46,7 @@ namespace CedWebRN.IBKC {
         
         /// <remarks/>
         public ConsultaFacturaWebServiceConSchema() {
-            this.Url = global::CedWebRN.Properties.Settings.Default.CedWebRN_IBKC_ConsultaFacturaWebServiceConSchema;
+            this.Url = global::CedWebRN.Properties.Settings.Default.CedWebRN_IBKP_ConsultaFacturaWebServiceConSchema;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -1181,12 +1181,11 @@ namespace CedWebRN.IBKC {
         
         /// <comentarios/>
         [System.Xml.Serialization.XmlArrayItemAttribute("set_timestamp_comprobante", IsNullable=false)]
-        public set_timestamp_comprobante[] timestamp_Comprobantes {
+        public set_timestamp_comprobante[] Timestamp_comprobantes {
             get {
                 return this.timestamp_comprobantesField;
             }
-            set 
-            {
+            set {
                 this.timestamp_comprobantesField = value;
             }
         }

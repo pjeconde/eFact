@@ -85,7 +85,6 @@ namespace eFact_DB
             }
             else
             {
-                Lote = new eFact_Entidades.Lote();
                 Copiar(ds, 0, Lote);
                 Lote.WF.EsquemaSegEventosPosibles = WF_EsquemaSegEventosPosibles_qry(Lote.WF);
             }
@@ -126,6 +125,7 @@ namespace eFact_DB
             Hasta.WF.Sesion = sesion;
             //Comprobantes
             DataRow[] dr = ds.Tables[1].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
+            Hasta.Comprobantes = new List<eFact_Entidades.Comprobante>();
             for (int i = 0; i < dr.Length; i++)
             {
                 eFact_Entidades.Comprobante c = new eFact_Entidades.Comprobante();
@@ -169,6 +169,7 @@ namespace eFact_DB
             }
             //WF
             dr = ds.Tables[2].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
+            Hasta.WF.Log = new List<CedEntidades.Log>();
             for (int i = 0; i < dr.Length; i++)
             {
                 CedEntidades.Log l = new CedEntidades.Log();
@@ -191,6 +192,7 @@ namespace eFact_DB
                 Hasta.WF.Log.Add(l);
             }
             dr = ds.Tables[3].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
+            Hasta.WF.EventosPosibles = new List<CedEntidades.Evento>();
             for (int i = 0; i < dr.Length; i++)
             {
                 CedEntidades.Evento evento = new CedEntidades.Evento();
@@ -209,6 +211,7 @@ namespace eFact_DB
                 Hasta.WF.EventosPosibles.Add(evento);
             }
             dr = ds.Tables[4].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
+            Hasta.WF.EventosXLotePosibles = new List<CedEntidades.Evento>();
             for (int i = 0; i < dr.Length; i++)
             {
                 CedEntidades.Evento evento = new CedEntidades.Evento();
@@ -489,7 +492,27 @@ namespace eFact_DB
             commandText.Append(loteXmlIF + "'");
             commandText.Append(" where IdLote = " + Lote.IdLote);
             commandText.Append(" declare @IdLote int select @IdLote=@@Identity");
-            commandText.Append(" end");
+            for (int i = 0; i < Lote.Comprobantes.Count; i++)
+            {
+                string estado = "";
+                if (Lote.Comprobantes[i].EstadoIFoAFIP != null)
+                {
+                    estado = Lote.Comprobantes[i].EstadoIFoAFIP;
+                }
+                string comentario = "";
+                if (Lote.Comprobantes[i].ComentarioIFoAFIP != null)
+                {
+                    comentario = Lote.Comprobantes[i].ComentarioIFoAFIP;
+                }
+                commandText.Append(" Update Comprobantes set EstadoIFoAFIP = '" + estado + "', ");
+                commandText.Append("ComentarioIFoAFIP = '" + comentario + "' ");
+                commandText.Append("where IdLote = " + Lote.IdLote + " and IdTipoComprobante = '" + Lote.Comprobantes[i].IdTipoComprobante + "' ");
+                commandText.Append("and NumeroComprobante = '" + Lote.Comprobantes[i].NumeroComprobante + "' ");
+            }
+            if (HandlerEvento != "")
+            {
+                commandText.Append(" end");
+            }
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.Usa, sesion.CnnStr);
         }

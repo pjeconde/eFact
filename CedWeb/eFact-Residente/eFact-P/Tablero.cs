@@ -110,9 +110,9 @@ namespace eFact_P
         private void ActualizarBandejaE()
         {
             VerificarServicio();
-            CedWebRN.IBKC.error[] respErroresListadoComprobantes = new CedWebRN.IBKC.error[0];
+            CedWebRN.IBKP.error[] respErroresListadoComprobantes = new CedWebRN.IBKP.error[0];
             List<FeaEntidades.InterFacturas.comprobante_listado> lcIBK = new List<FeaEntidades.InterFacturas.comprobante_listado>();
-            CedWebRN.IBKC.consulta_listado_comprobante clc = new CedWebRN.IBKC.consulta_listado_comprobante();
+            CedWebRN.IBKP.consulta_listado_comprobante clc = new CedWebRN.IBKP.consulta_listado_comprobante();
             try
             {
                 clc.cod_interno_canal = "";
@@ -124,7 +124,7 @@ namespace eFact_P
                 clc.tipo_doc_comprador = Convert.ToInt32("80");
                 clc.doc_comprador = Convert.ToInt64("30710015062");
                 CedWebRN.Comprobante cc = new CedWebRN.Comprobante();
-                lcIBK = cc.ConsultarListadoIBKC(clc, "012f0775357c");
+                lcIBK = cc.ConsultarListadoIBKP(clc, "012f0775357c");
                 BandejaEDataGridView.DataSource = lcIBK;
                 BandejaEDataGridView.Refresh();
             }
@@ -673,9 +673,9 @@ namespace eFact_P
 
         private void menuItem5_Click(object sender, EventArgs e)
         {
-            CedWebRN.IBKC.error[] respErroresComprobantes = new CedWebRN.IBKC.error[0];
+            CedWebRN.IBKP.error[] respErroresComprobantes = new CedWebRN.IBKP.error[0];
             FeaEntidades.InterFacturas.comprobante cIBK = new FeaEntidades.InterFacturas.comprobante();
-            CedWebRN.IBKC.consulta_detalle_comprobante cdc = new CedWebRN.IBKC.consulta_detalle_comprobante();
+            CedWebRN.IBKP.consulta_detalle_comprobante cdc = new CedWebRN.IBKP.consulta_detalle_comprobante();
             try
             {
                 cdc.cod_interno_canal = "";
@@ -688,7 +688,7 @@ namespace eFact_P
                 cdc.doc_comprador = Convert.ToInt64("30710015062");
                 cdc.usuario_consulta = "Pablo";
                 CedWebRN.Comprobante cc = new CedWebRN.Comprobante();
-                cIBK = cc.ConsultarIBKC(cdc, "012f0775357c");
+                cIBK = cc.ConsultarIBKP(cdc, "012f0775357c");
                 //lcIBK = CedWebRNComprobante.ConsultarIBK(out respErroresLote, out respErroresComprobantes, clc, WSCertificado);
                 //RespErroresLote = respErroresLote;
                 //RespErroresComprobantes = respErroresComprobantes;
