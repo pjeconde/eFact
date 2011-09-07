@@ -36,6 +36,7 @@
     <Compile Include="Aplicacion.cs" />
     <Compile Include="Archivo.cs" />
     <Compile Include="Comprobante.cs" />
+    <Compile Include="ComprobanteP.cs" />
     <Compile Include="Disco.cs" />
     <Compile Include="Lote.cs" />
     <Compile Include="Novedades.cs" />
