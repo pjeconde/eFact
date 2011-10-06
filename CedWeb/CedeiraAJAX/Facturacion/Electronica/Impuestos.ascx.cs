@@ -179,7 +179,17 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					}
 
 					int auxcodigo_jurisdiccion = Convert.ToInt32(((DropDownList)impuestosGridView.FooterRow.FindControl("ddljurisdiccion")).SelectedValue);
-					r.codigo_jurisdiccion = auxcodigo_jurisdiccion;
+                    if (!auxcodigo_jurisdiccion.Equals(0))
+                    {
+                        r.codigo_jurisdiccion = auxcodigo_jurisdiccion;
+                        r.codigo_jurisdiccionSpecified = true;
+                    }
+                    else
+                    {
+                        r.codigo_jurisdiccion = 0;
+                        r.codigo_jurisdiccionSpecified = false;
+                    }
+
 
 					r.descripcion = ((DropDownList)impuestosGridView.FooterRow.FindControl("ddlcodigo_impuesto")).SelectedItem.Text;
 
