@@ -70,13 +70,19 @@ namespace eFact_P
             StatusBar.Panels["CXOSBP"].Text = "CXO: " + Aplicacion.Sesion.CXO;
             StatusBar.Panels["CXOSBP"].ToolTipText = "Control por oposición: " + Aplicacion.Sesion.CXO;
             eFact_RN.Vendedor.Consultar(Aplicacion.Vendedores, Aplicacion.Sesion);
+            CuitCompradorTextBox.Text = Aplicacion.Vendedores[2].CuitVendedor;
+
+            TipoComprobanteComboBox.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
+            TipoComprobanteComboBox.DisplayMember = "Descr";
+            TipoComprobanteComboBox.ValueMember = "Codigo";
+            TipoComprobanteComboBox.SelectedIndex = -1;
+
             VerificarServicio();
         }
 
         private void Tablero_Load(object sender, EventArgs e)
         {
-            OtrosFiltrosBandejaEPanel.Enabled = false;
-            ArchivosHistoricosPanel.Enabled = false;
+            FechaProcesoPanel.Enabled = false;
 
             ActualizarBandejaE();
             BandejaEDataGridView.Refresh();
@@ -100,8 +106,6 @@ namespace eFact_P
             }
             finally
             {
-                BandejaEDataGridView.DataSource = new List<FeaEntidades.InterFacturas.comprobante_listado>();
-                BandejaEDataGridView.Refresh();
                 ActualizarBandejaEButton.Enabled = true;
                 Cursor = System.Windows.Forms.Cursors.Default;
             }
@@ -118,11 +122,22 @@ namespace eFact_P
                 clc.cod_interno_canal = "";
                 clc.cuit_canal = Convert.ToInt64(@System.Configuration.ConfigurationManager.AppSettings["CuitCanal"]);
                 clc.cuit_vendedor = Convert.ToInt64("20225018805");
-                //clc.punto_de_venta = Convert.ToInt32("22");
-                //clc.numero_comprobante = Convert.ToInt32("6");
-                //clc.tipo_de_comprobante = Convert.ToInt32("2");
+                clc.cuit_vendedorSpecified = true;
+                if (PuntoVentaTextBox.Text != "")
+                {
+                    clc.punto_de_venta = Convert.ToInt32(PuntoVentaTextBox.Text);
+                }
+                if (NumeroComprobanteTextBox.Text != "")
+                {
+                    clc.numero_comprobante_desde = Convert.ToInt32(NumeroComprobanteTextBox.Text);
+                    clc.numero_comprobante_hasta = Convert.ToInt32(NumeroComprobanteTextBox.Text);
+                }
+                if (TipoComprobanteComboBox.SelectedValue != null && TipoComprobanteComboBox.SelectedValue.ToString() != "-1")
+                {
+                    clc.tipo_de_comprobante = Convert.ToInt32(TipoComprobanteComboBox.SelectedValue);
+                }
                 clc.tipo_doc_comprador = Convert.ToInt32("80");
-                clc.doc_comprador = Convert.ToInt64("30710015062");
+                clc.doc_comprador = Convert.ToInt64(CuitCompradorTextBox.Text);
                 CedWebRN.Comprobante cc = new CedWebRN.Comprobante();
                 lcIBK = cc.ConsultarListadoIBKP(clc, "012f0775357c");
                 BandejaEDataGridView.DataSource = lcIBK;
@@ -143,15 +158,6 @@ namespace eFact_P
             DateTime FechaHst;
             VerificarServicio();
             
-            string otrosFiltrosCuitvendedor = "";
-            string otrosFiltrosPuntoVenta = "";
-            string otrosFiltrosNumeroLote = "";
-            if (OtrosFiltrosBandejaSCheckBox.Checked)
-            {
-                otrosFiltrosCuitvendedor = CuitVendedorTextBox.Text;
-                otrosFiltrosNumeroLote = NumeroLoteTextBox.Text;
-                otrosFiltrosPuntoVenta = PuntoVentaTextBox.Text;
-            }
             List<CedEntidades.Evento> eventosXLote = new List<CedEntidades.Evento>();
             InicializarEventosComboBox(out eventosXLote);
 
@@ -215,59 +221,59 @@ namespace eFact_P
             }
             return texto;
         }
-        private CedWebRN.IBK.lote_response ArmarLoteResponse(FeaEntidades.InterFacturas.lote_comprobantes Lc)
-        {
-            string texto = "";
-            CedWebRN.IBK.lote_response lrCompleto = new CedWebRN.IBK.lote_response();
-            CedWebRN.IBK.error[] errores = new CedWebRN.IBK.error[1];
-            lrCompleto.cantidad_reg = Lc.cabecera_lote.cantidad_reg;
-            lrCompleto.cuit_canal = Lc.cabecera_lote.cuit_canal;
-            lrCompleto.cuit_vendedor = Lc.cabecera_lote.cuit_vendedor;
-            lrCompleto.estado = Lc.cabecera_lote.resultado;
-            lrCompleto.fecha_envio_lote = Lc.cabecera_lote.fecha_envio_lote;
-            lrCompleto.id_lote = Lc.cabecera_lote.id_lote;
-            lrCompleto.presta_serv = Lc.cabecera_lote.presta_serv;
-            lrCompleto.presta_servSpecified = Lc.cabecera_lote.presta_servSpecified;
-            lrCompleto.punto_de_venta = Lc.cabecera_lote.punto_de_venta;
-            if (Lc.cabecera_lote.motivo != null && Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
-            {
-                errores[0] = new CedWebRN.IBK.error();
-                errores[0].codigo_error = 0;
-                errores[0].descripcion_error = Lc.cabecera_lote.motivo.Trim();
-                lrCompleto.errores_lote = errores;
-            }
-            int CantMotivoError = 0;
-            for (int i = 0; i < Lc.comprobante.Length; i++)
-            {
-                if (Lc.comprobante[i].cabecera.informacion_comprobante.motivo != null && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "00" && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "")
-                {
-                    CantMotivoError++;
-                }
-            }
-            int NroMotivo = 0;
-            for (int i = 0; i < Lc.comprobante.Length; i++)
-            {
-                CedWebRN.IBK.error[] erroresComprobante = new CedWebRN.IBK.error[1];
-                if (Lc.comprobante[i].cabecera.informacion_comprobante.motivo != null && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "00" && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "")
-                {
-                    if (lrCompleto.comprobante_response == null)
-                    {
-                        lrCompleto.comprobante_response = new CedWebRN.IBK.comprobante_response[CantMotivoError];
-                    }
-                    erroresComprobante[NroMotivo] = new CedWebRN.IBK.error();
-                    erroresComprobante[NroMotivo].codigo_error = 0;
-                    erroresComprobante[NroMotivo].descripcion_error = Lc.comprobante[i].cabecera.informacion_comprobante.motivo;
-                    lrCompleto.comprobante_response[NroMotivo] = new CedWebRN.IBK.comprobante_response();
-                    lrCompleto.comprobante_response[NroMotivo].numero_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante;
-                    lrCompleto.comprobante_response[NroMotivo].punto_de_venta = Lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta;
-                    lrCompleto.comprobante_response[NroMotivo].tipo_de_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante;
-                    lrCompleto.comprobante_response[NroMotivo].estado = Lc.comprobante[i].cabecera.informacion_comprobante.resultado;
-                    lrCompleto.comprobante_response[NroMotivo].errores_comprobante = erroresComprobante;
-                    NroMotivo++;
-                }
-            }
-            return lrCompleto;
-        }
+        //private CedWebRN.IBK.lote_response ArmarLoteResponse(FeaEntidades.InterFacturas.lote_comprobantes Lc)
+        //{
+        //    string texto = "";
+        //    CedWebRN.IBK.lote_response lrCompleto = new CedWebRN.IBK.lote_response();
+        //    CedWebRN.IBK.error[] errores = new CedWebRN.IBK.error[1];
+        //    lrCompleto.cantidad_reg = Lc.cabecera_lote.cantidad_reg;
+        //    lrCompleto.cuit_canal = Lc.cabecera_lote.cuit_canal;
+        //    lrCompleto.cuit_vendedor = Lc.cabecera_lote.cuit_vendedor;
+        //    lrCompleto.estado = Lc.cabecera_lote.resultado;
+        //    lrCompleto.fecha_envio_lote = Lc.cabecera_lote.fecha_envio_lote;
+        //    lrCompleto.id_lote = Lc.cabecera_lote.id_lote;
+        //    lrCompleto.presta_serv = Lc.cabecera_lote.presta_serv;
+        //    lrCompleto.presta_servSpecified = Lc.cabecera_lote.presta_servSpecified;
+        //    lrCompleto.punto_de_venta = Lc.cabecera_lote.punto_de_venta;
+        //    if (Lc.cabecera_lote.motivo != null && Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
+        //    {
+        //        errores[0] = new CedWebRN.IBK.error();
+        //        errores[0].codigo_error = 0;
+        //        errores[0].descripcion_error = Lc.cabecera_lote.motivo.Trim();
+        //        lrCompleto.errores_lote = errores;
+        //    }
+        //    int CantMotivoError = 0;
+        //    for (int i = 0; i < Lc.comprobante.Length; i++)
+        //    {
+        //        if (Lc.comprobante[i].cabecera.informacion_comprobante.motivo != null && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "00" && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "")
+        //        {
+        //            CantMotivoError++;
+        //        }
+        //    }
+        //    int NroMotivo = 0;
+        //    for (int i = 0; i < Lc.comprobante.Length; i++)
+        //    {
+        //        CedWebRN.IBK.error[] erroresComprobante = new CedWebRN.IBK.error[1];
+        //        if (Lc.comprobante[i].cabecera.informacion_comprobante.motivo != null && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "00" && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "")
+        //        {
+        //            if (lrCompleto.comprobante_response == null)
+        //            {
+        //                lrCompleto.comprobante_response = new CedWebRN.IBK.comprobante_response[CantMotivoError];
+        //            }
+        //            erroresComprobante[NroMotivo] = new CedWebRN.IBK.error();
+        //            erroresComprobante[NroMotivo].codigo_error = 0;
+        //            erroresComprobante[NroMotivo].descripcion_error = Lc.comprobante[i].cabecera.informacion_comprobante.motivo;
+        //            lrCompleto.comprobante_response[NroMotivo] = new CedWebRN.IBK.comprobante_response();
+        //            lrCompleto.comprobante_response[NroMotivo].numero_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante;
+        //            lrCompleto.comprobante_response[NroMotivo].punto_de_venta = Lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta;
+        //            lrCompleto.comprobante_response[NroMotivo].tipo_de_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante;
+        //            lrCompleto.comprobante_response[NroMotivo].estado = Lc.comprobante[i].cabecera.informacion_comprobante.resultado;
+        //            lrCompleto.comprobante_response[NroMotivo].errores_comprobante = erroresComprobante;
+        //            NroMotivo++;
+        //        }
+        //    }
+        //    return lrCompleto;
+        //}
         
         private void DescartarBandejaEButton_Click(object sender, EventArgs e)
         {
@@ -391,19 +397,17 @@ namespace eFact_P
         {
             if (((CheckBox)sender).Checked)
             {
-                OtrosFiltrosBandejaEPanel.Enabled = true;
                 ArchivosOtrosFiltros = eFact_Entidades.Archivo.OtrosFiltros.OK;
             }
             else
             {
-                OtrosFiltrosBandejaEPanel.Enabled = false;
                 ArchivosOtrosFiltros = eFact_Entidades.Archivo.OtrosFiltros.SinAplicar;
             }
         }
 
         private void ArchivosAProcesar_CheckedChanged(object sender, EventArgs e)
         {
-            if (((RadioButton)sender).Checked && ((RadioButton)sender).Name == "ArchivosAProcesarRadioButton")
+            if (((RadioButton)sender).Checked && ((RadioButton)sender).Name == "ComprobantesEnLineaRadioButton")
             {
                 //Actualizar Bandeja de entrada.
                 try
@@ -419,12 +423,12 @@ namespace eFact_P
                 {
                     Cursor = System.Windows.Forms.Cursors.Default;
                 }
-                ArchivosHistoricosPanel.Enabled = false;
+                FechaProcesoPanel.Enabled = false;
             }
             else
             {
                 LimpiarBandejaEntrada();
-                ArchivosHistoricosPanel.Enabled = true;
+                FechaProcesoPanel.Enabled = true;
             }
         }
 
@@ -673,32 +677,7 @@ namespace eFact_P
 
         private void menuItem5_Click(object sender, EventArgs e)
         {
-            CedWebRN.IBKP.error[] respErroresComprobantes = new CedWebRN.IBKP.error[0];
-            FeaEntidades.InterFacturas.comprobante cIBK = new FeaEntidades.InterFacturas.comprobante();
-            CedWebRN.IBKP.consulta_detalle_comprobante cdc = new CedWebRN.IBKP.consulta_detalle_comprobante();
-            try
-            {
-                cdc.cod_interno_canal = "";
-                cdc.cuit_canal = Convert.ToInt64("30690783521");
-                cdc.cuit_vendedor = Convert.ToInt64("20225018805");
-                cdc.punto_de_venta = Convert.ToInt32("22");
-                cdc.numero_comprobante = Convert.ToInt32("6");
-                cdc.tipo_de_comprobante = Convert.ToInt32("2");
-                cdc.tipo_doc_comprador = Convert.ToInt32("80");
-                cdc.doc_comprador = Convert.ToInt64("30710015062");
-                cdc.usuario_consulta = "Pablo";
-                CedWebRN.Comprobante cc = new CedWebRN.Comprobante();
-                cIBK = cc.ConsultarIBKP(cdc, "012f0775357c");
-                //lcIBK = CedWebRNComprobante.ConsultarIBK(out respErroresLote, out respErroresComprobantes, clc, WSCertificado);
-                //RespErroresLote = respErroresLote;
-                //RespErroresComprobantes = respErroresComprobantes;
-            }
-            catch (Exception ex)
-            {
-                //RespErroresLote = respErroresLote;
-                //RespErroresComprobantes = respErroresComprobantes;
-                throw new Exception(ex.Message);
-            }
+
         }
 
         private void BandejaEDataGridView_SelectionChanged(object sender, EventArgs e)
@@ -739,7 +718,54 @@ namespace eFact_P
                 EventosComboBox.Enabled = true;
                 Cursor = System.Windows.Forms.Cursors.Default;
             }
+        }
 
+        private void NumeroLoteTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FechaAltaHstBandejaEDTP_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void BandejaEDataGridView_DoubleClick(object sender, EventArgs e)
+        {
+            if (BandejaEDataGridView.SelectedRows.Count != 0)
+            {
+                CedWebRN.IBKP.error[] respErroresComprobantes = new CedWebRN.IBKP.error[0];
+                FeaEntidades.InterFacturas.comprobante cIBK = new FeaEntidades.InterFacturas.comprobante();
+                CedWebRN.IBKP.consulta_detalle_comprobante cdc = new CedWebRN.IBKP.consulta_detalle_comprobante();
+                try
+                {
+                    cdc.cod_interno_canal = "";
+                    cdc.cuit_canal = Convert.ToInt64(@System.Configuration.ConfigurationManager.AppSettings["CuitCanal"]);
+                    cdc.cuit_vendedor = Convert.ToInt64(BandejaEDataGridView.Rows[BandejaEDataGridView.SelectedRows[0].Index].Cells["cuit_vendedor"].Value.ToString());
+                    cdc.punto_de_venta = Convert.ToInt32(BandejaEDataGridView.Rows[BandejaEDataGridView.SelectedRows[0].Index].Cells["punto_de_venta"].Value.ToString());
+                    cdc.numero_comprobante = Convert.ToInt32(BandejaEDataGridView.Rows[BandejaEDataGridView.SelectedRows[0].Index].Cells["numero_comprobante"].Value.ToString());
+                    cdc.tipo_de_comprobante = Convert.ToInt32(BandejaEDataGridView.Rows[BandejaEDataGridView.SelectedRows[0].Index].Cells["tipo_de_comprobante"].Value.ToString());
+                    cdc.tipo_doc_comprador = Convert.ToInt32("80");
+                    cdc.doc_comprador = Convert.ToInt64(CuitCompradorTextBox.Text);
+                    cdc.usuario_consulta = Aplicacion.Sesion.Usuario.IdUsuario;
+                    CedWebRN.Comprobante cc = new CedWebRN.Comprobante();
+                    cIBK = cc.ConsultarIBKP(cdc, "012f0775357c");
+                    //lcIBK = CedWebRNComprobante.ConsultarIBK(out respErroresLote, out respErroresComprobantes, clc, WSCertificado);
+                    //RespErroresLote = respErroresLote;
+                    //RespErroresComprobantes = respErroresComprobantes;
+                }
+                catch (Exception ex)
+                {
+                    //RespErroresLote = respErroresLote;
+                    //RespErroresComprobantes = respErroresComprobantes;
+                    Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
+                }
+            }
         }
     }
 }

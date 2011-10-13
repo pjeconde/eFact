@@ -134,6 +134,7 @@
       <DependentUpon>ConsultaVendedor.cs</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\Reportes\NumALet.cs" />
+    <Compile Include="Memory.cs" />
     <Compile Include="Tablero.cs">
       <SubType>Form</SubType>
     </Compile>

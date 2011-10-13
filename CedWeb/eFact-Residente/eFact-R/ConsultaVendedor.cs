@@ -68,6 +68,33 @@ namespace eFact_R
 
         private void CuitVendedorComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            vendedor = new eFact_Entidades.Vendedor();
+            VendedorNombreTextBox.Text = "";
+            VendedorNroSerieCertificadoTextBox.Text = "";
+            VendedorCodigoTextBox.Text = "";
+            VendedorCondicionIVAComboBox.Text = "";
+            VendedorCondicionIBComboBox.Text = "";
+            VendedorNroIBTextBox.Text = "";
+            VendedorInicioActividadesDTP.Value = Aplicacion.FechaMax;
+            VendedorInicioActividadesDTP.Checked = false;
+            VendedorContactoTextBox.Text = "";
+            VendedorDomicilioCalleTextBox.Text = "";
+            VendedorDomicilioNroTextBox.Text = "";
+            VendedorDomicilioPisoTextBox.Text = "";
+            VendedorDomicilioDptoTextBox.Text = "";
+            VendedorDomicilioSectorTextBox.Text = "";
+            VendedorDomicilioTorreTextBox.Text = "";
+            VendedorDomicilioManzanaTextBox.Text = "";
+            VendedorLocalidadTextBox.Text = "";
+            VendedorProvinciaComboBox.Text = "";
+            VendedorCPTextBox.Text = "";
+            VendedorEMailTextBox.Text = "";
+            VendedorTelefonosTextBox.Text = "";
+            VendedorLogoPictureBox.Image = null;
+            BuscarImagenButton.Enabled = false;
+            ModificarButton.Enabled = false;
+            BorrarImagenButton.Enabled = false;
+            BorrarImagen();
             if (((ComboBox)sender).SelectedIndex != 0)
             {
                 string CuitVendedor = ((ComboBox)sender).SelectedItem.ToString().Trim();
@@ -100,35 +127,6 @@ namespace eFact_R
                 BuscarImagenButton.Enabled = true;
                 ModificarButton.Enabled = true;
                 BorrarImagenButton.Enabled = true;
-            }
-            else 
-            {
-                vendedor = new eFact_Entidades.Vendedor();
-                VendedorNombreTextBox.Text = "";
-                VendedorNroSerieCertificadoTextBox.Text = "";
-                VendedorCodigoTextBox.Text = "";
-                VendedorCondicionIVAComboBox.Text = "";
-                VendedorCondicionIBComboBox.Text = "";
-                VendedorNroIBTextBox.Text = "";
-                VendedorInicioActividadesDTP.Value = Aplicacion.FechaMax;
-                VendedorInicioActividadesDTP.Checked = false;
-                VendedorContactoTextBox.Text = "";
-                VendedorDomicilioCalleTextBox.Text = "";
-                VendedorDomicilioNroTextBox.Text = "";
-                VendedorDomicilioPisoTextBox.Text = "";
-                VendedorDomicilioDptoTextBox.Text = "";
-                VendedorDomicilioSectorTextBox.Text = "";
-                VendedorDomicilioTorreTextBox.Text = "";
-                VendedorDomicilioManzanaTextBox.Text = "";
-                VendedorLocalidadTextBox.Text = "";
-                VendedorProvinciaComboBox.Text = "";
-                VendedorCPTextBox.Text = "";
-                VendedorEMailTextBox.Text = "";
-                VendedorTelefonosTextBox.Text = "";
-                VendedorLogoPictureBox.Image = null;
-                BuscarImagenButton.Enabled = false;
-                ModificarButton.Enabled = false;
-                BorrarImagenButton.Enabled = false;
             }
         }
 
@@ -239,9 +237,18 @@ namespace eFact_R
                 Bitmap bitmap = new Bitmap(memorybits);
                 VendedorLogoPictureBox.Image = bitmap;
             }
+            else
+            {
+                BorrarImagen();
+            }
         }
 
         private void BorrarImagenButton_Click(object sender, EventArgs e)
+        {
+            
+            BorrarImagen();
+        }
+        private void BorrarImagen()
         {
             vendedor.Logo = null;
             VendedorLogoPictureBox.Image = null;

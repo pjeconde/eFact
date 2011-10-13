@@ -82,9 +82,18 @@ namespace eFact_S
         {
             try 
             {
+                bool EncontreArchivos = false;
                 timer1.Stop();
-                NombrePC = System.Environment.MachineName;
-                Inicializar();
+
+                CultureInfo cedeiraCultura = new CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
+                cedeiraCultura.DateTimeFormat = new CultureInfo(System.Configuration.ConfigurationManager.AppSettings["CulturaDateTimeFormat"], false).DateTimeFormat;
+                Thread.CurrentThread.CurrentCulture = cedeiraCultura;
+                
+                //Solo la primera vez inicia la sesion
+                if (Aplicacion == null)
+                {
+                    Inicializar();
+                }
 
                 //Actualizar Estado AFIP de los Lotes Ptes de Respuesta.
                 ActualizarEstadoAFIPLotes();
@@ -99,9 +108,14 @@ namespace eFact_S
                     FileInfo ArchFileInfo = new FileInfo(d);
                     try
                     {
+                        if (@System.Configuration.ConfigurationManager.AppSettings["ClearMemory"] == "SI")
+                        {
+                            Memory.ClearMemory();
+                        }
                         eFact_Entidades.Archivo archivo = new eFact_Entidades.Archivo();
                         ActualizarBandejaEntrada(archivo, ArchFileInfo, Aplicacion.Sesion);
                         Archivos.Add(archivo);
+                        EncontreArchivos = true;
                     }
                     catch (Exception ex)
                     {
@@ -175,6 +189,13 @@ namespace eFact_S
                     //Cuando se vuelve a iniciar el timer de servicio se ejecuta la funcion "ActualizarEstadoAFIPLotes()".
                     break;
                 }
+                if (EncontreArchivos)
+                {
+                    if (@System.Configuration.ConfigurationManager.AppSettings["ClearMemory"] == "SI")
+                    {
+                        Memory.ClearMemory();
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -214,10 +235,11 @@ namespace eFact_S
         private void ActualizarEstadoAFIPLotes()
         {
             List<eFact_Entidades.Lote> lotes = new List<eFact_Entidades.Lote>();
-            eFact_RN.Tablero.ActualizarBandejaSalida(out lotes, eFact_Entidades.Lote.TipoConsulta.SinAplicarFechas, Convert.ToDateTime("01/01/1980"), Convert.ToDateTime("31/12/2064"), "", "", "", false, Aplicacion.Sesion);
-            //Verificar Ptes.Respuesta AFIP.
-            List<eFact_Entidades.Lote> lotesFind = lotes.FindAll((delegate(eFact_Entidades.Lote e1) { return e1.WF.IdEstado == "PteRespAFIP"; }));
-            foreach (eFact_Entidades.Lote l in lotesFind)
+            //eFact_RN.Tablero.ActualizarBandejaSalida(out lotes, eFact_Entidades.Lote.TipoConsulta.SinAplicarFechas, Convert.ToDateTime("01/01/1980"), Convert.ToDateTime("31/12/2064"), "", "", "", false, Aplicacion.Sesion);
+            //Consultar Ptes.Respuesta AFIP.
+            eFact_RN.Lote.ConsultarXEstado(out lotes, "'PteRespAFIP'", Aplicacion.Sesion);
+            //List<eFact_Entidades.Lote> lotesFind = lotes.FindAll((delegate(eFact_Entidades.Lote e1) { return e1.WF.IdEstado == "PteRespAFIP"; }));
+            foreach (eFact_Entidades.Lote l in lotes)
             {
                 FeaEntidades.InterFacturas.lote_comprobantes Lc = new FeaEntidades.InterFacturas.lote_comprobantes();
                 CedWebRN.IBK.error[] respErroresLote = new CedWebRN.IBK.error[0];
@@ -274,7 +296,7 @@ namespace eFact_S
             string texto = "";
             if (Lc.cabecera_lote.resultado == "A" || Lc.cabecera_lote.resultado == "R" || Lc.cabecera_lote.resultado == "O" || Lc.cabecera_lote.resultado == "P")
             {
-                if (Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
+                if (Lc.cabecera_lote.motivo != null && Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
                 {
                     FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP codigosErrorAFIPLote = FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP.Lista().Find((delegate(FeaEntidades.CodigosErrorAFIP.CodigoErrorAFIP e1) { return e1.Codigo == Lc.cabecera_lote.motivo.Trim(); }));
                     string descrCodigosErrorAFIPLote = "";
@@ -308,14 +330,12 @@ namespace eFact_S
         }
         private void Inicializar()
         {
-            CultureInfo cedeiraCultura = new CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
-            cedeiraCultura.DateTimeFormat = new CultureInfo(System.Configuration.ConfigurationManager.AppSettings["CulturaDateTimeFormat"], false).DateTimeFormat;
-            Thread.CurrentThread.CurrentCulture = cedeiraCultura;
-
             System.Text.StringBuilder auxCnn = new System.Text.StringBuilder();
             auxCnn.Append(System.Configuration.ConfigurationManager.AppSettings["CnnStr"]);
 
             Aplicacion = eFact_RN.Aplicacion.Crear();
+            Aplicacion.Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+            Aplicacion.VersionParaControl = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(2);
 
             string Usuario = System.Environment.UserName;
             string Dominio = System.Environment.UserDomainName;

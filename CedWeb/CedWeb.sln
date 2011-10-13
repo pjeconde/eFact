@@ -217,6 +217,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-P", "eFact-Residente\
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gas", "Gas\Gas.csproj", "{884D9CCB-CB69-452D-B277-28D04F390046}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -603,6 +609,16 @@ Global
 		{4A108C58-8EB9-4BC0-B693-C497894C4386}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4A108C58-8EB9-4BC0-B693-C497894C4386}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4A108C58-8EB9-4BC0-B693-C497894C4386}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{884D9CCB-CB69-452D-B277-28D04F390046}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{884D9CCB-CB69-452D-B277-28D04F390046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{884D9CCB-CB69-452D-B277-28D04F390046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{884D9CCB-CB69-452D-B277-28D04F390046}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{884D9CCB-CB69-452D-B277-28D04F390046}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{884D9CCB-CB69-452D-B277-28D04F390046}.Release|.NET.ActiveCfg = Release|Any CPU
+		{884D9CCB-CB69-452D-B277-28D04F390046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{884D9CCB-CB69-452D-B277-28D04F390046}.Release|Any CPU.Build.0 = Release|Any CPU
+		{884D9CCB-CB69-452D-B277-28D04F390046}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{884D9CCB-CB69-452D-B277-28D04F390046}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

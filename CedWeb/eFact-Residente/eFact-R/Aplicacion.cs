@@ -43,12 +43,15 @@ namespace eFact_R
                 OtrosFiltrosFiltrarBS = @System.Configuration.ConfigurationManager.AppSettings["OtrosFiltrosFiltrarBS"];
                 OtrosFiltrosCuit = @System.Configuration.ConfigurationManager.AppSettings["OtrosFiltrosCuit"];
                 OtrosFiltrosPuntoVta = @System.Configuration.ConfigurationManager.AppSettings["OtrosFiltrosPuntoVta"];
-                FechaMin = Convert.ToDateTime("01/01/2001");
-                FechaMax = Convert.ToDateTime("31/12/9998");
                 StoreLocationActivacion = @System.Configuration.ConfigurationManager.AppSettings["StoreLocationActivacion"];
 
                 //seteo cultura thread
-                Thread.CurrentThread.CurrentCulture = new CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"]);
+                CultureInfo cedeiraCultura = new CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
+                cedeiraCultura.DateTimeFormat = new CultureInfo(System.Configuration.ConfigurationManager.AppSettings["CulturaDateTimeFormat"], false).DateTimeFormat;
+                Thread.CurrentThread.CurrentCulture = cedeiraCultura;
+
+                FechaMin = Convert.ToDateTime("01/01/2001");
+                FechaMax = Convert.ToDateTime("31/12/9998");
 
                 object changüí;
                 Application.EnableVisualStyles();
@@ -138,6 +141,8 @@ namespace eFact_R
                     if (claveSolicitud == claveActivacion.ToString())
                     {
                         Aplic = eFact_RN.Aplicacion.Crear();
+                        Aplic.Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+                        Aplic.VersionParaControl = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(2);
 
                         System.Text.StringBuilder auxCnn = new System.Text.StringBuilder();
                         auxCnn.Append(System.Configuration.ConfigurationManager.AppSettings["CnnStr"]);

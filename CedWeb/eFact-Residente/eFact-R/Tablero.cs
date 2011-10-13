@@ -219,6 +219,10 @@ namespace eFact_R
 
         private void ActualizarBandejaE()
         {
+            if (@System.Configuration.ConfigurationManager.AppSettings["ClearMemory"] == "SI")
+            {
+                Memory.ClearMemory();
+            }
             Cursor = System.Windows.Forms.Cursors.WaitCursor;
             VerificarServicio();
             switch (Aplicacion.Aplic.CodigoAplic.ToString())
@@ -476,7 +480,6 @@ namespace eFact_R
         }
         private CedWebRN.IBK.lote_response ArmarLoteResponse(FeaEntidades.InterFacturas.lote_comprobantes Lc)
         {
-            string texto = "";
             CedWebRN.IBK.lote_response lrCompleto = new CedWebRN.IBK.lote_response();
             CedWebRN.IBK.error[] errores = new CedWebRN.IBK.error[1];
             lrCompleto.cantidad_reg = Lc.cabecera_lote.cantidad_reg;
@@ -1224,6 +1227,7 @@ namespace eFact_R
                 ConsultaVendedor c = new ConsultaVendedor(StatusBar);
                 c.ShowDialog();
                 c.Dispose();
+                c = null;
             }
             catch (Exception ex)
             {
