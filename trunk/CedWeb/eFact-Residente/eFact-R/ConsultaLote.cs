@@ -280,7 +280,6 @@ namespace eFact_R
                                 break;
                             default:
                                 throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Lote.EstadoNoPermitido("Solo es posible operar en contingencia con lotes Aceptados por AFIP." + resultadoTexto);
-                                break;
                         }
                         Cedeira.SV.WF.LeerEvento(eventoContingencia, Aplicacion.Sesion);
                         lote.WF.EventosPosibles.Clear();
@@ -615,6 +614,10 @@ namespace eFact_R
             if (lc.comprobante[0].cabecera.informacion_comprador.telefono == null)
             {
                 lc.comprobante[0].cabecera.informacion_comprador.telefono = string.Empty;
+            }
+            if (lc.comprobante[0].cabecera.informacion_comprador.codigo_interno == null)
+            {
+                lc.comprobante[0].cabecera.informacion_comprador.codigo_interno = string.Empty;
             }
             if (lc.comprobante[0].resumen.impuestos != null)
             {

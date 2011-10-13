@@ -110,6 +110,7 @@ namespace eFact_C
             ms = (MemoryStream)writer.BaseStream;
             string LoteXML = ByteArrayToString(ms.ToArray());
             ms.Close();
+            ms = null;
             return LoteXML;
         }
         private static string ByteArrayToString(byte[] characters)

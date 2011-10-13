@@ -97,6 +97,7 @@ namespace eFact_RN
             ms = (MemoryStream)writer.BaseStream;
             XmlizedString = eFact_RN.Tablero.ByteArrayToString(ms.ToArray());
             ms.Close();
+            ms = null;
             Lote.LoteXmlIF = XmlizedString;
 
             eFact_Entidades.Comprobante comprobante =new eFact_Entidades.Comprobante();
@@ -138,6 +139,7 @@ namespace eFact_RN
             ms = (MemoryStream)writer.BaseStream;
             XmlizedString = eFact_RN.Tablero.ByteArrayToString(ms.ToArray());
             ms.Close();
+            ms = null;
             Lote.LoteXmlIF = XmlizedString;
         }
         public static void ActualizarDatosError(eFact_Entidades.Lote Lote, CedWebRN.IBK.lote_response Lr)
@@ -156,6 +158,7 @@ namespace eFact_RN
             ms = (MemoryStream)writer.BaseStream;
             XmlizedString = eFact_RN.Tablero.ByteArrayToString(ms.ToArray());
             ms.Close();
+            ms = null;
             Lote.LoteXmlIF = XmlizedString;
 
             if (Lr.comprobante_response != null)
@@ -174,6 +177,7 @@ namespace eFact_RN
                     ms = (MemoryStream)writer.BaseStream;
                     XmlizedString = eFact_RN.Tablero.ByteArrayToString(ms.ToArray());
                     ms.Close();
+                    ms = null;
                     c.ComentarioIFoAFIP = XmlizedString;
                 }
             }
@@ -317,6 +321,8 @@ namespace eFact_RN
             FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
             System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lc.GetType());
             lc = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+            ms.Close();
+            ms = null;
             Lc = lc;
         }
         public static void DeserializarLc(out FeaEntidades.Reporte.lote_comprobantes Lc, eFact_Entidades.Lote Lote)
@@ -332,6 +338,8 @@ namespace eFact_RN
             FeaEntidades.Reporte.lote_comprobantes lc = new FeaEntidades.Reporte.lote_comprobantes();
             System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lc.GetType());
             lc = (FeaEntidades.Reporte.lote_comprobantes)x.Deserialize(ms);
+            ms.Close();
+            ms = null;
             Lc = lc;
         }
         public static void DeserializarLr(out FeaEntidades.InterFacturas.lote_response Lr, string Cadena)
@@ -346,6 +354,8 @@ namespace eFact_RN
             FeaEntidades.InterFacturas.lote_response lr = new FeaEntidades.InterFacturas.lote_response();
             System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lr.GetType());
             lr = (FeaEntidades.InterFacturas.lote_response)x.Deserialize(ms);
+            ms.Close();
+            ms = null;
             Lr = lr;
         }
         public static void SerializarLc(out string LoteXML, FeaEntidades.InterFacturas.lote_comprobantes Lc)
@@ -358,6 +368,7 @@ namespace eFact_RN
             ms = (MemoryStream)writer.BaseStream;
             LoteXML = eFact_RN.Tablero.ByteArrayToString(ms.ToArray());
             ms.Close();
+            ms = null;
         }
         public static void SerializarLr(out string LoteXMLIF, CedWebRN.IBK.lote_response Lr)
         {
@@ -369,6 +380,7 @@ namespace eFact_RN
             ms = (MemoryStream)writer.BaseStream;
             LoteXMLIF = eFact_RN.Tablero.ByteArrayToString(ms.ToArray());
             ms.Close();
+            ms = null;
         }
         public static void GuardarItfTXT(out string NombreProcesado, eFact_Entidades.Lote Lote, string PreFijo, string Ruta, bool IF)
         {

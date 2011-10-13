@@ -49,32 +49,31 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.OtrosFiltrosBandejaSCheckBox = new System.Windows.Forms.CheckBox();
-            this.PtesDiasAntCheckBox = new System.Windows.Forms.CheckBox();
+            this.FechaEmisionPanel = new System.Windows.Forms.Panel();
+            this.FechaEmisionHstBandejaEDTP = new System.Windows.Forms.DateTimePicker();
+            this.label8 = new System.Windows.Forms.Label();
+            this.FechaEmisionCheckBox = new System.Windows.Forms.CheckBox();
+            this.FechaEmisionDsdBandejaEDTP = new System.Windows.Forms.DateTimePicker();
+            this.FechaComprobantes3Label = new System.Windows.Forms.Label();
             this.OtrosFiltrosBandejaSPanel = new System.Windows.Forms.Panel();
+            this.CuitCompradorTextBox = new System.Windows.Forms.TextBox();
+            this.CuitCompradorLabel = new System.Windows.Forms.Label();
+            this.TipoComprobanteLabel = new System.Windows.Forms.Label();
+            this.TipoComprobanteComboBox = new System.Windows.Forms.ComboBox();
             this.PuntoVentaTextBox = new System.Windows.Forms.TextBox();
             this.PuntoVentaLabel = new System.Windows.Forms.Label();
             this.CuitVendedorTextBox = new System.Windows.Forms.TextBox();
             this.CuitVendedorLabel = new System.Windows.Forms.Label();
-            this.NumeroLoteLabel = new System.Windows.Forms.Label();
-            this.NumeroLoteTextBox = new System.Windows.Forms.TextBox();
-            this.ArchivosHistoricosRadioButton = new System.Windows.Forms.RadioButton();
-            this.ArchivosHistoricosPanel = new System.Windows.Forms.Panel();
-            this.FechaProcesoRadioButton = new System.Windows.Forms.RadioButton();
-            this.FechaCreacionRadioButton = new System.Windows.Forms.RadioButton();
+            this.NumeroComprobanteLabel = new System.Windows.Forms.Label();
+            this.NumeroComprobanteTextBox = new System.Windows.Forms.TextBox();
+            this.ComprobantesProcesadosRadioButton = new System.Windows.Forms.RadioButton();
+            this.FechaProcesoPanel = new System.Windows.Forms.Panel();
+            this.FechaComprobantes2Label = new System.Windows.Forms.Label();
+            this.FechaProcesoCheckBox = new System.Windows.Forms.CheckBox();
             this.FechaProcesoDsdBandejaEDTP = new System.Windows.Forms.DateTimePicker();
             this.FechaProcesoHstBandejaEDTP = new System.Windows.Forms.DateTimePicker();
-            this.label8 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.FechaAltaDsdBandejaEDTP = new System.Windows.Forms.DateTimePicker();
-            this.FechaAltaHstBandejaEDTP = new System.Windows.Forms.DateTimePicker();
-            this.FechaComprobantes2Label = new System.Windows.Forms.Label();
-            this.FechaComprobantes3Label = new System.Windows.Forms.Label();
-            this.OtrosFiltrosBandejaECheckBox = new System.Windows.Forms.CheckBox();
-            this.OtrosFiltrosBandejaEPanel = new System.Windows.Forms.Panel();
-            this.ArchivosNotOKRadioButton = new System.Windows.Forms.RadioButton();
-            this.ArchivoOKRadioButton = new System.Windows.Forms.RadioButton();
-            this.ArchivosAProcesarRadioButton = new System.Windows.Forms.RadioButton();
+            this.ComprobantesEnLineaRadioButton = new System.Windows.Forms.RadioButton();
             this.ActualizarBandejaEButton = new System.Windows.Forms.Button();
             this.StatusBarPanel = new System.Windows.Forms.Panel();
             this.StatusBar = new System.Windows.Forms.StatusBar();
@@ -85,10 +84,8 @@
             this.ModalidadSBP = new System.Windows.Forms.StatusBarPanel();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.menuItem1 = new System.Windows.Forms.MenuItem();
-            this.menuItem4 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
-            this.menuItem5 = new System.Windows.Forms.MenuItem();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.SuspendLayout();
             this.BandejaEHorizontalSplitContainer.Panel1.SuspendLayout();
@@ -102,9 +99,9 @@
             this.CabBandejaEPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.FechaEmisionPanel.SuspendLayout();
             this.OtrosFiltrosBandejaSPanel.SuspendLayout();
-            this.ArchivosHistoricosPanel.SuspendLayout();
-            this.OtrosFiltrosBandejaEPanel.SuspendLayout();
+            this.FechaProcesoPanel.SuspendLayout();
             this.StatusBarPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UsuarioSBP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CXOSBP)).BeginInit();
@@ -187,6 +184,7 @@
             this.BandejaEDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.BandejaEDataGridView.Size = new System.Drawing.Size(1007, 163);
             this.BandejaEDataGridView.TabIndex = 7;
+            this.BandejaEDataGridView.DoubleClick += new System.EventHandler(this.BandejaEDataGridView_DoubleClick);
             this.BandejaEDataGridView.SelectionChanged += new System.EventHandler(this.BandejaEDataGridView_SelectionChanged);
             // 
             // cuit_vendedor
@@ -338,55 +336,129 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.OtrosFiltrosBandejaSCheckBox);
-            this.panel5.Controls.Add(this.PtesDiasAntCheckBox);
+            this.panel5.Controls.Add(this.FechaEmisionPanel);
             this.panel5.Controls.Add(this.OtrosFiltrosBandejaSPanel);
-            this.panel5.Controls.Add(this.ArchivosHistoricosRadioButton);
-            this.panel5.Controls.Add(this.ArchivosHistoricosPanel);
-            this.panel5.Controls.Add(this.ArchivosAProcesarRadioButton);
+            this.panel5.Controls.Add(this.ComprobantesProcesadosRadioButton);
+            this.panel5.Controls.Add(this.FechaProcesoPanel);
+            this.panel5.Controls.Add(this.ComprobantesEnLineaRadioButton);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1007, 195);
             this.panel5.TabIndex = 7;
+            this.panel5.Paint += new System.Windows.Forms.PaintEventHandler(this.panel5_Paint);
             // 
-            // OtrosFiltrosBandejaSCheckBox
+            // FechaEmisionPanel
             // 
-            this.OtrosFiltrosBandejaSCheckBox.AutoSize = true;
-            this.OtrosFiltrosBandejaSCheckBox.Location = new System.Drawing.Point(533, 96);
-            this.OtrosFiltrosBandejaSCheckBox.Name = "OtrosFiltrosBandejaSCheckBox";
-            this.OtrosFiltrosBandejaSCheckBox.Size = new System.Drawing.Size(78, 17);
-            this.OtrosFiltrosBandejaSCheckBox.TabIndex = 34;
-            this.OtrosFiltrosBandejaSCheckBox.Text = "Otros filtros";
-            this.OtrosFiltrosBandejaSCheckBox.UseVisualStyleBackColor = true;
-            this.OtrosFiltrosBandejaSCheckBox.CheckedChanged += new System.EventHandler(this.OtrosFiltrosBandejaSCheckBox_CheckedChanged);
+            this.FechaEmisionPanel.Controls.Add(this.FechaEmisionHstBandejaEDTP);
+            this.FechaEmisionPanel.Controls.Add(this.label8);
+            this.FechaEmisionPanel.Controls.Add(this.FechaEmisionCheckBox);
+            this.FechaEmisionPanel.Controls.Add(this.FechaEmisionDsdBandejaEDTP);
+            this.FechaEmisionPanel.Controls.Add(this.FechaComprobantes3Label);
+            this.FechaEmisionPanel.Location = new System.Drawing.Point(12, 62);
+            this.FechaEmisionPanel.Name = "FechaEmisionPanel";
+            this.FechaEmisionPanel.Size = new System.Drawing.Size(362, 31);
+            this.FechaEmisionPanel.TabIndex = 52;
             // 
-            // PtesDiasAntCheckBox
+            // FechaEmisionHstBandejaEDTP
             // 
-            this.PtesDiasAntCheckBox.AutoSize = true;
-            this.PtesDiasAntCheckBox.Location = new System.Drawing.Point(533, 172);
-            this.PtesDiasAntCheckBox.Name = "PtesDiasAntCheckBox";
-            this.PtesDiasAntCheckBox.Size = new System.Drawing.Size(122, 17);
-            this.PtesDiasAntCheckBox.TabIndex = 43;
-            this.PtesDiasAntCheckBox.Text = "Ver lotes pendientes";
-            this.PtesDiasAntCheckBox.UseVisualStyleBackColor = true;
+            this.FechaEmisionHstBandejaEDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.FechaEmisionHstBandejaEDTP.Location = new System.Drawing.Point(257, 5);
+            this.FechaEmisionHstBandejaEDTP.Name = "FechaEmisionHstBandejaEDTP";
+            this.FechaEmisionHstBandejaEDTP.Size = new System.Drawing.Size(94, 20);
+            this.FechaEmisionHstBandejaEDTP.TabIndex = 50;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(114, 9);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(21, 13);
+            this.label8.TabIndex = 51;
+            this.label8.Text = "del";
+            // 
+            // FechaEmisionCheckBox
+            // 
+            this.FechaEmisionCheckBox.AutoSize = true;
+            this.FechaEmisionCheckBox.Location = new System.Drawing.Point(5, 8);
+            this.FechaEmisionCheckBox.Name = "FechaEmisionCheckBox";
+            this.FechaEmisionCheckBox.Size = new System.Drawing.Size(109, 17);
+            this.FechaEmisionCheckBox.TabIndex = 47;
+            this.FechaEmisionCheckBox.Text = "Fecha de emisión";
+            this.FechaEmisionCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // FechaEmisionDsdBandejaEDTP
+            // 
+            this.FechaEmisionDsdBandejaEDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.FechaEmisionDsdBandejaEDTP.Location = new System.Drawing.Point(137, 5);
+            this.FechaEmisionDsdBandejaEDTP.Name = "FechaEmisionDsdBandejaEDTP";
+            this.FechaEmisionDsdBandejaEDTP.Size = new System.Drawing.Size(94, 20);
+            this.FechaEmisionDsdBandejaEDTP.TabIndex = 48;
+            // 
+            // FechaComprobantes3Label
+            // 
+            this.FechaComprobantes3Label.AutoSize = true;
+            this.FechaComprobantes3Label.Location = new System.Drawing.Point(237, 9);
+            this.FechaComprobantes3Label.Name = "FechaComprobantes3Label";
+            this.FechaComprobantes3Label.Size = new System.Drawing.Size(15, 13);
+            this.FechaComprobantes3Label.TabIndex = 49;
+            this.FechaComprobantes3Label.Text = "al";
             // 
             // OtrosFiltrosBandejaSPanel
             // 
+            this.OtrosFiltrosBandejaSPanel.Controls.Add(this.CuitCompradorTextBox);
+            this.OtrosFiltrosBandejaSPanel.Controls.Add(this.CuitCompradorLabel);
+            this.OtrosFiltrosBandejaSPanel.Controls.Add(this.TipoComprobanteLabel);
+            this.OtrosFiltrosBandejaSPanel.Controls.Add(this.TipoComprobanteComboBox);
             this.OtrosFiltrosBandejaSPanel.Controls.Add(this.PuntoVentaTextBox);
             this.OtrosFiltrosBandejaSPanel.Controls.Add(this.PuntoVentaLabel);
             this.OtrosFiltrosBandejaSPanel.Controls.Add(this.CuitVendedorTextBox);
             this.OtrosFiltrosBandejaSPanel.Controls.Add(this.CuitVendedorLabel);
-            this.OtrosFiltrosBandejaSPanel.Controls.Add(this.NumeroLoteLabel);
-            this.OtrosFiltrosBandejaSPanel.Controls.Add(this.NumeroLoteTextBox);
-            this.OtrosFiltrosBandejaSPanel.Location = new System.Drawing.Point(580, 107);
+            this.OtrosFiltrosBandejaSPanel.Controls.Add(this.NumeroComprobanteLabel);
+            this.OtrosFiltrosBandejaSPanel.Controls.Add(this.NumeroComprobanteTextBox);
+            this.OtrosFiltrosBandejaSPanel.Location = new System.Drawing.Point(389, 62);
             this.OtrosFiltrosBandejaSPanel.Name = "OtrosFiltrosBandejaSPanel";
-            this.OtrosFiltrosBandejaSPanel.Size = new System.Drawing.Size(345, 50);
+            this.OtrosFiltrosBandejaSPanel.Size = new System.Drawing.Size(558, 87);
             this.OtrosFiltrosBandejaSPanel.TabIndex = 42;
+            // 
+            // CuitCompradorTextBox
+            // 
+            this.CuitCompradorTextBox.Location = new System.Drawing.Point(333, 8);
+            this.CuitCompradorTextBox.Name = "CuitCompradorTextBox";
+            this.CuitCompradorTextBox.Size = new System.Drawing.Size(94, 20);
+            this.CuitCompradorTextBox.TabIndex = 68;
+            this.CuitCompradorTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // CuitCompradorLabel
+            // 
+            this.CuitCompradorLabel.AutoSize = true;
+            this.CuitCompradorLabel.Location = new System.Drawing.Point(242, 10);
+            this.CuitCompradorLabel.Name = "CuitCompradorLabel";
+            this.CuitCompradorLabel.Size = new System.Drawing.Size(85, 13);
+            this.CuitCompradorLabel.TabIndex = 67;
+            this.CuitCompradorLabel.Text = "Cuit Comprador: ";
+            // 
+            // TipoComprobanteLabel
+            // 
+            this.TipoComprobanteLabel.AutoSize = true;
+            this.TipoComprobanteLabel.Location = new System.Drawing.Point(10, 38);
+            this.TipoComprobanteLabel.Name = "TipoComprobanteLabel";
+            this.TipoComprobanteLabel.Size = new System.Drawing.Size(115, 13);
+            this.TipoComprobanteLabel.TabIndex = 64;
+            this.TipoComprobanteLabel.Text = "Tipo de Comprobante: ";
+            // 
+            // TipoComprobanteComboBox
+            // 
+            this.TipoComprobanteComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TipoComprobanteComboBox.FormattingEnabled = true;
+            this.TipoComprobanteComboBox.Location = new System.Drawing.Point(131, 34);
+            this.TipoComprobanteComboBox.Name = "TipoComprobanteComboBox";
+            this.TipoComprobanteComboBox.Size = new System.Drawing.Size(296, 21);
+            this.TipoComprobanteComboBox.TabIndex = 63;
             // 
             // PuntoVentaTextBox
             // 
-            this.PuntoVentaTextBox.Location = new System.Drawing.Point(250, 3);
+            this.PuntoVentaTextBox.Location = new System.Drawing.Point(131, 61);
             this.PuntoVentaTextBox.Name = "PuntoVentaTextBox";
             this.PuntoVentaTextBox.Size = new System.Drawing.Size(42, 20);
             this.PuntoVentaTextBox.TabIndex = 23;
@@ -395,7 +467,7 @@
             // PuntoVentaLabel
             // 
             this.PuntoVentaLabel.AutoSize = true;
-            this.PuntoVentaLabel.Location = new System.Drawing.Point(184, 7);
+            this.PuntoVentaLabel.Location = new System.Drawing.Point(62, 65);
             this.PuntoVentaLabel.Name = "PuntoVentaLabel";
             this.PuntoVentaLabel.Size = new System.Drawing.Size(63, 13);
             this.PuntoVentaLabel.TabIndex = 22;
@@ -403,7 +475,7 @@
             // 
             // CuitVendedorTextBox
             // 
-            this.CuitVendedorTextBox.Location = new System.Drawing.Point(84, 4);
+            this.CuitVendedorTextBox.Location = new System.Drawing.Point(131, 7);
             this.CuitVendedorTextBox.Name = "CuitVendedorTextBox";
             this.CuitVendedorTextBox.Size = new System.Drawing.Size(94, 20);
             this.CuitVendedorTextBox.TabIndex = 21;
@@ -412,87 +484,76 @@
             // CuitVendedorLabel
             // 
             this.CuitVendedorLabel.AutoSize = true;
-            this.CuitVendedorLabel.Location = new System.Drawing.Point(3, 8);
+            this.CuitVendedorLabel.Location = new System.Drawing.Point(45, 10);
             this.CuitVendedorLabel.Name = "CuitVendedorLabel";
             this.CuitVendedorLabel.Size = new System.Drawing.Size(80, 13);
             this.CuitVendedorLabel.TabIndex = 20;
             this.CuitVendedorLabel.Text = "Cuit Vendedor: ";
             // 
-            // NumeroLoteLabel
+            // NumeroComprobanteLabel
             // 
-            this.NumeroLoteLabel.AutoSize = true;
-            this.NumeroLoteLabel.Location = new System.Drawing.Point(34, 29);
-            this.NumeroLoteLabel.Name = "NumeroLoteLabel";
-            this.NumeroLoteLabel.Size = new System.Drawing.Size(49, 13);
-            this.NumeroLoteLabel.TabIndex = 19;
-            this.NumeroLoteLabel.Text = "Nº.Lote: ";
+            this.NumeroComprobanteLabel.AutoSize = true;
+            this.NumeroComprobanteLabel.Location = new System.Drawing.Point(236, 64);
+            this.NumeroComprobanteLabel.Name = "NumeroComprobanteLabel";
+            this.NumeroComprobanteLabel.Size = new System.Drawing.Size(91, 13);
+            this.NumeroComprobanteLabel.TabIndex = 19;
+            this.NumeroComprobanteLabel.Text = "Nº.Comprobante: ";
             // 
-            // NumeroLoteTextBox
+            // NumeroComprobanteTextBox
             // 
-            this.NumeroLoteTextBox.Location = new System.Drawing.Point(84, 27);
-            this.NumeroLoteTextBox.Name = "NumeroLoteTextBox";
-            this.NumeroLoteTextBox.Size = new System.Drawing.Size(94, 20);
-            this.NumeroLoteTextBox.TabIndex = 7;
-            this.NumeroLoteTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.NumeroComprobanteTextBox.Location = new System.Drawing.Point(333, 62);
+            this.NumeroComprobanteTextBox.Name = "NumeroComprobanteTextBox";
+            this.NumeroComprobanteTextBox.Size = new System.Drawing.Size(94, 20);
+            this.NumeroComprobanteTextBox.TabIndex = 7;
+            this.NumeroComprobanteTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.NumeroComprobanteTextBox.TextChanged += new System.EventHandler(this.NumeroLoteTextBox_TextChanged);
             // 
-            // ArchivosHistoricosRadioButton
+            // ComprobantesProcesadosRadioButton
             // 
-            this.ArchivosHistoricosRadioButton.AutoSize = true;
-            this.ArchivosHistoricosRadioButton.Location = new System.Drawing.Point(12, 62);
-            this.ArchivosHistoricosRadioButton.Name = "ArchivosHistoricosRadioButton";
-            this.ArchivosHistoricosRadioButton.Size = new System.Drawing.Size(113, 17);
-            this.ArchivosHistoricosRadioButton.TabIndex = 40;
-            this.ArchivosHistoricosRadioButton.Text = "Archivos históricos";
-            this.ArchivosHistoricosRadioButton.UseVisualStyleBackColor = true;
-            this.ArchivosHistoricosRadioButton.CheckedChanged += new System.EventHandler(this.ArchivosAProcesar_CheckedChanged);
+            this.ComprobantesProcesadosRadioButton.AutoSize = true;
+            this.ComprobantesProcesadosRadioButton.Location = new System.Drawing.Point(168, 35);
+            this.ComprobantesProcesadosRadioButton.Name = "ComprobantesProcesadosRadioButton";
+            this.ComprobantesProcesadosRadioButton.Size = new System.Drawing.Size(199, 17);
+            this.ComprobantesProcesadosRadioButton.TabIndex = 40;
+            this.ComprobantesProcesadosRadioButton.Text = "Comprobantes procesados ( locales )";
+            this.ComprobantesProcesadosRadioButton.UseVisualStyleBackColor = true;
+            this.ComprobantesProcesadosRadioButton.CheckedChanged += new System.EventHandler(this.ArchivosAProcesar_CheckedChanged);
             // 
-            // ArchivosHistoricosPanel
+            // FechaProcesoPanel
             // 
-            this.ArchivosHistoricosPanel.Controls.Add(this.FechaProcesoRadioButton);
-            this.ArchivosHistoricosPanel.Controls.Add(this.FechaCreacionRadioButton);
-            this.ArchivosHistoricosPanel.Controls.Add(this.FechaProcesoDsdBandejaEDTP);
-            this.ArchivosHistoricosPanel.Controls.Add(this.FechaProcesoHstBandejaEDTP);
-            this.ArchivosHistoricosPanel.Controls.Add(this.label8);
-            this.ArchivosHistoricosPanel.Controls.Add(this.label12);
-            this.ArchivosHistoricosPanel.Controls.Add(this.FechaAltaDsdBandejaEDTP);
-            this.ArchivosHistoricosPanel.Controls.Add(this.FechaAltaHstBandejaEDTP);
-            this.ArchivosHistoricosPanel.Controls.Add(this.FechaComprobantes2Label);
-            this.ArchivosHistoricosPanel.Controls.Add(this.FechaComprobantes3Label);
-            this.ArchivosHistoricosPanel.Controls.Add(this.OtrosFiltrosBandejaECheckBox);
-            this.ArchivosHistoricosPanel.Controls.Add(this.OtrosFiltrosBandejaEPanel);
-            this.ArchivosHistoricosPanel.Location = new System.Drawing.Point(61, 74);
-            this.ArchivosHistoricosPanel.Name = "ArchivosHistoricosPanel";
-            this.ArchivosHistoricosPanel.Size = new System.Drawing.Size(421, 121);
-            this.ArchivosHistoricosPanel.TabIndex = 41;
+            this.FechaProcesoPanel.Controls.Add(this.FechaComprobantes2Label);
+            this.FechaProcesoPanel.Controls.Add(this.FechaProcesoCheckBox);
+            this.FechaProcesoPanel.Controls.Add(this.FechaProcesoDsdBandejaEDTP);
+            this.FechaProcesoPanel.Controls.Add(this.FechaProcesoHstBandejaEDTP);
+            this.FechaProcesoPanel.Controls.Add(this.label12);
+            this.FechaProcesoPanel.Location = new System.Drawing.Point(12, 102);
+            this.FechaProcesoPanel.Name = "FechaProcesoPanel";
+            this.FechaProcesoPanel.Size = new System.Drawing.Size(362, 37);
+            this.FechaProcesoPanel.TabIndex = 41;
             // 
-            // FechaProcesoRadioButton
+            // FechaComprobantes2Label
             // 
-            this.FechaProcesoRadioButton.AutoSize = true;
-            this.FechaProcesoRadioButton.Checked = true;
-            this.FechaProcesoRadioButton.Location = new System.Drawing.Point(11, 9);
-            this.FechaProcesoRadioButton.Name = "FechaProcesoRadioButton";
-            this.FechaProcesoRadioButton.Size = new System.Drawing.Size(114, 17);
-            this.FechaProcesoRadioButton.TabIndex = 50;
-            this.FechaProcesoRadioButton.TabStop = true;
-            this.FechaProcesoRadioButton.Text = "Fecha de proceso:";
-            this.FechaProcesoRadioButton.UseVisualStyleBackColor = true;
-            this.FechaProcesoRadioButton.Click += new System.EventHandler(this.FechasArchivosHistorios_CheckedChanged);
+            this.FechaComprobantes2Label.AutoSize = true;
+            this.FechaComprobantes2Label.Location = new System.Drawing.Point(114, 11);
+            this.FechaComprobantes2Label.Name = "FechaComprobantes2Label";
+            this.FechaComprobantes2Label.Size = new System.Drawing.Size(21, 13);
+            this.FechaComprobantes2Label.TabIndex = 41;
+            this.FechaComprobantes2Label.Text = "del";
             // 
-            // FechaCreacionRadioButton
+            // FechaProcesoCheckBox
             // 
-            this.FechaCreacionRadioButton.AutoSize = true;
-            this.FechaCreacionRadioButton.Location = new System.Drawing.Point(11, 33);
-            this.FechaCreacionRadioButton.Name = "FechaCreacionRadioButton";
-            this.FechaCreacionRadioButton.Size = new System.Drawing.Size(117, 17);
-            this.FechaCreacionRadioButton.TabIndex = 49;
-            this.FechaCreacionRadioButton.Text = "Fecha de creación:";
-            this.FechaCreacionRadioButton.UseVisualStyleBackColor = true;
-            this.FechaCreacionRadioButton.Click += new System.EventHandler(this.FechasArchivosHistorios_CheckedChanged);
+            this.FechaProcesoCheckBox.AutoSize = true;
+            this.FechaProcesoCheckBox.Location = new System.Drawing.Point(5, 10);
+            this.FechaProcesoCheckBox.Name = "FechaProcesoCheckBox";
+            this.FechaProcesoCheckBox.Size = new System.Drawing.Size(112, 17);
+            this.FechaProcesoCheckBox.TabIndex = 49;
+            this.FechaProcesoCheckBox.Text = "Fecha de proceso";
+            this.FechaProcesoCheckBox.UseVisualStyleBackColor = true;
             // 
             // FechaProcesoDsdBandejaEDTP
             // 
             this.FechaProcesoDsdBandejaEDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.FechaProcesoDsdBandejaEDTP.Location = new System.Drawing.Point(162, 6);
+            this.FechaProcesoDsdBandejaEDTP.Location = new System.Drawing.Point(137, 7);
             this.FechaProcesoDsdBandejaEDTP.Name = "FechaProcesoDsdBandejaEDTP";
             this.FechaProcesoDsdBandejaEDTP.Size = new System.Drawing.Size(94, 20);
             this.FechaProcesoDsdBandejaEDTP.TabIndex = 45;
@@ -500,119 +561,32 @@
             // FechaProcesoHstBandejaEDTP
             // 
             this.FechaProcesoHstBandejaEDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.FechaProcesoHstBandejaEDTP.Location = new System.Drawing.Point(283, 6);
+            this.FechaProcesoHstBandejaEDTP.Location = new System.Drawing.Point(257, 7);
             this.FechaProcesoHstBandejaEDTP.Name = "FechaProcesoHstBandejaEDTP";
             this.FechaProcesoHstBandejaEDTP.Size = new System.Drawing.Size(94, 20);
             this.FechaProcesoHstBandejaEDTP.TabIndex = 48;
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(135, 35);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(21, 13);
-            this.label8.TabIndex = 46;
-            this.label8.Text = "del";
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(262, 12);
+            this.label12.Location = new System.Drawing.Point(237, 11);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(15, 13);
             this.label12.TabIndex = 47;
             this.label12.Text = "al";
             // 
-            // FechaAltaDsdBandejaEDTP
+            // ComprobantesEnLineaRadioButton
             // 
-            this.FechaAltaDsdBandejaEDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.FechaAltaDsdBandejaEDTP.Location = new System.Drawing.Point(162, 33);
-            this.FechaAltaDsdBandejaEDTP.Name = "FechaAltaDsdBandejaEDTP";
-            this.FechaAltaDsdBandejaEDTP.Size = new System.Drawing.Size(94, 20);
-            this.FechaAltaDsdBandejaEDTP.TabIndex = 40;
-            // 
-            // FechaAltaHstBandejaEDTP
-            // 
-            this.FechaAltaHstBandejaEDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.FechaAltaHstBandejaEDTP.Location = new System.Drawing.Point(283, 35);
-            this.FechaAltaHstBandejaEDTP.Name = "FechaAltaHstBandejaEDTP";
-            this.FechaAltaHstBandejaEDTP.Size = new System.Drawing.Size(94, 20);
-            this.FechaAltaHstBandejaEDTP.TabIndex = 43;
-            // 
-            // FechaComprobantes2Label
-            // 
-            this.FechaComprobantes2Label.AutoSize = true;
-            this.FechaComprobantes2Label.Location = new System.Drawing.Point(135, 11);
-            this.FechaComprobantes2Label.Name = "FechaComprobantes2Label";
-            this.FechaComprobantes2Label.Size = new System.Drawing.Size(21, 13);
-            this.FechaComprobantes2Label.TabIndex = 41;
-            this.FechaComprobantes2Label.Text = "del";
-            // 
-            // FechaComprobantes3Label
-            // 
-            this.FechaComprobantes3Label.AutoSize = true;
-            this.FechaComprobantes3Label.Location = new System.Drawing.Point(262, 35);
-            this.FechaComprobantes3Label.Name = "FechaComprobantes3Label";
-            this.FechaComprobantes3Label.Size = new System.Drawing.Size(15, 13);
-            this.FechaComprobantes3Label.TabIndex = 42;
-            this.FechaComprobantes3Label.Text = "al";
-            // 
-            // OtrosFiltrosBandejaECheckBox
-            // 
-            this.OtrosFiltrosBandejaECheckBox.AutoSize = true;
-            this.OtrosFiltrosBandejaECheckBox.Location = new System.Drawing.Point(11, 61);
-            this.OtrosFiltrosBandejaECheckBox.Name = "OtrosFiltrosBandejaECheckBox";
-            this.OtrosFiltrosBandejaECheckBox.Size = new System.Drawing.Size(78, 17);
-            this.OtrosFiltrosBandejaECheckBox.TabIndex = 37;
-            this.OtrosFiltrosBandejaECheckBox.Text = "Otros filtros";
-            this.OtrosFiltrosBandejaECheckBox.UseVisualStyleBackColor = true;
-            this.OtrosFiltrosBandejaECheckBox.CheckedChanged += new System.EventHandler(this.OtrosFiltrosBandejaECheckBox_CheckedChanged);
-            // 
-            // OtrosFiltrosBandejaEPanel
-            // 
-            this.OtrosFiltrosBandejaEPanel.Controls.Add(this.ArchivosNotOKRadioButton);
-            this.OtrosFiltrosBandejaEPanel.Controls.Add(this.ArchivoOKRadioButton);
-            this.OtrosFiltrosBandejaEPanel.Location = new System.Drawing.Point(58, 71);
-            this.OtrosFiltrosBandejaEPanel.Name = "OtrosFiltrosBandejaEPanel";
-            this.OtrosFiltrosBandejaEPanel.Size = new System.Drawing.Size(345, 50);
-            this.OtrosFiltrosBandejaEPanel.TabIndex = 38;
-            // 
-            // ArchivosNotOKRadioButton
-            // 
-            this.ArchivosNotOKRadioButton.AutoSize = true;
-            this.ArchivosNotOKRadioButton.Location = new System.Drawing.Point(12, 27);
-            this.ArchivosNotOKRadioButton.Name = "ArchivosNotOKRadioButton";
-            this.ArchivosNotOKRadioButton.Size = new System.Drawing.Size(161, 17);
-            this.ArchivosNotOKRadioButton.TabIndex = 33;
-            this.ArchivosNotOKRadioButton.Text = "Solo archivos con problemas";
-            this.ArchivosNotOKRadioButton.UseVisualStyleBackColor = true;
-            this.ArchivosNotOKRadioButton.Click += new System.EventHandler(this.ArchivosNotOKRadioButton_Click);
-            // 
-            // ArchivoOKRadioButton
-            // 
-            this.ArchivoOKRadioButton.AutoSize = true;
-            this.ArchivoOKRadioButton.Checked = true;
-            this.ArchivoOKRadioButton.Location = new System.Drawing.Point(12, 7);
-            this.ArchivoOKRadioButton.Name = "ArchivoOKRadioButton";
-            this.ArchivoOKRadioButton.Size = new System.Drawing.Size(235, 17);
-            this.ArchivoOKRadioButton.TabIndex = 32;
-            this.ArchivoOKRadioButton.TabStop = true;
-            this.ArchivoOKRadioButton.Text = "Solo archivos procesados satisfactoriamente";
-            this.ArchivoOKRadioButton.UseVisualStyleBackColor = true;
-            this.ArchivoOKRadioButton.Click += new System.EventHandler(this.ArchivoOKRadioButton_Click);
-            // 
-            // ArchivosAProcesarRadioButton
-            // 
-            this.ArchivosAProcesarRadioButton.AutoSize = true;
-            this.ArchivosAProcesarRadioButton.Checked = true;
-            this.ArchivosAProcesarRadioButton.Location = new System.Drawing.Point(12, 35);
-            this.ArchivosAProcesarRadioButton.Name = "ArchivosAProcesarRadioButton";
-            this.ArchivosAProcesarRadioButton.Size = new System.Drawing.Size(119, 17);
-            this.ArchivosAProcesarRadioButton.TabIndex = 39;
-            this.ArchivosAProcesarRadioButton.TabStop = true;
-            this.ArchivosAProcesarRadioButton.Text = "Archivos a procesar";
-            this.ArchivosAProcesarRadioButton.UseVisualStyleBackColor = true;
-            this.ArchivosAProcesarRadioButton.CheckedChanged += new System.EventHandler(this.ArchivosAProcesar_CheckedChanged);
+            this.ComprobantesEnLineaRadioButton.AutoSize = true;
+            this.ComprobantesEnLineaRadioButton.Checked = true;
+            this.ComprobantesEnLineaRadioButton.Location = new System.Drawing.Point(12, 35);
+            this.ComprobantesEnLineaRadioButton.Name = "ComprobantesEnLineaRadioButton";
+            this.ComprobantesEnLineaRadioButton.Size = new System.Drawing.Size(135, 17);
+            this.ComprobantesEnLineaRadioButton.TabIndex = 39;
+            this.ComprobantesEnLineaRadioButton.TabStop = true;
+            this.ComprobantesEnLineaRadioButton.Text = "Comprobantes en línea";
+            this.ComprobantesEnLineaRadioButton.UseVisualStyleBackColor = true;
+            this.ComprobantesEnLineaRadioButton.CheckedChanged += new System.EventHandler(this.ArchivosAProcesar_CheckedChanged);
             // 
             // ActualizarBandejaEButton
             // 
@@ -696,40 +670,26 @@
             // 
             this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem1,
-            this.menuItem4,
             this.menuItem2,
-            this.menuItem3,
-            this.menuItem5});
+            this.menuItem3});
             // 
             // menuItem1
             // 
             this.menuItem1.Index = 0;
-            this.menuItem1.Text = "Vendedores";
+            this.menuItem1.Text = "Compradores";
             this.menuItem1.Click += new System.EventHandler(this.menuItem1_Click);
-            // 
-            // menuItem4
-            // 
-            this.menuItem4.Index = 1;
-            this.menuItem4.Text = "Contingencia";
-            this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
             // 
             // menuItem2
             // 
-            this.menuItem2.Index = 2;
+            this.menuItem2.Index = 1;
             this.menuItem2.Text = "Acerca";
             this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
             // 
             // menuItem3
             // 
-            this.menuItem3.Index = 3;
+            this.menuItem3.Index = 2;
             this.menuItem3.Text = "Ayuda";
             this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
-            // 
-            // menuItem5
-            // 
-            this.menuItem5.Index = 4;
-            this.menuItem5.Text = "Proveedores";
-            this.menuItem5.Click += new System.EventHandler(this.menuItem5_Click);
             // 
             // Tablero
             // 
@@ -741,7 +701,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Menu = this.mainMenu1;
             this.Name = "Tablero";
-            this.Text = "eFact-Residente";
+            this.Text = "eFact-Proveedores";
             this.Load += new System.EventHandler(this.Tablero_Load);
             this.SplitContainer.Panel1.ResumeLayout(false);
             this.SplitContainer.ResumeLayout(false);
@@ -758,12 +718,12 @@
             this.panel1.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.FechaEmisionPanel.ResumeLayout(false);
+            this.FechaEmisionPanel.PerformLayout();
             this.OtrosFiltrosBandejaSPanel.ResumeLayout(false);
             this.OtrosFiltrosBandejaSPanel.PerformLayout();
-            this.ArchivosHistoricosPanel.ResumeLayout(false);
-            this.ArchivosHistoricosPanel.PerformLayout();
-            this.OtrosFiltrosBandejaEPanel.ResumeLayout(false);
-            this.OtrosFiltrosBandejaEPanel.PerformLayout();
+            this.FechaProcesoPanel.ResumeLayout(false);
+            this.FechaProcesoPanel.PerformLayout();
             this.StatusBarPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.UsuarioSBP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CXOSBP)).EndInit();
@@ -789,8 +749,6 @@
         private System.Windows.Forms.MenuItem menuItem1;
         private System.Windows.Forms.MenuItem menuItem2;
         private System.Windows.Forms.MenuItem menuItem3;
-        private System.Windows.Forms.MenuItem menuItem4;
-        private System.Windows.Forms.MenuItem menuItem5;
         private System.Windows.Forms.Panel BandejaEGrillaPanel;
         private System.Windows.Forms.DataGridView BandejaEDataGridView;
         private System.Windows.Forms.Panel BandejaEBotonesPanel;
@@ -806,34 +764,33 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.CheckBox PtesDiasAntCheckBox;
         private System.Windows.Forms.Panel OtrosFiltrosBandejaSPanel;
-        private System.Windows.Forms.CheckBox OtrosFiltrosBandejaSCheckBox;
         private System.Windows.Forms.TextBox PuntoVentaTextBox;
         private System.Windows.Forms.Label PuntoVentaLabel;
         private System.Windows.Forms.TextBox CuitVendedorTextBox;
         private System.Windows.Forms.Label CuitVendedorLabel;
-        private System.Windows.Forms.Label NumeroLoteLabel;
-        private System.Windows.Forms.TextBox NumeroLoteTextBox;
-        private System.Windows.Forms.RadioButton ArchivosHistoricosRadioButton;
-        private System.Windows.Forms.Panel ArchivosHistoricosPanel;
-        private System.Windows.Forms.RadioButton FechaProcesoRadioButton;
-        private System.Windows.Forms.RadioButton FechaCreacionRadioButton;
+        private System.Windows.Forms.Label NumeroComprobanteLabel;
+        private System.Windows.Forms.TextBox NumeroComprobanteTextBox;
+        private System.Windows.Forms.RadioButton ComprobantesProcesadosRadioButton;
+        private System.Windows.Forms.Panel FechaProcesoPanel;
         private System.Windows.Forms.DateTimePicker FechaProcesoDsdBandejaEDTP;
         private System.Windows.Forms.DateTimePicker FechaProcesoHstBandejaEDTP;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.DateTimePicker FechaAltaDsdBandejaEDTP;
-        private System.Windows.Forms.DateTimePicker FechaAltaHstBandejaEDTP;
         private System.Windows.Forms.Label FechaComprobantes2Label;
-        private System.Windows.Forms.Label FechaComprobantes3Label;
-        private System.Windows.Forms.CheckBox OtrosFiltrosBandejaECheckBox;
-        private System.Windows.Forms.Panel OtrosFiltrosBandejaEPanel;
-        private System.Windows.Forms.RadioButton ArchivosNotOKRadioButton;
-        private System.Windows.Forms.RadioButton ArchivoOKRadioButton;
-        private System.Windows.Forms.RadioButton ArchivosAProcesarRadioButton;
+        private System.Windows.Forms.RadioButton ComprobantesEnLineaRadioButton;
         private System.Windows.Forms.Button ActualizarBandejaEButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn cuit_vendedor;
+        private System.Windows.Forms.ComboBox TipoComprobanteComboBox;
+        private System.Windows.Forms.TextBox CuitCompradorTextBox;
+        private System.Windows.Forms.Label CuitCompradorLabel;
+        private System.Windows.Forms.Label TipoComprobanteLabel;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DateTimePicker FechaEmisionDsdBandejaEDTP;
+        private System.Windows.Forms.DateTimePicker FechaEmisionHstBandejaEDTP;
+        private System.Windows.Forms.Label FechaComprobantes3Label;
+        private System.Windows.Forms.CheckBox FechaEmisionCheckBox;
+        private System.Windows.Forms.CheckBox FechaProcesoCheckBox;
+        private System.Windows.Forms.Panel FechaEmisionPanel;
     }
 }
 
