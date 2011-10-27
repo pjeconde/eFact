@@ -654,6 +654,14 @@ namespace eFact_R
                 lc.comprobante[0].resumen.descuentos[0].alicuota_iva_descuentoSpecified = true;
                 lc.comprobante[0].resumen.descuentos[0].importe_iva_descuentoSpecified = true;
             }
+            else
+            {
+                for (int i = 0; i < lc.comprobante[0].resumen.descuentos.Length; i++)
+                {
+                    lc.comprobante[0].resumen.descuentos[i].alicuota_iva_descuentoSpecified = true;
+                    lc.comprobante[0].resumen.descuentos[i].importe_iva_descuentoSpecified = true;
+                }
+            }
             if (lc.comprobante[0].extensiones != null)
             {
                 if (lc.comprobante[0].extensiones.extensiones_datos_comerciales == null)

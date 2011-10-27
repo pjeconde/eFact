@@ -688,7 +688,7 @@ namespace eFact_DB
         {
             StringBuilder commandText = new StringBuilder();
             commandText.Append("insert Novedades values ('");
-            commandText.Append(novedad.CuitVendedor + "', " + novedad.IdLote + ", " + novedad.NumeroEnvio + ", " + novedad.PuntoVenta + ", " + novedad.IdLog + ", " + novedad.IdOp + ", '" + novedad.NumeroLote + "', '" + novedad.IdEstado + "', '" + novedad.Comentario + "', '" + novedad.FechaAlta.ToString("yyyyMMdd HH:mm:ss") + "', " + novedad.CantidadRegistros + ")");
+            commandText.Append(novedad.CuitVendedor + "', " + novedad.IdLote + ", " + novedad.NumeroEnvio + ", " + novedad.PuntoVenta + ", " + novedad.IdLog + ", " + novedad.IdOp + ", '" + novedad.NumeroLote + "', '" + novedad.IdEstado + "', '" + novedad.Comentario.Replace("'", " ") + "', '" + novedad.FechaAlta.ToString("yyyyMMdd HH:mm:ss") + "', " + novedad.CantidadRegistros + ")");
             Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.Usa, sesion.CnnStr);
         }
     }

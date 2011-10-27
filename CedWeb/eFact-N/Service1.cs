@@ -86,7 +86,17 @@ namespace eFact_N
             {
                 timer1.Stop();
                 NombrePC = System.Environment.MachineName;
-                Inicializar();
+
+                CultureInfo cedeiraCultura = new CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
+                cedeiraCultura.DateTimeFormat = new CultureInfo(System.Configuration.ConfigurationManager.AppSettings["CulturaDateTimeFormat"], false).DateTimeFormat;
+                Thread.CurrentThread.CurrentCulture = cedeiraCultura;
+
+                //Solo la primera vez inicia la sesion
+                if (Aplicacion == null)
+                {
+                    Inicializar();
+                }
+
                 //Buscar novedades en eFact-R.
                 ConsultarNovedades(out lotes);
                 //Actualizar DB2.
@@ -168,22 +178,28 @@ namespace eFact_N
                             myInsertQueryER += "'" + c.IdTipoComprobante + "', '" + lote.PuntoVenta + "', '" + c.NumeroComprobante + "', '" + codigoError + "'";
                             myInsertQueryER += Comentarios(c.ComentarioIFoAFIP); 
                             myInsertQueryER += ", '" + fecha + "', '" + hora + "') ";
+                            myCommand = new OleDbCommand(myInsertQueryER);
+                            myCommand.Connection = cn;
+                            myCommand.ExecuteNonQuery();
                             // --------------------------------
                         }
                     }
                     // Tabla: "BELLL" - Log
+                    //LOG indicando OK
                     myInsertQueryER = "insert into BELLL (BLLID, BLLIDL, BLLCOD, BLLFPR, BLLHPR) ";
-                    if (lote.WF.IdEstado == "AceptadoAFIP" || lote.WF.IdEstado == "AceptadoAFIPO")
-                    {
-                        myInsertQueryER += "values ('BL', '" + lote.NumeroLote + "', 'OK', '" + fecha + "', '" + hora + "') ";
-                    }
-                    else
-                    {
-                        myInsertQueryER += "values ('BL', '" + lote.NumeroLote + "', 'ER', '" + fecha + "', '" + hora + "') ";
-                    }
+                    myInsertQueryER += "values ('BL', '" + lote.NumeroLote + "', 'OK', '" + fecha + "', '" + hora + "') ";
                     myCommand = new OleDbCommand(myInsertQueryER);
                     myCommand.Connection = cn;
                     myCommand.ExecuteNonQuery();
+                    //LOG indicando ERROR
+                    if (lote.WF.IdEstado == "AceptadoAFIPP")
+                    {
+                        myInsertQueryER = "insert into BELLL (BLLID, BLLIDL, BLLCOD, BLLFPR, BLLHPR) ";
+                        myInsertQueryER += "values ('BL', '" + lote.NumeroLote + "', 'ER', '" + fecha + "', '" + hora + "') ";
+                        myCommand = new OleDbCommand(myInsertQueryER);
+                        myCommand.Connection = cn;
+                        myCommand.ExecuteNonQuery();
+                    }
                     // --------------------------------
                     cn.Close();
                 }
@@ -268,7 +284,6 @@ namespace eFact_N
                         // Grabar errores a nivel de lote
                         cn = new OleDbConnection(Aplicacion.Sesion.CnnStrAplicExterna);
                         cn.Open();
-
                         try
                         {
                             // Deserializar ( pasar de string XML a FeaEntidades.InterFacturas.lote_comprobantes )
@@ -381,10 +396,6 @@ namespace eFact_N
         }
         private void Inicializar()
         {
-            CultureInfo cedeiraCultura = new CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
-            cedeiraCultura.DateTimeFormat = new CultureInfo(System.Configuration.ConfigurationManager.AppSettings["CulturaDateTimeFormat"], false).DateTimeFormat;
-            Thread.CurrentThread.CurrentCulture = cedeiraCultura;
-
             System.Text.StringBuilder auxCnn = new System.Text.StringBuilder();
             auxCnn.Append(System.Configuration.ConfigurationManager.AppSettings["CnnStr"]);
 

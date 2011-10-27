@@ -657,7 +657,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:..\\..\\eFact-R-Docs\\aaInstaladoresYGuiasDeInstalacion\\06-Sistema eFact-R - Instalador Paquete\\eFact-R-Instalador-v1.6.33.msi"
+        "OutputFilename" = "8:..\\..\\eFact-R-Docs\\aaInstaladoresYGuiasDeInstalacion\\06-Sistema eFact-R - Instalador Paquete\\eFact-R-Instalador-v1.6.34.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -1158,7 +1158,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:eFact-RN, Version=1.6.32.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:eFact-RN, Version=1.6.33.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_79CFE60EAC7871B03EA43B9067EF8585"
@@ -1798,14 +1798,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:eFact-R"
-        "ProductCode" = "8:{572010F5-8133-4079-BD17-CDF605253F2A}"
-        "PackageCode" = "8:{932162AF-0A76-4C76-BA9A-D2BBBF413471}"
+        "ProductCode" = "8:{7514178A-04DA-40F6-8742-0EDFCFC093F2}"
+        "PackageCode" = "8:{C62A638D-C43E-4D7D-9314-0BB20D54BCB8}"
         "UpgradeCode" = "8:{42C6C405-B3ED-403A-9F09-E4DCDC66475D}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.6.33"
+        "ProductVersion" = "8:1.6.34"
         "Manufacturer" = "8:Cedeira"
         "ARPHELPTELEPHONE" = "8:facturaelectronica@live.com"
         "ARPHELPLINK" = "8:http://www.cedeira.com.ar"
@@ -1920,7 +1920,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C5106AF264B441EF9BE17F5A7FF485C7"
             {
-            "Name" = "8:eFact-R v1.6.33"
+            "Name" = "8:eFact-R v1.6.34"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
