@@ -61,6 +61,7 @@ namespace eFact_RN
                             byte[] a = new byte[cadena.Length];// esta es la declaracion de tu arreglo
                             System.Text.Encoding codificador;
                             codificador = System.Text.Encoding.GetEncoding("iso-8859-1");
+                            cadena = cadena.Replace("&", "&amp;");
                             a = codificador.GetBytes(cadena);
                             ms = new System.IO.MemoryStream(a);
                             ms.Seek(0, System.IO.SeekOrigin.Begin);
