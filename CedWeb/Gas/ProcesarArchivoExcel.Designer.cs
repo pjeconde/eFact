@@ -1,6 +1,6 @@
 ﻿namespace Gas
 {
-    partial class Form1
+    partial class ProcesarArchivoExcel
     {
         /// <summary>
         /// Variable del diseñador requerida.
@@ -35,20 +35,20 @@
             // 
             this.button1.Location = new System.Drawing.Point(12, 227);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(260, 23);
+            this.button1.Size = new System.Drawing.Size(582, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "Procesar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // ProcesarArchivoExcel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(606, 262);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "ProcesarArchivoExcel";
+            this.Text = "Procesamiento de planilla Excel";
             this.ResumeLayout(false);
 
         }
