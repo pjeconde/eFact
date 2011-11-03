@@ -11,9 +11,9 @@ using System.Xml.Serialization;
 
 namespace Gas
 {
-    public partial class Form1 : Form
+    public partial class ProcesarArchivoExcel : Form
     {
-        public Form1()
+        public ProcesarArchivoExcel()
         {
             InitializeComponent();
         }
@@ -26,11 +26,15 @@ namespace Gas
             fh.StartRow = 2;
             fh.StartColumn = 1;
             Planilla1[] conf = (Planilla1[]) fh.ExtractRecords();
+            List<Planilla1> lconf = new List<Planilla1>();
+            lconf.AddRange(conf);
 
             fh.SheetName = "ASIG 2011-08-16";
             fh.StartRow = 2;
             fh.StartColumn = 1;
             Planilla1[] asig = (Planilla1[])fh.ExtractRecords();
+            List<Planilla1> lasig = new List<Planilla1>();
+            lasig.AddRange(asig);
 
             AsigConf.dias_operativos dops = new AsigConf.dias_operativos();
             AsigConf.dias_operativosDia_operativo[] item = new AsigConf.dias_operativosDia_operativo[1];
@@ -40,14 +44,39 @@ namespace Gas
             dops.Items[0] = item[0];
 
             AsigConf.dias_operativosDia_operativoVolumen_gas[] vgas = new AsigConf.dias_operativosDia_operativoVolumen_gas[conf.Length];
+            int countVG = 1;
+            string ultVG = conf[0].megid_contrato_gas;
             for (int i = 0; i < conf.Length; i++)
+            {
+                if (ultVG != conf[i].megid_contrato_gas)
+                {
+                    ultVG = conf[i].megid_contrato_gas;
+                    countVG += 1;
+                }
+            }
+            dops.Items[0].volumenes_gas = new AsigConf.dias_operativosDia_operativoVolumen_gas[countVG];
+            for (int i = 0; i < dops.Items[0].volumenes_gas.Length; i++)
             {
                 vgas[i] = new AsigConf.dias_operativosDia_operativoVolumen_gas();
                 vgas[i].megid_contrato_gas = conf[i].megid_contrato_gas;
                 vgas[i].megid_tipo_balance = "DI";
                 vgas[i].mov = "A";
+                //Lista de Punto
+
+                List<Planilla1> lp = lconf.FindAll(delegate(Planilla1 e1) { return e1.megid_contrato_gas == vgas[i].megid_contrato_gas; });
+                AsigConf.dias_operativosDia_operativoVolumen_gasPUNTO[] punto = new AsigConf.dias_operativosDia_operativoVolumen_gasPUNTO[lp.Count];
+                for (int j = 0; j < lp.Count; j++)
+                {
+                    punto[j] = new AsigConf.dias_operativosDia_operativoVolumen_gasPUNTO();
+                    punto[j].megid_punto_medicion = lp[j].megid_punto_medicion;
+                    punto[j].volumen = lp[j].volumen;
+                    punto[j].megid_motivo = "";
+                    punto[j].observaciones_motivo = "";
+                }
+                vgas[i].PUNTOS = punto;
+                dops.Items[0].volumenes_gas = vgas;
             }
-            dops.Items[0].volumenes_gas = vgas;
+
 
             //Deserializar ( pasar de FeaEntidades.InterFacturas.lote_comprobantes a string XML )
             MemoryStream ms = new MemoryStream();
@@ -58,6 +87,7 @@ namespace Gas
             string resp = ByteArrayToString(ms.ToArray());
             ms.Close();
             ms = null;
+                    
         }
         public static string ByteArrayToString(byte[] characters)
         {
