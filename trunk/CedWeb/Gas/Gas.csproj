@@ -60,6 +60,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -71,6 +72,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CedEx\CedeiraEx.csproj">
+      <Project>{883AB19F-36F5-42A4-A1A7-4206F84E7757}</Project>
+      <Name>CedeiraEx</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FileHelpers.ExcelStorage\FileHelpers.ExcelStorage.2005.csproj">
       <Project>{B3F2B976-73D5-49C7-BEAA-BF62E233132A}</Project>
       <Name>FileHelpers.ExcelStorage.2005</Name>

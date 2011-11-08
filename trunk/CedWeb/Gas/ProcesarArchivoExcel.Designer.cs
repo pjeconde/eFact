@@ -28,34 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(12, 227);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(582, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Procesar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // ProcesarArchivoExcel
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(606, 262);
-            this.Controls.Add(this.button1);
-            this.Name = "ProcesarArchivoExcel";
-            this.Text = "Procesamiento de planilla Excel";
-            this.ResumeLayout(false);
+			this.ProcesarButton = new System.Windows.Forms.Button();
+			this.BuscarArchivoButton = new System.Windows.Forms.Button();
+			this.SuspendLayout();
+			// 
+			// ProcesarButton
+			// 
+			this.ProcesarButton.Location = new System.Drawing.Point(12, 44);
+			this.ProcesarButton.Name = "ProcesarButton";
+			this.ProcesarButton.Size = new System.Drawing.Size(582, 26);
+			this.ProcesarButton.TabIndex = 0;
+			this.ProcesarButton.Text = "Procesar";
+			this.ProcesarButton.UseVisualStyleBackColor = true;
+			this.ProcesarButton.Click += new System.EventHandler(this.button1_Click);
+			// 
+			// BuscarArchivoButton
+			// 
+			this.BuscarArchivoButton.Location = new System.Drawing.Point(12, 12);
+			this.BuscarArchivoButton.Name = "BuscarArchivoButton";
+			this.BuscarArchivoButton.Size = new System.Drawing.Size(582, 26);
+			this.BuscarArchivoButton.TabIndex = 1;
+			this.BuscarArchivoButton.Text = "Buscar Archivo";
+			this.BuscarArchivoButton.UseVisualStyleBackColor = true;
+			this.BuscarArchivoButton.Click += new System.EventHandler(this.BuscarArchivoButton_Click);
+			// 
+			// ProcesarArchivoExcel
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(606, 83);
+			this.Controls.Add(this.BuscarArchivoButton);
+			this.Controls.Add(this.ProcesarButton);
+			this.Name = "ProcesarArchivoExcel";
+			this.Text = "Procesamiento de planilla Excel";
+			this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ProcesarButton;
+		private System.Windows.Forms.Button BuscarArchivoButton;
     }
 }
 
