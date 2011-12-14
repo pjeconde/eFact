@@ -1,0 +1,13 @@
+C:\eFact-R-Docs\LEAR\WindowsApplication1\bin\Debug\WindowsApplication1.exe.config
+C:\eFact-R-Docs\LEAR\WindowsApplication1\obj\Debug\ResolveAssemblyReference.cache
+C:\eFact-R-Docs\LEAR\WindowsApplication1\obj\Debug\WindowsApplication1.frmSecuenciador.resources
+C:\eFact-R-Docs\LEAR\WindowsApplication1\obj\Debug\WindowsApplication1.frmConfiguracion.resources
+C:\eFact-R-Docs\LEAR\WindowsApplication1\obj\Debug\WindowsApplication1.Resources.resources
+C:\eFact-R-Docs\LEAR\WindowsApplication1\obj\Debug\WindowsApplication1.vbproj.GenerateResource.Cache
+C:\eFact-R-Docs\LEAR\WindowsApplication1\bin\Debug\WindowsApplication1.exe
+C:\eFact-R-Docs\LEAR\WindowsApplication1\bin\Debug\WindowsApplication1.pdb
+C:\eFact-R-Docs\LEAR\WindowsApplication1\bin\Debug\WindowsApplication1.xml
+C:\eFact-R-Docs\LEAR\WindowsApplication1\obj\Debug\WindowsApplication1.exe
+C:\eFact-R-Docs\LEAR\WindowsApplication1\obj\Debug\WindowsApplication1.xml
+C:\eFact-R-Docs\LEAR\WindowsApplication1\obj\Debug\WindowsApplication1.pdb
+C:\eFact-R-Docs\LEAR\WindowsApplication1\bin\Debug\SecuenciaUnificada.ini
