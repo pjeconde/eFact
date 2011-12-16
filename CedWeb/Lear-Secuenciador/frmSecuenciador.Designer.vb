@@ -24,11 +24,16 @@ Partial Class frmSecuenciador
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Me.BotonesPanel = New System.Windows.Forms.Panel
+        Me.EnviarButton = New System.Windows.Forms.Button
+        Me.BBTemp = New System.Windows.Forms.Button
         Me.SalirButton = New System.Windows.Forms.Button
         Me.ConfigurarButton = New System.Windows.Forms.Button
         Me.DetenerButton = New System.Windows.Forms.Button
         Me.RecibirButton = New System.Windows.Forms.Button
-        Me.GrillaPanel = New System.Windows.Forms.Panel
+        Me.Barra = New System.Windows.Forms.StatusStrip
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel
+        Me.Puerto = New System.IO.Ports.SerialPort(Me.components)
+        Me.SplitContainer = New System.Windows.Forms.SplitContainer
         Me.Grilla = New System.Windows.Forms.DataGridView
         Me.Origen = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -40,35 +45,55 @@ Partial Class frmSecuenciador
         Me.Sequi = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Vin = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Fin = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Barra = New System.Windows.Forms.StatusStrip
-        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel
-        Me.Puerto = New System.IO.Ports.SerialPort(Me.components)
-        Me.BBTemp = New System.Windows.Forms.Button
+        Me.MensajeTextBox = New System.Windows.Forms.TextBox
         Me.BotonesPanel.SuspendLayout()
-        Me.GrillaPanel.SuspendLayout()
-        CType(Me.Grilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Barra.SuspendLayout()
+        Me.SplitContainer.Panel1.SuspendLayout()
+        Me.SplitContainer.Panel2.SuspendLayout()
+        Me.SplitContainer.SuspendLayout()
+        CType(Me.Grilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BotonesPanel
         '
+        Me.BotonesPanel.Controls.Add(Me.EnviarButton)
         Me.BotonesPanel.Controls.Add(Me.BBTemp)
         Me.BotonesPanel.Controls.Add(Me.SalirButton)
         Me.BotonesPanel.Controls.Add(Me.ConfigurarButton)
         Me.BotonesPanel.Controls.Add(Me.DetenerButton)
         Me.BotonesPanel.Controls.Add(Me.RecibirButton)
         Me.BotonesPanel.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BotonesPanel.Location = New System.Drawing.Point(0, 421)
+        Me.BotonesPanel.Location = New System.Drawing.Point(0, 423)
         Me.BotonesPanel.Name = "BotonesPanel"
-        Me.BotonesPanel.Size = New System.Drawing.Size(784, 30)
+        Me.BotonesPanel.Size = New System.Drawing.Size(752, 30)
         Me.BotonesPanel.TabIndex = 25
+        '
+        'EnviarButton
+        '
+        Me.EnviarButton.Dock = System.Windows.Forms.DockStyle.Left
+        Me.EnviarButton.Location = New System.Drawing.Point(400, 0)
+        Me.EnviarButton.Name = "EnviarButton"
+        Me.EnviarButton.Size = New System.Drawing.Size(100, 30)
+        Me.EnviarButton.TabIndex = 30
+        Me.EnviarButton.Text = "Enviar"
+        Me.EnviarButton.UseVisualStyleBackColor = True
+        '
+        'BBTemp
+        '
+        Me.BBTemp.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BBTemp.Location = New System.Drawing.Point(300, 0)
+        Me.BBTemp.Name = "BBTemp"
+        Me.BBTemp.Size = New System.Drawing.Size(100, 30)
+        Me.BBTemp.TabIndex = 29
+        Me.BBTemp.Text = "Bajar Temporal"
+        Me.BBTemp.UseVisualStyleBackColor = True
         '
         'SalirButton
         '
         Me.SalirButton.Dock = System.Windows.Forms.DockStyle.Right
-        Me.SalirButton.Location = New System.Drawing.Point(656, 0)
+        Me.SalirButton.Location = New System.Drawing.Point(652, 0)
         Me.SalirButton.Name = "SalirButton"
-        Me.SalirButton.Size = New System.Drawing.Size(128, 30)
+        Me.SalirButton.Size = New System.Drawing.Size(100, 30)
         Me.SalirButton.TabIndex = 28
         Me.SalirButton.Text = "Salir"
         Me.SalirButton.UseVisualStyleBackColor = True
@@ -76,9 +101,9 @@ Partial Class frmSecuenciador
         'ConfigurarButton
         '
         Me.ConfigurarButton.Dock = System.Windows.Forms.DockStyle.Left
-        Me.ConfigurarButton.Location = New System.Drawing.Point(256, 0)
+        Me.ConfigurarButton.Location = New System.Drawing.Point(200, 0)
         Me.ConfigurarButton.Name = "ConfigurarButton"
-        Me.ConfigurarButton.Size = New System.Drawing.Size(128, 30)
+        Me.ConfigurarButton.Size = New System.Drawing.Size(100, 30)
         Me.ConfigurarButton.TabIndex = 27
         Me.ConfigurarButton.Text = "Configurar"
         Me.ConfigurarButton.UseVisualStyleBackColor = True
@@ -86,9 +111,9 @@ Partial Class frmSecuenciador
         'DetenerButton
         '
         Me.DetenerButton.Dock = System.Windows.Forms.DockStyle.Left
-        Me.DetenerButton.Location = New System.Drawing.Point(128, 0)
+        Me.DetenerButton.Location = New System.Drawing.Point(100, 0)
         Me.DetenerButton.Name = "DetenerButton"
-        Me.DetenerButton.Size = New System.Drawing.Size(128, 30)
+        Me.DetenerButton.Size = New System.Drawing.Size(100, 30)
         Me.DetenerButton.TabIndex = 26
         Me.DetenerButton.Text = "Detener"
         Me.DetenerButton.UseVisualStyleBackColor = True
@@ -98,19 +123,49 @@ Partial Class frmSecuenciador
         Me.RecibirButton.Dock = System.Windows.Forms.DockStyle.Left
         Me.RecibirButton.Location = New System.Drawing.Point(0, 0)
         Me.RecibirButton.Name = "RecibirButton"
-        Me.RecibirButton.Size = New System.Drawing.Size(128, 30)
+        Me.RecibirButton.Size = New System.Drawing.Size(100, 30)
         Me.RecibirButton.TabIndex = 25
         Me.RecibirButton.Text = "Recibir"
         Me.RecibirButton.UseVisualStyleBackColor = True
         '
-        'GrillaPanel
+        'Barra
         '
-        Me.GrillaPanel.Controls.Add(Me.Grilla)
-        Me.GrillaPanel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GrillaPanel.Location = New System.Drawing.Point(0, 0)
-        Me.GrillaPanel.Name = "GrillaPanel"
-        Me.GrillaPanel.Size = New System.Drawing.Size(784, 421)
-        Me.GrillaPanel.TabIndex = 26
+        Me.Barra.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
+        Me.Barra.Location = New System.Drawing.Point(0, 401)
+        Me.Barra.Name = "Barra"
+        Me.Barra.Size = New System.Drawing.Size(752, 22)
+        Me.Barra.TabIndex = 27
+        Me.Barra.Text = "StatusStrip"
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(63, 17)
+        Me.ToolStripStatusLabel1.Text = "Estado -->"
+        '
+        'Puerto
+        '
+        '
+        'SplitContainer
+        '
+        Me.SplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel2
+        Me.SplitContainer.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainer.Name = "SplitContainer"
+        Me.SplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'SplitContainer.Panel1
+        '
+        Me.SplitContainer.Panel1.Controls.Add(Me.Grilla)
+        Me.SplitContainer.Panel1MinSize = 50
+        '
+        'SplitContainer.Panel2
+        '
+        Me.SplitContainer.Panel2.Controls.Add(Me.MensajeTextBox)
+        Me.SplitContainer.Panel2MinSize = 20
+        Me.SplitContainer.Size = New System.Drawing.Size(752, 401)
+        Me.SplitContainer.SplitterDistance = 377
+        Me.SplitContainer.TabIndex = 30
         '
         'Grilla
         '
@@ -122,8 +177,8 @@ Partial Class frmSecuenciador
         Me.Grilla.Location = New System.Drawing.Point(0, 0)
         Me.Grilla.Name = "Grilla"
         Me.Grilla.ReadOnly = True
-        Me.Grilla.Size = New System.Drawing.Size(784, 421)
-        Me.Grilla.TabIndex = 21
+        Me.Grilla.Size = New System.Drawing.Size(752, 377)
+        Me.Grilla.TabIndex = 22
         '
         'Origen
         '
@@ -185,49 +240,32 @@ Partial Class frmSecuenciador
         Me.Fin.Name = "Fin"
         Me.Fin.ReadOnly = True
         '
-        'Barra
+        'MensajeTextBox
         '
-        Me.Barra.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
-        Me.Barra.Location = New System.Drawing.Point(0, 399)
-        Me.Barra.Name = "Barra"
-        Me.Barra.Size = New System.Drawing.Size(784, 22)
-        Me.Barra.TabIndex = 27
-        Me.Barra.Text = "StatusStrip"
-        '
-        'ToolStripStatusLabel1
-        '
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(45, 17)
-        Me.ToolStripStatusLabel1.Text = "Satatus"
-        '
-        'Puerto
-        '
-        '
-        'BBTemp
-        '
-        Me.BBTemp.Dock = System.Windows.Forms.DockStyle.Left
-        Me.BBTemp.Location = New System.Drawing.Point(384, 0)
-        Me.BBTemp.Name = "BBTemp"
-        Me.BBTemp.Size = New System.Drawing.Size(128, 30)
-        Me.BBTemp.TabIndex = 29
-        Me.BBTemp.Text = "Procesar Temp"
-        Me.BBTemp.UseVisualStyleBackColor = True
+        Me.MensajeTextBox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MensajeTextBox.Location = New System.Drawing.Point(0, 0)
+        Me.MensajeTextBox.Name = "MensajeTextBox"
+        Me.MensajeTextBox.Size = New System.Drawing.Size(752, 20)
+        Me.MensajeTextBox.TabIndex = 30
         '
         'frmSecuenciador
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(784, 451)
+        Me.ClientSize = New System.Drawing.Size(752, 453)
+        Me.Controls.Add(Me.SplitContainer)
         Me.Controls.Add(Me.Barra)
-        Me.Controls.Add(Me.GrillaPanel)
         Me.Controls.Add(Me.BotonesPanel)
         Me.Name = "frmSecuenciador"
         Me.Text = "Secuenciador (TCP IP y COM)"
         Me.BotonesPanel.ResumeLayout(False)
-        Me.GrillaPanel.ResumeLayout(False)
-        CType(Me.Grilla, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Barra.ResumeLayout(False)
         Me.Barra.PerformLayout()
+        Me.SplitContainer.Panel1.ResumeLayout(False)
+        Me.SplitContainer.Panel2.ResumeLayout(False)
+        Me.SplitContainer.Panel2.PerformLayout()
+        Me.SplitContainer.ResumeLayout(False)
+        CType(Me.Grilla, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -237,7 +275,12 @@ Partial Class frmSecuenciador
     Friend WithEvents ConfigurarButton As System.Windows.Forms.Button
     Friend WithEvents DetenerButton As System.Windows.Forms.Button
     Friend WithEvents RecibirButton As System.Windows.Forms.Button
-    Friend WithEvents GrillaPanel As System.Windows.Forms.Panel
+    Friend WithEvents Barra As System.Windows.Forms.StatusStrip
+    Friend WithEvents ToolStripStatusLabel1 As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents Puerto As System.IO.Ports.SerialPort
+    Friend WithEvents BBTemp As System.Windows.Forms.Button
+    Friend WithEvents EnviarButton As System.Windows.Forms.Button
+    Friend WithEvents SplitContainer As System.Windows.Forms.SplitContainer
     Friend WithEvents Grilla As System.Windows.Forms.DataGridView
     Friend WithEvents Origen As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -249,9 +292,6 @@ Partial Class frmSecuenciador
     Friend WithEvents Sequi As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Vin As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Fin As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Barra As System.Windows.Forms.StatusStrip
-    Friend WithEvents ToolStripStatusLabel1 As System.Windows.Forms.ToolStripStatusLabel
-    Friend WithEvents Puerto As System.IO.Ports.SerialPort
-    Friend WithEvents BBTemp As System.Windows.Forms.Button
+    Friend WithEvents MensajeTextBox As System.Windows.Forms.TextBox
 
 End Class

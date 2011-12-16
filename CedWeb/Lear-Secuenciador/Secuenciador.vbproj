@@ -7,9 +7,9 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4477D94C-9481-4D21-BCDA-7D1687C09C1A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>WindowsApplication1.My.MyApplication</StartupObject>
-    <RootNamespace>WindowsApplication1</RootNamespace>
-    <AssemblyName>WindowsApplication1</AssemblyName>
+    <StartupObject>Secuenciador.My.MyApplication</StartupObject>
+    <RootNamespace>Secuenciador</RootNamespace>
+    <AssemblyName>Secuenciador</AssemblyName>
     <MyType>WindowsForms</MyType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -18,8 +18,9 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>WindowsApplication1.xml</DocumentationFile>
+    <DocumentationFile>Secuenciador.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -27,7 +28,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>WindowsApplication1.xml</DocumentationFile>
+    <DocumentationFile>Secuenciador.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
@@ -51,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfigFileSettings.vb" />
+    <Compile Include="Modulo.vb" />
+    <Compile Include="TCPCliente.vb" />
     <Compile Include="LecturaArchivoINI.vb" />
     <Compile Include="frmSecuenciador.vb">
       <SubType>Form</SubType>
@@ -80,6 +83,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="TCPServidor.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmSecuenciador.resx">
