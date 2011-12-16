@@ -2,32 +2,19 @@ Imports Microsoft.VisualBasic
 Imports System.IO.Ports.SerialPort
 
 Public Class frmSecuenciador
-    Dim DirInstall As String
-    Dim PathArchINI As String
+    Inherits System.Windows.Forms.Form
+    Dim WithEvents WinSockServer As New TCPServidor()
+    'Solo para pruebas
+    Dim WithEvents WinSockCliente As New TCPCliente()
 
     Dim ArchivoTexto As String
     Dim ArchSemaforo As String
     Dim ArchDatos As String
     Dim CadenaContingencia As String
-    Dim DirContingencia As String
-    Dim DirContingencia2 As String
-    Dim Impre1 As String
-    Dim Impre2 As String
-    Dim ArchTempSec As String
     Dim CadenaGlobal As String
     Dim NombreCola1 As String
     Dim NombreCola2 As String
-    Dim Header1(3) As String
-    Dim Header2(3) As String
     Dim ForzarTemporal As Boolean
-
-    Dim Arch1 As String
-    Dim Arch2 As String
-    Dim SerialPuerto As String
-    Dim SerialBaudRate As String
-    Dim SerialParity As String
-    Dim SerialDataBits As String
-    Dim SerialStopBits As String
 
     Dim NuevaFila As Integer
     Dim Tiempo As String
@@ -38,27 +25,27 @@ Public Class frmSecuenciador
     'Dim oRead1 As System.IO.StreamReader    '#1
 
     Public Sub AbreArchivo()
-        'Open CStr(DirInstall & ArchivoTexto) For Append Access Write As #1
-        FileOpen(1, CStr(DirInstall & ArchivoTexto), OpenMode.Append, OpenAccess.Write)
-        'oWrite1 = oFile.CreateText(DirInstall & ArchivoTexto)
+        'Open CStr(DirectorioArchivos & ArchivoTexto) For Append Access Write As #1
+        FileOpen(1, CStr(DirectorioArchivos & ArchivoTexto), OpenMode.Append, OpenAccess.Write)
+        'oWrite1 = oFile.CreateText(DirectorioArchivos & ArchivoTexto)
     End Sub
 
     Public Sub AbreArchivoDatos()
         On Error Resume Next
         Err.Clear()
-        'Open CStr(DirInstall & ArchSemaforo) For Input Access Read Shared As #1
-        FileOpen(1, CStr(DirInstall & ArchSemaforo), OpenMode.Input, OpenAccess.Read, OpenShare.Shared)
-        'oRead1 = oFile.OpenText(DirInstall & ArchSemaforo)
+        'Open CStr(DirectorioArchivos & ArchSemaforo) For Input Access Read Shared As #1
+        FileOpen(1, CStr(DirectorioArchivos & ArchSemaforo), OpenMode.Input, OpenAccess.Read, OpenShare.Shared)
+        'oRead1 = oFile.OpenText(DirectorioArchivos & ArchSemaforo)
         MsgBox(Err.Number)
         If Err.Number <> 0 Then
             'Me dio error, o sea que el archivo no existe, entonces yo lo creo
-            'Open CStr(DirInstall & ArchSemaforo) For Output Access Write Lock Read Write As #1
-            FileOpen(1, CStr(DirInstall & ArchSemaforo), OpenMode.Output, OpenAccess.Write, OpenShare.LockReadWrite)
+            'Open CStr(DirectorioArchivos & ArchSemaforo) For Output Access Write Lock Read Write As #1
+            FileOpen(1, CStr(DirectorioArchivos & ArchSemaforo), OpenMode.Output, OpenAccess.Write, OpenShare.LockReadWrite)
             Print(1, "SEMAFORO")
             FileClose(1)
 
-            'Open CStr(DirInstall & ArchDatos) For Append Access Write As #1
-            FileOpen(1, CStr(DirInstall & ArchDatos), OpenMode.Append, OpenAccess.Write)
+            'Open CStr(DirectorioArchivos & ArchDatos) For Append Access Write As #1
+            FileOpen(1, CStr(DirectorioArchivos & ArchDatos), OpenMode.Append, OpenAccess.Write)
         End If
     End Sub
 
@@ -97,71 +84,106 @@ Public Class frmSecuenciador
         Dim Valor As Object
         'Close #1
         FileClose(1)
-        'Open CStr(DirInstall & ArchivoTexto & ".bat") For Output As #2
-        FileOpen(2, CStr(DirInstall & ArchivoTexto & ".bat"), OpenMode.Output)
+        'Open CStr(DirectorioArchivos & ArchivoTexto & ".bat") For Output As #2
+        FileOpen(2, CStr(DirectorioArchivos & ArchivoTexto & ".bat"), OpenMode.Output)
 
         If NombreCola1 <> "" Then
-            Print(2, CStr("COPY " & DirInstall & ArchivoTexto & ".txt " & NombreCola1))
+            Print(2, CStr("COPY " & DirectorioArchivos & ArchivoTexto & ".txt " & NombreCola1))
         End If
         If NombreCola2 <> "" Then
-            Print(2, CStr("COPY " & DirInstall & ArchivoTexto & ".txt " & NombreCola2))
+            Print(2, CStr("COPY " & DirectorioArchivos & ArchivoTexto & ".txt " & NombreCola2))
         End If
         FileClose(2)
         If NombreCola1 <> "" Or NombreCola2 <> "" Then
-            Valor = Shell(CStr(DirInstall & ArchivoTexto & ".BAT"), 6)
+            Valor = Shell(CStr(DirectorioArchivos & ArchivoTexto & ".BAT"), 6)
         End If
     End Sub
 
     Private Sub BEnviar_Click()
-        Dim L As Integer
-        Dim I As Integer
-        Dim C As String                   'Dim C As String * 1
-
-        'Puerto.CommPort = 1
-        Puerto.PortName = SerialPuerto
-        'Puerto.Settings = "9600,n,8,1"
-        Puerto.BaudRate = SerialBaudRate
-        Puerto.Parity = SerialParity
-        Puerto.DataBits = SerialDataBits
-        Puerto.StopBits = SerialStopBits
-
-        'No se utilizan mas los buffers
-        ''Puerto.InBufferSize = 1024
-        ''Puerto.OutBufferSize = 1024
-
-        'Puerto.PortOpen = True
-        'Me.Caption = "Enviando: Com" & Puerto.CommPort & ":" & Puerto.Settings
-        'L = Len(TMensaje.Text)
-        'For I = 1 To L
-        '    C = Mid$(TMensaje.Text, I, 1)
-        '    Puerto.Output = C
-        'Next I
-        'Puerto.PortOpen = False
-
-        ' ''Puerto.Open()
-        ' ''Me.Text = "Enviando: Com" & Puerto.PortName & ":" & Puerto.BaudRate & "," & Puerto.Parity & "," & Puerto.DataBits & "," & Puerto.StopBits
-        ' ''L = Len(TMensaje.Text)
-        ' ''If (L > 0) Then
-        ' ''    Puerto.WriteLine(TMensaje.Text)
-        ' ''End If
-        ' ''Puerto.Close()
-    End Sub
-
-    Private Sub BConfigurar_Click()
-        If Puerto.IsOpen Then
-            MsgBox("Para configurar los parámetros, debe detener la recepcion.", vbOKOnly + vbInformation)
+        If (MensajeTextBox.Text = "") Then
+            MsgBox("Debe Ingresar un mensaje para enviar.", vbOKOnly + vbInformation)
             Exit Sub
+        End If
+        If (TCPHabilitado) Then
+            WinSockCliente.Conectar()
+            WinSockCliente.EnviarDatos(MensajeTextBox.Text)
         Else
-            frmConfiguracion.Show()
-            'Leer nuevamente los parametros por si cambiaron e inicializar las variables.
+            AbrirPuertos()
+            If (MensajeTextBox.Text.Length > 0) Then
+                Barra.Items(0).Text = "Enviando: Com" & Puerto.PortName & ":" & Puerto.BaudRate & "," & Puerto.Parity & "," & Puerto.DataBits.ToString() & "," & Puerto.StopBits.ToString()
+                Puerto.WriteLine(MensajeTextBox.Text)
+            End If
+            CerrarPuertos()
         End If
     End Sub
 
-    Private Sub Puerto_DataReceived(ByVal sender As System.Object, ByVal e As System.IO.Ports.SerialDataReceivedEventArgs) Handles Puerto.DataReceived
-        MsgBox("Evento recibir")
+    Private Sub AbrirPuertos()
+        If (TCPHabilitado) Then
+            With WinSockServer
+                'Establezco el puerto donde escuchar
+                .PuertoDeEscucha = TCPPuerto
+                'Comienzo la escucha
+                .Escuchar()
+            End With
+            If (Not Produccion) Then
+                With WinSockCliente
+                    .IPDelHost = TCPIP
+                    .PuertoDelHost = TCPPuerto
+                End With
+            End If
+        Else
+            Puerto.PortName = "COM" & SerialPuerto
+            Puerto.BaudRate = SerialBaudRate
+            If (SerialParity.ToUpper() = "N") Then
+                Puerto.Parity = IO.Ports.Parity.None
+            ElseIf (SerialParity.ToUpper() = "E") Then
+                Puerto.Parity = IO.Ports.Parity.Even
+            ElseIf (SerialParity.ToUpper() = "M") Then
+                Puerto.Parity = IO.Ports.Parity.Mark
+            ElseIf (SerialParity.ToUpper() = "O") Then
+                Puerto.Parity = IO.Ports.Parity.Odd
+            ElseIf (SerialParity.ToUpper() = "S") Then
+                Puerto.Parity = IO.Ports.Parity.Space
+            End If
+            Puerto.DataBits = SerialDataBits
+            Puerto.StopBits = SerialStopBits
+            Puerto.Open()
+        End If
     End Sub
 
-    Private Sub BRecibir_Click()
+    Private Sub CerrarPuertos()
+        If (TCPHabilitado) Then
+            WinSockServer.Cerrar()
+        Else
+            Puerto.Close()
+        End If
+    End Sub
+
+    Private Sub BConfigurar_Click()
+        If TCPHabilitado Then
+
+            'Leer nuevamente los parametros por si cambiaron e inicializar las variables.
+            frmConfiguracion.Show()
+        Else
+            If Puerto.IsOpen Then
+                MsgBox("Para configurar los parámetros, debe detener la recepcion.", vbOKOnly + vbInformation)
+                Exit Sub
+            Else
+                'Leer nuevamente los parametros por si cambiaron e inicializar las variables.
+                frmConfiguracion.Show()
+            End If
+        End If
+    End Sub
+
+    Private Sub RecibirButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RecibirButton.Click
+        If TCPHabilitado Then
+            ProcesarTCP()
+        Else
+            ProcesarSerial()
+        End If
+    End Sub
+
+    Private Sub ProcesarSerial()
         On Error Resume Next
         Dim N As Integer
         Dim C As String
@@ -186,66 +208,15 @@ Public Class frmSecuenciador
         Dim RecuperaDatos As Boolean
         Dim Forzar2 As Boolean
 
-        If Puerto.IsOpen Then
-            MsgBox("El puerto está abierto.", vbOKOnly + vbCritical)
-            Exit Sub
-        End If
-
         FechaFila = Now.ToString("dd/MM/yyyy")
-        'Validaciones de configuracion
-        If DirInstall = "" Then
-            MsgBox("El directorio de Archivos no está configurado.", vbOKOnly + vbCritical)
-            Exit Sub
-        End If
-
-        'Ahora son cuartro (BuadRate, Parity, DataBits y StopBits)
-        If SerialBaudRate = "" Then
-            MsgBox("El parámetro de configuración BaudRate del puerto serie no está cargado.", vbOKOnly + vbCritical)
-            Exit Sub
-        End If
-        If SerialParity = "" Then
-            MsgBox("El parámetro de configuración Parity del puerto serie no está cargado.", vbOKOnly + vbCritical)
-            Exit Sub
-        End If
-        If SerialDataBits = "" Then
-            MsgBox("El parámetro de configuración DataBits del puerto serie no está cargado.", vbOKOnly + vbCritical)
-            Exit Sub
-        End If
-        If SerialStopBits = "" Then
-            MsgBox("El parámetro de configuración StopBits del puerto serie no está cargado.", vbOKOnly + vbCritical)
-            Exit Sub
-        End If
-        If SerialPuerto < 1 Or SerialPuerto > 4 Then
-            MsgBox("El Puerto Serie a utilizar no esta configurado.", vbOKOnly + vbCritical)
-            Exit Sub
-        End If
-        If Arch1 = "" Then
-            MsgBox("El nombre del Archivo de Datos 1 no esta cargado.", vbOKOnly + vbCritical)
-            Exit Sub
-        End If
-
-        'If Arch2 = "" Then
-        '  MsgBox "El nombre del archivo de Semaforo no esta cargado.", vbOKOnly + vbExclamation
-        'End If
 
         Cadena = ""
         N = 0
         LargoLinea = 0
-        Puerto.PortName = SerialPuerto
-        Puerto.BaudRate = SerialBaudRate
-        Puerto.Parity = SerialParity
-        Puerto.DataBits = SerialDataBits
-        Puerto.StopBits = SerialStopBits
 
-        'Puerto.InBufferSize = 20480
-        'Puerto.OutBufferSize = 20480
-        'Puerto.InputLen = 1
-        'Puerto.PortOpen = True
-        Puerto.Open()
+        AbrirPuertos()
 
-        'Me.Caption = "Recibiendo: Com" & Puerto.CommPort & ":" & Puerto.Settings & ". BUFFER:" & CStr(Puerto.InBufferCount) _
-        '& " de " & CStr(Puerto.InBufferSize)
-        'Me.Text = "Recibiendo: Com" & Puerto.PortName & ":" & Puerto.BaudRate & "," & Puerto.Parity & "," & Puerto.DataBits & "," & Puerto.StopBits
+        Dim ports As String()
 
         Barra.Items(0).Text = "Recibiendo: Com" & Puerto.PortName & ":" & Puerto.BaudRate & "," & Puerto.Parity & "," & Puerto.DataBits & "," & Puerto.StopBits
         ErrorRed = False 'Comienza sin errores de red
@@ -253,8 +224,7 @@ Public Class frmSecuenciador
         Forzar2 = False
         While Puerto.IsOpen
 Inicio:
-            'N = Puerto.InBufferCount
-            N = Puerto.ReadBufferSize
+            N = Puerto.BytesToRead()
             If N Or ForzarTemporal = True Then
                 Forzar2 = ForzarTemporal
                 If Forzar2 = False Then
@@ -333,8 +303,8 @@ Inicio:
                     Err.Clear()
 
                     Call CreaNombreArchivo()
-                    'Open CStr(DirInstall & ArchivoTexto) For Append Access Write Lock Read Write As #1
-                    FileOpen(1, CStr(DirInstall & ArchivoTexto), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
+                    'Open CStr(DirectorioArchivos & ArchivoTexto) For Append Access Write Lock Read Write As #1
+                    FileOpen(1, CStr(DirectorioArchivos & ArchivoTexto), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
                     If Err.Number <> 0 Then
                         'El enlace todavía no está restablecido
                         FileClose(1)
@@ -384,16 +354,16 @@ Inicio:
 
                         'GUARDO EN HISTORICO
                         Call CreaNombreArchivo()
-                        Barra.Items(0).Text = "Guardando informacion historica en " & DirInstall & ArchivoTexto
+                        Barra.Items(0).Text = "Guardando informacion historica en " & DirectorioArchivos & ArchivoTexto
 
                         Do While True
-                            'Open CStr(DirInstall & ArchivoTexto) For Append Access Write Lock Read Write As #1
-                            FileOpen(1, CStr(DirInstall & ArchivoTexto), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
+                            'Open CStr(DirectorioArchivos & ArchivoTexto) For Append Access Write Lock Read Write As #1
+                            FileOpen(1, CStr(DirectorioArchivos & ArchivoTexto), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
                             If Err.Number <> 0 Then
                                 FileClose(1)
                                 Err.Clear()
                                 If Tiempo <> CStr(TimeValue(Now)) Then
-                                    Barra.Items(0).Text = "Esperando liberacion de archivo " & DirInstall & ArchivoTexto & ". " & Now.ToString("hh:mm:ss")
+                                    Barra.Items(0).Text = "Esperando liberacion de archivo " & DirectorioArchivos & ArchivoTexto & ". " & Now.ToString("hh:mm:ss")
                                     Tiempo = CStr(TimeValue(Now))
                                 End If
                                 Me.Refresh()
@@ -503,15 +473,22 @@ Inicio:
         End While                   'While puerto.portopen..
     End Sub
 
-    Private Sub BStop_Click()
-        If Puerto.IsOpen Then
-            Puerto.Close()
-        End If
+    Private Sub ProcesarTCP()
+        AbrirPuertos()
     End Sub
 
-    Private Sub BSalir_Click()
-        BParar_Click()
-        End
+    Private Sub BRecibir_Click()
+        If VerificarConfiguracion(TCPHabilitado) Then
+            If TCPHabilitado Then
+                ProcesarTCP()
+            Else
+                If Puerto.IsOpen Then
+                    MsgBox("El puerto está abierto.", vbOKOnly + vbCritical)
+                    Exit Sub
+                End If
+                ProcesarSerial()
+            End If
+        End If
     End Sub
 
     Private Sub Command1_Click()
@@ -539,11 +516,7 @@ Inicio:
     End Sub
 
     Private Sub Configurar_Click()
-        Call BConfigurar_Click()
-    End Sub
-
-    Private Sub Salir_Click()
-        Call BSalir_Click()
+        BConfigurar_Click()
     End Sub
 
     Public Sub New()
@@ -558,52 +531,19 @@ Inicio:
     End Sub
 
     Private Sub DetenerButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DetenerButton.Click
-
+        Detener()
     End Sub
 
-    Private Sub BParar_Click()
-
+    Private Sub Detener()
+        If Puerto.IsOpen Then
+            Puerto.Close()
+        End If
     End Sub
 
     Private Sub frmSecuenciador_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         On Error Resume Next
-        'Me.Caption = "Recepcion de Secuencia Detenida"
-        'Archivo de Configuracion .INI
-        PathArchINI = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly.Location.ToString()) + "\SecuenciaUnificada.ini"
-        Dim LectArchINI As New LecturaArchivoINI
 
-        'Leo desde el .INI
-        'DirInstall = ProfileGetItem("MAIN", "DIRECTORIOARCHIVOS", "", sIniFile)
-        'ParametroSerie = ProfileGetItem("MAIN", "PARAMETROSSERIE", "", sIniFile)
-
-        DirInstall = LectArchINI.IniGet(PathArchINI, "MAIN", "DIRECTORIOARCHIVOS")
-
-        SerialPuerto = LectArchINI.IniGet(PathArchINI, "MAIN", "SerialPuerto")
-        SerialBaudRate = LectArchINI.IniGet(PathArchINI, "MAIN", "SerialBaudRate")
-        SerialParity = LectArchINI.IniGet(PathArchINI, "MAIN", "SerialParity")
-        SerialDataBits = LectArchINI.IniGet(PathArchINI, "MAIN", "SerialDataBits")
-        SerialStopBits = LectArchINI.IniGet(PathArchINI, "MAIN", "SerialStopBits")
-
-        Arch1 = LectArchINI.IniGet(PathArchINI, "MAIN", "ARCH1")
-        Arch2 = LectArchINI.IniGet(PathArchINI, "MAIN", "ARCH2")
-
-        Dim Contador As Integer
-        For Contador = 0 To 2
-            Header1(Contador) = LectArchINI.IniGet(PathArchINI, "MAIN", "ARCH1HDR" & CStr(Contador))
-        Next
-        For Contador = 0 To 2
-            Header2(Contador) = LectArchINI.IniGet(PathArchINI, "MAIN", "ARCH2HDR" & CStr(Contador))
-        Next
-        Impre1 = LectArchINI.IniGet(PathArchINI, "MAIN", "IMPERROR1")
-        Impre2 = LectArchINI.IniGet(PathArchINI, "MAIN", "IMPERROR2")
-
-        ArchTempSec = LectArchINI.IniGet(PathArchINI, "MAIN", "TEMPORARIOSECUENCIAS")
-
-        'Nuevo Archivo de Contingencia
-        DirContingencia = LectArchINI.IniGet(PathArchINI, "MAIN", "DIRECTORIOCONTINGENCIA")
-        DirContingencia2 = LectArchINI.IniGet(PathArchINI, "MAIN", "DIRECTORIOCONTINGENCIA2")
-
-        'Fin leo desde el .INI
+        LeerConfiguración()
 
         'Setup de la Grilla
         ' ''Grilla.Col = 1
@@ -655,11 +595,64 @@ Inicio:
         End If
         FileClose(3)
 
-        Call BRecibir_Click() ' Para que comience a recibir apenas arranque el programa
+        If (Produccion) Then
+            EnviarButton.Visible = False
+        Else
+            EnviarButton.Visible = True
+        End If
 
+        BRecibir_Click() ' Para que comience a recibir apenas arranque el programa
     End Sub
 
     Private Sub BBTemp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BBTemp.Click
         ForzarTemporal = True
     End Sub
+
+    Private Sub SalirButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalirButton.Click
+        Detener()
+        End
+    End Sub
+
+    Private Sub ConfigurarButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConfigurarButton.Click
+        BConfigurar_Click()
+    End Sub
+
+    Private Sub EnviarSerial_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnviarButton.Click
+        BEnviar_Click()
+    End Sub
+
+#Region "Eventos TCP - Servidor"
+    Private Sub WinSockServer_NuevaConexion(ByVal IDTerminal As System.Net.IPEndPoint) Handles WinSockServer.NuevaConexion
+        'Muestro quien se conecto
+        MsgBox("Se ha conectado un nuevo cliente desde la IP= " & IDTerminal.Address.ToString & ",Puerto = " & IDTerminal.Port)
+    End Sub
+
+    Private Sub WinSockServer_ConexionTerminada(ByVal IDTerminal As System.Net.IPEndPoint) Handles WinSockServer.ConexionTerminada
+        'Muestro con quien se termino la conexion
+        MsgBox("Se ha desconectado el cliente desde la IP= " & IDTerminal.Address.ToString & ",Puerto = " & IDTerminal.Port)
+    End Sub
+
+    Private Sub WinSockServer_DatosRecibidos(ByVal IDTerminal As System.Net.IPEndPoint) Handles WinSockServer.DatosRecibidos
+        'Muestro quien envio el mensaje
+        MsgBox("Nuevo mensaje desde el cliente de la IP= " & IDTerminal.Address.ToString & ",Puerto = " & IDTerminal.Port)
+        'Muestro el mensaje recibido
+        Call MsgBox(WinSockServer.ObtenerDatos(IDTerminal))
+    End Sub
+#End Region
+
+#Region "Eventos Serial - COMn"
+    Private Sub Puerto_DataReceived(ByVal sender As System.Object, ByVal e As System.IO.Ports.SerialDataReceivedEventArgs) Handles Puerto.DataReceived
+        MsgBox("Hay datos para recibir")
+        ProcesarSerial()
+    End Sub
+
+    Private Sub Puerto_Disposed(ByVal sender As Object, ByVal e As System.EventArgs) Handles Puerto.Disposed
+        MsgBox("Cerrando Puerto")
+    End Sub
+
+    Private Sub Puerto_ErrorReceived(ByVal sender As Object, ByVal e As System.IO.Ports.SerialErrorReceivedEventArgs) Handles Puerto.ErrorReceived
+        MsgBox("Recibiendo Error")
+    End Sub
+#End Region
+
 End Class
