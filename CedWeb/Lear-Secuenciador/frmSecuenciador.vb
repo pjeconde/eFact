@@ -1,6 +1,7 @@
 Imports Microsoft.VisualBasic
 Imports System.IO.Ports.SerialPort
 Imports System.IO
+Imports System.Drawing.Printing
 
 Public Class frmSecuenciador
     Inherits System.Windows.Forms.Form
@@ -434,6 +435,17 @@ Public Class frmSecuenciador
         '                        ' ''        End If
         '                        ' ''    Next
         '                        ' ''End If
+        ''Reemplaza lo inmediatamente anterior
+        'If ErrorCabecera = True Or ErrorDigitos = True Then
+        'For Each X As String In System.Drawing.Printing.PrinterSettings.InstalledPrinters
+        'If X = Impre1 Or X = Impre2 Then
+        'Dim pd As New System.Drawing.Printing.PrintDocument
+        'AddHandler pd.PrintPage, AddressOf print_PrintPage
+        'pd.Print()
+        'End If
+        'Next
+        'End If
+        ''Hasta aca
 
         '                        'Grabo segun cabecera
         '                        On Error Resume Next
@@ -660,6 +672,39 @@ Public Class frmSecuenciador
 
     Private Sub EnviarSerial_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnviarButton.Click
         BEnviar_Click()
+    End Sub
+    Private Sub print_PrintPage(ByVal sender As Object, _
+                            ByVal e As PrintPageEventArgs)
+        ' Este evento se producirá cada vez que se imprima una nueva página
+        ' imprimir HOLA MUNDO en Arial tamaño 24 y negrita
+
+        ' imprimimos la cadena en el margen izquierdo
+        Dim xPos As Single = e.MarginBounds.Left
+        ' La fuente a usar
+        Dim prFont As New Font("Arial", 32, FontStyle.Bold)
+        ' la posición superior
+        Dim yPos As Single = prFont.GetHeight(e.Graphics)
+        Dim lineHeight As Single = prFont.GetHeight(e.Graphics)
+
+        ' imprimimos la cadena
+        e.Graphics.DrawString("____________________________", prFont, Brushes.Black, xPos, yPos)
+        yPos += lineHeight
+        e.Graphics.DrawString("---ERROR DE COMUNICACION---", prFont, Brushes.Black, xPos, yPos)
+        yPos += lineHeight
+        e.Graphics.DrawString("____________________________", prFont, Brushes.Black, xPos, yPos)
+        Dim prFont2 As New Font("Arial", 24, FontStyle.Bold)
+        yPos += lineHeight
+        Dim s As String = "Fecha: " + Format(Date.Now, "dd/mm/yyyy") + "  Hora: " + Format(Date.Now, "hh:mm:ss AMPM")
+        e.Graphics.DrawString(s, prFont2, Brushes.Black, xPos, yPos)
+        yPos += lineHeight
+        e.Graphics.DrawString("---INFORMACION RECIBIDA---", prFont, Brushes.Black, xPos, yPos)
+        yPos += lineHeight
+        Dim prFont3 As New Font("Arial", 14, FontStyle.Bold)
+        e.Graphics.DrawString(CadenaGlobal, prFont, Brushes.Black, xPos, yPos)
+
+        ' indicamos que ya no hay nada más que imprimir
+        ' (el valor predeterminado de esta propiedad es False)
+        e.HasMorePages = False
     End Sub
 
 #Region "Eventos TCP - Servidor"
