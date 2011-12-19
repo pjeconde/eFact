@@ -28,12 +28,14 @@ Partial Class frmConfiguracion
         Me.ParametrosPanel = New System.Windows.Forms.Panel
         Me.TCPRadioButton = New System.Windows.Forms.RadioButton
         Me.SerialRadioButton = New System.Windows.Forms.RadioButton
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
+        Me.TCPGroupBox = New System.Windows.Forms.GroupBox
+        Me.TCPCantBytesBufferTextBox = New System.Windows.Forms.TextBox
+        Me.Label16 = New System.Windows.Forms.Label
         Me.TCPIPTextBox = New System.Windows.Forms.TextBox
         Me.Label15 = New System.Windows.Forms.Label
         Me.TCPPuertoTextBox = New System.Windows.Forms.TextBox
         Me.Label14 = New System.Windows.Forms.Label
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
+        Me.SerialGroupBox = New System.Windows.Forms.GroupBox
         Me.Label13 = New System.Windows.Forms.Label
         Me.SerialStopBitsTextBox = New System.Windows.Forms.TextBox
         Me.Label12 = New System.Windows.Forms.Label
@@ -64,12 +66,10 @@ Partial Class frmConfiguracion
         Me.Header12TextBox = New System.Windows.Forms.TextBox
         Me.Header11TextBox = New System.Windows.Forms.TextBox
         Me.Header10TextBox = New System.Windows.Forms.TextBox
-        Me.Label16 = New System.Windows.Forms.Label
-        Me.TCPCantBytesBufferTextBox = New System.Windows.Forms.TextBox
         Me.BotonesPanel.SuspendLayout()
         Me.ParametrosPanel.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.TCPGroupBox.SuspendLayout()
+        Me.SerialGroupBox.SuspendLayout()
         Me.SuspendLayout()
         '
         'BotonesPanel
@@ -77,7 +77,7 @@ Partial Class frmConfiguracion
         Me.BotonesPanel.Controls.Add(Me.AceptarButton)
         Me.BotonesPanel.Controls.Add(Me.SalirButton)
         Me.BotonesPanel.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BotonesPanel.Location = New System.Drawing.Point(0, 377)
+        Me.BotonesPanel.Location = New System.Drawing.Point(0, 407)
         Me.BotonesPanel.Name = "BotonesPanel"
         Me.BotonesPanel.Size = New System.Drawing.Size(784, 47)
         Me.BotonesPanel.TabIndex = 44
@@ -106,8 +106,8 @@ Partial Class frmConfiguracion
         '
         Me.ParametrosPanel.Controls.Add(Me.TCPRadioButton)
         Me.ParametrosPanel.Controls.Add(Me.SerialRadioButton)
-        Me.ParametrosPanel.Controls.Add(Me.GroupBox2)
-        Me.ParametrosPanel.Controls.Add(Me.GroupBox1)
+        Me.ParametrosPanel.Controls.Add(Me.TCPGroupBox)
+        Me.ParametrosPanel.Controls.Add(Me.SerialGroupBox)
         Me.ParametrosPanel.Controls.Add(Me.ArchivoTempSecuenciasTextBox)
         Me.ParametrosPanel.Controls.Add(Me.Label8)
         Me.ParametrosPanel.Controls.Add(Me.Label7)
@@ -131,45 +131,61 @@ Partial Class frmConfiguracion
         Me.ParametrosPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ParametrosPanel.Location = New System.Drawing.Point(0, 0)
         Me.ParametrosPanel.Name = "ParametrosPanel"
-        Me.ParametrosPanel.Size = New System.Drawing.Size(784, 377)
+        Me.ParametrosPanel.Size = New System.Drawing.Size(784, 407)
         Me.ParametrosPanel.TabIndex = 45
         '
         'TCPRadioButton
         '
         Me.TCPRadioButton.AutoSize = True
+        Me.TCPRadioButton.Checked = True
         Me.TCPRadioButton.Location = New System.Drawing.Point(458, 12)
         Me.TCPRadioButton.Name = "TCPRadioButton"
         Me.TCPRadioButton.Size = New System.Drawing.Size(172, 17)
         Me.TCPRadioButton.TabIndex = 71
+        Me.TCPRadioButton.TabStop = True
         Me.TCPRadioButton.Text = "Habilitar Comunicación TCP/IP"
         Me.TCPRadioButton.UseVisualStyleBackColor = True
         '
         'SerialRadioButton
         '
         Me.SerialRadioButton.AutoSize = True
-        Me.SerialRadioButton.Checked = True
         Me.SerialRadioButton.Location = New System.Drawing.Point(12, 15)
         Me.SerialRadioButton.Name = "SerialRadioButton"
         Me.SerialRadioButton.Size = New System.Drawing.Size(162, 17)
         Me.SerialRadioButton.TabIndex = 70
-        Me.SerialRadioButton.TabStop = True
         Me.SerialRadioButton.Text = "Habilitar Comunicación Serial"
         Me.SerialRadioButton.UseVisualStyleBackColor = True
         '
-        'GroupBox2
+        'TCPGroupBox
         '
-        Me.GroupBox2.Controls.Add(Me.TCPCantBytesBufferTextBox)
-        Me.GroupBox2.Controls.Add(Me.Label16)
-        Me.GroupBox2.Controls.Add(Me.TCPIPTextBox)
-        Me.GroupBox2.Controls.Add(Me.Label15)
-        Me.GroupBox2.Controls.Add(Me.TCPPuertoTextBox)
-        Me.GroupBox2.Controls.Add(Me.Label14)
-        Me.GroupBox2.Location = New System.Drawing.Point(443, 40)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(329, 79)
-        Me.GroupBox2.TabIndex = 69
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Parametros de Comunicación TCP/IP"
+        Me.TCPGroupBox.Controls.Add(Me.TCPCantBytesBufferTextBox)
+        Me.TCPGroupBox.Controls.Add(Me.Label16)
+        Me.TCPGroupBox.Controls.Add(Me.TCPIPTextBox)
+        Me.TCPGroupBox.Controls.Add(Me.Label15)
+        Me.TCPGroupBox.Controls.Add(Me.TCPPuertoTextBox)
+        Me.TCPGroupBox.Controls.Add(Me.Label14)
+        Me.TCPGroupBox.Location = New System.Drawing.Point(443, 40)
+        Me.TCPGroupBox.Name = "TCPGroupBox"
+        Me.TCPGroupBox.Size = New System.Drawing.Size(329, 79)
+        Me.TCPGroupBox.TabIndex = 69
+        Me.TCPGroupBox.TabStop = False
+        Me.TCPGroupBox.Text = "Parametros de Comunicación TCP/IP"
+        '
+        'TCPCantBytesBufferTextBox
+        '
+        Me.TCPCantBytesBufferTextBox.Location = New System.Drawing.Point(253, 19)
+        Me.TCPCantBytesBufferTextBox.Name = "TCPCantBytesBufferTextBox"
+        Me.TCPCantBytesBufferTextBox.Size = New System.Drawing.Size(60, 20)
+        Me.TCPCantBytesBufferTextBox.TabIndex = 79
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(153, 21)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(95, 13)
+        Me.Label16.TabIndex = 78
+        Me.Label16.Text = "Cant. Bytes Buffer:"
         '
         'TCPIPTextBox
         '
@@ -203,24 +219,25 @@ Partial Class frmConfiguracion
         Me.Label14.TabIndex = 74
         Me.Label14.Text = "Puerto:"
         '
-        'GroupBox1
+        'SerialGroupBox
         '
-        Me.GroupBox1.Controls.Add(Me.Label13)
-        Me.GroupBox1.Controls.Add(Me.SerialStopBitsTextBox)
-        Me.GroupBox1.Controls.Add(Me.Label12)
-        Me.GroupBox1.Controls.Add(Me.SerialDataBitsTextBox)
-        Me.GroupBox1.Controls.Add(Me.Label11)
-        Me.GroupBox1.Controls.Add(Me.SerialParityTextBox)
-        Me.GroupBox1.Controls.Add(Me.Label10)
-        Me.GroupBox1.Controls.Add(Me.Label9)
-        Me.GroupBox1.Controls.Add(Me.SerialPuertoTextBox)
-        Me.GroupBox1.Controls.Add(Me.SerialBaudRateTextBox)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 39)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(425, 80)
-        Me.GroupBox1.TabIndex = 68
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Parámetros de Comunicación Serial"
+        Me.SerialGroupBox.Controls.Add(Me.Label13)
+        Me.SerialGroupBox.Controls.Add(Me.SerialStopBitsTextBox)
+        Me.SerialGroupBox.Controls.Add(Me.Label12)
+        Me.SerialGroupBox.Controls.Add(Me.SerialDataBitsTextBox)
+        Me.SerialGroupBox.Controls.Add(Me.Label11)
+        Me.SerialGroupBox.Controls.Add(Me.SerialParityTextBox)
+        Me.SerialGroupBox.Controls.Add(Me.Label10)
+        Me.SerialGroupBox.Controls.Add(Me.Label9)
+        Me.SerialGroupBox.Controls.Add(Me.SerialPuertoTextBox)
+        Me.SerialGroupBox.Controls.Add(Me.SerialBaudRateTextBox)
+        Me.SerialGroupBox.Enabled = False
+        Me.SerialGroupBox.Location = New System.Drawing.Point(12, 39)
+        Me.SerialGroupBox.Name = "SerialGroupBox"
+        Me.SerialGroupBox.Size = New System.Drawing.Size(425, 80)
+        Me.SerialGroupBox.TabIndex = 68
+        Me.SerialGroupBox.TabStop = False
+        Me.SerialGroupBox.Text = "Parámetros de Comunicación Serial"
         '
         'Label13
         '
@@ -458,27 +475,11 @@ Partial Class frmConfiguracion
         Me.Header10TextBox.Size = New System.Drawing.Size(150, 20)
         Me.Header10TextBox.TabIndex = 44
         '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(153, 21)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(95, 13)
-        Me.Label16.TabIndex = 78
-        Me.Label16.Text = "Cant. Bytes Buffer:"
-        '
-        'TCPCantBytesBufferTextBox
-        '
-        Me.TCPCantBytesBufferTextBox.Location = New System.Drawing.Point(253, 19)
-        Me.TCPCantBytesBufferTextBox.Name = "TCPCantBytesBufferTextBox"
-        Me.TCPCantBytesBufferTextBox.Size = New System.Drawing.Size(60, 20)
-        Me.TCPCantBytesBufferTextBox.TabIndex = 79
-        '
         'frmConfiguracion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(784, 424)
+        Me.ClientSize = New System.Drawing.Size(784, 454)
         Me.Controls.Add(Me.ParametrosPanel)
         Me.Controls.Add(Me.BotonesPanel)
         Me.Name = "frmConfiguracion"
@@ -486,10 +487,10 @@ Partial Class frmConfiguracion
         Me.BotonesPanel.ResumeLayout(False)
         Me.ParametrosPanel.ResumeLayout(False)
         Me.ParametrosPanel.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.TCPGroupBox.ResumeLayout(False)
+        Me.TCPGroupBox.PerformLayout()
+        Me.SerialGroupBox.ResumeLayout(False)
+        Me.SerialGroupBox.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -517,7 +518,7 @@ Partial Class frmConfiguracion
     Friend WithEvents Header12TextBox As System.Windows.Forms.TextBox
     Friend WithEvents Header11TextBox As System.Windows.Forms.TextBox
     Friend WithEvents Header10TextBox As System.Windows.Forms.TextBox
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents SerialGroupBox As System.Windows.Forms.GroupBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents SerialPuertoTextBox As System.Windows.Forms.TextBox
@@ -528,7 +529,7 @@ Partial Class frmConfiguracion
     Friend WithEvents SerialDataBitsTextBox As System.Windows.Forms.TextBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents SerialParityTextBox As System.Windows.Forms.TextBox
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents TCPGroupBox As System.Windows.Forms.GroupBox
     Friend WithEvents TCPIPTextBox As System.Windows.Forms.TextBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents TCPPuertoTextBox As System.Windows.Forms.TextBox

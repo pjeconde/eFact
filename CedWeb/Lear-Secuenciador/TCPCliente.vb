@@ -41,17 +41,21 @@ Public Class TCPCliente
 
 #Region "METODOS"
     Public Sub Conectar()
-        Dim tcpClnt As TcpClient
-        Dim tcpThd As Thread 'Se encarga de escuchar mensajes enviados por el Servidor
+        Try
+            Dim tcpClnt As TcpClient
+            Dim tcpThd As Thread 'Se encarga de escuchar mensajes enviados por el Servidor
 
-        tcpClnt = New TcpClient()
-        'Me conecto al objeto de la clase Servidor, determinado por las propiedades IPDelHost y PuertoDelHost
-        tcpClnt.Connect(IPDelHost, PuertoDelHost)
-        Stm = tcpClnt.GetStream()
+            tcpClnt = New TcpClient()
+            'Me conecto al objeto de la clase Servidor, determinado por las propiedades IPDelHost y PuertoDelHost
+            tcpClnt.Connect(IPDelHost, PuertoDelHost)
+            Stm = tcpClnt.GetStream()
 
-        'Creo e inicio un thread para que escuche los mensajes enviados por el Servidor
-        tcpThd = New Thread(AddressOf LeerSocket)
-        tcpThd.Start()
+            'Creo e inicio un thread para que escuche los mensajes enviados por el Servidor
+            tcpThd = New Thread(AddressOf LeerSocket)
+            tcpThd.Start()
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
     End Sub
 
     Public Sub EnviarDatos(ByVal Datos As String)

@@ -16,6 +16,14 @@ Public Class frmConfiguracion
         SerialDataBitsTextBox.Text = SerialDataBits
         SerialStopBitsTextBox.Text = SerialStopBits
 
+        If (TCPHabilitado) Then
+            TCPRadioButton.Checked = True
+            SerialRadioButton.Checked = False
+        Else
+            SerialRadioButton.Checked = True
+            TCPRadioButton.Checked = False
+        End If
+
         TCPIPTextBox.Text = TCPIP
         TCPPuertoTextBox.Text = TCPPuerto
         TCPCantBytesBufferTextBox.Text = TCPCantBytesBuffer
@@ -42,12 +50,18 @@ Public Class frmConfiguracion
     End Sub
 
     Private Sub AceptarButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AceptarButton.Click
+
         SerialPuerto = SerialPuertoTextBox.Text
         SerialBaudRate = SerialBaudRateTextBox.Text
         SerialParity = SerialParityTextBox.Text
         SerialDataBits = SerialDataBitsTextBox.Text
         SerialStopBits = SerialStopBitsTextBox.Text
 
+        If (TCPRadioButton.Checked = True) Then
+            TCPHabilitado = True
+        Else
+            TCPHabilitado = False
+        End If
         TCPIP = TCPIPTextBox.Text
         TCPPuerto = TCPPuertoTextBox.Text
         TCPCantBytesBuffer = TCPCantBytesBufferTextBox.Text
@@ -65,5 +79,28 @@ Public Class frmConfiguracion
         'Impre2
 
         GrabarConfiguracion()
+        MsgBox("Información guardada satisfactoriamente.", MsgBoxStyle.Information, "Información")
+    End Sub
+
+    Private Sub TCPRadioButton_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TCPRadioButton.CheckedChanged
+        TCPoSerialCheckedChange()
+    End Sub
+
+    Private Sub SerialRadioButton_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SerialRadioButton.CheckedChanged
+        TCPoSerialCheckedChange()
+    End Sub
+
+    Private Sub TCPoSerialCheckedChange()
+        If (TCPRadioButton.Checked = True) Then
+            TCPGroupBox.Enabled = True
+            SerialGroupBox.Enabled = False
+        Else
+            SerialGroupBox.Enabled = True
+            TCPGroupBox.Enabled = False
+        End If
+    End Sub
+
+    Private Sub SalirButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalirButton.Click
+        Me.Close()
     End Sub
 End Class
