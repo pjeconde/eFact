@@ -7,7 +7,7 @@ Imports System.Text
 Public Class TCPServidor
 
 #Region "ESTRUCTURAS"
-    Private Structure InfoDeUnCliente
+    Public Structure InfoDeUnCliente
         'Esta estructura permite guardar la información sobre un cliente
         Public Socket As Socket 'Socket utilizado para mantener la conexion con el cliente
         Public Thread As Thread 'Thread utilizado para escuchar al cliente
@@ -17,7 +17,7 @@ Public Class TCPServidor
 
 #Region "VARIABLES"
     Private tcpLsn As TcpListener
-    Private Clientes As New Hashtable() 'Aqui se guarda la informacion de todos los clientes conectados
+    Public Clientes As New Hashtable() 'Aqui se guarda la informacion de todos los clientes conectados
     Private tcpThd As Thread
     Private IDClienteActual As Net.IPEndPoint 'Ultimo cliente conectado
     Private m_PuertoDeEscucha As String
@@ -49,6 +49,13 @@ Public Class TCPServidor
         'Creo un thread para que se quede escuchando la llegada de un cliente
         tcpThd = New Thread(AddressOf EsperarCliente)
         tcpThd.Start()
+    End Sub
+
+    Public Sub Detener()
+        'Detener un thread.
+        tcpThd.Abort()
+        tcpLsn.Stop()
+        m_PuertoDeEscucha = ""
     End Sub
 
     Public Function ObtenerDatos(ByVal IDCliente As Net.IPEndPoint) As String

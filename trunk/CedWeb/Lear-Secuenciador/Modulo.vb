@@ -30,6 +30,8 @@ Public Module Modulo
     Public DirContingencia As String
     Public DirContingencia2 As String
 
+    Public ArchLog As String
+
     Public Function VerificarConfiguracion(ByVal TCPHabilitado As Boolean) As Boolean
         VerificarConfiguracion = False
         If TCPHabilitado Then
@@ -111,8 +113,12 @@ Public Module Modulo
         Impre2 = LectArchINI.IniGet(PathArchINI, "MAIN", "IMPERROR2")
 
         ArchTempSec = LectArchINI.IniGet(PathArchINI, "MAIN", "TEMPORARIOSECUENCIAS")
+
         DirContingencia = LectArchINI.IniGet(PathArchINI, "MAIN", "DIRECTORIOCONTINGENCIA")
         DirContingencia2 = LectArchINI.IniGet(PathArchINI, "MAIN", "DIRECTORIOCONTINGENCIA2")
+
+        ArchLog = LectArchINI.IniGet(PathArchINI, "MAIN", "ArchLog")
+
     End Sub
 
     Public Sub GrabarConfiguracion()
@@ -120,7 +126,6 @@ Public Module Modulo
         Dim LectArchINI As New LecturaArchivoINI
 
         LectArchINI.IniWrite(PathArchINI, "MAIN", "DIRECTORIOARCHIVOS", DirectorioArchivos)
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "DIRECTORIOARCHIVOS", TCPHabilitado)
 
         LectArchINI.IniWrite(PathArchINI, "MAIN", "SerialPuerto", SerialPuerto)
         LectArchINI.IniWrite(PathArchINI, "MAIN", "SerialBaudRate", SerialBaudRate)
@@ -147,8 +152,11 @@ Public Module Modulo
         LectArchINI.IniWrite(PathArchINI, "MAIN", "IMPERROR2", Impre2)
 
         LectArchINI.IniWrite(PathArchINI, "MAIN", "TEMPORARIOSECUENCIAS", ArchTempSec)
+
         LectArchINI.IniWrite(PathArchINI, "MAIN", "DIRECTORIOCONTINGENCIA", DirContingencia)
         LectArchINI.IniWrite(PathArchINI, "MAIN", "DIRECTORIOCONTINGENCIA2", DirContingencia2)
+
+        LectArchINI.IniWrite(PathArchINI, "MAIN", "ArchLog", ArchLog)
     End Sub
 
 End Module
