@@ -66,6 +66,10 @@ Partial Class frmConfiguracion
         Me.Header12TextBox = New System.Windows.Forms.TextBox
         Me.Header11TextBox = New System.Windows.Forms.TextBox
         Me.Header10TextBox = New System.Windows.Forms.TextBox
+        Me.ComboBoxImpreError1 = New System.Windows.Forms.ComboBox
+        Me.ComboBoxImpreError2 = New System.Windows.Forms.ComboBox
+        Me.ImpError1Label = New System.Windows.Forms.Label
+        Me.ImpError2Label = New System.Windows.Forms.Label
         Me.BotonesPanel.SuspendLayout()
         Me.ParametrosPanel.SuspendLayout()
         Me.TCPGroupBox.SuspendLayout()
@@ -77,7 +81,7 @@ Partial Class frmConfiguracion
         Me.BotonesPanel.Controls.Add(Me.AceptarButton)
         Me.BotonesPanel.Controls.Add(Me.SalirButton)
         Me.BotonesPanel.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BotonesPanel.Location = New System.Drawing.Point(0, 407)
+        Me.BotonesPanel.Location = New System.Drawing.Point(0, 459)
         Me.BotonesPanel.Name = "BotonesPanel"
         Me.BotonesPanel.Size = New System.Drawing.Size(784, 47)
         Me.BotonesPanel.TabIndex = 44
@@ -104,6 +108,10 @@ Partial Class frmConfiguracion
         '
         'ParametrosPanel
         '
+        Me.ParametrosPanel.Controls.Add(Me.ImpError2Label)
+        Me.ParametrosPanel.Controls.Add(Me.ImpError1Label)
+        Me.ParametrosPanel.Controls.Add(Me.ComboBoxImpreError2)
+        Me.ParametrosPanel.Controls.Add(Me.ComboBoxImpreError1)
         Me.ParametrosPanel.Controls.Add(Me.TCPRadioButton)
         Me.ParametrosPanel.Controls.Add(Me.SerialRadioButton)
         Me.ParametrosPanel.Controls.Add(Me.TCPGroupBox)
@@ -131,7 +139,7 @@ Partial Class frmConfiguracion
         Me.ParametrosPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ParametrosPanel.Location = New System.Drawing.Point(0, 0)
         Me.ParametrosPanel.Name = "ParametrosPanel"
-        Me.ParametrosPanel.Size = New System.Drawing.Size(784, 407)
+        Me.ParametrosPanel.Size = New System.Drawing.Size(784, 459)
         Me.ParametrosPanel.TabIndex = 45
         '
         'TCPRadioButton
@@ -475,11 +483,45 @@ Partial Class frmConfiguracion
         Me.Header10TextBox.Size = New System.Drawing.Size(150, 20)
         Me.Header10TextBox.TabIndex = 44
         '
+        'ComboBoxImpreError1
+        '
+        Me.ComboBoxImpreError1.FormattingEnabled = True
+        Me.ComboBoxImpreError1.Location = New System.Drawing.Point(312, 362)
+        Me.ComboBoxImpreError1.Name = "ComboBoxImpreError1"
+        Me.ComboBoxImpreError1.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBoxImpreError1.TabIndex = 72
+        '
+        'ComboBoxImpreError2
+        '
+        Me.ComboBoxImpreError2.FormattingEnabled = True
+        Me.ComboBoxImpreError2.Location = New System.Drawing.Point(312, 390)
+        Me.ComboBoxImpreError2.Name = "ComboBoxImpreError2"
+        Me.ComboBoxImpreError2.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBoxImpreError2.TabIndex = 73
+        '
+        'ImpError1Label
+        '
+        Me.ImpError1Label.AutoSize = True
+        Me.ImpError1Label.Location = New System.Drawing.Point(215, 365)
+        Me.ImpError1Label.Name = "ImpError1Label"
+        Me.ImpError1Label.Size = New System.Drawing.Size(89, 13)
+        Me.ImpError1Label.TabIndex = 74
+        Me.ImpError1Label.Text = "Impresora error 1:"
+        '
+        'ImpError2Label
+        '
+        Me.ImpError2Label.AutoSize = True
+        Me.ImpError2Label.Location = New System.Drawing.Point(215, 393)
+        Me.ImpError2Label.Name = "ImpError2Label"
+        Me.ImpError2Label.Size = New System.Drawing.Size(89, 13)
+        Me.ImpError2Label.TabIndex = 75
+        Me.ImpError2Label.Text = "Impresora error 2:"
+        '
         'frmConfiguracion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(784, 454)
+        Me.ClientSize = New System.Drawing.Size(784, 506)
         Me.Controls.Add(Me.ParametrosPanel)
         Me.Controls.Add(Me.BotonesPanel)
         Me.Name = "frmConfiguracion"
@@ -538,4 +580,8 @@ Partial Class frmConfiguracion
     Friend WithEvents TCPRadioButton As System.Windows.Forms.RadioButton
     Friend WithEvents TCPCantBytesBufferTextBox As System.Windows.Forms.TextBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents ComboBoxImpreError2 As System.Windows.Forms.ComboBox
+    Friend WithEvents ComboBoxImpreError1 As System.Windows.Forms.ComboBox
+    Friend WithEvents ImpError2Label As System.Windows.Forms.Label
+    Friend WithEvents ImpError1Label As System.Windows.Forms.Label
 End Class
