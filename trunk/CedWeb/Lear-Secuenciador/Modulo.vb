@@ -2,7 +2,7 @@ Public Module Modulo
 
     Public Produccion As Boolean
 
-    Public DirectorioArchivos As String  'Antes llamado DirInstall 
+    Public DirectorioArchivos As String         'Antes llamado DirInstall 
     Public PathArchINI As String
 
     Public SerialPuerto As String
@@ -86,7 +86,7 @@ Public Module Modulo
 
         Produccion = LectArchINI.IniGet(PathArchINI, "MAIN", "Produccion")
 
-        DirectorioArchivos = LectArchINI.IniGet(PathArchINI, "MAIN", "DIRECTORIOARCHIVOS")
+        DirectorioArchivos = LectArchINI.IniGet(PathArchINI, "MAIN", "DirectorioArchivos")
 
         SerialPuerto = LectArchINI.IniGet(PathArchINI, "MAIN", "SerialPuerto")
         SerialBaudRate = LectArchINI.IniGet(PathArchINI, "MAIN", "SerialBaudRate")
@@ -104,13 +104,13 @@ Public Module Modulo
 
         Dim Contador As Integer
         For Contador = 0 To 2
-            Header1(Contador) = LectArchINI.IniGet(PathArchINI, "MAIN", "ARCH1HDR" & CStr(Contador))
+            Header1(Contador) = LectArchINI.IniGet(PathArchINI, "MAIN", "Arch1Hdr" & CStr(Contador))
         Next
         For Contador = 0 To 2
-            Header2(Contador) = LectArchINI.IniGet(PathArchINI, "MAIN", "ARCH2HDR" & CStr(Contador))
+            Header2(Contador) = LectArchINI.IniGet(PathArchINI, "MAIN", "Arch2Hdr" & CStr(Contador))
         Next
-        Impre1 = LectArchINI.IniGet(PathArchINI, "MAIN", "IMPERROR1")
-        Impre2 = LectArchINI.IniGet(PathArchINI, "MAIN", "IMPERROR2")
+        Impre1 = LectArchINI.IniGet(PathArchINI, "MAIN", "ImpError1")
+        Impre2 = LectArchINI.IniGet(PathArchINI, "MAIN", "ImpError2")
 
         ArchTempSec = LectArchINI.IniGet(PathArchINI, "MAIN", "TEMPORARIOSECUENCIAS")
 

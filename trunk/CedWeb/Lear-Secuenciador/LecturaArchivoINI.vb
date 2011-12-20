@@ -5,14 +5,14 @@ Public Class LecturaArchivoINI
         ByVal lpKeyName As String, _
         ByVal lpDefault As String, _
         ByVal lpReturnedString As String, _
-        ByVal nSize As Long, _
-        ByVal lpFileName As String) As Long
+        ByVal nSize As UInt32, _
+        ByVal lpFileName As String) As UInt32
 
     Private Declare Function WritePrivateProfileString Lib "kernel32" Alias "WritePrivateProfileStringA" ( _
         ByVal lpApplicationName As String, _
         ByVal lpKeyName As String, _
         ByVal lpString As String, _
-        ByVal lpFileName As String) As Long
+        ByVal lpFileName As String) As Boolean
 
     Public Function IniGet(ByVal sFileName As String, ByVal sSection As String, ByVal sKeyName As String, Optional ByVal sDefault As String = "") As String
         '--------------------------------------------------------------------------
@@ -23,12 +23,12 @@ Public Class LecturaArchivoINI
         '   sKeyName    Clave
         '   sDefault    Valor opcional que devolverá si no se encuentra la clave
         '--------------------------------------------------------------------------
-        Dim ret As Integer
+        Dim ret As UInt32
         Dim sRetVal As String
         '
         sRetVal = New String(Chr(0), 255)
         '
-        ret = GetPrivateProfileString(sSection, sKeyName, sDefault, sRetVal, 255, sFileName)
+        ret = GetPrivateProfileString(sSection, sKeyName, sDefault, sRetVal, Convert.ToUInt32(sRetVal.Length()), sFileName)
         If ret = 0 Then
             Return sDefault
         Else
@@ -42,6 +42,7 @@ Public Class LecturaArchivoINI
         ' Los parámetros son los mismos que en LeerIni
         ' Siendo sValue el valor a guardar
         '
-        Call WritePrivateProfileString(sSection, sKeyName, sValue, sFileName)
+        Dim ret As Boolean
+        ret = WritePrivateProfileString(sSection, sKeyName, sValue, sFileName)
     End Sub
 End Class
