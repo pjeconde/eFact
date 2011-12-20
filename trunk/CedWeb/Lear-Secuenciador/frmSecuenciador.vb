@@ -189,7 +189,7 @@ Public Class frmSecuenciador
     End Sub
 
     Private Sub EscribirLog(ByVal evento As String, ByVal texto As String)
-        FileOpen(11, CStr(ArchLog & ".txt"), OpenMode.Append, OpenAccess.Write)
+        FileOpen(11, CStr(ArchLog), OpenMode.Append, OpenAccess.Write)
         Dim Linea As String
         Linea = Date.Now.ToString("yyyy-MM-dd hh:mm:ss") & " " & evento & " " & texto & vbNewLine
         Print(11, Linea & vbNewLine)
