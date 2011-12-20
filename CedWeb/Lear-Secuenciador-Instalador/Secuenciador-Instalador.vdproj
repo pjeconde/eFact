@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_5DFA4B006A16496EB0DB5566EB298D2C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_886862B237F4494FA45FD7A68966414A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -39,7 +45,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:..\\..\\LEAR\\Instaladores\\v1.0.0\\Secuenciador-v1.0.0.msi"
+        "OutputFilename" = "8:..\\..\\LEAR\\Instaladores\\v1.0.1\\Secuenciador-v1.0.1.msi"
         "PackageFilesAs" = "3:1"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -49,6 +55,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.2.0"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 2.0"
+                    "ProductCode" = "8:Microsoft.Net.Framework.2.0"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -65,6 +87,17 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                }
+            }
         }
     }
     "Deployable"
@@ -94,6 +127,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5DFA4B006A16496EB0DB5566EB298D2C"
+            {
+            "SourcePath" = "8:..\\Lear-Secuenciador\\Cedeira.ico"
+            "TargetName" = "8:Cedeira.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_560DEC2EC4E04705A52509BC50209D52"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_886862B237F4494FA45FD7A68966414A"
             {
             "SourcePath" = "8:..\\Lear-Secuenciador\\SecuenciaUnificada.ini"
@@ -169,14 +222,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Secuenciador"
-        "ProductCode" = "8:{3DD3B51B-D162-4C60-B7DF-6A678BB7CF9C}"
-        "PackageCode" = "8:{96319513-02E0-4627-86E6-3693C0C12A74}"
+        "ProductCode" = "8:{5A3CA5B0-AF36-4D17-9EDC-A514C930FD81}"
+        "PackageCode" = "8:{A83160F4-8822-436B-A299-0183042AB7DE}"
         "UpgradeCode" = "8:{F4E66A85-2E30-47AE-985D-8AB57A83D0CC}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:Cedeira"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.cedeira.com.ar"
@@ -300,7 +353,7 @@
             "Target" = "8:_4337FD0A1FB74DF7BD650BAB6EA79B36"
             "Folder" = "8:_8386F9D5324B44D6A519EBAECD87FA2F"
             "WorkingFolder" = "8:_560DEC2EC4E04705A52509BC50209D52"
-            "Icon" = "8:"
+            "Icon" = "8:_5DFA4B006A16496EB0DB5566EB298D2C"
             "Feature" = "8:"
             }
         }
