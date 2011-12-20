@@ -49,11 +49,13 @@ Public Class frmConfiguracion
         For Each impresora As String In System.Drawing.Printing.PrinterSettings.InstalledPrinters
             ComboBoxImpreError1.Items.Add(impresora)
         Next
+        ComboBoxImpreError1.Text = Impre1
 
         'Impre2
         For Each impresora As String In System.Drawing.Printing.PrinterSettings.InstalledPrinters
             ComboBoxImpreError2.Items.Add(impresora)
         Next
+        ComboBoxImpreError2.Text = Impre2
 
         ArchLogTextBox.Text = ArchLog
     End Sub
@@ -84,8 +86,8 @@ Public Class frmConfiguracion
         DirContingencia2 = DirectorioContingencia2TextBox.Text
         DirectorioArchivos = DirectorioArchivosHisTextBox.Text
 
-        Impre1 = ComboBoxImpreError1.ValueMember
-        Impre2 = ComboBoxImpreError2.ValueMember
+        Impre1 = ComboBoxImpreError1.Text
+        Impre2 = ComboBoxImpreError2.Text
 
         ArchLog = ArchLogTextBox.Text
 

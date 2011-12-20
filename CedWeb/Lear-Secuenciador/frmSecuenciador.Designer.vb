@@ -24,6 +24,7 @@ Partial Class frmSecuenciador
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Me.BotonesPanel = New System.Windows.Forms.Panel
+        Me.ImprimirPruebaButton = New System.Windows.Forms.Button
         Me.EnviarButton = New System.Windows.Forms.Button
         Me.BBTemp = New System.Windows.Forms.Button
         Me.SalirButton = New System.Windows.Forms.Button
@@ -46,7 +47,6 @@ Partial Class frmSecuenciador
         Me.Vin = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Fin = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.MensajeTextBox = New System.Windows.Forms.TextBox
-        Me.ImprimirPruebaButton = New System.Windows.Forms.Button
         Me.BotonesPanel.SuspendLayout()
         Me.Barra.SuspendLayout()
         Me.SplitContainer.Panel1.SuspendLayout()
@@ -69,6 +69,16 @@ Partial Class frmSecuenciador
         Me.BotonesPanel.Name = "BotonesPanel"
         Me.BotonesPanel.Size = New System.Drawing.Size(752, 30)
         Me.BotonesPanel.TabIndex = 25
+        '
+        'ImprimirPruebaButton
+        '
+        Me.ImprimirPruebaButton.Dock = System.Windows.Forms.DockStyle.Left
+        Me.ImprimirPruebaButton.Location = New System.Drawing.Point(500, 0)
+        Me.ImprimirPruebaButton.Name = "ImprimirPruebaButton"
+        Me.ImprimirPruebaButton.Size = New System.Drawing.Size(100, 30)
+        Me.ImprimirPruebaButton.TabIndex = 31
+        Me.ImprimirPruebaButton.Text = "Imprimir Prueba"
+        Me.ImprimirPruebaButton.UseVisualStyleBackColor = True
         '
         'EnviarButton
         '
@@ -250,16 +260,6 @@ Partial Class frmSecuenciador
         Me.MensajeTextBox.Name = "MensajeTextBox"
         Me.MensajeTextBox.Size = New System.Drawing.Size(752, 77)
         Me.MensajeTextBox.TabIndex = 30
-        '
-        'ImprimirPruebaButton
-        '
-        Me.ImprimirPruebaButton.Dock = System.Windows.Forms.DockStyle.Left
-        Me.ImprimirPruebaButton.Location = New System.Drawing.Point(500, 0)
-        Me.ImprimirPruebaButton.Name = "ImprimirPruebaButton"
-        Me.ImprimirPruebaButton.Size = New System.Drawing.Size(100, 30)
-        Me.ImprimirPruebaButton.TabIndex = 31
-        Me.ImprimirPruebaButton.Text = "Imprimir Prueba"
-        Me.ImprimirPruebaButton.UseVisualStyleBackColor = True
         '
         'frmSecuenciador
         '
