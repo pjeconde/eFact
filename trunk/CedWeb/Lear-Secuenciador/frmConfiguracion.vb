@@ -54,6 +54,8 @@ Public Class frmConfiguracion
         For Each impresora As String In System.Drawing.Printing.PrinterSettings.InstalledPrinters
             ComboBoxImpreError2.Items.Add(impresora)
         Next
+
+        ArchLogTextBox.Text = ArchLog
     End Sub
 
     Private Sub AceptarButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AceptarButton.Click
@@ -84,6 +86,8 @@ Public Class frmConfiguracion
 
         Impre1 = ComboBoxImpreError1.ValueMember
         Impre2 = ComboBoxImpreError2.ValueMember
+
+        ArchLog = ArchLogTextBox.Text
 
         GrabarConfiguracion()
         MsgBox("Información guardada satisfactoriamente.", MsgBoxStyle.Information, "Información")

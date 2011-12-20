@@ -46,6 +46,7 @@ Partial Class frmSecuenciador
         Me.Vin = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Fin = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.MensajeTextBox = New System.Windows.Forms.TextBox
+        Me.ImprimirPruebaButton = New System.Windows.Forms.Button
         Me.BotonesPanel.SuspendLayout()
         Me.Barra.SuspendLayout()
         Me.SplitContainer.Panel1.SuspendLayout()
@@ -56,6 +57,7 @@ Partial Class frmSecuenciador
         '
         'BotonesPanel
         '
+        Me.BotonesPanel.Controls.Add(Me.ImprimirPruebaButton)
         Me.BotonesPanel.Controls.Add(Me.EnviarButton)
         Me.BotonesPanel.Controls.Add(Me.BBTemp)
         Me.BotonesPanel.Controls.Add(Me.SalirButton)
@@ -162,9 +164,9 @@ Partial Class frmSecuenciador
         'SplitContainer.Panel2
         '
         Me.SplitContainer.Panel2.Controls.Add(Me.MensajeTextBox)
-        Me.SplitContainer.Panel2MinSize = 20
+        Me.SplitContainer.Panel2MinSize = 40
         Me.SplitContainer.Size = New System.Drawing.Size(752, 401)
-        Me.SplitContainer.SplitterDistance = 377
+        Me.SplitContainer.SplitterDistance = 320
         Me.SplitContainer.TabIndex = 30
         '
         'Grilla
@@ -177,7 +179,7 @@ Partial Class frmSecuenciador
         Me.Grilla.Location = New System.Drawing.Point(0, 0)
         Me.Grilla.Name = "Grilla"
         Me.Grilla.ReadOnly = True
-        Me.Grilla.Size = New System.Drawing.Size(752, 377)
+        Me.Grilla.Size = New System.Drawing.Size(752, 320)
         Me.Grilla.TabIndex = 22
         '
         'Origen
@@ -244,9 +246,20 @@ Partial Class frmSecuenciador
         '
         Me.MensajeTextBox.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MensajeTextBox.Location = New System.Drawing.Point(0, 0)
+        Me.MensajeTextBox.Multiline = True
         Me.MensajeTextBox.Name = "MensajeTextBox"
-        Me.MensajeTextBox.Size = New System.Drawing.Size(752, 20)
+        Me.MensajeTextBox.Size = New System.Drawing.Size(752, 77)
         Me.MensajeTextBox.TabIndex = 30
+        '
+        'ImprimirPruebaButton
+        '
+        Me.ImprimirPruebaButton.Dock = System.Windows.Forms.DockStyle.Left
+        Me.ImprimirPruebaButton.Location = New System.Drawing.Point(500, 0)
+        Me.ImprimirPruebaButton.Name = "ImprimirPruebaButton"
+        Me.ImprimirPruebaButton.Size = New System.Drawing.Size(100, 30)
+        Me.ImprimirPruebaButton.TabIndex = 31
+        Me.ImprimirPruebaButton.Text = "Imprimir Prueba"
+        Me.ImprimirPruebaButton.UseVisualStyleBackColor = True
         '
         'frmSecuenciador
         '
@@ -293,5 +306,6 @@ Partial Class frmSecuenciador
     Friend WithEvents Vin As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Fin As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents MensajeTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents ImprimirPruebaButton As System.Windows.Forms.Button
 
 End Class

@@ -26,6 +26,10 @@ Partial Class frmConfiguracion
         Me.AceptarButton = New System.Windows.Forms.Button
         Me.SalirButton = New System.Windows.Forms.Button
         Me.ParametrosPanel = New System.Windows.Forms.Panel
+        Me.ImpError2Label = New System.Windows.Forms.Label
+        Me.ImpError1Label = New System.Windows.Forms.Label
+        Me.ComboBoxImpreError2 = New System.Windows.Forms.ComboBox
+        Me.ComboBoxImpreError1 = New System.Windows.Forms.ComboBox
         Me.TCPRadioButton = New System.Windows.Forms.RadioButton
         Me.SerialRadioButton = New System.Windows.Forms.RadioButton
         Me.TCPGroupBox = New System.Windows.Forms.GroupBox
@@ -66,10 +70,8 @@ Partial Class frmConfiguracion
         Me.Header12TextBox = New System.Windows.Forms.TextBox
         Me.Header11TextBox = New System.Windows.Forms.TextBox
         Me.Header10TextBox = New System.Windows.Forms.TextBox
-        Me.ComboBoxImpreError1 = New System.Windows.Forms.ComboBox
-        Me.ComboBoxImpreError2 = New System.Windows.Forms.ComboBox
-        Me.ImpError1Label = New System.Windows.Forms.Label
-        Me.ImpError2Label = New System.Windows.Forms.Label
+        Me.ArchLogTextBox = New System.Windows.Forms.TextBox
+        Me.Label17 = New System.Windows.Forms.Label
         Me.BotonesPanel.SuspendLayout()
         Me.ParametrosPanel.SuspendLayout()
         Me.TCPGroupBox.SuspendLayout()
@@ -108,6 +110,8 @@ Partial Class frmConfiguracion
         '
         'ParametrosPanel
         '
+        Me.ParametrosPanel.Controls.Add(Me.ArchLogTextBox)
+        Me.ParametrosPanel.Controls.Add(Me.Label17)
         Me.ParametrosPanel.Controls.Add(Me.ImpError2Label)
         Me.ParametrosPanel.Controls.Add(Me.ImpError1Label)
         Me.ParametrosPanel.Controls.Add(Me.ComboBoxImpreError2)
@@ -141,6 +145,40 @@ Partial Class frmConfiguracion
         Me.ParametrosPanel.Name = "ParametrosPanel"
         Me.ParametrosPanel.Size = New System.Drawing.Size(784, 459)
         Me.ParametrosPanel.TabIndex = 45
+        '
+        'ImpError2Label
+        '
+        Me.ImpError2Label.AutoSize = True
+        Me.ImpError2Label.Location = New System.Drawing.Point(215, 419)
+        Me.ImpError2Label.Name = "ImpError2Label"
+        Me.ImpError2Label.Size = New System.Drawing.Size(89, 13)
+        Me.ImpError2Label.TabIndex = 75
+        Me.ImpError2Label.Text = "Impresora error 2:"
+        '
+        'ImpError1Label
+        '
+        Me.ImpError1Label.AutoSize = True
+        Me.ImpError1Label.Location = New System.Drawing.Point(215, 391)
+        Me.ImpError1Label.Name = "ImpError1Label"
+        Me.ImpError1Label.Size = New System.Drawing.Size(89, 13)
+        Me.ImpError1Label.TabIndex = 74
+        Me.ImpError1Label.Text = "Impresora error 1:"
+        '
+        'ComboBoxImpreError2
+        '
+        Me.ComboBoxImpreError2.FormattingEnabled = True
+        Me.ComboBoxImpreError2.Location = New System.Drawing.Point(312, 416)
+        Me.ComboBoxImpreError2.Name = "ComboBoxImpreError2"
+        Me.ComboBoxImpreError2.Size = New System.Drawing.Size(460, 21)
+        Me.ComboBoxImpreError2.TabIndex = 73
+        '
+        'ComboBoxImpreError1
+        '
+        Me.ComboBoxImpreError1.FormattingEnabled = True
+        Me.ComboBoxImpreError1.Location = New System.Drawing.Point(312, 388)
+        Me.ComboBoxImpreError1.Name = "ComboBoxImpreError1"
+        Me.ComboBoxImpreError1.Size = New System.Drawing.Size(460, 21)
+        Me.ComboBoxImpreError1.TabIndex = 72
         '
         'TCPRadioButton
         '
@@ -337,7 +375,7 @@ Partial Class frmConfiguracion
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(130, 338)
+        Me.Label8.Location = New System.Drawing.Point(128, 338)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(176, 13)
         Me.Label8.TabIndex = 62
@@ -346,7 +384,7 @@ Partial Class frmConfiguracion
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(143, 312)
+        Me.Label7.Location = New System.Drawing.Point(141, 312)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(163, 13)
         Me.Label7.TabIndex = 61
@@ -483,39 +521,21 @@ Partial Class frmConfiguracion
         Me.Header10TextBox.Size = New System.Drawing.Size(150, 20)
         Me.Header10TextBox.TabIndex = 44
         '
-        'ComboBoxImpreError1
+        'ArchLogTextBox
         '
-        Me.ComboBoxImpreError1.FormattingEnabled = True
-        Me.ComboBoxImpreError1.Location = New System.Drawing.Point(312, 362)
-        Me.ComboBoxImpreError1.Name = "ComboBoxImpreError1"
-        Me.ComboBoxImpreError1.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBoxImpreError1.TabIndex = 72
+        Me.ArchLogTextBox.Location = New System.Drawing.Point(312, 362)
+        Me.ArchLogTextBox.Name = "ArchLogTextBox"
+        Me.ArchLogTextBox.Size = New System.Drawing.Size(460, 20)
+        Me.ArchLogTextBox.TabIndex = 77
         '
-        'ComboBoxImpreError2
+        'Label17
         '
-        Me.ComboBoxImpreError2.FormattingEnabled = True
-        Me.ComboBoxImpreError2.Location = New System.Drawing.Point(312, 390)
-        Me.ComboBoxImpreError2.Name = "ComboBoxImpreError2"
-        Me.ComboBoxImpreError2.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBoxImpreError2.TabIndex = 73
-        '
-        'ImpError1Label
-        '
-        Me.ImpError1Label.AutoSize = True
-        Me.ImpError1Label.Location = New System.Drawing.Point(215, 365)
-        Me.ImpError1Label.Name = "ImpError1Label"
-        Me.ImpError1Label.Size = New System.Drawing.Size(89, 13)
-        Me.ImpError1Label.TabIndex = 74
-        Me.ImpError1Label.Text = "Impresora error 1:"
-        '
-        'ImpError2Label
-        '
-        Me.ImpError2Label.AutoSize = True
-        Me.ImpError2Label.Location = New System.Drawing.Point(215, 393)
-        Me.ImpError2Label.Name = "ImpError2Label"
-        Me.ImpError2Label.Size = New System.Drawing.Size(89, 13)
-        Me.ImpError2Label.TabIndex = 75
-        Me.ImpError2Label.Text = "Impresora error 2:"
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(222, 365)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(82, 13)
+        Me.Label17.TabIndex = 76
+        Me.Label17.Text = "Archivo de Log:"
         '
         'frmConfiguracion
         '
@@ -584,4 +604,6 @@ Partial Class frmConfiguracion
     Friend WithEvents ComboBoxImpreError1 As System.Windows.Forms.ComboBox
     Friend WithEvents ImpError2Label As System.Windows.Forms.Label
     Friend WithEvents ImpError1Label As System.Windows.Forms.Label
+    Friend WithEvents ArchLogTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents Label17 As System.Windows.Forms.Label
 End Class

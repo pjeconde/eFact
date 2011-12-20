@@ -53,7 +53,6 @@
   <ItemGroup>
     <Compile Include="AppConfigFileSettings.vb" />
     <Compile Include="Modulo.vb" />
-    <Compile Include="TCPCliente.vb" />
     <Compile Include="LecturaArchivoINI.vb" />
     <Compile Include="frmSecuenciador.vb">
       <SubType>Form</SubType>
