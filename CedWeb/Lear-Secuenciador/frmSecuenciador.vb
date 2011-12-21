@@ -823,6 +823,7 @@ Inicio:
     Private Sub OnAccept(ByVal ar As IAsyncResult)
         Try
             client = server.EndAccept(ar)
+            bytes = New Byte(CInt(TCPCantBytesBuffer)) {}
             client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), client)
             MessageBox.Show("Cliente aceptado", "Secuenciador")
         Catch ex As Exception
@@ -836,6 +837,7 @@ Inicio:
             client.EndReceive(ar)
             client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), client)
             Dim message As String = System.Text.ASCIIEncoding.ASCII.GetString(bytes)
+            Array.Clear(bytes, 0, CInt(TCPCantBytesBuffer))
             ProcesarTCP(message)
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Secuenciador")
@@ -869,11 +871,12 @@ Inicio:
             DatosDeConfiguracion = "DESA"
         End If
         If (TCPHabilitado) Then
-            DatosDeConfiguracion += " Configuración TCP IP: Puerto " & TCPPuerto
             bytes = New Byte(CInt(TCPCantBytesBuffer)) {}
+            DatosDeConfiguracion += " Configuración TCP IP: Puerto " & TCPPuerto
             EnviarButton.Visible = False
             DetenerButton.Visible = False
             RecibirButton.Visible = False
+
         Else
             DatosDeConfiguracion += " Configuración Serial: " & SerialPuerto & " " & SerialBaudRate & "," & SerialParity & "," & SerialDataBits & "," & SerialStopBits
         End If
