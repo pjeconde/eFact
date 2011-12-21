@@ -31,8 +31,6 @@ Partial Class frmSecuenciador
         Me.ConfigurarButton = New System.Windows.Forms.Button
         Me.DetenerButton = New System.Windows.Forms.Button
         Me.RecibirButton = New System.Windows.Forms.Button
-        Me.Barra = New System.Windows.Forms.StatusStrip
-        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel
         Me.Puerto = New System.IO.Ports.SerialPort(Me.components)
         Me.SplitContainer = New System.Windows.Forms.SplitContainer
         Me.Grilla = New System.Windows.Forms.DataGridView
@@ -48,7 +46,6 @@ Partial Class frmSecuenciador
         Me.Fin = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.MensajeTextBox = New System.Windows.Forms.TextBox
         Me.BotonesPanel.SuspendLayout()
-        Me.Barra.SuspendLayout()
         Me.SplitContainer.Panel1.SuspendLayout()
         Me.SplitContainer.Panel2.SuspendLayout()
         Me.SplitContainer.SuspendLayout()
@@ -65,9 +62,9 @@ Partial Class frmSecuenciador
         Me.BotonesPanel.Controls.Add(Me.DetenerButton)
         Me.BotonesPanel.Controls.Add(Me.RecibirButton)
         Me.BotonesPanel.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BotonesPanel.Location = New System.Drawing.Point(0, 423)
+        Me.BotonesPanel.Location = New System.Drawing.Point(0, 424)
         Me.BotonesPanel.Name = "BotonesPanel"
-        Me.BotonesPanel.Size = New System.Drawing.Size(752, 30)
+        Me.BotonesPanel.Size = New System.Drawing.Size(752, 29)
         Me.BotonesPanel.TabIndex = 25
         '
         'ImprimirPruebaButton
@@ -75,7 +72,7 @@ Partial Class frmSecuenciador
         Me.ImprimirPruebaButton.Dock = System.Windows.Forms.DockStyle.Left
         Me.ImprimirPruebaButton.Location = New System.Drawing.Point(500, 0)
         Me.ImprimirPruebaButton.Name = "ImprimirPruebaButton"
-        Me.ImprimirPruebaButton.Size = New System.Drawing.Size(100, 30)
+        Me.ImprimirPruebaButton.Size = New System.Drawing.Size(100, 29)
         Me.ImprimirPruebaButton.TabIndex = 31
         Me.ImprimirPruebaButton.Text = "Imprimir Prueba"
         Me.ImprimirPruebaButton.UseVisualStyleBackColor = True
@@ -85,7 +82,7 @@ Partial Class frmSecuenciador
         Me.EnviarButton.Dock = System.Windows.Forms.DockStyle.Left
         Me.EnviarButton.Location = New System.Drawing.Point(400, 0)
         Me.EnviarButton.Name = "EnviarButton"
-        Me.EnviarButton.Size = New System.Drawing.Size(100, 30)
+        Me.EnviarButton.Size = New System.Drawing.Size(100, 29)
         Me.EnviarButton.TabIndex = 30
         Me.EnviarButton.Text = "Enviar"
         Me.EnviarButton.UseVisualStyleBackColor = True
@@ -95,7 +92,7 @@ Partial Class frmSecuenciador
         Me.BBTemp.Dock = System.Windows.Forms.DockStyle.Left
         Me.BBTemp.Location = New System.Drawing.Point(300, 0)
         Me.BBTemp.Name = "BBTemp"
-        Me.BBTemp.Size = New System.Drawing.Size(100, 30)
+        Me.BBTemp.Size = New System.Drawing.Size(100, 29)
         Me.BBTemp.TabIndex = 29
         Me.BBTemp.Text = "Bajar Temporal"
         Me.BBTemp.UseVisualStyleBackColor = True
@@ -105,7 +102,7 @@ Partial Class frmSecuenciador
         Me.SalirButton.Dock = System.Windows.Forms.DockStyle.Right
         Me.SalirButton.Location = New System.Drawing.Point(652, 0)
         Me.SalirButton.Name = "SalirButton"
-        Me.SalirButton.Size = New System.Drawing.Size(100, 30)
+        Me.SalirButton.Size = New System.Drawing.Size(100, 29)
         Me.SalirButton.TabIndex = 28
         Me.SalirButton.Text = "Salir"
         Me.SalirButton.UseVisualStyleBackColor = True
@@ -115,7 +112,7 @@ Partial Class frmSecuenciador
         Me.ConfigurarButton.Dock = System.Windows.Forms.DockStyle.Left
         Me.ConfigurarButton.Location = New System.Drawing.Point(200, 0)
         Me.ConfigurarButton.Name = "ConfigurarButton"
-        Me.ConfigurarButton.Size = New System.Drawing.Size(100, 30)
+        Me.ConfigurarButton.Size = New System.Drawing.Size(100, 29)
         Me.ConfigurarButton.TabIndex = 27
         Me.ConfigurarButton.Text = "Configurar"
         Me.ConfigurarButton.UseVisualStyleBackColor = True
@@ -125,7 +122,7 @@ Partial Class frmSecuenciador
         Me.DetenerButton.Dock = System.Windows.Forms.DockStyle.Left
         Me.DetenerButton.Location = New System.Drawing.Point(100, 0)
         Me.DetenerButton.Name = "DetenerButton"
-        Me.DetenerButton.Size = New System.Drawing.Size(100, 30)
+        Me.DetenerButton.Size = New System.Drawing.Size(100, 29)
         Me.DetenerButton.TabIndex = 26
         Me.DetenerButton.Text = "Detener"
         Me.DetenerButton.UseVisualStyleBackColor = True
@@ -135,25 +132,10 @@ Partial Class frmSecuenciador
         Me.RecibirButton.Dock = System.Windows.Forms.DockStyle.Left
         Me.RecibirButton.Location = New System.Drawing.Point(0, 0)
         Me.RecibirButton.Name = "RecibirButton"
-        Me.RecibirButton.Size = New System.Drawing.Size(100, 30)
+        Me.RecibirButton.Size = New System.Drawing.Size(100, 29)
         Me.RecibirButton.TabIndex = 25
         Me.RecibirButton.Text = "Recibir"
         Me.RecibirButton.UseVisualStyleBackColor = True
-        '
-        'Barra
-        '
-        Me.Barra.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
-        Me.Barra.Location = New System.Drawing.Point(0, 401)
-        Me.Barra.Name = "Barra"
-        Me.Barra.Size = New System.Drawing.Size(752, 22)
-        Me.Barra.TabIndex = 27
-        Me.Barra.Text = "StatusStrip"
-        '
-        'ToolStripStatusLabel1
-        '
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(63, 17)
-        Me.ToolStripStatusLabel1.Text = "Estado -->"
         '
         'Puerto
         '
@@ -175,8 +157,8 @@ Partial Class frmSecuenciador
         '
         Me.SplitContainer.Panel2.Controls.Add(Me.MensajeTextBox)
         Me.SplitContainer.Panel2MinSize = 40
-        Me.SplitContainer.Size = New System.Drawing.Size(752, 401)
-        Me.SplitContainer.SplitterDistance = 320
+        Me.SplitContainer.Size = New System.Drawing.Size(752, 424)
+        Me.SplitContainer.SplitterDistance = 343
         Me.SplitContainer.TabIndex = 30
         '
         'Grilla
@@ -189,7 +171,7 @@ Partial Class frmSecuenciador
         Me.Grilla.Location = New System.Drawing.Point(0, 0)
         Me.Grilla.Name = "Grilla"
         Me.Grilla.ReadOnly = True
-        Me.Grilla.Size = New System.Drawing.Size(752, 320)
+        Me.Grilla.Size = New System.Drawing.Size(752, 343)
         Me.Grilla.TabIndex = 22
         '
         'Origen
@@ -267,20 +249,16 @@ Partial Class frmSecuenciador
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(752, 453)
         Me.Controls.Add(Me.SplitContainer)
-        Me.Controls.Add(Me.Barra)
         Me.Controls.Add(Me.BotonesPanel)
         Me.Name = "frmSecuenciador"
         Me.Text = "Secuenciador (TCP IP y COM)"
         Me.BotonesPanel.ResumeLayout(False)
-        Me.Barra.ResumeLayout(False)
-        Me.Barra.PerformLayout()
         Me.SplitContainer.Panel1.ResumeLayout(False)
         Me.SplitContainer.Panel2.ResumeLayout(False)
         Me.SplitContainer.Panel2.PerformLayout()
         Me.SplitContainer.ResumeLayout(False)
         CType(Me.Grilla, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents BotonesPanel As System.Windows.Forms.Panel
@@ -288,8 +266,6 @@ Partial Class frmSecuenciador
     Friend WithEvents ConfigurarButton As System.Windows.Forms.Button
     Friend WithEvents DetenerButton As System.Windows.Forms.Button
     Friend WithEvents RecibirButton As System.Windows.Forms.Button
-    Friend WithEvents Barra As System.Windows.Forms.StatusStrip
-    Friend WithEvents ToolStripStatusLabel1 As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents Puerto As System.IO.Ports.SerialPort
     Friend WithEvents BBTemp As System.Windows.Forms.Button
     Friend WithEvents EnviarButton As System.Windows.Forms.Button
