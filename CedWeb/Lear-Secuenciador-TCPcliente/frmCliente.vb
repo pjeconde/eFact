@@ -19,23 +19,35 @@ Public Class frmCliente
         Dim IP As IPAddress = IPAddress.Parse(host)
         Dim xIpEndPoint As IPEndPoint = New IPEndPoint(IP, port)
         client.BeginConnect(xIpEndPoint, New AsyncCallback(AddressOf OnConnect), Nothing)
-        Controles(True)
+        'Controles(True)
     End Sub
 
     Private Sub EnviarButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnviarMensajeButton.Click
-        Dim bytes As Byte() = ASCII.GetBytes(MensajeTextBox.Text)
-        client.BeginSend(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnSend), client)
+        Try
+            Dim bytes As Byte() = ASCII.GetBytes(MensajeTextBox.Text)
+            client.BeginSend(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnSend), client)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "TCP Cliente")
+        End Try
     End Sub
 
     Private Sub OnConnect(ByVal ar As IAsyncResult)
         Try
             client.EndConnect(ar)
-            MessageBox.Show("Connected")
+            MessageBox.Show("Conectado", "TCP Cliente")
             'Controles(True)
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MessageBox.Show(ex.Message, "TCP Cliente")
             'Controles(False)
         End Try
+    End Sub
+
+    Private Sub OnSend(ByVal ar As IAsyncResult)
+        client.EndSend(ar)
+    End Sub
+
+    Private Sub SalirButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalirButton.Click
+        End
     End Sub
 
     Private Sub Controles(ByVal EnviarMensaje As Boolean)
@@ -45,26 +57,13 @@ Public Class frmCliente
             PuertoTextBox.Enabled = True
             EnviarMensajeButton.Enabled = False
             MensajeTextBox.Enabled = False
-            DetenerButton.Enabled = False
         Else
             ConectarButton.Enabled = False
             IPTextBox.Enabled = False
             PuertoTextBox.Enabled = False
             EnviarMensajeButton.Enabled = True
             MensajeTextBox.Enabled = True
-            DetenerButton.Enabled = True
         End If
-    End Sub
-    Private Sub OnSend(ByVal ar As IAsyncResult)
-        client.EndSend(ar)
-    End Sub
-
-    Private Sub SalirButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalirButton.Click
-        End
-    End Sub
-
-    Private Sub DetenerButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DetenerButton.Click
-        client.Close()
     End Sub
 
     'Private Sub WinSockCliente_DatosRecibidos(ByVal datos As String) Handles WinSockCliente.DatosRecibidos
@@ -89,8 +88,6 @@ Public Class frmCliente
     '    'Envio lo que esta escrito en la caja de texto del mensaje
     '    WinSockCliente.EnviarDatos(MensajeTextBox.Text)
     'End Sub
-
-
 
     'Private Sub ConectarButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConectarButton.Click
     '    'With WinSockCliente
