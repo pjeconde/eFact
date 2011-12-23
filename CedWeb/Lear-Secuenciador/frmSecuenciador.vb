@@ -122,14 +122,6 @@ Public Class frmSecuenciador
 
     Private Sub AbrirPuertos()
         If (TCPHabilitado) Then
-            'If (WinSockServer.PuertoDeEscucha = "") Then
-            '    With WinSockServer
-            '        'Establezco el puerto donde escuchar
-            '        .PuertoDeEscucha = TCPPuerto
-            '        'Comienzo la escucha
-            '        .Escuchar()
-            '    End With
-            'End If
             OnStart()
         Else
             If Not Puerto.IsOpen Then
@@ -153,14 +145,6 @@ Public Class frmSecuenciador
         End If
     End Sub
 
-    Private Sub CerrarPuertos()
-        If (TCPHabilitado) Then
-            'WinSockServer.Detener()
-            'WinSockServer.PuertoDeEscucha = ""
-        Else
-            Puerto.Close()
-        End If
-    End Sub
 
     Private Sub BConfigurar_Click()
         If TCPHabilitado Then
@@ -196,292 +180,292 @@ Public Class frmSecuenciador
     End Sub
 
     Private Sub ProcesarSerial()
-        On Error Resume Next
-        Dim N As Integer
-        Dim C As String
-        Dim VR As Integer
-        Dim Cadena As String
-        Dim LargoLinea As Integer
-        Dim Tiempo As String = ""
-        Dim LineaTexto As String
-        Dim FechaFila As Date
-        Dim CadenaFin As String
-        Dim CadenaBpcs As String
+        '        On Error Resume Next
+        '        Dim N As Integer
+        '        Dim C As String
+        '        Dim VR As Integer
+        '        Dim Cadena As String
+        '        Dim LargoLinea As Integer
+        '        Dim Tiempo As String = ""
+        '        Dim LineaTexto As String
+        '        Dim FechaFila As Date
+        '        Dim CadenaFin As String
+        '        Dim CadenaBpcs As String
 
-        Dim CuentaCaracter As Integer
-        Dim ErrorCabecera As Boolean
-        Dim ErrorDigitos As Boolean
-        Dim TotalCaracter As Integer
+        '        Dim CuentaCaracter As Integer
+        '        Dim ErrorCabecera As Boolean
+        '        Dim ErrorDigitos As Boolean
+        '        Dim TotalCaracter As Integer
 
-        ' ''Dim X As Printer
-        Dim ErrorRed As Boolean
-        Dim HayDatos As Boolean
-        Dim CadenaBackup As String
-        Dim RecuperaDatos As Boolean
-        Dim Forzar2 As Boolean
+        '        ' ''Dim X As Printer
+        '        Dim ErrorRed As Boolean
+        '        Dim HayDatos As Boolean
+        '        Dim CadenaBackup As String
+        '        Dim RecuperaDatos As Boolean
+        '        Dim Forzar2 As Boolean
 
-        FechaFila = Now.ToString("dd/MM/yyyy")
+        '        FechaFila = Now.ToString("dd/MM/yyyy")
 
-        Cadena = ""
-        N = 0
-        LargoLinea = 0
+        '        Cadena = ""
+        '        N = 0
+        '        LargoLinea = 0
 
-        AbrirPuertos()
+        '        AbrirPuertos()
 
-        Dim ports As String()
+        '        Dim ports As String()
 
-        MensajeTextBox.Text = "Recibiendo: Com" & Puerto.PortName & ":" & Puerto.BaudRate & "," & Puerto.Parity & "," & Puerto.DataBits & "," & Puerto.StopBits
-        ErrorRed = False 'Comienza sin errores de red
-        HayDatos = False 'Comienza sin datos en el temporal
-        Forzar2 = False
+        '        MensajeTextBox.Text = "Recibiendo: " & Puerto.PortName & ":" & Puerto.BaudRate & "," & Puerto.Parity & "," & Puerto.DataBits & "," & Puerto.StopBits
+        '        ErrorRed = False 'Comienza sin errores de red
+        '        HayDatos = False 'Comienza sin datos en el temporal
+        '        Forzar2 = False
 
-        N = Puerto.BytesToRead()
-        While N <> 0 Or ForzarTemporal = True
-Inicio:
-            If N Or ForzarTemporal = True Then
-                Forzar2 = ForzarTemporal
-                If Forzar2 = False Then
-                    Dim caux As Char
-                    caux = Convert.ToChar(Puerto.ReadChar())
-                    C = Convert.ToString(caux)
-                    C = Chr(CByte(Asc(C)) And CByte(127)) 'le saco el MSB
-                    If (C <> Chr(10) And C <> Chr(13) And C <> "*") And (Cadena <> "" Or C <> " ") Then
-                        Cadena = Cadena & C
-                    End If
-                    MensajeTextBox.Text = "Recibiendo Datos: " & Cadena
-                End If
+        '        N = Puerto.BytesToRead()
+        '        While N <> 0 Or ForzarTemporal = True
+        'Inicio:
+        '            If N Or ForzarTemporal = True Then
+        '                Forzar2 = ForzarTemporal
+        '                If Forzar2 = False Then
+        '                    Dim caux As Char
+        '                    caux = Convert.ToChar(Puerto.ReadChar())
+        '                    C = Convert.ToString(caux)
+        '                    C = Chr(CByte(Asc(C)) And CByte(127)) 'le saco el MSB
+        '                    If (C <> Chr(10) And C <> Chr(13) And C <> "*") And (Cadena <> "" Or C <> " ") Then
+        '                        Cadena = Cadena & C
+        '                    End If
+        '                    MensajeTextBox.Text = "Datos recibidos: " & Cadena
+        '                End If
 
-                If ((C = "*" Or C = Chr(13)) And (Trim(Cadena) <> "")) Or Forzar2 = True Then
-                    If Forzar2 = False Then
-                        If NuevaFila > 1800 Or FechaFila <> Date.Now.ToString("yyyyMMdd") Then
-                            FechaFila = Date.Now.ToString("yyyyMMdd")
-                            NuevaFila = 1
-                            'Grilla.Rows = 1 Establece cantidad de filas
-                            Grilla.RowCount = 1
-                            'Grilla.Row = 1 Especifica una fila
-                            Grilla.CurrentCell = Grilla(0, 1)
+        '                If ((C = "*" Or C = Chr(13)) And (Trim(Cadena) <> "")) Or Forzar2 = True Then
+        '                    If Forzar2 = False Then
+        '                        If NuevaFila > 1800 Or FechaFila <> Date.Now.ToString("yyyyMMdd") Then
+        '                            FechaFila = Date.Now.ToString("yyyyMMdd")
+        '                            NuevaFila = 1
+        '                            'Grilla.Rows = 1 Establece cantidad de filas
+        '                            Grilla.RowCount = 1
+        '                            'Grilla.Row = 1 Especifica una fila
+        '                            Grilla.CurrentCell = Grilla(0, 1)
 
-                            Grilla.Rows(2).Selected = True
-                            'Grilla.SelStartRow = 2
-                            'Grilla.SelEndRow = 2
-                        End If
+        '                            Grilla.Rows(2).Selected = True
+        '                            'Grilla.SelStartRow = 2
+        '                            'Grilla.SelEndRow = 2
+        '                        End If
 
-                        'MUESTRO EN LA GRILLA
-                        'Grilla.AddItem(CStr(NuevaFila) & Chr(9) & _
-                        Grilla.Rows.Add(Mid(Cadena, 1, 9), _
-                                      Mid(Cadena, 11, 9), _
-                                      Mid(Cadena, 22, 5), _
-                                      Mid(Cadena, 28, 14), _
-                                      Mid(Cadena, 43, 4), _
-                                      Mid(Cadena, 48, 4), _
-                                      Mid(Cadena, 52, 3), _
-                                      Mid(Cadena, 55, 4), _
-                                      Mid(Cadena, 59, 7))
-                        ' ''Grilla.Col = 1
-                        Grilla.CurrentCell = Grilla(1, 0)
-                        ' ''Grilla.Row = NuevaFila
-                        Grilla.CurrentCell = Grilla(0, NuevaFila)
-                        ' ''Grilla.SelStartCol = 1
-                        ' ''Grilla.SelEndCol = 9
-                        ' ''Grilla.SelStartRow = NuevaFila
-                        ' ''Grilla.SelEndRow = NuevaFila
-                        Grilla.Rows(NuevaFila).Selected = True
-                        If NuevaFila > 22 Then
-                            ' ''Grilla.TopRow = NuevaFila - 22
-                            Grilla.Rows(NuevaFila - 22).Selected = True
-                        End If
-                        NuevaFila = NuevaFila + 1
-                    End If 'if forzar2 = false
-                    If Forzar2 = True Then
-                        ForzarTemporal = False
-                        Forzar2 = False
-                        BBTemp.Visible = False
-                        BBTemp.Enabled = False
-                    End If
-                    Err.Clear()
-                    'Procedimiento que graba la informacion en el formato que BPCS precisa, pero en el disco local
-                    CadenaContingencia = Cadena
-                    If CadenaContingencia <> "" Then
-                        Call GrabaContingencia()
-                    End If
-                    'Validacion para ver si el archivo temporario tiene datos
-                    Err.Clear()
-                    CadenaBackup = Cadena
+        '                        'MUESTRO EN LA GRILLA
+        '                        'Grilla.AddItem(CStr(NuevaFila) & Chr(9) & _
+        '                        Grilla.Rows.Add(Mid(Cadena, 1, 9), _
+        '                                      Mid(Cadena, 11, 9), _
+        '                                      Mid(Cadena, 22, 5), _
+        '                                      Mid(Cadena, 28, 14), _
+        '                                      Mid(Cadena, 43, 4), _
+        '                                      Mid(Cadena, 48, 4), _
+        '                                      Mid(Cadena, 52, 3), _
+        '                                      Mid(Cadena, 55, 4), _
+        '                                      Mid(Cadena, 59, 7))
+        '                        ' ''Grilla.Col = 1
+        '                        Grilla.CurrentCell = Grilla(1, 0)
+        '                        ' ''Grilla.Row = NuevaFila
+        '                        Grilla.CurrentCell = Grilla(0, NuevaFila)
+        '                        ' ''Grilla.SelStartCol = 1
+        '                        ' ''Grilla.SelEndCol = 9
+        '                        ' ''Grilla.SelStartRow = NuevaFila
+        '                        ' ''Grilla.SelEndRow = NuevaFila
+        '                        Grilla.Rows(NuevaFila).Selected = True
+        '                        If NuevaFila > 22 Then
+        '                            ' ''Grilla.TopRow = NuevaFila - 22
+        '                            Grilla.Rows(NuevaFila - 22).Selected = True
+        '                        End If
+        '                        NuevaFila = NuevaFila + 1
+        '                    End If 'if forzar2 = false
+        '                    If Forzar2 = True Then
+        '                        ForzarTemporal = False
+        '                        Forzar2 = False
+        '                        BBTemp.Visible = False
+        '                        BBTemp.Enabled = False
+        '                    End If
+        '                    Err.Clear()
+        '                    'Procedimiento que graba la informacion en el formato que BPCS precisa, pero en el disco local
+        '                    CadenaContingencia = Cadena
+        '                    If CadenaContingencia <> "" Then
+        '                        Call GrabaContingencia()
+        '                    End If
+        '                    'Validacion para ver si el archivo temporario tiene datos
+        '                    Err.Clear()
+        '                    CadenaBackup = Cadena
 
-                    'Open ArchTempSec For Input As #3
-                    FileOpen(3, ArchTempSec, OpenMode.Input)
-                    If Err.Number <> 0 Then
-                        'el archivo temporario no tiene datos
-                        FileClose(3)
-                        ''Err.Clear()
-                        HayDatos = False
-                        BBTemp.Visible = False
-                        BBTemp.Enabled = False
-                    Else
-                        HayDatos = True
-                        BBTemp.Visible = True
-                        BBTemp.Enabled = True
-                    End If
-                    Err.Clear()
+        '                    'Open ArchTempSec For Input As #3
+        '                    FileOpen(3, ArchTempSec, OpenMode.Input)
+        '                    If Err.Number <> 0 Then
+        '                        'el archivo temporario no tiene datos
+        '                        FileClose(3)
+        '                        ''Err.Clear()
+        '                        HayDatos = False
+        '                        BBTemp.Visible = False
+        '                        BBTemp.Enabled = False
+        '                    Else
+        '                        HayDatos = True
+        '                        BBTemp.Visible = True
+        '                        BBTemp.Enabled = True
+        '                    End If
+        '                    Err.Clear()
 
-                    Call CreaNombreArchivo()
-                    'Open CStr(DirectorioArchivos & ArchivoTexto) For Append Access Write Lock Read Write As #1
-                    FileOpen(1, CStr(DirectorioArchivos & ArchivoTexto), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
-                    If Err.Number <> 0 Then
-                        'El enlace todavía no está restablecido
-                        FileClose(1)
-                        Err.Clear()
-                        CadenaGlobal = Cadena
-                        ErrorRed = True
-                        FileClose(3)
-                        If Cadena <> "" Then
-                            MensajeTextBox.Text = "Guardando informacion temporal en " & ArchTempSec
-                            Call GrabaTemp()
-                        End If
-                        Cadena = ""
-                        MensajeTextBox.Text = ""
-                        BBTemp.Visible = True
-                        BBTemp.Enabled = True
-                    Else
-                        FileClose(1)
-                        ErrorRed = False
-                    End If
+        '                    Call CreaNombreArchivo()
+        '                    'Open CStr(DirectorioArchivos & ArchivoTexto) For Append Access Write Lock Read Write As #1
+        '                    FileOpen(1, CStr(DirectorioArchivos & ArchivoTexto), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
+        '                    If Err.Number <> 0 Then
+        '                        'El enlace todavía no está restablecido
+        '                        FileClose(1)
+        '                        Err.Clear()
+        '                        CadenaGlobal = Cadena
+        '                        ErrorRed = True
+        '                        FileClose(3)
+        '                        If Cadena <> "" Then
+        '                            MensajeTextBox.Text = "Guardando informacion temporal en " & ArchTempSec
+        '                            Call GrabaTemp()
+        '                        End If
+        '                        Cadena = ""
+        '                        MensajeTextBox.Text = ""
+        '                        BBTemp.Visible = True
+        '                        BBTemp.Enabled = True
+        '                    Else
+        '                        FileClose(1)
+        '                        ErrorRed = False
+        '                    End If
 
-                    Do While ErrorRed = False 'LOOP creado para incluir el grabado de las secuencias en el archivo
-                        If HayDatos = True Then
-                            If EOF(3) = False Then
-                                FileGet(3, Cadena)        'Input #3, Cadena
-                            Else
-                                HayDatos = False
-                                FileClose(3)
-                                Kill(ArchTempSec)
-                                ErrorRed = True
-                                Cadena = CadenaBackup
-                                BBTemp.Visible = False
-                                BBTemp.Enabled = False
-                                If Cadena = "" Then GoTo Inicio
-                            End If
-                        Else
-                            Cadena = CadenaBackup
-                            FileClose(3)
-                            Kill(ArchTempSec)       ' Borrar Archivo temporal
-                            ErrorRed = True         'para que salga del loop despues de procesar la variable Cadena
-                            BBTemp.Visible = False
-                            BBTemp.Enabled = False
-                        End If
+        '                    Do While ErrorRed = False 'LOOP creado para incluir el grabado de las secuencias en el archivo
+        '                        If HayDatos = True Then
+        '                            If EOF(3) = False Then
+        '                                FileGet(3, Cadena)        'Input #3, Cadena
+        '                            Else
+        '                                HayDatos = False
+        '                                FileClose(3)
+        '                                Kill(ArchTempSec)
+        '                                ErrorRed = True
+        '                                Cadena = CadenaBackup
+        '                                BBTemp.Visible = False
+        '                                BBTemp.Enabled = False
+        '                                If Cadena = "" Then GoTo Inicio
+        '                            End If
+        '                        Else
+        '                            Cadena = CadenaBackup
+        '                            FileClose(3)
+        '                            Kill(ArchTempSec)       ' Borrar Archivo temporal
+        '                            ErrorRed = True         'para que salga del loop despues de procesar la variable Cadena
+        '                            BBTemp.Visible = False
+        '                            BBTemp.Enabled = False
+        '                        End If
 
-                        CadenaBpcs = Mid(Cadena, 1, 9) & Format(Now, "yyyymmdd") & Format(Now, "hhnnss") & _
-                                     Mid(Cadena, 28, 14) & Mid(Cadena, 43, 4) & Mid(Cadena, 48, 4) & _
-                                     Mid(Cadena, 52, 3) & Mid(Cadena, 55, 4) & Mid(Cadena, 59, 7)
+        '                        CadenaBpcs = Mid(Cadena, 1, 9) & Format(Now, "yyyymmdd") & Format(Now, "hhnnss") & _
+        '                                     Mid(Cadena, 28, 14) & Mid(Cadena, 43, 4) & Mid(Cadena, 48, 4) & _
+        '                                     Mid(Cadena, 52, 3) & Mid(Cadena, 55, 4) & Mid(Cadena, 59, 7)
 
-                        'GUARDO EN HISTORICO
-                        Call CreaNombreArchivo()
-                        MensajeTextBox.Text = "Guardando informacion historica en " & DirectorioArchivos & ArchivoTexto
+        '                        'GUARDO EN HISTORICO
+        '                        Call CreaNombreArchivo()
+        '                        MensajeTextBox.Text = "Guardando informacion historica en " & DirectorioArchivos & ArchivoTexto
 
-                        Do While True
-                            'Open CStr(DirectorioArchivos & ArchivoTexto) For Append Access Write Lock Read Write As #1
-                            FileOpen(1, CStr(DirectorioArchivos & ArchivoTexto), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
-                            If Err.Number <> 0 Then
-                                FileClose(1)
-                                Err.Clear()
-                                If Tiempo <> CStr(TimeValue(Now)) Then
-                                    MensajeTextBox.Text = "Esperando liberacion de archivo " & DirectorioArchivos & ArchivoTexto & ". " & Now.ToString("hh:mm:ss")
-                                    Tiempo = CStr(TimeValue(Now))
-                                End If
-                                Me.Refresh()
-                                Me.Text = "Recibiendo: Com" & Puerto.PortName & ":" & Puerto.BaudRate & "," & Puerto.Parity & "," & Puerto.DataBits & "," & Puerto.StopBits
-                            Else
-                                Print(1, Cadena)
-                                FileClose(1)
-                                MensajeTextBox.Text = ""
-                                Exit Do
-                            End If
-                        Loop
+        '                        Do While True
+        '                            'Open CStr(DirectorioArchivos & ArchivoTexto) For Append Access Write Lock Read Write As #1
+        '                            FileOpen(1, CStr(DirectorioArchivos & ArchivoTexto), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
+        '                            If Err.Number <> 0 Then
+        '                                FileClose(1)
+        '                                Err.Clear()
+        '                                If Tiempo <> CStr(TimeValue(Now)) Then
+        '                                    MensajeTextBox.Text = "Esperando liberacion de archivo " & DirectorioArchivos & ArchivoTexto & ". " & Now.ToString("hh:mm:ss")
+        '                                    Tiempo = CStr(TimeValue(Now))
+        '                                End If
+        '                                Me.Refresh()
+        '                                Me.Text = "Recibiendo: Com" & Puerto.PortName & ":" & Puerto.BaudRate & "," & Puerto.Parity & "," & Puerto.DataBits & "," & Puerto.StopBits
+        '                            Else
+        '                                Print(1, Cadena)
+        '                                FileClose(1)
+        '                                MensajeTextBox.Text = ""
+        '                                Exit Do
+        '                            End If
+        '                        Loop
 
-                        ' FIN REEMPLAZO POR SER ARCHIVO DE RED
-                        MensajeTextBox.Text = ""
-                        'Rutina de verificacion e impresion de cabecera y numero de secuencia
+        '                        ' FIN REEMPLAZO POR SER ARCHIVO DE RED
+        '                        MensajeTextBox.Text = ""
+        '                        'Rutina de verificacion e impresion de cabecera y numero de secuencia
 
-                        ErrorCabecera = True
-                        For CuentaCaracter = 0 To 2
-                            If Mid(Cadena, 1, 9) = Header1(CuentaCaracter) Then ErrorCabecera = False
-                        Next CuentaCaracter
+        '                        ErrorCabecera = True
+        '                        For CuentaCaracter = 0 To 2
+        '                            If Mid(Cadena, 1, 9) = Header1(CuentaCaracter) Then ErrorCabecera = False
+        '                        Next CuentaCaracter
 
-                        For CuentaCaracter = 0 To 2
-                            If Mid(Cadena, 1, 9) = Header2(CuentaCaracter) Then ErrorCabecera = False
-                        Next CuentaCaracter
+        '                        For CuentaCaracter = 0 To 2
+        '                            If Mid(Cadena, 1, 9) = Header2(CuentaCaracter) Then ErrorCabecera = False
+        '                        Next CuentaCaracter
 
 
-                        ErrorDigitos = False
-                        For CuentaCaracter = 0 To 3
-                            If Mid(Cadena, 43 + CuentaCaracter, 1) < "0" Or Mid(Cadena, 43 + CuentaCaracter, 1) > "9" Then ErrorDigitos = True
-                        Next
+        '                        ErrorDigitos = False
+        '                        For CuentaCaracter = 0 To 3
+        '                            If Mid(Cadena, 43 + CuentaCaracter, 1) < "0" Or Mid(Cadena, 43 + CuentaCaracter, 1) > "9" Then ErrorDigitos = True
+        '                        Next
 
-                        CadenaParaImprimir = Cadena
-                        If ErrorCabecera = True Or ErrorDigitos = True Then
-                            For Each X As String In System.Drawing.Printing.PrinterSettings.InstalledPrinters
-                                If X = Impre1 Or X = Impre2 Then
-                                    Dim pd As New System.Drawing.Printing.PrintDocument
-                                    AddHandler pd.PrintPage, AddressOf print_PrintPage
-                                    pd.Print()
-                                End If
-                            Next
-                        End If
+        '                        CadenaParaImprimir = Cadena
+        '                        If ErrorCabecera = True Or ErrorDigitos = True Then
+        '                            For Each X As String In System.Drawing.Printing.PrinterSettings.InstalledPrinters
+        '                                If X = Impre1 Or X = Impre2 Then
+        '                                    Dim pd As New System.Drawing.Printing.PrintDocument
+        '                                    AddHandler pd.PrintPage, AddressOf print_PrintPage
+        '                                    pd.Print()
+        '                                End If
+        '                            Next
+        '                        End If
 
-                        'Grabo segun cabecera
-                        On Error Resume Next
-                        'MsgBox Mid(Cadena, 1, 9)
-                        Select Case Mid(Cadena, 1, 9)
-                            Case Header1(0), Header1(1), Header1(2)
-                                MensajeTextBox.Text = "Guardando informacion en archivo de datos " & Arch1 & ". " & Now.ToString("hh:mm:ss")
-                                Do While True
-                                    'Open CStr(Arch1) For Append Access Write Lock Read Write As #2
-                                    FileOpen(2, CStr(Arch1), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
-                                    If Err.Number <> 0 Then
-                                        FileClose(2)
-                                        Err.Clear()
-                                        If Tiempo <> Now.ToString("hh:mm:ss") Then
-                                            MensajeTextBox.Text = "Esperando liberacion de archivo " & Arch1 & ". " & Now.ToString("hh:mm:ss")
-                                            Tiempo = Now.ToString("hh:mm:ss")
-                                        End If
-                                        Me.Refresh()
-                                        'Me.Text = "Recibiendo: Com" & Puerto.CommPort & ":" & Puerto.BaudRate & "," & Puerto.Parity & "," & Puerto.DataBits & "," & Puerto.StopBits
-                                    Else
-                                        Print(2, CadenaBpcs)
-                                        FileClose(2)
-                                        MensajeTextBox.Text = ""
-                                        Exit Do
-                                    End If
-                                Loop
-                            Case Header2(0), Header2(1), Header2(2)
-                                MensajeTextBox.Text = "Guardando informacion en archivo de datos " & Arch2 & ". " & Now.ToString("hh:mm:ss")
-                                Do While True
-                                    'Open CStr(Arch2) For Append Access Write Lock Read Write As #5
-                                    FileOpen(5, CStr(Arch2), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
-                                    If Err.Number <> 0 Then
-                                        FileClose(5)
-                                        Err.Clear()
-                                        If Tiempo <> Now.ToString("hh:mm:ss") Then
-                                            MensajeTextBox.Text = "Esperando liberacion de archivo " & Arch2 & ". " & Now.ToString("hh:mm:ss")
-                                        End If
-                                        Me.Refresh()
-                                        'Me.Caption = "Recibiendo: Com" & Puerto.CommPort & ":" & Puerto.Settings & ". BUFFER:" & CStr(Puerto.InBufferCount) _
-                                        '& " de " & CStr(Puerto.InBufferSize)
-                                    Else
-                                        Print(5, CadenaBpcs)
-                                        FileClose(5)
-                                        MensajeTextBox.Text = ""
-                                        Exit Do
-                                    End If
-                                Loop
-                        End Select
-                        Cadena = ""
-                    Loop            ' do While ErrorRed = True And HayDatos = True
-                End If              'If (C = "*" Or C = Chr$(13)) And (Trim(Cadena) <> "") Then
-            End If                  'If N then...
-            Me.Refresh()            'VR = DoEvents()
-            N = Puerto.BytesToRead()
-        End While               'While puerto.portopen..
+        '                        'Grabo segun cabecera
+        '                        On Error Resume Next
+        '                        'MsgBox Mid(Cadena, 1, 9)
+        '                        Select Case Mid(Cadena, 1, 9)
+        '                            Case Header1(0), Header1(1), Header1(2)
+        '                                MensajeTextBox.Text = "Guardando informacion en archivo de datos " & Arch1 & ". " & Now.ToString("hh:mm:ss")
+        '                                Do While True
+        '                                    'Open CStr(Arch1) For Append Access Write Lock Read Write As #2
+        '                                    FileOpen(2, CStr(Arch1), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
+        '                                    If Err.Number <> 0 Then
+        '                                        FileClose(2)
+        '                                        Err.Clear()
+        '                                        If Tiempo <> Now.ToString("hh:mm:ss") Then
+        '                                            MensajeTextBox.Text = "Esperando liberacion de archivo " & Arch1 & ". " & Now.ToString("hh:mm:ss")
+        '                                            Tiempo = Now.ToString("hh:mm:ss")
+        '                                        End If
+        '                                        Me.Refresh()
+        '                                        'Me.Text = "Recibiendo: Com" & Puerto.CommPort & ":" & Puerto.BaudRate & "," & Puerto.Parity & "," & Puerto.DataBits & "," & Puerto.StopBits
+        '                                    Else
+        '                                        Print(2, CadenaBpcs)
+        '                                        FileClose(2)
+        '                                        MensajeTextBox.Text = ""
+        '                                        Exit Do
+        '                                    End If
+        '                                Loop
+        '                            Case Header2(0), Header2(1), Header2(2)
+        '                                MensajeTextBox.Text = "Guardando informacion en archivo de datos " & Arch2 & ". " & Now.ToString("hh:mm:ss")
+        '                                Do While True
+        '                                    'Open CStr(Arch2) For Append Access Write Lock Read Write As #5
+        '                                    FileOpen(5, CStr(Arch2), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
+        '                                    If Err.Number <> 0 Then
+        '                                        FileClose(5)
+        '                                        Err.Clear()
+        '                                        If Tiempo <> Now.ToString("hh:mm:ss") Then
+        '                                            MensajeTextBox.Text = "Esperando liberacion de archivo " & Arch2 & ". " & Now.ToString("hh:mm:ss")
+        '                                        End If
+        '                                        Me.Refresh()
+        '                                        'Me.Caption = "Recibiendo: Com" & Puerto.CommPort & ":" & Puerto.Settings & ". BUFFER:" & CStr(Puerto.InBufferCount) _
+        '                                        '& " de " & CStr(Puerto.InBufferSize)
+        '                                    Else
+        '                                        Print(5, CadenaBpcs)
+        '                                        FileClose(5)
+        '                                        MensajeTextBox.Text = ""
+        '                                        Exit Do
+        '                                    End If
+        '                                Loop
+        '                        End Select
+        '                        Cadena = ""
+        '                    Loop            ' do While ErrorRed = True And HayDatos = True
+        '                End If              'If (C = "*" Or C = Chr$(13)) And (Trim(Cadena) <> "") Then
+        '            End If                  'If N then...
+        '            Me.Refresh()            'VR = DoEvents()
+        '            N = Puerto.BytesToRead()
+        '        End While               'While puerto.portopen..
     End Sub
 
     Private Sub ProcesarTCP(ByVal buffer As String)
@@ -537,7 +521,7 @@ Inicio:
                     If (C <> Chr(10) And C <> Chr(13) And C <> "*") And (Cadena <> "" Or C <> " ") Then
                         Cadena = Cadena & C
                     End If
-                    MensajeTextBox.Text = "Recibiendo Datos: (" & BufferPosicion & ") " & Cadena
+                    MensajeTextBox.Text = "Datos recibidos: " & Date.Now.ToString("dd/MM/yyyy hh:mm:ss") & " (" & BufferPosicion & ") " & Cadena
                     If (Asc(C) = 0) Then
                         Exit While
                     End If
@@ -557,18 +541,15 @@ Inicio:
                             If NuevaFila > 1800 Or FechaFila.ToString("yyyyMMdd") <> Date.Now.ToString("yyyyMMdd") Then
                                 FechaFila = Date.Now
                                 NuevaFila = 1
-                                'Grilla.Rows = 1 Establece cantidad de filas
+                                'Establece cantidad de filas anteriores que quedaran antes de recibir la nueva cadena 
+                                'Un renglon o más.
                                 Grilla.RowCount = 1
-                                'Grilla.Row = 1 Especifica una fila
-                                Grilla.CurrentCell = Grilla(0, 0)
-
-                                Grilla.Rows(1).Selected = True
-                                'Grilla.SelStartRow = 2
-                                'Grilla.SelEndRow = 2
+                                Grilla.CurrentCell = Grilla(0, Grilla.RowCount)
+                                'Selecciona la ultima fila de las anteriores
+                                Grilla.Rows(Grilla.RowCount - 1).Selected = True
                             End If
 
                             'MUESTRO EN LA GRILLA
-                            'Grilla.AddItem(CStr(NuevaFila) & Chr(9) & _
                             Grilla.Rows.Add(Mid(Cadena, 1, 9), _
                                           Mid(Cadena, 11, 9), _
                                           Mid(Cadena, 22, 5), _
@@ -578,220 +559,212 @@ Inicio:
                                           Mid(Cadena, 52, 3), _
                                           Mid(Cadena, 55, 4), _
                                           Mid(Cadena, 59, 7))
-                            ' ''Grilla.Col = 1
-                            ' ''Grilla.Row = NuevaFila
-                            Grilla.CurrentCell = Grilla(0, NuevaFila)
-                            ' ''Grilla.SelStartCol = 1
-                            ' ''Grilla.SelEndCol = 9
-                            ' ''Grilla.SelStartRow = NuevaFila
-                            ' ''Grilla.SelEndRow = NuevaFila
-                            Grilla.Rows(NuevaFila).Selected = True
-                            If NuevaFila > 22 Then
-                                ' ''Grilla.TopRow = NuevaFila - 22
-                                Grilla.Rows(NuevaFila - 22).Selected = True
-                            End If
+
+                            Grilla.ClearSelection()
+                            Grilla.CurrentCell = Grilla.Rows(Grilla.RowCount - 1).Cells(0)
+                            Grilla.Rows(Grilla.RowCount - 1).Selected = True
+
                             NuevaFila = NuevaFila + 1
-                            Cadena = "" 'esta linea la agregue Yo(Carlitos) no estaba en el codigo original
-                        End If 'este endif lo agregue Yo(Carlitos) no estaba en el código original
-                        '        End If 'if forzar2 = false
-                        '        If Forzar2 = True Then
-                        '            ForzarTemporal = False
-                        '            Forzar2 = False
-                        '            BBTemp.Visible = False
-                        '            BBTemp.Enabled = False
-                        '        End If
-                        '        Err.Clear()
-                        '        'Procedimiento que graba la informacion en el formato que BPCS precisa, pero en el disco local
-                        '        CadenaContingencia = Cadena
-                        '        If CadenaContingencia <> "" Then
-                        '            Call GrabaContingencia()
-                        '        End If
-                        '        'Validacion para ver si el archivo temporario tiene datos
-                        '        Err.Clear()
-                        '        CadenaBackup = Cadena
-
-                        '        'Open ArchTempSec For Input As #3
-                        '        FileOpen(3, ArchTempSec, OpenMode.Input)
-                        '        If Err.Number <> 0 Then
-                        '            'el archivo temporario no tiene datos
-                        '            FileClose(3)
-                        '            ''Err.Clear()
-                        '            HayDatos = False
-                        '            BBTemp.Visible = False
-                        '            BBTemp.Enabled = False
-                        '        Else
-                        '            HayDatos = True
-                        '            BBTemp.Visible = True
-                        '            BBTemp.Enabled = True
-                        '        End If
-                        '        Err.Clear()
-
-                        '        Call CreaNombreArchivo()
-                        '        'Open CStr(DirectorioArchivos & ArchivoTexto) For Append Access Write Lock Read Write As #1
-                        '        FileOpen(1, CStr(DirectorioArchivos & ArchivoTexto), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
-                        '        If Err.Number <> 0 Then
-                        '            'El enlace todavía no está restablecido
-                        '            FileClose(1)
-                        '            Err.Clear()
-                        '            CadenaGlobal = Cadena
-                        '            ErrorRed = True
-                        '            FileClose(3)
-                        '            If Cadena <> "" Then
-                        '                MensajeTextBox.Text = "Guardando informacion temporal en " & ArchTempSec
-                        '                Call GrabaTemp()
-                        '            End If
-                        '            Cadena = ""
-                        '            MensajeTextBox.Text = ""
-                        '            BBTemp.Visible = True
-                        '            BBTemp.Enabled = True
-                        '        Else
-                        '            FileClose(1)
-                        '            ErrorRed = False
-                        '        End If
-                        '        Err.Clear()
-
-                        '        Do While ErrorRed = False 'LOOP creado para incluir el grabado de las secuencias en el archivo
-                        '            If HayDatos = True Then
-                        '                If EOF(3) = False Then
-                        '                    FileGet(3, Cadena)        'Input #3, Cadena
-                        '                Else
-                        '                    HayDatos = False
-                        '                    FileClose(3)
-                        '                    Kill(ArchTempSec)
-                        '                    ErrorRed = True
-                        '                    Cadena = CadenaBackup
-                        '                    BBTemp.Visible = False
-                        '                    BBTemp.Enabled = False
-                        '                    If Cadena = "" Then GoTo Inicio
-                        '                End If
-                        '            Else
-                        '                Cadena = CadenaBackup
-                        '                FileClose(3)
-                        '                Kill(ArchTempSec)       ' Borrar Archivo temporal
-                        '                ErrorRed = True         'para que salga del loop despues de procesar la variable Cadena
-                        '                BBTemp.Visible = False
-                        '                BBTemp.Enabled = False
-                        '            End If
-                        '            Err.Clear()
-
-                        '            CadenaBpcs = Mid(Cadena, 1, 9) & Format(Now, "yyyymmdd") & Format(Now, "hhmmss") & _
-                        '                         Mid(Cadena, 28, 14) & Mid(Cadena, 43, 4) & Mid(Cadena, 48, 4) & _
-                        '                         Mid(Cadena, 52, 3) & Mid(Cadena, 55, 4) & Mid(Cadena, 59, 7)
-
-                        '            'GUARDO EN HISTORICO
-                        '            Call CreaNombreArchivo()
-                        '            MensajeTextBox.Text = "Guardando informacion historica en " & DirectorioArchivos & ArchivoTexto
-
-                        '            Do While True
-                        '                'Open CStr(DirectorioArchivos & ArchivoTexto) For Append Access Write Lock Read Write As #1
-                        '                FileOpen(1, CStr(DirectorioArchivos & ArchivoTexto), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
-                        '                If Err.Number <> 0 Then
-                        '                    FileClose(1)
-                        '                    Err.Clear()
-                        '                    If Tiempo <> CStr(TimeValue(Now)) Then
-                        '                        MensajeTextBox.Text = "Esperando liberacion de archivo " & DirectorioArchivos & ArchivoTexto & ". " & Now.ToString("hh:mm:ss")
-                        '                        Tiempo = CStr(TimeValue(Now))
-                        '                    End If
-                        '                    Me.Refresh()
-                        '                    Me.Text = "Recibiendo: Com" & Puerto.PortName & ":" & Puerto.BaudRate & "," & Puerto.Parity & "," & Puerto.DataBits & "," & Puerto.StopBits
-                        '                Else
-                        '                    Print(1, Cadena)
-                        '                    FileClose(1)
-                        '                    MensajeTextBox.Text = ""
-                        '                    Exit Do
-                        '                End If
-                        '            Loop
-
-                        '            ' FIN REEMPLAZO POR SER ARCHIVO DE RED
-                        '            MensajeTextBox.Text = ""
-                        '            'Rutina de verificacion e impresion de cabecera y numero de secuencia
-
-                        '            ErrorCabecera = True
-                        '            For CuentaCaracter = 0 To 2
-                        '                If Mid(Cadena, 1, 9) = Header1(CuentaCaracter) Then ErrorCabecera = False
-                        '            Next CuentaCaracter
-
-                        '            For CuentaCaracter = 0 To 2
-                        '                If Mid(Cadena, 1, 9) = Header2(CuentaCaracter) Then ErrorCabecera = False
-                        '            Next CuentaCaracter
-
-
-                        '            ErrorDigitos = False
-                        '            For CuentaCaracter = 0 To 3
-                        '                If Mid(Cadena, 43 + CuentaCaracter, 1) < "0" Or Mid(Cadena, 43 + CuentaCaracter, 1) > "9" Then ErrorDigitos = True
-                        '            Next
-
-                        '            If ErrorCabecera = True Or ErrorDigitos = True Then
-                        '                For Each X As String In System.Drawing.Printing.PrinterSettings.InstalledPrinters
-                        '                    If X = Impre1 Or X = Impre2 Then
-                        '                        Dim pd As New System.Drawing.Printing.PrintDocument
-                        '                        pd.PrinterSettings.PrinterName = X
-                        '                        AddHandler pd.PrintPage, AddressOf print_PrintPage
-                        '                        pd.Print()
-                        '                    End If
-                        '                Next
-                        '            End If
-
-                        '            'Grabo segun cabecera
-                        '            On Error Resume Next
-                        '            'MsgBox Mid(Cadena, 1, 9)
-                        '            Select Case Mid(Cadena, 1, 9)
-                        '                Case Header1(0), Header1(1), Header1(2)
-                        '                    MensajeTextBox.Text = "Guardando informacion en archivo de datos " & Arch1 & ". " & Now.ToString("hh:mm:ss")
-                        '                    Do While True
-                        '                        'Open CStr(Arch1) For Append Access Write Lock Read Write As #2
-                        '                        FileOpen(2, CStr(Arch1), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
-                        '                        If Err.Number <> 0 Then
-                        '                            FileClose(2)
-                        '                            Err.Clear()
-                        '                            If Tiempo <> Now.ToString("hh:mm:ss") Then
-                        '                                MensajeTextBox.Text = "Esperando liberacion de archivo " & Arch1 & ". " & Now.ToString("hh:mm:ss")
-                        '                                Tiempo = Now.ToString("hh:mm:ss")
-                        '                            End If
-                        '                            Me.Refresh()
-                        '                            'Me.Text = "Recibiendo: Com" & Puerto.CommPort & ":" & Puerto.BaudRate & "," & Puerto.Parity & "," & Puerto.DataBits & "," & Puerto.StopBits
-                        '                        Else
-                        '                            Print(2, CadenaBpcs)
-                        '                            FileClose(2)
-                        '                            MensajeTextBox.Text = ""
-                        '                            Exit Do
-                        '                        End If
-                        '                    Loop
-                        '                Case Header2(0), Header2(1), Header2(2)
-                        '                    MensajeTextBox.Text = "Guardando informacion en archivo de datos " & Arch2 & ". " & Now.ToString("hh:mm:ss")
-                        '                    Do While True
-                        '                        'Open CStr(Arch2) For Append Access Write Lock Read Write As #5
-                        '                        FileOpen(5, CStr(Arch2), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
-                        '                        If Err.Number <> 0 Then
-                        '                            FileClose(5)
-                        '                            Err.Clear()
-                        '                            If Tiempo <> Now.ToString("hh:mm:ss") Then
-                        '                                MensajeTextBox.Text = "Esperando liberacion de archivo " & Arch2 & ". " & Now.ToString("hh:mm:ss")
-                        '                            End If
-                        '                            Me.Refresh()
-                        '                            'Me.Caption = "Recibiendo: Com" & Puerto.CommPort & ":" & Puerto.Settings & ". BUFFER:" & CStr(Puerto.InBufferCount) _
-                        '                            '& " de " & CStr(Puerto.InBufferSize)
-                        '                        Else
-                        '                            Print(5, CadenaBpcs)
-                        '                            FileClose(5)
-                        '                            MensajeTextBox.Text = ""
-                        '                            Exit Do
-                        '                        End If
-                        '                    Loop
-                        '            End Select
-                        '            Cadena = ""
-                        '        Loop            ' do While ErrorRed = True And HayDatos = True
+                            Me.Grilla.Refresh()
                         End If
-                        End If              'If (C = "*" Or C = Chr$(13)) And (Trim(Cadena) <> "") Then
+
+                        If Forzar2 = True Then
+                            ForzarTemporal = False
+                            Forzar2 = False
+                            BBTemp.Visible = False
+                            BBTemp.Enabled = False
+                        End If
+                        Err.Clear()
+                        'Procedimiento que graba la informacion en el formato que BPCS precisa, pero en el disco local
+                        CadenaContingencia = Cadena
+                        If CadenaContingencia <> "" Then
+                            Call GrabaContingencia()
+                        End If
+                        'Validacion para ver si el archivo temporario tiene datos
+                        Err.Clear()
+                        CadenaBackup = Cadena
+
+                        'Open ArchTempSec For Input As #3
+                        FileOpen(3, ArchTempSec, OpenMode.Input)
+                        If Err.Number <> 0 Then
+                            'el archivo temporario no tiene datos
+                            FileClose(3)
+                            ''Err.Clear()
+                            HayDatos = False
+                            BBTemp.Visible = False
+                            BBTemp.Enabled = False
+                        Else
+                            HayDatos = True
+                            BBTemp.Visible = True
+                            BBTemp.Enabled = True
+                        End If
+                        Err.Clear()
+
+                        Call CreaNombreArchivo()
+                        'Open CStr(DirectorioArchivos & ArchivoTexto) For Append Access Write Lock Read Write As #1
+                        FileOpen(1, CStr(DirectorioArchivos & ArchivoTexto), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
+                        If Err.Number <> 0 Then
+                            'El enlace todavía no está restablecido
+                            FileClose(1)
+                            Err.Clear()
+                            CadenaGlobal = Cadena
+                            ErrorRed = True
+                            FileClose(3)
+                            If Cadena <> "" Then
+                                MensajeTextBox.Text = "Guardando informacion temporal en " & ArchTempSec
+                                Me.MensajeTextBox.Refresh()
+                                Call GrabaTemp()
+                            End If
+                            Cadena = ""
+                            MensajeTextBox.Text = ""
+                            Me.MensajeTextBox.Refresh()
+                            BBTemp.Visible = True
+                            BBTemp.Enabled = True
+                        Else
+                            FileClose(1)
+                            ErrorRed = False
+                        End If
+                        Err.Clear()
+
+                        Do While ErrorRed = False 'LOOP creado para incluir el grabado de las secuencias en el archivo
+                            If HayDatos = True Then
+                                If EOF(3) = False Then
+                                    FileGet(3, Cadena)        'Input #3, Cadena
+                                Else
+                                    HayDatos = False
+                                    FileClose(3)
+                                    Kill(ArchTempSec)
+                                    ErrorRed = True
+                                    Cadena = CadenaBackup
+                                    BBTemp.Visible = False
+                                    BBTemp.Enabled = False
+                                    If Cadena = "" Then GoTo Inicio
+                                End If
+                            Else
+                                Cadena = CadenaBackup
+                                FileClose(3)
+                                Kill(ArchTempSec)       ' Borrar Archivo temporal
+                                ErrorRed = True         'para que salga del loop despues de procesar la variable Cadena
+                                BBTemp.Visible = False
+                                BBTemp.Enabled = False
+                            End If
+                            Err.Clear()
+
+                            CadenaBpcs = Mid(Cadena, 1, 9) & Format(Now, "yyyymmdd") & Format(Now, "hhmmss") & _
+                                         Mid(Cadena, 28, 14) & Mid(Cadena, 43, 4) & Mid(Cadena, 48, 4) & _
+                                         Mid(Cadena, 52, 3) & Mid(Cadena, 55, 4) & Mid(Cadena, 59, 7)
+
+                            'GUARDO EN HISTORICO
+                            Call CreaNombreArchivo()
+                            MensajeTextBox.Text = "Guardando informacion historica en " & DirectorioArchivos & ArchivoTexto
+                            Me.MensajeTextBox.Refresh()
+
+                            Do While True
+                                'Open CStr(DirectorioArchivos & ArchivoTexto) For Append Access Write Lock Read Write As #1
+                                FileOpen(1, CStr(DirectorioArchivos & ArchivoTexto), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
+                                If Err.Number <> 0 Then
+                                    FileClose(1)
+                                    Err.Clear()
+                                    If Tiempo <> CStr(TimeValue(Now)) Then
+                                        MensajeTextBox.Text = "Esperando liberacion de archivo " & DirectorioArchivos & ArchivoTexto & ". " & Now.ToString("hh:mm:ss")
+                                        Tiempo = CStr(TimeValue(Now))
+                                    End If
+                                Else
+                                    Print(1, Cadena)
+                                    FileClose(1)
+                                    Exit Do
+                                End If
+                                Me.MensajeTextBox.Refresh()
+                            Loop
+
+                            ' FIN REEMPLAZO POR SER ARCHIVO DE RED
+                            MensajeTextBox.Text = ""
+                            Me.MensajeTextBox.Refresh()
+
+                            'Rutina de verificacion e impresion de cabecera y numero de secuencia
+                            ErrorCabecera = True
+                            For CuentaCaracter = 0 To 2
+                                If Mid(Cadena, 1, 9) = Header1(CuentaCaracter) Then ErrorCabecera = False
+                            Next CuentaCaracter
+
+                            For CuentaCaracter = 0 To 2
+                                If Mid(Cadena, 1, 9) = Header2(CuentaCaracter) Then ErrorCabecera = False
+                            Next CuentaCaracter
+
+                            ErrorDigitos = False
+                            For CuentaCaracter = 0 To 3
+                                If Mid(Cadena, 43 + CuentaCaracter, 1) < "0" Or Mid(Cadena, 43 + CuentaCaracter, 1) > "9" Then ErrorDigitos = True
+                            Next
+
+                            If ErrorCabecera = True Or ErrorDigitos = True Then
+                                For Each X As String In System.Drawing.Printing.PrinterSettings.InstalledPrinters
+                                    If X = Impre1 Or X = Impre2 Then
+                                        Dim pd As New System.Drawing.Printing.PrintDocument
+                                        pd.PrinterSettings.PrinterName = X
+                                        AddHandler pd.PrintPage, AddressOf print_PrintPage
+                                        pd.Print()
+                                    End If
+                                Next
+                            End If
+
+                            'Grabo segun cabecera
+                            On Error Resume Next
+                            'MsgBox Mid(Cadena, 1, 9)
+                            Select Case Mid(Cadena, 1, 9)
+                                Case Header1(0), Header1(1), Header1(2)
+                                    MensajeTextBox.Text = "Guardando informacion en archivo de datos " & Arch1 & ". " & Now.ToString("hh:mm:ss")
+                                    Do While True
+                                        'Open CStr(Arch1) For Append Access Write Lock Read Write As #2
+                                        FileOpen(2, CStr(Arch1), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
+                                        If Err.Number <> 0 Then
+                                            FileClose(2)
+                                            Err.Clear()
+                                            If Tiempo <> Now.ToString("hh:mm:ss") Then
+                                                MensajeTextBox.Text = "Esperando liberacion de archivo " & Arch1 & ". " & Now.ToString("hh:mm:ss")
+                                                Tiempo = Now.ToString("hh:mm:ss")
+                                            End If
+                                        Else
+                                            Print(2, CadenaBpcs)
+                                            FileClose(2)
+                                            MensajeTextBox.Text = ""
+                                            Exit Do
+                                        End If
+                                        Me.MensajeTextBox.Refresh()
+                                    Loop
+                                Case Header2(0), Header2(1), Header2(2)
+                                    MensajeTextBox.Text = "Guardando informacion en archivo de datos " & Arch2 & ". " & Now.ToString("hh:mm:ss")
+                                    Do While True
+                                        'Open CStr(Arch2) For Append Access Write Lock Read Write As #5
+                                        FileOpen(5, CStr(Arch2), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
+                                        If Err.Number <> 0 Then
+                                            FileClose(5)
+                                            Err.Clear()
+                                            If Tiempo <> Now.ToString("hh:mm:ss") Then
+                                                MensajeTextBox.Text = "Esperando liberacion de archivo " & Arch2 & ". " & Now.ToString("hh:mm:ss")
+                                            End If
+                                        Else
+                                            Print(5, CadenaBpcs)
+                                            FileClose(5)
+                                            MensajeTextBox.Text = ""
+                                            Exit Do
+                                        End If
+                                        Me.MensajeTextBox.Refresh()
+                                    Loop
+                            End Select
+                            Cadena = ""
+                        Loop            ' do While ErrorRed = True And HayDatos = True
+                    End If
+                End If              'If (C = "*" Or C = Chr$(13)) And (Trim(Cadena) <> "") Then
             End If                  'If N then...
-            Me.Refresh()            'VR = DoEvents()
+            Me.MensajeTextBox.Refresh()            'VR = DoEvents()
             N = buffer.Length - BufferPosicion
-        End While               'While puerto.portopen..
+        End While                   'While puerto.portopen..
     End Sub
 
     Private Sub Recibir()
         If VerificarConfiguracion(TCPHabilitado) Then
             If TCPHabilitado Then
+                DetenerManual = False
                 AbrirPuertos()
             Else
                 If Puerto.IsOpen Then
@@ -825,7 +798,12 @@ Inicio:
 
     Private Sub Detener()
         If (TCPHabilitado) Then
+            DetenerManual = True
+            If (client IsNot Nothing) Then
+                client.Close()
+            End If
             server.Close()
+            HabilitarBotones(False)
         Else
             If Puerto.IsOpen Then
                 Puerto.Close()
@@ -836,47 +814,88 @@ Inicio:
     Dim server As Socket
     Dim client As Socket
     Dim bytes As Byte()
+    Dim DetenerManual As Boolean
+    Public message As String
+    Public errorOnAccept As Boolean
+    Public OnReceive As Boolean
+    Public DesdeTimer As Boolean
 
     Private Sub OnAccept(ByVal ar As IAsyncResult)
         Try
-            client = server.EndAccept(ar)
-            bytes = New Byte(CInt(TCPCantBytesBuffer)) {}
-            client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), client)
-            MessageBox.Show("Cliente aceptado", "Secuenciador")
+            Timer.Enabled = False
+            If (DetenerManual <> True And Not DesdeTimer) Then
+                client = server.EndAccept(ar)
+                bytes = New Byte(CInt(TCPCantBytesBuffer)) {}
+                client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), client)
+                'MessageBox.Show("Cliente aceptado", "Secuenciador")
+                EscribirLog("[OnAccept]", "Cliente aceptado")
+            End If
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Secuenciador")
+            errorOnAccept = True
+        Finally
+            Timer.Enabled = True
         End Try
     End Sub
 
     Private Sub OnRecieve(ByVal ar As IAsyncResult)
         Try
-            client = ar.AsyncState
-            client.EndReceive(ar)
-            client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), client)
-            Dim message As String = System.Text.ASCIIEncoding.ASCII.GetString(bytes)
-            Array.Clear(bytes, 0, CInt(TCPCantBytesBuffer))
-            ProcesarTCP(message)
+            Timer.Enabled = False
+            If (DetenerManual <> True And Not DesdeTimer) Then
+                client = ar.AsyncState
+                client.EndReceive(ar)
+                client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), client)
+                message = System.Text.ASCIIEncoding.ASCII.GetString(bytes)
+                Array.Clear(bytes, 0, CInt(TCPCantBytesBuffer))
+                DesdeTimer = True
+                client.Close()
+                server.Close()
+            End If
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Secuenciador")
-            server.Close()
-            OnStart()
+        Finally
+            If (DetenerManual <> True) Then
+                OnReceive = True
+            End If
+            Timer.Enabled = True
         End Try
     End Sub
 
     Private Sub OnStart()
         Try
+            Timer.Enabled = False
+            'If (server Is Nothing) Then
             server = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
             Dim xEndpoint As IPEndPoint = New IPEndPoint(IPAddress.Any, TCPPuerto)
             server.Bind(xEndpoint)
             server.Listen(1)
             server.BeginAccept(New AsyncCallback(AddressOf OnAccept), vbNull)
+            HabilitarBotones(True)
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MessageBox.Show(ex.Message, "Secuenciador")
+            HabilitarBotones(False)
+        Finally
+            Timer.Enabled = True
         End Try
+    End Sub
+
+    Private Sub HabilitarBotones(ByVal EstaEscuchando As Boolean)
+        If (EstaEscuchando) Then
+            RecibirButton.Enabled = False
+            DetenerButton.Enabled = True
+            ConfigurarButton.Enabled = False
+        Else
+            RecibirButton.Enabled = True
+            DetenerButton.Enabled = False
+            ConfigurarButton.Enabled = True
+        End If
     End Sub
 
     Private Sub frmSecuenciador_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         On Error Resume Next
+
+        CheckForIllegalCrossThreadCalls = False
+        Timer.Enabled = True
 
         LeerConfiguración()
 
@@ -891,9 +910,6 @@ Inicio:
             bytes = New Byte(CInt(TCPCantBytesBuffer)) {}
             DatosDeConfiguracion += " Configuración TCP IP: Puerto " & TCPPuerto
             EnviarButton.Visible = False
-            DetenerButton.Visible = False
-            RecibirButton.Visible = False
-
         Else
             DatosDeConfiguracion += " Configuración Serial: " & SerialPuerto & " " & SerialBaudRate & "," & SerialParity & "," & SerialDataBits & "," & SerialStopBits
         End If
@@ -1072,5 +1088,28 @@ Inicio:
             End If
         Next
 
+    End Sub
+
+    Private Sub Timer_Elapsed(ByVal sender As System.Object, ByVal e As System.Timers.ElapsedEventArgs) Handles Timer.Elapsed
+        Timer.Enabled = False
+        DesdeTimer = True
+        If (message <> "") Then
+            'Procesar mensaje recibido
+            ProcesarTCP(message)
+            message = ""
+        End If
+        If DetenerButton.Enabled = False And DetenerManual <> True Then
+            OnStart()
+        ElseIf (errorOnAccept = True Or OnReceive = True) Then
+            If (client IsNot Nothing) Then
+                client.Close()
+            End If
+            server.Close()
+            OnStart()
+            errorOnAccept = False
+            OnReceive = False
+        End If
+        DesdeTimer = False
+        Timer.Enabled = True
     End Sub
 End Class

@@ -45,11 +45,13 @@ Partial Class frmSecuenciador
         Me.Vin = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Fin = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.MensajeTextBox = New System.Windows.Forms.TextBox
+        Me.Timer = New System.Timers.Timer
         Me.BotonesPanel.SuspendLayout()
         Me.SplitContainer.Panel1.SuspendLayout()
         Me.SplitContainer.Panel2.SuspendLayout()
         Me.SplitContainer.SuspendLayout()
         CType(Me.Grilla, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Timer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BotonesPanel
@@ -171,6 +173,7 @@ Partial Class frmSecuenciador
         Me.Grilla.Location = New System.Drawing.Point(0, 0)
         Me.Grilla.Name = "Grilla"
         Me.Grilla.ReadOnly = True
+        Me.Grilla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.Grilla.Size = New System.Drawing.Size(752, 343)
         Me.Grilla.TabIndex = 22
         '
@@ -240,8 +243,16 @@ Partial Class frmSecuenciador
         Me.MensajeTextBox.Location = New System.Drawing.Point(0, 0)
         Me.MensajeTextBox.Multiline = True
         Me.MensajeTextBox.Name = "MensajeTextBox"
+        Me.MensajeTextBox.ReadOnly = True
         Me.MensajeTextBox.Size = New System.Drawing.Size(752, 77)
         Me.MensajeTextBox.TabIndex = 30
+        '
+        'Timer
+        '
+        Me.Timer.AutoReset = False
+        Me.Timer.Enabled = True
+        Me.Timer.Interval = 1000
+        Me.Timer.SynchronizingObject = Me
         '
         'frmSecuenciador
         '
@@ -258,6 +269,7 @@ Partial Class frmSecuenciador
         Me.SplitContainer.Panel2.PerformLayout()
         Me.SplitContainer.ResumeLayout(False)
         CType(Me.Grilla, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Timer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -283,5 +295,6 @@ Partial Class frmSecuenciador
     Friend WithEvents Fin As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents MensajeTextBox As System.Windows.Forms.TextBox
     Friend WithEvents ImprimirPruebaButton As System.Windows.Forms.Button
+    Friend WithEvents Timer As System.Timers.Timer
 
 End Class
