@@ -39,10 +39,6 @@ Public Module Modulo
                 MsgBox("El parámetro de configuración Puerto TCP no está cargado.", vbOKOnly + vbCritical)
                 Exit Function
             End If
-            If TCPIP = "" Then
-                MsgBox("El parámetro de configuración Host TCP/IP del puerto serie no está cargado.", vbOKOnly + vbCritical)
-                Exit Function
-            End If
         Else
             If SerialBaudRate = "" Then
                 MsgBox("El parámetro de configuración BaudRate del puerto serie no está cargado.", vbOKOnly + vbCritical)
