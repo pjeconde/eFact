@@ -11,59 +11,87 @@ Public Class frmCliente
     Dim client As Socket
     Dim host As String
     Dim port As Integer
+    Public SocketDesconectar As Boolean
+    Public botonConectar As Boolean
+
+    Private Sub frmCliente_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        CheckForIllegalCrossThreadCalls = False
+        SocketDesconectar = False
+        botonConectar = True
+    End Sub
 
     Private Sub ConectarButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConectarButton.Click
-        host = IPTextBox.Text
-        port = PuertoTextBox.Text
-        client = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-        Dim IP As IPAddress = IPAddress.Parse(host)
-        Dim xIpEndPoint As IPEndPoint = New IPEndPoint(IP, port)
-        client.BeginConnect(xIpEndPoint, New AsyncCallback(AddressOf OnConnect), Nothing)
-        'Controles(True)
+        Try
+            Timer.Enabled = False
+            host = IPTextBox.Text
+            port = PuertoTextBox.Text
+            If (botonConectar) Then
+                client = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+                Dim IP As IPAddress = IPAddress.Parse(host)
+                Dim xIpEndPoint As IPEndPoint = New IPEndPoint(IP, port)
+                client.BeginConnect(xIpEndPoint, New AsyncCallback(AddressOf OnConnect), Nothing)
+                botonConectar = False
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "TCP Cliente")
+            botonConectar = True
+        Finally
+            Timer.Enabled = True
+        End Try
+
     End Sub
 
     Private Sub EnviarButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnviarMensajeButton.Click
         Try
+            Timer.Enabled = False
             Dim bytes As Byte() = ASCII.GetBytes(MensajeTextBox.Text)
             client.BeginSend(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnSend), client)
         Catch ex As Exception
             MessageBox.Show(ex.Message, "TCP Cliente")
+        Finally
+            SocketDesconectar = True
+            Timer.Enabled = True
         End Try
     End Sub
 
     Private Sub OnConnect(ByVal ar As IAsyncResult)
         Try
             client.EndConnect(ar)
-            MessageBox.Show("Conectado", "TCP Cliente")
-            'Controles(True)
         Catch ex As Exception
             MessageBox.Show(ex.Message, "TCP Cliente")
-            'Controles(False)
+            botonConectar = True
         End Try
     End Sub
 
     Private Sub OnSend(ByVal ar As IAsyncResult)
-        client.EndSend(ar)
+        Try
+            client.EndSend(ar)
+        Catch ex As Exception
+            Throw New Exception(ex.Message)
+        End Try
     End Sub
 
     Private Sub SalirButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalirButton.Click
         End
     End Sub
 
-    Private Sub Controles(ByVal EnviarMensaje As Boolean)
-        If (EnviarMensaje) Then
+    Private Sub Controles(ByVal Conectar As Boolean)
+        If (Conectar) Then
             ConectarButton.Enabled = True
-            IPTextBox.Enabled = True
-            PuertoTextBox.Enabled = True
-            EnviarMensajeButton.Enabled = False
-            MensajeTextBox.Enabled = False
         Else
             ConectarButton.Enabled = False
-            IPTextBox.Enabled = False
-            PuertoTextBox.Enabled = False
-            EnviarMensajeButton.Enabled = True
-            MensajeTextBox.Enabled = True
         End If
+    End Sub
+
+    Private Sub Timer_Elapsed(ByVal sender As System.Object, ByVal e As System.Timers.ElapsedEventArgs) Handles Timer.Elapsed
+        Timer.Enabled = False
+        If (SocketDesconectar = True) Then
+            client.Close()
+            SocketDesconectar = False
+            botonConectar = True
+        End If
+        Controles(botonConectar)
+        Timer.Enabled = True
     End Sub
 
     'Private Sub WinSockCliente_DatosRecibidos(ByVal datos As String) Handles WinSockCliente.DatosRecibidos
@@ -125,4 +153,5 @@ Public Class frmCliente
     '    MensajeTextBox.Enabled = False
 
     'End Sub
+
 End Class

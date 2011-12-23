@@ -22,6 +22,7 @@ Partial Class frmCliente
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCliente))
         Me.EnviarMensajeButton = New System.Windows.Forms.Button
         Me.SalirButton = New System.Windows.Forms.Button
         Me.MensajeTextBox = New System.Windows.Forms.TextBox
@@ -30,6 +31,8 @@ Partial Class frmCliente
         Me.ConectarButton = New System.Windows.Forms.Button
         Me.Label1 = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
+        Me.Timer = New System.Timers.Timer
+        CType(Me.Timer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'EnviarMensajeButton
@@ -102,6 +105,12 @@ Partial Class frmCliente
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "Puerto:"
         '
+        'Timer
+        '
+        Me.Timer.AutoReset = False
+        Me.Timer.Enabled = True
+        Me.Timer.SynchronizingObject = Me
+        '
         'frmCliente
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -115,8 +124,10 @@ Partial Class frmCliente
         Me.Controls.Add(Me.MensajeTextBox)
         Me.Controls.Add(Me.SalirButton)
         Me.Controls.Add(Me.EnviarMensajeButton)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmCliente"
-        Me.Text = "TCP cliente"
+        Me.Text = "Secuenciador TCP cliente"
+        CType(Me.Timer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -129,5 +140,6 @@ Partial Class frmCliente
     Friend WithEvents ConectarButton As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Timer As System.Timers.Timer
 
 End Class
