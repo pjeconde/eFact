@@ -23,6 +23,10 @@ Partial Class frmSecuenciador
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
+        Me.Puerto = New System.IO.Ports.SerialPort(Me.components)
+        Me.Timer = New System.Timers.Timer
+        Me.BarraPanel = New System.Windows.Forms.Panel
+        Me.BarraSplitContainer = New System.Windows.Forms.SplitContainer
         Me.BotonesPanel = New System.Windows.Forms.Panel
         Me.ImprimirPruebaButton = New System.Windows.Forms.Button
         Me.EnviarButton = New System.Windows.Forms.Button
@@ -31,8 +35,9 @@ Partial Class frmSecuenciador
         Me.ConfigurarButton = New System.Windows.Forms.Button
         Me.DetenerButton = New System.Windows.Forms.Button
         Me.RecibirButton = New System.Windows.Forms.Button
-        Me.Puerto = New System.IO.Ports.SerialPort(Me.components)
-        Me.SplitContainer = New System.Windows.Forms.SplitContainer
+        Me.BarraTextBox = New System.Windows.Forms.TextBox
+        Me.GrillaPanel = New System.Windows.Forms.Panel
+        Me.GrillaSplitContainer = New System.Windows.Forms.SplitContainer
         Me.Grilla = New System.Windows.Forms.DataGridView
         Me.Origen = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Fecha = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -45,14 +50,59 @@ Partial Class frmSecuenciador
         Me.Vin = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Fin = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.MensajeTextBox = New System.Windows.Forms.TextBox
-        Me.Timer = New System.Timers.Timer
-        Me.BotonesPanel.SuspendLayout()
-        Me.SplitContainer.Panel1.SuspendLayout()
-        Me.SplitContainer.Panel2.SuspendLayout()
-        Me.SplitContainer.SuspendLayout()
-        CType(Me.Grilla, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Timer, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.BarraPanel.SuspendLayout()
+        Me.BarraSplitContainer.Panel1.SuspendLayout()
+        Me.BarraSplitContainer.Panel2.SuspendLayout()
+        Me.BarraSplitContainer.SuspendLayout()
+        Me.BotonesPanel.SuspendLayout()
+        Me.GrillaPanel.SuspendLayout()
+        Me.GrillaSplitContainer.Panel1.SuspendLayout()
+        Me.GrillaSplitContainer.Panel2.SuspendLayout()
+        Me.GrillaSplitContainer.SuspendLayout()
+        CType(Me.Grilla, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'Puerto
+        '
+        '
+        'Timer
+        '
+        Me.Timer.AutoReset = False
+        Me.Timer.Enabled = True
+        Me.Timer.Interval = 1000
+        Me.Timer.SynchronizingObject = Me
+        '
+        'BarraPanel
+        '
+        Me.BarraPanel.Controls.Add(Me.BarraSplitContainer)
+        Me.BarraPanel.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.BarraPanel.Location = New System.Drawing.Point(0, 386)
+        Me.BarraPanel.Name = "BarraPanel"
+        Me.BarraPanel.Size = New System.Drawing.Size(768, 67)
+        Me.BarraPanel.TabIndex = 32
+        '
+        'BarraSplitContainer
+        '
+        Me.BarraSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BarraSplitContainer.Location = New System.Drawing.Point(0, 0)
+        Me.BarraSplitContainer.Name = "BarraSplitContainer"
+        Me.BarraSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'BarraSplitContainer.Panel1
+        '
+        Me.BarraSplitContainer.Panel1.Controls.Add(Me.BotonesPanel)
+        Me.BarraSplitContainer.Panel1.Padding = New System.Windows.Forms.Padding(3, 0, 3, 0)
+        Me.BarraSplitContainer.Panel1MinSize = 20
+        '
+        'BarraSplitContainer.Panel2
+        '
+        Me.BarraSplitContainer.Panel2.Controls.Add(Me.BarraTextBox)
+        Me.BarraSplitContainer.Panel2.Padding = New System.Windows.Forms.Padding(3, 6, 3, 0)
+        Me.BarraSplitContainer.Panel2MinSize = 20
+        Me.BarraSplitContainer.Size = New System.Drawing.Size(768, 67)
+        Me.BarraSplitContainer.SplitterDistance = 33
+        Me.BarraSplitContainer.TabIndex = 35
         '
         'BotonesPanel
         '
@@ -64,17 +114,17 @@ Partial Class frmSecuenciador
         Me.BotonesPanel.Controls.Add(Me.DetenerButton)
         Me.BotonesPanel.Controls.Add(Me.RecibirButton)
         Me.BotonesPanel.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BotonesPanel.Location = New System.Drawing.Point(0, 424)
+        Me.BotonesPanel.Location = New System.Drawing.Point(3, 6)
         Me.BotonesPanel.Name = "BotonesPanel"
-        Me.BotonesPanel.Size = New System.Drawing.Size(752, 29)
-        Me.BotonesPanel.TabIndex = 25
+        Me.BotonesPanel.Size = New System.Drawing.Size(762, 27)
+        Me.BotonesPanel.TabIndex = 27
         '
         'ImprimirPruebaButton
         '
         Me.ImprimirPruebaButton.Dock = System.Windows.Forms.DockStyle.Left
         Me.ImprimirPruebaButton.Location = New System.Drawing.Point(500, 0)
         Me.ImprimirPruebaButton.Name = "ImprimirPruebaButton"
-        Me.ImprimirPruebaButton.Size = New System.Drawing.Size(100, 29)
+        Me.ImprimirPruebaButton.Size = New System.Drawing.Size(100, 27)
         Me.ImprimirPruebaButton.TabIndex = 31
         Me.ImprimirPruebaButton.Text = "Imprimir Prueba"
         Me.ImprimirPruebaButton.UseVisualStyleBackColor = True
@@ -84,7 +134,7 @@ Partial Class frmSecuenciador
         Me.EnviarButton.Dock = System.Windows.Forms.DockStyle.Left
         Me.EnviarButton.Location = New System.Drawing.Point(400, 0)
         Me.EnviarButton.Name = "EnviarButton"
-        Me.EnviarButton.Size = New System.Drawing.Size(100, 29)
+        Me.EnviarButton.Size = New System.Drawing.Size(100, 27)
         Me.EnviarButton.TabIndex = 30
         Me.EnviarButton.Text = "Enviar"
         Me.EnviarButton.UseVisualStyleBackColor = True
@@ -94,7 +144,7 @@ Partial Class frmSecuenciador
         Me.BBTemp.Dock = System.Windows.Forms.DockStyle.Left
         Me.BBTemp.Location = New System.Drawing.Point(300, 0)
         Me.BBTemp.Name = "BBTemp"
-        Me.BBTemp.Size = New System.Drawing.Size(100, 29)
+        Me.BBTemp.Size = New System.Drawing.Size(100, 27)
         Me.BBTemp.TabIndex = 29
         Me.BBTemp.Text = "Bajar Temporal"
         Me.BBTemp.UseVisualStyleBackColor = True
@@ -102,9 +152,9 @@ Partial Class frmSecuenciador
         'SalirButton
         '
         Me.SalirButton.Dock = System.Windows.Forms.DockStyle.Right
-        Me.SalirButton.Location = New System.Drawing.Point(652, 0)
+        Me.SalirButton.Location = New System.Drawing.Point(662, 0)
         Me.SalirButton.Name = "SalirButton"
-        Me.SalirButton.Size = New System.Drawing.Size(100, 29)
+        Me.SalirButton.Size = New System.Drawing.Size(100, 27)
         Me.SalirButton.TabIndex = 28
         Me.SalirButton.Text = "Salir"
         Me.SalirButton.UseVisualStyleBackColor = True
@@ -114,7 +164,7 @@ Partial Class frmSecuenciador
         Me.ConfigurarButton.Dock = System.Windows.Forms.DockStyle.Left
         Me.ConfigurarButton.Location = New System.Drawing.Point(200, 0)
         Me.ConfigurarButton.Name = "ConfigurarButton"
-        Me.ConfigurarButton.Size = New System.Drawing.Size(100, 29)
+        Me.ConfigurarButton.Size = New System.Drawing.Size(100, 27)
         Me.ConfigurarButton.TabIndex = 27
         Me.ConfigurarButton.Text = "Configurar"
         Me.ConfigurarButton.UseVisualStyleBackColor = True
@@ -124,7 +174,7 @@ Partial Class frmSecuenciador
         Me.DetenerButton.Dock = System.Windows.Forms.DockStyle.Left
         Me.DetenerButton.Location = New System.Drawing.Point(100, 0)
         Me.DetenerButton.Name = "DetenerButton"
-        Me.DetenerButton.Size = New System.Drawing.Size(100, 29)
+        Me.DetenerButton.Size = New System.Drawing.Size(100, 27)
         Me.DetenerButton.TabIndex = 26
         Me.DetenerButton.Text = "Detener"
         Me.DetenerButton.UseVisualStyleBackColor = True
@@ -134,34 +184,49 @@ Partial Class frmSecuenciador
         Me.RecibirButton.Dock = System.Windows.Forms.DockStyle.Left
         Me.RecibirButton.Location = New System.Drawing.Point(0, 0)
         Me.RecibirButton.Name = "RecibirButton"
-        Me.RecibirButton.Size = New System.Drawing.Size(100, 29)
+        Me.RecibirButton.Size = New System.Drawing.Size(100, 27)
         Me.RecibirButton.TabIndex = 25
         Me.RecibirButton.Text = "Recibir"
         Me.RecibirButton.UseVisualStyleBackColor = True
         '
-        'Puerto
+        'BarraTextBox
         '
+        Me.BarraTextBox.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BarraTextBox.Location = New System.Drawing.Point(3, 6)
+        Me.BarraTextBox.Name = "BarraTextBox"
+        Me.BarraTextBox.ReadOnly = True
+        Me.BarraTextBox.Size = New System.Drawing.Size(762, 20)
+        Me.BarraTextBox.TabIndex = 2
         '
-        'SplitContainer
+        'GrillaPanel
         '
-        Me.SplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel2
-        Me.SplitContainer.Location = New System.Drawing.Point(0, 0)
-        Me.SplitContainer.Name = "SplitContainer"
-        Me.SplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal
+        Me.GrillaPanel.Controls.Add(Me.GrillaSplitContainer)
+        Me.GrillaPanel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GrillaPanel.Location = New System.Drawing.Point(0, 0)
+        Me.GrillaPanel.Name = "GrillaPanel"
+        Me.GrillaPanel.Size = New System.Drawing.Size(768, 386)
+        Me.GrillaPanel.TabIndex = 35
         '
-        'SplitContainer.Panel1
+        'GrillaSplitContainer
         '
-        Me.SplitContainer.Panel1.Controls.Add(Me.Grilla)
-        Me.SplitContainer.Panel1MinSize = 50
+        Me.GrillaSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GrillaSplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel2
+        Me.GrillaSplitContainer.Location = New System.Drawing.Point(0, 0)
+        Me.GrillaSplitContainer.Name = "GrillaSplitContainer"
+        Me.GrillaSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
-        'SplitContainer.Panel2
+        'GrillaSplitContainer.Panel1
         '
-        Me.SplitContainer.Panel2.Controls.Add(Me.MensajeTextBox)
-        Me.SplitContainer.Panel2MinSize = 40
-        Me.SplitContainer.Size = New System.Drawing.Size(752, 424)
-        Me.SplitContainer.SplitterDistance = 343
-        Me.SplitContainer.TabIndex = 30
+        Me.GrillaSplitContainer.Panel1.Controls.Add(Me.Grilla)
+        Me.GrillaSplitContainer.Panel1MinSize = 50
+        '
+        'GrillaSplitContainer.Panel2
+        '
+        Me.GrillaSplitContainer.Panel2.Controls.Add(Me.MensajeTextBox)
+        Me.GrillaSplitContainer.Panel2MinSize = 40
+        Me.GrillaSplitContainer.Size = New System.Drawing.Size(768, 386)
+        Me.GrillaSplitContainer.SplitterDistance = 305
+        Me.GrillaSplitContainer.TabIndex = 31
         '
         'Grilla
         '
@@ -174,7 +239,7 @@ Partial Class frmSecuenciador
         Me.Grilla.Name = "Grilla"
         Me.Grilla.ReadOnly = True
         Me.Grilla.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.Grilla.Size = New System.Drawing.Size(752, 343)
+        Me.Grilla.Size = New System.Drawing.Size(768, 305)
         Me.Grilla.TabIndex = 22
         '
         'Origen
@@ -244,44 +309,39 @@ Partial Class frmSecuenciador
         Me.MensajeTextBox.Multiline = True
         Me.MensajeTextBox.Name = "MensajeTextBox"
         Me.MensajeTextBox.ReadOnly = True
-        Me.MensajeTextBox.Size = New System.Drawing.Size(752, 77)
+        Me.MensajeTextBox.Size = New System.Drawing.Size(768, 77)
         Me.MensajeTextBox.TabIndex = 30
-        '
-        'Timer
-        '
-        Me.Timer.AutoReset = False
-        Me.Timer.Enabled = True
-        Me.Timer.Interval = 1000
-        Me.Timer.SynchronizingObject = Me
         '
         'frmSecuenciador
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(752, 453)
-        Me.Controls.Add(Me.SplitContainer)
-        Me.Controls.Add(Me.BotonesPanel)
+        Me.ClientSize = New System.Drawing.Size(768, 453)
+        Me.Controls.Add(Me.GrillaPanel)
+        Me.Controls.Add(Me.BarraPanel)
         Me.Name = "frmSecuenciador"
         Me.Text = "Secuenciador (TCP IP y COM)"
-        Me.BotonesPanel.ResumeLayout(False)
-        Me.SplitContainer.Panel1.ResumeLayout(False)
-        Me.SplitContainer.Panel2.ResumeLayout(False)
-        Me.SplitContainer.Panel2.PerformLayout()
-        Me.SplitContainer.ResumeLayout(False)
-        CType(Me.Grilla, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Timer, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.BarraPanel.ResumeLayout(False)
+        Me.BarraSplitContainer.Panel1.ResumeLayout(False)
+        Me.BarraSplitContainer.Panel2.ResumeLayout(False)
+        Me.BarraSplitContainer.Panel2.PerformLayout()
+        Me.BarraSplitContainer.ResumeLayout(False)
+        Me.BotonesPanel.ResumeLayout(False)
+        Me.GrillaPanel.ResumeLayout(False)
+        Me.GrillaSplitContainer.Panel1.ResumeLayout(False)
+        Me.GrillaSplitContainer.Panel2.ResumeLayout(False)
+        Me.GrillaSplitContainer.Panel2.PerformLayout()
+        Me.GrillaSplitContainer.ResumeLayout(False)
+        CType(Me.Grilla, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents BotonesPanel As System.Windows.Forms.Panel
-    Friend WithEvents SalirButton As System.Windows.Forms.Button
-    Friend WithEvents ConfigurarButton As System.Windows.Forms.Button
-    Friend WithEvents DetenerButton As System.Windows.Forms.Button
-    Friend WithEvents RecibirButton As System.Windows.Forms.Button
     Friend WithEvents Puerto As System.IO.Ports.SerialPort
-    Friend WithEvents BBTemp As System.Windows.Forms.Button
-    Friend WithEvents EnviarButton As System.Windows.Forms.Button
-    Friend WithEvents SplitContainer As System.Windows.Forms.SplitContainer
+    Friend WithEvents Timer As System.Timers.Timer
+    Friend WithEvents BarraPanel As System.Windows.Forms.Panel
+    Friend WithEvents GrillaPanel As System.Windows.Forms.Panel
+    Friend WithEvents GrillaSplitContainer As System.Windows.Forms.SplitContainer
     Friend WithEvents Grilla As System.Windows.Forms.DataGridView
     Friend WithEvents Origen As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Fecha As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -294,7 +354,15 @@ Partial Class frmSecuenciador
     Friend WithEvents Vin As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Fin As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents MensajeTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents BarraSplitContainer As System.Windows.Forms.SplitContainer
+    Friend WithEvents BotonesPanel As System.Windows.Forms.Panel
     Friend WithEvents ImprimirPruebaButton As System.Windows.Forms.Button
-    Friend WithEvents Timer As System.Timers.Timer
+    Friend WithEvents EnviarButton As System.Windows.Forms.Button
+    Friend WithEvents BBTemp As System.Windows.Forms.Button
+    Friend WithEvents SalirButton As System.Windows.Forms.Button
+    Friend WithEvents ConfigurarButton As System.Windows.Forms.Button
+    Friend WithEvents DetenerButton As System.Windows.Forms.Button
+    Friend WithEvents RecibirButton As System.Windows.Forms.Button
+    Friend WithEvents BarraTextBox As System.Windows.Forms.TextBox
 
 End Class
