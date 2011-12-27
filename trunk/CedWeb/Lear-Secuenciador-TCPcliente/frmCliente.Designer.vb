@@ -124,8 +124,12 @@ Partial Class frmCliente
         Me.Controls.Add(Me.MensajeTextBox)
         Me.Controls.Add(Me.SalirButton)
         Me.Controls.Add(Me.EnviarMensajeButton)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "frmCliente"
+        Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Text = "Secuenciador TCP cliente"
         CType(Me.Timer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

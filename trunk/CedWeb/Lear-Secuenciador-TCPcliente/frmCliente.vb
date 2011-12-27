@@ -64,11 +64,7 @@ Public Class frmCliente
     End Sub
 
     Private Sub OnSend(ByVal ar As IAsyncResult)
-        Try
-            client.EndSend(ar)
-        Catch ex As Exception
-            Throw New Exception(ex.Message)
-        End Try
+        client.EndSend(ar)
     End Sub
 
     Private Sub SalirButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalirButton.Click
@@ -86,7 +82,9 @@ Public Class frmCliente
     Private Sub Timer_Elapsed(ByVal sender As System.Object, ByVal e As System.Timers.ElapsedEventArgs) Handles Timer.Elapsed
         Timer.Enabled = False
         If (SocketDesconectar = True) Then
-            client.Close()
+            If (client IsNot Nothing) Then
+                client.Close()
+            End If
             SocketDesconectar = False
             botonConectar = True
         End If
