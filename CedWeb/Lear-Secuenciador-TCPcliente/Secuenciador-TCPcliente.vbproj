@@ -71,7 +71,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="TCPCliente.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmCliente.resx">
