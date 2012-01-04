@@ -24,7 +24,6 @@ Partial Class frmSecuenciador
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Me.Puerto = New System.IO.Ports.SerialPort(Me.components)
-        Me.Timer = New System.Timers.Timer
         Me.BarraPanel = New System.Windows.Forms.Panel
         Me.BarraSplitContainer = New System.Windows.Forms.SplitContainer
         Me.BotonesPanel = New System.Windows.Forms.Panel
@@ -50,7 +49,7 @@ Partial Class frmSecuenciador
         Me.Vin = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Fin = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.MensajeTextBox = New System.Windows.Forms.TextBox
-        CType(Me.Timer, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Timer1 = New System.Timers.Timer
         Me.BarraPanel.SuspendLayout()
         Me.BarraSplitContainer.Panel1.SuspendLayout()
         Me.BarraSplitContainer.Panel2.SuspendLayout()
@@ -61,17 +60,11 @@ Partial Class frmSecuenciador
         Me.GrillaSplitContainer.Panel2.SuspendLayout()
         Me.GrillaSplitContainer.SuspendLayout()
         CType(Me.Grilla, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Timer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Puerto
         '
-        '
-        'Timer
-        '
-        Me.Timer.AutoReset = False
-        Me.Timer.Enabled = True
-        Me.Timer.Interval = 1000
-        Me.Timer.SynchronizingObject = Me
         '
         'BarraPanel
         '
@@ -309,8 +302,15 @@ Partial Class frmSecuenciador
         Me.MensajeTextBox.Multiline = True
         Me.MensajeTextBox.Name = "MensajeTextBox"
         Me.MensajeTextBox.ReadOnly = True
+        Me.MensajeTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.MensajeTextBox.Size = New System.Drawing.Size(768, 77)
         Me.MensajeTextBox.TabIndex = 30
+        '
+        'Timer1
+        '
+        Me.Timer1.AutoReset = False
+        Me.Timer1.Enabled = True
+        Me.Timer1.SynchronizingObject = Me
         '
         'frmSecuenciador
         '
@@ -321,7 +321,6 @@ Partial Class frmSecuenciador
         Me.Controls.Add(Me.BarraPanel)
         Me.Name = "frmSecuenciador"
         Me.Text = "Secuenciador (TCP IP y COM)"
-        CType(Me.Timer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.BarraPanel.ResumeLayout(False)
         Me.BarraSplitContainer.Panel1.ResumeLayout(False)
         Me.BarraSplitContainer.Panel2.ResumeLayout(False)
@@ -334,11 +333,11 @@ Partial Class frmSecuenciador
         Me.GrillaSplitContainer.Panel2.PerformLayout()
         Me.GrillaSplitContainer.ResumeLayout(False)
         CType(Me.Grilla, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Timer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents Puerto As System.IO.Ports.SerialPort
-    Friend WithEvents Timer As System.Timers.Timer
     Friend WithEvents BarraPanel As System.Windows.Forms.Panel
     Friend WithEvents GrillaPanel As System.Windows.Forms.Panel
     Friend WithEvents GrillaSplitContainer As System.Windows.Forms.SplitContainer
@@ -364,5 +363,6 @@ Partial Class frmSecuenciador
     Friend WithEvents DetenerButton As System.Windows.Forms.Button
     Friend WithEvents RecibirButton As System.Windows.Forms.Button
     Friend WithEvents BarraTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents Timer1 As System.Timers.Timer
 
 End Class
