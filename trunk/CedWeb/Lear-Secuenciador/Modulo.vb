@@ -135,7 +135,7 @@ Public Module Modulo
         LectArchINI.IniWrite(PathArchINI, "MAIN", "TCPCantBytesBuffer", TCPCantBytesBuffer)
 
         LectArchINI.IniWrite(PathArchINI, "MAIN", "ARCH1", Arch1)
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "ARCH2", Arch1)
+        LectArchINI.IniWrite(PathArchINI, "MAIN", "ARCH2", Arch2)
 
         Dim Contador As Integer
         For Contador = 0 To 2
