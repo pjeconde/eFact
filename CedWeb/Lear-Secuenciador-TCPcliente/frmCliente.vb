@@ -38,7 +38,7 @@ Public Class frmCliente
                 botonConectar = False
             End If
         Catch ex As Exception
-            'MessageBox.Show(ex.Message, "TCP Cliente")
+            Debug.WriteLine("ER - Renglon: Conectar " & Renglon & " " & ex.Message)
             botonConectar = True
         Finally
             'Timer.Enabled = True
@@ -58,7 +58,6 @@ Public Class frmCliente
             client.Send(bytes, 0, bytes.Length, SocketFlags.None)
             Debug.WriteLine("OK - Renglon: " & Renglon)
         Catch ex As Exception
-            'MessageBox.Show(ex.Message, "TCP Cliente")
             Debug.WriteLine("ER - Renglon: " & Renglon & " " & ex.Message)
             Renglon = Renglon - 1
             Timer.Enabled = True
@@ -72,7 +71,7 @@ Public Class frmCliente
         Try
             client.EndConnect(ar)
         Catch ex As Exception
-            'MessageBox.Show(ex.Message, "TCP Cliente")
+            Debug.WriteLine("ER - Renglon: OnConectar " & Renglon & " " & ex.Message)
             botonConectar = True
         End Try
     End Sub
