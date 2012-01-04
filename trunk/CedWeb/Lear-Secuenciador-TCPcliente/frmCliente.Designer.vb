@@ -109,7 +109,6 @@ Partial Class frmCliente
         '
         Me.Timer.AutoReset = False
         Me.Timer.Enabled = True
-        Me.Timer.Interval = 1000
         Me.Timer.SynchronizingObject = Me
         '
         'frmCliente
