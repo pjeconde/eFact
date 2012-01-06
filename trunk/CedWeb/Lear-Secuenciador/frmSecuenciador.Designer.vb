@@ -310,7 +310,6 @@ Partial Class frmSecuenciador
         '
         Me.Timer1.AutoReset = False
         Me.Timer1.Enabled = True
-        Me.Timer1.Interval = 500
         Me.Timer1.SynchronizingObject = Me
         '
         'frmSecuenciador
