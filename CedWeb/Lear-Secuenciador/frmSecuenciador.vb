@@ -53,12 +53,11 @@ Public Class frmSecuenciador
         End If
         FileClose(3)
 
-        Timer1.Enabled = False
-        Recibir()
     End Sub
 
     Private Sub frmSecuenciador_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         EscribirLog("[frmSecuenciador_Load]", DatosDeConfiguracion)
+        'Recibir()
     End Sub
 
     Public Sub AbreArchivo()
@@ -178,6 +177,7 @@ Public Class frmSecuenciador
                 End If
             End If
             DatosBarra()
+            EscribirLog("[Configurar]", DatosDeConfiguracion)
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Secuenciador")
         Finally
