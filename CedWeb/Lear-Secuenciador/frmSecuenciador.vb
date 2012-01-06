@@ -53,6 +53,7 @@ Public Class frmSecuenciador
         End If
         FileClose(3)
 
+        Timer1.Enabled = False
         Recibir()
     End Sub
 
@@ -769,7 +770,7 @@ Inicio:
     Private Sub Recibir()
         If VerificarConfiguracion(TCPHabilitado) Then
             If TCPHabilitado Then
-                DetenerManual = False
+                DetenidoManualmente = False
                 AbrirPuertos()
             Else
                 If Puerto.IsOpen Then
@@ -785,8 +786,6 @@ Inicio:
     Public Sub New()
         ' Llamada necesaria para el Diseñador de Windows Forms.
         InitializeComponent()
-
-        ' Agregue cualquier inicialización después de la llamada a InitializeComponent().
     End Sub
 
     Protected Overrides Sub Finalize()
@@ -800,18 +799,18 @@ Inicio:
 
     Private Sub Detener()
         If (TCPHabilitado) Then
-            If (message = "") Then
-                DetenerManual = True
+            If (DetencionPermitida = True And message = "") Then
+                DetenidoManualmente = True
+                HabilitarBotones(False)
                 If (client IsNot Nothing) Then
                     client.Close()
                 End If
                 server.Close()
-                HabilitarBotones(False)
             Else
                 MsgBox("Hay un mensaje pendiente de procesamiento. Intente más tarde.", vbOKOnly + vbCritical)
             End If
         Else
-            DetenerManual = True
+            DetenidoManualmente = True
             If Puerto.IsOpen Then
                 Puerto.Close()
             End If
@@ -821,61 +820,55 @@ Inicio:
     Dim server As Socket
     Dim client As Socket
     Dim bytes As Byte()
-    Dim DetenerManual As Boolean
+    Dim DetenidoManualmente As Boolean
     Public message As String
-    Public errorOnAccept As Boolean
-    Public OnReceive As Boolean
-    Public DesdeTimer As Boolean
+    Public DetencionPermitida As Boolean
 
     Private Sub OnAccept(ByVal ar As IAsyncResult)
         Try
-            Timer1.Enabled = False
-            If (DetenerManual <> True And Not DesdeTimer) Then
+            If (DetenidoManualmente <> True) Then
+                DetencionPermitida = False
                 client = server.EndAccept(ar)
                 bytes = New Byte(CInt(TCPCantBytesBuffer)) {}
-                client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), client)
-                EscribirLog("[OnAccept]", "Cliente aceptado")
+                client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnReceive), client)
             End If
         Catch ex As Exception
             EscribirLog("[OnAccept]", "Mensaje: " & ex.Message)
-            errorOnAccept = True
             server.Close()
-        Finally
             Timer1.Enabled = True
         End Try
     End Sub
 
-    Private Sub OnRecieve(ByVal ar As IAsyncResult)
+    Private Sub OnReceive(ByVal ar As IAsyncResult)
         Try
-            Timer1.Enabled = False
+            'Timer1.Enabled = False
             client = ar.AsyncState
             client.EndReceive(ar)
-            'client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnRecieve), client)
+            'client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnReceive), client)
             client.Receive(bytes, 0, bytes.Length, SocketFlags.None)
             client.Close()
             server.Close()
-            If bytes(0) <> "0" Then
-                Dim a As String
-                a = System.Text.ASCIIEncoding.ASCII.GetString(bytes)
-                message = String.Copy(a.ToString())
-                Debug.WriteLine(message)
-            Else
-                Debug.WriteLine("OJO!!")
-            End If
+
+            Dim a As String
+            a = System.Text.ASCIIEncoding.ASCII.GetString(bytes)
+            message = String.Copy(a.ToString())
+            Debug.WriteLine(message)
             Array.Clear(bytes, 0, CInt(TCPCantBytesBuffer))
+
         Catch ex As Exception
-            EscribirLog("[OnRecieve]", " Desde Timer: " & DesdeTimer & "  Desde Parada Manual: " & DetenerManual & vbNewLine & "Exception: " + ex.Message)
-        Finally
-            If (DetenerManual <> True) Then
-                OnReceive = True
+            EscribirLog("[OnReceive]", "Mensaje: " + ex.Message)
+            If (client IsNot Nothing) Then
+                client.Close()
             End If
+            server.Close()
+        Finally
             Timer1.Enabled = True
         End Try
     End Sub
 
     Private Sub OnStart()
         Try
-            Timer1.Enabled = False
+            DetencionPermitida = True
             server = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
             Dim xEndpoint As IPEndPoint = New IPEndPoint(IPAddress.Any, TCPPuerto)
             server.Bind(xEndpoint)
@@ -885,8 +878,6 @@ Inicio:
         Catch ex As Exception
             EscribirLog("[OnStart]", "Mensaje: " & ex.Message)
             HabilitarBotones(False)
-        Finally
-            Timer1.Enabled = True
         End Try
     End Sub
 
@@ -925,8 +916,7 @@ Inicio:
         Enviar()
     End Sub
 
-    Private Sub print_PrintPage(ByVal sender As Object, _
-                            ByVal e As PrintPageEventArgs)
+    Private Sub print_PrintPage(ByVal sender As Object, ByVal e As PrintPageEventArgs)
         ' Este evento se producirá cada vez que se imprima una nueva página
         ' imprimimos la cadena en el margen izquierdo
         Dim xPos As Single = e.MarginBounds.Left
@@ -972,7 +962,6 @@ Inicio:
 #End Region
 
     Private Sub ImprimirPruebaButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ImprimirPruebaButton.Click
-
         CadenaParaImprimir = "Prueba de cadena para imprimir"
         For Each X As String In System.Drawing.Printing.PrinterSettings.InstalledPrinters
             If X = Impre1 Or X = Impre2 Then
@@ -982,7 +971,6 @@ Inicio:
                 pd.Print()
             End If
         Next
-
     End Sub
 
     Private Sub DatosBarra()
@@ -1003,27 +991,15 @@ Inicio:
             If Not Produccion Then
                 EnviarButton.Visible = True
             End If
-            Timer1.Enabled = False
         End If
         BarraTextBox.Text = DatosDeConfiguracion
     End Sub
 
     Private Sub Timer1_Elapsed(ByVal sender As System.Object, ByVal e As System.Timers.ElapsedEventArgs) Handles Timer1.Elapsed
-        DesdeTimer = True
         Timer1.Enabled = False
         'Procesar mensaje recibido. Utilizará el message o archivos temporales.
         ProcesarTCP(message)
         message = ""
-        If (errorOnAccept = True Or OnReceive = True) Then
-            If (client IsNot Nothing) Then
-                client.Close()
-            End If
-            server.Close()
-            OnStart()
-            errorOnAccept = False
-            OnReceive = False
-        End If
-        Timer1.Enabled = True
-        DesdeTimer = False
+        OnStart()
     End Sub
 End Class
