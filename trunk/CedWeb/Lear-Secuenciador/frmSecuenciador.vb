@@ -57,7 +57,7 @@ Public Class frmSecuenciador
 
     Private Sub frmSecuenciador_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
         EscribirLog("[frmSecuenciador_Load]", DatosDeConfiguracion)
-        'Recibir()
+        Recibir()
     End Sub
 
     Public Sub AbreArchivo()
@@ -164,7 +164,6 @@ Public Class frmSecuenciador
 
     Private Sub Configurar()
         Try
-            Timer1.Enabled = False
             If TCPHabilitado Then
                 frmConfiguracion.ShowDialog()
             Else
@@ -180,10 +179,6 @@ Public Class frmSecuenciador
             EscribirLog("[Configurar]", DatosDeConfiguracion)
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Secuenciador")
-        Finally
-            If (TCPHabilitado) Then
-                Timer1.Enabled = True
-            End If
         End Try
     End Sub
 
@@ -835,19 +830,18 @@ Inicio:
         Catch ex As Exception
             EscribirLog("[OnAccept]", "Mensaje: " & ex.Message)
             server.Close()
-            Timer1.Enabled = True
         End Try
     End Sub
 
     Private Sub OnReceive(ByVal ar As IAsyncResult)
         Try
-            'Timer1.Enabled = False
+            DetencionPermitida = False
             client = ar.AsyncState
             client.EndReceive(ar)
-            'client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnReceive), client)
-            client.Receive(bytes, 0, bytes.Length, SocketFlags.None)
-            client.Close()
-            server.Close()
+            client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnReceive), client)
+            'client.Receive(bytes, 0, bytes.Length, SocketFlags.None)
+            'client.Close()
+            'server.Close()
 
             Dim a As String
             a = System.Text.ASCIIEncoding.ASCII.GetString(bytes)
@@ -998,8 +992,13 @@ Inicio:
     Private Sub Timer1_Elapsed(ByVal sender As System.Object, ByVal e As System.Timers.ElapsedEventArgs) Handles Timer1.Elapsed
         Timer1.Enabled = False
         'Procesar mensaje recibido. Utilizará el message o archivos temporales.
-        ProcesarTCP(message)
-        message = ""
-        OnStart()
+        If (message <> Nothing) Then
+            If (message <> "") Then
+                ProcesarTCP(message)
+                message = ""
+                client.Send(System.Text.ASCIIEncoding.ASCII.GetBytes("ACK"))
+            End If
+        End If
+        DetencionPermitida = True
     End Sub
 End Class
