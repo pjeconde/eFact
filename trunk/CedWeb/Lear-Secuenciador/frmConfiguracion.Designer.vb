@@ -26,6 +26,10 @@ Partial Class frmConfiguracion
         Me.AceptarButton = New System.Windows.Forms.Button
         Me.SalirButton = New System.Windows.Forms.Button
         Me.ParametrosPanel = New System.Windows.Forms.Panel
+        Me.Label18 = New System.Windows.Forms.Label
+        Me.PathArchINITextBox = New System.Windows.Forms.TextBox
+        Me.ArchLogTextBox = New System.Windows.Forms.TextBox
+        Me.Label17 = New System.Windows.Forms.Label
         Me.ImpError2Label = New System.Windows.Forms.Label
         Me.ImpError1Label = New System.Windows.Forms.Label
         Me.ComboBoxImpreError2 = New System.Windows.Forms.ComboBox
@@ -70,8 +74,6 @@ Partial Class frmConfiguracion
         Me.Header12TextBox = New System.Windows.Forms.TextBox
         Me.Header11TextBox = New System.Windows.Forms.TextBox
         Me.Header10TextBox = New System.Windows.Forms.TextBox
-        Me.ArchLogTextBox = New System.Windows.Forms.TextBox
-        Me.Label17 = New System.Windows.Forms.Label
         Me.BotonesPanel.SuspendLayout()
         Me.ParametrosPanel.SuspendLayout()
         Me.TCPGroupBox.SuspendLayout()
@@ -83,7 +85,7 @@ Partial Class frmConfiguracion
         Me.BotonesPanel.Controls.Add(Me.AceptarButton)
         Me.BotonesPanel.Controls.Add(Me.SalirButton)
         Me.BotonesPanel.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BotonesPanel.Location = New System.Drawing.Point(0, 459)
+        Me.BotonesPanel.Location = New System.Drawing.Point(0, 478)
         Me.BotonesPanel.Name = "BotonesPanel"
         Me.BotonesPanel.Size = New System.Drawing.Size(784, 47)
         Me.BotonesPanel.TabIndex = 44
@@ -110,6 +112,8 @@ Partial Class frmConfiguracion
         '
         'ParametrosPanel
         '
+        Me.ParametrosPanel.Controls.Add(Me.Label18)
+        Me.ParametrosPanel.Controls.Add(Me.PathArchINITextBox)
         Me.ParametrosPanel.Controls.Add(Me.ArchLogTextBox)
         Me.ParametrosPanel.Controls.Add(Me.Label17)
         Me.ParametrosPanel.Controls.Add(Me.ImpError2Label)
@@ -143,8 +147,42 @@ Partial Class frmConfiguracion
         Me.ParametrosPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ParametrosPanel.Location = New System.Drawing.Point(0, 0)
         Me.ParametrosPanel.Name = "ParametrosPanel"
-        Me.ParametrosPanel.Size = New System.Drawing.Size(784, 459)
+        Me.ParametrosPanel.Size = New System.Drawing.Size(784, 478)
         Me.ParametrosPanel.TabIndex = 45
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(175, 446)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(131, 13)
+        Me.Label18.TabIndex = 79
+        Me.Label18.Text = "Ubicación del Archivo INI:"
+        '
+        'PathArchINITextBox
+        '
+        Me.PathArchINITextBox.BackColor = System.Drawing.SystemColors.Control
+        Me.PathArchINITextBox.Location = New System.Drawing.Point(312, 443)
+        Me.PathArchINITextBox.Name = "PathArchINITextBox"
+        Me.PathArchINITextBox.ReadOnly = True
+        Me.PathArchINITextBox.Size = New System.Drawing.Size(460, 20)
+        Me.PathArchINITextBox.TabIndex = 78
+        '
+        'ArchLogTextBox
+        '
+        Me.ArchLogTextBox.Location = New System.Drawing.Point(312, 362)
+        Me.ArchLogTextBox.Name = "ArchLogTextBox"
+        Me.ArchLogTextBox.Size = New System.Drawing.Size(460, 20)
+        Me.ArchLogTextBox.TabIndex = 77
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(222, 365)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(82, 13)
+        Me.Label17.TabIndex = 76
+        Me.Label17.Text = "Archivo de Log:"
         '
         'ImpError2Label
         '
@@ -521,27 +559,11 @@ Partial Class frmConfiguracion
         Me.Header10TextBox.Size = New System.Drawing.Size(150, 20)
         Me.Header10TextBox.TabIndex = 44
         '
-        'ArchLogTextBox
-        '
-        Me.ArchLogTextBox.Location = New System.Drawing.Point(312, 362)
-        Me.ArchLogTextBox.Name = "ArchLogTextBox"
-        Me.ArchLogTextBox.Size = New System.Drawing.Size(460, 20)
-        Me.ArchLogTextBox.TabIndex = 77
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(222, 365)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(82, 13)
-        Me.Label17.TabIndex = 76
-        Me.Label17.Text = "Archivo de Log:"
-        '
         'frmConfiguracion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(784, 506)
+        Me.ClientSize = New System.Drawing.Size(784, 525)
         Me.Controls.Add(Me.ParametrosPanel)
         Me.Controls.Add(Me.BotonesPanel)
         Me.Name = "frmConfiguracion"
@@ -606,4 +628,6 @@ Partial Class frmConfiguracion
     Friend WithEvents ImpError1Label As System.Windows.Forms.Label
     Friend WithEvents ArchLogTextBox As System.Windows.Forms.TextBox
     Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents PathArchINITextBox As System.Windows.Forms.TextBox
+    Friend WithEvents Label18 As System.Windows.Forms.Label
 End Class

@@ -56,7 +56,7 @@ Public Class frmSecuenciador
     End Sub
 
     Private Sub frmSecuenciador_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
-        EscribirLog("[frmSecuenciador_Load]", DatosDeConfiguracion)
+        EscribirLog("[frmSecuenciador_Shown]", DatosDeConfiguracion)
         Recibir()
     End Sub
 
@@ -191,7 +191,7 @@ Public Class frmSecuenciador
         On Error Resume Next
         Dim t As String = ""
         Do While True
-            FileOpen(11, CStr(ArchLog), OpenMode.Append, OpenAccess.Write)
+            FileOpen(11, CStr(ArchLog & Now.ToString("yyyyMMdd") & ".log"), OpenMode.Append, OpenAccess.Write)
             If Err.Number <> 0 Then
                 FileClose(11)
                 Err.Clear()
@@ -414,7 +414,7 @@ Inicio:
                         Next
 
                         If ErrorCabecera = True Or ErrorDigitos = True Then
-                            EscribirLog("[ProcesarTCP-ErrorCabeceraCtrl-ErrorDigitosCtrl] ", "Cadena: " & CadenaSerial)
+                            EscribirLog("[ProcesarSerial] ", "Error en cabecera o digito de control. Cadena: " & CadenaSerial)
                             CadenaParaImprimir = CadenaSerial
                             For Each X As String In System.Drawing.Printing.PrinterSettings.InstalledPrinters
                                 If X = Impre1 Or X = Impre2 Then
@@ -485,7 +485,7 @@ Inicio:
         Dim Tiempo As String = ""
         Dim FechaFila As Date
 
-        Dim Cadena As String
+        Dim Cadena As String = ""
         Dim CadenaFin As String
         Dim CadenaBpcs As String
         Dim CadenaBackup As String
@@ -531,7 +531,7 @@ Inicio:
                 End If
 
                 If ((C = "*" Or C = Chr(13)) And (Trim(Cadena) <> "")) Or Forzar2 = True Then
-                    EscribirLog("[ProcesarTCP]", "Cadena: " & Cadena)
+                    EscribirLog("[ProcesarTCP]", "Forzar = " & Forzar2 & " Cadena: " & Cadena)
 
                     If Forzar2 = False Then
                         If NuevaFila > 1800 Or FechaFila.ToString("yyyyMMdd") <> Date.Now.ToString("yyyyMMdd") Then
@@ -558,6 +558,49 @@ Inicio:
                         NuevaFila = NuevaFila + 1
                         Me.Grilla.Refresh()
                     End If
+
+                    Call CreaNombreArchivo()
+                    'Detectar Cadena Duplicada.
+                    If Not System.IO.File.Exists(DirectorioArchivos & ArchivoHST) Then
+                        Dim fs As System.IO.FileStream
+                        fs = System.IO.File.Create(DirectorioArchivos & ArchivoHST)
+                        If Err.Number <> 0 Then
+                            MsgBox("Error: No se puede crear el archivo histórico." & vbCrLf & Err.Description, vbOKOnly + vbCritical)
+                            Err.Clear()
+                        Else
+                            fs.Close()
+                        End If
+                    End If
+                    Do While True
+                        FileOpen(1, CStr(DirectorioArchivos & ArchivoHST), OpenMode.Input)
+                        If Err.Number <> 0 Then
+                            FileClose(1)
+                            Err.Clear()
+                            If Tiempo <> CStr(TimeValue(Now)) Then
+                                MensajeTextBox.Text = "Esperando liberacion de archivo " & DirectorioArchivos & ArchivoHST & ". (VD) " & Now.ToString("HH:mm:ss")
+                                Tiempo = CStr(TimeValue(Now))
+                            End If
+                        Else
+                            'Input trae de a un registro
+                            Dim CadenaAux As String
+                            Do While EOF(1) = False
+                                CadenaAux = LineInput(1)
+                                If (Cadena.Length >= 65 And CadenaAux.Length >= 65) Then
+                                    Dim c1 As String : Dim c2 As String
+                                    c1 = Cadena.Substring(0, 65)
+                                    c2 = CadenaAux.Substring(0, 65)
+                                    If (c1 = c2) Then
+                                        MensajeTextBox.Text = "Cadena existente: " & Cadena & Now.ToString("HH:mm:ss")
+                                        EscribirLog("[ProcesarTCP]", "Cadena existente: " & Cadena)
+                                        FileClose(1)
+                                        Exit Sub
+                                    End If
+                                End If
+                            Loop
+                            FileClose(1)
+                            Exit Do
+                        End If
+                    Loop
 
                     If Forzar2 = True Then
                         ForzarTemporal = False
@@ -593,7 +636,6 @@ Inicio:
                     End If
                     Err.Clear()
 
-                    Call CreaNombreArchivo()
                     'Open CStr(DirectorioArchivos & ArchivoHST) For Append Access Write Lock Read Write As #1
                     FileOpen(1, CStr(DirectorioArchivos & ArchivoHST), OpenMode.Append, OpenAccess.Write, OpenShare.LockReadWrite)
                     If Err.Number <> 0 Then
@@ -690,7 +732,7 @@ Inicio:
                         Next
 
                         If ErrorCabecera = True Or ErrorDigitos = True Then
-                            EscribirLog("[ProcesarTCP-ErrorCabeceraCtrl-ErrorDigitosCtrl] ", "Cadena: " & Cadena)
+                            EscribirLog("[ProcesarTCP] ", "Error en cabecera o digito de control. Cadena: " & Cadena)
                             CadenaParaImprimir = Cadena
                             'Dim i As Int32
                             'For i = 0 To Grilla.ColumnCount - 1
@@ -802,6 +844,7 @@ Inicio:
                 End If
                 server.Close()
             Else
+                EscribirLog("[Detener]", "Hay un mensaje pendiente de procesamiento. Intente más tarde.")
                 MsgBox("Hay un mensaje pendiente de procesamiento. Intente más tarde.", vbOKOnly + vbCritical)
             End If
         Else
@@ -891,17 +934,24 @@ Inicio:
 
     Private Sub BBTemp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BBTemp.Click
         ForzarTemporal = True
+        EscribirLog("[BBTemp_Click]", "")
         If (Not TCPHabilitado) Then
             ProcesarSerial()
+        Else
+            ProcesarTCP("")
         End If
     End Sub
 
     Private Sub SalirButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalirButton.Click
+        EscribirLog("[SalirButton_Click]", "")
         Detener()
-        End
+        If (message = "") Then
+            End
+        End If
     End Sub
 
     Private Sub ConfigurarButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConfigurarButton.Click
+        EscribirLog("[ConfigurarButton_Click]", "")
         Configurar()
     End Sub
 
@@ -995,6 +1045,7 @@ Inicio:
         If (message <> Nothing) Then
             If (message <> "") Then
                 ProcesarTCP(message)
+                EscribirLog("[Timer1_Elapsed]", "Confirmar mensaje recibido (ACK).")
                 message = ""
                 client.Send(System.Text.ASCIIEncoding.ASCII.GetBytes("ACK"))
             End If

@@ -77,7 +77,7 @@ Public Module Modulo
     End Function
 
     Public Sub LeerConfiguración()
-        PathArchINI = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly.Location.ToString()) + "\SecuenciaUnificada.ini"
+        PathArchINI = System.Configuration.ConfigurationManager.AppSettings("PathINI") + "SecuenciaUnificada.ini"
         Dim LectArchINI As New LecturaArchivoINI
 
         Produccion = LectArchINI.IniGet(PathArchINI, "MAIN", "Produccion")
@@ -114,45 +114,48 @@ Public Module Modulo
         DirContingencia2 = LectArchINI.IniGet(PathArchINI, "MAIN", "DIRECTORIOCONTINGENCIA2")
 
         ArchLog = LectArchINI.IniGet(PathArchINI, "MAIN", "ArchLog")
-
     End Sub
 
     Public Sub GrabarConfiguracion()
-        PathArchINI = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly.Location.ToString()) + "\SecuenciaUnificada.ini"
-        Dim LectArchINI As New LecturaArchivoINI
+        Try
+            PathArchINI = System.Configuration.ConfigurationManager.AppSettings("PathINI") + "SecuenciaUnificada.ini"
+            Dim LectArchINI As New LecturaArchivoINI
 
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "DIRECTORIOARCHIVOS", DirectorioArchivos)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "DIRECTORIOARCHIVOS", DirectorioArchivos)
 
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "SerialPuerto", SerialPuerto)
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "SerialBaudRate", SerialBaudRate)
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "SerialParity", SerialParity)
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "SerialDataBits", SerialDataBits)
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "SerialStopBits", SerialStopBits)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "SerialPuerto", SerialPuerto)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "SerialBaudRate", SerialBaudRate)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "SerialParity", SerialParity)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "SerialDataBits", SerialDataBits)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "SerialStopBits", SerialStopBits)
 
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "TCPHabilitado", TCPHabilitado)
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "TCPIP", TCPIP)
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "TCPPuerto", TCPPuerto)
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "TCPCantBytesBuffer", TCPCantBytesBuffer)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "TCPHabilitado", TCPHabilitado)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "TCPIP", TCPIP)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "TCPPuerto", TCPPuerto)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "TCPCantBytesBuffer", TCPCantBytesBuffer)
 
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "ARCH1", Arch1)
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "ARCH2", Arch2)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "ARCH1", Arch1)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "ARCH2", Arch2)
 
-        Dim Contador As Integer
-        For Contador = 0 To 2
-            LectArchINI.IniWrite(PathArchINI, "MAIN", "ARCH1HDR" & CStr(Contador), Header1(Contador))
-        Next
-        For Contador = 0 To 2
-            LectArchINI.IniWrite(PathArchINI, "MAIN", "ARCH2HDR" & CStr(Contador), Header2(Contador))
-        Next
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "IMPERROR1", Impre1)
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "IMPERROR2", Impre2)
+            Dim Contador As Integer
+            For Contador = 0 To 2
+                LectArchINI.IniWrite(PathArchINI, "MAIN", "ARCH1HDR" & CStr(Contador), Header1(Contador))
+            Next
+            For Contador = 0 To 2
+                LectArchINI.IniWrite(PathArchINI, "MAIN", "ARCH2HDR" & CStr(Contador), Header2(Contador))
+            Next
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "IMPERROR1", Impre1)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "IMPERROR2", Impre2)
 
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "TEMPORARIOSECUENCIAS", ArchTempSec)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "TEMPORARIOSECUENCIAS", ArchTempSec)
 
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "DIRECTORIOCONTINGENCIA", DirContingencia)
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "DIRECTORIOCONTINGENCIA2", DirContingencia2)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "DIRECTORIOCONTINGENCIA", DirContingencia)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "DIRECTORIOCONTINGENCIA2", DirContingencia2)
 
-        LectArchINI.IniWrite(PathArchINI, "MAIN", "ArchLog", ArchLog)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "ArchLog", ArchLog)
+        Catch ex As Exception
+            MsgBox(ex.Message, vbOKOnly + vbCritical)
+        End Try
     End Sub
 
 End Module
