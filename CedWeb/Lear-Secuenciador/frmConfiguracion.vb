@@ -58,6 +58,7 @@ Public Class frmConfiguracion
         ComboBoxImpreError2.Text = Impre2
 
         ArchLogTextBox.Text = ArchLog
+        PathArchINITextBox.Text = PathArchINI
     End Sub
 
     Private Sub AceptarButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AceptarButton.Click

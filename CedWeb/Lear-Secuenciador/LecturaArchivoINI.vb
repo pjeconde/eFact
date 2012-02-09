@@ -44,5 +44,8 @@ Public Class LecturaArchivoINI
         '
         Dim ret As Boolean
         ret = WritePrivateProfileString(sSection, sKeyName, sValue, sFileName)
+        If (ret = False) Then
+            MessageBox.Show("No se pudo grabar la key: " & sKeyName & " con el valor: " & sValue & vbCrLf & "Archivo: " & sFileName, "Configuracion")
+        End If
     End Sub
 End Class
