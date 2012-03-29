@@ -319,7 +319,7 @@ Partial Class frmSecuenciador
         Me.Controls.Add(Me.GrillaPanel)
         Me.Controls.Add(Me.BarraPanel)
         Me.Name = "frmSecuenciador"
-        Me.Text = "+"
+        Me.Text = "Secuenciador"
         Me.BarraPanel.ResumeLayout(False)
         Me.BarraSplitContainer.Panel1.ResumeLayout(False)
         Me.BarraSplitContainer.Panel2.ResumeLayout(False)

@@ -4,6 +4,8 @@ Imports System.IO
 Imports System.Drawing.Printing
 Imports System.Net
 Imports System.Net.Sockets
+Imports System.Globalization
+Imports System.Threading
 
 Public Class frmSecuenciador
     'Inherits System.Windows.Forms.Form
@@ -23,6 +25,7 @@ Public Class frmSecuenciador
     Dim ForzarTemporal As Boolean
 
     Dim NuevaFila As Integer
+    Dim FechaFila As Date
 
     Dim DatosDeConfiguracion As String
 
@@ -38,6 +41,7 @@ Public Class frmSecuenciador
 
         NuevaFila = 1
         Grilla.CurrentCell = Grilla(0, 0)
+        FechaFila = Date.Now
 
         Me.Show()
         ForzarTemporal = False
@@ -216,7 +220,6 @@ Public Class frmSecuenciador
         Dim C As String = ""
 
         Dim Tiempo As String = ""
-        Dim FechaFila As Date
 
         Dim CadenaFin As String
         Dim CadenaBpcs As String
@@ -229,8 +232,6 @@ Public Class frmSecuenciador
         Dim ErrorRed As Boolean
         Dim HayDatos As Boolean
         Dim Forzar2 As Boolean
-
-        FechaFila = Date.Now
 
         N = 0
 
@@ -278,6 +279,8 @@ Inicio:
                         Grilla.ClearSelection()
                         Grilla.CurrentCell = Grilla.Rows(Grilla.RowCount - 1).Cells(0)
                         Grilla.Rows(Grilla.RowCount - 1).Selected = True
+
+                        FechaFila = Mid(CadenaSerial, 11, 9)
 
                         NuevaFila = NuevaFila + 1
                         Me.Grilla.Refresh()
@@ -483,7 +486,6 @@ Inicio:
         Dim N As Integer
         Dim C As String = ""
         Dim Tiempo As String = ""
-        Dim FechaFila As Date
 
         Dim Cadena As String = ""
         Dim CadenaFin As String
@@ -498,7 +500,6 @@ Inicio:
         Dim HayDatos As Boolean
         Dim Forzar2 As Boolean
 
-        FechaFila = Date.Now
         Cadena = ""
         N = 0
 
@@ -554,6 +555,8 @@ Inicio:
                         Grilla.ClearSelection()
                         Grilla.CurrentCell = Grilla.Rows(Grilla.RowCount - 1).Cells(0)
                         Grilla.Rows(Grilla.RowCount - 1).Selected = True
+
+                        FechaFila = Mid(Cadena, 11, 9)
 
                         NuevaFila = NuevaFila + 1
                         Me.Grilla.Refresh()
@@ -872,7 +875,7 @@ Inicio:
             End If
         Catch ex As Exception
             EscribirLog("[OnAccept]", "Mensaje: " & ex.Message)
-            server.Close()
+            ReiniciarSocket()
         End Try
     End Sub
 
@@ -881,26 +884,30 @@ Inicio:
             DetencionPermitida = False
             client = ar.AsyncState
             client.EndReceive(ar)
-            client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnReceive), client)
-            'client.Receive(bytes, 0, bytes.Length, SocketFlags.None)
-            'client.Close()
-            'server.Close()
-
+            client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnEndReceive), client)
             Dim a As String
             a = System.Text.ASCIIEncoding.ASCII.GetString(bytes)
             message = String.Copy(a.ToString())
             Debug.WriteLine(message)
             Array.Clear(bytes, 0, CInt(TCPCantBytesBuffer))
-
         Catch ex As Exception
             EscribirLog("[OnReceive]", "Mensaje: " + ex.Message)
             If (client IsNot Nothing) Then
                 client.Close()
             End If
-            server.Close()
+            ReiniciarSocket()
         Finally
             Timer1.Enabled = True
         End Try
+    End Sub
+
+    Private Sub OnEndReceive(ByVal ar As IAsyncResult)
+        ReiniciarSocket()
+    End Sub
+
+    Private Sub ReiniciarSocket()
+        server.Close()
+        OnStart()
     End Sub
 
     Private Sub OnStart()
@@ -1040,16 +1047,28 @@ Inicio:
     End Sub
 
     Private Sub Timer1_Elapsed(ByVal sender As System.Object, ByVal e As System.Timers.ElapsedEventArgs) Handles Timer1.Elapsed
-        Timer1.Enabled = False
-        'Procesar mensaje recibido. Utilizará el message o archivos temporales.
-        If (message <> Nothing) Then
-            If (message <> "") Then
-                ProcesarTCP(message)
-                EscribirLog("[Timer1_Elapsed]", "Confirmar mensaje recibido (ACK).")
-                message = ""
-                client.Send(System.Text.ASCIIEncoding.ASCII.GetBytes("ACK"))
+        Try
+            Timer1.Enabled = False
+            'Procesar mensaje recibido. Utilizará el message o archivos temporales.
+            If (message <> Nothing) Then
+                If (message <> "") Then
+                    ProcesarTCP(message)
+                    EscribirLog("[Timer1_Elapsed]", "Confirmar mensaje recibido (ACK).")
+                    message = ""
+                    Try
+                        client.Send(System.Text.ASCIIEncoding.ASCII.GetBytes("ACK"))
+                    Catch ex As Exception
+                        EscribirLog("[Timer1_Elapsed] Send ACK ", ex.Message)
+                    End Try
+                End If
+                If (client IsNot Nothing) Then
+                    client.Close()
+                End If
             End If
-        End If
-        DetencionPermitida = True
+        Catch ex As Exception
+            EscribirLog("[Timer1_Elapsed]", ex.Message)
+        Finally
+            DetencionPermitida = True
+        End Try
     End Sub
 End Class

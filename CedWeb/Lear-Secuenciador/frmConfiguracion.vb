@@ -87,6 +87,14 @@ Public Class frmConfiguracion
         DirContingencia2 = DirectorioContingencia2TextBox.Text
         DirectorioArchivos = DirectorioArchivosHisTextBox.Text
 
+        Header1(0) = Header10TextBox.Text
+        Header1(1) = Header11TextBox.Text
+        Header1(2) = Header12TextBox.Text
+
+        Header2(0) = Header20TextBox.Text
+        Header2(1) = Header21TextBox.Text
+        Header2(2) = Header22TextBox.Text
+
         Impre1 = ComboBoxImpreError1.Text
         Impre2 = ComboBoxImpreError2.Text
 
