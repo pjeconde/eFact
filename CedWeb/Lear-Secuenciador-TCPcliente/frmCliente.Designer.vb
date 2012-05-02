@@ -31,12 +31,12 @@ Partial Class frmCliente
         Me.ConectarButton = New System.Windows.Forms.Button
         Me.Label1 = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
-        Me.Timer = New System.Timers.Timer
-        CType(Me.Timer, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.DetenerButton = New System.Windows.Forms.Button
         Me.SuspendLayout()
         '
         'EnviarMensajeButton
         '
+        Me.EnviarMensajeButton.Enabled = False
         Me.EnviarMensajeButton.Location = New System.Drawing.Point(12, 347)
         Me.EnviarMensajeButton.Name = "EnviarMensajeButton"
         Me.EnviarMensajeButton.Size = New System.Drawing.Size(481, 27)
@@ -72,7 +72,7 @@ Partial Class frmCliente
         'PuertoTextBox
         '
         Me.PuertoTextBox.AcceptsReturn = True
-        Me.PuertoTextBox.Location = New System.Drawing.Point(274, 15)
+        Me.PuertoTextBox.Location = New System.Drawing.Point(258, 16)
         Me.PuertoTextBox.Name = "PuertoTextBox"
         Me.PuertoTextBox.Size = New System.Drawing.Size(73, 20)
         Me.PuertoTextBox.TabIndex = 4
@@ -80,9 +80,9 @@ Partial Class frmCliente
         '
         'ConectarButton
         '
-        Me.ConectarButton.Location = New System.Drawing.Point(399, 12)
+        Me.ConectarButton.Location = New System.Drawing.Point(357, 11)
         Me.ConectarButton.Name = "ConectarButton"
-        Me.ConectarButton.Size = New System.Drawing.Size(206, 23)
+        Me.ConectarButton.Size = New System.Drawing.Size(121, 23)
         Me.ConectarButton.TabIndex = 5
         Me.ConectarButton.Text = "Conectar"
         Me.ConectarButton.UseVisualStyleBackColor = True
@@ -99,23 +99,27 @@ Partial Class frmCliente
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(227, 18)
+        Me.Label2.Location = New System.Drawing.Point(211, 18)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(41, 13)
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "Puerto:"
         '
-        'Timer
+        'DetenerButton
         '
-        Me.Timer.AutoReset = False
-        Me.Timer.Enabled = True
-        Me.Timer.SynchronizingObject = Me
+        Me.DetenerButton.Location = New System.Drawing.Point(484, 11)
+        Me.DetenerButton.Name = "DetenerButton"
+        Me.DetenerButton.Size = New System.Drawing.Size(121, 23)
+        Me.DetenerButton.TabIndex = 8
+        Me.DetenerButton.Text = "Detener"
+        Me.DetenerButton.UseVisualStyleBackColor = True
         '
         'frmCliente
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(621, 386)
+        Me.Controls.Add(Me.DetenerButton)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ConectarButton)
@@ -131,7 +135,6 @@ Partial Class frmCliente
         Me.Name = "frmCliente"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Text = "Secuenciador TCP cliente"
-        CType(Me.Timer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -144,6 +147,6 @@ Partial Class frmCliente
     Friend WithEvents ConectarButton As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Timer As System.Timers.Timer
+    Friend WithEvents DetenerButton As System.Windows.Forms.Button
 
 End Class

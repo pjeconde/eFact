@@ -11,37 +11,38 @@ Public Class frmCliente
     Dim client As Socket
     Dim host As String
     Dim port As Integer
-    Public SocketDesconectar As Boolean
-    Public botonConectar As Boolean
+    Public Detenido As Boolean
     Public Renglon As Int32
 
     Private Sub frmCliente_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         CheckForIllegalCrossThreadCalls = False
-        SocketDesconectar = False
-        botonConectar = True
+        Detenido = True
+        ConectarButton.Enabled = True
+        DetenerButton.Enabled = False
     End Sub
 
     Private Sub ConectarButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConectarButton.Click
+        Detenido = False
+        Controles()
+        Renglon = 1
         Conectar()
+        Do While Detenido = False
+            Enviar()
+            System.Threading.Thread.Sleep(4000)
+        Loop
     End Sub
 
     Private Sub Conectar()
         Try
-            Timer.Enabled = False
+            SoyEnvio = False
             host = IPTextBox.Text
             port = PuertoTextBox.Text
-            If (botonConectar) Then
-                client = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-                Dim IP As IPAddress = IPAddress.Parse(host)
-                Dim xIpEndPoint As IPEndPoint = New IPEndPoint(IP, port)
-                client.BeginConnect(xIpEndPoint, New AsyncCallback(AddressOf OnConnect), Nothing)
-                botonConectar = False
-            End If
+            client = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            Dim IP As IPAddress = IPAddress.Parse(host)
+            Dim xIpEndPoint As IPEndPoint = New IPEndPoint(IP, port)
+            client.BeginConnect(xIpEndPoint, New AsyncCallback(AddressOf OnConnect), Nothing)
         Catch ex As Exception
             Debug.WriteLine("ER - Renglon: Conectar " & Renglon & " " & ex.Message)
-            botonConectar = True
-        Finally
-            'Timer.Enabled = True
         End Try
     End Sub
 
@@ -49,21 +50,18 @@ Public Class frmCliente
         Enviar()
     End Sub
 
+    Dim bytes As Byte()
+    Dim SoyEnvio As Boolean
     Private Sub Enviar()
         Try
-            Timer.Enabled = False
-            Renglon = Renglon + 1
-            Dim bytes As Byte() = ASCII.GetBytes("PINRANGER 03-Ene-12  " & Date.Now.ToString("HH:mm") & " MEXICO         " & Renglon.ToString("0000") & " 20122BCHDC2C012388 " + vbNewLine)
-            'client.BeginSend(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnSend), client)
-            client.Send(bytes, 0, bytes.Length, SocketFlags.None)
+            SoyEnvio = True
+            Dim bytes As Byte() = ASCII.GetBytes("PINRANGER 02-May-12  " & Date.Now.ToString("HH:mm") & " MEXICO         " & Renglon.ToString("0000") & " 20122BCHDC2C012388 " + vbNewLine)
+            client.BeginSend(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnSend), client)
+            'client.Send(bytes, 0, bytes.Length, SocketFlags.None)
             Debug.WriteLine("OK - Renglon: " & Renglon)
         Catch ex As Exception
+            Conectar()
             Debug.WriteLine("ER - Renglon: " & Renglon & " " & ex.Message)
-            Renglon = Renglon - 1
-            Timer.Enabled = True
-        Finally
-            SocketDesconectar = True
-            client.Close()
         End Try
     End Sub
 
@@ -72,18 +70,17 @@ Public Class frmCliente
             client.EndConnect(ar)
         Catch ex As Exception
             Debug.WriteLine("ER - Renglon: OnConectar " & Renglon & " " & ex.Message)
-            botonConectar = True
         End Try
     End Sub
 
     Private Sub OnSend(ByVal ar As IAsyncResult)
         Try
             client.EndSend(ar)
+            If (SoyEnvio) Then
+                Renglon = Renglon + 1
+            End If
         Catch ex As Exception
             Debug.WriteLine("ER - Renglon: OnSend: " & Renglon)
-            Renglon = Renglon - 1
-        Finally
-            Timer.Enabled = True
         End Try
     End Sub
 
@@ -91,29 +88,18 @@ Public Class frmCliente
         End
     End Sub
 
-    Private Sub Controles(ByVal Conectar As Boolean)
-        If (Conectar) Then
+    Private Sub Controles()
+        If (Detenido = True) Then
             ConectarButton.Enabled = True
+            DetenerButton.Enabled = False
         Else
             ConectarButton.Enabled = False
+            DetenerButton.Enabled = True
         End If
     End Sub
 
-    Private Sub Timer_Elapsed(ByVal sender As System.Object, ByVal e As System.Timers.ElapsedEventArgs) Handles Timer.Elapsed
-        Timer.Enabled = False
-        Conectar()
-        If (client.Connected) Then
-            Enviar()
-            client.Close()
-        End If
-        If (SocketDesconectar = True) Then
-            If (client IsNot Nothing) Then
-                client.Close()
-            End If
-            SocketDesconectar = False
-            botonConectar = True
-        End If
-        Controles(botonConectar)
-        Timer.Enabled = True
+    Private Sub DetenerButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DetenerButton.Click
+        client.Close()
+        Detenido = True
     End Sub
 End Class
