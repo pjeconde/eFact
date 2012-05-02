@@ -28,6 +28,7 @@ Public Class frmSecuenciador
     Dim FechaFila As Date
 
     Dim DatosDeConfiguracion As String
+    'Dim HayAcceptClient As Boolean
 
     Private Sub frmSecuenciador_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         On Error Resume Next
@@ -56,7 +57,6 @@ Public Class frmSecuenciador
             BBTemp.Enabled = True
         End If
         FileClose(3)
-
     End Sub
 
     Private Sub frmSecuenciador_Shown(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
@@ -868,14 +868,13 @@ Inicio:
     Private Sub OnAccept(ByVal ar As IAsyncResult)
         Try
             If (DetenidoManualmente <> True) Then
-                DetencionPermitida = False
                 client = server.EndAccept(ar)
+                DetencionPermitida = False
                 bytes = New Byte(CInt(TCPCantBytesBuffer)) {}
                 client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnReceive), client)
             End If
         Catch ex As Exception
             EscribirLog("[OnAccept]", "Mensaje: " & ex.Message)
-            ReiniciarSocket()
         End Try
     End Sub
 
@@ -884,7 +883,7 @@ Inicio:
             DetencionPermitida = False
             client = ar.AsyncState
             client.EndReceive(ar)
-            client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnEndReceive), client)
+            client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnReceive), client)
             Dim a As String
             a = System.Text.ASCIIEncoding.ASCII.GetString(bytes)
             message = String.Copy(a.ToString())
@@ -892,17 +891,20 @@ Inicio:
             Array.Clear(bytes, 0, CInt(TCPCantBytesBuffer))
         Catch ex As Exception
             EscribirLog("[OnReceive]", "Mensaje: " + ex.Message)
-            If (client IsNot Nothing) Then
-                client.Close()
-            End If
-            ReiniciarSocket()
         Finally
             Timer1.Enabled = True
         End Try
     End Sub
 
-    Private Sub OnEndReceive(ByVal ar As IAsyncResult)
-        ReiniciarSocket()
+    Private Sub Procesar()
+        ProcesarTCP(message)
+        EscribirLog("[Procesar]", "Confirmar mensaje recibido (ACK).")
+        message = ""
+        Try
+            client.Send(System.Text.ASCIIEncoding.ASCII.GetBytes("ACK"))
+        Catch ex As Exception
+            EscribirLog("[Procesar] Send ACK ", ex.Message)
+        End Try
     End Sub
 
     Private Sub ReiniciarSocket()
@@ -912,7 +914,6 @@ Inicio:
 
     Private Sub OnStart()
         Try
-            DetencionPermitida = True
             server = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
             Dim xEndpoint As IPEndPoint = New IPEndPoint(IPAddress.Any, TCPPuerto)
             server.Bind(xEndpoint)
@@ -922,6 +923,8 @@ Inicio:
         Catch ex As Exception
             EscribirLog("[OnStart]", "Mensaje: " & ex.Message)
             HabilitarBotones(False)
+        Finally
+            DetencionPermitida = True
         End Try
     End Sub
 
@@ -1048,25 +1051,30 @@ Inicio:
 
     Private Sub Timer1_Elapsed(ByVal sender As System.Object, ByVal e As System.Timers.ElapsedEventArgs) Handles Timer1.Elapsed
         Try
-            Timer1.Enabled = False
-            'Procesar mensaje recibido. Utilizará el message o archivos temporales.
-            If (message <> Nothing) Then
-                If (message <> "") Then
-                    ProcesarTCP(message)
-                    EscribirLog("[Timer1_Elapsed]", "Confirmar mensaje recibido (ACK).")
-                    message = ""
-                    Try
-                        client.Send(System.Text.ASCIIEncoding.ASCII.GetBytes("ACK"))
-                    Catch ex As Exception
-                        EscribirLog("[Timer1_Elapsed] Send ACK ", ex.Message)
-                    End Try
-                End If
-                If (client IsNot Nothing) Then
-                    client.Close()
-                End If
+            If (message <> "") Then
+                Procesar()
             End If
         Catch ex As Exception
             EscribirLog("[Timer1_Elapsed]", ex.Message)
+        Finally
+            Timer1.Enabled = False
+            DetencionPermitida = True
+        End Try
+    End Sub
+
+    Private Sub Timer2_Elapsed(ByVal sender As System.Object, ByVal e As System.Timers.ElapsedEventArgs) Handles Timer2.Elapsed
+        Try
+            DetencionPermitida = False
+            If (DetenidoManualmente = False) Then
+                If (message = "") Then
+                    If (client IsNot Nothing) Then
+                        client.Close()
+                    End If
+                    ReiniciarSocket()
+                End If
+            End If
+        Catch ex As Exception
+            EscribirLog("[Timer2_Elapsed]", ex.Message)
         Finally
             DetencionPermitida = True
         End Try
