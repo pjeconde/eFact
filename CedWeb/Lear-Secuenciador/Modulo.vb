@@ -4,6 +4,7 @@ Public Module Modulo
 
     Public DirectorioArchivos As String         'Antes llamado DirInstall 
     Public PathArchINI As String
+    Public PathSecuenciasRecibidas As String
 
     Public SerialPuerto As String
     Public SerialBaudRate As String
@@ -114,6 +115,7 @@ Public Module Modulo
         DirContingencia2 = LectArchINI.IniGet(PathArchINI, "MAIN", "DIRECTORIOCONTINGENCIA2")
 
         ArchLog = LectArchINI.IniGet(PathArchINI, "MAIN", "ArchLog")
+        PathSecuenciasRecibidas = LectArchINI.IniGet(PathArchINI, "MAIN", "PathSecuenciasRecibidas")
     End Sub
 
     Public Sub GrabarConfiguracion()
@@ -153,6 +155,8 @@ Public Module Modulo
             LectArchINI.IniWrite(PathArchINI, "MAIN", "DIRECTORIOCONTINGENCIA2", DirContingencia2)
 
             LectArchINI.IniWrite(PathArchINI, "MAIN", "ArchLog", ArchLog)
+            LectArchINI.IniWrite(PathArchINI, "MAIN", "PathSecuenciasRecibidas", PathSecuenciasRecibidas)
+
         Catch ex As Exception
             MsgBox(ex.Message, vbOKOnly + vbCritical)
         End Try
