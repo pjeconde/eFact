@@ -1009,7 +1009,7 @@ Inicio:
             Dim FecAux As DateTime
             FecAux = ss.ContadorDiarioFecha.AddHours(3)
             If (ss.DetencionPermitida = True) Then
-                If (Convert.ToInt64(Date.Now.ToString("yyyyMMddhhmmss")) > Convert.ToInt64(FecAux.ToString("yyyyMMddhhmmss"))) Then
+                If (Convert.ToInt64(Date.Now.ToString("yyyyMMddHHmmss")) > Convert.ToInt64(FecAux.ToString("yyyyMMddHHmmss"))) Then
                     ss.DetenerSocket()
                     ss = New SocketSecuenciador()
                     ssThread = New Thread(AddressOf ss.DoWork)
