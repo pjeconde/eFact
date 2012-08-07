@@ -50,7 +50,6 @@ Partial Class frmSecuenciador
         Me.Fin = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.MensajeTextBox = New System.Windows.Forms.TextBox
         Me.Timer1 = New System.Timers.Timer
-        Me.Timer2 = New System.Timers.Timer
         Me.BarraPanel.SuspendLayout()
         Me.BarraSplitContainer.Panel1.SuspendLayout()
         Me.BarraSplitContainer.Panel2.SuspendLayout()
@@ -62,7 +61,6 @@ Partial Class frmSecuenciador
         Me.GrillaSplitContainer.SuspendLayout()
         CType(Me.Grilla, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Timer1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Timer2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Puerto
@@ -311,13 +309,9 @@ Partial Class frmSecuenciador
         'Timer1
         '
         Me.Timer1.AutoReset = False
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 2000
         Me.Timer1.SynchronizingObject = Me
-        '
-        'Timer2
-        '
-        Me.Timer2.Enabled = True
-        Me.Timer2.Interval = 150000
-        Me.Timer2.SynchronizingObject = Me
         '
         'frmSecuenciador
         '
@@ -341,7 +335,6 @@ Partial Class frmSecuenciador
         Me.GrillaSplitContainer.ResumeLayout(False)
         CType(Me.Grilla, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Timer1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Timer2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -372,6 +365,5 @@ Partial Class frmSecuenciador
     Friend WithEvents RecibirButton As System.Windows.Forms.Button
     Friend WithEvents BarraTextBox As System.Windows.Forms.TextBox
     Friend WithEvents Timer1 As System.Timers.Timer
-    Friend WithEvents Timer2 As System.Timers.Timer
 
 End Class
