@@ -74,6 +74,8 @@ Partial Class frmConfiguracion
         Me.Header12TextBox = New System.Windows.Forms.TextBox
         Me.Header11TextBox = New System.Windows.Forms.TextBox
         Me.Header10TextBox = New System.Windows.Forms.TextBox
+        Me.Label19 = New System.Windows.Forms.Label
+        Me.PathSecuenciasRecibidasTextBox = New System.Windows.Forms.TextBox
         Me.BotonesPanel.SuspendLayout()
         Me.ParametrosPanel.SuspendLayout()
         Me.TCPGroupBox.SuspendLayout()
@@ -85,7 +87,7 @@ Partial Class frmConfiguracion
         Me.BotonesPanel.Controls.Add(Me.AceptarButton)
         Me.BotonesPanel.Controls.Add(Me.SalirButton)
         Me.BotonesPanel.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.BotonesPanel.Location = New System.Drawing.Point(0, 478)
+        Me.BotonesPanel.Location = New System.Drawing.Point(0, 503)
         Me.BotonesPanel.Name = "BotonesPanel"
         Me.BotonesPanel.Size = New System.Drawing.Size(784, 47)
         Me.BotonesPanel.TabIndex = 44
@@ -112,6 +114,8 @@ Partial Class frmConfiguracion
         '
         'ParametrosPanel
         '
+        Me.ParametrosPanel.Controls.Add(Me.PathSecuenciasRecibidasTextBox)
+        Me.ParametrosPanel.Controls.Add(Me.Label19)
         Me.ParametrosPanel.Controls.Add(Me.Label18)
         Me.ParametrosPanel.Controls.Add(Me.PathArchINITextBox)
         Me.ParametrosPanel.Controls.Add(Me.ArchLogTextBox)
@@ -147,13 +151,13 @@ Partial Class frmConfiguracion
         Me.ParametrosPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ParametrosPanel.Location = New System.Drawing.Point(0, 0)
         Me.ParametrosPanel.Name = "ParametrosPanel"
-        Me.ParametrosPanel.Size = New System.Drawing.Size(784, 478)
+        Me.ParametrosPanel.Size = New System.Drawing.Size(784, 503)
         Me.ParametrosPanel.TabIndex = 45
         '
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(175, 446)
+        Me.Label18.Location = New System.Drawing.Point(172, 472)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(131, 13)
         Me.Label18.TabIndex = 79
@@ -162,7 +166,7 @@ Partial Class frmConfiguracion
         'PathArchINITextBox
         '
         Me.PathArchINITextBox.BackColor = System.Drawing.SystemColors.Control
-        Me.PathArchINITextBox.Location = New System.Drawing.Point(312, 443)
+        Me.PathArchINITextBox.Location = New System.Drawing.Point(312, 469)
         Me.PathArchINITextBox.Name = "PathArchINITextBox"
         Me.PathArchINITextBox.ReadOnly = True
         Me.PathArchINITextBox.Size = New System.Drawing.Size(460, 20)
@@ -559,11 +563,28 @@ Partial Class frmConfiguracion
         Me.Header10TextBox.Size = New System.Drawing.Size(150, 20)
         Me.Header10TextBox.TabIndex = 44
         '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(121, 446)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(182, 13)
+        Me.Label19.TabIndex = 80
+        Me.Label19.Text = "Ubicación de Secuencias Recibidas:"
+        '
+        'PathSecuenciasRecibidasTextBox
+        '
+        Me.PathSecuenciasRecibidasTextBox.BackColor = System.Drawing.SystemColors.Window
+        Me.PathSecuenciasRecibidasTextBox.Location = New System.Drawing.Point(312, 443)
+        Me.PathSecuenciasRecibidasTextBox.Name = "PathSecuenciasRecibidasTextBox"
+        Me.PathSecuenciasRecibidasTextBox.Size = New System.Drawing.Size(460, 20)
+        Me.PathSecuenciasRecibidasTextBox.TabIndex = 81
+        '
         'frmConfiguracion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(784, 525)
+        Me.ClientSize = New System.Drawing.Size(784, 550)
         Me.Controls.Add(Me.ParametrosPanel)
         Me.Controls.Add(Me.BotonesPanel)
         Me.Name = "frmConfiguracion"
@@ -630,4 +651,6 @@ Partial Class frmConfiguracion
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents PathArchINITextBox As System.Windows.Forms.TextBox
     Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents PathSecuenciasRecibidasTextBox As System.Windows.Forms.TextBox
+    Friend WithEvents Label19 As System.Windows.Forms.Label
 End Class

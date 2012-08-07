@@ -59,6 +59,7 @@ Public Class frmConfiguracion
 
         ArchLogTextBox.Text = ArchLog
         PathArchINITextBox.Text = PathArchINI
+        PathSecuenciasRecibidasTextBox.Text = PathSecuenciasRecibidas
     End Sub
 
     Private Sub AceptarButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AceptarButton.Click
@@ -99,6 +100,7 @@ Public Class frmConfiguracion
         Impre2 = ComboBoxImpreError2.Text
 
         ArchLog = ArchLogTextBox.Text
+        PathSecuenciasRecibidas = PathSecuenciasRecibidasTextBox.Text
 
         GrabarConfiguracion()
         MsgBox("Información guardada satisfactoriamente.", MsgBoxStyle.Information, "Información")

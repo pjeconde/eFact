@@ -62,7 +62,7 @@ Public Class SocketSecuenciador
                 ContadorDiario += 1
             End If
             ContadorDiarioFecha = DateTime.Now
-            fs = System.IO.File.Create(DirectorioArchivos + "\RecibidosSinProcesar\" + DateTime.Now.ToString("yyyyMMddhhmmss") + "-" + ContadorDiario.ToString("00000") + ".txt")
+            fs = System.IO.File.Create(PathSecuenciasRecibidas + "RecibidosSinProcesar\" + DateTime.Now.ToString("yyyyMMddhhmmss") + "-" + ContadorDiario.ToString("00000") + ".txt")
             fs.Write(bytes, 0, bytes.Length)
             fs.Close()
             client.Send(System.Text.ASCIIEncoding.ASCII.GetBytes("ACK"))

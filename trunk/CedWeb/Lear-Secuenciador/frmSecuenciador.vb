@@ -27,12 +27,14 @@ Public Class frmSecuenciador
     Dim DatosDeConfiguracion As String
     Dim ssThread As System.Threading.Thread
     Dim ss As SocketSecuenciador
+    Dim YaDepuro As Boolean
 
     Private Sub frmSecuenciador_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         On Error Resume Next
 
         'CheckForIllegalCrossThreadCalls = False
         CadenaSerial = ""
+        YaDepuro = False
 
         LeerConfiguración()
         DatosBarra()
@@ -514,22 +516,18 @@ Inicio:
         Forzar2 = False
 
         'Buscar el primer archivo SinProcesar por orden de llegada
-        Dim directorio As System.IO.Directory
         Dim archivosLista As String()
-        archivosLista = directorio.GetFiles(DirectorioArchivos & "RecibidosSinProcesar")
+        BufferCaracteres = ""
+        Message = ""
+        archivosLista = Directory.GetFiles(PathSecuenciasRecibidas & "RecibidosSinProcesar")
         If archivosLista.Length <> 0 Then
             Dim sr As System.IO.StreamReader = New System.IO.StreamReader(archivosLista(0))
             BufferCaracteres = sr.ReadToEnd()
             Message = BufferCaracteres
             sr.Close()
             Dim file As FileInfo = New FileInfo(archivosLista(0))
-            file.MoveTo(DirectorioArchivos & "RecibidosProcesados\" & file.Name)
+            file.MoveTo(PathSecuenciasRecibidas & "RecibidosProcesados\" & file.Name)
         End If
-
-        'Dim hg As String
-        'hg = DateTime.Now.AddSeconds(10).ToString("hhmmss")
-        'Do Until Convert.ToInt32(DateTime.Now.ToString("hhmmss")) > Convert.ToInt32(hg)
-        'Loop
 
         Dim BufferPosicion As Integer = 0
         N = BufferCaracteres.Length
@@ -1006,8 +1004,9 @@ Inicio:
         Try
             Timer1.Enabled = False
             ProcesarTCP()
+            'VERICAR SI NO HAY ACTIVIDAD POR (1 HORAS), PARA REINICIAR EL SERVICIO.
             Dim FecAux As DateTime
-            FecAux = ss.ContadorDiarioFecha.AddHours(3)
+            FecAux = ss.ContadorDiarioFecha.AddHours(1)
             If (ss.DetencionPermitida = True) Then
                 If (Convert.ToInt64(Date.Now.ToString("yyyyMMddHHmmss")) > Convert.ToInt64(FecAux.ToString("yyyyMMddHHmmss"))) Then
                     ss.DetenerSocket()
@@ -1015,6 +1014,31 @@ Inicio:
                     ssThread = New Thread(AddressOf ss.DoWork)
                     ssThread.Start()
                 End If
+            End If
+            'DEPURAR ARCHIVOS RECIBIDOS PROCESADOS, TODOS LOS (VIERNES), 
+            'DEJANDO SOLO LOS DEL DIA Y DEL DIA ANTERIOR (JUEVES).
+            Dim archivosLista As String()
+            Dim i As Int32
+            If (DateTime.Now.DayOfWeek = DayOfWeek.Friday) Then
+                If (YaDepuro = False) Then
+                    YaDepuro = True
+                    archivosLista = Directory.GetFiles(PathSecuenciasRecibidas & "RecibidosProcesados")
+                    For i = 0 To archivosLista.Length - 1
+                        If archivosLista.Length <> 0 Then
+                            Dim file As FileInfo = New FileInfo(archivosLista(i))
+                            Dim fechaArch As DateTime
+                            Try
+                                fechaArch = Convert.ToDateTime(file.Name.Substring(6, 2) + "/" + file.Name.Substring(4, 2) + "/" + file.Name.Substring(0, 4))
+                                If (fechaArch < DateTime.Today.AddDays(-1)) Then
+                                    file.Delete()
+                                End If
+                            Catch ex As Exception
+                            End Try
+                        End If
+                    Next i
+                End If
+            Else
+                YaDepuro = False
             End If
         Catch ex As Exception
             EscribirLog("[Timer1_Elapsed]", ex.Message)
