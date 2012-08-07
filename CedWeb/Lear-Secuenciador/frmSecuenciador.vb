@@ -8,9 +8,6 @@ Imports System.Globalization
 Imports System.Threading
 
 Public Class frmSecuenciador
-    'Inherits System.Windows.Forms.Form
-    'Dim WithEvents WinSockServer As New TCPServidor()
-
     Dim ArchivoHST As String
     Dim ArchSemaforo As String
     Dim ArchDatos As String
@@ -28,7 +25,8 @@ Public Class frmSecuenciador
     Dim FechaFila As Date
 
     Dim DatosDeConfiguracion As String
-    'Dim HayAcceptClient As Boolean
+    Dim ssThread As System.Threading.Thread
+    Dim ss As SocketSecuenciador
 
     Private Sub frmSecuenciador_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         On Error Resume Next
@@ -136,10 +134,13 @@ Public Class frmSecuenciador
     End Sub
 
     Private Sub AbrirPuertos()
-        If (TCPHabilitado) Then
-            OnStart()
-        Else
-            Try
+        Try
+            If (TCPHabilitado) Then
+                ss = New SocketSecuenciador()
+                ssThread = New Thread(AddressOf ss.DoWork)
+                ssThread.Start()
+                HabilitarBotones(True)
+            Else
                 If Not Puerto.IsOpen Then
                     Puerto.PortName = "COM" & SerialPuerto
                     Puerto.BaudRate = SerialBaudRate
@@ -159,11 +160,11 @@ Public Class frmSecuenciador
                     Puerto.Open()
                     HabilitarBotones(True)
                 End If
-            Catch ex As Exception
-                MessageBox.Show(ex.Message, "Secuenciador")
-                HabilitarBotones(False)
-            End Try
-        End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "Secuenciador")
+            HabilitarBotones(False)
+        End Try
     End Sub
 
     Private Sub Configurar()
@@ -481,7 +482,7 @@ Inicio:
         End While
     End Sub
 
-    Private Sub ProcesarTCP(ByVal BufferCaracteres As String)
+    Private Sub ProcesarTCP()
         On Error Resume Next
         Dim N As Integer
         Dim C As String = ""
@@ -500,6 +501,9 @@ Inicio:
         Dim HayDatos As Boolean
         Dim Forzar2 As Boolean
 
+        Dim BufferCaracteres As String
+        Dim Message As String
+
         Cadena = ""
         N = 0
 
@@ -509,6 +513,24 @@ Inicio:
         HayDatos = False        'Comienza sin datos en el temporal
         Forzar2 = False
 
+        'Buscar el primer archivo SinProcesar por orden de llegada
+        Dim directorio As System.IO.Directory
+        Dim archivosLista As String()
+        archivosLista = directorio.GetFiles(DirectorioArchivos & "RecibidosSinProcesar")
+        If archivosLista.Length <> 0 Then
+            Dim sr As System.IO.StreamReader = New System.IO.StreamReader(archivosLista(0))
+            BufferCaracteres = sr.ReadToEnd()
+            Message = BufferCaracteres
+            sr.Close()
+            Dim file As FileInfo = New FileInfo(archivosLista(0))
+            file.MoveTo(DirectorioArchivos & "RecibidosProcesados\" & file.Name)
+        End If
+
+        'Dim hg As String
+        'hg = DateTime.Now.AddSeconds(10).ToString("hhmmss")
+        'Do Until Convert.ToInt32(DateTime.Now.ToString("hhmmss")) > Convert.ToInt32(hg)
+        'Loop
+
         Dim BufferPosicion As Integer = 0
         N = BufferCaracteres.Length
         While N <> 0 Or ForzarTemporal = True
@@ -516,7 +538,7 @@ Inicio:
             If N Or ForzarTemporal = True Then
                 Forzar2 = ForzarTemporal
                 If Forzar2 = False Then
-                    C = message.Substring(BufferPosicion, 1)
+                    C = Message.Substring(BufferPosicion, 1)
                     BufferPosicion = BufferPosicion + 1
                     C = Chr(CByte(Asc(C)) And CByte(127))       'le saco el MSB
                     If (Asc(C) = 0) Then
@@ -803,14 +825,13 @@ Inicio:
                 End If                  'If (C = "*" Or C = Chr$(13)) And (Trim(Cadena) <> "") Then
             End If                      'If N then...
             Me.MensajeTextBox.Refresh()
-            N = message.Length - BufferPosicion
+            N = Message.Length - BufferPosicion
         End While
     End Sub
 
     Private Sub Recibir()
         If VerificarConfiguracion(TCPHabilitado) Then
             If TCPHabilitado Then
-                DetenidoManualmente = False
                 AbrirPuertos()
             Else
                 If Puerto.IsOpen Then
@@ -837,97 +858,7 @@ Inicio:
         Detener()
     End Sub
 
-    Private Sub Detener()
-        If (TCPHabilitado) Then
-            If (DetencionPermitida = True And message = "") Then
-                DetenidoManualmente = True
-                HabilitarBotones(False)
-                If (client IsNot Nothing) Then
-                    client.Close()
-                End If
-                server.Close()
-            Else
-                EscribirLog("[Detener]", "Hay un mensaje pendiente de procesamiento. Intente más tarde.")
-                MsgBox("Hay un mensaje pendiente de procesamiento. Intente más tarde.", vbOKOnly + vbCritical)
-            End If
-        Else
-            DetenidoManualmente = True
-            If Puerto.IsOpen Then
-                Puerto.Close()
-            End If
-        End If
-    End Sub
-
-    Dim server As Socket
-    Dim client As Socket
-    Dim bytes As Byte()
-    Dim DetenidoManualmente As Boolean
-    Public message As String
-    Public DetencionPermitida As Boolean
-
-    Private Sub OnAccept(ByVal ar As IAsyncResult)
-        Try
-            If (DetenidoManualmente <> True) Then
-                client = server.EndAccept(ar)
-                DetencionPermitida = False
-                bytes = New Byte(CInt(TCPCantBytesBuffer)) {}
-                client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnReceive), client)
-            End If
-        Catch ex As Exception
-            EscribirLog("[OnAccept]", "Mensaje: " & ex.Message)
-        End Try
-    End Sub
-
-    Private Sub OnReceive(ByVal ar As IAsyncResult)
-        Try
-            DetencionPermitida = False
-            client = ar.AsyncState
-            client.EndReceive(ar)
-            client.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnReceive), client)
-            Dim a As String
-            a = System.Text.ASCIIEncoding.ASCII.GetString(bytes)
-            message = String.Copy(a.ToString())
-            Debug.WriteLine(message)
-            Array.Clear(bytes, 0, CInt(TCPCantBytesBuffer))
-        Catch ex As Exception
-            EscribirLog("[OnReceive]", "Mensaje: " + ex.Message)
-        Finally
-            Timer1.Enabled = True
-        End Try
-    End Sub
-
-    Private Sub Procesar()
-        ProcesarTCP(message)
-        EscribirLog("[Procesar]", "Confirmar mensaje recibido (ACK).")
-        message = ""
-        Try
-            client.Send(System.Text.ASCIIEncoding.ASCII.GetBytes("ACK"))
-        Catch ex As Exception
-            EscribirLog("[Procesar] Send ACK ", ex.Message)
-        End Try
-    End Sub
-
-    Private Sub ReiniciarSocket()
-        server.Close()
-        OnStart()
-    End Sub
-
-    Private Sub OnStart()
-        Try
-            server = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
-            Dim xEndpoint As IPEndPoint = New IPEndPoint(IPAddress.Any, TCPPuerto)
-            server.Bind(xEndpoint)
-            server.Listen(1)
-            server.BeginAccept(New AsyncCallback(AddressOf OnAccept), vbNull)
-            HabilitarBotones(True)
-        Catch ex As Exception
-            EscribirLog("[OnStart]", "Mensaje: " & ex.Message)
-            HabilitarBotones(False)
-        Finally
-            DetencionPermitida = True
-        End Try
-    End Sub
-
+    
     Private Sub HabilitarBotones(ByVal EstaEscuchando As Boolean)
         If (EstaEscuchando) Then
             RecibirButton.Enabled = False
@@ -945,20 +876,40 @@ Inicio:
     Private Sub BBTemp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BBTemp.Click
         ForzarTemporal = True
         EscribirLog("[BBTemp_Click]", "")
-        If (Not TCPHabilitado) Then
-            ProcesarSerial()
+        If (TCPHabilitado) Then
+            ProcesarTCP()
         Else
-            ProcesarTCP("")
+            ProcesarSerial()
         End If
     End Sub
 
     Private Sub SalirButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalirButton.Click
         EscribirLog("[SalirButton_Click]", "")
-        Detener()
-        If (message = "") Then
+        Dim resp As Boolean
+        resp = Detener()
+        If (resp) Then
             End
         End If
     End Sub
+
+    Private Function Detener() As Boolean
+        Detener = False
+        If (TCPHabilitado) Then
+            If (ss.DetencionPermitida = True) Then
+                ss.DetenerSocket()
+                HabilitarBotones(False)
+                Detener = True
+            Else
+                EscribirLog("[Detener]", "No es posible detener el secuenciador. Intente más tarde.")
+                MsgBox("No es posible detener el secuenciador. Intente más tarde.", vbOKOnly + vbCritical)
+            End If
+        Else
+            If Puerto.IsOpen Then
+                Puerto.Close()
+                Detener = True
+            End If
+        End If
+    End Function
 
     Private Sub ConfigurarButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ConfigurarButton.Click
         EscribirLog("[ConfigurarButton_Click]", "")
@@ -968,6 +919,35 @@ Inicio:
     Private Sub EnviarSerial_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EnviarButton.Click
         EscribirLog("[EnviarSerial_Click]", "")
         Enviar()
+    End Sub
+
+#Region "Eventos Serial - COMn"
+    Private Sub Puerto_DataReceived(ByVal sender As System.Object, ByVal e As System.IO.Ports.SerialDataReceivedEventArgs) Handles Puerto.DataReceived
+        'MsgBox("Hay datos para recibir")
+        ProcesarSerial()
+    End Sub
+
+    Private Sub Puerto_Disposed(ByVal sender As Object, ByVal e As System.EventArgs) Handles Puerto.Disposed
+        HabilitarBotones(False)
+        'MsgBox("Cerrando Puerto")
+    End Sub
+
+    Private Sub Puerto_ErrorReceived(ByVal sender As Object, ByVal e As System.IO.Ports.SerialErrorReceivedEventArgs) Handles Puerto.ErrorReceived
+        'MsgBox("Recibiendo Error")
+    End Sub
+#End Region
+
+#Region "Imprimir"
+    Private Sub ImprimirPruebaButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ImprimirPruebaButton.Click
+        CadenaParaImprimir = "Prueba de cadena para imprimir"
+        For Each X As String In System.Drawing.Printing.PrinterSettings.InstalledPrinters
+            If X = Impre1 Or X = Impre2 Then
+                Dim pd As New System.Drawing.Printing.PrintDocument
+                pd.PrinterSettings.PrinterName = X
+                AddHandler pd.PrintPage, AddressOf print_PrintPage
+                pd.Print()
+            End If
+        Next
     End Sub
 
     Private Sub print_PrintPage(ByVal sender As Object, ByVal e As PrintPageEventArgs)
@@ -998,34 +978,7 @@ Inicio:
         ' (el valor predeterminado de esta propiedad es False)
         e.HasMorePages = False
     End Sub
-
-#Region "Eventos Serial - COMn"
-    Private Sub Puerto_DataReceived(ByVal sender As System.Object, ByVal e As System.IO.Ports.SerialDataReceivedEventArgs) Handles Puerto.DataReceived
-        'MsgBox("Hay datos para recibir")
-        ProcesarSerial()
-    End Sub
-
-    Private Sub Puerto_Disposed(ByVal sender As Object, ByVal e As System.EventArgs) Handles Puerto.Disposed
-        HabilitarBotones(False)
-        'MsgBox("Cerrando Puerto")
-    End Sub
-
-    Private Sub Puerto_ErrorReceived(ByVal sender As Object, ByVal e As System.IO.Ports.SerialErrorReceivedEventArgs) Handles Puerto.ErrorReceived
-        'MsgBox("Recibiendo Error")
-    End Sub
 #End Region
-
-    Private Sub ImprimirPruebaButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ImprimirPruebaButton.Click
-        CadenaParaImprimir = "Prueba de cadena para imprimir"
-        For Each X As String In System.Drawing.Printing.PrinterSettings.InstalledPrinters
-            If X = Impre1 Or X = Impre2 Then
-                Dim pd As New System.Drawing.Printing.PrintDocument
-                pd.PrinterSettings.PrinterName = X
-                AddHandler pd.PrintPage, AddressOf print_PrintPage
-                pd.Print()
-            End If
-        Next
-    End Sub
 
     Private Sub DatosBarra()
         If (Produccion) Then
@@ -1036,7 +989,7 @@ Inicio:
             DatosDeConfiguracion = "DESA"
         End If
         If (TCPHabilitado) Then
-            bytes = New Byte(CInt(TCPCantBytesBuffer)) {}
+            'bytes = New Byte(CInt(TCPCantBytesBuffer)) {}
             DatosDeConfiguracion += " Configuración TCP IP: Puerto " & TCPPuerto & "  Cant.Bytes Buffer: " & TCPCantBytesBuffer
             EnviarButton.Visible = False
             Timer1.Enabled = True
@@ -1051,32 +1004,22 @@ Inicio:
 
     Private Sub Timer1_Elapsed(ByVal sender As System.Object, ByVal e As System.Timers.ElapsedEventArgs) Handles Timer1.Elapsed
         Try
-            If (message <> "") Then
-                Procesar()
+            Timer1.Enabled = False
+            ProcesarTCP()
+            Dim FecAux As DateTime
+            FecAux = ss.ContadorDiarioFecha.AddHours(3)
+            If (ss.DetencionPermitida = True) Then
+                If (Convert.ToInt64(Date.Now.ToString("yyyyMMddhhmmss")) > Convert.ToInt64(FecAux.ToString("yyyyMMddhhmmss"))) Then
+                    ss.DetenerSocket()
+                    ss = New SocketSecuenciador()
+                    ssThread = New Thread(AddressOf ss.DoWork)
+                    ssThread.Start()
+                End If
             End If
         Catch ex As Exception
             EscribirLog("[Timer1_Elapsed]", ex.Message)
         Finally
-            Timer1.Enabled = False
-            DetencionPermitida = True
-        End Try
-    End Sub
-
-    Private Sub Timer2_Elapsed(ByVal sender As System.Object, ByVal e As System.Timers.ElapsedEventArgs) Handles Timer2.Elapsed
-        Try
-            DetencionPermitida = False
-            If (DetenidoManualmente = False) Then
-                If (message = "") Then
-                    If (client IsNot Nothing) Then
-                        client.Close()
-                    End If
-                    ReiniciarSocket()
-                End If
-            End If
-        Catch ex As Exception
-            EscribirLog("[Timer2_Elapsed]", ex.Message)
-        Finally
-            DetencionPermitida = True
+            Timer1.Enabled = True
         End Try
     End Sub
 End Class
