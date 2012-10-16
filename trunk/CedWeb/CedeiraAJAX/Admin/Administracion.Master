@@ -104,7 +104,7 @@
 							</td>
 							<td style="padding-left: 10px; padding-right: 10px">
 								<asp:LinkButton ID="FacturaElectronicaLinkButton" runat="server" CausesValidation="false"
-									Font-Bold="true" ForeColor="white" PostBackUrl="~/FacturaElectronica.aspx" Width="123px">Factura Electrónica</asp:LinkButton>
+									Font-Bold="true" ForeColor="white" PostBackUrl="~/FacturaElectronica.aspx" Width="123px">Factura&nbsp;Electrónica</asp:LinkButton>
 							</td>
 							<td style="padding-left: 10px; padding-right: 10px">
 								<asp:LinkButton ID="SolucionesLinkButton" runat="server" CausesValidation="false"
