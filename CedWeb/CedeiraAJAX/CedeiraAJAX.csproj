@@ -934,6 +934,7 @@
     <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsx">
       <DependentUpon>lote_comprobantes.xsd</DependentUpon>
     </None>
+    <None Include="SQL\RG2904\RG2904.sql" />
     <Content Include="Excepciones\Excepcion.aspx" />
     <Content Include="Facturacion\Electronica\Descuentos.ascx" />
     <Content Include="Facturacion\Electronica\Detalle.ascx" />
