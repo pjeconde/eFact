@@ -41,6 +41,7 @@ namespace CedWebEntidades.TiposPuntoDeVenta
             lista.Add(new BonoFiscal());
             lista.Add(new Exportacion());
             lista.Add(new Comun());
+            lista.Add(new RG2904());
             return lista;
         }
         public static List<TipoPuntoDeVenta> ListaInf()
@@ -49,6 +50,7 @@ namespace CedWebEntidades.TiposPuntoDeVenta
             lista.Add(new BonoFiscal());
             lista.Add(new Exportacion());
             lista.Add(new Comun());
+            lista.Add(new RG2904());
             return lista;
         }
     }

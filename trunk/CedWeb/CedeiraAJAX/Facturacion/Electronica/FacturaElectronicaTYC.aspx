@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Facturacion/Electronica/FacturaElectronica.Master" AutoEventWireup="true" CodeBehind="FacturaElectronicaTYC.aspx.cs" Inherits="CedeiraAJAX.Facturacion.Electronica.FacturaElectronicaTYC"  %>
+﻿<%@ Page Language="C#" MasterPageFile="~/CedeiraAJAX.Master" AutoEventWireup="true" CodeBehind="FacturaElectronicaTYC.aspx.cs" Inherits="CedeiraAJAX.Facturacion.Electronica.FacturaElectronicaTYC"  %>
 
 
 <asp:Content ID="Content2" runat="Server" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado">

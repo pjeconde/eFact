@@ -1,6 +1,6 @@
 ﻿<%@ Page AutoEventWireup="true" Buffer="true" Codebehind="Lote.aspx.cs" Culture="en-GB"
 	Inherits="CedeiraAJAX.Facturacion.Electronica.Lote" Language="C#" MaintainScrollPositionOnPostback="true"
-	MasterPageFile="~/Facturacion/Electronica/FacturaElectronica.Master" Title="Factura Electrónica Gratis(Interfacturas - AFIP)"
+	MasterPageFile="~/CedeiraAJAX.Master" Title="Factura Electrónica Gratis(Interfacturas - AFIP)"
 	UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false" %>
 
 
