@@ -222,12 +222,12 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
         private void ValidarYAsignarPropiedades(FeaEntidades.InterFacturas.linea l)
         {
-            ValidarDescripcion(l);
-            ValidarImporte(l);
+            ValidarDescripcion(l, (TextBox)detalleGridView.FooterRow.FindControl("txtdescripcion"));
+            ValidarImporte(l, (TextBox)detalleGridView.FooterRow.FindControl("txtimporte_total_articulo"));
             ValidarImporteIVA(l);
             ValidarAlicuotaIVA(l, (DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo"));
             ValidarUnidad(l);
-            ValidarCantidad(l);
+            ValidarCantidad(l, (TextBox)detalleGridView.FooterRow.FindControl("txtcantidad"));
             ValidarCodigoProductoComprador(l, ((TextBox)detalleGridView.FooterRow.FindControl("txtcpcomprador")).Text);
             ValidarCodigoProductoVendedor(l);
             ValidarIndicacionExentoGravado(l);
@@ -349,9 +349,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
         }
 
-        private void ValidarImporte(FeaEntidades.InterFacturas.linea l)
+        private void ValidarImporte(FeaEntidades.InterFacturas.linea l, TextBox txtimporte_total_articulo)
         {
-            string auxTotal = ((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_total_articulo")).Text;
+            string auxTotal = txtimporte_total_articulo.Text;
             if (auxTotal.Equals(string.Empty))
             {
                 throw new Exception("Detalle no agregado porque el importe debe ser informado");
@@ -373,9 +373,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
         }
 
-        private void ValidarDescripcion(FeaEntidades.InterFacturas.linea l)
+        private void ValidarDescripcion(FeaEntidades.InterFacturas.linea l, TextBox txtdescripcion)
         {
-            string auxDescr = ((TextBox)detalleGridView.FooterRow.FindControl("txtdescripcion")).Text;
+            string auxDescr = txtdescripcion.Text;
             if (!auxDescr.Equals(string.Empty))
             {
                 l.descripcion = auxDescr;
@@ -467,9 +467,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
         }
 
-        private void ValidarCantidad(FeaEntidades.InterFacturas.linea l)
+        private void ValidarCantidad(FeaEntidades.InterFacturas.linea l, TextBox txtCantidad)
         {
-            string auxCantidad = ((TextBox)detalleGridView.FooterRow.FindControl("txtcantidad")).Text;
+            string auxCantidad = txtCantidad.Text;
             if (!auxCantidad.Contains(","))
             {
                 if (!auxCantidad.Equals(string.Empty) && !auxCantidad.Equals("0"))
@@ -621,35 +621,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]);
 
 				FeaEntidades.InterFacturas.linea l = lineas[e.RowIndex];
-				string auxDescr = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtdescripcion")).Text;
-				if (!auxDescr.Equals(string.Empty))
-				{
-					l.descripcion = auxDescr;
-				}
-				else
-				{
-					throw new Exception("Detalle no actualizado porque la descripción no puede estar vacía");
-				}
-				string auxTotal = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_total_articulo")).Text;
-				if (auxTotal.Equals(string.Empty))
-				{
-					throw new Exception("Detalle no actualizado porque el importe debe ser informado");
-				}
-				if (!auxTotal.Contains(","))
-				{
-					try
-					{
-						l.importe_total_articulo = Convert.ToDouble(auxTotal, cedeiraCultura);
-					}
-					catch
-					{
-						throw new Exception("Detalle no actualizado porque el importe tiene más de un separador de decimales");
-					}
-				}
-				else
-				{
-					throw new Exception("Detalle no actualizado porque el separador de decimales debe ser el punto");
-				}
+
+                ValidarDescripcion(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtdescripcion"));
+
+                ValidarImporte(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_total_articulo"));
 
 				string auxNull = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_alicuota_articulo")).Text;
 				if (!auxNull.Equals(string.Empty) && !auxNull.Equals("0"))
@@ -707,57 +682,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					l.unidad = auxUnidad;
 				}
 
-				string auxCantidad = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcantidad")).Text;
-				if (!auxCantidad.Contains(","))
-				{
-					if (!auxCantidad.Equals(string.Empty) && !auxCantidad.Equals("0"))
-					{
-						try
-						{
-							l.cantidad = Convert.ToDouble(auxCantidad, cedeiraCultura);
-							l.cantidadSpecified = true;
-						}
-						catch
-						{
-							throw new Exception("Detalle no actualizado porque la cantidad tiene más de un separador de decimales");
-						}
-					}
-					else
-					{
-						if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-						{
-							if (!puntoDeVenta.Equals(string.Empty))
-							{
-								CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
-								System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
-								int auxPV = Convert.ToInt32(puntoDeVenta);
-								if (listaPV.Contains(auxPV))
-								{
-									throw new Exception("Detalle no actualizado porque la cantidad es obligatoria para bono fiscal");
-								}
-								else
-								{
-									l.cantidadSpecified = false;
-									l.cantidad = 0;
-								}
-							}
-							else
-							{
-								l.cantidadSpecified = false;
-								l.cantidad = 0;
-							}
-						}
-						else
-						{
-							l.cantidadSpecified = false;
-							l.cantidad = 0;
-						}
-					}
-				}
-				else
-				{
-					throw new Exception("Detalle no actualizado porque el separador de decimales debe ser el punto");
-				}
+
+                ValidarCantidad(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcantidad"));
 
 				ValidarCodigoProductoComprador(l, ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpcomprador")).Text);
 
