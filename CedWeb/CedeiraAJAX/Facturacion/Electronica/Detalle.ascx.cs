@@ -225,7 +225,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             ValidarDescripcion(l);
             ValidarImporte(l);
             ValidarImporteIVA(l);
-            ValidarAlicuotaIVA(l);
+            ValidarAlicuotaIVA(l, (DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo"));
             ValidarUnidad(l);
             ValidarCantidad(l);
             ValidarCodigoProductoComprador(l, ((TextBox)detalleGridView.FooterRow.FindControl("txtcpcomprador")).Text);
@@ -386,10 +386,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
         }
 
-        private void ValidarAlicuotaIVA(FeaEntidades.InterFacturas.linea l)
+        private void ValidarAlicuotaIVA(FeaEntidades.InterFacturas.linea l, DropDownList ddl)
         {
-            double auxAliIVA = Convert.ToDouble(((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).SelectedValue);
-            string auxDescAliIVA = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).SelectedItem.Text;
+            double auxAliIVA = Convert.ToDouble(ddl.SelectedValue);
+            string auxDescAliIVA = ddl.SelectedItem.Text;
             if (!auxDescAliIVA.Equals(string.Empty))
             {
                 l.alicuota_ivaSpecified = true;
@@ -671,45 +671,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					l.importe_iva = 0;
 				}
 
-				double auxAliIVA = Convert.ToDouble(((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlalicuota_articuloEdit")).SelectedValue);
-				string auxDescAliIVA = ((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlalicuota_articuloEdit")).SelectedItem.Text;
-				if (!auxDescAliIVA.Equals(string.Empty))
-				{
-					l.alicuota_ivaSpecified = true;
-					l.alicuota_iva = auxAliIVA;
-				}
-				else
-				{
-					if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-					{
-						if (!puntoDeVenta.Equals(string.Empty))
-						{
-							CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
-							System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
-							int auxPV = Convert.ToInt32(puntoDeVenta);
-							if (listaPV.Contains(auxPV))
-							{
-								throw new Exception("Detalle no actualizado porque la alicuota iva es obligatoria para bono fiscal");
-							}
-							else
-							{
-								l.alicuota_ivaSpecified = false;
-								l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
-							}
-						}
-						else
-						{
-							l.alicuota_ivaSpecified = false;
-							l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
-						}
-					}
-					else
-					{
-						l.alicuota_ivaSpecified = false;
-						l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
-					}
-				}
-				string auxUnidad = ((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlunidadEdit")).SelectedItem.Value;
+                ValidarAlicuotaIVA(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlalicuota_articuloEdit"));
+
+                string auxUnidad = ((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlunidadEdit")).SelectedItem.Value;
 				if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
 				{
 					if (!puntoDeVenta.Equals(string.Empty))
