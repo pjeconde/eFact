@@ -188,272 +188,12 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					{
 						throw new Exception("Debe definir el punto de venta antes de ingresar un detalle");
 					}
-
 					cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"]);
-
 					FeaEntidades.InterFacturas.linea l = new FeaEntidades.InterFacturas.linea();
 
-					string auxDescr = ((TextBox)detalleGridView.FooterRow.FindControl("txtdescripcion")).Text;
-					if (!auxDescr.Equals(string.Empty))
-					{
-						l.descripcion = auxDescr;
-					}
-					else
-					{
-						throw new Exception("Detalle no agregado porque la descripción no puede estar vacía");
-					}
-					string auxTotal = ((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_total_articulo")).Text;
-					if (auxTotal.Equals(string.Empty))
-					{
-						throw new Exception("Detalle no agregado porque el importe debe ser informado");
-					}
-					if (!auxTotal.Contains(","))
-					{
-						try
-						{
-							l.importe_total_articulo = Convert.ToDouble(auxTotal, cedeiraCultura);
-						}
-						catch
-						{
-							throw new Exception("Detalle no agregado porque el importe tiene más de un separador de decimales");
-						}
-					}
-					else
-					{
-						throw new Exception("Detalle no agregado porque el separador de decimales en el importe debe ser el punto");
-					}
-
-					string auxNull = ((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo")).Text;
-					if (!auxNull.Equals(string.Empty) && !auxNull.Equals("0"))
-					{
-						try
-						{
-							double auxImporteIVA = Convert.ToDouble(auxNull, cedeiraCultura);
-							l.importe_ivaSpecified = true;
-							l.importe_iva = auxImporteIVA;
-						}
-						catch
-						{
-							throw new Exception("Detalle no agregado porque el importe IVA tiene más de un separador de decimales");
-						}
-					}
-					else
-					{
-						l.importe_ivaSpecified = false;
-						l.importe_iva = 0;
-					}
-					double auxAliIVA = Convert.ToDouble(((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).SelectedValue);
-					string auxDescAliIVA = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).SelectedItem.Text;
-					if (!auxDescAliIVA.Equals(string.Empty))
-					{
-						l.alicuota_ivaSpecified = true;
-						l.alicuota_iva = auxAliIVA;
-					}
-					else
-					{
-						if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-						{
-							if (!puntoDeVenta.Equals(string.Empty))
-							{
-								CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
-								System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
-								int auxPV = Convert.ToInt32(puntoDeVenta);
-								if (listaPV.Contains(auxPV))
-								{
-									throw new Exception("Detalle no agregado porque la alicuota iva es obligatoria para bono fiscal");
-								}
-								else
-								{
-									l.alicuota_ivaSpecified = false;
-									l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
-								}
-							}
-							else
-							{
-								l.alicuota_ivaSpecified = false;
-								l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
-							}
-						}
-						else
-						{
-							l.alicuota_ivaSpecified = false;
-							l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
-						}
-					}
-
-					string auxUnidad = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).SelectedItem.Value;
-					if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-					{
-						if (!puntoDeVenta.Equals(string.Empty))
-						{
-							CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
-							System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
-							int auxPV = Convert.ToInt32(puntoDeVenta);
-							if (listaPV.Contains(auxPV))
-							{
-								if (auxUnidad.Equals(string.Empty) || auxUnidad.Equals("0"))
-								{
-									throw new Exception("Detalle no agregado porque la unidad es obligatoria para bono fiscal");
-								}
-								else
-								{
-									l.unidad = auxUnidad;
-								}
-							}
-							else
-							{
-								l.unidad = auxUnidad;
-							}
-						}
-						else
-						{
-							l.unidad = auxUnidad;
-						}
-					}
-					else
-					{
-						l.unidad = auxUnidad;
-					}
-
-					string auxCantidad = ((TextBox)detalleGridView.FooterRow.FindControl("txtcantidad")).Text;
-					if (!auxCantidad.Contains(","))
-					{
-						if (!auxCantidad.Equals(string.Empty) && !auxCantidad.Equals("0"))
-						{
-							try
-							{
-								l.cantidad = Convert.ToDouble(auxCantidad, cedeiraCultura);
-								l.cantidadSpecified = true;
-							}
-							catch
-							{
-								throw new Exception("Detalle no agregado porque la cantidad tiene más de un separador de decimales");
-							}
-						}
-						else
-						{
-							if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-							{
-								if (!puntoDeVenta.Equals(string.Empty))
-								{
-									CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
-									System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
-									int auxPV = Convert.ToInt32(puntoDeVenta);
-									if (listaPV.Contains(auxPV))
-									{
-										throw new Exception("Detalle no agregado porque la cantidad es obligatoria para bono fiscal");
-									}
-									else
-									{
-										l.cantidadSpecified = false;
-										l.cantidad = 0;
-									}
-								}
-								else
-								{
-									l.cantidadSpecified = false;
-									l.cantidad = 0;
-								}
-							}
-							else
-							{
-								l.cantidadSpecified = false;
-								l.cantidad = 0;
-							}
-						}
-					}
-					else
-					{
-						throw new Exception("Detalle no agregado porque el separador de decimales debe ser el punto");
-					}
-
-					ValidarCodigoProductoComprador(l, ((TextBox)detalleGridView.FooterRow.FindControl("txtcpcomprador")).Text);
-
-					string auxcpvendedor = ((TextBox)detalleGridView.FooterRow.FindControl("txtcpvendedor")).Text;
-					l.codigo_producto_vendedor = auxcpvendedor;
-
-					string auxindicacion_exento_gravado = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).SelectedItem.Value;
-					if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-					{
-						if (!puntoDeVenta.Equals(string.Empty))
-						{
-							CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
-							System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
-							int auxPV = Convert.ToInt32(puntoDeVenta);
-							if (listaPV.Contains(auxPV))
-							{
-								if (auxindicacion_exento_gravado.Equals(string.Empty))
-								{
-									throw new Exception("Detalle no agregado porque la indicacion exento gravado es obligatoria para bono fiscal");
-								}
-								else
-								{
-									l.indicacion_exento_gravado = auxindicacion_exento_gravado;
-								}
-							}
-							else
-							{
-								l.indicacion_exento_gravado = auxindicacion_exento_gravado;
-							}
-						}
-						else
-						{
-							l.indicacion_exento_gravado = auxindicacion_exento_gravado;
-						}
-					}
-					else
-					{
-						l.indicacion_exento_gravado = auxindicacion_exento_gravado;
-					}
-
-					string auxprecio_unitario = ((TextBox)detalleGridView.FooterRow.FindControl("txtprecio_unitario")).Text;
-					if (!auxprecio_unitario.Equals(string.Empty) && !auxprecio_unitario.Equals("0"))
-					{
-						try
-						{
-							double auxPU = Convert.ToDouble(auxprecio_unitario, cedeiraCultura);
-							l.precio_unitario = auxPU;
-							l.precio_unitarioSpecified = true;
-						}
-						catch
-						{
-							throw new Exception("Detalle no agregado porque el precio unitario tiene más de un separador de decimales");
-						}
-					}
-					else
-					{
-						if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-						{
-							if (!puntoDeVenta.Equals(string.Empty))
-							{
-								CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
-								System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
-								int auxPV = Convert.ToInt32(puntoDeVenta);
-								if (listaPV.Contains(auxPV))
-								{
-									throw new Exception("Detalle no agregado porque el precio unitario es obligatorio para bono fiscal");
-								}
-								else
-								{
-									l.precio_unitario = 0;
-									l.precio_unitarioSpecified = false;
-								}
-							}
-							else
-							{
-								l.precio_unitario = 0;
-								l.precio_unitarioSpecified = false;
-							}
-						}
-						else
-						{
-							l.precio_unitario = 0;
-							l.precio_unitarioSpecified = false;
-						}
-					}
+                    ValidarYAsignarPropiedades(l);
 
 					((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]).Add(l);
-
 
 					//Me fijo si elimino la fila automática
 					System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]);
@@ -479,6 +219,394 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 			}
 		}
+
+        private void ValidarYAsignarPropiedades(FeaEntidades.InterFacturas.linea l)
+        {
+            ValidarDescripcion(l);
+            ValidarImporte(l);
+            ValidarImporteIVA(l);
+            ValidarAlicuotaIVA(l);
+            ValidarUnidad(l);
+            ValidarCantidad(l);
+            ValidarCodigoProductoComprador(l, ((TextBox)detalleGridView.FooterRow.FindControl("txtcpcomprador")).Text);
+            ValidarCodigoProductoVendedor(l);
+            ValidarIndicacionExentoGravado(l);
+            ValidarPrecioUnitario(l);
+            ValidarGTIN(l);
+        }
+
+        private void ValidarGTIN(FeaEntidades.InterFacturas.linea l)
+        {
+            string auxGTIN = ((TextBox)detalleGridView.FooterRow.FindControl("txtGTIN")).Text;
+            if (!auxGTIN.Equals(string.Empty) && !auxGTIN.Equals("0"))
+            {
+                try
+                {
+                    Int64 auxNroGTIN = Convert.ToInt64(auxGTIN, cedeiraCultura);
+                    if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                    {
+                        if (!puntoDeVenta.Equals(string.Empty))
+                        {
+                            CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.RG2904();
+                            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
+                            int auxPV = Convert.ToInt32(puntoDeVenta);
+                            if (listaPV.Contains(auxPV))
+                            {
+                                if (auxGTIN.Length > 13)
+                                {
+                                    throw new Exception("Detalle no agregado porque la longitud del GTIN debe ser menor o igual a 13 dígitos para RG2904");
+                                }
+                                else
+                                {
+                                    l.GTIN = auxNroGTIN;
+                                    l.GTINSpecified = true;
+                                }
+                            }
+                            else
+                            {
+                                l.GTIN = auxNroGTIN;
+                                l.GTINSpecified = true;
+                            }
+                        }
+                        else
+                        {
+                            l.GTIN = auxNroGTIN;
+                            l.GTINSpecified = true;
+                        }
+                    }
+                    else
+                    {
+                      
+                        l.GTIN = auxNroGTIN;
+                        l.GTINSpecified = true;
+                    }
+                }
+                catch
+                {
+                    throw new Exception("Detalle no agregado porque el formato del GTIN no es válido (sólo hasta 13 dígitos)");
+                }
+            }
+            else
+            {
+                if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                {
+                    if (!puntoDeVenta.Equals(string.Empty))
+                    {
+                        CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.RG2904();
+                        System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
+                        int auxPV = Convert.ToInt32(puntoDeVenta);
+                        if (listaPV.Contains(auxPV) && l.unidad!="97")
+                        {
+                            throw new Exception("Detalle no agregado porque el GTIN es obligatorio para RG2904 si la unidad de medida es distinta a 'Anticipos/Señas'");
+                        }
+                        else
+                        {
+                            l.GTIN = 0;
+                            l.GTINSpecified = false;
+                        }
+                    }
+                    else
+                    {
+                        l.GTIN = 0;
+                        l.GTINSpecified = false;
+                    }
+                }
+                else
+                {
+                    l.GTIN = 0;
+                    l.GTINSpecified = false;
+                }
+            }
+
+        }
+
+        private void ValidarCodigoProductoVendedor(FeaEntidades.InterFacturas.linea l)
+        {
+            string auxcpvendedor = ((TextBox)detalleGridView.FooterRow.FindControl("txtcpvendedor")).Text;
+            l.codigo_producto_vendedor = auxcpvendedor;
+        }
+
+        private void ValidarImporteIVA(FeaEntidades.InterFacturas.linea l)
+        {
+            string auxNull = ((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo")).Text;
+            if (!auxNull.Equals(string.Empty) && !auxNull.Equals("0"))
+            {
+                try
+                {
+                    double auxImporteIVA = Convert.ToDouble(auxNull, cedeiraCultura);
+                    l.importe_ivaSpecified = true;
+                    l.importe_iva = auxImporteIVA;
+                }
+                catch
+                {
+                    throw new Exception("Detalle no agregado porque el importe IVA tiene más de un separador de decimales");
+                }
+            }
+            else
+            {
+                l.importe_ivaSpecified = false;
+                l.importe_iva = 0;
+            }
+        }
+
+        private void ValidarImporte(FeaEntidades.InterFacturas.linea l)
+        {
+            string auxTotal = ((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_total_articulo")).Text;
+            if (auxTotal.Equals(string.Empty))
+            {
+                throw new Exception("Detalle no agregado porque el importe debe ser informado");
+            }
+            if (!auxTotal.Contains(","))
+            {
+                try
+                {
+                    l.importe_total_articulo = Convert.ToDouble(auxTotal, cedeiraCultura);
+                }
+                catch
+                {
+                    throw new Exception("Detalle no agregado porque el importe tiene más de un separador de decimales");
+                }
+            }
+            else
+            {
+                throw new Exception("Detalle no agregado porque el separador de decimales en el importe debe ser el punto");
+            }
+        }
+
+        private void ValidarDescripcion(FeaEntidades.InterFacturas.linea l)
+        {
+            string auxDescr = ((TextBox)detalleGridView.FooterRow.FindControl("txtdescripcion")).Text;
+            if (!auxDescr.Equals(string.Empty))
+            {
+                l.descripcion = auxDescr;
+            }
+            else
+            {
+                throw new Exception("Detalle no agregado porque la descripción no puede estar vacía");
+            }
+        }
+
+        private void ValidarAlicuotaIVA(FeaEntidades.InterFacturas.linea l)
+        {
+            double auxAliIVA = Convert.ToDouble(((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).SelectedValue);
+            string auxDescAliIVA = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).SelectedItem.Text;
+            if (!auxDescAliIVA.Equals(string.Empty))
+            {
+                l.alicuota_ivaSpecified = true;
+                l.alicuota_iva = auxAliIVA;
+            }
+            else
+            {
+                if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                {
+                    if (!puntoDeVenta.Equals(string.Empty))
+                    {
+                        CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                        System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
+                        int auxPV = Convert.ToInt32(puntoDeVenta);
+                        if (listaPV.Contains(auxPV))
+                        {
+                            throw new Exception("Detalle no agregado porque la alicuota iva es obligatoria para bono fiscal");
+                        }
+                        else
+                        {
+                            l.alicuota_ivaSpecified = false;
+                            l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
+                        }
+                    }
+                    else
+                    {
+                        l.alicuota_ivaSpecified = false;
+                        l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
+                    }
+                }
+                else
+                {
+                    l.alicuota_ivaSpecified = false;
+                    l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
+                }
+            }
+        }
+
+        private void ValidarUnidad(FeaEntidades.InterFacturas.linea l)
+        {
+            string auxUnidad = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).SelectedItem.Value;
+            if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+            {
+                if (!puntoDeVenta.Equals(string.Empty))
+                {
+                    CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                    System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
+                    tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.RG2904();
+                    listaPV.AddRange(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta));
+                    int auxPV = Convert.ToInt32(puntoDeVenta);
+                    if (listaPV.Contains(auxPV))
+                    {
+                        if (auxUnidad.Equals(string.Empty) || auxUnidad.Equals("0"))
+                        {
+                            throw new Exception("Detalle no agregado porque la unidad es obligatoria para bono fiscal y para RG2904");
+                        }
+                        else
+                        {
+                            l.unidad = auxUnidad;
+                        }
+                    }
+                    else
+                    {
+                        l.unidad = auxUnidad;
+                    }
+                }
+                else
+                {
+                    l.unidad = auxUnidad;
+                }
+            }
+            else
+            {
+                l.unidad = auxUnidad;
+            }
+        }
+
+        private void ValidarCantidad(FeaEntidades.InterFacturas.linea l)
+        {
+            string auxCantidad = ((TextBox)detalleGridView.FooterRow.FindControl("txtcantidad")).Text;
+            if (!auxCantidad.Contains(","))
+            {
+                if (!auxCantidad.Equals(string.Empty) && !auxCantidad.Equals("0"))
+                {
+                    try
+                    {
+                        l.cantidad = Convert.ToDouble(auxCantidad, cedeiraCultura);
+                        l.cantidadSpecified = true;
+                    }
+                    catch
+                    {
+                        throw new Exception("Detalle no agregado porque la cantidad tiene más de un separador de decimales");
+                    }
+                }
+                else
+                {
+                    if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                    {
+                        if (!puntoDeVenta.Equals(string.Empty))
+                        {
+                            CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                            System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
+                            int auxPV = Convert.ToInt32(puntoDeVenta);
+                            if (listaPV.Contains(auxPV))
+                            {
+                                throw new Exception("Detalle no agregado porque la cantidad es obligatoria para bono fiscal");
+                            }
+                            else
+                            {
+                                l.cantidadSpecified = false;
+                                l.cantidad = 0;
+                            }
+                        }
+                        else
+                        {
+                            l.cantidadSpecified = false;
+                            l.cantidad = 0;
+                        }
+                    }
+                    else
+                    {
+                        l.cantidadSpecified = false;
+                        l.cantidad = 0;
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception("Detalle no agregado porque el separador de decimales debe ser el punto");
+            }
+        }
+
+        private void ValidarIndicacionExentoGravado(FeaEntidades.InterFacturas.linea l)
+        {
+            string auxindicacion_exento_gravado = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).SelectedItem.Value;
+            if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+            {
+                if (!puntoDeVenta.Equals(string.Empty))
+                {
+                    CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                    System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
+                    int auxPV = Convert.ToInt32(puntoDeVenta);
+                    if (listaPV.Contains(auxPV))
+                    {
+                        if (auxindicacion_exento_gravado.Equals(string.Empty))
+                        {
+                            throw new Exception("Detalle no agregado porque la indicacion exento gravado es obligatoria para bono fiscal");
+                        }
+                        else
+                        {
+                            l.indicacion_exento_gravado = auxindicacion_exento_gravado;
+                        }
+                    }
+                    else
+                    {
+                        l.indicacion_exento_gravado = auxindicacion_exento_gravado;
+                    }
+                }
+                else
+                {
+                    l.indicacion_exento_gravado = auxindicacion_exento_gravado;
+                }
+            }
+            else
+            {
+                l.indicacion_exento_gravado = auxindicacion_exento_gravado;
+            }
+        }
+
+        private void ValidarPrecioUnitario(FeaEntidades.InterFacturas.linea l)
+        {
+            string auxprecio_unitario = ((TextBox)detalleGridView.FooterRow.FindControl("txtprecio_unitario")).Text;
+            if (!auxprecio_unitario.Equals(string.Empty) && !auxprecio_unitario.Equals("0"))
+            {
+                try
+                {
+                    double auxPU = Convert.ToDouble(auxprecio_unitario, cedeiraCultura);
+                    l.precio_unitario = auxPU;
+                    l.precio_unitarioSpecified = true;
+                }
+                catch
+                {
+                    throw new Exception("Detalle no agregado porque el precio unitario tiene más de un separador de decimales");
+                }
+            }
+            else
+            {
+                if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                {
+                    if (!puntoDeVenta.Equals(string.Empty))
+                    {
+                        CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                        System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
+                        int auxPV = Convert.ToInt32(puntoDeVenta);
+                        if (listaPV.Contains(auxPV))
+                        {
+                            throw new Exception("Detalle no agregado porque el precio unitario es obligatorio para bono fiscal");
+                        }
+                        else
+                        {
+                            l.precio_unitario = 0;
+                            l.precio_unitarioSpecified = false;
+                        }
+                    }
+                    else
+                    {
+                        l.precio_unitario = 0;
+                        l.precio_unitarioSpecified = false;
+                    }
+                }
+                else
+                {
+                    l.precio_unitario = 0;
+                    l.precio_unitarioSpecified = false;
+                }
+            }
+        }
 		protected void detalleGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
 		{
 			try

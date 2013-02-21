@@ -1,5 +1,5 @@
 ﻿<%@ Page AutoEventWireup="true" Codebehind="Excepcion.aspx.cs" Inherits="CedeiraAJAX.Excepciones.Excepcion"
-	Language="C#" MasterPageFile="~/Excepciones/CedeiraAJAX.Master"%>
+	Language="C#" MasterPageFile="~/CedeiraAJAX.Master"%>
 
 <asp:Content ID="ExContent" runat="Server" ContentPlaceHolderID="ContentPlaceHolderNoAutenticado">
 	<table border="0" cellpadding="0" cellspacing="0" class="TextoComun" style="height: 500px;

@@ -54,6 +54,7 @@
     <Compile Include="TiposPuntoDeVenta\BonoFiscal.cs" />
     <Compile Include="TiposPuntoDeVenta\Comun.cs" />
     <Compile Include="TiposPuntoDeVenta\Exportacion.cs" />
+    <Compile Include="TiposPuntoDeVenta\RG2904.cs" />
     <Compile Include="TiposPuntoDeVenta\SinInformar.cs" />
     <Compile Include="TiposPuntoDeVenta\TipoPuntoDeVenta.cs" />
     <Compile Include="Vendedor.cs" />

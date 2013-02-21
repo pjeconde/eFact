@@ -316,13 +316,6 @@
     <Compile Include="Excepcion.aspx.designer.cs">
       <DependentUpon>Excepcion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Excepciones\CedeiraAJAX.Master.cs">
-      <DependentUpon>CedeiraAJAX.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Excepciones\CedeiraAJAX.Master.designer.cs">
-      <DependentUpon>CedeiraAJAX.Master</DependentUpon>
-    </Compile>
     <Compile Include="Excepciones\Excepcion.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Excepcion.aspx</DependentUpon>
@@ -358,13 +351,6 @@
     </Compile>
     <Compile Include="Facturacion\Electronica\Extensiones\Marketing.ascx.designer.cs">
       <DependentUpon>Marketing.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Facturacion\Electronica\FacturaElectronica.Master.cs">
-      <DependentUpon>FacturaElectronica.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Facturacion\Electronica\FacturaElectronica.Master.designer.cs">
-      <DependentUpon>FacturaElectronica.Master</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\FacturaElectronicaTYC.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -830,7 +816,6 @@
     <None Include="Descargas\Cedeira-SistAdminFCIs.pdf" />
     <None Include="Descargas\Cedeira-SistTransfMEP.pdf" />
     <None Include="Descargas\eFact-R-XL.zip" />
-    <Content Include="Facturacion\Electronica\FacturaElectronica.Master" />
     <Content Include="Mensaje.aspx" />
     <Content Include="SoloDispPUsuariosActivCP.aspx" />
     <Content Include="SoloDispPUsuariosAdministradores.aspx" />
@@ -930,7 +915,6 @@
     <Content Include="Comprador\Explorador.aspx" />
     <Content Include="Comprador\Modificar.aspx" />
     <Content Include="Excepciones\Web.config" />
-    <Content Include="Excepciones\CedeiraAJAX.Master" />
     <Content Include="Admin\Administracion.Master" />
     <None Include="Facturacion\Electronica\Reportes\FREE3OF9.TTF" />
     <None Include="Facturacion\Electronica\Reportes\Factura.rpt">
