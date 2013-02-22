@@ -192,6 +192,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						switch (idtipo)
 						{
 							case "Comun":
+                            case "RG2904":
 								((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
 								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
 								((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
@@ -206,6 +207,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
 								((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = false;
 								break;
+                            default:
+                                throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
 						}
 					}
 					catch
@@ -481,6 +484,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						switch (idtipo)
 						{
 							case "Comun":
+                            case "RG2904":
 								((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
 								((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
 								((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
@@ -495,6 +499,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = true;
 								((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = false;
 								break;
+                            default:
+                                throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
 						}
 					}
 					catch
@@ -1438,6 +1444,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 							switch (idtipo)
 							{
 								case "Comun":
+                                case "RG2904":
 									CalcularTotalesExceptoExportacion(ref totalGravado, ref totalNoGravado, totalIVA, total_Impuestos_Nacionales, total_Impuestos_Internos, total_Ingresos_Brutos, total_Impuestos_Municipales, total_Operaciones_Exentas);
 									if (CodigoConceptoDropDownList.Visible)
 									{
@@ -1455,6 +1462,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 									total = totalGravado + totalNoGravado + totalIVA;
 									Importe_Total_Factura_ResumenTextBox.Text = total.ToString();
 									break;
+                                default:
+                                    throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
 							}
 						}
 						catch
@@ -1645,6 +1654,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						switch (idtipo)
 						{
 							case "Comun":
+                            case "RG2904":
 								listacompradores = AjustarCamposXPtaVentaComun(listacompradores);
 								break;
 							case "BFiscal":
@@ -1653,6 +1663,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 							case "Export":
 								listacompradores = AjustarCamposXPtaVentaExport(listacompradores);
 								break;
+                            default:
+                                throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
 						}
 						Tipo_De_ComprobanteDropDownList.DataBind();
 						Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();

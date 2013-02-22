@@ -796,6 +796,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						{
 							case "Comun":
 							case "Export":
+                            case "RG2904":
 								l.codigo_producto_comprador = auxcpcomprador;
 								break;
 							case "BFiscal":
@@ -810,7 +811,6 @@ namespace CedeiraAJAX.Facturacion.Electronica
 								break;
                             default:
                                 throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación ("+idtipo+")");
-                                break;
 						}
 					}
 					catch (System.NullReferenceException)
