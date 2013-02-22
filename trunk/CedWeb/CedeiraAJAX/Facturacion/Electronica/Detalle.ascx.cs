@@ -222,22 +222,22 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
         private void ValidarYAsignarPropiedades(FeaEntidades.InterFacturas.linea l)
         {
+            ValidarGTIN(l, (TextBox)detalleGridView.FooterRow.FindControl("txtGTIN")); 
             ValidarDescripcion(l, (TextBox)detalleGridView.FooterRow.FindControl("txtdescripcion"));
             ValidarImporte(l, (TextBox)detalleGridView.FooterRow.FindControl("txtimporte_total_articulo"));
-            ValidarImporteIVA(l);
+            ValidarImporteIVA(l, (TextBox)detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"));
             ValidarAlicuotaIVA(l, (DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo"));
-            ValidarUnidad(l);
+            ValidarUnidad(l, (DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad"));
             ValidarCantidad(l, (TextBox)detalleGridView.FooterRow.FindControl("txtcantidad"));
-            ValidarCodigoProductoComprador(l, ((TextBox)detalleGridView.FooterRow.FindControl("txtcpcomprador")).Text);
-            ValidarCodigoProductoVendedor(l);
-            ValidarIndicacionExentoGravado(l);
-            ValidarPrecioUnitario(l);
-            ValidarGTIN(l);
+            ValidarCodigoProductoComprador(l, (TextBox)detalleGridView.FooterRow.FindControl("txtcpcomprador"));
+            ValidarCodigoProductoVendedor(l, (TextBox)detalleGridView.FooterRow.FindControl("txtcpvendedor"));
+            ValidarIndicacionExentoGravado(l, (DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado"));
+            ValidarPrecioUnitario(l, (TextBox)detalleGridView.FooterRow.FindControl("txtprecio_unitario"));
         }
 
-        private void ValidarGTIN(FeaEntidades.InterFacturas.linea l)
+        private void ValidarGTIN(FeaEntidades.InterFacturas.linea l, TextBox txtGTIN)
         {
-            string auxGTIN = ((TextBox)detalleGridView.FooterRow.FindControl("txtGTIN")).Text;
+            string auxGTIN = txtGTIN.Text;
             if (!auxGTIN.Equals(string.Empty) && !auxGTIN.Equals("0"))
             {
                 try
@@ -320,15 +320,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
         }
 
-        private void ValidarCodigoProductoVendedor(FeaEntidades.InterFacturas.linea l)
+        private void ValidarCodigoProductoVendedor(FeaEntidades.InterFacturas.linea l, TextBox txtcpvendedor)
         {
-            string auxcpvendedor = ((TextBox)detalleGridView.FooterRow.FindControl("txtcpvendedor")).Text;
+            string auxcpvendedor = txtcpvendedor.Text;
             l.codigo_producto_vendedor = auxcpvendedor;
         }
 
-        private void ValidarImporteIVA(FeaEntidades.InterFacturas.linea l)
+        private void ValidarImporteIVA(FeaEntidades.InterFacturas.linea l, TextBox txtimporte_alicuota_articulo)
         {
-            string auxNull = ((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo")).Text;
+            string auxNull = txtimporte_alicuota_articulo.Text;
             if (!auxNull.Equals(string.Empty) && !auxNull.Equals("0"))
             {
                 try
@@ -428,9 +428,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
         }
 
-        private void ValidarUnidad(FeaEntidades.InterFacturas.linea l)
+        private void ValidarUnidad(FeaEntidades.InterFacturas.linea l, DropDownList ddlunidad)
         {
-            string auxUnidad = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).SelectedItem.Value;
+            string auxUnidad = ddlunidad.SelectedItem.Value;
             if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
             {
                 if (!puntoDeVenta.Equals(string.Empty))
@@ -522,9 +522,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
         }
 
-        private void ValidarIndicacionExentoGravado(FeaEntidades.InterFacturas.linea l)
+        private void ValidarIndicacionExentoGravado(FeaEntidades.InterFacturas.linea l, DropDownList ddlindicacion_exento_gravado)
         {
-            string auxindicacion_exento_gravado = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).SelectedItem.Value;
+            string auxindicacion_exento_gravado = ddlindicacion_exento_gravado.SelectedItem.Value;
             if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
             {
                 if (!puntoDeVenta.Equals(string.Empty))
@@ -559,9 +559,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
         }
 
-        private void ValidarPrecioUnitario(FeaEntidades.InterFacturas.linea l)
+        private void ValidarPrecioUnitario(FeaEntidades.InterFacturas.linea l, TextBox txtprecio_unitario)
         {
-            string auxprecio_unitario = ((TextBox)detalleGridView.FooterRow.FindControl("txtprecio_unitario")).Text;
+            string auxprecio_unitario = txtprecio_unitario.Text;
             if (!auxprecio_unitario.Equals(string.Empty) && !auxprecio_unitario.Equals("0"))
             {
                 try
@@ -622,154 +622,18 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
 				FeaEntidades.InterFacturas.linea l = lineas[e.RowIndex];
 
+                ValidarGTIN(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtGTIN"));
                 ValidarDescripcion(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtdescripcion"));
-
                 ValidarImporte(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_total_articulo"));
-
-				string auxNull = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_alicuota_articulo")).Text;
-				if (!auxNull.Equals(string.Empty) && !auxNull.Equals("0"))
-				{
-					try
-					{
-						double auxImporteIVA = Convert.ToDouble(auxNull);
-						l.importe_ivaSpecified = true;
-						l.importe_iva = auxImporteIVA;
-					}
-					catch
-					{
-						throw new Exception("Detalle no actualizado porque el importe IVA tiene más de un separador de decimales");
-					}
-				}
-				else
-				{
-					l.importe_ivaSpecified = false;
-					l.importe_iva = 0;
-				}
-
+                ValidarImporteIVA(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_alicuota_articulo"));
                 ValidarAlicuotaIVA(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlalicuota_articuloEdit"));
-
-                string auxUnidad = ((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlunidadEdit")).SelectedItem.Value;
-				if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-				{
-					if (!puntoDeVenta.Equals(string.Empty))
-					{
-						CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
-						System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
-						int auxPV = Convert.ToInt32(puntoDeVenta);
-						if (listaPV.Contains(auxPV))
-						{
-							if (auxUnidad.Equals(string.Empty) || auxUnidad.Equals("0"))
-							{
-								throw new Exception("Detalle no actualizado porque la unidad es obligatoria para bono fiscal");
-							}
-							else
-							{
-								l.unidad = auxUnidad;
-							}
-						}
-						else
-						{
-							l.unidad = auxUnidad;
-						}
-					}
-					else
-					{
-						l.unidad = auxUnidad;
-					}
-				}
-				else
-				{
-					l.unidad = auxUnidad;
-				}
-
-
+                ValidarUnidad(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlunidadEdit"));
                 ValidarCantidad(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcantidad"));
+				ValidarCodigoProductoComprador(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpcomprador"));
+                ValidarCodigoProductoVendedor(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpvendedor"));
+                ValidarIndicacionExentoGravado(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlindicacion_exento_gravadoEdit"));
+                ValidarPrecioUnitario(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtprecio_unitario"));
 
-				ValidarCodigoProductoComprador(l, ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpcomprador")).Text);
-
-				string auxcodigo_producto_vendedor = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpvendedor")).Text;
-				l.codigo_producto_vendedor = auxcodigo_producto_vendedor;
-
-				string auxindicacion_exento_gravado = ((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlindicacion_exento_gravadoEdit")).SelectedItem.Value;
-				if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-				{
-					if (!puntoDeVenta.Equals(string.Empty))
-					{
-						CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
-						System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
-						int auxPV = Convert.ToInt32(puntoDeVenta);
-						if (listaPV.Contains(auxPV))
-						{
-							if (auxindicacion_exento_gravado.Equals(string.Empty))
-							{
-								throw new Exception("Detalle no actualizado porque la indicacion exento gravado es obligatoria para bono fiscal");
-							}
-							else
-							{
-								l.indicacion_exento_gravado = auxindicacion_exento_gravado;
-							}
-						}
-						else
-						{
-							l.indicacion_exento_gravado = auxindicacion_exento_gravado;
-						}
-					}
-					else
-					{
-						l.indicacion_exento_gravado = auxindicacion_exento_gravado;
-					}
-				}
-				else
-				{
-					l.indicacion_exento_gravado = auxindicacion_exento_gravado;
-				}
-
-
-				string auxprecio_unitario = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtprecio_unitario")).Text;
-				if (!auxprecio_unitario.Equals(string.Empty) && !auxprecio_unitario.Equals("0"))
-				{
-					try
-					{
-						double auxPU = Convert.ToDouble(auxprecio_unitario);
-						l.precio_unitario = auxPU;
-						l.precio_unitarioSpecified = true;
-					}
-					catch
-					{
-						throw new Exception("Detalle no actualizado porque el precio unitario tiene más de un separador de decimales");
-					}
-				}
-				else
-				{
-					if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-					{
-						if (!puntoDeVenta.Equals(string.Empty))
-						{
-							CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
-							System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
-							int auxPV = Convert.ToInt32(puntoDeVenta);
-							if (listaPV.Contains(auxPV))
-							{
-								throw new Exception("Detalle no actualizado porque el precio unitario es obligatorio para bono fiscal");
-							}
-							else
-							{
-								l.precio_unitario = 0;
-								l.precio_unitarioSpecified = false;
-							}
-						}
-						else
-						{
-							l.precio_unitario = 0;
-							l.precio_unitarioSpecified = false;
-						}
-					}
-					else
-					{
-						l.precio_unitario = 0;
-						l.precio_unitarioSpecified = false;
-					}
-				}
 				detalleGridView.EditIndex = -1;
 				detalleGridView.DataSource = lineas;
 				detalleGridView.DataBind();
@@ -914,9 +778,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				e.ExceptionHandled = true;
 			}
 		}
-		private void ValidarCodigoProductoComprador(FeaEntidades.InterFacturas.linea l, string auxcpcomprador)
+        private void ValidarCodigoProductoComprador(FeaEntidades.InterFacturas.linea l, TextBox txtcpcomprador)
 		{
-			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+            string auxcpcomprador = txtcpcomprador.Text;
+            if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
 			{
 				if (!puntoDeVenta.Equals(string.Empty))
 				{
