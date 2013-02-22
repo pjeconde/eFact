@@ -1654,9 +1654,11 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						switch (idtipo)
 						{
 							case "Comun":
-                            case "RG2904":
-								listacompradores = AjustarCamposXPtaVentaComun(listacompradores);
+                            	listacompradores = AjustarCamposXPtaVentaComun(listacompradores);
 								break;
+                            case "RG2904":
+                                listacompradores = AjustarCamposXPtaVentaRG2904(listacompradores);
+                                break;
 							case "BFiscal":
 								listacompradores = AjustarCamposXPtaVentaBonoFiscal(listacompradores);
 								break;
@@ -1781,37 +1783,54 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		private System.Collections.Generic.List<CedWebEntidades.Comprador> AjustarCamposXPtaVentaComun(System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores)
 		{
 			Presta_ServCheckBox.Enabled = true;
-			Version0RadioButton.Visible = true;
-			Version0RadioButton.Checked = true;
-			Version1RadioButton.Visible = true;
-			Version1RadioButton.Checked = false;
-
-			AjustarPrestaServxVersiones();
-
-			FechaServDesdeDatePickerWebUserControl.Visible = true;
-			FechaInicioServLabel.Visible = true;
-			FechaHstServLabel.Visible = true;
-			FechaServHastaDatePickerWebUserControl.Visible = true;
-			Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
-			Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
-			Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
-			Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
-			docCompradorRequiredFieldValidator.Enabled = true;
-			listaDocCompradorRequiredFieldValidator.Enabled = false;
-			docCompradorRequiredFieldValidator.DataBind();
-			listaDocCompradorRequiredFieldValidator.DataBind();
-			((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
-			listacompradores = CedWebRN.Comprador.ListaSinExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
-			TipoExpDropDownList.SelectedIndex = -1;
-			TipoExpDropDownList.Enabled = false;
-			PaisDestinoExpDropDownList.SelectedIndex = -1;
-			PaisDestinoExpDropDownList.Enabled = false;
-			IdiomaDropDownList.SelectedIndex = -1;
-			IdiomaDropDownList.Enabled = false;
-			IncotermsDropDownList.SelectedIndex = -1;
-			IncotermsDropDownList.Enabled = false;
+            HacerVisiblesV0V1();
+            listacompradores = AjustarCamposXPtaVtaComunYRG2904(listacompradores);
 			return listacompradores;
 		}
+
+        private System.Collections.Generic.List<CedWebEntidades.Comprador> AjustarCamposXPtaVentaRG2904(System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores)
+        {
+            Presta_ServCheckBox.Enabled = true;
+            listacompradores = AjustarCamposXPtaVtaComunYRG2904(listacompradores);
+            return listacompradores;
+        }
+
+        private System.Collections.Generic.List<CedWebEntidades.Comprador> AjustarCamposXPtaVtaComunYRG2904(System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores)
+        {
+            AjustarPrestaServxVersiones();
+
+            FechaServDesdeDatePickerWebUserControl.Visible = true;
+            FechaInicioServLabel.Visible = true;
+            FechaHstServLabel.Visible = true;
+            FechaServHastaDatePickerWebUserControl.Visible = true;
+            Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
+            Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
+            Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
+            Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+            docCompradorRequiredFieldValidator.Enabled = true;
+            listaDocCompradorRequiredFieldValidator.Enabled = false;
+            docCompradorRequiredFieldValidator.DataBind();
+            listaDocCompradorRequiredFieldValidator.DataBind();
+            ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+            listacompradores = CedWebRN.Comprador.ListaSinExportacion(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta, ((CedWebEntidades.Sesion)Session["Sesion"]), true);
+            TipoExpDropDownList.SelectedIndex = -1;
+            TipoExpDropDownList.Enabled = false;
+            PaisDestinoExpDropDownList.SelectedIndex = -1;
+            PaisDestinoExpDropDownList.Enabled = false;
+            IdiomaDropDownList.SelectedIndex = -1;
+            IdiomaDropDownList.Enabled = false;
+            IncotermsDropDownList.SelectedIndex = -1;
+            IncotermsDropDownList.Enabled = false;
+            return listacompradores;
+        }
+
+        private void HacerVisiblesV0V1()
+        {
+            Version0RadioButton.Visible = true;
+            Version0RadioButton.Checked = true;
+            Version1RadioButton.Visible = true;
+            Version1RadioButton.Checked = false;
+        }
 
 		private void AjustarCamposXPtaVentaIndefinido()
 		{
