@@ -127,6 +127,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 if (l.GTINSpecified)
                 {
                     linea.GTIN = l.GTIN;
+                    linea.GTINSpecified = true;
                 }
 				//Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
 				if (l.descripcion.Substring(0, 1) == "%")
