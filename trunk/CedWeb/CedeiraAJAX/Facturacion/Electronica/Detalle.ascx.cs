@@ -254,7 +254,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                             {
                                 if (auxGTIN.Length > 13)
                                 {
-                                    throw new Exception("Detalle no agregado porque la longitud del GTIN debe ser menor o igual a 13 dígitos para RG2904");
+                                    throw new Exception("La longitud del GTIN debe ser menor o igual a 13 dígitos para RG2904");
                                 }
                                 else
                                 {
@@ -283,7 +283,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 catch
                 {
-                    throw new Exception("Detalle no agregado porque el formato del GTIN no es válido (sólo hasta 13 dígitos)");
+                    throw new Exception("El formato del GTIN no es válido (sólo hasta 13 dígitos)");
                 }
             }
             else
@@ -297,7 +297,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         int auxPV = Convert.ToInt32(puntoDeVenta);
                         if (listaPV.Contains(auxPV) && l.unidad!="97")
                         {
-                            throw new Exception("Detalle no agregado porque el GTIN es obligatorio para RG2904 si la unidad de medida es distinta a 'Anticipos/Señas'");
+                            throw new Exception("El GTIN es obligatorio para RG2904 si la unidad de medida es distinta a 'Anticipos/Señas'");
                         }
                         else
                         {
@@ -339,7 +339,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 catch
                 {
-                    throw new Exception("Detalle no agregado porque el importe IVA tiene más de un separador de decimales");
+                    throw new Exception("El importe IVA tiene más de un separador de decimales");
                 }
             }
             else
@@ -354,7 +354,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             string auxTotal = txtimporte_total_articulo.Text;
             if (auxTotal.Equals(string.Empty))
             {
-                throw new Exception("Detalle no agregado porque el importe debe ser informado");
+                throw new Exception("El importe debe ser informado");
             }
             if (!auxTotal.Contains(","))
             {
@@ -364,12 +364,12 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 catch
                 {
-                    throw new Exception("Detalle no agregado porque el importe tiene más de un separador de decimales");
+                    throw new Exception("El importe tiene más de un separador de decimales");
                 }
             }
             else
             {
-                throw new Exception("Detalle no agregado porque el separador de decimales en el importe debe ser el punto");
+                throw new Exception("El separador de decimales en el importe debe ser el punto");
             }
         }
 
@@ -382,7 +382,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
             else
             {
-                throw new Exception("Detalle no agregado porque la descripción no puede estar vacía");
+                throw new Exception("La descripción no puede estar vacía");
             }
         }
 
@@ -406,7 +406,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         int auxPV = Convert.ToInt32(puntoDeVenta);
                         if (listaPV.Contains(auxPV))
                         {
-                            throw new Exception("Detalle no agregado porque la alicuota iva es obligatoria para bono fiscal");
+                            throw new Exception("La alicuota iva es obligatoria para bono fiscal");
                         }
                         else
                         {
@@ -444,7 +444,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     {
                         if (auxUnidad.Equals(string.Empty) || auxUnidad.Equals("0"))
                         {
-                            throw new Exception("Detalle no agregado porque la unidad es obligatoria para bono fiscal y para RG2904");
+                            throw new Exception("La unidad es obligatoria para bono fiscal y para RG2904");
                         }
                         else
                         {
@@ -481,7 +481,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     }
                     catch
                     {
-                        throw new Exception("Detalle no agregado porque la cantidad tiene más de un separador de decimales");
+                        throw new Exception("La cantidad tiene más de un separador de decimales");
                     }
                 }
                 else
@@ -495,7 +495,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                             int auxPV = Convert.ToInt32(puntoDeVenta);
                             if (listaPV.Contains(auxPV))
                             {
-                                throw new Exception("Detalle no agregado porque la cantidad es obligatoria para bono fiscal");
+                                throw new Exception("La cantidad es obligatoria para bono fiscal");
                             }
                             else
                             {
@@ -518,7 +518,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
             else
             {
-                throw new Exception("Detalle no agregado porque el separador de decimales debe ser el punto");
+                throw new Exception("El separador de decimales debe ser el punto");
             }
         }
 
@@ -536,7 +536,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     {
                         if (auxindicacion_exento_gravado.Equals(string.Empty))
                         {
-                            throw new Exception("Detalle no agregado porque la indicacion exento gravado es obligatoria para bono fiscal");
+                            throw new Exception("La indicación exento gravado es obligatoria para bono fiscal");
                         }
                         else
                         {
@@ -572,7 +572,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 }
                 catch
                 {
-                    throw new Exception("Detalle no agregado porque el precio unitario tiene más de un separador de decimales");
+                    throw new Exception("El precio unitario tiene más de un separador de decimales");
                 }
             }
             else
@@ -586,7 +586,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         int auxPV = Convert.ToInt32(puntoDeVenta);
                         if (listaPV.Contains(auxPV))
                         {
-                            throw new Exception("Detalle no agregado porque el precio unitario es obligatorio para bono fiscal");
+                            throw new Exception("El precio unitario es obligatorio para bono fiscal");
                         }
                         else
                         {
@@ -808,6 +808,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
 									l.codigo_producto_comprador = auxcpcomprador;
 								}
 								break;
+                            default:
+                                throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación ("+idtipo+")");
+                                break;
 						}
 					}
 					catch (System.NullReferenceException)
