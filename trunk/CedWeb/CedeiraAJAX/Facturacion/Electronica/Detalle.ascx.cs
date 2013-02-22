@@ -918,6 +918,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				det.linea[i].cantidadSpecified = listadelineas[i].cantidadSpecified;
                 det.linea[i].GTIN = listadelineas[i].GTIN;
                 det.linea[i].GTINSpecified = listadelineas[i].GTINSpecified;
+                if (TipoPtoVta.Equals("RG2904"))
+                {
+                    det.linea[i].informacion_adicional = new FeaEntidades.InterFacturas.lineaInformacion_adicional[1];
+                    det.linea[i].informacion_adicional[0] = new FeaEntidades.InterFacturas.lineaInformacion_adicional();
+                    det.linea[i].informacion_adicional[0].tipo = "UNIDAD_MTX";
+                    det.linea[i].informacion_adicional[0].valor = listadelineas[i].unidad;
+                }
 				det.linea[i].codigo_producto_comprador = listadelineas[i].codigo_producto_comprador;
 				det.linea[i].codigo_producto_vendedor = listadelineas[i].codigo_producto_vendedor;
 
