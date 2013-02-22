@@ -124,6 +124,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			{
 				FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
 				CedWebRN.Comprobante crn = new CedWebRN.Comprobante();
+                if (l.GTINSpecified)
+                {
+                    linea.GTIN = l.GTIN;
+                }
 				//Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
 				if (l.descripcion.Substring(0, 1) == "%")
 				{
@@ -912,6 +916,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 				det.linea[i].cantidad = listadelineas[i].cantidad;
 				det.linea[i].cantidadSpecified = listadelineas[i].cantidadSpecified;
+                det.linea[i].GTIN = listadelineas[i].GTIN;
+                det.linea[i].GTINSpecified = listadelineas[i].GTINSpecified;
 				det.linea[i].codigo_producto_comprador = listadelineas[i].codigo_producto_comprador;
 				det.linea[i].codigo_producto_vendedor = listadelineas[i].codigo_producto_vendedor;
 
