@@ -943,6 +943,7 @@
     <Content Include="Facturacion\Electronica\Impuestos.ascx" />
     <Content Include="Facturacion\Electronica\Permisos.ascx" />
     <Content Include="Facturacion\Electronica\Reportes\Web.config" />
+    <Content Include="SQL\RG2904\Modificacion.txt" />
     <Content Include="Vendedor\Default.aspx" />
   </ItemGroup>
   <ItemGroup>

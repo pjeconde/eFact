@@ -1,0 +1,10 @@
+	Modify	CedWebEntidades.dll
+	Modify	CedeiraAJAX.dll
+	Modify	CedeiraAJAX/Excepciones/Excepcion.aspx	
+	Modify	CedeiraAJAX/Facturacion/Electronica/Detalle.ascx	
+	Modify	/trunk/CedWeb/CedeiraAJAX/Facturacion/Electronica/FacturaElectronicaTYC.aspx	diff	
+	Modify	/trunk/CedWeb/CedeiraAJAX/Facturacion/Electronica/Lote.aspx
+	
+	
+	
+	Add	/trunk/CedWeb/CedeiraAJAX/SQL/RG2904/RG2904.sql	diff
