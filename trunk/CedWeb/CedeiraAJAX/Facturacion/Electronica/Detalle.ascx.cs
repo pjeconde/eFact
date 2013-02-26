@@ -1158,66 +1158,88 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 TextBox txtimporte_total_articulo=((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_total_articulo")));
                 TextBox txtimporte_alicuota_articulo=((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo")));
                 DropDownList ddl = ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit"));
-                double preUni = Convert.ToDouble(((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtprecio_unitario"))).Text);
-				double cant = Convert.ToDouble(((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtcantidad"))).Text);
-                RecalcularImportesEnDetalle(txtimporte_total_articulo, txtimporte_alicuota_articulo, ddl, preUni, cant);
-			}
+                TextBox txtprecio_unitario = ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtprecio_unitario")));
+                TextBox txtcantidad = ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtcantidad")));
+                RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, (CedWebEntidades.Sesion)Session["Sesion"], txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
+            }
 			catch
 			{
 			}
 		}
 
-        private static void RecalcularImportesEnDetalle(TextBox txtimporte_total_articulo, TextBox txtimporte_alicuota_articulo, DropDownList ddl, double preUni, double cant)
-        {
-            if (!preUni.Equals(0) && !cant.Equals(0))
-            {
-                txtimporte_total_articulo.Text = Convert.ToString(Math.Round(preUni * cant, 2));
-            }
-            if (!ddl.SelectedValue.Equals("0") && !ddl.SelectedValue.Equals("99"))
-            {
-                double imptot = Convert.ToDouble(txtimporte_total_articulo.Text);
-                if (!imptot.Equals(0))
-                {
-                    double aux = imptot * Convert.ToDouble(ddl.SelectedValue) / 100;
-                    txtimporte_alicuota_articulo.Text = Convert.ToString(Math.Round(aux, 2));
-                }
-            }
-            if (ddl.SelectedValue.Equals("99"))
-            {
-                txtimporte_alicuota_articulo.Text = string.Empty;
-            }
-        }
 		protected void CalcularImporteArtEnFooter(object sender, EventArgs e)
 		{
 			try
 			{
-				double preUni = Convert.ToDouble(((TextBox)(detalleGridView.FooterRow.FindControl("txtprecio_unitario"))).Text);
-				double cant = Convert.ToDouble(((TextBox)(detalleGridView.FooterRow.FindControl("txtcantidad"))).Text);
+                TextBox txtprecio_unitario = ((TextBox)(detalleGridView.FooterRow.FindControl("txtprecio_unitario")));
+                TextBox txtcantidad = ((TextBox)(detalleGridView.FooterRow.FindControl("txtcantidad")));
                 TextBox txtimporte_total_articulo = (TextBox)detalleGridView.FooterRow.FindControl("txtimporte_total_articulo");
                 TextBox txtimporte_alicuota_articulo = (TextBox)detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo");
                 DropDownList ddl = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo"));
-                RecalcularImportesEnDetalle(txtimporte_total_articulo, txtimporte_alicuota_articulo, ddl, preUni, cant);
-			}
-			catch
-			{
-			}
-		}
-		protected void ddlalicuota_articuloEdit_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			try
-			{
-				double imptot = Convert.ToDouble(((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_total_articulo"))).Text);
-				double alic=Convert.ToDouble(((DropDownList)sender).SelectedValue);
-                TextBox txtimporte_alicuota_articulo = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo"));
-                CalcularImporteAlicuotaArticulo(imptot, alic, txtimporte_alicuota_articulo);
-			}
+                RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, (CedWebEntidades.Sesion)Session["Sesion"], txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
+            }
 			catch
 			{
 			}
 		}
 
-        private static void CalcularImporteAlicuotaArticulo(double imptot, double alic, TextBox txtimporte_alicuota_articulo)
+		protected void ddlalicuota_articuloEdit_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			try
+			{
+                TextBox txtimporte_alicuota_articulo = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo"));
+                TextBox txtimporte_total_articulo = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_total_articulo"));
+                DropDownList ddl = (DropDownList)sender;
+                TextBox txtprecio_unitario = ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtprecio_unitario")));
+                TextBox txtcantidad = ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtcantidad")));
+                RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, (CedWebEntidades.Sesion)Session["Sesion"], txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
+            }
+			catch
+			{
+			}
+		}
+
+		protected void ddlalicuota_articuloFooter_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			try
+			{
+                TextBox txtprecio_unitario = ((TextBox)(detalleGridView.FooterRow.FindControl("txtprecio_unitario")));
+                TextBox txtcantidad = (TextBox)(detalleGridView.FooterRow.FindControl("txtcantidad"));
+                DropDownList ddl = (DropDownList)sender;
+                TextBox txtimporte_alicuota_articulo = (TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"));
+                TextBox txtimporte_total_articulo = (TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_total_articulo"));
+                RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, (CedWebEntidades.Sesion)Session["Sesion"], txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
+			}
+			catch
+			{
+			}
+		}
+        protected void RecalcularLinea(TextBox txtimporte_alicuota_articulo, string puntoDeVenta, CedWebEntidades.Sesion sesion, TextBox txtimporte_total_articulo, DropDownList ddl, TextBox txtprecio_unitario, TextBox txtcantidad)
         {
+            double preUni;
+            try
+            {
+                preUni = Convert.ToDouble(txtprecio_unitario.Text);
+            }
+            catch
+            {
+                preUni = 0;
+            }
+            double cant;
+            try
+            {
+                cant = Convert.ToDouble(txtcantidad.Text);
+            }
+            catch
+            {
+                cant = 0;
+            }
+            if (!preUni.Equals(0) && !cant.Equals(0))
+            {
+                txtimporte_total_articulo.Text = Convert.ToString(Math.Round(preUni * cant, 2));
+            }
+            double imptot = Convert.ToDouble(txtimporte_total_articulo.Text);
+            double alic = Convert.ToDouble(ddl.SelectedValue);
             if (!imptot.Equals(0) && !alic.Equals(99))
             {
                 double aux = imptot * alic / 100;
@@ -1227,19 +1249,20 @@ namespace CedeiraAJAX.Facturacion.Electronica
             {
                 txtimporte_alicuota_articulo.Text = string.Empty;
             }
+           
+            if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium(sesion))
+            {
+                if (!puntoDeVenta.Equals(string.Empty))
+                {
+                    CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.RG2904();
+                    System.Collections.Generic.List<int> listaPV = sesion.Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
+                    int auxPV = Convert.ToInt32(puntoDeVenta);
+                    if (listaPV.Contains(auxPV))
+                    {
+                        txtimporte_total_articulo.Text = Convert.ToString(Convert.ToDouble(txtimporte_total_articulo.Text) + Convert.ToDouble(txtimporte_alicuota_articulo.Text));
+                    }
+                }
+            }
         }
-		protected void ddlalicuota_articuloFooter_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			try
-			{
-				double imptot = Convert.ToDouble(((TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_total_articulo"))).Text);
-				double alic = Convert.ToDouble(((DropDownList)sender).SelectedValue);
-                TextBox txtimporte_alicuota_articulo = (TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"));
-                CalcularImporteAlicuotaArticulo(imptot, alic, txtimporte_alicuota_articulo);
-			}
-			catch
-			{
-			}
-		}
 	}
 }
