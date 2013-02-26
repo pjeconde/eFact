@@ -45,6 +45,9 @@ namespace CedeiraAJAX.Facturacion.Electronica.Reportes
             {
                 try
                 {
+                    System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+                    System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
+                    
                     string lcomp = Server.MapPath("~/Facturacion/Electronica/Reportes/lote_comprobantes.xsd");
                     System.IO.File.Copy(lcomp, @System.IO.Path.GetTempPath() + "lote_comprobantes.xsd", true);
 
