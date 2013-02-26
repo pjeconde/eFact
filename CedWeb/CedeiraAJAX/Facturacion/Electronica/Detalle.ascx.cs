@@ -626,8 +626,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]);
 
 				FeaEntidades.InterFacturas.linea l = lineas[e.RowIndex];
-
-                ValidarGTIN(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtGTIN"));
+                
                 ValidarDescripcion(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtdescripcion"));
                 ValidarImporte(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_total_articulo"));
                 ValidarImporteIVA(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_alicuota_articulo"));
@@ -638,6 +637,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 ValidarCodigoProductoVendedor(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpvendedor"));
                 ValidarIndicacionExentoGravado(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlindicacion_exento_gravadoEdit"));
                 ValidarPrecioUnitario(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtprecio_unitario"));
+                ValidarGTIN(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtGTIN"));
 
 				detalleGridView.EditIndex = -1;
 				detalleGridView.DataSource = lineas;
