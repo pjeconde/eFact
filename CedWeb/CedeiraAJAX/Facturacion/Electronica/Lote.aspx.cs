@@ -3695,6 +3695,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 						if (l != null)
 						{
 							l.descripcion = cDC.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
+                            l.informacion_adicional = null;
 						}
 						else
 						{
@@ -3731,6 +3732,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 							}
 						}
 					}
+                    
 					Session["lote"] = lcFea;
 					Response.Redirect("Reportes\\FacturaWebForm.aspx", true);
 
