@@ -1791,6 +1791,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
         private System.Collections.Generic.List<CedWebEntidades.Comprador> AjustarCamposXPtaVentaRG2904(System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores)
         {
             Presta_ServCheckBox.Enabled = true;
+            Version0RadioButton.Visible = false;
+            Version1RadioButton.Visible = false;
             listacompradores = AjustarCamposXPtaVtaComunYRG2904(listacompradores);
             return listacompradores;
         }
