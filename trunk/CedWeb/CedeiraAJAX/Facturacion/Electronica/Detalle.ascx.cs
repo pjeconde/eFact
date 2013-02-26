@@ -857,17 +857,40 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     {
                         throw new Exception("Debe informar al menos un artículo");
                     }
+                    double imptotdiscr = listadelineas[i].importe_total_articulo;
+
+                    int auxPV = Convert.ToInt32(puntoDeVenta);
+                    string idtipo;
+                    try
+                    {
+                        idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+                                {
+                                    return pv.Id == auxPV;
+                                }).IdTipo;
+                    }
+                    catch (NullReferenceException)
+                    {
+                        idtipo = "Comun";
+                    }
+                    if (idtipo.Equals("RG2904"))
+                    {
+                        if (listadelineas[i].importe_ivaSpecified)
+                        {
+                            imptotdiscr -= listadelineas[i].importe_iva;
+                        }
+                    }
+
                     if (listadelineas[i].importe_iva != 0)
                     {
-                        totalGravado += listadelineas[i].importe_total_articulo;
+                        totalGravado += imptotdiscr;
                     }
                     else if (listadelineas[i].indicacion_exento_gravado.Equals("E"))
                     {
-                        total_Operaciones_Exentas += listadelineas[i].importe_total_articulo;
+                        total_Operaciones_Exentas += imptotdiscr;
                     }
                     else
                     {
-                        totalNoGravado += listadelineas[i].importe_total_articulo;
+                        totalNoGravado += imptotdiscr;
                     }
                 }
                 catch (NullReferenceException)
