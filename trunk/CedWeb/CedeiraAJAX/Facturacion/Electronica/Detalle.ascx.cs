@@ -247,7 +247,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
             {
                 try
                 {
-                    Int64 auxNroGTIN = Convert.ToInt64(auxGTIN, cedeiraCultura);
+                    long auxNroGTIN = Convert.ToInt64(auxGTIN, cedeiraCultura);
                     if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
                     {
                         if (!puntoDeVenta.Equals(string.Empty))
@@ -269,8 +269,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
                             }
                             else
                             {
-                                l.GTIN = auxNroGTIN;
-                                l.GTINSpecified = true;
+                                if (auxGTIN.Length > 20)
+                                {
+                                    throw new Exception("La longitud del GTIN debe ser menor o igual a 20 dígitos");
+                                }
+                                else
+                                {
+                                   l.GTIN = auxNroGTIN;
+                                    l.GTINSpecified = true;
+                                }
                             }
                         }
                         else
@@ -281,14 +288,13 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     }
                     else
                     {
-                      
                         l.GTIN = auxNroGTIN;
                         l.GTINSpecified = true;
                     }
                 }
-                catch
+                catch (System.OverflowException)
                 {
-                    throw new Exception("El formato del GTIN no es válido (sólo hasta 13 dígitos)");
+                    throw new Exception("Longitud no válida para GTIN");
                 }
             }
             else
