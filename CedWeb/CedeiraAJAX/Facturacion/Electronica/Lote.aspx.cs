@@ -1790,7 +1790,10 @@ namespace CedeiraAJAX.Facturacion.Electronica
 
         private System.Collections.Generic.List<CedWebEntidades.Comprador> AjustarCamposXPtaVentaRG2904(System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores)
         {
-            Presta_ServCheckBox.Enabled = true;
+            Presta_ServCheckBox.Enabled = false;
+            Presta_ServCheckBox.Checked = false;
+            Presta_ServCheckBox.Visible = false;
+            Presta_ServLabel.Visible = false;
             Version0RadioButton.Visible = false;
             Version1RadioButton.Visible = false;
             listacompradores = AjustarCamposXPtaVtaComunYRG2904(listacompradores);
@@ -2110,7 +2113,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					{
 						return pv.Id == auxPV;
 					}).IdTipo;
-					if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Export") || idtipo.Equals("RG2904"))
 					{
 						cab.presta_servSpecified = false;
 					}

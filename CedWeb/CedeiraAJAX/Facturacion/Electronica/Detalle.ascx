@@ -27,7 +27,7 @@
                                 <EditItemTemplate>
                                     <asp:TextBox ID="txtGTIN" runat="server" Text='<%# Eval("GTIN") %>' Width="150px"></asp:TextBox>
                                     <cc1:FilteredTextBoxExtender ID="GTINEditFilteredTextBoxExtender" runat="server"
-                                        FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtGTIN" ValidChars="0123456789">
+                                        FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtGTIN" ValidChars="0123456789" >
                                     </cc1:FilteredTextBoxExtender>
                                 </EditItemTemplate>
                                 <FooterTemplate>
