@@ -1443,8 +1443,15 @@ namespace CedeiraAJAX.Facturacion.Electronica
 							double total;
 							switch (idtipo)
 							{
-								case "Comun":
                                 case "RG2904":
+                                    CalcularTotalesExceptoExportacion(ref totalGravado, ref totalNoGravado, totalIVA, total_Impuestos_Nacionales, total_Impuestos_Internos, total_Ingresos_Brutos, total_Impuestos_Municipales, total_Operaciones_Exentas);
+                                    ImpuestosGlobales.EliminarImpuestosIVA();
+                                    ImpuestosGlobales.AgregarImpuestosIVA(DetalleLinea.Lineas);
+                                    //Descontar descuentos a impuestos
+                                    DescuentosGlobales.RestarDescuentosAImpuestosGlobales(ImpuestosGlobales.Lista);
+                                    ImpuestosGlobales.Actualizar(ImpuestosGlobales.Lista);
+                                    break;
+                                case "Comun":
 									CalcularTotalesExceptoExportacion(ref totalGravado, ref totalNoGravado, totalIVA, total_Impuestos_Nacionales, total_Impuestos_Internos, total_Ingresos_Brutos, total_Impuestos_Municipales, total_Operaciones_Exentas);
 									if (CodigoConceptoDropDownList.Visible)
 									{
