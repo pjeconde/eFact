@@ -123,16 +123,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					{
 						CedWebEntidades.Vendedor v = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor;
 						Razon_Social_VendedorTextBox.Text = v.RazonSocial;
-						Domicilio_Calle_VendedorTextBox.Text = v.Domicilio.Calle;
-						Domicilio_Numero_VendedorTextBox.Text = v.Domicilio.Nro;
-						Domicilio_Piso_VendedorTextBox.Text = v.Domicilio.Piso;
-						Domicilio_Depto_VendedorTextBox.Text = v.Domicilio.Depto;
-						Domicilio_Sector_VendedorTextBox.Text = v.Domicilio.Sector;
-						Domicilio_Torre_VendedorTextBox.Text = v.Domicilio.Torre;
-						Domicilio_Manzana_VendedorTextBox.Text = v.Domicilio.Manzana;
-						Localidad_VendedorTextBox.Text = v.Domicilio.Localidad;
-						Provincia_VendedorDropDownList.SelectedValue = v.Domicilio.Provincia.Id;
-						Cp_VendedorTextBox.Text = v.Domicilio.CodPost;
+                        CompletarDomicilioVendedor(v);
 						Contacto_VendedorTextBox.Text = v.NombreContacto;
 						Email_VendedorTextBox.Text = v.EmailContacto;
 						Telefono_VendedorTextBox.Text = v.TelefonoContacto.ToString();
@@ -164,6 +155,35 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				}
 			}
 		}
+
+        private void CompletarDomicilioVendedor(CedWebEntidades.Vendedor v)
+        {
+            Domicilio_Calle_VendedorTextBox.Text = v.Domicilio.Calle;
+            Domicilio_Numero_VendedorTextBox.Text = v.Domicilio.Nro;
+            Domicilio_Piso_VendedorTextBox.Text = v.Domicilio.Piso;
+            Domicilio_Depto_VendedorTextBox.Text = v.Domicilio.Depto;
+            Domicilio_Sector_VendedorTextBox.Text = v.Domicilio.Sector;
+            Domicilio_Torre_VendedorTextBox.Text = v.Domicilio.Torre;
+            Domicilio_Manzana_VendedorTextBox.Text = v.Domicilio.Manzana;
+            Localidad_VendedorTextBox.Text = v.Domicilio.Localidad;
+            Provincia_VendedorDropDownList.SelectedValue = v.Domicilio.Provincia.Id;
+            Cp_VendedorTextBox.Text = v.Domicilio.CodPost;
+        }
+
+        private void CompletarDomicilioVendedor(CedWebEntidades.PuntoDeVenta pv)
+        {
+            Domicilio_Calle_VendedorTextBox.Text = pv.Domicilio.Calle;
+            Domicilio_Calle_VendedorTextBox.DataBind();
+            Domicilio_Numero_VendedorTextBox.Text = pv.Domicilio.Nro;
+            Domicilio_Piso_VendedorTextBox.Text = pv.Domicilio.Piso;
+            Domicilio_Depto_VendedorTextBox.Text = pv.Domicilio.Depto;
+            Domicilio_Sector_VendedorTextBox.Text = pv.Domicilio.Sector;
+            Domicilio_Torre_VendedorTextBox.Text = pv.Domicilio.Torre;
+            Domicilio_Manzana_VendedorTextBox.Text = pv.Domicilio.Manzana;
+            Localidad_VendedorTextBox.Text = pv.Domicilio.Localidad;
+            Provincia_VendedorDropDownList.SelectedValue = pv.Domicilio.Provincia.Id;
+            Cp_VendedorTextBox.Text = pv.Domicilio.CodPost;
+        }
 
 		private void BindearDropDownLists()
 		{
@@ -1696,6 +1716,12 @@ namespace CedeiraAJAX.Facturacion.Electronica
 							CompradorDropDownList.Visible = false;
 							CompradorDropDownList.DataSource = null;
 						}
+                        CedWebEntidades.Vendedor v = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor;
+                        CedWebEntidades.PuntoDeVenta ptoventa = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+                        {
+                            return pv.Id == auxPV;
+                        });
+                        CompletarDomicilioVendedor(ptoventa);
 					}
 					catch
 					{
