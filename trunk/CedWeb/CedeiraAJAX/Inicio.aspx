@@ -44,7 +44,7 @@
 				</asp:Image>
 			</td>
 			<td align="left" style="height: 16px; padding-top: 3px" valign="top">
-				<asp:Label ID="Label1" runat="server" SkinID="TextoMediano" Text="Soporta los siguientes tipos de Factura Electrónica: Común (en Pesos o Dólares), Bono Fiscal (Bs. de Capital) y Exportacion (RG2758/2010)."></asp:Label>
+				<asp:Label ID="Label1" runat="server" SkinID="TextoMediano" Text="Soporta los siguientes tipos de Factura Electrónica: Común (RG2485/RG2904), Bono Fiscal (Bs. de Capital) y Exportación (RG2758/2010)."></asp:Label>
 			</td>
 		</tr>
 		<tr>
