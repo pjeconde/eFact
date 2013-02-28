@@ -303,18 +303,25 @@
 														<!-- Datos del Vendedor: Calle -->
 														<tr>
 															<td >
-																<table border="0" cellpadding="0" cellspacing="0" >
-																	<tr>
-																		<td class="TextoLabelFEAVendedor" >
-																			Calle:
-																		</td>
-																		<td class="TextoLabelFEAVendedorDet" >
-																			<asp:TextBox ID="Domicilio_Calle_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
-																			</asp:TextBox>
-																		</td>
-																	</tr>
-																</table>
-															</td>
+                                                                <asp:UpdatePanel ID="DomicilioCalleVendedorUpdatePanel" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
+                                                                    <Triggers>
+                                                                        <asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+                                                                    </Triggers>
+                                                                    <ContentTemplate>
+                                                                        <table border="0" cellpadding="0" cellspacing="0">
+                                                                            <tr>
+                                                                                <td class="TextoLabelFEAVendedor">
+                                                                                    Calle:
+                                                                                </td>
+                                                                                <td class="TextoLabelFEAVendedorDet">
+                                                                                    <asp:TextBox ID="Domicilio_Calle_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
+                                                                                    </asp:TextBox>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </ContentTemplate>
+                                                                </asp:UpdatePanel>
+                                                            </td>
 															<td >
 																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
@@ -338,34 +345,42 @@
 														<!-- Datos del Vendedor: Nro.Calle, Piso y Dpto  / Fecha Emision -->
 														<tr>
 															<td>
-																<table border="0" cellpadding="0" cellspacing="0" >
-																	<tr>
-																		<!-- 25 + 80 + 40 + 60 + 40 + 80 + 40 + 5 padding = 370px -->
-																		<td style="width: 25px;">
-																		</td>
-																		<td class="TextoLabelFEAVendedorCh">
-																			Nro.:
-																		</td>
-																		<td class="TextoLabelFEAVendedorDetChCh">
-																			<asp:TextBox ID="Domicilio_Numero_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-																			</asp:TextBox>
-																		</td>
-																		<td class="TextoLabelFEAVendedorChCh">
-																			Piso:
-																		</td>
-																		<td class="TextoLabelFEAVendedorDetChCh">
-																			<asp:TextBox ID="Domicilio_Piso_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-																			</asp:TextBox>
-																		</td>
-																		<td class="TextoLabelFEAVendedorCh">
-																			Depto:
-																		</td>
-																		<td class="TextoLabelFEAVendedorDetChCh" style="padding-right: 5px">
-																			<asp:TextBox ID="Domicilio_Depto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-																			</asp:TextBox>
-																		</td>
-																	</tr>
-																</table>
+                                                                <asp:UpdatePanel ID="NroPisoUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                                    UpdateMode="Conditional">
+                                                                    <Triggers>
+                                                                        <asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+                                                                    </Triggers>
+                                                                    <ContentTemplate>
+                                                                        <table border="0" cellpadding="0" cellspacing="0">
+                                                                            <tr>
+                                                                                <!-- 25 + 80 + 40 + 60 + 40 + 80 + 40 + 5 padding = 370px -->
+                                                                                <td style="width: 25px;">
+                                                                                </td>
+                                                                                <td class="TextoLabelFEAVendedorCh">
+                                                                                    Nro.:
+                                                                                </td>
+                                                                                <td class="TextoLabelFEAVendedorDetChCh">
+                                                                                    <asp:TextBox ID="Domicilio_Numero_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
+                                                                                    </asp:TextBox>
+                                                                                </td>
+                                                                                <td class="TextoLabelFEAVendedorChCh">
+                                                                                    Piso:
+                                                                                </td>
+                                                                                <td class="TextoLabelFEAVendedorDetChCh">
+                                                                                    <asp:TextBox ID="Domicilio_Piso_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
+                                                                                    </asp:TextBox>
+                                                                                </td>
+                                                                                <td class="TextoLabelFEAVendedorCh">
+                                                                                    Depto:
+                                                                                </td>
+                                                                                <td class="TextoLabelFEAVendedorDetChCh" style="padding-right: 5px">
+                                                                                    <asp:TextBox ID="Domicilio_Depto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
+                                                                                    </asp:TextBox>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+															        </ContentTemplate>
+                                                                </asp:UpdatePanel>
 															</td>
 															<td>
 																<table border="0" cellpadding="0" cellspacing="0" >
@@ -387,37 +402,45 @@
 														</tr>
 														<!-- Datos del Vendedor: Sector, Torre y Manzana -->
 														<tr>
+                                                            <td>
+                                                                <asp:UpdatePanel ID="SectorTorreUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                                    UpdateMode="Conditional">
+                                                                    <Triggers>
+                                                                        <asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+                                                                    </Triggers>
+                                                                    <ContentTemplate>
+                                                                        <table border="0" cellpadding="0" cellspacing="0">
+                                                                            <tr>
+                                                                                <!-- 25 + 80 + 40 + 60 + 40 + 80 + 40 + 5 padding = 370px -->
+                                                                                <td style="width: 25px;">
+                                                                                </td>
+                                                                                <td class="TextoLabelFEAVendedorCh">
+                                                                                    Sector:
+                                                                                </td>
+                                                                                <td class="TextoLabelFEAVendedorDetChCh">
+                                                                                    <asp:TextBox ID="Domicilio_Sector_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
+                                                                                    </asp:TextBox>
+                                                                                </td>
+                                                                                <td class="TextoLabelFEAVendedorChCh">
+                                                                                    Torre:
+                                                                                </td>
+                                                                                <td class="TextoLabelFEAVendedorDetChCh">
+                                                                                    <asp:TextBox ID="Domicilio_Torre_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
+                                                                                    </asp:TextBox>
+                                                                                </td>
+                                                                                <td class="TextoLabelFEAVendedorCh">
+                                                                                    Manzana:
+                                                                                </td>
+                                                                                <td class="TextoLabelFEAVendedorDetChCh" style="padding-right: 5px">
+                                                                                    <asp:TextBox ID="Domicilio_Manzana_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
+                                                                                    </asp:TextBox>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </ContentTemplate>
+                                                                </asp:UpdatePanel>
+                                                            </td>
 															<td>
-																<table border="0" cellpadding="0" cellspacing="0" >
-																	<tr>
-																		<!-- 25 + 80 + 40 + 60 + 40 + 80 + 40 + 5 padding = 370px -->
-																		<td style="width: 25px;">
-																		</td>
-																		<td class="TextoLabelFEAVendedorCh">
-																			Sector:
-																		</td>
-																		<td class="TextoLabelFEAVendedorDetChCh">
-																			<asp:TextBox ID="Domicilio_Sector_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-																			</asp:TextBox>
-																		</td>
-																		<td class="TextoLabelFEAVendedorChCh">
-																			Torre:
-																		</td>
-																		<td class="TextoLabelFEAVendedorDetChCh">
-																			<asp:TextBox ID="Domicilio_Torre_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-																			</asp:TextBox>
-																		</td>
-																		<td class="TextoLabelFEAVendedorCh">
-																			Manzana:
-																		</td>
-																		<td class="TextoLabelFEAVendedorDetChCh" style="padding-right: 5px">
-																			<asp:TextBox ID="Domicilio_Manzana_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-																			</asp:TextBox>
-																		</td>
-																	</tr>
-																</table>
-															</td>
-															<td >
 																<table border="0" cellpadding="0" cellspacing="0" >
 																	<tr>
 																		<td class="TextoLabelFEAVendedor" >
@@ -435,19 +458,27 @@
 														<!-- Datos del Vendedor: Localidad -->
 														<tr>
 															<td>
-																<table border="0" cellpadding="0" cellspacing="0" >
-																	<tr>
-																		<td class="TextoLabelFEAVendedor" >
-																			<asp:RequiredFieldValidator ID="Localidad_VendedorRequiredFieldValidator" runat="server"
-																				ControlToValidate="Localidad_VendedorTextBox" ErrorMessage="localidad" SetFocusOnError="True">* </asp:RequiredFieldValidator>Localidad:
-																		</td>
-																		<td class="TextoLabelFEAVendedorDet">
-																			<asp:TextBox ID="Localidad_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
-																			</asp:TextBox>
-																		</td>
-																	</tr>
-																</table>
-															</td>
+                                                                <asp:UpdatePanel ID="LocalidadVendedorUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                                    UpdateMode="Conditional">
+                                                                    <Triggers>
+                                                                        <asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+                                                                    </Triggers>
+                                                                    <ContentTemplate>
+                                                                        <table border="0" cellpadding="0" cellspacing="0">
+                                                                            <tr>
+                                                                                <td class="TextoLabelFEAVendedor">
+                                                                                    <asp:RequiredFieldValidator ID="Localidad_VendedorRequiredFieldValidator" runat="server"
+                                                                                        ControlToValidate="Localidad_VendedorTextBox" ErrorMessage="localidad" SetFocusOnError="True">* </asp:RequiredFieldValidator>Localidad:
+                                                                                </td>
+                                                                                <td class="TextoLabelFEAVendedorDet">
+                                                                                    <asp:TextBox ID="Localidad_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
+                                                                                    </asp:TextBox>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </ContentTemplate>
+                                                                </asp:UpdatePanel>
+                                                            </td>
 															<td>
 															<asp:UpdatePanel ID="TipoExpoUpdatePanel" runat="server" ChildrenAsTriggers="true"
 																UpdateMode="Conditional">
@@ -473,18 +504,26 @@
 														<!-- Datos del Vendedor: Provincia -->
 														<tr>
 															<td>
-																<table border="0" cellpadding="0" cellspacing="0" >
-																	<tr>
-																		<td class="TextoLabelFEAVendedor">
-																			Provincia:
-																		</td>
-																		<td class="TextoLabelFEAVendedorDet">
-																			<asp:DropDownList ID="Provincia_VendedorDropDownList" runat="server" SkinID="DropDownListVendedor">
-																			</asp:DropDownList>
-																		</td>
-																	</tr>
-																</table>
-															</td>
+                                                                <asp:UpdatePanel ID="ProvinciaVendUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                                    UpdateMode="Conditional">
+                                                                    <Triggers>
+                                                                        <asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+                                                                    </Triggers>
+                                                                    <ContentTemplate>
+                                                                        <table border="0" cellpadding="0" cellspacing="0">
+                                                                            <tr>
+                                                                                <td class="TextoLabelFEAVendedor">
+                                                                                    Provincia:
+                                                                                </td>
+                                                                                <td class="TextoLabelFEAVendedorDet">
+                                                                                    <asp:DropDownList ID="Provincia_VendedorDropDownList" runat="server" SkinID="DropDownListVendedor">
+                                                                                    </asp:DropDownList>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </ContentTemplate>
+                                                                </asp:UpdatePanel>
+                                                            </td>
 															<td>
 															<asp:UpdatePanel ID="PaisDestinoExpUpdatePanel" runat="server"
 																UpdateMode="Conditional">
@@ -518,17 +557,25 @@
 														<!-- Datos del Vendedor: Código Postal -->
 														<tr>
 															<td>
-																<table border="0" cellpadding="0" cellspacing="0" >
-																	<tr>
-																		<td class="TextoLabelFEAVendedor" >
-																			Código Postal:
-																		</td>
-																		<td class="TextoLabelFEAVendedorDet">
-																			<asp:TextBox ID="Cp_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
-																			</asp:TextBox>
-																		</td>
-																	</tr>
-																</table>
+                                                                <asp:UpdatePanel ID="CPVendedorUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                                    UpdateMode="Conditional">
+                                                                    <Triggers>
+                                                                        <asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+                                                                    </Triggers>
+                                                                    <ContentTemplate>
+                                                                        <table border="0" cellpadding="0" cellspacing="0">
+                                                                            <tr>
+                                                                                <td class="TextoLabelFEAVendedor">
+                                                                                    Código Postal:
+                                                                                </td>
+                                                                                <td class="TextoLabelFEAVendedorDet">
+                                                                                    <asp:TextBox ID="Cp_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
+                                                                                    </asp:TextBox>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </ContentTemplate>
+                                                                </asp:UpdatePanel>
 															</td>
 															<td>
 															<asp:UpdatePanel ID="IdiomaUpdatePanel" runat="server" ChildrenAsTriggers="true"
