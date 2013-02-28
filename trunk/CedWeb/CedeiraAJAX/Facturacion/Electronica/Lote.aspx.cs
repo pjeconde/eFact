@@ -1934,9 +1934,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
         private void HacerVisiblesV0V1()
         {
             Version0RadioButton.Visible = true;
-            Version0RadioButton.Checked = true;
+            Version0RadioButton.Checked = false;
             Version1RadioButton.Visible = true;
-            Version1RadioButton.Checked = false;
+            Version1RadioButton.Checked = true;
         }
 
 		private void AjustarCamposXPtaVentaIndefinido()
