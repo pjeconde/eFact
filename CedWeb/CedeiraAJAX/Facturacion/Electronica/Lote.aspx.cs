@@ -170,19 +170,88 @@ namespace CedeiraAJAX.Facturacion.Electronica
             Cp_VendedorTextBox.Text = v.Domicilio.CodPost;
         }
 
-        private void CompletarDomicilioVendedor(CedWebEntidades.PuntoDeVenta pv)
+        private void CompletarDomicilioVendedor(CedWebEntidades.PuntoDeVenta pv, CedWebEntidades.Vendedor v)
         {
-            Domicilio_Calle_VendedorTextBox.Text = pv.Domicilio.Calle;
-            Domicilio_Calle_VendedorTextBox.DataBind();
-            Domicilio_Numero_VendedorTextBox.Text = pv.Domicilio.Nro;
-            Domicilio_Piso_VendedorTextBox.Text = pv.Domicilio.Piso;
-            Domicilio_Depto_VendedorTextBox.Text = pv.Domicilio.Depto;
-            Domicilio_Sector_VendedorTextBox.Text = pv.Domicilio.Sector;
-            Domicilio_Torre_VendedorTextBox.Text = pv.Domicilio.Torre;
-            Domicilio_Manzana_VendedorTextBox.Text = pv.Domicilio.Manzana;
-            Localidad_VendedorTextBox.Text = pv.Domicilio.Localidad;
-            Provincia_VendedorDropDownList.SelectedValue = pv.Domicilio.Provincia.Id;
-            Cp_VendedorTextBox.Text = pv.Domicilio.CodPost;
+            if (!pv.Domicilio.Calle.Equals(string.Empty))
+            {
+                Domicilio_Calle_VendedorTextBox.Text = pv.Domicilio.Calle;
+            }
+            else
+            {
+                Domicilio_Calle_VendedorTextBox.Text = v.Domicilio.Calle;
+            }
+            if (!pv.Domicilio.Nro.Equals(string.Empty))
+            {
+                Domicilio_Numero_VendedorTextBox.Text = pv.Domicilio.Nro;
+            }
+            else
+            {
+                Domicilio_Numero_VendedorTextBox.Text = v.Domicilio.Nro;
+            }
+            if (!pv.Domicilio.Piso.Equals(string.Empty))
+            {
+                Domicilio_Piso_VendedorTextBox.Text = pv.Domicilio.Piso;
+            }
+            else
+            {
+                Domicilio_Piso_VendedorTextBox.Text = v.Domicilio.Piso;
+            }
+            if (!pv.Domicilio.Depto.Equals(string.Empty))
+            {
+                Domicilio_Depto_VendedorTextBox.Text = pv.Domicilio.Depto;
+            }
+            else
+            {
+                Domicilio_Depto_VendedorTextBox.Text = v.Domicilio.Depto;
+            }
+            if (!pv.Domicilio.Sector.Equals(string.Empty))
+            {
+                Domicilio_Sector_VendedorTextBox.Text = pv.Domicilio.Sector;
+            }
+            else
+            {
+                Domicilio_Sector_VendedorTextBox.Text = v.Domicilio.Sector;
+            }
+            if (!pv.Domicilio.Torre.Equals(string.Empty))
+            {
+                Domicilio_Torre_VendedorTextBox.Text = pv.Domicilio.Torre;
+            }
+            else
+            {
+                Domicilio_Torre_VendedorTextBox.Text = v.Domicilio.Torre;
+            }
+            if (!pv.Domicilio.Manzana.Equals(string.Empty))
+            {
+                Domicilio_Manzana_VendedorTextBox.Text = pv.Domicilio.Manzana;
+            }
+            else
+            {
+                Domicilio_Manzana_VendedorTextBox.Text = v.Domicilio.Manzana;
+            }
+            if (!pv.Domicilio.Localidad.Equals(string.Empty))
+            {
+                Localidad_VendedorTextBox.Text = pv.Domicilio.Localidad;
+            }
+            else
+            {
+                Localidad_VendedorTextBox.Text = v.Domicilio.Localidad;
+            }
+            if (!pv.Domicilio.Provincia.Id.Equals(string.Empty))
+            {
+                Provincia_VendedorDropDownList.SelectedValue = pv.Domicilio.Provincia.Id;
+            }
+            else
+            {
+                Provincia_VendedorDropDownList.SelectedValue = v.Domicilio.Provincia.Id;
+            }
+            if (!pv.Domicilio.CodPost.Equals(string.Empty))
+            {
+                Cp_VendedorTextBox.Text = pv.Domicilio.CodPost;
+            }
+            else
+            {
+                Cp_VendedorTextBox.Text = v.Domicilio.CodPost;
+            }
         }
 
 		private void BindearDropDownLists()
@@ -1721,7 +1790,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                         {
                             return pv.Id == auxPV;
                         });
-                        CompletarDomicilioVendedor(ptoventa);
+                        CompletarDomicilioVendedor(ptoventa, v);
 					}
 					catch
 					{
@@ -1915,7 +1984,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			PaisDestinoExpDropDownList.Enabled = true;
 			IdiomaDropDownList.Enabled = true;
 			IncotermsDropDownList.Enabled = true;
-			
+            CedWebEntidades.Vendedor v = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor;
+			CompletarDomicilioVendedor(v);
 		}
 		
 		protected void EnviarIBKButton_Click(object sender, EventArgs e)
