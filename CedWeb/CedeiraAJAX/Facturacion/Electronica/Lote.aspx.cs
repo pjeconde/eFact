@@ -1516,7 +1516,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 					double total_Ingresos_Brutos;
 					double total_Impuestos_Municipales;
 
-					CalcularImpuestos(out total_Impuestos_Nacionales, out total_Impuestos_Internos, out total_Ingresos_Brutos, out total_Impuestos_Municipales);
+                    ImpuestosGlobales.EliminarImpuestosIVA();
+                    CalcularImpuestos(out total_Impuestos_Nacionales, out total_Impuestos_Internos, out total_Ingresos_Brutos, out total_Impuestos_Municipales);
 					
 					//Asigno totales
 					if (!Punto_VentaTextBox.Text.Equals(string.Empty))
