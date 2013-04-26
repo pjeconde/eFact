@@ -446,11 +446,16 @@ namespace CedeiraAJAX.Facturacion.Electronica
             {
                 if (!puntoDeVenta.Equals(string.Empty))
                 {
-                    CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
-                    System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
-                    tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.RG2904();
-                    listaPV.AddRange(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta));
                     int auxPV = Convert.ToInt32(puntoDeVenta);
+                    CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta;
+                    tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.RG2904();
+                    System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
+                    if (listaPV.Contains(auxPV) && auxUnidad.Equals("99"))
+                    {
+                        throw new Exception("La unidad BONIFICACIÓN no se admite para RG2904");
+                    }
+                    tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
+                    listaPV.AddRange(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta));
                     if (listaPV.Contains(auxPV))
                     {
                         if (auxUnidad.Equals(string.Empty) || auxUnidad.Equals("0"))
