@@ -1019,6 +1019,15 @@ namespace CedeiraAJAX.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.DropDownList IVAcomputableDropDownList;
         
         /// <summary>
+        /// CodigoOperacionLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CodigoOperacionLabel;
+        
+        /// <summary>
         /// CodigoOperacionDropDownList control.
         /// </summary>
         /// <remarks>

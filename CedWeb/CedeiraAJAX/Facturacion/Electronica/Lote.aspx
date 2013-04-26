@@ -175,10 +175,10 @@
 																						<asp:UpdatePanel ID="Tipo_De_ComprobanteUpdatePanel" runat="server" ChildrenAsTriggers="true"
 																							UpdateMode="Conditional">
 																							<Triggers>
-																								<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+																								<asp:AsyncPostBackTrigger controlid="Punto_VentaTextBox" />
 																							</Triggers>
 																							<ContentTemplate>
-																								<asp:DropDownList ID="Tipo_De_ComprobanteDropDownList" runat="server" SkinID="DropDownListCompradorGr">
+																								<asp:DropDownList ID="Tipo_De_ComprobanteDropDownList" runat="server" SkinID="DropDownListCompradorGr" OnSelectedIndexChanged="Tipo_De_ComprobanteDropDownList_SelectedIndexChanged" AutoPostBack="true">
 																								</asp:DropDownList>
 																							</ContentTemplate>
 																						</asp:UpdatePanel>
@@ -1185,6 +1185,7 @@
 													</asp:AsyncPostBackTrigger>
 													<asp:PostBackTrigger ControlID="FileUploadButton">
 													</asp:PostBackTrigger>
+													<asp:AsyncPostBackTrigger ControlID="Tipo_De_ComprobanteDropDownList" EventName="SelectedIndexChanged"/>
 											</Triggers>
 											<ContentTemplate>
 												<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
@@ -1232,7 +1233,7 @@
 																</tr>
 																<tr>
 																	<td class="TextoLabelFEAVendedor">
-																		Código de operación:
+																	    <asp:Label ID="CodigoOperacionLabel" runat="server" Text="Código de operación:" Visible="false"></asp:Label>
 																	</td>
 																	<td style="padding-top: 8px;">
 																		<asp:DropDownList ID="CodigoOperacionDropDownList" runat="server">
