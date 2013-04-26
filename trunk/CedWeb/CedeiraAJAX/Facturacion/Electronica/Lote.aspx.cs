@@ -839,9 +839,9 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				int auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
 				ViewState["PuntoVenta"] = auxPV;
 				DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
+                Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
 				AjustarCamposXPtaVentaChanged(Punto_VentaTextBox.Text);
 				AjustarCamposXVersion(lc);
-				Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
 			}
 			catch (NullReferenceException)//detalle_factura.xml
 			{
@@ -1754,7 +1754,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
                             	listacompradores = AjustarCamposXPtaVentaComun(listacompradores);
 								break;
                             case "RG2904":
-                                listacompradores = AjustarCamposXPtaVentaRG2904(listacompradores);
+                                listacompradores = AjustarCamposXPtaVentaRG2904(listacompradores, Tipo_De_ComprobanteDropDownList.SelectedValue);
                                 break;
 							case "BFiscal":
 								listacompradores = AjustarCamposXPtaVentaBonoFiscal(listacompradores);
@@ -1843,6 +1843,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			PaisDestinoExpDropDownList.Enabled = true;
 			IdiomaDropDownList.Enabled = true;
 			IncotermsDropDownList.Enabled = true;
+            CodigoOperacionDropDownList.Visible = true;
+            CodigoOperacionLabel.Visible = true;
 			return listacompradores;
 		}
 
@@ -1880,6 +1882,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			IdiomaDropDownList.Enabled = false;
 			IncotermsDropDownList.SelectedIndex = -1;
 			IncotermsDropDownList.Enabled = false;
+            CodigoOperacionDropDownList.Visible = true;
+            CodigoOperacionLabel.Visible = true;
 			return listacompradores;
 		}
 
@@ -1891,7 +1895,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			return listacompradores;
 		}
 
-        private System.Collections.Generic.List<CedWebEntidades.Comprador> AjustarCamposXPtaVentaRG2904(System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores)
+        private System.Collections.Generic.List<CedWebEntidades.Comprador> AjustarCamposXPtaVentaRG2904(System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores, string tipoComprobante)
         {
             Presta_ServCheckBox.Enabled = false;
             Presta_ServCheckBox.Checked = false;
@@ -1900,7 +1904,22 @@ namespace CedeiraAJAX.Facturacion.Electronica
             Version0RadioButton.Visible = false;
             Version1RadioButton.Visible = false;
             listacompradores = AjustarCamposXPtaVtaComunYRG2904(listacompradores);
+            AjustarCodigoOperacionEn2904(tipoComprobante);
             return listacompradores;
+        }
+
+        private void AjustarCodigoOperacionEn2904(string valor)
+        {
+            if (valor.Equals("2") || valor.Equals("3"))
+            {
+                CodigoOperacionDropDownList.Visible = false;
+                CodigoOperacionLabel.Visible = false;
+            }
+            else
+            {
+                CodigoOperacionDropDownList.Visible = true;
+                CodigoOperacionLabel.Visible = true;
+            }
         }
 
         private System.Collections.Generic.List<CedWebEntidades.Comprador> AjustarCamposXPtaVtaComunYRG2904(System.Collections.Generic.List<CedWebEntidades.Comprador> listacompradores)
@@ -1929,6 +1948,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
             IdiomaDropDownList.Enabled = false;
             IncotermsDropDownList.SelectedIndex = -1;
             IncotermsDropDownList.Enabled = false;
+            CodigoOperacionDropDownList.Visible = true;
+            CodigoOperacionLabel.Visible = true;
             return listacompradores;
         }
 
@@ -1987,6 +2008,8 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			IncotermsDropDownList.Enabled = true;
             CedWebEntidades.Vendedor v = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor;
 			CompletarDomicilioVendedor(v);
+            CodigoOperacionDropDownList.Visible = true;
+            CodigoOperacionLabel.Visible = true;
 		}
 		
 		protected void EnviarIBKButton_Click(object sender, EventArgs e)
@@ -2454,6 +2477,7 @@ namespace CedeiraAJAX.Facturacion.Electronica
 		private void GenerarCodigoOperacion(FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
 		{
 			//No se tiene que informar para exportación
+            //El nodo no se debe informar para RG2904 (solo NC A y ND A)
 			if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
 			{
 				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
@@ -2470,27 +2494,45 @@ namespace CedeiraAJAX.Facturacion.Electronica
                             CodigoOperacionDropDownList.Focus();
                             throw new Exception("El código de operación no se debe informar para exportación");
                         }
+                        else if (idtipo.Equals("RG2904") && (Tipo_De_ComprobanteDropDownList.SelectedValue.Equals("2") || Tipo_De_ComprobanteDropDownList.SelectedValue.Equals("3")))
+                        {
+                            infcomprob.codigo_operacion = string.Empty;
+                            infcomprob.codigo_operacionSpecified = false;
+                        }
                         else
                         {
                             infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
+                            infcomprob.codigo_operacionSpecified = true;
                         }
 					}
                     else
                     {
                         if (!idtipo.Equals("Export"))
                         {
-                            infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
+                            if (idtipo.Equals("RG2904") && (Tipo_De_ComprobanteDropDownList.SelectedValue.Equals("2") || Tipo_De_ComprobanteDropDownList.SelectedValue.Equals("3")))
+                            {
+                                infcomprob.codigo_operacion = string.Empty;
+                                infcomprob.codigo_operacionSpecified = false;
+                            }
+                            else
+                            {
+                                infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
+                                infcomprob.codigo_operacionSpecified = true;
+                            }
                         }
+                       
                     }
 				}
 				catch (System.NullReferenceException)
 				{
 					infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
+                    infcomprob.codigo_operacionSpecified = true;
 				}
 			}
 			else
 			{
 				infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
+                infcomprob.codigo_operacionSpecified = true;
 			}
 		}
 
@@ -4014,5 +4056,24 @@ namespace CedeiraAJAX.Facturacion.Electronica
 				return this.DetalleLinea;
 			}
 		}
+
+        protected void Tipo_De_ComprobanteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
+                string idtipo = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVenta.Find(delegate(CedWebEntidades.PuntoDeVenta pv)
+                {
+                    return pv.Id == auxPV;
+                }).IdTipo;
+                if (idtipo.Equals("RG2904"))
+                {
+                    AjustarCodigoOperacionEn2904(((DropDownList)sender).SelectedValue);
+                }
+            }
+            catch
+            {
+            }
+        }
 	}
 }
