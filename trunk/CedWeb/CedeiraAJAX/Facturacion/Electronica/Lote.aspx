@@ -1233,7 +1233,7 @@
 																</tr>
 																<tr>
 																	<td class="TextoLabelFEAVendedor">
-																	    <asp:Label ID="CodigoOperacionLabel" runat="server" Text="Código de operación:" Visible="false"></asp:Label>
+																	    <asp:Label ID="CodigoOperacionLabel" runat="server" Text="Código de operación:" Visible="true"></asp:Label>
 																	</td>
 																	<td style="padding-top: 8px;">
 																		<asp:DropDownList ID="CodigoOperacionDropDownList" runat="server">
