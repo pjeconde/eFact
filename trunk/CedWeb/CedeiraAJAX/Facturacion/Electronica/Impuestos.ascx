@@ -103,7 +103,7 @@
 									</asp:TemplateField>
 									<asp:TemplateField HeaderText="Alícuota %">
 										<ItemTemplate>
-											<asp:Label ID="lblalicuota" runat="server" Width="50px" Text='<%# GetAlicuota((double)Eval("porcentaje_impuesto")) %>'></asp:Label>
+											<asp:Label ID="lblalicuota" runat="server" Width="50px" Text='<%# GetAlicuota((double)Eval("porcentaje_impuesto")) %>' ></asp:Label>
 										</ItemTemplate>
 										<EditItemTemplate>
 											<asp:TextBox ID="txtalicuota" runat="server" Text='<%# Eval("porcentaje_impuesto") %>'
