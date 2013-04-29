@@ -355,8 +355,35 @@ namespace CedeiraAJAX.Facturacion.Electronica
             }
             else
             {
-                l.importe_ivaSpecified = false;
-                l.importe_iva = 0;
+                if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                {
+                    if (!puntoDeVenta.Equals(string.Empty))
+                    {
+                        CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.RG2904();
+                        System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
+                        int auxPV = Convert.ToInt32(puntoDeVenta);
+                        if (listaPV.Contains(auxPV))
+                        {
+                            l.importe_ivaSpecified = true;
+                            l.importe_iva = 0;
+                        }
+                        else
+                        {
+                            l.importe_ivaSpecified = false;
+                            l.importe_iva = 0;
+                        }
+                    }
+                    else
+                    {
+                        l.importe_ivaSpecified = false;
+                        l.importe_iva = 0;
+                    }
+                }
+                else
+                {
+                    l.importe_ivaSpecified = false;
+                    l.importe_iva = 0;
+                }
             }
         }
 
@@ -403,8 +430,34 @@ namespace CedeiraAJAX.Facturacion.Electronica
             string auxDescAliIVA = ddl.SelectedItem.Text;
             if (!auxDescAliIVA.Equals(string.Empty))
             {
-                l.alicuota_ivaSpecified = true;
-                l.alicuota_iva = auxAliIVA;
+                if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                {
+                    if (!puntoDeVenta.Equals(string.Empty))
+                    {
+                        CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.RG2904();
+                        System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
+                        int auxPV = Convert.ToInt32(puntoDeVenta);
+                        if (listaPV.Contains(auxPV) && !auxAliIVA.Equals(0) && (l.indicacion_exento_gravado.Equals("N") || l.indicacion_exento_gravado.Equals("E")))
+                        {
+                            throw new Exception("La alicuota iva debe ser 0% para RG2904 cuando está exento o no está gravado el artículo");
+                        }
+                        else
+                        {
+                            l.alicuota_ivaSpecified = true;
+                            l.alicuota_iva = auxAliIVA;
+                        }
+                    }
+                    else
+                    {
+                        l.alicuota_ivaSpecified = true;
+                        l.alicuota_iva = auxAliIVA;
+                    }
+                }
+                else
+                {
+                    l.alicuota_ivaSpecified = true;
+                    l.alicuota_iva = auxAliIVA;
+                }
             }
             else
             {
@@ -414,10 +467,12 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     {
                         CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
                         System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
+                        tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.RG2904();
+                        listaPV.AddRange(((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta));
                         int auxPV = Convert.ToInt32(puntoDeVenta);
                         if (listaPV.Contains(auxPV))
                         {
-                            throw new Exception("La alicuota iva es obligatoria para bono fiscal");
+                            throw new Exception("La alicuota iva es obligatoria para bono fiscal y RG2904");
                         }
                         else
                         {
@@ -641,12 +696,12 @@ namespace CedeiraAJAX.Facturacion.Electronica
                 ValidarDescripcion(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtdescripcion"));
                 ValidarImporte(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_total_articulo"));
                 ValidarImporteIVA(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_alicuota_articulo"));
+                ValidarIndicacionExentoGravado(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlindicacion_exento_gravadoEdit"));
                 ValidarAlicuotaIVA(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlalicuota_articuloEdit"));
                 ValidarUnidad(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlunidadEdit"));
                 ValidarCantidad(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcantidad"));
 				ValidarCodigoProductoComprador(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpcomprador"));
                 ValidarCodigoProductoVendedor(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpvendedor"));
-                ValidarIndicacionExentoGravado(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlindicacion_exento_gravadoEdit"));
                 ValidarPrecioUnitario(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtprecio_unitario"));
                 ValidarGTIN(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtGTIN"));
 
@@ -1141,38 +1196,42 @@ namespace CedeiraAJAX.Facturacion.Electronica
 			}
 			else
 			{
-				switch (TipoCbte)
-				{
-					case "6":
-					case "7":
-					case "8":
-					case "9":
-					case "10":
-					case "40":
-					case "61":
-                    case "64":
-                        if (TipoPtoVta.Equals("RG2904"))
-                        {
+                if (TipoPtoVta.Equals("RG2904"))
+                {
+                    if (listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+                    {
+                        throw new Exception("La alícuota de IVA es obligatoria para RG2904");
+                    }
+                    else
+                    {
+                        det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
+                        det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
+                    }
+                }
+                else
+                {
+                    switch (TipoCbte)
+                    {
+                        case "6":
+                        case "7":
+                        case "8":
+                        case "9":
+                        case "10":
+                        case "40":
+                        case "61":
+                        case "64":
+                            det.linea[i].alicuota_ivaSpecified = false;
+                            det.linea[i].alicuota_iva = 0;
+                            break;
+                        default:
                             det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
                             if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
                             {
                                 det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
                             }
-                        }
-                        else
-                        {
-                            det.linea[i].alicuota_ivaSpecified = false;
-                            det.linea[i].alicuota_iva = 0;
-                        }
-                        break;
-					default:
-						det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
-						if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
-						{
-							det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
-						}
-						break;
-				}
+                            break;
+                    }
+                }
 			}
 		}
 
