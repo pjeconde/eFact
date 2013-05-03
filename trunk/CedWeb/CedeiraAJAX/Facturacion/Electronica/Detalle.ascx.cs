@@ -654,10 +654,17 @@ namespace CedeiraAJAX.Facturacion.Electronica
                     {
                         CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.BonoFiscal();
                         System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
+                        CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta rg2904 = new CedWebEntidades.TiposPuntoDeVenta.RG2904();
+                        System.Collections.Generic.List<int> listaPV2904 = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(rg2904);
                         int auxPV = Convert.ToInt32(puntoDeVenta);
                         if (listaPV.Contains(auxPV))
                         {
                             throw new Exception("El precio unitario es obligatorio para bono fiscal");
+                        }
+                        else if (listaPV2904.Contains(auxPV))
+                        {
+                            l.precio_unitario = 0;
+                            l.precio_unitarioSpecified = true;
                         }
                         else
                         {
