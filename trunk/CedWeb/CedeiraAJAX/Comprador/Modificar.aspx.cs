@@ -52,7 +52,6 @@ namespace CedeiraAJAX.Comprador
                         TorreTextBox.Text = Comprador.Domicilio.Torre;
                         ManzanaTextBox.Text = Comprador.Domicilio.Manzana;
                         LocalidadTextBox.Text = Comprador.Domicilio.Localidad;
-                        ProvinciaDropDownList.SelectedValue = Comprador.Domicilio.Provincia.Id;
                         CodPostTextBox.Text = Comprador.Domicilio.CodPost;
                         NombreContactoTextBox.Text = Comprador.NombreContacto;
                         EmailContactoTextBox.Text = Comprador.EmailContacto;
@@ -65,6 +64,7 @@ namespace CedeiraAJAX.Comprador
                         {
                             HabilitarCompradorDelExtranjero();
                         }
+                        ProvinciaDropDownList.SelectedValue = Comprador.Domicilio.Provincia.Id;
                         TipoDocDropDownList.SelectedValue = Convert.ToString(Comprador.IdTipoDoc);
                         if (!CompradorDelExtranjeroCheckBox.Checked)
                         {
@@ -214,7 +214,6 @@ namespace CedeiraAJAX.Comprador
             TipoDocDropDownList.DataTextField = "Descr";
             TipoDocDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
             DataBind();
-            ProvinciaDropDownList.SelectedValue = ((FeaEntidades.CodigosProvincia.CodigoProvincia)new FeaEntidades.CodigosProvincia.SinInformar()).Codigo.ToString();
             CompradorDelExtranjeroCheckBox.Checked = true;
             TipoDocDropDownList.SelectedValue = ((FeaEntidades.Documentos.Documento)new FeaEntidades.Documentos.CUITPais()).Codigo.ToString();
             DestinosCuitLabel.Visible = true;
@@ -229,7 +228,6 @@ namespace CedeiraAJAX.Comprador
             TipoDocDropDownList.DataTextField = "Descr";
             TipoDocDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaNoExportacion();
             DataBind();
-            ProvinciaDropDownList.SelectedValue = ((FeaEntidades.CodigosProvincia.CodigoProvincia)new FeaEntidades.CodigosProvincia.CapitalFederal()).Codigo.ToString();
             CompradorDelExtranjeroCheckBox.Checked = false;
             TipoDocDropDownList.SelectedValue = ((FeaEntidades.Documentos.Documento)new FeaEntidades.Documentos.CUIT()).Codigo.ToString();
             DestinosCuitLabel.Visible = false;
