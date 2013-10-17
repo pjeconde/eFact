@@ -28,11 +28,16 @@ Public Class frmSecuenciador
     Dim ssThread As System.Threading.Thread
     Dim ss As SocketSecuenciador
     Dim YaDepuro As Boolean
+    Dim Detenido As Boolean
 
     Private Sub frmSecuenciador_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         On Error Resume Next
 
-        'CheckForIllegalCrossThreadCalls = False
+        Dim cedeiraCultura As CultureInfo
+        cedeiraCultura = New CultureInfo("en-GB", False)
+        cedeiraCultura.DateTimeFormat = New CultureInfo("es-AR", False).DateTimeFormat
+        Thread.CurrentThread.CurrentCulture = cedeiraCultura
+
         CadenaSerial = ""
         YaDepuro = False
 
@@ -88,7 +93,7 @@ Public Class frmSecuenciador
     End Sub
 
     Public Sub CreaNombreArchivo()
-        ArchivoHST = Now.ToString("yyyyMMdd") & ".HST"
+        ArchivoHST = Date.Now.ToString("yyyyMMdd") & ".HST"
     End Sub
 
     Public Sub GrabaContingencia()
@@ -515,7 +520,7 @@ Inicio:
         HayDatos = False        'Comienza sin datos en el temporal
         Forzar2 = False
 
-        'Buscar el primer archivo SinProcesar por orden de llegada
+        'Buscar el primer ARCHIVO SinProcesar por orden de llegada
         Dim archivosLista As String()
         BufferCaracteres = ""
         Message = ""
@@ -525,8 +530,6 @@ Inicio:
             BufferCaracteres = sr.ReadToEnd()
             Message = BufferCaracteres
             sr.Close()
-            Dim file As FileInfo = New FileInfo(archivosLista(0))
-            file.MoveTo(PathSecuenciasRecibidas & "RecibidosProcesados\" & file.Name)
         End If
 
         Dim BufferPosicion As Integer = 0
@@ -552,7 +555,7 @@ Inicio:
                 End If
 
                 If ((C = "*" Or C = Chr(13)) And (Trim(Cadena) <> "")) Or Forzar2 = True Then
-                    EscribirLog("[ProcesarTCP]", "Forzar = " & Forzar2 & " Cadena: " & Cadena)
+                    'EscribirLog("[ProcesarTCP]", "Forzar = " & Forzar2 & " Cadena: " & Cadena)
 
                     If Forzar2 = False Then
                         If NuevaFila > 1800 Or FechaFila.ToString("yyyyMMdd") <> Date.Now.ToString("yyyyMMdd") Then
@@ -614,8 +617,13 @@ Inicio:
                                     c2 = CadenaAux.Substring(0, 65)
                                     If (c1 = c2) Then
                                         MensajeTextBox.Text = "Cadena existente: " & Cadena & Now.ToString("HH:mm:ss")
-                                        EscribirLog("[ProcesarTCP]", "Cadena existente: " & Cadena)
+                                        'EscribirLog("[ProcesarTCP]", "Cadena existente: " & Cadena)
                                         FileClose(1)
+                                        'MUEVE EL ARCHIVO PROCESADO
+                                        If archivosLista.Length <> 0 Then
+                                            Dim file As FileInfo = New FileInfo(archivosLista(0))
+                                            file.MoveTo(PathSecuenciasRecibidas & "RecibidosProcesados\" & file.Name)
+                                        End If
                                         Exit Sub
                                     End If
                                 End If
@@ -755,7 +763,7 @@ Inicio:
                         Next
 
                         If ErrorCabecera = True Or ErrorDigitos = True Then
-                            EscribirLog("[ProcesarTCP] ", "Error en cabecera o digito de control. Cadena: " & Cadena)
+                            'EscribirLog("[ProcesarTCP] ", "Error en cabecera o digito de control. Cadena: " & Cadena)
                             CadenaParaImprimir = Cadena
                             'Dim i As Int32
                             'For i = 0 To Grilla.ColumnCount - 1
@@ -825,12 +833,19 @@ Inicio:
             Me.MensajeTextBox.Refresh()
             N = Message.Length - BufferPosicion
         End While
+        'MUEVE EL ARCHIVO PROCESADO
+        If archivosLista.Length <> 0 Then
+            Dim file As FileInfo = New FileInfo(archivosLista(0))
+            file.MoveTo(PathSecuenciasRecibidas & "RecibidosProcesados\" & file.Name)
+        End If
     End Sub
 
     Private Sub Recibir()
         If VerificarConfiguracion(TCPHabilitado) Then
             If TCPHabilitado Then
                 AbrirPuertos()
+                Timer1.Enabled = True
+                Detenido = False
             Else
                 If Puerto.IsOpen Then
                     MsgBox("El puerto está abierto.", vbOKOnly + vbCritical)
@@ -883,20 +898,19 @@ Inicio:
 
     Private Sub SalirButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SalirButton.Click
         EscribirLog("[SalirButton_Click]", "")
-        Dim resp As Boolean
-        resp = Detener()
-        If (resp) Then
+        If Detenido Then
             End
         End If
     End Sub
 
-    Private Function Detener() As Boolean
-        Detener = False
+    Private Function Detener()
+        Detenido = False
         If (TCPHabilitado) Then
             If (ss.DetencionPermitida = True) Then
                 ss.DetenerSocket()
                 HabilitarBotones(False)
-                Detener = True
+                Detenido = True
+                Timer1.Enabled = False
             Else
                 EscribirLog("[Detener]", "No es posible detener el secuenciador. Intente más tarde.")
                 MsgBox("No es posible detener el secuenciador. Intente más tarde.", vbOKOnly + vbCritical)
@@ -904,7 +918,7 @@ Inicio:
         Else
             If Puerto.IsOpen Then
                 Puerto.Close()
-                Detener = True
+                Detenido = True
             End If
         End If
     End Function
@@ -1029,7 +1043,7 @@ Inicio:
                             Dim fechaArch As DateTime
                             Try
                                 fechaArch = Convert.ToDateTime(file.Name.Substring(6, 2) + "/" + file.Name.Substring(4, 2) + "/" + file.Name.Substring(0, 4))
-                                If (fechaArch < DateTime.Today.AddDays(-1)) Then
+                                If (fechaArch < DateTime.Today.AddDays(-31)) Then
                                     file.Delete()
                                 End If
                             Catch ex As Exception
@@ -1043,7 +1057,9 @@ Inicio:
         Catch ex As Exception
             EscribirLog("[Timer1_Elapsed]", ex.Message)
         Finally
-            Timer1.Enabled = True
+            If Detenido <> True Then
+                Timer1.Enabled = True
+            End If
         End Try
     End Sub
 End Class

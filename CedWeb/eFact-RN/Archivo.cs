@@ -41,7 +41,7 @@ namespace eFact_RN
         public static void Procesar(out eFact_Entidades.Lote Lote, eFact_Entidades.Archivo Archivo, eFact_Entidades.Aplicacion Aplicacion, CedEntidades.Sesion Sesion)
         {
             //Antes de procesar el archivo grabamos los datos básicos del mismo.
-            if (Archivo.Tipo.ToUpper() != ".TXT" && Archivo.Tipo.ToUpper() != ".XML")
+            if (Archivo.Tipo.ToUpper() != ".TXT" && Archivo.Tipo.ToUpper() != ".XML" && Archivo.Tipo.ToUpper() != ".REC")
             {
                 throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.TipoDeArchivoIncorrecto("Solo se aceptan archivo TXT o XML.");
             }
@@ -74,6 +74,12 @@ namespace eFact_RN
                             eFact_RN.Engine Engine = new eFact_RN.Engine();
                             Lc = new FeaEntidades.InterFacturas.lote_comprobantes();
                             Engine.LeerMultiRegistro(out Lc, Archivo.Path + "\\" + Archivo.Nombre);
+                        }
+                        else if (Archivo.Tipo.ToUpper() == ".REC")
+                        {
+                            eFact_RN.Engine Engine = new eFact_RN.Engine();
+                            Lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+                            Engine.LeerRegistroRECE(out Lc, Archivo.Path + "\\" + Archivo.Nombre, Sesion);
                         }
                         break;
                     }

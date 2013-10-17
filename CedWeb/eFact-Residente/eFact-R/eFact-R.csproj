@@ -257,10 +257,6 @@
     <Content Include="XMLwsqacfe.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CedeiraAJAX\CedeiraAJAX.csproj">
-      <Project>{A572E64D-02D8-4BCC-8BD6-7E28ABA46730}</Project>
-      <Name>CedeiraAJAX</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\CedeiraAP\CedeiraAP.csproj">
       <Project>{DB0A7D76-F68E-43A7-ADBD-08DDF2AFAD36}</Project>
       <Name>CedeiraAP</Name>

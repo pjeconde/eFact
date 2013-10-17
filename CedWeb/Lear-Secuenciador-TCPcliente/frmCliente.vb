@@ -26,9 +26,13 @@ Public Class frmCliente
         Controles()
         Renglon = 1
         Conectar()
+        Dim FecAux As DateTime
         Do While Detenido = False
             Enviar()
-            System.Threading.Thread.Sleep(4000)
+            FecAux = DateTime.Now.AddSeconds(5)
+            Me.Refresh()
+            Do Until CLng(DateTime.Now.ToString("yyyyMMddhhmmss")) > CLng(FecAux.ToString("yyyyMMddhhmmss"))
+            Loop
         Loop
     End Sub
 
@@ -55,9 +59,9 @@ Public Class frmCliente
     Private Sub Enviar()
         Try
             SoyEnvio = True
-            Dim bytes As Byte() = ASCII.GetBytes("PINRANGER 02-May-12  " & Date.Now.ToString("HH:mm") & " MEXICO         " & Renglon.ToString("0000") & " 20122BCHDC2C012388 " + vbNewLine)
+            'Dim bytes As Byte() = ASCII.GetBytes("PINRANGER " & FechaProcDTP.Value.ToString("dd-MMM-yy") & "  " & Date.Now.ToString("HH:mm") & " MEXICO         " & Renglon.ToString("0000") & " 20122BCHDC2C012388 " + vbNewLine)
+            Dim bytes As Byte() = ASCII.GetBytes("PINRANGER " & "10-ago-12" & "  " & Date.Now.ToString("HH:mm") & " MEXICO         " & Renglon.ToString("0000") & " 20122BCHDC2C012388 " + vbNewLine)
             client.BeginSend(bytes, 0, bytes.Length, SocketFlags.None, New AsyncCallback(AddressOf OnSend), client)
-            'client.Send(bytes, 0, bytes.Length, SocketFlags.None)
             Debug.WriteLine("OK - Renglon: " & Renglon)
         Catch ex As Exception
             Conectar()
@@ -81,6 +85,8 @@ Public Class frmCliente
             End If
         Catch ex As Exception
             Debug.WriteLine("ER - Renglon: OnSend: " & Renglon)
+        Finally
+            SoyEnvio = False
         End Try
     End Sub
 

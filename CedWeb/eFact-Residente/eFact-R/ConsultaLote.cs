@@ -866,6 +866,7 @@ namespace eFact_R
                         PdfRtfWordFormatOptions CrFormatTypeOptions = new PdfRtfWordFormatOptions();
                         ReporteDocumento.ExportOptions.ExportFormatOptions = CrFormatTypeOptions;
                         ReporteDocumento.Export();
+                        ReporteDocumento.Close();
                     }
                     if (DetalleLoteDataGridView.SelectedRows.Count == 1)
                     {

@@ -97,6 +97,8 @@ namespace eFact_RN
                         NroLinea = ((FeaEntidades.InterFacturas.linea)o).numeroLinea - 1;
                         lc.comprobante[NroComprobante].detalle.linea[NroLinea] = (FeaEntidades.InterFacturas.linea)o;
                         GetPropiedades(o);
+                        NroLineaDescuento = 0;
+                        NroLineaInfoAdicional = 0;
                     }
                     if (typeof(FeaEntidades.InterFacturas.lineaImportes_moneda_origen) == o.GetType())
                     {
@@ -225,16 +227,6 @@ namespace eFact_RN
                 throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.BaseApplicationException("Problemas al procesar el archivo.\r\n\r\n" + ex.Message);
             }
         }
-        //public string ConvertToHex(string asciiString)
-        //{
-        //    string hex = "";
-        //    foreach (char c in asciiString)
-        //    {
-        //        int tmp = c;
-        //        hex += String.Format("{0:x2}", (uint)System.Convert.ToUInt32(tmp.ToString()));
-        //    }
-        //    return hex;
-        //}
         public string ConvertToHex(string asciiString)
         {
             byte[] b = Encoding.ASCII.GetBytes(asciiString);
@@ -392,6 +384,231 @@ namespace eFact_RN
             sb.Append("-");
             sb.Append(Nombre);
             NombreArch = sb.ToString();
+        }
+
+        public static void LeerRegistroRECE(out FeaEntidades.InterFacturas.lote_comprobantes Lc, string Archivo, CedEntidades.Sesion Sesion)
+        {
+            //Leer archivo RECE
+            FixedFileEngine engine = new FixedFileEngine(typeof(FeaEntidades.RECE.ComprobanteRECE));
+            FeaEntidades.RECE.ComprobanteRECE[] res = (FeaEntidades.RECE.ComprobanteRECE[])engine.ReadFile(Archivo);
+
+            if (res.Length < 2)
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.ProblemaProcesoArchRECE("\r\nEl archivo debe contener como mínimo dos registros.");
+            }
+            //Leer ultimo registro de control
+            FixedFileEngine engineCtrl = new FixedFileEngine(typeof(FeaEntidades.RECE.ComprobanteRECEctrl));
+            //res[res.Length-1];
+            string textocontrol = res[res.Length - 1].TipoRegistro;
+            textocontrol += res[res.Length - 1].FechaComprobante;
+            textocontrol += res[res.Length - 1].TipoComprobante;
+            textocontrol += res[res.Length - 1].ControladorFiscal;
+            textocontrol += res[res.Length - 1].PuntoVenta;
+            textocontrol += res[res.Length - 1].NroComprobanteDsd;
+            textocontrol += res[res.Length - 1].NroComprobanteHst;
+            textocontrol += res[res.Length - 1].CantidadHojas;
+            textocontrol += res[res.Length - 1].CodDocComprador;
+            textocontrol += res[res.Length - 1].NroDocComprador;
+            textocontrol += res[res.Length - 1].ApellidoNombreComprador;
+            textocontrol += res[res.Length - 1].ImporteTotalOpe;
+            textocontrol += res[res.Length - 1].ImporteNoGravado;
+            textocontrol += res[res.Length - 1].ImporteNetoGravado;
+            textocontrol += res[res.Length - 1].ImporteLiq;
+            textocontrol += res[res.Length - 1].ImporteLiqRNI;
+            textocontrol += res[res.Length - 1].ImporteOpeExentas;
+            textocontrol += res[res.Length - 1].ImportePercepOImpNacionales;
+            textocontrol += res[res.Length - 1].ImportePercepIB;
+            textocontrol += res[res.Length - 1].ImportePercepImpMunicipales;
+            textocontrol += res[res.Length - 1].ImporteImpInternos;
+            textocontrol += res[res.Length - 1].FechaServicioDsd;
+            textocontrol += res[res.Length - 1].FechaServicioHst;
+            textocontrol += res[res.Length - 1].FechaVtoPago;
+            textocontrol += res[res.Length - 1].Relleno;
+            textocontrol += res[res.Length - 1].CantidadAlicIVA;
+            textocontrol += res[res.Length - 1].CodOpe;
+            textocontrol += res[res.Length - 1].CAE;
+            textocontrol += res[res.Length - 1].FechaVtoCAE;
+            textocontrol += res[res.Length - 1].FechaAnulComprobante;
+            object o = engineCtrl.ReadString(textocontrol);
+            FeaEntidades.RECE.ComprobanteRECEctrl[] resCtrl = (FeaEntidades.RECE.ComprobanteRECEctrl[])o;
+            
+            FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+            Lc = lc;
+            //Armado de cabecera
+            lc.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
+            lc.cabecera_lote.cantidad_reg = res.Length - 1;
+            lc.cabecera_lote.cuit_canal = Convert.ToInt64(@System.Configuration.ConfigurationManager.AppSettings["CuitCanal"]);
+            lc.cabecera_lote.cuit_vendedor = Convert.ToInt64(resCtrl[0].CuitInformante);
+            lc.cabecera_lote.gestionar_afip = "S";
+            lc.cabecera_lote.gestionar_afipSpecified = true;
+            lc.cabecera_lote.punto_de_venta = Convert.ToInt32(res[0].PuntoVenta);
+            lc.cabecera_lote.fecha_envio_lote = DateTime.Now.ToString("yyyyMMdd hhmmss");
+
+            if (Convert.ToInt32(res.Length - 1) != Convert.ToInt32(resCtrl[0].CantidadRegTipo1))
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.ProblemaProcesoArchRECE("\r\nLa cantidad de registros informada, no coincide con la contenidad en el archivo.");
+            }
+            eFact_Entidades.Vendedor vendedor = new eFact_Entidades.Vendedor();
+            vendedor.CuitVendedor = lc.cabecera_lote.cuit_vendedor.ToString();
+            eFact_RN.Vendedor.Leer(vendedor, Sesion);
+            for (int i = 0; i < res.Length - 1; i++) 
+            {
+                List<FeaEntidades.InterFacturas.resumenImpuestos> resumenImpuestos = new List<FeaEntidades.InterFacturas.resumenImpuestos>();
+                lc.comprobante[i] = new FeaEntidades.InterFacturas.comprobante();
+                lc.comprobante[i].cabecera = new FeaEntidades.InterFacturas.cabecera();
+                lc.comprobante[i].cabecera.informacion_comprador = new FeaEntidades.InterFacturas.informacion_comprador();
+                lc.comprobante[i].cabecera.informacion_comprador.codigo_doc_identificatorio = Convert.ToInt32(res[i].CodDocComprador);
+                lc.comprobante[i].cabecera.informacion_comprador.nro_doc_identificatorio = Convert.ToInt64(res[i].NroDocComprador);
+                lc.comprobante[i].cabecera.informacion_comprador.denominacion = res[i].ApellidoNombreComprador;
+
+                lc.comprobante[i].cabecera.informacion_comprobante = new FeaEntidades.InterFacturas.informacion_comprobante();
+                lc.comprobante[i].cabecera.informacion_comprobante.codigo_concepto = 2;
+                lc.comprobante[i].cabecera.informacion_comprobante.codigo_conceptoSpecified = true;
+                lc.comprobante[i].cabecera.informacion_comprobante.fecha_emision = res[i].FechaComprobante;
+                lc.comprobante[i].cabecera.informacion_comprobante.fecha_serv_desde = res[i].FechaServicioDsd;
+                lc.comprobante[i].cabecera.informacion_comprobante.fecha_serv_hasta = res[i].FechaServicioHst;
+                lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento = res[i].FechaVtoPago;
+                lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta = Convert.ToInt32(res[i].PuntoVenta);
+                lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante = Convert.ToInt64(res[i].NroComprobanteDsd);
+
+                lc.comprobante[i].cabecera.informacion_vendedor = new FeaEntidades.InterFacturas.informacion_vendedor();
+                lc.comprobante[i].cabecera.informacion_vendedor.cuit = Convert.ToInt64(vendedor.CuitVendedor);
+                lc.comprobante[i].cabecera.informacion_vendedor.domicilio_calle = vendedor.DomicilioCalle;
+                lc.comprobante[i].cabecera.informacion_vendedor.domicilio_depto = vendedor.DomicilioDepto;
+                lc.comprobante[i].cabecera.informacion_vendedor.domicilio_numero = vendedor.DomicilioNumero;
+                lc.comprobante[i].cabecera.informacion_vendedor.domicilio_piso = vendedor.DomicilioPiso;
+                lc.comprobante[i].cabecera.informacion_vendedor.domicilio_manzana = vendedor.DomicilioManzana;
+                lc.comprobante[i].cabecera.informacion_vendedor.domicilio_sector = vendedor.DomicilioSector;
+                lc.comprobante[i].cabecera.informacion_vendedor.domicilio_torre = vendedor.DomicilioTorre;
+                lc.comprobante[i].cabecera.informacion_vendedor.cp = vendedor.CP;
+                lc.comprobante[i].cabecera.informacion_vendedor.email = vendedor.EMail;
+                if (vendedor.InicioActividades.ToString("yyyyMMdd") != "99981231")
+                {
+                    lc.comprobante[i].cabecera.informacion_vendedor.inicio_de_actividades = vendedor.InicioActividades.ToString("yyyyMMdd");
+                }
+                lc.comprobante[i].cabecera.informacion_vendedor.localidad = vendedor.Localidad;
+                lc.comprobante[i].cabecera.informacion_vendedor.provincia = vendedor.Provincia;
+                lc.comprobante[i].cabecera.informacion_vendedor.razon_social = vendedor.Nombre;
+                lc.comprobante[i].cabecera.informacion_vendedor.condicion_ingresos_brutos = vendedor.CondicionIB;
+                if (lc.comprobante[i].cabecera.informacion_vendedor.condicion_ingresos_brutos != 0)
+                {
+                    lc.comprobante[i].cabecera.informacion_vendedor.condicion_ingresos_brutosSpecified = true;
+                }
+                lc.comprobante[i].cabecera.informacion_vendedor.nro_ingresos_brutos = vendedor.NroIB;
+                lc.comprobante[i].cabecera.informacion_vendedor.condicion_IVA = vendedor.CondicionIVA;
+                if (lc.comprobante[i].cabecera.informacion_vendedor.condicion_IVA != 0)
+                {
+                    lc.comprobante[i].cabecera.informacion_vendedor.condicion_IVASpecified = true;
+                }
+                lc.comprobante[i].cabecera.informacion_vendedor.contacto = vendedor.Contacto;
+
+                lc.comprobante[i].detalle = new FeaEntidades.InterFacturas.detalle();
+                lc.comprobante[i].detalle.comentarios = "";
+
+                lc.comprobante[i].resumen = new FeaEntidades.InterFacturas.resumen();
+                lc.comprobante[i].resumen.cant_alicuotas_iva = Convert.ToInt32(res[i].CantidadAlicIVA);
+                double valor = ConvertirStringToDouble(15, 2, res[i].ImporteTotalOpe);
+                lc.comprobante[i].resumen.importe_total_factura = valor;
+                valor = ConvertirStringToDouble(15, 2, res[i].ImporteImpInternos);
+                if (valor != 0)
+                {
+                    lc.comprobante[i].resumen.importe_total_impuestos_internos = valor;
+                    lc.comprobante[i].resumen.importe_total_impuestos_internosSpecified = true;
+                }
+                valor = ConvertirStringToDouble(15, 2, res[i].ImportePercepImpMunicipales);
+                if (valor != 0)
+                {
+                    lc.comprobante[i].resumen.importe_total_impuestos_municipales = valor;
+                    lc.comprobante[i].resumen.importe_total_impuestos_municipalesSpecified = true;
+                }
+                valor = ConvertirStringToDouble(15, 2, res[i].ImportePercepOImpNacionales);
+                if (valor != 0)
+                {
+                    lc.comprobante[i].resumen.importe_total_impuestos_nacionales = valor;
+                    lc.comprobante[i].resumen.importe_total_impuestos_nacionalesSpecified = true;
+                }
+                valor = ConvertirStringToDouble(15, 2, res[i].ImportePercepIB);
+                if (valor != 0)
+                {
+                    lc.comprobante[i].resumen.importe_total_ingresos_brutos = valor;
+                    lc.comprobante[i].resumen.importe_total_ingresos_brutosSpecified = true;
+                }
+                lc.comprobante[i].resumen.impuesto_liq = ConvertirStringToDouble(15, 2, res[i].ImporteLiq);
+                lc.comprobante[i].resumen.impuesto_liq_rni = ConvertirStringToDouble(15, 2, res[i].ImporteLiqRNI);
+                lc.comprobante[i].resumen.importe_total_concepto_no_gravado = ConvertirStringToDouble(15, 2, res[i].ImporteNoGravado);
+                lc.comprobante[i].resumen.importe_total_neto_gravado = ConvertirStringToDouble(15, 2, res[i].ImporteNetoGravado);
+                lc.comprobante[i].resumen.importe_operaciones_exentas = ConvertirStringToDouble(15, 2, res[i].ImporteOpeExentas);
+                lc.comprobante[i].resumen.codigo_moneda = "PES";
+                lc.comprobante[i].resumen.tipo_de_cambio = 1;
+
+                //Lineas
+                FeaEntidades.InterFacturas.resumenImpuestos resumenImpuesto;
+                int linea = 0;
+                if (lc.comprobante[i].resumen.impuesto_liq != 0)
+                {
+                    lc.comprobante[i].detalle.linea[linea] = new FeaEntidades.InterFacturas.linea();
+                    lc.comprobante[i].detalle.linea[linea].cantidad = 1;
+                    lc.comprobante[i].detalle.linea[linea].unidad = "7";
+                    lc.comprobante[i].detalle.linea[linea].descripcion = "";
+                    lc.comprobante[i].detalle.linea[linea].codigo_producto_comprador = "";
+                    lc.comprobante[i].detalle.linea[linea].codigo_producto_vendedor = "";
+                    lc.comprobante[i].detalle.linea[linea].numeroLinea = linea + 1;
+                    lc.comprobante[i].detalle.linea[linea].alicuota_iva = Math.Round((lc.comprobante[i].resumen.impuesto_liq * 100) / lc.comprobante[i].resumen.importe_total_neto_gravado, 2);
+                    lc.comprobante[i].detalle.linea[linea].importe_iva = lc.comprobante[i].resumen.impuesto_liq;
+                    lc.comprobante[i].detalle.linea[linea].precio_unitario = lc.comprobante[i].resumen.importe_total_neto_gravado;
+                    lc.comprobante[i].detalle.linea[linea].importe_total_articulo = lc.comprobante[i].resumen.importe_total_neto_gravado;
+                    lc.comprobante[i].detalle.linea[linea].indicacion_exento_gravado = "G";
+                    resumenImpuesto = new FeaEntidades.InterFacturas.resumenImpuestos();
+                    resumenImpuesto.codigo_impuesto = 1;
+                    resumenImpuesto.base_imponible = lc.comprobante[i].resumen.importe_total_neto_gravado;
+                    resumenImpuesto.descripcion = "IVA";
+                    resumenImpuesto.porcentaje_impuesto = lc.comprobante[i].detalle.linea[linea].alicuota_iva;
+                    resumenImpuesto.porcentaje_impuestoSpecified = true; 
+                    resumenImpuestos.Add(resumenImpuesto);
+                    linea += 1;
+                }
+                if (lc.comprobante[i].resumen.importe_total_concepto_no_gravado != 0)
+                {
+                    lc.comprobante[i].detalle.linea[linea] = new FeaEntidades.InterFacturas.linea();
+                    lc.comprobante[i].detalle.linea[linea].cantidad = 1;
+                    lc.comprobante[i].detalle.linea[linea].unidad = "7";
+                    lc.comprobante[i].detalle.linea[linea].descripcion = "";
+                    lc.comprobante[i].detalle.linea[linea].codigo_producto_comprador = "";
+                    lc.comprobante[i].detalle.linea[linea].codigo_producto_vendedor = "";
+                    lc.comprobante[i].detalle.linea[linea].numeroLinea = linea + 1;
+                    lc.comprobante[i].detalle.linea[linea].alicuota_iva = 0;
+                    lc.comprobante[i].detalle.linea[linea].importe_iva = 0;
+                    lc.comprobante[i].detalle.linea[linea].precio_unitario = lc.comprobante[i].resumen.importe_total_concepto_no_gravado;
+                    lc.comprobante[i].detalle.linea[linea].importe_total_articulo = lc.comprobante[i].resumen.importe_total_concepto_no_gravado;
+                    lc.comprobante[i].detalle.linea[linea].indicacion_exento_gravado = "N";
+                    linea += 1;
+                }
+
+                //CODIGOS DE IMPUESTO
+                //COD         DESCRIPCION
+                //1           IVA
+                //2           Impuestos internos
+                //3           Otros impuestos
+                //4           Percepciones o pagos a cuenta de impuestos nacionales
+                //5           Percepción de Ingresos Brutos
+                //6           Percepción por Impuestos Municipales
+
+                lc.comprobante[i].resumen.impuestos = new FeaEntidades.InterFacturas.resumenImpuestos[resumenImpuestos.Count];
+                for (int ri = 0; ri < lc.comprobante[i].resumen.impuestos.Length; ri++)
+                {
+                    lc.comprobante[i].resumen.impuestos[ri] = resumenImpuestos[ri];
+                }
+
+                //Controles
+                if (lc.cabecera_lote.punto_de_venta != lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta)
+                {
+                    throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.ProblemaProcesoArchRECE("\r\nNo se puede procesar distintos puntos de venta en el mismo lote. Verificar linea: [" + Convert.ToInt32(i+1) + "]");
+                }
+            }
+        }
+        private static double ConvertirStringToDouble(int LongitudString, int LongitudDecimales, string Valor)
+        {
+            return Convert.ToDouble(Valor.Substring(0, LongitudString - LongitudDecimales) + "." + Valor.Substring(LongitudString - LongitudDecimales, LongitudDecimales));
         }
     }
 }

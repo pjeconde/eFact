@@ -488,6 +488,22 @@ namespace Microsoft.ApplicationBlocks.ExceptionManagement
             {
             }
         }
+        public class ProblemaProcesoArchRECE : Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.Fechas.BaseApplicationException
+        {
+            static string TextoError = "Problemas para procesar el archivo formato REC.";
+            public ProblemaProcesoArchRECE(string Nombre)
+                : base(TextoError + Nombre)
+            {
+            }
+            public ProblemaProcesoArchRECE(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public ProblemaProcesoArchRECE(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
     }
     namespace Reporte
     {

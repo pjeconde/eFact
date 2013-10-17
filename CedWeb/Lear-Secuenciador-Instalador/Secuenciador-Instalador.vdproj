@@ -27,12 +27,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_886862B237F4494FA45FD7A68966414A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_4337FD0A1FB74DF7BD650BAB6EA79B36"
         "MsmSig" = "8:_UNDEFINED"
@@ -45,7 +39,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:..\\..\\LEAR\\Instaladores\\v1.0.14\\Secuenciador-v1.0.14.msi"
+        "OutputFilename" = "8:..\\..\\LEAR\\Instaladores\\v1.0.25\\Secuenciador-v1.0.25.msi"
         "PackageFilesAs" = "3:1"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -147,26 +141,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_886862B237F4494FA45FD7A68966414A"
-            {
-            "SourcePath" = "8:..\\Lear-Secuenciador\\SecuenciaUnificada.ini"
-            "TargetName" = "8:SecuenciaUnificada.ini"
-            "Tag" = "8:"
-            "Folder" = "8:_560DEC2EC4E04705A52509BC50209D52"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
         }
         "FileType"
         {
@@ -222,14 +196,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Secuenciador"
-        "ProductCode" = "8:{9F0C7A08-39FE-439C-BBF8-DC0DD26A211B}"
-        "PackageCode" = "8:{1AC6CA0A-D876-4EAC-8E9C-E7909F69E318}"
+        "ProductCode" = "8:{8D66673C-FA93-4CFA-97C1-1427089556BD}"
+        "PackageCode" = "8:{F084064D-0D8B-41ED-AA9D-2703DDE8E3D3}"
         "UpgradeCode" = "8:{F4E66A85-2E30-47AE-985D-8AB57A83D0CC}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.14"
+        "ProductVersion" = "8:1.0.25"
         "Manufacturer" = "8:Cedeira"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.cedeira.com.ar"
@@ -344,7 +318,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_FBA5ACB0EDD24333ACF6755B0BC39C7D"
             {
-            "Name" = "8:Secuenciador v1.0.14"
+            "Name" = "8:Secuenciador v1.0.25"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
