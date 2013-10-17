@@ -116,6 +116,7 @@ namespace eFact_N
         {
             eFact_RN.Lote.ConsultarNovedades(out lotes, Aplicacion.Sesion);
         }
+
         private void ActualizarDB2(List<eFact_Entidades.Lote> lotes)
         {
             foreach (eFact_Entidades.Lote lote in lotes)
@@ -298,11 +299,12 @@ namespace eFact_N
                             lr = (FeaEntidades.InterFacturas.lote_response)x.Deserialize(ms);
                             foreach (FeaEntidades.InterFacturas.error le in lr.errores_lote)
                             {
-                                if (le.codigo_error == 500 || le.codigo_error == 600)
-                                {
-                                    errorSoloXMail = lote.LoteXmlIF;
-                                    break;
-                                }
+                                //if (le.codigo_error == 500 || le.codigo_error == 600)
+                                //{
+                                //    errorSoloXMail = lote.LoteXmlIF;
+                                //    break;
+                                //}
+
                                 // Tabla: "BECCL" - Comprobante ER
                                 myInsertQueryER = "insert into BEEIL (BEIID, BEICOM, BEIIDL, BEITCO, BEICLA, BEITCA, BEISUC, BEINED, BEICOE, ";
                                 // Descripcion del 1 a 30 / del 31 a 60 / 61 a 90 / 91 a 120 / 121 a 150
@@ -350,7 +352,6 @@ namespace eFact_N
                         // --------------------------------
                         cn.Close();
                     }
-
                 }
             }
         }
@@ -403,6 +404,8 @@ namespace eFact_N
             auxCnnStrAplicExterna.Append(System.Configuration.ConfigurationManager.AppSettings["CnnStrAplicExterna"]);
 
             Aplicacion = eFact_RN.Aplicacion.Crear();
+            Aplicacion.Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+            Aplicacion.VersionParaControl = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(2);
 
             string Usuario = System.Environment.UserName;
             string Dominio = System.Environment.UserDomainName;

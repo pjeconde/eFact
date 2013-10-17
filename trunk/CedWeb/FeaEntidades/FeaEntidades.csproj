@@ -1373,6 +1373,8 @@
     <Compile Include="IVA\Veintisiete.cs" />
     <Compile Include="IVA\Veintiuno.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RECE\ComprobanteRECE.cs" />
+    <Compile Include="RECE\ComprobanteRECEctrl.cs" />
     <Compile Include="Reporte\cabecera.cs" />
     <Compile Include="Reporte\cabecera_lote.cs" />
     <Compile Include="Reporte\comprobante.cs" />

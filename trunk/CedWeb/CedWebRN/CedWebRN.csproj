@@ -77,7 +77,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CaptchaDotNet2\CaptchaDotNet2.csproj">
+    <ProjectReference Include="..\..\SVNCedForecast\CaptchaDotNet2\CaptchaDotNet2.csproj">
       <Project>{B76ED545-1CF6-40BC-A3E1-52C34B0A0EFF}</Project>
       <Name>CaptchaDotNet2</Name>
     </ProjectReference>

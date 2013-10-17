@@ -20,44 +20,51 @@ namespace eFact_DB
             commandText.Append(" where CuitVendedor='" + Vendedor.CuitVendedor + "'");
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.Acepta, sesion.CnnStr);
-            Vendedor.CuitVendedor = dt.Rows[0]["CuitVendedor"].ToString();
-            Vendedor.Nombre = dt.Rows[0]["Nombre"].ToString();
-            Vendedor.NumeroSerieCertificado = dt.Rows[0]["NumeroSerieCertificado"].ToString();
-            if (dt.Rows[0]["Logo"].GetType() != Type.GetType("System.DBNull"))
+            if (dt.Rows.Count != 0)
             {
-                Vendedor.Logo = ((byte[])dt.Rows[0]["Logo"]);
-            }
-            Vendedor.Codigo = dt.Rows[0]["Codigo"].ToString();
-            if (dt.Rows[0]["CondicionIVA"].GetType() != Type.GetType("System.DBNull"))
-            {
-                Vendedor.CondicionIVA = Convert.ToInt32(dt.Rows[0]["CondicionIVA"].ToString());
-            }
-            if (dt.Rows[0]["CondicionIB"].GetType() != Type.GetType("System.DBNull"))
-            {
-                Vendedor.CondicionIB = Convert.ToInt32(dt.Rows[0]["CondicionIB"].ToString());
-            }
-            Vendedor.NroIB =  dt.Rows[0]["NroIB"].ToString();
-            if (dt.Rows[0]["InicioActividades"].GetType() != Type.GetType("System.DBNull"))
-            {
-                Vendedor.InicioActividades = Convert.ToDateTime(dt.Rows[0]["InicioActividades"].ToString());
+                Vendedor.CuitVendedor = dt.Rows[0]["CuitVendedor"].ToString();
+                Vendedor.Nombre = dt.Rows[0]["Nombre"].ToString();
+                Vendedor.NumeroSerieCertificado = dt.Rows[0]["NumeroSerieCertificado"].ToString();
+                if (dt.Rows[0]["Logo"].GetType() != Type.GetType("System.DBNull"))
+                {
+                    Vendedor.Logo = ((byte[])dt.Rows[0]["Logo"]);
+                }
+                Vendedor.Codigo = dt.Rows[0]["Codigo"].ToString();
+                if (dt.Rows[0]["CondicionIVA"].GetType() != Type.GetType("System.DBNull"))
+                {
+                    Vendedor.CondicionIVA = Convert.ToInt32(dt.Rows[0]["CondicionIVA"].ToString());
+                }
+                if (dt.Rows[0]["CondicionIB"].GetType() != Type.GetType("System.DBNull"))
+                {
+                    Vendedor.CondicionIB = Convert.ToInt32(dt.Rows[0]["CondicionIB"].ToString());
+                }
+                Vendedor.NroIB = dt.Rows[0]["NroIB"].ToString();
+                if (dt.Rows[0]["InicioActividades"].GetType() != Type.GetType("System.DBNull"))
+                {
+                    Vendedor.InicioActividades = Convert.ToDateTime(dt.Rows[0]["InicioActividades"].ToString());
+                }
+                else
+                {
+                    Vendedor.InicioActividades = FechaMax;
+                }
+                Vendedor.Contacto = dt.Rows[0]["Contacto"].ToString();
+                Vendedor.DomicilioCalle = dt.Rows[0]["DomicilioCalle"].ToString();
+                Vendedor.DomicilioNumero = dt.Rows[0]["DomicilioNumero"].ToString();
+                Vendedor.DomicilioPiso = dt.Rows[0]["DomicilioPiso"].ToString();
+                Vendedor.DomicilioDepto = dt.Rows[0]["DomicilioDepto"].ToString();
+                Vendedor.DomicilioSector = dt.Rows[0]["DomicilioSector"].ToString();
+                Vendedor.DomicilioTorre = dt.Rows[0]["DomicilioTorre"].ToString();
+                Vendedor.DomicilioManzana = dt.Rows[0]["DomicilioManzana"].ToString();
+                Vendedor.Localidad = dt.Rows[0]["Localidad"].ToString();
+                Vendedor.Provincia = dt.Rows[0]["Provincia"].ToString();
+                Vendedor.CP = dt.Rows[0]["CP"].ToString();
+                Vendedor.EMail = dt.Rows[0]["EMail"].ToString();
+                Vendedor.Telefono = dt.Rows[0]["Telefono"].ToString();
             }
             else
             {
-                Vendedor.InicioActividades = FechaMax;
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Vendedor.Inexistente("Cuit: " + Vendedor.CuitVendedor);
             }
-            Vendedor.Contacto = dt.Rows[0]["Contacto"].ToString();
-            Vendedor.DomicilioCalle = dt.Rows[0]["DomicilioCalle"].ToString();
-            Vendedor.DomicilioNumero = dt.Rows[0]["DomicilioNumero"].ToString();
-            Vendedor.DomicilioPiso = dt.Rows[0]["DomicilioPiso"].ToString();
-            Vendedor.DomicilioDepto = dt.Rows[0]["DomicilioDepto"].ToString();
-            Vendedor.DomicilioSector = dt.Rows[0]["DomicilioSector"].ToString();
-            Vendedor.DomicilioTorre = dt.Rows[0]["DomicilioTorre"].ToString();
-            Vendedor.DomicilioManzana = dt.Rows[0]["DomicilioManzana"].ToString();
-            Vendedor.Localidad = dt.Rows[0]["Localidad"].ToString();
-            Vendedor.Provincia = dt.Rows[0]["Provincia"].ToString();
-            Vendedor.CP = dt.Rows[0]["CP"].ToString();
-            Vendedor.EMail = dt.Rows[0]["EMail"].ToString();
-            Vendedor.Telefono = dt.Rows[0]["Telefono"].ToString();
         }
         public void Consultar(List<eFact_Entidades.Vendedor> Vendedores)
         {

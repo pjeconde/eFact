@@ -32,6 +32,8 @@ Partial Class frmCliente
         Me.Label1 = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
         Me.DetenerButton = New System.Windows.Forms.Button
+        Me.Label3 = New System.Windows.Forms.Label
+        Me.FechaProcDTP = New System.Windows.Forms.DateTimePicker
         Me.SuspendLayout()
         '
         'EnviarMensajeButton
@@ -65,24 +67,24 @@ Partial Class frmCliente
         '
         Me.IPTextBox.Location = New System.Drawing.Point(41, 14)
         Me.IPTextBox.Name = "IPTextBox"
-        Me.IPTextBox.Size = New System.Drawing.Size(150, 20)
+        Me.IPTextBox.Size = New System.Drawing.Size(88, 20)
         Me.IPTextBox.TabIndex = 3
         Me.IPTextBox.Text = "127.0.0.1"
         '
         'PuertoTextBox
         '
         Me.PuertoTextBox.AcceptsReturn = True
-        Me.PuertoTextBox.Location = New System.Drawing.Point(258, 16)
+        Me.PuertoTextBox.Location = New System.Drawing.Point(192, 14)
         Me.PuertoTextBox.Name = "PuertoTextBox"
-        Me.PuertoTextBox.Size = New System.Drawing.Size(73, 20)
+        Me.PuertoTextBox.Size = New System.Drawing.Size(46, 20)
         Me.PuertoTextBox.TabIndex = 4
         Me.PuertoTextBox.Text = "8080"
         '
         'ConectarButton
         '
-        Me.ConectarButton.Location = New System.Drawing.Point(357, 11)
+        Me.ConectarButton.Location = New System.Drawing.Point(461, 11)
         Me.ConectarButton.Name = "ConectarButton"
-        Me.ConectarButton.Size = New System.Drawing.Size(121, 23)
+        Me.ConectarButton.Size = New System.Drawing.Size(68, 23)
         Me.ConectarButton.TabIndex = 5
         Me.ConectarButton.Text = "Conectar"
         Me.ConectarButton.UseVisualStyleBackColor = True
@@ -99,7 +101,7 @@ Partial Class frmCliente
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(211, 18)
+        Me.Label2.Location = New System.Drawing.Point(145, 16)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(41, 13)
         Me.Label2.TabIndex = 7
@@ -107,18 +109,38 @@ Partial Class frmCliente
         '
         'DetenerButton
         '
-        Me.DetenerButton.Location = New System.Drawing.Point(484, 11)
+        Me.DetenerButton.Location = New System.Drawing.Point(535, 11)
         Me.DetenerButton.Name = "DetenerButton"
-        Me.DetenerButton.Size = New System.Drawing.Size(121, 23)
+        Me.DetenerButton.Size = New System.Drawing.Size(70, 23)
         Me.DetenerButton.TabIndex = 8
         Me.DetenerButton.Text = "Detener"
         Me.DetenerButton.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(256, 16)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(65, 13)
+        Me.Label3.TabIndex = 9
+        Me.Label3.Text = "Fecha.Proc:"
+        '
+        'FechaProcDTP
+        '
+        Me.FechaProcDTP.Cursor = System.Windows.Forms.Cursors.Default
+        Me.FechaProcDTP.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.FechaProcDTP.Location = New System.Drawing.Point(328, 14)
+        Me.FechaProcDTP.Name = "FechaProcDTP"
+        Me.FechaProcDTP.Size = New System.Drawing.Size(89, 20)
+        Me.FechaProcDTP.TabIndex = 10
         '
         'frmCliente
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(621, 386)
+        Me.Controls.Add(Me.FechaProcDTP)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.DetenerButton)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
@@ -148,5 +170,7 @@ Partial Class frmCliente
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents DetenerButton As System.Windows.Forms.Button
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents FechaProcDTP As System.Windows.Forms.DateTimePicker
 
 End Class

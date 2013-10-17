@@ -18,6 +18,7 @@ namespace eFact_RN
             aplic.ArchPathItf = @System.Configuration.ConfigurationManager.AppSettings["ArchPathItf"];
             aplic.ArchPathItfAut = @System.Configuration.ConfigurationManager.AppSettings["ArchPathItfAut"];
             aplic.ArchPathPDF = @System.Configuration.ConfigurationManager.AppSettings["ArchPathPDF"];
+            aplic.TipoItfAut = @System.Configuration.ConfigurationManager.AppSettings["TipoItfAut"]; 
 
             aplic.MailServidorSmtp = @System.Configuration.ConfigurationManager.AppSettings["MailServidorSmtp"];
             aplic.MailCredencialesUsr = @System.Configuration.ConfigurationManager.AppSettings["MailCredencialesUsr"];
