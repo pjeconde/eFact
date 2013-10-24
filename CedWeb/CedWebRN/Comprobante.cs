@@ -218,6 +218,7 @@ namespace CedWebRN
 			IBK.FacturaWebServiceConSchema objIBK;
 			objIBK = new IBK.FacturaWebServiceConSchema();
             objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturas"];
+            objIBK.Timeout = 300000000;
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null && System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
             {
                 System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
@@ -1283,7 +1284,10 @@ namespace CedWebRN
                 }
                 cIBK.resumen.observaciones = lc.comprobante[i].resumen.observaciones;
                 cIBK.resumen.tipo_de_cambio = lc.comprobante[i].resumen.tipo_de_cambio;
-
+                //if (i > 294)
+                //{
+                //    string zz = "";
+                //}
                 lcIBK.comprobante[i] = cIBK;
             }
             return lcIBK;

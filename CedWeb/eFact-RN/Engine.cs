@@ -434,6 +434,19 @@ namespace eFact_RN
             
             FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
             Lc = lc;
+
+            bool prueba = true; 
+            //Para prueba se usa unicamente --------
+            int[] NroComprobantePrueba = new int[6];
+            NroComprobantePrueba[0] = 99;
+            NroComprobantePrueba[3] = 207;
+            string fecha_emision = "20131024";
+            string fecha_serv_desde = "20131001";
+            string fecha_serv_hasta = "20131030";
+            string fecha_vencimiento = "20131030";
+            int punto_de_venta = 36;
+            //--------------------------------------
+
             //Armado de cabecera
             lc.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
             lc.cabecera_lote.cantidad_reg = res.Length - 1;
@@ -442,15 +455,29 @@ namespace eFact_RN
             lc.cabecera_lote.gestionar_afip = "S";
             lc.cabecera_lote.gestionar_afipSpecified = true;
             lc.cabecera_lote.punto_de_venta = Convert.ToInt32(res[0].PuntoVenta);
+            if (prueba) { lc.cabecera_lote.punto_de_venta = punto_de_venta; }
             lc.cabecera_lote.fecha_envio_lote = DateTime.Now.ToString("yyyyMMdd hhmmss");
+            lc.cabecera_lote.id_lote = Convert.ToInt64(DateTime.Now.ToString("yyyyMMddhhmmss"));
 
             if (Convert.ToInt32(res.Length - 1) != Convert.ToInt32(resCtrl[0].CantidadRegTipo1))
             {
-                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.ProblemaProcesoArchRECE("\r\nLa cantidad de registros informada, no coincide con la contenidad en el archivo.");
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.ProblemaProcesoArchRECE("\r\nLa cantidad de registros informada, no coincide con la contenida en el archivo.");
             }
             eFact_Entidades.Vendedor vendedor = new eFact_Entidades.Vendedor();
             vendedor.CuitVendedor = lc.cabecera_lote.cuit_vendedor.ToString();
             eFact_RN.Vendedor.Leer(vendedor, Sesion);
+
+            double ImporteTotalOpe = 0;
+            double ImporteNoGravado = 0;
+            double ImporteNetoGravado = 0;
+            double ImporteLiq = 0;
+            double ImporteLiqRNI = 0;
+            double ImporteOpeExentas = 0;
+            double ImportePercepOImpNacionales = 0;
+            double ImportePercepIB = 0;
+            double ImportePercepImpMunicipales = 0;
+            double ImporteImpInternos = 0;
+
             for (int i = 0; i < res.Length - 1; i++) 
             {
                 List<FeaEntidades.InterFacturas.resumenImpuestos> resumenImpuestos = new List<FeaEntidades.InterFacturas.resumenImpuestos>();
@@ -464,13 +491,23 @@ namespace eFact_RN
                 lc.comprobante[i].cabecera.informacion_comprobante = new FeaEntidades.InterFacturas.informacion_comprobante();
                 lc.comprobante[i].cabecera.informacion_comprobante.codigo_concepto = 2;
                 lc.comprobante[i].cabecera.informacion_comprobante.codigo_conceptoSpecified = true;
+                lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante = Convert.ToInt32(res[i].TipoComprobante); 
                 lc.comprobante[i].cabecera.informacion_comprobante.fecha_emision = res[i].FechaComprobante;
+                if (prueba) { lc.comprobante[i].cabecera.informacion_comprobante.fecha_emision = fecha_emision; }
                 lc.comprobante[i].cabecera.informacion_comprobante.fecha_serv_desde = res[i].FechaServicioDsd;
+                if (prueba) { lc.comprobante[i].cabecera.informacion_comprobante.fecha_serv_desde = fecha_serv_desde; }
                 lc.comprobante[i].cabecera.informacion_comprobante.fecha_serv_hasta = res[i].FechaServicioHst;
+                if (prueba) { lc.comprobante[i].cabecera.informacion_comprobante.fecha_serv_hasta = fecha_serv_hasta; }
                 lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento = res[i].FechaVtoPago;
+                if (prueba) { lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento = fecha_vencimiento; }
                 lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta = Convert.ToInt32(res[i].PuntoVenta);
+                if (prueba) { lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta = lc.cabecera_lote.punto_de_venta; }
                 lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante = Convert.ToInt64(res[i].NroComprobanteDsd);
-
+                if (prueba) 
+                {
+                    NroComprobantePrueba[lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante - 1] += 1;
+                    lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante = NroComprobantePrueba[lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante - 1];
+                }
                 lc.comprobante[i].cabecera.informacion_vendedor = new FeaEntidades.InterFacturas.informacion_vendedor();
                 lc.comprobante[i].cabecera.informacion_vendedor.cuit = Convert.ToInt64(vendedor.CuitVendedor);
                 lc.comprobante[i].cabecera.informacion_vendedor.domicilio_calle = vendedor.DomicilioCalle;
@@ -507,67 +544,57 @@ namespace eFact_RN
 
                 lc.comprobante[i].resumen = new FeaEntidades.InterFacturas.resumen();
                 lc.comprobante[i].resumen.cant_alicuotas_iva = Convert.ToInt32(res[i].CantidadAlicIVA);
-                double valor = ConvertirStringToDouble(15, 2, res[i].ImporteTotalOpe);
+                double valor = 0;
+                valor = ConvertirStringToDouble(15, 2, res[i].ImporteTotalOpe);
+                ImporteTotalOpe += valor;
                 lc.comprobante[i].resumen.importe_total_factura = valor;
                 valor = ConvertirStringToDouble(15, 2, res[i].ImporteImpInternos);
                 if (valor != 0)
                 {
+                    ImporteImpInternos += valor;
                     lc.comprobante[i].resumen.importe_total_impuestos_internos = valor;
                     lc.comprobante[i].resumen.importe_total_impuestos_internosSpecified = true;
+
                 }
                 valor = ConvertirStringToDouble(15, 2, res[i].ImportePercepImpMunicipales);
                 if (valor != 0)
                 {
+                    ImportePercepImpMunicipales += valor;
                     lc.comprobante[i].resumen.importe_total_impuestos_municipales = valor;
                     lc.comprobante[i].resumen.importe_total_impuestos_municipalesSpecified = true;
                 }
                 valor = ConvertirStringToDouble(15, 2, res[i].ImportePercepOImpNacionales);
                 if (valor != 0)
                 {
+                    ImportePercepOImpNacionales += valor;
                     lc.comprobante[i].resumen.importe_total_impuestos_nacionales = valor;
                     lc.comprobante[i].resumen.importe_total_impuestos_nacionalesSpecified = true;
                 }
                 valor = ConvertirStringToDouble(15, 2, res[i].ImportePercepIB);
                 if (valor != 0)
                 {
+                    ImportePercepIB += valor;
                     lc.comprobante[i].resumen.importe_total_ingresos_brutos = valor;
                     lc.comprobante[i].resumen.importe_total_ingresos_brutosSpecified = true;
                 }
+
                 lc.comprobante[i].resumen.impuesto_liq = ConvertirStringToDouble(15, 2, res[i].ImporteLiq);
+                ImporteLiq += lc.comprobante[i].resumen.impuesto_liq;
                 lc.comprobante[i].resumen.impuesto_liq_rni = ConvertirStringToDouble(15, 2, res[i].ImporteLiqRNI);
+                ImporteLiqRNI += lc.comprobante[i].resumen.impuesto_liq_rni;
                 lc.comprobante[i].resumen.importe_total_concepto_no_gravado = ConvertirStringToDouble(15, 2, res[i].ImporteNoGravado);
+                ImporteNoGravado += lc.comprobante[i].resumen.importe_total_concepto_no_gravado;
                 lc.comprobante[i].resumen.importe_total_neto_gravado = ConvertirStringToDouble(15, 2, res[i].ImporteNetoGravado);
+                ImporteNetoGravado += lc.comprobante[i].resumen.importe_total_neto_gravado;
                 lc.comprobante[i].resumen.importe_operaciones_exentas = ConvertirStringToDouble(15, 2, res[i].ImporteOpeExentas);
+                ImporteOpeExentas += lc.comprobante[i].resumen.importe_operaciones_exentas;
                 lc.comprobante[i].resumen.codigo_moneda = "PES";
                 lc.comprobante[i].resumen.tipo_de_cambio = 1;
 
                 //Lineas
                 FeaEntidades.InterFacturas.resumenImpuestos resumenImpuesto;
                 int linea = 0;
-                if (lc.comprobante[i].resumen.impuesto_liq != 0)
-                {
-                    lc.comprobante[i].detalle.linea[linea] = new FeaEntidades.InterFacturas.linea();
-                    lc.comprobante[i].detalle.linea[linea].cantidad = 1;
-                    lc.comprobante[i].detalle.linea[linea].unidad = "7";
-                    lc.comprobante[i].detalle.linea[linea].descripcion = "";
-                    lc.comprobante[i].detalle.linea[linea].codigo_producto_comprador = "";
-                    lc.comprobante[i].detalle.linea[linea].codigo_producto_vendedor = "";
-                    lc.comprobante[i].detalle.linea[linea].numeroLinea = linea + 1;
-                    lc.comprobante[i].detalle.linea[linea].alicuota_iva = Math.Round((lc.comprobante[i].resumen.impuesto_liq * 100) / lc.comprobante[i].resumen.importe_total_neto_gravado, 2);
-                    lc.comprobante[i].detalle.linea[linea].importe_iva = lc.comprobante[i].resumen.impuesto_liq;
-                    lc.comprobante[i].detalle.linea[linea].precio_unitario = lc.comprobante[i].resumen.importe_total_neto_gravado;
-                    lc.comprobante[i].detalle.linea[linea].importe_total_articulo = lc.comprobante[i].resumen.importe_total_neto_gravado;
-                    lc.comprobante[i].detalle.linea[linea].indicacion_exento_gravado = "G";
-                    resumenImpuesto = new FeaEntidades.InterFacturas.resumenImpuestos();
-                    resumenImpuesto.codigo_impuesto = 1;
-                    resumenImpuesto.base_imponible = lc.comprobante[i].resumen.importe_total_neto_gravado;
-                    resumenImpuesto.descripcion = "IVA";
-                    resumenImpuesto.porcentaje_impuesto = lc.comprobante[i].detalle.linea[linea].alicuota_iva;
-                    resumenImpuesto.porcentaje_impuestoSpecified = true; 
-                    resumenImpuestos.Add(resumenImpuesto);
-                    linea += 1;
-                }
-                if (lc.comprobante[i].resumen.importe_total_concepto_no_gravado != 0)
+                if (lc.comprobante[i].resumen.importe_total_factura == 0)
                 {
                     lc.comprobante[i].detalle.linea[linea] = new FeaEntidades.InterFacturas.linea();
                     lc.comprobante[i].detalle.linea[linea].cantidad = 1;
@@ -577,8 +604,60 @@ namespace eFact_RN
                     lc.comprobante[i].detalle.linea[linea].codigo_producto_vendedor = "";
                     lc.comprobante[i].detalle.linea[linea].numeroLinea = linea + 1;
                     lc.comprobante[i].detalle.linea[linea].alicuota_iva = 0;
+                    lc.comprobante[i].detalle.linea[linea].alicuota_ivaSpecified = true;
                     lc.comprobante[i].detalle.linea[linea].importe_iva = 0;
+                    lc.comprobante[i].detalle.linea[linea].importe_ivaSpecified = true;
+                    lc.comprobante[i].detalle.linea[linea].precio_unitario = 0;
+                    lc.comprobante[i].detalle.linea[linea].precio_unitarioSpecified = true;
+                    lc.comprobante[i].detalle.linea[linea].importe_total_articulo = 0;
+                    lc.comprobante[i].detalle.linea[linea].indicacion_exento_gravado = "N";
+                    linea += 1;
+                }
+                if (lc.comprobante[i].resumen.impuesto_liq != 0)
+                {
+                    lc.comprobante[i].detalle.linea[linea] = new FeaEntidades.InterFacturas.linea();
+                    lc.comprobante[i].detalle.linea[linea].cantidad = 1;
+                    lc.comprobante[i].detalle.linea[linea].cantidadSpecified = true;
+                    lc.comprobante[i].detalle.linea[linea].unidad = "7";
+                    lc.comprobante[i].detalle.linea[linea].descripcion = "";
+                    lc.comprobante[i].detalle.linea[linea].codigo_producto_comprador = "";
+                    lc.comprobante[i].detalle.linea[linea].codigo_producto_vendedor = "";
+                    lc.comprobante[i].detalle.linea[linea].numeroLinea = linea + 1;
+                    lc.comprobante[i].detalle.linea[linea].alicuota_iva = Math.Round((lc.comprobante[i].resumen.impuesto_liq * 100) / lc.comprobante[i].resumen.importe_total_neto_gravado, 2);
+                    lc.comprobante[i].detalle.linea[linea].alicuota_ivaSpecified = true;
+                    lc.comprobante[i].detalle.linea[linea].importe_iva = lc.comprobante[i].resumen.impuesto_liq;
+                    lc.comprobante[i].detalle.linea[linea].importe_ivaSpecified = true;
+                    lc.comprobante[i].detalle.linea[linea].precio_unitario = lc.comprobante[i].resumen.importe_total_neto_gravado;
+                    lc.comprobante[i].detalle.linea[linea].precio_unitarioSpecified = true;
+                    lc.comprobante[i].detalle.linea[linea].importe_total_articulo = lc.comprobante[i].resumen.importe_total_neto_gravado;
+                    lc.comprobante[i].detalle.linea[linea].indicacion_exento_gravado = "G";
+                    resumenImpuesto = new FeaEntidades.InterFacturas.resumenImpuestos();
+                    resumenImpuesto.codigo_impuesto = 1;
+                    resumenImpuesto.base_imponible = lc.comprobante[i].resumen.importe_total_neto_gravado;
+                    resumenImpuesto.base_imponibleSpecified = true;
+                    resumenImpuesto.descripcion = "IVA";
+                    resumenImpuesto.porcentaje_impuesto = lc.comprobante[i].detalle.linea[linea].alicuota_iva;
+                    resumenImpuesto.porcentaje_impuestoSpecified = true;
+                    resumenImpuesto.importe_impuesto = lc.comprobante[i].detalle.linea[linea].importe_iva;
+                    resumenImpuestos.Add(resumenImpuesto);
+                    linea += 1;
+                }
+                if (lc.comprobante[i].resumen.importe_total_concepto_no_gravado != 0)
+                {
+                    lc.comprobante[i].detalle.linea[linea] = new FeaEntidades.InterFacturas.linea();
+                    lc.comprobante[i].detalle.linea[linea].cantidad = 1;
+                    lc.comprobante[i].detalle.linea[linea].cantidadSpecified = true;
+                    lc.comprobante[i].detalle.linea[linea].unidad = "7";
+                    lc.comprobante[i].detalle.linea[linea].descripcion = "";
+                    lc.comprobante[i].detalle.linea[linea].codigo_producto_comprador = "";
+                    lc.comprobante[i].detalle.linea[linea].codigo_producto_vendedor = "";
+                    lc.comprobante[i].detalle.linea[linea].numeroLinea = linea + 1;
+                    lc.comprobante[i].detalle.linea[linea].alicuota_iva = 0;
+                    lc.comprobante[i].detalle.linea[linea].alicuota_ivaSpecified = true;
+                    lc.comprobante[i].detalle.linea[linea].importe_iva = 0;
+                    lc.comprobante[i].detalle.linea[linea].importe_ivaSpecified = true;
                     lc.comprobante[i].detalle.linea[linea].precio_unitario = lc.comprobante[i].resumen.importe_total_concepto_no_gravado;
+                    lc.comprobante[i].detalle.linea[linea].precio_unitarioSpecified = true;
                     lc.comprobante[i].detalle.linea[linea].importe_total_articulo = lc.comprobante[i].resumen.importe_total_concepto_no_gravado;
                     lc.comprobante[i].detalle.linea[linea].indicacion_exento_gravado = "N";
                     linea += 1;
@@ -604,6 +683,47 @@ namespace eFact_RN
                 {
                     throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.ProblemaProcesoArchRECE("\r\nNo se puede procesar distintos puntos de venta en el mismo lote. Verificar linea: [" + Convert.ToInt32(i+1) + "]");
                 }
+            }
+            //Controlar totales de improtes.
+            if (ConvertirStringToDouble(15, 2, resCtrl[0].ImporteTotalOpe) != Math.Round(ImporteTotalOpe, 2))
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.ProblemaProcesoArchRECE("\r\nLa sumatoria de Importes Totales, no coincide con la informada en el registro de control.");
+            }
+            if (ConvertirStringToDouble(15, 2, resCtrl[0].ImporteImpInternos) != Math.Round(ImporteImpInternos, 2))
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.ProblemaProcesoArchRECE("\r\nLa sumatoria de Impuestos Internos, no coincide con la informada en el registro de control.");
+            }
+            if (ConvertirStringToDouble(15, 2, resCtrl[0].ImporteLiq) != Math.Round(ImporteLiq, 2))
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.ProblemaProcesoArchRECE("\r\nLa sumatoria de Importes Liquidos, no coincide con la informada en el registro de control.");
+            }
+            if (ConvertirStringToDouble(15, 2, resCtrl[0].ImporteLiqRNI) != Math.Round(ImporteLiqRNI, 2))
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.ProblemaProcesoArchRECE("\r\nLa sumatoria de Importes Liquidos RNI, no coincide con la informada en el registro de control.");
+            }
+            if (ConvertirStringToDouble(15, 2, resCtrl[0].ImporteNetoGravado) != Math.Round(ImporteNetoGravado, 2))
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.ProblemaProcesoArchRECE("\r\nLa sumatoria de Importes Neto Gravado, no coincide con la informada en el registro de control.");
+            }
+            if (ConvertirStringToDouble(15, 2, resCtrl[0].ImporteNoGravado) != Math.Round(ImporteNoGravado, 2))
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.ProblemaProcesoArchRECE("\r\nLa sumatoria de Importes No Gravados, no coincide con la informada en el registro de control.");
+            }
+            if (ConvertirStringToDouble(15, 2, resCtrl[0].ImporteOpeExentas) != Math.Round(ImporteOpeExentas, 2))
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.ProblemaProcesoArchRECE("\r\nLa sumatoria de Importes Exentos, no coincide con la informada en el registro de control.");
+            }
+            if (ConvertirStringToDouble(15, 2, resCtrl[0].ImportePercepIB) != Math.Round(ImportePercepIB, 2))
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.ProblemaProcesoArchRECE("\r\nLa sumatoria de Importes Percep IB, no coincide con la informada en el registro de control.");
+            }
+            if (ConvertirStringToDouble(15, 2, resCtrl[0].ImportePercepImpMunicipales) != Math.Round(ImportePercepImpMunicipales, 2))
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.ProblemaProcesoArchRECE("\r\nLa sumatoria de Importes Percep Impuestos Municipales, no coincide con la informada en el registro de control.");
+            }
+            if (ConvertirStringToDouble(15, 2, resCtrl[0].ImportePercepOImpNacionales) != Math.Round(ImportePercepOImpNacionales, 2))
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Engine.ProblemaProcesoArchRECE("\r\nLa sumatoria de Importes Percep Impuestos Nacionales, no coincide con la informada en el registro de control.");
             }
         }
         private static double ConvertirStringToDouble(int LongitudString, int LongitudDecimales, string Valor)
