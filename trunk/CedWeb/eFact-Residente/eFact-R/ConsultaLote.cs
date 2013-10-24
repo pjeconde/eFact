@@ -150,8 +150,12 @@ namespace eFact_R
                     fileWriter = File.CreateText(System.IO.Path.GetTempPath() + Aplicacion.Sesion.Usuario.IdUsuario + "-XML.xml");
                     string lotexml = lote.LoteXml.Replace("iso-8859-1", "UTF-8");
                     fileWriter.Write(lotexml);
+                    long t = fileWriter.BaseStream.Length;
                     fileWriter.Close();
-                    XMLWebBrowser.Navigate(System.IO.Path.GetTempPath() + Aplicacion.Sesion.Usuario.IdUsuario + "-XML.xml");
+                    if (t < 2000000)
+                    {
+                        XMLWebBrowser.Navigate(System.IO.Path.GetTempPath() + Aplicacion.Sesion.Usuario.IdUsuario + "-XML.xml");
+                    }
                 }
             }
             catch (Exception ex)
@@ -168,8 +172,12 @@ namespace eFact_R
                     fileWriter = File.CreateText(System.IO.Path.GetTempPath() + Aplicacion.Sesion.Usuario.IdUsuario + "-XMLIF.xml");
                     string lotexml = lote.LoteXmlIF.Replace("iso-8859-1", "UTF-8");
                     fileWriter.Write(lotexml);
+                    long t = fileWriter.BaseStream.Length;
                     fileWriter.Close();
-                    XMLIFWebBrowser.Navigate(System.IO.Path.GetTempPath() + Aplicacion.Sesion.Usuario.IdUsuario + "-XMLIF.xml");
+                    if (t < 2000000)
+                    {
+                        XMLIFWebBrowser.Navigate(System.IO.Path.GetTempPath() + Aplicacion.Sesion.Usuario.IdUsuario + "-XMLIF.xml");
+                    }
                 }
             }
             catch (Exception ex)
