@@ -107,8 +107,17 @@ namespace eFact_R_XL
 									case "FeaEntidades.InterFacturas.resumenImportes_moneda_origen[]":
 										break;
 									case "FeaEntidades.InterFacturas.resumenImpuestos[]":
-										comp.resumen.impuestos = (FeaEntidades.InterFacturas.resumenImpuestos[])oArrayInterno;
-										break;
+                                        FeaEntidades.InterFacturas.resumenImpuestos[] impLista = ((FeaEntidades.InterFacturas.resumenImpuestos[])oArrayInterno);
+                                        FeaEntidades.InterFacturas.resumenImpuestos[] impNewLista = new FeaEntidades.InterFacturas.resumenImpuestos[10];
+                                        for (int im = 0; im < impLista.Length; im++)
+                                        {
+                                            if (impLista[im].importe_impuesto != 0)
+                                            {
+                                                impNewLista[im] = impLista[im];
+                                            }
+                                        }
+                                        comp.resumen.impuestos = impNewLista;
+        								break;
 								}
 							}
 						}
