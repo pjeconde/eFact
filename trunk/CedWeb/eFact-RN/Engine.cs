@@ -435,16 +435,16 @@ namespace eFact_RN
             FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
             Lc = lc;
 
-            bool prueba = true; 
+            bool prueba = false; 
             //Para prueba se usa unicamente --------
             int[] NroComprobantePrueba = new int[6];
-            NroComprobantePrueba[0] = 99;
-            NroComprobantePrueba[3] = 207;
-            string fecha_emision = "20131024";
+            NroComprobantePrueba[0] = 0;
+            NroComprobantePrueba[3] = 0;
+            string fecha_emision = "20131028";
             string fecha_serv_desde = "20131001";
             string fecha_serv_hasta = "20131030";
             string fecha_vencimiento = "20131030";
-            int punto_de_venta = 36;
+            int punto_de_venta = 37;
             //--------------------------------------
 
             //Armado de cabecera

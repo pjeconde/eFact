@@ -152,7 +152,7 @@ namespace eFact_R
                     fileWriter.Write(lotexml);
                     long t = fileWriter.BaseStream.Length;
                     fileWriter.Close();
-                    if (t < 2000000)
+                    if (t < 3000000)
                     {
                         XMLWebBrowser.Navigate(System.IO.Path.GetTempPath() + Aplicacion.Sesion.Usuario.IdUsuario + "-XML.xml");
                     }
@@ -174,7 +174,7 @@ namespace eFact_R
                     fileWriter.Write(lotexml);
                     long t = fileWriter.BaseStream.Length;
                     fileWriter.Close();
-                    if (t < 2000000)
+                    if (t < 3000000)
                     {
                         XMLIFWebBrowser.Navigate(System.IO.Path.GetTempPath() + Aplicacion.Sesion.Usuario.IdUsuario + "-XMLIF.xml");
                     }
