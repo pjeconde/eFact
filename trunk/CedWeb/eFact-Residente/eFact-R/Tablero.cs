@@ -699,11 +699,22 @@ namespace eFact_R
                             string handler = eFact_RN.Archivo.Insertar(dtBandejaEntrada[renglon], true, Aplicacion.Sesion);
                             //Ejecutar el insert local del "Lote".
                             CedEntidades.Evento evento = new CedEntidades.Evento();
-                            evento.Id = "EnvBandSalida";
-                            evento.Flow.IdFlow = "eFact";
-                            evento.Flow.DescrFlow = "Facturación Electrónica";
-                            Cedeira.SV.WF.LeerEvento(evento, Aplicacion.Sesion);
-                            lote.WF = Cedeira.SV.WF.Nueva("eFact", "Fact", 0, "Facturacion Electrónica", Aplicacion.Sesion);
+                            if (lote.IdNaturalezaLote == "")
+                            {
+                                evento.Id = "EnvBandSalida";
+                                evento.Flow.IdFlow = "eFact";
+                                //evento.Flow.DescrFlow = "Facturación Electrónica";
+                                Cedeira.SV.WF.LeerEvento(evento, Aplicacion.Sesion);
+                                lote.WF = Cedeira.SV.WF.Nueva("eFact", "Fact", 0, "Facturacion Electrónica", Aplicacion.Sesion);
+                            }
+                            else
+                            {
+                                evento.Id = "EnvBandSalidaV";
+                                evento.Flow.IdFlow = "eFact";
+                                //evento.Flow.DescrFlow = "Comprobantes";
+                                Cedeira.SV.WF.LeerEvento(evento, Aplicacion.Sesion);
+                                lote.WF = Cedeira.SV.WF.Nueva("eFact", "Fact", 0, "Comprobantes", Aplicacion.Sesion);
+                            }
                             eFact_RN.Lote.VerificarEnviosPosteriores(true, lote.CuitVendedor, lote.NumeroLote, lote.PuntoVenta, lote.NumeroEnvio, eFact_R.Aplicacion.Sesion);
                             //Generar nombre de archivo procesado para ser enviado al histórico.
                             eFact_RN.Lote.Ejecutar(lote, evento, handler, Aplicacion.Aplic, Aplicacion.Sesion);
@@ -1331,6 +1342,25 @@ namespace eFact_R
                         VerificarServicio();
                         break;
                 }
+            }
+            catch (Exception ex)
+            {
+                Microsoft.ApplicationBlocks.ExceptionManagement.ExceptionManager.Publish(ex);
+            }
+            finally
+            {
+                Cursor = System.Windows.Forms.Cursors.Default;
+            }
+        }
+
+        private void menuItem6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor = System.Windows.Forms.Cursors.WaitCursor;
+                ComprasYVentas c = new ComprasYVentas();
+                c.ShowDialog();
+                c.Dispose();
             }
             catch (Exception ex)
             {

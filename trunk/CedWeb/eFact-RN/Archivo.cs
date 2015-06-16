@@ -111,7 +111,7 @@ namespace eFact_RN
             }
             else
             {
-                lote.IdNaturalezaLote = "Venta";
+                lote.IdNaturalezaLote = "";
             }
             int cantComprobantes = 0;
             for (int i = 0; i < Lc.comprobante.Length; i++)
@@ -143,12 +143,23 @@ namespace eFact_RN
             {
                 throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Problemas con la cantidad de registros declarada.");
             }
+            List<eFact_Entidades.ComprobanteC> cCListVigentes = new List<eFact_Entidades.ComprobanteC>();
+            if (Lc.cabecera_lote.IdNaturalezaLoteField != null && Lc.cabecera_lote.IdNaturalezaLoteField == "Compra")
+            {
+                cCListVigentes = eFact_RN.Comprobante.ConsultarComprobantesCVigentes(Sesion);
+            }
+            List<eFact_Entidades.Comprobante> cVListVigentes = new List<eFact_Entidades.Comprobante>();
+            if (Lc.cabecera_lote.IdNaturalezaLoteField != null && Lc.cabecera_lote.IdNaturalezaLoteField == "Venta")
+            {
+                cVListVigentes = eFact_RN.Comprobante.ConsultarComprobantesVigentes(Sesion);
+            }
             for (int i = 0; i < Lc.comprobante.Length; i++)
             {
                 if (Lc.comprobante[i] != null)
                 {
                     if (lote.IdNaturalezaLote != "Compra")
                     {
+                        //Ventas
                         eFact_Entidades.Comprobante c = new eFact_Entidades.Comprobante();
                         c.IdTipoComprobante = Convert.ToInt16(Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante.ToString());
                         c.NumeroComprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante.ToString();
@@ -187,14 +198,19 @@ namespace eFact_RN
                             }
                         }
                         lote.Comprobantes.Add(c);
-                        if (eFact_RN.Comprobante.ConsultarComprobanteVigente(c, Sesion))
+                        if (lote.IdNaturalezaLote == "Venta")
                         {
-                            throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Comprobante existente. Tipo: " + c.IdTipoComprobante.ToString() + " Nro: " + c.NumeroComprobante);
+                            //if (eFact_RN.Comprobante.ConsultarComprobantesVigentes(esion))
+                            //{
+                            //    throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Comprobante existente. Tipo: " + c.IdTipoComprobante.ToString() + " Nro: " + c.NumeroComprobante);
+                            //}
                         }
                     }
                     else
                     {
+                        //Compras
                         eFact_Entidades.ComprobanteC cC = new eFact_Entidades.ComprobanteC();
+                        cC.PuntoVenta = Lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta.ToString();
                         cC.IdTipoComprobante = Convert.ToInt16(Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante.ToString());
                         cC.NumeroComprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante.ToString();
                         cC.TipoDocVendedor = Convert.ToInt16("80");
@@ -209,9 +225,11 @@ namespace eFact_RN
                         }
                         cC.TipoCambio = Convert.ToDecimal(Lc.comprobante[i].resumen.tipo_de_cambio);
                         lote.ComprobantesC.Add(cC);
-                        if (eFact_RN.Comprobante.ConsultarComprobanteCVigente(cC, Sesion))
+
+                        List<eFact_Entidades.ComprobanteC> listAux = cCListVigentes.FindAll((delegate(eFact_Entidades.ComprobanteC e1) { return e1.NroDocVendedor == cC.NroDocVendedor && e1.PuntoVenta.ToString() == cC.PuntoVenta && e1.IdTipoComprobante == cC.IdTipoComprobante && e1.NumeroComprobante == cC.NumeroComprobante; }));
+                        if (listAux.Count == 0)
                         {
-                            throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Comprobante existente. Tipo: " + cC.IdTipoComprobante.ToString() + " Nro: " + cC.NumeroComprobante + " Cuit Vendedor: " + cC.NroDocVendedor);
+                            throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Comprobante existente. Cuit Vendedor: " + cC.NroDocVendedor + " Punto Venta: " + cC.PuntoVenta + " Tipo: " + cC.IdTipoComprobante.ToString() + " Nro: " + cC.NumeroComprobante);
                         }
                     }
                 }
