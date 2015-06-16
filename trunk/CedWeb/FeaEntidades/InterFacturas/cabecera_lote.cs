@@ -46,6 +46,11 @@ namespace FeaEntidades.InterFacturas
         private string gestionar_afipField;
 
         private bool gestionar_afipFieldSpecified;
+
+        private string idNaturalezaLoteField;
+
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool idNaturalezaLoteFieldSpecified;
         
 		/// <comentarios/>
 		public long id_lote
@@ -252,6 +257,33 @@ namespace FeaEntidades.InterFacturas
             set
             {
                 this.gestionar_afipFieldSpecified = value;
+            }
+        }
+
+        /// <comentarios/>
+        public string IdNaturalezaLoteField
+        {
+            get
+            {
+                return this.idNaturalezaLoteField;
+            }
+            set
+            {
+                this.idNaturalezaLoteField = value;
+            }
+        }
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IdNaturalezaLoteFieldSpecified
+        {
+            get
+            {
+                return this.idNaturalezaLoteFieldSpecified;
+            }
+            set
+            {
+                this.idNaturalezaLoteFieldSpecified = value;
             }
         }
 	}

@@ -114,9 +114,9 @@ namespace eFact_P
         private void ActualizarBandejaE()
         {
             VerificarServicio();
-            CedWebRN.IBKP.error[] respErroresListadoComprobantes = new CedWebRN.IBKP.error[0];
+            eFact_RN.IBKP.error[] respErroresListadoComprobantes = new eFact_RN.IBKP.error[0];
             List<FeaEntidades.InterFacturas.comprobante_listado> lcIBK = new List<FeaEntidades.InterFacturas.comprobante_listado>();
-            CedWebRN.IBKP.consulta_listado_comprobante clc = new CedWebRN.IBKP.consulta_listado_comprobante();
+            eFact_RN.IBKP.consulta_listado_comprobante clc = new eFact_RN.IBKP.consulta_listado_comprobante();
             try
             {
                 clc.cod_interno_canal = "";
@@ -138,7 +138,7 @@ namespace eFact_P
                 }
                 clc.tipo_doc_comprador = Convert.ToInt32("80");
                 clc.doc_comprador = Convert.ToInt64(CuitCompradorTextBox.Text);
-                CedWebRN.Comprobante cc = new CedWebRN.Comprobante();
+                eFact_RN.Comprobante cc = new eFact_RN.Comprobante();
                 lcIBK = cc.ConsultarListadoIBKP(clc, "012f0775357c");
                 BandejaEDataGridView.DataSource = lcIBK;
                 BandejaEDataGridView.Refresh();
@@ -221,11 +221,11 @@ namespace eFact_P
             }
             return texto;
         }
-        //private CedWebRN.IBK.lote_response ArmarLoteResponse(FeaEntidades.InterFacturas.lote_comprobantes Lc)
+        //private eFact_RN.IBK.lote_response ArmarLoteResponse(FeaEntidades.InterFacturas.lote_comprobantes Lc)
         //{
         //    string texto = "";
-        //    CedWebRN.IBK.lote_response lrCompleto = new CedWebRN.IBK.lote_response();
-        //    CedWebRN.IBK.error[] errores = new CedWebRN.IBK.error[1];
+        //    eFact_RN.IBK.lote_response lrCompleto = new eFact_RN.IBK.lote_response();
+        //    eFact_RN.IBK.error[] errores = new eFact_RN.IBK.error[1];
         //    lrCompleto.cantidad_reg = Lc.cabecera_lote.cantidad_reg;
         //    lrCompleto.cuit_canal = Lc.cabecera_lote.cuit_canal;
         //    lrCompleto.cuit_vendedor = Lc.cabecera_lote.cuit_vendedor;
@@ -237,7 +237,7 @@ namespace eFact_P
         //    lrCompleto.punto_de_venta = Lc.cabecera_lote.punto_de_venta;
         //    if (Lc.cabecera_lote.motivo != null && Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
         //    {
-        //        errores[0] = new CedWebRN.IBK.error();
+        //        errores[0] = new eFact_RN.IBK.error();
         //        errores[0].codigo_error = 0;
         //        errores[0].descripcion_error = Lc.cabecera_lote.motivo.Trim();
         //        lrCompleto.errores_lote = errores;
@@ -253,17 +253,17 @@ namespace eFact_P
         //    int NroMotivo = 0;
         //    for (int i = 0; i < Lc.comprobante.Length; i++)
         //    {
-        //        CedWebRN.IBK.error[] erroresComprobante = new CedWebRN.IBK.error[1];
+        //        eFact_RN.IBK.error[] erroresComprobante = new eFact_RN.IBK.error[1];
         //        if (Lc.comprobante[i].cabecera.informacion_comprobante.motivo != null && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "00" && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "")
         //        {
         //            if (lrCompleto.comprobante_response == null)
         //            {
-        //                lrCompleto.comprobante_response = new CedWebRN.IBK.comprobante_response[CantMotivoError];
+        //                lrCompleto.comprobante_response = new eFact_RN.IBK.comprobante_response[CantMotivoError];
         //            }
-        //            erroresComprobante[NroMotivo] = new CedWebRN.IBK.error();
+        //            erroresComprobante[NroMotivo] = new eFact_RN.IBK.error();
         //            erroresComprobante[NroMotivo].codigo_error = 0;
         //            erroresComprobante[NroMotivo].descripcion_error = Lc.comprobante[i].cabecera.informacion_comprobante.motivo;
-        //            lrCompleto.comprobante_response[NroMotivo] = new CedWebRN.IBK.comprobante_response();
+        //            lrCompleto.comprobante_response[NroMotivo] = new eFact_RN.IBK.comprobante_response();
         //            lrCompleto.comprobante_response[NroMotivo].numero_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante;
         //            lrCompleto.comprobante_response[NroMotivo].punto_de_venta = Lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta;
         //            lrCompleto.comprobante_response[NroMotivo].tipo_de_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante;
@@ -739,9 +739,9 @@ namespace eFact_P
         {
             if (BandejaEDataGridView.SelectedRows.Count != 0)
             {
-                CedWebRN.IBKP.error[] respErroresComprobantes = new CedWebRN.IBKP.error[0];
+                eFact_RN.IBKP.error[] respErroresComprobantes = new eFact_RN.IBKP.error[0];
                 FeaEntidades.InterFacturas.comprobante cIBK = new FeaEntidades.InterFacturas.comprobante();
-                CedWebRN.IBKP.consulta_detalle_comprobante cdc = new CedWebRN.IBKP.consulta_detalle_comprobante();
+                eFact_RN.IBKP.consulta_detalle_comprobante cdc = new eFact_RN.IBKP.consulta_detalle_comprobante();
                 try
                 {
                     cdc.cod_interno_canal = "";
@@ -753,9 +753,9 @@ namespace eFact_P
                     cdc.tipo_doc_comprador = Convert.ToInt32("80");
                     cdc.doc_comprador = Convert.ToInt64(CuitCompradorTextBox.Text);
                     cdc.usuario_consulta = Aplicacion.Sesion.Usuario.IdUsuario;
-                    CedWebRN.Comprobante cc = new CedWebRN.Comprobante();
+                    eFact_RN.Comprobante cc = new eFact_RN.Comprobante();
                     cIBK = cc.ConsultarIBKP(cdc, "012f0775357c");
-                    //lcIBK = CedWebRNComprobante.ConsultarIBK(out respErroresLote, out respErroresComprobantes, clc, WSCertificado);
+                    //lcIBK = eFact_RNComprobante.ConsultarIBK(out respErroresLote, out respErroresComprobantes, clc, WSCertificado);
                     //RespErroresLote = respErroresLote;
                     //RespErroresComprobantes = respErroresComprobantes;
                 }

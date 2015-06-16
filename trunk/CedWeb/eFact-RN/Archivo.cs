@@ -54,13 +54,15 @@ namespace eFact_RN
                     {
                         if (Archivo.Tipo.ToUpper() == ".XML")
                         {
-                            StreamReader objReader = new StreamReader(Archivo.Path + "\\" + Archivo.Nombre, Encoding.GetEncoding("iso-8859-1"));
+                            //StreamReader objReader = new StreamReader(Archivo.Path + "\\" + Archivo.Nombre, Encoding.GetEncoding("iso-8859-1"));
+                            StreamReader objReader = new StreamReader(Archivo.Path + "\\" + Archivo.Nombre, Encoding.GetEncoding("utf-8"));
                             string cadena;
                             cadena = objReader.ReadToEnd();
                             objReader.Close();
                             byte[] a = new byte[cadena.Length];// esta es la declaracion de tu arreglo
                             System.Text.Encoding codificador;
-                            codificador = System.Text.Encoding.GetEncoding("iso-8859-1");
+                            //codificador = System.Text.Encoding.GetEncoding("iso-8859-1");
+                            codificador = System.Text.Encoding.GetEncoding("utf-8");
                             cadena = cadena.Replace("&", "&amp;");
                             a = codificador.GetBytes(cadena);
                             ms = new System.IO.MemoryStream(a);
@@ -73,7 +75,7 @@ namespace eFact_RN
                         {
                             eFact_RN.Engine Engine = new eFact_RN.Engine();
                             Lc = new FeaEntidades.InterFacturas.lote_comprobantes();
-                            Engine.LeerMultiRegistro(out Lc, Archivo.Path + "\\" + Archivo.Nombre);
+                            Engine.LeerMultiRegistro(out Lc, Archivo.Path + "\\" + Archivo.Nombre, Sesion);
                         }
                         else if (Archivo.Tipo.ToUpper() == ".REC")
                         {
@@ -97,58 +99,152 @@ namespace eFact_RN
             lote.PuntoVenta = Lc.cabecera_lote.punto_de_venta.ToString();
             lote.NumeroLote = Lc.cabecera_lote.id_lote.ToString();
             lote.CantidadRegistros = Convert.ToInt32(Lc.cabecera_lote.cantidad_reg.ToString());
-            //Verificar bandeja de salida.
+            //Verificar bandeja de salida.-----------
             int numeroEnvioDisponible = 0;
             eFact_RN.Lote.ObtenerNumeroEnvioDisponible(out numeroEnvioDisponible, lote.CuitVendedor, lote.NumeroLote, lote.PuntoVenta, Sesion);
-            
             lote.NumeroEnvio = numeroEnvioDisponible;
+            //---------------------------------------
             lote.NombreArch = Archivo.Nombre;
-
-            for (int i = 0; i < Lc.cabecera_lote.cantidad_reg; i++)
+            if (Lc.cabecera_lote.IdNaturalezaLoteFieldSpecified)
             {
-                eFact_Entidades.Comprobante c = new eFact_Entidades.Comprobante();
-                c.IdTipoComprobante = Convert.ToInt16(Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante.ToString());
-                c.NumeroComprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante.ToString();
-                c.TipoDocComprador = Convert.ToInt16(Lc.comprobante[i].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString());
-                c.NroDocComprador = Lc.comprobante[i].cabecera.informacion_comprador.nro_doc_identificatorio.ToString();
-                c.NombreComprador = Lc.comprobante[i].cabecera.informacion_comprador.denominacion;
-                c.Fecha = ConvertirStringToDateTime(Lc.comprobante[i].cabecera.informacion_comprobante.fecha_emision.ToString());
-                c.NumeroCAE = Convert.ToString(Lc.comprobante[i].cabecera.informacion_comprobante.cae);
-                if (Lc.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae != null && Lc.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae.ToString() != "")
+                lote.IdNaturalezaLote = Lc.cabecera_lote.IdNaturalezaLoteField;
+            }
+            else
+            {
+                lote.IdNaturalezaLote = "Venta";
+            }
+            int cantComprobantes = 0;
+            for (int i = 0; i < Lc.comprobante.Length; i++)
+            {
+                if (Lc.comprobante[i] != null)
                 {
-                    c.FechaCAE = ConvertirStringToDateTime(Lc.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae.ToString());
+                    cantComprobantes += 1;
                 }
-                if (Lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento_cae != null && Lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento_cae.ToString() != "")
+                else
                 {
-                    c.FechaVtoCAE = ConvertirStringToDateTime(Lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento_cae.ToString());
+                    break;
                 }
-                c.IdMoneda = Convert.ToString(Lc.comprobante[i].resumen.codigo_moneda);
-                c.Importe = Convert.ToDecimal(Lc.comprobante[i].resumen.importe_total_factura);
-                if (Lc.comprobante[i].resumen.importes_moneda_origen != null)
+            }
+            if (Lc.comprobanteDespacho != null)
+            {
+                for (int i = 0; i < Lc.comprobanteDespacho.Length; i++)
                 {
-                    c.ImporteMonedaOrigen = Convert.ToDecimal(Lc.comprobante[i].resumen.importes_moneda_origen.importe_total_factura);
-                }
-                c.TipoCambio = Convert.ToDecimal(Lc.comprobante[i].resumen.tipo_de_cambio);
-                if (Lc.comprobante[i].extensiones != null)
-                {
-                    if (Lc.comprobante[i].extensiones.extensiones_camara_facturas != null)
+                    if (Lc.comprobanteDespacho[i] != null)
                     {
-                        if (Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion != null)
+                        cantComprobantes += 1;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            if (Lc.cabecera_lote.cantidad_reg != cantComprobantes)
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Problemas con la cantidad de registros declarada.");
+            }
+            for (int i = 0; i < Lc.comprobante.Length; i++)
+            {
+                if (Lc.comprobante[i] != null)
+                {
+                    if (lote.IdNaturalezaLote != "Compra")
+                    {
+                        eFact_Entidades.Comprobante c = new eFact_Entidades.Comprobante();
+                        c.IdTipoComprobante = Convert.ToInt16(Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante.ToString());
+                        c.NumeroComprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante.ToString();
+                        c.TipoDocComprador = Convert.ToInt16(Lc.comprobante[i].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString());
+                        c.NroDocComprador = Lc.comprobante[i].cabecera.informacion_comprador.nro_doc_identificatorio.ToString();
+                        c.NombreComprador = Lc.comprobante[i].cabecera.informacion_comprador.denominacion;
+                        c.Fecha = ConvertirStringToDateTime(Lc.comprobante[i].cabecera.informacion_comprobante.fecha_emision.ToString());
+                        c.NumeroCAE = Convert.ToString(Lc.comprobante[i].cabecera.informacion_comprobante.cae);
+                        if (Lc.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae != null && Lc.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae.ToString() != "")
                         {
-                            Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion = Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion.Trim();
-                            if (Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion.Length != 0 && Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion.Length != 32)
+                            c.FechaCAE = ConvertirStringToDateTime(Lc.comprobante[i].cabecera.informacion_comprobante.fecha_obtencion_cae.ToString());
+                        }
+                        if (Lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento_cae != null && Lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento_cae.ToString() != "")
+                        {
+                            c.FechaVtoCAE = ConvertirStringToDateTime(Lc.comprobante[i].cabecera.informacion_comprobante.fecha_vencimiento_cae.ToString());
+                        }
+                        c.IdMoneda = Convert.ToString(Lc.comprobante[i].resumen.codigo_moneda);
+                        c.Importe = Convert.ToDecimal(Lc.comprobante[i].resumen.importe_total_factura);
+                        if (Lc.comprobante[i].resumen.importes_moneda_origen != null)
+                        {
+                            c.ImporteMonedaOrigen = Convert.ToDecimal(Lc.comprobante[i].resumen.importes_moneda_origen.importe_total_factura);
+                        }
+                        c.TipoCambio = Convert.ToDecimal(Lc.comprobante[i].resumen.tipo_de_cambio);
+                        if (Lc.comprobante[i].extensiones != null)
+                        {
+                            if (Lc.comprobante[i].extensiones.extensiones_camara_facturas != null)
                             {
-                                Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion = Cedeira.SV.Fun.CreateMD5Hash(Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion);
+                                if (Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion != null)
+                                {
+                                    Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion = Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion.Trim();
+                                    if (Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion.Length != 0 && Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion.Length != 32)
+                                    {
+                                        Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion = Cedeira.SV.Fun.CreateMD5Hash(Lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion);
+                                    }
+                                }
                             }
+                        }
+                        lote.Comprobantes.Add(c);
+                        if (eFact_RN.Comprobante.ConsultarComprobanteVigente(c, Sesion))
+                        {
+                            throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Comprobante existente. Tipo: " + c.IdTipoComprobante.ToString() + " Nro: " + c.NumeroComprobante);
+                        }
+                    }
+                    else
+                    {
+                        eFact_Entidades.ComprobanteC cC = new eFact_Entidades.ComprobanteC();
+                        cC.IdTipoComprobante = Convert.ToInt16(Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante.ToString());
+                        cC.NumeroComprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante.ToString();
+                        cC.TipoDocVendedor = Convert.ToInt16("80");
+                        cC.NroDocVendedor = Lc.comprobante[i].cabecera.informacion_vendedor.cuit.ToString();
+                        cC.NombreVendedor = Lc.comprobante[i].cabecera.informacion_vendedor.razon_social;
+                        cC.Fecha = ConvertirStringToDateTime(Lc.comprobante[i].cabecera.informacion_comprobante.fecha_emision.ToString());
+                        cC.IdMoneda = Convert.ToString(Lc.comprobante[i].resumen.codigo_moneda);
+                        cC.Importe = Convert.ToDecimal(Lc.comprobante[i].resumen.importe_total_factura);
+                        if (Lc.comprobante[i].resumen.importes_moneda_origen != null)
+                        {
+                            cC.ImporteMonedaOrigen = Convert.ToDecimal(Lc.comprobante[i].resumen.importes_moneda_origen.importe_total_factura);
+                        }
+                        cC.TipoCambio = Convert.ToDecimal(Lc.comprobante[i].resumen.tipo_de_cambio);
+                        lote.ComprobantesC.Add(cC);
+                        if (eFact_RN.Comprobante.ConsultarComprobanteCVigente(cC, Sesion))
+                        {
+                            throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Comprobante existente. Tipo: " + cC.IdTipoComprobante.ToString() + " Nro: " + cC.NumeroComprobante + " Cuit Vendedor: " + cC.NroDocVendedor);
                         }
                     }
                 }
-                lote.Comprobantes.Add(c);
+                else
+                {
+                    break;
+                }
+            }
+            if (Lc.comprobanteDespacho != null)
+            {
+                for (int i = 0; i < Lc.comprobanteDespacho.Length; i++)
+                {
+
+                    eFact_Entidades.ComprobanteC cC = new eFact_Entidades.ComprobanteC();
+                    cC.IdTipoComprobante = Convert.ToInt16(Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante.ToString());
+                    cC.NumeroComprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante.ToString();
+                    cC.TipoDocVendedor = Convert.ToInt16("80");
+                    cC.NroDocVendedor = Lc.comprobante[i].cabecera.informacion_vendedor.cuit.ToString();
+                    cC.NombreVendedor = Lc.comprobante[i].cabecera.informacion_vendedor.razon_social;
+                    cC.Fecha = ConvertirStringToDateTime(Lc.comprobante[i].cabecera.informacion_comprobante.fecha_emision.ToString());
+                    cC.IdMoneda = Convert.ToString(Lc.comprobante[i].resumen.codigo_moneda);
+                    cC.Importe = Convert.ToDecimal(Lc.comprobante[i].resumen.importe_total_factura);
+                    if (Lc.comprobante[i].resumen.importes_moneda_origen != null)
+                    {
+                        cC.ImporteMonedaOrigen = Convert.ToDecimal(Lc.comprobante[i].resumen.importes_moneda_origen.importe_total_factura);
+                    }
+                    cC.TipoCambio = Convert.ToDecimal(Lc.comprobante[i].resumen.tipo_de_cambio);
+                    lote.ComprobantesC.Add(cC);
+                }
             }
             string loteXml = "";
             eFact_RN.Lote.SerializarLc(out loteXml, Lc);
             lote.LoteXml = loteXml;
-
             Lote = lote;
         }
         public static DateTime ConvertirStringToDateTime(String sFecha)

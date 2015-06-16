@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="ConsultarResult" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>TestWSConsoleApplication.org.dyndns.cedweb.ConsultarResult</TypeInfo>
+   <TypeInfo>TestWSConsoleApplication.org.dyndns.cedweb.ConsultarResult, Web References.org.dyndns.cedweb.Reference.cs, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

@@ -887,7 +887,7 @@ namespace eFact_Tester
                         //{
                         //    for (int j = 0; j < lc.comprobante[i].extensiones.extensiones_destinatarios.destinatario.Length; j++)
                         //    {
-                        //        cIBK.extensiones.extensiones_destinatarios.destinatario[j] = new CedWebRN.IBK.extensionesExtensiones_destinatariosDestinatario();
+                        //        cIBK.extensiones.extensiones_destinatarios.destinatario[j] = new eFact_RN.IBK.extensionesExtensiones_destinatariosDestinatario();
                         //        cIBK.extensiones.extensiones_destinatarios.destinatario[j].cuit = lc.comprobante[i].extensiones.extensiones_destinatarios.destinatario[j].cuit;
                         //    }
                         //}

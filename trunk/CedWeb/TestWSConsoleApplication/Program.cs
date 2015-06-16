@@ -12,8 +12,8 @@ namespace TestWSConsoleApplication
 
             try
             {
-                //CedWebRN.Comprobante c = new CedWebRN.Comprobante();
-                //CedWebRN.IBK.consulta_lote_comprobantes clc = new CedWebRN.IBK.consulta_lote_comprobantes();
+                //eFact_RN.Comprobante c = new eFact_RN.Comprobante();
+                //eFact_RN.IBK.consulta_lote_comprobantes clc = new eFact_RN.IBK.consulta_lote_comprobantes();
                 //clc.punto_de_venta = 1;
                 //clc.punto_de_ventaSpecified = true;
                 //clc.cod_interno_canal = string.Empty;
@@ -22,13 +22,13 @@ namespace TestWSConsoleApplication
                 //clc.id_lote = 1;
                 //string certificado = "011f66c68d70";
 
-                //CedWebRN.IBK.consulta_lote_comprobantes_response clcr = c.ConsultarIBK(clc, certificado);
+                //eFact_RN.IBK.consulta_lote_comprobantes_response clcr = c.ConsultarIBK(clc, certificado);
 
                 //Ir por WS
                 org.dyndns.cedweb.ConsultaIBK clcdyndns = new org.dyndns.cedweb.ConsultaIBK();
                 try
                 {
-                    CedWebRN.Cripto cripto = new CedWebRN.Cripto();
+                    eFact_RN.Cripto cripto = new eFact_RN.Cripto();
                     string certificado = cripto.EncryptData("011f66c68d70", "CedWeb.pubpriv.rsa", "CedWebWS.pub.rsa");
 
                     org.dyndns.cedweb.ConsultarResult clcrdyndns = new org.dyndns.cedweb.ConsultarResult();
