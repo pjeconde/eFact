@@ -13,7 +13,7 @@ namespace eFact_RN
     {
         private MultiRecordEngine engine;
         
-        public void LeerMultiRegistro(out FeaEntidades.InterFacturas.lote_comprobantes Lc, string Archivo)
+        public void LeerMultiRegistro(out FeaEntidades.InterFacturas.lote_comprobantes Lc, string Archivo, CedEntidades.Sesion Sesion)
         {
             try
             {
@@ -42,6 +42,9 @@ namespace eFact_RN
                 engine = new MultiRecordEngine(types[0], types[1], types[2], types[3], types[4], types[5], types[6], types[7], types[8], types[9], types[10], types[11], types[12], types[13], types[14], types[15], types[16], types[17], types[18], types[19]);
                 engine.RecordSelector = new FileHelpers.RecordTypeSelector(cs);
                 object[] oC = engine.ReadFile(Archivo);
+
+                List<eFact_Entidades.Vendedor> vendedores = new List<eFact_Entidades.Vendedor>();
+                eFact_RN.Vendedor.Consultar(vendedores, Sesion);
 
                 FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
                 int NroComprobante = 0;
@@ -211,6 +214,31 @@ namespace eFact_RN
                             }
                         }
                         resumenImpuestos = new List<FeaEntidades.InterFacturas.resumenImpuestos>();
+
+                        //Controlar CUIT de empresa
+                        string cuitEmpresa = "";
+                        if (lc.cabecera_lote.IdNaturalezaLoteField == "Compra")
+                        {
+                            cuitEmpresa = lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio.ToString();
+                            if (lc.cabecera_lote.cuit_vendedor.ToString() != cuitEmpresa)
+                            {
+                                throw new Exception("El comprante procesado no es de la empresa declarada en el lote. Verificar datos en el archivo del comprobante " + lc.comprobante[NroComprobante].cabecera.informacion_comprobante.punto_de_venta.ToString("0000") + "-" + lc.comprobante[NroComprobante].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000"));
+                            }
+                        }
+                        else
+                        {
+                            cuitEmpresa = lc.comprobante[0].cabecera.informacion_vendedor.cuit.ToString();
+                            if (lc.cabecera_lote.cuit_vendedor.ToString() != cuitEmpresa)
+                            {
+                                throw new Exception("El comprante procesado no es de la empresa declarada en el lote. Verificar datos en el archivo del comprobante " + lc.comprobante[NroComprobante].cabecera.informacion_comprobante.punto_de_venta.ToString("0000") + "-" + lc.comprobante[NroComprobante].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000"));
+                            }
+                        }
+                        eFact_Entidades.Vendedor vendedor = vendedores.Find(delegate(eFact_Entidades.Vendedor e1) { return e1.CuitVendedor == cuitEmpresa; });
+                        if (vendedor == null || vendedor.CuitVendedor == "")
+                        {
+                            throw new Exception("El comprante procesado no se corresponde a las empresas declaradas para operar. Verificar datos en el archivo del comprobante " + lc.comprobante[NroComprobante].cabecera.informacion_comprobante.punto_de_venta.ToString("0000") + "-" + lc.comprobante[NroComprobante].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000"));
+                        }
+
                         ++NroComprobante;
                         NroLineaReferencias = 0;
                         NroLineaPermisos = 0;
@@ -458,6 +486,21 @@ namespace eFact_RN
             if (prueba) { lc.cabecera_lote.punto_de_venta = punto_de_venta; }
             lc.cabecera_lote.fecha_envio_lote = DateTime.Now.ToString("yyyyMMdd hhmmss");
             lc.cabecera_lote.id_lote = Convert.ToInt64(DateTime.Now.ToString("yyyyMMddhhmmss"));
+            try
+            {
+                lc.cabecera_lote.no_disponible = System.Configuration.ConfigurationManager.AppSettings["LcNoDisponible"];
+                if (lc.cabecera_lote.no_disponible != null)
+                {
+                    lc.cabecera_lote.no_disponibleSpecified = true;
+                }
+                else
+                {
+                    lc.cabecera_lote.no_disponibleSpecified = false;
+                }
+            }
+            catch
+            { 
+            }
 
             if (Convert.ToInt32(res.Length - 1) != Convert.ToInt32(resCtrl[0].CantidadRegTipo1))
             {

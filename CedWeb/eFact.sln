@@ -1,215 +1,69 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CedeiraAP", "CedeiraAP\CedeiraAP.csproj", "{DB0A7D76-F68E-43A7-ADBD-08DDF2AFAD36}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CedEntidades", "CedEntidades\CedEntidades.csproj", "{2D17A63F-789D-4C01-864A-C15411D577A7}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CedeiraEx", "CedEx\CedeiraEx.csproj", "{883AB19F-36F5-42A4-A1A7-4206F84E7757}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CedWebDB", "CedWebDB\CedWebDB.csproj", "{C6F923E8-4A61-4708-A234-A98A20D92657}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CedWebEntidades", "CedWebEntidades\CedWebEntidades.csproj", "{E4986760-165B-4079-9A4F-3026D498BD11}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CedWebRN", "CedWebRN\CedWebRN.csproj", "{9C229E72-6A86-4209-8730-91F573B4DF19}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeaEntidades", "FeaEntidades\FeaEntidades.csproj", "{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PieChart", "PieChart\PieChart.csproj", "{FFD70223-E4B1-4CA3-9655-D5107D1C920B}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileHelpers.2005", "FileHelpers\FileHelpers.2005.csproj", "{EB8633FF-CEED-40EE-8D1A-CA1BF5678C42}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWSConsoleApplication", "TestWSConsoleApplication\TestWSConsoleApplication.csproj", "{CD26CAD2-4CA6-4252-A2B6-D751D6553674}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CedeiraUIforms", "CedUI\CedeiraUIforms.vbproj", "{48571E9A-0BCD-486E-875F-62B861186EBE}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-I-Bj", "eFact-Interfaz\eFact-I-Bj\eFact-I-Bj.csproj", "{80E7AF64-D3DA-4D46-9C21-48BD3C140725}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "eFact-I-Bj-Instalador", "eFact-I-Bj-Instalador\eFact-I-Bj-Instalador.vdproj", "{CA323B8D-CFC5-4489-8D2D-87AD8FBE5E06}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "eFact-R-Instalador", "eFact-R-Instalador\eFact-R-Instalador.vdproj", "{A0DBA393-A3DD-4740-8613-584B63A029C7}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-R", "eFact-Residente\eFact-R\eFact-R.csproj", "{38768D97-E8CF-427F-A6AB-E658A2B25AAC}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-R-XL", "eFact-Residente\XL\eFact-R-XL\eFact-R-XL.csproj", "{2A145857-3B75-4308-A56E-40F971142FE4}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileHelpers.ExcelStorage.2005", "FileHelpers.ExcelStorage\FileHelpers.ExcelStorage.2005.csproj", "{B3F2B976-73D5-49C7-BEAA-BF62E233132A}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-C", "eFact-C\eFact-C.csproj", "{E402D19A-999D-40B0-99B5-06B5DB7CB829}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-C-Tester", "eFact-C-Tester\eFact-C-Tester.csproj", "{3ECD3075-9C53-4DBD-AEB8-7EE949F64C9C}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-S-Registrador", "eFact-S-Registrador\eFact-S-Registrador.csproj", "{E198F880-F6D8-4F68-8A98-E4044C1EEE4C}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-S-Desregistrador", "eFact-S-Desregistrador\eFact-S-Desregistrador.csproj", "{8D0007A4-B355-4B63-B0AA-B07E0A76E7EF}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-S", "eFact-S\eFact-S.csproj", "{7D82E548-CC8D-49AB-A97B-1A35771D50A4}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-DB", "eFact-DB\eFact-DB.csproj", "{40CCD1A7-45DD-4C54-998E-24DE8D117760}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-Entidades", "eFact-Entidades\eFact-Entidades.csproj", "{88FDF572-3FF0-4019-8EE5-53D0BD47EA0D}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-RN", "eFact-RN\eFact-RN.csproj", "{709FF43D-659A-4AA2-A184-892CD2B35F32}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "eFact-S-Instalador", "eFact-S-Instalador\eFact-S-Instalador.vdproj", "{5DE1269A-F5A6-4A33-A340-C365FCACD1FD}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-Tester", "eFact-Tester\eFact-Tester.csproj", "{B8AD562A-0C5D-4BE5-9333-8E53DF705B82}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "eFact-R-XL Instalador", "eFact-Residente\XL\Instalador\Instalador\Instalador.vdproj", "{A74ACAD3-4D05-41EC-BF68-CE554A76D5A6}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester-DB2", "eFact-Tester-DB2\Tester-DB2.csproj", "{DF85D4A2-587F-41C9-AF70-662ACE7F3404}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-N", "eFact-N\eFact-N.csproj", "{CE96961F-BEF6-4202-AE0F-B8E1C5CDEF71}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "eFact-N-Instalador", "eFact-N-Instalador\eFact-N-Instalador.vdproj", "{27D4DD72-5D0C-48BF-9B63-E4AE00A5E08E}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFact-P", "eFact-Residente\eFact-P\eFact-P.csproj", "{4A108C58-8EB9-4BC0-B693-C497894C4386}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gas", "Gas\Gas.csproj", "{884D9CCB-CB69-452D-B277-28D04F390046}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Gas-Instalador", "Gas-Instalador\Gas-Instalador.vdproj", "{F6E9E3E2-92ED-46F5-9D59-AAC511364AAD}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaDotNet2", "..\SVNCedForecast\CaptchaDotNet2\CaptchaDotNet2.csproj", "{B76ED545-1CF6-40BC-A3E1-52C34B0A0EFF}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaDotNet2", "CaptchaDotNet2\CaptchaDotNet2.csproj", "{B76ED545-1CF6-40BC-A3E1-52C34B0A0EFF}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
@@ -258,39 +112,6 @@ Global
 		{883AB19F-36F5-42A4-A1A7-4206F84E7757}.Release|Any CPU.Build.0 = Release|Any CPU
 		{883AB19F-36F5-42A4-A1A7-4206F84E7757}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{883AB19F-36F5-42A4-A1A7-4206F84E7757}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{C6F923E8-4A61-4708-A234-A98A20D92657}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{C6F923E8-4A61-4708-A234-A98A20D92657}.Debug|.NET.Build.0 = Debug|Any CPU
-		{C6F923E8-4A61-4708-A234-A98A20D92657}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C6F923E8-4A61-4708-A234-A98A20D92657}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C6F923E8-4A61-4708-A234-A98A20D92657}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{C6F923E8-4A61-4708-A234-A98A20D92657}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{C6F923E8-4A61-4708-A234-A98A20D92657}.Release|.NET.ActiveCfg = Release|Any CPU
-		{C6F923E8-4A61-4708-A234-A98A20D92657}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C6F923E8-4A61-4708-A234-A98A20D92657}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C6F923E8-4A61-4708-A234-A98A20D92657}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{C6F923E8-4A61-4708-A234-A98A20D92657}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{E4986760-165B-4079-9A4F-3026D498BD11}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{E4986760-165B-4079-9A4F-3026D498BD11}.Debug|.NET.Build.0 = Debug|Any CPU
-		{E4986760-165B-4079-9A4F-3026D498BD11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4986760-165B-4079-9A4F-3026D498BD11}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4986760-165B-4079-9A4F-3026D498BD11}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{E4986760-165B-4079-9A4F-3026D498BD11}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{E4986760-165B-4079-9A4F-3026D498BD11}.Release|.NET.ActiveCfg = Release|Any CPU
-		{E4986760-165B-4079-9A4F-3026D498BD11}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4986760-165B-4079-9A4F-3026D498BD11}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4986760-165B-4079-9A4F-3026D498BD11}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{E4986760-165B-4079-9A4F-3026D498BD11}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{9C229E72-6A86-4209-8730-91F573B4DF19}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{9C229E72-6A86-4209-8730-91F573B4DF19}.Debug|.NET.Build.0 = Debug|Any CPU
-		{9C229E72-6A86-4209-8730-91F573B4DF19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C229E72-6A86-4209-8730-91F573B4DF19}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C229E72-6A86-4209-8730-91F573B4DF19}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{9C229E72-6A86-4209-8730-91F573B4DF19}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{9C229E72-6A86-4209-8730-91F573B4DF19}.Release|.NET.ActiveCfg = Release|Any CPU
-		{9C229E72-6A86-4209-8730-91F573B4DF19}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C229E72-6A86-4209-8730-91F573B4DF19}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9C229E72-6A86-4209-8730-91F573B4DF19}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{9C229E72-6A86-4209-8730-91F573B4DF19}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}.Debug|.NET.ActiveCfg = Debug|Any CPU
 		{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}.Debug|.NET.Build.0 = Debug|Any CPU
 		{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

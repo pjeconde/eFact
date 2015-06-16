@@ -194,8 +194,8 @@ namespace eFact_R
                 CuitVendedorTextBox.ReadOnly = true;
                 PuntoVentaTextBox.ReadOnly = true;
                 FeaEntidades.InterFacturas.lote_comprobantes Lc = new FeaEntidades.InterFacturas.lote_comprobantes();
-                CedWebRN.IBK.error[] respErroresLote = new CedWebRN.IBK.error[0];
-                CedWebRN.IBK.error[] respErroresComprobantes = new CedWebRN.IBK.error[0];
+                eFact_RN.IBK.error[] respErroresLote = new eFact_RN.IBK.error[0];
+                eFact_RN.IBK.error[] respErroresComprobantes = new eFact_RN.IBK.error[0];
                 eFact_Entidades.Vendedor v = Aplicacion.Vendedores.Find(delegate(eFact_Entidades.Vendedor e1) { return e1.CuitVendedor == CuitVendedorTextBox.Text; });
                 if (v == null)
                 {

@@ -98,6 +98,7 @@
             this.NombreArch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdLote = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LoteXML = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdNaturalezaLote = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BandejaSBotonesPanel = new System.Windows.Forms.Panel();
             this.panel12 = new System.Windows.Forms.Panel();
             this.BotonesBSLinea2SplitContainer = new System.Windows.Forms.SplitContainer();
@@ -760,7 +761,8 @@
             this.WF,
             this.NombreArch,
             this.IdLote,
-            this.LoteXML});
+            this.LoteXML,
+            this.IdNaturalezaLote});
             this.BandejaSDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BandejaSDataGridView.Location = new System.Drawing.Point(0, 0);
             this.BandejaSDataGridView.Name = "BandejaSDataGridView";
@@ -769,14 +771,14 @@
             this.BandejaSDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.BandejaSDataGridView.Size = new System.Drawing.Size(484, 163);
             this.BandejaSDataGridView.TabIndex = 6;
-            this.BandejaSDataGridView.DoubleClick += new System.EventHandler(this.BandejaSDataGridView_DoubleClick);
             this.BandejaSDataGridView.SelectionChanged += new System.EventHandler(this.BandejaSDataGridView_SelectionChanged);
+            this.BandejaSDataGridView.DoubleClick += new System.EventHandler(this.BandejaSDataGridView_DoubleClick);
             // 
             // CuitVendedorBandS
             // 
             this.CuitVendedorBandS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.CuitVendedorBandS.DataPropertyName = "CuitVendedor";
-            this.CuitVendedorBandS.HeaderText = "Cuit Vendedor";
+            this.CuitVendedorBandS.HeaderText = "Cuit Empresa";
             this.CuitVendedorBandS.Name = "CuitVendedorBandS";
             this.CuitVendedorBandS.ReadOnly = true;
             this.CuitVendedorBandS.Width = 80;
@@ -864,6 +866,13 @@
             this.LoteXML.HeaderText = "LoteXML";
             this.LoteXML.Name = "LoteXML";
             this.LoteXML.ReadOnly = true;
+            // 
+            // IdNaturalezaLote
+            // 
+            this.IdNaturalezaLote.DataPropertyName = "IdNaturalezaLote";
+            this.IdNaturalezaLote.HeaderText = "Tipo de Lote";
+            this.IdNaturalezaLote.Name = "IdNaturalezaLote";
+            this.IdNaturalezaLote.ReadOnly = true;
             // 
             // BandejaSBotonesPanel
             // 
@@ -1344,7 +1353,7 @@
             // menuItem1
             // 
             this.menuItem1.Index = 0;
-            this.menuItem1.Text = "Vendedores";
+            this.menuItem1.Text = "Empresa";
             this.menuItem1.Click += new System.EventHandler(this.menuItem1_Click);
             // 
             // menuItem4
@@ -1505,18 +1514,6 @@
         private System.Windows.Forms.MainMenu mainMenu1;
         private System.Windows.Forms.MenuItem menuItem1;
         private System.Windows.Forms.MenuItem menuItem2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CuitVendedorBandS;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PuntoVentaBandS;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroLoteBandS;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroEnvioBandS;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaAltaBandS;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdEstado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEnvioBandS;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CantidadRegistrosBandS;
-        private System.Windows.Forms.DataGridViewTextBoxColumn WF;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NombreArch;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdLote;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LoteXML;
         private System.Windows.Forms.MenuItem menuItem3;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdArchivo;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdLoteBandE;
@@ -1541,6 +1538,19 @@
         private System.Windows.Forms.Button SalirButton;
         private System.Windows.Forms.ComboBox ExportarItfComboBox;
         private System.Windows.Forms.MenuItem menuItem4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CuitVendedorBandS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PuntoVentaBandS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroLoteBandS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroEnvioBandS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaAltaBandS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdEstado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaEnvioBandS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CantidadRegistrosBandS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WF;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NombreArch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdLote;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LoteXML;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdNaturalezaLote;
     }
 }
 

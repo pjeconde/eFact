@@ -46,13 +46,7 @@
         "Entry"
         {
         "MsmKey" = "8:_2E8464842E93C77962E7FD5797B6FF41"
-        "OwnerKey" = "8:_79CFE60EAC7871B03EA43B9067EF8585"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2E8464842E93C77962E7FD5797B6FF41"
-        "OwnerKey" = "8:_80D6A3D412A2760F028A1230E28B22DC"
+        "OwnerKey" = "8:_98801D21839DAFB9EE6A921089A52FF7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -64,7 +58,13 @@
         "Entry"
         {
         "MsmKey" = "8:_2E8464842E93C77962E7FD5797B6FF41"
-        "OwnerKey" = "8:_98801D21839DAFB9EE6A921089A52FF7"
+        "OwnerKey" = "8:_80D6A3D412A2760F028A1230E28B22DC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2E8464842E93C77962E7FD5797B6FF41"
+        "OwnerKey" = "8:_79CFE60EAC7871B03EA43B9067EF8585"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -106,13 +106,13 @@
         "Entry"
         {
         "MsmKey" = "8:_738DFB4093278F2DE93232A7C7A57BD2"
-        "OwnerKey" = "8:_79CFE60EAC7871B03EA43B9067EF8585"
+        "OwnerKey" = "8:_C1D40D72568E4BD0AEB16C404F507ACB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_738DFB4093278F2DE93232A7C7A57BD2"
-        "OwnerKey" = "8:_C1D40D72568E4BD0AEB16C404F507ACB"
+        "OwnerKey" = "8:_79CFE60EAC7871B03EA43B9067EF8585"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -130,13 +130,13 @@
         "Entry"
         {
         "MsmKey" = "8:_7A93CBFD7094A6F03A8A8149BFEE5768"
-        "OwnerKey" = "8:_C1D40D72568E4BD0AEB16C404F507ACB"
+        "OwnerKey" = "8:_79CFE60EAC7871B03EA43B9067EF8585"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_7A93CBFD7094A6F03A8A8149BFEE5768"
-        "OwnerKey" = "8:_79CFE60EAC7871B03EA43B9067EF8585"
+        "OwnerKey" = "8:_C1D40D72568E4BD0AEB16C404F507ACB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -160,19 +160,7 @@
         "Entry"
         {
         "MsmKey" = "8:_852B5DA3507F91D8CBAD71FE48242F23"
-        "OwnerKey" = "8:_79CFE60EAC7871B03EA43B9067EF8585"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_852B5DA3507F91D8CBAD71FE48242F23"
-        "OwnerKey" = "8:_80D6A3D412A2760F028A1230E28B22DC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_852B5DA3507F91D8CBAD71FE48242F23"
-        "OwnerKey" = "8:_2878B7545FC1BE7B9BC474B531CDE87D"
+        "OwnerKey" = "8:_C1D40D72568E4BD0AEB16C404F507ACB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -184,7 +172,19 @@
         "Entry"
         {
         "MsmKey" = "8:_852B5DA3507F91D8CBAD71FE48242F23"
-        "OwnerKey" = "8:_C1D40D72568E4BD0AEB16C404F507ACB"
+        "OwnerKey" = "8:_2878B7545FC1BE7B9BC474B531CDE87D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_852B5DA3507F91D8CBAD71FE48242F23"
+        "OwnerKey" = "8:_80D6A3D412A2760F028A1230E28B22DC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_852B5DA3507F91D8CBAD71FE48242F23"
+        "OwnerKey" = "8:_79CFE60EAC7871B03EA43B9067EF8585"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -262,31 +262,7 @@
         "Entry"
         {
         "MsmKey" = "8:_CE7BC05CB5AAC6E8C7609D4DE177BE3F"
-        "OwnerKey" = "8:_79CFE60EAC7871B03EA43B9067EF8585"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CE7BC05CB5AAC6E8C7609D4DE177BE3F"
-        "OwnerKey" = "8:_738DFB4093278F2DE93232A7C7A57BD2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CE7BC05CB5AAC6E8C7609D4DE177BE3F"
-        "OwnerKey" = "8:_80D6A3D412A2760F028A1230E28B22DC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CE7BC05CB5AAC6E8C7609D4DE177BE3F"
-        "OwnerKey" = "8:_2878B7545FC1BE7B9BC474B531CDE87D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CE7BC05CB5AAC6E8C7609D4DE177BE3F"
-        "OwnerKey" = "8:_F0EFB5043B6748EF8FE20D87B40D687A"
+        "OwnerKey" = "8:_C1D40D72568E4BD0AEB16C404F507ACB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -298,7 +274,31 @@
         "Entry"
         {
         "MsmKey" = "8:_CE7BC05CB5AAC6E8C7609D4DE177BE3F"
-        "OwnerKey" = "8:_C1D40D72568E4BD0AEB16C404F507ACB"
+        "OwnerKey" = "8:_F0EFB5043B6748EF8FE20D87B40D687A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CE7BC05CB5AAC6E8C7609D4DE177BE3F"
+        "OwnerKey" = "8:_2878B7545FC1BE7B9BC474B531CDE87D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CE7BC05CB5AAC6E8C7609D4DE177BE3F"
+        "OwnerKey" = "8:_80D6A3D412A2760F028A1230E28B22DC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CE7BC05CB5AAC6E8C7609D4DE177BE3F"
+        "OwnerKey" = "8:_738DFB4093278F2DE93232A7C7A57BD2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CE7BC05CB5AAC6E8C7609D4DE177BE3F"
+        "OwnerKey" = "8:_79CFE60EAC7871B03EA43B9067EF8585"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -346,13 +346,13 @@
         "Entry"
         {
         "MsmKey" = "8:_F0EFB5043B6748EF8FE20D87B40D687A"
-        "OwnerKey" = "8:_2878B7545FC1BE7B9BC474B531CDE87D"
+        "OwnerKey" = "8:_C1D40D72568E4BD0AEB16C404F507ACB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F0EFB5043B6748EF8FE20D87B40D687A"
-        "OwnerKey" = "8:_C1D40D72568E4BD0AEB16C404F507ACB"
+        "OwnerKey" = "8:_2878B7545FC1BE7B9BC474B531CDE87D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -370,13 +370,13 @@
         "Entry"
         {
         "MsmKey" = "8:_FFA7F6FDA97D2D05BA1C81EA42925F14"
-        "OwnerKey" = "8:_C1D40D72568E4BD0AEB16C404F507ACB"
+        "OwnerKey" = "8:_79CFE60EAC7871B03EA43B9067EF8585"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_FFA7F6FDA97D2D05BA1C81EA42925F14"
-        "OwnerKey" = "8:_79CFE60EAC7871B03EA43B9067EF8585"
+        "OwnerKey" = "8:_C1D40D72568E4BD0AEB16C404F507ACB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -388,115 +388,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_EAA404AF5E2C447A9E7BA5368E5F3147"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9EFD12D22DDA4D39BA766BF22F0F1E2F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_96C6122B19574C8CAAF03DC2707C6161"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_659D1360A19F414686E0A256356A1902"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_59E171500C227113066FB11CF7955F7D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C1D40D72568E4BD0AEB16C404F507ACB"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_79CFE60EAC7871B03EA43B9067EF8585"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_80D6A3D412A2760F028A1230E28B22DC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_738DFB4093278F2DE93232A7C7A57BD2"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2878B7545FC1BE7B9BC474B531CDE87D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7A93CBFD7094A6F03A8A8149BFEE5768"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FFA7F6FDA97D2D05BA1C81EA42925F14"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BA756C42E1BE2BC0E3F87903D1F76287"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_98801D21839DAFB9EE6A921089A52FF7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F0EFB5043B6748EF8FE20D87B40D687A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A0A804CB6F7545A8E7307ABBD61906BA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2E8464842E93C77962E7FD5797B6FF41"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_852B5DA3507F91D8CBAD71FE48242F23"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D770A03936B2E13B998449D12A9F2AF1"
+        "OwnerKey" = "8:_CE7BC05CB5AAC6E8C7609D4DE177BE3F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -508,7 +400,115 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CE7BC05CB5AAC6E8C7609D4DE177BE3F"
+        "OwnerKey" = "8:_D770A03936B2E13B998449D12A9F2AF1"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_852B5DA3507F91D8CBAD71FE48242F23"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2E8464842E93C77962E7FD5797B6FF41"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A0A804CB6F7545A8E7307ABBD61906BA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F0EFB5043B6748EF8FE20D87B40D687A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_98801D21839DAFB9EE6A921089A52FF7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_BA756C42E1BE2BC0E3F87903D1F76287"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FFA7F6FDA97D2D05BA1C81EA42925F14"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7A93CBFD7094A6F03A8A8149BFEE5768"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2878B7545FC1BE7B9BC474B531CDE87D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_738DFB4093278F2DE93232A7C7A57BD2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_80D6A3D412A2760F028A1230E28B22DC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_79CFE60EAC7871B03EA43B9067EF8585"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C1D40D72568E4BD0AEB16C404F507ACB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_59E171500C227113066FB11CF7955F7D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_659D1360A19F414686E0A256356A1902"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_96C6122B19574C8CAAF03DC2707C6161"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_9EFD12D22DDA4D39BA766BF22F0F1E2F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_EAA404AF5E2C447A9E7BA5368E5F3147"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -519,7 +519,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:..\\..\\eFact-R-Docs\\aaInstaladoresYGuiasDeInstalacion\\06-Sistema eFact-R - Instalador Paquete\\eFact-R-Instalador-v1.6.39.msi"
+        "OutputFilename" = "8:..\\..\\eFact-R-Docs\\aaInstaladoresYGuiasDeInstalacion\\06-Sistema eFact-R - Instalador Paquete\\eFact-R-Instalador-v2.0.0.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -598,7 +598,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "Version" = "8:2.0.50727"
+                "FrameworkVersion" = "8:2.0.50727"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=9832"
                 }
@@ -653,11 +653,6 @@
             "AssemblyAsmDisplayName" = "8:CedWebRN, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_2878B7545FC1BE7B9BC474B531CDE87D"
-                    {
-                    "Name" = "8:CedWebRN.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CedWebRN.dll"
             "TargetName" = "8:"
@@ -684,11 +679,6 @@
             "AssemblyAsmDisplayName" = "8:CedeiraAP, Version=1.0.35.1, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_2E8464842E93C77962E7FD5797B6FF41"
-                    {
-                    "Name" = "8:CedeiraAP.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CedeiraAP.dll"
             "TargetName" = "8:"
@@ -837,11 +827,6 @@
             "AssemblyAsmDisplayName" = "8:eFact-Entidades, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_738DFB4093278F2DE93232A7C7A57BD2"
-                    {
-                    "Name" = "8:eFact-Entidades.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:eFact-Entidades.dll"
             "TargetName" = "8:"
@@ -868,11 +853,6 @@
             "AssemblyAsmDisplayName" = "8:eFact-RN, Version=1.6.33.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_79CFE60EAC7871B03EA43B9067EF8585"
-                    {
-                    "Name" = "8:eFact-RN.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:eFact-RN.dll"
             "TargetName" = "8:"
@@ -899,11 +879,6 @@
             "AssemblyAsmDisplayName" = "8:FeaEntidades, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_7A93CBFD7094A6F03A8A8149BFEE5768"
-                    {
-                    "Name" = "8:FeaEntidades.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:FeaEntidades.dll"
             "TargetName" = "8:"
@@ -930,11 +905,6 @@
             "AssemblyAsmDisplayName" = "8:eFact-DB, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_80D6A3D412A2760F028A1230E28B22DC"
-                    {
-                    "Name" = "8:eFact-DB.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:eFact-DB.dll"
             "TargetName" = "8:"
@@ -961,11 +931,6 @@
             "AssemblyAsmDisplayName" = "8:CedeiraEx, Version=1.0.35.1, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_852B5DA3507F91D8CBAD71FE48242F23"
-                    {
-                    "Name" = "8:CedeiraEx.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CedeiraEx.dll"
             "TargetName" = "8:"
@@ -1023,11 +988,6 @@
             "AssemblyAsmDisplayName" = "8:CedWebDB, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_98801D21839DAFB9EE6A921089A52FF7"
-                    {
-                    "Name" = "8:CedWebDB.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CedWebDB.dll"
             "TargetName" = "8:"
@@ -1105,11 +1065,6 @@
             "AssemblyAsmDisplayName" = "8:CaptchaDotNet2, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_A0A804CB6F7545A8E7307ABBD61906BA"
-                    {
-                    "Name" = "8:CaptchaDotNet2.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CaptchaDotNet2.dll"
             "TargetName" = "8:"
@@ -1136,11 +1091,6 @@
             "AssemblyAsmDisplayName" = "8:PieChart, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_BA756C42E1BE2BC0E3F87903D1F76287"
-                    {
-                    "Name" = "8:PieChart.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:PieChart.dll"
             "TargetName" = "8:"
@@ -1187,11 +1137,6 @@
             "AssemblyAsmDisplayName" = "8:CedEntidades, Version=1.0.35.1, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_CE7BC05CB5AAC6E8C7609D4DE177BE3F"
-                    {
-                    "Name" = "8:CedEntidades.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CedEntidades.dll"
             "TargetName" = "8:"
@@ -1218,11 +1163,6 @@
             "AssemblyAsmDisplayName" = "8:PureComponents.NicePanel, Version=1.0.1013.4, Culture=neutral, PublicKeyToken=2f0f2e4259d7a8e4"
                 "ScatterAssemblies"
                 {
-                    "_D75CEB5DC066DE421707EEE8B472077D"
-                    {
-                    "Name" = "8:PureComponents.NicePanel.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:PureComponents.NicePanel.dll"
             "TargetName" = "8:"
@@ -1249,11 +1189,6 @@
             "AssemblyAsmDisplayName" = "8:CedeiraUIforms, Version=1.0.35.1, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_D770A03936B2E13B998449D12A9F2AF1"
-                    {
-                    "Name" = "8:CedeiraUIforms.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CedeiraUIforms.dll"
             "TargetName" = "8:"
@@ -1331,11 +1266,6 @@
             "AssemblyAsmDisplayName" = "8:CedWebEntidades, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_F0EFB5043B6748EF8FE20D87B40D687A"
-                    {
-                    "Name" = "8:CedWebEntidades.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CedWebEntidades.dll"
             "TargetName" = "8:"
@@ -1393,11 +1323,6 @@
             "AssemblyAsmDisplayName" = "8:FileHelpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_FFA7F6FDA97D2D05BA1C81EA42925F14"
-                    {
-                    "Name" = "8:FileHelpers.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:FileHelpers.dll"
             "TargetName" = "8:"
@@ -1500,19 +1425,21 @@
         "MsiBootstrapper"
         {
         "LangId" = "3:3082"
+        "RequiresElevation" = "11:FALSE"
         }
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:eFact-R"
-        "ProductCode" = "8:{29EACA5B-4D7C-4F0B-8D6C-A4B8432415D0}"
-        "PackageCode" = "8:{E6EA8C41-31E9-4435-9188-1C127F3FF84A}"
+        "ProductCode" = "8:{317A7A9C-D4B3-4112-8F16-6876556DFB49}"
+        "PackageCode" = "8:{1E085D16-6849-48D2-8F72-09B5313A73F1}"
         "UpgradeCode" = "8:{42C6C405-B3ED-403A-9F09-E4DCDC66475D}"
+        "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.6.39"
+        "ProductVersion" = "8:2.0.0"
         "Manufacturer" = "8:Cedeira"
         "ARPHELPTELEPHONE" = "8:facturaelectronica@live.com"
         "ARPHELPLINK" = "8:http://www.cedeira.com.ar"
@@ -1627,7 +1554,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C5106AF264B441EF9BE17F5A7FF485C7"
             {
-            "Name" = "8:eFact-R v1.6.39"
+            "Name" = "8:eFact-R v2.0.0"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -2066,9 +1993,6 @@
                 {
                 }
             }
-        }
-        "VJSharpPlugin"
-        {
         }
     }
 }

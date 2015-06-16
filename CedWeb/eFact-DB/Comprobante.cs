@@ -27,5 +27,37 @@ namespace eFact_DB
             Comprobante.Importe = Convert.ToDecimal(dt.Rows[0]["ImporteMonedaOrigen"]);
             Comprobante.Importe = Convert.ToDecimal(dt.Rows[0]["TipoCambio"]);
         }
+        public bool ConsutarComprobanteVigente(eFact_Entidades.Comprobante Comprobante)
+        {
+            StringBuilder commandText = new StringBuilder();
+            commandText.Append("Select * from Comprobantes, Lotes, WF_Op where Comprobantes.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente')");
+            commandText.Append("PuntoVenta=" + Comprobante.PuntoVenta + " and IdTipoComprobante = '" + Comprobante.IdTipoComprobante + "' and NumeroComprobante='" + Comprobante.NumeroComprobante + "'");
+            DataTable dt = new DataTable();
+            dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.Acepta, sesion.CnnStr);
+            if (dt.Rows.Count != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool ConsutarComprobanteCVigente(eFact_Entidades.ComprobanteC Comprobante)
+        {
+            StringBuilder commandText = new StringBuilder();
+            commandText.Append("Select * from ComprobantesC, Lotes, WF_Op where Comprobantes.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente')");
+            commandText.Append("PuntoVenta=" + Comprobante.PuntoVenta + " and IdTipoComprobante = '" + Comprobante.IdTipoComprobante + "' and NumeroComprobante='" + Comprobante.NumeroComprobante + "'");
+            DataTable dt = new DataTable();
+            dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.Acepta, sesion.CnnStr);
+            if (dt.Rows.Count != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

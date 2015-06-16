@@ -31,9 +31,14 @@ namespace eFact_Entidades
         private string loteXmlIF;
         private CedEntidades.WF wf;
         private List<eFact_Entidades.Comprobante> comprobantes;
+        private List<eFact_Entidades.ComprobanteC> comprobantesC;
+        private List<eFact_Entidades.ComprobanteD> comprobantesD;
+        private string idNaturalezaLote;
         public Lote()
         {
             comprobantes = new List<eFact_Entidades.Comprobante>();
+            comprobantesC = new List<eFact_Entidades.ComprobanteC>();
+            comprobantesD = new List<eFact_Entidades.ComprobanteD>();
         }
         public int IdLote
         {
@@ -178,6 +183,28 @@ namespace eFact_Entidades
                 comprobantes = value;
             }
         }
+        public List<eFact_Entidades.ComprobanteC> ComprobantesC
+        {
+            get
+            {
+                return comprobantesC;
+            }
+            set
+            {
+                comprobantesC = value;
+            }
+        }
+        public List<eFact_Entidades.ComprobanteD> ComprobantesD
+        {
+            get
+            {
+                return comprobantesD;
+            }
+            set
+            {
+                comprobantesD = value;
+            }
+        }
         public string IdEstado
         {
             get
@@ -194,6 +221,17 @@ namespace eFact_Entidades
             set
             {
                 wf = value;
+            }
+        }
+        public string IdNaturalezaLote
+        {
+            set
+            {
+                idNaturalezaLote = value;
+            }
+            get
+            {
+                return idNaturalezaLote;
             }
         }
     }

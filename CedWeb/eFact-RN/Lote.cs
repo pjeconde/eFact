@@ -142,7 +142,7 @@ namespace eFact_RN
             ms = null;
             Lote.LoteXmlIF = XmlizedString;
         }
-        public static void ActualizarDatosError(eFact_Entidades.Lote Lote, CedWebRN.IBK.lote_response Lr)
+        public static void ActualizarDatosError(eFact_Entidades.Lote Lote, eFact_RN.IBK.lote_response Lr)
         {
             MemoryStream ms;
             System.Xml.XmlTextWriter writer;
@@ -344,7 +344,7 @@ namespace eFact_RN
         }
         public static void DeserializarLr(out FeaEntidades.InterFacturas.lote_response Lr, string Cadena)
         {
-            //Deserializar ( pasar de string XML a CedWebRN.IBK.lote_response )
+            //Deserializar ( pasar de string XML a eFact_RN.IBK.lote_response )
             System.Text.Encoding codificador;
             codificador = System.Text.Encoding.GetEncoding("iso-8859-1");
             byte[] a = new byte[Cadena.Length];
@@ -370,7 +370,7 @@ namespace eFact_RN
             ms.Close();
             ms = null;
         }
-        public static void SerializarLr(out string LoteXMLIF, CedWebRN.IBK.lote_response Lr)
+        public static void SerializarLr(out string LoteXMLIF, eFact_RN.IBK.lote_response Lr)
         {
             //Deserializar ( pasar de FeaEntidades.InterFacturas.lote_comprobantes a string XML )
             MemoryStream ms = new MemoryStream();
@@ -617,15 +617,15 @@ namespace eFact_RN
             sb.Append("." + Extension);
             NombreArch = sb.ToString();
         }
-        public static void ConsultarLoteIF(out FeaEntidades.InterFacturas.lote_comprobantes Lc, out CedWebRN.IBK.error[] RespErroresLote, out CedWebRN.IBK.error[] RespErroresComprobantes, eFact_Entidades.Lote Lote, string WSCertificado)
+        public static void ConsultarLoteIF(out FeaEntidades.InterFacturas.lote_comprobantes Lc, out eFact_RN.IBK.error[] RespErroresLote, out eFact_RN.IBK.error[] RespErroresComprobantes, eFact_Entidades.Lote Lote, string WSCertificado)
         {
-            CedWebRN.IBK.error[] respErroresLote = new CedWebRN.IBK.error[0];
-            CedWebRN.IBK.error[] respErroresComprobantes = new CedWebRN.IBK.error[0];
+            eFact_RN.IBK.error[] respErroresLote = new eFact_RN.IBK.error[0];
+            eFact_RN.IBK.error[] respErroresComprobantes = new eFact_RN.IBK.error[0];
             FeaEntidades.InterFacturas.lote_comprobantes lcIBK = new FeaEntidades.InterFacturas.lote_comprobantes();
-            CedWebRN.IBK.consulta_lote_comprobantes clc = new CedWebRN.IBK.consulta_lote_comprobantes();
+            eFact_RN.IBK.consulta_lote_comprobantes clc = new eFact_RN.IBK.consulta_lote_comprobantes();
             try
             {
-                CedWebRN.Comprobante CedWebRNComprobante = new CedWebRN.Comprobante();
+                eFact_RN.Comprobante eFact_RNComprobante = new eFact_RN.Comprobante();
                 if (Lote.LoteXml != null || Lote.LoteXmlIF != null)
                 {
                     FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
@@ -652,7 +652,7 @@ namespace eFact_RN
                     clc.punto_de_venta = Convert.ToInt32(Lote.PuntoVenta);
                     clc.punto_de_ventaSpecified = true;
                 }
-                lcIBK = CedWebRNComprobante.ConsultarIBK(out respErroresLote, out respErroresComprobantes, clc, WSCertificado);
+                lcIBK = eFact_RNComprobante.ConsultarIBK(out respErroresLote, out respErroresComprobantes, clc, WSCertificado);
                 RespErroresLote = respErroresLote;
                 RespErroresComprobantes = respErroresComprobantes;
             }

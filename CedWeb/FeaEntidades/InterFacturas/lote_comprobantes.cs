@@ -21,6 +21,8 @@ namespace FeaEntidades.InterFacturas
 
 		private comprobante[] comprobanteField=new comprobante[10000];
 
+        private comprobanteDespacho[] comprobanteDespachoField;
+
 		/// <comentarios/>
 		public cabecera_lote cabecera_lote
 		{
@@ -47,6 +49,18 @@ namespace FeaEntidades.InterFacturas
 				this.comprobanteField = value;
 			}
 		}
-	}
 
+        [System.Xml.Serialization.XmlElementAttribute("comprobanteDespacho")]
+        public comprobanteDespacho[] comprobanteDespacho
+        {
+            get
+            {
+                return this.comprobanteDespachoField;
+            }
+            set
+            {
+                this.comprobanteDespachoField = value;
+            }
+        }
+	}
 }

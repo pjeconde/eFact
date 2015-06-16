@@ -242,8 +242,8 @@ namespace eFact_S
             foreach (eFact_Entidades.Lote l in lotes)
             {
                 FeaEntidades.InterFacturas.lote_comprobantes Lc = new FeaEntidades.InterFacturas.lote_comprobantes();
-                CedWebRN.IBK.error[] respErroresLote = new CedWebRN.IBK.error[0];
-                CedWebRN.IBK.error[] respErroresComprobantes = new CedWebRN.IBK.error[0];
+                eFact_RN.IBK.error[] respErroresLote = new eFact_RN.IBK.error[0];
+                eFact_RN.IBK.error[] respErroresComprobantes = new eFact_RN.IBK.error[0];
                 try
                 {
                     //Consultar si exite el lote en Interfacturas
@@ -269,7 +269,7 @@ namespace eFact_S
                     }
                     else if (Lc.cabecera_lote.resultado == "R")
                     {
-                        CedWebRN.IBK.lote_response lr = ArmarLoteResponse(Lc);
+                        eFact_RN.IBK.lote_response lr = ArmarLoteResponse(Lc);
                         eFact_RN.Lote.ActualizarDatosError(l, lr);
                         string comentario = ArmarTextoMotivo(Lc);
                         EjecutarEventoBandejaS("RegRechAFIP", comentario, l);
@@ -382,13 +382,13 @@ namespace eFact_S
 
                 //Consultar si exite el lote en Interfacturas
                 FeaEntidades.InterFacturas.lote_comprobantes Lc = new FeaEntidades.InterFacturas.lote_comprobantes();
-                CedWebRN.IBK.error[] respErroresLote = new CedWebRN.IBK.error[0];
-                CedWebRN.IBK.error[] respErroresComprobantes = new CedWebRN.IBK.error[0];
-                CedWebRN.IBK.consulta_lote_responseErrores_consulta RespErroresLote = new CedWebRN.IBK.consulta_lote_responseErrores_consulta();
-                CedWebRN.IBK.consulta_lote_comprobantes_responseErrores_response RespErroresComprobantes = new CedWebRN.IBK.consulta_lote_comprobantes_responseErrores_response();
+                eFact_RN.IBK.error[] respErroresLote = new eFact_RN.IBK.error[0];
+                eFact_RN.IBK.error[] respErroresComprobantes = new eFact_RN.IBK.error[0];
+                eFact_RN.IBK.consulta_lote_responseErrores_consulta RespErroresLote = new eFact_RN.IBK.consulta_lote_responseErrores_consulta();
+                eFact_RN.IBK.consulta_lote_comprobantes_responseErrores_response RespErroresComprobantes = new eFact_RN.IBK.consulta_lote_comprobantes_responseErrores_response();
                 //Enviar a Interfacturas si el lote no existe.
-                CedWebRN.Comprobante CedWebRNComprobante = new CedWebRN.Comprobante();
-                CedWebRN.IBK.lote_response Lr = new CedWebRN.IBK.lote_response();
+                eFact_RN.Comprobante eFact_RNComprobante = new eFact_RN.Comprobante();
+                eFact_RN.IBK.lote_response Lr = new eFact_RN.IBK.lote_response();
                 try
                 {
                     eFact_Entidades.Vendedor v = Aplicacion.Vendedores.Find(delegate(eFact_Entidades.Vendedor e1) { return e1.CuitVendedor == lc.cabecera_lote.cuit_vendedor.ToString(); });
@@ -396,7 +396,7 @@ namespace eFact_S
                     {
                         throw new Microsoft.ApplicationBlocks.ExceptionManagement.Vendedor.Inexistente("CUIT " + lc.cabecera_lote.cuit_vendedor.ToString());
                     }
-                    CedWebRNComprobante.EnviarIBK(out Lr, lc, v.NumeroSerieCertificado.ToString());
+                    eFact_RNComprobante.EnviarIBK(out Lr, lc, v.NumeroSerieCertificado.ToString());
                     EjecutarEventoBandejaS("RegAceptIF", "", lote);
                 }
                 catch (Exception ex2)
@@ -408,11 +408,17 @@ namespace eFact_S
                         //Cuando el error es local, previo a la respuesta de IF se usa el código 99 (Cedeira) para mostrar el error.
                         //Ejemplo: cuando no está instalado el certificado.
                         Lr.estado = "99";
-                        Lr.errores_lote = new CedWebRN.IBK.error[1];
-                        Lr.errores_lote[0] = new CedWebRN.IBK.error();
+                        Lr.errores_lote = new eFact_RN.IBK.error[1];
+                        Lr.errores_lote[0] = new eFact_RN.IBK.error();
                         Lr.errores_lote[0].codigo_error = 99;
                         edescr = ex2.Message.Replace("'", "''");
                         Lr.errores_lote[0].descripcion_error = edescr;
+                        //------ Datos del lote, que genera el error ------
+                        Lr.id_lote = Convert.ToInt64(lote.NumeroLote);
+                        Lr.cuit_vendedor = Convert.ToInt64(lote.CuitVendedor);
+                        Lr.punto_de_venta = Convert.ToInt32(lote.PuntoVenta);
+                        Lr.cantidad_reg = lote.CantidadRegistros;
+                        //-------------------------------------------------
                         if (edescr.IndexOf("500 - error") != -1)
                         {
                             Lr.errores_lote[0].codigo_error = 500;
@@ -458,11 +464,11 @@ namespace eFact_S
             eFact_RN.Lote.VerificarEnviosPosteriores(false, lote.CuitVendedor, lote.NumeroLote, lote.PuntoVenta, lote.NumeroEnvio, Aplicacion.Sesion);
             eFact_RN.Lote.Ejecutar(lote, evento, "", Aplicacion, Aplicacion.Sesion);
         }
-        private CedWebRN.IBK.lote_response ArmarLoteResponse(FeaEntidades.InterFacturas.lote_comprobantes Lc)
+        private eFact_RN.IBK.lote_response ArmarLoteResponse(FeaEntidades.InterFacturas.lote_comprobantes Lc)
         {
             string texto = "";
-            CedWebRN.IBK.lote_response lrCompleto = new CedWebRN.IBK.lote_response();
-            CedWebRN.IBK.error[] errores = new CedWebRN.IBK.error[1];
+            eFact_RN.IBK.lote_response lrCompleto = new eFact_RN.IBK.lote_response();
+            eFact_RN.IBK.error[] errores = new eFact_RN.IBK.error[1];
             lrCompleto.cantidad_reg = Lc.cabecera_lote.cantidad_reg;
             lrCompleto.cuit_canal = Lc.cabecera_lote.cuit_canal;
             lrCompleto.cuit_vendedor = Lc.cabecera_lote.cuit_vendedor;
@@ -474,7 +480,7 @@ namespace eFact_S
             lrCompleto.punto_de_venta = Lc.cabecera_lote.punto_de_venta;
             if (Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
             {
-                errores[0] = new CedWebRN.IBK.error();
+                errores[0] = new eFact_RN.IBK.error();
                 errores[0].codigo_error = 0;
                 errores[0].descripcion_error = Lc.cabecera_lote.motivo.Trim();
                 lrCompleto.errores_lote = errores;
@@ -490,17 +496,17 @@ namespace eFact_S
             int NroMotivo = 0;
             for (int i = 0; i < Lc.comprobante.Length; i++)
             {
-                CedWebRN.IBK.error[] erroresComprobante = new CedWebRN.IBK.error[1];
+                eFact_RN.IBK.error[] erroresComprobante = new eFact_RN.IBK.error[1];
                 if (Lc.comprobante[i].cabecera.informacion_comprobante.motivo != null && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "00" && Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim() != "")
                 {
                     if (lrCompleto.comprobante_response == null)
                     {
-                        lrCompleto.comprobante_response = new CedWebRN.IBK.comprobante_response[CantMotivoError];
+                        lrCompleto.comprobante_response = new eFact_RN.IBK.comprobante_response[CantMotivoError];
                     }
-                    erroresComprobante[NroMotivo] = new CedWebRN.IBK.error();
+                    erroresComprobante[NroMotivo] = new eFact_RN.IBK.error();
                     erroresComprobante[NroMotivo].codigo_error = 0;
                     erroresComprobante[NroMotivo].descripcion_error = Lc.comprobante[i].cabecera.informacion_comprobante.motivo;
-                    lrCompleto.comprobante_response[NroMotivo] = new CedWebRN.IBK.comprobante_response();
+                    lrCompleto.comprobante_response[NroMotivo] = new eFact_RN.IBK.comprobante_response();
                     lrCompleto.comprobante_response[NroMotivo].numero_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante;
                     lrCompleto.comprobante_response[NroMotivo].punto_de_venta = Lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta;
                     lrCompleto.comprobante_response[NroMotivo].tipo_de_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante;
