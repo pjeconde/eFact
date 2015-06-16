@@ -148,6 +148,8 @@
             this.menuItem4 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
+            this.menuItem5 = new System.Windows.Forms.MenuItem();
+            this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
             this.SplitContainer.SuspendLayout();
@@ -1348,7 +1350,8 @@
             this.menuItem1,
             this.menuItem4,
             this.menuItem2,
-            this.menuItem3});
+            this.menuItem3,
+            this.menuItem5});
             // 
             // menuItem1
             // 
@@ -1373,6 +1376,19 @@
             this.menuItem3.Index = 3;
             this.menuItem3.Text = "Ayuda";
             this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
+            // 
+            // menuItem5
+            // 
+            this.menuItem5.Index = 4;
+            this.menuItem5.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem6});
+            this.menuItem5.Text = "Interfaces";
+            // 
+            // menuItem6
+            // 
+            this.menuItem6.Index = 0;
+            this.menuItem6.Text = "Compras y Ventas";
+            this.menuItem6.Click += new System.EventHandler(this.menuItem6_Click);
             // 
             // Tablero
             // 
@@ -1551,6 +1567,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IdLote;
         private System.Windows.Forms.DataGridViewTextBoxColumn LoteXML;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdNaturalezaLote;
+        private System.Windows.Forms.MenuItem menuItem5;
+        private System.Windows.Forms.MenuItem menuItem6;
     }
 }
 

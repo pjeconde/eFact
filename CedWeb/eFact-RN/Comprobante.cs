@@ -12,15 +12,15 @@ namespace eFact_RN
             eFact_DB.Comprobante c = new eFact_DB.Comprobante(Sesion);
             c.Leer(Comprobante);
         }
-        public static bool ConsultarComprobanteVigente(eFact_Entidades.Comprobante Comprobante, CedEntidades.Sesion Sesion)
+        public static List<eFact_Entidades.Comprobante> ConsultarComprobantesVigentes(CedEntidades.Sesion Sesion)
         {
             eFact_DB.Comprobante c = new eFact_DB.Comprobante(Sesion);
-            return c.ConsutarComprobanteVigente(Comprobante);
+            return c.ConsutarComprobantesVigentes();
         }
-        public static bool ConsultarComprobanteCVigente(eFact_Entidades.ComprobanteC Comprobante, CedEntidades.Sesion Sesion)
+        public static List<eFact_Entidades.ComprobanteC> ConsultarComprobantesCVigentes(CedEntidades.Sesion Sesion)
         {
             eFact_DB.Comprobante c = new eFact_DB.Comprobante(Sesion);
-            return c.ConsutarComprobanteCVigente(Comprobante);
+            return c.ConsutarComprobantesCVigentes();
         }
         public FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(IBK.consulta_lote_comprobantes clc, string certificado)
         {
