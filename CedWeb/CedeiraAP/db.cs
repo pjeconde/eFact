@@ -897,8 +897,9 @@ namespace Cedeira.SV
 		}
 		public int WF_Op_ins(string IdFlow, string IdCircuito, int IdNivSeg, string IdEstado, string DescrOp, string IdEvento, string IdUsuario, string Comentario, string IdGrupo, bool Supervisor, byte SupervisorNivel)
 		{
-			DataView dv = (DataView)Ejecutar(
-				WF_Op_insHandler(IdFlow, IdCircuito, IdNivSeg, IdEstado, DescrOp, IdEvento, IdUsuario, Comentario, IdGrupo, Supervisor, SupervisorNivel),
+            string a = WF_Op_insHandler(IdFlow, IdCircuito, IdNivSeg, IdEstado, DescrOp, IdEvento, IdUsuario, Comentario, IdGrupo, Supervisor, SupervisorNivel);
+            a = a + "select @IdOp as IdOp"; 
+			DataView dv = (DataView)Ejecutar(a,
 				TipoRetorno.DV,
 				Transaccion.Usa,
 				sesion.CnnStr);
