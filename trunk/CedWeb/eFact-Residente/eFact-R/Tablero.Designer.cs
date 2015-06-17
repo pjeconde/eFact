@@ -1349,9 +1349,9 @@
             this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem1,
             this.menuItem4,
+            this.menuItem5,
             this.menuItem2,
-            this.menuItem3,
-            this.menuItem5});
+            this.menuItem3});
             // 
             // menuItem1
             // 
@@ -1367,19 +1367,19 @@
             // 
             // menuItem2
             // 
-            this.menuItem2.Index = 2;
+            this.menuItem2.Index = 3;
             this.menuItem2.Text = "Acerca";
             this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
             // 
             // menuItem3
             // 
-            this.menuItem3.Index = 3;
+            this.menuItem3.Index = 4;
             this.menuItem3.Text = "Ayuda";
             this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
             // 
             // menuItem5
             // 
-            this.menuItem5.Index = 4;
+            this.menuItem5.Index = 2;
             this.menuItem5.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem6});
             this.menuItem5.Text = "Interfaces";

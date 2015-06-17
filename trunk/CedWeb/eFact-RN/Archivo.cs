@@ -227,7 +227,7 @@ namespace eFact_RN
                         lote.ComprobantesC.Add(cC);
 
                         List<eFact_Entidades.ComprobanteC> listAux = cCListVigentes.FindAll((delegate(eFact_Entidades.ComprobanteC e1) { return e1.NroDocVendedor == cC.NroDocVendedor && e1.PuntoVenta.ToString() == cC.PuntoVenta && e1.IdTipoComprobante == cC.IdTipoComprobante && e1.NumeroComprobante == cC.NumeroComprobante; }));
-                        if (listAux.Count == 0)
+                        if (listAux.Count != 0)
                         {
                             throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Comprobante existente. Cuit Vendedor: " + cC.NroDocVendedor + " Punto Venta: " + cC.PuntoVenta + " Tipo: " + cC.IdTipoComprobante.ToString() + " Nro: " + cC.NumeroComprobante);
                         }

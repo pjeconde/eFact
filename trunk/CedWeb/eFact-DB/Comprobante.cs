@@ -68,10 +68,10 @@ namespace eFact_DB
         }
         public List<eFact_Entidades.ComprobanteC> ConsutarComprobantesCVigentes()
         {
-            StringBuilder commandText = new StringBuilder();
-            commandText.Append("Select * from ComprobantesC, Lotes, WF_Op where ComprobantesC.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente')");
+            string a = "";
+            a = "Select * from ComprobantesC, Lotes, WF_Op where ComprobantesC.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente')";
             DataSet ds = new DataSet();
-            ds = (DataSet)Ejecutar(commandText, TipoRetorno.DS, Transaccion.Acepta, sesion.CnnStr);
+            ds = (DataSet)Ejecutar(a, TipoRetorno.DS, Transaccion.Acepta, sesion.CnnStr);
             List<eFact_Entidades.ComprobanteC> ComprobantesC = new List<eFact_Entidades.ComprobanteC>();
             if (ds.Tables.Count == 0)
             {

@@ -210,6 +210,10 @@ namespace eFact_RN
                             handlerEvento += Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
                             lote.Insertar(Lote, handlerEvento, Handler);
                             break;
+                        case "EnvBandSalidaV":
+                            handlerEvento += Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
+                            lote.Insertar(Lote, handlerEvento, Handler);
+                            break;
                         case "EnviarAIF":
                             handlerEvento += Cedeira.SV.WF.EjecutarEvento(Lote.WF, Evento, true);
                             lote.ActualizarFechaEnvio(Lote, handlerEvento);

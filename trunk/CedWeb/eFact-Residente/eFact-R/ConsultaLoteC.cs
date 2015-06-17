@@ -68,11 +68,11 @@ namespace eFact_R
         }
         private static int ordenarPorNroComprobanteC(eFact_Entidades.ComprobanteC A1, eFact_Entidades.ComprobanteC A2)
         {
-            return Convert.ToInt32(A1.NroDocVendedor.ToString().Trim() + A1.NumeroComprobante.PadLeft(8, Convert.ToChar("0"))).CompareTo(Convert.ToInt32(A2.NroDocVendedor.ToString().Trim() + A2.NumeroComprobante.PadLeft(8, Convert.ToChar("0"))));
+            return Convert.ToInt32(A1.NroDocVendedor.Substring(0, 8).Trim()).CompareTo(Convert.ToInt32(A2.NroDocVendedor.Substring(0, 8).Trim()));
         }
         private static int ordenarPorNroComprobanteD(eFact_Entidades.ComprobanteD A1, eFact_Entidades.ComprobanteD A2)
         {
-            return Convert.ToInt32(A1.NroDocVendedor.ToString().Trim()).CompareTo(Convert.ToInt32(A2.NroDocVendedor.ToString().Trim()));
+            return Convert.ToInt32(A1.NroDocVendedor.Substring(0, 8).Trim()).CompareTo(Convert.ToInt32(A2.NroDocVendedor.Substring(0, 8).Trim()));
         }
         private void BindingControles()
         {
