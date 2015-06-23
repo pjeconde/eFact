@@ -34,8 +34,8 @@
             this.PeriodoLabel = new System.Windows.Forms.Label();
             this.VentasRadioButton = new System.Windows.Forms.RadioButton();
             this.ComprasRadioButton = new System.Windows.Forms.RadioButton();
-            this.FechaProcesoDsdBandejaEDTP = new System.Windows.Forms.DateTimePicker();
-            this.FechaProcesoHstBandejaEDTP = new System.Windows.Forms.DateTimePicker();
+            this.FechaDsdDTP = new System.Windows.Forms.DateTimePicker();
+            this.FechaHstDTP = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.CUITLabel = new System.Windows.Forms.Label();
             this.CuitVendedorComboBox = new System.Windows.Forms.ComboBox();
@@ -78,8 +78,8 @@
             this.PrincipalPanel.Controls.Add(this.PeriodoLabel);
             this.PrincipalPanel.Controls.Add(this.VentasRadioButton);
             this.PrincipalPanel.Controls.Add(this.ComprasRadioButton);
-            this.PrincipalPanel.Controls.Add(this.FechaProcesoDsdBandejaEDTP);
-            this.PrincipalPanel.Controls.Add(this.FechaProcesoHstBandejaEDTP);
+            this.PrincipalPanel.Controls.Add(this.FechaDsdDTP);
+            this.PrincipalPanel.Controls.Add(this.FechaHstDTP);
             this.PrincipalPanel.Controls.Add(this.label3);
             this.PrincipalPanel.Controls.Add(this.CUITLabel);
             this.PrincipalPanel.Controls.Add(this.CuitVendedorComboBox);
@@ -120,21 +120,21 @@
             this.ComprasRadioButton.Text = "Compras";
             this.ComprasRadioButton.UseVisualStyleBackColor = true;
             // 
-            // FechaProcesoDsdBandejaEDTP
+            // FechaDsdDTP
             // 
-            this.FechaProcesoDsdBandejaEDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.FechaProcesoDsdBandejaEDTP.Location = new System.Drawing.Point(81, 45);
-            this.FechaProcesoDsdBandejaEDTP.Name = "FechaProcesoDsdBandejaEDTP";
-            this.FechaProcesoDsdBandejaEDTP.Size = new System.Drawing.Size(94, 20);
-            this.FechaProcesoDsdBandejaEDTP.TabIndex = 72;
+            this.FechaDsdDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.FechaDsdDTP.Location = new System.Drawing.Point(81, 45);
+            this.FechaDsdDTP.Name = "FechaDsdDTP";
+            this.FechaDsdDTP.Size = new System.Drawing.Size(94, 20);
+            this.FechaDsdDTP.TabIndex = 72;
             // 
-            // FechaProcesoHstBandejaEDTP
+            // FechaHstDTP
             // 
-            this.FechaProcesoHstBandejaEDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.FechaProcesoHstBandejaEDTP.Location = new System.Drawing.Point(202, 46);
-            this.FechaProcesoHstBandejaEDTP.Name = "FechaProcesoHstBandejaEDTP";
-            this.FechaProcesoHstBandejaEDTP.Size = new System.Drawing.Size(94, 20);
-            this.FechaProcesoHstBandejaEDTP.TabIndex = 74;
+            this.FechaHstDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.FechaHstDTP.Location = new System.Drawing.Point(202, 46);
+            this.FechaHstDTP.Name = "FechaHstDTP";
+            this.FechaHstDTP.Size = new System.Drawing.Size(94, 20);
+            this.FechaHstDTP.TabIndex = 74;
             // 
             // label3
             // 
@@ -239,8 +239,8 @@
         private System.Windows.Forms.Label PeriodoLabel;
         private System.Windows.Forms.RadioButton VentasRadioButton;
         private System.Windows.Forms.RadioButton ComprasRadioButton;
-        private System.Windows.Forms.DateTimePicker FechaProcesoDsdBandejaEDTP;
-        private System.Windows.Forms.DateTimePicker FechaProcesoHstBandejaEDTP;
+        private System.Windows.Forms.DateTimePicker FechaDsdDTP;
+        private System.Windows.Forms.DateTimePicker FechaHstDTP;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label CUITLabel;
         private System.Windows.Forms.ComboBox CuitVendedorComboBox;
