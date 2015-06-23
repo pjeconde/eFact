@@ -146,10 +146,10 @@
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.menuItem4 = new System.Windows.Forms.MenuItem();
-            this.menuItem2 = new System.Windows.Forms.MenuItem();
-            this.menuItem3 = new System.Windows.Forms.MenuItem();
             this.menuItem5 = new System.Windows.Forms.MenuItem();
             this.menuItem6 = new System.Windows.Forms.MenuItem();
+            this.menuItem2 = new System.Windows.Forms.MenuItem();
+            this.menuItem3 = new System.Windows.Forms.MenuItem();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
             this.SplitContainer.SuspendLayout();
@@ -1365,18 +1365,6 @@
             this.menuItem4.Text = "Contingencia";
             this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
             // 
-            // menuItem2
-            // 
-            this.menuItem2.Index = 3;
-            this.menuItem2.Text = "Acerca";
-            this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
-            // 
-            // menuItem3
-            // 
-            this.menuItem3.Index = 4;
-            this.menuItem3.Text = "Ayuda";
-            this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
-            // 
             // menuItem5
             // 
             this.menuItem5.Index = 2;
@@ -1389,6 +1377,18 @@
             this.menuItem6.Index = 0;
             this.menuItem6.Text = "Compras y Ventas";
             this.menuItem6.Click += new System.EventHandler(this.menuItem6_Click);
+            // 
+            // menuItem2
+            // 
+            this.menuItem2.Index = 3;
+            this.menuItem2.Text = "Acerca";
+            this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
+            // 
+            // menuItem3
+            // 
+            this.menuItem3.Index = 4;
+            this.menuItem3.Text = "Ayuda";
+            this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
             // 
             // Tablero
             // 
