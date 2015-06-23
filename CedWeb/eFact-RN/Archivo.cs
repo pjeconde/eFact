@@ -200,10 +200,11 @@ namespace eFact_RN
                         lote.Comprobantes.Add(c);
                         if (lote.IdNaturalezaLote == "Venta")
                         {
-                            //if (eFact_RN.Comprobante.ConsultarComprobantesVigentes(esion))
-                            //{
-                            //    throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Comprobante existente. Tipo: " + c.IdTipoComprobante.ToString() + " Nro: " + c.NumeroComprobante);
-                            //}
+                            List<eFact_Entidades.Comprobante> listAux = cVListVigentes.FindAll((delegate(eFact_Entidades.Comprobante e1) { return e1.NroDocComprador == c.NroDocComprador && e1.PuntoVenta.ToString() == c.PuntoVenta && e1.IdTipoComprobante == c.IdTipoComprobante && e1.NumeroComprobante == c.NumeroComprobante; }));
+                            if (listAux.Count != 0)
+                            {
+                                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Comprobante existente. Cuit Comprador: " + c.NroDocComprador + " Punto Venta: " + c.PuntoVenta + " Tipo: " + c.IdTipoComprobante.ToString() + " Nro: " + c.NumeroComprobante);
+                            }
                         }
                     }
                     else

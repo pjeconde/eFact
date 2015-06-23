@@ -162,7 +162,7 @@ namespace eFact_R
                 DescartarBandejaEButton.Enabled = true;
                 EnviarABandejaSButton.Enabled = true;
                 StatusBar.Panels["ModalidadSBP"].Text = "Modalidad = " + Aplicacion.Modalidad + "  Servicio: (!)";
-                if (Aplicacion.Modalidad != "Automatica")
+                if (Aplicacion.Modalidad == "Automatica")
                 {
                     StatusBar.Panels["ModalidadSBP"].ToolTipText = "(!) El servicio no está disponible, por lo tanto se habilitará la opción de procesamiento de archivos manual.\r\n\r\n" + "Mensaje: " + ex.Message + "\r\n\r\n( Hacer clic para actualizar el estado )";
                 }
