@@ -8,6 +8,7 @@ namespace eFact_Entidades
     public class Comprobante
     {
         private int idLote;
+        private string loteXml;
         private string puntoVenta;
         private short idTipoComprobante;
         private string numeroComprobante;
@@ -36,6 +37,17 @@ namespace eFact_Entidades
             get
             {
                 return idLote;
+            }
+        }
+        public string LoteXml
+        {
+            set
+            {
+                loteXml = value;
+            }
+            get
+            {
+                return loteXml;
             }
         }
         public string PuntoVenta

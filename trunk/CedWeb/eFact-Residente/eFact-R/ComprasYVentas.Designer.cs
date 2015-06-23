@@ -31,20 +31,20 @@
             this.components = new System.ComponentModel.Container();
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.PrincipalPanel = new System.Windows.Forms.Panel();
+            this.PeriodoLabel = new System.Windows.Forms.Label();
+            this.VentasRadioButton = new System.Windows.Forms.RadioButton();
+            this.ComprasRadioButton = new System.Windows.Forms.RadioButton();
+            this.FechaProcesoDsdBandejaEDTP = new System.Windows.Forms.DateTimePicker();
+            this.FechaProcesoHstBandejaEDTP = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.CUITLabel = new System.Windows.Forms.Label();
+            this.CuitVendedorComboBox = new System.Windows.Forms.ComboBox();
             this.PiePanel = new System.Windows.Forms.Panel();
             this.BotonesPanel = new System.Windows.Forms.Panel();
             this.GenerarButton = new System.Windows.Forms.Button();
             this.SalirButton = new System.Windows.Forms.Button();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.PeriodoLabel = new System.Windows.Forms.Label();
-            this.FechaProcesoRadioButton = new System.Windows.Forms.RadioButton();
-            this.FechaCreacionRadioButton = new System.Windows.Forms.RadioButton();
-            this.FechaProcesoDsdBandejaEDTP = new System.Windows.Forms.DateTimePicker();
-            this.FechaProcesoHstBandejaEDTP = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.CUITLabel = new System.Windows.Forms.Label();
-            this.CuitVendedorComboBox = new System.Windows.Forms.ComboBox();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
             this.SplitContainer.SuspendLayout();
@@ -76,8 +76,8 @@
             // PrincipalPanel
             // 
             this.PrincipalPanel.Controls.Add(this.PeriodoLabel);
-            this.PrincipalPanel.Controls.Add(this.FechaProcesoRadioButton);
-            this.PrincipalPanel.Controls.Add(this.FechaCreacionRadioButton);
+            this.PrincipalPanel.Controls.Add(this.VentasRadioButton);
+            this.PrincipalPanel.Controls.Add(this.ComprasRadioButton);
             this.PrincipalPanel.Controls.Add(this.FechaProcesoDsdBandejaEDTP);
             this.PrincipalPanel.Controls.Add(this.FechaProcesoHstBandejaEDTP);
             this.PrincipalPanel.Controls.Add(this.label3);
@@ -89,48 +89,6 @@
             this.PrincipalPanel.Size = new System.Drawing.Size(344, 116);
             this.PrincipalPanel.TabIndex = 4;
             // 
-            // PiePanel
-            // 
-            this.PiePanel.Controls.Add(this.BotonesPanel);
-            this.PiePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PiePanel.Location = new System.Drawing.Point(0, 0);
-            this.PiePanel.Name = "PiePanel";
-            this.PiePanel.Size = new System.Drawing.Size(344, 30);
-            this.PiePanel.TabIndex = 5;
-            // 
-            // BotonesPanel
-            // 
-            this.BotonesPanel.Controls.Add(this.GenerarButton);
-            this.BotonesPanel.Controls.Add(this.SalirButton);
-            this.BotonesPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BotonesPanel.Location = new System.Drawing.Point(0, 0);
-            this.BotonesPanel.Name = "BotonesPanel";
-            this.BotonesPanel.Padding = new System.Windows.Forms.Padding(3);
-            this.BotonesPanel.Size = new System.Drawing.Size(344, 27);
-            this.BotonesPanel.TabIndex = 13;
-            // 
-            // GenerarButton
-            // 
-            this.GenerarButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.GenerarButton.Location = new System.Drawing.Point(3, 3);
-            this.GenerarButton.Name = "GenerarButton";
-            this.GenerarButton.Size = new System.Drawing.Size(99, 21);
-            this.GenerarButton.TabIndex = 23;
-            this.GenerarButton.Text = "Generar";
-            this.GenerarButton.UseVisualStyleBackColor = true;
-            this.GenerarButton.Click += new System.EventHandler(this.GenerarButton_Click);
-            // 
-            // SalirButton
-            // 
-            this.SalirButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.SalirButton.Location = new System.Drawing.Point(281, 3);
-            this.SalirButton.Name = "SalirButton";
-            this.SalirButton.Size = new System.Drawing.Size(60, 21);
-            this.SalirButton.TabIndex = 9;
-            this.SalirButton.Text = "Salir";
-            this.SalirButton.UseVisualStyleBackColor = true;
-            this.SalirButton.Click += new System.EventHandler(this.SalirButton_Click);
-            // 
             // PeriodoLabel
             // 
             this.PeriodoLabel.AutoSize = true;
@@ -140,27 +98,27 @@
             this.PeriodoLabel.TabIndex = 77;
             this.PeriodoLabel.Text = "Período:";
             // 
-            // FechaProcesoRadioButton
+            // VentasRadioButton
             // 
-            this.FechaProcesoRadioButton.AutoSize = true;
-            this.FechaProcesoRadioButton.Checked = true;
-            this.FechaProcesoRadioButton.Location = new System.Drawing.Point(82, 76);
-            this.FechaProcesoRadioButton.Name = "FechaProcesoRadioButton";
-            this.FechaProcesoRadioButton.Size = new System.Drawing.Size(58, 17);
-            this.FechaProcesoRadioButton.TabIndex = 76;
-            this.FechaProcesoRadioButton.TabStop = true;
-            this.FechaProcesoRadioButton.Text = "Ventas";
-            this.FechaProcesoRadioButton.UseVisualStyleBackColor = true;
+            this.VentasRadioButton.AutoSize = true;
+            this.VentasRadioButton.Checked = true;
+            this.VentasRadioButton.Location = new System.Drawing.Point(82, 76);
+            this.VentasRadioButton.Name = "VentasRadioButton";
+            this.VentasRadioButton.Size = new System.Drawing.Size(58, 17);
+            this.VentasRadioButton.TabIndex = 76;
+            this.VentasRadioButton.TabStop = true;
+            this.VentasRadioButton.Text = "Ventas";
+            this.VentasRadioButton.UseVisualStyleBackColor = true;
             // 
-            // FechaCreacionRadioButton
+            // ComprasRadioButton
             // 
-            this.FechaCreacionRadioButton.AutoSize = true;
-            this.FechaCreacionRadioButton.Location = new System.Drawing.Point(157, 76);
-            this.FechaCreacionRadioButton.Name = "FechaCreacionRadioButton";
-            this.FechaCreacionRadioButton.Size = new System.Drawing.Size(66, 17);
-            this.FechaCreacionRadioButton.TabIndex = 75;
-            this.FechaCreacionRadioButton.Text = "Compras";
-            this.FechaCreacionRadioButton.UseVisualStyleBackColor = true;
+            this.ComprasRadioButton.AutoSize = true;
+            this.ComprasRadioButton.Location = new System.Drawing.Point(157, 76);
+            this.ComprasRadioButton.Name = "ComprasRadioButton";
+            this.ComprasRadioButton.Size = new System.Drawing.Size(66, 17);
+            this.ComprasRadioButton.TabIndex = 75;
+            this.ComprasRadioButton.Text = "Compras";
+            this.ComprasRadioButton.UseVisualStyleBackColor = true;
             // 
             // FechaProcesoDsdBandejaEDTP
             // 
@@ -204,6 +162,49 @@
             this.CuitVendedorComboBox.Name = "CuitVendedorComboBox";
             this.CuitVendedorComboBox.Size = new System.Drawing.Size(214, 21);
             this.CuitVendedorComboBox.TabIndex = 70;
+            this.CuitVendedorComboBox.SelectedIndexChanged += new System.EventHandler(this.CuitVendedorComboBox_SelectedIndexChanged);
+            // 
+            // PiePanel
+            // 
+            this.PiePanel.Controls.Add(this.BotonesPanel);
+            this.PiePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PiePanel.Location = new System.Drawing.Point(0, 0);
+            this.PiePanel.Name = "PiePanel";
+            this.PiePanel.Size = new System.Drawing.Size(344, 30);
+            this.PiePanel.TabIndex = 5;
+            // 
+            // BotonesPanel
+            // 
+            this.BotonesPanel.Controls.Add(this.GenerarButton);
+            this.BotonesPanel.Controls.Add(this.SalirButton);
+            this.BotonesPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BotonesPanel.Location = new System.Drawing.Point(0, 0);
+            this.BotonesPanel.Name = "BotonesPanel";
+            this.BotonesPanel.Padding = new System.Windows.Forms.Padding(3);
+            this.BotonesPanel.Size = new System.Drawing.Size(344, 27);
+            this.BotonesPanel.TabIndex = 13;
+            // 
+            // GenerarButton
+            // 
+            this.GenerarButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.GenerarButton.Location = new System.Drawing.Point(3, 3);
+            this.GenerarButton.Name = "GenerarButton";
+            this.GenerarButton.Size = new System.Drawing.Size(99, 21);
+            this.GenerarButton.TabIndex = 23;
+            this.GenerarButton.Text = "Generar";
+            this.GenerarButton.UseVisualStyleBackColor = true;
+            this.GenerarButton.Click += new System.EventHandler(this.GenerarButton_Click);
+            // 
+            // SalirButton
+            // 
+            this.SalirButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.SalirButton.Location = new System.Drawing.Point(281, 3);
+            this.SalirButton.Name = "SalirButton";
+            this.SalirButton.Size = new System.Drawing.Size(60, 21);
+            this.SalirButton.TabIndex = 9;
+            this.SalirButton.Text = "Salir";
+            this.SalirButton.UseVisualStyleBackColor = true;
+            this.SalirButton.Click += new System.EventHandler(this.SalirButton_Click);
             // 
             // ComprasYVentas
             // 
@@ -236,8 +237,8 @@
         private System.Windows.Forms.Button GenerarButton;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label PeriodoLabel;
-        private System.Windows.Forms.RadioButton FechaProcesoRadioButton;
-        private System.Windows.Forms.RadioButton FechaCreacionRadioButton;
+        private System.Windows.Forms.RadioButton VentasRadioButton;
+        private System.Windows.Forms.RadioButton ComprasRadioButton;
         private System.Windows.Forms.DateTimePicker FechaProcesoDsdBandejaEDTP;
         private System.Windows.Forms.DateTimePicker FechaProcesoHstBandejaEDTP;
         private System.Windows.Forms.Label label3;
