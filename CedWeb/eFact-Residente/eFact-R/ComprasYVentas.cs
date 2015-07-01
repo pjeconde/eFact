@@ -80,498 +80,503 @@ namespace eFact_R
                 comprobantesC = eFact_RN.Comprobante.ConsultarComprobantesCVigentesXFecha(FechaDsdDTP.Value.ToString("yyyyMMdd"), FechaHstDTP.Value.ToString("yyyyMMdd"), Aplicacion.Sesion);
             }
 
-            System.Xml.Serialization.XmlSerializer x;
-            byte[] bytes;
-            System.IO.MemoryStream ms;
-            string script;
-            FeaEntidades.InterFacturas.lote_comprobantes lote;
-            bool HayVentas = false;
-            bool HayVentasAlic = false;
-            bool HayCompras = false;
-            bool HayComprasAlic = false;
-
-            //Crear nombre de archivo default sin extensión
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append(CuitVendedorComboBox.SelectedItem.ToString());
-            sb.Append("-");
-            sb.Append(DateTime.Now.ToString("yyyyMMdd"));
-
-            //Crear nombre de archivo ZIP
-            System.Text.StringBuilder sbZIP = new System.Text.StringBuilder();
-            sbZIP.Append(sb.ToString() + ".zip");
-
-            //Crear archivo VENTAS CABECERA
-            System.Text.StringBuilder sbVENTASCab = new System.Text.StringBuilder();
-            sbVENTASCab.Append("REGINFO_CV_VENTAS_CBTE.TXT");    //sb.ToString() + "-CABECERA_EMISOR.txt");
-            System.IO.MemoryStream m = new System.IO.MemoryStream();
-            System.IO.FileStream fs = new System.IO.FileStream(Path.GetTempPath() + sbVENTASCab.ToString(), System.IO.FileMode.Create);
-            m.WriteTo(fs);
-            fs.Close();
-
-            //Crear archivo VENTAS ALICUOTAS
-            System.Text.StringBuilder sbVENTASAlic = new System.Text.StringBuilder();
-            sbVENTASAlic.Append("REGINFO_CV_VENTAS_ALICUOTAS.TXT");     //sb.ToString() + "-DETALLE.txt");
-            m = new System.IO.MemoryStream();
-            fs = new System.IO.FileStream(Path.GetTempPath() + sbVENTASAlic.ToString(), System.IO.FileMode.Create);
-            m.WriteTo(fs);
-            fs.Close();
-
-            //Crear archivo COMPRAS CABECERA
-            System.Text.StringBuilder sbCOMPRASCab = new System.Text.StringBuilder();
-            sbCOMPRASCab.Append("REGINFO_CV_COMPRAS_CBTE.TXT");    //sb.ToString() + "-CABECERA_EMISOR.txt");
-            m = new System.IO.MemoryStream();
-            fs = new System.IO.FileStream(Path.GetTempPath() + sbCOMPRASCab.ToString(), System.IO.FileMode.Create);
-            m.WriteTo(fs);
-            fs.Close();
-
-            //Crear archivo COMPRAS ALICUOTAS
-            System.Text.StringBuilder sbCOMPRASAlic = new System.Text.StringBuilder();
-            sbCOMPRASAlic.Append("REGINFO_CV_COMPRAS_ALICUOTAS.TXT");     //sb.ToString() + "-DETALLE.txt");
-            m = new System.IO.MemoryStream();
-            fs = new System.IO.FileStream(Path.GetTempPath() + sbCOMPRASAlic.ToString(), System.IO.FileMode.Create);
-            m.WriteTo(fs);
-            fs.Close();
-
-            if (VentasRadioButton.Checked)
+            if (comprobantes.Count != 0)
             {
-                if (comprobantes.Count > 0)
+                System.Xml.Serialization.XmlSerializer x;
+                byte[] bytes;
+                System.IO.MemoryStream ms;
+                string script;
+                FeaEntidades.InterFacturas.lote_comprobantes lote;
+                bool HayVentas = false;
+                bool HayVentasAlic = false;
+                bool HayCompras = false;
+                bool HayComprasAlic = false;
+
+                //Crear nombre de archivo default sin extensión
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(CuitVendedorComboBox.SelectedItem.ToString());
+                sb.Append("-");
+                sb.Append(DateTime.Now.ToString("yyyyMMdd"));
+
+                //Crear nombre de archivo ZIP
+                System.Text.StringBuilder sbZIP = new System.Text.StringBuilder();
+                sbZIP.Append(sb.ToString() + ".zip");
+
+                //Crear archivo VENTAS CABECERA
+                System.Text.StringBuilder sbVENTASCab = new System.Text.StringBuilder();
+                sbVENTASCab.Append("REGINFO_CV_VENTAS_CBTE.TXT");    //sb.ToString() + "-CABECERA_EMISOR.txt");
+                System.IO.MemoryStream m = new System.IO.MemoryStream();
+                System.IO.FileStream fs = new System.IO.FileStream(Path.GetTempPath() + sbVENTASCab.ToString(), System.IO.FileMode.Create);
+                m.WriteTo(fs);
+                fs.Close();
+
+                //Crear archivo VENTAS ALICUOTAS
+                System.Text.StringBuilder sbVENTASAlic = new System.Text.StringBuilder();
+                sbVENTASAlic.Append("REGINFO_CV_VENTAS_ALICUOTAS.TXT");     //sb.ToString() + "-DETALLE.txt");
+                m = new System.IO.MemoryStream();
+                fs = new System.IO.FileStream(Path.GetTempPath() + sbVENTASAlic.ToString(), System.IO.FileMode.Create);
+                m.WriteTo(fs);
+                fs.Close();
+
+                //Crear archivo COMPRAS CABECERA
+                System.Text.StringBuilder sbCOMPRASCab = new System.Text.StringBuilder();
+                sbCOMPRASCab.Append("REGINFO_CV_COMPRAS_CBTE.TXT");    //sb.ToString() + "-CABECERA_EMISOR.txt");
+                m = new System.IO.MemoryStream();
+                fs = new System.IO.FileStream(Path.GetTempPath() + sbCOMPRASCab.ToString(), System.IO.FileMode.Create);
+                m.WriteTo(fs);
+                fs.Close();
+
+                //Crear archivo COMPRAS ALICUOTAS
+                System.Text.StringBuilder sbCOMPRASAlic = new System.Text.StringBuilder();
+                sbCOMPRASAlic.Append("REGINFO_CV_COMPRAS_ALICUOTAS.TXT");     //sb.ToString() + "-DETALLE.txt");
+                m = new System.IO.MemoryStream();
+                fs = new System.IO.FileStream(Path.GetTempPath() + sbCOMPRASAlic.ToString(), System.IO.FileMode.Create);
+                m.WriteTo(fs);
+                fs.Close();
+
+                if (VentasRadioButton.Checked)
                 {
-                    foreach (eFact_Entidades.Comprobante comprobante in comprobantes)
+                    if (comprobantes.Count > 0)
                     {
-                        long UltLoteProcesado = 0;
-                        HayVentas = true;
-                        lote = new FeaEntidades.InterFacturas.lote_comprobantes();
-                        x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
-                        if (UltLoteProcesado != comprobante.IdLote)
+                        foreach (eFact_Entidades.Comprobante comprobante in comprobantes)
                         {
-                            UltLoteProcesado = comprobante.IdLote;
-                            try
+                            long UltLoteProcesado = 0;
+                            HayVentas = true;
+                            lote = new FeaEntidades.InterFacturas.lote_comprobantes();
+                            x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
+                            if (UltLoteProcesado != comprobante.IdLote)
                             {
-                                comprobante.LoteXml = comprobante.LoteXml.Replace("iso-8859-1", "utf-16");
-                                bytes = new byte[comprobante.LoteXml.Length * sizeof(char)];
-                                System.Buffer.BlockCopy(comprobante.LoteXml.ToCharArray(), 0, bytes, 0, bytes.Length);
-                                ms = new System.IO.MemoryStream(bytes);
-                                ms.Seek(0, System.IO.SeekOrigin.Begin);
-                                lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
-
-                                //Procesar todos los comprobantes del lote.
-                                for (int cl = 0; cl < lote.comprobante.Length; cl++)
+                                UltLoteProcesado = comprobante.IdLote;
+                                try
                                 {
-                                    #region "Armar Interfaz Ventas"
-                                    if (Convert.ToInt32(lote.comprobante[cl].cabecera.informacion_comprobante.fecha_emision) >= Convert.ToInt32(FechaDsdDTP.Value.ToString("yyyyMMdd")) && Convert.ToInt32(lote.comprobante[cl].cabecera.informacion_comprobante.fecha_emision) <= Convert.ToInt32(FechaHstDTP.Value.ToString("yyyyMMdd")))
-                                    {
-                                        //Guardar info en archivo VENTAS CABECERA
-                                        System.Text.StringBuilder sbDataVENTASCab = new System.Text.StringBuilder();
-                                        //string Campo2 = String.Format("{0,11}", sesion.Cuit.Nro);
-                                        string Campo1 = lote.comprobante[cl].cabecera.informacion_comprobante.fecha_emision;
-                                        string Campo2 = lote.comprobante[cl].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("000");
-                                        string Campo3 = lote.comprobante[cl].cabecera.informacion_comprobante.punto_de_venta.ToString("00000");
-                                        string Campo4 = lote.comprobante[cl].cabecera.informacion_comprobante.numero_comprobante.ToString(new string(Convert.ToChar("0"), 20));
-                                        string Campo5 = lote.comprobante[cl].cabecera.informacion_comprobante.numero_comprobante.ToString(new string(Convert.ToChar("0"), 20));
-                                        string Campo6 = lote.comprobante[cl].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString("00");
-                                        string Campo7 = lote.comprobante[cl].cabecera.informacion_comprador.nro_doc_identificatorio.ToString(new string(Convert.ToChar("0"), 20));
-                                        string Campo8 = Truncate(String.Format("{0,-30}", lote.comprobante[cl].cabecera.informacion_comprador.denominacion), 30);
+                                    comprobante.LoteXml = comprobante.LoteXml.Replace("iso-8859-1", "utf-16");
+                                    bytes = new byte[comprobante.LoteXml.Length * sizeof(char)];
+                                    System.Buffer.BlockCopy(comprobante.LoteXml.ToCharArray(), 0, bytes, 0, bytes.Length);
+                                    ms = new System.IO.MemoryStream(bytes);
+                                    ms.Seek(0, System.IO.SeekOrigin.Begin);
+                                    lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
 
-                                        string Campo9 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_factura.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_factura.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        string Campo10 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_concepto_no_gravado.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_concepto_no_gravado.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        //string CampoXX = String.Format("{0,16}", lote.comprobante[cl].resumen.impuesto_liq_rni.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuesto_liq_rni.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        string Campo11 = new string(Convert.ToChar("0"), 15);   //Percepción a no categorizados
-                                        string Campo12 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_operaciones_exentas.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_operaciones_exentas.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        //Importe de percepciones o pagos a cuenta de impuestos nacionales
-                                        string Campo13 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_nacionales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_nacionales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        string Campo14 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_ingresos_brutos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_ingresos_brutos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        string Campo15 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_municipales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_municipales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        string Campo16 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_internos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_internos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        string Campo17 = String.Format("{0,-3}", lote.comprobante[cl].resumen.codigo_moneda);
-                                        string Campo18 = String.Format("{0,11}", lote.comprobante[cl].resumen.tipo_de_cambio.ToString(new string(Convert.ToChar("0"), 4) + ".000000")).Substring(0, 4) + String.Format("{0,11}", lote.comprobante[cl].resumen.tipo_de_cambio.ToString(new string(Convert.ToChar("0"), 4) + ".000000")).Substring(5, 6);
-                                        int CantAlicuotas = 0;
-                                        if (lote.comprobante[cl].resumen.cant_alicuotas_iva == 0)
+                                    //Procesar todos los comprobantes del lote.
+                                    for (int cl = 0; cl < lote.comprobante.Length; cl++)
+                                    {
+                                        #region "Armar Interfaz Ventas"
+                                        if (Convert.ToInt32(lote.comprobante[cl].cabecera.informacion_comprobante.fecha_emision) >= Convert.ToInt32(FechaDsdDTP.Value.ToString("yyyyMMdd")) && Convert.ToInt32(lote.comprobante[cl].cabecera.informacion_comprobante.fecha_emision) <= Convert.ToInt32(FechaHstDTP.Value.ToString("yyyyMMdd")))
                                         {
-                                            if (lote.comprobante[cl].resumen.impuestos != null)
+                                            //Guardar info en archivo VENTAS CABECERA
+                                            System.Text.StringBuilder sbDataVENTASCab = new System.Text.StringBuilder();
+                                            //string Campo2 = String.Format("{0,11}", sesion.Cuit.Nro);
+                                            string Campo1 = lote.comprobante[cl].cabecera.informacion_comprobante.fecha_emision;
+                                            string Campo2 = lote.comprobante[cl].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("000");
+                                            string Campo3 = lote.comprobante[cl].cabecera.informacion_comprobante.punto_de_venta.ToString("00000");
+                                            string Campo4 = lote.comprobante[cl].cabecera.informacion_comprobante.numero_comprobante.ToString(new string(Convert.ToChar("0"), 20));
+                                            string Campo5 = lote.comprobante[cl].cabecera.informacion_comprobante.numero_comprobante.ToString(new string(Convert.ToChar("0"), 20));
+                                            string Campo6 = lote.comprobante[cl].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString("00");
+                                            string Campo7 = lote.comprobante[cl].cabecera.informacion_comprador.nro_doc_identificatorio.ToString(new string(Convert.ToChar("0"), 20));
+                                            string Campo8 = Truncate(String.Format("{0,-30}", lote.comprobante[cl].cabecera.informacion_comprador.denominacion), 30);
+
+                                            string Campo9 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_factura.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_factura.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            string Campo10 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_concepto_no_gravado.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_concepto_no_gravado.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            //string CampoXX = String.Format("{0,16}", lote.comprobante[cl].resumen.impuesto_liq_rni.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuesto_liq_rni.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            string Campo11 = new string(Convert.ToChar("0"), 15);   //Percepción a no categorizados
+                                            string Campo12 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_operaciones_exentas.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_operaciones_exentas.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            //Importe de percepciones o pagos a cuenta de impuestos nacionales
+                                            string Campo13 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_nacionales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_nacionales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            string Campo14 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_ingresos_brutos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_ingresos_brutos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            string Campo15 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_municipales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_municipales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            string Campo16 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_internos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_internos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            string Campo17 = String.Format("{0,-3}", lote.comprobante[cl].resumen.codigo_moneda);
+                                            string Campo18 = String.Format("{0,11}", lote.comprobante[cl].resumen.tipo_de_cambio.ToString(new string(Convert.ToChar("0"), 4) + ".000000")).Substring(0, 4) + String.Format("{0,11}", lote.comprobante[cl].resumen.tipo_de_cambio.ToString(new string(Convert.ToChar("0"), 4) + ".000000")).Substring(5, 6);
+                                            int CantAlicuotas = 0;
+                                            if (lote.comprobante[cl].resumen.cant_alicuotas_iva == 0)
                                             {
+                                                if (lote.comprobante[cl].resumen.impuestos != null)
+                                                {
+                                                    for (int z = 0; z < lote.comprobante[cl].resumen.impuestos.Length; z++)
+                                                    {
+                                                        if (lote.comprobante[cl].resumen.impuestos[z].codigo_impuesto == 1)
+                                                        {
+                                                            CantAlicuotas += 1;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                CantAlicuotas = lote.comprobante[cl].resumen.cant_alicuotas_iva;
+                                            }
+                                            string Campo19 = String.Format("{0,1}", CantAlicuotas);
+                                            string Campo20 = String.Format("{0,1}", lote.comprobante[cl].cabecera.informacion_comprobante.codigo_operacion);
+                                            string Campo21 = new string(Convert.ToChar("0"), 15);  //Otros Tributos
+                                            string Campo22 = String.Format("{0,-8}", lote.comprobante[cl].cabecera.informacion_comprobante.fecha_vencimiento);
+
+                                            sbDataVENTASCab.AppendLine(Campo1 + Campo2 + Campo3 + Campo4 + Campo5 + Campo6 + Campo7 + Campo8 + Campo9 + Campo10 + Campo11 + Campo12 + Campo13 + Campo14 + Campo15 + Campo16 + Campo17 + Campo18 + Campo19 + Campo20 + Campo21 + Campo22);
+                                            using (StreamWriter outfile = new StreamWriter(Path.GetTempPath() + sbVENTASCab.ToString()))
+                                            {
+                                                outfile.Write(sbDataVENTASCab.ToString());
+                                            }
+
+                                            //Guardar info en archivo VENTAS ALICUOTAS
+                                            System.Text.StringBuilder sbDataVENTASAlic = new System.Text.StringBuilder();
+                                            if (CantAlicuotas != 0)
+                                            {
+                                                HayVentasAlic = true;
                                                 for (int z = 0; z < lote.comprobante[cl].resumen.impuestos.Length; z++)
                                                 {
                                                     if (lote.comprobante[cl].resumen.impuestos[z].codigo_impuesto == 1)
                                                     {
-                                                        CantAlicuotas += 1;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        else
-                                        {
-                                            CantAlicuotas = lote.comprobante[cl].resumen.cant_alicuotas_iva;
-                                        }
-                                        string Campo19 = String.Format("{0,1}", CantAlicuotas);
-                                        string Campo20 = String.Format("{0,1}", lote.comprobante[cl].cabecera.informacion_comprobante.codigo_operacion);
-                                        string Campo21 = new string(Convert.ToChar("0"), 15);  //Otros Tributos
-                                        string Campo22 = String.Format("{0,-8}", lote.comprobante[cl].cabecera.informacion_comprobante.fecha_vencimiento);
+                                                        Campo1 = lote.comprobante[cl].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("000");
+                                                        Campo2 = lote.comprobante[cl].cabecera.informacion_comprobante.punto_de_venta.ToString("00000");
+                                                        Campo3 = lote.comprobante[cl].cabecera.informacion_comprobante.numero_comprobante.ToString(new string(Convert.ToChar("0"), 20));
 
-                                        sbDataVENTASCab.AppendLine(Campo1 + Campo2 + Campo3 + Campo4 + Campo5 + Campo6 + Campo7 + Campo8 + Campo9 + Campo10 + Campo11 + Campo12 + Campo13 + Campo14 + Campo15 + Campo16 + Campo17 + Campo18 + Campo19 + Campo20 + Campo21 + Campo22);
-                                        using (StreamWriter outfile = new StreamWriter(Path.GetTempPath() + sbVENTASCab.ToString()))
-                                        {
-                                            outfile.Write(sbDataVENTASCab.ToString());
-                                        }
-
-                                        //Guardar info en archivo VENTAS ALICUOTAS
-                                        System.Text.StringBuilder sbDataVENTASAlic = new System.Text.StringBuilder();
-                                        if (CantAlicuotas != 0)
-                                        {
-                                            HayVentasAlic = true;
-                                            for (int z = 0; z < lote.comprobante[cl].resumen.impuestos.Length; z++)
-                                            {
-                                                if (lote.comprobante[cl].resumen.impuestos[z].codigo_impuesto == 1)
-                                                {
-                                                    Campo1 = lote.comprobante[cl].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("000");
-                                                    Campo2 = lote.comprobante[cl].cabecera.informacion_comprobante.punto_de_venta.ToString("00000");
-                                                    Campo3 = lote.comprobante[cl].cabecera.informacion_comprobante.numero_comprobante.ToString(new string(Convert.ToChar("0"), 20));
-
-                                                    double baseImponible = lote.comprobante[cl].resumen.impuestos[z].base_imponible;
-                                                    if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 0)
-                                                    {
-                                                        if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                        double baseImponible = lote.comprobante[cl].resumen.impuestos[z].base_imponible;
+                                                        if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 0)
                                                         {
-                                                            for (int k = 0; k < lote.comprobante[cl].detalle.linea.Length; k++)
+                                                            if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
                                                             {
-                                                                if (lote.comprobante[cl].detalle.linea[k] == null) { break; }
-                                                                if (lote.comprobante[cl].detalle.linea[k].indicacion_exento_gravado != null && lote.comprobante[cl].detalle.linea[k].indicacion_exento_gravado.Trim().ToUpper() == "G" && lote.comprobante[cl].detalle.linea[k].alicuota_iva == 0)
+                                                                for (int k = 0; k < lote.comprobante[cl].detalle.linea.Length; k++)
                                                                 {
-                                                                    baseImponible += Math.Round(lote.comprobante[cl].detalle.linea[k].importe_total_articulo, 2);
+                                                                    if (lote.comprobante[cl].detalle.linea[k] == null) { break; }
+                                                                    if (lote.comprobante[cl].detalle.linea[k].indicacion_exento_gravado != null && lote.comprobante[cl].detalle.linea[k].indicacion_exento_gravado.Trim().ToUpper() == "G" && lote.comprobante[cl].detalle.linea[k].alicuota_iva == 0)
+                                                                    {
+                                                                        baseImponible += Math.Round(lote.comprobante[cl].detalle.linea[k].importe_total_articulo, 2);
+                                                                    }
                                                                 }
                                                             }
+                                                            Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                                            Campo5 = "0003";
+                                                            Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                                                         }
-                                                        Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                        Campo5 = "0003";
-                                                        Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                    }
-                                                    if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 10.5)
-                                                    {
-                                                        if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                        if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 10.5)
                                                         {
-                                                            baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                            {
+                                                                baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            }
+                                                            Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                                            Campo5 = "0004";
+                                                            Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                                                         }
-                                                        Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                        Campo5 = "0004";
-                                                        Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                    }
-                                                    else if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 21)
-                                                    {
-                                                        if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                        else if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 21)
                                                         {
-                                                            baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                            {
+                                                                baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            }
+                                                            Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                                            Campo5 = "0005";
+                                                            Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                                                         }
-                                                        Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                        Campo5 = "0005";
-                                                        Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                    }
-                                                    else if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 27)
-                                                    {
-                                                        if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                        else if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 27)
                                                         {
-                                                            baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                            {
+                                                                baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            }
+                                                            Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                                            Campo5 = "0006";
+                                                            Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                                                         }
-                                                        Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                        Campo5 = "0006";
-                                                        Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                    }
-                                                    else if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 5)
-                                                    {
-                                                        if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                        else if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 5)
                                                         {
-                                                            baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                            {
+                                                                baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            }
+                                                            Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                                            Campo5 = "0008";
+                                                            Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                                                         }
-                                                        Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                        Campo5 = "0008";
-                                                        Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                    }
-                                                    else if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 2.5)
-                                                    {
-                                                        if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                        else if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 2.5)
                                                         {
-                                                            baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                            {
+                                                                baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            }
+                                                            Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                                            Campo5 = "0009";
+                                                            Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                                                         }
-                                                        Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                        Campo5 = "0009";
-                                                        Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                                                     }
                                                 }
-                                            }
 
-                                            sbDataVENTASAlic.AppendLine(Campo1 + Campo2 + Campo3 + Campo4 + Campo5 + Campo6);
-                                            using (StreamWriter outfile = new StreamWriter(Path.GetTempPath() + sbVENTASAlic.ToString()))
-                                            {
-                                                outfile.Write(sbDataVENTASAlic.ToString());
+                                                sbDataVENTASAlic.AppendLine(Campo1 + Campo2 + Campo3 + Campo4 + Campo5 + Campo6);
+                                                using (StreamWriter outfile = new StreamWriter(Path.GetTempPath() + sbVENTASAlic.ToString()))
+                                                {
+                                                    outfile.Write(sbDataVENTASAlic.ToString());
+                                                }
                                             }
                                         }
+                                        #endregion
                                     }
-                                    #endregion
                                 }
-                            }
-                            catch (Exception ex)
-                            {
-                                script = "Problemas para generar la interfaz.\\n" + ex.Message + "\\n" + ex.StackTrace;
-                                MessageBox.Show(script, "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                                catch (Exception ex)
+                                {
+                                    script = "Problemas para generar la interfaz.\\n" + ex.Message + "\\n" + ex.StackTrace;
+                                    MessageBox.Show(script, "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                                }
                             }
                         }
                     }
-                }
-                else
-                {
-                    MessageBox.Show("No hay información de Ventas para procesar en el período seleccionado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                }
-            }
-            if (ComprasRadioButton.Checked)
-            {
-                if (comprobantesC.Count > 0)
-                {
-                    foreach (eFact_Entidades.ComprobanteC comprobante in comprobantesC)
+                    else
                     {
-                        long UltLoteProcesado = 0;
-                        HayCompras = true;
-                        lote = new FeaEntidades.InterFacturas.lote_comprobantes();
-                        x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
-                        if (UltLoteProcesado != comprobante.IdLote)
+                        MessageBox.Show("No hay información de Ventas para procesar en el período seleccionado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                    }
+                }
+                if (ComprasRadioButton.Checked)
+                {
+                    if (comprobantesC.Count > 0)
+                    {
+                        foreach (eFact_Entidades.ComprobanteC comprobante in comprobantesC)
                         {
-                            UltLoteProcesado = comprobante.IdLote;
-                            try
+                            long UltLoteProcesado = 0;
+                            HayCompras = true;
+                            lote = new FeaEntidades.InterFacturas.lote_comprobantes();
+                            x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
+                            if (UltLoteProcesado != comprobante.IdLote)
                             {
-                                comprobante.LoteXml = comprobante.LoteXml.Replace("iso-8859-1", "utf-16");
-                                bytes = new byte[comprobante.LoteXml.Length * sizeof(char)];
-                                System.Buffer.BlockCopy(comprobante.LoteXml.ToCharArray(), 0, bytes, 0, bytes.Length);
-                                ms = new System.IO.MemoryStream(bytes);
-                                ms.Seek(0, System.IO.SeekOrigin.Begin);
-                                lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
-                                
-                                //Procesar todos los comprobantes del lote.
-                                for (int cl = 0; cl < lote.comprobante.Length; cl++)
+                                UltLoteProcesado = comprobante.IdLote;
+                                try
                                 {
-                                    #region "Armar Interfaz Compras"
-                                    if (Convert.ToInt32(lote.comprobante[cl].cabecera.informacion_comprobante.fecha_emision) >= Convert.ToInt32(FechaDsdDTP.Value.ToString("yyyyMMdd")) && Convert.ToInt32(lote.comprobante[cl].cabecera.informacion_comprobante.fecha_emision) <= Convert.ToInt32(FechaHstDTP.Value.ToString("yyyyMMdd")))
-                                    {
-                                        //Guardar info en archivo COMPRAS CABECERA
-                                        System.Text.StringBuilder sbDataCOMPRASCab = new System.Text.StringBuilder();
-                                        //string Campo2 = String.Format("{0,11}", sesion.Cuit.Nro);
-                                        string Campo1 = lote.comprobante[cl].cabecera.informacion_comprobante.fecha_emision;
-                                        string Campo2 = lote.comprobante[cl].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("000");
-                                        string Campo3 = lote.comprobante[cl].cabecera.informacion_comprobante.punto_de_venta.ToString("00000");
-                                        string Campo4 = lote.comprobante[cl].cabecera.informacion_comprobante.numero_comprobante.ToString(new string(Convert.ToChar("0"), 20));
-                                        string Campo5 = new string(Convert.ToChar("0"), 20);  //Nro. de despacho de importación
-                                        string Campo6 = "80";
-                                        string Campo7 = lote.comprobante[cl].cabecera.informacion_vendedor.cuit.ToString(new string(Convert.ToChar("0"), 20));
-                                        string Campo8 = Truncate(String.Format("{0,-30}", lote.comprobante[cl].cabecera.informacion_comprador.denominacion), 30);
+                                    comprobante.LoteXml = comprobante.LoteXml.Replace("iso-8859-1", "utf-16");
+                                    bytes = new byte[comprobante.LoteXml.Length * sizeof(char)];
+                                    System.Buffer.BlockCopy(comprobante.LoteXml.ToCharArray(), 0, bytes, 0, bytes.Length);
+                                    ms = new System.IO.MemoryStream(bytes);
+                                    ms.Seek(0, System.IO.SeekOrigin.Begin);
+                                    lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
 
-                                        string Campo9 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_factura.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_factura.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        string Campo10 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_concepto_no_gravado.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_concepto_no_gravado.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        //string CampoXX = String.Format("{0,16}", lote.comprobante[cl].resumen.impuesto_liq_rni.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuesto_liq_rni.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        string Campo11 = new string(Convert.ToChar("0"), 15);   //Percepción a no categorizados
-                                        string Campo12 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_operaciones_exentas.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_operaciones_exentas.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        //Importe de percepciones o pagos a cuenta de impuestos nacionales
-                                        string Campo13 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_nacionales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_nacionales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        string Campo14 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_ingresos_brutos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_ingresos_brutos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        string Campo15 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_municipales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_municipales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        string Campo16 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_internos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_internos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        string Campo17 = String.Format("{0,-3}", lote.comprobante[cl].resumen.codigo_moneda);
-                                        string Campo18 = String.Format("{0,11}", lote.comprobante[cl].resumen.tipo_de_cambio.ToString(new string(Convert.ToChar("0"), 4) + ".000000")).Substring(0, 4) + String.Format("{0,11}", lote.comprobante[cl].resumen.tipo_de_cambio.ToString(new string(Convert.ToChar("0"), 4) + ".000000")).Substring(5, 6);
-                                        int CantAlicuotas = 0;
-                                        if (lote.comprobante[cl].resumen.cant_alicuotas_iva == 0)
+                                    //Procesar todos los comprobantes del lote.
+                                    for (int cl = 0; cl < lote.comprobante.Length; cl++)
+                                    {
+                                        #region "Armar Interfaz Compras"
+                                        if (Convert.ToInt32(lote.comprobante[cl].cabecera.informacion_comprobante.fecha_emision) >= Convert.ToInt32(FechaDsdDTP.Value.ToString("yyyyMMdd")) && Convert.ToInt32(lote.comprobante[cl].cabecera.informacion_comprobante.fecha_emision) <= Convert.ToInt32(FechaHstDTP.Value.ToString("yyyyMMdd")))
                                         {
-                                            if (lote.comprobante[cl].resumen.impuestos != null)
+                                            //Guardar info en archivo COMPRAS CABECERA
+                                            System.Text.StringBuilder sbDataCOMPRASCab = new System.Text.StringBuilder();
+                                            //string Campo2 = String.Format("{0,11}", sesion.Cuit.Nro);
+                                            string Campo1 = lote.comprobante[cl].cabecera.informacion_comprobante.fecha_emision;
+                                            string Campo2 = lote.comprobante[cl].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("000");
+                                            string Campo3 = lote.comprobante[cl].cabecera.informacion_comprobante.punto_de_venta.ToString("00000");
+                                            string Campo4 = lote.comprobante[cl].cabecera.informacion_comprobante.numero_comprobante.ToString(new string(Convert.ToChar("0"), 20));
+                                            string Campo5 = new string(Convert.ToChar("0"), 20);  //Nro. de despacho de importación
+                                            string Campo6 = "80";
+                                            string Campo7 = lote.comprobante[cl].cabecera.informacion_vendedor.cuit.ToString(new string(Convert.ToChar("0"), 20));
+                                            string Campo8 = Truncate(String.Format("{0,-30}", lote.comprobante[cl].cabecera.informacion_comprador.denominacion), 30);
+
+                                            string Campo9 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_factura.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_factura.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            string Campo10 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_concepto_no_gravado.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_concepto_no_gravado.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            //string CampoXX = String.Format("{0,16}", lote.comprobante[cl].resumen.impuesto_liq_rni.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuesto_liq_rni.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            string Campo11 = new string(Convert.ToChar("0"), 15);   //Percepción a no categorizados
+                                            string Campo12 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_operaciones_exentas.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_operaciones_exentas.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            //Importe de percepciones o pagos a cuenta de impuestos nacionales
+                                            string Campo13 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_nacionales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_nacionales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            string Campo14 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_ingresos_brutos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_ingresos_brutos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            string Campo15 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_municipales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_municipales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            string Campo16 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_internos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_impuestos_internos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            string Campo17 = String.Format("{0,-3}", lote.comprobante[cl].resumen.codigo_moneda);
+                                            string Campo18 = String.Format("{0,11}", lote.comprobante[cl].resumen.tipo_de_cambio.ToString(new string(Convert.ToChar("0"), 4) + ".000000")).Substring(0, 4) + String.Format("{0,11}", lote.comprobante[cl].resumen.tipo_de_cambio.ToString(new string(Convert.ToChar("0"), 4) + ".000000")).Substring(5, 6);
+                                            int CantAlicuotas = 0;
+                                            if (lote.comprobante[cl].resumen.cant_alicuotas_iva == 0)
                                             {
+                                                if (lote.comprobante[cl].resumen.impuestos != null)
+                                                {
+                                                    for (int z = 0; z < lote.comprobante[cl].resumen.impuestos.Length; z++)
+                                                    {
+                                                        if (lote.comprobante[cl].resumen.impuestos[z].codigo_impuesto == 1)
+                                                        {
+                                                            CantAlicuotas += 1;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                CantAlicuotas = lote.comprobante[cl].resumen.cant_alicuotas_iva;
+                                            }
+                                            string Campo19 = String.Format("{0,1}", CantAlicuotas);
+                                            string Campo20 = String.Format("{0,1}", lote.comprobante[cl].cabecera.informacion_comprobante.codigo_operacion);
+                                            string Campo21 = new string(Convert.ToChar("0"), 15);           //Crédito Fiscal Computable
+                                            string Campo22 = new string(Convert.ToChar("0"), 15);           //Otros Tributos
+                                            string Campo23 = new string(Convert.ToChar("0"), 11);           //CUIT emisor / corredor
+                                            string Campo24 = Truncate(String.Format("{0,-30}", ""), 30);    //Denominación del emisor / corredor
+                                            string Campo25 = new string(Convert.ToChar("0"), 15);           //IVA comisión
+
+                                            //string Campo25 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_neto_gravado.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_neto_gravado.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                            //string Campo26 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuesto_liq.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuesto_liq.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+
+                                            sbDataCOMPRASCab.AppendLine(Campo1 + Campo2 + Campo3 + Campo4 + Campo5 + Campo6 + Campo7 + Campo8 + Campo9 + Campo10 + Campo11 + Campo12 + Campo13 + Campo14 + Campo15 + Campo16 + Campo17 + Campo18 + Campo19 + Campo20 + Campo21 + Campo22 + Campo23 + Campo24 + Campo25);
+                                            using (StreamWriter outfile = new StreamWriter(Path.GetTempPath() + sbCOMPRASCab.ToString()))
+                                            {
+                                                outfile.Write(sbDataCOMPRASCab.ToString());
+                                            }
+
+                                            //Guardar info en archivo COMPRAS ALICUOTAS
+                                            System.Text.StringBuilder sbDataCOMPRASAlic = new System.Text.StringBuilder();
+                                            if (CantAlicuotas != 0)
+                                            {
+                                                HayComprasAlic = true;
                                                 for (int z = 0; z < lote.comprobante[cl].resumen.impuestos.Length; z++)
                                                 {
                                                     if (lote.comprobante[cl].resumen.impuestos[z].codigo_impuesto == 1)
                                                     {
-                                                        CantAlicuotas += 1;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        else
-                                        {
-                                            CantAlicuotas = lote.comprobante[cl].resumen.cant_alicuotas_iva;
-                                        }
-                                        string Campo19 = String.Format("{0,1}", CantAlicuotas);
-                                        string Campo20 = String.Format("{0,1}", lote.comprobante[cl].cabecera.informacion_comprobante.codigo_operacion);
-                                        string Campo21 = new string(Convert.ToChar("0"), 15);           //Crédito Fiscal Computable
-                                        string Campo22 = new string(Convert.ToChar("0"), 15);           //Otros Tributos
-                                        string Campo23 = new string(Convert.ToChar("0"), 11);           //CUIT emisor / corredor
-                                        string Campo24 = Truncate(String.Format("{0,-30}", ""), 30);    //Denominación del emisor / corredor
-                                        string Campo25 = new string(Convert.ToChar("0"), 15);           //IVA comisión
+                                                        Campo1 = lote.comprobante[cl].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("000");
+                                                        Campo2 = lote.comprobante[cl].cabecera.informacion_comprobante.punto_de_venta.ToString("00000");
+                                                        Campo3 = lote.comprobante[cl].cabecera.informacion_comprobante.numero_comprobante.ToString(new string(Convert.ToChar("0"), 20));
 
-                                        //string Campo25 = String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_neto_gravado.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.importe_total_neto_gravado.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                        //string Campo26 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuesto_liq.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuesto_liq.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-
-                                        sbDataCOMPRASCab.AppendLine(Campo1 + Campo2 + Campo3 + Campo4 + Campo5 + Campo6 + Campo7 + Campo8 + Campo9 + Campo10 + Campo11 + Campo12 + Campo13 + Campo14 + Campo15 + Campo16 + Campo17 + Campo18 + Campo19 + Campo20 + Campo21 + Campo22 + Campo23 + Campo24 + Campo25);
-                                        using (StreamWriter outfile = new StreamWriter(Path.GetTempPath() + sbCOMPRASCab.ToString()))
-                                        {
-                                            outfile.Write(sbDataCOMPRASCab.ToString());
-                                        }
-
-                                        //Guardar info en archivo COMPRAS ALICUOTAS
-                                        System.Text.StringBuilder sbDataCOMPRASAlic = new System.Text.StringBuilder();
-                                        if (CantAlicuotas != 0)
-                                        {
-                                            HayComprasAlic = true;
-                                            for (int z = 0; z < lote.comprobante[cl].resumen.impuestos.Length; z++)
-                                            {
-                                                if (lote.comprobante[cl].resumen.impuestos[z].codigo_impuesto == 1)
-                                                {
-                                                    Campo1 = lote.comprobante[cl].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("000");
-                                                    Campo2 = lote.comprobante[cl].cabecera.informacion_comprobante.punto_de_venta.ToString("00000");
-                                                    Campo3 = lote.comprobante[cl].cabecera.informacion_comprobante.numero_comprobante.ToString(new string(Convert.ToChar("0"), 20));
-
-                                                    double baseImponible = lote.comprobante[cl].resumen.impuestos[z].base_imponible;
-                                                    if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 0)
-                                                    {
-                                                        if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                        double baseImponible = lote.comprobante[cl].resumen.impuestos[z].base_imponible;
+                                                        if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 0)
                                                         {
-                                                            for (int k = 0; k < lote.comprobante[cl].detalle.linea.Length; k++)
+                                                            if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
                                                             {
-                                                                if (lote.comprobante[cl].detalle.linea[k] == null) { break; }
-                                                                if (lote.comprobante[cl].detalle.linea[k].indicacion_exento_gravado != null && lote.comprobante[cl].detalle.linea[k].indicacion_exento_gravado.Trim().ToUpper() == "G" && lote.comprobante[cl].detalle.linea[k].alicuota_iva == 0)
+                                                                for (int k = 0; k < lote.comprobante[cl].detalle.linea.Length; k++)
                                                                 {
-                                                                    baseImponible += Math.Round(lote.comprobante[cl].detalle.linea[k].importe_total_articulo, 2);
+                                                                    if (lote.comprobante[cl].detalle.linea[k] == null) { break; }
+                                                                    if (lote.comprobante[cl].detalle.linea[k].indicacion_exento_gravado != null && lote.comprobante[cl].detalle.linea[k].indicacion_exento_gravado.Trim().ToUpper() == "G" && lote.comprobante[cl].detalle.linea[k].alicuota_iva == 0)
+                                                                    {
+                                                                        baseImponible += Math.Round(lote.comprobante[cl].detalle.linea[k].importe_total_articulo, 2);
+                                                                    }
                                                                 }
                                                             }
+                                                            Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                                            Campo5 = "0003";
+                                                            Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                                                         }
-                                                        Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                        Campo5 = "0003";
-                                                        Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                    }
-                                                    if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 10.5)
-                                                    {
-                                                        if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                        if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 10.5)
                                                         {
-                                                            baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                            {
+                                                                baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            }
+                                                            Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                                            Campo5 = "0004";
+                                                            Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                                                         }
-                                                        Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                        Campo5 = "0004";
-                                                        Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                    }
-                                                    else if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 21)
-                                                    {
-                                                        if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                        else if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 21)
                                                         {
-                                                            baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                            {
+                                                                baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            }
+                                                            Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                                            Campo5 = "0005";
+                                                            Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                                                         }
-                                                        Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                        Campo5 = "0005";
-                                                        Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                    }
-                                                    else if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 27)
-                                                    {
-                                                        if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                        else if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 27)
                                                         {
-                                                            baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                            {
+                                                                baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            }
+                                                            Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                                            Campo5 = "0006";
+                                                            Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                                                         }
-                                                        Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                        Campo5 = "0006";
-                                                        Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                    }
-                                                    else if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 5)
-                                                    {
-                                                        if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                        else if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 5)
                                                         {
-                                                            baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                            {
+                                                                baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            }
+                                                            Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                                            Campo5 = "0008";
+                                                            Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                                                         }
-                                                        Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                        Campo5 = "0008";
-                                                        Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                    }
-                                                    else if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 2.5)
-                                                    {
-                                                        if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                        else if (lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto == 2.5)
                                                         {
-                                                            baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            if (lote.comprobante[cl].resumen.impuestos[z].base_imponible == 0)
+                                                            {
+                                                                baseImponible += Math.Round((lote.comprobante[cl].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[cl].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                                            }
+                                                            Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                                                            Campo5 = "0009";
+                                                            Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                                                         }
-                                                        Campo4 = String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", baseImponible.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
-                                                        Campo5 = "0009";
-                                                        Campo6 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuestos[z].importe_impuesto.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                                                     }
                                                 }
-                                            }
 
-                                            sbDataCOMPRASAlic.AppendLine(Campo1 + Campo2 + Campo3 + Campo4 + Campo5 + Campo6);
-                                            using (StreamWriter outfile = new StreamWriter(Path.GetTempPath() + sbCOMPRASAlic.ToString()))
-                                            {
-                                                outfile.Write(sbDataCOMPRASAlic.ToString());
+                                                sbDataCOMPRASAlic.AppendLine(Campo1 + Campo2 + Campo3 + Campo4 + Campo5 + Campo6);
+                                                using (StreamWriter outfile = new StreamWriter(Path.GetTempPath() + sbCOMPRASAlic.ToString()))
+                                                {
+                                                    outfile.Write(sbDataCOMPRASAlic.ToString());
+                                                }
                                             }
                                         }
+                                        #endregion
                                     }
-                                    #endregion
                                 }
-                            }
-                            catch (Exception ex)
-                            {
-                                script = "Problemas para generar la interfaz.\\n" + ex.Message + "\\n" + ex.StackTrace;
-                                MessageBox.Show(script, "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                                catch (Exception ex)
+                                {
+                                    script = "Problemas para generar la interfaz.\\n" + ex.Message + "\\n" + ex.StackTrace;
+                                    MessageBox.Show(script, "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                                }
                             }
                         }
                     }
+                    else
+                    {
+                        MessageBox.Show("No hay información de Compras para procesar en el período seleccionado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                    }
+                }
+
+                //Descargar ZIP ( Ventas y Alicuotas )
+                string filename = sbZIP.ToString();
+                //String dlDir = @"~/Temp/";
+                String pathZIP = Path.GetTempPath() + filename;
+                System.IO.FileInfo toZIP = new System.IO.FileInfo(pathZIP);
+                System.IO.FileInfo toVENTASCab = new System.IO.FileInfo(Path.GetTempPath() + sbVENTASCab.ToString());
+                System.IO.FileInfo toVENTASAlic = new System.IO.FileInfo(Path.GetTempPath() + sbVENTASAlic.ToString());
+                System.IO.FileInfo toCOMPRASCab = new System.IO.FileInfo(Path.GetTempPath() + sbCOMPRASCab.ToString());
+                System.IO.FileInfo toCOMPRASAlic = new System.IO.FileInfo(Path.GetTempPath() + sbCOMPRASAlic.ToString());
+
+                using (ZipFile zip = new ZipFile())
+                {
+                    if (HayVentas)
+                    {
+                        zip.AddFile(Path.GetTempPath() + sbVENTASCab.ToString(), "");
+                    }
+                    if (HayVentasAlic)
+                    {
+                        zip.AddFile(Path.GetTempPath() + sbVENTASAlic.ToString(), "");
+                    }
+
+                    if (HayCompras)
+                    {
+                        zip.AddFile(Path.GetTempPath() + sbCOMPRASCab.ToString(), "");
+
+                    }
+                    if (HayComprasAlic)
+                    {
+                        zip.AddFile(Path.GetTempPath() + sbCOMPRASAlic.ToString(), "");
+                    }
+
+                    if (HayVentas || HayCompras)
+                    {
+                        zip.Save(pathZIP);
+                    }
+                    else
+                    {
+                        //Borrar ZIP vacio.
+                        toZIP.Delete();
+                    }
+                    //Borrar archivos ya incluidos en el ZIP
+                    toVENTASCab.Delete();
+                    toVENTASAlic.Delete();
+                    toCOMPRASCab.Delete();
+                    toCOMPRASAlic.Delete();
+                }
+                toZIP = new System.IO.FileInfo(pathZIP);
+                if (toZIP.Exists)
+                {
+                    MessageBox.Show("Archivo de Interfaz ZIP generado satisfactoriamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                 }
                 else
                 {
-                    MessageBox.Show("No hay información de Compras para procesar en el período seleccionado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                    MessageBox.Show("Archivo de Interfaz ZIP inexistente.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                 }
-            }
-
-            //Descargar ZIP ( Ventas y Alicuotas )
-            string filename = sbZIP.ToString();
-            //String dlDir = @"~/Temp/";
-            String pathZIP = Path.GetTempPath() + filename;
-            System.IO.FileInfo toZIP = new System.IO.FileInfo(pathZIP);
-            System.IO.FileInfo toVENTASCab = new System.IO.FileInfo(Path.GetTempPath() + sbVENTASCab.ToString());
-            System.IO.FileInfo toVENTASAlic = new System.IO.FileInfo(Path.GetTempPath() + sbVENTASAlic.ToString());
-            System.IO.FileInfo toCOMPRASCab = new System.IO.FileInfo(Path.GetTempPath() + sbCOMPRASCab.ToString());
-            System.IO.FileInfo toCOMPRASAlic = new System.IO.FileInfo(Path.GetTempPath() + sbCOMPRASAlic.ToString());
-
-            using (ZipFile zip = new ZipFile())
-            {
-                if (HayVentas)
-                {
-                    zip.AddFile(Path.GetTempPath() + sbVENTASCab.ToString(), "");
-                }
-                if (HayVentasAlic)
-                {
-                    zip.AddFile(Path.GetTempPath() + sbVENTASAlic.ToString(), "");
-                }
-
-                if (HayCompras)
-                {
-                    zip.AddFile(Path.GetTempPath() + sbCOMPRASCab.ToString(), "");
-                
-                }
-                if (HayComprasAlic)
-                {
-                    zip.AddFile(Path.GetTempPath() + sbCOMPRASAlic.ToString(), "");
-                }
-
-                if (HayVentas || HayCompras)
-                {
-                    zip.Save(pathZIP);
-                }
-                else
-                {
-                    //Borrar ZIP vacio.
-                    toZIP.Delete();
-                }
-                //Borrar archivos ya incluidos en el ZIP
-                toVENTASCab.Delete();
-                toVENTASAlic.Delete();
-                toCOMPRASCab.Delete();
-                toCOMPRASAlic.Delete();
-            }
-            toZIP = new System.IO.FileInfo(pathZIP);
-            if (toZIP.Exists)
-            {
-
-                MessageBox.Show("Archivo de Interfaz ZIP generado satisfactoriamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
             }
             else
             {
-                MessageBox.Show("Archivo de Interfaz ZIP inexistente.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                MessageBox.Show("No hay información para procesar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
             }
-            
         }
         public string Truncate(string value, int maxLength)
         {
