@@ -49,7 +49,7 @@ namespace eFact_DB
         public List<eFact_Entidades.Comprobante> ConsutarComprobantesVigentes()
         {
             StringBuilder commandText = new StringBuilder();
-            commandText.Append("Select Comprobantes.*, Lotes.LoteXML from Comprobantes, Lotes, WF_Op where Comprobantes.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
+            commandText.Append("Select Comprobantes.*, Lotes.PuntoVenta as PuntoVenta, Lotes.LoteXML from Comprobantes, Lotes, WF_Op where Comprobantes.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
             commandText.Append("order by Comprobantes.IdLote");
             DataSet ds = new DataSet();
             ds = (DataSet)Ejecutar(commandText.ToString(), TipoRetorno.DS, Transaccion.Acepta, sesion.CnnStr);
@@ -72,7 +72,7 @@ namespace eFact_DB
         public List<eFact_Entidades.Comprobante> ConsutarComprobantesVigentesXFecha(string FechaDsd, string FechaHst)
         {
             StringBuilder commandText = new StringBuilder();
-            commandText.Append("Select Comprobantes.*, Lotes.LoteXML from Comprobantes, Lotes, WF_Op where Comprobantes.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
+            commandText.Append("Select Comprobantes.*, Lotes.PuntoVenta as PuntoVenta, Lotes.LoteXML from Comprobantes, Lotes, WF_Op where Comprobantes.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
             commandText.Append("and convert(varchar(8), Comprobantes.Fecha, 112) >= '" + FechaDsd + "' and convert(varchar(8), Comprobantes.Fecha, 112) <= '" + FechaHst + "' ");
             commandText.Append("order by Comprobantes.IdLote");
             DataSet ds = new DataSet();
