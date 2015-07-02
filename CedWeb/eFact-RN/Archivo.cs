@@ -147,6 +147,8 @@ namespace eFact_RN
             if (Lc.cabecera_lote.IdNaturalezaLoteField != null && Lc.cabecera_lote.IdNaturalezaLoteField == "Compra")
             {
                 cCListVigentes = eFact_RN.Comprobante.ConsultarComprobantesCVigentes(Sesion);
+                //----- Consultar despachos 'Vigentes' -----.
+                //cDListVigentes = eFact_RN.Comprobante.ConsultarComprobantesDVigentes(Sesion);
             }
             List<eFact_Entidades.Comprobante> cVListVigentes = new List<eFact_Entidades.Comprobante>();
             if (Lc.cabecera_lote.IdNaturalezaLoteField != null && Lc.cabecera_lote.IdNaturalezaLoteField == "Venta")

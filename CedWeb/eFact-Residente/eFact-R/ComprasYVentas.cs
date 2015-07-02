@@ -520,7 +520,7 @@ namespace eFact_R
                 //Descargar ZIP ( Ventas y Alicuotas )
                 string filename = sbZIP.ToString();
                 //String dlDir = @"~/Temp/";
-                String pathZIP = Path.GetTempPath() + filename;
+                String pathZIP = Aplicacion.Aplic.ArchPathItf + filename;
                 System.IO.FileInfo toZIP = new System.IO.FileInfo(pathZIP);
                 System.IO.FileInfo toVENTASCab = new System.IO.FileInfo(Path.GetTempPath() + sbVENTASCab.ToString());
                 System.IO.FileInfo toVENTASAlic = new System.IO.FileInfo(Path.GetTempPath() + sbVENTASAlic.ToString());
