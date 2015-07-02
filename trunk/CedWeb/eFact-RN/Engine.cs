@@ -17,7 +17,7 @@ namespace eFact_RN
         {
             try
             {
-                Type[] types = new Type[20];
+                Type[] types = new Type[23];
                 types[0] = typeof(FeaEntidades.InterFacturas.cabecera_lote);
                 types[1] = typeof(FeaEntidades.InterFacturas.informacion_comprador);
                 types[2] = typeof(FeaEntidades.InterFacturas.informacion_comprobante);
@@ -38,8 +38,11 @@ namespace eFact_RN
                 types[17] = typeof(FeaEntidades.InterFacturas.resumenImportes_moneda_origen);
                 types[18] = typeof(FeaEntidades.InterFacturas.resumen);
                 types[19] = typeof(FeaEntidades.InterFacturas.informacion_adicional_comprobante);
+                types[20] = typeof(FeaEntidades.InterFacturas.despachoCabecera);
+                types[21] = typeof(FeaEntidades.InterFacturas.despachoImpuesto);
+                types[22] = typeof(FeaEntidades.InterFacturas.despachoResumen);
 
-                engine = new MultiRecordEngine(types[0], types[1], types[2], types[3], types[4], types[5], types[6], types[7], types[8], types[9], types[10], types[11], types[12], types[13], types[14], types[15], types[16], types[17], types[18], types[19]);
+                engine = new MultiRecordEngine(types[0], types[1], types[2], types[3], types[4], types[5], types[6], types[7], types[8], types[9], types[10], types[11], types[12], types[13], types[14], types[15], types[16], types[17], types[18], types[19], types[20], types[21], types[22]);
                 engine.RecordSelector = new FileHelpers.RecordTypeSelector(cs);
                 object[] oC = engine.ReadFile(Archivo);
 
@@ -55,6 +58,7 @@ namespace eFact_RN
                 int NroLineaInfoAdicional = 0;
                 int NroLineaInformacionAdicionalComprobante = 0;
                 int NroLinea = -1;
+                int NroLineaDespachoImpuestos = 0;
                 FeaEntidades.InterFacturas.resumenImportes_moneda_origen importes_moneda_origen = new FeaEntidades.InterFacturas.resumenImportes_moneda_origen();
                 List<FeaEntidades.InterFacturas.resumenImpuestos> resumenImpuestos = new List<FeaEntidades.InterFacturas.resumenImpuestos>();
                 foreach (Object o in oC)
@@ -247,6 +251,33 @@ namespace eFact_RN
                         NroLineaInfoAdicional = 0;
                         NroLineaInformacionAdicionalComprobante = 0;
                     }
+
+                    //--- Despachos -----------------------------------
+                    if (typeof(FeaEntidades.InterFacturas.despachoCabecera) == o.GetType())
+                    {
+                        if (lc.comprobanteDespacho == null)
+                        {
+                            lc.comprobanteDespacho = new FeaEntidades.InterFacturas.comprobanteDespacho[1000];
+                        }
+                        lc.comprobanteDespacho[NroComprobante] = new FeaEntidades.InterFacturas.comprobanteDespacho();
+                        lc.comprobanteDespacho[NroComprobante].DespachoCabecera = (FeaEntidades.InterFacturas.despachoCabecera)o;
+                        GetPropiedades(o);
+                    }
+                    if (typeof(FeaEntidades.InterFacturas.despachoImpuesto) == o.GetType())
+                    {
+                        lc.comprobanteDespacho[NroComprobante].DespachoImpuesto[NroLineaDespachoImpuestos] = new FeaEntidades.InterFacturas.despachoImpuesto();
+                        lc.comprobanteDespacho[NroComprobante].DespachoImpuesto[NroLineaDespachoImpuestos] = (FeaEntidades.InterFacturas.despachoImpuesto)o;
+                        ++NroLineaDespachoImpuestos;
+                    }
+                    if (typeof(FeaEntidades.InterFacturas.despachoResumen) == o.GetType())
+                    {
+                        lc.comprobanteDespacho[NroComprobante].DespachoResumen = new FeaEntidades.InterFacturas.despachoResumen();
+                        lc.comprobanteDespacho[NroComprobante].DespachoResumen = (FeaEntidades.InterFacturas.despachoResumen)o;
+                        GetPropiedades(o);
+                        ++NroComprobante;
+                        NroLineaDespachoImpuestos = 0;
+                    }
+                    //------------------------------------------------
                 }
                 Lc = lc;
             }
@@ -393,6 +424,18 @@ namespace eFact_RN
                 case "<informacion_adicional_comprobante>":
                     {
                         return typeof(FeaEntidades.InterFacturas.informacion_adicional_comprobante);
+                    }
+                case "<despachoCabecera>":
+                    {
+                        return typeof(FeaEntidades.InterFacturas.despachoCabecera);
+                    }
+                case "<despachoImpuesto>":
+                    {
+                        return typeof(FeaEntidades.InterFacturas.despachoImpuesto);
+                    }
+                case "<despachoResumen>":
+                    {
+                        return typeof(FeaEntidades.InterFacturas.despachoResumen);
                     }
                 default:
                     {

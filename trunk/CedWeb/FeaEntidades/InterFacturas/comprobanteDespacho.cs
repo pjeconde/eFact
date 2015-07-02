@@ -12,47 +12,50 @@ namespace FeaEntidades.InterFacturas
 	[FileHelpers.DelimitedRecord("|")]
 	public partial class comprobanteDespacho
 	{
-        private string nombre_claseField = "<despacho>";
+        private despachoCabecera despachoCabeceraField;
 
-        private string nrodespachoField;
+        private despachoImpuesto[] despachoImpuestoField = new despachoImpuesto[50];
 
-        private int nrodocField;
+        private despachoResumen despachoResumenField;
 
         /// <comentarios/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public string nombre_clase
+        public despachoCabecera DespachoCabecera
+		{
+			get
+			{
+                return this.despachoCabeceraField;
+			}
+			set
+			{
+                this.despachoCabeceraField = value;
+			}
+		}
+
+        /// <comentarios/>
+        public despachoImpuesto[] DespachoImpuesto
+		{
+			get
+			{
+                return this.despachoImpuestoField;
+			}
+			set
+			{
+                this.despachoImpuestoField = value;
+			}
+		}
+
+        /// <comentarios/>
+        public despachoResumen DespachoResumen
         {
             get
             {
-                return nombre_claseField;
+                return this.despachoResumenField;
+            }
+            set
+            {
+                this.despachoResumenField = value;
             }
         }
-
-        /// <comentarios/>
-        public string nrodespacho
-		{
-			get
-			{
-                return this.nrodespachoField;
-			}
-			set
-			{
-                this.nrodespachoField = value;
-			}
-		}
-
-        /// <comentarios/>
-        public int nrodoc
-		{
-			get
-			{
-                return this.nrodocField;
-			}
-			set
-			{
-                this.nrodocField = value;
-			}
-		}
 
     }
 }
