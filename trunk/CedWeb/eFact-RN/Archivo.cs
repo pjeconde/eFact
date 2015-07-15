@@ -146,14 +146,14 @@ namespace eFact_RN
             List<eFact_Entidades.ComprobanteC> cCListVigentes = new List<eFact_Entidades.ComprobanteC>();
             if (Lc.cabecera_lote.IdNaturalezaLoteField != null && Lc.cabecera_lote.IdNaturalezaLoteField == "Compra")
             {
-                cCListVigentes = eFact_RN.Comprobante.ConsultarComprobantesCVigentes(Sesion);
+                cCListVigentes = eFact_RN.Comprobante.ConsultarComprobantesCVigentes(Lc.cabecera_lote.cuit_vendedor.ToString(), Sesion);
                 //----- Consultar despachos 'Vigentes' -----.
                 //cDListVigentes = eFact_RN.Comprobante.ConsultarComprobantesDVigentes(Sesion);
             }
             List<eFact_Entidades.Comprobante> cVListVigentes = new List<eFact_Entidades.Comprobante>();
             if (Lc.cabecera_lote.IdNaturalezaLoteField != null && Lc.cabecera_lote.IdNaturalezaLoteField == "Venta")
             {
-                cVListVigentes = eFact_RN.Comprobante.ConsultarComprobantesVigentes(Sesion);
+                cVListVigentes = eFact_RN.Comprobante.ConsultarComprobantesVigentes(Lc.cabecera_lote.cuit_vendedor.ToString(), Sesion);
             }
             for (int i = 0; i < Lc.comprobante.Length; i++)
             {

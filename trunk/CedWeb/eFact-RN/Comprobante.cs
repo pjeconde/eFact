@@ -12,25 +12,25 @@ namespace eFact_RN
             eFact_DB.Comprobante c = new eFact_DB.Comprobante(Sesion);
             c.Leer(Comprobante);
         }
-        public static List<eFact_Entidades.Comprobante> ConsultarComprobantesVigentes(CedEntidades.Sesion Sesion)
+        public static List<eFact_Entidades.Comprobante> ConsultarComprobantesVigentes(string CuitEmpresa, CedEntidades.Sesion Sesion)
         {
             eFact_DB.Comprobante c = new eFact_DB.Comprobante(Sesion);
-            return c.ConsutarComprobantesVigentes();
+            return c.ConsutarComprobantesVigentes(CuitEmpresa);
         }
-        public static List<eFact_Entidades.Comprobante> ConsultarComprobantesVigentesXFecha(string FechaDsd, string FechaHst, CedEntidades.Sesion Sesion)
+        public static List<eFact_Entidades.Comprobante> ConsultarComprobantesVigentesXFecha(string FechaDsd, string FechaHst, string CuitEmpresa, CedEntidades.Sesion Sesion)
         {
             eFact_DB.Comprobante c = new eFact_DB.Comprobante(Sesion);
-            return c.ConsutarComprobantesVigentesXFecha(FechaDsd, FechaHst);
+            return c.ConsutarComprobantesVigentesXFecha(FechaDsd, FechaHst, CuitEmpresa);
         }
-        public static List<eFact_Entidades.ComprobanteC> ConsultarComprobantesCVigentes(CedEntidades.Sesion Sesion)
+        public static List<eFact_Entidades.ComprobanteC> ConsultarComprobantesCVigentes(string CuitEmpresa, CedEntidades.Sesion Sesion)
         {
             eFact_DB.Comprobante c = new eFact_DB.Comprobante(Sesion);
-            return c.ConsutarComprobantesCVigentes();
+            return c.ConsutarComprobantesCVigentes(CuitEmpresa);
         }
-        public static List<eFact_Entidades.ComprobanteC> ConsultarComprobantesCVigentesXFecha(string FechaDsd, string FechaHst, CedEntidades.Sesion Sesion)
+        public static List<eFact_Entidades.ComprobanteC> ConsultarComprobantesCVigentesXFecha(string FechaDsd, string FechaHst, string CuitEmpresa, CedEntidades.Sesion Sesion)
         {
             eFact_DB.Comprobante c = new eFact_DB.Comprobante(Sesion);
-            return c.ConsutarComprobantesCVigentesXFecha(FechaDsd, FechaHst);
+            return c.ConsutarComprobantesCVigentesXFecha(FechaDsd, FechaHst, CuitEmpresa);
         }
         public FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(IBK.consulta_lote_comprobantes clc, string certificado)
         {
