@@ -32,6 +32,16 @@ namespace eFact_RN
             eFact_DB.Comprobante c = new eFact_DB.Comprobante(Sesion);
             return c.ConsutarComprobantesCVigentesXFecha(FechaDsd, FechaHst, CuitEmpresa);
         }
+        public static List<eFact_Entidades.ComprobanteD> ConsultarComprobantesDVigentes(string CuitEmpresa, CedEntidades.Sesion Sesion)
+        {
+            eFact_DB.Comprobante c = new eFact_DB.Comprobante(Sesion);
+            return c.ConsutarComprobantesDVigentes(CuitEmpresa);
+        }
+        public static List<eFact_Entidades.ComprobanteD> ConsultarComprobantesDVigentesXFecha(string FechaDsd, string FechaHst, string CuitEmpresa, CedEntidades.Sesion Sesion)
+        {
+            eFact_DB.Comprobante c = new eFact_DB.Comprobante(Sesion);
+            return c.ConsutarComprobantesDVigentesXFecha(FechaDsd, FechaHst, CuitEmpresa);
+        }
         public FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(IBK.consulta_lote_comprobantes clc, string certificado)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();

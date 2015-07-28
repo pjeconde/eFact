@@ -40,7 +40,7 @@ namespace FeaEntidades.InterFacturas
 
         private int cantAlicIVAField;
 
-        private int codigoOperacionField;
+        private string codigoOperacionField;
 
 		private double creditoFiscalComputableField;
 
@@ -212,7 +212,7 @@ namespace FeaEntidades.InterFacturas
 		}
 
 		/// <comentarios/>
-        public int CodigoOperacion
+        public string CodigoOperacion
 		{
 			get
 			{
@@ -225,7 +225,7 @@ namespace FeaEntidades.InterFacturas
 		}
 
         /// <comentarios/>
-        public double CreditoFiscalCmputable
+        public double CreditoFiscalComputable
         {
             get
             {
