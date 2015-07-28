@@ -192,5 +192,78 @@ namespace eFact_DB
             Hasta.ImporteMonedaOrigen = Convert.ToDecimal(Desde["ImporteMonedaOrigen"]);
             Hasta.TipoCambio = Convert.ToDecimal(Desde["TipoCambio"]);
         }
+
+        public List<eFact_Entidades.ComprobanteD> ConsutarComprobantesDVigentes(string CuitEmpresa)
+        {
+            StringBuilder commandText = new StringBuilder();
+            commandText.Append("Select ComprobantesD.*, Lotes.CuitVendedor as CuitEmpresa, Lotes.LoteXML from ComprobantesD, Lotes, WF_Op where ComprobantesD.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
+            if (CuitEmpresa != "")
+            {
+                commandText.Append("and Lotes.CuitVendedor = '" + CuitEmpresa + "' ");
+            }
+            commandText.Append("order by ComprobantesD.IdLote");
+            DataSet ds = new DataSet();
+            ds = (DataSet)Ejecutar(commandText.ToString(), TipoRetorno.DS, Transaccion.Acepta, sesion.CnnStr);
+            List<eFact_Entidades.ComprobanteD> ComprobantesD = new List<eFact_Entidades.ComprobanteD>();
+            if (ds.Tables.Count == 0)
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.NoHayDatos();
+            }
+            else
+            {
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    eFact_Entidades.ComprobanteD ComprobanteD = new eFact_Entidades.ComprobanteD();
+                    CopiarConLoteXML(ds, i, ComprobanteD);
+                    ComprobantesD.Add(ComprobanteD);
+                }
+            }
+            return ComprobantesD;
+        }
+        public List<eFact_Entidades.ComprobanteD> ConsutarComprobantesDVigentesXFecha(string FechaDsd, string FechaHst, string CuitEmpresa)
+        {
+            StringBuilder commandText = new StringBuilder();
+            commandText.Append("Select ComprobantesD.*, Lotes.CuitVendedor as CuitEmpresa, Lotes.LoteXML from ComprobantesD, Lotes, WF_Op where ComprobantesD.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
+            commandText.Append("and convert(varchar(8), ComprobantesD.Fecha, 112) >= '" + FechaDsd + "' and convert(varchar(8), ComprobantesD.Fecha, 112) <= '" + FechaHst + "' ");
+            if (CuitEmpresa != "")
+            {
+                commandText.Append("and Lotes.CuitVendedor = '" + CuitEmpresa + "' ");
+            }
+            commandText.Append("order by ComprobantesD.IdLote");
+            DataSet ds = new DataSet();
+            ds = (DataSet)Ejecutar(commandText.ToString(), TipoRetorno.DS, Transaccion.Acepta, sesion.CnnStr);
+            List<eFact_Entidades.ComprobanteD> ComprobantesD = new List<eFact_Entidades.ComprobanteD>();
+            if (ds.Tables.Count == 0)
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.NoHayDatos();
+            }
+            else
+            {
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    eFact_Entidades.ComprobanteD ComprobanteD = new eFact_Entidades.ComprobanteD();
+                    CopiarConLoteXML(ds, i, ComprobanteD);
+                    ComprobantesD.Add(ComprobanteD);
+                }
+            }
+            return ComprobantesD;
+        }
+        private void CopiarConLoteXML(DataSet ds, int NroRowPpal, eFact_Entidades.ComprobanteD Hasta)
+        {
+            DataRow Desde;
+            Desde = ds.Tables[0].Rows[NroRowPpal];
+            Hasta.IdLote = Convert.ToInt32(Desde["IdLote"]);
+            Hasta.LoteXml = Convert.ToString(Desde["LoteXml"].ToString());
+            Hasta.IdTipoComprobante = Convert.ToInt16(Desde["IdTipoComprobante"]);
+            Hasta.NumeroDespacho = Convert.ToString(Desde["NumeroDespacho"]);
+            Hasta.TipoDocVendedor = Convert.ToInt16(Desde["TipoDocVendedor"]);
+            Hasta.NroDocVendedor = Desde["NroDocVendedor"].ToString();
+            Hasta.NombreVendedor = Desde["NombreVendedor"].ToString();
+            Hasta.Fecha = Convert.ToDateTime(Desde["Fecha"]);
+            Hasta.IdMoneda = Convert.ToString(Desde["IdMoneda"]);
+            Hasta.Importe = Convert.ToDecimal(Desde["Importe"]);
+            Hasta.ImporteMonedaOrigen = Convert.ToDecimal(Desde["ImporteMonedaOrigen"]);
+            Hasta.TipoCambio = Convert.ToDecimal(Desde["TipoCambio"]);
+        }
     }
 }

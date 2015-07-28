@@ -561,8 +561,9 @@ namespace eFact_R
                                                     }
                                                 }
                                                 string Campo19 = String.Format("{0,1}", CantAlicuotas);
-                                                string Campo20 = String.Format("{0,1}", lote.comprobante[cl].cabecera.informacion_comprobante.codigo_operacion);
-                                                string Campo21 = new string(Convert.ToChar("0"), 15);           //Crédito Fiscal Computable
+                                                string Campo20 = String.Format("{0,1}", lote.comprobanteDespacho[cl].DespachoResumen.CodigoOperacion);
+                                                //Crédito Fiscal Computable
+                                                string Campo21 = String.Format("{0,16}", lote.comprobanteDespacho[cl].DespachoResumen.CreditoFiscalComputable.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobanteDespacho[cl].DespachoResumen.ImportePercepImpInternos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                                                 string Campo22 = new string(Convert.ToChar("0"), 15);           //Otros Tributos
                                                 string Campo23 = new string(Convert.ToChar("0"), 11);           //CUIT emisor / corredor
                                                 string Campo24 = Truncate(String.Format("{0,-30}", ""), 30);    //Denominación del emisor / corredor
