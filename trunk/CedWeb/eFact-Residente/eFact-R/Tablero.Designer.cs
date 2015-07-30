@@ -432,7 +432,7 @@
             this.DescartarBandejaEButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.DescartarBandejaEButton.Location = new System.Drawing.Point(0, 0);
             this.DescartarBandejaEButton.Name = "DescartarBandejaEButton";
-            this.DescartarBandejaEButton.Size = new System.Drawing.Size(160, 23);
+            this.DescartarBandejaEButton.Size = new System.Drawing.Size(170, 23);
             this.DescartarBandejaEButton.TabIndex = 9;
             this.DescartarBandejaEButton.Text = "Descartar Bandeja de Entrada";
             this.DescartarBandejaEButton.UseVisualStyleBackColor = true;
@@ -441,9 +441,9 @@
             // EnviarABandejaSButton
             // 
             this.EnviarABandejaSButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.EnviarABandejaSButton.Location = new System.Drawing.Point(361, 0);
+            this.EnviarABandejaSButton.Location = new System.Drawing.Point(339, 0);
             this.EnviarABandejaSButton.Name = "EnviarABandejaSButton";
-            this.EnviarABandejaSButton.Size = new System.Drawing.Size(148, 23);
+            this.EnviarABandejaSButton.Size = new System.Drawing.Size(170, 23);
             this.EnviarABandejaSButton.TabIndex = 8;
             this.EnviarABandejaSButton.Text = "Enviar a Bandeja de Salida";
             this.EnviarABandejaSButton.UseVisualStyleBackColor = true;
@@ -488,7 +488,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label3.Location = new System.Drawing.Point(185, 1);
+            this.label3.Location = new System.Drawing.Point(188, 1);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(76, 24);
             this.label3.TabIndex = 23;
@@ -499,7 +499,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label4.Location = new System.Drawing.Point(172, 1);
+            this.label4.Location = new System.Drawing.Point(173, 1);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(26, 25);
             this.label4.TabIndex = 24;
@@ -1239,7 +1239,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label11.Location = new System.Drawing.Point(170, 1);
+            this.label11.Location = new System.Drawing.Point(173, 1);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(76, 24);
             this.label11.TabIndex = 22;
@@ -1260,7 +1260,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label13.Location = new System.Drawing.Point(157, 1);
+            this.label13.Location = new System.Drawing.Point(158, 1);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(26, 25);
             this.label13.TabIndex = 21;

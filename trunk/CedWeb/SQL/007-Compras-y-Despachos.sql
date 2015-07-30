@@ -34,7 +34,7 @@ GO
 CREATE TABLE dbo.ComprobantesD (
 IdLote int NOT NULL,
 IdTipoComprobante varchar(2) COLLATE Modern_Spanish_CI_AS NOT NULL,
-IdDespacho varchar(16) COLLATE Modern_Spanish_CI_AS NOT NULL,
+NumeroDespacho varchar(16) COLLATE Modern_Spanish_CI_AS NOT NULL,
 TipoDocVendedor varchar(3) COLLATE Modern_Spanish_CI_AS NOT NULL,
 NroDocVendedor varchar(11) COLLATE Modern_Spanish_CI_AS NOT NULL,
 NombreVendedor varchar(60) COLLATE Modern_Spanish_CI_AS NOT NULL,

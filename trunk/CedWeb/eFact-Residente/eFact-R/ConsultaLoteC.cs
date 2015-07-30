@@ -55,6 +55,28 @@ namespace eFact_R
                 colIdMoneda.DataPropertyName = "IdMoneda";
                 colIdMoneda.HeaderText = "Mon.";
 
+                Cursor = System.Windows.Forms.Cursors.WaitCursor;
+                DataGridViewComboBoxColumn colIdTipoComprobanteD = (DataGridViewComboBoxColumn)DespachosDataGridView.Columns["IdTipoComprobanteD"];
+                colIdTipoComprobanteD.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaImportaciones();
+                colIdTipoComprobanteD.DisplayMember = "Descr";
+                colIdTipoComprobanteD.ValueMember = "Codigo";
+                colIdTipoComprobanteD.DataPropertyName = "IdTipoComprobante";
+                colIdTipoComprobanteD.HeaderText = "Tipo de Comprobante";
+
+                DataGridViewComboBoxColumn colTipoDocVendedorD = (DataGridViewComboBoxColumn)DespachosDataGridView.Columns["TipoDocVendedorD"];
+                colTipoDocVendedorD.DataSource = FeaEntidades.Documentos.Documento.Lista();
+                colTipoDocVendedorD.DisplayMember = "Descr";
+                colTipoDocVendedorD.ValueMember = "Codigo";
+                colTipoDocVendedorD.DataPropertyName = "TipoDocVendedor";
+                colTipoDocVendedorD.HeaderText = "Tipo Doc. Vendedor";
+
+                DataGridViewComboBoxColumn colIdMonedaD = (DataGridViewComboBoxColumn)DespachosDataGridView.Columns["IdMonedaD"];
+                colIdMonedaD.DataSource = FeaEntidades.CodigosMoneda.CodigoMoneda.Lista();
+                colIdMonedaD.DisplayMember = "Descr";
+                colIdMonedaD.ValueMember = "Codigo";
+                colIdMonedaD.DataPropertyName = "IdMoneda";
+                colIdMonedaD.HeaderText = "Mon.";
+
                 BindingControles();
             }
             catch (Exception ex)
@@ -151,6 +173,13 @@ namespace eFact_R
         }
 
         private void DetalleLoteDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (((DataGridView)sender).Name.ToString() == "DetalleLoteDataGridView")
+            {
+            }
+        }
+
+        private void DespachosDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             if (((DataGridView)sender).Name.ToString() == "DetalleLoteDataGridView")
             {
