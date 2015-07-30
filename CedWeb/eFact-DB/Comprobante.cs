@@ -262,8 +262,8 @@ namespace eFact_DB
             Hasta.Fecha = Convert.ToDateTime(Desde["Fecha"]);
             Hasta.IdMoneda = Convert.ToString(Desde["IdMoneda"]);
             Hasta.Importe = Convert.ToDecimal(Desde["Importe"]);
-            Hasta.ImporteMonedaOrigen = Convert.ToDecimal(Desde["ImporteMonedaOrigen"]);
-            Hasta.TipoCambio = Convert.ToDecimal(Desde["TipoCambio"]);
+            //Hasta.ImporteMonedaOrigen = Convert.ToDecimal(Desde["ImporteMonedaOrigen"]);
+            //Hasta.TipoCambio = Convert.ToDecimal(Desde["TipoCambio"]);
         }
     }
 }

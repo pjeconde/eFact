@@ -30,28 +30,6 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -64,6 +42,26 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsultaLoteC));
             this.PpalPanel = new System.Windows.Forms.Panel();
             this.DetPanel = new System.Windows.Forms.Panel();
@@ -72,19 +70,29 @@
             this.TabControl = new System.Windows.Forms.TabControl();
             this.DetalleTabPage = new System.Windows.Forms.TabPage();
             this.DetalleLoteDataGridView = new System.Windows.Forms.DataGridView();
+            this.IdLote = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PuntoVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdTipoComprobante = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaComprobante = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdMoneda = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.ImporteMonedaOrigen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoCambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreVendedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoDocVendedor = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.NroDocVendedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DespachosTabPage = new System.Windows.Forms.TabPage();
             this.DespachosDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewComboBoxColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.NumeroDespacho = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewComboBoxColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewComboBoxColumn3 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdLoteDIdLoteD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdTipoComprobanteD = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.NumeroDespachoD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ImporteD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdMonedaD = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.NombreVendedorD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoDocVendedorD = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.NroDocVendedorD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LoteXMLTabPage = new System.Windows.Forms.TabPage();
             this.XMLWebBrowser = new System.Windows.Forms.WebBrowser();
             this.LogTabPage = new System.Windows.Forms.TabPage();
@@ -118,18 +126,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.IdLote = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PuntoVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdTipoComprobante = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaComprobante = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdMoneda = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.ImporteMonedaOrigen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoCambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombreVendedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoDocVendedor = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.NroDocVendedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PpalPanel.SuspendLayout();
             this.DetPanel.SuspendLayout();
             this.SplitContainer.Panel1.SuspendLayout();
@@ -269,6 +265,131 @@
             this.DetalleLoteDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DetalleLoteDataGridView_DataError);
             this.DetalleLoteDataGridView.DoubleClick += new System.EventHandler(this.DetalleLoteDataGridView_DoubleClick);
             // 
+            // IdLote
+            // 
+            this.IdLote.DataPropertyName = "IdLote";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.IdLote.DefaultCellStyle = dataGridViewCellStyle2;
+            this.IdLote.HeaderText = "Id.Lote";
+            this.IdLote.Name = "IdLote";
+            this.IdLote.ReadOnly = true;
+            this.IdLote.Width = 60;
+            // 
+            // PuntoVenta
+            // 
+            this.PuntoVenta.DataPropertyName = "PuntoVenta";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.PuntoVenta.DefaultCellStyle = dataGridViewCellStyle3;
+            this.PuntoVenta.HeaderText = "PuntoVenta";
+            this.PuntoVenta.Name = "PuntoVenta";
+            this.PuntoVenta.ReadOnly = true;
+            // 
+            // IdTipoComprobante
+            // 
+            this.IdTipoComprobante.DataPropertyName = "IdTipoComprobante";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.IdTipoComprobante.DefaultCellStyle = dataGridViewCellStyle4;
+            this.IdTipoComprobante.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.IdTipoComprobante.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IdTipoComprobante.HeaderText = "Tipo Comprobante";
+            this.IdTipoComprobante.Name = "IdTipoComprobante";
+            this.IdTipoComprobante.ReadOnly = true;
+            this.IdTipoComprobante.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IdTipoComprobante.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.IdTipoComprobante.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "NumeroComprobante";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewTextBoxColumn15.HeaderText = "Nº Comprobante";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            this.dataGridViewTextBoxColumn15.Width = 70;
+            // 
+            // FechaComprobante
+            // 
+            this.FechaComprobante.DataPropertyName = "Fecha";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.FechaComprobante.DefaultCellStyle = dataGridViewCellStyle6;
+            this.FechaComprobante.HeaderText = "Fecha";
+            this.FechaComprobante.Name = "FechaComprobante";
+            this.FechaComprobante.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            this.dataGridViewTextBoxColumn22.DataPropertyName = "Importe";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.dataGridViewTextBoxColumn22.DefaultCellStyle = dataGridViewCellStyle7;
+            this.dataGridViewTextBoxColumn22.HeaderText = "Importe Mon. Nacional";
+            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            this.dataGridViewTextBoxColumn22.ReadOnly = true;
+            // 
+            // IdMoneda
+            // 
+            this.IdMoneda.DataPropertyName = "IdMoneda";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.IdMoneda.DefaultCellStyle = dataGridViewCellStyle8;
+            this.IdMoneda.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.IdMoneda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IdMoneda.HeaderText = "Moneda";
+            this.IdMoneda.Name = "IdMoneda";
+            this.IdMoneda.ReadOnly = true;
+            this.IdMoneda.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IdMoneda.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // ImporteMonedaOrigen
+            // 
+            this.ImporteMonedaOrigen.DataPropertyName = "ImporteMonedaOrigen";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.ImporteMonedaOrigen.DefaultCellStyle = dataGridViewCellStyle9;
+            this.ImporteMonedaOrigen.HeaderText = "Importe Mon. Extranjera";
+            this.ImporteMonedaOrigen.Name = "ImporteMonedaOrigen";
+            this.ImporteMonedaOrigen.ReadOnly = true;
+            // 
+            // TipoCambio
+            // 
+            this.TipoCambio.DataPropertyName = "TipoCambio";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.TipoCambio.DefaultCellStyle = dataGridViewCellStyle10;
+            this.TipoCambio.HeaderText = "Tipo de Cambio";
+            this.TipoCambio.Name = "TipoCambio";
+            this.TipoCambio.ReadOnly = true;
+            // 
+            // NombreVendedor
+            // 
+            this.NombreVendedor.DataPropertyName = "NombreVendedor";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.NombreVendedor.DefaultCellStyle = dataGridViewCellStyle11;
+            this.NombreVendedor.HeaderText = "Nombre Vendedor";
+            this.NombreVendedor.Name = "NombreVendedor";
+            this.NombreVendedor.ReadOnly = true;
+            this.NombreVendedor.Width = 300;
+            // 
+            // TipoDocVendedor
+            // 
+            this.TipoDocVendedor.DataPropertyName = "TipoDocVendedor";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.TipoDocVendedor.DefaultCellStyle = dataGridViewCellStyle12;
+            this.TipoDocVendedor.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.TipoDocVendedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TipoDocVendedor.HeaderText = "Tipo Doc. Vendedor";
+            this.TipoDocVendedor.Name = "TipoDocVendedor";
+            this.TipoDocVendedor.ReadOnly = true;
+            this.TipoDocVendedor.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.TipoDocVendedor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.TipoDocVendedor.Width = 80;
+            // 
+            // NroDocVendedor
+            // 
+            this.NroDocVendedor.DataPropertyName = "NroDocVendedor";
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.NroDocVendedor.DefaultCellStyle = dataGridViewCellStyle13;
+            this.NroDocVendedor.HeaderText = "Nro.Doc. Vendedor";
+            this.NroDocVendedor.Name = "NroDocVendedor";
+            this.NroDocVendedor.ReadOnly = true;
+            // 
             // DespachosTabPage
             // 
             this.DespachosTabPage.Controls.Add(this.DespachosDataGridView);
@@ -295,149 +416,130 @@
             this.DespachosDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.DespachosDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DespachosDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewComboBoxColumn1,
-            this.NumeroDespacho,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewComboBoxColumn2,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewComboBoxColumn3,
-            this.dataGridViewTextBoxColumn9});
+            this.IdLoteDIdLoteD,
+            this.IdTipoComprobanteD,
+            this.NumeroDespachoD,
+            this.FechaD,
+            this.ImporteD,
+            this.IdMonedaD,
+            this.NombreVendedorD,
+            this.TipoDocVendedorD,
+            this.NroDocVendedorD});
             this.DespachosDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DespachosDataGridView.Location = new System.Drawing.Point(3, 3);
             this.DespachosDataGridView.Name = "DespachosDataGridView";
             this.DespachosDataGridView.ReadOnly = true;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DespachosDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DespachosDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle25;
             this.DespachosDataGridView.RowHeadersVisible = false;
             this.DespachosDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DespachosDataGridView.Size = new System.Drawing.Size(868, 254);
             this.DespachosDataGridView.TabIndex = 16;
+            this.DespachosDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DespachosDataGridView_DataError);
             // 
-            // dataGridViewTextBoxColumn1
+            // IdLoteDIdLoteD
             // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "IdLote";
+            this.IdLoteDIdLoteD.DataPropertyName = "IdLote";
             dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle16;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Id.Lote";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 60;
+            this.IdLoteDIdLoteD.DefaultCellStyle = dataGridViewCellStyle16;
+            this.IdLoteDIdLoteD.HeaderText = "Id.Lote";
+            this.IdLoteDIdLoteD.Name = "IdLoteDIdLoteD";
+            this.IdLoteDIdLoteD.ReadOnly = true;
+            this.IdLoteDIdLoteD.Width = 60;
             // 
-            // dataGridViewComboBoxColumn1
+            // IdTipoComprobanteD
             // 
-            this.dataGridViewComboBoxColumn1.DataPropertyName = "IdTipoComprobante";
+            this.IdTipoComprobanteD.DataPropertyName = "IdTipoComprobante";
             dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.dataGridViewComboBoxColumn1.DefaultCellStyle = dataGridViewCellStyle17;
-            this.dataGridViewComboBoxColumn1.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.dataGridViewComboBoxColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataGridViewComboBoxColumn1.HeaderText = "Tipo Comprobante";
-            this.dataGridViewComboBoxColumn1.Name = "dataGridViewComboBoxColumn1";
-            this.dataGridViewComboBoxColumn1.ReadOnly = true;
-            this.dataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewComboBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewComboBoxColumn1.Width = 120;
+            this.IdTipoComprobanteD.DefaultCellStyle = dataGridViewCellStyle17;
+            this.IdTipoComprobanteD.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.IdTipoComprobanteD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IdTipoComprobanteD.HeaderText = "Tipo Comprobante";
+            this.IdTipoComprobanteD.Name = "IdTipoComprobanteD";
+            this.IdTipoComprobanteD.ReadOnly = true;
+            this.IdTipoComprobanteD.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IdTipoComprobanteD.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.IdTipoComprobanteD.Width = 120;
             // 
-            // NumeroDespacho
+            // NumeroDespachoD
             // 
-            this.NumeroDespacho.DataPropertyName = "NumeroDespacho";
+            this.NumeroDespachoD.DataPropertyName = "NumeroDespacho";
             dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.NumeroDespacho.DefaultCellStyle = dataGridViewCellStyle18;
-            this.NumeroDespacho.HeaderText = "Nº Comprobante";
-            this.NumeroDespacho.Name = "NumeroDespacho";
-            this.NumeroDespacho.ReadOnly = true;
-            this.NumeroDespacho.Width = 70;
+            this.NumeroDespachoD.DefaultCellStyle = dataGridViewCellStyle18;
+            this.NumeroDespachoD.HeaderText = "Nº Despacho";
+            this.NumeroDespachoD.Name = "NumeroDespachoD";
+            this.NumeroDespachoD.ReadOnly = true;
+            this.NumeroDespachoD.Width = 70;
             // 
-            // dataGridViewTextBoxColumn4
+            // FechaD
             // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "Fecha";
+            this.FechaD.DataPropertyName = "Fecha";
             dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle19;
-            this.dataGridViewTextBoxColumn4.HeaderText = "Fecha";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.FechaD.DefaultCellStyle = dataGridViewCellStyle19;
+            this.FechaD.HeaderText = "Fecha";
+            this.FechaD.Name = "FechaD";
+            this.FechaD.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn5
+            // ImporteD
             // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Importe";
+            this.ImporteD.DataPropertyName = "Importe";
             dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle20;
-            this.dataGridViewTextBoxColumn5.HeaderText = "Importe Mon. Nacional";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.ImporteD.DefaultCellStyle = dataGridViewCellStyle20;
+            this.ImporteD.HeaderText = "Importe Mon. Nacional";
+            this.ImporteD.Name = "ImporteD";
+            this.ImporteD.ReadOnly = true;
             // 
-            // dataGridViewComboBoxColumn2
+            // IdMonedaD
             // 
-            this.dataGridViewComboBoxColumn2.DataPropertyName = "IdMoneda";
+            this.IdMonedaD.DataPropertyName = "IdMoneda";
             dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.dataGridViewComboBoxColumn2.DefaultCellStyle = dataGridViewCellStyle21;
-            this.dataGridViewComboBoxColumn2.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.dataGridViewComboBoxColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataGridViewComboBoxColumn2.HeaderText = "Moneda";
-            this.dataGridViewComboBoxColumn2.Name = "dataGridViewComboBoxColumn2";
-            this.dataGridViewComboBoxColumn2.ReadOnly = true;
-            this.dataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewComboBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.IdMonedaD.DefaultCellStyle = dataGridViewCellStyle21;
+            this.IdMonedaD.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.IdMonedaD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IdMonedaD.HeaderText = "Moneda";
+            this.IdMonedaD.Name = "IdMonedaD";
+            this.IdMonedaD.ReadOnly = true;
+            this.IdMonedaD.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IdMonedaD.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // dataGridViewTextBoxColumn6
+            // NombreVendedorD
             // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "ImporteMonedaOrigen";
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle22;
-            this.dataGridViewTextBoxColumn6.HeaderText = "Importe Mon. Extranjera";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.NombreVendedorD.DataPropertyName = "NombreVendedor";
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.NombreVendedorD.DefaultCellStyle = dataGridViewCellStyle22;
+            this.NombreVendedorD.HeaderText = "Nombre Vendedor";
+            this.NombreVendedorD.Name = "NombreVendedorD";
+            this.NombreVendedorD.ReadOnly = true;
+            this.NombreVendedorD.Width = 300;
             // 
-            // dataGridViewTextBoxColumn7
+            // TipoDocVendedorD
             // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "TipoCambio";
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle23;
-            this.dataGridViewTextBoxColumn7.HeaderText = "Tipo de Cambio";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.TipoDocVendedorD.DataPropertyName = "TipoDocVendedor";
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.TipoDocVendedorD.DefaultCellStyle = dataGridViewCellStyle23;
+            this.TipoDocVendedorD.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.TipoDocVendedorD.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TipoDocVendedorD.HeaderText = "Tipo Doc. Vendedor";
+            this.TipoDocVendedorD.Name = "TipoDocVendedorD";
+            this.TipoDocVendedorD.ReadOnly = true;
+            this.TipoDocVendedorD.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.TipoDocVendedorD.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.TipoDocVendedorD.Width = 80;
             // 
-            // dataGridViewTextBoxColumn8
+            // NroDocVendedorD
             // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "NombreVendedor";
+            this.NroDocVendedorD.DataPropertyName = "NroDocVendedor";
             dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle24;
-            this.dataGridViewTextBoxColumn8.HeaderText = "Nombre Vendedor";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            this.dataGridViewTextBoxColumn8.Width = 300;
-            // 
-            // dataGridViewComboBoxColumn3
-            // 
-            this.dataGridViewComboBoxColumn3.DataPropertyName = "TipoDocVendedor";
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.dataGridViewComboBoxColumn3.DefaultCellStyle = dataGridViewCellStyle25;
-            this.dataGridViewComboBoxColumn3.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.dataGridViewComboBoxColumn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dataGridViewComboBoxColumn3.HeaderText = "Tipo Doc. Vendedor";
-            this.dataGridViewComboBoxColumn3.Name = "dataGridViewComboBoxColumn3";
-            this.dataGridViewComboBoxColumn3.ReadOnly = true;
-            this.dataGridViewComboBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewComboBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewComboBoxColumn3.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "NroDocVendedor";
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle26;
-            this.dataGridViewTextBoxColumn9.HeaderText = "Nro.Doc. Vendedor";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.NroDocVendedorD.DefaultCellStyle = dataGridViewCellStyle24;
+            this.NroDocVendedorD.HeaderText = "Nro.Doc. Vendedor";
+            this.NroDocVendedorD.Name = "NroDocVendedorD";
+            this.NroDocVendedorD.ReadOnly = true;
             // 
             // LoteXMLTabPage
             // 
@@ -473,14 +575,14 @@
             // LogLoteDataGridView
             // 
             this.LogLoteDataGridView.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.LogLoteDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.LogLoteDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
             this.LogLoteDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.LogLoteDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdLog,
@@ -505,8 +607,8 @@
             // IdLog
             // 
             this.IdLog.DataPropertyName = "IdLog";
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.IdLog.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.IdLog.DefaultCellStyle = dataGridViewCellStyle27;
             this.IdLog.HeaderText = "Id.Log";
             this.IdLog.Name = "IdLog";
             this.IdLog.Width = 80;
@@ -514,8 +616,8 @@
             // EventoDescr
             // 
             this.EventoDescr.DataPropertyName = "EventoDescr";
-            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.EventoDescr.DefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.EventoDescr.DefaultCellStyle = dataGridViewCellStyle28;
             this.EventoDescr.HeaderText = "Evento";
             this.EventoDescr.Name = "EventoDescr";
             this.EventoDescr.Width = 180;
@@ -523,24 +625,24 @@
             // UsuarioNombre
             // 
             this.UsuarioNombre.DataPropertyName = "UsuarioNombre";
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.UsuarioNombre.DefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.UsuarioNombre.DefaultCellStyle = dataGridViewCellStyle29;
             this.UsuarioNombre.HeaderText = "Usuario";
             this.UsuarioNombre.Name = "UsuarioNombre";
             // 
             // Fecha
             // 
             this.Fecha.DataPropertyName = "Fecha";
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.Fecha.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.Fecha.DefaultCellStyle = dataGridViewCellStyle30;
             this.Fecha.HeaderText = "Fecha";
             this.Fecha.Name = "Fecha";
             // 
             // Estado
             // 
             this.Estado.DataPropertyName = "Estado";
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.Estado.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.Estado.DefaultCellStyle = dataGridViewCellStyle31;
             this.Estado.HeaderText = "Estado";
             this.Estado.Name = "Estado";
             this.Estado.Width = 150;
@@ -549,8 +651,8 @@
             // 
             this.Comentario.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.Comentario.DataPropertyName = "Comentario";
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.Comentario.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            this.Comentario.DefaultCellStyle = dataGridViewCellStyle32;
             this.Comentario.HeaderText = "Comentario";
             this.Comentario.Name = "Comentario";
             this.Comentario.Width = 600;
@@ -558,9 +660,9 @@
             // SupervisorNivel
             // 
             this.SupervisorNivel.DataPropertyName = "SupervisorNivel";
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle35.NullValue = false;
-            this.SupervisorNivel.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle33.NullValue = false;
+            this.SupervisorNivel.DefaultCellStyle = dataGridViewCellStyle33;
             this.SupervisorNivel.HeaderText = "Supervisor";
             this.SupervisorNivel.Name = "SupervisorNivel";
             this.SupervisorNivel.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -570,8 +672,8 @@
             // IdNivSeg
             // 
             this.IdNivSeg.DataPropertyName = "IdNivSeg";
-            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.IdNivSeg.DefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            this.IdNivSeg.DefaultCellStyle = dataGridViewCellStyle34;
             this.IdNivSeg.HeaderText = "Nivel Seg.";
             this.IdNivSeg.Name = "IdNivSeg";
             this.IdNivSeg.Width = 80;
@@ -778,131 +880,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "IdLote: ";
             // 
-            // IdLote
-            // 
-            this.IdLote.DataPropertyName = "IdLote";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.IdLote.DefaultCellStyle = dataGridViewCellStyle2;
-            this.IdLote.HeaderText = "Id.Lote";
-            this.IdLote.Name = "IdLote";
-            this.IdLote.ReadOnly = true;
-            this.IdLote.Width = 60;
-            // 
-            // PuntoVenta
-            // 
-            this.PuntoVenta.DataPropertyName = "PuntoVenta";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.PuntoVenta.DefaultCellStyle = dataGridViewCellStyle3;
-            this.PuntoVenta.HeaderText = "PuntoVenta";
-            this.PuntoVenta.Name = "PuntoVenta";
-            this.PuntoVenta.ReadOnly = true;
-            // 
-            // IdTipoComprobante
-            // 
-            this.IdTipoComprobante.DataPropertyName = "IdTipoComprobante";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.IdTipoComprobante.DefaultCellStyle = dataGridViewCellStyle4;
-            this.IdTipoComprobante.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.IdTipoComprobante.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IdTipoComprobante.HeaderText = "Tipo Comprobante";
-            this.IdTipoComprobante.Name = "IdTipoComprobante";
-            this.IdTipoComprobante.ReadOnly = true;
-            this.IdTipoComprobante.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.IdTipoComprobante.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.IdTipoComprobante.Width = 120;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "NumeroComprobante";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewTextBoxColumn15.HeaderText = "Nº Comprobante";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            this.dataGridViewTextBoxColumn15.Width = 70;
-            // 
-            // FechaComprobante
-            // 
-            this.FechaComprobante.DataPropertyName = "Fecha";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.FechaComprobante.DefaultCellStyle = dataGridViewCellStyle6;
-            this.FechaComprobante.HeaderText = "Fecha";
-            this.FechaComprobante.Name = "FechaComprobante";
-            this.FechaComprobante.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn22
-            // 
-            this.dataGridViewTextBoxColumn22.DataPropertyName = "Importe";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.dataGridViewTextBoxColumn22.DefaultCellStyle = dataGridViewCellStyle7;
-            this.dataGridViewTextBoxColumn22.HeaderText = "Importe Mon. Nacional";
-            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-            this.dataGridViewTextBoxColumn22.ReadOnly = true;
-            // 
-            // IdMoneda
-            // 
-            this.IdMoneda.DataPropertyName = "IdMoneda";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.IdMoneda.DefaultCellStyle = dataGridViewCellStyle8;
-            this.IdMoneda.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.IdMoneda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IdMoneda.HeaderText = "Moneda";
-            this.IdMoneda.Name = "IdMoneda";
-            this.IdMoneda.ReadOnly = true;
-            this.IdMoneda.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.IdMoneda.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // ImporteMonedaOrigen
-            // 
-            this.ImporteMonedaOrigen.DataPropertyName = "ImporteMonedaOrigen";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.ImporteMonedaOrigen.DefaultCellStyle = dataGridViewCellStyle9;
-            this.ImporteMonedaOrigen.HeaderText = "Importe Mon. Extranjera";
-            this.ImporteMonedaOrigen.Name = "ImporteMonedaOrigen";
-            this.ImporteMonedaOrigen.ReadOnly = true;
-            // 
-            // TipoCambio
-            // 
-            this.TipoCambio.DataPropertyName = "TipoCambio";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            this.TipoCambio.DefaultCellStyle = dataGridViewCellStyle10;
-            this.TipoCambio.HeaderText = "Tipo de Cambio";
-            this.TipoCambio.Name = "TipoCambio";
-            this.TipoCambio.ReadOnly = true;
-            // 
-            // NombreVendedor
-            // 
-            this.NombreVendedor.DataPropertyName = "NombreVendedor";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.NombreVendedor.DefaultCellStyle = dataGridViewCellStyle11;
-            this.NombreVendedor.HeaderText = "Nombre Vendedor";
-            this.NombreVendedor.Name = "NombreVendedor";
-            this.NombreVendedor.ReadOnly = true;
-            this.NombreVendedor.Width = 300;
-            // 
-            // TipoDocVendedor
-            // 
-            this.TipoDocVendedor.DataPropertyName = "TipoDocVendedor";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.TipoDocVendedor.DefaultCellStyle = dataGridViewCellStyle12;
-            this.TipoDocVendedor.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.TipoDocVendedor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.TipoDocVendedor.HeaderText = "Tipo Doc. Vendedor";
-            this.TipoDocVendedor.Name = "TipoDocVendedor";
-            this.TipoDocVendedor.ReadOnly = true;
-            this.TipoDocVendedor.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.TipoDocVendedor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.TipoDocVendedor.Width = 80;
-            // 
-            // NroDocVendedor
-            // 
-            this.NroDocVendedor.DataPropertyName = "NroDocVendedor";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            this.NroDocVendedor.DefaultCellStyle = dataGridViewCellStyle13;
-            this.NroDocVendedor.HeaderText = "Nro.Doc. Vendedor";
-            this.NroDocVendedor.Name = "NroDocVendedor";
-            this.NroDocVendedor.ReadOnly = true;
-            // 
             // ConsultaLoteC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -980,17 +957,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Grupo;
         private System.Windows.Forms.TabPage DespachosTabPage;
         private System.Windows.Forms.DataGridView DespachosDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroDespacho;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dataGridViewComboBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdLote;
         private System.Windows.Forms.DataGridViewTextBoxColumn PuntoVenta;
         private System.Windows.Forms.DataGridViewComboBoxColumn IdTipoComprobante;
@@ -1003,6 +969,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreVendedor;
         private System.Windows.Forms.DataGridViewComboBoxColumn TipoDocVendedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn NroDocVendedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdLoteDIdLoteD;
+        private System.Windows.Forms.DataGridViewComboBoxColumn IdTipoComprobanteD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroDespachoD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ImporteD;
+        private System.Windows.Forms.DataGridViewComboBoxColumn IdMonedaD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NombreVendedorD;
+        private System.Windows.Forms.DataGridViewComboBoxColumn TipoDocVendedorD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NroDocVendedorD;
 
     }
 }

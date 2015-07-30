@@ -1446,6 +1446,8 @@
     <Compile Include="TiposDeComprobantes\Facturas\A.cs" />
     <Compile Include="TiposDeComprobantes\Facturas\B.cs" />
     <Compile Include="TiposDeComprobantes\Facturas\Factura.cs" />
+    <Compile Include="TiposDeComprobantes\Importaciones\Despacho.cs" />
+    <Compile Include="TiposDeComprobantes\Importaciones\Importacion.cs" />
     <Compile Include="TiposDeComprobantes\Liquidacion\A.cs" />
     <Compile Include="TiposDeComprobantes\Liquidacion\B.cs" />
     <Compile Include="TiposDeComprobantes\Liquidacion\Liquidacion.cs" />

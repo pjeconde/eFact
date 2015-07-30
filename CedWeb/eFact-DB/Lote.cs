@@ -203,20 +203,20 @@ namespace eFact_DB
                 cD.IdLote = Convert.ToInt32(dr[i]["IdLote"]);
                 cD.IdTipoComprobante = Convert.ToInt16(dr[i]["IdTipoComprobante"]);
                 cD.NumeroDespacho = Convert.ToString(dr[i]["NumeroDespacho"]);
-                cD.IdMoneda = Convert.ToString(dr[i]["IdMoneda"]);
-                cD.Importe = Convert.ToDecimal(dr[i]["Importe"]);
                 cD.NroDocVendedor = Convert.ToString(dr[i]["NroDocVendedor"]);
                 cD.TipoDocVendedor = Convert.ToInt16(dr[i]["TipoDocVendedor"]);
                 cD.NombreVendedor = Convert.ToString(dr[i]["NombreVendedor"]);
                 cD.Fecha = Convert.ToDateTime(dr[i]["Fecha"]);
-                if (dr[i]["ImporteMonedaOrigen"].ToString() != "")
-                {
-                    cD.ImporteMonedaOrigen = Convert.ToDecimal(dr[i]["ImporteMonedaOrigen"]);
-                }
-                if (dr[i]["ImporteMonedaOrigen"].ToString() != "")
-                {
-                    cD.TipoCambio = Convert.ToDecimal(dr[i]["TipoCambio"]);
-                }
+                cD.IdMoneda = Convert.ToString(dr[i]["IdMoneda"]);
+                cD.Importe = Convert.ToDecimal(dr[i]["Importe"]);
+                //if (dr[i]["ImporteMonedaOrigen"].ToString() != "")
+                //{
+                //    cD.ImporteMonedaOrigen = Convert.ToDecimal(dr[i]["ImporteMonedaOrigen"]);
+                //}
+                //if (dr[i]["ImporteMonedaOrigen"].ToString() != "")
+                //{
+                //    cD.TipoCambio = Convert.ToDecimal(dr[i]["TipoCambio"]);
+                //}
                 Hasta.ComprobantesD.Add(cD);
             }
             //WF
@@ -520,9 +520,7 @@ namespace eFact_DB
                 commandText.Append(nombreVendedor + "', '");
                 commandText.Append(Lote.ComprobantesD[i].Fecha.ToString("yyyyMMdd") + "', '");
                 commandText.Append(Lote.ComprobantesD[i].IdMoneda + "', ");
-                commandText.Append(Lote.ComprobantesD[i].Importe + ", ");
-                commandText.Append(Lote.ComprobantesD[i].ImporteMonedaOrigen + ", ");
-                commandText.Append(Lote.ComprobantesD[i].TipoCambio + ") ");
+                commandText.Append(Lote.ComprobantesD[i].Importe + ") ");
             }
             commandText.Append(HandlerArchivo);
             commandText.Append(" Select @IdLote ");
