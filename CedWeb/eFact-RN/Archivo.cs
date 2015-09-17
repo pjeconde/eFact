@@ -268,6 +268,12 @@ namespace eFact_RN
                         //cD.ImporteMonedaOrigen = Convert.ToDecimal(Lc.comprobante[i].resumen.importes_moneda_origen.importe_total_factura);
                         cD.TipoCambio = Convert.ToDecimal(Lc.comprobanteDespacho[i].DespachoResumen.TipoCambio);
                         lote.ComprobantesD.Add(cD);
+
+                        List<eFact_Entidades.ComprobanteD> listAux = cDListVigentes.FindAll((delegate(eFact_Entidades.ComprobanteD e1) { return e1.NroDocVendedor == cD.NroDocVendedor && e1.IdTipoComprobante == cD.IdTipoComprobante && e1.NumeroDespacho == cD.NumeroDespacho; }));
+                        if (listAux.Count != 0)
+                        {
+                            throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Comprobante de Despacho existente. Cuit Vendedor: " + cD.NroDocVendedor + " Tipo: " + cD.IdTipoComprobante.ToString() + " Nro: " + cD.NumeroDespacho);
+                        }
                     }
                     else
                     {

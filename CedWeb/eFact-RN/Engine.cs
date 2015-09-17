@@ -51,6 +51,7 @@ namespace eFact_RN
 
                 FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
                 int NroComprobante = 0;
+                int NroDespacho = 0;
                 int NroLineaReferencias = 0;
                 int NroLineaPermisos = 0;
                 int NroLineaDescuento = 0;
@@ -255,26 +256,26 @@ namespace eFact_RN
                     //--- Despachos -----------------------------------
                     if (typeof(FeaEntidades.InterFacturas.despachoCabecera) == o.GetType())
                     {
-                        if (lc.comprobanteDespacho == null)
-                        {
-                            lc.comprobanteDespacho = new FeaEntidades.InterFacturas.comprobanteDespacho[1000];
-                        }
-                        lc.comprobanteDespacho[NroComprobante] = new FeaEntidades.InterFacturas.comprobanteDespacho();
-                        lc.comprobanteDespacho[NroComprobante].DespachoCabecera = (FeaEntidades.InterFacturas.despachoCabecera)o;
+                        //if (lc.comprobanteDespacho == null)
+                        //{
+                        //    lc.comprobanteDespacho = new FeaEntidades.InterFacturas.comprobanteDespacho[1000];
+                        //}
+                        lc.comprobanteDespacho[NroDespacho] = new FeaEntidades.InterFacturas.comprobanteDespacho();
+                        lc.comprobanteDespacho[NroDespacho].DespachoCabecera = (FeaEntidades.InterFacturas.despachoCabecera)o;
                         GetPropiedades(o);
                     }
                     if (typeof(FeaEntidades.InterFacturas.despachoImpuesto) == o.GetType())
                     {
-                        lc.comprobanteDespacho[NroComprobante].DespachoImpuesto[NroLineaDespachoImpuestos] = new FeaEntidades.InterFacturas.despachoImpuesto();
-                        lc.comprobanteDespacho[NroComprobante].DespachoImpuesto[NroLineaDespachoImpuestos] = (FeaEntidades.InterFacturas.despachoImpuesto)o;
+                        lc.comprobanteDespacho[NroDespacho].DespachoImpuesto[NroLineaDespachoImpuestos] = new FeaEntidades.InterFacturas.despachoImpuesto();
+                        lc.comprobanteDespacho[NroDespacho].DespachoImpuesto[NroLineaDespachoImpuestos] = (FeaEntidades.InterFacturas.despachoImpuesto)o;
                         ++NroLineaDespachoImpuestos;
                     }
                     if (typeof(FeaEntidades.InterFacturas.despachoResumen) == o.GetType())
                     {
-                        lc.comprobanteDespacho[NroComprobante].DespachoResumen = new FeaEntidades.InterFacturas.despachoResumen();
-                        lc.comprobanteDespacho[NroComprobante].DespachoResumen = (FeaEntidades.InterFacturas.despachoResumen)o;
+                        lc.comprobanteDespacho[NroDespacho].DespachoResumen = new FeaEntidades.InterFacturas.despachoResumen();
+                        lc.comprobanteDespacho[NroDespacho].DespachoResumen = (FeaEntidades.InterFacturas.despachoResumen)o;
                         GetPropiedades(o);
-                        ++NroComprobante;
+                        ++NroDespacho;
                         NroLineaDespachoImpuestos = 0;
                     }
                     //------------------------------------------------

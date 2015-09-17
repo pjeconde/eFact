@@ -818,5 +818,20 @@ namespace eFact_RN
             eFact_DB.Lote lote = new eFact_DB.Lote(Sesion);
             lote.GuardarNovedades(novedad);
         }
+        public static List<eFact_Entidades.Lote> ConsultarLotesDeComprobantesVigentesXFecha(string FechaDsd, string FechaHst, string CuitEmpresa, CedEntidades.Sesion Sesion)
+        {
+            eFact_DB.Lote c = new eFact_DB.Lote(Sesion);
+            return c.ConsutarLotesDeComprobantesVigentesXFecha(FechaDsd, FechaHst, CuitEmpresa);
+        }
+        public static List<eFact_Entidades.Lote> ConsultarLotesDeComprobantesCVigentesXFecha(string FechaDsd, string FechaHst, string CuitEmpresa, CedEntidades.Sesion Sesion)
+        {
+            eFact_DB.Lote c = new eFact_DB.Lote(Sesion);
+            return c.ConsutarLotesDeComprobantesCVigentesXFecha(FechaDsd, FechaHst, CuitEmpresa);
+        }
+        public static List<eFact_Entidades.Lote> ConsultarLotesDeComprobantesDVigentesXFecha(string FechaDsd, string FechaHst, string CuitEmpresa, CedEntidades.Sesion Sesion)
+        {
+            eFact_DB.Lote c = new eFact_DB.Lote(Sesion);
+            return c.ConsutarLotesDeComprobantesDVigentesXFecha(FechaDsd, FechaHst, CuitEmpresa);
+        }
     }
 }

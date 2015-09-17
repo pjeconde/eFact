@@ -51,7 +51,7 @@ namespace eFact_R
             {
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 DataGridViewComboBoxColumn colIdTipoComprobante = (DataGridViewComboBoxColumn)DetalleLoteDataGridView.Columns["IdTipoComprobante"];
-                colIdTipoComprobante.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
+                colIdTipoComprobante.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP();
                 colIdTipoComprobante.DisplayMember = "Descr";
                 colIdTipoComprobante.ValueMember = "Codigo";
                 colIdTipoComprobante.DataPropertyName = "IdTipoComprobante";

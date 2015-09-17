@@ -49,7 +49,7 @@ namespace eFact_DB
         public List<eFact_Entidades.Comprobante> ConsutarComprobantesVigentes(string CuitEmpresa)
         {
             StringBuilder commandText = new StringBuilder();
-            commandText.Append("Select Comprobantes.*, Lotes.PuntoVenta as PuntoVenta, Lotes.CuitVendedor as CuitEmpresa, Lotes.LoteXML from Comprobantes, Lotes, WF_Op where Comprobantes.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
+            commandText.Append("Select Comprobantes.*, Lotes.PuntoVenta as PuntoVenta, Lotes.CuitVendedor as CuitEmpresa, '' as LoteXML from Comprobantes, Lotes, WF_Op where Comprobantes.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
             if (CuitEmpresa != "")
             {
                 commandText.Append("and Lotes.CuitVendedor = '" + CuitEmpresa + "' ");
@@ -76,7 +76,7 @@ namespace eFact_DB
         public List<eFact_Entidades.Comprobante> ConsutarComprobantesVigentesXFecha(string FechaDsd, string FechaHst, string CuitEmpresa)
         {
             StringBuilder commandText = new StringBuilder();
-            commandText.Append("Select Comprobantes.*, Lotes.PuntoVenta as PuntoVenta, Lotes.CuitVendedor as CuitEmpresa, Lotes.LoteXML from Comprobantes, Lotes, WF_Op where Comprobantes.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
+            commandText.Append("Select Comprobantes.*, Lotes.PuntoVenta as PuntoVenta, Lotes.CuitVendedor as CuitEmpresa, '' as LoteXML from Comprobantes, Lotes, WF_Op where Comprobantes.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente', 'AceptadoAFIP', 'AceptadoAFIPO') ");
             commandText.Append("and convert(varchar(8), Comprobantes.Fecha, 112) >= '" + FechaDsd + "' and convert(varchar(8), Comprobantes.Fecha, 112) <= '" + FechaHst + "' ");
             if (CuitEmpresa != "")
             {
@@ -122,7 +122,7 @@ namespace eFact_DB
         public List<eFact_Entidades.ComprobanteC> ConsutarComprobantesCVigentes(string CuitEmpresa)
         {
             StringBuilder commandText = new StringBuilder();
-            commandText.Append("Select ComprobantesC.*, Lotes.CuitVendedor as CuitEmpresa, Lotes.LoteXML from ComprobantesC, Lotes, WF_Op where ComprobantesC.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
+            commandText.Append("Select ComprobantesC.*, Lotes.CuitVendedor as CuitEmpresa, '' as LoteXML from ComprobantesC, Lotes, WF_Op where ComprobantesC.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
             if (CuitEmpresa != "")
             {
                 commandText.Append("and Lotes.CuitVendedor = '" + CuitEmpresa + "' ");
@@ -149,7 +149,7 @@ namespace eFact_DB
         public List<eFact_Entidades.ComprobanteC> ConsutarComprobantesCVigentesXFecha(string FechaDsd, string FechaHst, string CuitEmpresa)
         {
             StringBuilder commandText = new StringBuilder();
-            commandText.Append("Select ComprobantesC.*, Lotes.CuitVendedor as CuitEmpresa, Lotes.LoteXML from ComprobantesC, Lotes, WF_Op where ComprobantesC.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
+            commandText.Append("Select ComprobantesC.*, Lotes.CuitVendedor as CuitEmpresa, '' as LoteXML from ComprobantesC, Lotes, WF_Op where ComprobantesC.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
             commandText.Append("and convert(varchar(8), ComprobantesC.Fecha, 112) >= '" + FechaDsd + "' and convert(varchar(8), ComprobantesC.Fecha, 112) <= '" + FechaHst + "' ");
             if (CuitEmpresa != "")
             {
@@ -196,7 +196,7 @@ namespace eFact_DB
         public List<eFact_Entidades.ComprobanteD> ConsutarComprobantesDVigentes(string CuitEmpresa)
         {
             StringBuilder commandText = new StringBuilder();
-            commandText.Append("Select ComprobantesD.*, Lotes.CuitVendedor as CuitEmpresa, Lotes.LoteXML from ComprobantesD, Lotes, WF_Op where ComprobantesD.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
+            commandText.Append("Select ComprobantesD.*, Lotes.CuitVendedor as CuitEmpresa, '' as LoteXML from ComprobantesD, Lotes, WF_Op where ComprobantesD.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
             if (CuitEmpresa != "")
             {
                 commandText.Append("and Lotes.CuitVendedor = '" + CuitEmpresa + "' ");
@@ -223,7 +223,7 @@ namespace eFact_DB
         public List<eFact_Entidades.ComprobanteD> ConsutarComprobantesDVigentesXFecha(string FechaDsd, string FechaHst, string CuitEmpresa)
         {
             StringBuilder commandText = new StringBuilder();
-            commandText.Append("Select ComprobantesD.*, Lotes.CuitVendedor as CuitEmpresa, Lotes.LoteXML from ComprobantesD, Lotes, WF_Op where ComprobantesD.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
+            commandText.Append("Select ComprobantesD.*, Lotes.CuitVendedor as CuitEmpresa, '' as LoteXML from ComprobantesD, Lotes, WF_Op where ComprobantesD.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
             commandText.Append("and convert(varchar(8), ComprobantesD.Fecha, 112) >= '" + FechaDsd + "' and convert(varchar(8), ComprobantesD.Fecha, 112) <= '" + FechaHst + "' ");
             if (CuitEmpresa != "")
             {

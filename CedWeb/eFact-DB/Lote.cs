@@ -42,6 +42,12 @@ namespace eFact_DB
             //Select Comprobantes
             commandText.Append("select Comprobantes.* from #Lotes ");
             commandText.Append("inner join Comprobantes on Comprobantes.IdLote = #Lotes.IdLote ");
+            //Select ComprobantesC (Compras)
+            commandText.Append("select ComprobantesC.* from #Lotes ");
+            commandText.Append("inner join ComprobantesC on ComprobantesC.IdLote = #Lotes.IdLote ");
+            //Select ComprobantesD (Compras - Despachos de Importación)
+            commandText.Append("select ComprobantesD.* from #Lotes ");
+            commandText.Append("inner join ComprobantesD on ComprobantesD.IdLote = #Lotes.IdLote ");
             //Select WF_LOG
             commandText.Append("Select #Lotes.IdLote, ");
             commandText.Append("WF_Log.Fecha, WF_Evento.DescrEvento as Evento, WF_Estado.DescrEstado as Estado, WCUsuarios.Nombre+' ('+WF_Log.IdUsuario+')' as Responsable, WCUsuarios.Nombre as Nombre, ");
@@ -780,6 +786,113 @@ namespace eFact_DB
             commandText.Append("insert Novedades values ('");
             commandText.Append(novedad.CuitVendedor + "', " + novedad.IdLote + ", " + novedad.NumeroEnvio + ", " + novedad.PuntoVenta + ", " + novedad.IdLog + ", " + novedad.IdOp + ", '" + novedad.NumeroLote + "', '" + novedad.IdEstado + "', '" + novedad.Comentario.Replace("'", " ") + "', '" + novedad.FechaAlta.ToString("yyyyMMdd HH:mm:ss") + "', " + novedad.CantidadRegistros + ")");
             Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.Usa, sesion.CnnStr);
+        }
+
+        public List<eFact_Entidades.Lote> ConsutarLotesDeComprobantesVigentesXFecha(string FechaDsd, string FechaHst, string CuitEmpresa)
+        {
+            StringBuilder commandText = new StringBuilder();
+            commandText.Append("Select Lotes.* from Lotes where IdLote in (Select distinct(Lotes.IdLote) as IdLote from Comprobantes, Lotes, WF_Op where Comprobantes.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente', 'AceptadoAFIP', 'AceptadoAFIPO') ");
+            commandText.Append("and convert(varchar(8), Comprobantes.Fecha, 112) >= '" + FechaDsd + "' and convert(varchar(8), Comprobantes.Fecha, 112) <= '" + FechaHst + "' ");
+            if (CuitEmpresa != "")
+            {
+                commandText.Append("and Lotes.CuitVendedor = '" + CuitEmpresa + "') ");
+            }
+            commandText.Append("order by Lotes.IdLote");
+            DataSet ds = new DataSet();
+            ds = (DataSet)Ejecutar(commandText.ToString(), TipoRetorno.DS, Transaccion.Acepta, sesion.CnnStr);
+            List<eFact_Entidades.Lote> Lotes = new List<eFact_Entidades.Lote>();
+            if (ds.Tables.Count == 0)
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.NoHayDatos();
+            }
+            else
+            {
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    eFact_Entidades.Lote Lote = new eFact_Entidades.Lote();
+                    CopiarSimple(ds, i, Lote);
+                    Lotes.Add(Lote);
+                }
+            }
+            return Lotes;
+        }
+        public List<eFact_Entidades.Lote> ConsutarLotesDeComprobantesCVigentesXFecha(string FechaDsd, string FechaHst, string CuitEmpresa)
+        {
+            StringBuilder commandText = new StringBuilder();
+            commandText.Append("Select Lotes.* from Lotes where IdLote in (Select distinct(Lotes.IdLote) as IdLote from ComprobantesC, Lotes, WF_Op where ComprobantesC.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
+            commandText.Append("and convert(varchar(8), ComprobantesC.Fecha, 112) >= '" + FechaDsd + "' and convert(varchar(8), ComprobantesC.Fecha, 112) <= '" + FechaHst + "' ");
+            if (CuitEmpresa != "")
+            {
+                commandText.Append("and Lotes.CuitVendedor = '" + CuitEmpresa + "') ");
+            }
+            commandText.Append("order by Lotes.IdLote");
+            DataSet ds = new DataSet();
+            ds = (DataSet)Ejecutar(commandText.ToString(), TipoRetorno.DS, Transaccion.Acepta, sesion.CnnStr);
+            List<eFact_Entidades.Lote> Lotes = new List<eFact_Entidades.Lote>();
+            if (ds.Tables.Count == 0)
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.NoHayDatos();
+            }
+            else
+            {
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    eFact_Entidades.Lote Lote = new eFact_Entidades.Lote();
+                    CopiarSimple(ds, i, Lote);
+                    Lotes.Add(Lote);
+                }
+            }
+            return Lotes;
+        }
+        public List<eFact_Entidades.Lote> ConsutarLotesDeComprobantesDVigentesXFecha(string FechaDsd, string FechaHst, string CuitEmpresa)
+        {
+            StringBuilder commandText = new StringBuilder();
+            commandText.Append("Select Lotes.* from Lotes where IdLote in (Select distinct(Lotes.IdLote) as IdLote from ComprobantesD, Lotes, WF_Op where ComprobantesD.IdLote=Lotes.IdLote and Lotes.IdOp=WF_Op.IdOp and WF_Op.IdEstado in ('Vigente') ");
+            commandText.Append("and convert(varchar(8), ComprobantesD.Fecha, 112) >= '" + FechaDsd + "' and convert(varchar(8), ComprobantesD.Fecha, 112) <= '" + FechaHst + "' ");
+            if (CuitEmpresa != "")
+            {
+                commandText.Append("and Lotes.CuitVendedor = '" + CuitEmpresa + "') ");
+            }
+            commandText.Append("order by Lotes.IdLote");
+            DataSet ds = new DataSet();
+            ds = (DataSet)Ejecutar(commandText.ToString(), TipoRetorno.DS, Transaccion.Acepta, sesion.CnnStr);
+            List<eFact_Entidades.Lote> Lotes = new List<eFact_Entidades.Lote>();
+            if (ds.Tables.Count == 0)
+            {
+                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Validaciones.NoHayDatos();
+            }
+            else
+            {
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    eFact_Entidades.Lote Lote = new eFact_Entidades.Lote();
+                    CopiarSimple(ds, i, Lote);
+                    Lotes.Add(Lote);
+                }
+            }
+            return Lotes;
+        }
+        private void CopiarSimple(DataSet ds, int NroRowPpal, eFact_Entidades.Lote Hasta)
+        {
+            DataRow Desde;
+            Desde = ds.Tables[0].Rows[NroRowPpal];
+            Hasta.IdLote = Convert.ToInt32(Desde["IdLote"]);
+            Hasta.CuitVendedor = Convert.ToString(Desde["CuitVendedor"]);
+            Hasta.PuntoVenta = Convert.ToString(Desde["PuntoVenta"]);
+            Hasta.NumeroLote = Convert.ToString(Desde["NumeroLote"]);
+            Hasta.NumeroEnvio = Convert.ToInt32(Desde["NumeroEnvio"]);
+            Hasta.IdOp = Convert.ToInt32(Desde["IdOp"]);
+            Hasta.FechaAlta = Convert.ToDateTime(Desde["FechaAlta"]);
+            if (Desde["FechaEnvio"].ToString() == "")
+            {
+                Desde["FechaEnvio"] = "31/12/9998";
+            }
+            Hasta.FechaEnvio = Convert.ToDateTime(Desde["FechaEnvio"]);
+            Hasta.NombreArch = Convert.ToString(Desde["NombreArch"]);
+            Hasta.CantidadRegistros = Convert.ToInt32(Desde["CantidadRegistros"]);
+            Hasta.LoteXml = Convert.ToString(Desde["LoteXml"]);
+            Hasta.LoteXmlIF = Convert.ToString(Desde["LoteXmlIF"]);
+            Hasta.IdNaturalezaLote = Convert.ToString(Desde["IdNaturalezaLote"]);
         }
     }
 }
