@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using FileHelpers;
+using FileHelpers.RunTime; 
 
 namespace FeaEntidades.InterFacturas
 {
@@ -11,7 +13,7 @@ namespace FeaEntidades.InterFacturas
 	[System.ComponentModel.DesignerCategoryAttribute("code")]
 	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://lote.schemas.cfe.ib.com.ar/")]
 	[System.Xml.Serialization.XmlRootAttribute(Namespace = "http://lote.schemas.cfe.ib.com.ar/", IsNullable = false)]
-	[FileHelpers.DelimitedRecord("|")]
+	[DelimitedRecord("|")]
 	public partial class despachoCabecera
 	{
         private string nombre_claseField = "<despachoCabecera>";
@@ -35,8 +37,6 @@ namespace FeaEntidades.InterFacturas
 
         [FileHelpers.FieldNullValue(typeof(System.Int64), "0")]
         private long nroDocCompradorField;	//(fijo)
-
-   	    
 
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string nombre_clase

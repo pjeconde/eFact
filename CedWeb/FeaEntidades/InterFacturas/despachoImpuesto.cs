@@ -1,16 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using FileHelpers;
+using FileHelpers.RunTime; 
 
 namespace FeaEntidades.InterFacturas
 {
-	/// <comentarios/>
+    /// <comentarios/>
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
 	[System.SerializableAttribute()]
 	[System.Diagnostics.DebuggerStepThroughAttribute()]
 	[System.ComponentModel.DesignerCategoryAttribute("code")]
-	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://lote.schemas.cfe.ib.com.ar/")]
-	[FileHelpers.DelimitedRecord("|")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://lote.schemas.cfe.ib.com.ar/")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://lote.schemas.cfe.ib.com.ar/", IsNullable = false)]
+    [DelimitedRecord("|")]
 	public partial class despachoImpuesto
 	{
         private string nombre_claseField = "<despachoImpuesto>";
@@ -43,7 +46,6 @@ namespace FeaEntidades.InterFacturas
                 this.importeNetoGravadoField = value;
 			}
 		}
-
 
 		/// <comentarios/>
 		public double AlicIVA

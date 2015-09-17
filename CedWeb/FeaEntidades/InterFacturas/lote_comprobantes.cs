@@ -16,12 +16,11 @@ namespace FeaEntidades.InterFacturas
     [DelimitedRecord("|")] 
     public partial class lote_comprobantes
 	{
-
 		private cabecera_lote cabecera_loteField;
 
 		private comprobante[] comprobanteField=new comprobante[10000];
 
-        private comprobanteDespacho[] comprobanteDespachoField;
+        private comprobanteDespacho[] comprobanteDespachoField=new comprobanteDespacho[10000];
 
 		/// <comentarios/>
 		public cabecera_lote cabecera_lote

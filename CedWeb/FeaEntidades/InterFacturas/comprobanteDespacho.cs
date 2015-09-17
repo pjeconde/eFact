@@ -9,6 +9,7 @@ namespace FeaEntidades.InterFacturas
 	[System.Diagnostics.DebuggerStepThroughAttribute()]
 	[System.ComponentModel.DesignerCategoryAttribute("code")]
 	[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://lote.schemas.cfe.ib.com.ar/")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://lote.schemas.cfe.ib.com.ar/", IsNullable = false)]
 	[FileHelpers.DelimitedRecord("|")]
 	public partial class comprobanteDespacho
 	{
@@ -32,6 +33,7 @@ namespace FeaEntidades.InterFacturas
 		}
 
         /// <comentarios/>
+        [System.Xml.Serialization.XmlArrayItem(IsNullable=false)]
         public despachoImpuesto[] DespachoImpuesto
 		{
 			get
