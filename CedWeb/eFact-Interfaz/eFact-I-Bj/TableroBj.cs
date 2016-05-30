@@ -77,6 +77,12 @@ namespace eFact_I_Bj
             ConsultaComprobantesDataGridView.Columns.Add(colCompradorNombre);
 			FechaComprobantesDsdDTP.Value = DateTime.Now;
 			FechaComprobantesHstDTP.Value = DateTime.Now;
+            TipoCambioLabel.Visible = true;
+            ImporteDolaresLabel.Visible = true;
+            TipoCambioTextBox.Visible = true;
+            TipoCambioTextBox.Enabled = false;
+            ImporteDolaresTextBox.Visible = true;
+            ImporteDolaresTextBox.Enabled = false;
         }
 
         private void TableroBj_Load(object sender, EventArgs e)
@@ -125,7 +131,8 @@ namespace eFact_I_Bj
 
         private void menuItem3_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\eFact-I-Bj-Ayuda.doc");
+            MessageBox.Show("No hay ayuda disponible.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            //System.Diagnostics.Process.Start(Environment.CurrentDirectory + "\\eFact-I-Bj-Ayuda.doc");
         }
 
         private void menuItem2_Click(object sender, EventArgs e)
@@ -204,6 +211,18 @@ namespace eFact_I_Bj
                                 Lc.comprobante[renglon].resumen.observaciones = plantillaExpuesta.LeyendaBanco;
                             //}
                         }
+						if (FactServiciosCheckBox.Checked)
+						{
+							Lc.comprobante[renglon].cabecera.informacion_comprobante.fecha_serv_desde = FechaDsdServ.Value.ToString("yyyyMMdd");
+							Lc.comprobante[renglon].cabecera.informacion_comprobante.fecha_serv_hasta = FechaHstServ.Value.ToString("yyyyMMdd");
+							Lc.comprobante[renglon].cabecera.informacion_comprobante.codigo_conceptoSpecified = true;
+							Lc.comprobante[renglon].cabecera.informacion_comprobante.codigo_concepto = 2;
+						}
+						if (FactDolarCheckBox.Checked)
+						{
+							string comentario = "Este documento se emite por el importe equivalente a USD "+ ImporteDolaresTextBox.Text +" al TC "+ TipoCambioTextBox.Text +" ARS/USD. De existir diferencia entre este tipo de cambio y el que corresponda al día anterior al pago efectivo, el pago se considerara hecho a cuenta y la diferencia generada deberá ser compensada mediante una ND/NC según corresponda a ser emitida por Gas Patagonia S.A.";
+							Lc.comprobante[renglon].detalle.comentarios = comentario;
+						}
                         
                         //Crear "lote_comprobantes"
                         string LoteXML;
@@ -248,6 +267,8 @@ namespace eFact_I_Bj
 							lcComprobanteSelec.comprobante[0].resumen.importe_operaciones_exentas = 0;
 
 						}
+						lcComprobanteSelec.cabecera_lote.id_lote = Convert.ToInt64(DateTime.Now.ToString("yyyyMMddHHmmss"));
+						lcComprobanteSelec.cabecera_lote.fecha_envio_lote = DateTime.Now.ToString("yyyyMMdd") + " " + DateTime.Now.ToString("HHmmss");
                         LoteXML = ArmarLoteXML(lcComprobanteSelec);
                         //Definir ruta y nombre del archivo.
 						string archPath = System.Configuration.ConfigurationManager.AppSettings["ArchPath"];
@@ -332,5 +353,41 @@ namespace eFact_I_Bj
             plantilla.ShowDialog();
             plantilla = null;
         }
+
+		private void FactServiciosCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (FactServiciosCheckBox.Checked)
+			{
+				FechaDsdServ.Enabled = true;
+				FechaDsdServ.Visible = true;
+				FechaHstServ.Enabled = true;
+				FechaHstServ.Visible = true;
+			}
+			else
+			{
+				FechaDsdServ.Enabled = false;
+				FechaDsdServ.Visible = true;
+				FechaHstServ.Enabled = false;
+				FechaHstServ.Visible = true;
+			}
+		}
+
+		private void FactDolarCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (FactDolarCheckBox.Checked)
+			{
+				TipoCambioTextBox.Enabled = true;
+				TipoCambioTextBox.Visible = true;
+				ImporteDolaresTextBox.Enabled = true;
+				ImporteDolaresTextBox.Visible = true;
+			}
+			else
+			{
+				TipoCambioTextBox.Enabled = false;
+				TipoCambioTextBox.Visible = true;
+				ImporteDolaresTextBox.Enabled = false;
+				ImporteDolaresTextBox.Visible = true;
+			}
+		}
     }
 }

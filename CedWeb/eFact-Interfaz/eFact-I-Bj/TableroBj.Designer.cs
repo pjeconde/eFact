@@ -45,6 +45,16 @@
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.BandejaEHorizontalSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.ImporteDolaresLabel = new System.Windows.Forms.Label();
+            this.TipoCambioLabel = new System.Windows.Forms.Label();
+            this.ImporteDolaresTextBox = new System.Windows.Forms.TextBox();
+            this.TipoCambioTextBox = new System.Windows.Forms.TextBox();
+            this.FactDolarCheckBox = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.FechaHstServ = new System.Windows.Forms.DateTimePicker();
+            this.FechaDsdServ = new System.Windows.Forms.DateTimePicker();
+            this.FactServiciosCheckBox = new System.Windows.Forms.CheckBox();
             this.TestingPanel = new System.Windows.Forms.Panel();
             this.TestingVerificarExistenciaCAECheckBox = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -58,9 +68,9 @@
             this.PuntoVentaTextBox = new System.Windows.Forms.TextBox();
             this.PuntoVentaLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.FechaComprobantesHstDTP = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.FechaComprobantesDsdDTP = new System.Windows.Forms.DateTimePicker();
-            this.FechaComprobantesHstDTP = new System.Windows.Forms.DateTimePicker();
             this.label12 = new System.Windows.Forms.Label();
             this.FechaComprobantes2Label = new System.Windows.Forms.Label();
             this.ComprobantesAProcesarRadioButton = new System.Windows.Forms.RadioButton();
@@ -160,11 +170,21 @@
             this.BandejaEHorizontalSplitContainer.Panel2.Controls.Add(this.BandejaEGrillaPanel);
             this.BandejaEHorizontalSplitContainer.Panel2MinSize = 80;
             this.BandejaEHorizontalSplitContainer.Size = new System.Drawing.Size(963, 480);
-            this.BandejaEHorizontalSplitContainer.SplitterDistance = 126;
+            this.BandejaEHorizontalSplitContainer.SplitterDistance = 160;
             this.BandejaEHorizontalSplitContainer.TabIndex = 16;
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.ImporteDolaresLabel);
+            this.panel5.Controls.Add(this.TipoCambioLabel);
+            this.panel5.Controls.Add(this.ImporteDolaresTextBox);
+            this.panel5.Controls.Add(this.TipoCambioTextBox);
+            this.panel5.Controls.Add(this.FactDolarCheckBox);
+            this.panel5.Controls.Add(this.label10);
+            this.panel5.Controls.Add(this.label9);
+            this.panel5.Controls.Add(this.FechaHstServ);
+            this.panel5.Controls.Add(this.FechaDsdServ);
+            this.panel5.Controls.Add(this.FactServiciosCheckBox);
             this.panel5.Controls.Add(this.TestingPanel);
             this.panel5.Controls.Add(this.ComprobantesTodosRadioButton);
             this.panel5.Controls.Add(this.ComprobantesProcesadosRadioButton);
@@ -173,8 +193,105 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(963, 103);
+            this.panel5.Size = new System.Drawing.Size(963, 137);
             this.panel5.TabIndex = 9;
+            // 
+            // ImporteDolaresLabel
+            // 
+            this.ImporteDolaresLabel.AutoSize = true;
+            this.ImporteDolaresLabel.Location = new System.Drawing.Point(475, 100);
+            this.ImporteDolaresLabel.Name = "ImporteDolaresLabel";
+            this.ImporteDolaresLabel.Size = new System.Drawing.Size(100, 13);
+            this.ImporteDolaresLabel.TabIndex = 79;
+            this.ImporteDolaresLabel.Text = "Importe en dólares: ";
+            this.ImporteDolaresLabel.Visible = false;
+            // 
+            // TipoCambioLabel
+            // 
+            this.TipoCambioLabel.AutoSize = true;
+            this.TipoCambioLabel.Location = new System.Drawing.Point(333, 99);
+            this.TipoCambioLabel.Name = "TipoCambioLabel";
+            this.TipoCambioLabel.Size = new System.Drawing.Size(83, 13);
+            this.TipoCambioLabel.TabIndex = 78;
+            this.TipoCambioLabel.Text = "Tipo de cambio:";
+            this.TipoCambioLabel.Visible = false;
+            // 
+            // ImporteDolaresTextBox
+            // 
+            this.ImporteDolaresTextBox.Location = new System.Drawing.Point(581, 97);
+            this.ImporteDolaresTextBox.Name = "ImporteDolaresTextBox";
+            this.ImporteDolaresTextBox.Size = new System.Drawing.Size(81, 20);
+            this.ImporteDolaresTextBox.TabIndex = 77;
+            this.ImporteDolaresTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ImporteDolaresTextBox.Visible = false;
+            // 
+            // TipoCambioTextBox
+            // 
+            this.TipoCambioTextBox.Location = new System.Drawing.Point(422, 96);
+            this.TipoCambioTextBox.Name = "TipoCambioTextBox";
+            this.TipoCambioTextBox.Size = new System.Drawing.Size(42, 20);
+            this.TipoCambioTextBox.TabIndex = 76;
+            this.TipoCambioTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TipoCambioTextBox.Visible = false;
+            // 
+            // FactDolarCheckBox
+            // 
+            this.FactDolarCheckBox.AutoSize = true;
+            this.FactDolarCheckBox.Location = new System.Drawing.Point(217, 99);
+            this.FactDolarCheckBox.Name = "FactDolarCheckBox";
+            this.FactDolarCheckBox.Size = new System.Drawing.Size(102, 17);
+            this.FactDolarCheckBox.TabIndex = 74;
+            this.FactDolarCheckBox.Text = "Fact. en dólares";
+            this.FactDolarCheckBox.UseVisualStyleBackColor = true;
+            this.FactDolarCheckBox.CheckedChanged += new System.EventHandler(this.FactDolarCheckBox_CheckedChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(748, 65);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(98, 13);
+            this.label10.TabIndex = 73;
+            this.label10.Text = "Fecha serv. hasta: ";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(748, 39);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(98, 13);
+            this.label9.TabIndex = 72;
+            this.label9.Text = "Fecha serv. desde:";
+            // 
+            // FechaHstServ
+            // 
+            this.FechaHstServ.Enabled = false;
+            this.FechaHstServ.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.FechaHstServ.Location = new System.Drawing.Point(857, 61);
+            this.FechaHstServ.Name = "FechaHstServ";
+            this.FechaHstServ.Size = new System.Drawing.Size(94, 20);
+            this.FechaHstServ.TabIndex = 49;
+            // 
+            // FechaDsdServ
+            // 
+            this.FechaDsdServ.Enabled = false;
+            this.FechaDsdServ.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.FechaDsdServ.Location = new System.Drawing.Point(857, 35);
+            this.FechaDsdServ.Name = "FechaDsdServ";
+            this.FechaDsdServ.Size = new System.Drawing.Size(94, 20);
+            this.FechaDsdServ.TabIndex = 46;
+            this.FechaDsdServ.Value = new System.DateTime(2011, 8, 25, 0, 0, 0, 0);
+            // 
+            // FactServiciosCheckBox
+            // 
+            this.FactServiciosCheckBox.AutoSize = true;
+            this.FactServiciosCheckBox.Location = new System.Drawing.Point(728, 14);
+            this.FactServiciosCheckBox.Name = "FactServiciosCheckBox";
+            this.FactServiciosCheckBox.Size = new System.Drawing.Size(96, 17);
+            this.FactServiciosCheckBox.TabIndex = 45;
+            this.FactServiciosCheckBox.Text = "Fact. Servicios";
+            this.FactServiciosCheckBox.UseVisualStyleBackColor = true;
+            this.FactServiciosCheckBox.CheckedChanged += new System.EventHandler(this.FactServiciosCheckBox_CheckedChanged);
             // 
             // TestingPanel
             // 
@@ -182,7 +299,7 @@
             this.TestingPanel.Controls.Add(this.label5);
             this.TestingPanel.Location = new System.Drawing.Point(688, 14);
             this.TestingPanel.Name = "TestingPanel";
-            this.TestingPanel.Size = new System.Drawing.Size(308, 75);
+            this.TestingPanel.Size = new System.Drawing.Size(17, 75);
             this.TestingPanel.TabIndex = 44;
             this.TestingPanel.Visible = false;
             // 
@@ -238,9 +355,9 @@
             this.ArchivosHistoricosPanel.Controls.Add(this.PuntoVentaTextBox);
             this.ArchivosHistoricosPanel.Controls.Add(this.PuntoVentaLabel);
             this.ArchivosHistoricosPanel.Controls.Add(this.label8);
+            this.ArchivosHistoricosPanel.Controls.Add(this.FechaComprobantesHstDTP);
             this.ArchivosHistoricosPanel.Controls.Add(this.label2);
             this.ArchivosHistoricosPanel.Controls.Add(this.FechaComprobantesDsdDTP);
-            this.ArchivosHistoricosPanel.Controls.Add(this.FechaComprobantesHstDTP);
             this.ArchivosHistoricosPanel.Controls.Add(this.label12);
             this.ArchivosHistoricosPanel.Controls.Add(this.FechaComprobantes2Label);
             this.ArchivosHistoricosPanel.Location = new System.Drawing.Point(217, 14);
@@ -313,6 +430,14 @@
             this.label8.TabIndex = 50;
             this.label8.Text = "Comprobante";
             // 
+            // FechaComprobantesHstDTP
+            // 
+            this.FechaComprobantesHstDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.FechaComprobantesHstDTP.Location = new System.Drawing.Point(276, 6);
+            this.FechaComprobantesHstDTP.Name = "FechaComprobantesHstDTP";
+            this.FechaComprobantesHstDTP.Size = new System.Drawing.Size(94, 20);
+            this.FechaComprobantesHstDTP.TabIndex = 48;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -330,14 +455,6 @@
             this.FechaComprobantesDsdDTP.Size = new System.Drawing.Size(94, 20);
             this.FechaComprobantesDsdDTP.TabIndex = 45;
             this.FechaComprobantesDsdDTP.Value = new System.DateTime(2011, 8, 25, 0, 0, 0, 0);
-            // 
-            // FechaComprobantesHstDTP
-            // 
-            this.FechaComprobantesHstDTP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.FechaComprobantesHstDTP.Location = new System.Drawing.Point(276, 6);
-            this.FechaComprobantesHstDTP.Name = "FechaComprobantesHstDTP";
-            this.FechaComprobantesHstDTP.Size = new System.Drawing.Size(94, 20);
-            this.FechaComprobantesHstDTP.TabIndex = 48;
             // 
             // label12
             // 
@@ -373,7 +490,7 @@
             // ActualizarConsultaCButton
             // 
             this.ActualizarConsultaCButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ActualizarConsultaCButton.Location = new System.Drawing.Point(0, 103);
+            this.ActualizarConsultaCButton.Location = new System.Drawing.Point(0, 137);
             this.ActualizarConsultaCButton.Name = "ActualizarConsultaCButton";
             this.ActualizarConsultaCButton.Size = new System.Drawing.Size(963, 23);
             this.ActualizarConsultaCButton.TabIndex = 8;
@@ -387,7 +504,7 @@
             this.BandejaEGrillaPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BandejaEGrillaPanel.Location = new System.Drawing.Point(0, 0);
             this.BandejaEGrillaPanel.Name = "BandejaEGrillaPanel";
-            this.BandejaEGrillaPanel.Size = new System.Drawing.Size(963, 350);
+            this.BandejaEGrillaPanel.Size = new System.Drawing.Size(963, 316);
             this.BandejaEGrillaPanel.TabIndex = 16;
             // 
             // ConsultaComprobantesDataGridView
@@ -431,10 +548,10 @@
             this.ConsultaComprobantesDataGridView.RowHeadersVisible = false;
             this.ConsultaComprobantesDataGridView.RowTemplate.Height = 24;
             this.ConsultaComprobantesDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ConsultaComprobantesDataGridView.Size = new System.Drawing.Size(963, 350);
+            this.ConsultaComprobantesDataGridView.Size = new System.Drawing.Size(963, 316);
             this.ConsultaComprobantesDataGridView.TabIndex = 7;
-            this.ConsultaComprobantesDataGridView.DoubleClick += new System.EventHandler(this.ConsultaComprobantesDataGridView_DoubleClick);
             this.ConsultaComprobantesDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.ConsultaComprobantesDataGridView_DataError);
+            this.ConsultaComprobantesDataGridView.DoubleClick += new System.EventHandler(this.ConsultaComprobantesDataGridView_DoubleClick);
             // 
             // VendedorCuit
             // 
@@ -826,6 +943,16 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn FechaVtoCAE;
 		private System.Windows.Forms.DataGridViewComboBoxColumn IdMoneda;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Importe;
+		private System.Windows.Forms.DateTimePicker FechaDsdServ;
+		private System.Windows.Forms.CheckBox FactServiciosCheckBox;
+		private System.Windows.Forms.Label label10;
+		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.DateTimePicker FechaHstServ;
+		private System.Windows.Forms.CheckBox FactDolarCheckBox;
+		private System.Windows.Forms.TextBox ImporteDolaresTextBox;
+		private System.Windows.Forms.TextBox TipoCambioTextBox;
+		private System.Windows.Forms.Label ImporteDolaresLabel;
+		private System.Windows.Forms.Label TipoCambioLabel;
     }
 }
 

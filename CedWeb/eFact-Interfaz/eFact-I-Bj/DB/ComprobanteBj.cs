@@ -22,7 +22,7 @@ namespace eFact_I_Bj.DB
 				commandText.Append("SET @NroComp='" + NumeroComprobante + "' ");
 			}
             commandText.Append("select gva12.id_gva12, gva12.cod_client, gva12.cat_iva, gva12.fecha_emis, gva12.n_comp, gva12.t_comp, gva12.cotiz, gva12.importe_iv, round(gva12.importe_iv * gva12.cotiz, 6) as importe_iv_pesos, gva12.unidades, gva12.importe, round((gva12.unidades - gva12.importe_iv) * gva12.cotiz, 6) as ImpTotalNetoGravado, gva12.pto_vta, gva12.leyenda_1, gva12.leyenda_2, gva12.leyenda_3, gva12.leyenda_4, gva12.leyenda_5, gva12.MON_CTE, ");
-            commandText.Append("gva14.c_postal, gva14.cod_provin, gva14.cuit, gva14.dir_com, gva14.localidad, gva14.nom_com, gva14.tipo_doc ");
+            commandText.Append("gva14.c_postal, gva14.cod_provin, gva14.cuit, gva14.domicilio, gva14.localidad, gva14.nom_com, gva14.tipo_doc ");
             commandText.Append("from GVA12 ");
             commandText.Append("inner join gva14 on gva12.cod_client=gva14.cod_client ");
 			if (NumeroComprobante != string.Empty)
@@ -35,7 +35,7 @@ namespace eFact_I_Bj.DB
 			}
 
             commandText.Append("select gva12.id_gva12, gva12.cod_client, gva12.cat_iva, gva12.fecha_emis, gva12.n_comp, gva12.t_comp, gva12.cotiz, gva12.importe_iv, gva12.unidades, gva12.importe, ");
-            commandText.Append("gva14.id_gva14, gva14.c_postal, gva14.cod_provin, gva14.cuit, gva14.dir_com, gva14.localidad, gva14.nom_com, gva14.tipo_doc, ");
+            commandText.Append("gva14.id_gva14, gva14.c_postal, gva14.cod_provin, gva14.cuit, gva14.domicilio, gva14.localidad, gva14.nom_com, gva14.tipo_doc, ");
             commandText.Append("gva53.cantidad, gva53.id_medida_ventas, GVA53.PRECIO_NET, round(GVA53.PRECIO_NET * gva12.cotiz, 7) as PRECIO_NET_pesos, gva53.IMP_NETO_P, round(GVA53.IMP_NETO_P * gva12.cotiz, 6) as IMP_NETO_P_pesos, GVA53.PORC_IVA, ");
             commandText.Append("sta11.descripcio, ");
             commandText.Append("medida.cod_medida ");
@@ -147,6 +147,18 @@ namespace eFact_I_Bj.DB
 								}
 								break;
 							case "N/C":
+								if (letraComprobante == "A")
+								{
+									FeaEntidades.TiposDeComprobantes.NotasCredito.A tc = new FeaEntidades.TiposDeComprobantes.NotasCredito.A();
+									c.cabecera.informacion_comprobante.tipo_de_comprobante = tc.Codigo;
+									Comprobante.IdTipoComprobante = tc.Codigo.ToString();
+								}
+								else
+								{
+									FeaEntidades.TiposDeComprobantes.NotasCredito.B tc = new FeaEntidades.TiposDeComprobantes.NotasCredito.B();
+									c.cabecera.informacion_comprobante.tipo_de_comprobante = tc.Codigo;
+									Comprobante.IdTipoComprobante = tc.Codigo.ToString();
+								}
 								break;
 							case "LIQ":
 								if (letraComprobante == "A")
@@ -183,11 +195,12 @@ namespace eFact_I_Bj.DB
 
 						Comprobante.Comprador.NroDoc = dt.Rows[i]["cuit"].ToString();
 						feaEntidadinfComprador.nro_doc_identificatorio = Convert.ToInt64(Comprobante.Comprador.NroDoc.Replace("-", string.Empty));
+						feaEntidadinfComprador.codigo_interno = "";
 
 						Comprobante.Comprador.Nombre = dt.Rows[i]["nom_com"].ToString();
 						feaEntidadinfComprador.denominacion = Comprobante.Comprador.Nombre;
 						feaEntidadinfComprador.denominacion = Comprobante.Comprador.Nombre;
-						Comprobante.Comprador.DomicilioCalle = dt.Rows[i]["dir_com"].ToString();
+						Comprobante.Comprador.DomicilioCalle = dt.Rows[i]["domicilio"].ToString();
 						feaEntidadinfComprador.domicilio_calle = Comprobante.Comprador.DomicilioCalle;
 						Comprobante.Comprador.CondicionIVA = dt.Rows[i]["cat_iva"].ToString();
 						FeaEntidades.CondicionesIVA.ResponsableInscripto condicionIVA = new FeaEntidades.CondicionesIVA.ResponsableInscripto();
@@ -195,8 +208,8 @@ namespace eFact_I_Bj.DB
 						feaEntidadinfComprador.condicion_IVASpecified = true;
 						Comprobante.Comprador.Localidad = dt.Rows[i]["localidad"].ToString();
 						feaEntidadinfComprador.localidad = Comprobante.Comprador.Localidad;
-						Comprobante.Comprador.Provincia = Convert.ToInt16(dt.Rows[i]["cod_provin"]);
-						feaEntidadinfComprador.provincia = dt.Rows[i]["cod_provin"].ToString();
+						Comprobante.Comprador.Provincia = DeterminarProvincia(Convert.ToInt16(dt.Rows[i]["cod_provin"]));
+						feaEntidadinfComprador.provincia = Convert.ToString(Comprobante.Comprador.Provincia);
 						Comprobante.Comprador.CP = dt.Rows[i]["c_postal"].ToString();
 						feaEntidadinfComprador.cp = Comprobante.Comprador.CP;
 						//Comprobante.Comprador.Telefono = dt.Rows[i]["Comprador_telefono"].ToString();
@@ -266,8 +279,8 @@ namespace eFact_I_Bj.DB
 						feaEntidadInfVendedor.nro_ingresos_brutos = Comprobante.Vendedor.NroIB;
 						Comprobante.Vendedor.Localidad = dt2.Rows[0]["Localidad"].ToString();
 						feaEntidadInfVendedor.localidad = Comprobante.Vendedor.Localidad;
-						Comprobante.Vendedor.Provincia = dt2.Rows[0]["Provincia"].ToString();
-						//feaEntidadInfVendedor.provincia = Comprobante.Vendedor.Provincia;
+						Comprobante.Vendedor.Provincia = DeterminarProvincia(Convert.ToInt16(dt2.Rows[0]["Provincia"])).ToString();
+						feaEntidadInfVendedor.provincia = Comprobante.Vendedor.Provincia;
 						Comprobante.Vendedor.CP = dt2.Rows[0]["CP"].ToString();
 						feaEntidadInfVendedor.cp = Comprobante.Vendedor.CP;
 						Comprobante.Vendedor.Telefono = dt2.Rows[0]["Telefono"].ToString();
@@ -280,8 +293,16 @@ namespace eFact_I_Bj.DB
 						c.resumen.tipo_de_cambio = Convert.ToDouble(dt.Rows[i]["cotiz"]);
 						Comprobante.TipoDeCambio = Convert.ToDouble(dt.Rows[i]["cotiz"]);
 						c.resumen.importe_total_factura = Math.Round(Convert.ToDouble(dt.Rows[i]["importe"]), 2);
-						c.resumen.importe_total_neto_gravado = Math.Round(Convert.ToDouble(dt.Rows[i]["ImpTotalNetoGravado"]), 2);
+						
 						c.resumen.impuesto_liq = Math.Round(Convert.ToDouble(dt.Rows[i]["importe_iv_pesos"]), 2);
+						if (c.resumen.impuesto_liq != 0)
+						{
+							c.resumen.importe_total_neto_gravado = Math.Round(Convert.ToDouble(dt.Rows[i]["ImpTotalNetoGravado"]), 2);
+						}
+						else
+						{
+							c.resumen.importe_total_concepto_no_gravado = Math.Round(Convert.ToDouble(dt.Rows[i]["ImpTotalNetoGravado"]), 2);
+						}
 
 						//Guardar Leyendas
 						List<string> leyendas = new List<string>();
@@ -300,7 +321,15 @@ namespace eFact_I_Bj.DB
 							c.resumen.importes_moneda_origen = new FeaEntidades.InterFacturas.resumenImportes_moneda_origen();
 							c.resumen.importes_moneda_origen.impuesto_liq = Math.Round(Convert.ToDouble(dt.Rows[i]["importe_iv"]), 2);
 							c.resumen.importes_moneda_origen.importe_total_factura = Math.Round(Convert.ToDouble(dt.Rows[i]["unidades"]), 2);
-							c.resumen.importes_moneda_origen.importe_total_neto_gravado = Math.Round(c.resumen.importes_moneda_origen.importe_total_factura - c.resumen.importes_moneda_origen.impuesto_liq, 2);
+							
+							if (c.resumen.importes_moneda_origen.impuesto_liq != 0)
+							{
+								c.resumen.importes_moneda_origen.importe_total_neto_gravado = Math.Round(c.resumen.importes_moneda_origen.importe_total_factura - c.resumen.importes_moneda_origen.impuesto_liq, 2);
+							}
+							else
+							{
+								c.resumen.importes_moneda_origen.importe_total_concepto_no_gravado = Math.Round(c.resumen.importes_moneda_origen.importe_total_factura - c.resumen.importes_moneda_origen.impuesto_liq, 2);
+							}
 							Comprobante.Importe = Math.Round(Convert.ToDecimal(dt.Rows[i]["unidades"]), 2);
 						}
 						else
@@ -308,10 +337,15 @@ namespace eFact_I_Bj.DB
 							c.resumen.codigo_moneda = "PES";
 							Comprobante.IdMoneda = "PES";
 							Comprobante.Importe = Math.Round(Convert.ToDecimal(dt.Rows[i]["importe"]), 2);
-							;
 						}
 						FeaEntidades.InterFacturas.lineas feaEntidadLineas = new FeaEntidades.InterFacturas.lineas();
 						DataRow[] drDetDesc = ds.Tables[1].Select("id_gva12 = " + Comprobante.Clave);
+						List<double> iva = new List<double>();
+						List<double> ivaMonedaOrigen = new List<double>();
+						iva.Add(0);
+						iva.Add(0);
+						ivaMonedaOrigen.Add(0);
+						ivaMonedaOrigen.Add(0);
 						double porcIVA = 0;
 						for (int j = 0; j < drDetDesc.Length; j++)
 						{
@@ -341,6 +375,14 @@ namespace eFact_I_Bj.DB
 							//linea.Importe_total_impuestos = Convert.ToDecimal(dr[0]["Linea_Importe_total_impuestos"]);
 							if (lineaFEA.alicuota_iva != 0)
 							{
+								if (lineaFEA.alicuota_iva == 21)
+								{
+									iva[0] = iva[0] + lineaFEA.importe_iva;
+								}
+								if (lineaFEA.alicuota_iva == 27)
+								{
+									iva[1] = iva[1] + lineaFEA.importe_iva;
+								}
 								porcIVA = lineaFEA.alicuota_iva;
 							}
 							if (c.resumen.codigo_moneda == "DOL")
@@ -352,27 +394,52 @@ namespace eFact_I_Bj.DB
 								lineaFEA.importes_moneda_origen.importe_ivaSpecified = true;
 								lineaFEA.importes_moneda_origen.precio_unitario = Math.Round(Convert.ToDouble(dr["PRECIO_NET"]), 6);
 								lineaFEA.importes_moneda_origen.precio_unitarioSpecified = true;
+								if (lineaFEA.alicuota_iva != 0)
+								{
+									if (lineaFEA.alicuota_iva == 21)
+									{
+										ivaMonedaOrigen[0] = ivaMonedaOrigen[0] + lineaFEA.importes_moneda_origen.importe_iva;
+									}
+									if (lineaFEA.alicuota_iva == 27)
+									{
+										ivaMonedaOrigen[1] = ivaMonedaOrigen[1] + lineaFEA.importes_moneda_origen.importe_iva;
+									}
+									porcIVA = lineaFEA.alicuota_iva;
+								}
 							}
-
+							Comprobante.Lineas.Add(linea);
+							c.detalle.linea[j] = lineaFEA;
+						}
+						c.resumen.impuestos = new FeaEntidades.InterFacturas.resumenImpuestos[10];
+						if (iva[0] != 0)
+						{
 							FeaEntidades.InterFacturas.resumenImpuestos imp = new FeaEntidades.InterFacturas.resumenImpuestos();
 							imp.codigo_impuesto = 1;
 							imp.descripcion = "IVA";
-							if (porcIVA != 0)
+							imp.porcentaje_impuesto = Convert.ToDouble(21);
+							imp.porcentaje_impuestoSpecified = true;
+							imp.importe_impuesto = Math.Round(iva[0], 2);
+							if (c.resumen.codigo_moneda == "DOL")
 							{
-								imp.porcentaje_impuesto = porcIVA;
-								imp.porcentaje_impuestoSpecified = true;
-								imp.importe_impuesto = c.resumen.impuesto_liq;
-								if (c.resumen.codigo_moneda == "DOL")
-								{
-									imp.importe_impuesto_moneda_origen = c.resumen.importes_moneda_origen.impuesto_liq;
-									imp.importe_impuesto_moneda_origenSpecified = true;
-								}
+								imp.importe_impuesto_moneda_origen = Math.Round(ivaMonedaOrigen[0],2);
+								imp.importe_impuesto_moneda_origenSpecified = true;
 							}
-							c.resumen.impuestos = new FeaEntidades.InterFacturas.resumenImpuestos[10];
 							c.resumen.impuestos[0] = imp;
-
-							Comprobante.Lineas.Add(linea);
-							c.detalle.linea[j] = lineaFEA;
+						}
+						if (iva[1] != 0)
+						{
+							FeaEntidades.InterFacturas.resumenImpuestos imp = new FeaEntidades.InterFacturas.resumenImpuestos();
+							imp.codigo_impuesto = 1;
+							imp.descripcion = "IVA";
+							imp.porcentaje_impuesto = Convert.ToDouble(27);
+							imp.porcentaje_impuestoSpecified = true;
+							imp.importe_impuesto = Math.Round(iva[1],2);
+							if (c.resumen.codigo_moneda == "DOL")
+							{
+								imp.importe_impuesto_moneda_origen = Math.Round(ivaMonedaOrigen[1],2);
+								imp.importe_impuesto_moneda_origenSpecified = true;
+							}
+							c.resumen.impuestos[1] = imp;
 						}
 						Comprobantes.Add(Comprobante);
 						Lc.comprobante[i] = c;
@@ -384,6 +451,111 @@ namespace eFact_I_Bj.DB
                     
                 }
             }
+
+		private int DeterminarProvincia(int CodProv)
+		{
+			FeaEntidades.CodigosProvincia.CodigoProvincia provincia = new FeaEntidades.CodigosProvincia.CodigoProvincia();
+			switch (CodProv)
+			{
+				case 0:
+					provincia = new FeaEntidades.CodigosProvincia.CapitalFederal();
+					
+					break;
+				case 1:
+					provincia = new  FeaEntidades.CodigosProvincia.BuenosAires();
+					
+					break;
+				case 2:
+					provincia = new  FeaEntidades.CodigosProvincia.Catamarca();
+					
+					break;
+				case 3:
+					provincia = new  FeaEntidades.CodigosProvincia.Cordoba();
+					
+					break;
+				case 4:
+					provincia = new  FeaEntidades.CodigosProvincia.Corrientes();
+					
+					break;
+				case 5:
+					provincia = new  FeaEntidades.CodigosProvincia.EntreRios();
+					
+					break;
+				case 6:
+					provincia = new  FeaEntidades.CodigosProvincia.Jujuy();
+					
+					break;
+				case 8:
+					provincia = new  FeaEntidades.CodigosProvincia.LaRioja();
+					
+					break;
+				case 7:
+					provincia = new  FeaEntidades.CodigosProvincia.Mendoza();
+					
+					break;
+				case 9:
+					provincia = new  FeaEntidades.CodigosProvincia.Salta();
+					
+					break;
+				case 10:
+					provincia = new  FeaEntidades.CodigosProvincia.SanJuan();
+					
+					break;
+				case 11:
+					provincia = new  FeaEntidades.CodigosProvincia.SanLuis();
+					
+					break;
+				case 12:
+					provincia = new  FeaEntidades.CodigosProvincia.SantaFe();
+					
+					break;
+				case 13:
+					provincia = new  FeaEntidades.CodigosProvincia.SantiagoDelEstero();
+					
+					break;
+				case 14:
+					provincia = new  FeaEntidades.CodigosProvincia.Tucuman();
+					
+					break;
+				case 16:
+					provincia = new  FeaEntidades.CodigosProvincia.Chaco();
+					
+					break;
+				case 17:
+					provincia = new  FeaEntidades.CodigosProvincia.Chubut();
+					
+					break;
+				case 18:
+					provincia = new  FeaEntidades.CodigosProvincia.Formosa();
+					
+					break;
+				case 21:
+					provincia = new  FeaEntidades.CodigosProvincia.LaPampa();
+					
+					break;
+				case 19:
+					provincia = new  FeaEntidades.CodigosProvincia.Misiones();
+					
+					break;
+				case 20:
+					provincia = new  FeaEntidades.CodigosProvincia.Neuquen();
+					
+					break;
+				case 22:
+					provincia = new  FeaEntidades.CodigosProvincia.RioNegro();
+					
+					break;
+				case 23:
+					provincia = new  FeaEntidades.CodigosProvincia.SantaCruz();
+					
+					break;
+				case 24:
+					provincia = new FeaEntidades.CodigosProvincia.TierraDelFuego();
+					
+					break;
+			}
+			return provincia.Codigo;
+		}
         
         public void Consultar(List<eFact_I_Bj.Entidades.ComprobanteBj> Comprobantes, eFact_I_Bj.RN.TableroBj.TipoConsulta TipoConsulta, DateTime FechaDsd, DateTime FechaHst, string IdTipoComprobante, string PuntoVenta, string NumeroComprobante, bool VerificarExistenciaCAE)
         {

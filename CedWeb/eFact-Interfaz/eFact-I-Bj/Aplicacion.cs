@@ -42,35 +42,35 @@ namespace eFact_I_Bj
                 //seteo cultura thread
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"]);
 
-                object changüí;
+                //object changüí;
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                if (!RN.Registro.Existe(Registry.LocalMachine, RegistroNombreClave))
-                {
-                    //Registracion
-                    changüí = Encryptor.Encrypt("0", "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-                    RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "q", changüí);
-                    RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "k", "");
-                }
-                //Verificar changüí
-                RN.Registro.Leer(Registry.LocalMachine, RegistroNombreClave, "q", out changüí);
-                int i = Convert.ToInt32(Encryptor.Decrypt(changüí.ToString(), "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")));
-                if (i > 0)
-                {
-                    i--;
-                    changüí = Encryptor.Encrypt(i.ToString(), "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-                    RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "q", changüí);
-                    Application.Run(new TableroBj());
-                }
-                else
-                {
-                    //Verificar activacion
-                    ClaveSolicitud = RN.Disco.ClaveSolicitud();
-                    string claveSolicitud = Encryptor.Encrypt(ClaveSolicitud, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-                    object claveActivacion;
-                    RN.Registro.Leer(Registry.LocalMachine, RegistroNombreClave, "k", out claveActivacion);
-                    if (claveSolicitud == claveActivacion.ToString())
-                    {
+                //if (!RN.Registro.Existe(Registry.LocalMachine, RegistroNombreClave))
+                //{
+                //    //Registracion
+                //    changüí = Encryptor.Encrypt("0", "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                //    RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "q", changüí);
+                //    RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "k", "");
+                //}
+                ////Verificar changüí
+                //RN.Registro.Leer(Registry.LocalMachine, RegistroNombreClave, "q", out changüí);
+                //int i = Convert.ToInt32(Encryptor.Decrypt(changüí.ToString(), "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")));
+                //if (i > 0)
+                //{
+                //    i--;
+                //    changüí = Encryptor.Encrypt(i.ToString(), "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                //    RN.Registro.Guardar(Registry.LocalMachine, RegistroNombreClave, "q", changüí);
+                //    Application.Run(new TableroBj());
+                //}
+                //else
+                //{
+                //    //Verificar activacion
+                //    ClaveSolicitud = RN.Disco.ClaveSolicitud();
+                //    string claveSolicitud = Encryptor.Encrypt(ClaveSolicitud, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                //    object claveActivacion;
+                //    RN.Registro.Leer(Registry.LocalMachine, RegistroNombreClave, "k", out claveActivacion);
+                //    if (claveSolicitud == claveActivacion.ToString())
+                //    {
                         System.Text.StringBuilder auxCnn = new System.Text.StringBuilder();
                         auxCnn.Append(System.Configuration.ConfigurationManager.AppSettings["CnnStr"]);
                         
@@ -88,12 +88,12 @@ namespace eFact_I_Bj
                         {
                             throw new Microsoft.ApplicationBlocks.ExceptionManagement.Sesion.BaseApplicationException("Problemas para crear la sesion de trabajo");
                         }
-                    }
-                    else
-                    {
-                        Application.Run(new Activacion());
-                    }
-                }
+                //    }
+                //    else
+                //    {
+                //        Application.Run(new Activacion());
+                //    }
+                //}
             }
 			catch (Exception ex) 
             {
