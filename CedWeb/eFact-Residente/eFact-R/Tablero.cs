@@ -494,7 +494,15 @@ namespace eFact_R
             if (Lc.cabecera_lote.motivo != null && Lc.cabecera_lote.motivo.Trim() != "00" && Lc.cabecera_lote.motivo.Trim() != "")
             {
                 errores[0] = new eFact_RN.IBK.error();
-                errores[0].codigo_error = 0;
+                int ejem = 0;
+                if (int.TryParse(Lc.cabecera_lote.motivo.Trim(), out ejem))
+                {
+                    errores[0].codigo_error = Convert.ToInt32(Lc.cabecera_lote.motivo.Trim());
+                }
+                else
+                {
+                    errores[0].codigo_error = 0;
+                }
                 errores[0].descripcion_error = Lc.cabecera_lote.motivo.Trim();
                 lrCompleto.errores_lote = errores;
             }
@@ -517,8 +525,16 @@ namespace eFact_R
                         lrCompleto.comprobante_response = new eFact_RN.IBK.comprobante_response[CantMotivoError];
                     }
                     erroresComprobante[NroMotivo] = new eFact_RN.IBK.error();
-                    erroresComprobante[NroMotivo].codigo_error = 0;
-                    erroresComprobante[NroMotivo].descripcion_error = Lc.comprobante[i].cabecera.informacion_comprobante.motivo;
+                    int ejem = 0;
+                    if (int.TryParse(Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim(), out ejem))
+                    {
+                        erroresComprobante[NroMotivo].codigo_error = Convert.ToInt32(Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim());
+                    }
+                    else
+                    {
+                        erroresComprobante[NroMotivo].codigo_error = 0;
+                    }
+                    erroresComprobante[NroMotivo].descripcion_error = Lc.comprobante[i].cabecera.informacion_comprobante.motivo.Trim();
                     lrCompleto.comprobante_response[NroMotivo] = new eFact_RN.IBK.comprobante_response();
                     lrCompleto.comprobante_response[NroMotivo].numero_comprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante;
                     lrCompleto.comprobante_response[NroMotivo].punto_de_venta = Lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta;

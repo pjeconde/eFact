@@ -29,29 +29,37 @@ namespace eFact_R
         private void Comentarios_Load(object sender, EventArgs e)
         {
             //Determino si el comentario es XML
-            if (comentario.Substring(0, 1) != "<")
+            if (comentario == null)
             {
-                ComentariosTextBox.Text = comentario;
+                ComentariosTextBox.Text = "";
                 XMLWebBrowser.Visible = false;
             }
             else
             {
-                this.XMLWebBrowser.Navigate("about:blank");
-                try
+                if (comentario.Substring(0, 1) != "<")
                 {
-                    if (comentario != "")
-                    {
-                        StreamWriter fileWriter;
-                        fileWriter = File.CreateText(System.IO.Path.GetTempPath() + Aplicacion.Sesion.Usuario.IdUsuario + "-XML-Comprobante.xml");
-                        string c = comentario.Replace("iso-8859-1", "UTF-8");
-                        fileWriter.Write(c);
-                        fileWriter.Close();
-                        XMLWebBrowser.Navigate(System.IO.Path.GetTempPath() + Aplicacion.Sesion.Usuario.IdUsuario + "-XML-Comprobante.xml");
-                    }
+                    ComentariosTextBox.Text = comentario;
+                    XMLWebBrowser.Visible = false;
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message, "Solapa XML Origen", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                    this.XMLWebBrowser.Navigate("about:blank");
+                    try
+                    {
+                        if (comentario != "")
+                        {
+                            StreamWriter fileWriter;
+                            fileWriter = File.CreateText(System.IO.Path.GetTempPath() + Aplicacion.Sesion.Usuario.IdUsuario + "-XML-Comprobante.xml");
+                            string c = comentario.Replace("iso-8859-1", "UTF-8");
+                            fileWriter.Write(c);
+                            fileWriter.Close();
+                            XMLWebBrowser.Navigate(System.IO.Path.GetTempPath() + Aplicacion.Sesion.Usuario.IdUsuario + "-XML-Comprobante.xml");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Solapa XML Origen", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                    }
                 }
             }
         }

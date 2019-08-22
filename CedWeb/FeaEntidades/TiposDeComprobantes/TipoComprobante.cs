@@ -47,7 +47,10 @@ namespace FeaEntidades.TiposDeComprobantes
 			lista.Add(new CuentaDeVentaYLiquido.B());
 			lista.Add(new Liquidacion.A());
 			lista.Add(new Liquidacion.B());
-			return lista;
+            lista.Add(new Facturas.MiPyMEsA());
+            lista.Add(new NotasDebito.MiPyMEsA());
+            lista.Add(new NotasCredito.MiPyMEsA());
+    		return lista;
 		}
         public static List<TipoComprobante> ListaSinInf()
         {
@@ -69,6 +72,9 @@ namespace FeaEntidades.TiposDeComprobantes
             lista.Add(new CuentaDeVentaYLiquido.B());
             lista.Add(new Liquidacion.A());
             lista.Add(new Liquidacion.B());
+            lista.Add(new Facturas.MiPyMEsA());
+            lista.Add(new NotasDebito.MiPyMEsA());
+            lista.Add(new NotasCredito.MiPyMEsA());
             return lista;
         }
         public static List<TipoComprobante> ListaParaBienesDeCapital()
@@ -115,6 +121,9 @@ namespace FeaEntidades.TiposDeComprobantes
             lista.Add(new Exportaciones.NotaDeDebitoPorOperacionesConElExterior());
             lista.Add(new Exportaciones.NotaDeCreditoPorOperacionesConElExterior());
             lista.Add(new Importaciones.Despacho());
+            lista.Add(new Facturas.MiPyMEsA());
+            lista.Add(new NotasDebito.MiPyMEsA());
+            lista.Add(new NotasCredito.MiPyMEsA());
             return lista;
         }
 
@@ -161,6 +170,9 @@ namespace FeaEntidades.TiposDeComprobantes
             lista.Add(new NotasDebito.C());
             lista.Add(new NotasCredito.C());
             lista.Add(new Recibos.C());
+            lista.Add(new Facturas.MiPyMEsA());
+            lista.Add(new NotasDebito.MiPyMEsA());
+            lista.Add(new NotasCredito.MiPyMEsA());
             return lista;
         }
 	}

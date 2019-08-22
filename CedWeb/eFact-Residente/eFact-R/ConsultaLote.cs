@@ -341,7 +341,8 @@ namespace eFact_R
             {
                 Cursor = System.Windows.Forms.Cursors.WaitCursor;
                 facturaRpt = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
-                facturaRpt.Load("Facturacion\\Electronica\\Reportes\\Factura.rpt");
+                string reportePath = string.Format("{0}\\Facturacion\\Electronica\\Reportes\\factura.rpt", System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
+                facturaRpt.Load(reportePath);
 
                 //Crear un lote de un solo comprobante, para la impresion o exportacion del pdf.
                 eFact_Entidades.Lote LoteConUnSoloComprobante = new eFact_Entidades.Lote();

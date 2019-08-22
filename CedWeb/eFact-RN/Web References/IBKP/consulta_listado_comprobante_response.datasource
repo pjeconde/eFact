@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="consulta_listado_comprobante_response" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>eFact_RN.IBKP.consulta_listado_comprobante_response</TypeInfo>
+   <TypeInfo>eFact_RN.IBKP.consulta_listado_comprobante_response, Web References.IBKP.Reference.cs, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

@@ -222,7 +222,7 @@ namespace eFact_RN
 
                         //Controlar CUIT de empresa
                         string cuitEmpresa = "";
-                        if (lc.cabecera_lote.IdNaturalezaLoteField == "Compra")
+                        if (lc.cabecera_lote.IdNaturalezaLote == "Compra")
                         {
                             cuitEmpresa = lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio.ToString();
                             if (lc.cabecera_lote.cuit_vendedor.ToString() != cuitEmpresa)

@@ -34,6 +34,7 @@
             this.BotonesPanel = new System.Windows.Forms.Panel();
             this.SalirButton = new System.Windows.Forms.Button();
             this.ConsultaComprobanteCRViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
             this.SplitContainer.SuspendLayout();
@@ -107,13 +108,13 @@
             // 
             this.ConsultaComprobanteCRViewer.ActiveViewIndex = -1;
             this.ConsultaComprobanteCRViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ConsultaComprobanteCRViewer.Cursor = System.Windows.Forms.Cursors.Default;
             this.ConsultaComprobanteCRViewer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ConsultaComprobanteCRViewer.Location = new System.Drawing.Point(3, 3);
             this.ConsultaComprobanteCRViewer.Name = "ConsultaComprobanteCRViewer";
-            this.ConsultaComprobanteCRViewer.SelectionFormula = "";
             this.ConsultaComprobanteCRViewer.Size = new System.Drawing.Size(963, 645);
-            this.ConsultaComprobanteCRViewer.TabIndex = 1;
-            this.ConsultaComprobanteCRViewer.ViewTimeSelectionFormula = "";
+            this.ConsultaComprobanteCRViewer.TabIndex = 0;
+            this.ConsultaComprobanteCRViewer.Load += new System.EventHandler(this.ConsultaComprobanteCRViewer_Load);
             // 
             // ConsultaComprobante
             // 
@@ -125,6 +126,7 @@
             this.Text = "ConsultaComprobante";
             this.SplitContainer.Panel1.ResumeLayout(false);
             this.SplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).EndInit();
             this.SplitContainer.ResumeLayout(false);
             this.ComentariosPanel.ResumeLayout(false);
             this.PiePanel.ResumeLayout(false);
@@ -137,10 +139,10 @@
 
         private System.Windows.Forms.SplitContainer SplitContainer;
         private System.Windows.Forms.Panel ComentariosPanel;
-        private CrystalDecisions.Windows.Forms.CrystalReportViewer ConsultaComprobanteCRViewer;
         private System.Windows.Forms.Panel PiePanel;
         private System.Windows.Forms.Panel BotonesPanel;
         private System.Windows.Forms.Button SalirButton;
+        private CrystalDecisions.Windows.Forms.CrystalReportViewer ConsultaComprobanteCRViewer;
 
     }
 }

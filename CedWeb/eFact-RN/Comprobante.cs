@@ -1020,10 +1020,12 @@ namespace eFact_RN
                             if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip.Trim().ToUpper() == "S")
                             {
                                 cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip = eFact_RN.IBK.informacion_comprobanteReferenciasTipo_comprobante_afip.S;
+                                cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afipSpecified = true;
                             }
                             else if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip.Trim().ToUpper() == "N")
                             {
                                 cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip = eFact_RN.IBK.informacion_comprobanteReferenciasTipo_comprobante_afip.N;
+                                cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afipSpecified = true;
                             }
                             cIBK.cabecera.informacion_comprobante.referencias[j].codigo_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].codigo_de_referencia;
                             cIBK.cabecera.informacion_comprobante.referencias[j].dato_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].dato_de_referencia.Trim();

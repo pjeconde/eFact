@@ -261,7 +261,7 @@ namespace FeaEntidades.InterFacturas
         }
 
         /// <comentarios/>
-        public string IdNaturalezaLoteField
+        public string IdNaturalezaLote
         {
             get
             {
@@ -275,7 +275,7 @@ namespace FeaEntidades.InterFacturas
 
         /// <comentarios/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdNaturalezaLoteFieldSpecified
+        public bool IdNaturalezaLoteSpecified
         {
             get
             {

@@ -105,9 +105,9 @@ namespace eFact_RN
             lote.NumeroEnvio = numeroEnvioDisponible;
             //---------------------------------------
             lote.NombreArch = Archivo.Nombre;
-            if (Lc.cabecera_lote.IdNaturalezaLoteFieldSpecified)
+            if (Lc.cabecera_lote.IdNaturalezaLoteSpecified)
             {
-                lote.IdNaturalezaLote = Lc.cabecera_lote.IdNaturalezaLoteField;
+                lote.IdNaturalezaLote = Lc.cabecera_lote.IdNaturalezaLote;
             }
             else
             {
@@ -145,7 +145,7 @@ namespace eFact_RN
             }
             List<eFact_Entidades.ComprobanteC> cCListVigentes = new List<eFact_Entidades.ComprobanteC>();
             List<eFact_Entidades.ComprobanteD> cDListVigentes = new List<eFact_Entidades.ComprobanteD>();
-            if (Lc.cabecera_lote.IdNaturalezaLoteField != null && Lc.cabecera_lote.IdNaturalezaLoteField == "Compra")
+            if (Lc.cabecera_lote.IdNaturalezaLote != null && Lc.cabecera_lote.IdNaturalezaLote == "Compra")
             {
                 //----- Consultar comprobantes de compras 'Vigentes' -----.
                 if (Lc.comprobante[0] != null)
@@ -159,7 +159,7 @@ namespace eFact_RN
                 }
             }
             List<eFact_Entidades.Comprobante> cVListVigentes = new List<eFact_Entidades.Comprobante>();
-            if (Lc.cabecera_lote.IdNaturalezaLoteField != null && Lc.cabecera_lote.IdNaturalezaLoteField == "Venta")
+            if (Lc.cabecera_lote.IdNaturalezaLote != null && Lc.cabecera_lote.IdNaturalezaLote == "Venta")
             {
                 //----- Consultar comprobantes de ventas 'Vigentes' -----.
                 cVListVigentes = eFact_RN.Comprobante.ConsultarComprobantesVigentes(Lc.cabecera_lote.cuit_vendedor.ToString(), Sesion);

@@ -313,6 +313,10 @@ namespace eFact_Tester
                         if (lcIBK.comprobante[i].cabecera.informacion_comprobante.referencias[j] != null)
                         {
                             cIBK.cabecera.informacion_comprobante.referencias[j] = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
+                            if (lcIBK.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afipSpecified)
+                            {
+                                cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip = lcIBK.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip.ToString();
+                            }
                             cIBK.cabecera.informacion_comprobante.referencias[j].codigo_de_referencia = lcIBK.comprobante[i].cabecera.informacion_comprobante.referencias[j].codigo_de_referencia;
                             cIBK.cabecera.informacion_comprobante.referencias[j].dato_de_referencia = lcIBK.comprobante[i].cabecera.informacion_comprobante.referencias[j].dato_de_referencia;
                         }
@@ -702,6 +706,19 @@ namespace eFact_Tester
                         if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j] != null)
                         {
                             cIBK.cabecera.informacion_comprobante.referencias[j] = new IBK.informacion_comprobanteReferencias();
+                            if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip != null && lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip != String.Empty)
+                            {
+                                if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip == "S")
+                                {
+                                    cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip = IBK.informacion_comprobanteReferenciasTipo_comprobante_afip.S;
+                                    cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afipSpecified = true;
+                                }
+                                else if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip == "N")
+                                {
+                                    cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip = IBK.informacion_comprobanteReferenciasTipo_comprobante_afip.N;
+                                    cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afipSpecified = true;
+                                }
+                            }
                             cIBK.cabecera.informacion_comprobante.referencias[j].codigo_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].codigo_de_referencia;
                             cIBK.cabecera.informacion_comprobante.referencias[j].dato_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].dato_de_referencia;
                         }

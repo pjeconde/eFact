@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FeaEntidades</RootNamespace>
     <AssemblyName>FeaEntidades</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -31,6 +31,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1446,7 +1447,9 @@
     <Compile Include="TiposDeComprobantes\Facturas\A.cs" />
     <Compile Include="TiposDeComprobantes\Facturas\B.cs" />
     <Compile Include="TiposDeComprobantes\Facturas\C.cs" />
+    <Compile Include="TiposDeComprobantes\Facturas\MiPyMEsB.cs" />
     <Compile Include="TiposDeComprobantes\Facturas\Factura.cs" />
+    <Compile Include="TiposDeComprobantes\Facturas\MiPyMEsA.cs" />
     <Compile Include="TiposDeComprobantes\Importaciones\Despacho.cs" />
     <Compile Include="TiposDeComprobantes\Importaciones\Importacion.cs" />
     <Compile Include="TiposDeComprobantes\Liquidacion\A.cs" />
@@ -1455,10 +1458,14 @@
     <Compile Include="TiposDeComprobantes\NotasCredito\A.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\B.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\C.cs" />
+    <Compile Include="TiposDeComprobantes\NotasCredito\MiPyMEsB.cs" />
+    <Compile Include="TiposDeComprobantes\NotasCredito\MiPyMEsA.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\NotaCredito.cs" />
     <Compile Include="TiposDeComprobantes\NotasDebito\A.cs" />
     <Compile Include="TiposDeComprobantes\NotasDebito\B.cs" />
     <Compile Include="TiposDeComprobantes\NotasDebito\C.cs" />
+    <Compile Include="TiposDeComprobantes\NotasDebito\MiPyMEsB.cs" />
+    <Compile Include="TiposDeComprobantes\NotasDebito\MiPyMEsA.cs" />
     <Compile Include="TiposDeComprobantes\NotasDebito\NotaDebito.cs" />
     <Compile Include="TiposDeComprobantes\NotasDeVentaAlContado\A.cs" />
     <Compile Include="TiposDeComprobantes\NotasDeVentaAlContado\B.cs" />

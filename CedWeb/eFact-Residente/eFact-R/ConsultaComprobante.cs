@@ -20,5 +20,10 @@ namespace eFact_R
         {
             this.Close();
         }
+
+        private void ConsultaComprobanteCRViewer_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
