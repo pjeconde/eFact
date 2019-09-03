@@ -118,37 +118,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CEFED0EE86A333C7559DF729B9D28CDD"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E3C87D67C940FB0D195F58F9A558457E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AC87CD19283CE1681BBB941A233B0FEE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8AEE5C8C6F04FAC2177436630E93E49A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_677641F73A22B4EF64CEE62E310EB132"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_59191969BC14974A554F7AE5F85F3FFF"
+        "OwnerKey" = "8:_AB2D6BB8D1D814926A6CEFB1C444D1CA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -160,7 +130,37 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AB2D6BB8D1D814926A6CEFB1C444D1CA"
+        "OwnerKey" = "8:_59191969BC14974A554F7AE5F85F3FFF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_677641F73A22B4EF64CEE62E310EB132"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_8AEE5C8C6F04FAC2177436630E93E49A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_AC87CD19283CE1681BBB941A233B0FEE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_E3C87D67C940FB0D195F58F9A558457E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CEFED0EE86A333C7559DF729B9D28CDD"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -171,7 +171,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:..\\..\\..\\..\\eFact-R-Docs\\aaInstaladoresYGuiasDeInstalacion\\06-Sistema eFact-I - Instalador Paquete\\eFact-I-Bj-Instalador_v2.0.msi"
+        "OutputFilename" = "8:..\\..\\..\\..\\eFact-R-Docs\\aaInstaladoresYGuiasDeInstalacion\\06-Sistema eFact-I - Instalador Paquete\\eFact-I-Bj-Instalador_v2.0.3.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -250,7 +250,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:2.0.50727 "
+                "FrameworkVersion" = "8:2.0.50727  "
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=9832"
                 }
@@ -265,6 +265,11 @@
             "AssemblyAsmDisplayName" = "8:CedeiraAP, Version=1.0.35.1, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_59191969BC14974A554F7AE5F85F3FFF"
+                    {
+                    "Name" = "8:CedeiraAP.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:CedeiraAP.dll"
             "TargetName" = "8:"
@@ -291,6 +296,11 @@
             "AssemblyAsmDisplayName" = "8:CedeiraEx, Version=1.0.35.1, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_677641F73A22B4EF64CEE62E310EB132"
+                    {
+                    "Name" = "8:CedeiraEx.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:CedeiraEx.dll"
             "TargetName" = "8:"
@@ -317,6 +327,11 @@
             "AssemblyAsmDisplayName" = "8:FileHelpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_75B7FF19F609D727290E52064C37CE5F"
+                    {
+                    "Name" = "8:FileHelpers.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:FileHelpers.dll"
             "TargetName" = "8:"
@@ -363,6 +378,11 @@
             "AssemblyAsmDisplayName" = "8:CedeiraUIforms, Version=1.0.35.1, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_8AEE5C8C6F04FAC2177436630E93E49A"
+                    {
+                    "Name" = "8:CedeiraUIforms.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:CedeiraUIforms.dll"
             "TargetName" = "8:"
@@ -409,6 +429,11 @@
             "AssemblyAsmDisplayName" = "8:FeaEntidades, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_AB2D6BB8D1D814926A6CEFB1C444D1CA"
+                    {
+                    "Name" = "8:FeaEntidades.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:FeaEntidades.dll"
             "TargetName" = "8:"
@@ -435,6 +460,11 @@
             "AssemblyAsmDisplayName" = "8:PureComponents.NicePanel, Version=1.0.1013.4, Culture=neutral, PublicKeyToken=2f0f2e4259d7a8e4"
                 "ScatterAssemblies"
                 {
+                    "_AC87CD19283CE1681BBB941A233B0FEE"
+                    {
+                    "Name" = "8:PureComponents.NicePanel.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:PureComponents.NicePanel.dll"
             "TargetName" = "8:"
@@ -461,6 +491,11 @@
             "AssemblyAsmDisplayName" = "8:CaptchaDotNet2, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_CEFED0EE86A333C7559DF729B9D28CDD"
+                    {
+                    "Name" = "8:CaptchaDotNet2.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:CaptchaDotNet2.dll"
             "TargetName" = "8:"
@@ -487,6 +522,11 @@
             "AssemblyAsmDisplayName" = "8:CedEntidades, Version=1.0.35.1, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_E3C87D67C940FB0D195F58F9A558457E"
+                    {
+                    "Name" = "8:CedEntidades.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:CedEntidades.dll"
             "TargetName" = "8:"
@@ -562,15 +602,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:eFact-I-Bj"
-        "ProductCode" = "8:{3A2EA087-4E41-4A16-9864-7F518F9A56A0}"
-        "PackageCode" = "8:{D8138D76-AF58-41A1-9760-D78087EFB234}"
+        "ProductCode" = "8:{CC95028D-6579-4138-85DB-7ABF5E7CE9DE}"
+        "PackageCode" = "8:{BD0B98E7-B092-4189-9B84-8215D1891A0E}"
         "UpgradeCode" = "8:{8D299D08-B63D-46E7-B130-DF95919A1138}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:2.0"
+        "ProductVersion" = "8:2.0.3"
         "Manufacturer" = "8:Cedeira"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

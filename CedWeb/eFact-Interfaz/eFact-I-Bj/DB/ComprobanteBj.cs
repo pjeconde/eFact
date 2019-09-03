@@ -182,9 +182,9 @@ namespace eFact_I_Bj.DB
 						}
 						FeaEntidades.InterFacturas.informacion_comprador feaEntidadinfComprador = new FeaEntidades.InterFacturas.informacion_comprador();
 						Comprobante.NumeroComprobante = dt.Rows[i]["n_comp"].ToString();
-						c.cabecera.informacion_comprobante.numero_comprobante = Convert.ToInt64(Comprobante.NumeroComprobante.Substring(5, Comprobante.NumeroComprobante.Length - 5));
+						c.cabecera.informacion_comprobante.numero_comprobante = Convert.ToInt64(Comprobante.NumeroComprobante.Substring(6, Comprobante.NumeroComprobante.Length - 6));
 
-						Comprobante.PuntoVenta = Convert.ToInt32(Comprobante.NumeroComprobante.Substring(1, 4));
+						Comprobante.PuntoVenta = Convert.ToInt32(Comprobante.NumeroComprobante.Substring(1, 5));
 						Lc.cabecera_lote.punto_de_venta = Comprobante.PuntoVenta;
 						c.cabecera.informacion_comprobante.punto_de_venta = Comprobante.PuntoVenta;
 
