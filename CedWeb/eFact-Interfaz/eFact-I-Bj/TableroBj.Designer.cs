@@ -107,9 +107,11 @@
             this.menuItem5 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
             this.SplitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BandejaEHorizontalSplitContainer)).BeginInit();
             this.BandejaEHorizontalSplitContainer.Panel1.SuspendLayout();
             this.BandejaEHorizontalSplitContainer.Panel2.SuspendLayout();
             this.BandejaEHorizontalSplitContainer.SuspendLayout();
@@ -862,9 +864,11 @@
             this.Load += new System.EventHandler(this.TableroBj_Load);
             this.SplitContainer.Panel1.ResumeLayout(false);
             this.SplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).EndInit();
             this.SplitContainer.ResumeLayout(false);
             this.BandejaEHorizontalSplitContainer.Panel1.ResumeLayout(false);
             this.BandejaEHorizontalSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.BandejaEHorizontalSplitContainer)).EndInit();
             this.BandejaEHorizontalSplitContainer.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
