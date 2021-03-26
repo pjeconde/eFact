@@ -39,7 +39,7 @@
             // 
             // Service1
             // 
-            this.ServiceName = "Servicio-eFact";
+            this.ServiceName = "eFact-Servicio";
             ((System.ComponentModel.ISupportInitialize)(this.timer1)).EndInit();
 
         }

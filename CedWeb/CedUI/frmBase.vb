@@ -43,15 +43,15 @@ Public Class frmBase
     'No lo modifique con el editor de código.
     Protected WithEvents FondoNicePanel As PureComponents.NicePanel.NicePanel
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-        Dim ContainerImage1 As PureComponents.NicePanel.ContainerImage = New PureComponents.NicePanel.ContainerImage
-        Dim HeaderImage1 As PureComponents.NicePanel.HeaderImage = New PureComponents.NicePanel.HeaderImage
-        Dim HeaderImage2 As PureComponents.NicePanel.HeaderImage = New PureComponents.NicePanel.HeaderImage
-        Dim resources As System.Resources.ResourceManager = New System.Resources.ResourceManager(GetType(frmBase))
-        Dim PanelStyle1 As PureComponents.NicePanel.PanelStyle = New PureComponents.NicePanel.PanelStyle
-        Dim ContainerStyle1 As PureComponents.NicePanel.ContainerStyle = New PureComponents.NicePanel.ContainerStyle
-        Dim PanelHeaderStyle1 As PureComponents.NicePanel.PanelHeaderStyle = New PureComponents.NicePanel.PanelHeaderStyle
-        Dim PanelHeaderStyle2 As PureComponents.NicePanel.PanelHeaderStyle = New PureComponents.NicePanel.PanelHeaderStyle
-        Me.FondoNicePanel = New PureComponents.NicePanel.NicePanel
+        Dim ContainerImage1 As PureComponents.NicePanel.ContainerImage = New PureComponents.NicePanel.ContainerImage()
+        Dim HeaderImage1 As PureComponents.NicePanel.HeaderImage = New PureComponents.NicePanel.HeaderImage()
+        Dim HeaderImage2 As PureComponents.NicePanel.HeaderImage = New PureComponents.NicePanel.HeaderImage()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmBase))
+        Dim PanelStyle1 As PureComponents.NicePanel.PanelStyle = New PureComponents.NicePanel.PanelStyle()
+        Dim ContainerStyle1 As PureComponents.NicePanel.ContainerStyle = New PureComponents.NicePanel.ContainerStyle()
+        Dim PanelHeaderStyle1 As PureComponents.NicePanel.PanelHeaderStyle = New PureComponents.NicePanel.PanelHeaderStyle()
+        Dim PanelHeaderStyle2 As PureComponents.NicePanel.PanelHeaderStyle = New PureComponents.NicePanel.PanelHeaderStyle()
+        Me.FondoNicePanel = New PureComponents.NicePanel.NicePanel()
         Me.SuspendLayout()
         '
         'FondoNicePanel
@@ -92,17 +92,17 @@ Public Class frmBase
         ContainerStyle1.FadeColor = System.Drawing.Color.PeachPuff
         ContainerStyle1.FillStyle = PureComponents.NicePanel.FillStyle.DiagonalForward
         ContainerStyle1.FlashItemBackColor = System.Drawing.Color.Red
-        ContainerStyle1.FocusItemBackColor = System.Drawing.Color.FromArgb(CType(255, Byte), CType(255, Byte), CType(192, Byte))
+        ContainerStyle1.FocusItemBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         ContainerStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         ContainerStyle1.ForeColor = System.Drawing.Color.Navy
         ContainerStyle1.Shape = PureComponents.NicePanel.Shape.Squared
         PanelStyle1.ContainerStyle = ContainerStyle1
         PanelHeaderStyle1.BackColor = System.Drawing.Color.Brown
-        PanelHeaderStyle1.ButtonColor = System.Drawing.Color.FromArgb(CType(172, Byte), CType(191, Byte), CType(227, Byte))
+        PanelHeaderStyle1.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(172, Byte), Integer), CType(CType(191, Byte), Integer), CType(CType(227, Byte), Integer))
         PanelHeaderStyle1.FadeColor = System.Drawing.Color.Peru
         PanelHeaderStyle1.FillStyle = PureComponents.NicePanel.FillStyle.HorizontalFading
-        PanelHeaderStyle1.FlashBackColor = System.Drawing.Color.FromArgb(CType(243, Byte), CType(122, Byte), CType(1, Byte))
-        PanelHeaderStyle1.FlashFadeColor = System.Drawing.Color.FromArgb(CType(255, Byte), CType(215, Byte), CType(159, Byte))
+        PanelHeaderStyle1.FlashBackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(1, Byte), Integer))
+        PanelHeaderStyle1.FlashFadeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(159, Byte), Integer))
         PanelHeaderStyle1.FlashForeColor = System.Drawing.Color.White
         PanelHeaderStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         PanelHeaderStyle1.ForeColor = System.Drawing.Color.White
@@ -112,8 +112,8 @@ Public Class frmBase
         PanelHeaderStyle2.ButtonColor = System.Drawing.Color.Cornsilk
         PanelHeaderStyle2.FadeColor = System.Drawing.Color.Brown
         PanelHeaderStyle2.FillStyle = PureComponents.NicePanel.FillStyle.VerticalFading
-        PanelHeaderStyle2.FlashBackColor = System.Drawing.Color.FromArgb(CType(243, Byte), CType(122, Byte), CType(1, Byte))
-        PanelHeaderStyle2.FlashFadeColor = System.Drawing.Color.FromArgb(CType(255, Byte), CType(215, Byte), CType(159, Byte))
+        PanelHeaderStyle2.FlashBackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(1, Byte), Integer))
+        PanelHeaderStyle2.FlashFadeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(215, Byte), Integer), CType(CType(159, Byte), Integer))
         PanelHeaderStyle2.FlashForeColor = System.Drawing.Color.White
         PanelHeaderStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold)
         PanelHeaderStyle2.ForeColor = System.Drawing.Color.White
@@ -129,6 +129,7 @@ Public Class frmBase
         Me.ClientSize = New System.Drawing.Size(602, 391)
         Me.Controls.Add(Me.FondoNicePanel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmBase"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.ResumeLayout(False)

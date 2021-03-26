@@ -37,27 +37,27 @@ Public Class frmAcerca
     Friend WithEvents SistemaLabel As System.Windows.Forms.Label
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents CodigoSistemaLabel As System.Windows.Forms.Label
-    Friend WithEvents pictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents VersionLabel As System.Windows.Forms.Label
     Friend WithEvents SalirButton As System.Windows.Forms.Button
+    Friend WithEvents pictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents pnlGral As PureComponents.NicePanel.NicePanel
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Dim ContainerImage1 As PureComponents.NicePanel.ContainerImage = New PureComponents.NicePanel.ContainerImage
-        Dim HeaderImage1 As PureComponents.NicePanel.HeaderImage = New PureComponents.NicePanel.HeaderImage
-        Dim HeaderImage2 As PureComponents.NicePanel.HeaderImage = New PureComponents.NicePanel.HeaderImage
-        Dim PanelStyle1 As PureComponents.NicePanel.PanelStyle = New PureComponents.NicePanel.PanelStyle
-        Dim ContainerStyle1 As PureComponents.NicePanel.ContainerStyle = New PureComponents.NicePanel.ContainerStyle
-        Dim PanelHeaderStyle1 As PureComponents.NicePanel.PanelHeaderStyle = New PureComponents.NicePanel.PanelHeaderStyle
-        Dim PanelHeaderStyle2 As PureComponents.NicePanel.PanelHeaderStyle = New PureComponents.NicePanel.PanelHeaderStyle
+        Me.components = New System.ComponentModel.Container()
+        Dim ContainerImage1 As PureComponents.NicePanel.ContainerImage = New PureComponents.NicePanel.ContainerImage()
+        Dim HeaderImage1 As PureComponents.NicePanel.HeaderImage = New PureComponents.NicePanel.HeaderImage()
+        Dim HeaderImage2 As PureComponents.NicePanel.HeaderImage = New PureComponents.NicePanel.HeaderImage()
+        Dim PanelStyle1 As PureComponents.NicePanel.PanelStyle = New PureComponents.NicePanel.PanelStyle()
+        Dim ContainerStyle1 As PureComponents.NicePanel.ContainerStyle = New PureComponents.NicePanel.ContainerStyle()
+        Dim PanelHeaderStyle1 As PureComponents.NicePanel.PanelHeaderStyle = New PureComponents.NicePanel.PanelHeaderStyle()
+        Dim PanelHeaderStyle2 As PureComponents.NicePanel.PanelHeaderStyle = New PureComponents.NicePanel.PanelHeaderStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAcerca))
-        Me.SistemaLabel = New System.Windows.Forms.Label
+        Me.SistemaLabel = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.pnlGral = New PureComponents.NicePanel.NicePanel
-        Me.SalirButton = New System.Windows.Forms.Button
-        Me.VersionLabel = New System.Windows.Forms.Label
-        Me.CodigoSistemaLabel = New System.Windows.Forms.Label
-        Me.pictureBox2 = New System.Windows.Forms.PictureBox
+        Me.pnlGral = New PureComponents.NicePanel.NicePanel()
+        Me.SalirButton = New System.Windows.Forms.Button()
+        Me.VersionLabel = New System.Windows.Forms.Label()
+        Me.CodigoSistemaLabel = New System.Windows.Forms.Label()
+        Me.pictureBox2 = New System.Windows.Forms.PictureBox()
         Me.pnlGral.SuspendLayout()
         CType(Me.pictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -187,9 +187,9 @@ Public Class frmAcerca
         '
         Me.pictureBox2.BackColor = System.Drawing.Color.Transparent
         Me.pictureBox2.Image = CType(resources.GetObject("pictureBox2.Image"), System.Drawing.Image)
-        Me.pictureBox2.Location = New System.Drawing.Point(112, 156)
+        Me.pictureBox2.Location = New System.Drawing.Point(139, 124)
         Me.pictureBox2.Name = "pictureBox2"
-        Me.pictureBox2.Size = New System.Drawing.Size(144, 42)
+        Me.pictureBox2.Size = New System.Drawing.Size(85, 79)
         Me.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.pictureBox2.TabIndex = 10
         Me.pictureBox2.TabStop = False

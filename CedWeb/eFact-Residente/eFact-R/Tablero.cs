@@ -715,22 +715,22 @@ namespace eFact_R
                             string handler = eFact_RN.Archivo.Insertar(dtBandejaEntrada[renglon], true, Aplicacion.Sesion);
                             //Ejecutar el insert local del "Lote".
                             CedEntidades.Evento evento = new CedEntidades.Evento();
-                            if (lote.IdNaturalezaLote == "")
-                            {
+                            //if (lote.IdNaturalezaLote == "")
+                            //{
                                 evento.Id = "EnvBandSalida";
                                 evento.Flow.IdFlow = "eFact";
                                 //evento.Flow.DescrFlow = "Facturación Electrónica";
                                 Cedeira.SV.WF.LeerEvento(evento, Aplicacion.Sesion);
                                 lote.WF = Cedeira.SV.WF.Nueva("eFact", "Fact", 0, "Facturacion Electrónica", Aplicacion.Sesion);
-                            }
-                            else
-                            {
-                                evento.Id = "EnvBandSalidaV";
-                                evento.Flow.IdFlow = "eFact";
-                                //evento.Flow.DescrFlow = "Comprobantes";
-                                Cedeira.SV.WF.LeerEvento(evento, Aplicacion.Sesion);
-                                lote.WF = Cedeira.SV.WF.Nueva("eFact", "Fact", 0, "Comprobantes", Aplicacion.Sesion);
-                            }
+                            //}
+                            //else
+                            //{
+                            //    evento.Id = "EnvBandSalidaV";
+                            //    evento.Flow.IdFlow = "eFact";
+                            //    //evento.Flow.DescrFlow = "Comprobantes";
+                            //    Cedeira.SV.WF.LeerEvento(evento, Aplicacion.Sesion);
+                            //    lote.WF = Cedeira.SV.WF.Nueva("eFact", "Fact", 0, "Comprobantes", Aplicacion.Sesion);
+                            //}
                             eFact_RN.Lote.VerificarEnviosPosteriores(true, lote.CuitVendedor, lote.NumeroLote, lote.PuntoVenta, lote.NumeroEnvio, eFact_R.Aplicacion.Sesion);
                             //Generar nombre de archivo procesado para ser enviado al histórico.
                             eFact_RN.Lote.Ejecutar(lote, evento, handler, Aplicacion.Aplic, Aplicacion.Sesion);
@@ -1299,18 +1299,18 @@ namespace eFact_R
                     eFact_Entidades.Lote lote = new eFact_Entidades.Lote();
                     int renglon = BandejaSDataGridView.SelectedRows[0].Index;
                     lote = dtBandejaSalida[renglon];
-                    if (lote.IdNaturalezaLote != "Compra")
-                    {
+                    //if (lote.IdNaturalezaLote != "Compra")
+                    //{
                         ConsultaLote cl = new ConsultaLote(lote, ConsultaLote.Modo.Consulta);
                         cl.ShowDialog();
                         cl.Dispose();
-                    }
-                    else
-                    {
-                        ConsultaLoteC cl = new ConsultaLoteC(lote);
-                        cl.ShowDialog();
-                        cl.Dispose();
-                    }
+                    //}
+                    //else
+                    //{
+                    //    ConsultaLoteC cl = new ConsultaLoteC(lote);
+                    //    cl.ShowDialog();
+                    //    cl.Dispose();
+                    //}
                 }
             }
             catch (Exception ex)

@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsultaVendedor));
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.VendedoresPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BorrarImagenButton = new System.Windows.Forms.Button();
             this.VendedorProvinciaComboBox = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
             this.VendedorContactoTextBox = new System.Windows.Forms.TextBox();
@@ -83,7 +85,7 @@
             this.SalirButton = new System.Windows.Forms.Button();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.BorrarImagenButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
             this.SplitContainer.SuspendLayout();
@@ -175,6 +177,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(669, 496);
             this.panel1.TabIndex = 14;
+            // 
+            // BorrarImagenButton
+            // 
+            this.BorrarImagenButton.Location = new System.Drawing.Point(559, 244);
+            this.BorrarImagenButton.Name = "BorrarImagenButton";
+            this.BorrarImagenButton.Size = new System.Drawing.Size(102, 23);
+            this.BorrarImagenButton.TabIndex = 63;
+            this.BorrarImagenButton.Text = "Borrar imagen";
+            this.BorrarImagenButton.UseVisualStyleBackColor = true;
+            this.BorrarImagenButton.Click += new System.EventHandler(this.BorrarImagenButton_Click);
             // 
             // VendedorProvinciaComboBox
             // 
@@ -594,27 +606,19 @@
             this.SalirButton.UseVisualStyleBackColor = true;
             this.SalirButton.Click += new System.EventHandler(this.SalirButton_Click);
             // 
-            // BorrarImagenButton
-            // 
-            this.BorrarImagenButton.Location = new System.Drawing.Point(559, 244);
-            this.BorrarImagenButton.Name = "BorrarImagenButton";
-            this.BorrarImagenButton.Size = new System.Drawing.Size(102, 23);
-            this.BorrarImagenButton.TabIndex = 63;
-            this.BorrarImagenButton.Text = "Borrar imagen";
-            this.BorrarImagenButton.UseVisualStyleBackColor = true;
-            this.BorrarImagenButton.Click += new System.EventHandler(this.BorrarImagenButton_Click);
-            // 
             // ConsultaVendedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 561);
             this.Controls.Add(this.SplitContainer);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConsultaVendedor";
             this.Text = "Consulta de Vendedor";
             this.Load += new System.EventHandler(this.ConsultaVendedor_Load);
             this.SplitContainer.Panel1.ResumeLayout(false);
             this.SplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).EndInit();
             this.SplitContainer.ResumeLayout(false);
             this.VendedoresPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);

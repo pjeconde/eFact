@@ -47,10 +47,10 @@ namespace FeaEntidades.InterFacturas
 
         private bool gestionar_afipFieldSpecified;
 
-        private string idNaturalezaLoteField;
+        //private string idNaturalezaLoteField;
 
-        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
-        private bool idNaturalezaLoteFieldSpecified;
+        //[FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        //private bool idNaturalezaLoteFieldSpecified;
         
 		/// <comentarios/>
 		public long id_lote
@@ -260,31 +260,31 @@ namespace FeaEntidades.InterFacturas
             }
         }
 
-        /// <comentarios/>
-        public string IdNaturalezaLote
-        {
-            get
-            {
-                return this.idNaturalezaLoteField;
-            }
-            set
-            {
-                this.idNaturalezaLoteField = value;
-            }
-        }
+        ///// <comentarios/>
+        //public string IdNaturalezaLote
+        //{
+        //    get
+        //    {
+        //        return this.idNaturalezaLoteField;
+        //    }
+        //    set
+        //    {
+        //        this.idNaturalezaLoteField = value;
+        //    }
+        //}
 
-        /// <comentarios/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdNaturalezaLoteSpecified
-        {
-            get
-            {
-                return this.idNaturalezaLoteFieldSpecified;
-            }
-            set
-            {
-                this.idNaturalezaLoteFieldSpecified = value;
-            }
-        }
+        ///// <comentarios/>
+        //[System.Xml.Serialization.XmlIgnoreAttribute()]
+        //public bool IdNaturalezaLoteSpecified
+        //{
+        //    get
+        //    {
+        //        return this.idNaturalezaLoteFieldSpecified;
+        //    }
+        //    set
+        //    {
+        //        this.idNaturalezaLoteFieldSpecified = value;
+        //    }
+        //}
 	}
 }

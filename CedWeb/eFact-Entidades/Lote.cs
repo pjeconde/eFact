@@ -33,7 +33,7 @@ namespace eFact_Entidades
         private List<eFact_Entidades.Comprobante> comprobantes;
         private List<eFact_Entidades.ComprobanteC> comprobantesC;
         private List<eFact_Entidades.ComprobanteD> comprobantesD;
-        private string idNaturalezaLote;
+        //private string idNaturalezaLote;
         public Lote()
         {
             comprobantes = new List<eFact_Entidades.Comprobante>();
@@ -223,16 +223,16 @@ namespace eFact_Entidades
                 wf = value;
             }
         }
-        public string IdNaturalezaLote
-        {
-            set
-            {
-                idNaturalezaLote = value;
-            }
-            get
-            {
-                return idNaturalezaLote;
-            }
-        }
+        //public string IdNaturalezaLote
+        //{
+        //    set
+        //    {
+        //        idNaturalezaLote = value;
+        //    }
+        //    get
+        //    {
+        //        return idNaturalezaLote;
+        //    }
+        //}
     }
 }

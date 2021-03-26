@@ -222,22 +222,22 @@ namespace eFact_RN
 
                         //Controlar CUIT de empresa
                         string cuitEmpresa = "";
-                        if (lc.cabecera_lote.IdNaturalezaLote == "Compra")
-                        {
-                            cuitEmpresa = lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio.ToString();
-                            if (lc.cabecera_lote.cuit_vendedor.ToString() != cuitEmpresa)
-                            {
-                                throw new Exception("El comprante procesado no es de la empresa declarada en el lote. Verificar datos en el archivo del comprobante " + lc.comprobante[NroComprobante].cabecera.informacion_comprobante.punto_de_venta.ToString("0000") + "-" + lc.comprobante[NroComprobante].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000"));
-                            }
-                        }
-                        else
-                        {
+                        //if (lc.cabecera_lote.IdNaturalezaLote == "Compra")
+                        //{
+                        //    cuitEmpresa = lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio.ToString();
+                        //    if (lc.cabecera_lote.cuit_vendedor.ToString() != cuitEmpresa)
+                        //    {
+                        //        throw new Exception("El comprante procesado no es de la empresa declarada en el lote. Verificar datos en el archivo del comprobante " + lc.comprobante[NroComprobante].cabecera.informacion_comprobante.punto_de_venta.ToString("0000") + "-" + lc.comprobante[NroComprobante].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000"));
+                        //    }
+                        //}
+                        //else
+                        //{
                             cuitEmpresa = lc.comprobante[0].cabecera.informacion_vendedor.cuit.ToString();
                             if (lc.cabecera_lote.cuit_vendedor.ToString() != cuitEmpresa)
                             {
                                 throw new Exception("El comprante procesado no es de la empresa declarada en el lote. Verificar datos en el archivo del comprobante " + lc.comprobante[NroComprobante].cabecera.informacion_comprobante.punto_de_venta.ToString("0000") + "-" + lc.comprobante[NroComprobante].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000"));
                             }
-                        }
+                        //}
                         eFact_Entidades.Vendedor vendedor = vendedores.Find(delegate(eFact_Entidades.Vendedor e1) { return e1.CuitVendedor == cuitEmpresa; });
                         if (vendedor == null || vendedor.CuitVendedor == "")
                         {

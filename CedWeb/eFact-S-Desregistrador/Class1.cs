@@ -14,13 +14,13 @@ namespace eFact_S_Desregistrador
         static void Main(string[] args)
         {
             Process pro = new Process();
-            string version = "v2.0.50727";
+            string version = "v4.0.30319";
             System.Console.WriteLine(args[0]);
             try
             {
                 try
                 {
-                    System.ServiceProcess.ServiceController myController = new System.ServiceProcess.ServiceController("Servicio-eFact");
+                    System.ServiceProcess.ServiceController myController = new System.ServiceProcess.ServiceController("eFact-Servicio");
                     myController.Stop();
                 }
                 catch

@@ -43,11 +43,11 @@ namespace eFact_DB
             commandText.Append("select Comprobantes.* from #Lotes ");
             commandText.Append("inner join Comprobantes on Comprobantes.IdLote = #Lotes.IdLote ");
             //Select ComprobantesC (Compras)
-            commandText.Append("select ComprobantesC.* from #Lotes ");
-            commandText.Append("inner join ComprobantesC on ComprobantesC.IdLote = #Lotes.IdLote ");
+            //commandText.Append("select ComprobantesC.* from #Lotes ");
+            //commandText.Append("inner join ComprobantesC on ComprobantesC.IdLote = #Lotes.IdLote ");
             //Select ComprobantesD (Compras - Despachos de Importación)
-            commandText.Append("select ComprobantesD.* from #Lotes ");
-            commandText.Append("inner join ComprobantesD on ComprobantesD.IdLote = #Lotes.IdLote ");
+            //commandText.Append("select ComprobantesD.* from #Lotes ");
+            //commandText.Append("inner join ComprobantesD on ComprobantesD.IdLote = #Lotes.IdLote ");
             //Select WF_LOG
             commandText.Append("Select #Lotes.IdLote, ");
             commandText.Append("WF_Log.Fecha, WF_Evento.DescrEvento as Evento, WF_Estado.DescrEstado as Estado, WCUsuarios.Nombre+' ('+WF_Log.IdUsuario+')' as Responsable, WCUsuarios.Nombre as Nombre, ");
@@ -115,7 +115,7 @@ namespace eFact_DB
             Hasta.CantidadRegistros = Convert.ToInt32(Desde["CantidadRegistros"]);
             Hasta.LoteXml = Convert.ToString(Desde["LoteXml"]);
             Hasta.LoteXmlIF = Convert.ToString(Desde["LoteXmlIF"]);
-            Hasta.IdNaturalezaLote = Convert.ToString(Desde["IdNaturalezaLote"]);
+            //Hasta.IdNaturalezaLote = Convert.ToString(Desde["IdNaturalezaLote"]);
             Hasta.WF = new CedEntidades.WF();
             Hasta.WF.IdOp = Convert.ToInt32(Desde["IdOp"]);
             Hasta.WF.IdFlow = Convert.ToString(Desde["IdFlow"]);
@@ -175,58 +175,58 @@ namespace eFact_DB
                 Hasta.Comprobantes.Add(c);
             }
             //ComprobantesC (Compras)
-            dr = ds.Tables[2].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
-            Hasta.ComprobantesC = new List<eFact_Entidades.ComprobanteC>();
-            for (int i = 0; i < dr.Length; i++)
-            {
-                eFact_Entidades.ComprobanteC cC = new eFact_Entidades.ComprobanteC();
-                cC.IdLote = Convert.ToInt32(dr[i]["IdLote"]);
-                cC.PuntoVenta = Convert.ToString(dr[i]["PuntoVenta"]);
-                cC.IdTipoComprobante = Convert.ToInt16(dr[i]["IdTipoComprobante"]);
-                cC.NumeroComprobante = Convert.ToString(dr[i]["NumeroComprobante"]);
-                cC.IdMoneda = Convert.ToString(dr[i]["IdMoneda"]);
-                cC.Importe = Convert.ToDecimal(dr[i]["Importe"]);
-                cC.NroDocVendedor = Convert.ToString(dr[i]["NroDocVendedor"]);
-                cC.TipoDocVendedor = Convert.ToInt16(dr[i]["TipoDocVendedor"]);
-                cC.NombreVendedor = Convert.ToString(dr[i]["NombreVendedor"]);
-                cC.Fecha = Convert.ToDateTime(dr[i]["Fecha"]);
-                if (dr[i]["ImporteMonedaOrigen"].ToString() != "")
-                {
-                    cC.ImporteMonedaOrigen = Convert.ToDecimal(dr[i]["ImporteMonedaOrigen"]);
-                }
-                if (dr[i]["ImporteMonedaOrigen"].ToString() != "")
-                {
-                    cC.TipoCambio = Convert.ToDecimal(dr[i]["TipoCambio"]);
-                }
-                Hasta.ComprobantesC.Add(cC);
-            }
-            //ComprobantesC (Compras - Despachos de Impotación)
-            dr = ds.Tables[3].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
-            Hasta.ComprobantesD = new List<eFact_Entidades.ComprobanteD>();
-            for (int i = 0; i < dr.Length; i++)
-            {
-                eFact_Entidades.ComprobanteD cD = new eFact_Entidades.ComprobanteD();
-                cD.IdLote = Convert.ToInt32(dr[i]["IdLote"]);
-                cD.IdTipoComprobante = Convert.ToInt16(dr[i]["IdTipoComprobante"]);
-                cD.NumeroDespacho = Convert.ToString(dr[i]["NumeroDespacho"]);
-                cD.NroDocVendedor = Convert.ToString(dr[i]["NroDocVendedor"]);
-                cD.TipoDocVendedor = Convert.ToInt16(dr[i]["TipoDocVendedor"]);
-                cD.NombreVendedor = Convert.ToString(dr[i]["NombreVendedor"]);
-                cD.Fecha = Convert.ToDateTime(dr[i]["Fecha"]);
-                cD.IdMoneda = Convert.ToString(dr[i]["IdMoneda"]);
-                cD.Importe = Convert.ToDecimal(dr[i]["Importe"]);
-                //if (dr[i]["ImporteMonedaOrigen"].ToString() != "")
-                //{
-                //    cD.ImporteMonedaOrigen = Convert.ToDecimal(dr[i]["ImporteMonedaOrigen"]);
-                //}
-                //if (dr[i]["ImporteMonedaOrigen"].ToString() != "")
-                //{
-                //    cD.TipoCambio = Convert.ToDecimal(dr[i]["TipoCambio"]);
-                //}
-                Hasta.ComprobantesD.Add(cD);
-            }
+            //dr = ds.Tables[2].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
+            //Hasta.ComprobantesC = new List<eFact_Entidades.ComprobanteC>();
+            //for (int i = 0; i < dr.Length; i++)
+            //{
+            //    eFact_Entidades.ComprobanteC cC = new eFact_Entidades.ComprobanteC();
+            //    cC.IdLote = Convert.ToInt32(dr[i]["IdLote"]);
+            //    cC.PuntoVenta = Convert.ToString(dr[i]["PuntoVenta"]);
+            //    cC.IdTipoComprobante = Convert.ToInt16(dr[i]["IdTipoComprobante"]);
+            //    cC.NumeroComprobante = Convert.ToString(dr[i]["NumeroComprobante"]);
+            //    cC.IdMoneda = Convert.ToString(dr[i]["IdMoneda"]);
+            //    cC.Importe = Convert.ToDecimal(dr[i]["Importe"]);
+            //    cC.NroDocVendedor = Convert.ToString(dr[i]["NroDocVendedor"]);
+            //    cC.TipoDocVendedor = Convert.ToInt16(dr[i]["TipoDocVendedor"]);
+            //    cC.NombreVendedor = Convert.ToString(dr[i]["NombreVendedor"]);
+            //    cC.Fecha = Convert.ToDateTime(dr[i]["Fecha"]);
+            //    if (dr[i]["ImporteMonedaOrigen"].ToString() != "")
+            //    {
+            //        cC.ImporteMonedaOrigen = Convert.ToDecimal(dr[i]["ImporteMonedaOrigen"]);
+            //    }
+            //    if (dr[i]["ImporteMonedaOrigen"].ToString() != "")
+            //    {
+            //        cC.TipoCambio = Convert.ToDecimal(dr[i]["TipoCambio"]);
+            //    }
+            //    Hasta.ComprobantesC.Add(cC);
+            //}
+            ////ComprobantesC (Compras - Despachos de Impotación)
+            //dr = ds.Tables[3].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
+            //Hasta.ComprobantesD = new List<eFact_Entidades.ComprobanteD>();
+            //for (int i = 0; i < dr.Length; i++)
+            //{
+            //    eFact_Entidades.ComprobanteD cD = new eFact_Entidades.ComprobanteD();
+            //    cD.IdLote = Convert.ToInt32(dr[i]["IdLote"]);
+            //    cD.IdTipoComprobante = Convert.ToInt16(dr[i]["IdTipoComprobante"]);
+            //    cD.NumeroDespacho = Convert.ToString(dr[i]["NumeroDespacho"]);
+            //    cD.NroDocVendedor = Convert.ToString(dr[i]["NroDocVendedor"]);
+            //    cD.TipoDocVendedor = Convert.ToInt16(dr[i]["TipoDocVendedor"]);
+            //    cD.NombreVendedor = Convert.ToString(dr[i]["NombreVendedor"]);
+            //    cD.Fecha = Convert.ToDateTime(dr[i]["Fecha"]);
+            //    cD.IdMoneda = Convert.ToString(dr[i]["IdMoneda"]);
+            //    cD.Importe = Convert.ToDecimal(dr[i]["Importe"]);
+            //    //if (dr[i]["ImporteMonedaOrigen"].ToString() != "")
+            //    //{
+            //    //    cD.ImporteMonedaOrigen = Convert.ToDecimal(dr[i]["ImporteMonedaOrigen"]);
+            //    //}
+            //    //if (dr[i]["ImporteMonedaOrigen"].ToString() != "")
+            //    //{
+            //    //    cD.TipoCambio = Convert.ToDecimal(dr[i]["TipoCambio"]);
+            //    //}
+            //    Hasta.ComprobantesD.Add(cD);
+            //}
             //WF
-            dr = ds.Tables[4].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
+            dr = ds.Tables[2].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
             Hasta.WF.Log = new List<CedEntidades.Log>();
             for (int i = 0; i < dr.Length; i++)
             {
@@ -249,7 +249,7 @@ namespace eFact_DB
                 l.Usuario.Nombre = Convert.ToString(dr[i]["Nombre"]);
                 Hasta.WF.Log.Add(l);
             }
-            dr = ds.Tables[5].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
+            dr = ds.Tables[3].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
             Hasta.WF.EventosPosibles = new List<CedEntidades.Evento>();
             for (int i = 0; i < dr.Length; i++)
             {
@@ -268,7 +268,7 @@ namespace eFact_DB
                 evento.IdEstadoHst.DescrEstado = Convert.ToString(dr[i]["DescrEstadoHst"]);
                 Hasta.WF.EventosPosibles.Add(evento);
             }
-            dr = ds.Tables[6].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
+            dr = ds.Tables[4].Select("IdLote = " + Convert.ToInt32(Hasta.IdLote));
             Hasta.WF.EventosXLotePosibles = new List<CedEntidades.Evento>();
             for (int i = 0; i < dr.Length; i++)
             {
@@ -342,11 +342,11 @@ namespace eFact_DB
             commandText.Append("select Comprobantes.* from #Lotes ");
             commandText.Append("inner join Comprobantes on Comprobantes.IdLote = #Lotes.IdLote ");
             //Select ComprobantesC (Compras)
-            commandText.Append("select ComprobantesC.* from #Lotes ");
-            commandText.Append("inner join ComprobantesC on ComprobantesC.IdLote = #Lotes.IdLote ");
+            //commandText.Append("select ComprobantesC.* from #Lotes ");
+            //commandText.Append("inner join ComprobantesC on ComprobantesC.IdLote = #Lotes.IdLote ");
             //Select ComprobantesD (Compras - Despachos de Importación)
-            commandText.Append("select ComprobantesD.* from #Lotes ");
-            commandText.Append("inner join ComprobantesD on ComprobantesD.IdLote = #Lotes.IdLote ");
+            //commandText.Append("select ComprobantesD.* from #Lotes ");
+            //commandText.Append("inner join ComprobantesD on ComprobantesD.IdLote = #Lotes.IdLote ");
             //Select WF_LOG
             commandText.Append("Select #Lotes.IdLote, ");
             commandText.Append("WF_Log.Fecha, WF_Evento.DescrEvento as Evento, WF_Estado.DescrEstado as Estado, WCUsuarios.Nombre+' ('+WF_Log.IdUsuario+')' as Responsable, WCUsuarios.Nombre as Nombre, ");
@@ -427,8 +427,8 @@ namespace eFact_DB
             commandText.Append(Lote.CantidadRegistros + ", '");
             commandText.Append(Lote.NombreArch + "', '");
             commandText.Append(loteXml + "', '");
-            commandText.Append(loteXmlIF + "', '");
-            commandText.Append(Lote.IdNaturalezaLote + "') ");
+            commandText.Append(loteXmlIF + "') ");
+            //commandText.Append(Lote.IdNaturalezaLote + "') ");
             commandText.Append("declare @IdLote int select @IdLote=@@Identity");
             string nombreComprador = "";
             string nombreVendedor = "";
@@ -892,7 +892,7 @@ namespace eFact_DB
             Hasta.CantidadRegistros = Convert.ToInt32(Desde["CantidadRegistros"]);
             Hasta.LoteXml = Convert.ToString(Desde["LoteXml"]);
             Hasta.LoteXmlIF = Convert.ToString(Desde["LoteXmlIF"]);
-            Hasta.IdNaturalezaLote = Convert.ToString(Desde["IdNaturalezaLote"]);
+            //Hasta.IdNaturalezaLote = Convert.ToString(Desde["IdNaturalezaLote"]);
         }
     }
 }

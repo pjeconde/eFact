@@ -28,12 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsultaArchivo));
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.ArchivosPanel = new System.Windows.Forms.Panel();
             this.ArchivosDataGridView = new System.Windows.Forms.DataGridView();
-            this.PiePanel = new System.Windows.Forms.Panel();
-            this.BotonesPanel = new System.Windows.Forms.Panel();
-            this.SalirButton = new System.Windows.Forms.Button();
             this.IdArchivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdLote = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,6 +42,10 @@
             this.Comentario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreProcesado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaProceso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PiePanel = new System.Windows.Forms.Panel();
+            this.BotonesPanel = new System.Windows.Forms.Panel();
+            this.SalirButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
             this.SplitContainer.SuspendLayout();
@@ -105,36 +107,6 @@
             this.ArchivosDataGridView.Size = new System.Drawing.Size(931, 325);
             this.ArchivosDataGridView.TabIndex = 8;
             this.ArchivosDataGridView.DoubleClick += new System.EventHandler(this.ArchivosDataGridView_DoubleClick);
-            // 
-            // PiePanel
-            // 
-            this.PiePanel.Controls.Add(this.BotonesPanel);
-            this.PiePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PiePanel.Location = new System.Drawing.Point(0, 0);
-            this.PiePanel.Name = "PiePanel";
-            this.PiePanel.Size = new System.Drawing.Size(931, 30);
-            this.PiePanel.TabIndex = 5;
-            // 
-            // BotonesPanel
-            // 
-            this.BotonesPanel.Controls.Add(this.SalirButton);
-            this.BotonesPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BotonesPanel.Location = new System.Drawing.Point(0, 0);
-            this.BotonesPanel.Name = "BotonesPanel";
-            this.BotonesPanel.Padding = new System.Windows.Forms.Padding(3);
-            this.BotonesPanel.Size = new System.Drawing.Size(931, 29);
-            this.BotonesPanel.TabIndex = 13;
-            // 
-            // SalirButton
-            // 
-            this.SalirButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.SalirButton.Location = new System.Drawing.Point(868, 3);
-            this.SalirButton.Name = "SalirButton";
-            this.SalirButton.Size = new System.Drawing.Size(60, 23);
-            this.SalirButton.TabIndex = 9;
-            this.SalirButton.Text = "Salir";
-            this.SalirButton.UseVisualStyleBackColor = true;
-            this.SalirButton.Click += new System.EventHandler(this.SalirButton_Click);
             // 
             // IdArchivo
             // 
@@ -206,17 +178,49 @@
             this.FechaProceso.HeaderText = "Fecha Arch. Procesado";
             this.FechaProceso.Name = "FechaProceso";
             // 
+            // PiePanel
+            // 
+            this.PiePanel.Controls.Add(this.BotonesPanel);
+            this.PiePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PiePanel.Location = new System.Drawing.Point(0, 0);
+            this.PiePanel.Name = "PiePanel";
+            this.PiePanel.Size = new System.Drawing.Size(931, 30);
+            this.PiePanel.TabIndex = 5;
+            // 
+            // BotonesPanel
+            // 
+            this.BotonesPanel.Controls.Add(this.SalirButton);
+            this.BotonesPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BotonesPanel.Location = new System.Drawing.Point(0, 0);
+            this.BotonesPanel.Name = "BotonesPanel";
+            this.BotonesPanel.Padding = new System.Windows.Forms.Padding(3);
+            this.BotonesPanel.Size = new System.Drawing.Size(931, 29);
+            this.BotonesPanel.TabIndex = 13;
+            // 
+            // SalirButton
+            // 
+            this.SalirButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.SalirButton.Location = new System.Drawing.Point(868, 3);
+            this.SalirButton.Name = "SalirButton";
+            this.SalirButton.Size = new System.Drawing.Size(60, 23);
+            this.SalirButton.TabIndex = 9;
+            this.SalirButton.Text = "Salir";
+            this.SalirButton.UseVisualStyleBackColor = true;
+            this.SalirButton.Click += new System.EventHandler(this.SalirButton_Click);
+            // 
             // ConsultaArchivo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(931, 359);
             this.Controls.Add(this.SplitContainer);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConsultaArchivo";
             this.Text = "Consulta de Archivos";
             this.Load += new System.EventHandler(this.ConsultaArchivo_Load);
             this.SplitContainer.Panel1.ResumeLayout(false);
             this.SplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).EndInit();
             this.SplitContainer.ResumeLayout(false);
             this.ArchivosPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ArchivosDataGridView)).EndInit();

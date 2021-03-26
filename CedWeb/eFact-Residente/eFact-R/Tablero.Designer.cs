@@ -150,9 +150,11 @@
             this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
             this.SplitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BandejaEHorizontalSplitContainer)).BeginInit();
             this.BandejaEHorizontalSplitContainer.Panel1.SuspendLayout();
             this.BandejaEHorizontalSplitContainer.Panel2.SuspendLayout();
             this.BandejaEHorizontalSplitContainer.SuspendLayout();
@@ -165,6 +167,7 @@
             this.panel5.SuspendLayout();
             this.ArchivosHistoricosPanel.SuspendLayout();
             this.OtrosFiltrosBandejaEPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BandejaSHorizontalSplitContainer)).BeginInit();
             this.BandejaSHorizontalSplitContainer.Panel1.SuspendLayout();
             this.BandejaSHorizontalSplitContainer.Panel2.SuspendLayout();
             this.BandejaSHorizontalSplitContainer.SuspendLayout();
@@ -172,10 +175,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.BandejaSDataGridView)).BeginInit();
             this.BandejaSBotonesPanel.SuspendLayout();
             this.panel12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BotonesBSLinea2SplitContainer)).BeginInit();
             this.BotonesBSLinea2SplitContainer.Panel1.SuspendLayout();
             this.BotonesBSLinea2SplitContainer.Panel2.SuspendLayout();
             this.BotonesBSLinea2SplitContainer.SuspendLayout();
             this.BotonesBSlinea1Panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BotonesBSLinea1SplitContainer)).BeginInit();
             this.BotonesBSLinea1SplitContainer.Panel1.SuspendLayout();
             this.BotonesBSLinea1SplitContainer.Panel2.SuspendLayout();
             this.BotonesBSLinea1SplitContainer.SuspendLayout();
@@ -914,7 +919,7 @@
             this.BotonesBSLinea2SplitContainer.Panel2.Controls.Add(this.SalirButton);
             this.BotonesBSLinea2SplitContainer.Panel2MinSize = 120;
             this.BotonesBSLinea2SplitContainer.Size = new System.Drawing.Size(474, 23);
-            this.BotonesBSLinea2SplitContainer.SplitterDistance = 353;
+            this.BotonesBSLinea2SplitContainer.SplitterDistance = 127;
             this.BotonesBSLinea2SplitContainer.SplitterWidth = 1;
             this.BotonesBSLinea2SplitContainer.TabIndex = 0;
             // 
@@ -930,7 +935,7 @@
             this.ExportarItfComboBox.Location = new System.Drawing.Point(0, 0);
             this.ExportarItfComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.ExportarItfComboBox.Name = "ExportarItfComboBox";
-            this.ExportarItfComboBox.Size = new System.Drawing.Size(353, 21);
+            this.ExportarItfComboBox.Size = new System.Drawing.Size(127, 21);
             this.ExportarItfComboBox.TabIndex = 20;
             this.ExportarItfComboBox.SelectedIndexChanged += new System.EventHandler(this.ExportarItf);
             // 
@@ -940,7 +945,7 @@
             this.SalirButton.Location = new System.Drawing.Point(0, 0);
             this.SalirButton.Margin = new System.Windows.Forms.Padding(2);
             this.SalirButton.Name = "SalirButton";
-            this.SalirButton.Size = new System.Drawing.Size(120, 23);
+            this.SalirButton.Size = new System.Drawing.Size(346, 23);
             this.SalirButton.TabIndex = 18;
             this.SalirButton.Text = "Salir";
             this.SalirButton.UseVisualStyleBackColor = true;
@@ -974,7 +979,7 @@
             this.BotonesBSLinea1SplitContainer.Panel2.Controls.Add(this.ConsultarButton);
             this.BotonesBSLinea1SplitContainer.Panel2MinSize = 120;
             this.BotonesBSLinea1SplitContainer.Size = new System.Drawing.Size(474, 23);
-            this.BotonesBSLinea1SplitContainer.SplitterDistance = 353;
+            this.BotonesBSLinea1SplitContainer.SplitterDistance = 127;
             this.BotonesBSLinea1SplitContainer.SplitterWidth = 1;
             this.BotonesBSLinea1SplitContainer.TabIndex = 16;
             // 
@@ -986,7 +991,7 @@
             this.EventosComboBox.Location = new System.Drawing.Point(0, 0);
             this.EventosComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.EventosComboBox.Name = "EventosComboBox";
-            this.EventosComboBox.Size = new System.Drawing.Size(353, 21);
+            this.EventosComboBox.Size = new System.Drawing.Size(127, 21);
             this.EventosComboBox.TabIndex = 14;
             this.EventosComboBox.SelectedIndexChanged += new System.EventHandler(this.EventosComboBox_SelectedIndexChanged);
             // 
@@ -996,7 +1001,7 @@
             this.ConsultarButton.Location = new System.Drawing.Point(0, 0);
             this.ConsultarButton.Margin = new System.Windows.Forms.Padding(2);
             this.ConsultarButton.Name = "ConsultarButton";
-            this.ConsultarButton.Size = new System.Drawing.Size(120, 23);
+            this.ConsultarButton.Size = new System.Drawing.Size(346, 23);
             this.ConsultarButton.TabIndex = 16;
             this.ConsultarButton.Text = "Consultar";
             this.ConsultarButton.UseVisualStyleBackColor = true;
@@ -1401,9 +1406,11 @@
             this.Load += new System.EventHandler(this.Tablero_Load);
             this.SplitContainer.Panel1.ResumeLayout(false);
             this.SplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).EndInit();
             this.SplitContainer.ResumeLayout(false);
             this.BandejaEHorizontalSplitContainer.Panel1.ResumeLayout(false);
             this.BandejaEHorizontalSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.BandejaEHorizontalSplitContainer)).EndInit();
             this.BandejaEHorizontalSplitContainer.ResumeLayout(false);
             this.BandejaEGrillaPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.BandejaEDataGridView)).EndInit();
@@ -1420,6 +1427,7 @@
             this.OtrosFiltrosBandejaEPanel.PerformLayout();
             this.BandejaSHorizontalSplitContainer.Panel1.ResumeLayout(false);
             this.BandejaSHorizontalSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.BandejaSHorizontalSplitContainer)).EndInit();
             this.BandejaSHorizontalSplitContainer.ResumeLayout(false);
             this.BandejaSGrillaPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.BandejaSDataGridView)).EndInit();
@@ -1427,10 +1435,12 @@
             this.panel12.ResumeLayout(false);
             this.BotonesBSLinea2SplitContainer.Panel1.ResumeLayout(false);
             this.BotonesBSLinea2SplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.BotonesBSLinea2SplitContainer)).EndInit();
             this.BotonesBSLinea2SplitContainer.ResumeLayout(false);
             this.BotonesBSlinea1Panel.ResumeLayout(false);
             this.BotonesBSLinea1SplitContainer.Panel1.ResumeLayout(false);
             this.BotonesBSLinea1SplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.BotonesBSLinea1SplitContainer)).EndInit();
             this.BotonesBSLinea1SplitContainer.ResumeLayout(false);
             this.CabBandejaSPanel.ResumeLayout(false);
             this.panel6.ResumeLayout(false);

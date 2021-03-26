@@ -125,6 +125,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.PpalPanel.SuspendLayout();
             this.DetPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
             this.SplitContainer.SuspendLayout();
@@ -262,8 +263,8 @@
             this.DetalleLoteDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DetalleLoteDataGridView.Size = new System.Drawing.Size(868, 254);
             this.DetalleLoteDataGridView.TabIndex = 15;
-            this.DetalleLoteDataGridView.DoubleClick += new System.EventHandler(this.DetalleLoteDataGridView_DoubleClick);
             this.DetalleLoteDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DetalleLoteDataGridView_DataError);
+            this.DetalleLoteDataGridView.DoubleClick += new System.EventHandler(this.DetalleLoteDataGridView_DoubleClick);
             // 
             // IdLote
             // 
@@ -501,8 +502,8 @@
             this.LogLoteDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.LogLoteDataGridView.Size = new System.Drawing.Size(868, 254);
             this.LogLoteDataGridView.TabIndex = 7;
-            this.LogLoteDataGridView.DoubleClick += new System.EventHandler(this.LogLoteDataGridView_DoubleClick);
             this.LogLoteDataGridView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.LogLoteDataGridView_DataError);
+            this.LogLoteDataGridView.DoubleClick += new System.EventHandler(this.LogLoteDataGridView_DoubleClick);
             // 
             // IdLog
             // 
@@ -915,6 +916,7 @@
             this.DetPanel.ResumeLayout(false);
             this.SplitContainer.Panel1.ResumeLayout(false);
             this.SplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).EndInit();
             this.SplitContainer.ResumeLayout(false);
             this.ConsultaLotePanel.ResumeLayout(false);
             this.TabControl.ResumeLayout(false);

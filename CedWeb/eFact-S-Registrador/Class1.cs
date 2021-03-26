@@ -11,7 +11,7 @@ namespace eFact_S_Registrador
         static void Main(string[] args)
         {
             Process pro = new Process();
-            string version = "v2.0.50727";
+            string version = "v4.0.30319";
             try
             {
                 ProcessStartInfo psi = new ProcessStartInfo();
@@ -34,7 +34,7 @@ namespace eFact_S_Registrador
                 {
                     if (pro.HasExited)
                     {
-                        System.ServiceProcess.ServiceController myController = new System.ServiceProcess.ServiceController("Servicio-eFact");
+                        System.ServiceProcess.ServiceController myController = new System.ServiceProcess.ServiceController("eFact-Servicio");
                         myController.Start();
                         break;
                     }

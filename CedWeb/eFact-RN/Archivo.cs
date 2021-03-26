@@ -105,14 +105,14 @@ namespace eFact_RN
             lote.NumeroEnvio = numeroEnvioDisponible;
             //---------------------------------------
             lote.NombreArch = Archivo.Nombre;
-            if (Lc.cabecera_lote.IdNaturalezaLoteSpecified)
-            {
-                lote.IdNaturalezaLote = Lc.cabecera_lote.IdNaturalezaLote;
-            }
-            else
-            {
-                lote.IdNaturalezaLote = "";
-            }
+            //if (Lc.cabecera_lote.IdNaturalezaLoteSpecified)
+            //{
+            //    lote.IdNaturalezaLote = Lc.cabecera_lote.IdNaturalezaLote;
+            //}
+            //else
+            //{
+            //    lote.IdNaturalezaLote = "";
+            //}
             int cantComprobantes = 0;
             for (int i = 0; i < Lc.comprobante.Length; i++)
             {
@@ -143,33 +143,33 @@ namespace eFact_RN
             {
                 throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Problemas con la cantidad de registros declarada.");
             }
-            List<eFact_Entidades.ComprobanteC> cCListVigentes = new List<eFact_Entidades.ComprobanteC>();
-            List<eFact_Entidades.ComprobanteD> cDListVigentes = new List<eFact_Entidades.ComprobanteD>();
-            if (Lc.cabecera_lote.IdNaturalezaLote != null && Lc.cabecera_lote.IdNaturalezaLote == "Compra")
-            {
-                //----- Consultar comprobantes de compras 'Vigentes' -----.
-                if (Lc.comprobante[0] != null)
-                {
-                    cCListVigentes = eFact_RN.Comprobante.ConsultarComprobantesCVigentes(Lc.cabecera_lote.cuit_vendedor.ToString(), Sesion);
-                }    
-                //----- Consultar despachos 'Vigentes' -----.
-                if (Lc.comprobanteDespacho[0] != null)
-                {
-                    cDListVigentes = eFact_RN.Comprobante.ConsultarComprobantesDVigentes(Lc.cabecera_lote.cuit_vendedor.ToString(), Sesion);
-                }
-            }
+            //List<eFact_Entidades.ComprobanteC> cCListVigentes = new List<eFact_Entidades.ComprobanteC>();
+            //List<eFact_Entidades.ComprobanteD> cDListVigentes = new List<eFact_Entidades.ComprobanteD>();
+            //if (Lc.cabecera_lote.IdNaturalezaLote != null && Lc.cabecera_lote.IdNaturalezaLote == "Compra")
+            //{
+            //    //----- Consultar comprobantes de compras 'Vigentes' -----.
+            //    if (Lc.comprobante[0] != null)
+            //    {
+            //        cCListVigentes = eFact_RN.Comprobante.ConsultarComprobantesCVigentes(Lc.cabecera_lote.cuit_vendedor.ToString(), Sesion);
+            //    }    
+            //    //----- Consultar despachos 'Vigentes' -----.
+            //    if (Lc.comprobanteDespacho[0] != null)
+            //    {
+            //        cDListVigentes = eFact_RN.Comprobante.ConsultarComprobantesDVigentes(Lc.cabecera_lote.cuit_vendedor.ToString(), Sesion);
+            //    }
+            //}
             List<eFact_Entidades.Comprobante> cVListVigentes = new List<eFact_Entidades.Comprobante>();
-            if (Lc.cabecera_lote.IdNaturalezaLote != null && Lc.cabecera_lote.IdNaturalezaLote == "Venta")
-            {
+            //if (Lc.cabecera_lote.IdNaturalezaLote != null && Lc.cabecera_lote.IdNaturalezaLote == "Venta")
+            //{
                 //----- Consultar comprobantes de ventas 'Vigentes' -----.
                 cVListVigentes = eFact_RN.Comprobante.ConsultarComprobantesVigentes(Lc.cabecera_lote.cuit_vendedor.ToString(), Sesion);
-            }
+            //}
             for (int i = 0; i < Lc.comprobante.Length; i++)
             {
                 if (Lc.comprobante[i] != null)
                 {
-                    if (lote.IdNaturalezaLote != "Compra")
-                    {
+                    //if (lote.IdNaturalezaLote != "Compra")
+                    //{
                         //Ventas
                         eFact_Entidades.Comprobante c = new eFact_Entidades.Comprobante();
                         c.IdTipoComprobante = Convert.ToInt16(Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante.ToString());
@@ -209,78 +209,78 @@ namespace eFact_RN
                             }
                         }
                         lote.Comprobantes.Add(c);
-                        if (lote.IdNaturalezaLote == "Venta")
-                        {
+                        //if (lote.IdNaturalezaLote == "Venta")
+                        //{
                             List<eFact_Entidades.Comprobante> listAux = cVListVigentes.FindAll((delegate(eFact_Entidades.Comprobante e1) { return e1.NroDocComprador == c.NroDocComprador && e1.PuntoVenta.ToString() == c.PuntoVenta && e1.IdTipoComprobante == c.IdTipoComprobante && e1.NumeroComprobante == c.NumeroComprobante; }));
                             if (listAux.Count != 0)
                             {
                                 throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Comprobante existente. Cuit Comprador: " + c.NroDocComprador + " Punto Venta: " + c.PuntoVenta + " Tipo: " + c.IdTipoComprobante.ToString() + " Nro: " + c.NumeroComprobante);
                             }
-                        }
-                    }
-                    else
-                    {
-                        //Compras
-                        eFact_Entidades.ComprobanteC cC = new eFact_Entidades.ComprobanteC();
-                        cC.PuntoVenta = Lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta.ToString();
-                        cC.IdTipoComprobante = Convert.ToInt16(Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante.ToString());
-                        cC.NumeroComprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante.ToString();
-                        cC.TipoDocVendedor = Convert.ToInt16("80");
-                        cC.NroDocVendedor = Lc.comprobante[i].cabecera.informacion_vendedor.cuit.ToString();
-                        cC.NombreVendedor = Lc.comprobante[i].cabecera.informacion_vendedor.razon_social;
-                        cC.Fecha = ConvertirStringToDateTime(Lc.comprobante[i].cabecera.informacion_comprobante.fecha_emision.ToString());
-                        cC.IdMoneda = Convert.ToString(Lc.comprobante[i].resumen.codigo_moneda);
-                        cC.Importe = Convert.ToDecimal(Lc.comprobante[i].resumen.importe_total_factura);
-                        if (Lc.comprobante[i].resumen.importes_moneda_origen != null)
-                        {
-                            cC.ImporteMonedaOrigen = Convert.ToDecimal(Lc.comprobante[i].resumen.importes_moneda_origen.importe_total_factura);
-                        }
-                        cC.TipoCambio = Convert.ToDecimal(Lc.comprobante[i].resumen.tipo_de_cambio);
-                        lote.ComprobantesC.Add(cC);
+                        //}
+                    //}
+                    //else
+                    //{
+                    //    //Compras
+                    //    eFact_Entidades.ComprobanteC cC = new eFact_Entidades.ComprobanteC();
+                    //    cC.PuntoVenta = Lc.comprobante[i].cabecera.informacion_comprobante.punto_de_venta.ToString();
+                    //    cC.IdTipoComprobante = Convert.ToInt16(Lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante.ToString());
+                    //    cC.NumeroComprobante = Lc.comprobante[i].cabecera.informacion_comprobante.numero_comprobante.ToString();
+                    //    cC.TipoDocVendedor = Convert.ToInt16("80");
+                    //    cC.NroDocVendedor = Lc.comprobante[i].cabecera.informacion_vendedor.cuit.ToString();
+                    //    cC.NombreVendedor = Lc.comprobante[i].cabecera.informacion_vendedor.razon_social;
+                    //    cC.Fecha = ConvertirStringToDateTime(Lc.comprobante[i].cabecera.informacion_comprobante.fecha_emision.ToString());
+                    //    cC.IdMoneda = Convert.ToString(Lc.comprobante[i].resumen.codigo_moneda);
+                    //    cC.Importe = Convert.ToDecimal(Lc.comprobante[i].resumen.importe_total_factura);
+                    //    if (Lc.comprobante[i].resumen.importes_moneda_origen != null)
+                    //    {
+                    //        cC.ImporteMonedaOrigen = Convert.ToDecimal(Lc.comprobante[i].resumen.importes_moneda_origen.importe_total_factura);
+                    //    }
+                    //    cC.TipoCambio = Convert.ToDecimal(Lc.comprobante[i].resumen.tipo_de_cambio);
+                    //    lote.ComprobantesC.Add(cC);
 
-                        List<eFact_Entidades.ComprobanteC> listAux = cCListVigentes.FindAll((delegate(eFact_Entidades.ComprobanteC e1) { return e1.NroDocVendedor == cC.NroDocVendedor && e1.PuntoVenta.ToString() == cC.PuntoVenta && e1.IdTipoComprobante == cC.IdTipoComprobante && e1.NumeroComprobante == cC.NumeroComprobante; }));
-                        if (listAux.Count != 0)
-                        {
-                            throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Comprobante existente. Cuit Vendedor: " + cC.NroDocVendedor + " Punto Venta: " + cC.PuntoVenta + " Tipo: " + cC.IdTipoComprobante.ToString() + " Nro: " + cC.NumeroComprobante);
-                        }
-                    }
+                    //    List<eFact_Entidades.ComprobanteC> listAux = cCListVigentes.FindAll((delegate(eFact_Entidades.ComprobanteC e1) { return e1.NroDocVendedor == cC.NroDocVendedor && e1.PuntoVenta.ToString() == cC.PuntoVenta && e1.IdTipoComprobante == cC.IdTipoComprobante && e1.NumeroComprobante == cC.NumeroComprobante; }));
+                    //    if (listAux.Count != 0)
+                    //    {
+                    //        throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Comprobante existente. Cuit Vendedor: " + cC.NroDocVendedor + " Punto Venta: " + cC.PuntoVenta + " Tipo: " + cC.IdTipoComprobante.ToString() + " Nro: " + cC.NumeroComprobante);
+                    //    }
+                    //}
                 }
                 else
                 {
                     break;
                 }
             }
-            if (Lc.comprobanteDespacho != null)
-            {
-                for (int i = 0; i < Lc.comprobanteDespacho.Length; i++)
-                {
-                    if (Lc.comprobanteDespacho[i] != null)
-                    {
-                        eFact_Entidades.ComprobanteD cD = new eFact_Entidades.ComprobanteD();
-                        cD.IdTipoComprobante = Convert.ToInt16(Lc.comprobanteDespacho[i].DespachoCabecera.TipoComprobante.ToString());
-                        cD.NumeroDespacho = Lc.comprobanteDespacho[i].DespachoCabecera.NumeroDespacho.ToString();
-                        cD.TipoDocVendedor = Convert.ToInt16(Lc.comprobanteDespacho[i].DespachoCabecera.TipoDocVendedor);
-                        cD.NroDocVendedor = Lc.comprobanteDespacho[i].DespachoCabecera.NroDocVendedor.ToString();
-                        cD.NombreVendedor = Lc.comprobanteDespacho[i].DespachoCabecera.NombreVendedor;
-                        cD.Fecha = ConvertirStringToDateTime(Lc.comprobanteDespacho[i].DespachoCabecera.Fecha.ToString());
-                        cD.IdMoneda = Convert.ToString(Lc.comprobanteDespacho[i].DespachoResumen.Moneda);
-                        cD.Importe = Convert.ToDecimal(Lc.comprobanteDespacho[i].DespachoResumen.ImporteTotal);
-                        //cD.ImporteMonedaOrigen = Convert.ToDecimal(Lc.comprobante[i].resumen.importes_moneda_origen.importe_total_factura);
-                        cD.TipoCambio = Convert.ToDecimal(Lc.comprobanteDespacho[i].DespachoResumen.TipoCambio);
-                        lote.ComprobantesD.Add(cD);
+            //if (Lc.comprobanteDespacho != null)
+            //{
+            //    for (int i = 0; i < Lc.comprobanteDespacho.Length; i++)
+            //    {
+            //        if (Lc.comprobanteDespacho[i] != null)
+            //        {
+            //            eFact_Entidades.ComprobanteD cD = new eFact_Entidades.ComprobanteD();
+            //            cD.IdTipoComprobante = Convert.ToInt16(Lc.comprobanteDespacho[i].DespachoCabecera.TipoComprobante.ToString());
+            //            cD.NumeroDespacho = Lc.comprobanteDespacho[i].DespachoCabecera.NumeroDespacho.ToString();
+            //            cD.TipoDocVendedor = Convert.ToInt16(Lc.comprobanteDespacho[i].DespachoCabecera.TipoDocVendedor);
+            //            cD.NroDocVendedor = Lc.comprobanteDespacho[i].DespachoCabecera.NroDocVendedor.ToString();
+            //            cD.NombreVendedor = Lc.comprobanteDespacho[i].DespachoCabecera.NombreVendedor;
+            //            cD.Fecha = ConvertirStringToDateTime(Lc.comprobanteDespacho[i].DespachoCabecera.Fecha.ToString());
+            //            cD.IdMoneda = Convert.ToString(Lc.comprobanteDespacho[i].DespachoResumen.Moneda);
+            //            cD.Importe = Convert.ToDecimal(Lc.comprobanteDespacho[i].DespachoResumen.ImporteTotal);
+            //            //cD.ImporteMonedaOrigen = Convert.ToDecimal(Lc.comprobante[i].resumen.importes_moneda_origen.importe_total_factura);
+            //            cD.TipoCambio = Convert.ToDecimal(Lc.comprobanteDespacho[i].DespachoResumen.TipoCambio);
+            //            lote.ComprobantesD.Add(cD);
 
-                        List<eFact_Entidades.ComprobanteD> listAux = cDListVigentes.FindAll((delegate(eFact_Entidades.ComprobanteD e1) { return e1.NroDocVendedor == cD.NroDocVendedor && e1.IdTipoComprobante == cD.IdTipoComprobante && e1.NumeroDespacho == cD.NumeroDespacho; }));
-                        if (listAux.Count != 0)
-                        {
-                            throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Comprobante de Despacho existente. Cuit Vendedor: " + cD.NroDocVendedor + " Tipo: " + cD.IdTipoComprobante.ToString() + " Nro: " + cD.NumeroDespacho);
-                        }
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-            }
+            //            List<eFact_Entidades.ComprobanteD> listAux = cDListVigentes.FindAll((delegate(eFact_Entidades.ComprobanteD e1) { return e1.NroDocVendedor == cD.NroDocVendedor && e1.IdTipoComprobante == cD.IdTipoComprobante && e1.NumeroDespacho == cD.NumeroDespacho; }));
+            //            if (listAux.Count != 0)
+            //            {
+            //                throw new Microsoft.ApplicationBlocks.ExceptionManagement.Archivo.ProcesarArchivo("Comprobante de Despacho existente. Cuit Vendedor: " + cD.NroDocVendedor + " Tipo: " + cD.IdTipoComprobante.ToString() + " Nro: " + cD.NumeroDespacho);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            break;
+            //        }
+            //    }
+            //}
             string loteXml = "";
             eFact_RN.Lote.SerializarLc(out loteXml, Lc);
             lote.LoteXml = loteXml;

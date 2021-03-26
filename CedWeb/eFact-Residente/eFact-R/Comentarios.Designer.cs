@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Comentarios));
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.ComentariosPanel = new System.Windows.Forms.Panel();
             this.ComentariosTextBox = new System.Windows.Forms.TextBox();
             this.PiePanel = new System.Windows.Forms.Panel();
             this.BotonesPanel = new System.Windows.Forms.Panel();
             this.SalirButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
             this.SplitContainer.SuspendLayout();
@@ -120,10 +122,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 366);
             this.Controls.Add(this.SplitContainer);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Comentarios";
             this.Text = "Comentarios";
             this.SplitContainer.Panel1.ResumeLayout(false);
             this.SplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).EndInit();
             this.SplitContainer.ResumeLayout(false);
             this.ComentariosPanel.ResumeLayout(false);
             this.ComentariosPanel.PerformLayout();

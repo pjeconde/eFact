@@ -69,17 +69,17 @@ Friend Class frmMensaje
     Friend WithEvents SplitterMasDetalles As System.Windows.Forms.Splitter
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMensaje))
-        Me.pnlMensaje = New System.Windows.Forms.Panel
-        Me.txtMensaje = New System.Windows.Forms.TextBox
-        Me.Splitter3 = New System.Windows.Forms.Splitter
-        Me.PictureBox = New System.Windows.Forms.PictureBox
-        Me.pnlMasDetalles = New System.Windows.Forms.Panel
-        Me.txtMasDetalles = New System.Windows.Forms.TextBox
-        Me.SplitterMensaje = New System.Windows.Forms.Splitter
-        Me.SplitterMasDetalles = New System.Windows.Forms.Splitter
-        Me.pnlBotones = New System.Windows.Forms.Panel
-        Me.btnAceptar = New System.Windows.Forms.Button
-        Me.btnMasDetalles = New System.Windows.Forms.Button
+        Me.pnlMensaje = New System.Windows.Forms.Panel()
+        Me.txtMensaje = New System.Windows.Forms.TextBox()
+        Me.Splitter3 = New System.Windows.Forms.Splitter()
+        Me.PictureBox = New System.Windows.Forms.PictureBox()
+        Me.pnlMasDetalles = New System.Windows.Forms.Panel()
+        Me.txtMasDetalles = New System.Windows.Forms.TextBox()
+        Me.SplitterMensaje = New System.Windows.Forms.Splitter()
+        Me.SplitterMasDetalles = New System.Windows.Forms.Splitter()
+        Me.pnlBotones = New System.Windows.Forms.Panel()
+        Me.btnAceptar = New System.Windows.Forms.Button()
+        Me.btnMasDetalles = New System.Windows.Forms.Button()
         Me.pnlMensaje.SuspendLayout()
         CType(Me.PictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlMasDetalles.SuspendLayout()

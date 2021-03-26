@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsultaComprobante));
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.ComentariosPanel = new System.Windows.Forms.Panel();
+            this.ConsultaComprobanteCRViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.PiePanel = new System.Windows.Forms.Panel();
             this.BotonesPanel = new System.Windows.Forms.Panel();
             this.SalirButton = new System.Windows.Forms.Button();
-            this.ConsultaComprobanteCRViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
@@ -74,6 +75,18 @@
             this.ComentariosPanel.Size = new System.Drawing.Size(969, 651);
             this.ComentariosPanel.TabIndex = 4;
             // 
+            // ConsultaComprobanteCRViewer
+            // 
+            this.ConsultaComprobanteCRViewer.ActiveViewIndex = -1;
+            this.ConsultaComprobanteCRViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ConsultaComprobanteCRViewer.Cursor = System.Windows.Forms.Cursors.Default;
+            this.ConsultaComprobanteCRViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ConsultaComprobanteCRViewer.Location = new System.Drawing.Point(3, 3);
+            this.ConsultaComprobanteCRViewer.Name = "ConsultaComprobanteCRViewer";
+            this.ConsultaComprobanteCRViewer.Size = new System.Drawing.Size(963, 645);
+            this.ConsultaComprobanteCRViewer.TabIndex = 0;
+            this.ConsultaComprobanteCRViewer.Load += new System.EventHandler(this.ConsultaComprobanteCRViewer_Load);
+            // 
             // PiePanel
             // 
             this.PiePanel.Controls.Add(this.BotonesPanel);
@@ -104,24 +117,13 @@
             this.SalirButton.UseVisualStyleBackColor = true;
             this.SalirButton.Click += new System.EventHandler(this.SalirButton_Click);
             // 
-            // ConsultaComprobanteCRViewer
-            // 
-            this.ConsultaComprobanteCRViewer.ActiveViewIndex = -1;
-            this.ConsultaComprobanteCRViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ConsultaComprobanteCRViewer.Cursor = System.Windows.Forms.Cursors.Default;
-            this.ConsultaComprobanteCRViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ConsultaComprobanteCRViewer.Location = new System.Drawing.Point(3, 3);
-            this.ConsultaComprobanteCRViewer.Name = "ConsultaComprobanteCRViewer";
-            this.ConsultaComprobanteCRViewer.Size = new System.Drawing.Size(963, 645);
-            this.ConsultaComprobanteCRViewer.TabIndex = 0;
-            this.ConsultaComprobanteCRViewer.Load += new System.EventHandler(this.ConsultaComprobanteCRViewer_Load);
-            // 
             // ConsultaComprobante
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(969, 718);
             this.Controls.Add(this.SplitContainer);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConsultaComprobante";
             this.Text = "ConsultaComprobante";
             this.SplitContainer.Panel1.ResumeLayout(false);

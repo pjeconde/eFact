@@ -29,8 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ComprasYVentas));
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.PrincipalPanel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.ResultadosTextBox = new System.Windows.Forms.TextBox();
             this.PeriodoLabel = new System.Windows.Forms.Label();
             this.VentasRadioButton = new System.Windows.Forms.RadioButton();
@@ -46,7 +48,7 @@
             this.SalirButton = new System.Windows.Forms.Button();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
             this.SplitContainer.Panel1.SuspendLayout();
             this.SplitContainer.Panel2.SuspendLayout();
             this.SplitContainer.SuspendLayout();
@@ -92,6 +94,15 @@
             this.PrincipalPanel.Name = "PrincipalPanel";
             this.PrincipalPanel.Size = new System.Drawing.Size(678, 244);
             this.PrincipalPanel.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 53);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.TabIndex = 79;
+            this.label1.Text = "Resultados:";
             // 
             // ResultadosTextBox
             // 
@@ -219,15 +230,6 @@
             this.SalirButton.UseVisualStyleBackColor = true;
             this.SalirButton.Click += new System.EventHandler(this.SalirButton_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 13);
-            this.label1.TabIndex = 79;
-            this.label1.Text = "Resultados:";
-            // 
             // ComprasYVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -235,11 +237,13 @@
             this.ClientSize = new System.Drawing.Size(678, 278);
             this.Controls.Add(this.SplitContainer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ComprasYVentas";
             this.Text = "Interfaz de Compras y Ventas";
             this.Load += new System.EventHandler(this.ConsultaVendedor_Load);
             this.SplitContainer.Panel1.ResumeLayout(false);
             this.SplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).EndInit();
             this.SplitContainer.ResumeLayout(false);
             this.PrincipalPanel.ResumeLayout(false);
             this.PrincipalPanel.PerformLayout();

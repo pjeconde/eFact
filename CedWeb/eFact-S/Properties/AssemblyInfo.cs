@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("eFact-S")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("Cedeira")]
 [assembly: AssemblyProduct("eFact-S")]
-[assembly: AssemblyCopyright("© Microsoft 2011")]
+[assembly: AssemblyCopyright("© Cedeira 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Número de versión de compilación
 //      Revisión
 //
-[assembly: AssemblyVersion("1.6.19.0")]
-[assembly: AssemblyFileVersion("1.6.19.0")]
+[assembly: AssemblyVersion("1.6.20.0")]
+[assembly: AssemblyFileVersion("1.6.20.0")]
